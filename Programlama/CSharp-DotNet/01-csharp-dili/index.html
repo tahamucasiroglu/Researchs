@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C# Dili — .NET Anahtar Listesi</title>
+<meta name="description" content="C# dil özellikleri: record, pattern matching, LINQ, async/await, generics, nullable, span, source generators.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">C# Dili</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 01 · Dil ve Platform</div>
+        <h1 class="page-title">C# dilinin <em>tamamı</em>, sürüm sürüm</h1>
+        <p class="lede">Temel sözdiziminden C# 12-14 ile gelen yeniliklere kadar dil özelliklerinin kategorili listesi. C# kullanıyorsan bildiklerini hızlıca geçer, bilmediklerinde durursun; yeni başlıyorsan veya başka bir dilden geliyorsan §&nbsp;1'deki başlangıç yolunu izle.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; ~200 başlık</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfayı nasıl kullanacaksın</h2>
+
+        <p class="intro">Bu sayfa bir ders değil, bir <strong>arama listesi</strong>. Her satır tek bir terim, terimin
+        ne olduğunu hatırlatan bir cümle ve resmî dokümana bağlantı. Konuyu buradan öğrenmeyeceksin; buradan
+        <em>neyi</em> öğreneceğini seçip kendi kaynağından çalışacaksın.</p>
+
+        <p>Not sütunu sadece iki iş yapar: önceliği söyler ve karışıklığı önler. Örneğin <code>record</code> terimini
+        tek başına aratırsan alakasız sonuç gelir; "C# record" yazman gerekir. Böyle tuzaklar Not sütununda yazar.</p>
+
+        <p>Nereden başlayacağın, C#'la ilişkine göre değişir:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre bu sayfanın kullanımı</caption>
+            <thead><tr><th>Durum</th><th>Nereden başla</th><th>Neyi sonraya bırak</th></tr></thead>
+            <tbody>
+              <tr><td>C#'ı zaten kullanıyorsun</td><td>Tabloları tara; bildiğini hızlı geç, bilmediğinde dur. Sıralamayı §&nbsp;14'ten al.</td><td>&mdash;</td></tr>
+              <tr><td>Hiç programlama bilmiyorsun</td><td>Bu sayfa öğretici değil, başvuru listesi. Önce <a href="https://learn.microsoft.com/en-us/dotnet/csharp/">Microsoft Learn C# dokümanındaki</a> başlangıç eğitimleriyle değişken, koşul, döngü, metot ve sınıf kavramlarını öğren; sonra §&nbsp;14'teki “Sıfırdan öğreniyorsun” sırasını izle (§&nbsp;2 &rarr; §&nbsp;3 &rarr; §&nbsp;13 &rarr; §&nbsp;11 &rarr; §&nbsp;4 &rarr; §&nbsp;10 &rarr; §&nbsp;5 &rarr; …). LINQ (§&nbsp;5) generic ve lambda bilgisi ister; ona generics (§&nbsp;4) ve delegate/lambda (§&nbsp;10) bittikten sonra geç.</td><td>§&nbsp;7 (bellek), §&nbsp;12 (reflection), §&nbsp;9'daki C# 15 satırları</td></tr>
+              <tr><td>Java'dan geliyorsun</td><td>Farklara odaklan: value type / <code>struct</code>, property, LINQ, async/await, nullable reference types, reified generics (type erasure yok).</td><td>Sözdizimi temelleri (çok benzer)</td></tr>
+              <tr><td>JavaScript / TypeScript'ten geliyorsun</td><td>Statik ve nominal tipleme, value/reference ayrımı, generics, derleme adımı, Task tabanlı async.</td><td>&mdash;</td></tr>
+              <tr><td>Python'dan geliyorsun</td><td>Statik tip, derleme, interface / abstract class, erişim belirleyiciler, LINQ (list comprehension karşılığı).</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Sıralamayı §&nbsp;14 Özet bölümünden al. Bu sayfa dil katmanıdır; çalışma zamanı, ASP.NET ve barındırma
+        tarafı için <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a>, sorgu tarafı için
+        <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>, ölçüm ve test için
+        <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a> sayfalarına bak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rozet sözlüğü — tüm sayfalarda aynı anlamda kullanılır</caption>
+            <thead><tr><th>Rozet</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik.</td></tr>
+              <tr><td><span class="tag tag--ok">TEMEL</span></td><td>Bu alanda olmazsa olmaz. Önce bunlar.</td></tr>
+              <tr><td><span class="tag">ORTA</span></td><td>Temeli bitirdikten sonra gelir.</td></tr>
+              <tr><td><span class="tag tag--info">İLERİ</span></td><td>Derinleşme konusu. Acele etme.</td></tr>
+              <tr><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>Lisansı ücretli veya sonradan ücretli hale gelmiş.</td></tr>
+              <tr><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>Eski kodda karşına çıkar, yeni projede kullanılmaz.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Sayfadaki bağlantıların neredeyse tamamı <strong>learn.microsoft.com</strong> adresine gider. Microsoft
+          dokümanı sürüm bazlı yazılır: sayfanın üstündeki "Applies to" / moniker seçicisini kontrol et. Dil referansı
+          sayfaları her zaman <em>en son yayınlanan</em> C# sürümünü anlatır, eski sürüm farkları metin içinde
+          "Beginning with C# 13..." biçiminde geçer.</p>
+        </div>
+
+        <h2 id="temel-tipler"><span class="h-num">§ 2</span>Temel sözdizimi ve tipler</h2>
+
+        <p>C# kullanan biri için buradaki her şey "biliyorum" denen bölge olabilir; yine de listede duruyor çünkü mülakatta en çok
+        <strong>değer tipi / referans tipi</strong> ve <strong>boxing</strong> soruluyor ve çoğu kişi burada takılıyor.
+        Yeni başlıyorsan bu bölüm başlangıç noktan; JavaScript veya Python'dan geliyorsan değer/referans ayrımı ve statik tipler en büyük farktır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tip sistemi çekirdeği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>value type / reference type</strong></td>
+                <td>Verinin kopyalanarak mı yoksa adresi taşınarak mı geçtiğini belirleyen ayrım</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatın 1 numaralı sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>class</strong></td>
+                <td>Heap'te yaşayan, referansla taşınan tip</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/classes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>struct</strong></td>
+                <td>Değer tipi; kopyalanarak taşınır, kalıtım almaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> "ne zaman struct?" sorusuna hazır ol: küçük, değişmez, kısa ömürlü</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>readonly struct</strong></td>
+                <td>Alanları değiştirilemeyen struct; derleyici savunma amaçlı kopya üretmez</td>
+                <td><span class="tag">ORTA</span> Performans farkı yaratır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>record</strong></td>
+                <td>Değer eşitliğine sahip, kısa tanımlı referans tipi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada "C# record" yaz; "record" tek başına farklı sonuç verir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>record struct</strong></td>
+                <td>Değer tipi olan record; C# 10 ile geldi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>with expression</strong></td>
+                <td>Bir record'un kopyasını bir-iki alanı değiştirerek üretme sözdizimi</td>
+                <td><span class="tag">ORTA</span> Non-destructive mutation olarak da geçer</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/with-expression">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>enum</strong></td>
+                <td>İsimlendirilmiş sabit kümesi; altında int vardır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>[Flags]</code> varyantını ayrıca çalış</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tuple / ValueTuple</strong></td>
+                <td>İsimli alanları olan hafif, geçici veri paketi</td>
+                <td><span class="tag">ORTA</span> Eski <code>System.Tuple</code> ile karıştırma; o referans tipi ve <span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>deconstruction</strong></td>
+                <td>Bir nesneyi birden çok değişkene dağıtma (<code>var (a, b) = nokta;</code>)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/deconstruct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>anonymous type</strong></td>
+                <td>Adı olmayan, sadece LINQ projeksiyonunda kullanılan geçici tip</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/anonymous-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nullable value type</strong></td>
+                <td><code>int?</code> yani <code>Nullable&lt;int&gt;</code>; değer tipine null yeteneği ekler</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>HasValue</code> / <code>GetValueOrDefault</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nullable reference types (NRT)</strong></td>
+                <td>Derleyici seviyesinde null uyarısı; çalışma zamanı davranışını değiştirmez</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yukarıdakiyle aynı şey değil. <code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code> ile açılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>null-forgiving operator (<code>!</code>)</strong></td>
+                <td>"Ben null olmadığını biliyorum" diyerek uyarıyı susturma</td>
+                <td><span class="tag">ORTA</span> Kötüye kullanılırsa NRT'nin anlamı kalmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong><code>??</code> ve <code>??=</code></strong></td>
+                <td>Null birleştirme ve null ise atama operatörleri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong><code>?.</code> ve <code>?[]</code></strong></td>
+                <td>Null koşullu erişim; C# 14 ile atamanın sol tarafında da kullanılabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>var</strong></td>
+                <td>Tipi derleyiciye çıkarttırma; tip yine statiktir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>dynamic</code> ile karıştırma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/declarations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dynamic</strong></td>
+                <td>Tip denetimini çalışma zamanına erteleyen tip; DLR üzerinden çözülür</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni kodda neredeyse hiç gerekmez</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interop/using-type-dynamic">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>object</strong></td>
+                <td>Tüm tiplerin kökü; <code>System.Object</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>Equals</code>, <code>GetHashCode</code>, <code>ToString</code> sözleşmesini bil</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.object">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>boxing / unboxing</strong></td>
+                <td>Değer tipini heap'e sarma ve geri çıkarma; sessiz performans kaybı kaynağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Performans mülakatının klasik sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>const vs readonly</strong></td>
+                <td>const derleme zamanında gömülür, readonly çalışma zamanında bir kez atanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> const'un assembly sınırında versiyon tuzağı var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/const">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>checked / unchecked</strong></td>
+                <td>Tamsayı taşmasında istisna atılsın mı kararı</td>
+                <td><span class="tag">ORTA</span> Varsayılan davranış <code>unchecked</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/checked-and-unchecked">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>decimal vs double vs float</strong></td>
+                <td>Para için decimal, bilimsel hesap için double; ikisi karıştırılınca kuruş kaybolur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Finans projesinde ilk sorulan şey</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Half, Int128, UInt128</strong></td>
+                <td>Yeni sayısal tipler (.NET 5 / .NET 7)</td>
+                <td><span class="tag tag--info">İLERİ</span> Nadir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.int128">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic math / INumber&lt;T&gt;</strong></td>
+                <td>Sayısal tipler üzerinde generic çalışabilmeyi sağlayan statik soyut arayüzler (.NET 7+)</td>
+                <td><span class="tag tag--info">İLERİ</span> Generic ile derinleşmek isteyenler için iyi bir başlangıç</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/generics/math">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>array, jagged array, multi-dimensional array</strong></td>
+                <td><code>int[]</code>, <code>int[][]</code>, <code>int[,]</code> — üçü farklı şeydir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Performans erişim desenine bağlı: satır satır gezinmede jagged, CLR'nin tek boyutlu dizi optimizasyonları sayesinde çoğu ölçümde daha hızlı; tek bitişik bellek bloğu ve satır başına ayrı tahsisattan kaçınmak gerektiğinde <code>int[,]</code> avantajlı olabilir. Kesin hüküm yerine kendi .NET sürümünde BenchmarkDotNet ile ölç.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Index ve Range (<code>^1</code>, <code>..</code>)</strong></td>
+                <td>Sondan indeksleme ve dilimleme sözdizimi (C# 8)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>implicit / explicit cast, <code>is</code>, <code>as</code></strong></td>
+                <td>Tip dönüşümünün üç yolu; <code>as</code> başarısızlıkta null döner, cast istisna atar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nameof</strong></td>
+                <td>Bir sembolün adını string olarak derleme zamanında alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Magic string'i öldürür; C# 14'te unbound generic destekler</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/nameof">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>typeof / GetType()</strong></td>
+                <td>Derleme zamanı tipi ve çalışma zamanı tipini almanın iki ayrı yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nesne-yonelimli"><span class="h-num">§ 3</span>Nesne yönelimli programlama</h2>
+
+        <p>SOLID ilanlarda sık istenir; SOLID'in dildeki karşılığı bu bölümdür. Prensiplerin kendisi
+        <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a> sayfasında.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kalıtım, arayüz ve üye tanımlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>inheritance</strong></td>
+                <td>Bir sınıfın başka bir sınıfın üyelerini devralması; C#'ta tek kalıtım vardır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>interface</strong></td>
+                <td>Sözleşme; çoklu uygulanabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/interfaces">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>default interface member (DIM)</strong></td>
+                <td>Arayüzde gövdeli metot tanımlama (C# 8)</td>
+                <td><span class="tag">ORTA</span> Arayüzü sınıfa çevirmez; dikkatli kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>explicit interface implementation</strong></td>
+                <td>Üyeyi sadece arayüz üzerinden erişilebilir yapma</td>
+                <td><span class="tag">ORTA</span> İki arayüz aynı imzayı istediğinde şart</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/explicit-interface-implementation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>static abstract interface member</strong></td>
+                <td>Arayüzde statik soyut üye (C# 11); generic math'in temeli</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>abstract</strong></td>
+                <td>Örneği alınamayan sınıf / gövdesiz metot</td>
+                <td><span class="tag tag--ok">TEMEL</span> "abstract class mı interface mi?" sorusuna cevabın hazır olsun</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>sealed</strong></td>
+                <td>Kalıtımı veya override'ı kapatma; JIT için de optimizasyon ipucu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>virtual / override</strong></td>
+                <td>Çalışma zamanında geç bağlanan metot çifti</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>new modifier (member hiding)</strong></td>
+                <td>Üst sınıf üyesini gizleme; override değildir, polimorfizm çalışmaz</td>
+                <td><span class="tag">ORTA</span> Klasik mülakat tuzağı: <code>new</code> ile <code>override</code> farkı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-modifier">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>base</strong></td>
+                <td>Üst sınıfın kurucusuna veya üyesine erişim</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/base">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>partial type / partial member</strong></td>
+                <td>Bir tipi birden çok dosyaya bölme; source generator'ların çalışma alanı</td>
+                <td><span class="tag">ORTA</span> C# 14 ile partial constructor ve partial event de var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/partial-type">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>static class / static member</strong></td>
+                <td>Örneklenemeyen sınıf; extension method'ların evi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>static constructor</strong></td>
+                <td>Tip ilk kullanıldığında bir kez çalışan kurucu</td>
+                <td><span class="tag">ORTA</span> Thread-safe'tir ama sırası öngörülemez</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>extension method</strong></td>
+                <td>Var olan tipe dışarıdan metot ekliyormuş gibi yazma; aslında statik metot</td>
+                <td><span class="tag tag--ok">TEMEL</span> LINQ'in tamamı budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>extension members / <code>extension</code> bloğu</strong></td>
+                <td>C# 14'ün yeni sözdizimi: extension property ve statik extension üye tanımlama</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanda ".NET 10" geçiyorsa bu sorulabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/extension">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>property / auto-property</strong></td>
+                <td>get/set erişimcisi olan üye; alan (field) değildir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong><code>field</code> keyword</strong></td>
+                <td>Erişimci gövdesinde derleyicinin ürettiği arka alanı adlandırma (C# 14)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>indexer</strong></td>
+                <td>Nesneye <code>obj[key]</code> ile erişim tanımlama (<code>this[...]</code>)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>operator overloading</strong></td>
+                <td><code>+</code>, <code>==</code> gibi operatörleri kendi tipin için tanımlama</td>
+                <td><span class="tag">ORTA</span> <code>==</code> yazarsan <code>Equals</code> ve <code>GetHashCode</code>'u da yaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>implicit / explicit conversion operator</strong></td>
+                <td>Kendi tipin için kullanıcı tanımlı dönüşüm</td>
+                <td><span class="tag">ORTA</span> Value object desenlerinde çok kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/user-defined-conversion-operators">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>object initializer / collection initializer</strong></td>
+                <td>Kurucu çağırmadan süslü parantezle alan doldurma</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>local function</strong></td>
+                <td>Metot içinde tanımlanan metot; lambda'dan farkı closure maliyetidir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>access modifiers</strong></td>
+                <td>public, private, protected, internal, protected internal, private protected</td>
+                <td><span class="tag tag--ok">TEMEL</span> Altı tane olduğunu bil; son ikisi az bilinir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/access-modifiers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InternalsVisibleTo</strong></td>
+                <td>internal üyeleri test projesine açan assembly attribute'u</td>
+                <td><span class="tag">ORTA</span> Test yazarken lazım olur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>closed hierarchy (<code>closed</code>)</strong></td>
+                <td>Türetmeyi assembly içine kapatıp switch'i exhaustive yapan C# 15 önizleme özelliği</td>
+                <td><span class="tag tag--info">İLERİ</span> Henüz önizleme (.NET 11 preview)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="generics"><span class="h-num">§ 4</span>Generics</h2>
+
+        <p>Generic'i günlük işte kullananlar için bile mülakatta "peki neden?" diye derinleştirilecek
+        maddeler de listede: variance, constraint çeşitleri, generic type cache.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Generic tipler ve kısıtlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>generic type / type parameter</strong></td>
+                <td><code>List&lt;T&gt;</code> gibi tip parametreli tanımlar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic method</strong></td>
+                <td>Sadece metodun tip parametresi olması; tip çıkarımı çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>constraint (<code>where</code>)</strong></td>
+                <td>Tip parametresini sınırlama: <code>class</code>, <code>struct</code>, <code>new()</code>, taban tip, arayüz, <code>notnull</code>, <code>unmanaged</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Kaç çeşit constraint olduğunu sayabilmelisin</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong><code>allows ref struct</code></strong></td>
+                <td>C# 13 ile gelen anti-constraint; tip argümanı ref struct olabilsin</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>covariance (<code>out</code>)</strong></td>
+                <td>Türemişten tabana atama; <code>IEnumerable&lt;string&gt;</code> &rarr; <code>IEnumerable&lt;object&gt;</code></td>
+                <td><span class="tag">ORTA</span> Aramada "C# covariance generic" yaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>contravariance (<code>in</code>)</strong></td>
+                <td>Ters yön; <code>IComparer&lt;object&gt;</code> &rarr; <code>IComparer&lt;string&gt;</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>invariance</strong></td>
+                <td>Varsayılan davranış; <code>List&lt;T&gt;</code> ne co ne contravariant'tır</td>
+                <td><span class="tag">ORTA</span> "Neden List&lt;string&gt; List&lt;object&gt; olmuyor?" sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>open generic / closed generic</strong></td>
+                <td><code>typeof(List&lt;&gt;)</code> açık, <code>typeof(List&lt;int&gt;)</code> kapalı</td>
+                <td><span class="tag">ORTA</span> DI konteynerine açık generic kaydı yaparken lazım</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generics-and-reflection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MakeGenericType / MakeGenericMethod</strong></td>
+                <td>Çalışma zamanında açık generic'i kapatma</td>
+                <td><span class="tag tag--info">İLERİ</span> AOT ile sorun çıkarır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.type.makegenerictype">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>default(T)</strong></td>
+                <td>Tip parametresinin varsayılan değeri; referans tipte null, değer tipte sıfır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/default">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic type inference</strong></td>
+                <td>Derleyicinin tip argümanını argümanlardan çıkarması</td>
+                <td><span class="tag">ORTA</span> Dönüş tipinden çıkarım yapmaz — bilinen sınır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic specialization / JIT davranışı</strong></td>
+                <td>Değer tipleri için ayrı kod üretilir, referans tipleri tek kodu paylaşır</td>
+                <td><span class="tag tag--info">İLERİ</span> Performans mülakatında etkileyici cevap</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/generics/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EqualityComparer&lt;T&gt;.Default / Comparer&lt;T&gt;.Default</strong></td>
+                <td>Generic kodda karşılaştırma yaparken boxing'siz doğru yol</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.equalitycomparer-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic constraints ile static cache deseni</strong></td>
+                <td><code>static class Cache&lt;T&gt;</code> her T için ayrı alan tutar; tip başına önbellek</td>
+                <td><span class="tag tag--info">İLERİ</span> Reflection maliyetini sıfırlayan klasik numara</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>union types (<code>union</code>)</strong></td>
+                <td>Bir değerin birkaç tipten biri olabilmesi; C# 15 önizleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Henüz üretimde yok; F#/Rust'taki karşılığını bilmek işine yarar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="linq"><span class="h-num">§ 5</span>LINQ</h2>
+
+        <p>LINQ neredeyse her .NET ilanında geçer. Mülakatta LINQ sorusu neredeyse kesin ve genelde iki yerden gelir:
+        <strong>deferred execution</strong> ve <strong>IEnumerable / IQueryable farkı</strong>. Operatörlerin tam listesi
+        <code>System.Linq.Enumerable</code> API sayfasında.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>LINQ kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>method syntax vs query syntax</strong></td>
+                <td><code>.Where(x =&gt; ...)</code> ile <code>from x in ... where ...</code>; derleyici ikisini aynı şeye çevirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Query syntax bazı operatörleri desteklemez</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>deferred execution</strong></td>
+                <td>Sorgu tanımlandığında değil, enumerate edildiğinde çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Neden iki kez sorgu attı?" sorusunun cevabı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>immediate execution</strong></td>
+                <td><code>ToList</code>, <code>Count</code>, <code>Sum</code> gibi operatörler anında çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IEnumerable&lt;T&gt;</strong></td>
+                <td>Bellekte, delegate ile çalışan sorgu; LINQ to Objects</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IQueryable&lt;T&gt;</strong></td>
+                <td>Expression tree üretip sağlayıcıya (EF Core &rarr; SQL) çevirten sorgu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrıntı: <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>client-side evaluation</strong></td>
+                <td>IQueryable'ın çeviremediği kısmı belleğe çekip orada çalıştırması</td>
+                <td><span class="tag tag--ok">TEMEL</span> EF Core 3.0'dan beri çoğu durumda istisna atar</td>
+                <td><a href="https://learn.microsoft.com/en-us/ef/core/querying/client-eval">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Enumerable sınıfı</strong></td>
+                <td>LINQ to Objects operatörlerinin tam listesi burada</td>
+                <td><span class="tag tag--ok">TEMEL</span> Referans olarak açık tut</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Queryable sınıfı</strong></td>
+                <td>Aynı operatörlerin expression tree alan ikizi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.queryable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AsEnumerable / AsQueryable</strong></td>
+                <td>İki dünya arasında bilinçli geçiş yapma</td>
+                <td><span class="tag">ORTA</span> Yanlış yerde çağırırsan tüm tabloyu belleğe çekersin</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.asenumerable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LINQ to XML</strong></td>
+                <td><code>XElement</code>/<code>XDocument</code> üzerinden XML sorgulama</td>
+                <td><span class="tag">ORTA</span> Entegrasyon işlerinde hâlâ karşına çıkar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/linq/linq-xml-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PLINQ (<code>AsParallel</code>)</strong></td>
+                <td>LINQ sorgusunu birden çok çekirdeğe dağıtma</td>
+                <td><span class="tag tag--info">İLERİ</span> Küçük veri kümesinde yavaşlatır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/introduction-to-plinq">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LINQ to SQL</strong></td>
+                <td>EF'ten önceki eski ORM</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski projede görürsün, yenisinde kullanma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql/linq/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Standart sorgu operatörleri — kategori kategori</caption>
+            <thead><tr><th>Operatör(ler)</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Where, OfType</strong></td>
+                <td>Filtreleme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/filtering-data">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Select, SelectMany</strong></td>
+                <td>Projeksiyon; SelectMany iç içe koleksiyonu düzleştirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> SelectMany çoğu kişinin bilmediği yerdir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/projection-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OrderBy, OrderByDescending, ThenBy, ThenByDescending, Reverse</strong></td>
+                <td>Sıralama</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>OrderBy</code>'ı iki kez çağırmak <code>ThenBy</code> değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/sorting-data">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Order, OrderDescending</strong></td>
+                <td>Anahtar seçicisi olmayan sıralama (.NET 7+)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.order">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GroupBy, ToLookup</strong></td>
+                <td>Gruplama; ToLookup anında çalışır, GroupBy ertelenir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/grouping-data">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Join, GroupJoin</strong></td>
+                <td>İç birleştirme ve gruplu birleştirme; LEFT JOIN için GroupJoin + DefaultIfEmpty</td>
+                <td><span class="tag tag--ok">TEMEL</span> "LINQ'te left join nasıl yapılır?" klasik soru</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/join-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aggregate</strong></td>
+                <td>Fold/reduce; birikimli hesaplama</td>
+                <td><span class="tag">ORTA</span> Okunabilirliği düşürür, dikkatli kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.aggregate">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sum, Average, Min, Max, Count, LongCount, MinBy, MaxBy, CountBy, AggregateBy</strong></td>
+                <td>Toplama işlemleri; <code>MinBy</code>/<code>MaxBy</code> .NET 6, <code>CountBy</code>/<code>AggregateBy</code> .NET 9</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/aggregation-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>First, FirstOrDefault, Single, SingleOrDefault, Last, LastOrDefault, ElementAt</strong></td>
+                <td>Tek eleman alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>First</code> ile <code>Single</code> farkını sorarlar: Single birden fazlada istisna atar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/element-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Any, All, Contains</strong></td>
+                <td>Nicelik belirteçleri; <code>Any()</code> genelde <code>Count() &gt; 0</code>'dan hızlıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/quantifier-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Distinct, DistinctBy, Union, UnionBy, Intersect, IntersectBy, Except, ExceptBy</strong></td>
+                <td>Küme işlemleri</td>
+                <td><span class="tag">ORTA</span> <code>...By</code> varyantları .NET 6 ile geldi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/set-operations">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Take, Skip, TakeWhile, SkipWhile, TakeLast, SkipLast</strong></td>
+                <td>Bölümleme; sayfalama mantığının temeli</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/partitioning-data">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chunk</strong></td>
+                <td>Diziyi sabit boyutlu parçalara böler (.NET 6)</td>
+                <td><span class="tag">ORTA</span> Toplu insert/mesaj gönderiminde çok işe yarar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.chunk">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zip</strong></td>
+                <td>İki (veya üç) diziyi eleman eleman eşler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.zip">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Concat, Append, Prepend</strong></td>
+                <td>Dizi birleştirme ve uç ekleme</td>
+                <td><span class="tag">ORTA</span> <code>Concat</code> tekrarları korur, <code>Union</code> korumaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.concat">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ToList, ToArray, ToDictionary, ToHashSet, ToLookup</strong></td>
+                <td>Materyalizasyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>ToDictionary</code> tekrarlı anahtarda istisna atar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/converting-data-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cast, OfType</strong></td>
+                <td>Non-generic koleksiyonu tipli hale getirme</td>
+                <td><span class="tag">ORTA</span> <code>Cast</code> uyumsuzda patlar, <code>OfType</code> eler</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.oftype">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DefaultIfEmpty, Empty, Range, Repeat</strong></td>
+                <td>Üretim ve boş dizi işlemleri</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.range">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SequenceEqual</strong></td>
+                <td>İki diziyi eleman eleman karşılaştırma</td>
+                <td><span class="tag">ORTA</span> Test yazarken çok kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.sequenceequal">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Index (.NET 9)</strong></td>
+                <td>Elemanı sırasıyla birlikte döndürür; <code>foreach (var (i, x) in list.Index())</code></td>
+                <td><span class="tag">ORTA</span> <code>System.Index</code> tipiyle karıştırma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.index">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LeftJoin / RightJoin (.NET 10)</strong></td>
+                <td>Dış birleştirmenin doğrudan operatörleri</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanlarda .NET 10 geçmeye başladı; bunlar yeni eklendi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shuffle (.NET 10)</strong></td>
+                <td>Diziyi rastgele karıştırır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Linq.Async / IAsyncEnumerable operatörleri</strong></td>
+                <td>Asenkron akış üzerinde LINQ; .NET 10 ile <code>System.Linq.AsyncEnumerable</code> BCL'e girdi</td>
+                <td><span class="tag">ORTA</span> Daha önce <code>System.Linq.Async</code> NuGet paketi gerekiyordu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.asyncenumerable">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="async"><span class="h-num">§ 6</span>Async ve eşzamanlılık</h2>
+
+        <p>ASP.NET Core'da endpoint'ler senkron da yazılabilir; ama veritabanı, HTTP, dosya gibi G/Ç yapan endpoint'lerin
+        async yazılması önerilen yoldur. Bu bölümün önemi hedefe göre değişir:</p>
+        <ul>
+          <li><strong>Web API yazacaksan</strong> &rarr; <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a> sayfasının önkoşulu.</li>
+          <li><strong>Masaüstü (WPF, WinForms) veya MAUI</strong> &rarr; UI thread'ini dondurmamak için şart; SynchronizationContext burada belirleyicidir.</li>
+          <li><strong>Konsol / CLI aracı</strong> &rarr; <code>async Task Main</code> ile kullanılır; SynchronizationContext yoktur.</li>
+          <li><strong>Unity ile oyun geliştirme</strong> &rarr; Coroutine ve UniTask gibi farklı bir model yaygındır; Unity'nin kendi dokümanına bak.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>async/await ve Task</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>async / await</strong></td>
+                <td>Bekleyen işi thread'i bloklamadan yürütme sözdizimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> "async yeni thread açar mı?" &rarr; hayır. Bunu net anlat</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Task / Task&lt;T&gt;</strong></td>
+                <td>Gelecekte tamamlanacak işin nesnesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ValueTask / ValueTask&lt;T&gt;</strong></td>
+                <td>Çoğu zaman senkron tamamlanan işlerde tahsisat kaçınan Task alternatifi</td>
+                <td><span class="tag tag--info">İLERİ</span> İki kez await edilemez; kuralları sıkı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>async void</strong></td>
+                <td>Sadece event handler için; istisnayı yakalayamazsın, uygulama çöker</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatın favori "kötü kod" sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-return-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Task.Run vs Task.Factory.StartNew</strong></td>
+                <td>CPU-bound işi thread pool'a atma; StartNew'un varsayılanları tuzaklıdır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.run">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Task.WhenAll / WhenAny / WhenEach</strong></td>
+                <td>Birden çok görevi paralel bekleme; <code>WhenEach</code> .NET 9</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.whenall">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Task.Delay vs Thread.Sleep</strong></td>
+                <td>Biri thread'i serbest bırakır, diğeri bloklar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.delay">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>deadlock (<code>.Result</code>, <code>.Wait()</code>)</strong></td>
+                <td>Async kodu senkron bekleyince oluşan kilitlenme</td>
+                <td><span class="tag tag--ok">TEMEL</span> "sync over async" olarak da aranır</td>
+                <td><a href="https://devblogs.microsoft.com/dotnet/configureawait-faq/">devblogs.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConfigureAwait(false)</strong></td>
+                <td>Devamı orijinal SynchronizationContext'e döndürmeme talebi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Koda göre: <strong>ASP.NET Core uygulama kodu</strong> &rarr; SynchronizationContext yok, gereksiz (zararsız). <strong>Genel amaçlı kütüphane / NuGet paketi</strong> &rarr; önerilir; UI veya eski ASP.NET'ten çağrılabilir. <strong>WPF / WinForms / MAUI uygulama kodu</strong> &rarr; await sonrası UI öğesine dokunacaksan kullanma, dokunmayacaksan kullanılabilir. <strong>Eski ASP.NET (.NET Framework)</strong> &rarr; context var; <code>.Result</code>/<code>.Wait()</code> ile birleşince deadlock riski.</td>
+                <td><a href="https://devblogs.microsoft.com/dotnet/configureawait-faq/">devblogs.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SynchronizationContext</strong></td>
+                <td>Devamın hangi thread'de çalışacağını belirleyen mekanizma</td>
+                <td><span class="tag tag--info">İLERİ</span> UI ve eski ASP.NET'te vardır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.synchronizationcontext">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CancellationToken / CancellationTokenSource</strong></td>
+                <td>İptal sinyalini zincir boyunca taşıma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her async metoda parametre olarak koyman beklenir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OperationCanceledException / TaskCanceledException</strong></td>
+                <td>İptalin istisna karşılığı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.operationcanceledexception">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IAsyncEnumerable&lt;T&gt; / await foreach</strong></td>
+                <td>Asenkron akışları tembel tüketme (C# 8)</td>
+                <td><span class="tag">ORTA</span> <code>[EnumeratorCancellation]</code> attribute'unu da öğren</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TaskCompletionSource&lt;T&gt;</strong></td>
+                <td>Elle tamamlanan Task üretme; callback API'lerini await'lenebilir yapar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Parallel.For / ForEach / Invoke</strong></td>
+                <td>Veri paralelliği; CPU-bound işler için</td>
+                <td><span class="tag">ORTA</span> IO işi için kullanma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Parallel.ForEachAsync</strong></td>
+                <td>Async iş için paralellik derecesi ayarlanabilir döngü (.NET 6)</td>
+                <td><span class="tag">ORTA</span> Toplu HTTP çağrısında doğru araç</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.foreachasync">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Channel&lt;T&gt; (System.Threading.Channels)</strong></td>
+                <td>Üretici-tüketici kuyruğu; bellekte hafif mesaj hattı</td>
+                <td><span class="tag">ORTA</span> RabbitMQ'ya geçmeden önce buradaki mantığı öğren</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/channels">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BlockingCollection&lt;T&gt;</strong></td>
+                <td>Channel'ın senkron atası</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kodda Channel tercih et</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.concurrent.blockingcollection-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SemaphoreSlim</strong></td>
+                <td>Eşzamanlı erişim sayısını sınırlama; async destekler (<code>WaitAsync</code>)</td>
+                <td><span class="tag">ORTA</span> <code>lock</code> async kodda çalışmaz, yerine bu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>lock / Monitor / System.Threading.Lock</strong></td>
+                <td>Karşılıklı dışlama; .NET 9 ile ayrı bir <code>Lock</code> tipi geldi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Interlocked</strong></td>
+                <td>Kilitsiz atomik artırma/değiştirme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.interlocked">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>volatile / Memory barrier</strong></td>
+                <td>Derleyici ve CPU yeniden sıralamasını engelleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Yanlış anlaşılan konu; genelde ihtiyacın olmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConcurrentDictionary, ConcurrentQueue, ConcurrentBag</strong></td>
+                <td>Kilit gerektirmeyen eşzamanlı koleksiyonlar</td>
+                <td><span class="tag">ORTA</span> <code>GetOrAdd</code>'in factory'si birden çok kez çağrılabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.concurrent">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ThreadPool</strong></td>
+                <td>Yönetilen thread havuzu; starvation kavramını öğren</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AsyncLocal&lt;T&gt;</strong></td>
+                <td>Async akış boyunca taşınan bağlam değeri</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>ThreadLocal</code> ile karıştırma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.asynclocal-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PeriodicTimer</strong></td>
+                <td>Async döngüde çalışan zamanlayıcı (.NET 6)</td>
+                <td><span class="tag">ORTA</span> Arka plan servislerinde <code>Timer</code>'dan daha temiz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.periodictimer">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bellek-ve-performans"><span class="h-num">§ 7</span>Bellek ve performans</h2>
+
+        <p>"Kod performansı" özgeçmişlerde sık öne çıkarılan bir alan. Mülakatta bunu iddia edersen aşağıdakilerden en az
+        <strong>Span&lt;T&gt;, GC nesilleri ve boxing</strong> üçlüsü sorulur. Ölçüm araçları
+        <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a> sayfasında ayrıca var.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bellek, tahsisat ve yaşam döngüsü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Span&lt;T&gt; / ReadOnlySpan&lt;T&gt;</strong></td>
+                <td>Bellekte var olan bir bölgeye kopyasız pencere; stack'te yaşar</td>
+                <td><span class="tag tag--ok">TEMEL</span> String parse işlerinde tahsisatı sıfırlar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.span-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Memory&lt;T&gt; / ReadOnlyMemory&lt;T&gt;</strong></td>
+                <td>Span'ın heap'te saklanabilen, async metotta kullanılabilen hali</td>
+                <td><span class="tag">ORTA</span> Span async metotta await ile aynı blokta kullanılamaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.memory-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ref struct</strong></td>
+                <td>Heap'e kaçamayan, sadece stack'te yaşayan struct</td>
+                <td><span class="tag">ORTA</span> Span'ın kendisi bir ref struct'tır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/ref-struct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stackalloc</strong></td>
+                <td>Stack üzerinde geçici dizi ayırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Boyutu sabit ve küçük tut; yoksa stack overflow</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>in / ref / out / ref readonly parametreler</strong></td>
+                <td>Parametre geçiş kipleri; büyük struct'ta kopya maliyetini kaldırır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada "C# method parameters modifiers"</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ref return / ref local</strong></td>
+                <td>Değerin kendisini değil referansını döndürme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArrayPool&lt;T&gt;</strong></td>
+                <td>Dizi kirala-geri ver havuzu; GC baskısını düşürür</td>
+                <td><span class="tag">ORTA</span> <code>Return</code>'ü unutursan havuz işe yaramaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MemoryPool&lt;T&gt;</strong></td>
+                <td>Memory tabanlı havuz</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.memorypool-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ObjectPool&lt;T&gt;</strong></td>
+                <td>Pahalı nesneleri yeniden kullanma havuzu (Microsoft.Extensions.ObjectPool)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, Microsoft paketi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/object-reuse-with-objectpool">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GC nesilleri (Gen0/Gen1/Gen2), LOH</strong></td>
+                <td>Çöp toplayıcının kuşak mantığı; 85 KB üstü nesneler Large Object Heap'e gider</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik mülakat sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Workstation GC vs Server GC</strong></td>
+                <td>GC modları; varsayılan uygulama türüne göre değişir</td>
+                <td><span class="tag">ORTA</span> <strong>ASP.NET Core uygulaması</strong> &rarr; Server GC varsayılan; .NET 9 ve sonrasında DATAS (dinamik heap sayısı) Server GC ile varsayılan açık (TEYİT: learn.microsoft.com "DATAS" sayfası). <strong>Konsol, worker, masaüstü</strong> &rarr; Workstation GC varsayılan; <code>ServerGarbageCollection</code> ile değiştirilebilir. <strong>Tek çekirdekle sınırlı konteyner/makine</strong> &rarr; ayardan bağımsız Workstation GC kullanılır. Konteynerde bellek limitiyle etkileşir; ayarı limite göre yap.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/workstation-server-gc">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IDisposable / Dispose pattern</strong></td>
+                <td>Yönetilmeyen kaynağı deterministik serbest bırakma sözleşmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IAsyncDisposable / await using</strong></td>
+                <td>Asenkron temizleme (C# 8)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>using declaration</strong></td>
+                <td>Süslü parantezsiz using; kapsam sonunda Dispose çağrılır (C# 8)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/using">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>finalizer (<code>~Sinif()</code>)</strong></td>
+                <td>GC'nin çağırdığı son çare temizleyici; nesneyi bir GC turu daha yaşatır</td>
+                <td><span class="tag tag--info">İLERİ</span> Neredeyse hiç yazmamalısın</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SafeHandle</strong></td>
+                <td>Yönetilmeyen tanıtıcıyı finalizer yazmadan güvenli tutma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WeakReference&lt;T&gt;</strong></td>
+                <td>GC'nin toplamasını engellemeyen referans</td>
+                <td><span class="tag tag--info">İLERİ</span> Önbellek ve event sızıntısı senaryolarında</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.weakreference-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>struct layout / StructLayout / FieldOffset</strong></td>
+                <td>Bellek yerleşimini elle kontrol etme</td>
+                <td><span class="tag tag--info">İLERİ</span> Interop işlerinde</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MethodImplOptions.AggressiveInlining</strong></td>
+                <td>JIT'e "bu metodu satır içine al" ipucu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ölçmeden kullanma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.methodimploptions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SIMD / Vector&lt;T&gt; / System.Numerics.Tensors</strong></td>
+                <td>Tek komutta çok veri işleme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/simd">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>unsafe / fixed / pointer</strong></td>
+                <td>İşaretçili kod; <code>AllowUnsafeBlocks</code> gerekir</td>
+                <td><span class="tag tag--info">İLERİ</span> C# 15 önizlemesi bu kuralları gevşetiyor</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BenchmarkDotNet</strong></td>
+                <td>Mikro-benchmark kütüphanesi; ısınma, istatistik ve bellek ölçümünü kendi yapar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz, MIT. En az bir kez gerçekten çalıştır</td>
+                <td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-counters, dotnet-trace, dotnet-gcdump</strong></td>
+                <td>Ücretsiz teşhis CLI araçları</td>
+                <td><span class="tag">ORTA</span> Ayrıntı: <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="pattern-matching"><span class="h-num">§ 8</span>Pattern matching</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Desen eşleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>is pattern</strong></td>
+                <td><code>if (o is Musteri m)</code> — tip testi ve değişken bildirimi tek adımda</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>switch expression</strong></td>
+                <td>Değer döndüren switch (<code>=&gt;</code> sözdizimi, C# 8)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik <code>switch</code> ifadesiyle karıştırma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>declaration / type pattern</strong></td>
+                <td>Tipe göre eşleşme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>constant pattern</strong></td>
+                <td>Sabit değere göre eşleşme; <code>null</code> dahil</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>property pattern</strong></td>
+                <td><code>{ Yas: &gt; 18, Sehir: "Ankara" }</code> gibi alan bazlı eşleşme</td>
+                <td><span class="tag">ORTA</span> C# 10'dan beri iç içe alan yolu yazılabilir: <code>{ Adres.Sehir: "Ankara" }</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>positional pattern</strong></td>
+                <td>Deconstruct üzerinden konumsal eşleşme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>relational pattern</strong></td>
+                <td><code>&lt;</code>, <code>&gt;=</code> gibi karşılaştırmalı desenler (C# 9)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>logical pattern (<code>and</code>, <code>or</code>, <code>not</code>)</strong></td>
+                <td>Desenleri birleştirme; <code>is not null</code> en yaygın kullanımı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>list pattern (<code>[1, 2, ..]</code>)</strong></td>
+                <td>Dizi/liste yapısına göre eşleşme (C# 11)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>slice pattern (<code>..</code>)</strong></td>
+                <td>List pattern içinde "geri kalanı" yakalama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>var pattern</strong></td>
+                <td>Her zaman eşleşir, sadece değeri yakalar; <code>when</code> ile birlikte kullanılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>discard pattern (<code>_</code>)</strong></td>
+                <td>"Umursamıyorum" deseni; switch expression'ın varsayılan kolu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/discards">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>when clause (guard)</strong></td>
+                <td>Desene ek koşul</td>
+                <td><span class="tag tag--ok">TEMEL</span> Exception filter'daki <code>when</code> ile aynı kelime, farklı bağlam</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exhaustiveness / CS8509 uyarısı</strong></td>
+                <td>Switch expression'ın tüm halleri kapsamaması uyarısı</td>
+                <td><span class="tag">ORTA</span> C# 15'te <code>closed</code> ile tam kapsama mümkün olacak</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="surumler"><span class="h-num">§ 9</span>Sürüm sürüm dil özellikleri</h2>
+
+        <p>Hangi C# sürümünü kullanabileceğin projenin hedef çatısına bağlıdır; varsayılan dil sürümü: .NET Framework 4.x &rarr; C# 7.3,
+        .NET Core 3.x &rarr; C# 8, .NET 5 &rarr; C# 9, .NET 6 &rarr; C# 10, .NET 7 &rarr; C# 11, .NET 8 &rarr; C# 12, .NET 9 &rarr; C# 13, .NET 10 &rarr; C# 14.
+        .NET Framework'te <code>LangVersion</code> yükseltilse bile çalışma zamanı desteği gerektiren özellikler (ör. default interface member) çalışmaz.
+        İlan .NET Framework bakım işiyse C# 7.3 sınırı ve Web API 2 / MVC 5 bilgisi önemlidir; ilanda ".NET 6-10" aralığı geçiyorsa C# 10'dan C# 14'e kadar her şeyi bilmen beklenir.
+        Mülakatçı "primary constructor kullandın mı?", "collection expression nedir?" diye sorabilir. Aşağıdaki tablo
+        hangi özelliğin hangi sürümle geldiğini gösterir; her sürümün resmî "what's new" sayfası bağlantıda.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>C# sürümleri ve eşleştiği .NET sürümü</caption>
+            <thead><tr><th>Sürüm</th><th>.NET</th><th>Öne çıkanlar</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>C# 8</strong></td>
+                <td>.NET Core 3.x</td>
+                <td>nullable reference types, switch expression, <code>using</code> declaration, IAsyncEnumerable, default interface member, index/range</td>
+                <td><span class="tag tag--ok">TEMEL</span> Modern C#'ın başladığı sürüm</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-8">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 9</strong></td>
+                <td>.NET 5</td>
+                <td>record, init-only setter, top-level statements, target-typed <code>new</code>, relational/logical pattern</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 10</strong></td>
+                <td>.NET 6</td>
+                <td>file-scoped namespace, global using, record struct, genişletilmiş property pattern, constant interpolated string</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Modern .NET projelerinde hâlâ yaygın alt sınır burası (.NET Framework projelerinde sınır C# 7.3)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 11</strong></td>
+                <td>.NET 7</td>
+                <td>raw string literal, <code>required</code> üye, list pattern, generic attribute, static abstract interface member, UTF-8 string literal</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 12</strong></td>
+                <td>.NET 8</td>
+                <td>primary constructor (tüm sınıflarda), collection expression <code>[..]</code>, alias any type, default lambda parameter, inline array</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> En çok sorulan yeni özellikler burada</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 13</strong></td>
+                <td>.NET 9</td>
+                <td><code>params</code> koleksiyonları, yeni <code>Lock</code> tipi, <code>\e</code> kaçış dizisi, iterator/async içinde ref struct, <code>allows ref struct</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 14</strong></td>
+                <td>.NET 10</td>
+                <td>extension members, <code>field</code> keyword, null-conditional assignment, partial constructor/event, kullanıcı tanımlı bileşik atama, implicit span dönüşümleri, unbound generic <code>nameof</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Güncel sürüm; en olası soru alanı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>C# 15</strong></td>
+                <td>.NET 11 (önizleme)</td>
+                <td>union types, <code>closed</code> hiyerarşi, extension indexer, etiketli <code>break</code>/<code>continue</code>, collection expression argümanları, bellek güvenliği modeli</td>
+                <td><span class="tag tag--info">İLERİ</span> Henüz önizleme; bilmen bonus, bilmemen kusur değil</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-15">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sürüm geçmişi tablosu</strong></td>
+                <td>&mdash;</td>
+                <td>Hangi özellik hangi sürümde geldi sorusunun tek kaynağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakat öncesi bir kez baştan sona oku</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LangVersion / configure-language-version</strong></td>
+                <td>Projede hangi C# sürümünün açık olduğunu belirleyen ayar</td>
+                <td><span class="tag">ORTA</span> Varsayılan, hedef framework'e göre otomatik seçilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/configure-language-version">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tek tek modern dil özellikleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>top-level statements</strong></td>
+                <td><code>Program.cs</code>'te Main ve sınıf yazmadan doğrudan kod</td>
+                <td><span class="tag tag--ok">TEMEL</span> Minimal API şablonlarının varsayılanı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>file-scoped namespace</strong></td>
+                <td><code>namespace X;</code> — bir seviye girinti kazandırır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/namespace">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>global using / ImplicitUsings</strong></td>
+                <td>Tüm dosyalarda geçerli using; SDK bazı using'leri otomatik ekler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>init-only setter</strong></td>
+                <td>Sadece nesne oluşturulurken atanabilen property</td>
+                <td><span class="tag tag--ok">TEMEL</span> Immutability'nin dildeki temeli</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/init">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>required member</strong></td>
+                <td>Nesne oluşturulurken atanması zorunlu property (C# 11)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> init ile birlikte kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>primary constructor</strong></td>
+                <td>Sınıf/struct adının yanına parametre yazma (C# 12)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> record'daki ile davranışı aynı değil: record'da property üretir, sınıfta üretmez</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/instance-constructors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>collection expression <code>[ ]</code> ve spread <code>..</code></strong></td>
+                <td>Tek sözdizimiyle dizi, List, Span, ImmutableArray üretme (C# 12)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>raw string literal (<code>"""</code>)</strong></td>
+                <td>Kaçışsız çok satırlı string; JSON/SQL gömerken (C# 11)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/raw-string">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>target-typed new (<code>new()</code>)</strong></td>
+                <td>Tip soldan belliyse sağda tekrar yazmama (C# 9)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/new-operator">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>using alias any type</strong></td>
+                <td>Tuple, dizi, generic dahil her tipe takma ad verme (C# 12)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>params collections</strong></td>
+                <td><code>params ReadOnlySpan&lt;T&gt;</code> gibi dizi dışı params (C# 13)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Tahsisat kazandırır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>inline array</strong></td>
+                <td>Struct içinde sabit boyutlu, güvenli dizi (C# 12)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>UTF-8 string literal (<code>"..."u8</code>)</strong></td>
+                <td>Doğrudan <code>ReadOnlySpan&lt;byte&gt;</code> üreten literal (C# 11)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/reference-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic attribute</strong></td>
+                <td><code>[MyAttr&lt;int&gt;]</code> yazabilme (C# 11)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>interceptor</strong></td>
+                <td>Bir çağrıyı derleme anında başka metoda yönlendiren deneysel özellik</td>
+                <td><span class="tag tag--info">İLERİ</span> Hâlâ deneysel; ASP.NET Core ve Regex üreteçleri kullanıyor</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/interceptors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>file-local type (<code>file class</code>)</strong></td>
+                <td>Sadece kendi dosyasında görünen tip (C# 11); source generator'lar için</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/file">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="delegate-event"><span class="h-num">§ 10</span>Delegate ve event</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Delegate, lambda ve olaylar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>delegate</strong></td>
+                <td>Metot imzasını temsil eden tip; "tip güvenli fonksiyon işaretçisi"</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Func&lt;...&gt;</strong></td>
+                <td>Değer döndüren hazır delegate; son tip parametresi dönüş tipidir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.func-2">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Action&lt;...&gt;</strong></td>
+                <td>Değer döndürmeyen hazır delegate</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.action-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Predicate&lt;T&gt;</strong></td>
+                <td><code>Func&lt;T, bool&gt;</code> ile aynı imza, ayrı tip</td>
+                <td><span class="tag">ORTA</span> LINQ <code>Func</code> kullanır, <code>List&lt;T&gt;.Find</code> <code>Predicate</code> kullanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.predicate-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Comparison&lt;T&gt;, Converter&lt;TIn,TOut&gt;</strong></td>
+                <td>Eski BCL'de kalan özel delegate'ler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.comparison-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>lambda expression</strong></td>
+                <td><code>x =&gt; x * 2</code>; delegate veya expression tree'ye dönüşebilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>closure / captured variable</strong></td>
+                <td>Lambda'nın dış değişkeni yakalaması; gizli sınıf tahsisatı üretir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Döngü değişkeni yakalama tuzağını bil</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>static lambda</strong></td>
+                <td><code>static x =&gt; ...</code> — yakalamayı derleyici seviyesinde yasaklar (C# 9)</td>
+                <td><span class="tag">ORTA</span> Performans kodunda kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>multicast delegate</strong></td>
+                <td>Birden çok metodu zincirleyen delegate (<code>+=</code>); dönüş değeri son metodunkidir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.multicastdelegate">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>event</strong></td>
+                <td>Delegate alanını dışarıdan sadece <code>+=</code>/<code>-=</code> ile erişilebilir yapan sarmalayıcı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EventHandler / EventHandler&lt;TArgs&gt;</strong></td>
+                <td>.NET'in standart event imzası: <code>(object? sender, TArgs e)</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>event memory leak</strong></td>
+                <td>Abonelikten çıkılmayınca yayıncının aboneyi hayatta tutması</td>
+                <td><span class="tag">ORTA</span> Uzun yaşayan servislerin klasik sızıntısı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>weak event pattern</strong></td>
+                <td>Zayıf referansla abone tutma; sızıntıyı önler</td>
+                <td><span class="tag tag--info">İLERİ</span> Aramada "weak event pattern .NET" yaz; WPF dokümanında anlatılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/events/weak-event-patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IObservable&lt;T&gt; / IObserver&lt;T&gt; (Rx)</strong></td>
+                <td>Event'in akış tabanlı alternatifi; System.Reactive kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz (MIT), ayrı NuGet paketi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.iobservable-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>function pointer (<code>delegate*</code>)</strong></td>
+                <td>Yönetilmeyen fonksiyon işaretçisi (C# 9); unsafe gerektirir</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="exception"><span class="h-num">§ 11</span>Exception yönetimi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İstisnalar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>try / catch / finally</strong></td>
+                <td>Temel istisna yakalama bloğu; <code>finally</code> her hâlükârda çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>throw vs throw ex</strong></td>
+                <td><code>throw;</code> stack trace'i korur, <code>throw ex;</code> siler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatta çok sorulan tuzak</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exception filter (<code>catch ... when</code>)</strong></td>
+                <td>Koşul sağlanmazsa stack açılmadan devam eder</td>
+                <td><span class="tag">ORTA</span> Loglama için ideal</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom exception</strong></td>
+                <td><code>Exception</code>'dan türeyen kendi istisnan; üç kurucuyu da yaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>ApplicationException</code>'dan türetme &mdash; artık önerilmiyor</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/how-to-create-user-defined-exceptions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AggregateException</strong></td>
+                <td>Paralel işlerden gelen birden çok istisnayı toplayan sarmalayıcı</td>
+                <td><span class="tag">ORTA</span> <code>Flatten()</code> ve <code>InnerExceptions</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.aggregateexception">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InnerException</strong></td>
+                <td>Sarılmış asıl istisna; log'da mutlaka yaz</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception.innerexception">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ExceptionDispatchInfo</strong></td>
+                <td>Yakalanan istisnayı stack trace'i koruyarak başka yerde yeniden fırlatma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.exceptionservices.exceptiondispatchinfo">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArgumentNullException.ThrowIfNull</strong></td>
+                <td>Guard clause'ları tek satıra indiren yardımcılar (.NET 6+)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>ArgumentException.ThrowIfNullOrEmpty</code>, <code>ObjectDisposedException.ThrowIf</code> de var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception.throwifnull">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>first chance exception</strong></td>
+                <td>CLR'ın istisnayı yakalanmadan önce bildirmesi; hata ayıklamada görürsün</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.firstchanceexception">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StackOverflowException, OutOfMemoryException</strong></td>
+                <td>Yakalanamayan / yakalanmaması gereken istisnalar</td>
+                <td><span class="tag">ORTA</span> <code>catch (Exception)</code> bunları kurtarmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exception maliyeti</strong></td>
+                <td>Fırlatmak pahalıdır; akış kontrolü için istisna kullanma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>TryParse</code> deseninin varlık sebebi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Result / Either deseni</strong></td>
+                <td>İstisna yerine hatayı dönüş değeri olarak taşıma yaklaşımı</td>
+                <td><span class="tag">ORTA</span> Dilde yok; kütüphane veya kendi tipinle yaparsın (bkz. <a href="../04-mimari-ve-desenler/index.html">04</a>)</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>global exception handling</strong></td>
+                <td>ASP.NET Core'da <code>IExceptionHandler</code> ve middleware ile merkezî yakalama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrıntı: <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="reflection-metaprogramlama"><span class="h-num">§ 12</span>Reflection ve metaprogramlama</h2>
+
+        <p>Generic ve mimari konularında derinleşmek isteyenler için bu bölüm tam olarak o ikisinin kesişimi. AutoMapper,
+        FluentValidation, EF Core, DI konteyneri &mdash; hepsi bu maddelerin üstüne kurulu.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma zamanı ve derleme zamanı metaprogramlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Reflection / System.Reflection</strong></td>
+                <td>Tipleri, üyeleri ve attribute'ları çalışma zamanında okuma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yavaştır; sonuçları önbelleğe al</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/reflection/reflection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Type, MethodInfo, PropertyInfo, FieldInfo</strong></td>
+                <td>Reflection'ın temel nesneleri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Activator.CreateInstance</strong></td>
+                <td>Tipten çalışma zamanında nesne üretme</td>
+                <td><span class="tag">ORTA</span> Yavaş; sıcak yolda kullanma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.activator">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Assembly.Load / GetTypes / AssemblyScanning</strong></td>
+                <td>Assembly'deki tipleri tarayıp otomatik kayıt yapma</td>
+                <td><span class="tag">ORTA</span> Scrutor gibi kütüphaneler bunu sarar; ücretsiz (MIT)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>attribute yazma</strong></td>
+                <td><code>Attribute</code>'dan türeyen sınıf + <code>[AttributeUsage]</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Validation, yetkilendirme, serileştirme &mdash; hepsi bununla</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CallerMemberName, CallerFilePath, CallerLineNumber, CallerArgumentExpression</strong></td>
+                <td>Derleyicinin otomatik doldurduğu parametre attribute'ları</td>
+                <td><span class="tag">ORTA</span> Guard clause ve loglamada çok kullanışlı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/caller-information">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>expression tree (<code>Expression&lt;Func&lt;T,bool&gt;&gt;</code>)</strong></td>
+                <td>Kodun veri olarak temsili; EF Core'un SQL üretmesinin temeli</td>
+                <td><span class="tag tag--ok">TEMEL</span> Lambda ile expression tree farkını bil</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/expression-trees/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Expression.Compile()</strong></td>
+                <td>Expression tree'yi çalışan delegate'e çevirme; reflection'a hızlı alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span> AOT'ta çalışmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expression-1.compile">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ExpressionVisitor</strong></td>
+                <td>Expression tree'yi gezip yeniden yazma; dinamik filtre kurmanın yolu</td>
+                <td><span class="tag tag--info">İLERİ</span> Generic repository'de spec deseni burada kurulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expressionvisitor">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>source generator (incremental generator)</strong></td>
+                <td>Derleme sırasında kod üretme; reflection'ın AOT dostu alternatifi</td>
+                <td><span class="tag">ORTA</span> Aramada "incremental source generator" yaz; eski <code>ISourceGenerator</code> API'si aşıldı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Roslyn analyzer / code fix</strong></td>
+                <td>Kod kurallarını derleyici seviyesinde zorlama ve otomatik düzeltme</td>
+                <td><span class="tag">ORTA</span> Clean Code ilkelerini somutlaştıran araç</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.editorconfig / code style rules (IDExxxx, CAxxxx)</strong></td>
+                <td>Kod stili ve kalite kurallarının yapılandırma dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, SDK ile gelir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dynamic proxy / interception</strong></td>
+                <td>Çalışma zamanında sınıfı sarıp metot çağrılarına araya girme</td>
+                <td><span class="tag tag--info">İLERİ</span> Castle.DynamicProxy (ücretsiz, Apache 2.0) en yaygını; Moq da bunu kullanır</td>
+                <td><a href="https://www.castleproject.org/projects/dynamicproxy/">castleproject.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DispatchProxy</strong></td>
+                <td>BCL'in kendi hafif proxy mekanizması; ek paket gerekmez</td>
+                <td><span class="tag tag--info">İLERİ</span> NuGet kullanımının kısıtlı olduğu ortamlarda tek seçenek olabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.dispatchproxy">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reflection.Emit / ILGenerator</strong></td>
+                <td>Çalışma zamanında IL üretme</td>
+                <td><span class="tag tag--info">İLERİ</span> Çok nadir; AOT'ta çalışmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.emit">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trimming / Native AOT uyumu</strong></td>
+                <td>Reflection kullanan kod trim/AOT'ta kırılır; <code>[DynamicallyAccessedMembers]</code> ile bildirilir</td>
+                <td><span class="tag tag--info">İLERİ</span> Modern .NET mülakatlarında yükselen konu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger"><span class="h-num">§ 13</span>Diğer: iterator, string, tarih, JSON</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Iterator ve string</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>yield return / yield break</strong></td>
+                <td>Tembel dizi üreten iterator metodu; derleyici state machine yazar</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Metot ne zaman çalışır?" sorusunun cevabı: ilk MoveNext'te</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/yield">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IEnumerator&lt;T&gt; / GetEnumerator</strong></td>
+                <td><code>foreach</code>'un altındaki sözleşme; duck typing ile de çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerator-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>string immutability / interning</strong></td>
+                <td>String değiştirilemez; literal'ler ortak havuzda tutulur</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>string interpolation (<code>$""</code>)</strong></td>
+                <td>String içine ifade gömme; C# 10'dan beri handler ile optimize edilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InterpolatedStringHandler</strong></td>
+                <td>Interpolation'ı ele geçirip gereksiz string üretimini engelleme (C# 10)</td>
+                <td><span class="tag tag--info">İLERİ</span> Logging kütüphaneleri bunu kullanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/performance/interpolated-string-handler">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StringBuilder</strong></td>
+                <td>Çok sayıda birleştirme için değiştirilebilir tampon</td>
+                <td><span class="tag tag--ok">TEMEL</span> Az sayıda birleştirmede <code>+</code> daha hızlı olabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>string.Create / Span tabanlı string üretimi</strong></td>
+                <td>Tahsisatsız string kurma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.create">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StringComparison / Ordinal vs Culture</strong></td>
+                <td>Karşılaştırmanın kültüre duyarlı mı olacağı; Türkçe <code>i</code> problemi buradan çıkar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tuzak coğrafyaya değil, sürecin kültürüne bağlı: <code>CurrentCulture</code> tr-TR veya az (Azerice) olan her süreçte (sunucu nerede olursa olsun; Türk kullanıcının makinesindeki masaüstü uygulaması dahil) <code>"I".ToLower()</code> &rarr; <code>"ı"</code> olur. Sunucu en-US / Invariant ise kod testte çalışır görünür, Türkçe kültürle çalıştığında bozulur. <code>InvariantGlobalization</code> açıksa kültürel dönüşümler Invariant davranır. Kural herkes için aynı: makine karşılaştırmasında <code>Ordinal</code>/<code>OrdinalIgnoreCase</code>, ekranda kullanıcı kültürü.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>composite formatting / format specifier</strong></td>
+                <td><code>{0:N2}</code>, <code>{0:yyyy-MM-dd}</code> gibi biçim dizeleri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/formatting-types">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CultureInfo / InvariantCulture</strong></td>
+                <td>Sayı ve tarih biçimlendirmesinin kültür bağlamı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Veri yazarken Invariant, kullanıcıya gösterirken kullanıcı kültürü</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IFormattable / ISpanFormattable / IParsable&lt;T&gt;</strong></td>
+                <td>Kendi tipini biçimlendirilebilir ve ayrıştırılabilir yapma arayüzleri</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>IParsable&lt;T&gt;</code> .NET 7</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.iparsable-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Regex / GeneratedRegex</strong></td>
+                <td>Düzenli ifadeler; <code>[GeneratedRegex]</code> derleme zamanında üretir</td>
+                <td><span class="tag">ORTA</span> Source generator'ın en görünür kullanımı (.NET 7+)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tarih, saat ve serileştirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>DateTime</strong></td>
+                <td>Tarih+saat; <code>Kind</code> alanı yüzünden tuzaklı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>DateTime.Now</code> yerine <code>UtcNow</code> alışkanlığı edin</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DateTimeOffset</strong></td>
+                <td>UTC farkını (offset) da taşıyan tarih</td>
+                <td><span class="tag tag--ok">TEMEL</span> Veritabanına ve senaryoya göre seç: <strong>SQL Server</strong> &rarr; <code>datetimeoffset</code> sütunu offset'i saklar. <strong>PostgreSQL + Npgsql 6+</strong> &rarr; <code>timestamptz</code> yalnızca UTC saklar, offset kaybolur; Npgsql <code>DateTimeOffset</code>'i yalnızca offset 0 ile kabul eder (TEYİT: npgsql.org "Date and Time Handling"). <strong>Geçmiş bir an</strong> (log, işlem zamanı) &rarr; UTC. <strong>Gelecekteki yerel randevu</strong> &rarr; yerel saat + IANA saat dilimi kimliği (kural değişse de doğru kalır). <strong>Yalnızca tarih</strong> &rarr; <code>DateOnly</code>; <strong>süre</strong> &rarr; <code>TimeSpan</code>. "Hangisini seçmeliyim?" sayfası bağlantıda.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DateOnly / TimeOnly</strong></td>
+                <td>Sadece tarih veya sadece saat (.NET 6)</td>
+                <td><span class="tag">ORTA</span> Doğum tarihi, mesai saati gibi alanlarda doğru tip</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimeSpan</strong></td>
+                <td>Süre; tarih değil</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimeZoneInfo</strong></td>
+                <td>Saat dilimi dönüşümleri; Windows ("Turkey Standard Time") ve IANA ("Europe/Istanbul") kimlikleri farklıdır</td>
+                <td><span class="tag">ORTA</span> Çalışma ortamına göre: <strong>.NET 6+ ve ICU mevcut</strong> &rarr; <code>FindSystemTimeZoneById</code> iki kimliği de her iki işletim sisteminde kabul eder (otomatik dönüşüm). <strong>.NET Framework, .NET Core 3.1 ve öncesi</strong> &rarr; yalnızca işletim sisteminin kimliği çalışır; TimeZoneConverter paketi gerekir. <strong>Alpine/minimal konteyner (tzdata veya ICU yok) ya da InvariantGlobalization açık</strong> &rarr; dönüşüm başarısız olabilir; imaja tzdata ekle (TEYİT: learn.microsoft.com <code>FindSystemTimeZoneById</code>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timezoneinfo">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimeProvider</strong></td>
+                <td>Zamanı soyutlayan .NET 8 tipi; testte sahte zaman vermeyi mümkün kılar</td>
+                <td><span class="tag">ORTA</span> "DateTime.Now'ı nasıl test edersin?" sorusunun modern cevabı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Guid / Guid.NewGuid</strong></td>
+                <td>128 bit benzersiz kimlik</td>
+                <td><span class="tag tag--ok">TEMEL</span> Rastgele Guid, clustered index'i parçalar &mdash; SQL Server tarafında bilinmesi gerekir; çözümü veritabanına göre değişir (bir alttaki satır)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.guid">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Guid.CreateVersion7</strong></td>
+                <td>Zaman sıralı UUIDv7 üretimi (.NET 9)</td>
+                <td><span class="tag">ORTA</span> Veritabanına göre: <strong>PostgreSQL <code>uuid</code></strong> ve bayt sırasıyla karşılaştıran motorlar &rarr; UUIDv7 sıralı eklenir, B-tree parçalanmasını azaltır. <strong>SQL Server <code>uniqueidentifier</code></strong> &rarr; karşılaştırmaya son bayt grubundan başlar; UUIDv7'nin zaman kısmı başta olduğu için SQL Server'da sıralı <em>değildir</em>; <code>NEWSEQUENTIALID()</code> veya EF Core'un SQL Server için varsayılan sıralı Guid üreteci kullanılır (TEYİT: learn.microsoft.com uniqueidentifier karşılaştırması ve EF Core değer üretimi). <strong>Clustered index olmayan tablo / anahtar olmayan alan</strong> &rarr; fark önemsiz.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.guid.createversion7">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Text.Json (STJ)</strong></td>
+                <td>.NET'in yerleşik JSON kütüphanesi; ek paket gerekmez</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, BCL içinde</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>STJ source generation (<code>JsonSerializerContext</code>)</strong></td>
+                <td>Reflection yerine derleme zamanında serileştirme kodu üretme</td>
+                <td><span class="tag">ORTA</span> AOT ve performans için; <code>[JsonSerializable]</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>JsonConverter&lt;T&gt;</strong></td>
+                <td>Özel serileştirme kuralı yazma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Newtonsoft.Json (Json.NET)</strong></td>
+                <td>Eski standart JSON kütüphanesi; hâlâ çok yaygın</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT). Yeni projede STJ tercih et; bazı senaryolarda hâlâ gerekli</td>
+                <td><a href="https://www.newtonsoft.com/json">newtonsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BinaryFormatter</strong></td>
+                <td>Eski ikili serileştirici</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Güvenlik açığı; .NET 9'da tamamen kaldırıldı. Eski kodda görürsen değiştir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>XmlSerializer / DataContractSerializer</strong></td>
+                <td>XML serileştirme; e-fatura ve SOAP entegrasyonlarında hâlâ gerekli</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Random / Random.Shared / RandomNumberGenerator</strong></td>
+                <td>Rastgelelik; kriptografik amaç için <code>RandomNumberGenerator</code> kullanılır</td>
+                <td><span class="tag">ORTA</span> Token üretiminde <code>Random</code> kullanmak güvenlik hatasıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.randomnumbergenerator">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Collections: List, Dictionary, HashSet, SortedDictionary, Queue, Stack, LinkedList</strong></td>
+                <td>Temel koleksiyonlar ve karmaşıklıkları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her birinin O(...) maliyetini ezberle</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FrozenDictionary / FrozenSet</strong></td>
+                <td>Bir kez kurulup çok okunan, okuma için optimize koleksiyonlar (.NET 8)</td>
+                <td><span class="tag">ORTA</span> Uygulama açılışında dolan lookup tablolarında ideal</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ImmutableArray, ImmutableList, ImmutableDictionary</strong></td>
+                <td>Değiştirilemez koleksiyonlar (System.Collections.Immutable)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, Microsoft paketi; .NET 8'den beri çoğu şablonda hazır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>preprocessor directives (<code>#if</code>, <code>#region</code>, <code>#nullable</code>, <code>#pragma warning</code>)</strong></td>
+                <td>Derleyici yönergeleri</td>
+                <td><span class="tag">ORTA</span> C# 14 dosya tabanlı uygulamalar için yenilerini ekledi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>XML doküman yorumu (<code>///</code>)</strong></td>
+                <td><code>&lt;summary&gt;</code>, <code>&lt;param&gt;</code>; Swagger açıklamalarını da besler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Clean Code ilkelerinin görünür kısmı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 14</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>Aşağıdaki numaralı sıra, <strong>C#'ı kullanan ve mülakata hazırlanan</strong> okur için mülakat riskine ve temel ihtiyaca göre dizilmiştir; üstten başla. Başka bir durumdaysan şu sırayı izle:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Duruma göre bu sayfadaki çalışma sırası</caption>
+            <thead><tr><th>Durum</th><th>Sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Mülakata hazırlanıyorsun, C# kullanıyorsun</td><td>Aşağıdaki numaralı liste</td></tr>
+              <tr><td>Sıfırdan öğreniyorsun</td><td>§&nbsp;2 tipler &rarr; §&nbsp;3 OOP &rarr; §&nbsp;13 koleksiyonlar/string &rarr; §&nbsp;11 exception &rarr; §&nbsp;4 generics &rarr; §&nbsp;10 delegate/lambda &rarr; §&nbsp;5 LINQ &rarr; §&nbsp;6 async &rarr; §&nbsp;8 pattern matching &rarr; §&nbsp;7 bellek &rarr; §&nbsp;12 reflection</td></tr>
+              <tr><td>Java'dan geliyorsun</td><td>§&nbsp;2 (değer/referans, <code>struct</code>) &rarr; §&nbsp;4 generics (reified, type erasure yok) &rarr; §&nbsp;5 LINQ &rarr; §&nbsp;6 async &rarr; §&nbsp;9 modern sözdizimi; §&nbsp;3 OOP'yi property ve erişim farkları için hızlı tara, kalanını ihtiyaç oldukça</td></tr>
+              <tr><td>JavaScript / TypeScript'ten geliyorsun</td><td>§&nbsp;2 (değer/referans, statik tip) &rarr; §&nbsp;3 OOP (nominal tipleme, interface, sınıf) &rarr; §&nbsp;4 generics &rarr; §&nbsp;6 async (Task ve Promise farkı) &rarr; §&nbsp;10 delegate/lambda &rarr; §&nbsp;5 LINQ &rarr; §&nbsp;9 modern sözdizimi; kalanını ihtiyaç oldukça</td></tr>
+              <tr><td>Python'dan geliyorsun</td><td>§&nbsp;2 (statik tip, değer/referans) &rarr; §&nbsp;3 OOP (interface, abstract class, erişim belirleyiciler) &rarr; §&nbsp;4 generics &rarr; §&nbsp;10 delegate/lambda &rarr; §&nbsp;5 LINQ (list comprehension karşılığı) &rarr; §&nbsp;6 async &rarr; §&nbsp;9 modern sözdizimi; kalanını ihtiyaç oldukça</td></tr>
+              <tr><td>Başka bir dilden (Go, Rust, C++ vb.) geliyorsun</td><td>§&nbsp;2 (değer/referans) &rarr; §&nbsp;3 OOP &rarr; §&nbsp;4 generics &rarr; §&nbsp;5 LINQ &rarr; §&nbsp;6 async &rarr; §&nbsp;9 modern sözdizimi; kendi dilinde olmayan kavramı öne al (ör. Go'dan geliyorsan kalıtım ve exception, Rust'tan geliyorsan GC ve §&nbsp;7 bellek)</td></tr>
+              <tr><td>AOT/trimming hedefliyorsun (serverless, CLI aracı, hızlı açılan konteyner, mobil/WASM)</td><td>Source generator ve AOT uyumu öne alınır (§&nbsp;12 ve §&nbsp;9); reflection kullanan kodun AOT'ta neden sorun çıkardığını erken öğren</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Değer tipi / referans tipi, boxing, struct-class kararı</span>
+            <p>Mülakatın açılış sorusu. Cevabı ezber değil, örnekle anlatabilecek düzeyde olmalı. §&nbsp;2.</p>
+            <span class="steps__meta">Öncelik: en yüksek · Kaynak: learn.microsoft.com dil referansı</span>
+          </li>
+          <li>
+            <span class="steps__title">async/await: deadlock, ConfigureAwait, async void, CancellationToken</span>
+            <p>ASP.NET Core işi yapıyorsan bu dört başlık her mülakatta çıkar; masaüstü/MAUI tarafında ise ConfigureAwait ve UI thread'i ayrıca önemlidir. §&nbsp;6.</p>
+            <span class="steps__meta">Öncelik: en yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">LINQ: deferred execution ve IEnumerable / IQueryable</span>
+            <p>LINQ bildiğini söyleyen birine ilk sorulan iki başlık bunlardır; bilmiyorsan LINQ iddiası çürür. §&nbsp;5.</p>
+            <span class="steps__meta">Öncelik: en yüksek · Devamı: <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></span>
+          </li>
+          <li>
+            <span class="steps__title">C# 12-13-14 özellikleri (primary constructor, collection expression, required, field, extension members)</span>
+            <p>İlanda ".NET 6-10" geçiyorsa bu sürümleri bildiğin varsayılır. §&nbsp;9 tablosunu baştan sona oku, her satır için 5 dakikalık örnek yaz. İlan .NET Framework bakım işiyse öncelik C# 7.3 sınırı ve modern .NET'e geçiş farklarıdır.</p>
+            <span class="steps__meta">Öncelik: en yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Generics: constraint çeşitleri, covariance/contravariance, open/closed generic</span>
+            <p>Generic kullandığını söyleyen adayda mülakatçı derinleşir. Variance'ı örnekle anlat. §&nbsp;4.</p>
+            <span class="steps__meta">Öncelik: yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">Pattern matching ve switch expression</span>
+            <p>Modern C# kodunun görüntüsünü belirler. Kod yazma sınavında beklenir. §&nbsp;8.</p>
+            <span class="steps__meta">Öncelik: yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">IDisposable, using, GC nesilleri</span>
+            <p>Kaynak yönetimi soruları; "finalizer yazar mısın?" cevabın "hayır, çünkü..." olmalı. §&nbsp;7.</p>
+            <span class="steps__meta">Öncelik: yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">Exception: throw vs throw ex, exception filter, istisna maliyeti</span>
+            <p>Kısa ama garanti çıkan başlıklar. §&nbsp;11.</p>
+            <span class="steps__meta">Öncelik: yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">Delegate, lambda, closure ve event</span>
+            <p>LINQ'in ve DI'ın altındaki mekanizma. Closure tahsisatını anlatabilmek artı puan. §&nbsp;10.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">BenchmarkDotNet ile gerçek bir ölçüm yap</span>
+            <p>"Kod performansı" iddiası ölçümle desteklenmelidir. Bir öğleden sonrada kapanır: iki string birleştirme yöntemini karşılaştır, çıktıyı oku.</p>
+            <span class="steps__meta">Öncelik: orta · Rozet: MÜLAKATTA SIK · Ücretsiz (MIT) · Devamı: <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Span&lt;T&gt;, Memory&lt;T&gt;, ArrayPool</span>
+            <p>Performans konuşmasını bir üst seviyeye taşıyan üçlü. §&nbsp;7.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">Expression tree ve reflection</span>
+            <p>Kütüphanelerin nasıl çalıştığını anlaman için. Mimari sorularında işine yarar. §&nbsp;12.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">DateTimeOffset, TimeProvider, CultureInfo, StringComparison</span>
+            <p>Uygulaman Türkçe (tr-TR) veya Azerice kültürle çalışabiliyorsa (sunucu nerede olursa olsun, ya da kullanıcı makinesinde) sessiz hata kaynakları; birden çok saat diliminde kullanıcısı olan her uygulamada da tarih tipleri kritik. §&nbsp;13.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">Source generator, interceptor, AOT/trimming</span>
+            <p>Genel amaçlı web/backend hedefinde şimdilik son sıra; .NET dünyasının gittiği yön bu, iş görüşmesinde bahsi geçerse yönü bilmen yeter. Serverless, CLI aracı, hızlı açılan konteyner veya mobil/WASM hedefliyorsan son sıra değil, öne alınır. §&nbsp;9 ve §&nbsp;12.</p>
+            <span class="steps__meta">Öncelik: düşük · Rozet: İLERİ</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu sayfadaki hiçbir madde tek başına "öğrendim" denecek bir şey değil. Her satır için en az bir kere
+          küçük bir konsol projesi açıp kodu kendin yaz. Okuyup geçtiğin madde, mülakatta hatırlamadığın maddedir.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Sonraki sayfa: <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a>. Bu sayfayla
+          birlikte okunacak diğer alanlar: <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>,
+          <a href="../../Java/index.html">Java alanı</a> (generics ve tip sistemi karşılaştırması için),
+          <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> (aynı kavramların karşılığı) ve
+          <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> (TypeScript'in tip sistemi C#'a benzer, geçişi kolaylaştırır).
+          Bu bağlantılar iki yönlü kullanılır: C#'tan diğer dillere bakıyorsan karşılaştırma için; <strong>Java'dan geliyorsan</strong>
+          Java sayfası C# öğrenirken köprüdür (type erasure ve reified generics farkı, checked exception yokluğu, property);
+          <strong>TypeScript'ten geliyorsan</strong> yapısal tipleme (TypeScript) ile nominal tipleme (C#) farkına dikkat et;
+          <strong>Python, Go veya Rust'tan geliyorsan</strong> ilgili sayfadaki kavramların C# karşılığını eşle.
+          Programlama ana sayfası: <a href="../../index.html">ana sayfa</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Genel Bakış</span></a>
+        <a class="next" href="../02-platform-ve-web-api/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Platform ve Web API</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

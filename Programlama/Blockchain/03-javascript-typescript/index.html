@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript ve TypeScript Ekosistemi — Blockchain Anahtar Listesi</title>
+<meta name="description" content="ethers.js, viem, wagmi, cüzdan bağlantısı, React dApp, Hardhat, indeksleme ve imzalama akışları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">JavaScript ve TypeScript Ekosistemi</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 03 · Ekosistemler</div>
+        <h1 class="page-title">JS/TS: zincire <em>tarayıcıdan</em> bağlanmak</h1>
+        <p class="lede">Blockchain uygulama geliştirmenin ana akımı JavaScript ve TypeScript. Cüzdan bağlantısından sözleşme çağrısına, olay dinlemekten React dApp'e kadar hangi kütüphanenin ne işe yaradığı. <a href="../../JavaScript-TypeScript/03-react/index.html">React</a> sayfasıyla birlikte okunur.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; Ana akım ekosistem</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+        <p class="intro">Bu sayfa bir anlatım değil, <strong>arama listesi</strong>. Her satırda bir terim, onu başka şeyle karıştırmaman için bir iki cümle ve resmî doküman bağlantısı var. Terimi dokümanda ya da arama motorunda aynı yazımla ara.</p>
+        <div class="callout callout--warn">
+          <p class="callout__title">Dürüst çerçeve</p>
+          <p>İş ilanlarında "React, Solidity, Smart Contract" birlikte sık geçer. React ile dApp arayüzü yazmış biri mülakatta "cüzdanı nasıl bağladın, işlemi nasıl gönderdin, imzayı nerede doğruladın" sorularıyla karşılaşabilir. O yüzden <span class="tag tag--bad">MÜLAKATTA SIK</span> satırları listenin en başında. Bu sayfanın senin için ağırlığı ana hattına göre değişir:</p>
+          <ul>
+            <li><strong>Ana hattın backend (.NET, Java, Go, Python) ve blockchain yan alansa</strong> &rarr; maddelerin çoğu genel iş başvurularında ana platform bilgisi kadar işe yaramaz; MÜLAKATTA SIK satırlarla yetin.</li>
+            <li><strong>Ana hattın frontend / React ise</strong> &rarr; bu sayfa ana hattının doğrudan uzantısıdır: wagmi/viem React bilgisinin üstüne eklenir ve frontend ilanlarında da ayırt edici olur.</li>
+            <li><strong>Blockchain ana hedefinse</strong> &rarr; MÜLAKATTA SIK ve TEMEL maddelerin tamamı ana hattır; § 8 veri katmanı ve § 10 test de öne alınır.</li>
+          </ul>
+        </div>
+        <div class="callout callout--info">
+          <p class="callout__title">Ön koşul: JavaScript'i henüz yazmadıysan</p>
+          <p>Bu listeye başlamadan önce JavaScript / TypeScript bölümünde şu başlıkları bitir: <a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">Asenkron JavaScript</a> (Promise, async/await), <a href="../../JavaScript-TypeScript/01-javascript/index.html#moduller">Modüller ve paketleme</a> (import, npm), <a href="../../JavaScript-TypeScript/01-javascript/index.html#nodejs">Node.js temelleri</a>, <a href="../../JavaScript-TypeScript/02-typescript/index.html#generics">TypeScript generics</a> ve <a href="../../JavaScript-TypeScript/03-react/index.html#hooklar">React hook'ları</a>. Bunlar olmadan wagmi kodu okunmaz. Her bölümün başında o bölüm için gereken ön koşul ayrıca yazıldı.</p>
+        </div>
+        <ul>
+          <li><span class="tag tag--bad">MÜLAKATTA SIK</span> İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik.</li>
+          <li><span class="tag tag--ok">TEMEL</span> olmazsa olmaz · <span class="tag">ORTA</span> sonra · <span class="tag tag--info">İLERİ</span> derinleşme.</li>
+          <li><span class="tag tag--warn">ÜCRETLİ</span> ücretli ya da ücretli katmanı olan · <span class="tag tag--warn">ESKİMİŞ</span> hâlâ görürsün ama yeni projede kullanılmaz · <span class="tag tag--warn">RİSK</span> para ya da güvenlik riski.</li>
+          <li><strong>0 TL</strong> işareti: testnet, faucet ya da ücretsiz katmanla sıfır maliyetle yapılabilir.</li>
+        </ul>
+        <div class="callout callout--def">
+          <p class="callout__title">13 Eylül 2026 itibarıyla güncel durum</p>
+          <p>wagmi v3'te <code>useAccount</code> hook'unun adı <code>useConnection</code> oldu. web3.js 4 Mart 2025'te sunset edildi. Truffle sunset edildi. OpenZeppelin Defender'ın kapanış tarihi 1 Temmuz 2026 olarak duyurulmuştu; durumu değişebilir, teyit et. Sürüm bilgileri resmî dokümanlardan kontrol edildi. C#'tan geliyorsan karşılıklar için <a href="../04-dotnet/index.html#csharp-js-kavram-eslestirme">C# ↔ JavaScript kavram eşleştirme</a> bölümüne bak.</p>
+        </div>
+
+        <h2 id="js-kutuphaneleri"><span class="h-num">§ 2</span>Kütüphaneler: ethers.js, viem, wagmi, web3.js</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">async/await</a> (her zincir çağrısı Promise döner), <a href="../../JavaScript-TypeScript/01-javascript/index.html#modern-js">BigInt</a> (token miktarları Number'a sığmaz) ve <a href="../../JavaScript-TypeScript/01-javascript/index.html#moduller">import/npm</a>.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>ethers.js v6</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>ethers.js v6</strong></td><td>Sağlayıcı, imzalayıcı, sözleşme, ABI ve yardımcı fonksiyonları tek pakette toplayan JS/TS kütüphanesi. 2022–2023 döneminde en yaygın seçenekti.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/">docs.ethers.org/v6</a></td></tr>
+        <tr><td><strong>Provider</strong></td><td>Zincirden okuma bağlantısı (bakiye, blok, eth_call). İmza atamaz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/providers/">api/providers</a></td></tr>
+        <tr><td><strong>JsonRpcProvider</strong></td><td>Bir RPC URL'sine (Alchemy, Infura, yerel anvil) doğrudan bağlanır. Backend ve script tarafında kullanılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/providers/jsonrpc/">providers/jsonrpc</a></td></tr>
+        <tr><td><strong>BrowserProvider</strong></td><td>Tarayıcı cüzdanını (window.ethereum, EIP-1193) sarar. v5'teki <code>Web3Provider</code>'ın yeni adıdır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/providers/#BrowserProvider">#BrowserProvider</a></td></tr>
+        <tr><td><strong>Signer / getSigner()</strong></td><td>İşlem ve mesaj imzalayan nesne. <code>BrowserProvider.getSigner()</code> cüzdandaki hesabı verir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/providers/">api/providers</a></td></tr>
+        <tr><td><strong>Wallet / HDNodeWallet</strong></td><td>Özel anahtar ya da mnemonic ile yerel imzalayıcı. Yalnızca test ve backend script'lerinde kullan.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.ethers.org/v6/api/wallet/">api/wallet</a></td></tr>
+        <tr><td><strong>Contract</strong></td><td>ABI + adres + runner (provider ya da signer) ile oluşturulan sözleşme nesnesi. <code>contract.balanceOf(addr)</code> gibi çağrılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/contract/">api/contract</a></td></tr>
+        <tr><td><strong>ContractFactory</strong></td><td>Bytecode ve ABI'den sözleşme deploy eder.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/contract/">api/contract</a></td></tr>
+        <tr><td><strong>Interface / AbiCoder</strong></td><td>ABI kodlama ve çözme: calldata, event log ve custom error decode.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/abi/">api/abi</a></td></tr>
+        <tr><td><strong>Human-Readable ABI</strong></td><td><code>"function balanceOf(address) view returns (uint256)"</code> gibi string ABI parçaları. Küçük script'te JSON ABI yerine kullanılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/abi/">api/abi</a></td></tr>
+        <tr><td><strong>formatUnits / parseUnits</strong></td><td>wei ile okunabilir sayı arasında dönüşüm. Ondalık basamak sayısı token'a göre değişir (ETH 18, bazı stablecoin'ler 6).</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/utils/#formatUnits">utils/#formatUnits</a></td></tr>
+        <tr><td><strong>formatEther / parseEther</strong></td><td>18 basamak için kısayol.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/api/utils/#formatEther">utils/#formatEther</a></td></tr>
+        <tr><td><strong>BigInt (1000n)</strong></td><td>v6'da BigNumber sınıfı kaldırıldı, yerleşik ES2020 BigInt kullanılıyor. BigInt'i Number ile karıştırmak sık yapılan hata.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/migrating/">v6/migrating</a></td></tr>
+        <tr><td><strong>WebSocketProvider</strong></td><td>Canlı olay aboneliği için kalıcı WS bağlantısı.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/providers/#WebSocketProvider">#WebSocketProvider</a></td></tr>
+        <tr><td><strong>FallbackProvider</strong></td><td>Birden çok RPC'yi yedekli kullanır; biri düşerse diğerine geçer.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.ethers.org/v6/api/providers/fallback-provider/">fallback-provider</a></td></tr>
+        <tr><td><strong>ethers v5</strong></td><td>Eski sürüm. Eski eğitimler ve 2022–2023 kodları bununla yazıldı. <code>BigNumber</code> ya da <code>providers.Web3Provider</code> görüyorsan kod v5'tir.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.ethers.org/v5/">docs.ethers.org/v5</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>viem</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>viem</strong></td><td>TypeScript öncelikli, düşük seviyeli, modüler Ethereum arayüzü. wagmi'nin altında çalışan motor. Yeni projelerde varsayılan tercih.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/getting-started">viem.sh</a></td></tr>
+        <tr><td><strong>createPublicClient</strong></td><td>Okuma istemcisi: readContract, getBalance, getLogs. ethers'taki Provider'ın karşılığı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/clients/public">clients/public</a></td></tr>
+        <tr><td><strong>createWalletClient</strong></td><td>İmza ve yazma istemcisi. İki hesap türüyle çalışır: JSON-RPC hesabı (imzayı cüzdana bırakır) ya da yerel hesap (özel anahtarla imzalar). ethers'taki Signer'ın karşılığı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/clients/wallet">clients/wallet</a></td></tr>
+        <tr><td><strong>createTestClient</strong></td><td>anvil, hardhat ya da ganache modunda blok kazma, hesap taklidi gibi test eylemleri.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/test">clients/test</a></td></tr>
+        <tr><td><strong>Transport: http / webSocket / fallback / custom</strong></td><td>İstemcinin zincire nasıl bağlandığını belirler. <code>custom(window.ethereum)</code> tarayıcı cüzdanına bağlanır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/clients/transports/http">transports/http</a></td></tr>
+        <tr><td><strong>viem/chains</strong></td><td>Hazır zincir tanımları (mainnet, sepolia, base, anvil…): chainId, RPC ve explorer bilgisi.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/chains/introduction">chains</a></td></tr>
+        <tr><td><strong>readContract / writeContract</strong></td><td>Okuma ve yazma eylemleri. Parametreler: abi, address, functionName, args.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/readContract">readContract</a> · <a href="https://viem.sh/docs/contract/writeContract">writeContract</a></td></tr>
+        <tr><td><strong>simulateContract</strong></td><td>İşlemi göndermeden simüle eder ve revert'i önceden yakalar. Dönen <code>request</code> writeContract'a verilir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/simulateContract">simulateContract</a></td></tr>
+        <tr><td><strong>getContract</strong></td><td>ethers'taki Contract tarzında bir sözleşme örneği nesnesi.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/contract/getContract">getContract</a></td></tr>
+        <tr><td><strong>parseAbi</strong></td><td>İnsan tarafından okunabilir ABI string'lerini tipli ABI'ye çevirir.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/abi/parseAbi">abi/parseAbi</a></td></tr>
+        <tr><td><strong>formatUnits / parseUnits (viem)</strong></td><td>ethers'takiyle aynı işi yapar, bigint döner.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/utilities/formatUnits">formatUnits</a></td></tr>
+        <tr><td><strong>privateKeyToAccount</strong></td><td>Özel anahtardan yerel hesap üretir; backend ve script'te kullanılır. Anahtarı koda gömme.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://viem.sh/docs/accounts/local/privateKeyToAccount">privateKeyToAccount</a></td></tr>
+        <tr><td><strong>ethers → viem geçiş rehberi</strong></td><td>İki API'nin eşleme tablosu. İki kütüphaneyle yazılmış kodu da okuyabilmek için.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/ethers-migration">ethers-migration</a></td></tr>
+        <tr><td><strong>viem TypeScript (as const ABI)</strong></td><td>ABI'yi <code>as const</code> ile verirsen fonksiyon adları ve argümanlar tip kontrolünden geçer. Bkz. <a href="../../JavaScript-TypeScript/02-typescript/index.html#ileri-tipler">İleri tipler</a>.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/typescript">docs/typescript</a></td></tr>
+        <tr><td><strong>Ox</strong></td><td>wevm'in düşük seviyeli Ethereum standart kütüphanesi (ABI, RLP, imza). viem gibi üst katman kütüphanelerin temelinde kullanılır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/wevm/ox">github.com/wevm/ox</a></td></tr>
+        <tr><td><strong>noble-curves / noble-hashes</strong></td><td>Saf JS kriptografi kütüphaneleri (secp256k1, hash); 7 kez dış denetimden geçti. Kendi kripto kodunu yazma.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://paulmillr.com/noble/">paulmillr.com/noble</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>wagmi ve TanStack Query (React)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>wagmi</strong></td><td>viem ve TanStack Query üzerine kurulu React hook kütüphanesi. Güncel ana sürüm v3. "React dApp" deneyiminin bugünkü karşılığı.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/getting-started">wagmi.sh</a></td></tr>
+        <tr><td><strong>createConfig / WagmiProvider</strong></td><td>Zincirleri, transport'ları ve connector'ları tanımlayan yapılandırma ile uygulamayı saran provider. Bkz. <a href="../../JavaScript-TypeScript/03-react/index.html#context">Context API</a>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/getting-started">getting-started</a></td></tr>
+        <tr><td><strong>useConnection (eski adı useAccount)</strong></td><td>Bağlı adresi, chainId'yi ve bağlantı durumunu (connected, disconnected…) verir. v3'te adı değişti; eski eğitimlerde useAccount olarak görürsün.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useConnection">useConnection</a></td></tr>
+        <tr><td><strong>useReadContract</strong></td><td>Sözleşmeden okur; sonuç TanStack Query önbelleğinde tutulur.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useReadContract">useReadContract</a></td></tr>
+        <tr><td><strong>useReadContracts</strong></td><td>Birden fazla okumayı multicall ile tek istekte yapar.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/api/hooks/useReadContracts">useReadContracts</a></td></tr>
+        <tr><td><strong>useWriteContract</strong></td><td>İşlem gönderir. v3'te gönderme fonksiyonlarının adı <code>mutate</code>/<code>mutateAsync</code> olarak standartlaştı.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWriteContract">useWriteContract</a></td></tr>
+        <tr><td><strong>useSimulateContract</strong></td><td>Yazmadan önce işlemi simüle eder ve doğrular.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useSimulateContract">useSimulateContract</a></td></tr>
+        <tr><td><strong>useWaitForTransactionReceipt</strong></td><td>İşlem hash'i için receipt'i bekler. <code>confirmations</code> parametresiyle kaç blok bekleneceğini ayarlarsın.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt">useWaitForTransactionReceipt</a></td></tr>
+        <tr><td><strong>useWatchContractEvent</strong></td><td>Sözleşme olaylarını (event log) canlı izler.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWatchContractEvent">useWatchContractEvent</a></td></tr>
+        <tr><td><strong>TanStack Query (@tanstack/react-query)</strong></td><td>wagmi'nin zorunlu bağımlılığı: önbellek, yeniden çekme, senkronizasyon. Eski adı React Query. Bkz. <a href="../../JavaScript-TypeScript/03-react/index.html#veri-cekme">Veri çekme</a>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://tanstack.com/query/latest/docs/framework/react/overview">tanstack.com/query</a></td></tr>
+        <tr><td><strong>wagmi query key / invalidateQueries</strong></td><td>Her hook bir query key verir. İşlem onaylandıktan sonra ilgili okumaları bu anahtarla geçersiz kılıp tazelersin.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/guides/tanstack-query">guides/tanstack-query</a></td></tr>
+        <tr><td><strong>wagmi v2 → v3 geçişi</strong></td><td>Hook adları değişti. Connector bağımlılıkları (@walletconnect/ethereum-provider, @metamask/connect-evm vb.) artık elle kuruluyor. En düşük TypeScript sürümü 5.9.3.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/guides/migrate-from-v2-to-v3">migrate-from-v2-to-v3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Eski ve alternatif kütüphaneler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>web3.js</strong></td><td>ChainSafe 4 Mart 2025'te sunset etti; GitHub deposu 5 Mart 2025'te arşivlendi. Eski kodlarda ve eğitimlerde hâlâ çok görülür.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.web3js.org/">docs.web3js.org</a> · <a href="https://github.com/web3/web3.js">github</a></td></tr>
+        <tr><td><strong>Truffle / Ganache</strong></td><td>ConsenSys Eylül 2023'te sunset duyurdu; Hardhat'e geçiş öneriliyor.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://archive.trufflesuite.com/">archive.trufflesuite.com</a></td></tr>
+        <tr><td><strong>thirdweb SDK</strong></td><td>Hazır bileşen ve altyapı paketi. Fiyat sayfasında ücretsiz plan görünmedi (Eylül 2026). Öğrenmek için gerekli değil.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://portal.thirdweb.com/">portal.thirdweb.com</a></td></tr>
+        <tr><td><strong>ethereum.org JavaScript API listesi</strong></td><td>ethereum.org'un kütüphane listesi (ethers, viem, wagmi, RainbowKit…). web3.js'in arşivlendiğini de belirtiyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/apis/javascript/">ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca: hangisi önce</p>
+          <p>Önce <strong>viem + wagmi</strong> öğren; yeni kodların çoğu bununla yazılıyor. Sonra ethers v6'yı mevcut kodu okuyabilecek kadar öğren. web3.js'i sadece tanı. .NET karşılığı Nethereum'dur: <a href="../04-dotnet/index.html#nethereum-ana-kutuphane">04 · Nethereum</a>.</p>
+        </div>
+
+        <h2 id="cuzdan-baglantisi"><span class="h-num">§ 3</span>Cüzdan bağlantısı</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#tarayici-apileri">Tarayıcı API'leri</a> (window nesnesi, olay dinleme) ve <a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">Promise</a>. Cüzdan, sayfaya enjekte edilen bir JS nesnesidir. Her istek bir Promise döner ve kullanıcı reddedebilir.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Standartlar ve cüzdan RPC metotları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>injected provider / window.ethereum</strong></td><td>Tarayıcı eklentisinin sayfaya enjekte ettiği nesne. Tek bir global olduğu için birden çok cüzdan eklentisi kuruluysa çakışır.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/provider-api/">MetaMask provider API</a></td></tr>
+        <tr><td><strong>EIP-1193</strong></td><td>Ethereum Provider JavaScript API standardı: <code>request({ method, params })</code> ve olaylar. viem custom transport ve ethers BrowserProvider bu arayüzü sarar. Durum: Final.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1193">EIP-1193</a></td></tr>
+        <tr><td><strong>eth_requestAccounts</strong></td><td>Kullanıcıdan hesaplarına erişim izni isteyen metot. Sayfadaki ilk "Connect" düğmesi bunu çağırır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/provider-api/">provider API</a></td></tr>
+        <tr><td><strong>accountsChanged / chainChanged</strong></td><td>Kullanıcı hesap ya da ağ değiştirdiğinde gelen EIP-1193 olayları. Arayüzü güncellemek için dinlenir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/provider-api/">provider API</a></td></tr>
+        <tr><td><strong>EIP-6963</strong></td><td>Multi Injected Provider Discovery: cüzdanlar kendilerini window olaylarıyla duyurur, kullanıcı listeden birini seçer. window.ethereum çakışmasının çözümü. Durum: Final.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963</a></td></tr>
+        <tr><td><strong>Provider hata kodları 4001 / 4100 / 4200 / 4900 / 4901</strong></td><td>EIP-1193'te tanımlı kodlar. 4001 kullanıcının isteği reddettiği anlamına gelir; 4900 ve 4901 bağlantı olmadığını gösterir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1193">EIP-1193</a></td></tr>
+        <tr><td><strong>wallet_switchEthereumChain (EIP-3326)</strong></td><td>dApp'in cüzdandan ağ değiştirmesini istemesi. EIP'nin durumu Stagnant ama cüzdanlarda yaygın olarak destekleniyor.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/json-rpc-api/wallet_switchEthereumChain/">MetaMask ref</a> · <a href="https://eips.ethereum.org/EIPS/eip-3326">EIP-3326</a></td></tr>
+        <tr><td><strong>4902 hata kodu</strong></td><td>Cüzdan istenen zinciri tanımıyor demektir; önce wallet_addEthereumChain çağrılır. Bu kod MetaMask dokümanında geçiyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/json-rpc-api/wallet_switchEthereumChain/">MetaMask ref</a></td></tr>
+        <tr><td><strong>wallet_addEthereumChain (EIP-3085)</strong></td><td>Cüzdana yeni bir zincir (RPC, chainId, sembol) eklenmesini önerir. Durum: Stagnant ama yaygın destekleniyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-3085">EIP-3085</a></td></tr>
+        <tr><td><strong>wallet_watchAsset (EIP-747)</strong></td><td>Kullanıcının cüzdanına bir token eklenmesini ister.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-747">EIP-747</a></td></tr>
+        <tr><td><strong>chainId / Chainlist</strong></td><td>Her EVM ağının sayısal kimliği (Ethereum 1, Base 8453). Chainlist, ağları ve herkese açık RPC adreslerini listeler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+        <tr><td><strong>EIP-55 checksum adres</strong></td><td>Büyük-küçük harf karışımıyla adres doğrulaması. Adresleri doğrudan string olarak karşılaştırma; kütüphanenin karşılaştırma fonksiyonunu kullan.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-55">EIP-55</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bağlantı kitleri (UI + connector)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>wagmi connectors (injected, metaMask, walletConnect, coinbaseWallet, baseAccount)</strong></td><td>wagmi'nin cüzdan adaptörleri. v3'te her birinin eş bağımlılığı ayrıca kurulur.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/guides/migrate-from-v2-to-v3">wagmi v3 notları</a></td></tr>
+        <tr><td><strong>WalletConnect / projectId</strong></td><td>Mobil cüzdanı QR kodu ya da deep link ile masaüstü dApp'e bağlayan protokol. projectId Reown panelinden ücretsiz alınır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.reown.com/appkit/overview">docs.reown.com</a></td></tr>
+        <tr><td><strong>Reown AppKit</strong></td><td>WalletConnect ekibinin (Reown) hazır bağlantı modalı. Wagmi, Ethers, Solana ve Bitcoin adaptörleri var. <strong>0 TL:</strong> ücretsiz plan 500 aylık aktif kullanıcı ve 1 proje (Eylül 2026).</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.reown.com/appkit/react/core/installation">AppKit React</a> · <a href="https://reown.com/pricing">pricing</a></td></tr>
+        <tr><td><strong>Web3Modal</strong></td><td>AppKit'in eski adı. Web3Modal v1–v5 kullananlar için geçiş rehberi var.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.reown.com/appkit/upgrade/from-w3m-to-reown">from-w3m-to-reown</a></td></tr>
+        <tr><td><strong>RainbowKit</strong></td><td>Rainbow ekibinin React bağlantı arayüzü. wagmi, viem ve TanStack Query ister; WalletConnect projectId zorunlu (ücretsiz).</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://rainbowkit.com/docs/installation">rainbowkit.com</a></td></tr>
+        <tr><td><strong>RainbowKit custom chains</strong></td><td>Kendi zincir tanımını (ör. yerel anvil) bağlantı modalına ekleme.</td><td><span class="tag">ORTA</span></td><td><a href="https://rainbowkit.com/docs/custom-chains">custom-chains</a></td></tr>
+        <tr><td><strong>ConnectKit</strong></td><td>Family'nin wagmi tabanlı bağlantı bileşeni. SIWE desteği var. RainbowKit'e alternatif.</td><td><span class="tag">ORTA</span></td><td><a href="https://family.co/docs/connectkit">family.co/docs/connectkit</a></td></tr>
+        <tr><td><strong>MetaMask Connect (EVM)</strong></td><td>MetaMask'in kendi bağlantı kütüphanesi; wagmi ile hızlı başlangıç rehberi var. wagmi v3'teki metaMask connector'u <code>@metamask/connect-evm</code> paketini ister.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/quickstart/wagmi/">quickstart/wagmi</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cüzdanlar ve hesap türleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>MetaMask</strong></td><td>En yaygın tarayıcı eklentisi ve mobil cüzdan. Geliştirme için ayrı bir tarayıcı profili ve yalnızca testnet hesabı kullan; gerçek varlık tutan cüzdanla deneme yapma.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/reference/provider-api/">docs.metamask.io</a></td></tr>
+        <tr><td><strong>Rabby</strong></td><td>Açık kaynak EVM tarayıcı cüzdanı. İkinci bir cüzdan kurup EIP-6963 seçimini denemek için uygun.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/RabbyHub/Rabby">github.com/RabbyHub/Rabby</a></td></tr>
+        <tr><td><strong>Coinbase Wallet SDK / Base Account</strong></td><td><code>@coinbase/wallet-sdk</code> paketi çalışmaya devam ediyor. Ancak depo notuna göre yeni entegrasyonlarda <code>@base-org/account</code> öneriliyor (Eylül 2026).</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/coinbase/coinbase-wallet-sdk">github</a></td></tr>
+        <tr><td><strong>Embedded wallet (Privy)</strong></td><td>E-posta ya da sosyal girişle uygulama içinde oluşturulan cüzdan. Privy'nin ücretsiz planında aylık 50 bin imza var.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.privy.io/">docs.privy.io</a></td></tr>
+        <tr><td><strong>ERC-4337 (Account Abstraction)</strong></td><td>UserOperation, bundler ve paymaster ile akıllı sözleşme hesapları; gas ücretinin başkası tarafından ödenmesi (sponsorluk). Ayrıntılar <a href="../06-altyapi-araclar-guvenlik/index.html#hesap-soyutlama-ve-ux">06 · Hesap soyutlama</a> bölümünde.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4337">ERC-4337</a></td></tr>
+        <tr><td><strong>EIP-7702</strong></td><td>Normal bir hesabın (EOA) kodunu bir sözleşmeye yönlendirmesine izin verir (toplu işlem, sponsorluk). <code>tx.origin == msg.sender</code> varsayımını bozar.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7702">EIP-7702</a></td></tr>
+        <tr><td><strong>permissionless.js (Pimlico)</strong></td><td>ERC-4337 hesaplarını viem üzerinden kullanmak için TypeScript kütüphanesi.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.pimlico.io/">docs.pimlico.io</a></td></tr>
+        <tr><td><strong>viem Account Abstraction</strong></td><td>viem'in yerleşik AA modülü (bundler client, smart account).</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://viem.sh/account-abstraction">viem.sh/account-abstraction</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="imzalama"><span class="h-num">§ 4</span>İmzalama: personal_sign, EIP-712, SIWE, permit</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#nesneler-ve-prototip">JS nesneleri</a> (EIP-712 tipleri iç içe nesne olarak yazılır) ve <a href="../../JavaScript-TypeScript/01-javascript/index.html#guvenlik">Güvenlik</a> bölümü (nonce, oturum, CSRF mantığı). Kriptografinin temelleri için <a href="../01-temeller/index.html">01 · Temeller</a>.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mesaj ve yapılandırılmış veri imzası</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>personal_sign</strong></td><td>Düz metin mesaj imzası. Gas harcamaz, zincire gitmez. Giriş ve sahiplik kanıtında kullanılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/guides/sign-data/">MetaMask sign data</a></td></tr>
+        <tr><td><strong>ERC-191 (Signed Data Standard)</strong></td><td>İmzalanan verinin <code>0x19</code> önekiyle başlaması kuralı. personal_sign'ın eklediği "\x19Ethereum Signed Message" önekinin kaynağı.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-191">ERC-191</a></td></tr>
+        <tr><td><strong>signMessage (viem / ethers / wagmi useSignMessage)</strong></td><td>personal_sign'ı saran kütüphane fonksiyonları.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/wallet/signMessage">viem signMessage</a> · <a href="https://wagmi.sh/react/api/hooks/useSignMessage">useSignMessage</a></td></tr>
+        <tr><td><strong>EIP-712 (typed structured data)</strong></td><td>Yapılandırılmış veri imzası. Cüzdan, anlamsız hex yerine alanları okunur biçimde gösterir. Sözleşme içinde de doğrulanabilir. Durum: Final.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a></td></tr>
+        <tr><td><strong>domain / types / primaryType / message</strong></td><td>EIP-712 imzasının dört parçası. <code>domain</code> içindeki chainId ve verifyingContract, imzanın başka zincirde ya da başka sözleşmede tekrar kullanılmasını engeller.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/wallet/signTypedData">viem signTypedData</a></td></tr>
+        <tr><td><strong>eth_signTypedData_v4</strong></td><td>EIP-712 imzası için kullanılan cüzdan RPC metodu. Eski v1 ve v3 sürümlerini kullanma.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/guides/sign-data/">MetaMask sign data</a></td></tr>
+        <tr><td><strong>useSignTypedData</strong></td><td>wagmi'nin EIP-712 hook'u.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useSignTypedData">useSignTypedData</a></td></tr>
+        <tr><td><strong>verifyMessage / verifyTypedData</strong></td><td>İmzanın beklenen adrese ait olduğunu doğrular. viem'in public action sürümü akıllı sözleşme hesaplarını da destekler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/public/verifyMessage">verifyMessage</a> · <a href="https://viem.sh/docs/actions/public/verifyTypedData">verifyTypedData</a></td></tr>
+        <tr><td><strong>ERC-1271</strong></td><td>Akıllı sözleşme cüzdanlarının imza doğrulama standardı (<code>isValidSignature</code>). Bu hesaplar için ecrecover yetmez.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1271">ERC-1271</a></td></tr>
+        <tr><td><strong>ERC-6492</strong></td><td>Henüz deploy edilmemiş akıllı hesapların imzasını doğrulama. ERC-1271'i genişletir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-6492">ERC-6492</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Giriş (SIWE) ve permit imzaları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>SIWE — Sign-In with Ethereum (ERC-4361)</strong></td><td>Standart biçimli bir mesajı imzalatarak kullanıcıyı sunucuda oturum açtırma. Parola yoktur; alanlar domain, adres, nonce, geçerlilik süresi. Durum: Final.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4361">ERC-4361</a> · <a href="https://docs.login.xyz/">docs.login.xyz</a></td></tr>
+        <tr><td><strong>siwe (npm)</strong></td><td>Spruce ID'nin TypeScript SIWE kütüphanesi: mesaj üretme ve doğrulama.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.login.xyz/libraries/typescript">libraries/typescript</a> · <a href="https://github.com/spruceid/siwe">github</a></td></tr>
+        <tr><td><strong>createSiweMessage / verifySiweMessage (viem)</strong></td><td>viem'in yerleşik SIWE yardımcıları. Doğrulama akıllı sözleşme hesaplarını da destekler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/siwe/utilities/createSiweMessage">createSiweMessage</a> · <a href="https://viem.sh/docs/siwe/actions/verifySiweMessage">verifySiweMessage</a></td></tr>
+        <tr><td><strong>nonce ve replay saldırısı</strong></td><td>Sunucu her giriş için tek kullanımlık nonce üretir, imzadan sonra onu siler. Silmezse aynı imza tekrar kullanılabilir.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4361">ERC-4361</a></td></tr>
+        <tr><td><strong>RainbowKit / ConnectKit SIWE</strong></td><td>Bağlantı kitlerinin hazır SIWE akışı. RainbowKit'te <code>@rainbow-me/rainbowkit-siwe-next-auth</code> ile NextAuth entegrasyonu var.</td><td><span class="tag">ORTA</span></td><td><a href="https://rainbowkit.com/docs/authentication">RainbowKit auth</a> · <a href="https://family.co/docs/connectkit/auth-with-nextjs">ConnectKit auth</a></td></tr>
+        <tr><td><strong>permit (ERC-2612)</strong></td><td>ERC-20 onayını (approve) işlem yerine EIP-712 imzasıyla verme. Kullanıcı approve için ayrıca gas ödemez.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2612">ERC-2612</a></td></tr>
+        <tr><td><strong>ERC20Permit (OpenZeppelin)</strong></td><td>Permit'in sözleşme tarafındaki hazır uygulaması. Solidity kısmı için <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 · Solidity</a>.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/token/erc20#erc20permit">OZ ERC20Permit</a></td></tr>
+        <tr><td><strong>Permit2 (Uniswap)</strong></td><td>SignatureTransfer ve AllowanceTransfer sözleşmelerinden oluşur. Token Permit2'ye bir kez onaylanır, sonraki izinler imzayla, süreli olarak verilir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://developers.uniswap.org/docs/protocols/permit2/overview">Permit2 overview</a></td></tr>
+        <tr><td><strong>permit phishing / blind signing</strong></td><td>Oltalama sitelerinin kullanıcıya zararsız görünen bir imzayla token harcama izni aldırması. Arayüzün imzalatacağı veriyi açıkça göstermeli.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a></td></tr>
+        <tr><td><strong>backend'de imza doğrulama</strong></td><td>İmza istemcide atılır, sunucuda doğrulanır; sonra oturum (JWT ya da cookie) açılır. Node.js backend'de viem <code>verifySiweMessage</code> ya da siwe paketiyle yapılır; .NET tarafında Nethereum ile: <a href="../04-dotnet/index.html#backend-desenleri">04 · Backend desenleri</a>, <a href="../04-dotnet/index.html#dotnet-kriptografi-temelleri">04 · Kriptografi</a>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/siwe/actions/verifySiweMessage">verifySiweMessage</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sozlesme-etkilesimi"><span class="h-num">§ 5</span>Sözleşme etkileşimi</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">Asenkron akış</a> (gönder → bekle → sonucu işle), <a href="../../JavaScript-TypeScript/01-javascript/index.html#hata-ve-hata-ayiklama">try/catch</a> ve <a href="../../JavaScript-TypeScript/02-typescript/index.html#tip-sistemi">tip daraltma</a>. Okuma ile yazma farkını kavramsal olarak <a href="../01-temeller/index.html">01 · Temeller</a> anlatıyor.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>ABI ve tip üretimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>ABI (Application Binary Interface)</strong></td><td>Sözleşmenin fonksiyon, event ve error listesinin JSON tanımı. Derleyici üretir; JS tarafı bununla çağrı kodlar.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity ABI spec</a></td></tr>
+        <tr><td><strong>function selector</strong></td><td>Fonksiyon imzasının keccak256 hash'inin ilk 4 baytı. Calldata bununla başlar.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">ABI spec</a></td></tr>
+        <tr><td><strong>ABIType (abitype)</strong></td><td>ABI ve EIP-712 için katı TypeScript tipleri. viem ve wagmi'nin tip çıkarımının temeli.</td><td><span class="tag">ORTA</span></td><td><a href="https://abitype.dev/">abitype.dev</a></td></tr>
+        <tr><td><strong>@wagmi/cli</strong></td><td>Foundry, Hardhat ya da Etherscan'den ABI çekip tipli kod ve React hook'ları üretir.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/cli/getting-started">wagmi CLI</a></td></tr>
+        <tr><td><strong>TypeChain</strong></td><td>ABI'den ethers için TS sınıfları üretir. Bakımcısı "soft deprecation" notuyla eski yazılım sayıyor; abitype, wagmi ve viem'i öneriyor.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/dethcrypto/TypeChain">github TypeChain</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Okuma (call) ve yazma (transaction)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>eth_call</strong></td><td>İşlem oluşturmadan sözleşmeyi çalıştırır. Ücretsizdir, imza gerekmez, durumu değiştirmez. view/pure fonksiyonlar bununla okunur.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org JSON-RPC</a></td></tr>
+        <tr><td><strong>eth_sendRawTransaction</strong></td><td>İmzalı işlemi ağa gönderir; durum değişir ve gas ödenir. writeContract sonunda bunu çağırır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">JSON-RPC</a></td></tr>
+        <tr><td><strong>gas tahmini (estimateGas / estimateContractGas)</strong></td><td>İşlemin kaç gas harcayacağını önceden hesaplar. Tahmin başarısızsa işlem büyük olasılıkla revert eder.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/estimateContractGas">estimateContractGas</a> · <a href="https://viem.sh/docs/actions/public/estimateGas">estimateGas</a></td></tr>
+        <tr><td><strong>EIP-1559 (maxFeePerGas / maxPriorityFeePerGas)</strong></td><td>Ücret modeli: yakılan base fee ve doğrulayıcıya giden priority fee. Kütüphaneler bu değerleri genelde otomatik doldurur.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1559">EIP-1559</a></td></tr>
+        <tr><td><strong>nonce (hesap nonce'u)</strong></td><td>Bir hesabın gönderdiği işlemlerin sıra numarası. Backend'den art arda işlem gönderirken çakışır ya da işlem takılı kalır (stuck transaction).</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">JSON-RPC</a></td></tr>
+        <tr><td><strong>transaction hash ve receipt</strong></td><td>Gönderim yalnızca hash döner; işlemin başarılı olduğu receipt gelince anlaşılır. receipt.status <code>reverted</code> olabilir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/public/waitForTransactionReceipt">waitForTransactionReceipt</a></td></tr>
+        <tr><td><strong>confirmations</strong></td><td>İşlemin dahil olduğu bloktan sonra beklenen blok sayısı. Zincirdeki yeniden düzenlemeye (reorg) karşı güvence için.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt">useWaitForTransactionReceipt</a></td></tr>
+        <tr><td><strong>revert reason / custom error decode</strong></td><td>Sözleşmenin <code>require</code> mesajı ya da <code>error X()</code> tanımı. viem bunu ContractFunctionRevertedError olarak çözer.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/glossary/errors">viem errors</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Olay dinleme (logs, filters, websocket)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>event / log / topics</strong></td><td>Sözleşmenin <code>emit</code> ettiği kayıtlar. İlk topic event imzasının hash'idir, <code>indexed</code> parametreler sonraki topic'lere yazılır. Filtreleme topic'lerle yapılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">ABI spec (events)</a></td></tr>
+        <tr><td><strong>getLogs (eth_getLogs)</strong></td><td>Belirli blok aralığındaki logları çeker; geçmişi taramak (backfill) için. RPC sağlayıcıları blok aralığını sınırlar, aralığı parçala.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/public/getLogs">viem getLogs</a></td></tr>
+        <tr><td><strong>createEventFilter (eth_newFilter)</strong></td><td>Düğüm tarafında filtre oluşturup değişiklikleri sorma. Bazı sağlayıcılar filtreyi kısa sürede siler.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/actions/public/createEventFilter">createEventFilter</a></td></tr>
+        <tr><td><strong>watchContractEvent</strong></td><td>Olayları canlı izler. HTTP transport'ta periyodik sorgulama (polling), WebSocket transport'ta abonelik kullanır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/watchContractEvent">watchContractEvent</a></td></tr>
+        <tr><td><strong>webSocket transport / eth_subscribe</strong></td><td>Yeni blok ve log için anlık bildirim. Bağlantı koptuğunda yeniden bağlanıp aradaki blokları getLogs ile tamamlaman gerekir.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/transports/websocket">transports/websocket</a></td></tr>
+        <tr><td><strong>watchBlocks</strong></td><td>Her yeni blokta tetiklenen izleyici.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/actions/public/watchBlocks">watchBlocks</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Toplu çağrı: multicall ve batch</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>multicall</strong></td><td>Birden çok okumayı Multicall3 sözleşmesi üzerinden tek eth_call'da yapar. Liste ekranlarında RPC sayısını düşürür.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/multicall">viem multicall</a></td></tr>
+        <tr><td><strong>Multicall3</strong></td><td>250'den fazla zincirde aynı adreste deploy edilmiş toplu çağrı sözleşmesi (<code>0xcA11bde05977b3631167028862bE2a173976CA11</code>).</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/mds1/multicall3">github.com/mds1/multicall3</a></td></tr>
+        <tr><td><strong>batch.multicall (client ayarı)</strong></td><td>Public Client'ta açılırsa aynı anda yapılan eth_call'lar otomatik olarak tek multicall'a toplanır.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/public">clients/public</a></td></tr>
+        <tr><td><strong>JSON-RPC batch</strong></td><td>Birden çok RPC isteğini tek HTTP isteğinde göndermek (<code>http(url, { batch: true })</code>). Multicall'dan farklıdır: sözleşme gerekmez.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/transports/http">transports/http</a></td></tr>
+        <tr><td><strong>EIP-5792 (wallet_sendCalls)</strong></td><td>Cüzdandan birden çok yazma işlemini tek onayla istemek; <code>wallet_getCallsStatus</code> ile durum sorulur. Örnek: approve ve swap birlikte. Durum: Final.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-5792">EIP-5792</a> · <a href="https://viem.sh/docs/actions/wallet/sendCalls">viem sendCalls</a></td></tr>
+        <tr><td><strong>useSendCalls</strong></td><td>wagmi'nin EIP-5792 hook'u.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://wagmi.sh/react/api/hooks/useSendCalls">useSendCalls</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dapp-mimarisi"><span class="h-num">§ 6</span>dApp mimarisi</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/03-react/index.html#hooklar">React hook'ları</a>, <a href="../../JavaScript-TypeScript/03-react/index.html#state-yonetimi">state yönetimi</a>, <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html#meta-framework">Next.js</a> ve <a href="../../JavaScript-TypeScript/01-javascript/index.html#guvenlik">JS güvenliği</a>. Tarayıcıya giden her şeyin herkes tarafından okunabildiğini unutma.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Şablon: React + wagmi + viem</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>create-wagmi</strong></td><td><code>npm create wagmi@latest</code> ile Vite (React) ya da Next.js şablonu kurar. En sade başlangıç noktası.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/cli/create-wagmi">create-wagmi</a></td></tr>
+        <tr><td><strong>Provider sırası: WagmiProvider → QueryClientProvider → (RainbowKitProvider)</strong></td><td>dApp'in kök bileşen iskeleti. Sıra yanlışsa hook'lar "provider bulunamadı" hatası verir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/getting-started">wagmi getting-started</a></td></tr>
+        <tr><td><strong>Vite + React (SPA)</strong></td><td>Sunucusuz, tamamen istemcide çalışan dApp. SSR sorunları yaşanmaz; öğrenmek için en kolayı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://vite.dev/guide/env-and-mode">vite.dev</a></td></tr>
+        <tr><td><strong>Next.js App Router</strong></td><td>Varsayılan olarak Server Component'lerle çalışır. Cüzdan kodu tarayıcıda çalışmak zorunda olduğu için Client Component'e konur.</td><td><span class="tag">ORTA</span></td><td><a href="https://nextjs.org/docs/app/getting-started/server-and-client-components">server-and-client-components</a></td></tr>
+        <tr><td><strong>'use client'</strong></td><td>Dosyayı istemci paketine alan direktif. window, localStorage ve wagmi hook'ları yalnızca burada çalışır.</td><td><span class="tag">ORTA</span></td><td><a href="https://nextjs.org/docs/app/getting-started/server-and-client-components">Next.js docs</a></td></tr>
+        <tr><td><strong>wagmi ssr: true / cookieStorage / cookieToInitialState</strong></td><td>SSR'da hydration uyuşmazlığını önler. Bağlantı durumu cookie'de saklanır, sunucudan başlangıç state'i olarak aktarılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/guides/ssr">wagmi SSR</a></td></tr>
+        <tr><td><strong>hydration mismatch</strong></td><td>Sunucunun ürettiği HTML ile istemcinin ilk render'ı farklı olunca çıkan hata. "Bağlı adres" sunucuda bilinmediği için dApp'lerde sık görülür.</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/react/guides/ssr">wagmi SSR</a></td></tr>
+        <tr><td><strong>Zustand</strong></td><td>Küçük, hook tabanlı global state kütüphanesi. Zincir verisini TanStack Query'de, arayüz durumunu (modal, seçili token) burada tut.</td><td><span class="tag">ORTA</span></td><td><a href="https://zustand.docs.pmnd.rs/">zustand.docs.pmnd.rs</a></td></tr>
+        <tr><td><strong>ENS (getEnsName / useEnsName)</strong></td><td>Adres yerine <code>isim.eth</code> gösterme ve isimden adres çözme.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/ens/actions/getEnsName">viem getEnsName</a> · <a href="https://docs.ens.domains/web/resolution">ENS docs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ortam değişkenleri ve RPC anahtarı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>NEXT_PUBLIC_ öneki</strong></td><td>Next.js bu önekli değişkenleri build sırasında JS paketine gömer, yani tarayıcıda herkes okuyabilir. Öneksiz değişkenler yalnızca sunucuda kalır.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://nextjs.org/docs/app/guides/environment-variables">Next.js env</a></td></tr>
+        <tr><td><strong>VITE_ öneki</strong></td><td>Vite'ta istemci paketine giren değişkenler. Resmî doküman API anahtarı konmamasını açıkça söylüyor.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://vite.dev/guide/env-and-mode">Vite env</a></td></tr>
+        <tr><td><strong>RPC anahtarı gizleme</strong></td><td>Tarayıcıdaki RPC URL'si görünür. Seçenekler: sağlayıcı panelinde domain kısıtı koymak, isteği kendi sunucundan (route handler) geçirmek, sadece okuma yetkili ayrı anahtar kullanmak.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://nextjs.org/docs/app/guides/environment-variables">Next.js env</a> · <a href="../06-altyapi-araclar-guvenlik/index.html#rpc-ve-dugum-saglayicilari">06 · RPC</a></td></tr>
+        <tr><td><strong>server-only paketi</strong></td><td>Gizli anahtar kullanan modülün istemci bileşenine yanlışlıkla import edilmesini build hatasına çevirir.</td><td><span class="tag">ORTA</span></td><td><a href="https://nextjs.org/docs/app/getting-started/server-and-client-components">Next.js docs</a></td></tr>
+        <tr><td><strong>fallback transport</strong></td><td>Birden çok RPC adresini sırayla dener. Ücretsiz katman limitine takılınca uygulamanın çökmesini önler.</td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/transports/fallback">transports/fallback</a></td></tr>
+        <tr><td><strong>özel anahtar (private key) frontend'de</strong></td><td>Frontend koduna ya da .env'e özel anahtar koymak, anahtarı ve içindeki varlıkları herkese vermek demektir. İmzayı her zaman kullanıcının cüzdanı atar.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://viem.sh/docs/clients/wallet">clients/wallet</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata yönetimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>UserRejectedRequestError (4001)</strong></td><td>Kullanıcı imzayı ya da işlemi reddetti. Bu bir hata değil, normal bir akış; kırmızı hata ekranı gösterme.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/glossary/errors">viem errors</a></td></tr>
+        <tr><td><strong>InsufficientFundsError</strong></td><td>Gas ya da gönderilecek tutar için bakiye yetersiz. Testnet'te çözümü faucet: <a href="../06-altyapi-araclar-guvenlik/index.html#testnet-ve-faucet">06 · Faucet</a>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/glossary/errors">viem errors</a></td></tr>
+        <tr><td><strong>ChainMismatchError</strong></td><td>Cüzdan, işlemin hedeflediği zincirden başka bir ağda. Kullanıcıya ağ değiştirme düğmesi göster.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/glossary/errors">viem errors</a></td></tr>
+        <tr><td><strong>ContractFunctionRevertedError</strong></td><td>Sözleşme işlemi geri çevirdi (revert). İçindeki reason ya da custom error adını kullanıcıya anlaşılır bir mesaja çevir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/glossary/errors">viem errors</a></td></tr>
+        <tr><td><strong>BaseError / shortMessage / error.name</strong></td><td>viem ve wagmi hataları tiplidir. <code>error.name</code> ile ayırt edilir, <code>shortMessage</code> kullanıcıya gösterilebilir. Bkz. <a href="../../JavaScript-TypeScript/01-javascript/index.html#hata-ve-hata-ayiklama">JS hata yönetimi</a>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/guides/error-handling">wagmi error handling</a></td></tr>
+        <tr><td><strong>JSON-RPC hata kodları (-32603, -32000…)</strong></td><td>Düğümün döndürdüğü genel hata kodları. EIP-1474'te listelenmiş; durum Stagnant.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1474">EIP-1474</a></td></tr>
+        <tr><td><strong>işlem durumu UX'i (idle → imza bekleniyor → gönderildi → onaylandı / başarısız)</strong></td><td>Her yazma işleminde kullanıcıya gösterilecek aşamalar. Hash'i blok gezgini bağlantısıyla göster.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt">useWaitForTransactionReceipt</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ağ değişimi ve mobil</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>useSwitchChain</strong></td><td>wagmi'de connector'ın ya da config'in hedef zincirini değiştirir. Arka planda wallet_switchEthereumChain çağrılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useSwitchChain">useSwitchChain</a></td></tr>
+        <tr><td><strong>Sepolia testnet</strong></td><td>Ethereum'un uygulama geliştirme testnet'i. Bütün denemeler burada yapılır. <strong>0 TL.</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">Google Sepolia faucet</a></td></tr>
+        <tr><td><strong>MetaMask mobile deeplink</strong></td><td><code>link.metamask.io</code> bağlantılarıyla kullanıcıyı MetaMask mobil uygulamasındaki belirli bir işleve yönlendirme.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.metamask.io/metamask-connect/evm/guides/metamask-exclusive/use-deeplinks/">use-deeplinks</a></td></tr>
+        <tr><td><strong>mobil tarayıcıda injected provider yok</strong></td><td>Mobil Safari ya da Chrome'da window.ethereum yoktur. Çözüm: WalletConnect veya cüzdan uygulamasının kendi içindeki tarayıcı.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.reown.com/appkit/overview">Reown AppKit</a></td></tr>
+        <tr><td><strong>AppKit React Native (redirect native / universal)</strong></td><td>Expo destekli mobil dApp. Cüzdandan uygulamaya geri dönüş için app scheme ya da universal link tanımlanır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.reown.com/appkit/react-native/core/installation">AppKit RN</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="gelistirme-ortami"><span class="h-num">§ 7</span>Geliştirme ortamı</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#nodejs">Node.js ve paket yönetimi</a>, <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html#paket-yoneticileri">paket yöneticileri</a> ve <a href="../../JavaScript-TypeScript/02-typescript/index.html#modul-ve-yapilandirma">tsconfig ile ESM</a>. Hardhat 3 ESM zorunlu kılıyor. Solidity tarafı <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02</a>'de.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Node.js kurulumu (Windows, macOS, Linux)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Node.js LTS (v24 Active, v22 Maintenance)</strong></td><td>Eylül 2026 itibarıyla v24 Active LTS, v22 Maintenance LTS; v20 2026'da EOL oldu (sürüm durumu değişir, nodejs.org'dan teyit et). Hardhat 3 v22.13.0 ve üstünü, Ponder v22 ve üstünü istiyor.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://nodejs.org/en/about/previous-releases">nodejs.org releases</a></td></tr>
+        <tr><td><strong>Node sürüm yöneticisi (işletim sistemine göre)</strong></td><td>Birden çok Node sürümünü yan yana kullanma. <strong>Windows</strong> &rarr; fnm (winget ile kurulur, PowerShell'de çalışır) veya nvm-windows. <strong>macOS</strong> &rarr; fnm (Homebrew veya kurulum betiği) ya da nvm (curl kurulum betiği). <strong>Linux</strong> &rarr; nvm veya fnm (curl kurulum betiği); dağıtımın paket yöneticisindeki Node sürümü genelde eski kalır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/Schniz/fnm">fnm</a> · <a href="https://github.com/nvm-sh/nvm">nvm</a> · <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a></td></tr>
+        <tr><td><strong>pnpm</strong></td><td>npm yerine kullanılabilen hızlı, disk tasarruflu paket yöneticisi. wagmi dokümanındaki komutlar pnpm ile yazılı.</td><td><span class="tag">ORTA</span></td><td><a href="https://pnpm.io/">pnpm.io</a></td></tr>
+        <tr><td><strong>WSL</strong></td><td>Windows'ta Linux ortamı (<code>wsl --install</code>). Foundry'nin kurulum aracı foundryup PowerShell'de çalışmıyor; Windows'ta Git Bash ya da WSL gerekiyor (Windows için hazır ikili dosya seçenekleri <span class="tag tag--warn">TEYİT</span>, getfoundry.sh kurulum sayfası). <strong>macOS ve Linux'ta</strong> foundryup doğrudan terminalde çalışır; WSL gerekmez.</td><td><span class="tag tag--ok">TEMEL</span> (Windows'ta)</td><td><a href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL install</a> · <a href="https://getfoundry.sh/">getfoundry.sh</a></td></tr>
+        <tr><td><strong>Node yerleşik TypeScript (type stripping)</strong></td><td>Node, .ts dosyalarını tip bilgisini silerek doğrudan çalıştırır (v24.12.0 ve v25.2.0'dan beri kararlı). Tip kontrolü yapmaz; enum ve decorator desteklenmez.</td><td><span class="tag">ORTA</span></td><td><a href="https://nodejs.org/api/typescript.html">nodejs.org/api/typescript</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hardhat, Foundry ve yerel zincir</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Hardhat 3</strong></td><td>Nomic Foundation'ın geliştirme ortamı. TypeScript testleri ve Solidity testleri (.t.sol) birlikte çalışır. Güncel ana sürüm 3.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://hardhat.org/docs/getting-started">hardhat.org/docs</a></td></tr>
+        <tr><td><strong>hardhat-toolbox-viem</strong></td><td>Yeni projeler için önerilen paket: viem, node:test test koşucusu, Ignition, doğrulama ve keystore.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hardhat.org/docs/plugins/hardhat-toolbox-viem">toolbox-viem</a></td></tr>
+        <tr><td><strong>hardhat-toolbox-mocha-ethers</strong></td><td>ethers, Mocha ve Chai matcher'larıyla çalışan alternatif paket. Eski projeler çoğunlukla bu yapıya benzer.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/plugins/hardhat-toolbox-mocha-ethers">toolbox-mocha-ethers</a></td></tr>
+        <tr><td><strong>Hardhat 2 → 3 geçişi</strong></td><td>Yapılandırma ESM'e taşındı, plugin kaydı bildirimsel (declarative) hale geldi. İnternetteki Hardhat 2 örnekleri doğrudan çalışmaz.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/migrate-from-hardhat2">migrate-from-hardhat2</a></td></tr>
+        <tr><td><strong>hardhat node</strong></td><td>Yerel HTTP JSON-RPC düğümü başlatır; dApp'i buna bağlarsın. <strong>0 TL.</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hardhat.org/docs/guides/hardhat-node">guides/hardhat-node</a></td></tr>
+        <tr><td><strong>Hardhat Ignition</strong></td><td>Bildirimsel deploy modülleri. Deploy adresi ve ABI çıktısını frontend'e aktarmak için kullanılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/ignition">hardhat.org/ignition</a></td></tr>
+        <tr><td><strong>configuration variables / hardhat-keystore</strong></td><td>RPC URL'si ve deploy anahtarını config dosyasına düz yazmadan, şifreli keystore'dan okuma.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://hardhat.org/docs/guides/configuration-variables">configuration-variables</a></td></tr>
+        <tr><td><strong>Foundry (forge, cast, anvil, chisel)</strong></td><td>Rust ile yazılmış, Solidity'de test yazılan araç seti. JS tarafıyla bağlantısı: forge'un ürettiği ABI'yi wagmi CLI ya da viem kullanır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/introduction/installation">getfoundry.sh</a></td></tr>
+        <tr><td><strong>anvil</strong></td><td>Foundry'nin yerel düğümü. Her biri 10.000 test ETH'si olan 10 hesap üretir. viem createTestClient'ın <code>anvil</code> modu buna bağlanır. <strong>0 TL.</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/anvil/">getfoundry.sh/anvil</a></td></tr>
+        <tr><td><strong>anvil --fork-url</strong></td><td>Mainnet ya da başka bir zincirin durumunu yerelde kopyalar. Gerçek sözleşmelerle para harcamadan deneme yapılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/anvil/">anvil</a></td></tr>
+        <tr><td><strong>cast</strong></td><td>Komut satırından zincir çağrısı (cast call, cast send). JS yazmadan önce çağrıyı test etmeye yarar.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/cast/">getfoundry.sh/cast</a></td></tr>
+        <tr><td><strong>chainId 31337</strong></td><td>anvil ve hardhat yerel ağlarının varsayılan chainId'si; viem/chains içinde <code>anvil</code> ve <code>hardhat</code> olarak tanımlı. Cüzdana eklerken bu değer kullanılır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/chains/introduction">viem chains</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hazır şablonlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Scaffold-ETH 2 (npx create-eth@latest)</strong></td><td>Next.js, RainbowKit, wagmi, viem ve Hardhat ya da Foundry'yi hazır bağlayan açık kaynak şablon. <code>useScaffoldReadContract</code> gibi hook'lar içerir. Node 20.18.3 ve üstü, Yarn gerekir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.scaffoldeth.io/quick-start/installation">docs.scaffoldeth.io</a></td></tr>
+        <tr><td><strong>create-web3-dapp (Alchemy)</strong></td><td>Alchemy'nin CLI'ı. Güncel README'ye göre Scaffold Alchemy tabanlı proje üretiyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/alchemyplatform/create-web3-dapp">github</a></td></tr>
+        <tr><td><strong>prool</strong></td><td>wevm'in test için programatik anvil örnekleri başlatan kütüphanesi. Paralel testlerde her test kendi zincirini kullanır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/wevm/prool">github.com/wevm/prool</a></td></tr>
+        <tr><td><strong>Tenderly (Virtual Environments, Simulations)</strong></td><td>Gerçek zincir durumunda işlem simülasyonu ve hata ayıklama. Ücretsiz hesap var; gelişmiş özellikler ücretli.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.tenderly.co/">docs.tenderly.co</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="veri-katmani"><span class="h-num">§ 8</span>Veri katmanı: indeksleme ve veri API'leri</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#tarayici-apileri">fetch</a> ile REST çağrısı, <a href="../../JavaScript-TypeScript/03-react/index.html#veri-cekme">React'ta veri çekme</a> ve temel GraphQL sorgu yapısı. Zincirden doğrudan "bu adresin bütün NFT'leri" gibi bir sorgu yapılamaz; bu tür sorular için indeksleyici gerekir. Genel altyapı karşılaştırması <a href="../06-altyapi-araclar-guvenlik/index.html#indeksleme-ve-veri">06 · İndeksleme</a> bölümünde.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kendi indeksleyicin (subgraph ve TypeScript indeksleyiciler)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>The Graph / subgraph</strong></td><td>Sözleşme olaylarını indeksleyip GraphQL ile sorgulatan protokol; 60'tan fazla zincir destekleniyor. Subgraph, bir sözleşme için yazılan indeksleme tanımı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://thegraph.com/docs/en/subgraphs/quick-start/">subgraph quick start</a></td></tr>
+        <tr><td><strong>graph-cli / subgraph.yaml / schema.graphql / mapping.ts</strong></td><td>Subgraph'ın parçaları: manifest (hangi sözleşme), şema (hangi varlıklar), AssemblyScript mapping (olay → varlık dönüşümü).</td><td><span class="tag">ORTA</span></td><td><a href="https://thegraph.com/docs/en/subgraphs/quick-start/">quick start</a></td></tr>
+        <tr><td><strong>Subgraph Studio</strong></td><td>Subgraph deploy etme ve test ortamı. <strong>0 TL:</strong> ücretsiz planda ayda 100.000 sorgu var.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://thegraph.com/docs/en/subgraphs/providers/subgraph-studio/introduction/">Subgraph Studio</a></td></tr>
+        <tr><td><strong>GraphQL (sorgu dili)</strong></td><td>Subgraph'tan veri çekmek için kullanılan dil. İstemcide fetch ya da TanStack Query ile çağrılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://thegraph.com/docs/en/">thegraph.com/docs</a></td></tr>
+        <tr><td><strong>Ponder</strong></td><td>Açık kaynak TypeScript EVM indeksleyici. Veriyi Postgres'e yazar, kendi sunucunda çalışır. Node 22 ve üstü, Postgres 14–17 gerekir. JS bilen biri için subgraph'tan daha tanıdık.</td><td><span class="tag">ORTA</span></td><td><a href="https://ponder.sh/docs/get-started">ponder.sh</a></td></tr>
+        <tr><td><strong>Envio HyperIndex / HyperSync</strong></td><td>TypeScript, JavaScript ya da ReScript ile yazılan indeksleyici ve bunun altındaki hızlı veri motoru. HyperSync'e 3 Kasım 2025'ten beri API token ile erişiliyor. Ücretsiz katman bilgisi dokümanda net değil.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.envio.dev/docs/HyperIndex/overview">docs.envio.dev</a></td></tr>
+        <tr><td><strong>SQD (eski adı Subsquid)</strong></td><td>TypeScript SDK ile indeksleyici. Geliştirme için ücretsiz ortak kapasite var, üretim için ücretli bulut.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.sqd.dev/">docs.sqd.dev</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hazır veri API'leri ve RPC sağlayıcıları (JS tarafı)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Alchemy (RPC + Data API)</strong></td><td>RPC, NFT API ve webhook'lar. <strong>0 TL:</strong> ücretsiz planda ayda 30.000.000 compute unit; Debug ve Trace API ücretli.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.alchemy.com/docs">alchemy.com/docs</a> · <a href="https://www.alchemy.com/docs/reference/pricing-plans">plans</a></td></tr>
+        <tr><td><strong>Alchemy SDK (alchemy-sdk)</strong></td><td>ethers tabanlı sarmalayıcı. ethereum.org listesinde hâlâ duruyor. Yeni projede viem ile doğrudan REST/RPC çağrısı da yeterli.</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/apis/javascript/">ethereum.org listesi</a></td></tr>
+        <tr><td><strong>Infura</strong></td><td>MetaMask ekibinin RPC hizmeti. <strong>0 TL:</strong> ücretsiz planda günde 3.000.000 kredi, saniyede 500 kredi.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.infura.io/">docs.infura.io</a> · <a href="https://docs.infura.io/get-started/pricing">pricing</a></td></tr>
+        <tr><td><strong>QuickNode (RPC, Streams)</strong></td><td>RPC ve gerçek zamanlı veri akışı (Streams). Ücretsiz deneme planında ayda 10M API kredisi ve 1 endpoint var.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.quicknode.com/docs/streams/getting-started">Streams docs</a> · <a href="https://www.quicknode.com/pricing">pricing</a></td></tr>
+        <tr><td><strong>Etherscan API V2</strong></td><td>60'tan fazla EVM zinciri için tek anahtar; <code>chainid</code> parametresiyle zincir seçilir. Bakiye, işlem, doğrulanmış kaynak kod ve ABI. <strong>0 TL:</strong> ücretsiz katmanda saniyede 3, günde 100.000 çağrı; sadece seçili zincirler.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.etherscan.io/">docs.etherscan.io</a> · <a href="https://docs.etherscan.io/rate-limits">rate limits</a></td></tr>
+        <tr><td><strong>Blockscout API</strong></td><td>Açık kaynak blok gezgini ve API'si; Etherscan uyumlu uç noktalar da sunuyor. Yeni PRO API kredi sistemiyle çalışıyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.blockscout.com/devs/apis">Blockscout APIs</a></td></tr>
+        <tr><td><strong>Sourcify</strong></td><td>Açık kaynak sözleşme doğrulama; doğrulanmış kaynak koduna ve ABI'ye API ile erişim. Etherscan'e bağımlı kalmamak için.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.sourcify.dev/">docs.sourcify.dev</a></td></tr>
+        <tr><td><strong>Moralis (Data API, Streams)</strong></td><td>Cüzdan, token, NFT verisi ve webhook akışları. Fiyat sayfasında ücretsiz plan görünmedi (Eylül 2026); en düşük plan ücretli.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.moralis.com/">docs.moralis.com</a></td></tr>
+        <tr><td><strong>Dune (DuneSQL, Data API)</strong></td><td>100'den fazla zincirin verisini SQL ile sorgulama ve panolar oluşturma. Analitik amaçlı; dApp'in canlı verisi için kullanılmaz. Dokümanda ücretsiz katman geçiyor.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.dune.com/">docs.dune.com</a></td></tr>
+        <tr><td><strong>GoldRush (eski adı Covalent)</strong></td><td>100'den fazla zincir için birleşik veri API'si ve TypeScript SDK. Ücretsiz deneme var.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://goldrush.dev/docs/">goldrush.dev/docs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nft-ve-medya"><span class="h-num">§ 9</span>NFT ve medya</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#tarayici-apileri">fetch ve JSON</a>, <a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">async akış</a> ve <a href="../../JavaScript-TypeScript/03-react/index.html#formlar">React formları</a> (mint ekranı bir formdur). Sözleşme tarafı (ERC-721 yazmak) <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02</a>'de, depolama altyapısı <a href="../06-altyapi-araclar-guvenlik/index.html#depolama">06 · Depolama</a> bölümünde.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Standartlar ve metadata</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>ERC-721</strong></td><td>Benzersiz token (NFT) standardı. Her tokenId, sözleşme adresiyle birlikte tekildir. Durum: Final.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-721">ERC-721</a> · <a href="https://ethereum.org/developers/docs/standards/tokens/erc-721/">ethereum.org</a></td></tr>
+        <tr><td><strong>ERC-1155</strong></td><td>Tek sözleşmede birden çok token türü (fungible ve non-fungible karışık) ile toplu transfer.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a></td></tr>
+        <tr><td><strong>tokenURI / uri(id)</strong></td><td>Token'ın metadata JSON adresini döndüren fonksiyon. ERC-1155'te <code>{id}</code> yer tutucusu küçük harfli hex tokenId ile değiştirilir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.opensea.io/docs/metadata-standards">OpenSea metadata</a></td></tr>
+        <tr><td><strong>metadata JSON (name, description, image, attributes)</strong></td><td>ERC-721 name, description ve image alanlarını tanımlar. OpenSea bunlara external_url, animation_url ve attributes (trait_type, value) ekler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.opensea.io/docs/metadata-standards">metadata standards</a></td></tr>
+        <tr><td><strong>contractURI (ERC-7572)</strong></td><td>Koleksiyon düzeyinde metadata (ad, görsel, açıklama). Durum: Draft, ama pazar yerleri yıllardır destekliyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7572">ERC-7572</a></td></tr>
+        <tr><td><strong>ERC-4906 (MetadataUpdate)</strong></td><td>Metadata değişince yayılan standart olay. Pazar yerleri bunu görünce görseli yeniler.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4906">ERC-4906</a></td></tr>
+        <tr><td><strong>ERC-2981 (royalty)</strong></td><td><code>royaltyInfo()</code> ile telif bilgisini bildirir. Ödeme zorunlu değil, pazar yerinin tercihine bağlı.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2981">ERC-2981</a></td></tr>
+        <tr><td><strong>ERC721URIStorage / OpenZeppelin Wizard</strong></td><td>Her token için ayrı URI saklayan hazır uzantı; Wizard mintable ERC-721 kodunu tıklayarak üretir. JS tarafına ABI olarak gelir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc721">OZ ERC-721</a> · <a href="https://wizard.openzeppelin.com/">wizard</a></td></tr>
+        <tr><td><strong>on-chain metadata (Base64 data URI)</strong></td><td>JSON ya da SVG'yi sözleşme içinde üretip <code>data:application/json;base64,…</code> olarak döndürmek. Dış depolamaya bağımlılık yoktur ama gas maliyeti yüksektir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc721">OZ ERC-721</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>IPFS ve pinning</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>IPFS / CID (v0 ve v1)</strong></td><td>İçerik adreslemeli dosya ağı. CID dosyanın hash'inden türer; v0 "Qm" ile başlar, yeni projelerde v1 önerilir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ipfs.tech/concepts/content-addressing/">content addressing</a></td></tr>
+        <tr><td><strong>ipfs:// URI</strong></td><td>Metadata'da gateway adresi yerine protokol URI'si yazmak; hangi gateway'le açılacağına istemci karar verir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ipfs.tech/concepts/ipfs-gateway/">IPFS gateway</a></td></tr>
+        <tr><td><strong>pinning / garbage collection</strong></td><td>Pinlenmemiş veri IPFS düğümünde çöp toplamayla silinir. "IPFS'e yükledim, kalıcı" düşüncesi yanlış; biri pinlemeye devam etmeli.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.ipfs.tech/concepts/persistence/">persistence</a></td></tr>
+        <tr><td><strong>IPFS Pinning Service API</strong></td><td>Pinning hizmetleri için ortak API. Pinata ve Filebase destekliyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ipfs.tech/how-to/work-with-pinning-services/">pinning services</a></td></tr>
+        <tr><td><strong>IPFS gateway (public / kendi gateway'in)</strong></td><td>IPFS içeriğini HTTP'den sunar. IPFS dokümanı ciddi uygulamalarda public gateway yerine kendi gateway'ini çalıştırmayı öneriyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ipfs.tech/concepts/ipfs-gateway/">IPFS gateway</a></td></tr>
+        <tr><td><strong>Helia</strong></td><td>Tarayıcı ve Node için modüler TypeScript IPFS uygulaması.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/ipfs/helia">github.com/ipfs/helia</a></td></tr>
+        <tr><td><strong>Pinata (pinata npm)</strong></td><td>En yaygın IPFS pinning hizmeti; JWT ile kimlik doğrulama, kişisel gateway. <strong>0 TL:</strong> ücretsiz hesapla başlanabiliyor.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.pinata.cloud/">docs.pinata.cloud</a></td></tr>
+        <tr><td><strong>Filebase</strong></td><td>S3 uyumlu depolama ve IPFS pinning. Dokümanında ücretsiz katman geçmiyor; GB başına ücretli.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://filebase.com/docs/">filebase.com/docs</a></td></tr>
+        <tr><td><strong>Lighthouse Storage</strong></td><td>IPFS ve Filecoin üzerinde şifreli yükleme ve SDK. Ücretsiz katman dokümanda doğrulanamadı.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.lighthouse.storage/">docs.lighthouse.storage</a></td></tr>
+        <tr><td><strong>web3.storage / Storacha</strong></td><td>Eski eğitimlerin ücretsiz yükleme önerisi. 13 Eylül 2026 kontrolünde web3.storage storacha.network'e, o da fil.one'a (S3 uyumlu, ücretli depolama) yönleniyor. Eski eğitimdeki kod büyük olasılıkla çalışmaz.</td><td><span class="tag tag--warn">ESKİMİŞ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td>web3.storage (metin olarak; yönlendiriliyor)</td></tr>
+        <tr><td><strong>NFT.Storage</strong></td><td>Güncel sitesi NFT verisini "tek seferlik küçük bir ücretle" saklamayı sunuyor. Eski eğitimlerdeki ücretsiz API akışına güvenme.</td><td><span class="tag tag--warn">ESKİMİŞ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://nft.storage/">nft.storage</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>NFT API'leri ve mint arayüzü kalıbı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>OpenSea API</strong></td><td>NFT ve koleksiyon verisi. API anahtarı zorunlu. <strong>0 TL:</strong> kayıt gerektirmeyen anlık anahtar saatte 600 okuma sağlar, 7 gün geçerli; tam anahtar da ücretsiz ama başvuru istiyor.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.opensea.io/reference/api-overview">API overview</a> · <a href="https://docs.opensea.io/reference/api-keys">API keys</a></td></tr>
+        <tr><td><strong>Alchemy NFT API (getNFTsForOwner)</strong></td><td>Bir adresin sahip olduğu NFT'leri tek çağrıyla listeler. Zincirde bunu kendin yapmak için indeksleyici gerekir. Ücretsiz katmanda var.</td><td><span class="tag">ORTA</span></td><td><a href="https://www.alchemy.com/docs/reference/nft-api-quickstart">NFT API quickstart</a></td></tr>
+        <tr><td><strong>ERC-721 mint UI kalıbı</strong></td><td>Sıra: dosyayı pinle → metadata JSON'u pinle → <code>useSimulateContract</code> → <code>useWriteContract</code> → <code>useWaitForTransactionReceipt</code> → receipt'teki <code>Transfer</code> olayından tokenId'yi oku. <strong>0 TL:</strong> Sepolia ve ücretsiz pinning ile yapılır.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/react/api/hooks/useWriteContract">useWriteContract</a> · <a href="../07-projeler/index.html#kucuk-projeler">07 · Küçük projeler</a></td></tr>
+        <tr><td><strong>Transfer event'inden tokenId okuma</strong></td><td>Mint fonksiyonu tokenId döndürse bile yazma işleminin dönüş değeri JS'e ulaşmaz. tokenId'yi receipt log'larını decode ederek alırsın.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/public/waitForTransactionReceipt">waitForTransactionReceipt</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test-ve-kalite"><span class="h-num">§ 10</span>Test ve kalite</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/03-react/index.html#test">React testi</a>, <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html#test">test araçları</a> ve <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html#kod-kalitesi">kod kalitesi</a>. Başlangıç noktana göre: xUnit ve Moq (C#) ya da JUnit ve Mockito (Java) biliyorsan mantık aynı, sadece araçların adı farklı. pytest ve unittest.mock (Python) biliyorsan fixture ≈ <code>beforeEach</code>, mock ≈ <code>vi.mock</code>. Jest biliyorsan Vitest API'si neredeyse aynı. Hiç test yazmadıysan önce test araçları bölümü, sonra <a href="https://vitest.dev/guide/">Vitest Getting Started</a>. Sözleşme güvenlik araçları (Slither vb.) <a href="../06-altyapi-araclar-guvenlik/index.html#guvenlik-araclari">06 · Güvenlik araçları</a> bölümünde.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Birim ve bileşen testi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Vitest</strong></td><td>Vite tabanlı test koşucusu, Jest'e benzer API. Yeni React ve wagmi projelerinde varsayılan tercih.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://vitest.dev/guide/mocking">vitest.dev</a></td></tr>
+        <tr><td><strong>vi.mock / vi.fn</strong></td><td>Modül ve fonksiyon mock'lama. Örneğin <code>useReadContract</code>'ı sabit değer döndürecek şekilde değiştirmek.</td><td><span class="tag">ORTA</span></td><td><a href="https://vitest.dev/guide/mocking">guide/mocking</a></td></tr>
+        <tr><td><strong>Jest</strong></td><td>Klasik test koşucusu (güncel sürüm 30.x). Eski projelerde sık görülür.</td><td><span class="tag">ORTA</span></td><td><a href="https://jestjs.io/docs/getting-started">jestjs.io</a></td></tr>
+        <tr><td><strong>React Testing Library</strong></td><td>Bileşeni kullanıcının göreceği şekliyle (etiket, düğme metni) test eder.</td><td><span class="tag">ORTA</span></td><td><a href="https://testing-library.com/docs/react-testing-library/intro/">testing-library.com</a></td></tr>
+        <tr><td><strong>wagmi mock connector</strong></td><td>Gerçek cüzdan olmadan bağlı hesap, bağlantı hatası ya da imza reddi simüle eder. "viem mock" ihtiyacının en kolay cevabı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wagmi.sh/core/api/connectors/mock">connectors/mock</a></td></tr>
+        <tr><td><strong>MSW (Mock Service Worker)</strong></td><td>HTTP isteklerini ağ katmanında yakalar. RPC ya da Etherscan yanıtlarını sahte veriyle döndürmek için.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://mswjs.io/docs/">mswjs.io</a></td></tr>
+        <tr><td><strong>anvil + viem test client (mock yerine gerçek zincir)</strong></td><td>Testte sahte veri yerine yerel anvil'e deploy edip gerçek çağrı yapmak. Blok kazma ve hesap taklidi desteklenir. <strong>0 TL.</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://viem.sh/docs/clients/test">clients/test</a></td></tr>
+        <tr><td><strong>Hardhat TypeScript testleri (node:test + viem)</strong></td><td>Sözleşme testlerini TypeScript'le yazmak. Solidity testleriyle aynı projede çalışır.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/guides/testing/using-viem">testing/using-viem</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Uçtan uca test ve cüzdan otomasyonu</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>Playwright</strong></td><td>Tarayıcı otomasyonu ve E2E test aracı. Node 22.x, 24.x ya da 26.x istiyor.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://playwright.dev/docs/intro">playwright.dev</a></td></tr>
+        <tr><td><strong>Synpress v4</strong></td><td>Playwright ile MetaMask'i (v4.1 ve üstünde Phantom'u da) otomatik yöneterek bağlanma, imzalama ve işlem onaylama testleri. Cypress desteği deneysel.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.synpress.io/">docs.synpress.io</a></td></tr>
+        <tr><td><strong>Ethereum Wallet Mock (Synpress)</strong></td><td>Eklenti kurmadan sahte cüzdanla E2E testi. Daha hızlı ve daha kararlı çalışır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.synpress.io/">docs.synpress.io</a></td></tr>
+        <tr><td><strong>dAppwright</strong></td><td>Playwright ile MetaMask ve Coinbase Wallet otomasyonu. Synpress'e alternatif.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/TenKeyLabs/dappwright">github dappwright</a></td></tr>
+        <tr><td><strong>MetaMask Test Dapp</strong></td><td>EIP-6963 sağlayıcı tespitini ve cüzdan metotlarını elle denemek için MetaMask'in hazır test sayfası.</td><td><span class="tag">ORTA</span></td><td><a href="https://metamask.github.io/test-dapp/">metamask.github.io/test-dapp</a></td></tr>
+        <tr><td><strong>test mnemonic'i</strong></td><td>E2E'de kullanılan mnemonic repoya ve CI loglarına düşer. O hesapta asla mainnet varlığı tutma.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.synpress.io/">docs.synpress.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Lint, format ve CI</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>ESLint (flat config, eslint.config.js)</strong></td><td>JS/TS linter. Güncel yapılandırma biçimi flat config; eski <code>.eslintrc</code> örneklerini kullanma.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eslint.org/docs/latest/">eslint.org</a></td></tr>
+        <tr><td><strong>typescript-eslint</strong></td><td>ESLint'in TypeScript eklentisi. Tip bilgisiyle lint (typed linting) de yapar.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://typescript-eslint.io/getting-started/">typescript-eslint.io</a></td></tr>
+        <tr><td><strong>Biome</strong></td><td>Lint ve format tek araçta (<code>biome check</code>). ESLint + Prettier ikilisine alternatif.</td><td><span class="tag">ORTA</span></td><td><a href="https://biomejs.dev/guides/getting-started/">biomejs.dev</a></td></tr>
+        <tr><td><strong>prettier-plugin-solidity</strong></td><td>Solidity dosyalarını Prettier ile biçimlendirir.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/prettier-solidity/prettier-plugin-solidity">github</a></td></tr>
+        <tr><td><strong>solhint</strong></td><td>Solidity linter: güvenlik ve stil kuralları. npm ile kurulur.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/protofire/solhint">github.com/protofire/solhint</a></td></tr>
+        <tr><td><strong>foundry-toolchain (GitHub Actions)</strong></td><td>CI'da Foundry kurulumu ve önbelleğe alma. PR'da forge test ile vitest'i birlikte koşturmak için.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/foundry-rs/foundry-toolchain">github foundry-toolchain</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nodejs-zincir-dinleme"><span class="h-num">§ 11</span>Node.js backend ile zincir dinleme</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#nodejs">Node.js temelleri</a>, <a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">event loop</a> ve <a href="../../JavaScript-TypeScript/01-javascript/index.html#hata-ve-hata-ayiklama">hata yönetimi</a>. Bu bölümün rolü bildiğin backend diline göre değişir:</p>
+          <ul>
+            <li><strong>.NET biliyorsan</strong> &rarr; dinleyiciyi <a href="../04-dotnet/index.html#backend-desenleri">04 · Backend desenleri</a> (Nethereum + BackgroundService) ile yazabilirsin; bu bölüm ilanlarda JS versiyonu istendiğinde tanıman gereken terimler için.</li>
+            <li><strong>.NET bilmiyorsan, JS/TS biliyorsan</strong> &rarr; bu bölüm ana yoldur: viem <code>watchContractEvent</code> + backfill/checkpoint + Drizzle/Prisma + PM2 ile ya da hazır indeksleyici Ponder (§ 8) ile tam uygula.</li>
+            <li><strong>Python biliyorsan</strong> &rarr; web3.py ile <code>get_logs</code> taraması ve abonelik tabanlı bir dinleyici de mümkün (güncel API <span class="tag tag--warn">TEYİT</span>, web3py.readthedocs.io); kavramlar (backfill, idempotency, confirmations) aynıdır.</li>
+            <li><strong>Java biliyorsan</strong> &rarr; web3j ile aynı desen kurulabilir (kapsam <span class="tag tag--warn">TEYİT</span>, docs.web3j.io); aşağıdaki tabloda Spring karşılıkları var.</li>
+          </ul>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çatı ve çalışma zamanı (C#'tan ve Java'dan geliyorsan karşılıklarıyla)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>node --env-file</strong></td><td>.env dosyasını dotenv paketi olmadan yükler (v20.6.0'dan beri). Kaba karşılığı: C#'tan geliyorsan appsettings ve user-secrets, Java'dan geliyorsan application.properties / ortam değişkenleri.</td><td><span class="tag">ORTA</span></td><td><a href="https://nodejs.org/api/cli.html#--env-filefile">nodejs.org cli</a></td></tr>
+        <tr><td><strong>NestJS</strong></td><td>TypeScript, dependency injection ve modül yapısı. ASP.NET Core ya da Spring Boot bilen birine en tanıdık gelecek Node çatısı.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nestjs.com/">docs.nestjs.com</a></td></tr>
+        <tr><td><strong>Express 5</strong></td><td>En yaygın minimal HTTP çatısı; güncel ana sürüm 5.x. C#'tan geliyorsan Minimal API'ye, Python'dan geliyorsan Flask'a benzer.</td><td><span class="tag">ORTA</span></td><td><a href="https://expressjs.com/">expressjs.com</a></td></tr>
+        <tr><td><strong>Fastify</strong></td><td>Şema tabanlı, düşük ek yüklü HTTP çatısı.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://fastify.dev/docs/latest/">fastify.dev</a></td></tr>
+        <tr><td><strong>Hono</strong></td><td>Web Standards tabanlı. Node, Bun ve Cloudflare Workers'ta aynı kodla çalışır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hono.dev/docs/">hono.dev</a></td></tr>
+        <tr><td><strong>Drizzle ORM / Prisma</strong></td><td>TypeScript ORM'leri; C#'tan geliyorsan EF Core, Java'dan geliyorsan Hibernate/JPA, Python'dan geliyorsan SQLAlchemy karşılığı. İndekslenen olayları SQL Server ya da Postgres'e yazmak için.</td><td><span class="tag">ORTA</span></td><td><a href="https://orm.drizzle.team/docs/overview">Drizzle</a> · <a href="https://www.prisma.io/docs">Prisma</a></td></tr>
+        <tr><td><strong>Pino</strong></td><td>Hızlı JSON logger; C#'tan geliyorsan Serilog, Java'dan geliyorsan Logback/SLF4J karşılığı.</td><td><span class="tag">ORTA</span></td><td><a href="https://getpino.io/">getpino.io</a></td></tr>
+        <tr><td><strong>PM2</strong></td><td>Süreç yöneticisi: çökünce yeniden başlatma, log ve cluster modu. Windows Service ya da systemd görevi görür (Linux sunucuda doğrudan systemd de kullanılabilir).</td><td><span class="tag">ORTA</span></td><td><a href="https://pm2.keymetrics.io/docs/usage/quick-start/">pm2 quick start</a></td></tr>
+        <tr><td><strong>BullMQ</strong></td><td>Redis tabanlı iş kuyruğu (retry, zamanlama, eşzamanlılık). C#'tan geliyorsan Hangfire'a, Java'dan geliyorsan Quartz'a, Python'dan geliyorsan Celery'ye benzer.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.bullmq.io/">docs.bullmq.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dinleme desenleri ve operasyon</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>watchContractEvent (sunucuda)</strong></td><td>Uzun süre çalışan süreçte olay dinleme. HTTP'de polling, WebSocket'te abonelik kullanır. Bağlantı sessizce kopabilir; sağlık kontrolü ekle.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/contract/watchContractEvent">watchContractEvent</a></td></tr>
+        <tr><td><strong>ethers contract.on / WebSocketProvider</strong></td><td>ethers ile aynı dinleme işi. Eski Node servislerinde bu yapı görülür.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/contract/">api/contract</a></td></tr>
+        <tr><td><strong>backfill + checkpoint (son işlenen blok)</strong></td><td>Servis açılışta veritabanındaki son bloktan itibaren getLogs ile tarar, sonra canlı dinlemeye geçer. Kesinti olursa olay kaçmaz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/docs/actions/public/getLogs">getLogs</a></td></tr>
+        <tr><td><strong>idempotency (txHash + logIndex)</strong></td><td>Her log'u benzersiz anahtarla kaydetmek. Yeniden tarama ya da yeniden bağlanma aynı olayı iki kez işletmez.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">JSON-RPC (log alanları)</a></td></tr>
+        <tr><td><strong>reorg / confirmations</strong></td><td>Son bloklar zincirden düşebilir. Para ile ilgili işlemleri N blok onayından sonra işle, düşen blokların kayıtlarını geri al.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://viem.sh/docs/actions/public/waitForTransactionReceipt">waitForTransactionReceipt</a></td></tr>
+        <tr><td><strong>Alchemy Webhooks (Address Activity, NFT Activity, Custom)</strong></td><td>Sürekli dinleme yerine sağlayıcının sunucuna push etmesi. Ücretsiz katmanla denenebilir.</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.alchemy.com/docs/reference/notify-api-quickstart">webhooks quickstart</a></td></tr>
+        <tr><td><strong>sunucu cüzdanı (hot wallet)</strong></td><td>Backend'den işlem imzalayan hesap (privateKeyToAccount). Anahtar düz .env'de durmamalı. Testnet için ayrı hesap kullan, yetkiyi en aza indir.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://viem.sh/docs/accounts/local/privateKeyToAccount">privateKeyToAccount</a> · <a href="../06-altyapi-araclar-guvenlik/index.html#operasyon">06 · Operasyon</a></td></tr>
+        <tr><td><strong>nonce yönetimi (sıralı gönderim)</strong></td><td>Aynı hesaptan paralel işlem gönderince nonce çakışır. Gönderimleri kuyrukla sıraya koy.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">JSON-RPC</a></td></tr>
+        <tr><td><strong>OpenZeppelin Monitor / Relayer</strong></td><td>Defender'ın açık kaynak halefleri. Monitor Rust ile yazılmış, kendi sunucunda çalışır; Slack, Discord ve webhook bildirimi gönderir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/monitor">docs.openzeppelin.com/monitor</a></td></tr>
+        <tr><td><strong>OpenZeppelin Defender</strong></td><td>Yeni kayıtlar 30 Haziran 2025'te kapandı; son kapanış tarihi 1 Temmuz 2026 olarak duyuruldu. Eski eğitimlerde Defender Relayer ve Autotask görürsün.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.openzeppelin.com/defender">docs.openzeppelin.com/defender</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="evm-disi-js"><span class="h-num">§ 12</span>EVM dışı zincirlerin JS kütüphaneleri</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Önce bunu bil</p>
+          <p>Bu sayfanın geri kalanı EVM (Ethereum ve uyumlu zincirler) içindi. Başka zincirlerin kavramları farklı; önce <a href="../05-diger-zincirler/index.html">05 · Diğer zincirler</a> bölümünü oku. Solana programları Rust ile yazılır: <a href="../../Rust/index.html">Rust sayfası</a>.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Solana, Starknet, Cosmos, Bitcoin</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+        <tr><td><strong>@solana/kit</strong></td><td>Solana'nın önerdiği güncel TypeScript SDK. Plugin'lerden oluşan modüler bir yapı.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.solana.com/docs/clients/javascript">solana.com/docs</a></td></tr>
+        <tr><td><strong>@solana/web3.js</strong></td><td>Eski Solana SDK'sı. Resmî doküman yeni uygulamalar için Kit'i öneriyor.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://www.solana.com/docs/clients/javascript">solana.com/docs</a></td></tr>
+        <tr><td><strong>starknet.js</strong></td><td>Starknet için JS/TS kütüphanesi.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/starknet-io/starknet.js">github starknet.js</a></td></tr>
+        <tr><td><strong>CosmJS</strong></td><td>Cosmos SDK zincirleri için TypeScript kütüphaneleri. Bakımcılar yeni özellik yerine bakım modunda olduklarını belirtiyor.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/cosmos/cosmjs">github cosmjs</a></td></tr>
+        <tr><td><strong>bitcoinjs-lib</strong></td><td>Node ve tarayıcı için Bitcoin kütüphanesi. Sadece etiketli sürümler kararlı kabul ediliyor. .NET karşılığı NBitcoin.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bitcoinjs/bitcoinjs-lib">github bitcoinjs-lib</a></td></tr>
+        <tr><td><strong>AppKit Solana / Bitcoin adapter</strong></td><td>Aynı Reown bağlantı modalını EVM dışı cüzdanlarla kullanma.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.reown.com/appkit/react/core/installation">AppKit install</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet: bu sayfadaki öncelik sırası</h2>
+        <div class="callout callout--warn">
+          <p class="callout__title">Önce ana hat</p>
+          <p>Blockchain yan alansa ve ana hattın backend ise zamanın büyük kısmı ana dil/platforma gitmeli. Ana hattın React ise bu sayfa zaten ana hattının parçasıdır; blockchain ana hedefinse aşağıdaki adımların tamamı ana hattır. Aşağıdaki sıra, blockchain'e ayrılan zamanı mülakatta işe yarayacak yere yönlendirmek için. Her adım testnet ve ücretsiz katmanlarla <strong>0 TL</strong>'ye yapılabilir.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Ön koşul: JavaScript, TypeScript ve React temeli</span>
+            <p><a href="../../JavaScript-TypeScript/01-javascript/index.html#asenkron">async/await</a>, <a href="../../JavaScript-TypeScript/01-javascript/index.html#moduller">modüller</a>, <a href="../../JavaScript-TypeScript/02-typescript/index.html#generics">generics</a>, <a href="../../JavaScript-TypeScript/03-react/index.html#hooklar">hook'lar</a>. Bunlar olmadan listeye başlama. Zaten React yazıyorsan bu adımı geç; başka dilden geliyorsan JS temeli kısa sürer, hiç dil bilmiyorsan bu adım en uzun adımdır.</p>
+            <span class="steps__meta">Öncelik: zorunlu ön adım</span>
+          </li>
+          <li>
+            <span class="steps__title">Mülakatta sık sorulan dApp çekirdeği: viem + wagmi v3</span>
+            <p>useConnection (eski adı useAccount), useReadContract, useSimulateContract, useWriteContract, useWaitForTransactionReceipt; ABI, eth_call ile işlem farkı, işlem durumu UX'i, ERC-721 mint kalıbı. Sepolia'da çalışan bir örnek, mülakatta blockchain deneyimi sorulduğunda somut bir cevap olur.</p>
+            <span class="steps__meta"><span class="tag tag--bad">MÜLAKATTA SIK</span> · <a href="../07-projeler/index.html#mulakatta-anlatim">07 · Mülakatta deneyimi anlatmak</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Cüzdan bağlantısı</span>
+            <p>EIP-1193, EIP-6963, RainbowKit ya da Reown AppKit, useSwitchChain; 4001 ve 4902 hata kodları; mobilde WalletConnect.</p>
+            <span class="steps__meta"><span class="tag tag--ok">TEMEL</span></span>
+          </li>
+          <li>
+            <span class="steps__title">İmza ve SIWE: backend ile köprü</span>
+            <p>personal_sign, EIP-712, SIWE (ERC-4361) ve imzanın sunucuda doğrulanması. Doğrulamayı nerede yapacağın backend diline göre değişir: .NET geçmişin varsa ASP.NET Core + Nethereum.Siwe (<a href="../04-dotnet/index.html#backend-desenleri">04 · Backend desenleri</a>); JS/TS ile Node route handler + viem <code>verifySiweMessage</code> veya siwe npm paketi (§ 4); Next.js kullanıyorsan RainbowKit SIWE + NextAuth (Auth.js) kurgusu.</p>
+            <span class="steps__meta"><span class="tag tag--ok">TEMEL</span> · .NET geçmişi olanlar için en ayırt edici parça; JS/TS geçmişinde tam yığın dApp'in parçası</span>
+          </li>
+          <li>
+            <span class="steps__title">Geliştirme ortamı</span>
+            <p>Node 24 LTS (Windows'ta fnm ya da nvm-windows; macOS/Linux'ta fnm ya da nvm), Hardhat 3 + toolbox-viem ya da Foundry + anvil (Windows'ta Git Bash veya WSL'de; macOS/Linux'ta doğrudan terminalde), hızlı başlangıç için Scaffold-ETH 2.</p>
+            <span class="steps__meta"><span class="tag tag--ok">TEMEL</span> · <a href="../07-projeler/index.html#sifir-maliyet-altyapi">07 · Sıfır maliyet altyapısı</a></span>
+          </li>
+          <li>
+            <span class="steps__title">ethers v6'yı okuyabilecek kadar öğren, eskileri tanı</span>
+            <p>BrowserProvider, Signer, Contract, formatUnits. web3.js, Truffle, TypeChain, Web3Modal, web3.storage ve Defender eskimiş; eski eğitimde görünce yerine ne geldiğini bil.</p>
+            <span class="steps__meta"><span class="tag">ORTA</span> · <span class="tag tag--warn">ESKİMİŞ</span> maddeleri yalnızca tanımak için</span>
+          </li>
+          <li>
+            <span class="steps__title">Veri katmanı ve NFT metadata</span>
+            <p>Etherscan API V2, The Graph Subgraph Studio (ayda 100.000 ücretsiz sorgu) ya da Ponder; IPFS pinning (Pinata ücretsiz hesap), metadata JSON.</p>
+            <span class="steps__meta"><span class="tag">ORTA</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Test</span>
+            <p>Vitest + wagmi mock connector, anvil üzerinde entegrasyon testi, Playwright + Synpress ile bir E2E senaryosu, ESLint/typescript-eslint.</p>
+            <span class="steps__meta"><span class="tag">ORTA</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Zincir dinleyici: bildiğin backend diliyle yap</span>
+            <p>Backfill + checkpoint, idempotency, confirmations kavramlarını buradan öğren. .NET biliyorsan uygulamayı <a href="../04-dotnet/index.html">04</a>'teki .NET yığınıyla yap ve Node çatılarını (NestJS, Express) sadece tanı. .NET bilmiyorsan uygulamayı Node ile (viem + NestJS/Express) ya da Ponder ile yap; bu durumda "sadece tanı" geçerli değil, § 11 senin ana yolun.</p>
+            <span class="steps__meta"><span class="tag">ORTA</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Derinleşme (sadece zaman kalırsa)</span>
+            <p>ERC-4337 ve EIP-7702, EIP-5792 toplu çağrı, Permit2, ERC-1271/6492, EVM dışı SDK'lar (@solana/kit).</p>
+            <span class="steps__meta"><span class="tag tag--info">İLERİ</span></span>
+          </li>
+        </ol>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Solidity ve Akıllı Sözleşmeler</span></a>
+        <a class="next" href="../04-dotnet/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">.NET Ekosistemi</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

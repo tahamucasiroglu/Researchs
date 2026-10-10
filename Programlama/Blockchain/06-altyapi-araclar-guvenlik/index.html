@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Altyapı, Araçlar ve Güvenlik — Blockchain Anahtar Listesi</title>
+<meta name="description" content="RPC sağlayıcılar, testnet ve faucet, blok gezginleri, oracle, IPFS, indeksleyiciler, güvenlik tarayıcıları, L2 ekosistemi ve hesap soyutlama.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Altyapı, Araçlar ve Güvenlik</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 06 · Altyapı</div>
+        <h1 class="page-title">Düğüm, <em>testnet</em>, oracle, güvenlik araçları</h1>
+        <p class="lede">Sözleşme tek başına çalışmaz: bir düğüme bağlanır, bir gezginde görünür, dış veriyi oracle'dan alır, dosyasını IPFS'te tutar. Ücretsiz katmanlar ve testnet'ler ayrıca işaretli — hobi bütçesiyle sıfır maliyetle öğrenilir.</p>
+        <div class="head-meta">Referans &middot; Ücretsiz seçenekler işaretli</div>
+      </header>
+
+      <div class="content">
+        <h2 id="rpc-ve-dugum-saglayicilari"><span class="h-num">§ 1</span>RPC ve düğüm sağlayıcıları</h2>
+        <p class="intro">Bu sayfa anlatım değil, anahtar kelime listesidir. Her satır: terim, bir-iki cümle "bu nedir", öncelik rozeti ve resmî doküman. Sıfır bütçeyle öğrenilebilmesi için ücretsiz katmanlar ve testnet yolları ayrıca işaretlendi. Sıralama önerisi en sonda, <a href="#ozet">§ 13 Özet</a>'te.</p>
+        <p>Bir dApp veya .NET servisi zincire "RPC" üzerinden konuşur. Kendi düğümünü çalıştırmak pahalı ve zahmetli; hobi seviyesinde ücretsiz sağlayıcı katmanları yeter. Aşağıdaki limitler doküman sayfalarından okundu; panelde güncelini teyit et.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>RPC sağlayıcıları ve API kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>JSON-RPC (execution API)</strong></td>
+                <td>eth_call, eth_getLogs, eth_sendRawTransaction, eth_feeHistory gibi 90+ metodun resmî sözleşmesi; her sağlayıcı bunu sunar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://ethereum.github.io/execution-apis/">ethereum.github.io/execution-apis</a></td>
+              </tr>
+              <tr>
+                <td><strong>Alchemy</strong></td>
+                <td>En yaygın sağlayıcı; Free plan 30 milyon compute unit, webhook, Enhanced API, Subgraphs, Smart Wallet altyapısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://www.alchemy.com/docs/reference/pricing-plans">alchemy.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Infura (MetaMask Developer)</strong></td>
+                <td>MetaMask'ın arkasındaki sağlayıcı; ücretsiz katman var, günlük kredi limitini panelden teyit et. IPFS servisi artık yalnızca ön onaylı müşterilere</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://docs.infura.io/">docs.infura.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>QuickNode</strong></td>
+                <td>80+ zincir; RPC + Streams (gerçek zamanlı veri) + Webhooks; ücretsiz plan var</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://www.quicknode.com/docs">quicknode.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ankr</strong></td>
+                <td>Anahtarsız public RPC + premium uçlar; hızlı deneme için public uç yeter</td>
+                <td><span class="tag">ORTA</span> ücretsiz public uç</td>
+                <td><a href="https://www.ankr.com/docs/">ankr.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainstack</strong></td>
+                <td>70+ ağ; "request unit" ile faturalama; giriş planı ve limitler için fiyat sayfasına bak</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.chainstack.com/docs/pricing-introduction">docs.chainstack.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dRPC</strong></td>
+                <td>Dağıtık RPC ağı; API anahtarı ile ücretsiz katman, Ethereum ve Solana API dokümanı</td>
+                <td><span class="tag">ORTA</span> ücretsiz katman var</td>
+                <td><a href="https://drpc.org/docs">drpc.org/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>PublicNode</strong></td>
+                <td>74 zincir için tamamen ücretsiz, anahtarsız RPC (ör. ethereum-rpc.publicnode.com); oran sınırı var, üretim SLA'sı yok — hobi için ideal</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://www.publicnode.com/">publicnode.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlist</strong></td>
+                <td>Chain ID + RPC adresleri listesi; MetaMask'a ağ eklemenin en kolay yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://chainlist.org/">chainlist.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>eRPC</strong></td>
+                <td>Açık kaynak RPC proxy: failover, önbellek, birden çok ücretsiz sağlayıcıyı tek uçta birleştirme</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://docs.erpc.cloud/">docs.erpc.cloud</a></td>
+              </tr>
+              <tr>
+                <td><strong>rate limit / compute unit</strong></td>
+                <td>Her sağlayıcı isteği farklı "birim"le sayar; geniş blok aralıklı eth_getLogs en pahalı çağrıdır — indeksleyici yazarken bunu planla</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.alchemy.com/docs/reference/pricing-plans">alchemy.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>WebSocket / eth_subscribe</strong></td>
+                <td>newHeads, logs, newPendingTransactions abonelikleri; HTTP polling yerine push. Sağlayıcıların wss uçları çoğunlukla ücretsiz katmanda da var</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://geth.ethereum.org/docs/interacting-with-geth/rpc/pubsub">geth.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-1559 (base fee, priority fee)</strong></td>
+                <td>Gaz fiyatlama modeli; eth_feeHistory ile tahmin. "gasPrice" alanı görürsen eski tip işlem demektir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-1559">eips.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Beacon API</strong></td>
+                <td>Konsensüs katmanının REST API'si; validator ve finality izleme. Uygulama geliştiricisi nadiren dokunur</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://ethereum.github.io/beacon-APIs/">ethereum.github.io/beacon-APIs</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Kendi düğümün (execution + consensus istemcileri)</h3>
+        <p>Merge sonrası bir Ethereum düğümü iki yazılımdan oluşur: execution client (EL) ve consensus client (CL). Mainnet için yüzlerce GB ile TB arası SSD gerekir (tahmini; istemci dokümanından teyit et); hobi için Sepolia düğümü kurmak daha ucuz bir deneydir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İstemciler ve düğüm işletme kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Nethermind</strong></td>
+                <td>.NET ile yazılmış execution client. C# biliyorsan kaynak kodu okunabilir bir okul; <a href="../04-dotnet/index.html">04 .NET</a> sayfasının doğal komşusu. Hangi istemcinin kaynağını okuyacağın bildiğin dile göre değişir: C# &rarr; Nethermind, Go &rarr; geth/Erigon/Prysm, Rust &rarr; reth/Lighthouse, Java &rarr; Besu/Teku, TypeScript &rarr; Lodestar</td>
+                <td><span class="tag tag--ok">TEMEL</span> (C#/.NET bilen için); diğerleri için <span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.nethermind.io/">docs.nethermind.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>geth (go-ethereum)</strong></td>
+                <td>Go ile yazılmış, en yaygın execution client; JSON-RPC dokümanı referans niteliğinde (<a href="../../Go/index.html">Go sayfası</a>)</td>
+                <td><span class="tag">ORTA</span>; Go bilen için kaynak okuma <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://geth.ethereum.org/docs">geth.ethereum.org/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>reth</strong></td>
+                <td>Rust execution client + node SDK; "ExEx" ile düğüm içinde indeksleyici yazma (<a href="../../Rust/index.html">Rust sayfası</a>)</td>
+                <td><span class="tag tag--info">İLERİ</span>; Rust bilen için <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://reth.rs/">reth.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Erigon</strong></td>
+                <td>Düşük disk kullanımlı, arşiv düğümüne uygun execution client</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.erigon.tech/">docs.erigon.tech</a></td>
+              </tr>
+              <tr>
+                <td><strong>Besu</strong></td>
+                <td>Java, Apache 2.0; izinli/kurumsal ağlarda da kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span>; Java bilen ya da kurumsal ilan hedefleyen için <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.besu-eth.org/">docs.besu-eth.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lighthouse</strong></td>
+                <td>Rust consensus client (Sigma Prime)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://lighthouse-book.sigmaprime.io/">lighthouse-book.sigmaprime.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prysm</strong></td>
+                <td>Go consensus client; dokümanı prysm.offchainlabs.com'a taşındı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://prysm.offchainlabs.com/docs/getting-started">prysm.offchainlabs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nimbus · Teku · Lodestar</strong></td>
+                <td>Hafif (Nim) · Java · TypeScript consensus istemcileri; azınlık istemci seçmek ağ sağlığına katkıdır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://nimbus.guide/">nimbus.guide</a> · <a href="https://docs.teku.consensys.io/">docs.teku.consensys.io</a> · <a href="https://chainsafe.github.io/lodestar/">chainsafe.github.io/lodestar</a></td>
+              </tr>
+              <tr>
+                <td><strong>Eth Docker</strong></td>
+                <td>docker-compose ile EL + CL + izleme kurulumu; elle kurulumun kısa yolu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://ethdocker.com/">ethdocker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>checkpoint sync</strong></td>
+                <td>Consensus client'ı günler değil dakikalar içinde senkronlamak için güvenilir bir checkpoint ucu kullan</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://eth-clients.github.io/checkpoint-sync-endpoints/">eth-clients.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>client diversity</strong></td>
+                <td>Tek istemcinin çoğunluk olması ağ riski; hangi istemcinin ne kadar pay aldığını gösterir</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://clientdiversity.org/">clientdiversity.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>full node / archive node</strong></td>
+                <td>Full: güncel durum + son bloklar; archive: tüm geçmiş durum (çok daha büyük disk). Geçmiş bakiye sorgusu için archive gerekir; sağlayıcılarda çoğunlukla ücretli</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/nodes-and-clients/">ethereum.org/developers</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="testnet-ve-faucet"><span class="h-num">§ 2</span>Testnet ve faucet</h2>
+        <p>Sıfır bütçenin ana aracı. Testnet ETH'nin parasal değeri yoktur; alınıp satılmaz. En ucuz zincir, kendi makinendeki yerel zincirdir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ağlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Sepolia</strong></td>
+                <td>Uygulama geliştirme için varsayılan Ethereum testneti; chain ID 11155111. Tüm tutorial'lar buradan başlar</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org/developers</a> · <a href="https://sepolia.dev/">sepolia.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hoodi</strong></td>
+                <td>Validator/staking ve altyapı testneti; 2025'te Holesky'nin yerini aldı. Uygulama geliştirici için değil, düğüm/validator denemesi için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://hoodi.ethpandaops.io/">hoodi.ethpandaops.io</a> · <a href="https://github.com/eth-clients/hoodi">github.com/eth-clients/hoodi</a></td>
+              </tr>
+              <tr>
+                <td><strong>Holesky</strong></td>
+                <td>Eylül 2025'te kullanımdan kaldırıldı; eski yazılarda görürsün</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org/developers</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ephemery</strong></td>
+                <td>Her ay sıfırlanan testnet; faucet kuruması sorunu yok, ama deploy ettiğin her şey silinir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://ephemery.dev/">ephemery.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Goerli · Rinkeby · Ropsten · Kovan</strong></td>
+                <td>Kapatılmış eski testnet'ler; bir eğitimde bunları görüyorsan eğitim eskidir</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td>ethereum.org/developers/docs/networks</td>
+              </tr>
+              <tr>
+                <td><strong>Base Sepolia</strong></td>
+                <td>Base L2 testneti (chain ID 84532); Coinbase ekosistemi, ucuz gaz, bol doküman</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.base.org/base-chain/tools/network-faucets">docs.base.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Arbitrum Sepolia</strong></td>
+                <td>Arbitrum L2 testneti (chain ID 421614); Stylus ile Rust/C kontrat da denenebilir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.arbitrum.io/for-devs/dev-tools-and-resources/chain-info">docs.arbitrum.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>OP Sepolia</strong></td>
+                <td>Optimism / OP Stack testneti (chain ID 11155420)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.optimism.io/superchain/networks">docs.optimism.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Solana devnet</strong></td>
+                <td>Solana'nın ücretsiz test kümesi; <code>solana airdrop</code> komutu. Ayrıntı <a href="../05-diger-zincirler/index.html">05 Diğer Zincirler</a>'de</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://solana.com/docs/references/clusters">solana.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>L2BEAT</strong></td>
+                <td>L2'lerin risk analizi ve "stage" sınıflandırması; hangi L2'nin ne kadar merkezi olduğunu görmek için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://l2beat.com/">l2beat.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Faucet'ler (testnet ETH kaynakları)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Chainlink Faucet</strong></td>
+                <td>Sepolia, Base Sepolia, Arbitrum Sepolia ve 50+ ağ için testnet ETH veya LINK. Cüzdan bağlamanın yeterli olup olmadığı ya da ETH dağıtımı için mainnet bakiyesi şartı eklenip eklenmediği <span class="tag tag--warn">TEYİT</span> (faucet sayfasından kontrol et; miktarlar da değişebilir)</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz; şartı yeni cüzdana uymuyorsa Google Cloud / PoW</td>
+                <td><a href="https://faucets.chain.link/">faucets.chain.link</a></td>
+              </tr>
+              <tr>
+                <td><strong>PoW Faucet (pk910)</strong></td>
+                <td>Tarayıcıda madencilik yaparak testnet ETH kazan; hesap, mainnet bakiyesi, sosyal medya şartı yok. Hoodi sürümü de var</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://sepolia-faucet.pk910.de/">sepolia-faucet.pk910.de</a></td>
+              </tr>
+              <tr>
+                <td><strong>QuickNode Faucet</strong></td>
+                <td>Hesap ve mainnet bakiyesi gerektirmediği, yeni cüzdanın da alabildiği bilgisi güncel olmayabilir; bazı sağlayıcılar kötüye kullanıma karşı mainnet bakiyesi şartı ekledi <span class="tag tag--warn">TEYİT</span> (faucet sayfasından kontrol et). X paylaşımı isteğe bağlı bonus</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz (şart TEYİT)</td>
+                <td><a href="https://faucet.quicknode.com/ethereum/sepolia">faucet.quicknode.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Alchemy Faucet</strong></td>
+                <td>24 saatte 0,1 Sepolia ETH; mainnet'te en az 0,001 ETH bakiye ve işlem geçmişi şartı var (sıfır bütçede engel olabilir)</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> mainnet bakiyesi şartı</td>
+                <td><a href="https://www.alchemy.com/faucets/ethereum-sepolia">alchemy.com/faucets</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Cloud Web3 Faucet</strong></td>
+                <td>Google hesabıyla Sepolia ETH; limitler sayfada</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">cloud.google.com/application/web3</a></td>
+              </tr>
+              <tr>
+                <td><strong>Infura / MetaMask Faucet</strong></td>
+                <td>MetaMask Developer hesabıyla; ethereum.org'un Sepolia faucet listesinde</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org/developers</a></td>
+              </tr>
+              <tr>
+                <td><strong>Solana Faucet</strong></td>
+                <td>Devnet SOL; 8 saatte en fazla 2 istek</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://faucet.solana.com/">faucet.solana.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>testnet token satışı</strong></td>
+                <td>"Sepolia ETH satın al" ilanları dolandırıcılık zeminidir; testnet parasının değeri yoktur, faucet ile al</td>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yerel zincir ve fork (en ucuz yol)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>anvil</strong></td>
+                <td>Foundry'nin yerel Ethereum düğümü; anında blok, 10 hazır hesap, sıfır maliyet</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://getfoundry.sh/anvil/overview">getfoundry.sh/anvil</a></td>
+              </tr>
+              <tr>
+                <td><strong>anvil --fork-url</strong></td>
+                <td>Mainnet veya L2'yi yerel olarak çatalla; gerçek Uniswap/Aave kontratlarıyla ücretsiz oyna</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://getfoundry.sh/anvil/forking">getfoundry.sh/anvil/forking</a></td>
+              </tr>
+              <tr>
+                <td><strong>forge fork testing</strong></td>
+                <td>Testleri çatallanmış ağ üzerinde koştur; hesap taklidi (prank), zaman ilerletme, çok zincirli test</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://getfoundry.sh/forge/fork-testing">getfoundry.sh/forge/fork-testing</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hardhat Network / hardhat node</strong></td>
+                <td>Hardhat'in yerel zinciri; Hardhat 3 ile Solidity testleri de geldi. JS/TS ekosistemiyle çalışıyorsan</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://hardhat.org/docs">hardhat.org/docs</a> · <a href="https://v2.hardhat.org/hardhat-network/docs/overview">v2.hardhat.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tenderly Virtual TestNets</strong></td>
+                <td>Bulutta fork; paylaşılabilir; ücretsiz hesapla sınırlı kullanım</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://docs.tenderly.co/">docs.tenderly.co</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blok-gezginleri"><span class="h-num">§ 3</span>Blok gezginleri ve kaynak doğrulama</h2>
+        <p>Gezginler zinciri okumak, kontrat kaynağını yayımlamak ve işlem hatalarını ayıklamak için kullanılır. Kaynak doğrulaması yapılmamış kontrat, kullanıcı için kara kutudur.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Gezginler, doğrulama ve hata ayıklama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Etherscan</strong></td>
+                <td>Fiili standart gezgin; arayüz ücretsiz. API Free katman: 3 çağrı/sn, 100.000 çağrı/gün, seçili zincirler; PRO uçlar ücretli</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span> API ücretsiz katman var</td>
+                <td><a href="https://docs.etherscan.io/rate-limits">docs.etherscan.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sepolia Etherscan</strong></td>
+                <td>Testnet gezgini; ilk kontratını burada doğrula</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Etherscan API V2</strong></td>
+                <td>Tek API anahtarı ile 60+ EVM zinciri; chainid parametresi. Eski V1 anahtarları zincir başınaydı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.etherscan.io/">docs.etherscan.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blockscout</strong></td>
+                <td>Açık kaynak gezgin; birçok zincirin resmî gezgini; Sepolia örneği eth-sepolia.blockscout.com. API'si anahtarsız kullanılabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://docs.blockscout.com/">docs.blockscout.com</a> · <a href="https://eth-sepolia.blockscout.com/">eth-sepolia.blockscout.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blockscout self-host</strong></td>
+                <td>Docker Compose / Kubernetes ile kendi zincirin veya anvil için gezgin kurma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.blockscout.com/setup/deployment">docs.blockscout.com/setup</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sourcify</strong></td>
+                <td>Açık kaynak, merkeziyetsiz kaynak doğrulama; metadata hash ile "full match" kavramı</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://docs.sourcify.dev/">docs.sourcify.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>forge verify-contract / hardhat verify</strong></td>
+                <td>Deploy sonrası kaynak doğrulamayı komut satırından yap; Etherscan, Sourcify ve Blockscout hedefleri desteklenir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://getfoundry.sh/forge/overview">getfoundry.sh/forge</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tenderly Debugger / Simulator</strong></td>
+                <td>İşlemi adım adım (opcode, state diff) izle; göndermeden önce simüle et. Ücretsiz hesap yeterli</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://docs.tenderly.co/simulations/overview">docs.tenderly.co</a></td>
+              </tr>
+              <tr>
+                <td><strong>Phalcon Explorer (BlockSec)</strong></td>
+                <td>Saldırı işlemlerinin analizinde standart araç; fund flow, çağrı ağacı; rekt.news yazılarında sık geçer</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://blocksec.com/phalcon/explorer">blocksec.com/phalcon</a></td>
+              </tr>
+              <tr>
+                <td><strong>Otterscan</strong></td>
+                <td>Erigon/Reth arşiv düğümüyle çalışan hızlı, yerel gezgin</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/otterscan/otterscan">github.com/otterscan</a></td>
+              </tr>
+              <tr>
+                <td><strong>4byte / function selector DB</strong></td>
+                <td>0xa9059cbb gibi selector'ı fonksiyon imzasına çevirir; doğrulanmamış kontratı okurken ilk adım</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://4byte.sourcify.dev/signatures">4byte.sourcify.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>heimdall-rs</strong></td>
+                <td>Doğrulanmamış EVM bytecode'unu decompile eden araç seti</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/Jon-Becker/heimdall-rs">github.com/Jon-Becker/heimdall-rs</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="oracle"><span class="h-num">§ 4</span>Oracle</h2>
+        <p>Akıllı sözleşme kendi başına internete çıkamaz; zincir dışı veriyi (fiyat, rastgelelik, API sonucu) oracle taşır. Yanlış oracle kullanımı DeFi hack'lerinin en büyük sınıflarından biridir; saldırı tarafı <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a> sayfasında.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Oracle sağlayıcıları ve kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>oracle problem</strong></td>
+                <td>Doğruluk, erişilebilirlik ve teşvik uyumu: zincir dışı verinin güvenilirliği kime dayanıyor?</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/oracles/">ethereum.org/developers</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink Data Feeds</strong></td>
+                <td>Push tabanlı fiyat beslemeleri; AggregatorV3Interface.latestRoundData(); Sepolia adresleri ücretsiz kullanılır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.chain.link/data-feeds">docs.chain.link/data-feeds</a> · <a href="https://docs.chain.link/data-feeds/price-feeds/addresses">adresler</a></td>
+              </tr>
+              <tr>
+                <td><strong>stale price / heartbeat / deviation</strong></td>
+                <td>updatedAt'i kontrol et; besleme uzun süre güncellenmemişse işlemi durdur. L2'de ayrıca sequencer uptime feed</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.chain.link/data-feeds">docs.chain.link/data-feeds</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink VRF</strong></td>
+                <td>Doğrulanabilir rastgele sayı; block.timestamp veya blockhash ile "rastgelelik" üretmek saldırıya açıktır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.chain.link/vrf">docs.chain.link/vrf</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink Automation</strong></td>
+                <td>Zamanlanmış veya koşullu kontrat çağrısı (eski adı Keepers); cron'un zincir karşılığı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.chain.link/chainlink-automation">docs.chain.link/chainlink-automation</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink CCIP</strong></td>
+                <td>Zincirler arası mesaj ve token transferi protokolü</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.chain.link/ccip">docs.chain.link/ccip</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink Functions</strong></td>
+                <td>Kontrattan HTTP API çağırıp sonucu zincire yazma (JavaScript kaynak kodu ile)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.chain.link/chainlink-functions">docs.chain.link/chainlink-functions</a></td>
+              </tr>
+              <tr>
+                <td><strong>LINK ile ödeme</strong></td>
+                <td>VRF, Automation, Functions abonelik modeliyle LINK yakar; testnet LINK'i faucet'ten ücretsiz, mainnet ücretli</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> testnet ücretsiz</td>
+                <td><a href="https://faucets.chain.link/">faucets.chain.link</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pyth</strong></td>
+                <td>Pull tabanlı fiyat (kullanıcı güncellemeyi işlemle getirir); Solana kökenli, EVM'de de var; Entropy rastgelelik servisi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.pyth.network/">docs.pyth.network</a></td>
+              </tr>
+              <tr>
+                <td><strong>API3</strong></td>
+                <td>First-party oracle (veri sağlayıcı kendi düğümünü çalıştırır); dAPI ve OEV kavramları</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.api3.org/">docs.api3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>RedStone</strong></td>
+                <td>Pull ve push modelleri; veriyi calldata ile taşıma yaklaşımı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.redstone.finance/docs/introduction">docs.redstone.finance</a></td>
+              </tr>
+              <tr>
+                <td><strong>UMA Optimistic Oracle</strong></td>
+                <td>"İtiraz gelmezse doğrudur" modeli; tahmin piyasaları ve sigorta için</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.uma.xyz/">docs.uma.xyz</a></td>
+              </tr>
+              <tr>
+                <td><strong>TWAP (Uniswap oracle)</strong></td>
+                <td>DEX içi zaman ağırlıklı ortalama fiyat; spot fiyat (reserve oranı) oracle olarak kullanılmaz</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://developers.uniswap.org/">developers.uniswap.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>oracle manipulation</strong></td>
+                <td>Flash loan ile havuz fiyatını şişirip protokolü yanıltma; "price oracle manipulation flash loan" diye ara. Savunma: Chainlink/TWAP + sınırlar</td>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org/developers</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="depolama"><span class="h-num">§ 5</span>Depolama</h2>
+        <p>Zincir üzerinde veri saklamak pahalıdır; dosyalar (NFT görseli, metadata, frontend) zincir dışında tutulur, zincire yalnızca içerik adresi (hash) yazılır.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>IPFS, kalıcı depolama ve NFT metadata</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>IPFS</strong></td>
+                <td>İçerik adresli, eşler arası dosya protokolü; "nerede" değil "ne" ile adresleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://docs.ipfs.tech/">docs.ipfs.tech</a></td>
+              </tr>
+              <tr>
+                <td><strong>CID</strong></td>
+                <td>Content Identifier: içeriğin hash'inden üretilen adres; CIDv0 (Qm...) ve CIDv1 (bafy...) biçimleri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.ipfs.tech/concepts/content-addressing/">docs.ipfs.tech/concepts</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kubo</strong></td>
+                <td>Go ile yazılmış IPFS düğümü ve CLI (<code>ipfs add</code>, <code>ipfs pin</code>); yerelde ücretsiz dene</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.ipfs.tech/install/command-line/">docs.ipfs.tech/install</a></td>
+              </tr>
+              <tr>
+                <td><strong>Helia</strong></td>
+                <td>TypeScript IPFS uygulaması; tarayıcı ve Node.js için (<a href="../03-javascript-typescript/index.html">03 JS/TS</a>)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/ipfs/helia">github.com/ipfs/helia</a></td>
+              </tr>
+              <tr>
+                <td><strong>IPFS gateway</strong></td>
+                <td>HTTP üzerinden IPFS içeriği (ipfs.io, dweb.link, sağlayıcı gateway'leri); public gateway'ler oran sınırlıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.ipfs.tech/concepts/ipfs-gateway/">docs.ipfs.tech/concepts/ipfs-gateway</a></td>
+              </tr>
+              <tr>
+                <td><strong>pinning / persistence</strong></td>
+                <td>IPFS veriyi otomatik saklamaz; biri "pin"lemezse kaybolur. Pinning servisi = para karşılığı düğümlerinde tutma</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.ipfs.tech/concepts/persistence/">docs.ipfs.tech/concepts/persistence</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pinata</strong></td>
+                <td>En yaygın pinning servisi; ücretsiz hesapla başlanır, limitleri fiyat sayfasında; SDK'lar (Next.js, React)</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://docs.pinata.cloud/">docs.pinata.cloud</a></td>
+              </tr>
+              <tr>
+                <td><strong>Filebase</strong></td>
+                <td>S3 uyumlu API ile IPFS pinning; depolama ücretli; ücretsiz katman olup olmadığını fiyat sayfasından teyit et. .NET'ten AWS SDK ile konuşabilirsin</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://filebase.com/docs/">filebase.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>web3.storage / Storacha</strong></td>
+                <td>Eski ücretsiz favori; 2026'da hem web3.storage hem storacha.network adresleri fil.one (S3 depolama) sitesine yönleniyor. Eski eğitimlerde görürsün</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> durumu teyit et</td>
+                <td>web3.storage</td>
+              </tr>
+              <tr>
+                <td><strong>Filecoin</strong></td>
+                <td>IPFS'in ekonomik katmanı: depolama sağlayıcılarıyla anlaşma (deal) ve kanıt; Calibration testneti var</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.filecoin.io/">docs.filecoin.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Arweave / permaweb</strong></td>
+                <td>Bir kez öde, kalıcı sakla modeli; AR token ile ödeme; NFT metadata için tercih edilir</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://cookbook.arweave.net/">cookbook.arweave.net</a> · <a href="https://docs.arweave.org/">docs.arweave.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Irys</strong></td>
+                <td>Eski adı Bundlr; Arweave'e toplu yükleme katmanı olarak başladı, artık kendi zinciri var</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.irys.xyz/">docs.irys.xyz</a></td>
+              </tr>
+              <tr>
+                <td><strong>NFT metadata (tokenURI JSON)</strong></td>
+                <td>name / description / image / attributes alanlı JSON; image alanı ipfs://CID; ERC-721 tokenURI ve ERC-1155 uri fonksiyonları</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.opensea.io/docs/metadata-standards">docs.opensea.io</a> · <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a></td>
+              </tr>
+              <tr>
+                <td><strong>on-chain metadata</strong></td>
+                <td>SVG'yi data: URI olarak zincirde tutma; pahalı ama sunucusuz. "fully on-chain NFT" diye ara</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.opensea.io/docs/metadata-standards">docs.opensea.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ENS contenthash</strong></td>
+                <td>ENS adına IPFS CID bağlayıp frontend'i merkeziyetsiz yayınlama (isim.eth.limo gibi gateway'ler)</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> ENS kaydı</td>
+                <td><a href="https://docs.ens.domains/">docs.ens.domains</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fleek</strong></td>
+                <td>IPFS site barındırma servisiydi; sitesi 2026'da "yeni bir şey geliyor" mesajı gösteriyor, durumu belirsiz</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> durumu teyit et</td>
+                <td>fleek.xyz</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="indeksleme-ve-veri"><span class="h-num">§ 6</span>İndeksleme ve veri</h2>
+        <p>Zincir bir veritabanı gibi sorgulanamaz; "kullanıcının tüm transferleri" gibi sorular için olayları (event/log) okuyup kendi veritabanına yazan bir indeksleyici gerekir. En doğal giriş kapısı bildiğin dile göre değişir:</p>
+        <ul>
+          <li><strong>.NET</strong> &rarr; Worker Service + Nethereum.BlockchainProcessing + SQL Server veya PostgreSQL (<a href="../04-dotnet/index.html">04</a>).</li>
+          <li><strong>JS/TS</strong> &rarr; Ponder (self-host, ücretsiz) ya da viem + Postgres ile kendi servisin (<a href="../03-javascript-typescript/index.html">03</a> § 8, § 11).</li>
+          <li><strong>GraphQL ve barındırılan çözüm tercih ediyorsan</strong> &rarr; The Graph Subgraph Studio (AssemblyScript mapping, ücretsiz kota).</li>
+          <li><strong>Rust</strong> &rarr; Reth ExEx ya da Substreams.</li>
+          <li><strong>Python / veri analizi</strong> &rarr; cryo ile ham veriyi parquet/csv'ye çekip Python ile analiz (indeksleyici değil, analiz yolu; kapsam <span class="tag tag--warn">TEYİT</span>).</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İndeksleme çerçeveleri ve veri platformları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>event / log / eth_getLogs</strong></td>
+                <td>Kontratların yayınladığı olaylar; indeksleyicinin ham kaynağı. Geniş blok aralığı sağlayıcı limitine takılır, parça parça oku</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://ethereum.github.io/execution-apis/">execution-apis</a></td>
+              </tr>
+              <tr>
+                <td><strong>kendi indeksleyicin (.NET)</strong></td>
+                <td>Nethereum ile log okuma + BackgroundService + SQL Server/PostgreSQL; .NET backend ilanlarını hedefliyorsan portföy için en ayırt edici proje. JS/TS hattında aynı rolü Ponder veya viem tabanlı servis oynar. Ayrıntı <a href="../04-dotnet/index.html">04 .NET</a>'te</td>
+                <td><span class="tag tag--ok">TEMEL</span> (.NET geliştiricisi için)</td>
+                <td><a href="https://docs.nethereum.com/">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>reorg handling</strong></td>
+                <td>Son bloklar yeniden düzenlenebilir; birkaç blok geriden takip et, yazımları idempotent yap, "finalized" etiketini kullan</td>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://ethereum.github.io/execution-apis/">execution-apis</a></td>
+              </tr>
+              <tr>
+                <td><strong>The Graph / subgraph</strong></td>
+                <td>GraphQL ile sorgulanan indeks; AssemblyScript mapping. Subgraph Studio ayda 100.000 ücretsiz sorgu</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz katman var</td>
+                <td><a href="https://thegraph.com/docs/en/">thegraph.com/docs</a> · <a href="https://thegraph.com/docs/en/subgraphs/providers/subgraph-studio/introduction/">Studio ücretlendirme</a></td>
+              </tr>
+              <tr>
+                <td><strong>Substreams</strong></td>
+                <td>The Graph'ın Rust tabanlı, paralel akış motoru; büyük hacimli veri için</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://thegraph.com/docs/en/">thegraph.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ponder</strong></td>
+                <td>Açık kaynak TypeScript indeksleyici; kendi Postgres'ine yazar, GraphQL/SQL API üretir; tamamen ücretsiz self-host</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://ponder.sh/docs/get-started">ponder.sh/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Envio HyperIndex</strong></td>
+                <td>Çok zincirli hızlı indeksleyici; self-host veya Envio Cloud; HyperSync ile ham veri akışı</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> self-host ücretsiz</td>
+                <td><a href="https://docs.envio.dev/docs/HyperIndex/overview">docs.envio.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>SQD (Subsquid)</strong></td>
+                <td>Portal API + Squid/Pipes TypeScript SDK; 140+ ağ; SQD Cloud'a deploy</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.sqd.dev/">docs.sqd.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Goldsky</strong></td>
+                <td>Yönetilen subgraph barındırma + "Mirror" ile veriyi kendi veritabanına akıtma</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.goldsky.com/">docs.goldsky.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dune</strong></td>
+                <td>Zincir verisi üzerinde SQL; panolar; ücretsiz hesapla sorgu yazılır, API ve hız ücretli</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://docs.dune.com/">docs.dune.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flipside</strong></td>
+                <td>Dune benzeri SQL analitik platformuydu; doküman adresi 2026'da başka bir siteye yönleniyor</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> durumu teyit et</td>
+                <td>flipsidecrypto.xyz</td>
+              </tr>
+              <tr>
+                <td><strong>Moralis</strong></td>
+                <td>Hazır Web3 Data API (bakiye, NFT, transfer) + Streams; hızlı prototip için</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.moralis.com/">docs.moralis.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GoldRush (Covalent)</strong></td>
+                <td>Çok zincirli birleşik veri API'si; ücretsiz deneme</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://goldrush.dev/docs">goldrush.dev/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>cryo</strong></td>
+                <td>Paradigm'in aracı: RPC'den blok/log/tx verisini parquet/csv'ye çeker; analiz için ücretsiz ham veri</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://github.com/paradigmxyz/cryo">github.com/paradigmxyz/cryo</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reth ExEx</strong></td>
+                <td>Düğümün içinde çalışan Rust indeksleyici eklentisi; RPC olmadan veri</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://reth.rs/">reth.rs</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hesap-soyutlama-ve-ux"><span class="h-num">§ 7</span>Hesap soyutlama ve cüzdan UX</h2>
+        <p>Kullanıcının seed phrase saklaması ve gaz için ETH bulması ana UX engelidir. Hesap soyutlama (account abstraction) bu engelleri akıllı sözleşme hesaplarıyla kaldırır. Cüzdan bağlama kütüphaneleri React dApp'in görünen yüzüdür — React bilgisinin blockchain'deki doğal uzantısı.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Standartlar, SDK'lar ve cüzdan bağlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ERC-4337</strong></td>
+                <td>Final standart: UserOperation, alternatif mempool, Bundler, tek EntryPoint kontratı, Paymaster; protokol değişikliği gerektirmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-4337">eips.ethereum.org/EIPS/eip-4337</a></td>
+              </tr>
+              <tr>
+                <td><strong>bundler</strong></td>
+                <td>UserOperation'ları toplayıp EntryPoint'e gönderen düğüm; referans uygulama eth-infinitism; Pimlico Alto, Alchemy Rundler gibi üretim sürümleri</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/eth-infinitism/bundler">github.com/eth-infinitism/bundler</a></td>
+              </tr>
+              <tr>
+                <td><strong>paymaster / gas sponsorship</strong></td>
+                <td>Gazı uygulama öder veya kullanıcı ERC-20 ile öder; "gasless" deneyimin altyapısı. Sponsorluk mainnet'te gerçek para</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span> testnet ücretsiz</td>
+                <td><a href="https://www.alchemy.com/docs/wallets/infra/sponsor-gas">alchemy.com/docs/wallets</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-7702</strong></td>
+                <td>Final, Pectra ile geldi: EOA'ya geçici kod delegasyonu; toplu işlem (batching) ve sponsorluk EOA'lar için de mümkün</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-7702">eips.ethereum.org/EIPS/eip-7702</a></td>
+              </tr>
+              <tr>
+                <td><strong>ERC-7579</strong></td>
+                <td>Minimal modüler smart account standardı (Draft); Kernel, Nexus, Safe modülleri bunu konuşur</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-7579">eips.ethereum.org/EIPS/eip-7579</a></td>
+              </tr>
+              <tr>
+                <td><strong>ERC-6900</strong></td>
+                <td>Alchemy öncülüğünde rakip modüler hesap standardı (Draft)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-6900">eips.ethereum.org/EIPS/eip-6900</a></td>
+              </tr>
+              <tr>
+                <td><strong>Safe (Safe{Wallet}, Safe{Core})</strong></td>
+                <td>En yaygın multisig ve smart account; Safe{Core} SDK, 4337 modülü. Hem UX hem operasyon (bkz. § 11) aracı</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://docs.safe.global/home/what-is-safe">docs.safe.global</a> · <a href="https://docs.safe.global/advanced/erc-4337/overview">4337 modülü</a></td>
+              </tr>
+              <tr>
+                <td><strong>ZeroDev (Kernel)</strong></td>
+                <td>Smart account SDK; permissions = session key modeli (kim, ne zaman, ne)</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> altyapı</td>
+                <td><a href="https://docs.zerodev.app/">docs.zerodev.app</a> · <a href="https://docs.zerodev.app/sdk/permissions/intro">permissions</a></td>
+              </tr>
+              <tr>
+                <td><strong>Biconomy (Nexus, MEE)</strong></td>
+                <td>ERC-7579 uyumlu hesap; zincirler arası orkestrasyon</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.biconomy.io/">docs.biconomy.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Alchemy Account Kit / Wallet APIs</strong></td>
+                <td>Smart wallet + Gas Manager; gömülü cüzdan için Privy önerir</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://www.alchemy.com/docs/wallets">alchemy.com/docs/wallets</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pimlico / permissionless.js</strong></td>
+                <td>Bundler + paymaster altyapısı; permissionless.js viem üzerine 4337 kütüphanesi</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katmanı panelden teyit et</td>
+                <td><a href="https://docs.pimlico.io/references/permissionless">docs.pimlico.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>viem account-abstraction</strong></td>
+                <td>Bundler client, smart account ve paymaster API'leri viem'in içinde (<a href="../03-javascript-typescript/index.html">03 JS/TS</a>)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://viem.sh/account-abstraction">viem.sh/account-abstraction</a></td>
+              </tr>
+              <tr>
+                <td><strong>passkey (WebAuthn, P-256)</strong></td>
+                <td>Seed phrase yerine cihaz biyometrisi; zincirde P-256 doğrulaması için RIP-7212 precompile (L2'lerde yaygın)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md">RIP-7212</a></td>
+              </tr>
+              <tr>
+                <td><strong>session key</strong></td>
+                <td>Sınırlı süre/kapsamlı yetki anahtarı; oyun ve otomasyon için her işlemde imza istememe</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.zerodev.app/sdk/permissions/intro">docs.zerodev.app</a></td>
+              </tr>
+              <tr>
+                <td><strong>Coinbase Smart Wallet / Base Account</strong></td>
+                <td>Passkey tabanlı smart account; dokümanı Coinbase Developer Platform'a taşındı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>docs.cdp.coinbase.com (adresi teyit et)</td>
+              </tr>
+              <tr>
+                <td><strong>embedded wallet (Privy)</strong></td>
+                <td>E-posta/sosyal girişle uygulama içi cüzdan; kullanıcı "cüzdan" kelimesini görmez</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katmanı teyit et</td>
+                <td><a href="https://docs.privy.io/">docs.privy.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>RainbowKit</strong></td>
+                <td>React cüzdan bağlama bileşeni; wagmi üzerine. React dApp mülakatında "cüzdanı nasıl bağladın" sorusunun cevabı (<a href="../../JavaScript-TypeScript/03-react/index.html">React sayfası</a>)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://rainbowkit.com/docs/introduction">rainbowkit.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reown AppKit (eski WalletConnect)</strong></td>
+                <td>Açık kaynak çok platformlu bağlama SDK'sı; mobil cüzdanlarla QR ile bağlanma protokolü</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz proje ID</td>
+                <td><a href="https://docs.reown.com/">docs.reown.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-1193 / EIP-6963</strong></td>
+                <td>Tarayıcı cüzdan sağlayıcı API'si ve çoklu cüzdan keşfi; window.ethereum'un arkasındaki standartlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.metamask.io/wallet/">docs.metamask.io/wallet</a></td>
+              </tr>
+              <tr>
+                <td><strong>SIWE (ERC-4361)</strong></td>
+                <td>Sign-In with Ethereum: cüzdan imzasıyla oturum; backend'de nonce üretip imzayı doğrularsın: .NET'te Nethereum.Siwe (<a href="../04-dotnet/index.html">04 .NET</a>), Node.js'te viem <code>verifySiweMessage</code> (<a href="../03-javascript-typescript/index.html">03 JS/TS</a>)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-4361">eips.ethereum.org/EIPS/eip-4361</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-712 typed data</strong></td>
+                <td>Okunabilir yapılandırılmış imza (permit, meta-tx); kör imza (blind signing) phishing'in ana aracıdır</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-712">eips.ethereum.org/EIPS/eip-712</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="guvenlik-araclari"><span class="h-num">§ 8</span>Güvenlik araçları</h2>
+        <p>"Solidity, Smart Contract" isteyen ilanların mülakatında "reentrancy nedir, nasıl test ettin" sorusu sık gelir. Araçların hepsi ücretsiz ve yerelde çalışır — bu alanda bütçe engeli yok. Açık sınıfları <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a>'de.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Statik analiz, fuzzing, formal doğrulama, izleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Solidity security considerations</strong></td>
+                <td>Resmî dokümanın güvenlik bölümü: reentrancy, checks-effects-interactions, tx.origin, gas limitleri. Mülakat öncesi ilk okuma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Slither</strong></td>
+                <td>Trail of Bits'in Python statik analizörü (Solidity + Vyper); AGPLv3; <code>slither .</code> ile saniyeler içinde 90+ dedektör</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://github.com/crytic/slither">github.com/crytic/slither</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aderyn</strong></td>
+                <td>Cyfrin'in Rust statik analizörü; hızlı, markdown rapor; Slither'ın yanına ikinci görüş</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/Cyfrin/aderyn">github.com/Cyfrin/aderyn</a></td>
+              </tr>
+              <tr>
+                <td><strong>4naly3er</strong></td>
+                <td>Code4rena yarışmalarında "otomatik bulgular" raporunu üreten statik araç; yarışmaya girmeden önce çalıştır</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/Picodes/4naly3er">github.com/Picodes/4naly3er</a></td>
+              </tr>
+              <tr>
+                <td><strong>Solhint</strong></td>
+                <td>Solidity linter; stil + güvenlik kuralları; editör entegrasyonu</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://protofire.github.io/solhint/">protofire.github.io/solhint</a></td>
+              </tr>
+              <tr>
+                <td><strong>Mythril</strong></td>
+                <td>Consensys'in sembolik yürütme aracı; EVM bytecode üzerinde çalışır, kaynak gerekmez</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/Consensys/mythril">github.com/Consensys/mythril</a></td>
+              </tr>
+              <tr>
+                <td><strong>Foundry fuzz testing</strong></td>
+                <td>Parametreli test fonksiyonu otomatik fuzz'lanır; varsayılan 256 koşu; <code>vm.assume</code> ve <code>bound</code> ile girdi sınırlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://getfoundry.sh/forge/fuzz-testing">getfoundry.sh/forge/fuzz-testing</a></td>
+              </tr>
+              <tr>
+                <td><strong>Foundry invariant testing</strong></td>
+                <td>Rastgele çağrı dizileri boyunca "her zaman doğru" olması gereken özellikler; handler ve ghost variable kavramları</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://getfoundry.sh/forge/invariant-testing">getfoundry.sh/forge/invariant-testing</a></td>
+              </tr>
+              <tr>
+                <td><strong>Echidna</strong></td>
+                <td>Trail of Bits'in property-based fuzzer'ı (Haskell); Foundry fuzz'dan daha derin kampanyalar</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/crytic/echidna">github.com/crytic/echidna</a></td>
+              </tr>
+              <tr>
+                <td><strong>Medusa</strong></td>
+                <td>go-ethereum tabanlı, paralel, coverage-guided fuzzer; Echidna'nın Go kardeşi</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://github.com/crytic/medusa">github.com/crytic/medusa</a></td>
+              </tr>
+              <tr>
+                <td><strong>Halmos</strong></td>
+                <td>a16z'nin sembolik test aracı; mevcut Foundry testlerini "her girdi için" kanıta çevirir</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://github.com/a16z/halmos">github.com/a16z/halmos</a></td>
+              </tr>
+              <tr>
+                <td><strong>Certora Prover / CVL</strong></td>
+                <td>Formal doğrulama; kuralları CVL dilinde yazarsın. Ticari ürün, büyük protokoller kullanır</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.certora.com/">docs.certora.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Wake</strong></td>
+                <td>Python tabanlı Solidity geliştirme/test çerçevesi + yerleşik zafiyet dedektörleri</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://ack3.ai/wake/docs/latest/">ack3.ai/wake</a></td>
+              </tr>
+              <tr>
+                <td><strong>Semgrep smart-contracts kuralları</strong></td>
+                <td>Gerçek DeFi exploit'lerinden türetilmiş Semgrep kuralları; CI'a eklenir</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/Decurity/semgrep-smart-contracts">github.com/Decurity/semgrep-smart-contracts</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenZeppelin Defender</strong></td>
+                <td>Yönetilen izleme/relayer/Code Inspector platformuydu; yeni kayıt 30 Haziran 2025'te kapandı, son kapanış tarihi 1 Temmuz 2026 olarak duyuruldu (durumu değişebilir, teyit et). Eski yazılarda görürsün</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://docs.openzeppelin.com/defender/">docs.openzeppelin.com/defender</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenZeppelin Monitor</strong></td>
+                <td>Defender'ın açık kaynak halefi: zincir olaylarını izle, Slack/Discord/e-posta bildirimi</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/OpenZeppelin/openzeppelin-monitor">github.com/OpenZeppelin/openzeppelin-monitor</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenZeppelin Relayer</strong></td>
+                <td>Açık kaynak işlem relayer'ı (Rust, AGPL-3.0); EVM, Solana, Stellar</td>
+                <td><span class="tag tag--info">İLERİ</span> ücretsiz</td>
+                <td><a href="https://github.com/OpenZeppelin/openzeppelin-relayer">github.com/OpenZeppelin/openzeppelin-relayer</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenZeppelin Contracts Wizard</strong></td>
+                <td>ERC-20/721/1155 + Ownable/Pausable/Upgradeable iskeletini tıklayarak üret; denetlenmiş kod kullan, kendin yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://wizard.openzeppelin.com/">wizard.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenZeppelin Upgrades Plugins</strong></td>
+                <td>Proxy yükseltmelerinde storage layout çakışmasını derleme zamanında yakalar (Foundry ve Hardhat)</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.openzeppelin.com/upgrades-plugins/">docs.openzeppelin.com/upgrades-plugins</a></td>
+              </tr>
+              <tr>
+                <td><strong>Building Secure Contracts (Trail of Bits)</strong></td>
+                <td>Rehber + Slither/Echidna/Medusa eğitimleri; secure-contracts.com</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://github.com/crytic/building-secure-contracts">github.com/crytic/building-secure-contracts</a></td>
+              </tr>
+              <tr>
+                <td><strong>Smart Contract Security Field Guide</strong></td>
+                <td>Açık sınıflarını ve savunmaları toplayan bağımsız rehber</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://scsfg.io/">scsfg.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ethereum.org security</strong></td>
+                <td>Reentrancy, access control, oracle manipulation dahil genel kontrol listesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org/developers</a></td>
+              </tr>
+              <tr>
+                <td><strong>EEA EthTrust Security Levels</strong></td>
+                <td>Denetim gereksinimlerini seviyelendiren spesifikasyon (v3, Mart 2025); SWC Registry'nin yerini alan sınıflandırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://entethalliance.github.io/wg-ethtrust-site/spec/v3/">entethalliance.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SWC Registry</strong></td>
+                <td>Eski zafiyet sınıflandırması (SWC-107 reentrancy gibi kodlar); artık bakımı yapılmıyor ama eski raporlarda geçer</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://swcregistry.io/">swcregistry.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="denetim-ve-topluluk"><span class="h-num">§ 9</span>Denetim, yarışmalar ve öğrenme yolları</h2>
+        <p>Güvenlik öğrenmenin en ucuz yolu gerçek kod okumaktır: yarışmalı denetimler, CTF'ler ve olay arşivleri ücretsizdir. Burada bir şey kazanmayı değil öğrenmeyi hedefle.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Platformlar, arşivler ve CTF'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Ethernaut</strong></td>
+                <td>OpenZeppelin'in tarayıcıda oynanan Solidity wargame'i; her seviye bir açık. Solidity tekrarı için ilk durak</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://ethernaut.openzeppelin.com/">ethernaut.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Damn Vulnerable DeFi</strong></td>
+                <td>Foundry tabanlı DeFi CTF: flash loan, oracle, governance, NFT senaryoları</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://github.com/theredguild/damn-vulnerable-defi">github.com/theredguild/damn-vulnerable-defi</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cyfrin Updraft</strong></td>
+                <td>Ücretsiz Solidity/Foundry/güvenlik kursları (150+ saat); "Security and Auditing" kursu bu sayfanın ders hali</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://www.cyfrin.io/updraft">cyfrin.io/updraft</a></td>
+              </tr>
+              <tr>
+                <td><strong>DeFiHackLabs</strong></td>
+                <td>Gerçek hack'lerin Foundry ile yeniden üretilmiş PoC'leri; bir olayı oku, testi çalıştır, anla</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://github.com/SunWeb3Sec/DeFiHackLabs">github.com/SunWeb3Sec/DeFiHackLabs</a></td>
+              </tr>
+              <tr>
+                <td><strong>rekt.news</strong></td>
+                <td>Hack olaylarının kronolojik arşivi ve zarar sıralaması (leaderboard); her yazı bir vaka çalışması</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://rekt.news/">rekt.news</a></td>
+              </tr>
+              <tr>
+                <td><strong>Solodit</strong></td>
+                <td>Binlerce denetim bulgusunun aranabilir veritabanı; ücretsiz göz atma, ek özellikler hesapla</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://solodit.cyfrin.io/">solodit.cyfrin.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>CodeHawks / First Flights</strong></td>
+                <td>Cyfrin'in yarışma platformu; "First Flights" başlangıç seviyesi küçük kod tabanları — ilk yarışma için en uygun yer</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz katılım</td>
+                <td><a href="https://codehawks.cyfrin.io/">codehawks.cyfrin.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Code4rena</strong></td>
+                <td>Yarışmalı denetimin öncüsü (512 denetim, 16.600+ warden); 2026'da "winding down" duyurusu yaptı, aktif yarışmalar tamamlanıyor. Geçmiş raporları hâlâ öğrenme hazinesi</td>
+                <td><span class="tag">ORTA</span> durumu teyit et</td>
+                <td><a href="https://code4rena.com/">code4rena.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sherlock</strong></td>
+                <td>Yarışmalı denetim ("Watson" denetçiler) + protokol sigortası</td>
+                <td><span class="tag">ORTA</span> ücretsiz katılım</td>
+                <td><a href="https://audits.sherlock.xyz/">audits.sherlock.xyz</a> · <a href="https://docs.sherlock.xyz/">docs.sherlock.xyz</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cantina (Spearbit)</strong></td>
+                <td>Spearbit'in denetim ağı Cantina'ya taşındı; yarışma ve bounty var, şirket odağı 2026'da "agentic security"ye kaydı</td>
+                <td><span class="tag">ORTA</span> durumu teyit et</td>
+                <td><a href="https://www.cantina.security/">cantina.security</a></td>
+              </tr>
+              <tr>
+                <td><strong>Immunefi</strong></td>
+                <td>Web3 bug bounty platformu; canlı protokollerde ödüllü açık bildirimi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://immunefi.com/">immunefi.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>audit firmaları</strong></td>
+                <td>Trail of Bits, OpenZeppelin, Consensys Diligence, ChainSecurity, Sigma Prime, Zellic, Cyfrin, Spearbit/Cantina — raporlarını oku, iş ilanlarını izle. Ücreti protokol öder</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.trailofbits.com/">trailofbits.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SEAL / SEAL 911</strong></td>
+                <td>Security Alliance: 7/24 olay müdahale hattı ve whitehat'ler için "Safe Harbor" hukuki çerçevesi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://securityalliance.org/">securityalliance.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>responsible disclosure / whitehat</strong></td>
+                <td>Canlı protokolde izinsiz exploit denemek suçtur; bulguyu bounty programı veya SEAL üzerinden bildir. Testnet ve CTF'ler serbest</td>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://securityalliance.org/">securityalliance.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mev-ve-islem-gizliligi"><span class="h-num">§ 10</span>MEV ve işlem gizliliği</h2>
+        <p>Mempool herkese açıktır; işlemin yayınlandığı anda botlar onu görür. dApp yazarken slippage ve deadline parametrelerini, backend'den (.NET, Node.js ya da başka bir dille) işlem gönderirken private RPC seçeneğini bilmek gerekir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>MEV kavramları ve korunma araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MEV (maximal extractable value)</strong></td>
+                <td>Blok üreticisinin işlem sıralamasından çıkarabileceği değer; arbitraj, likidasyon, sandwich</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/mev/">ethereum.org/developers/docs/mev</a></td>
+              </tr>
+              <tr>
+                <td><strong>frontrunning / sandwich attack</strong></td>
+                <td>Bot, büyük swap'ın önüne alım, arkasına satım koyar; kullanıcı kötü fiyat alır. "sandwich attack uniswap" diye ara</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/mev/">ethereum.org/developers/docs/mev</a></td>
+              </tr>
+              <tr>
+                <td><strong>slippage / amountOutMin</strong></td>
+                <td>Kabul edilen fiyat sapması; sıfır bırakırsan işlem düşer, yüksek bırakırsan sandwich'e açık olursun</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developers.uniswap.org/">developers.uniswap.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>deadline</strong></td>
+                <td>Swap'ın geçerli olduğu son zaman damgası; mempool'da bekleyen eski işlemin sonradan kötü fiyata çalışmasını engeller</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developers.uniswap.org/">developers.uniswap.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mempool / pending tx</strong></td>
+                <td>Onaylanmamış işlem havuzu; eth_subscribe newPendingTransactions ile izlenir — botların gördüğü şey</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://geth.ethereum.org/docs/interacting-with-geth/rpc/pubsub">geth.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flashbots Protect (private RPC)</strong></td>
+                <td>rpc.flashbots.net/fast: işlemi public mempool'a düşürmeden builder'a gönder; frontrunning koruması, ücretsiz</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://docs.flashbots.net/flashbots-protect/quick-start">docs.flashbots.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>MEV Blocker (CoW)</strong></td>
+                <td>Alternatif private RPC; sitesi "satın alındı" notu gösteriyor, güncel durumunu teyit et</td>
+                <td><span class="tag">ORTA</span> durumu teyit et</td>
+                <td>cow.fi/mev-blocker</td>
+              </tr>
+              <tr>
+                <td><strong>PBS / MEV-Boost</strong></td>
+                <td>Proposer-Builder Separation: bloğu builder kurar, validator önerir; MEV-Boost validator tarafı yazılımı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.flashbots.net/">docs.flashbots.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>searcher / bundle</strong></td>
+                <td>MEV fırsatı arayan bot ve işlemleri atomik paket olarak builder'a gönderme; öğrenmek için anvil fork'ta dene, mainnet'te para yakma</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.flashbots.net/">docs.flashbots.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>commit-reveal</strong></td>
+                <td>Önce hash'i, sonra değeri gönder; açık artırma ve oyunlarda frontrunning'e karşı tasarım deseni</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org/developers</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="operasyon"><span class="h-num">§ 11</span>Operasyon ve anahtar yönetimi</h2>
+        <p>Kontrat deploy etmek işin yarısı; sahipliği, anahtarları ve acil durum planını yönetmek diğer yarısı. Hobi projesinde bile bu alışkanlıkları edin — mülakatta "üretimde nasıl yönetirsin" diye sorulur.</p>
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Private key veya RPC anahtarı içeren <code>.env</code> dosyası bir kez commit edilirse git geçmişinden silinse bile sızmış sayılır; botlar GitHub'ı saniyeler içinde tarar. Anahtarı değiştir, cüzdanı terk et. Testnet cüzdanı ile mainnet cüzdanını asla aynı tutma.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sahiplik, anahtarlar, CI ve olay yönetimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Safe multisig ile sahiplik</strong></td>
+                <td>Kontrat owner'ı tek EOA değil, 2/3 gibi çoklu imza olsun; tek anahtar sızıntısı protokolü bitirmesin</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://docs.safe.global/home/what-is-safe">docs.safe.global</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ownable / Ownable2Step / AccessControl / AccessManager</strong></td>
+                <td>OpenZeppelin erişim modelleri; Ownable2Step devri iki adımda yapar (yanlış adrese devir riski). Roller için AccessControl</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimelockController</strong></td>
+                <td>Yönetim işlemlerine zorunlu gecikme; kullanıcı kötü bir yükseltmeyi görüp çıkabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/api/governance">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pausable / kill switch</strong></td>
+                <td>Acil durdurma; whenNotPaused modifier'ı. Kimin durdurabileceği de bir güven varsayımıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>upgradeable proxy riski</strong></td>
+                <td>UUPS/Transparent proxy'de storage çakışması ve initialize unutma klasik hatalar; Upgrades Plugins ile kontrol et</td>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.openzeppelin.com/upgrades-plugins/">docs.openzeppelin.com/upgrades-plugins</a></td>
+              </tr>
+              <tr>
+                <td><strong>incident response planı</strong></td>
+                <td>Kim durdurur, kim iletişir, hangi kanaldan (SEAL 911); önceden yazılı olsun</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://securityalliance.org/">securityalliance.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>key rotation</strong></td>
+                <td>Deploy anahtarı ile işletme anahtarı ayrı; deploy sonrası sahipliği Safe'e devret; RPC/API anahtarlarını düzenli yenile</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.env ve .gitignore</strong></td>
+                <td>Sırlar ortam değişkeninde, dosya .gitignore'da; örnek için .env.example commit'le</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cast wallet import / keystore</strong></td>
+                <td>Private key'i şifreli keystore'a al, komutlarda <code>--account</code> ile kullan; düz metin PRIVATE_KEY'e gerek kalmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://getfoundry.sh/cast/wallet-operations">getfoundry.sh/cast/wallet-operations</a></td>
+              </tr>
+              <tr>
+                <td><strong>hardware wallet (Ledger/Trezor)</strong></td>
+                <td>Mainnet için imzayı donanımda tut; Foundry <code>--ledger</code> / <code>--trezor</code> destekler</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> cihaz</td>
+                <td><a href="https://getfoundry.sh/cast/wallet-operations">getfoundry.sh/cast/wallet-operations</a></td>
+              </tr>
+              <tr>
+                <td><strong>gitleaks</strong></td>
+                <td>Repo ve commit geçmişinde sır tarayıcı; pre-commit hook olarak ekle. Proje "feature complete", halefi Betterleaks</td>
+                <td><span class="tag">ORTA</span> ücretsiz</td>
+                <td><a href="https://github.com/gitleaks/gitleaks">github.com/gitleaks/gitleaks</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Actions secrets</strong></td>
+                <td>CI'da RPC URL ve Etherscan anahtarı repo/environment secret olarak; log'a yazdırma</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>foundry-toolchain (GitHub Action)</strong></td>
+                <td>CI'da Foundry kur, <code>forge build</code>, <code>forge test</code>, Slither çalıştır. Herhangi bir dilde CI kurduysan alışkanlık aynıdır (.NET'ten geliyorsan <a href="../../CSharp-DotNet/07-devops-ve-gozlemlenebilirlik/index.html">DevOps sayfası</a>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> ücretsiz</td>
+                <td><a href="https://github.com/foundry-rs/foundry-toolchain">github.com/foundry-rs/foundry-toolchain</a></td>
+              </tr>
+              <tr>
+                <td><strong>forge script / broadcast</strong></td>
+                <td>Deploy'u script ile yap; broadcast klasöründeki adres ve tx kayıtlarını repoya al — "hangi adres hangi ağda" kaybolmasın</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://getfoundry.sh/forge/overview">getfoundry.sh/forge</a></td>
+              </tr>
+              <tr>
+                <td><strong>monitoring / alerting</strong></td>
+                <td>Owner değişimi, büyük transfer, pause olayı gibi tetikleyicilere bildirim; OZ Monitor (açık kaynak) veya Tenderly Alerts</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/OpenZeppelin/openzeppelin-monitor">github.com/OpenZeppelin/openzeppelin-monitor</a></td>
+              </tr>
+              <tr>
+                <td><strong>gas estimation / nonce yönetimi</strong></td>
+                <td>Backend'den işlem gönderirken nonce çakışması ve düşük fee sık hata; eth_feeHistory + yeniden fiyatlama stratejisi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-1559">eips.ethereum.org/EIPS/eip-1559</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bütçe kuralı: bu sayfadaki her şey Sepolia, Base Sepolia veya anvil üzerinde denenebilir. Mainnet'e para koymadan portföy projesi tamamlanır; işverenlerin görmek istediği kontrat adresi Sepolia Etherscan'de de doğrulanmış olabilir.</p>
+        </div>
+
+        <h2 id="turkiye-ve-uyum"><span class="h-num">§ 12</span>Türkiye ve uyum notu</h2>
+        <p>Bu bölüm hukuki tavsiye değildir; geliştirici olarak hangi kavramları bilmen gerektiğini listeler. Kullanıcı parası tutan veya kripto alım satımı yaptıran bir şey yayınlamadan önce avukata sor.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mevzuat ve uyum kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong><span class="law">7518 s.K.</span> (SPKn değişikliği)</strong></td>
+                <td>Kabul 26/6/2024, Resmî Gazete 2 Temmuz 2024 sayı 32590. "Kripto varlık", "kripto varlık hizmet sağlayıcı (KVHS)", "cüzdan", "platform" tanımlarını <span class="law">6362 s.K.</span>'ya ekledi; yetkili kurum SPK</td>
+                <td><span class="tag tag--ok">TEMEL</span> Resmî Gazete metninden doğrulandı</td>
+                <td><a href="https://www.resmigazete.gov.tr/eskiler/2024/07/20240702-1.htm">resmigazete.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>KVHS (kripto varlık hizmet sağlayıcı)</strong></td>
+                <td>Platform işletme, saklama ve kanunda sayılan diğer hizmetler SPK izni gerektirir; izinli liste SPK sitesinde. Kendi testnet dApp'in bu tanıma girmez; kullanıcı parası tutan mainnet servisi girebilir</td>
+                <td><span class="tag tag--warn">RİSK</span> avukata sor</td>
+                <td><a href="https://spk.gov.tr/kurumlar/kripto-varlik-hizmet-saglayicilar">spk.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>SPK ikincil düzenlemeleri (tebliğler)</strong></td>
+                <td>Tebliğ III-35/B.1 (Kuruluş ve Faaliyet Esasları) ve Tebliğ III-35/B.2 (Çalışma Usul ve Esasları ile Sermaye Yeterliliği). Bilgi sistemleri ve teknolojik altyapıya ilişkin şartların ayrı bir düzenlemeyle (TÜBİTAK kriterleri) belirlenip belirlenmediği <span class="tag tag--warn">TEYİT</span></td>
+                <td>Adları SPK sayfasında doğrulandı; yayım tarihleri doğrulanamadı, SPK sitesinden teyit et (<a href="../index.html#turkiye-yasal-cerceve">Genel Bakış § 7</a> ile aynı)</td>
+                <td><a href="https://spk.gov.tr/kurumlar/kripto-varlik-hizmet-saglayicilar/basvuru-surecleri">spk.gov.tr (başvuru süreçleri)</a></td>
+              </tr>
+              <tr>
+                <td><strong>MASAK / <span class="law">5549 s.K.</span></strong></td>
+                <td>Suç gelirlerinin aklanmasının önlenmesi; KVHS'ler "yükümlü" sayılır: müşteri tanıma, şüpheli işlem bildirimi. 7518 s.K. transferlerde bilgi taşıma (travel rule) yükümlülüğüne de atıf yapar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masak.hmb.gov.tr/">masak.hmb.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>KYC / AML / travel rule</strong></td>
+                <td>Know Your Customer: kimlik doğrulama; Anti-Money Laundering: aklama önleme; travel rule: transferde gönderen/alıcı bilgisinin sağlayıcılar arasında taşınması (FATF tavsiyesi)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>fatf-gafi.org</td>
+              </tr>
+              <tr>
+                <td><strong>TCMB ödeme yönetmeliği (2021)</strong></td>
+                <td>Ödemelerde Kripto Varlıkların Kullanılmamasına Dair Yönetmelik (Resmî Gazete 16.04.2021, sayı 31456): kripto varlıkların ödemelerde doğrudan veya dolaylı kullanılmasını ve ödeme/elektronik para kuruluşlarının buna aracılık etmesini yasaklar (güncel hâli <span class="tag tag--warn">TEYİT</span>). Durum &rarr; sonuç:
+                  <ul>
+                    <li><strong>Testnet demosu</strong> (ör. <a href="../07-projeler/index.html">07</a> § 5/3) &rarr; gerçek ödeme yok, kapsam dışı.</li>
+                    <li><strong>Türkiye'de yerleşik kullanıcıdan mainnet'te mal/hizmet bedeli almak</strong> &rarr; yönetmelik kapsamında yasak riski; avukata sor.</li>
+                    <li><strong>Yalnızca yurt dışı kullanıcıya hizmet</strong> &rarr; hedef ülke mevzuatı (ör. AB'de MiCA) + Türkiye'deki vergi yükümlülüğün. Türkiye'de yerleşik olarak kripto ile tahsilat yapmanın bu yönetmelik kapsamına girip girmediği ve TL'ye çevrim/banka kanalı ayrıca <span class="tag tag--warn">TEYİT</span> (<a href="../index.html#durust-cerceve">Genel Bakış § 2</a>).</li>
+                    <li><strong>Kripto varlık alım-satım / saklama hizmeti sunmak</strong> &rarr; SPK KVHS izni (<span class="law">7518 s.K.</span>).</li>
+                  </ul>
+                </td>
+                <td><span class="tag tag--warn">RİSK</span> güncel metni teyit et</td>
+                <td><a href="https://www.resmigazete.gov.tr/">resmigazete.gov.tr</a> · tcmb.gov.tr</td>
+              </tr>
+              <tr>
+                <td><strong>MiCA (AB)</strong></td>
+                <td>Avrupa Birliği'nin kripto varlık düzenlemesi; AB kullanıcısına hizmet verirsen ilgili. Türkiye mevzuatı büyük ölçüde bu çerçeveye paralel</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica">esma.europa.eu</a></td>
+              </tr>
+              <tr>
+                <td><strong>gri alanlar</strong></td>
+                <td>Açık kaynak kontrat yayınlamak, testnet dApp, eğitim projesi: düşük risk. Mainnet'te kullanıcı fonu tutan, swap yaptıran, token satan ürün: izin/vergi/AML soruları. Sınır çizgisi için avukat</td>
+                <td><span class="tag tag--warn">RİSK</span> avukata sor</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>vergi</strong></td>
+                <td>Bu sayfa yatırım veya vergi tavsiyesi vermez. Önce gelirin hangi türde olduğunu belirle, sonra SMMM'ye sor (her dal <span class="tag tag--warn">TEYİT</span>):
+                  <ul>
+                    <li><strong>Bordrolu maaş</strong> (blockchain şirketinde de olsa; Türkiye'deki işveren, yabancı şirketin Türkiye bordrosu veya EOR) &rarr; ücret geliri; stopajı işveren/EOR yapar.</li>
+                    <li><strong>Yabancı işverenle doğrudan iş sözleşmesi</strong> (Türkiye'de bordro, şube veya EOR yok) &rarr; ücret geliri, ama stopaj yapan işveren olmadığından yıllık beyanname ile beyan gündeme gelir; SGK yönü (isteğe bağlı sigorta / 4/b / GSS) ayrıca — GİB ve SGK'ya sor.</li>
+                    <li><strong>Yurt dışı müşteriye freelance geliştirme</strong> (döviz veya stablecoin) &rarr; bağımsız faaliyet geliri, mükellefiyet kaydı (şahıs işletmesi / serbest meslek ya da şirket); yurt dışına verilen hizmet için kazanç indirimi/KDV istisnası olabilir. SGK sonucu 4/a çalışan, emekli, 29 yaş altı ve diğer durumlara göre değişir: <a href="../index.html#durust-cerceve">Genel Bakış § 2</a>.</li>
+                    <li><strong>Bug bounty / audit contest ödülü</strong> &rarr; beyan edilecek gelir olabilir; türü (serbest meslek / arızi kazanç) belirsiz.</li>
+                    <li><strong>Kripto alım-satım kazancı</strong> &rarr; 2026 itibarıyla özel bir düzenlemenin yürürlükte olup olmadığını Resmî Gazete ve GİB'den kontrol et.</li>
+                    <li><strong>Yalnızca testnet</strong> &rarr; parasal değer yok, vergi doğmaz.</li>
+                  </ul>
+                  Ayrıntılı tablo: <a href="../index.html#turkiye-yasal-cerceve">Genel Bakış § 7</a>.
+                </td>
+                <td><span class="tag tag--warn">RİSK</span> SMMM'ye sor</td>
+                <td><a href="https://www.gib.gov.tr/">gib.gov.tr</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bir hobi projesini GitHub'da yayınlamak ile Türkiye'den kullanıcıya açık bir mainnet servisi işletmek farklı hukuki kategorilerdir. İkincisine geçmeden önce SPK tanımlarını oku ve avukata danış. Öğrenme ve portföy aşamasında birinci kategori yeter.</p>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet ve öncelik sırası</h2>
+        <p>Bu sayfa için sıra, mülakat hazırlığını ve sıfır bütçeyi gözetir. Solidity/React iş ilanlarında ve mülakatlarda sık geçtiği için güvenlik araçları ve cüzdan bağlama en öne alındı.</p>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Yerel zincir + Sepolia + ücretsiz RPC</span>
+            <p>anvil ile başla; Sepolia için PublicNode veya Alchemy free plan; testnet ETH için mainnet bakiyen yoksa Google Cloud veya PoW faucet (şartsız), Chainlink/QuickNode faucet'lerini güncel şartları uyuyorsa kullan (§ 2). Chainlist'ten ağ ekle, Sepolia Etherscan'de ilk kontratını doğrula.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 1, § 2, § 3</span>
+          </li>
+          <li>
+            <span class="steps__title">Güvenlik araçları — mülakatta sık sorulan Solidity için</span>
+            <p>Solidity security considerations sayfasını oku; Slither + Solhint'i her projeye ekle; Foundry fuzz testini öğren; Ethernaut'u bitir, Damn Vulnerable DeFi'ye başla. Mülakatta "reentrancy" ve "checks-effects-interactions"ı anlatabil.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 8, § 9</span>
+          </li>
+          <li>
+            <span class="steps__title">Cüzdan bağlama ve SIWE — React dApp için</span>
+            <p>RainbowKit veya Reown AppKit ile bağlantı; SIWE ile oturum (doğrulama her durumda sunucu tarafında yapılır): .NET biliyorsan ASP.NET Core + Nethereum.Siwe, Node.js biliyorsan viem <code>verifySiweMessage</code>, Next.js kullanıyorsan route handler + RainbowKit SIWE / Auth.js (yine sunucu tarafı doğrulama; ayrı bir backend projesi gerekmez). EIP-712 imzalarını ve phishing riskini bil.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 7</span>
+          </li>
+          <li>
+            <span class="steps__title">Kendi indeksleyicin (.NET veya Node)</span>
+            <p>.NET biliyorsan Nethereum ile eth_getLogs okuyan Worker Service + SQL Server/PostgreSQL; Node.js biliyorsan viem + Postgres ya da Ponder; backend yazmak istemiyorsan Subgraph Studio ücretsiz katmanı. Her durumda reorg'u ele al; karşılaştırma için aynı veriyi ikinci bir yolla da indeksle. .NET backend ilanlarını hedefliyorsan portföyün en ayırt edici parçası.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 6 → 04 .NET ya da 03 JS/TS sayfası</span>
+          </li>
+          <li>
+            <span class="steps__title">Oracle ve depolama</span>
+            <p>Chainlink Data Feeds ve VRF'yi Sepolia'da kullan; NFT metadata'yı IPFS'e Pinata ücretsiz hesabıyla pin'le; CID ve gateway kavramlarını öğren.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 4, § 5</span>
+          </li>
+          <li>
+            <span class="steps__title">Operasyon alışkanlıkları</span>
+            <p>Keystore kullan, .env commit'leme, gitleaks pre-commit, GitHub Actions'ta forge test + Slither; sahipliği Safe'e devret, Pausable ve Timelock ekle.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 11</span>
+          </li>
+          <li>
+            <span class="steps__title">Hesap soyutlama ve MEV — derinleşme</span>
+            <p>ERC-4337 ve EIP-7702'yi oku; Sepolia'da paymaster ile gasless işlem dene; Flashbots Protect'i ve slippage/deadline kavramlarını bil. rekt.news ve DeFiHackLabs'ten haftada bir vaka oku.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 7, § 10, § 9</span>
+          </li>
+          <li>
+            <span class="steps__title">Uyum — yalnızca mainnet ürün düşünürsen</span>
+            <p>7518 s.K. tanımlarını ve SPK KVHS listesini bil; kullanıcı fonu tutan bir şey yayınlamadan önce avukata sor. Hobi ve portföy aşamasında testnet yeter.</p>
+            <span class="steps__meta">Maliyet: avukat ücreti (gerekirse) · § 12</span>
+          </li>
+        </ol>
+        <ul class="checklist">
+          <li>Eskimiş ama hâlâ göreceğin isimler: Holesky, Goerli, OpenZeppelin Defender, SWC Registry, web3.storage, Truffle/web3.js (bkz. <a href="../03-javascript-typescript/index.html">03 JS/TS</a>).</li>
+          <li>Durumu değişen platformlar (2026): Code4rena "winding down", Spearbit → Cantina, Flipside ve Fleek yönlendirmeleri — kullanmadan önce teyit et.</li>
+          <li>Ücretsiz katmanı doğrulanan servisler: Alchemy (30M CU), Etherscan API (3 çağrı/sn, 100.000/gün), The Graph Studio (100.000 sorgu/ay), Tenderly, PublicNode. Faucet'ler: şartsız olanlar Google Cloud ve PoW; mainnet bakiyesi şartlı olan Alchemy; Chainlink ve QuickNode'un güncel şartı <span class="tag tag--warn">TEYİT</span>. Mainnet bakiyesi olan biri şartlı faucet'leri de kullanabilir, ama gerçek varlıklı cüzdanı geliştirmeye bağlamak önerilmez (<a href="../07-projeler/index.html">07</a> § 8).</li>
+          <li>Proje fikirleri için <a href="../07-projeler/index.html">07 Projeler</a>; kavram tekrarı için <a href="../01-temeller/index.html">01 Temeller</a>.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../05-diger-zincirler/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Diğer Zincirler ve Diller</span></a>
+        <a class="next" href="../07-projeler/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Projeler</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>React — JavaScript ve TypeScript Anahtar Listesi</title>
+<meta name="description" content="Bileşen, JSX, state, hook'lar, context, performans, form yönetimi, veri çekme ve yönlendirme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">React</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · JavaScript / TypeScript</span>
+      <span class="brand__name">JavaScript ve TypeScript Anahtar Listesi</span>
+      <span class="brand__sub">JS → TS → React → Araçlar</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-javascript/index.html"><span class="nav-num">01</span><span>JavaScript</span></a></li>
+          <li><a class="nav-item" href="../02-typescript/index.html"><span class="nav-num">02</span><span>TypeScript</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kütüphane ve araçlar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">03</span><span>React</span></a></li>
+          <li><a class="nav-item" href="../04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Sıralı bir yol haritası: React'a doğrudan atlamak yerine altındaki dili kurar. Anlatım yok, araştırma başlığı var. Ön koşul: HTML ve CSS bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 03 · Kütüphane</div>
+        <h1 class="page-title">React: <em>bileşen</em>, state ve hook'lar</h1>
+        <p class="lede">Temel kavramlardan hook'ların tamamına, performans optimizasyonundan yaygın kalıplara. Her başlık bir araştırma sorgusu; sırayla ilerlemek için tasarlandı.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; ileri &middot; Ekosistem ayrı bölümde</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa React'i anlatmaz. React öğrenirken karşına çıkacak terimlerin
+        listesidir. Her satırdaki terimi kendin araştıracak, resmî dokümandan okuyacak ve kod yazacaksın.
+        "Kısaca" sütunu sadece terimi tanıman içindir, öğretmek için değildir.</p>
+
+        <p>React, tarayıcı tarafı iş ilanlarında en sık istenen kütüphanedir. Rozetler gerçek öğrenme sırasına
+        göre dağıtıldı. <span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti, iş ilanlarında ve mülakatlarda sık
+        geçen çekirdek konuları işaretler (en az bir çalışan örnek yaz): bunlar "React biliyorum" diyen
+        birinin cevaplayamaması affedilmeyen sorulardır.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Sıra önemli</p>
+          <p>React'e JavaScript bilmeden başlamak en yaygın hatadır. Önce
+          <a href="../01-javascript/index.html">01 &mdash; JavaScript</a> sayfasındaki closure, `this`, destructuring,
+          spread, array metotları (map/filter/reduce), Promise ve async/await maddelerini bitir.
+          React'in yarısı aslında JavaScript'tir. Tip güvenliği için de
+          <a href="../02-typescript/index.html">02 &mdash; TypeScript</a> sayfasına bak; bugün React projelerinin
+          çoğu TypeScript ile yazılıyor.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Projeyi kurma ve çalıştırma (buradan başlarsın)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>React</strong></td>
+                <td>Kullanıcı arayüzü kurmak için bileşen tabanlı JavaScript kütüphanesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Framework değil "library" der kendine; router/veri çekme dahil değildir</td>
+                <td><a href="https://react.dev/learn">react.dev/learn</a></td>
+              </tr>
+              <tr>
+                <td><strong>react.dev</strong></td>
+                <td>2023'ten beri geçerli olan resmî yeni dokümantasyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada çıkan <em>legacy.reactjs.org</em> eski dokümandır; class component anlatır, onu takip etme</td>
+                <td><a href="https://react.dev">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vite</strong></td>
+                <td>Yaygın React proje kurucusu ve dev sunucusu (öğrenme ve SPA için)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kurulum yolu proje türüne göre değişir (react.dev "Creating a React App" sayfası da böyle dallanır): öğrenme, SPA veya giriş ekranı arkasındaki iç uygulama &rarr; `npm create vite@latest` (react-ts şablonu; react.dev bunu Vite/Parcel/Rsbuild ile "sıfırdan kurma" yolu olarak anlatır); SEO veya SSR gereken herkese açık site &rarr; Next.js veya React Router v7 framework modu; mobil uygulama &rarr; Expo (React Native); mevcut bir ASP.NET Core, Spring vb. çözüme bağlanacak frontend &rarr; Vite + backend SPA entegrasyonu (<a href="../04-ekosistem-ve-araclar/index.html#dotnet-entegrasyon">04 § 15</a>). Karar için <a href="../04-ekosistem-ve-araclar/index.html#meta-framework">04 § 4 "Next.js gerçekten gerekli mi"</a>. Adres <em>vite.dev</em> oldu (eski: vitejs.dev)</td>
+                <td><a href="https://vite.dev">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Create React App (CRA)</strong></td>
+                <td>Eski resmî proje kurucusu</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> React ekibi 2025'te emekliye ayırdı; eski eğitim videolarında hâlâ görürsün, kullanma</td>
+                <td><a href="https://react.dev/blog/2025/02/14/sunsetting-create-react-app">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>Next.js</strong></td>
+                <td>React üzerine kurulu, sunucu tarafı render ve routing içeren tam framework</td>
+                <td><span class="tag">ORTA</span> React'i öğrenmeden Next.js'e başlama; "React iş ilanı" çoğu zaman Next.js demektir</td>
+                <td><a href="https://nextjs.org/docs">nextjs.org/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm / package.json</strong></td>
+                <td>Node paket yöneticisi ve bağımlılık dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Pratikte hiçbir React projesi paketsiz kurulamaz. Ortamına göre: açık internet erişimi varsa paketler doğrudan public npm registry'den (registry.npmjs.org) kurulur; kurumsal ortamda dış paket deposu kapalı veya kısıtlıysa iç registry/proxy kullanılır (Azure Artifacts, JFrog Artifactory, Sonatype Nexus, GitHub Packages veya kendi barındırdığın Verdaccio) ve proje ya da kullanıcı düzeyindeki <code>.npmrc</code> içindeki <code>registry</code> ayarıyla yönlendirilir, yeni paket için güvenlik/lisans onay süreci gerekebilir; tamamen çevrimdışı ortamda önbelleğe alınmış paketler veya <code>npm pack</code> ile üretilmiş <code>.tgz</code> dosyaları kullanılır. C#'tan geliyorsan: NuGet + .csproj karşılığı</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>node_modules</strong></td>
+                <td>İndirilen paketlerin durduğu klasör</td>
+                <td><span class="tag tag--ok">TEMEL</span> Git'e koyulmaz (.gitignore). Devasa boyutu normaldir</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/folders">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pnpm / yarn / bun</strong></td>
+                <td>npm alternatifi paket yöneticileri</td>
+                <td><span class="tag">ORTA</span> pnpm disk tasarrufu yapar, bun hem runtime hem paket yöneticisidir; hepsi ücretsiz</td>
+                <td><a href="https://pnpm.io">pnpm.io</a> &middot; <a href="https://bun.sh/docs">bun.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>react &amp; react-dom</strong></td>
+                <td>İki ayrı paket: çekirdek ve tarayıcıya basan renderer</td>
+                <td><span class="tag tag--ok">TEMEL</span> React Native gibi başka renderer'lar da var; bu yüzden ikiye ayrılmış</td>
+                <td><a href="https://react.dev/reference/react-dom">react.dev/reference/react-dom</a></td>
+              </tr>
+              <tr>
+                <td><strong>createRoot</strong></td>
+                <td>Uygulamanın DOM'a bağlandığı giriş noktası (main.jsx)</td>
+                <td><span class="tag tag--ok">TEMEL</span> React 18 ile geldi; eski `ReactDOM.render` yerine geçti</td>
+                <td><a href="https://react.dev/reference/react-dom/client/createRoot">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React DevTools</strong></td>
+                <td>Bileşen ağacını, props/state'i ve render sebeplerini gösteren tarayıcı eklentisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. "Neden render oldu" sorusunun cevabını burada bulursun</td>
+                <td><a href="https://react.dev/learn/react-developer-tools">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>eslint-plugin-react-hooks</strong></td>
+                <td>Hook kurallarını ve eksik bağımlılıkları yakalayan lint kuralları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Uyarılarını susturma; %90'ı gerçek hata. Vite şablonunda genelde kurulu gelir</td>
+                <td><a href="https://www.npmjs.com/package/eslint-plugin-react-hooks">npmjs.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="temel-kavramlar"><span class="h-num">§ 2</span>Temel kavramlar</h2>
+
+        <p>Bu bölüm React'in kelime dağarcığıdır. Buradaki her terimi tanımadan sonraki bölümlere geçme.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bileşen, JSX ve render</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>component (function component)</strong></td>
+                <td>Büyük harfle başlayan, JSX döndüren fonksiyon</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Küçük harfle başlarsa React onu HTML etiketi sanar; bu klasik bir hatadır</td>
+                <td><a href="https://react.dev/learn/your-first-component">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>class component</strong></td>
+                <td>Eski yazım: `class X extends React.Component`, `render()` metodu</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kod yazılmaz ama eski projelerde bolca görürsün; mülakatta "farkı nedir" diye sorulur</td>
+                <td><a href="https://react.dev/reference/react/Component">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>JSX</strong></td>
+                <td>JavaScript içine HTML benzeri sözdizimi gömme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HTML değildir: `class` yerine `className`, `for` yerine `htmlFor`, stil bir JS nesnesidir</td>
+                <td><a href="https://react.dev/learn/writing-markup-with-jsx">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>JSX transform</strong></td>
+                <td>JSX'in derleyici tarafından `jsx()` çağrılarına çevrilmesi</td>
+                <td><span class="tag">ORTA</span> "JSX aslında ne oluyor" sorusunun cevabı. Eski adı `React.createElement`; yeni transform ile `import React` satırı artık gerekmez</td>
+                <td><a href="https://react.dev/reference/react/createElement">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>süslü parantez { }</strong></td>
+                <td>JSX içinde JavaScript ifadesi çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> İfade (expression) alır, komut (statement) almaz: `if` yazamazsın, ternary yazarsın</td>
+                <td><a href="https://react.dev/learn/javascript-in-jsx-with-curly-braces">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>props</strong></td>
+                <td>Bileşene dışarıdan verilen, salt okunur veri</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Props değiştirilemez (immutable). Yukarıdan aşağı akar; buna "one-way data flow" denir</td>
+                <td><a href="https://react.dev/learn/passing-props-to-a-component">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>children</strong></td>
+                <td>Bileşenin açılış-kapanış etiketi arasına yazılan içerik, özel bir prop</td>
+                <td><span class="tag tag--ok">TEMEL</span> Layout/kart bileşenlerinin temeli. Arama: "React children prop"</td>
+                <td><a href="https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>prop spread</strong></td>
+                <td>`&lt;Btn {...props} /&gt;` ile tüm propları aktarma</td>
+                <td><span class="tag">ORTA</span> Kolay ama hangi propun nereye gittiğini gizler; kütüphane bileşenlerinde yaygındır</td>
+                <td><a href="https://react.dev/learn/passing-props-to-a-component#forwarding-props-with-the-jsx-spread-syntax">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>defaultProps / varsayılan değer</strong></td>
+                <td>Prop gelmezse kullanılacak değer</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Fonksiyon bileşenlerinde `defaultProps` React 19'da kaldırıldı; JS varsayılan parametresi kullan</td>
+                <td><a href="https://react.dev/blog/2024/12/05/react-19">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>conditional rendering</strong></td>
+                <td>Koşula göre farklı JSX döndürme (`&amp;&amp;`, ternary, erken return)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `count &amp;&amp; <em>...</em>` tuzağı: count 0 ise ekrana "0" basar. Bunu bilmek mülakatta ayırt edicidir</td>
+                <td><a href="https://react.dev/learn/conditional-rendering">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>list rendering (map)</strong></td>
+                <td>Diziyi `.map()` ile JSX listesine çevirme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Her elemanı JSX'e dönüştürüp yeni bir dizi verir; her elemana kararlı bir `key` ver. C#'tan geliyorsan: LINQ `Select()` ile aynı mantık; Java'dan: Stream `map`; Python'dan: list comprehension</td>
+                <td><a href="https://react.dev/learn/rendering-lists">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>key</strong></td>
+                <td>Liste elemanlarının kimliği; React hangi öğenin hangisi olduğunu bununla anlar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> En sık sorulan React sorusudur. Index kullanma sebebi için §14'e bak</td>
+                <td><a href="https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fragment (&lt;&gt;&lt;/&gt;)</strong></td>
+                <td>DOM'a fazladan div eklemeden birden çok eleman döndürme</td>
+                <td><span class="tag tag--ok">TEMEL</span> `key` vermen gerekiyorsa kısa yazım yerine `&lt;Fragment key=...&gt;` yazmalısın</td>
+                <td><a href="https://react.dev/reference/react/Fragment">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>createPortal</strong></td>
+                <td>Bileşeni DOM ağacında başka bir yere basma (modal, tooltip)</td>
+                <td><span class="tag">ORTA</span> React ağacında yerinde kalır, sadece DOM konumu değişir; event'ler yine React ağacından akar</td>
+                <td><a href="https://react.dev/reference/react-dom/createPortal">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>StrictMode</strong></td>
+                <td>Geliştirme modunda hataları erken yakalatan sarmalayıcı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bileşenleri ve effect'leri bilerek iki kez çalıştırır; "kodum iki kez çalışıyor" şaşkınlığının sebebi budur, üretimde olmaz</td>
+                <td><a href="https://react.dev/reference/react/StrictMode">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>pure component / saflık</strong></td>
+                <td>Aynı props ile aynı çıktıyı üretme, render sırasında yan etki yapmama kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in tüm optimizasyonları bu varsayıma dayanır. Fonksiyonel programlama bilgisi burada işe yarar</td>
+                <td><a href="https://react.dev/learn/keeping-components-pure">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>render &amp; commit</strong></td>
+                <td>React'in iki fazı: neyin değiştiğini hesaplama, sonra DOM'a yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Render" DOM'a yazmak demek değildir; bu ayrım performans konusunun temelidir</td>
+                <td><a href="https://react.dev/learn/render-and-commit">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Virtual DOM / reconciliation</strong></td>
+                <td>Bellekteki ağacı karşılaştırıp sadece farkı DOM'a yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik mülakat sorusu. React 16+ mimarisinin adı "Fiber"dır</td>
+                <td><a href="https://react.dev/learn/preserving-and-resetting-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>event handling (onClick, onChange)</strong></td>
+                <td>JSX üzerinden olay bağlama; camelCase isimlendirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> `onClick={handleClick}` fonksiyonu verir, `onClick={handleClick()}` render'da çağırır &rarr; klasik hata</td>
+                <td><a href="https://react.dev/learn/responding-to-events">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>SyntheticEvent</strong></td>
+                <td>React'in tarayıcı olayını sarmalayan kendi olay nesnesi</td>
+                <td><span class="tag">ORTA</span> React 17+ ile olaylar `document` yerine root'a bağlanır; `e.nativeEvent` ile gerçek olaya ulaşırsın</td>
+                <td><a href="https://react.dev/reference/react-dom/components/common#react-event-object">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>composition over inheritance</strong></td>
+                <td>Bileşenleri kalıtımla değil iç içe koyarak birleştirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'te component inheritance yoktur. SOLID/kompozisyon ilkeleri doğrudan uygulanır</td>
+                <td><a href="https://react.dev/learn/passing-props-to-a-component">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="state-ve-render"><span class="h-num">§ 3</span>State ve render döngüsü</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>State'in davranışı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>state</strong></td>
+                <td>Bileşenin zamanla değişen, render'ı tetikleyen hafızası</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Props dışarıdan gelir ve değişmez, state içeriden yönetilir; "props vs state" mülakat klasiğidir</td>
+                <td><a href="https://react.dev/learn/state-a-components-memory">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>state as a snapshot</strong></td>
+                <td>Her render kendi state değerini "dondurulmuş" görür</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `setCount(count+1)` üç kez üst üste yazınca neden 1 artar sorusunun cevabı burada</td>
+                <td><a href="https://react.dev/learn/state-as-a-snapshot">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>functional update</strong></td>
+                <td>`setCount(c =&gt; c + 1)` biçimi: bir önceki değeri argüman alır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ardışık güncellemelerde ve effect bağımlılığını azaltmada doğru yol budur</td>
+                <td><a href="https://react.dev/learn/queueing-a-series-of-state-updates">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>asenkron güncelleme / batching</strong></td>
+                <td>set çağrısı state'i anında değiştirmez; render sırada beklenir</td>
+                <td><span class="tag tag--ok">TEMEL</span> React 18'den beri tüm olaylarda otomatik toplu güncelleme (automatic batching) vardır</td>
+                <td><a href="https://react.dev/reference/react/useState#setstate">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>immutability</strong></td>
+                <td>State'i değiştirmek yerine yeni nesne/dizi üretmek</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `arr.push()` React'te işe yaramaz; `[...arr, x]` yazarsın: state'i yerinde değiştirme, her güncellemede yeni nesne/dizi üret. C#'tan geliyorsan: record'un `with` mantığına benzer</td>
+                <td><a href="https://react.dev/learn/updating-objects-in-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>updating arrays in state</strong></td>
+                <td>Ekle/çıkar/sırala işlemlerinin immutable karşılıkları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kopyalayan metotlar: map, filter, slice, concat, toSorted. Mutasyon yapanlar: push, splice, sort, reverse</td>
+                <td><a href="https://react.dev/learn/updating-arrays-in-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Immer / use-immer</strong></td>
+                <td>Mutasyon yazıyormuş gibi kod yazıp arka planda immutable kopya üreten kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Derin iç içe state'te işe yarar; Redux Toolkit içinde zaten gömülü gelir</td>
+                <td><a href="https://immerjs.github.io/immer/">immerjs.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>lifting state up</strong></td>
+                <td>İki kardeş bileşen aynı veriyi kullanacaksa state'i ortak ataya taşımak</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Context'ten önce denenecek ilk çözümdür</td>
+                <td><a href="https://react.dev/learn/sharing-state-between-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>state yapısını seçmek</strong></td>
+                <td>Gereksiz, çelişen veya türetilebilir state'ten kaçınma kuralları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Normalizasyon ve tekrarsız veri fikri; veritabanı tasarımına benzer düşün</td>
+                <td><a href="https://react.dev/learn/choosing-the-state-structure">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>derived state</strong></td>
+                <td>Var olan state'ten hesaplanabilen değer; state'te tutulmaz, render'da hesaplanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> "fullName" için ayrı state tutmak klasik hatadır; §14'e bak</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>controlled component</strong></td>
+                <td>Input'un değerini React state'i belirler (`value` + `onChange`)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `value` verip `onChange` vermezsen input kilitlenir; React konsolda uyarır</td>
+                <td><a href="https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>uncontrolled component</strong></td>
+                <td>Değeri DOM tutar; React sadece `ref` ile okur (`defaultValue`)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Büyük formlarda daha performanslıdır; React Hook Form bu yaklaşımı kullanır</td>
+                <td><a href="https://react.dev/reference/react-dom/components/input">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>preserving &amp; resetting state</strong></td>
+                <td>State'in bileşene değil, ağaçtaki konuma bağlı olması</td>
+                <td><span class="tag">ORTA</span> Aynı konumda aynı tip bileşen kalırsa state korunur; `key` değiştirirsen sıfırlanır</td>
+                <td><a href="https://react.dev/learn/preserving-and-resetting-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>lazy initial state</strong></td>
+                <td>`useState(() =&gt; pahalıHesap())` biçimi: başlangıç değerini bir kez hesaplar</td>
+                <td><span class="tag">ORTA</span> `useState(pahalıHesap())` her render'da fonksiyonu çağırır; fark budur</td>
+                <td><a href="https://react.dev/reference/react/useState#avoiding-recreating-the-initial-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>lifecycle (yaşam döngüsü)</strong></td>
+                <td>mount &rarr; update &rarr; unmount aşamaları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Class dünyasının terimidir; hook'larda karşılığı useEffect'tir ama birebir eşleme kurma, kafanı karıştırır</td>
+                <td><a href="https://react.dev/learn/lifecycle-of-reactive-effects">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="hooklar"><span class="h-num">§ 4</span>Hook'lar tek tek</h2>
+
+        <p>Hook'lar React'in çekirdeğidir. "React biliyorum" demek pratikte "hook'ları biliyorum" demektir.
+        Aşağıdaki listeyi tek tek geç; her biri için küçük bir örnek yaz.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hook kuralları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Rules of Hooks</strong></td>
+                <td>Hook'lar sadece en üst seviyede ve sadece bileşen/custom hook içinde çağrılır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `if`, `for` veya callback içinde hook çağıramazsın</td>
+                <td><a href="https://react.dev/reference/rules/rules-of-hooks">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>hook çağrı sırası</strong></td>
+                <td>React hook'ları isimle değil, çağrılma sırasıyla eşler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yukarıdaki kuralın <em>nedeni</em> budur; mülakatta "neden koşul içinde olmaz" diye sorulur</td>
+                <td><a href="https://react.dev/reference/rules/rules-of-hooks">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rules of React</strong></td>
+                <td>Saflık, hook kuralları ve React'in kod hakkındaki varsayımları</td>
+                <td><span class="tag">ORTA</span> React Compiler bu kurallara uyulduğunu varsayar; uymayan kod derlenmez/atlanır</td>
+                <td><a href="https://react.dev/reference/rules">react.dev/reference/rules</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom hook</strong></td>
+                <td>`use` ile başlayan, içinde hook çağıran kendi fonksiyonun</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React'in kod tekrarını önleme yolu. İsim `use` ile başlamazsa lint kuralları çalışmaz</td>
+                <td><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Temel hook'lar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>useState</strong></td>
+                <td>Bileşene state ekler; `[değer, setDeğer]` döner</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlk öğrenilecek hook</td>
+                <td><a href="https://react.dev/reference/react/useState">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useEffect</strong></td>
+                <td>Bileşeni React dışı bir sistemle (API, timer, abonelik) senkronlar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Bileşen yüklendiğinde çalışan fonksiyon" diye öğrenme; bu yanlış model tüm hataların kaynağı</td>
+                <td><a href="https://react.dev/reference/react/useEffect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>dependency array</strong></td>
+                <td>useEffect'in ikinci argümanı: hangi değerler değişince tekrar çalışacağı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `[]` = bir kez, dizi yok = her render, `[x]` = x değişince. Eksik bağımlılık = stale closure</td>
+                <td><a href="https://react.dev/reference/react/useEffect#parameters">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>cleanup function</strong></td>
+                <td>useEffect'ten döndürülen fonksiyon; abonelik/timer'ı kapatır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sadece unmount'ta değil, her yeniden çalıştırmadan önce de çağrılır. `IDisposable`/`using` mantığına benzet</td>
+                <td><a href="https://react.dev/learn/synchronizing-with-effects#how-to-handle-the-effect-firing-twice-in-development">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>You Might Not Need an Effect</strong></td>
+                <td>useEffect'in gereksiz kullanıldığı senaryoların resmî listesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React dokümanının en çok işe yarayan tek sayfası. Mutlaka baştan sona oku</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>removing effect dependencies</strong></td>
+                <td>Bağımlılığı susturmadan azaltmanın doğru yolları</td>
+                <td><span class="tag tag--info">İLERİ</span> Lint uyarısını `// eslint-disable` ile kapatmak yanlış çözümdür</td>
+                <td><a href="https://react.dev/learn/removing-effect-dependencies">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useLayoutEffect</strong></td>
+                <td>Tarayıcı ekrana boyamadan <em>önce</em> senkron çalışan effect</td>
+                <td><span class="tag tag--info">İLERİ</span> Sadece ölçüm (getBoundingClientRect) ve titremeyi önleme için. Performansı düşürür, varsayılan olarak useEffect kullan</td>
+                <td><a href="https://react.dev/reference/react/useLayoutEffect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useInsertionEffect</strong></td>
+                <td>DOM değişmeden önce stil enjekte etmek için; CSS-in-JS kütüphaneleri içindir</td>
+                <td><span class="tag tag--info">İLERİ</span> Uygulama kodunda neredeyse hiç kullanılmaz; varlığını bilmen yeterli</td>
+                <td><a href="https://react.dev/reference/react/useInsertionEffect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useRef</strong></td>
+                <td>Render tetiklemeyen, kalıcı bir kutu (`.current`)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İki işi var: DOM elemanına erişmek ve render'lar arası değer saklamak. Değişimi ekrana yansımaz</td>
+                <td><a href="https://react.dev/reference/react/useRef">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ref ile DOM erişimi</strong></td>
+                <td>`&lt;input ref={inputRef} /&gt;` &rarr; `inputRef.current.focus()`</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in "escape hatch"i; DOM'a doğrudan dokunman gereken tek meşru yol</td>
+                <td><a href="https://react.dev/learn/manipulating-the-dom-with-refs">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ref callback</strong></td>
+                <td>ref yerine fonksiyon verme; eleman bağlanınca/kopunca çağrılır</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19'dan itibaren cleanup fonksiyonu da döndürebilir</td>
+                <td><a href="https://react.dev/reference/react-dom/components/common#ref-callback">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>forwardRef</strong></td>
+                <td>Kendi bileşenine dışarıdan ref geçirmeyi sağlar</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> React 19'da artık gerekmez: `ref` normal bir prop oldu. Eski kodda çok görürsün</td>
+                <td><a href="https://react.dev/reference/react/forwardRef">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useImperativeHandle</strong></td>
+                <td>Bileşenin ref üzerinden dışarıya açtığı metotları belirler</td>
+                <td><span class="tag tag--info">İLERİ</span> Nadiren doğru cevaptır; genelde props ile çözülür. Kütüphane yazarken işe yarar</td>
+                <td><a href="https://react.dev/reference/react/useImperativeHandle">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useContext</strong></td>
+                <td>Context değerini okur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> §5'e bak</td>
+                <td><a href="https://react.dev/reference/react/useContext">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useReducer</strong></td>
+                <td>State güncellemelerini action + reducer fonksiyonuyla merkezîleştirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Redux'ın çekirdek fikrinin React'e gömülmüş hali; karmaşık state geçişlerinde useState'e yeğlenir</td>
+                <td><a href="https://react.dev/reference/react/useReducer">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useMemo</strong></td>
+                <td>Pahalı bir <em>hesabın</em> sonucunu render'lar arası önbelleğe alır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ölçmeden ekleme; çoğu yerde faydadan çok gürültü olur</td>
+                <td><a href="https://react.dev/reference/react/useMemo">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useCallback</strong></td>
+                <td>Bir <em>fonksiyonun</em> kimliğini render'lar arası sabit tutar</td>
+                <td><span class="tag tag--ok">TEMEL</span> useMemo'nun fonksiyona özel hali. Sadece `React.memo`lu çocuğa veya bağımlılık dizisine giden fonksiyonlarda anlamlı</td>
+                <td><a href="https://react.dev/reference/react/useCallback">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useId</strong></td>
+                <td>Erişilebilirlik için benzersiz, sunucu-istemci uyumlu id üretir</td>
+                <td><span class="tag">ORTA</span> Liste `key`'i için KULLANILMAZ; label/input eşleştirmesi içindir</td>
+                <td><a href="https://react.dev/reference/react/useId">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useDebugValue</strong></td>
+                <td>Custom hook'a DevTools'ta etiket yazdırır</td>
+                <td><span class="tag tag--info">İLERİ</span> Sadece kütüphane yazarken</td>
+                <td><a href="https://react.dev/reference/react/useDebugValue">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useTransition</strong></td>
+                <td>Bir state güncellemesini "acil değil" işaretler; arayüz kilitlenmez</td>
+                <td><span class="tag tag--info">İLERİ</span> React 18 concurrent özelliği. `isPending` ile yükleniyor göstergesi verirsin</td>
+                <td><a href="https://react.dev/reference/react/useTransition">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useDeferredValue</strong></td>
+                <td>Bir değerin "gecikmeli" sürümünü verir; ağır liste filtrelemede kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span> Debounce'a benzer ama zamanlayıcı değil, React önceliklendirmesidir</td>
+                <td><a href="https://react.dev/reference/react/useDeferredValue">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useSyncExternalStore</strong></td>
+                <td>React dışı bir store'a (Redux, tarayıcı API'si) güvenli abonelik</td>
+                <td><span class="tag tag--info">İLERİ</span> Genelde kütüphaneler kullanır; `window.matchMedia`, `navigator.onLine` gibi şeylerde işine yarar</td>
+                <td><a href="https://react.dev/reference/react/useSyncExternalStore">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useOptimistic</strong></td>
+                <td>Sunucu cevabı gelmeden arayüzü "başarılı olmuş gibi" gösterir</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19. Optimistic UI kalıbının resmî hali</td>
+                <td><a href="https://react.dev/reference/react/useOptimistic">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useActionState</strong></td>
+                <td>Form action'ının sonucunu, bekleme durumunu ve hatasını state olarak verir</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19. Kısa süre `useFormState` adıyla anıldı, ismi değişti</td>
+                <td><a href="https://react.dev/reference/react/useActionState">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useFormStatus</strong></td>
+                <td>İçinde bulunduğu formun gönderim durumunu okur (react-dom'dan gelir)</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19. `react` değil `react-dom` paketinden import edilir</td>
+                <td><a href="https://react.dev/reference/react-dom/hooks/useFormStatus">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>use()</strong></td>
+                <td>Promise veya context'i render sırasında okuyan yeni API</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19. Hook değildir: koşul içinde çağrılabilir. Arama: "React use API"</td>
+                <td><a href="https://react.dev/reference/react/use">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useEffectEvent</strong></td>
+                <td>Effect içinde kullanılan ama bağımlılık olmayan "olay" fonksiyonu</td>
+                <td><span class="tag tag--info">İLERİ</span> Uzun süre deneyseldi; kullanmadan önce mevcut React sürümünde stabil mi kontrol et</td>
+                <td><a href="https://react.dev/learn/separating-events-from-effects">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="context"><span class="h-num">§ 5</span>Context API</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Context ve prop drilling</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>prop drilling</strong></td>
+                <td>Bir veriyi ihtiyacı olmayan 5 bileşenden geçirerek aşağı taşımak</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Context'in var oluş sebebi. Mülakatta "context'i ne zaman kullanırsın" sorusunun cevabı</td>
+                <td><a href="https://react.dev/learn/passing-data-deeply-with-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>createContext</strong></td>
+                <td>Context nesnesi oluşturur; varsayılan değer alır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan değer sadece Provider yoksa kullanılır; çoğu hata buradan çıkar</td>
+                <td><a href="https://react.dev/reference/react/createContext">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Provider</strong></td>
+                <td>Alt ağaca değer sağlayan sarmalayıcı</td>
+                <td><span class="tag tag--ok">TEMEL</span> React 19'dan itibaren `&lt;Context.Provider&gt;` yerine doğrudan `&lt;Context&gt;` yazılabiliyor</td>
+                <td><a href="https://react.dev/reference/react/createContext#provider">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Consumer</strong></td>
+                <td>Context'i render-prop ile okuma yöntemi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> useContext varken kullanılmaz; class component'lerde ve eski kodda görürsün</td>
+                <td><a href="https://react.dev/reference/react/createContext#consumer">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>context + reducer kalıbı</strong></td>
+                <td>useReducer ile üretilen state'i context üzerinden dağıtmak</td>
+                <td><span class="tag">ORTA</span> Küçük/orta uygulamalarda Redux'a gerek bırakmayan resmî kalıp</td>
+                <td><a href="https://react.dev/learn/scaling-up-with-reducer-and-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>context performans tuzağı</strong></td>
+                <td>Context değeri değişince onu <em>okuyan</em> tüm bileşenler yeniden render olur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sık değişen veriyi (input değeri, mouse pozisyonu) context'e koyma</td>
+                <td><a href="https://react.dev/reference/react/useContext#optimizing-re-renders-when-passing-objects-and-functions">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>context'i bölmek</strong></td>
+                <td>Veri context'i ile dispatch context'ini ayırmak</td>
+                <td><span class="tag">ORTA</span> Yukarıdaki tuzağın standart çözümü; dispatch hiç değişmediği için gereksiz render olmaz</td>
+                <td><a href="https://react.dev/learn/scaling-up-with-reducer-and-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>value nesnesini memo'lamak</strong></td>
+                <td>Provider'a verilen nesneyi useMemo ile sabitlemek</td>
+                <td><span class="tag">ORTA</span> `value={{user, login}}` her render'da yeni nesne üretir &rarr; herkes render olur</td>
+                <td><a href="https://react.dev/reference/react/useContext">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>context ≠ state manager</strong></td>
+                <td>Context bir dağıtım mekanizmasıdır, state yönetim kütüphanesi değildir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tema, dil, oturum gibi az değişen veriler için idealdir; §11'e bak</td>
+                <td><a href="https://react.dev/learn/passing-data-deeply-with-context#before-you-use-context">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="performans"><span class="h-num">§ 6</span>Performans</h2>
+
+        <p>Backend'de performans optimizasyonu yaptıysan (ör. .NET, Java) ölçme alışkanlığı tanıdık gelecek; ama React'te
+        performans sezgisi sunucu tarafından farklıdır. Hiç performans çalışması yapmadıysan tek kural yeter: ölçüm
+        aracı Profiler'dır, tahmin değil.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Render optimizasyonu</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>React.memo</strong></td>
+                <td>Props değişmediyse bileşeni yeniden render etmez</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sığ (shallow) karşılaştırma yapar; props'ta her render yeni üretilen nesne/fonksiyon varsa hiçbir işe yaramaz</td>
+                <td><a href="https://react.dev/reference/react/memo">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>referential equality</strong></td>
+                <td>Nesne/dizi/fonksiyonların değere değil referansa göre karşılaştırılması</td>
+                <td><span class="tag tag--ok">TEMEL</span> memo/useMemo/useCallback üçlüsünün tamamı bu kavram üzerine kuruludur</td>
+                <td><a href="https://react.dev/reference/react/useMemo#skipping-re-rendering-of-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>gereksiz memoizasyon</strong></td>
+                <td>Her fonksiyonu useCallback, her değeri useMemo ile sarmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kendi maliyeti vardır; okunabilirliği düşürür. Önce ölç, sonra ekle</td>
+                <td><a href="https://react.dev/reference/react/useMemo#should-you-add-usememo-everywhere">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Profiler (DevTools)</strong></td>
+                <td>Hangi bileşenin ne kadar sürede ve neden render olduğunu ölçer</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Why did this render?" seçeneğini aç. Ücretsiz</td>
+                <td><a href="https://react.dev/reference/react/Profiler">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;Profiler&gt; bileşeni</strong></td>
+                <td>Kod içinden render süresi ölçen programatik API</td>
+                <td><span class="tag tag--info">İLERİ</span> DevTools'taki panelle aynı şey değil; ikisi ayrı</td>
+                <td><a href="https://react.dev/reference/react/Profiler">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>key ile remount</strong></td>
+                <td>`key` değiştirerek bileşeni sıfırdan kurdurma</td>
+                <td><span class="tag">ORTA</span> Formu sıfırlamanın en temiz yolu; "resetKey" kalıbı diye aranır</td>
+                <td><a href="https://react.dev/learn/preserving-and-resetting-state#resetting-a-form-with-a-key">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>lazy()</strong></td>
+                <td>Bileşeni ilk ihtiyaç duyulduğunda indirir (code splitting)</td>
+                <td><span class="tag tag--ok">TEMEL</span> `Suspense` ile birlikte kullanılır; tek başına çalışmaz</td>
+                <td><a href="https://react.dev/reference/react/lazy">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Suspense</strong></td>
+                <td>Alt ağaç hazır değilken gösterilecek `fallback`'i belirler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Hem lazy yükleme hem veri çekme için kullanılır; iki farklı senaryo, aynı bileşen</td>
+                <td><a href="https://react.dev/reference/react/Suspense">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>dynamic import()</strong></td>
+                <td>Modülü çalışma zamanında yükleyen JS özelliği</td>
+                <td><span class="tag tag--ok">TEMEL</span> `lazy()`'nin altında bu vardır; JavaScript tarafı konusudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>bundle analizi</strong></td>
+                <td>Paketin neyle şiştiğini gösteren araçlar (rollup-plugin-visualizer, source-map-explorer)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Detaylar için <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a></td>
+                <td><a href="https://vite.dev/guide/build">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>virtualization / windowing</strong></td>
+                <td>10.000 satırlık listede sadece görünen satırları DOM'a basma</td>
+                <td><span class="tag">ORTA</span> Büyük tablo/liste performansının tek gerçek çözümü</td>
+                <td><a href="https://tanstack.com/virtual/latest">tanstack.com/virtual</a></td>
+              </tr>
+              <tr>
+                <td><strong>react-window</strong></td>
+                <td>Küçük ve yaygın virtualization kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT). Eski ve daha ağır kardeşi <em>react-virtualized</em>'ı karıştırma</td>
+                <td><a href="https://github.com/bvaughn/react-window">github.com/bvaughn/react-window</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Virtual</strong></td>
+                <td>Headless (görsel dayatmayan) virtualization kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Aynı ailede Query/Table/Router var; hepsi "TanStack" markası</td>
+                <td><a href="https://tanstack.com/virtual/latest">tanstack.com/virtual</a></td>
+              </tr>
+              <tr>
+                <td><strong>react-virtuoso</strong></td>
+                <td>Değişken yükseklikli satırlarda kolay kullanımlı alternatif</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT), niş ama pratik</td>
+                <td><a href="https://virtuoso.dev">virtuoso.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Compiler</strong></td>
+                <td>Memoizasyonu otomatik ekleyen derleyici; useMemo/useCallback ihtiyacını azaltır</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Kullanmadan önce sürüm durumunu (RC/stabil) kontrol et; Rules of React'e uymayan kodu atlar</td>
+                <td><a href="https://react.dev/learn/react-compiler">react.dev/learn/react-compiler</a></td>
+              </tr>
+              <tr>
+                <td><strong>eslint-plugin-react-compiler</strong></td>
+                <td>Derleyicinin şikâyet edeceği kodu önceden gösterir</td>
+                <td><span class="tag tag--info">İLERİ</span> Compiler'ı açmadan önce bunu çalıştırmak mantıklı</td>
+                <td><a href="https://react.dev/learn/react-compiler">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>debounce / throttle</strong></td>
+                <td>Sık tetiklenen olayları seyreltme</td>
+                <td><span class="tag">ORTA</span> React'e ait değil, genel JS tekniği; useDeferredValue ile karıştırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>state'i aşağı taşımak</strong></td>
+                <td>Render alanını daraltmak için state'i kullanan en alt bileşene indirmek</td>
+                <td><span class="tag">ORTA</span> Kütüphane eklemeden yapılan en ucuz optimizasyon</td>
+                <td><a href="https://react.dev/learn/sharing-state-between-components">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="formlar"><span class="h-num">§ 7</span>Formlar ve doğrulama</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Form kütüphaneleri ve doğrulama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>controlled form</strong></td>
+                <td>Her input değerinin state'te tutulduğu form</td>
+                <td><span class="tag tag--ok">TEMEL</span> Öğrenirken bununla başla; her tuşta tüm form render olur</td>
+                <td><a href="https://react.dev/reference/react-dom/components/input">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>onSubmit / preventDefault</strong></td>
+                <td>Form gönderiminde sayfanın yenilenmesini engelleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik JS bilgisi; unutulursa sayfa yenilenir ve state uçar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>FormData</strong></td>
+                <td>Form alanlarını tarayıcı API'siyle toplama</td>
+                <td><span class="tag">ORTA</span> React 19 form action'ları bunu doğrudan verir; state'siz form yazmanı sağlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;form action={fn}&gt;</strong></td>
+                <td>React 19'da form gönderimini bir fonksiyona bağlama</td>
+                <td><span class="tag tag--info">İLERİ</span> HTML'in `action` özniteliği değildir; React bunu ele geçirir</td>
+                <td><a href="https://react.dev/reference/react-dom/components/form">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Hook Form</strong></td>
+                <td>Uncontrolled yaklaşımla çalışan, en yaygın form kütüphanesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (MIT). Az render, küçük boyut. Bugün varsayılan tercih budur</td>
+                <td><a href="https://react-hook-form.com">react-hook-form.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>register / control / handleSubmit</strong></td>
+                <td>React Hook Form'un üç temel API'si</td>
+                <td><span class="tag tag--ok">TEMEL</span> `register` yerli input'lar için, `Controller` üçüncü parti bileşenler için</td>
+                <td><a href="https://react-hook-form.com/docs/useform">react-hook-form.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Formik</strong></td>
+                <td>Eski nesil, controlled yaklaşımlı form kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz ama bakımı yavaşladı; yeni projede React Hook Form seçilir. Eski projelerde bolca var</td>
+                <td><a href="https://formik.org">formik.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Form</strong></td>
+                <td>Tip güvenliği güçlü, yeni nesil form kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. TypeScript ağırlıklı projelerde tercih ediliyor</td>
+                <td><a href="https://tanstack.com/form/latest">tanstack.com/form</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zod</strong></td>
+                <td>Şema tanımlayıp hem doğrulama hem TypeScript tipi üreten kütüphane</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (MIT). Şemayı bir kez yazarsın; hem çalışma zamanında doğrular hem TS tipini üretir. Karşılıklar: C#'tan geliyorsan FluentValidation; Java'dan Bean Validation (Jakarta Validation); Python'dan Pydantic</td>
+                <td><a href="https://zod.dev">zod.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>@hookform/resolvers</strong></td>
+                <td>Zod/Yup/Valibot şemasını React Hook Form'a bağlayan köprü</td>
+                <td><span class="tag tag--ok">TEMEL</span> `zodResolver` en çok kullanılan; ayrı paket olarak kurulur</td>
+                <td><a href="https://github.com/react-hook-form/resolvers">github.com/react-hook-form/resolvers</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yup</strong></td>
+                <td>Zod'dan önceki yaygın şema doğrulama kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Formik ile birlikte çok görülür; TypeScript çıkarımı Zod kadar iyi değildir</td>
+                <td><a href="https://github.com/jquense/yup">github.com/jquense/yup</a></td>
+              </tr>
+              <tr>
+                <td><strong>Valibot</strong></td>
+                <td>Zod'a çok benzeyen, çok daha küçük boyutlu alternatif</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Bundle boyutu kritikse bakılır</td>
+                <td><a href="https://valibot.dev">valibot.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML5 doğrulama</strong></td>
+                <td>`required`, `pattern`, `type=email` ile tarayıcı doğrulaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kütüphaneden önce bunu bil; detay için <a href="../../HTML-CSS/01-html/index.html">HTML</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>erişilebilir hata mesajı</strong></td>
+                <td>`aria-invalid`, `aria-describedby` ile hatayı ekran okuyucuya bildirme</td>
+                <td><span class="tag">ORTA</span> Kurumsal projelerde denetlenir; <a href="../../HTML-CSS/01-html/index.html">HTML</a> sayfasındaki ARIA bölümüne bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="veri-cekme"><span class="h-num">§ 8</span>Veri çekme (data fetching)</h2>
+
+        <p>API'yi sunucu tarafında yazmak bir iş, tarayıcıda tüketmek başka bir iş; bu bölüm ikincisini anlatır.
+        Basit bir Web API'yi React'ten çağıran küçük bir uygulama yazmak, bu bölümün tamamını tek seferde öğretir.
+        API'yi nereden bulacağın durumuna bağlı:</p>
+
+        <ul>
+          <li><strong>Bir backend biliyorsan</strong> &rarr; kendi yığınında basit bir REST API yaz: ASP.NET Core, Spring Boot, Django/FastAPI, Express/NestJS veya Go.</li>
+          <li><strong>Backend bilmiyorsan veya yalnızca frontend hedefliyorsan</strong> &rarr; herkese açık ücretsiz bir deneme API'si (ör. <a href="https://jsonplaceholder.typicode.com/">JSONPlaceholder</a>), yerelde <code>json-server</code> veya MSW ile sahte (mock) API yeterli.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri çekme yolları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>fetch</strong></td>
+                <td>Tarayıcının yerleşik HTTP istemcisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> HttpClient'ın tarayıcı karşılığı. 404/500 hata fırlatmaz; `response.ok` kontrolü sende</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>axios</strong></td>
+                <td>Yaygın üçüncü parti HTTP istemcisi; interceptor ve otomatik JSON çevirme sunar</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. JWT token eklemek için interceptor kullanımı çok yaygın</td>
+                <td><a href="https://axios-http.com/docs/intro">axios-http.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fetch + useEffect kalıbı</strong></td>
+                <td>Effect içinde veri çekip state'e yazma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Öğrenmek şart ama üretimde tek başına yetersiz; sorunlarını bilmen mülakatta ayırt edicidir</td>
+                <td><a href="https://react.dev/reference/react/useEffect#fetching-data-with-effects">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>race condition</strong></td>
+                <td>Hızlı ardışık isteklerde eski cevabın yenisinin üstüne yazması</td>
+                <td><span class="tag tag--ok">TEMEL</span> useEffect ile veri çekmenin bilinen kusuru; cleanup'ta `ignore` bayrağı veya AbortController ile çözülür</td>
+                <td><a href="https://react.dev/reference/react/useEffect#fetching-data-with-effects">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>AbortController</strong></td>
+                <td>Devam eden isteği iptal etme API'si</td>
+                <td><span class="tag">ORTA</span> Devam eden fetch'i iptal eder; effect cleanup'ında çağırarak eski isteğin yeni sonucu ezmesini önlersin. C#'tan geliyorsan: CancellationToken'ın tarayıcı karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>loading / error / data üçlüsü</strong></td>
+                <td>Her istekte yönetilmesi gereken üç durum</td>
+                <td><span class="tag tag--ok">TEMEL</span> Elle yazdığında 20 satır; kütüphanelerin var oluş sebebi budur</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Query (React Query)</strong></td>
+                <td>Sunucu verisi için cache, yeniden deneme, arka planda tazeleme yöneten kütüphane</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (MIT). Adı v4'te "React Query"den "TanStack Query"ye döndü; ikisi de aynı şey</td>
+                <td><a href="https://tanstack.com/query/latest">tanstack.com/query</a></td>
+              </tr>
+              <tr>
+                <td><strong>queryKey / staleTime / invalidateQueries</strong></td>
+                <td>TanStack Query'nin üç temel kavramı: cache anahtarı, tazelik süresi, geçersiz kılma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sunucudan gelen veriyi anahtara göre önbellekler, ne zaman bayatladığını ve ne zaman yeniden çekileceğini yönetir. C#'tan geliyorsan: cache mantığı MemoryCache'e benzer</td>
+                <td><a href="https://tanstack.com/query/latest/docs/framework/react/guides/query-keys">tanstack.com/query</a></td>
+              </tr>
+              <tr>
+                <td><strong>useMutation</strong></td>
+                <td>POST/PUT/DELETE gibi yazma işlemleri için</td>
+                <td><span class="tag tag--ok">TEMEL</span> Okuma `useQuery`, yazma `useMutation`; ayrım nettir</td>
+                <td><a href="https://tanstack.com/query/latest/docs/framework/react/guides/mutations">tanstack.com/query</a></td>
+              </tr>
+              <tr>
+                <td><strong>SWR</strong></td>
+                <td>Vercel'in daha küçük ve sade veri çekme kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. İsim "stale-while-revalidate" HTTP başlığından gelir</td>
+                <td><a href="https://swr.vercel.app">swr.vercel.app</a></td>
+              </tr>
+              <tr>
+                <td><strong>RTK Query</strong></td>
+                <td>Redux Toolkit'in içindeki veri çekme katmanı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Zaten Redux kullanıyorsan mantıklı; sırf bunun için Redux kurma</td>
+                <td><a href="https://redux-toolkit.js.org/rtk-query/overview">redux-toolkit.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Suspense ile veri çekme</strong></td>
+                <td>`use()` veya framework desteğiyle yükleme durumunu Suspense'e devretme</td>
+                <td><span class="tag tag--info">İLERİ</span> Çıplak React'te elle kurmak zordur; genelde framework veya kütüphane sağlar</td>
+                <td><a href="https://react.dev/reference/react/Suspense">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Error Boundary</strong></td>
+                <td>Alt ağaçtaki render hatalarını yakalayıp yedek arayüz gösteren bileşen</td>
+                <td><span class="tag tag--ok">TEMEL</span> Hâlâ class component gerektirir; event handler ve async hataları yakalamaz</td>
+                <td><a href="https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>react-error-boundary</strong></td>
+                <td>Error Boundary'yi hazır bileşen + hook olarak veren paket</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT). Class yazmaktan kurtarır</td>
+                <td><a href="https://github.com/bvaughn/react-error-boundary">github.com/bvaughn/react-error-boundary</a></td>
+              </tr>
+              <tr>
+                <td><strong>CORS</strong></td>
+                <td>Tarayıcının farklı origin'e istek atmayı kısıtlaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Frontend hatası gibi görünür ama çözümü API'yi sunan tarafta yapılır. Backend'e göre: ASP.NET Core `AddCors`/`UseCors`; Express `cors`, NestJS `app.enableCors()`; Spring `@CrossOrigin`; Django `django-cors-headers`, FastAPI `CORSMiddleware`; Laravel `config/cors.php`. Kontrol edemediğin üçüncü taraf API'de kendi sunucunda proxy/BFF; aynı origin'den sunuluyorsa CORS gerekmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>proxy (dev sunucusu)</strong></td>
+                <td>Geliştirmede `/api` isteklerini backend'e yönlendirerek CORS'u aşma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite'ta `server.proxy` ayarı. Sadece geliştirme içindir</td>
+                <td><a href="https://vite.dev/config/server-options">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>JWT'yi tarayıcıda saklamak</strong></td>
+                <td>localStorage mı, httpOnly cookie mi tartışması</td>
+                <td><span class="tag">ORTA</span> localStorage XSS'e açıktır; httpOnly cookie tercih edilir ama CSRF önlemi ister. Backend tarafı için kendi yığınının bölümüne bak (ör. <a href="../../CSharp-DotNet/index.html">.NET</a>, <a href="../../Java/index.html">Java</a>)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>SignalR ile React</strong></td>
+                <td>@microsoft/signalr istemcisini bir effect içinde bağlayıp temizleme</td>
+                <td><span class="tag">ORTA</span> Yalnızca backend'i ASP.NET Core SignalR olan projelerde; bağlantıyı cleanup'ta kapatmayı unutma. Diğer yığınlarda aynı kalıp Socket.IO (Node), STOMP/WebSocket (Spring), Django Channels veya saf WebSocket/SSE ile kurulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="yonlendirme"><span class="h-num">§ 9</span>Yönlendirme (routing)</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Router seçenekleri ve kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>SPA / client-side routing</strong></td>
+                <td>Sayfa yenilenmeden URL ve görünümün değişmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'te routing çekirdeğe dahil değildir; kütüphane kurarsın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Router</strong></td>
+                <td>En yaygın React routing kütüphanesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Sürümler arası API çok değişti; eğitim ararken v6/v7 olduğundan emin ol</td>
+                <td><a href="https://reactrouter.com">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Route / Link / NavLink</strong></td>
+                <td>Rota tanımı ve sayfa yenilemeden gezinme bileşenleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> `&lt;a href&gt;` kullanırsan tüm uygulama baştan yüklenir; `Link` kullan</td>
+                <td><a href="https://reactrouter.com/start/framework/routing">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>useNavigate / useParams / useSearchParams</strong></td>
+                <td>Programatik gezinme, rota parametresi ve query string okuma</td>
+                <td><span class="tag tag--ok">TEMEL</span> `useParams` ile `/urun/:id` içindeki id'yi alırsın</td>
+                <td><a href="https://reactrouter.com/api/hooks/useParams">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nested routes / Outlet</strong></td>
+                <td>İç içe rota ve ortak layout</td>
+                <td><span class="tag">ORTA</span> MVC'deki `_Layout.cshtml` + `@RenderBody()` mantığına benzer</td>
+                <td><a href="https://reactrouter.com/start/framework/routing">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>protected route</strong></td>
+                <td>Girişsiz kullanıcıyı login'e yönlendiren sarmalayıcı rota</td>
+                <td><span class="tag tag--ok">TEMEL</span> Frontend kontrolü güvenlik değildir; asıl yetkilendirme API'de kalır</td>
+                <td><a href="https://reactrouter.com">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>loader / action (React Router)</strong></td>
+                <td>Rota seviyesinde veri çekme ve form gönderme</td>
+                <td><span class="tag">ORTA</span> v6.4 ile geldi; Remix'ten devralınan mimari</td>
+                <td><a href="https://reactrouter.com/start/framework/data-loading">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Router</strong></td>
+                <td>Tip güvenli, dosya tabanlı routing sunan alternatif</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. TypeScript'te rota adreslerini bile tipli yapar</td>
+                <td><a href="https://tanstack.com/router/latest">tanstack.com/router</a></td>
+              </tr>
+              <tr>
+                <td><strong>Next.js App Router</strong></td>
+                <td>Klasör yapısının rotayı belirlediği, sunucu bileşenleri temelli router</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski "Pages Router" ile karıştırma; iki farklı sistem, dokümanları ayrı</td>
+                <td><a href="https://nextjs.org/docs/app">nextjs.org/docs/app</a></td>
+              </tr>
+              <tr>
+                <td><strong>file-based routing</strong></td>
+                <td>Dosya/klasör adının rota adresi olması</td>
+                <td><span class="tag">ORTA</span> Next.js, TanStack Router ve Remix'te kullanılır</td>
+                <td><a href="https://nextjs.org/docs/app/getting-started/layouts-and-pages">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Remix</strong></td>
+                <td>Web standartlarına yaslanan React framework'ü</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. React Router v7 ile aynı ekip; sınırlar bulanıklaştı, güncel duruma bak</td>
+                <td><a href="https://remix.run/docs">remix.run/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>SPA'da 404 sorunu</strong></td>
+                <td>Sunucunun tüm yolları index.html'e yönlendirmesi gerekliliği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Deploy ederken çıkan klasik hata; IIS/nginx tarafında fallback ayarı istenir</td>
+                <td><a href="https://vite.dev/guide/static-deploy">vite.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="bilesen-kaliplari"><span class="h-num">§ 10</span>Bileşen kalıpları</h2>
+
+        <p>Bu kalıpların ortak fikri <strong>tek sorumluluk ve kompozisyon</strong>dur: her bileşen tek bir işi yapar,
+        büyük arayüz küçük bileşenlerin birleştirilmesiyle kurulur, davranış kalıtımla değil props ve children ile
+        paylaşılır. Mimari/SOLID geçmişin varsa bu kalıplar o fikirlerin arayüz tarafındaki karşılığı olarak tanıdık gelir;
+        yoksa bu tanımla başla ve her kalıbı "hangi tekrarı ortadan kaldırıyor" sorusuyla oku.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yeniden kullanım kalıpları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>custom hook</strong></td>
+                <td>Mantığı bileşenden ayırıp paylaşma; bugünün varsayılan kalıbı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HOC ve render props'un yerini büyük ölçüde bu aldı</td>
+                <td><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>compound component</strong></td>
+                <td>`&lt;Tabs&gt;&lt;Tabs.List/&gt;&lt;Tabs.Panel/&gt;&lt;/Tabs&gt;` gibi birlikte çalışan bileşen ailesi</td>
+                <td><span class="tag">ORTA</span> Genelde içeride context kullanır; `select`/`option` ilişkisine benzet</td>
+                <td><a href="https://react.dev/learn/passing-data-deeply-with-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>render props</strong></td>
+                <td>Prop olarak fonksiyon verip ne render edileceğini çağırana bırakma</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hook'lardan önceki çözüm; eski kodda ve bazı kütüphanelerde hâlâ var</td>
+                <td><a href="https://legacy.reactjs.org/docs/render-props.html">legacy.reactjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>HOC (Higher-Order Component)</strong></td>
+                <td>Bileşeni alıp yeteneği eklenmiş yeni bileşen döndüren fonksiyon</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Decorator pattern'in React hali. `withRouter`, `connect` gibi isimlerle karşına çıkar</td>
+                <td><a href="https://legacy.reactjs.org/docs/higher-order-components.html">legacy.reactjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>container / presentational</strong></td>
+                <td>Veriyi getiren bileşen ile sadece gösteren bileşeni ayırmak</td>
+                <td><span class="tag">ORTA</span> "Smart/dumb component" da denir. Katmanlı mimari fikrine yakın</td>
+                <td><a href="https://react.dev/learn/thinking-in-react">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>headless component</strong></td>
+                <td>Davranışı veren ama görünüm dayatmayan bileşen/hook</td>
+                <td><span class="tag">ORTA</span> TanStack ve Radix'in felsefesi; stil sana kalır</td>
+                <td><a href="https://www.radix-ui.com/primitives">radix-ui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>controlled / uncontrolled bileşen tasarımı</strong></td>
+                <td>Kendi bileşenini her iki modda da çalışabilir yazmak</td>
+                <td><span class="tag tag--info">İLERİ</span> `value` verilirse controlled, `defaultValue` verilirse uncontrolled; kütüphane bileşenlerinin standardı</td>
+                <td><a href="https://react.dev/learn/sharing-state-between-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>slot / children as function</strong></td>
+                <td>Belirli bölgeleri prop olarak dışarıdan doldurma</td>
+                <td><span class="tag">ORTA</span> `header`, `footer` gibi JSX propları; Blazor'daki RenderFragment'a benzer</td>
+                <td><a href="https://react.dev/learn/passing-props-to-a-component">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Thinking in React</strong></td>
+                <td>Tasarımı bileşenlere bölme ve state'i yerleştirme yöntemi (resmî 5 adım)</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Nereden başlayacağımı bilmiyorum" sorusunun resmî cevabı</td>
+                <td><a href="https://react.dev/learn/thinking-in-react">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>tek yönlü veri akışı</strong></td>
+                <td>Veri yukarıdan aşağı, olaylar aşağıdan yukarı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Angular'ın iki yönlü binding'i ile karıştırma; React'te callback prop kullanılır</td>
+                <td><a href="https://react.dev/learn/sharing-state-between-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>klasör yapısı</strong></td>
+                <td>feature-based, atomic design, colocation yaklaşımları</td>
+                <td><span class="tag">ORTA</span> React'in resmî bir dayatması yoktur; tek doğru cevap aramayı bırak</td>
+                <td><a href="https://react.dev/learn/thinking-in-react">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>barrel file (index.ts)</strong></td>
+                <td>Bir klasörün dışa açılan tek giriş dosyası</td>
+                <td><span class="tag">ORTA</span> Okunabilirliği artırır ama bundle boyutunu ve derleme süresini bozabilir; iki tarafı da oku</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/introduction.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>props tiplemesi</strong></td>
+                <td>TypeScript ile prop arayüzü tanımlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> `React.FC` artık tavsiye edilmiyor; propları doğrudan tiple. <a href="../02-typescript/index.html">02 &mdash; TypeScript</a></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/react.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>PropTypes</strong></td>
+                <td>TypeScript öncesi çalışma zamanı prop doğrulaması</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> React 19'da çekirdekten kaldırıldı; eski projelerde görürsün</td>
+                <td><a href="https://react.dev/blog/2024/12/05/react-19">react.dev blog</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="state-yonetimi"><span class="h-num">§ 11</span>State yönetimi kütüphaneleri</h2>
+
+        <p>Hepsini öğrenmene gerek yok. Ama isimlerini tanı: iş ilanlarında ve mülakatta
+        "hangisini kullandın" diye sorulur. Kural: sunucudan gelen veri için §8'deki TanStack Query,
+        arayüz durumu için buradakiler.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Global state seçenekleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>client state vs server state</strong></td>
+                <td>Sadece tarayıcıda yaşayan durum ile sunucudaki verinin kopyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu ayrımı yapmadan doğru kütüphane seçemezsin</td>
+                <td><a href="https://tanstack.com/query/latest/docs/framework/react/guides/does-this-replace-client-state">tanstack.com/query</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redux</strong></td>
+                <td>Tek merkezî store, action ve reducer temelli klasik state yönetimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ham Redux'ı yeni projede kimse kurmuyor; kavramları bilmen mülakat için gerekli</td>
+                <td><a href="https://redux.js.org">redux.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redux Toolkit (RTK)</strong></td>
+                <td>Redux'ın resmî, boilerplate'i azaltılmış hali</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. "Redux öğren" denince kastedilen budur; `createSlice` merkezî kavramdır</td>
+                <td><a href="https://redux-toolkit.js.org">redux-toolkit.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zustand</strong></td>
+                <td>Çok küçük API'li, hook temelli store</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Yeni projelerde Redux'a en sık tercih edilen alternatif</td>
+                <td><a href="https://zustand.docs.pmnd.rs">zustand.docs.pmnd.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jotai</strong></td>
+                <td>Atom temelli, aşağıdan yukarı state yönetimi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Recoil'in fikrini devam ettiren, bakımı süren proje</td>
+                <td><a href="https://jotai.org">jotai.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Valtio</strong></td>
+                <td>Proxy tabanlı; state'i doğrudan mutasyonla değiştirirsin</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Niş; state'i normal bir nesne gibi değiştirirsin, kütüphane değişikliği yakalayıp yeniden çizer. Nesne yönelimli, değiştirilebilir state alışkanlığıyla (ör. .NET, Java) gelen birine sezgisel gelebilir</td>
+                <td><a href="https://valtio.dev">valtio.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MobX</strong></td>
+                <td>Gözlemlenebilir (observable) nesneler ve otomatik tepki</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Kurumsal eski projelerde çok görülür; gözlemlenebilir nesneler değişince onları kullanan bileşen otomatik yeniden çizilir. C#'tan geliyorsan: INotifyPropertyChanged mantığına benzer</td>
+                <td><a href="https://mobx.js.org">mobx.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Recoil</strong></td>
+                <td>Facebook'un atom tabanlı deneysel kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Geliştirmesi durdu; yeni projede kullanma, eski projede karşına çıkabilir</td>
+                <td><a href="https://recoiljs.org">recoiljs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>XState</strong></td>
+                <td>Durum makinesi (state machine) ile karmaşık akışları modelleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Çekirdek ücretsiz; görsel editör Stately'nin ücretli planları olabilir. Çok adımlı sihirbaz/ödeme akışlarında güçlü</td>
+                <td><a href="https://stately.ai/docs">stately.ai/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>URL'yi state olarak kullanmak</strong></td>
+                <td>Filtre/sayfa numarasını query string'de tutmak</td>
+                <td><span class="tag">ORTA</span> Çoğu zaman kütüphaneden iyidir: paylaşılabilir, geri tuşuyla çalışır</td>
+                <td><a href="https://reactrouter.com/api/hooks/useSearchParams">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>localStorage / sessionStorage</strong></td>
+                <td>Tarayıcıda kalıcı küçük veri saklama</td>
+                <td><span class="tag">ORTA</span> Sunucu render'ında (SSR) erişilemez; hydration hatalarının klasik kaynağı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>hydration mismatch</strong></td>
+                <td>Sunucunun ürettiği HTML ile istemcinin ürettiğinin uyuşmaması</td>
+                <td><span class="tag tag--info">İLERİ</span> SSR/Next.js'te `Date.now()`, `window`, rastgele değer kullanınca çıkar</td>
+                <td><a href="https://react.dev/reference/react-dom/client/hydrateRoot">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="react-18-19"><span class="h-num">§ 12</span>React 18 / 19 özellikleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yeni nesil React</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>concurrent rendering</strong></td>
+                <td>React'in render'ı bölüp araya daha acil işleri alabilmesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Bir özellik değil, altyapı değişimi. "Concurrent Mode" adı kullanılmıyor artık</td>
+                <td><a href="https://react.dev/blog/2022/03/29/react-v18">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>automatic batching</strong></td>
+                <td>Birden çok state güncellemesinin tek render'da toplanması</td>
+                <td><span class="tag tag--ok">TEMEL</span> React 18 öncesinde sadece olay işleyicilerinde vardı; artık promise/timeout içinde de var</td>
+                <td><a href="https://react.dev/blog/2022/03/29/react-v18">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>transitions</strong></td>
+                <td>Acil olmayan güncellemeleri işaretleme (`startTransition`, `useTransition`)</td>
+                <td><span class="tag tag--info">İLERİ</span> Yazma anında arayüzün donmasını engeller</td>
+                <td><a href="https://react.dev/reference/react/startTransition">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Suspense streaming (SSR)</strong></td>
+                <td>Sunucunun HTML'i parça parça göndermesi</td>
+                <td><span class="tag tag--info">İLERİ</span> `renderToPipeableStream`; genelde framework halleder</td>
+                <td><a href="https://react.dev/reference/react-dom/server/renderToPipeableStream">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Server Components (RSC)</strong></td>
+                <td>Sunucuda çalışan, tarayıcıya JS göndermeyen bileşenler</td>
+                <td><span class="tag tag--info">İLERİ</span> SSR ile aynı şey DEĞİL; bu ayrımı sorabilirler. Çıplak React'te değil, framework ile kullanılır</td>
+                <td><a href="https://react.dev/reference/rsc/server-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>'use client' / 'use server'</strong></td>
+                <td>Kodun hangi tarafta çalışacağını belirten direktifler</td>
+                <td><span class="tag tag--info">İLERİ</span> `'use server'` bileşeni sunucuya taşımaz; sunucu fonksiyonu tanımlar. Bu ters anlaşılma çok yaygındır</td>
+                <td><a href="https://react.dev/reference/rsc/use-client">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Server Functions (eski adı Server Actions)</strong></td>
+                <td>İstemciden çağrılabilen sunucu fonksiyonları</td>
+                <td><span class="tag tag--info">İLERİ</span> Eylül 2024'te isim değişti: hepsi "Server Function", sadece action olarak kullanılana "Server Action" deniyor</td>
+                <td><a href="https://react.dev/reference/rsc/server-functions">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>form actions</strong></td>
+                <td>Formun `action` propuna fonksiyon vererek gönderim yönetimi</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19; `useActionState` ve `useFormStatus` ile birlikte öğrenilir</td>
+                <td><a href="https://react.dev/reference/react-dom/components/form">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Actions</strong></td>
+                <td>Bekleme, hata ve optimistic güncellemeyi tek yerde toplayan React 19 kavramı</td>
+                <td><span class="tag tag--info">İLERİ</span> Arama: "React 19 Actions"; tek başına "action" farklı sonuç verir</td>
+                <td><a href="https://react.dev/blog/2024/12/05/react-19">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>ref as a prop</strong></td>
+                <td>React 19'da forwardRef'e gerek kalmaması</td>
+                <td><span class="tag tag--info">İLERİ</span> Sürüm 19 öncesinde çalışmaz; hedef sürümünü kontrol et</td>
+                <td><a href="https://react.dev/blog/2024/12/05/react-19">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>document metadata desteği</strong></td>
+                <td>Bileşen içinde `&lt;title&gt;`, `&lt;meta&gt;`, `&lt;link&gt;` yazabilme</td>
+                <td><span class="tag tag--info">İLERİ</span> React 19. react-helmet ihtiyacını büyük ölçüde bitirdi</td>
+                <td><a href="https://react.dev/blog/2024/12/05/react-19">react.dev blog</a></td>
+              </tr>
+              <tr>
+                <td><strong>hydrateRoot</strong></td>
+                <td>Sunucudan gelen HTML'i React'in "canlandırması"</td>
+                <td><span class="tag tag--info">İLERİ</span> SSR'ın istemci ayağı</td>
+                <td><a href="https://react.dev/reference/react-dom/client/hydrateRoot">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>SSR / CSR / SSG / ISR</strong></td>
+                <td>Sunucuda render, istemcide render, önceden üretme, aralıklı yeniden üretme</td>
+                <td><span class="tag">ORTA</span> Framework seçiminde ve mülakatta sık geçen dört kısaltma</td>
+                <td><a href="https://nextjs.org/docs/app/getting-started/partial-prerendering">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>React 19 upgrade guide</strong></td>
+                <td>Kaldırılan API'ler ve göç adımları</td>
+                <td><span class="tag">ORTA</span> Eski bir projeye girersen ilk okuyacağın belge</td>
+                <td><a href="https://react.dev/blog/2024/04/25/react-19-upgrade-guide">react.dev blog</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="test"><span class="h-num">§ 13</span>Test</h2>
+
+        <p>Mock ve TDD pratiği kazanmak için tarayıcı tarafı testi
+        iyi bir alan: React Testing Library ile yazacağın 20 test, "mock" kavramını backend tarafında da oturtur.
+        Backend'ine göre karşılık: .NET &rarr; xUnit/Moq (<a href="../../CSharp-DotNet/index.html">.NET bölümü</a>);
+        Java &rarr; JUnit 5 + Mockito; Python &rarr; pytest + <code>unittest.mock</code>; Node &rarr; yine Jest/Vitest.
+        Backend'in yoksa bu bölümdeki araçlar tek başına yeterli.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test araçları ve kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>React Testing Library (RTL)</strong></td>
+                <td>Bileşeni kullanıcının gördüğü gibi test etme kütüphanesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz. İç state'i test etmez, ekrandaki çıktıyı test eder; felsefesi budur</td>
+                <td><a href="https://testing-library.com/docs/react-testing-library/intro">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>render / screen</strong></td>
+                <td>Bileşeni test DOM'una basma ve sorgulama</td>
+                <td><span class="tag tag--ok">TEMEL</span> RTL'in giriş kapısı</td>
+                <td><a href="https://testing-library.com/docs/react-testing-library/api">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>query öncelikleri (getByRole)</strong></td>
+                <td>Eleman bulmanın önerilen sırası: role &gt; label &gt; text &gt; testid</td>
+                <td><span class="tag tag--ok">TEMEL</span> `getBy` bulamazsa hata atar, `queryBy` null döner, `findBy` bekler. Bu üçlüyü karıştırmak en sık hatadır</td>
+                <td><a href="https://testing-library.com/docs/queries/about#priority">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>user-event</strong></td>
+                <td>Gerçek kullanıcı etkileşimini taklit eden kütüphane</td>
+                <td><span class="tag tag--ok">TEMEL</span> `fireEvent`'ten daha gerçekçidir; yeni testlerde bunu kullan</td>
+                <td><a href="https://testing-library.com/docs/user-event/intro">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vitest</strong></td>
+                <td>Vite ile uyumlu, hızlı test koşucusu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Jest ile API'si neredeyse aynı; Vite projesinde varsayılan tercih</td>
+                <td><a href="https://vitest.dev">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jest</strong></td>
+                <td>Uzun süre standart olan test koşucusu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Eski projelerde ve iş ilanlarında hâlâ çok geçer</td>
+                <td><a href="https://jestjs.io/docs/getting-started">jestjs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>jsdom</strong></td>
+                <td>Node içinde çalışan sahte tarayıcı ortamı</td>
+                <td><span class="tag">ORTA</span> Gerçek tarayıcı değildir; layout ölçümleri ve bazı API'ler çalışmaz</td>
+                <td><a href="https://github.com/jsdom/jsdom">github.com/jsdom/jsdom</a></td>
+              </tr>
+              <tr>
+                <td><strong>mock / spy / stub</strong></td>
+                <td>Bağımlılığı sahte bir uygulamayla değiştirme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> `vi.fn()` / `jest.fn()`: çağrılıp çağrılmadığını ve hangi argümanla çağrıldığını kaydeden sahte fonksiyon. C#'tan geliyorsan: Moq'un `Setup`/`Verify` karşılığı; Java'dan: Mockito `when`/`verify`</td>
+                <td><a href="https://vitest.dev/api/mock">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>module mocking</strong></td>
+                <td>Tüm bir modülü sahte sürümüyle değiştirme (`vi.mock`)</td>
+                <td><span class="tag">ORTA</span> Aşırı kullanımı testi kırılgan yapar; önce bağımlılığı prop olarak geçirmeyi dene</td>
+                <td><a href="https://vitest.dev/guide/mocking">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MSW (Mock Service Worker)</strong></td>
+                <td>fetch'i değil, ağ katmanını taklit eden API mock aracı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Bugün önerilen yaklaşım; hem testte hem geliştirmede çalışır</td>
+                <td><a href="https://mswjs.io/docs">mswjs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>act() uyarısı</strong></td>
+                <td>"An update was not wrapped in act(...)" hatası</td>
+                <td><span class="tag">ORTA</span> Genelde beklenmeyen async güncellemenin işaretidir; `findBy`/`waitFor` ile çözülür</td>
+                <td><a href="https://react.dev/reference/react/act">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>waitFor / findBy</strong></td>
+                <td>Asenkron sonucu bekleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sabit `setTimeout` ile beklemek testleri kırılgan yapar</td>
+                <td><a href="https://testing-library.com/docs/dom-testing-library/api-async">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>snapshot testing</strong></td>
+                <td>Çıktının metin halini kaydedip değişimi karşılaştırma</td>
+                <td><span class="tag">ORTA</span> Kolayca anlamsızlaşır; herkes gözü kapalı `-u` basar. Ölçülü kullan</td>
+                <td><a href="https://vitest.dev/guide/snapshot">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Playwright</strong></td>
+                <td>Gerçek tarayıcıda uçtan uca (E2E) test</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (Microsoft, MIT). JS/TS dışında .NET (C#), Java ve Python istemcileri de var; E2E testlerini backend ekibinin diliyle yazmak mümkün</td>
+                <td><a href="https://playwright.dev/docs/intro">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cypress</strong></td>
+                <td>Yaygın E2E test aracı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Aracın kendisi ücretsiz (MIT); Cypress Cloud (kayıt/paralel çalıştırma) ücretlidir</td>
+                <td><a href="https://docs.cypress.io">docs.cypress.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Storybook</strong></td>
+                <td>Bileşenleri izole geliştirme ve görsel katalog</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Chromatic (görsel regresyon servisi) ücretlidir</td>
+                <td><a href="https://storybook.js.org/docs">storybook.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>test coverage</strong></td>
+                <td>Kodun ne kadarının testle çalıştırıldığı</td>
+                <td><span class="tag">ORTA</span> Yüzde hedefi kaliteyi garanti etmez; CI'da eşik koyarken dikkatli ol</td>
+                <td><a href="https://vitest.dev/guide/coverage">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>CI'da test çalıştırma</strong></td>
+                <td>GitHub Actions / Azure DevOps ile her push'ta test</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Hiç CI/CD kurmadıysan `npm ci &amp;&amp; npm test` içeren tek dosyalık bir workflow iyi bir başlangıçtır</td>
+                <td><a href="https://docs.github.com/en/actions">docs.github.com/actions</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="yaygin-hatalar"><span class="h-num">§ 14</span>Yaygın hatalar</h2>
+
+        <p>Aşağıdakiler mülakatta "React'te en sık yapılan hata nedir" sorusunun cevap havuzudur.
+        Her birini kendin bilerek yapıp sonucunu gör; ezberden daha kalıcı olur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sık düşülen tuzaklar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>stale closure</strong></td>
+                <td>Bir fonksiyonun eski render'ın state değerini hatırlaması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> setInterval + useEffect kombinasyonunda klasiktir. JavaScript closure bilgisi olmadan anlaşılmaz</td>
+                <td><a href="https://react.dev/learn/removing-effect-dependencies">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>sonsuz useEffect döngüsü</strong></td>
+                <td>Effect state'i güncelliyor, güncelleme effect'i tekrar tetikliyor</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sebep genelde bağımlılık dizisindeki nesne/dizi/fonksiyondur (her render'da yeni referans)</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>key olarak index kullanmak</strong></td>
+                <td>`key={i}` yazmak</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Liste sıralanır/araya ekleme yapılırsa input değerleri ve state karışır. Liste hiç değişmiyorsa zararsızdır</td>
+                <td><a href="https://react.dev/learn/rendering-lists#why-does-react-need-keys">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>state'i doğrudan mutasyon</strong></td>
+                <td>`user.name = "x"` veya `arr.push(y)` yazmak</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React değişimi fark etmez, ekran güncellenmez</td>
+                <td><a href="https://react.dev/learn/updating-objects-in-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>türetilebilir state'i saklamak</strong></td>
+                <td>Hesaplanabilecek değeri ayrı state'te tutmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> İki kaynak birbirinden kopar (senkronizasyon hatası). Render'da hesapla</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect#updating-state-based-on-props-or-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>props'u state'e kopyalamak</strong></td>
+                <td>`const [x, setX] = useState(props.x)` yazıp güncellenmesini beklemek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Başlangıç değeri sadece ilk render'da okunur; sonra prop değişse de state değişmez</td>
+                <td><a href="https://react.dev/reference/react/useState#ive-updated-the-state-but-the-screen-doesnt-update">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useEffect'i "sayfa açılınca çalışsın" diye kullanmak</strong></td>
+                <td>Olay üzerine yapılması gereken işi effect'e koymak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kullanıcı tıklamasıyla olan iş event handler'a yazılır, effect'e değil</td>
+                <td><a href="https://react.dev/learn/you-might-not-need-an-effect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>render sırasında setState çağırmak</strong></td>
+                <td>Gövdede doğrudan `setX(...)` yazmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Too many re-renders" hatası. Koşullu tek seferlik ayarlama dışında yapılmaz</td>
+                <td><a href="https://react.dev/reference/react/useState#storing-information-from-previous-renders">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>lint bağımlılık uyarısını susturmak</strong></td>
+                <td>`// eslint-disable-next-line react-hooks/exhaustive-deps`</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kısa vadede susar, uzun vadede stale closure üretir; §4'teki "removing dependencies" sayfasını oku</td>
+                <td><a href="https://react.dev/learn/removing-effect-dependencies">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>her şeyi context'e koymak</strong></td>
+                <td>Global tek bir "AppContext" yapmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tek değişiklik tüm uygulamayı render eder; §5'teki tuzağa bak</td>
+                <td><a href="https://react.dev/reference/react/useContext">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>async fonksiyonu useEffect'e vermek</strong></td>
+                <td>`useEffect(async () =&gt; {...})` yazmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Effect cleanup fonksiyonu döndürmeli, Promise değil. İçeride ayrı async fonksiyon tanımla</td>
+                <td><a href="https://react.dev/reference/react/useEffect">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>`&amp;&amp;` ile 0 basmak</strong></td>
+                <td>`{items.length &amp;&amp; &lt;List/&gt;}` boş listede ekrana 0 yazar</td>
+                <td><span class="tag tag--ok">TEMEL</span> `items.length &gt; 0 &amp;&amp; ...` yaz. Küçük ama mülakatta sorulur</td>
+                <td><a href="https://react.dev/learn/conditional-rendering">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>StrictMode'u kapatmak</strong></td>
+                <td>Effect iki kez çalışıyor diye StrictMode'u silmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Belirtiyi gizler, hastalığı gizlemez; cleanup yazmadığının işaretidir</td>
+                <td><a href="https://react.dev/reference/react/StrictMode">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>bileşen içinde bileşen tanımlamak</strong></td>
+                <td>Bir bileşenin gövdesinde başka bileşen tanımlamak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her render'da yeni tip üretilir &rarr; alt ağaç tamamen remount olur, state uçar</td>
+                <td><a href="https://react.dev/learn/preserving-and-resetting-state">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>dangerouslySetInnerHTML</strong></td>
+                <td>Ham HTML basma; XSS riski taşır</td>
+                <td><span class="tag tag--ok">TEMEL</span> İsim bilerek korkutucu. Kullanacaksan DOMPurify gibi bir temizleyiciyle kullan</td>
+                <td><a href="https://react.dev/reference/react-dom/components/common#dangerously-setting-the-inner-html">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>gizli bilgiyi frontend'e koymak</strong></td>
+                <td>API anahtarını `VITE_` değişkenine koymak</td>
+                <td><span class="tag tag--ok">TEMEL</span> `VITE_` ile başlayan her değişken bundle'a gömülür ve herkes görebilir</td>
+                <td><a href="https://vite.dev/guide/env-and-mode">vite.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <h2 id="ozet"><span class="h-num">§ 15</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>Yukarıdaki listeyi baştan sona sırayla çalışma. Aşağıdaki sıra, "React biliyorum" cümlesini
+        savunulabilir hale getirmenin en kısa yoludur.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Önce React değil, JavaScript</span>
+            <p>Closure, `this`, destructuring, spread, map/filter/reduce, Promise, async/await, ES modülleri.
+            Bunlar olmadan React'te yazdığın her satır ezber olur.
+            <a href="../01-javascript/index.html">01 &mdash; JavaScript</a> sayfasındaki ilgili maddeleri bitir.</p>
+            <span class="steps__meta">Sıra: 1 &middot; Varsayılan: bunlar olmadan devam etme. İstisna: işte mevcut bir React projesine katkı veriyorsan JS ve React'ı paralel yürüt, eksik JS konusunu karşına çıktıkça kapat (<a href="../index.html#react-a-atlanir-mi">genel bakış § 1</a>); JS'i zaten iyi biliyorsan doğrudan 2. adıma geç.</span>
+          </li>
+          <li>
+            <span class="steps__title">Kurulum ve temel kavramlar (§ 1 – § 2)</span>
+            <p>Vite ile proje aç. Bileşen, JSX, props, children, koşullu render, liste + key, Fragment,
+            StrictMode. CRA ile başlayan eğitimlere takılma.</p>
+            <span class="steps__meta">Sıra: 2 &middot; Rozet: MÜLAKATTA SIK + TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">State ve render mantığı (§ 3)</span>
+            <p>useState, state'in snapshot doğası, functional update, immutability, lifting state up,
+            controlled vs uncontrolled. Buradaki "state as a snapshot" konusunu anlamadan hook'lara geçme.</p>
+            <span class="steps__meta">Sıra: 3 &middot; En sık sorulan mülakat alanı</span>
+          </li>
+          <li>
+            <span class="steps__title">Hook'lar: useState, useEffect, useRef, useContext, useReducer (§ 4)</span>
+            <p>Bu beşi günlük işin %90'ıdır. "You Might Not Need an Effect" sayfasını baştan sona oku;
+            React'te yazacağın kötü kodun çoğunu bu tek sayfa engeller.</p>
+            <span class="steps__meta">Sıra: 4 &middot; Hook kurallarını ve nedenini ezberle</span>
+          </li>
+          <li>
+            <span class="steps__title">Context (§ 5) ve bileşen kalıpları (§ 10)</span>
+            <p>Prop drilling &rarr; lifting state &rarr; context sırasını kur. Custom hook yazmayı öğren;
+            Tek sorumluluk ve kompozisyon fikri burada karşılığını bulur; SOLID bilmiyorsan §&nbsp;10'daki tanımla başla.</p>
+            <span class="steps__meta">Sıra: 5 &middot; SOLID/kompozisyon bilgisi varsa işe yarar</span>
+          </li>
+          <li>
+            <span class="steps__title">Veri çekme (§ 8) — basit bir Web API ile</span>
+            <p>Önce fetch + useEffect ile elle yaz, race condition'ı bizzat gör. Sonra TanStack Query'ye geç
+            ve neyi çözdüğünü anla. Kendi backend'in varsa CORS'u o tarafta çözmeyi de dene (ör.
+            <a href="../../CSharp-DotNet/index.html">.NET</a>, Express, Spring, Django/FastAPI; satırlar §&nbsp;8'de);
+            yoksa JSONPlaceholder veya MSW ile çalış ve Vite proxy'sini dene.</p>
+            <span class="steps__meta">Sıra: 6 &middot; Backend bilgisi varsa burada avantaj</span>
+          </li>
+          <li>
+            <span class="steps__title">Yönlendirme (§ 9) ve formlar (§ 7)</span>
+            <p>React Router ile 4-5 sayfalık bir uygulama; React Hook Form + Zod ile bir kayıt formu.
+            İkisi birlikte "gerçek uygulama" hissi verir.</p>
+            <span class="steps__meta">Sıra: 7</span>
+          </li>
+          <li>
+            <span class="steps__title">Yaygın hatalar (§ 14)</span>
+            <p>Bu tabloyu mülakattan önce tek başına tekrar oku. Buradaki 16 maddeyi bilen aday,
+            "React'e yeni başladım" izlenimi vermez.</p>
+            <span class="steps__meta">Sıra: 8 &middot; En yüksek getirili tek tablo</span>
+          </li>
+          <li>
+            <span class="steps__title">Performans (§ 6) ve test (§ 13)</span>
+            <p>React.memo/useMemo/useCallback üçlüsünü ölçerek öğren. RTL + Vitest + MSW ile birkaç test yaz;
+            bu aynı zamanda "TDD" ve "mock" pratiğini somut örneklerle kazandırır. Backend'de test yazdıysan kavramlar
+            tanıdık gelir; hiç test yazmadıysan önce tek bir bileşen için "render et &rarr; kullanıcı gibi etkileş &rarr;
+            sonucu doğrula" döngüsünü kur, mock'a sonra geç.</p>
+            <span class="steps__meta">Sıra: 9 &middot; Backend test kavramlarına yakın (test geçmişi yoksa orta zorluk)</span>
+          </li>
+          <li>
+            <span class="steps__title">State yönetimi (§ 11) ve React 18/19 (§ 12)</span>
+            <p>Redux Toolkit'in `createSlice`'ını ve Zustand'ı tanımak yeter. Server Components ve Actions'ın yeri hedefine bağlı:</p>
+            <ul>
+              <li><strong>Backend ağırlıklı rol veya Vite SPA hedefi</strong> &rarr; en sona bırak; mülakatta "duydum, henüz kullanmadım" demek doğru cevaptır.</li>
+              <li><strong>Next.js (App Router) veya React Router framework modu kullanan pozisyon/proje</strong> &rarr; Server Components, Server Actions, Suspense ve streaming çekirdek konudur; 4&ndash;5. sıraya al, "kullanmadım" yeterli bir cevap değildir.</li>
+              <li><strong>Frontend uzmanlığı hedefi</strong> &rarr; React 19 özellikleri (<code>use</code>, <code>useActionState</code>, <code>useOptimistic</code>, form actions) orta öncelik.</li>
+            </ul>
+            <span class="steps__meta">Sıra: 10 &middot; Hedefe göre öne alınabilir</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Mülakatta dürüst ol</p>
+          <p>React'i derinlemesine kullanmadıysan "Küçük projelerde kullandım, derinleşmedim" demek, bilmediğin bir konuda
+          yanlış cevap vermekten her zaman iyidir. Bu sayfadaki § 2, § 3 ve § 14 tablolarını bilirsen
+          o cümleyi rahatlıkla kurabilirsin.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Devamı</p>
+          <p>Derleme araçları, UI kütüphaneleri, stil çözümleri, paket yönetimi ve deploy için
+          <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a> sayfasına geç.
+          Bölümün girişi: <a href="../index.html">JavaScript ve TypeScript genel bakış</a>. İşaretleme ve stil temeli: <a href="../../HTML-CSS/index.html">HTML ve CSS</a>.
+          Diğer alanlar: <a href="../../CSharp-DotNet/index.html">.NET</a> &middot;
+          <a href="../../Java/index.html">Java</a> &middot;
+          <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfaları &middot;
+          <a href="../../index.html">Site ana sayfası</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../02-typescript/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">TypeScript</span></a>
+        <a class="next" href="../04-ekosistem-ve-araclar/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Ekosistem ve Araçlar</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

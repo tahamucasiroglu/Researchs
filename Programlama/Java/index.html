@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genel Bakış — Java Anahtar Listesi</title>
+<meta name="description" content="Java'ya .NET tarafından geçiş: neden, ne kadar sürede, hangi sırayla ve kavram eşleştirme tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Genel Bakış</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Programlama · Java</span>
+      <span class="brand__name">Java Anahtar Listesi</span>
+      <span class="brand__sub">Backend odaklı · Spring Boot</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-java-dili/index.html"><span class="nav-num">01</span><span>Java Dili</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Çatı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="02-spring-boot/index.html"><span class="nav-num">02</span><span>Spring Boot</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Dağıtık</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="03-veri-ve-mesajlasma/index.html"><span class="nav-num">03</span><span>Veri ve Mesajlaşma</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistem</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# / .NET</span></a></li>
+          <li><a class="nav-item" href="../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+          <li><a class="nav-item" href="../proje-fikirleri/index.html"><span class="nav-num">&larr;</span><span>Proje fikirleri</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Backend odaklı liste. C#/.NET'ten geliyorsan eşleştirme tabloları kısa yoldur; başka bir dilden ya da sıfırdan geliyorsan "Java karşılığı" ve "Not" sütunlarını oku, dil temelleri için 01'den başla.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Java · Genel Bakış</div>
+        <h1 class="page-title">Java'ya giriş: <em>hangi yoldan geldiğine göre</em></h1>
+        <p class="lede">Türkiye'de Java; bankacılık, sigorta, telekom ve kamu entegratörlerinde ağırlıklı, .NET ise ERP/muhasebe ve Microsoft yığınlı kurumsal yazılımda güçlü. Oran için tek bir rakam vermiyoruz, kendin ölç (aşağıdaki kutu). Bu dosya Java ekosistemini anahtar kelime listesi olarak veriyor: C#/.NET'ten geliyorsan her kavramın karşılığı yan sütunda; başka bir dilden, eski Java'dan ya da sıfırdan geliyorsan § 1'deki yol tablosundan başla.</p>
+        <div class="head-meta">5 bölüm &middot; Backend odaklı &middot; C#/.NET'ten geliyorsan karşılaştırmalı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="neden-java"><span class="h-num">§ 1</span>Neden Java — ve bu dosya nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa bir ders değil, <strong>arama listesi</strong>. Hiçbir konu burada anlatılmıyor. Her satırda bir terim, o terimi yanlış aramanı engelleyecek kadar kısa bir not ve mümkün olduğunda resmî dokümanın bağlantısı var. Öğrenmeyi sen yapacaksın: terimi okuyacaksın, bağlantıya gidip kendi kaynağından çalışacaksın, sonra o konuda kod yazacaksın.</p>
+
+        <p>Bu dosyayı nasıl kullanacağın <strong>nereden geldiğine</strong> bağlı. Kendi satırını bul:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktana göre bu dosya</caption>
+            <thead><tr><th>Durumun</th><th>Bu dosyayı nasıl kullan</th><th>Gerçekçi beklenti</th></tr></thead>
+            <tbody>
+              <tr><td><strong>C#/.NET biliyorsun</strong></td><td><strong>(1)</strong> <a href="#esleme">§ 2 eşleştirme tablosunu</a> aç; sol sütundaki .NET terimini biliyorsan sağdaki Java karşılığını okumak o konuyu neredeyse bedavaya kazandırır. <strong>(2)</strong> Bilmediğin satırları ve <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırları işaretle. <strong>(3)</strong> Her işaretlediğin satır için tek dosyalık bir Java örneği yaz.</td><td>Dilin büyük kısmı tanıdık; zor kısım ekosistemin isimleri.</td></tr>
+              <tr><td><strong>Başka bir dil biliyorsun</strong> (Python, JavaScript/TypeScript, Go, PHP, Kotlin vb.)</td><td>§ 2'deki sol sütun (.NET adları) sana yabancıdır; tabloları <strong>"Java karşılığı" ve "Not"</strong> sütunlarından oku. Dil temelleri için <a href="01-java-dili/index.html">01</a>'i baştan sona çalış (tip sistemi, OOP, generics, exception), sonra <a href="02-spring-boot/index.html">02 Spring Boot</a>, en son <span class="tag tag--bad">MÜLAKATTA SIK</span> satırlar.</td><td>Sıfırdan değil, ama isim değiştirmekten fazlası: statik tip ve sınıf yapısı yeni olabilir.</td></tr>
+              <tr><td><strong>Hiç programlama bilmiyorsun</strong></td><td>Bu sayfa bir arama listesidir, ders değil. Önce <a href="https://dev.java/learn/">dev.java/learn</a> "Getting Started" yolunu izle; değişken, döngü, sınıf, koleksiyon yazabilecek hâle gel, sonra buraya dön.</td><td>Java'yı gerçekten sıfırdan öğreniyorsun; dil temelleri + OOP + koleksiyonlar birkaç ay sürer. Spring'e erken girme.</td></tr>
+              <tr><td><strong>Eski Java (8/11) biliyorsun</strong></td><td>Önce aşağıdaki <a href="#neden-java">sürüm haritası</a>, sonra <a href="01-java-dili/index.html">01</a>'deki sürüm sürüm modern özellikler (record, sealed, switch pattern, virtual thread) ve Spring Boot 2 &rarr; 3 geçişi (<code>javax.*</code> &rarr; <code>jakarta.*</code>).</td><td>Dil tanıdık; açığın son 5-10 yılın özellikleri ve yeni Spring sürümleri.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Hangi satırdan gelirsen gel: <span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti iş ilanlarında ve mülakatlarda sık geçen konuları gösterir; her birine en az bir çalışan örnek yaz. Okuyup geçtiğin madde mülakatta seni kurtarmaz.</p>
+
+        <blockquote><strong>C#'tan geliyorsan:</strong> Java'yı sıfırdan öğrenmiyorsun. .NET'te bildiğin her kavramın Java'da bir adı var; büyük ölçüde isim değiştiriyorsun. Zor kısım dil değil, ekosistemin isimlerini bilmemek. <strong>Başka bir yerden geliyorsan</strong> bu cümle sana birebir uymaz: dili de öğreneceksin.</blockquote>
+
+        <h3>Türkiye'de Java gerçeği</h3>
+
+        <p>Türkiye'de kurumsal yazılımın büyük bölümü — bankacılık, sigorta, telekom, kamu entegratörleri, büyük perakende — ağırlıklı olarak Java üzerinde koşuyor. .NET güçlü ama daha çok orta ölçekli kurumsal, ERP/muhasebe, Microsoft yığınlı iç yazılım, savunma ve ürün şirketlerinde yoğunlaşıyor; startup/ürün tarafı karışık. Bu dağılım sektör gözlemidir, ölçülmüş oran değildir <span class="tag tag--warn">TEYİT</span>. Bu, "Java daha iyi" demek değil; başka bir dilden geliyorsan <strong>ilan havuzunu genişletmek</strong>, ilk dilini seçiyorsan hedeflediğin sektörün dilini seçmek demek.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat — rakam vermiyorum</p>
+          <p>"Java ilanı .NET'in şu kadar katı" diye bir sayı yazmıyorum, çünkü doğrulanabilir güncel bir kaynağa bakmadan yazılan her oran uydurmadır. Bunu kendin ölç: kariyer.net ve LinkedIn'de aynı gün, aynı şehir filtresiyle "Java Developer" ve ".NET Developer" araması yap, çıkan ilan sayılarını not et. Beş dakikalık iş, ve mülakatta "piyasayı takip ediyorum" cümlesini gerçek yapar.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sektöre göre tipik yığın — hangi kapıyı hangi dil açıyor</caption>
+            <thead><tr><th>Alan</th><th>Baskın taraf</th><th>Tipik teknoloji</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bankacılık / ödeme</strong></td><td>Java</td><td>Spring Boot, Oracle DB, Kafka, WebLogic/Tomcat</td><td>En büyük Java havuzu. Eski kod tabanı çok; Java 8 hâlâ karşına çıkar. <span class="tag tag--ok">TEMEL</span></td></tr>
+              <tr><td><strong>Sigorta</strong></td><td>Java</td><td>Spring Boot, Oracle/PostgreSQL, SOAP servisleri</td><td>SOAP ve XML entegrasyonu beklenir. <span class="tag">ORTA</span></td></tr>
+              <tr><td><strong>Telekom</strong></td><td>Java</td><td>Spring, Kafka, mikroservis, Kubernetes</td><td>Yüksek trafik; performans soruları ağırlıklı. <span class="tag">ORTA</span></td></tr>
+              <tr><td><strong>Kamu / e-devlet entegratörü</strong></td><td>Java</td><td>Java EE / Jakarta EE, JBoss/WildFly, Oracle</td><td>Uygulama sunucusu (WAR dağıtımı) hâlâ yaygın. <span class="tag tag--warn">ESKİMİŞ</span></td></tr>
+              <tr><td><strong>Kurumsal ERP / muhasebe</strong></td><td>.NET</td><td>ASP.NET Core, SQL Server, Windows sunucu</td><td>.NET'in en güçlü olduğu alanlardan biri. <span class="tag tag--ok">TEMEL</span></td></tr>
+              <tr><td><strong>Savunma sanayi</strong></td><td>Karışık</td><td>C#/.NET, C++, Java</td><td>İlan diline değil, projeye göre değişir. <span class="tag">ORTA</span></td></tr>
+              <tr><td><strong>Startup / ürün</strong></td><td>Karışık</td><td>Node.js, Python, Go, Java, .NET</td><td>Dil serbest; ürün ve hız önemli. <span class="tag">ORTA</span></td></tr>
+              <tr><td><strong>Android mobil</strong></td><td>JVM</td><td>Kotlin (önce Java'ydı)</td><td>Java bilmek Kotlin'e geçişi kolaylaştırır. <span class="tag tag--info">İLERİ</span></td></tr>
+              <tr><td><strong>Büyük veri / veri mühendisliği</strong></td><td>JVM</td><td>Spark, Flink, Kafka, Hadoop</td><td>Bu araçların çekirdeği JVM üstünde. <span class="tag tag--info">İLERİ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Java öğrenmenin kazandırdığı (genel)</p>
+            <ul>
+              <li>Geniş kurumsal ilan havuzu; özellikle banka ve telekom kapıları açılır.</li>
+              <li>Kurumsal maaş bandı Java tarafında genelde derindir (kıdemli ilanı çok) <span class="tag tag--warn">TEYİT</span>.</li>
+              <li>Spring Boot'u bilmek Kotlin, Android ve büyük veri dünyasına köprü kurar.</li>
+              <li><em>Başka bir ekosistemden geliyorsan:</em> "iki ekosistem birden bilen" aday mimari tartışmalarında ayrışır.</li>
+              <li><em>.NET'ten geliyorsan:</em> Java'da mecburen öğrendiğin şeyler (Maven, JUnit, Mockito, Docker, CI) .NET tarafındaki eksikleri de kapatır.</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Maliyeti ve tuzakları (genel)</p>
+            <ul>
+              <li>Dil öğrenilebilir, <strong>ekosistem kalabalık</strong>: Maven/Gradle, Spring, JPA, uygulama sunucusu... isim yükü ağır.</li>
+              <li>Kurumsal Java projelerinde eski sürüm (Java 8/11) ve eski desenler çok.</li>
+              <li><em>Başka bir ana dilin varsa:</em> yarım Java bilgisiyle mülakata girmek, iyi bildiğin ana dilindeki güvenilirliğini de şüpheli gösterir.</li>
+              <li><em>Başka bir ana dilin varsa:</em> iki dili birden özgeçmişe yazıp ikisinde de sığ kalmak en kötü senaryo. Önce ana dilindeki boşlukları kapat.</li>
+              <li>Hedefine göre çatı yükü değişir: <strong>backend / kurumsal web</strong> &rarr; Spring Boot fiilen zorunlu, "framework yok" seçeneği pratikte yok; <strong>kamu / eski kurumsal projeler</strong> &rarr; Jakarta EE (WildFly vb.) da istenir; <strong>Android</strong> &rarr; Kotlin + Android SDK, Spring gerekmez; <strong>büyük veri</strong> &rarr; Spark/Flink.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Durumuna göre kazanç ve maliyet</caption>
+            <thead><tr><th>Durumun</th><th>Kazanç</th><th>Maliyet / dikkat</th></tr></thead>
+            <tbody>
+              <tr><td><strong>.NET geliştiricisisin, Java ikinci ekosistemin olacak</strong></td><td>Yukarıdaki maddelerin hepsi geçerli; kavramların çoğu aktarılır.</td><td>Java'yı özgeçmişe "kişisel proje" düzeyinde yaz; .NET derinliğini kaybetme.</td></tr>
+              <tr><td><strong>Başka bir dilden geçiyorsun</strong> (Python, JS/TS, Go, PHP)</td><td>Kurumsal ilan havuzu, statik tipli büyük kod tabanı deneyimi.</td><td>"Ana dilin" o dildir; Java'yı ikinci dil olarak özgeçmişe yazma kuralı aynı. Tip sistemi ve OOP için ek süre ayır.</td></tr>
+              <tr><td><strong>Java ilk/tek ana dilin olacak</strong></td><td>Geniş kurumsal ilan havuzu; Kotlin, Android ve büyük veriye köprü.</td><td>Ekosistem isim yükü ve eski sürümlü kod tabanları; dil + Spring + SQL birlikte öğrenilecek.</td></tr>
+              <tr><td><strong>Hiç iş deneyimin yok</strong> (öğrenci, yeni mezun, kariyer değiştiren)</td><td>Junior Java ilanları bol; tek dilde derinleşmek yeterli.</td><td>"İki dili özgeçmişe yazıp sığ kalma" uyarısı yerine: <strong>tek dilde derinleş</strong>; Java'yı seçtiysen Spring Boot ile bir vitrin projesi yap.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Sıralama tavsiyesi</p>
+          <p>Redis, RabbitMQ, CQRS, mock test, CI/CD dil bağımsız kavramlardır; bir kez öğrenince öbür ekosistemde yalnızca kütüphane adı değişir. Bunları nerede öğreneceğin duruma bağlı:</p>
+          <ul>
+            <li><strong>.NET'ten geliyorsun, hedefin iki ekosistem</strong> &rarr; önce <a href="../CSharp-DotNet/index.html">.NET bölümünde</a> öğren, Java'ya ondan sonra gel; Java'da yalnızca kütüphane adı değişir.</li>
+            <li><strong>.NET'ten geliyorsun, hedefin acil bir Java işi</strong> &rarr; bu konuları doğrudan Java tarafında öğren (<a href="03-veri-ve-mesajlasma/index.html">03</a>, <a href="04-ekosistem-ve-araclar/index.html">04</a>); iki kez öğrenme maliyetinden kurtulursun.</li>
+            <li><strong>.NET bilmiyorsun ya da hedefin yalnızca Java</strong> &rarr; .NET bölümüne gitme; bu konuları doğrudan <a href="03-veri-ve-mesajlasma/index.html">03</a> ve <a href="04-ekosistem-ve-araclar/index.html">04</a>'te öğren.</li>
+          </ul>
+        </div>
+
+        <h3>JVM üzerindeki diller</h3>
+
+        <p>"Java" derken çoğu zaman <strong>JVM ekosistemi</strong> kastedilir. Aynı kütüphaneleri kullanan birden fazla dil var; ilanlarda hepsi karşına çıkar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JVM dilleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Java</strong></td><td>JVM'in ana dili; kurumsalın varsayılanı</td><td>Önce bu. Diğerleri sonra. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/">dev.java</a></td></tr>
+              <tr><td><strong>Kotlin</strong></td><td>JetBrains'in JVM dili; Android'in resmî dili</td><td>Hedefe göre: <strong>Android</strong> &rarr; Java yerine doğrudan Kotlin + Android öğren (resmî dil). <strong>Backend</strong> &rarr; önce Java + Spring Boot, Kotlin isteğe bağlı. <strong>Büyük veri</strong> &rarr; Java/Scala + Spark. Java bilenler için geçiş 1-2 hafta <span class="tag tag--warn">TAHMİN</span>. <em>C#'tan geliyorsan:</em> Kotlin sözdizimi (null güvenliği, data class, extension) sana Java'dan daha tanıdık gelir. <span class="tag">ORTA</span></td><td><a href="https://kotlinlang.org/docs/home.html">kotlinlang.org</a></td></tr>
+              <tr><td><strong>Scala</strong></td><td>Fonksiyonel ağırlıklı JVM dili</td><td>Spark projelerinde çıkar. Öğrenme eğrisi dik. <span class="tag tag--info">İLERİ</span></td><td><a href="https://www.scala-lang.org/">scala-lang.org</a></td></tr>
+              <tr><td><strong>Groovy</strong></td><td>Dinamik JVM dili</td><td>Gradle betikleri ve Spock testleri Groovy ile yazılır; dil olarak öğrenmene gerek yok, okuyabilmen yeter. <span class="tag">ORTA</span></td><td><a href="https://groovy.apache.org/">groovy.apache.org</a></td></tr>
+              <tr><td><strong>Clojure</strong></td><td>JVM üzerinde Lisp</td><td>Niş. Adını bil, yeter. <span class="tag tag--info">İLERİ</span></td><td><a href="https://clojure.org/">clojure.org</a></td></tr>
+              <tr><td><strong>Android + Java</strong></td><td>Android uygulamaları eskiden Java, şimdi Kotlin</td><td>Aramada "Android Kotlin" yaz; eski Java örnekleri seni yanıltır. <span class="tag tag--info">İLERİ</span></td><td><a href="https://developer.android.com/">developer.android.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Java sürüm haritası</h3>
+
+        <p>Java 6 ayda bir sürüm çıkarır; bunların bir kısmı <strong>LTS</strong> (uzun destekli) ve kurumlar sadece LTS kullanır. İlanda "Java 8 tecrübesi" görürsen bu eski kod anlamına gelir, korkma.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi Java sürümü ne demek</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Java 8</strong></td><td>Lambda, Stream API ve Optional'ın geldiği sürüm (2014)</td><td>Kurumsalda hâlâ çok yaygın. Modern Java örnekleri burada derlenmez. <span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.oracle.com/javase/8/docs/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Java 11</strong></td><td>İlk yaygın modüler LTS (2018)</td><td>Eski mikroservislerin çoğu burada. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/11/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Java 17</strong></td><td>LTS (2021); Spring Boot 3'ün asgari şartı</td><td>Yeni proje açacaksan alt sınır burası. record, sealed, switch pattern burada oturdu. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/17/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Java 21</strong></td><td>LTS (2023); sanal iş parçacıkları (virtual threads) burada kesinleşti</td><td>Kurumlarda yaygınlaşan LTS; kaynak ve örnek bolluğu yüksek. Öğrenmek için de geçerli bir seçim (aşağıdaki karar tablosuna bak). <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Java 25</strong></td><td>Güncel LTS (Eylül 2025)</td><td>Öğrenme ve yeni kişisel proje için önerilen sürüm; kurumlarda yayılması zaman alır. Sürüm ve tarihleri resmî sayfadan doğrula. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://openjdk.org/projects/jdk/">openjdk.org</a></td></tr>
+              <tr><td><strong>LTS</strong></td><td>Long Term Support — uzun destekli sürüm</td><td>LTS olmayan sürümler (18, 19, 20...) 6 ayda destek dışı kalır; kurumsal proje kurmaz. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html">oracle.com</a></td></tr>
+              <tr><td><strong>JEP</strong></td><td>JDK Enhancement Proposal — Java'ya özellik ekleme önerisi</td><td>"Bu özellik hangi sürümde geldi?" sorusunun cevabı JEP numarasıdır; sürüm notlarını JEP numarasıyla ara. <span class="tag">ORTA</span></td><td><a href="https://openjdk.org/jeps/0">openjdk.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi JDK sürümünü kurmalısın — duruma göre (01 ve 04 sayfalarıyla ortak tablo)</caption>
+            <thead><tr><th>Durum</th><th>Sürüm</th><th>Gerekçe</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Öğreniyorsun / yeni kişisel proje</strong></td><td><strong>Java 25</strong> (güncel LTS); 21 de geçerli</td><td>Güncel LTS en uzun destek süresini verir; 21 için kaynak ve örnek daha bol. Spring Boot 3.5.x ve 4.x'in 25'i desteklediğini <a href="https://docs.spring.io/spring-boot/system-requirements.html">Spring Boot system requirements</a> sayfasından doğrula <span class="tag tag--warn">TEYİT</span>.</td></tr>
+              <tr><td><strong>Virtual thread'i yoğun kullanacaksın</strong></td><td>24+ &rarr; LTS olarak <strong>25</strong></td><td><code>synchronized</code> blokta sanal iş parçacığının taşıyıcıya sabitlenmesi (pinning) JDK 24'te düzeltildi (<a href="https://openjdk.org/jeps/491">JEP 491</a>).</td></tr>
+              <tr><td><strong>İşyerindeki mevcut projeye katılıyorsun</strong></td><td>Projenin derlendiği sürüm (8/11/17/21)</td><td>IDE'de o JDK'yı kur; birden fazla JDK'yı SDKMAN! veya IDE'nin JDK yöneticisiyle yan yana tut.</td></tr>
+              <tr><td><strong>Spring Boot 2.x projesi</strong></td><td>Java 8-21 aralığı (21 için 2.7.16+; daha eski 2.x alt sürümlerinde üst sınır daha düşük)</td><td>Boot 2.7'nin desteklediği üst sınırı projenin Boot sürümünün dokümanından doğrula <span class="tag tag--warn">TEYİT</span>. Boot 2.x açık kaynak desteği bitmiştir; geçiş planı sorulur.</td></tr>
+              <tr><td><strong>Spring Boot 3.x / 4.x projesi</strong></td><td>En az <strong>Java 17</strong></td><td>Boot 3'ün asgari şartı 17'dir; <code>jakarta.*</code> paket adları zorunludur.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="esleme"><span class="h-num">§ 2</span>.NET &rarr; Java kavram eşleştirme sözlüğü</h2>
+
+        <p class="intro">Bu bölüm sayfanın kalbi. Tablolarda sol sütun .NET tarafındaki adı, sağ sütun Java'daki adı verir. <strong>C#/.NET biliyorsan</strong> tabloyu açık tut; bir Java terimi görüp "bu neydi?" dediğinde sol sütuna bakarak anlamlandırırsın. <strong>.NET bilmiyorsan</strong> sol sütunu atla; "Java / JVM karşılığı" sütunu sana bir anahtar kelime listesi, "Not" sütunu da o terimin ne işe yaradığını verir (2.0 jargon tablosu herkes için). Ayrıntılar alt sayfalarda: <a href="01-java-dili/index.html">dil</a>, <a href="02-spring-boot/index.html">Spring Boot</a>, <a href="03-veri-ve-mesajlasma/index.html">veri ve mesajlaşma</a>, <a href="04-ekosistem-ve-araclar/index.html">ekosistem ve araçlar</a>.</p>
+
+        <h3>2.0 Önce jargon: yanlış aratınca yanlış sonuç veren terimler</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Java arama tuzakları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bean</strong></td><td>Spring konteynerinin oluşturup yönettiği nesne</td><td>Üç ayrı "bean" var: <em>Spring bean</em> (DI nesnesi), <em>JavaBean</em> (getter/setter sözleşmesi), <em>EJB</em> (eski kurumsal bileşen). Aramada "Spring bean" yaz. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>POJO</strong></td><td>Plain Old Java Object — hiçbir çatıya bağımlı olmayan sade sınıf</td><td>.NET'teki POCO ile aynı fikir. <span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>Spring / Spring Framework / Spring Boot</strong></td><td>Sırasıyla: şemsiye marka, çekirdek DI çatısı, hazır yapılandırmalı başlatıcı</td><td>Aramada mutlaka "Spring Boot" yaz. Sadece "Spring" ararsan 2010 tarihli XML yapılandırmalı örnekler gelir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spring.io/projects/spring-boot">spring.io</a></td></tr>
+              <tr><td><strong>JDK / JRE / JVM</strong></td><td>Geliştirme kiti / çalıştırma ortamı / sanal makine</td><td>Geliştirmek için JDK kurarsın. Yalnızca çalıştırmak için dağıtıma göre: <strong>Oracle</strong> Java 11'den beri ayrı JRE yayınlamıyor; <strong>Temurin, Liberica, Zulu</strong> gibi dağıtımlar 11/17/21/25 için hâlâ JRE paketi sunar; özel ve küçük bir runtime gerekiyorsa <code>jlink</code> ile kendin üretirsin. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://adoptium.net/">adoptium.net</a></td></tr>
+              <tr><td><strong>Java EE / J2EE / Jakarta EE</strong></td><td>Aynı kurumsal standardın üç dönemdeki adı</td><td>Oracle bağışladıktan sonra paket adları <em>javax.*</em> &rarr; <em>jakarta.*</em> oldu. Eski örnek kodun derlenmemesinin en sık sebebi budur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/">jakarta.ee</a></td></tr>
+              <tr><td><strong>JPA vs Hibernate</strong></td><td>JPA standart (arayüz), Hibernate onun uygulaması</td><td>EF Core'da böyle bir ayrım yok; Java'da "JPA öğrendim" demek "Hibernate kullandım" demektir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Stream</strong></td><td>İki tamamen farklı şey aynı adı taşır</td><td><em>Stream API</em> = koleksiyon işlemleri (map/filter/reduce; C#'tan geliyorsan LINQ karşılığı). <em>InputStream/OutputStream</em> = bayt akışı (.NET'teki Stream). Aramada "Java Stream API" yaz. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Servlet</strong></td><td>HTTP isteğini karşılayan en alt seviye Java bileşeni</td><td>Spring MVC'nin altında bir <em>DispatcherServlet</em> vardır. Kendi başına servlet yazmayacaksın ama adını bilmelisin. <span class="tag">ORTA</span></td><td><a href="https://jakarta.ee/specifications/servlet/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Servlet container / Application server</strong></td><td>Tomcat gibi hafif konteyner ile WebLogic gibi tam uygulama sunucusu farklıdır</td><td>Spring Boot gömülü Tomcat ile gelir; ayrı sunucu kurmana gerek yoktur. <span class="tag">ORTA</span></td><td><a href="https://tomcat.apache.org/">tomcat.apache.org</a></td></tr>
+              <tr><td><strong>WAR / JAR / fat JAR</strong></td><td>Sunucuya atılan paket / kütüphane paketi / her şeyi içinde taşıyan çalıştırılabilir paket</td><td>Spring Boot varsayılan olarak fat JAR üretir: <code>java -jar app.jar</code>. WAR eski dağıtım modeli. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>classpath</strong></td><td>JVM'in sınıfları aradığı yol listesi</td><td>.NET'te bin klasörü ve assembly çözümlemesinin karşılığı. "ClassNotFoundException" hatalarının kaynağı. <span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>checked exception</strong></td><td>Metodun imzasında bildirilmesi zorunlu istisna türü</td><td>Çoğu dilde yoktur (C#, Python, JavaScript, Go, Kotlin). Java'da <code>throws IOException</code> yazmak zorunda kalırsın; başka dilden gelenleri en çok şaşırtan fark. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/exceptions/">dev.java</a></td></tr>
+              <tr><td><strong>Optional</strong></td><td>Değer olmayabilir anlamına gelen sarmalayıcı tip</td><td>C#'taki <code>Nullable&lt;T&gt;</code> değil; ona en yakın kullanım biçimi. Alan (field) olarak kullanılmaz, dönüş tipi olarak kullanılır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>record (Java)</strong></td><td>Değişmez, değer eşitlikli kısa sınıf (Java 16+)</td><td>Aramada "Java record class" yaz. C# record ile benzer ama Java'da <code>with</code> ifadesi yoktur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/language/records.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>annotation</strong></td><td>Sınıf/metot üstüne yazılan meta veri: <code>@Override</code>, <code>@Service</code></td><td>C#'taki attribute'un karşılığı. Aramada "Java annotation" yaz; "annotation" tek başına farklı alanlara gider. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/annotations/">dev.java</a></td></tr>
+              <tr><td><strong>reactive</strong></td><td>Bloklamayan, geri-basınçlı programlama modeli (Reactor, WebFlux)</td><td>async/await sanma. Java'da async/await yok; ya Reactor'a ya sanal iş parçacıklarına bakılır. <span class="tag tag--info">İLERİ</span></td><td><a href="https://projectreactor.io/">projectreactor.io</a></td></tr>
+              <tr><td><strong>Lombok @Data</strong></td><td>Getter/setter/equals kodunu derleme anında üreten annotation</td><td>Kod tabanında getter göremezsin, panikleme; Lombok üretiyor. Tartışmalı bir kütüphane, ekipler ikiye ayrılır. <span class="tag">ORTA</span></td><td><a href="https://projectlombok.org/">projectlombok.org</a></td></tr>
+              <tr><td><strong>Maven scope vs Spring scope</strong></td><td>Bağımlılık kapsamı (compile/test) ile bean yaşam süresi (singleton/prototype)</td><td>Aynı kelime, alakasız iki kavram. Hangi bağlamda geçtiğine bak. <span class="tag">ORTA</span></td><td><a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">maven.apache.org</a></td></tr>
+              <tr><td><strong>Java vs JavaScript</strong></td><td>Alakasız iki dil</td><td>Arama sonuçlarını kirletir; sorgularına "Java JVM" veya kütüphane adı ekle. <span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>Type erasure</strong></td><td>Java jeneriklerinin tip bilgisinin derleme sonrası silinmesi</td><td>C#'ta jenerikler çalışma anında da bilinir; Java'da bilinmez. <code>List&lt;String&gt;</code> çalışma anında sadece <code>List</code>'tir. C#'tan geliyorsan jenerik alışkanlıklarını doğrudan etkiler; TypeScript'ten geliyorsan tiplerin çalışma anında silinmesi tanıdıktır; generics'i ilk kez görüyorsan önce temel kullanımı öğren. Her durumda mutlaka oku. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/generics/">dev.java</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.1 Dil ve çalışma zamanı</h3>
+
+        <p>Ayrıntılar: <a href="01-java-dili/index.html">01 — Java dili</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dil ve çalışma zamanı karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CLR</strong></td><td><strong>JVM</strong></td><td>Aynı rol: bytecode çalıştıran sanal makine. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://openjdk.org/">openjdk.org</a></td></tr>
+              <tr><td><strong>.NET SDK</strong></td><td><strong>JDK</strong></td><td>Derleyici + araçlar + kütüphane. Birden fazla dağıtımı var (aşağıda). <span class="tag tag--ok">TEMEL</span></td><td><a href="https://adoptium.net/">adoptium.net</a></td></tr>
+              <tr><td><strong>IL (Intermediate Language)</strong></td><td><strong>bytecode</strong></td><td><code>javap -c</code> ile bakılır; ildasm karşılığı. <span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>C#</strong></td><td><strong>Java</strong> (dil)</td><td>Sözdizimi %80 aynı. Fark listesi: property yok, extension method yok, checked exception var, struct yok. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/javase/specs/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>namespace</strong></td><td><strong>package</strong></td><td>Java'da klasör yapısı paket adıyla birebir aynı olmak zorunda. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/packages/">dev.java</a></td></tr>
+              <tr><td><strong>internal</strong></td><td><strong>package-private</strong> (erişim belirteci yazmamak)</td><td>Modül seviyesinde gizleme için ayrıca JPMS (<code>module-info.java</code>) var. <span class="tag">ORTA</span></td><td><a href="https://dev.java/learn/modules/">dev.java</a></td></tr>
+              <tr><td><strong>Assembly / DLL</strong></td><td><strong>JAR</strong></td><td>JAR aslında zip. <span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>attribute</strong> <code>[Authorize]</code></td><td><strong>annotation</strong> <code>@PreAuthorize</code></td><td>Aynı fikir; Java'da köşeli parantez değil <code>@</code>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/annotations/">dev.java</a></td></tr>
+              <tr><td><strong>LINQ (to Objects)</strong></td><td><strong>Stream API</strong></td><td><code>Where</code>&rarr;<code>filter</code>, <code>Select</code>&rarr;<code>map</code>, <code>FirstOrDefault</code>&rarr;<code>findFirst</code>. Tembel değerlendirme aynı mantık. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/api/streams/">dev.java</a></td></tr>
+              <tr><td><strong>IEnumerable&lt;T&gt;</strong></td><td><strong>Iterable&lt;T&gt;</strong> / <strong>Stream&lt;T&gt;</strong></td><td>Stream tek kullanımlıktır; ikinci kez dolaşamazsın. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/Stream.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>yield return</strong></td><td>Doğrudan karşılığı <strong>yok</strong>; <code>Stream.generate</code>/<code>Iterator</code> ile yazılır</td><td>C#'tan (ya da Python/JS generator'larından) geliyorsan en çok özleyeceğin özellik. <span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>Func&lt;T&gt; / Action / delegate</strong></td><td><strong>Functional interface</strong>: <code>Function</code>, <code>Supplier</code>, <code>Consumer</code>, <code>Predicate</code></td><td>Java'da delege tipi yoktur; tek metotlu arayüz kullanılır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/package-summary.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>event / EventHandler</strong></td><td>Dinleyici arayüzü + <strong>ApplicationEvent</strong> (Spring)</td><td>Dilde event anahtar sözcüğü yok; desenle çözülür. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>property</strong> <code>{ get; set; }</code></td><td>getter/setter metotları, <strong>record</strong> veya <strong>Lombok</strong></td><td>Dilde property yok. Bu yüzden Lombok bu kadar yaygın. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://projectlombok.org/features/">projectlombok.org</a></td></tr>
+              <tr><td><strong>record (C#)</strong></td><td><strong>record (Java 16+)</strong></td><td>Java'da record alanları kesin değişmezdir; <code>with</code> ifadesi yoktur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/language/records.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>struct / value type</strong></td><td>Henüz <strong>yok</strong> — Project Valhalla</td><td>Java'da her şey referans tipidir (ilkel tipler hariç). Performans tartışmalarında bunu bil. <span class="tag tag--info">İLERİ</span></td><td><a href="https://openjdk.org/projects/valhalla/">openjdk.org</a></td></tr>
+              <tr><td><strong>int/long/bool ilkelleri + boxing</strong></td><td><code>int</code>/<code>long</code>/<code>boolean</code> + <strong>wrapper</strong> (<code>Integer</code>, <code>Long</code>)</td><td>Java'da <code>Integer</code> ile <code>int</code> ayrımı ve otomatik kutulama tuzakları var; <code>==</code> ile karşılaştırma hatası klasiktir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/language-basics/">dev.java</a></td></tr>
+              <tr><td><strong>Nullable reference types</strong> (<code>string?</code>)</td><td>Dilde <strong>yok</strong>; <code>@Nullable</code> annotation'ları + <strong>JSpecify</strong></td><td>Derleyici zorlamaz, statik analiz aracı zorlar. <span class="tag">ORTA</span></td><td><a href="https://jspecify.dev/">jspecify.dev</a></td></tr>
+              <tr><td><strong>Nullable&lt;T&gt; / ??</strong></td><td><strong>Optional</strong> / <code>Objects.requireNonNullElse</code></td><td><code>?.</code> ve <code>??</code> operatörleri Java'da yok. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>extension method</strong></td><td><strong>Yok.</strong> Statik yardımcı sınıf yazılır (Kotlin'de var)</td><td>C#'tan gelenlerin ilk şaşırdığı eksik. <span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>generics (reified)</strong></td><td><strong>generics (type erasure)</strong> + wildcard <code>? extends</code></td><td>C#'ta alışılan jenerik kullanımı burada farklı çalışıyor; <code>typeof(T)</code> yapamazsın, <code>Class&lt;T&gt;</code> parametresi geçersin. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/generics/">dev.java</a></td></tr>
+              <tr><td><strong>async / await / Task</strong></td><td><strong>CompletableFuture</strong>, <strong>virtual threads</strong>, <strong>Reactor</strong></td><td>Java'da async/await yok. 21+ ile sanal iş parçacıkları bloklayan kodu ucuza çevirdi. <span class="tag">ORTA</span></td><td><a href="https://openjdk.org/jeps/444">openjdk.org (JEP 444)</a></td></tr>
+              <tr><td><strong>Task.Run / ThreadPool</strong></td><td><strong>ExecutorService</strong> / <code>Executors.newVirtualThreadPerTaskExecutor()</code></td><td>Havuz yönetimi elle daha görünür. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/core/concurrency.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>CancellationToken</strong></td><td><code>Thread.interrupt()</code> / <code>Future.cancel</code> / <strong>StructuredTaskScope</strong></td><td>Kültür farkı: Java'da iptal daha az standarttır. <span class="tag tag--info">İLERİ</span></td><td><a href="https://openjdk.org/projects/loom/">openjdk.org</a></td></tr>
+              <tr><td><strong>lock / Monitor</strong></td><td><code>synchronized</code> / <code>ReentrantLock</code></td><td>Aynı kavram. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/package-summary.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>IDisposable / using</strong></td><td><strong>AutoCloseable</strong> / <strong>try-with-resources</strong></td><td>Sözdizimi: <code>try (var x = ...) { }</code>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/exceptions/">dev.java</a></td></tr>
+              <tr><td><strong>switch expression / pattern matching</strong></td><td>Aynısı var (Java 17+ / 21)</td><td><code>sealed interface</code> + record + switch üçlüsü Java'nın modern yüzü. <span class="tag">ORTA</span></td><td><a href="https://openjdk.org/projects/amber/">openjdk.org</a></td></tr>
+              <tr><td><strong>Span&lt;T&gt; / Memory&lt;T&gt;</strong></td><td><code>ByteBuffer</code>, <strong>MemorySegment</strong> (Project Panama)</td><td>Düşük seviye performans işi. <span class="tag tag--info">İLERİ</span></td><td><a href="https://openjdk.org/projects/panama/">openjdk.org</a></td></tr>
+              <tr><td><strong>unsafe / P/Invoke</strong></td><td><strong>JNI</strong> (eski) / <strong>FFM API</strong> (yeni, Panama)</td><td>Nadiren gerekir. <span class="tag tag--info">İLERİ</span></td><td><a href="https://openjdk.org/projects/panama/">openjdk.org</a></td></tr>
+              <tr><td><strong>Reflection</strong></td><td><strong>Reflection</strong> / <code>MethodHandles</code></td><td>Spring'in temeli; .NET'tekinden daha çok kullanılır. <span class="tag">ORTA</span></td><td><a href="https://dev.java/learn/reflection/">dev.java</a></td></tr>
+              <tr><td><strong>Source Generator</strong></td><td><strong>Annotation Processor (APT)</strong></td><td>Lombok, MapStruct, Dagger hep bunu kullanır. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>GC (workstation/server)</strong></td><td><strong>G1</strong> (varsayılan), <strong>ZGC</strong>, <strong>Parallel</strong>, <strong>Shenandoah</strong></td><td>Java'da GC seçilebilir; mülakatta "hangi GC?" sorusu çıkar. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>NativeAOT</strong></td><td><strong>GraalVM Native Image</strong></td><td>Spring Boot ve Quarkus destekliyor; başlatma süresi milisaniyeye düşer. <span class="tag tag--info">İLERİ</span></td><td><a href="https://www.graalvm.org/">graalvm.org</a></td></tr>
+              <tr><td><strong>ReadyToRun / tiered JIT</strong></td><td><strong>C1/C2 JIT + tiered compilation</strong>, JIT ısınması</td><td>"JVM ısınması" (warmup) kavramı benchmark ölçümlerini bozar; JMH bunu yönetir. <span class="tag tag--info">İLERİ</span></td><td><a href="https://openjdk.org/projects/code-tools/jmh/">openjdk.org</a></td></tr>
+              <tr><td><strong>string interpolation</strong> <code>$"..."</code></td><td><code>String.format</code>, <code>"...".formatted()</code>, text block <code>"""</code></td><td>Java'da string interpolation yok; text block çok satırlı metin için. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/text-blocks/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>System.Text.Json</strong></td><td><strong>Jackson</strong> (varsayılan), <strong>Gson</strong>, <strong>JSON-B</strong></td><td>Spring Boot Jackson ile gelir. <code>@JsonProperty</code>, <code>ObjectMapper</code> anahtar kelimelerin. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/FasterXML/jackson">github.com/FasterXML</a></td></tr>
+              <tr><td><strong>Newtonsoft.Json</strong></td><td><strong>Gson</strong> (Google) veya eski Jackson sürümleri</td><td>Alternatif olarak bilinsin. <span class="tag">ORTA</span></td><td><a href="https://github.com/google/gson">github.com/google/gson</a></td></tr>
+              <tr><td><strong>DateTime / DateTimeOffset</strong></td><td><code>LocalDateTime</code>, <code>ZonedDateTime</code>, <code>Instant</code> (java.time)</td><td>Eski <code>java.util.Date</code>'i kullanma. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/package-summary.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>decimal</strong></td><td><strong>BigDecimal</strong></td><td>Java'da <code>decimal</code> ilkel tipi yok; para hesabında <code>double</code> kullanma. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/math/BigDecimal.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Guid</strong></td><td><strong>UUID</strong></td><td>Aynı şey, farklı isim. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/UUID.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>List&lt;T&gt; / Dictionary</strong></td><td><code>ArrayList</code> / <code>HashMap</code> (arayüz: <code>List</code>, <code>Map</code>)</td><td>Java'da arayüze programlama kültürü daha katı: <code>List&lt;X&gt; l = new ArrayList&lt;&gt;()</code>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://dev.java/learn/api/collections-framework/">dev.java</a></td></tr>
+              <tr><td><strong>IEqualityComparer / GetHashCode</strong></td><td><code>equals()</code> + <code>hashCode()</code> sözleşmesi</td><td>Klasik mülakat sorusu: "equals'ı override edip hashCode'u etmezsen ne olur?" <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html">docs.oracle.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.2 Proje yapısı, paket yönetimi, dağıtım</h3>
+
+        <p>Ayrıntılar: <a href="04-ekosistem-ve-araclar/index.html">04 — Ekosistem ve araçlar</a>. Bu bölüm başka ekosistemden gelenlerin en çok zorlandığı yer, çünkü <code>dotnet</code>, <code>npm</code> ya da <code>go</code> gibi dille birlikte gelen tek bir komut satırı aracı yok; derleme aracı (Maven/Gradle) ayrıca seçilir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yapı ve paket karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>NuGet</strong></td><td><strong>Maven Central</strong> (depo) + <strong>Maven/Gradle</strong> (araç)</td><td>Java'da paket yöneticisi ile derleme aracı aynı şeydir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://central.sonatype.com/">central.sonatype.com</a></td></tr>
+              <tr><td><strong>.csproj</strong></td><td><strong>pom.xml</strong> (Maven) veya <strong>build.gradle(.kts)</strong> (Gradle)</td><td>İkisini de tanı; ilanlar ikiye bölünmüş durumda. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://maven.apache.org/guides/index.html">maven.apache.org</a></td></tr>
+              <tr><td><strong>MSBuild</strong></td><td><strong>Maven lifecycle</strong> (<code>clean package install</code>) / <strong>Gradle task</strong></td><td>Maven'da sıralı yaşam döngüsü, Gradle'da görev grafiği vardır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.gradle.org/current/userguide/userguide.html">docs.gradle.org</a></td></tr>
+              <tr><td><strong>.sln</strong></td><td>Çok modüllü <strong>parent pom</strong> / <strong>settings.gradle</strong></td><td>Katmanlı mimariyi modül modül ayırmak Java'da çok yaygın. <span class="tag">ORTA</span></td><td><a href="https://maven.apache.org/guides/mini/guide-multiple-modules.html">maven.apache.org</a></td></tr>
+              <tr><td><strong>PackageReference sürüm çakışması</strong></td><td><strong>dependency mediation</strong>, <code>mvn dependency:tree</code>, BOM</td><td>"Jar hell" terimini duyacaksın. BOM = sürümleri toplu sabitleyen pom. <span class="tag">ORTA</span></td><td><a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">maven.apache.org</a></td></tr>
+              <tr><td><strong>dotnet new</strong></td><td><strong>start.spring.io</strong> (Spring Initializr) / Maven archetype</td><td>Yeni proje oluşturmanın standart yolu web sitesi. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://start.spring.io/">start.spring.io</a></td></tr>
+              <tr><td><strong>dotnet restore/build/run</strong></td><td><code>./mvnw spring-boot:run</code> / <code>./gradlew bootRun</code></td><td><code>mvnw</code> = wrapper; makineye Maven kurmadan sabit sürümle çalıştırır. Komut kabuğa göre değişir: <strong>Linux/macOS/WSL/Git Bash</strong> &rarr; <code>./mvnw spring-boot:run</code>, <code>./gradlew bootRun</code>; <strong>Windows PowerShell</strong> &rarr; <code>.\mvnw spring-boot:run</code>, <code>.\gradlew bootRun</code> (<code>mvnw.cmd</code>/<code>gradlew.bat</code> çağrılır); <strong>Windows cmd</strong> &rarr; <code>mvnw spring-boot:run</code>, <code>gradlew bootRun</code>; <strong>wrapper yok, Maven kurulu</strong> &rarr; <code>mvn spring-boot:run</code>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://maven.apache.org/wrapper/">maven.apache.org</a></td></tr>
+              <tr><td><strong>dotnet publish (self-contained)</strong></td><td><strong>fat/uber JAR</strong> (Spring Boot plugin) veya <strong>jlink</strong></td><td><code>java -jar app.jar</code> ile tek dosya çalışır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>dotnet tool</strong></td><td><strong>SDKMAN!</strong> (sürüm yöneticisi) + Maven/Gradle eklentileri</td><td>SDKMAN Java sürümleri arasında geçiş yapar; nvm'in Java'sı. <span class="tag">ORTA</span></td><td><a href="https://sdkman.io/">sdkman.io</a></td></tr>
+              <tr><td><strong>Azure Artifacts / özel NuGet beslemesi</strong></td><td><strong>Nexus Repository</strong>, <strong>JFrog Artifactory</strong></td><td>Artifactory ücretli katmanlara sahip; Nexus'un Community sürümü ücretsiz. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.sonatype.com/products/sonatype-nexus-repository">sonatype.com</a></td></tr>
+              <tr><td><strong>Eclipse Temurin</strong> <em>(dağıtım seçeneği)</em></td><td>Ücretsiz, en yaygın OpenJDK dağıtımı</td><td>Varsayılan seçim: öğreniyorsan ya da ortamın özel bir dağıtım gerektirmiyorsa bunu kur (seçim listesi tablonun altında). <span class="tag tag--ok">TEMEL</span></td><td><a href="https://adoptium.net/">adoptium.net</a></td></tr>
+              <tr><td><strong>Oracle JDK</strong> <em>(dağıtım seçeneği)</em></td><td>Oracle'ın kendi dağıtımı</td><td>Lisans sürüme göre değişir: kişisel/öğrenme kullanımı ücretsiz; NFTC lisansı yalnızca güncel LTS'yi (2026 itibarıyla 25) kapsar ve bir LTS'yi sonraki LTS çıktıktan bir yıl sonrasına kadar üretimde de ücretsiz tutar; eski LTS'lerin (8, 11, 17 ve Eylül 2026'dan itibaren 21) güncellemeleri OTN lisansı / Java SE Subscription ile ticari kullanımda ücretli. Kurumda kullanacaksan şirketin lisans durumunu sor <span class="tag tag--warn">TEYİT</span>: <a href="https://www.oracle.com/java/technologies/javase/jdk-faqs.html">Oracle JDK SSS</a>. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.oracle.com/java/technologies/downloads/">oracle.com</a></td></tr>
+              <tr><td><strong>Amazon Corretto</strong> <em>(dağıtım seçeneği)</em></td><td>AWS'in ücretsiz OpenJDK dağıtımı</td><td>AWS'te çalışıyorsan varsayılan. <span class="tag">ORTA</span></td><td><a href="https://aws.amazon.com/corretto/">aws.amazon.com</a></td></tr>
+              <tr><td><strong>Azul Zulu / BellSoft Liberica</strong></td><td>Ücretsiz dağıtımlar; ücretli destek paketleri var</td><td>Liberica, Spring'in önerdiği dağıtımlardandır. <span class="tag">ORTA</span></td><td><a href="https://www.azul.com/downloads/">azul.com</a></td></tr>
+              <tr><td><strong>Microsoft Build of OpenJDK</strong></td><td>Microsoft'un ücretsiz OpenJDK dağıtımı</td><td>Evet, Microsoft Java dağıtıyor. Uygulama Azure'da çalışacaksa doğal seçim (.NET geçmişi şart değil). <span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/java/openjdk/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Dockerfile / dotnet publish --container</strong></td><td><strong>Jib</strong>, <strong>Cloud Native Buildpacks</strong> (<code>bootBuildImage</code>)</td><td>Spring Boot Dockerfile yazmadan imaj üretebilir. <span class="tag">ORTA</span></td><td><a href="https://buildpacks.io/">buildpacks.io</a></td></tr>
+              <tr><td><strong>appsettings.json</strong></td><td><strong>application.yml</strong> / <strong>application.properties</strong></td><td>Ortam ayrımı: <code>application-dev.yml</code> + Spring profilleri. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>ASPNETCORE_ENVIRONMENT</strong></td><td><code>spring.profiles.active</code> / <code>SPRING_PROFILES_ACTIVE</code></td><td>Aynı kavram: dev/test/prod ayrımı. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>User Secrets / Azure Key Vault</strong></td><td>Ortam değişkenleri, <strong>Spring Cloud Config</strong>, <strong>HashiCorp Vault</strong></td><td>Java'da "user secrets" dengi yerleşik değil; ortam değişkeni standarttır. <span class="tag">ORTA</span></td><td><a href="https://spring.io/projects/spring-cloud-config">spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">JDK dağıtımı seçimi — Durum &rarr; Sonuç</p>
+          <p>Hepsi aynı OpenJDK kaynak kodundan derlenir; fark lisans, destek ve ortam entegrasyonundadır.</p>
+          <ul>
+            <li><strong>Varsayılan / öğrenme</strong> &rarr; Eclipse Temurin.</li>
+            <li><strong>Uygulama AWS'te çalışacak</strong> &rarr; Amazon Corretto.</li>
+            <li><strong>Uygulama Azure'da çalışacak</strong> &rarr; Microsoft Build of OpenJDK.</li>
+            <li><strong>Red Hat / OpenShift ortamı</strong> &rarr; Red Hat build of OpenJDK.</li>
+            <li><strong>JavaFX masaüstü uygulaması</strong> &rarr; JavaFX'i içinde taşıyan Liberica Full veya Zulu FX (ya da OpenJFX'i ayrı bağımlılık olarak ekle).</li>
+            <li><strong>Kurumda Oracle destek sözleşmesi var</strong> &rarr; Oracle JDK (lisans koşulunu yukarıdaki satırdan ve Oracle SSS'den doğrula <span class="tag tag--warn">TEYİT</span>).</li>
+            <li><strong>Mevcut projeye katılıyorsun</strong> &rarr; ekibin kullandığı dağıtım ve sürüm.</li>
+          </ul>
+        </div>
+
+        <h3>2.3 Web çatısı: ASP.NET Core &rarr; Spring Boot</h3>
+
+        <p>Ayrıntılar: <a href="02-spring-boot/index.html">02 — Spring Boot</a>. Java tarafında iş bulmanın tek zorunlu kalemi burası.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Web ve uygulama çatısı karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ASP.NET Core</strong></td><td><strong>Spring Boot</strong> (+ Spring MVC)</td><td>Java ilanlarının neredeyse hepsinde bu var. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spring.io/projects/spring-boot">spring.io</a></td></tr>
+              <tr><td><strong>Minimal API</strong></td><td><strong>Javalin</strong>, <strong>Spark Java</strong>, Spring <code>RouterFunction</code>, <strong>Ktor</strong> (Kotlin)</td><td>Java kültüründe minimal API yaygın değil; controller yazılır. <span class="tag">ORTA</span></td><td><a href="https://javalin.io/">javalin.io</a></td></tr>
+              <tr><td><strong>Controller + [ApiController]</strong></td><td><code>@RestController</code> + <code>@GetMapping</code>/<code>@PostMapping</code></td><td>Birebir karşılık. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Program.cs / Startup.cs</strong></td><td><code>@SpringBootApplication</code> ana sınıf + <strong>auto-configuration</strong></td><td>Spring "sihir" yapar: sınıf yoluna bakıp kendi yapılandırır. <code>@ConditionalOnClass</code>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>IServiceCollection / DI konteyneri</strong></td><td><strong>Spring IoC container</strong> / <code>ApplicationContext</code></td><td>Kayıt <code>@Service</code>, <code>@Component</code>, <code>@Bean</code> ile yapılır; tarama otomatiktir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Singleton / Scoped / Transient</strong></td><td><code>singleton</code> (varsayılan) / <code>request</code> / <code>prototype</code></td><td>Dikkat: Spring'in varsayılanı singleton'dır; ASP.NET Core'un scoped alışkanlığıyla gelirsen tuzağa düşersin. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Constructor injection</strong></td><td>Aynısı; alan (field) enjeksiyonu <code>@Autowired</code> ile de mümkün ama önerilmez</td><td>Mülakat sorusu: "field injection neden kötü?" <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Middleware</strong></td><td><strong>Servlet Filter</strong>, <strong>HandlerInterceptor</strong>, (WebFlux) <strong>WebFilter</strong></td><td>Pipeline mantığı aynı, isim üç tane. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Action filter / Exception filter</strong></td><td><code>@ControllerAdvice</code> + <code>@ExceptionHandler</code>, Spring AOP</td><td>Global hata yönetimi burada kurulur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>IOptions&lt;T&gt;</strong></td><td><code>@ConfigurationProperties</code></td><td>Tipli yapılandırma. <code>@Value</code> tekil değer için. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Kestrel</strong></td><td><strong>Gömülü Tomcat</strong> (varsayılan)</td><td>Spring Boot içinde sunucu taşır; ayrıca kurmazsın. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://tomcat.apache.org/">tomcat.apache.org</a></td></tr>
+              <tr><td><strong>Kestrel alternatifi</strong></td><td><strong>Jetty</strong>, <strong>Undertow</strong></td><td>Spring Boot'ta tek satır bağımlılık değişikliğiyle takas edilir. <span class="tag">ORTA</span></td><td><a href="https://jetty.org/">jetty.org</a></td></tr>
+              <tr><td><strong>IIS / Windows Service barındırma</strong></td><td><strong>WildFly/JBoss</strong>, <strong>WebLogic</strong>, <strong>WebSphere</strong> (WAR dağıtımı)</td><td>Eski kurumsal projelerde karşına çıkar. WebLogic ve WebSphere ücretlidir. <span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://www.wildfly.org/">wildfly.org</a></td></tr>
+              <tr><td><strong>ASP.NET Core alternatifi</strong></td><td><strong>Quarkus</strong> (Red Hat), <strong>Micronaut</strong>, <strong>Helidon</strong>, <strong>Vert.x</strong></td><td>Hepsi ücretsiz; bulut/native odaklı. Spring'i öğrendikten sonra bak. <span class="tag tag--info">İLERİ</span></td><td><a href="https://quarkus.io/">quarkus.io</a></td></tr>
+              <tr><td><strong>Model binding + DataAnnotations</strong></td><td><strong>Jakarta Bean Validation</strong> (<code>@NotNull</code>, <code>@Size</code>) + <code>@Valid</code></td><td>Uygulaması Hibernate Validator'dır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://hibernate.org/validator/">hibernate.org</a></td></tr>
+              <tr><td><strong>FluentValidation</strong></td><td>Bean Validation + özel <code>ConstraintValidator</code>; akıcı API kültürü zayıf</td><td>.NET ilanlarında sık geçer; Java karşılığını da öğren. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/validator/">hibernate.org</a></td></tr>
+              <tr><td><strong>AutoMapper</strong></td><td><strong>MapStruct</strong> (derleme anında kod üretir), <strong>ModelMapper</strong> (çalışma anında)</td><td>MapStruct daha hızlı ve tercih edileni. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://mapstruct.org/">mapstruct.org</a></td></tr>
+              <tr><td><strong>Swashbuckle / Swagger UI</strong></td><td><strong>springdoc-openapi</strong> (eskisi: springfox)</td><td>springfox terk edilmiş durumda; yeni projede springdoc kullan. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://springdoc.org/">springdoc.org</a></td></tr>
+              <tr><td><strong>OpenAPI şeması</strong></td><td>Aynı standart; kod üretimi için <strong>OpenAPI Generator</strong></td><td>Sözleşme öncelikli (contract-first) çalışma Java'da daha yaygın. <span class="tag">ORTA</span></td><td><a href="https://openapi-generator.tech/">openapi-generator.tech</a></td></tr>
+              <tr><td><strong>JWT Authentication</strong></td><td><strong>Spring Security</strong> OAuth2 Resource Server</td><td>Spring Security'nin öğrenme eğrisi diktir; en çok zorlanacağın parça. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-security/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Policy-based authorization</strong></td><td><code>@PreAuthorize</code> / metot güvenliği / <code>SecurityFilterChain</code></td><td>Rol ve ifade tabanlı yetkilendirme. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ASP.NET Core Identity</strong></td><td>Spring Security <code>UserDetailsService</code> veya <strong>Keycloak</strong> (harici sunucu)</td><td>Java dünyasında kimlik yönetimini dışarı almak (Keycloak) çok yaygın. <span class="tag">ORTA</span></td><td><a href="https://www.keycloak.org/">keycloak.org</a></td></tr>
+              <tr><td><strong>Rate limiting middleware</strong></td><td><strong>Bucket4j</strong>, <strong>Resilience4j RateLimiter</strong>, ağ geçidi seviyesinde sınırlama</td><td>Spring'de yerleşik değil, kütüphane eklersin. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://bucket4j.com/">bucket4j.com</a></td></tr>
+              <tr><td><strong>Polly (retry, circuit breaker)</strong></td><td><strong>Resilience4j</strong> (eskisi: Hystrix)</td><td>Hystrix bakım dışı; yeni projede Resilience4j. <span class="tag">ORTA</span></td><td><a href="https://resilience4j.readme.io/">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>HttpClient / IHttpClientFactory</strong></td><td><code>RestClient</code> (yeni), <code>WebClient</code>, <code>RestTemplate</code> (eski), <strong>OpenFeign</strong></td><td><code>RestTemplate</code> bakım modunda; yeni kodda kullanma. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>HealthChecks</strong></td><td><strong>Spring Boot Actuator</strong> (<code>/actuator/health</code>)</td><td>Actuator ayrıca metrik, ortam ve bean listesi de verir. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>BackgroundService / IHostedService</strong></td><td><code>@Scheduled</code>, <code>ApplicationRunner</code>, <code>CommandLineRunner</code></td><td>Basit zamanlanmış işler için yeterli. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Hangfire</strong></td><td><strong>Quartz Scheduler</strong>, <strong>JobRunr</strong>, <strong>Spring Batch</strong> (toplu işler)</td><td>JobRunr'ın Pro sürümü ücretli; temel sürüm ücretsiz. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.quartz-scheduler.org/">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>SignalR</strong></td><td>Spring <strong>WebSocket + STOMP</strong>, <strong>SSE</strong>, (harici) Socket.IO</td><td>SignalR gibi tek çatı altında toplanmış hazır bir çözüm yok; parçaları kendin kurarsın. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/web/websocket.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>gRPC (Grpc.AspNetCore)</strong></td><td><strong>grpc-java</strong>, Spring gRPC starter, Quarkus gRPC</td><td>.proto dosyası ve kod üretimi aynı mantık. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://grpc.io/docs/languages/java/">grpc.io</a></td></tr>
+              <tr><td><strong>YARP / Ocelot (API gateway)</strong></td><td><strong>Spring Cloud Gateway</strong>, (eski) Zuul</td><td>Mikroservis mimarisinde standart parça. <span class="tag tag--info">İLERİ</span></td><td><a href="https://spring.io/projects/spring-cloud-gateway">spring.io</a></td></tr>
+              <tr><td><strong>Service discovery (Consul)</strong></td><td><strong>Eureka</strong> (Spring Cloud Netflix), Consul, Kubernetes servisleri</td><td>Kubernetes varsa çoğu zaman ayrı keşif sunucusuna gerek kalmaz. <span class="tag tag--info">İLERİ</span></td><td><a href="https://spring.io/projects/spring-cloud-netflix">spring.io</a></td></tr>
+              <tr><td><strong>.NET Aspire</strong></td><td>Tam karşılığı <strong>yok</strong>; Docker Compose + Testcontainers + Spring Boot Docker Compose desteği</td><td>Spring Boot yerel geliştirmede compose dosyasını kendisi ayağa kaldırabiliyor. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Razor / MVC View</strong></td><td><strong>Thymeleaf</strong> (yaygın), <strong>FreeMarker</strong>, <strong>JSP</strong> (eski)</td><td>Yeni projede JSP kullanılmaz. <span class="tag">ORTA</span></td><td><a href="https://www.thymeleaf.org/">thymeleaf.org</a></td></tr>
+              <tr><td><strong>Blazor</strong></td><td><strong>Vaadin</strong> (sunucu tarafı UI), <strong>JSF</strong> (eski), <strong>HTMX</strong> + Thymeleaf</td><td>Vaadin'in ücretli katmanları var. Java'da SPA genelde React/Angular ile ayrı yazılır &rarr; <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümü</a>. <span class="tag">ORTA</span></td><td><a href="https://vaadin.com/">vaadin.com</a></td></tr>
+              <tr><td><strong>SoapCore / WCF</strong></td><td><strong>JAX-WS</strong>, <strong>Apache CXF</strong>, Spring Web Services</td><td>Kamu ve sigorta entegrasyonlarında hâlâ karşına çıkar. <span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://cxf.apache.org/">cxf.apache.org</a></td></tr>
+              <tr><td><strong>Multi-tenant</strong></td><td>Hazır çatı yok; Hibernate multi-tenancy + <code>TenantContext</code> deseni</td><td>Hibernate'in şema/veritabanı bazlı çok kiracılık desteği vardır. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.4 Veri erişimi</h3>
+
+        <p>Ayrıntılar: <a href="03-veri-ve-mesajlasma/index.html">03 — Veri ve mesajlaşma</a>. SQL bilgin hangi veritabanından gelirse gelsin buraya taşınır; değişen sürücü ve ORM adıdır.</p>
+
+        <ul>
+          <li><strong>SQL Server biliyorsan</strong> &rarr; sürücü <code>mssql-jdbc</code>; bilgin aynen geçerli.</li>
+          <li><strong>PostgreSQL / MySQL / MariaDB biliyorsan</strong> &rarr; ilgili JDBC sürücüsü; bilgin aynen geçerli.</li>
+          <li><strong>Oracle biliyorsan</strong> &rarr; <code>ojdbc</code>; banka ve telekom Java projelerinde büyük avantaj.</li>
+          <li><strong>Hiç SQL bilmiyorsan</strong> &rarr; JPA'dan önce temel SQL öğren (SELECT, JOIN, index, transaction). ORM, SQL bilgisinin yerini tutmaz; N+1 gibi sorunları SQL bilmeden göremezsin.</li>
+          <li><strong>Hedef sektöre göre veritabanı</strong> &rarr; banka/telekom: çoğunlukla Oracle; startup/ürün/e-ticaret: çoğunlukla PostgreSQL veya MySQL; Microsoft yığınlı kurum: SQL Server. Bu dağılım gözlemdir, ilanlardan kendin doğrula <span class="tag tag--warn">TEYİT</span>.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri erişimi karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ADO.NET / SqlConnection</strong></td><td><strong>JDBC</strong> / <code>DataSource</code></td><td>En alt katman. Her veritabanının bir JDBC sürücüsü vardır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/module-summary.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Connection pooling (yerleşik)</strong></td><td><strong>HikariCP</strong> (Spring Boot varsayılanı)</td><td>Java'da havuz ayrı bir kütüphanedir; ayarları mülakatta sorulur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com</a></td></tr>
+              <tr><td><strong>Entity Framework Core</strong></td><td><strong>JPA</strong> (standart) + <strong>Hibernate</strong> (uygulama) + <strong>Spring Data JPA</strong> (kolaylaştırıcı)</td><td>Üç isim, tek yığın. Karıştırma. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spring.io/projects/spring-data-jpa">spring.io</a></td></tr>
+              <tr><td><strong>DbContext</strong></td><td><code>EntityManager</code> / Hibernate <code>Session</code></td><td>Persistence context = change tracker. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>DbSet&lt;T&gt; + LINQ sorgusu</strong></td><td><code>JpaRepository&lt;T, ID&gt;</code> + türetilmiş metot adları (<code>findByEmailAndActive</code>)</td><td>Spring Data metot adından sorgu üretir; ilk görüşte tuhaf gelir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spring.io/projects/spring-data-jpa">spring.io</a></td></tr>
+              <tr><td><strong>LINQ to Entities</strong></td><td><strong>JPQL</strong>, <strong>Criteria API</strong>, <strong>QueryDSL</strong></td><td>Java'da derleyici destekli sorgu dili yok; JPQL metin tabanlıdır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>IQueryable kompozisyonu</strong></td><td><strong>Criteria API</strong> / <strong>QueryDSL</strong> / <strong>Specification</strong> (Spring Data)</td><td>Dinamik filtreleme için Specification deseni öğren. <span class="tag">ORTA</span></td><td><a href="https://spring.io/projects/spring-data-jpa">spring.io</a></td></tr>
+              <tr><td><strong>Fluent API / Data Annotations</strong></td><td>JPA annotation'ları (<code>@Entity</code>, <code>@Column</code>, <code>@ManyToOne</code>) veya <code>orm.xml</code></td><td>Fluent API dengi yok; yapılandırma annotation ile yapılır. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>Lazy loading</strong></td><td><code>FetchType.LAZY</code> + <strong>N+1 problemi</strong> + <code>JOIN FETCH</code></td><td>En sık sorulan JPA performans sorusu budur. <code>LazyInitializationException</code> klasiktir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>AsNoTracking()</strong></td><td>Salt okunur sorgu / DTO projeksiyonu / <code>@Transactional(readOnly = true)</code></td><td>Aynı performans kaygısı, farklı araç. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SaveChanges / transaction scope</strong></td><td><code>@Transactional</code> (Spring)</td><td>Proxy üzerinden çalışır; aynı sınıf içindeki çağrıda devreye girmez — klasik tuzak. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Dapper</strong></td><td><strong>JdbcTemplate</strong> / <strong>JDBI</strong> / <strong>MyBatis</strong></td><td>"SQL'i ben yazarım" tarzına en yakın seçenekler bunlar. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Dapper alternatifi</strong></td><td><strong>jOOQ</strong> — tip güvenli SQL üretimi</td><td>Açık kaynak veritabanları için ücretsiz; ticari veritabanlarında (Oracle, SQL Server) ücretli lisans ister. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.jooq.org/">jooq.org</a></td></tr>
+              <tr><td><strong>EF Core Migrations</strong></td><td><strong>Flyway</strong> veya <strong>Liquibase</strong></td><td>JPA'da yerleşik migration yoktur; ayrı araç şart. Flyway artık Redgate ürünü, Community sürümü ücretsiz. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://documentation.red-gate.com/flyway">documentation.red-gate.com</a></td></tr>
+              <tr><td><strong>Migration (alternatif)</strong></td><td><strong>Liquibase</strong> — XML/YAML/SQL changelog</td><td>Kurumsalda Flyway kadar yaygın; ücretsiz çekirdek + ücretli Pro. <span class="tag">ORTA</span></td><td><a href="https://docs.liquibase.com/">docs.liquibase.com</a></td></tr>
+              <tr><td><strong>ddl-auto / EnsureCreated</strong></td><td><code>spring.jpa.hibernate.ddl-auto</code></td><td>Üretimde <code>none</code> olmalı; <code>update</code> ile canlıya çıkmak klasik felakettir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>SQL Server sürücüsü</strong></td><td><strong>mssql-jdbc</strong></td><td>SQL Server biliyorsan bilgin aynen geçerli; sadece sürücü ve bağlantı dizesi biçimi değişir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Npgsql</strong></td><td><strong>PostgreSQL JDBC Driver</strong></td><td>Java tarafında PostgreSQL çok yaygın. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jdbc.postgresql.org/">jdbc.postgresql.org</a></td></tr>
+              <tr><td><strong>Oracle veritabanı</strong></td><td><strong>ojdbc</strong> sürücüsü</td><td>Türkiye'de banka Java'sının varsayılan veritabanı çoğu zaman Oracle'dır. Veritabanı lisansı ücretlidir. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.oracle.com/database/technologies/appdev/jdbc.html">oracle.com</a></td></tr>
+              <tr><td><strong>LocalDB / SQLite testi</strong></td><td><strong>H2</strong> (bellek içi veritabanı), <strong>Testcontainers</strong></td><td>H2 pratik ama üretim veritabanıyla davranış farkı yaratır; Testcontainers daha doğru. <span class="tag">ORTA</span></td><td><a href="https://testcontainers.com/">testcontainers.com</a></td></tr>
+              <tr><td><strong>MemoryCache</strong></td><td><strong>Caffeine</strong>, <strong>Ehcache</strong> + Spring <code>@Cacheable</code> soyutlaması</td><td>Spring Cache soyutlaması sağlayıcıdan bağımsızdır. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>IDistributedCache / StackExchange.Redis</strong></td><td><strong>Spring Data Redis</strong> + <strong>Lettuce</strong> (varsayılan istemci) veya <strong>Jedis</strong></td><td>Redis'i hiç kullanmadıysan Docker ile 10 dakikada kurulur, mutlaka dene. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis alternatifi</strong></td><td><strong>Valkey</strong> (Redis çatallanması), <strong>Hazelcast</strong>, <strong>Infinispan</strong></td><td>Hazelcast ve Infinispan Java dünyasının dağıtık bellek ızgaraları. <span class="tag tag--info">İLERİ</span></td><td><a href="https://valkey.io/">valkey.io</a></td></tr>
+              <tr><td><strong>MongoDB.Driver</strong></td><td><strong>MongoDB Java Driver</strong> + Spring Data MongoDB</td><td>Aynı desen: Spring Data her veri deposu için repository sunar. <span class="tag">ORTA</span></td><td><a href="https://spring.io/projects/spring-data-mongodb">spring.io</a></td></tr>
+              <tr><td><strong>Elasticsearch .NET istemcisi</strong></td><td><strong>Elasticsearch Java API Client</strong> / OpenSearch istemcisi</td><td>Log ve arama altyapılarında sık. <span class="tag tag--info">İLERİ</span></td><td><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api-client/current/index.html">elastic.co</a></td></tr>
+              <tr><td><strong>Bulk insert / SqlBulkCopy</strong></td><td>JDBC batch (<code>addBatch</code>/<code>executeBatch</code>), <code>hibernate.jdbc.batch_size</code></td><td>Performans mülakatlarında sorulur. <span class="tag">ORTA</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>Stored procedure çağrısı</strong></td><td><code>@Procedure</code>, <code>StoredProcedureQuery</code>, <code>SimpleJdbcCall</code></td><td>SQL deneyimin varsa (SQL Server, PostgreSQL vb.) burada avantaja dönüşür. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.5 Mesajlaşma ve dağıtık mimari</h3>
+
+        <p>Bu tablodaki satırların çoğu ilanlarda sık istenir. Deneyimine göre: <strong>işte bu teknolojileri (başka bir dilde de olsa) kullanıyorsan</strong> &rarr; kavramları tekrar etme, yalnızca Java istemci kütüphanesini öğren. <strong>Hiç kullanmadıysan ya da işte fırsatın yoksa</strong> &rarr; Docker ile kendi küçük örneğini yaz; kavramı bir kez öğrenince öbür ekosistemde yalnızca isim değişir. Ayrıntı: <a href="03-veri-ve-mesajlasma/index.html">03 — Veri ve mesajlaşma</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mesajlaşma ve dağıtık sistem karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>RabbitMQ.Client</strong></td><td><strong>Spring AMQP</strong> / <code>RabbitTemplate</code> / <code>@RabbitListener</code></td><td>Broker aynı yazılım; sadece istemci kütüphanesi değişir. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>MassTransit</strong></td><td><strong>Spring Cloud Stream</strong>, <strong>Apache Camel</strong>, <strong>Spring Integration</strong></td><td>MassTransit'in birebir karşılığı yok; bu üçü aynı ihtiyacı farklı üsluplarla çözer. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://spring.io/projects/spring-cloud-stream">spring.io</a></td></tr>
+              <tr><td><strong>NServiceBus</strong></td><td><strong>Apache Camel</strong> / <strong>Axon Framework</strong></td><td>NServiceBus ücretlidir; Camel ücretsizdir. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://camel.apache.org/">camel.apache.org</a></td></tr>
+              <tr><td><strong>Azure Service Bus / SQS</strong></td><td>Aynı bulut servisleri, Java SDK'ları ile</td><td>Bulut servisleri dil bağımsızdır. <span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/azure/service-bus-messaging/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Kafka (Confluent.Kafka)</strong></td><td><strong>Spring for Apache Kafka</strong> — Kafka'nın ana vatanı JVM'dir</td><td>Türkiye'de banka/telekom ilanlarında Kafka çok geçer. Öğrenmen gereken en yüksek getirili mesajlaşma teknolojisi. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>—</strong></td><td><strong>JMS</strong> (Jakarta Messaging) + <strong>ActiveMQ Artemis</strong></td><td>Java'ya özgü standart mesajlaşma API'si; .NET'te dengi yok. Eski kurumsal projelerde çok. <span class="tag">ORTA</span></td><td><a href="https://activemq.apache.org/">activemq.apache.org</a></td></tr>
+              <tr><td><strong>MediatR / CQRS</strong></td><td><strong>Spring Modulith</strong> olay yayını, <strong>Axon Framework</strong> (tam CQRS + Event Sourcing)</td><td>CQRS'de önce deseni öğren (komut/sorgu ayrımı), kütüphane sonra. Axon Server'ın ücretli katmanları var. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://spring.io/projects/spring-modulith">spring.io</a></td></tr>
+              <tr><td><strong>Outbox pattern</strong></td><td>Aynı desen; <strong>Debezium</strong> ile CDC tabanlı outbox</td><td>Mikroservis tutarlılığının standart cevabı. <span class="tag tag--info">İLERİ</span></td><td><a href="https://debezium.io/">debezium.io</a></td></tr>
+              <tr><td><strong>Saga / iş akışı</strong></td><td><strong>Camunda</strong>, <strong>Temporal</strong>, Axon Saga</td><td>Camunda'nın ücretsiz ve ücretli sürümleri var; iş akışı motorları Java dünyasında güçlü. <span class="tag tag--info">İLERİ</span></td><td><a href="https://camunda.com/">camunda.com</a></td></tr>
+              <tr><td><strong>Distributed lock</strong></td><td><strong>ShedLock</strong>, Redis tabanlı kilit, ZooKeeper</td><td>Zamanlanmış işin iki sunucuda birden koşmasını engellemek için. <span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/lukas-krecan/ShedLock">github.com</a></td></tr>
+              <tr><td><strong>Dapr</strong></td><td>Dapr'ın kendisi (dil bağımsız) veya Spring Cloud bileşenleri</td><td>Dapr Java'da da çalışır; Java dünyasında yaygınlığı düşüktür. <span class="tag tag--info">İLERİ</span></td><td><a href="https://dapr.io/">dapr.io</a></td></tr>
+              <tr><td><strong>Mikroservis / monolit tartışması</strong></td><td><strong>Modular monolith</strong> — Spring Modulith</td><td>Mülakatta "her şeyi mikroservis yapmam" diyebilmek artı puandır. <span class="tag">ORTA</span></td><td><a href="https://spring.io/projects/spring-modulith">spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.6 Test ve kalite</h3>
+
+        <p><strong>İşte birim test ve mock yazıyorsan</strong> (xUnit/Moq, pytest, Jest vb.) &rarr; burada yalnızca JUnit/Mockito sözdizimi farkı var. <strong>Hiç mock test yazmadıysan</strong> &rarr; bu, en hızlı kapatılabilecek ve mülakatta en görünür açıktır; bir akşamda temelini kapat. Ayrıntı: <a href="04-ekosistem-ve-araclar/index.html">04 — Ekosistem ve araçlar</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test ve kod kalitesi karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>xUnit / NUnit / MSTest</strong></td><td><strong>JUnit 5</strong> (JUnit Jupiter)</td><td>Fiilen tek standart. Aramada "JUnit 5" yaz; JUnit 4 örnekleri farklı annotation kullanır. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://junit.org/junit5/docs/current/user-guide/">junit.org</a></td></tr>
+              <tr><td><strong>NUnit alternatifi</strong></td><td><strong>TestNG</strong>, <strong>Spock</strong> (Groovy)</td><td>Spock okunabilir testleriyle sevilir; Groovy gerektirir. <span class="tag">ORTA</span></td><td><a href="https://testng.org/">testng.org</a></td></tr>
+              <tr><td><strong>Moq / NSubstitute</strong></td><td><strong>Mockito</strong> (fiili standart), EasyMock</td><td><code>when(...).thenReturn(...)</code> sözdizimi. Bir günde öğrenilir; öğren. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://site.mockito.org/">site.mockito.org</a></td></tr>
+              <tr><td><strong>FluentAssertions</strong></td><td><strong>AssertJ</strong> (<code>assertThat(x).isEqualTo(y)</code>), Hamcrest</td><td>FluentAssertions v8 ile ticari kullanımda ücretli lisansa geçti; v7 açık lisansta kaldı. AssertJ ücretsiz. Lisans koşulları değişebilir, kullanmadan önce kendi sayfasından teyit et. <span class="tag">ORTA</span></td><td><a href="https://assertj.github.io/doc/">assertj.github.io</a></td></tr>
+              <tr><td><strong>WebApplicationFactory / entegrasyon testi</strong></td><td><code>@SpringBootTest</code> + <strong>MockMvc</strong> / <code>WebTestClient</code> / <code>TestRestTemplate</code></td><td>Uygulamayı ayağa kaldırıp HTTP üzerinden test etme. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Testcontainers (.NET)</strong></td><td><strong>Testcontainers (Java)</strong> — projenin doğduğu yer</td><td>Gerçek PostgreSQL/Redis/Kafka'yı Docker'da açıp test eder. En değerli test aracı. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://testcontainers.com/">testcontainers.com</a></td></tr>
+              <tr><td><strong>WireMock.Net</strong></td><td><strong>WireMock</strong> (Java aslı), MockWebServer (OkHttp)</td><td>Dış HTTP servisini taklit etme. <span class="tag">ORTA</span></td><td><a href="https://wiremock.org/">wiremock.org</a></td></tr>
+              <tr><td><strong>RestSharp test / API testi</strong></td><td><strong>REST Assured</strong></td><td>API testleri için akıcı DSL. <span class="tag">ORTA</span></td><td><a href="https://rest-assured.io/">rest-assured.io</a></td></tr>
+              <tr><td><strong>Coverlet + ReportGenerator</strong></td><td><strong>JaCoCo</strong></td><td>Kapsam raporu; CI eşiği koymak yaygın. <span class="tag">ORTA</span></td><td><a href="https://www.jacoco.org/jacoco/">jacoco.org</a></td></tr>
+              <tr><td><strong>SpecFlow</strong></td><td><strong>Cucumber-JVM</strong> (Gherkin)</td><td>Davranış odaklı test; SpecFlow'un atası. <span class="tag tag--info">İLERİ</span></td><td><a href="https://cucumber.io/docs/">cucumber.io</a></td></tr>
+              <tr><td><strong>Bogus (sahte veri)</strong></td><td><strong>Instancio</strong>, <strong>Datafaker</strong>, EasyRandom</td><td>Test verisi üretimi. <span class="tag tag--info">İLERİ</span></td><td><a href="https://www.instancio.org/">instancio.org</a></td></tr>
+              <tr><td><strong>BenchmarkDotNet</strong></td><td><strong>JMH</strong> (Java Microbenchmark Harness)</td><td>JVM ısınması yüzünden elle ölçüm yanıltır; JMH şart. Performans pozisyonu hedefliyorsan ya da özgeçmişinde performans iddiası varsa öncelikli; genel backend hedefinde adını ve neden gerektiğini bilmen yeter. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://openjdk.org/projects/code-tools/jmh/">openjdk.org</a></td></tr>
+              <tr><td><strong>Roslyn analizörleri</strong></td><td><strong>Checkstyle</strong>, <strong>SpotBugs</strong>, <strong>PMD</strong>, <strong>Error Prone</strong></td><td>Dört ayrı araç, dört ayrı odak: biçim, hata deseni, kod kokusu, derleme anı kontrol. <span class="tag">ORTA</span></td><td><a href="https://checkstyle.org/">checkstyle.org</a></td></tr>
+              <tr><td><strong>SonarQube / SonarCloud</strong></td><td>Aynı ürün, Java tarafında daha da yaygın</td><td>Community sürümü ücretsiz; kurumsal sürümler ücretli. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.sonarsource.com/products/sonarqube/">sonarsource.com</a></td></tr>
+              <tr><td><strong>dotnet format / EditorConfig</strong></td><td><strong>Spotless</strong>, <strong>google-java-format</strong></td><td>Derlemeye bağlanır, PR'da biçim tartışmasını bitirir. <span class="tag">ORTA</span></td><td><a href="https://github.com/diffplug/spotless">github.com</a></td></tr>
+              <tr><td><strong>ArchUnitNET</strong></td><td><strong>ArchUnit</strong> (Java aslı)</td><td>Katman kurallarını testle zorlar: "domain katmanı web'e bağımlı olamaz". Senior/mimari pozisyon hedefliyorsan ya da özgeçmişinde mimari iddiası varsa öncelikli; değilse sonraya bırakılabilir. <span class="tag tag--info">İLERİ</span></td><td><a href="https://www.archunit.org/">archunit.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.7 Log, izleme, hata ayıklama</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Gözlemlenebilirlik karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ILogger&lt;T&gt; soyutlaması</strong></td><td><strong>SLF4J</strong> (arayüz)</td><td>Java'da loglama iki katmanlıdır: arayüz (SLF4J) + uygulama (Logback/Log4j2). <span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.slf4j.org/">slf4j.org</a></td></tr>
+              <tr><td><strong>Serilog</strong></td><td><strong>Logback</strong> (Spring Boot varsayılanı) veya <strong>Log4j2</strong></td><td>Yapılandırılmış (JSON) log için ek encoder eklersin. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://logback.qos.ch/">logback.qos.ch</a></td></tr>
+              <tr><td><strong>Seq</strong></td><td><strong>Kibana</strong> (ELK), <strong>Grafana Loki</strong>, <strong>Graylog</strong></td><td>Seq'in birebir dengi yok; Java kültüründe log merkezi ELK/Loki'dir. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://grafana.com/oss/loki/">grafana.com</a></td></tr>
+              <tr><td><strong>Serilog enrichment / correlation id</strong></td><td><strong>MDC</strong> (Mapped Diagnostic Context)</td><td>İstek kimliğini loga taşımanın standart yolu. <span class="tag">ORTA</span></td><td><a href="https://logback.qos.ch/manual/mdc.html">logback.qos.ch</a></td></tr>
+              <tr><td><strong>OpenTelemetry .NET</strong></td><td><strong>OpenTelemetry Java Agent</strong></td><td>Kod değiştirmeden <code>-javaagent</code> ile izleme ekleyebilirsin; Java'nın büyük avantajı. <span class="tag">ORTA</span></td><td><a href="https://opentelemetry.io/docs/languages/java/">opentelemetry.io</a></td></tr>
+              <tr><td><strong>Application Insights / Prometheus exporter</strong></td><td><strong>Micrometer</strong> + Actuator + Prometheus</td><td>Micrometer, metrik dünyasının SLF4J'sidir. <span class="tag">ORTA</span></td><td><a href="https://micrometer.io/">micrometer.io</a></td></tr>
+              <tr><td><strong>dotnet-counters / EventCounters</strong></td><td><strong>JMX</strong>, <strong>JFR</strong> (Java Flight Recorder), <code>jcmd</code></td><td>JFR üretimde düşük maliyetli profil çıkarır; güçlü araç. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/jfapi/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>dotMemory / dotTrace</strong></td><td><strong>VisualVM</strong> (ücretsiz), <strong>async-profiler</strong> (ücretsiz), <strong>JProfiler</strong> / <strong>YourKit</strong> (ücretli)</td><td>Ücretsiz ile başla; VisualVM işini görür. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://visualvm.github.io/">visualvm.github.io</a></td></tr>
+              <tr><td><strong>dotnet-dump / WinDbg</strong></td><td><code>jmap</code>, <code>jstack</code>, <strong>Eclipse MAT</strong> (heap dump analizi)</td><td>OutOfMemoryError araştırmasının standart yolu. <span class="tag tag--info">İLERİ</span></td><td><a href="https://eclipse.dev/mat/">eclipse.dev/mat</a></td></tr>
+              <tr><td><strong>GC ayarları / sunucu GC</strong></td><td><code>-Xmx</code>, <code>-Xms</code>, <code>-XX:+UseG1GC</code> JVM bayrakları</td><td>Konteynerde bellek sınırı ile <code>-Xmx</code> uyumu klasik üretim sorunudur. <span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/">docs.oracle.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.8 Araçlar, IDE ve CI/CD</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Araç ve süreç karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Visual Studio / Rider</strong></td><td><strong>IntelliJ IDEA</strong> — ücretsiz katman + ücretli (Ultimate) abonelik</td><td>Java'nın fiili standardı. Gelişmiş Spring desteği ücretli katmandadır. Lisans durumuna göre: <strong>öğrenci/eğitimci</strong> &rarr; JetBrains eğitim lisansıyla ücretli katman ücretsiz; <strong>açık kaynak proje bakımcısı</strong> &rarr; açık kaynak lisans programı; <strong>şirket lisans sağlıyorsa</strong> &rarr; ücretli katman; <strong>hiçbiri yoksa</strong> &rarr; ücretsiz katman + <a href="https://start.spring.io/">Spring Initializr</a>, Spring araçları için VS Code + Spring Boot Extension Pack (ücretsiz). JetBrains 2025'te Community/Ultimate dağıtımını tek "IntelliJ IDEA" ürününde birleştirdi <span class="tag tag--warn">TEYİT</span>: <a href="https://www.jetbrains.com/idea/download/">jetbrains.com/idea/download</a>. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.jetbrains.com/idea/">jetbrains.com</a></td></tr>
+              <tr><td><strong>IDE alternatifi</strong></td><td><strong>Eclipse IDE</strong>, <strong>Apache NetBeans</strong>, <strong>VS Code</strong> + Java eklenti paketi</td><td>Hepsi ücretsiz. Kurumsalda Eclipse hâlâ yaygındır. <span class="tag">ORTA</span></td><td><a href="https://eclipseide.org/">eclipseide.org</a></td></tr>
+              <tr><td><strong>dotnet watch</strong></td><td><strong>Spring Boot DevTools</strong> (otomatik yeniden başlatma), <strong>JRebel</strong> (ücretli, gerçek sıcak takas)</td><td>DevTools yeniden başlatır, JRebel başlatmadan değiştirir. <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>GitHub Actions</strong></td><td>Aynı ürün; Java için <code>setup-java</code> + Maven/Gradle önbelleği</td><td>İşte CI hattı kullanıyorsan yalnızca <code>setup-java</code> ve Maven/Gradle adımlarını öğren. Hiç CI hattı kurmadıysan tek YAML dosyasıyla başla: derle, test et, artefakt üret. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.github.com/en/actions">docs.github.com</a></td></tr>
+              <tr><td><strong>Azure DevOps Pipelines</strong></td><td>Aynı ürün; Maven/Gradle görevleri hazır</td><td>Kurumsalda çok yaygın. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CI alternatifi</strong></td><td><strong>Jenkins</strong> — Java dünyasının klasiği, ücretsiz</td><td>Türkiye'de banka/telekomda hâlâ yaygın (gözlem <span class="tag tag--warn">TEYİT</span>). Jenkinsfile (Groovy) yazılır. <span class="tag">ORTA</span></td><td><a href="https://www.jenkins.io/doc/">jenkins.io</a></td></tr>
+              <tr><td><strong>GitLab CI</strong></td><td>Aynı ürün</td><td>Şirket içi GitLab kurulumları yaygın. <span class="tag">ORTA</span></td><td><a href="https://docs.gitlab.com/ee/ci/">docs.gitlab.com</a></td></tr>
+              <tr><td><strong>Git</strong></td><td>Aynı</td><td>Dil bağımsız. Kullanıyorsan geç; hiç kullanmadıysan Java'dan önce temel Git'i öğren (commit, branch, merge, pull request), çünkü vitrin projesinin kendisi bir Git deposudur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://git-scm.com/doc">git-scm.com</a></td></tr>
+              <tr><td><strong>Docker / Kubernetes</strong></td><td>Aynı; Java imajlarında bellek ve JVM bayrağı ayarı ek konu</td><td>Java ilanlarında Docker beklentisi yüksektir. Kurulum ortamına göre: Linux &rarr; Docker Engine; Windows/macOS &rarr; Docker Desktop (Windows'ta WSL2 içinde Docker Engine de olur). Docker Desktop, 250'den fazla çalışanı veya 10 milyon dolardan fazla yıllık geliri olan kuruluşlarda ticari kullanımda ücretli abonelik ister; kişisel/öğrenme kullanımı ücretsiz; alternatifler Podman, Rancher Desktop <span class="tag tag--warn">TEYİT</span>: <a href="https://www.docker.com/pricing/">docker.com/pricing</a>. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.docker.com/">docs.docker.com</a></td></tr>
+              <tr><td><strong>Upgrade Assistant</strong></td><td><strong>OpenRewrite</strong> — otomatik kod modernizasyonu</td><td>javax&rarr;jakarta geçişi gibi toplu dönüşümleri yapar. Kurumsal Java'da altın değerinde. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openrewrite.org/">openrewrite.org</a></td></tr>
+              <tr><td><strong>NuGet paket denetimi</strong></td><td><strong>OWASP Dependency-Check</strong>, Dependabot, <code>mvn versions:display-dependency-updates</code></td><td>Güvenlik açığı taraması; Log4Shell sonrası standart oldu. <span class="tag">ORTA</span></td><td><a href="https://owasp.org/www-project-dependency-check/">owasp.org</a></td></tr>
+              <tr><td><strong>Postman / .http dosyası</strong></td><td>Aynı; ayrıca IntelliJ HTTP Client</td><td>Dil bağımsız. <span class="tag">ORTA</span></td><td><a href="https://learning.postman.com/docs/">postman.com</a></td></tr>
+              <tr><td><strong>Learn / MSDN</strong></td><td><strong>dev.java</strong>, <strong>docs.spring.io</strong>, <strong>Baeldung</strong> (resmî değil ama fiili başvuru kaynağı)</td><td>Baeldung Java dünyasının Stack Overflow sonrası ikinci adresidir; resmî doküman değildir, doğrula. <span class="tag">ORTA</span></td><td><a href="https://dev.java/learn/">dev.java</a></td></tr>
+              <tr><td><strong>mvnrepository.com</strong></td><td>Bağımlılık arama sitesi (resmî değil, ama herkes kullanır)</td><td>Maven koordinatını (groupId:artifactId:version) buradan kopyalarsın. <span class="tag">ORTA</span></td><td><a href="https://mvnrepository.com/">mvnrepository.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.9 Arayüz, mobil, masaüstü</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İstemci tarafı karşılıklar</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>WPF / WinForms</strong></td><td><strong>JavaFX</strong>, <strong>Swing</strong> (eski)</td><td>Java masaüstü bugün niş bir alan (sol sütun yalnızca .NET'ten gelenler için karşılık). Masaüstü hedefliyorsan JavaFX'i JavaFX içeren bir JDK ile (Liberica Full, Zulu FX) ya da OpenJFX bağımlılığıyla kur. <span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://openjfx.io/">openjfx.io</a></td></tr>
+              <tr><td><strong>.NET MAUI</strong></td><td><strong>Kotlin Multiplatform</strong> + <strong>Compose Multiplatform</strong></td><td>JVM tarafının çapraz platform cevabı; Android'de doğal avantajlı. <span class="tag tag--info">İLERİ</span></td><td><a href="https://kotlinlang.org/docs/multiplatform.html">kotlinlang.org</a></td></tr>
+              <tr><td><strong>Xamarin / Android</strong></td><td><strong>Android SDK</strong> (Kotlin/Java)</td><td>Flutter biliyorsan karşılaştırma sorusu gelebilir. <span class="tag tag--info">İLERİ</span></td><td><a href="https://developer.android.com/">developer.android.com</a></td></tr>
+              <tr><td><strong>Blazor WASM</strong></td><td><strong>TeaVM</strong>, <strong>CheerpJ</strong> (niş), pratikte React/Angular</td><td>Java'yı tarayıcıda çalıştırmak yaygın bir yol değildir. <span class="tag tag--info">İLERİ</span></td><td><a href="https://teavm.org/">teavm.org</a></td></tr>
+              <tr><td><strong>React + ASP.NET Core</strong></td><td>React + Spring Boot (aynı kurgu)</td><td>Arayüz tarafı dil bağımsız; <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümüne</a> bak. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://react.dev/">react.dev</a></td></tr>
+              <tr><td><strong>Console uygulaması</strong></td><td><code>public static void main(String[] args)</code>, Picocli (CLI kütüphanesi)</td><td>Öğrenirken tek dosyalık main ile başla; <code>java Dosya.java</code> doğrudan çalışır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://picocli.info/">picocli.info</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.10 Mimari, tasarım deseni ve kod kalitesi</h3>
+
+        <p>Bu tablodaki satırların çoğu <strong>dil değil kavram</strong>. Bu kavramları başka bir dilde zaten biliyorsan Java'daki adını öğrenmek dışında yeni bir şey öğrenmene gerek yok; ama adını bilmezsen mülakatta bildiğin konuyu anlatamazsın. Hiç çalışmadıysan önce kavramı (ör. <a href="https://refactoring.guru/">refactoring.guru</a>), sonra Java örneğini öğren. İlanlarda sık geçen mimari maddeler (Layered/Onion, Clean Code, TDD) burada ayrıca işaretlendi.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mimari, desen ve kod kalitesi karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java / JVM karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SOLID</strong></td><td>Aynı isim, aynı içerik</td><td>Dilden bağımsız. <strong>SOLID'i başka bir dilde biliyorsan</strong> &rarr; tek iş, her ilke için örneği Java sözdizimiyle verebilmek. <strong>Hiç çalışmadıysan</strong> &rarr; önce kavram (refactoring.guru, Clean Code), sonra Java örneği; junior/mid mülakatının değişmez sorusudur. <span class="tag tag--ok">TEMEL</span></td><td>—</td></tr>
+              <tr><td><strong>Clean Code / kod standardı</strong></td><td><strong>Effective Java</strong> (referans kitap), <strong>Google Java Style</strong>, <strong>Checkstyle</strong> + <strong>Spotless</strong></td><td>Java dünyasında "temiz kod" tartışması Effective Java üzerinden yürür; kitabın adını bilmek mülakatta "temiz kod" iddiasını savunulabilir yapar. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://checkstyle.org/">checkstyle.org</a></td></tr>
+              <tr><td><strong>Layered / Onion / Clean Architecture</strong></td><td>Aynı kavram; Java tarafında <strong>Hexagonal Architecture (Ports &amp; Adapters)</strong> adı daha sık kullanılır</td><td>Aramada "hexagonal architecture java" yaz; "onion architecture java" çok daha az sonuç verir. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>—</td></tr>
+              <tr><td><strong>DDD (Domain-Driven Design)</strong></td><td>Aynı; modül sınırı için <strong>Spring Modulith</strong>, tam event sourcing için <strong>Axon Framework</strong></td><td>Aggregate, Value Object, Bounded Context terimleri Java ilanlarında .NET'e göre daha sık geçer. <span class="tag">ORTA</span></td><td><a href="https://spring.io/projects/spring-modulith">spring.io</a></td></tr>
+              <tr><td><strong>TDD</strong></td><td><strong>JUnit 5</strong> + <strong>Mockito</strong> ile aynı kırmızı-yeşil-refactor döngüsü</td><td>Mülakatta en çok kanıt istenen maddelerden biri; mock test yazmadan TDD iddiası zayıf kalır &rarr; <a href="04-ekosistem-ve-araclar/index.html">04</a>. <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://junit.org/junit5/docs/current/user-guide/">junit.org</a></td></tr>
+              <tr><td><strong>Unit of Work</strong></td><td>JPA <strong>persistence context</strong> (<code>EntityManager</code>) + <code>@Transactional</code></td><td>Java'da ayrı bir <code>UnitOfWork</code> sınıfı yazılmaz; işlem sınırını anotasyon çizer. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Repository deseni</strong></td><td><code>JpaRepository</code> arayüzü — gövdesini sen yazmazsın, Spring üretir</td><td>Spring Data, arayüzdeki metot adından sorgu türetir; arayüz tanımı yeterlidir. <em>C#'tan geliyorsan:</em> .NET'teki elle yazılan generic repository alışkanlığını buraya taşıma. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spring.io/projects/spring-data-jpa">spring.io</a></td></tr>
+              <tr><td><strong>ProblemDetails (RFC 9457) / UseExceptionHandler</strong></td><td>Spring <code>ProblemDetail</code> + <code>@RestControllerAdvice</code> <code>@ExceptionHandler</code></td><td>İki taraf da aynı RFC'yi uygular; hata gövdesinin alanları birebir aynıdır. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>IActionFilter / ActionFilterAttribute</strong></td><td><code>HandlerInterceptor</code> veya Spring AOP <code>@Aspect</code> (<code>@Around</code>)</td><td>Karışıklık: Java'da "Filter" kelimesi Servlet Filter'ı çağrıştırır. Aksiyon seviyesi için "Spring HandlerInterceptor" diye ara. <span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Middleware boru hattı</strong></td><td><code>jakarta.servlet.Filter</code>, Spring'in <code>OncePerRequestFilter</code> sınıfı</td><td>Sıra <code>FilterRegistrationBean</code> veya <code>@Order</code> ile verilir; <code>app.Use...</code> zinciri yoktur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/servlet/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Result pattern (exception'sız akış)</strong></td><td>Java'da yaygın değil; <code>Optional</code> + özel exception + <code>@ControllerAdvice</code> tercih edilir</td><td>"Java Result type" araması seni Vavr'a götürür; Vavr niş bir kütüphanedir, standart sayılmaz. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Feature flag (Microsoft.FeatureManagement)</strong></td><td><strong>Togglz</strong>, <strong>FF4j</strong> (açık kaynak); <strong>Unleash</strong>, <strong>LaunchDarkly</strong> (bulut, ücretli katmanlı)</td><td>Basit hali Spring'de <code>@ConditionalOnProperty</code> ile de yapılır, kütüphane şart değil. <span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td>togglz.org</td></tr>
+              <tr><td><strong>GoF desenleri (Singleton, Factory, Strategy)</strong></td><td>Aynı desenler, aynı isimler</td><td>Karışıklık: Spring'deki <code>singleton</code> bean scope'u GoF Singleton deseni <em>değildir</em>; konteyner başına tek örnek demektir. Mülakatta bu ayrım sorulur. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Object initializer <code>{ }</code> / <code>with</code> ifadesi</strong></td><td>Java'da yok; <strong>Builder deseni</strong>, <strong>Lombok <code>@Builder</code></strong>, record ile yeni örnek üretme</td><td><code>new Foo { X = 1 }</code> sözdizimi Java'da derlenmez; kurucu veya builder kullanılır. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://projectlombok.org/features/">projectlombok.org</a></td></tr>
+              <tr><td><strong>partial class / #region</strong></td><td>Karşılığı yok</td><td>Sınıfı iki dosyaya bölemezsin. Üretilen kod ayrı sınıfa çıkar: Lombok, MapStruct, annotation processor. <span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>Equals / GetHashCode</strong></td><td><code>equals()</code> / <code>hashCode()</code></td><td>JPA entity'sinde bunları override etmek ayrı bir tuzaktır (lazy proxy, id null durumu). "JPA equals hashCode" diye ara &rarr; <a href="03-veri-ve-mesajlasma/index.html">03</a>. <span class="tag">ORTA</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>Konfigürasyon önceliği (appsettings &rarr; ortam değişkeni)</strong></td><td>Spring Boot <strong>externalized configuration</strong> öncelik sırası</td><td>Aramada tam olarak "spring boot externalized configuration" yaz; sıralama kuralları .NET'inkine benzer ama birebir aynı değildir. <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Source Generator (kod üretimi)</strong></td><td><strong>Annotation processor</strong> (APT) — Lombok, MapStruct, Dagger bununla çalışır</td><td>Derleme sırasında kaynak üretir. IDE'de "annotation processing" ayarı kapalıysa proje derlenmez; klasik yeni başlayan hatası. <span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html">docs.oracle.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ogrenme-sirasi"><span class="h-num">§ 3</span>Öğrenme sırası ve tahmini zorluk</h2>
+
+        <p class="intro">Sıra önemli: önce ortamı kur, sonra dili (ya da yalnızca farkları) öğren, sonra Spring Boot ile üretim yap. Aşağıdaki 11 adım <strong>C#/.NET bilen</strong> biri için yazıldı; başka bir noktadan başlıyorsan önce kendi yolunu bul, adımları ona göre uyarla.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre öğrenme yolu <span class="tag tag--warn">TAHMİN</span></caption>
+            <thead><tr><th>Başlangıç noktan</th><th>Yol</th><th>Ek süre (günde 1-2 saat)</th></tr></thead>
+            <tbody>
+              <tr><td><strong>(A) C#/.NET biliyorsun</strong></td><td>Aşağıdaki 11 adım olduğu gibi; adım 2'de yalnızca farklara odaklan.</td><td>Aşağıdaki süreler.</td></tr>
+              <tr><td><strong>(B) Başka bir statik tipli / nesne yönelimli dil biliyorsun</strong> (Kotlin, TypeScript, Go)</td><td>Adım 2'yi "<a href="01-java-dili/index.html">01</a> sayfasının tamamı" yap; adım 3'ü "Stream API = koleksiyon işlemleri (map/filter/reduce)" olarak çalış, LINQ notlarını atla.</td><td>Adım 2-3 için toplam 3-4 hafta (<a href="01-java-dili/index.html#ozet">01 § 17</a> toplamı).</td></tr>
+              <tr><td><strong>(C) Dinamik bir dil biliyorsun</strong> (Python, JavaScript, PHP)</td><td>(B) yolu + statik tip sistemi, generics, sınıf tabanlı OOP ve derle-çalıştır döngüsüne ayrıca zaman ayır.</td><td>(B)'ye ek 2-4 hafta.</td></tr>
+              <tr><td><strong>(D) Hiç programlama bilmiyorsun</strong></td><td>Önce <a href="https://dev.java/learn/">dev.java/learn</a> + temel algoritma ve OOP; ancak ondan sonra adım 1'den başla. Spring Boot'a erken girme.</td><td>Önce 2-3 ay.</td></tr>
+              <tr><td><strong>(E) Eski Java (8) biliyorsun</strong></td><td>Adım 2-3 yerine <a href="01-java-dili/index.html">01</a>'deki sürüm sürüm modern özellikler + Spring Boot 2 &rarr; 3 geçişi (<code>jakarta.*</code>, Java 17 tabanı).</td><td>Adım 2-3 yerine 1-2 hafta.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Süreler tahmindir <span class="tag tag--warn">TAHMİN</span></p>
+          <p>Aşağıdaki süreler, (A) yolundaki ve günde 1-2 saat ayıran biri varsayımıyla yazılmıştır. Günde 6-8 saat (tam zamanlı) öğrenmeye ayırabiliyorsan yaklaşık üçte birine iner; tam zamanlı bir işin yanında yalnızca haftada birkaç saat ayırabiliyorsan süreler uzar; (B)-(D) yollarında yukarıdaki ek süreleri ekle. Ölçülmüş veri değildir; kendi hızına göre kaydır.</p>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Ortamı kur: JDK + IDE + Maven wrapper</span>
+            <p>JDK'yı <a href="#neden-java">§ 1'deki sürüm tablosuna</a> göre seç (öğreniyorsan Temurin 25 LTS veya 21; mevcut projeye katılıyorsan projenin sürümü). IDE olarak IntelliJ IDEA'nın ücretsiz katmanı ya da VS Code + Java eklenti paketi ile başla, <a href="https://start.spring.io/">start.spring.io</a>'dan boş bir proje indir ve çalıştır. Hedef: <code>./mvnw spring-boot:run</code> komutunun (Windows PowerShell'de <code>.\mvnw spring-boot:run</code>, cmd'de <code>mvnw spring-boot:run</code>) ne yaptığını bilmek.</p>
+            <span class="steps__meta">Süre: 1 gün &middot; Zorluk: düşük &middot; Sayfa: <a href="04-ekosistem-ve-araclar/index.html">04</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Dili öğren — C#'tan geliyorsan yalnızca farkları tara</span>
+            <p><strong>C#'tan geliyorsan:</strong> tüm dili baştan öğrenme; farklara odaklan: property yok, extension method yok, checked exception var, <code>Optional</code>, type erasure, <code>equals/hashCode</code>, <code>record</code>, koleksiyon arayüzleri. <strong>Başka bir yerden geliyorsan:</strong> <a href="01-java-dili/index.html">01</a> sayfasının tamamını sırayla çalış (yukarıdaki yol tablosu).</p>
+            <span class="steps__meta">Süre: 3-5 gün (C#'tan, yalnızca farkları tararsan) / 12-17 gün, adım 3 dahil (C#'tan, 01'in tüm maddelerini <a href="01-java-dili/index.html#ozet">§ 17</a> sırasıyla yazarak çalışırsan) / 3-4 hafta, adım 3 dahil ((B) yolu; (C)'de buna 2-4 hafta ekle) &middot; Zorluk: düşük-orta &middot; Sayfa: <a href="01-java-dili/index.html">01</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Stream API ve lambda — koleksiyon işlemleri</span>
+            <p><code>filter/map/collect</code>, <code>Collectors.groupingBy</code>, tembel değerlendirme, tek kullanımlık stream kuralı. C#'tan geliyorsan LINQ sorgularını Stream'e çevirerek çalış; JavaScript'ten geliyorsan <code>map/filter/reduce</code> zincirlerini çevir; hiç fonksiyonel koleksiyon işlemi yazmadıysan önce lambda'yı öğren.</p>
+            <span class="steps__meta">Süre: 2-3 gün (C#'tan, hızlı yol; diğer yollarda adım 2'nin süresine dahil) &middot; Zorluk: düşük &middot; Sayfa: <a href="01-java-dili/index.html">01</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Maven'ı öğren (Gradle'ı tanı)</span>
+            <p><code>pom.xml</code> yapısı, bağımlılık koordinatı, scope, parent pom, <code>dependency:tree</code>. Gradle'ı okuyabilecek kadar tanı, yazmayı sonraya bırak.</p>
+            <span class="steps__meta">Süre: 2 gün &middot; Zorluk: orta &middot; Sayfa: <a href="04-ekosistem-ve-araclar/index.html">04</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Spring Boot ile REST API yaz</span>
+            <p><code>@RestController</code>, DI, <code>application.yml</code>, profiller, <code>@ConfigurationProperties</code>, global hata yönetimi, springdoc ile Swagger. Bu adım Java'da iş bulmanın çekirdeğidir.</p>
+            <span class="steps__meta">Süre: 2-3 hafta &middot; Zorluk: orta-yüksek &middot; Sayfa: <a href="02-spring-boot/index.html">02</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Spring Data JPA + Flyway ile veritabanına bağlan</span>
+            <p>PostgreSQL, MySQL, SQL Server veya Oracle ile <code>@Entity</code>, repository, ilişkiler, N+1 problemi, <code>@Transactional</code>, Flyway migration. SQL deneyimin varsa burada seni öne çıkarır; yoksa bu adımdan önce temel SQL'e (SELECT, JOIN, index, transaction) 1-2 hafta ayır <span class="tag tag--warn">TAHMİN</span>.</p>
+            <span class="steps__meta">Süre: 2 hafta &middot; Zorluk: yüksek &middot; Sayfa: <a href="03-veri-ve-mesajlasma/index.html">03</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Test yaz: JUnit 5 + Mockito + Testcontainers</span>
+            <p>Daha önce mock yazmadıysan bu adımı atlamak cazip gelebilir; atlama. Bir servis sınıfını mock'layarak birim test, bir de Testcontainers ile gerçek veritabanına karşı entegrasyon testi yaz.</p>
+            <span class="steps__meta">Süre: 1 hafta &middot; Zorluk: orta &middot; Sayfa: <a href="04-ekosistem-ve-araclar/index.html">04</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Spring Security ve JWT</span>
+            <p>En dik öğrenme eğrisi burada. <code>SecurityFilterChain</code>, JWT doğrulama, <code>@PreAuthorize</code>. JWT ve policy-based authorization ilanlarda sık geçer. .NET'ten geliyorsan ve iki ekosistemi hedefliyorsan iki tarafta da çalışan bir örneğin olsun; yalnızca Java hedefliyorsan Java örneği yeter.</p>
+            <span class="steps__meta">Süre: 1-2 hafta &middot; Zorluk: yüksek &middot; Sayfa: <a href="02-spring-boot/index.html">02</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Redis, RabbitMQ veya Kafka — birini seç ve çalıştır</span>
+            <p>Üçünü birden öğrenme. Docker ile birini ayağa kaldır, tek bir yayınla/tüket örneği yaz. İşte zaten kullanıyorsan yalnızca Spring istemcisini öğren; kullanmıyorsan kendi örneğin fark yaratır. Hangisini seçeceğin hedefe bağlı:</p>
+            <ul>
+              <li><strong>Banka / telekom / büyük veri hedefi</strong> &rarr; Kafka.</li>
+              <li><strong>Kurumsal entegrasyon, iş kuyruğu ağırlıklı küçük-orta ölçek</strong> &rarr; RabbitMQ.</li>
+              <li><strong>Önbellek / oturum soruları öncelikse</strong> &rarr; Redis (çoğu ilanda mesajlaşmadan ayrıca istenir).</li>
+            </ul>
+            <p>Docker Desktop kurumsal makinede lisans koşuluna takılırsa (250+ çalışan veya 10 milyon dolar+ yıllık gelir) Podman, Rancher Desktop ya da WSL2/Linux'ta Docker Engine kullan <span class="tag tag--warn">TEYİT</span>: <a href="https://www.docker.com/pricing/">docker.com/pricing</a>.</p>
+            <span class="steps__meta">Süre: 1 hafta &middot; Zorluk: orta &middot; Sayfa: <a href="03-veri-ve-mesajlasma/index.html">03</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Docker imajı üret ve GitHub Actions ile derle</span>
+            <p>Tek YAML: derle, test et, imaj üret. Bu adımdan sonra "CI/CD hattı kurdum" diyebilirsin ve doğru olur.</p>
+            <span class="steps__meta">Süre: 3-4 gün &middot; Zorluk: orta &middot; Sayfa: <a href="04-ekosistem-ve-araclar/index.html">04</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Vitrin projesi: tek bir Spring Boot uygulaması, hepsi içinde</span>
+            <p>REST API + JPA + Flyway + güvenlik + test + Docker + CI. İş arıyorsan ve Java'da iş deneyimin yoksa mülakatta göstereceğin tek repo bu olsun; "öğrendim" cümlesinin kanıtı repodur. İşte zaten Java/Spring kullanıyorsan bu adım isteğe bağlıdır.</p>
+            <span class="steps__meta">Süre: 2 hafta &middot; Zorluk: orta &middot; Sayfa: hepsi</span>
+          </li>
+          <li>
+            <span class="steps__title">İsteğe bağlı derinleşme: Kafka, mikroservis, GraalVM, Kotlin</span>
+            <p>Buraya kadarki adımlar tamamlanmadan bunlara girme. İlan gereksinimlerini okuyup hangisinin sana lazım olduğuna karar ver.</p>
+            <span class="steps__meta">Süre: açık uçlu &middot; Zorluk: yüksek &middot; Sayfa: <a href="03-veri-ve-mesajlasma/index.html">03</a>, <a href="04-ekosistem-ve-araclar/index.html">04</a></span>
+          </li>
+        </ol>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Java ilanlarında teknik mülakat çoğunlukla canlı kod veya JPA/koleksiyon sorularıyla yapılır; yüzeysel bilgi ilk 10 dakikada anlaşılır ve o an ana dilindeki güvenilirliğin de (ör. .NET'ten geliyorsan .NET bilgin) sorgulanır. Özgeçmişe nasıl yazacağın durumuna bağlı:</p>
+          <ul>
+            <li><strong>İş arıyorsun, Java'da iş deneyimin yok</strong> &rarr; bu listeyi bitirmeden "Java, Spring Boot" yazma; yazacaksan "Spring Boot ile kişisel proje" ibaresiyle yaz ve vitrin reposunu bağla.</li>
+            <li><strong>İşte Java/Spring kullanıyorsun</strong> &rarr; iş deneyimini doğrudan yaz; vitrin repo isteğe bağlı.</li>
+            <li><strong>Mevcut işinde bir Java projesine geçiyorsun</strong> &rarr; öncelik özgeçmiş değil; ekibin kod tabanı, Java ve Spring sürümü.</li>
+            <li><strong>Öğrenci / stajyer adayısın</strong> &rarr; okul ve kişisel projeler kabul görür; esas kanıt GitHub reposudur.</li>
+            <li><strong>Hobi / öğrenme amaçlı çalışıyorsun</strong> &rarr; mülakat odaklı maddeler isteğe bağlı.</li>
+          </ul>
+        </div>
+
+        <h2 id="bolum-haritasi"><span class="h-num">§ 4</span>Bölüm haritası</h2>
+
+        <p class="intro">Bu bölümün dört alt sayfası var. Sırayla gitmen şart değil ama <a href="01-java-dili/index.html">01</a> ile <a href="02-spring-boot/index.html">02</a> diğerlerinin ön koşuludur.</p>
+
+        <div class="cards">
+          <a class="card" href="01-java-dili/index.html">
+            <span class="card__num">01</span>
+            <h3 class="card__title">Java dili</h3>
+            <p class="card__desc">Sözdizimi farkları, koleksiyonlar, Stream API, jenerikler ve type erasure, record, Optional, checked exception, eşzamanlılık ve sanal iş parçacıkları.</p>
+            <span class="card__foot"><span class="tag tag--ok">ÖNCE OKU</span><span class="tag">C#'tan geliyorsan: § 16 çeviri sözlüğü kısa yol</span><span class="tag">Başka dilden / sıfırdan: sayfanın tamamı</span></span>
+          </a>
+          <a class="card" href="02-spring-boot/index.html">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Spring Boot</h3>
+            <p class="card__desc">DI konteyneri, auto-configuration, REST controller, yapılandırma ve profiller, validation, Spring Security, Actuator, hata yönetimi.</p>
+            <span class="card__foot"><span class="tag tag--ok">TEMEL</span><span class="tag tag--bad">İŞ İLANI ŞARTI</span></span>
+          </a>
+          <a class="card" href="03-veri-ve-mesajlasma/index.html">
+            <span class="card__num">03</span>
+            <h3 class="card__title">Veri ve mesajlaşma</h3>
+            <p class="card__desc">JPA/Hibernate, Spring Data, JdbcTemplate, Flyway/Liquibase, N+1, Redis, RabbitMQ, Kafka, CQRS ve olay tabanlı mimari.</p>
+            <span class="card__foot"><span class="tag tag--bad">MÜLAKATTA SIK</span><span class="tag">SQL bilgisi işe yarar</span></span>
+          </a>
+          <a class="card" href="04-ekosistem-ve-araclar/index.html">
+            <span class="card__num">04</span>
+            <h3 class="card__title">Ekosistem ve araçlar</h3>
+            <p class="card__desc">Maven ve Gradle, JDK dağıtımları, IntelliJ, JUnit 5, Mockito, Testcontainers, JaCoCo, SonarQube, Docker, CI/CD, profil ve bellek araçları.</p>
+            <span class="card__foot"><span class="tag">ORTA</span><span class="tag tag--bad">CI/CD burada</span></span>
+          </a>
+          <a class="card" href="../CSharp-DotNet/index.html">
+            <span class="card__num">&rarr;</span>
+            <h3 class="card__title">.NET bölümü</h3>
+            <p class="card__desc">C# ve .NET ekosistemi. .NET'ten geliyorsan ve hedefin iki ekosistemse dil bağımsız konuları (Redis, RabbitMQ, CQRS, mock, CI/CD) önce orada öğrenmek daha hızlıdır; .NET bilmiyorsan ya da hedefin yalnızca Java ise bu konuları doğrudan 03 ve 04'te öğren.</p>
+            <span class="card__foot"><span class="tag tag--ok">İLGİLİ</span></span>
+          </a>
+          <a class="card" href="../index.html">
+            <span class="card__num">&rarr;</span>
+            <h3 class="card__title">Programlama genel bakış</h3>
+            <p class="card__desc">Python, Go, Rust, JavaScript / TypeScript, HTML / CSS ve Blockchain bölümlerinin haritası. Mülakatta karşılaştırma sorusu gelebilecek diller.</p>
+            <span class="card__foot"><span class="tag">SONRA</span></span>
+          </a>
+        </div>
+
+        <p>Ana sayfaya dönmek için: <a href="../index.html">site ana sayfası</a>. Arayüz tarafı için: <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> ve <a href="../HTML-CSS/index.html">HTML / CSS</a> bölümleri.</p>
+
+        <h2 id="ozet"><span class="h-num">§ 5</span>Özet — bu sayfanın öncelik sırası</h2>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Dil bağımsız konuları (Redis, RabbitMQ, CQRS, mock test, CI/CD) nerede öğreneceğini durumuna göre seç</span>
+            <p><strong>.NET'ten geliyorsun, hedefin iki ekosistem</strong> &rarr; önce .NET'te öğren; Java tarafında yalnızca kütüphane adı değişir. <strong>.NET'ten geliyorsun, acil Java işi hedefliyorsun</strong> &rarr; doğrudan Java tarafında öğren, iki kez öğrenme. <strong>.NET bilmiyorsun / yalnızca Java</strong> &rarr; doğrudan <a href="03-veri-ve-mesajlasma/index.html">03</a> ve <a href="04-ekosistem-ve-araclar/index.html">04</a>.</p>
+          </li>
+          <li>
+            <span class="steps__title">Eşleştirme tablosunu ezberleme, yanında bulundur</span>
+            <p><a href="#esleme">§ 2</a> bir referans; Java kodu okurken açık tut. <strong>C#'tan geliyorsan</strong> bilmediğin her terimi sol sütundaki .NET karşılığıyla anlamlandır; <strong>başka bir yerden geliyorsan</strong> "Java karşılığı" ve "Not" sütunlarını anahtar kelime listesi olarak kullan.</p>
+          </li>
+          <li>
+            <span class="steps__title">Çatı seçimi hedefe bağlı; backend için Spring Boot fiilen zorunlu</span>
+            <p><strong>Backend / kurumsal web</strong> &rarr; "Java biliyorum, Spring bilmiyorum" cümlesi Türkiye'de ilan karşılığı yaratmaz; Quarkus, Micronaut ve diğerleri sonra gelir. <strong>Kamu / eski kurumsal projeler</strong> &rarr; Spring'e ek olarak Jakarta EE (WildFly, Payara) de istenir. <strong>Android</strong> &rarr; Kotlin + Android SDK; Spring gerekmez. <strong>Büyük veri</strong> &rarr; Spark/Flink; Spring ikinci planda kalır.</p>
+          </li>
+          <li>
+            <span class="steps__title">En büyük dil farkları: property yok, extension method yok, checked exception var, type erasure var</span>
+            <p><strong>C#'tan geliyorsan</strong> bu dört madde ilk hafta canını sıkacak; baştan bilirsen şaşırmazsın. C#'taki jenerik alışkanlıkları Java'da farklı çalışır, mutlaka <a href="01-java-dili/index.html">01</a>'i oku. <strong>Başka bir dilden ya da sıfırdan geliyorsan</strong> bunlar sana "fark" değil, öğrenilecek temel kurallardır (getter/setter ve record, checked/unchecked istisna, generics ve silinme); 01'de sırayla gelir.</p>
+          </li>
+          <li>
+            <span class="steps__title">JPA/Hibernate az affedici bir ORM'dir</span>
+            <p>N+1, LazyInitializationException, <code>@Transactional</code> proxy tuzağı, <code>ddl-auto</code> ayarı: Java mülakatlarının klasik soruları. <strong>C#'tan geliyorsan</strong> EF Core'dan daha az affedici olduğunu bil. <strong>ORM'i ilk kez kullanıyorsan</strong> bu dört başlığı (N+1, lazy loading, transaction proxy, şema yönetimi) temel olarak öğren. SQL deneyimin varsa (SQL Server, PostgreSQL, MySQL, Oracle) burada avantaja dönüşür; yoksa önce temel SQL.</p>
+          </li>
+          <li>
+            <span class="steps__title">Migration için ayrı araç şart: Flyway veya Liquibase</span>
+            <p>JPA'da yerleşik migration aracı yok; Flyway veya Liquibase'i doğrudan öğren. <strong>C#'tan geliyorsan</strong> EF Core'daki yerleşik migration alışkanlığını Java'ya taşıyamazsın; <strong>Python'dan geliyorsan</strong> Alembic/Django migrations, <strong>Node'dan geliyorsan</strong> Prisma/Knex migration'larının karşılığıdır. Flyway artık Redgate ürünüdür; Community sürümü ücretsizdir.</p>
+          </li>
+          <li>
+            <span class="steps__title">Test kültürü Java'da daha katı</span>
+            <p>JUnit 5 + Mockito + Testcontainers üçlüsü ilanların çoğunda beklenir. Testcontainers Java dünyasında doğdu ve burada standart sayılır.</p>
+          </li>
+          <li>
+            <span class="steps__title">Ücretli/ücretsiz ayrımını bil</span>
+            <p>IntelliJ Ultimate, JRebel, JProfiler, YourKit, jOOQ (ticari veritabanları), Oracle JDK (kullanım koşuluna göre), SonarQube kurumsal sürümleri ücretlidir. Ücretsiz karşılıkları bu sayfada listelendi; mülakatta ikisini birden söyleyebilmek artı puandır.</p>
+          </li>
+          <li>
+            <span class="steps__title">Eski Java'yı tanı ama yeni projede kullanma</span>
+            <p>JSP, JSF, Java 8, WebLogic/WebSphere, springfox, RestTemplate, Hystrix, <code>java.util.Date</code>: kurumsal kod tabanında karşına çıkar, yeni kodda tercih edilmez.</p>
+          </li>
+          <li>
+            <span class="steps__title">Kanıtın repo olsun</span>
+            <p>Java'da iş deneyimin yoksa (iş arayan, öğrenci, başka dilden geçen) bir tane Spring Boot vitrin projesi, mülakatta on satırlık özgeçmiş maddesinden daha fazla iş görür; öğrenme sırasının atlanmaması gereken adımı budur. İşte zaten Java/Spring kullanıyorsan kanıtın iş deneyimindir, vitrin repo isteğe bağlıdır.</p>
+          </li>
+        </ol>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="next" href="01-java-dili/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Java Dili</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

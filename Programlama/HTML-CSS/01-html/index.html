@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML — HTML ve CSS Anahtar Listesi</title>
+<meta name="description" content="Semantik etiketler, formlar, iframe, tablolar, medya, erişilebilirlik ve SEO meta etiketleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">HTML</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · HTML / CSS</span>
+      <span class="brand__name">HTML ve CSS Anahtar Listesi</span>
+      <span class="brand__sub">HTML → CSS</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel katman</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">01</span><span>HTML</span></a></li>
+          <li><a class="nav-item" href="../02-css/index.html"><span class="nav-num">02</span><span>CSS</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Web'in temel katmanı: yapı (HTML) ve görünüm (CSS). Anlatım yok, araştırma başlığı var. Sonraki adım: JavaScript ve TypeScript bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 01 · Temel Katman</div>
+        <h1 class="page-title">HTML: temel etiketlerin <em>ötesi</em></h1>
+        <p class="lede">Etiket ezberi değil; semantik yapı, form doğrulama, erişilebilirlik ve SEO. iframe, dialog, template gibi az bilinen etiketler ayrıca işaretli.</p>
+        <div class="head-meta">Seviye: temel &rarr; orta &middot; Temel etiketler de listede</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfayı nasıl kullanacaksın</h2>
+
+        <p class="intro">Bu sayfa bir HTML dersi değil, bir <strong>arama listesi</strong>. Her satır tek bir terim,
+        terimin ne olduğunu hatırlatan bir cümle ve resmî dokümana bağlantı. Konuyu buradan öğrenmeyeceksin;
+        buradan <em>neyi</em> öğreneceğini seçip kendi kaynağından çalışacaksın.</p>
+
+        <p>Not sütunu iki iş yapar: önceliği söyler ve karışıklığı önler. Bir terimi tek başına arattığında alakasız
+        sonuç geliyorsa, doğru arama ifadesi Not sütununda yazar. Örneğin <code>section</code> tek başına aratılırsa
+        işe yaramaz; <code>HTML section element</code> yazman gerekir.</p>
+
+        <p>Başlangıç noktana göre: <strong>hiç HTML bilmiyorsan</strong> önce
+        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website">MDN "Your first website"</a>
+        veya <a href="https://web.dev/learn/html">web.dev Learn HTML</a> ile belge iskeleti, metin, bağlantı ve görseli öğren,
+        sonra bu listeye gel; <strong>temel etiketleri biliyorsan</strong> doğrudan bu liste. İş ilanlarında "HTML5" neredeyse
+        her zaman geçer, ama çoğu kişinin HTML bilgisi <code>&lt;a&gt;</code>,
+        <code>&lt;img&gt;</code>, <code>alt</code>, <code>href</code> düzeyinde kalır. Mülakatta HTML sorusu genelde üç yerden gelir: <em>semantik etiketler</em>, <em>form doğrulama</em> ve
+        <em>erişilebilirlik</em>. Bu üçü sayfada <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetiyle işaretli.</p>
+
+        <p>HTML tek başına iş görmez. Görsel taraf için <a href="../02-css/index.html">02 &mdash; CSS</a>, davranış için
+        <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a>, bileşen mantığı için <a href="../../JavaScript-TypeScript/03-react/index.html">React</a>,
+        araçlar ve derleyiciler için <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem ve Araçlar</a> sayfalarına bak.
+        Bölüm girişi: <a href="../index.html">HTML ve CSS genel bakış</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rozet sözlüğü — bu sitedeki tüm sayfalarda aynı anlamda kullanılır</caption>
+            <thead><tr><th>Rozet</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik.</td></tr>
+              <tr><td><span class="tag tag--ok">TEMEL</span></td><td>Bu alanda olmazsa olmaz. Önce bunlar.</td></tr>
+              <tr><td><span class="tag">ORTA</span></td><td>Temeli bitirdikten sonra gelir.</td></tr>
+              <tr><td><span class="tag tag--info">İLERİ</span></td><td>Derinleşme konusu. Acele etme.</td></tr>
+              <tr><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>Lisansı ücretli veya sonradan ücretli hale gelmiş.</td></tr>
+              <tr><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>Eski kodda karşına çıkar, yeni projede kullanılmaz.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bu sayfadaki bağlantıların çoğu <strong>developer.mozilla.org</strong> (MDN) adresine gider. MDN 2025'te
+          HTML referansını yeniden düzenledi: element sayfaları artık <code>/Web/HTML/Reference/Elements/...</code>
+          altında. Eski <code>/Web/HTML/Element/...</code> adresleri yönlendiriliyor, ikisi de çalışır. Standardın
+          kendisi MDN'de değil, <a href="https://html.spec.whatwg.org/multipage/">WHATWG HTML Living Standard</a>
+          belgesindedir — "HTML5" diye ayrı bir sürüm artık yok, standart sürekli güncelleniyor.</p>
+        </div>
+
+        <h2 id="belge-yapisi"><span class="h-num">§ 2</span>Belge yapısı ve &lt;head&gt;</h2>
+
+        <p>Bir sayfanın tarayıcıya kendini tanıttığı bölüm. Buradaki hatalar görünmez ama pahalıdır: yanlış
+        <code>charset</code> Türkçe karakterleri bozar, eksik <code>viewport</code> mobilde sayfayı küçültür,
+        yanlış <code>script</code> yerleşimi sayfayı yavaşlatır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Belgenin iskeleti</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;!DOCTYPE html&gt;</strong></td>
+                <td>Belgenin ilk satırı; tarayıcıyı standart moda sokar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yoksa tarayıcı "quirks mode"a düşer, CSS kutu modeli değişir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Doctype">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>quirks mode / standards mode</strong></td>
+                <td>Doctype yoksa devreye giren eski uyumluluk modu</td>
+                <td><span class="tag">ORTA</span> Eski projede tuhaf CSS davranışı görürsen ilk buraya bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Quirks_mode_and_standards_mode">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;html lang&gt;</strong></td>
+                <td>Kök element; <code>lang="tr"</code> sayfanın dilini bildirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ekran okuyucu telaffuzu ve arama motoru bunu kullanır; sık unutulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/html">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;head&gt;</strong></td>
+                <td>Ekranda görünmeyen üstveri bölümü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;body&gt;</strong></td>
+                <td>Görünen içeriğin tamamı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/body">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;title&gt;</strong></td>
+                <td>Sekme başlığı ve arama sonucundaki mavi satır</td>
+                <td><span class="tag tag--ok">TEMEL</span> SEO'da en ağır tek etiket</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/title">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;base&gt;</strong></td>
+                <td>Sayfadaki tüm göreli URL'ler için kök adres tanımlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Nadiren gerekir; yanlış kullanılırsa tüm bağlantıları bozar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/base">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta charset="utf-8"&gt;</strong></td>
+                <td>Karakter kodlaması; head'in ilk 1024 baytında olmalı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Türkçe "ş ğ ı İ" bozuluyorsa ilk bakılacak yer burasıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="viewport"&gt;</strong></td>
+                <td><code>width=device-width, initial-scale=1</code> — mobilde doğru ölçek</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Responsive tasarımın ön koşulu; olmadan medya sorguları çalışmaz gibi görünür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Viewport_meta_element">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="description"&gt;</strong></td>
+                <td>Arama sonucunda başlığın altındaki açıklama metni</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sıralamayı doğrudan etkilemez, tıklanma oranını etkiler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="robots"&gt;</strong></td>
+                <td><code>noindex</code>, <code>nofollow</code> gibi tarayıcı-robot direktifleri</td>
+                <td><span class="tag">ORTA</span> <code>robots.txt</code> ile karıştırma: biri sayfa içi, diğeri site kökünde dosya</td>
+                <td><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="theme-color"&gt;</strong></td>
+                <td>Mobil tarayıcı adres çubuğunun rengi</td>
+                <td><span class="tag tag--info">İLERİ</span> PWA görünümü için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/theme-color">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="color-scheme"&gt;</strong></td>
+                <td>Sayfanın açık/koyu tema desteğini bildirir</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS <code>prefers-color-scheme</code> ile birlikte çalışır &rarr; <a href="../02-css/index.html">02 &mdash; CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta name="keywords"&gt;</strong></td>
+                <td>Anahtar kelime listesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Google 2009'dan beri dikkate almıyor; eski şablonlarda görürsün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meta http-equiv&gt;</strong></td>
+                <td>HTTP başlığı yerine geçen meta (refresh, content-security-policy)</td>
+                <td><span class="tag">ORTA</span> Mümkünse gerçek HTTP başlığı kullan; meta karşılığı kısıtlıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/http-equiv">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Open Graph (og:title, og:image, og:description, og:url, og:type)</strong></td>
+                <td>Bağlantı paylaşıldığında çıkan önizleme kartını belirler</td>
+                <td><span class="tag">ORTA</span> HTML standardının parçası değil, Facebook protokolü; <code>property=</code> kullanır, <code>name=</code> değil</td>
+                <td><a href="https://ogp.me/">ogp.me</a></td>
+              </tr>
+              <tr>
+                <td><strong>Twitter Card (twitter:card, twitter:title, twitter:image)</strong></td>
+                <td>X/Twitter'a özel önizleme etiketleri</td>
+                <td><span class="tag">ORTA</span> Çoğu alan Open Graph'a geri düşer; sadece <code>twitter:card</code> gerekebilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kaynak yükleme: &lt;link&gt; ve &lt;script&gt;</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;link rel="stylesheet"&gt;</strong></td>
+                <td>Harici CSS dosyasını bağlar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Render'ı bloklar; bilinçli olarak head'de durur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/link">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="icon"&gt;</strong></td>
+                <td>Sekme simgesi (favicon)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="canonical"&gt;</strong></td>
+                <td>Aynı içeriğin asıl adresini bildirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> SEO'nun en sık sorulan tek etiketi; §&nbsp;11'e bak</td>
+                <td><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="preconnect" / "dns-prefetch"&gt;</strong></td>
+                <td>Üçüncü parti sunucuya bağlantıyı önden kurar</td>
+                <td><span class="tag">ORTA</span> Font CDN'lerinde tipik kullanım</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preconnect">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="preload"&gt;</strong></td>
+                <td>Kritik kaynağı yüksek öncelikle indirir</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>as=</code> vermeyi unutursan kaynak iki kez inilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preload">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="alternate" hreflang&gt;</strong></td>
+                <td>Aynı sayfanın başka dildeki karşılığı</td>
+                <td><span class="tag tag--info">İLERİ</span> Çok dilli sitede gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;link rel="manifest"&gt;</strong></td>
+                <td>PWA manifest dosyasını bağlar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;script&gt;</strong></td>
+                <td>JavaScript kodunu satır içi veya <code>src</code> ile yükler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>defer</strong></td>
+                <td>HTML ayrıştırması bitince, sıraya sadık kalarak çalıştır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "defer ile async farkı nedir" klasik mülakat sorusu. Varsayılan tercihin bu olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>async</strong></td>
+                <td>İndiği anda çalıştır; sıra garantisi yok</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Bağımsız betikler için (analytics). Sıralı bağımlılık varsa kullanma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="module"</strong></td>
+                <td>ES modülü olarak yükle; otomatik defer davranışı ve strict mode</td>
+                <td><span class="tag">ORTA</span> Modül sistemi için <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>nomodule</strong></td>
+                <td>Modül desteği olmayan eski tarayıcılar için yedek betik</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> IE11 döneminin kalıntısı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>integrity (SRI)</strong></td>
+                <td>CDN'den gelen dosyanın hash'ini doğrular</td>
+                <td><span class="tag tag--info">İLERİ</span> "Subresource Integrity" diye ara; güvenlik konusudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>crossorigin</strong></td>
+                <td>Kaynağın CORS ile mi çekileceğini belirler</td>
+                <td><span class="tag tag--info">İLERİ</span> SRI ve font yüklemede zorunlu olur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;noscript&gt;</strong></td>
+                <td>JavaScript kapalıysa gösterilecek içerik</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Pratikte sadece uyarı mesajı için kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/noscript">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;style&gt;</strong></td>
+                <td>Sayfa içi CSS bloğu</td>
+                <td><span class="tag">ORTA</span> "Critical CSS" tekniğinde bilinçli olarak kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/style">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="metin-etiketleri"><span class="h-num">§ 3</span>Metin ve içerik etiketleri</h2>
+
+        <p>Bu bölümdeki etiketlerin çoğu tanıdıktır. Listede duruyorlar çünkü mülakatta sorulan şey etiketin varlığı değil,
+        <strong>hangisinin ne anlama geldiği</strong>: <code>&lt;strong&gt;</code> ile <code>&lt;b&gt;</code> arasındaki
+        fark tam olarak bu tip bir sorudur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlık, paragraf, genel kaplar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;h1&gt; … &lt;h6&gt;</strong></td>
+                <td>Altı seviyeli başlık hiyerarşisi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Seviye atlama (h1 &rarr; h3) erişilebilirlik hatasıdır; boyut için değil <em>yapı</em> için seç</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;p&gt;</strong></td>
+                <td>Paragraf</td>
+                <td><span class="tag tag--ok">TEMEL</span> İçine <code>&lt;div&gt;</code> koyamazsın; tarayıcı paragrafı erken kapatır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;div&gt;</strong></td>
+                <td>Anlamsız blok kap; sadece gruplamak için</td>
+                <td><span class="tag tag--ok">TEMEL</span> "div soup" eleştirisi buradan gelir. Semantik alternatif varsa onu kullan &rarr; §&nbsp;4</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;span&gt;</strong></td>
+                <td>Anlamsız satır içi kap</td>
+                <td><span class="tag tag--ok">TEMEL</span> div'in satır içi karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>block / inline / inline-block</strong></td>
+                <td>Elementin varsayılan akış davranışı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HTML'in değil CSS'in konusudur ama HTML mülakatında sorulur &rarr; <a href="../02-css/index.html">02 &mdash; CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_display/Flow_layout">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;br&gt;</strong></td>
+                <td>Zorunlu satır sonu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Boşluk yaratmak için art arda kullanma; o iş CSS'in</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;hr&gt;</strong></td>
+                <td>Konu değişimini ifade eden yatay ayraç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Artık "çizgi çiz" değil "konu değişti" anlamı taşır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Vurgu ve anlam taşıyan satır içi etiketler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;strong&gt;</strong></td>
+                <td>Güçlü <em>önem</em>; ekran okuyucu tonlamayı değiştirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "strong vs b" sorusunun doğru cevabı: strong anlam, b sadece görünüm</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;b&gt;</strong></td>
+                <td>Anlamsal önem taşımayan kalınlaştırma</td>
+                <td><span class="tag">ORTA</span> Ürün adı, anahtar kelime gibi "dikkat çeksin ama önemli değil" durumlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/b">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;em&gt;</strong></td>
+                <td>Cümlenin anlamını değiştiren vurgu</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "em vs i" ikinci klasik soru</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;i&gt;</strong></td>
+                <td>Farklı ses/tür (yabancı kelime, teknik terim, gemi adı)</td>
+                <td><span class="tag">ORTA</span> İkon kütüphaneleri de <code>&lt;i&gt;</code> kullanır; bu kötü bir alışkanlıktır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;mark&gt;</strong></td>
+                <td>Arama sonucu vurgusu gibi "işaretlenmiş" metin</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;small&gt;</strong></td>
+                <td>Yan not, telif, yasal uyarı</td>
+                <td><span class="tag">ORTA</span> "Küçük yaz" değil "ikincil bilgi" anlamındadır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/small">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;sub&gt; / &lt;sup&gt;</strong></td>
+                <td>Alt simge / üst simge (H<sub>2</sub>O, m<sup>2</sup>)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/sub">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;s&gt; / &lt;del&gt; / &lt;ins&gt;</strong></td>
+                <td>Üstü çizili / silinmiş / eklenmiş içerik</td>
+                <td><span class="tag">ORTA</span> <code>&lt;s&gt;</code> "artık geçerli değil", <code>&lt;del&gt;</code> düzenleme geçmişi anlamı taşır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/del">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;abbr title&gt;</strong></td>
+                <td>Kısaltma; <code>title</code> ile açılımı</td>
+                <td><span class="tag">ORTA</span> <code>title</code> mobilde görünmez, tek erişim yolu olmasın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/abbr">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;time datetime&gt;</strong></td>
+                <td>Makine okunur tarih/saat</td>
+                <td><span class="tag">ORTA</span> <code>datetime="2026-09-04"</code> ISO 8601 biçiminde olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/time">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;q&gt;</strong></td>
+                <td>Satır içi kısa alıntı; tırnakları tarayıcı koyar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/q">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;blockquote cite&gt;</strong></td>
+                <td>Blok alıntı</td>
+                <td><span class="tag">ORTA</span> <code>cite</code> özniteliği görünmez; kaynağı ayrıca yazmalısın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;cite&gt;</strong></td>
+                <td>Eser adı (kitap, makale, film)</td>
+                <td><span class="tag">ORTA</span> Kişi adı için değil, <em>eser</em> adı için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;bdi&gt; / &lt;bdo&gt;</strong></td>
+                <td>Metin yönü izolasyonu / zorlaması (Arapça, İbranice)</td>
+                <td><span class="tag tag--info">İLERİ</span> Kullanıcı adı gibi yönü bilinmeyen metinlerde <code>&lt;bdi&gt;</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/bdi">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;ruby&gt; / &lt;rt&gt; / &lt;rp&gt;</strong></td>
+                <td>Doğu Asya dillerinde okunuş açıklaması</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş; bilmen yeterli</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ruby">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;wbr&gt;</strong></td>
+                <td>İsteğe bağlı satır kırma noktası</td>
+                <td><span class="tag tag--info">İLERİ</span> Uzun URL'leri taşırmadan kırmak için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/wbr">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kod, çıktı ve etkileşimli kaplar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;code&gt;</strong></td>
+                <td>Kod parçası (satır içi)</td>
+                <td><span class="tag tag--ok">TEMEL</span> İçindeki <code>&lt;</code> karakterini <code>&amp;lt;</code> yapmayı unutma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;pre&gt;</strong></td>
+                <td>Boşluk ve satır sonlarını koruyan blok</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kod bloğu için <code>&lt;pre&gt;&lt;code&gt;</code> ikilisi standarttır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;kbd&gt;</strong></td>
+                <td>Klavye girdisi (Ctrl+C)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;samp&gt;</strong></td>
+                <td>Program çıktısı örneği</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/samp">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;var&gt;</strong></td>
+                <td>Matematiksel/programatik değişken adı</td>
+                <td><span class="tag">ORTA</span> JavaScript'teki <code>var</code> anahtar kelimesiyle ilgisi yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/var">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;details&gt; / &lt;summary&gt;</strong></td>
+                <td>JavaScript'siz açılır-kapanır bölüm</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Accordion için JS yazmadan çözüm; <code>name</code> özniteliğiyle tek-açık grup yapılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;dialog&gt;</strong></td>
+                <td>Yerleşik modal/diyalog penceresi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>showModal()</code> odak tuzağını ve ESC ile kapanmayı bedava verir; kendi modal'ını yazmadan önce buna bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;template&gt;</strong></td>
+                <td>Ayrıştırılan ama render edilmeyen HTML parçası</td>
+                <td><span class="tag">ORTA</span> JS ile klonlanıp kullanılır; Web Components'in üçüncü ayağı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;slot&gt;</strong></td>
+                <td>Shadow DOM içine dışarıdan içerik yerleştirme noktası</td>
+                <td><span class="tag tag--info">İLERİ</span> Web Components konusu &rarr; §&nbsp;12</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/slot">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>popover özniteliği</strong></td>
+                <td>Tooltip/menü için yerleşik üst katman davranışı</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni; destek durumunu <a href="https://caniuse.com/">caniuse.com</a> üzerinden doğrula</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML entity (&amp;amp; &amp;lt; &amp;nbsp;)</strong></td>
+                <td>Özel karakterlerin kaçış yazımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> UTF-8 kullanıyorsan Türkçe karakterler için entity'ye gerek yok, doğrudan yaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Character_reference">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML yorumu &lt;!-- --&gt;</strong></td>
+                <td>Kaynak kodda görünen, render edilmeyen not</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kullanıcı "kaynağı görüntüle" derse okur; sır yazma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Comments">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="semantik"><span class="h-num">§ 4</span>Semantik yapı</h2>
+
+        <p>Bu bölüm mülakatta en çok sorulan HTML konusudur. Soru genelde şu biçimde gelir: "<code>&lt;div&gt;</code>
+        yerine <code>&lt;section&gt;</code> kullanmanın ne faydası var?" Cevabın üç ayağı olmalı: ekran okuyucu
+        gezinmesi, arama motorunun içerik haritası, ve kodun okunabilirliği.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sayfa iskeletini kuran semantik elementler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>semantic HTML</strong></td>
+                <td>Etiketin görünüşü değil anlamı için seçilmesi ilkesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Tek bir kavram olarak ara: "semantic HTML". Bu sayfanın en önemli maddesi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Semantics">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;header&gt;</strong></td>
+                <td>Sayfanın veya bir bölümün giriş alanı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sayfada birden fazla olabilir; <code>&lt;article&gt;</code> içinde de kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;nav&gt;</strong></td>
+                <td>Ana gezinme bağlantıları</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Her bağlantı kümesi <code>nav</code> değildir; sadece <em>birincil</em> gezinme</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;main&gt;</strong></td>
+                <td>Sayfanın benzersiz ana içeriği</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sayfada <strong>tek</strong> tane olmalı; skip link'in hedefi genelde budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;section&gt;</strong></td>
+                <td>Başlığı olan tematik bölüm</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Başlık yoksa muhtemelen <code>&lt;div&gt;</code> kullanmalısın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;article&gt;</strong></td>
+                <td>Tek başına anlamlı, dağıtılabilir içerik birimi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Test: "RSS'te tek başına yayınlansa anlamlı mı?" Evetse article</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/article">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;aside&gt;</strong></td>
+                <td>Ana içerikle dolaylı ilgili yan içerik</td>
+                <td><span class="tag">ORTA</span> Kenar çubuğu, ilgili yazılar, reklam</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/aside">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;footer&gt;</strong></td>
+                <td>Bölümün kapanış alanı (telif, yazar, bağlantılar)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;figure&gt; / &lt;figcaption&gt;</strong></td>
+                <td>Görsel/kod/tablo + açıklaması ikilisi</td>
+                <td><span class="tag">ORTA</span> <code>figcaption</code> ile <code>alt</code> farklı şeylerdir; ikisi de gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/figure">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;address&gt;</strong></td>
+                <td>İletişim bilgisi</td>
+                <td><span class="tag tag--info">İLERİ</span> Posta adresi için değil, <em>iletişim</em> bilgisi için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/address">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;search&gt;</strong></td>
+                <td>Arama formunu saran yeni semantik element</td>
+                <td><span class="tag tag--info">İLERİ</span> Eskiden <code>role="search"</code> ile yapılırdı; destek durumunu kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/search">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>document outline / heading structure</strong></td>
+                <td>Başlıkların oluşturduğu belge iskeleti</td>
+                <td><span class="tag">ORTA</span> "HTML5 outline algorithm" hiçbir tarayıcıda uygulanmadı; iskeleti <code>h1-h6</code> ile elle kur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>landmark</strong></td>
+                <td>Ekran okuyucunun atlayarak gezindiği bölge (header, nav, main, aside, footer)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Semantik etiketlerin somut faydası tam olarak budur &rarr; §&nbsp;10</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles#3._landmark_roles">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Semantik etiketler <strong>görünümü değiştirmez</strong>. <code>&lt;section&gt;</code> ile
+          <code>&lt;div&gt;</code> ekranda birebir aynı görünür. Bu yüzden "fark etmiyor" diye düşünüp
+          hepsine <code>div</code> yazmak yaygın hatadır. Farkı ekran okuyucuda, arama motoru botunda ve
+          6 ay sonra kodu okuyan kişide görürsün.</p>
+        </div>
+
+        <h2 id="listeler-tablolar"><span class="h-num">§ 5</span>Listeler ve tablolar</h2>
+
+        <p>Tablo kısmını dikkatli oku. Veritabanından veri çekmek bir iş, o veriyi ekrana basan HTML tablosunu
+        erişilebilir kurmak ayrı bir bilgi. <code>&lt;th scope&gt;</code> ve <code>&lt;caption&gt;</code> tam olarak
+        bunun için var.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Listeler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;ul&gt; / &lt;li&gt;</strong></td>
+                <td>Sırasız liste</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>&lt;li&gt;</code> yalnızca <code>ul</code>/<code>ol</code>/<code>menu</code> içinde durabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;ol&gt; (start, reversed, type)</strong></td>
+                <td>Sıralı liste; numaralandırmayı kontrol eden öznitelikler</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>value</code> özniteliği tek bir <code>li</code>'nin numarasını değiştirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;dl&gt; / &lt;dt&gt; / &lt;dd&gt;</strong></td>
+                <td>Tanım listesi: terim + açıklaması</td>
+                <td><span class="tag">ORTA</span> "description list" diye ara; "definition list" eski adı. Metadata çiftleri için ideal</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;menu&gt;</strong></td>
+                <td>Komut listesi; anlamsal olarak <code>ul</code> ile eşdeğer</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski "bağlam menüsü" anlamı kaldırıldı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/menu">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tablolar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;table&gt;</strong></td>
+                <td>Tablo kökü</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sayfa yerleşimi için asla kullanma; o iş 2005'te bitti</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/table">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;caption&gt;</strong></td>
+                <td>Tablonun başlığı; tablonun ilk çocuğu olmalı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Erişilebilirlik için neredeyse zorunlu; çoğu kişi atlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/caption">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;thead&gt; / &lt;tbody&gt; / &lt;tfoot&gt;</strong></td>
+                <td>Tablonun başlık, gövde ve alt bölümleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yazmasan da tarayıcı <code>tbody</code>'yi kendi ekler; DOM'da görünce şaşırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/tbody">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;tr&gt; / &lt;td&gt; / &lt;th&gt;</strong></td>
+                <td>Satır / veri hücresi / başlık hücresi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/th">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>scope="col" / "row"</strong></td>
+                <td>Başlık hücresinin hangi yönü etiketlediğini bildirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ekran okuyucu hücreyi okurken doğru başlığı söylemesi için gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/th">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>colspan / rowspan</strong></td>
+                <td>Hücrenin birden fazla sütun/satırı kaplaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Karmaşık birleştirmeler erişilebilirliği bozar; <code>headers</code>/<code>id</code> eşlemesi gerekebilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;colgroup&gt; / &lt;col&gt;</strong></td>
+                <td>Sütun bazlı stil ve genişlik tanımı</td>
+                <td><span class="tag">ORTA</span> Sadece sınırlı CSS özellikleri sütuna uygulanabilir (background, width, border)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/colgroup">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>headers / id eşlemesi</strong></td>
+                <td>Karmaşık tablolarda hücreyi başlığa açıkça bağlama</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>scope</code> yetmediğinde son çare</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/td">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>responsive table</strong></td>
+                <td>Dar ekranda tabloyu kaydırılabilir yapma tekniği</td>
+                <td><span class="tag">ORTA</span> HTML çözümü yok; CSS <code>overflow-x</code> ile yapılır &rarr; <a href="../02-css/index.html">02 &mdash; CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="baglanti-medya"><span class="h-num">§ 6</span>Bağlantı ve medya</h2>
+
+        <p><code>&lt;a&gt;</code> ve <code>&lt;img&gt;</code> herkesin ilk öğrendiği iki etiket. Buradaki iş,
+        onların bilmediğin özniteliklerini öğrenmek: <code>rel</code>, <code>srcset</code>, <code>loading</code>.
+        Performans mülakatında bu üçü sorulur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bağlantılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;a href&gt;</strong></td>
+                <td>Bağlantı; web'in temel yapı taşı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>href</code> olmayan <code>&lt;a&gt;</code> klavyeyle odaklanamaz; tıklanabilir div yapma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>target="_blank"</strong></td>
+                <td>Yeni sekmede aç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Modern tarayıcılar otomatik <code>noopener</code> uygular ama yazmak yine iyi alışkanlık</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rel="noopener"</strong></td>
+                <td>Açılan sayfanın <code>window.opener</code> ile açan sayfaya erişmesini engeller</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik güvenlik sorusu: "tabnabbing" saldırısını ara</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noopener">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rel="noreferrer"</strong></td>
+                <td>Referer başlığını göndermez; noopener etkisini de içerir</td>
+                <td><span class="tag">ORTA</span> Analitik kaybına yol açar, bilinçli seç</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/noreferrer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rel="nofollow" / "ugc" / "sponsored"</strong></td>
+                <td>Arama motoruna bağlantı değeri aktarma sinyalleri</td>
+                <td><span class="tag">ORTA</span> Kullanıcı içeriği ve reklam bağlantılarında SEO gereği</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>download</strong></td>
+                <td>Bağlantıyı gezinme yerine indirme yapar</td>
+                <td><span class="tag">ORTA</span> Sadece aynı kaynaklı (same-origin) URL'lerde ve <code>blob:</code>/<code>data:</code> üzerinde çalışır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mailto: / tel: / sms:</strong></td>
+                <td>Uygulama açan URL şemaları</td>
+                <td><span class="tag">ORTA</span> Spam botları <code>mailto:</code> adreslerini toplar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>fragment / anchor (#id)</strong></td>
+                <td>Sayfa içi hedefe atlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>:target</code> CSS seçicisiyle birlikte kullanılabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>relative vs absolute URL</strong></td>
+                <td>Göreli (<code>../x.html</code>) ve mutlak (<code>https://...</code>) adres farkı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kök göreli (<code>/x.html</code>) üçüncü bir durumdur; alt klasörde barındırmada sorun çıkarır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/URI">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Görseller</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;img src alt&gt;</strong></td>
+                <td>Görsel; <code>alt</code> metin karşılığı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dekoratif görselde <code>alt=""</code> yaz (boş bırakma değil, <em>boş değer</em>). Bu ayrım sorulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>width / height öznitelikleri</strong></td>
+                <td>Görselin doğal boyutu; yer ayırtır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Yazmazsan sayfa zıplar (CLS). Core Web Vitals'ın en kolay puanı &rarr; §&nbsp;11</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>srcset / sizes</strong></td>
+                <td>Ekran genişliğine göre farklı görsel dosyası seçtirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "responsive images" diye ara. <code>w</code> ve <code>x</code> tanımlayıcıları farklı işler yapar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>loading="lazy"</strong></td>
+                <td>Görseli ekrana yaklaşınca indir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ekranın üstündeki (above the fold) görsele <strong>koyma</strong>; LCP'yi kötüleştirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>decoding="async"</strong></td>
+                <td>Görsel çözümlemesini ana iş parçacığından ayırır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>fetchpriority</strong></td>
+                <td>Kaynağın indirme önceliğini elle ayarlar</td>
+                <td><span class="tag tag--info">İLERİ</span> LCP görselinde <code>fetchpriority="high"</code> tipik kullanım</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/fetchpriority">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;picture&gt; / &lt;source&gt;</strong></td>
+                <td>Sanat yönü ve format seçimi (WebP/AVIF yedekli)</td>
+                <td><span class="tag">ORTA</span> <code>srcset</code> ile karıştırma: picture <em>farklı görsel</em>, srcset <em>aynı görselin farklı boyutu</em></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>WebP / AVIF / SVG / PNG / JPEG</strong></td>
+                <td>Web'de kullanılan görsel formatları</td>
+                <td><span class="tag">ORTA</span> Hepsi ücretsiz. Logo ve ikon &rarr; SVG; fotoğraf &rarr; AVIF/WebP</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Image_types">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inline SVG</strong></td>
+                <td>SVG kodunu doğrudan HTML içine yazma</td>
+                <td><span class="tag">ORTA</span> CSS ile renklendirilebilir; ikon setleri böyle çalışır. Dekoratifse <code>aria-hidden="true"</code> ekle</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/SVG">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;canvas&gt;</strong></td>
+                <td>JavaScript ile piksel çizilen tuval</td>
+                <td><span class="tag tag--info">İLERİ</span> İçeriği ekran okuyucuya görünmez; metin alternatifi şart</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;map&gt; / &lt;area&gt;</strong></td>
+                <td>Görsel üzerinde tıklanabilir bölgeler</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski sitelerde karşına çıkar; yeni projede SVG kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/map">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ses ve video</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;video&gt;</strong></td>
+                <td>Yerleşik video oynatıcı</td>
+                <td><span class="tag">ORTA</span> <code>controls</code> yazmazsan hiçbir düğme görünmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;audio&gt;</strong></td>
+                <td>Yerleşik ses oynatıcı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/audio">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>autoplay / muted / playsinline</strong></td>
+                <td>Otomatik oynatma davranışı</td>
+                <td><span class="tag">ORTA</span> Sesli otomatik oynatma tarayıcılarca engellenir; <code>muted</code> olmadan çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>poster</strong></td>
+                <td>Video oynamadan önce gösterilen görsel</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;track kind="captions"&gt;</strong></td>
+                <td>Altyazı/açıklama dosyası (WebVTT)</td>
+                <td><span class="tag">ORTA</span> WCAG seviyesi içerik türüne göre değişir: önceden kaydedilmiş sesli videoda altyazı (captions) Seviye A (1.2.2); canlı yayında altyazı AA (1.2.4); önceden kaydedilmiş videoda görsel bilginin sesli betimlemesi AA (1.2.5); yalnızca ses içeren kayıtta metin dökümü (transcript) A (1.2.1); işaret dili AAA (1.2.6). Kaynak: <a href="https://www.w3.org/WAI/WCAG22/quickref/">WCAG 2.2 quickref</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>preload="none" / "metadata" / "auto"</strong></td>
+                <td>Medyanın ne kadarının önden inileceği</td>
+                <td><span class="tag tag--info">İLERİ</span> Bant genişliği tasarrufu için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/video">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;object&gt; / &lt;embed&gt;</strong></td>
+                <td>Harici kaynak gömme (PDF, eski eklentiler)</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Flash dönemi kalıntısı; PDF için hâlâ görürsün. <code>&lt;iframe&gt;</code> tercih et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/object">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="iframe"><span class="h-num">§ 7</span>iframe ve gömme güvenliği</h2>
+
+        <p class="intro">Bu bölüm sık karıştırılan bir konuyu ayrıca ele alıyor. <code>&lt;iframe&gt;</code> teknik olarak "başka bir sayfayı
+        benim sayfamın içine göm" demektir ve iki ayrı güvenlik problemi doğurur: <strong>ben başkasını gömüyorum</strong>
+        (o sayfa bana ne yapabilir?) ve <strong>başkası beni gömüyor</strong> (clickjacking).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>iframe'in kendisi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;iframe src&gt;</strong></td>
+                <td>Sayfa içine bağımsız bir tarayıcı bağlamı gömer</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> YouTube, harita, ödeme formu, üçüncü parti widget — hepsi bu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>srcdoc</strong></td>
+                <td>URL yerine doğrudan HTML metni gömer</td>
+                <td><span class="tag tag--info">İLERİ</span> Kullanıcı içeriğini izole etmek için <code>sandbox</code> ile birlikte kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sandbox</strong></td>
+                <td>Gömülü içeriğe kısıtlama uygular; boş değer = tam kilit</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ayrıcalıkları <em>geri veren</em> tokenlar: <code>allow-scripts</code>, <code>allow-forms</code>, <code>allow-same-origin</code>, <code>allow-popups</code>, <code>allow-downloads</code>, <code>allow-modals</code>, <code>allow-top-navigation</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>allow-scripts + allow-same-origin tuzağı</strong></td>
+                <td>İkisi birlikte verilirse sandbox pratikte anlamsızlaşır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Gömülü sayfa kendi sandbox özniteliğini kaldırabilir. Bu, sorulduğunda ayırt edici bir cevaptır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>allow (Permissions Policy)</strong></td>
+                <td>Kamera, mikrofon, tam ekran gibi izinleri iframe'e devreder</td>
+                <td><span class="tag">ORTA</span> <code>allow="fullscreen; camera 'none'"</code>. Eski <code>allowfullscreen</code> özniteliğinin yerini aldı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>loading="lazy" (iframe)</strong></td>
+                <td>iframe'i ekrana yaklaşınca yükle</td>
+                <td><span class="tag">ORTA</span> YouTube gömmelerinde ciddi performans kazancı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>referrerpolicy</strong></td>
+                <td>Gömülü isteğe hangi referer bilgisinin gideceği</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>title (iframe üzerinde)</strong></td>
+                <td>Ekran okuyucunun çerçeveyi tanıtması için</td>
+                <td><span class="tag tag--ok">TEMEL</span> Erişilebilirlik denetçileri eksikse hata verir; tek satırlık düzeltme</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;frameset&gt; / &lt;frame&gt;</strong></td>
+                <td>Sayfayı çerçevelere bölen eski yapı</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> HTML'den kaldırıldı. 2000'lerin intranet uygulamalarında görürsün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/frameset">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başkası seni gömerse: clickjacking savunması</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>clickjacking</strong></td>
+                <td>Görünmez iframe ile kullanıcıya farkında olmadan tıklatma saldırısı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "UI redressing" olarak da geçer. Savunması aşağıdaki iki başlık</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/Clickjacking">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSP frame-ancestors</strong></td>
+                <td>Sayfanı kimin gömebileceğini belirleyen HTTP başlığı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Modern ve doğru çözüm. <code>&lt;meta&gt;</code> ile <strong>çalışmaz</strong>, gerçek HTTP başlığı olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>X-Frame-Options</strong></td>
+                <td>Eski çözüm: <code>DENY</code> veya <code>SAMEORIGIN</code></td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ eski tarayıcı yedeği olarak birlikte gönderilir. <code>ALLOW-FROM</code> desteklenmiyor</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Content-Security-Policy (genel)</strong></td>
+                <td>Sayfanın hangi kaynakları yükleyebileceğini kısıtlayan başlık</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> XSS savunmasının ana hattı; HTTP başlığı olarak sunucudan gönderilir. Eklemenin yolu yığına göre değişir: ASP.NET Core middleware (<a href="../../CSharp-DotNet/index.html">.NET alanı</a>), Express <code>helmet</code>, Spring Security headers, Django <code>django-csp</code> (yeni Django sürümlerinde yerleşik CSP desteği TEYİT), Nginx/Apache <code>add_header</code>/<code>Header</code>, Netlify/Cloudflare Pages <code>_headers</code>. <code>frame-ancestors</code> <code>&lt;meta http-equiv&gt;</code> ile verilemez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>frame-src vs frame-ancestors</strong></td>
+                <td>Biri "ben kimi gömerim", diğeri "beni kim gömer"</td>
+                <td><span class="tag">ORTA</span> En sık karıştırılan CSP çifti</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-src">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>same-origin policy</strong></td>
+                <td>Farklı kaynaktaki iframe'in içeriğine JS ile erişememe kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bunu bilmeden iframe'i anlayamazsın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>postMessage</strong></td>
+                <td>Farklı kaynaklı iframe ile güvenli mesajlaşma yolu</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>origin</code> kontrolü yapmazsan güvenlik açığı olur &rarr; <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Bir ödeme sayfası veya yönetim paneli yazıyorsan <code>frame-ancestors</code> ayarı zorunlu sayılmalı;
+          değeri sayfanın gömülme ihtiyacına göre seçilir:</p>
+          <ul>
+            <li><strong>Hiçbir yerde gömülmeyecek sayfa</strong> &rarr; <code>frame-ancestors 'none'</code> (eski tarayıcılar için ek olarak <code>X-Frame-Options: DENY</code>).</li>
+            <li><strong>Yalnızca kendi sitende gömülecek</strong> &rarr; <code>frame-ancestors 'self'</code> (<code>X-Frame-Options: SAMEORIGIN</code>).</li>
+            <li><strong>Belirli iş ortaklarının sitelerinde gömülecek</strong> (widget, ödeme sağlayıcısının iframe'i) &rarr; <code>frame-ancestors</code> içinde açık origin listesi; <code>X-Frame-Options</code> bunu ifade edemez, CSP gerekir.</li>
+          </ul>
+          <p>Bunu ayarlamayan bir uygulama, saldırganın kendi sayfasında görünmez bir katmanla
+          uygulamanın "Onayla" düğmesine kullanıcıyı tıklatmasına açıktır. Başlık <code>&lt;meta&gt;</code> ile verilemez; yığınına göre nasıl ekleneceği yukarıdaki CSP satırında. Aynı şekilde, üçüncü partiden gelen bir HTML'i
+          <code>sandbox</code> olmadan iframe'e koymak, o siteye kullanıcının oturumu üzerinde hareket alanı vermektir.</p>
+        </div>
+
+        <h2 id="formlar"><span class="h-num">§ 8</span>Formlar ve girdi türleri</h2>
+
+        <p>Formlar hem gönderilen verinin biçimi (<code>enctype</code>) hem doğrulamanın nerede yapıldığı açısından
+        önemlidir; API veya sunucu taraflı form işleyen kod yazıyorsan özellikle. İstemci doğrulaması <strong>sadece kullanıcı deneyimidir</strong>;
+        sunucu doğrulamasının yerini almaz — bu cümleyi mülakatta kur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Form kabı ve gönderim</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>&lt;form&gt;</strong></td>
+                <td>Girdileri gruplayan ve gönderen kap</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>action</strong></td>
+                <td>Verinin gönderileceği URL</td>
+                <td><span class="tag tag--ok">TEMEL</span> Boşsa aynı sayfaya gönderir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>method="get" / "post"</strong></td>
+                <td>GET veriyi URL'e yazar, POST gövdeye koyar</td>
+                <td><span class="tag tag--ok">TEMEL</span> HTML formu yalnızca GET ve POST destekler; PUT/DELETE için JS gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>enctype</strong></td>
+                <td><code>application/x-www-form-urlencoded</code> (varsayılan), <code>multipart/form-data</code>, <code>text/plain</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Dosya yükleme çalışmıyorsa sebebi %90 eksik <code>multipart/form-data</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>name özniteliği</strong></td>
+                <td>Sunucuya giden anahtar adı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>name</code> yoksa alan <strong>hiç gönderilmez</strong>. <code>id</code> ile karıştırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;label for&gt;</strong></td>
+                <td>Girdiyi etiketleyen metin; tıklanınca alana odaklanır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>for</code> değeri girdinin <code>id</code>'siyle eşleşmeli. Erişilebilirlik denetiminin 1 numaralı hatası</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;fieldset&gt; / &lt;legend&gt;</strong></td>
+                <td>İlgili alanları gruplayan çerçeve ve başlığı</td>
+                <td><span class="tag">ORTA</span> Radyo düğmesi grubunda neredeyse zorunlu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;button type&gt;</strong></td>
+                <td><code>submit</code> (varsayılan), <code>reset</code>, <code>button</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Form içinde <code>type</code> yazmazsan düğme sayfayı gönderir. Klasik "neden sayfa yenileniyor" hatası</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>formaction / formmethod / formnovalidate</strong></td>
+                <td>Düğme bazında form ayarlarını ezme</td>
+                <td><span class="tag tag--info">İLERİ</span> "Taslak kaydet" ile "Yayınla" düğmelerini ayırmak için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>autocomplete</strong></td>
+                <td>Tarayıcı otomatik doldurmasına ipucu (<code>email</code>, <code>new-password</code>, <code>one-time-code</code>)</td>
+                <td><span class="tag">ORTA</span> Doğru değerler kullanıcı deneyimini ciddi iyileştirir; <code>off</code> yazmak çoğu zaman yanlıştır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>form özniteliği</strong></td>
+                <td>Girdiyi DOM'da uzaktaki bir forma bağlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Girdi formun içinde olmak zorunda değildir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>FormData</strong></td>
+                <td>Form verisini JS ile toplayıp <code>fetch</code> ile gönderme nesnesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Modern form gönderiminin standart yolu &rarr; <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSRF / antiforgery token</strong></td>
+                <td>Formun sahte bir siteden gönderilmesini engelleyen gizli alan</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HTML tarafı gizli input'tur; üretimi çatıya göre değişir: ASP.NET Core &rarr; form tag helper (<code>method="post"</code>) otomatik ekler, elle <code>@Html.AntiForgeryToken()</code>; Django &rarr; <code>{% csrf_token %}</code>; Laravel &rarr; <code>@csrf</code>; Rails &rarr; <code>form_with</code> otomatik <code>authenticity_token</code>; Spring Security + Thymeleaf &rarr; <code>th:action</code> ile otomatik <code>_csrf</code>; Express &rarr; eski <code>csurf</code> paketi kullanımdan kalktı, güncel alternatif için OWASP CSRF Prevention Cheat Sheet (TEYİT). SPA + çerezle oturumda token başlıkta gönderilir (ör. <code>X-XSRF-TOKEN</code>); token çerezde değil <code>Authorization</code> başlığındaysa CSRF riski yoktur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/CSRF">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>&lt;input&gt; türleri — tamamı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>type="text"</strong></td>
+                <td>Tek satır serbest metin</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan tür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="password"</strong></td>
+                <td>Girdiyi gizler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sadece görsel gizleme; HTTPS olmadan hiçbir koruma yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="email"</strong></td>
+                <td>E-posta biçimi doğrular, mobilde @ klavyesi açar</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>multiple</code> ile virgüllü liste kabul eder</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/email">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="number"</strong></td>
+                <td>Sayısal girdi + artır/azalt okları</td>
+                <td><span class="tag">ORTA</span> Telefon/kart numarası için <strong>kullanma</strong>; baştaki sıfırı yer, kaydırma tekerleğiyle değişir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="tel"</strong></td>
+                <td>Telefon; doğrulama yapmaz ama mobilde tuş takımı açar</td>
+                <td><span class="tag">ORTA</span> Biçim için <code>pattern</code> ekle</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/tel">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="url"</strong></td>
+                <td>URL biçimi doğrular</td>
+                <td><span class="tag">ORTA</span> Şema (<code>https://</code>) zorunlu sayılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/url">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="search"</strong></td>
+                <td>Arama kutusu; tarayıcı temizle düğmesi ekler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="date" / "time" / "datetime-local" / "month" / "week"</strong></td>
+                <td>Yerleşik tarih-saat seçiciler</td>
+                <td><span class="tag">ORTA</span> Görünüm tarayıcıya göre değişir, stillenemez. <code>datetime-local</code> saat dilimi <strong>taşımaz</strong></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="range"</strong></td>
+                <td>Kaydırma çubuğu</td>
+                <td><span class="tag">ORTA</span> Kesin değer gerekiyorsa yanına bir <code>output</code> koy</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="color"</strong></td>
+                <td>Renk seçici</td>
+                <td><span class="tag tag--info">İLERİ</span> Değer her zaman <code>#rrggbb</code> biçiminde döner</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/color">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="file" (accept, multiple, capture)</strong></td>
+                <td>Dosya seçici</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>accept</code> sadece filtredir, güvenlik değil — sunucuda tür ve boyut doğrula</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="checkbox"</strong></td>
+                <td>Bağımsız açık/kapalı seçim</td>
+                <td><span class="tag tag--ok">TEMEL</span> İşaretlenmemiş checkbox sunucuya <strong>hiç gönderilmez</strong>. Çatıya göre: ASP.NET MVC/Core <code>bool</code> alan için gizli <code>false</code> input'u ekler; Rails <code>check_box</code> gizli <code>0</code> ekler; saf HTML'de ve bunu yapmayan çatılarda sunucu "alan yoksa false" varsaymalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="radio"</strong></td>
+                <td>Aynı <code>name</code> ile tek seçimlik grup</td>
+                <td><span class="tag tag--ok">TEMEL</span> Grup mantığı <code>name</code>'den gelir, sarmalayıcıdan değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="hidden"</strong></td>
+                <td>Kullanıcıya görünmeyen ama gönderilen değer</td>
+                <td><span class="tag tag--ok">TEMEL</span> Gizli değil, sadece görünmez — DevTools'tan değiştirilebilir. Güven verme</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/hidden">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type="submit" / "reset" / "button" / "image"</strong></td>
+                <td>Düğme davranışlı input türleri</td>
+                <td><span class="tag">ORTA</span> Yeni kodda <code>&lt;button&gt;</code> tercih edilir; <code>reset</code> kullanıcıyı kızdırır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/submit">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;textarea&gt;</strong></td>
+                <td>Çok satırlı metin</td>
+                <td><span class="tag tag--ok">TEMEL</span> Değeri <code>value</code> özniteliğinde değil, etiketin <em>içinde</em> durur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;select&gt; / &lt;option&gt; / &lt;optgroup&gt;</strong></td>
+                <td>Açılır liste ve gruplanmış seçenekler</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>multiple</code> ile çoklu seçim; stillenmesi zordur, kütüphaneler bu yüzden var</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;datalist&gt;</strong></td>
+                <td>Serbest yazıma öneri listesi ekler</td>
+                <td><span class="tag">ORTA</span> <code>select</code> değildir: kullanıcı listede olmayanı da yazabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;output&gt;</strong></td>
+                <td>Hesaplama sonucunu gösteren canlı alan</td>
+                <td><span class="tag tag--info">İLERİ</span> Varsayılan olarak <code>aria-live</code> davranışı taşır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/output">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;progress&gt;</strong></td>
+                <td>Görev ilerleme çubuğu</td>
+                <td><span class="tag">ORTA</span> <code>value</code> vermezsen belirsiz (indeterminate) animasyon gösterir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>&lt;meter&gt;</strong></td>
+                <td>Bilinen aralıkta ölçüm (disk doluluk, puan)</td>
+                <td><span class="tag">ORTA</span> <code>progress</code> ile karıştırma: meter <em>ilerleme değil, ölçüm</em></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meter">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>placeholder</strong></td>
+                <td>Alan boşken görünen ipucu metni</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <strong>Label yerine geçmez.</strong> Yazmaya başlayınca kaybolur, kontrastı düşüktür. Erişilebilirlik hatası olarak sayılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/placeholder">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>readonly vs disabled</strong></td>
+                <td>Salt okunur alan gönderilir, devre dışı alan <strong>gönderilmez</strong></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik mülakat sorusu ve klasik üretim hatası</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/readonly">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inputmode</strong></td>
+                <td>Mobilde açılacak klavye türü (<code>numeric</code>, <code>decimal</code>, <code>tel</code>)</td>
+                <td><span class="tag">ORTA</span> <code>type</code>'ı değiştirmeden klavyeyi düzeltmenin yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/inputmode">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>autofocus</strong></td>
+                <td>Sayfa açılınca alana odaklan</td>
+                <td><span class="tag tag--info">İLERİ</span> Sayfada tek olmalı; ekran okuyucu kullanıcısını şaşırtabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/autofocus">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dogrulama"><span class="h-num">§ 9</span>Yerleşik doğrulama ve Constraint Validation API</h2>
+
+        <p>Sunucu tarafında doğrulama kütüphaneleri kullanılır: ör. FluentValidation (.NET), Bean Validation (Java),
+        Pydantic veya Django forms (Python), Zod/Joi (Node). Bu bölüm onun tarayıcı tarafındaki, kütüphanesiz
+        karşılığı. İkisi birbirinin yerine geçmez; birlikte kullanılır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doğrulama öznitelikleri ve API</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>required</strong></td>
+                <td>Alan boş bırakılamaz</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Boolean öznitelik; <code>required="false"</code> yazmak <em>yine de zorunlu</em> yapar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/required">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>pattern</strong></td>
+                <td>Regex ile biçim kısıtı</td>
+                <td><span class="tag">ORTA</span> Regex başı/sonu otomatik sabitlenir; <code>^</code> ve <code>$</code> yazmana gerek yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/pattern">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>min / max / step</strong></td>
+                <td>Sayı ve tarih aralığı kısıtı</td>
+                <td><span class="tag">ORTA</span> <code>step="any"</code> ondalık sayıda kısıtı kaldırır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/min">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>minlength / maxlength</strong></td>
+                <td>Karakter sayısı sınırı</td>
+                <td><span class="tag">ORTA</span> <code>maxlength</code> yazmayı engeller, <code>minlength</code> göndermeyi engeller — davranışları farklı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/maxlength">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>novalidate / formnovalidate</strong></td>
+                <td>Yerleşik doğrulamayı kapatır</td>
+                <td><span class="tag">ORTA</span> Kendi hata mesajlarını gösterecekseniz gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Constraint Validation API</strong></td>
+                <td><code>checkValidity()</code>, <code>reportValidity()</code>, <code>validity</code>, <code>setCustomValidity()</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kütüphanesiz özel doğrulamanın standart yolu. Tam adıyla ara</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ValidityState</strong></td>
+                <td>Hangi kuralın ihlal edildiğini söyleyen nesne (<code>valueMissing</code>, <code>typeMismatch</code>, <code>patternMismatch</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span> Kendi hata mesajını (sitenin dilinde) yazmak için buna bakman gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/ValidityState">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:valid / :invalid / :user-invalid</strong></td>
+                <td>Doğrulama durumuna göre CSS seçicileri</td>
+                <td><span class="tag">ORTA</span> <code>:user-invalid</code> kullanıcı alandan çıkana kadar kırmızı boyamaz; tercih edilen budur &rarr; <a href="../02-css/index.html">02 &mdash; CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>istemci vs sunucu doğrulaması</strong></td>
+                <td>Tarayıcı doğrulaması atlanabilir; sunucu doğrulaması zorunludur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Postman ile isteği doğrudan atan biri tüm HTML kurallarını atlar. Mülakat cevabın bu olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-invalid / aria-errormessage</strong></td>
+                <td>Hatalı alanı ve hata metnini ekran okuyucuya bildirir</td>
+                <td><span class="tag">ORTA</span> Görsel kırmızı çerçeve tek başına yetmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-invalid">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="erisilebilirlik"><span class="h-num">§ 10</span>Erişilebilirlik (a11y)</h2>
+
+        <p class="intro">Erişilebilirlik bir iyi uygulama olduğu kadar, bazı durumlarda yasal veya sözleşmesel
+        yükümlülüktür; hangisinin geçerli olduğu ürünün kime ve nerede sunulduğuna bağlıdır (aşağıdaki yükümlülük tablosu).
+        Mülakatta "ARIA nedir" sorusuna verilecek en iyi cevap şudur: <em>"En iyi ARIA, ARIA yazmamaktır —
+        doğru semantik elementi seçmek yeterlidir."</em></p>
+
+        <div class="tablewrap" id="erisilebilirlik-yukumluluk">
+          <table class="data">
+            <caption>Erişilebilirlikte hedef seviye ve yükümlülük &mdash; ürünün kime ve nerede sunulduğuna göre</caption>
+            <thead><tr><th>Durum</th><th>Ne geçerli</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Türkiye'de kamu kurumu sitesi/uygulaması</strong></td><td>Kamu internet siteleri için erişilebilirlik yükümlülükleri, Aile ve Sosyal Hizmetler Bakanlığı'nın erişilebilirlik denetimi/logosu düzenlemeleri ve Cumhurbaşkanlığı Dijital Dönüşüm Ofisi rehberleri. Hedef seviye ve ilgili mevzuat maddesi TEYİT.</td><td>cbddo.gov.tr &middot; aile.gov.tr &middot; mevzuat.gov.tr</td></tr>
+              <tr><td><strong>AB pazarında kapsamdaki ürün/hizmet</strong> (e-ticaret, bankacılık, e-kitap, ulaşım vb.)</td><td>European Accessibility Act (Direktif 2019/882) 28 Haziran 2025'ten beri uygulanıyor; teknik referans EN 301 549 (WCAG 2.1 AA'yı içerir). Hizmetlerde mikro işletme istisnası var.</td><td><a href="https://eur-lex.europa.eu/eli/dir/2019/882/oj">eur-lex.europa.eu</a></td></tr>
+              <tr><td><strong>AB kamu sektörü</strong></td><td>Web Accessibility Directive (2016/2102); EN 301 549.</td><td><a href="https://eur-lex.europa.eu/eli/dir/2016/2102/oj">eur-lex.europa.eu</a></td></tr>
+              <tr><td><strong>ABD federal kurumları</strong></td><td>Section 508.</td><td><a href="https://www.section508.gov/">section508.gov</a></td></tr>
+              <tr><td><strong>ABD eyalet/yerel yönetimleri</strong></td><td>ADA Title II kuralı: WCAG 2.1 AA; uyum tarihleri nüfusa göre 2026/2027 (TEYİT).</td><td><a href="https://www.ada.gov/">ada.gov</a></td></tr>
+              <tr><td><strong>Özel/kişisel proje, kurumsal müşteri işi</strong></td><td>Genelde doğrudan yasal zorunluluk yok; kurumsal müşteriler sözleşmeye koyabilir. Her durumda WCAG 2.2 AA iyi uygulama hedefidir.</td><td><a href="https://www.w3.org/WAI/WCAG22/quickref/">WCAG 2.2</a></td></tr>
+              <tr><td><strong>AAA seviyesi</strong></td><td>W3C, tüm siteler için genel hedef olarak önermez; yalnızca belirli içerik veya kitle için.</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/conformance">w3.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Temel kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>a11y</strong></td>
+                <td>"accessibility" kelimesinin kısaltması (a + 11 harf + y)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada hem <code>a11y</code> hem <code>web accessibility</code> dene</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>WCAG 2.2 (A / AA / AAA)</strong></td>
+                <td>Uluslararası erişilebilirlik ölçütleri; üç uyum seviyesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sektör hedefi genelde <strong>AA</strong>'dır. AAA hemen hiç talep edilmez</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/quickref/">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>WAI-ARIA</strong></td>
+                <td>HTML'in anlatamadığı durumları yardımcı teknolojiye anlatan öznitelik seti</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "ARIA" tek başına aratıldığında alakasız sonuç gelir; <code>WAI-ARIA</code> yaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ARIA'nın birinci kuralı</strong></td>
+                <td>Yerleşik bir HTML elementi işi görüyorsa ARIA kullanma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>&lt;div role="button"&gt;</code> yerine <code>&lt;button&gt;</code>. Bu cümle mülakatta çok iş görür</td>
+                <td><a href="https://www.w3.org/TR/using-aria/">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>role</strong></td>
+                <td>Elementin ne olduğunu bildirir (<code>button</code>, <code>dialog</code>, <code>alert</code>, <code>tablist</code>)</td>
+                <td><span class="tag">ORTA</span> Rol vermek davranış vermez; klavye desteğini sen yazacaksın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>accessible name</strong></td>
+                <td>Yardımcı teknolojinin bir öğeyi okurken söylediği ad</td>
+                <td><span class="tag">ORTA</span> Hesaplanma sırası vardır: <code>aria-labelledby</code> &gt; <code>aria-label</code> &gt; içerik &gt; <code>title</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Accessible_name">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-label</strong></td>
+                <td>Görünür metni olmayan öğeye ad verir (ikon düğmesi)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Görünür bir etiket varsa <code>aria-labelledby</code> tercih et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-label">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-labelledby</strong></td>
+                <td>Ada başka bir elementin metnini kaynak gösterir</td>
+                <td><span class="tag">ORTA</span> Birden çok <code>id</code> boşlukla verilebilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-labelledby">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-describedby</strong></td>
+                <td>Ek açıklama/yardım metnini bağlar</td>
+                <td><span class="tag">ORTA</span> Ad değil, <em>açıklama</em>. Form yardım metinleri için ideal</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-describedby">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-hidden="true"</strong></td>
+                <td>Öğeyi erişilebilirlik ağacından gizler</td>
+                <td><span class="tag">ORTA</span> Odaklanabilir bir öğeye <strong>koyma</strong>; klavye kullanıcısı görünmeyen bir yere düşer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-hidden">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-live (polite / assertive)</strong></td>
+                <td>Dinamik değişen bölgeyi ekran okuyucuya duyurur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Bildirim, sepet sayacı, arama sonucu sayısı için. <code>assertive</code> kullanıcıyı böler, dikkatli kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aria-expanded / aria-controls / aria-current</strong></td>
+                <td>Açılır menü, sekme ve aktif sayfa durumu bildirimi</td>
+                <td><span class="tag">ORTA</span> Menü/accordion bileşeni yazacaksan zorunlu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-expanded">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tabindex="0" / "-1" / pozitif</strong></td>
+                <td>Klavye odak sırasına dahil etme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <strong>Pozitif değer kullanma</strong>; sıra kaosu yaratır. <code>-1</code> "JS ile odaklanabilir ama Tab ile gelinmez" demektir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/tabindex">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>focus management / focus trap</strong></td>
+                <td>Modal açılınca odağı içeride tutma, kapanınca geri verme</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>&lt;dialog&gt;</code> bunu hazır verir &rarr; §&nbsp;3</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Keyboard-navigable_JavaScript_widgets">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:focus-visible</strong></td>
+                <td>Yalnızca klavyeyle gelindiğinde odak halkası göster</td>
+                <td><span class="tag">ORTA</span> <code>outline: none</code> yazıp yerine bir şey koymamak en yaygın a11y suçudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>skip link</strong></td>
+                <td>"İçeriğe atla" — gezinmeyi atlayan ilk bağlantı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Görsel olarak gizlidir, odaklanınca görünür. Küçük ama sık sorulan bir detay</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G1">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>renk kontrastı (4.5:1 / 3:1)</strong></td>
+                <td>Metin ile arka plan arasındaki minimum oran</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> AA için normal metin 4.5:1, büyük metin 3:1. Tasarımcı vermese de sen ölçebilirsin</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ekran okuyucu (NVDA / JAWS / VoiceOver / Narrator)</strong></td>
+                <td>Sayfayı sesli okuyan yardımcı yazılımlar</td>
+                <td><span class="tag">ORTA</span> NVDA ücretsiz (Windows) — <span class="tag tag--warn">ÜCRETLİ</span> JAWS ücretli. VoiceOver macOS/iOS'ta, Narrator Windows'ta yerleşik</td>
+                <td><a href="https://www.nvaccess.org/">nvaccess.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>accessibility tree</strong></td>
+                <td>Tarayıcının DOM'dan türettiği, yardımcı teknolojiye sunduğu ağaç</td>
+                <td><span class="tag tag--info">İLERİ</span> Chrome DevTools &rarr; Elements &rarr; Accessibility sekmesinden görülür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Accessibility_tree">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ARIA Authoring Practices Guide (APG)</strong></td>
+                <td>Sekme, menü, combobox gibi bileşenlerin doğru kalıpları</td>
+                <td><span class="tag">ORTA</span> Bileşen yazmadan önce bakılacak yer. Ücretsiz</td>
+                <td><a href="https://www.w3.org/WAI/ARIA/apg/">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-reduced-motion</strong></td>
+                <td>Animasyon istemeyen kullanıcıyı tespit eder</td>
+                <td><span class="tag">ORTA</span> CSS medya sorgusu &rarr; <a href="../02-css/index.html">02 &mdash; CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>axe DevTools</strong></td>
+                <td>Sayfayı tarayıp erişilebilirlik ihlallerini listeleyen tarayıcı eklentisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Temel sürümü ücretsiz, kurumsal sürümü <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.deque.com/axe/">deque.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>axe-core</strong></td>
+                <td>Aynı motorun açık kaynak kütüphanesi; testlere gömülebilir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. CI hattına eklenebilir &rarr; <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem</a></td>
+                <td><a href="https://github.com/dequelabs/axe-core">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lighthouse</strong></td>
+                <td>Chrome'da yerleşik performans/SEO/erişilebilirlik denetimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Erişilebilirlik puanı otomatik testin sınırını gösterir; 100 almak "erişilebilir" demek değildir</td>
+                <td><a href="https://developer.chrome.com/docs/lighthouse/overview">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WAVE</strong></td>
+                <td>Sayfa üzerine görsel işaretleme yapan denetim aracı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz web aracı ve eklenti</td>
+                <td><a href="https://wave.webaim.org/">wave.webaim.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Accessibility Insights</strong></td>
+                <td>Microsoft'un denetim aracı; rehberli manuel testler içerir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz</td>
+                <td><a href="https://accessibilityinsights.io/">accessibilityinsights.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>klavye testi</strong></td>
+                <td>Fareyi bırak, sadece Tab / Shift+Tab / Enter / Space / Ok tuşlarıyla gez</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sıfır maliyetli, en etkili test. Otomatik araçların bulamadığını bulur</td>
+                <td><a href="https://www.w3.org/WAI/test-evaluate/preliminary/">w3.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="seo"><span class="h-num">§ 11</span>SEO ve sayfa performansı</h2>
+
+        <p>SEO'nun senin için ne kadar önemli olduğu işine bağlı:</p>
+
+        <ul>
+          <li><strong>Yalnızca API yazan backend geliştirici</strong> &rarr; SEO bilmen beklenmez; <em>sunucu tarafı render</em> tartışmasında temel terimleri bilmen yeterli.</li>
+          <li><strong>Sunucu taraflı şablon</strong> (Razor Pages/MVC, Django, Laravel, Thymeleaf) <strong>veya SSR framework'ü</strong> (Next.js, Nuxt, Astro) <strong>yazıyorsan</strong> &rarr; <code>title</code>/meta, canonical ve yapılandırılmış veri doğrudan senin sorumluluğun.</li>
+          <li><strong>Frontend/full-stack, pazarlama veya e-ticaret sitesi</strong> &rarr; SEO ve Core Web Vitals yüksek öncelik.</li>
+          <li><strong>Giriş ekranı arkasındaki iç uygulama</strong> &rarr; SEO önemsiz; ama <code>noindex</code>/robots ayarı doğru yapılmalı.</li>
+        </ul>
+
+        <p>Aşağıdakiler HTML'in doğrudan kontrol ettiği kısımlar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Arama motoru için HTML</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>title etiketi</strong></td>
+                <td>Arama sonucundaki tıklanabilir başlık</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her sayfada benzersiz olmalı</td>
+                <td><a href="https://developers.google.com/search/docs/appearance/title-link">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>meta description</strong></td>
+                <td>Sonuç altındaki özet</td>
+                <td><span class="tag tag--ok">TEMEL</span> Google çoğu zaman kendi metnini yazar; yine de doldur</td>
+                <td><a href="https://developers.google.com/search/docs/appearance/snippet">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>başlık hiyerarşisi (h1…h6)</strong></td>
+                <td>İçeriğin yapısal haritası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sayfada tek <code>h1</code> pratiği hâlâ en güvenli yaklaşımdır</td>
+                <td><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>rel="canonical"</strong></td>
+                <td>Yinelenen içeriğin asıl adresi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Filtreli/sıralamalı liste sayfalarında kritik</td>
+                <td><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>robots.txt</strong></td>
+                <td>Site kökündeki tarama kuralları dosyası</td>
+                <td><span class="tag">ORTA</span> Taramayı engeller, <strong>indekslemeyi değil</strong>. İndekslemeyi <code>noindex</code> engeller</td>
+                <td><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>sitemap.xml</strong></td>
+                <td>Sayfa listesi; botun keşfini hızlandırır</td>
+                <td><span class="tag">ORTA</span> Küçük sitede etkisi sınırlıdır</td>
+                <td><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>structured data / JSON-LD</strong></td>
+                <td>Sayfa içeriğini makineye tanımlayan yapılandırılmış veri</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Google JSON-LD'yi önerir. Şemalar <a href="https://schema.org/">schema.org</a>'dan gelir</td>
+                <td><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data">developers.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rich Results Test</strong></td>
+                <td>JSON-LD'ni doğrulayan Google aracı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz</td>
+                <td><a href="https://search.google.com/test/rich-results">search.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Search Console</strong></td>
+                <td>Sitenin arama tarafındaki durumunu gösteren panel</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; site sahipliği doğrulaması gerekir</td>
+                <td><a href="https://search.google.com/search-console/about">search.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Core Web Vitals (LCP, INP, CLS)</strong></td>
+                <td>Yükleme, etkileşim ve görsel kararlılık ölçütleri</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> INP, 2024'te FID'in yerini aldı — eski kaynaklarda hâlâ FID görürsün</td>
+                <td><a href="https://web.dev/articles/vitals">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>LCP (Largest Contentful Paint)</strong></td>
+                <td>En büyük içerik öğesinin ekrana gelme süresi; hedef 2,5 sn altı</td>
+                <td><span class="tag">ORTA</span> Genelde bir kapak görselidir; <code>loading="lazy"</code> koymamak burada işe yarar</td>
+                <td><a href="https://web.dev/articles/lcp">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>CLS (Cumulative Layout Shift)</strong></td>
+                <td>Sayfanın yüklenirken zıplaması; hedef 0,1 altı</td>
+                <td><span class="tag">ORTA</span> Görsele <code>width</code>/<code>height</code> yazmak en kolay düzeltmedir</td>
+                <td><a href="https://web.dev/articles/cls">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>INP (Interaction to Next Paint)</strong></td>
+                <td>Etkileşime yanıt süresi; hedef 200 ms altı</td>
+                <td><span class="tag">ORTA</span> Ağır JavaScript'in bedeli burada görünür &rarr; <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td>
+                <td><a href="https://web.dev/articles/inp">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>SSR / SSG / CSR</strong></td>
+                <td>HTML'in sunucuda mı tarayıcıda mı üretildiği</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> SEO tartışmasının kalbi. React tarafı için <a href="../../JavaScript-TypeScript/03-react/index.html">React</a>; sunucu tarafı render için kendi yığınının bölümü (ör. ASP.NET için <a href="../../CSharp-DotNet/index.html">.NET alanı</a>, Spring/Thymeleaf için <a href="../../Java/index.html">Java</a>)</td>
+                <td><a href="https://web.dev/articles/rendering-on-the-web">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>semantik HTML ve SEO ilişkisi</strong></td>
+                <td>Doğru etiketler botun içeriği anlamasını kolaylaştırır</td>
+                <td><span class="tag">ORTA</span> "Semantik etiket sıralamayı yükseltir" iddiası abartılıdır; dolaylı fayda sağlar</td>
+                <td><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger"><span class="h-num">§ 12</span>Global öznitelikler, Web Components ve doğrulama</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Her elementte kullanılabilen global öznitelikler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>global attributes</strong></td>
+                <td>Her HTML elementinde geçerli öznitelik kümesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tek sayfada topluca listelenir; bir kez baştan sona oku</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>id / class</strong></td>
+                <td>Benzersiz kimlik / yeniden kullanılabilir sınıf</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>id</code> sayfada bir kez geçmeli; tekrar edersen JS ve <code>label for</code> bozulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/id">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>data-* öznitelikleri</strong></td>
+                <td>Kendi verini elemente iliştirme; JS'te <code>element.dataset</code> ile okunur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Aramada <code>HTML data attributes</code> yaz. Sunucudan gelen id'yi DOM'a taşımanın standart yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>title</strong></td>
+                <td>Fare üzerine gelince çıkan ipucu</td>
+                <td><span class="tag">ORTA</span> Mobilde ve klavyede erişilemez; kritik bilgi koyma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/title">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hidden</strong></td>
+                <td>Elementi tamamen gizler</td>
+                <td><span class="tag">ORTA</span> CSS <code>display</code> ile ezilebilir; <code>hidden="until-found"</code> yeni bir değerdir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/hidden">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>contenteditable</strong></td>
+                <td>Elementi kullanıcı tarafından düzenlenebilir yapar</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>plaintext-only</code> değeri zengin metni kapatır. Kendi zengin metin editörünü yazmaya kalkma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/contenteditable">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>draggable</strong></td>
+                <td>Sürükle-bırak API'sine dahil eder</td>
+                <td><span class="tag tag--info">İLERİ</span> Tek başına yetmez; <code>dragstart</code>/<code>drop</code> olaylarını yazman gerekir. Dokunmatik cihazda çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>lang / dir</strong></td>
+                <td>Dil ve yazım yönü</td>
+                <td><span class="tag">ORTA</span> <code>dir="auto"</code> kullanıcı içeriğinde işe yarar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/dir">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>translate</strong></td>
+                <td>Otomatik çeviriden hariç tutar</td>
+                <td><span class="tag tag--info">İLERİ</span> Marka adı, kod örneği için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/translate">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>spellcheck</strong></td>
+                <td>Yazım denetimini açar/kapatır</td>
+                <td><span class="tag tag--info">İLERİ</span> Kod alanlarında kapatmak mantıklıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/spellcheck">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>accesskey</strong></td>
+                <td>Klavye kısayolu tanımlar</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ekran okuyucu kısayollarıyla çakışır; kullanma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/accesskey">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>boolean attribute</strong></td>
+                <td>Varlığı yeter, değeri önemsizdir (<code>required</code>, <code>disabled</code>, <code>checked</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>disabled="false"</code> yazmak alanı yine devre dışı bırakır. Sık yapılan hata</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>void element</strong></td>
+                <td>Kapanış etiketi olmayan elementler (<code>img</code>, <code>br</code>, <code>input</code>, <code>meta</code>)</td>
+                <td><span class="tag">ORTA</span> HTML'de <code>/&gt;</code> yazmak gereksizdir; JSX'te zorunludur &rarr; <a href="../../JavaScript-TypeScript/03-react/index.html">React</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Void_element">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Web Components</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Web Components</strong></td>
+                <td>Custom Elements + Shadow DOM + Template üçlüsü</td>
+                <td><span class="tag tag--info">İLERİ</span> Framework'süz bileşen yazma standardı; React'in alternatifi değil, tamamlayıcısıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Custom Elements</strong></td>
+                <td>Kendi HTML etiketini tanımlama (<code>&lt;my-card&gt;</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ad tirenli olmak <strong>zorunda</strong>; <code>customElements.define()</code> ile kaydedilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shadow DOM</strong></td>
+                <td>Bileşenin stilini ve DOM'unu dışarıdan izole eder</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS sızıntısını kökten çözer ama dışarıdan stillemeyi de zorlaştırır (<code>::part</code>, CSS değişkenleri)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>lifecycle callbacks</strong></td>
+                <td><code>connectedCallback</code>, <code>disconnectedCallback</code>, <code>attributeChangedCallback</code></td>
+                <td><span class="tag tag--info">İLERİ</span> React'in yaşam döngüsüne benzer mantık</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lit</strong></td>
+                <td>Web Components yazmayı kolaylaştıran küçük kütüphane</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, açık kaynak. Google destekli</td>
+                <td><a href="https://lit.dev/">lit.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stencil</strong></td>
+                <td>Web Components derleyicisi; tasarım sistemi üretiminde kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Ionic ekibi geliştiriyor</td>
+                <td><a href="https://stenciljs.com/">stenciljs.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doğrulama, referans ve öğrenme kaynakları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>W3C Markup Validator (Nu Html Checker)</strong></td>
+                <td>HTML'inin standarda uygunluğunu denetler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. URL, dosya veya yapıştırılan metinle çalışır</td>
+                <td><a href="https://validator.w3.org/nu/">validator.w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML Living Standard (WHATWG)</strong></td>
+                <td>HTML'in gerçek, güncel şartnamesi</td>
+                <td><span class="tag tag--info">İLERİ</span> "HTML5" ayrı bir sürüm değil; standart sürekli güncelleniyor. Tek sayfalık hali çok büyüktür, <code>multipage</code> sürümünü kullan</td>
+                <td><a href="https://html.spec.whatwg.org/multipage/">html.spec.whatwg.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>content model / permitted content</strong></td>
+                <td>Hangi elementin içine hangi elementin girebileceği kuralı</td>
+                <td><span class="tag">ORTA</span> Her MDN element sayfasının altındaki teknik özet tablosunda yazar</td>
+                <td><a href="https://html.spec.whatwg.org/multipage/dom.html#content-models">html.spec.whatwg.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>caniuse.com</strong></td>
+                <td>Bir özelliğin tarayıcı desteğini gösterir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Yeni bir HTML özelliği kullanmadan önce buraya bak</td>
+                <td><a href="https://caniuse.com/">caniuse.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Baseline</strong></td>
+                <td>Bir özelliğin tüm ana tarayıcılarda yerleştiğini gösteren yeni etiket</td>
+                <td><span class="tag">ORTA</span> MDN sayfalarının üstünde "Baseline: Widely available" olarak görünür</td>
+                <td><a href="https://web.dev/baseline">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MDN HTML Reference</strong></td>
+                <td>Tüm element ve özniteliklerin listesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Bu sayfanın kaynağı büyük ölçüde burasıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTMLHint / html-validate</strong></td>
+                <td>HTML için linter; derleme hattına eklenebilir</td>
+                <td><span class="tag tag--info">İLERİ</span> Her ikisi de ücretsiz &rarr; <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem ve Araçlar</a></td>
+                <td><a href="https://htmlhint.com/">htmlhint.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Emmet</strong></td>
+                <td>Kısaltmadan HTML üreten editör eklentisi (<code>ul&gt;li*5</code>)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; VS Code'da yerleşik gelir</td>
+                <td><a href="https://docs.emmet.io/">docs.emmet.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>XSS ve HTML kaçışı</strong></td>
+                <td>Kullanıcı girdisini HTML'e basarken kaçırmama açığı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Şablon motorları varsayılan olarak kaçırır, "ham" çıktı biçimi kaçırmaz: Razor <code>@</code> / <code>@Html.Raw()</code>; React JSX / <code>dangerouslySetInnerHTML</code>; Vue <code>{{ }}</code> / <code>v-html</code>; Angular interpolation / <code>[innerHTML]</code> (temizler) ve <code>bypassSecurityTrustHtml</code> (temizlemez); Django ve Jinja autoescape (Jinja'da açık olması yapılandırmaya bağlı) / <code>|safe</code>; Thymeleaf <code>th:text</code> / <code>th:utext</code>; Blade <code>{{ }}</code> / <code>{!! !!}</code>. Tarayıcıda <code>innerHTML</code> da kaçırmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/XSS">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DOMPurify</strong></td>
+                <td>Kullanıcıdan gelen HTML'i temizleyen kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Zengin metin girişi kabul ediyorsan neredeyse zorunlu</td>
+                <td><a href="https://github.com/cure53/DOMPurify">github.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>Aşağıdaki sıra, temel HTML bilen ve iş arayan biri için mülakat riskine ve günlük iş faydasına göre dizildi. Her maddeyi okuyup geçme;
+        her biri için küçük bir HTML dosyası açıp elle yaz, tarayıcıda aç, DevTools'tan bak. Durumun farklıysa:</p>
+
+        <ul>
+          <li><strong>Hiç HTML bilmiyorsan</strong> &rarr; önce MDN "Your first website" veya web.dev Learn HTML ile belge iskeleti, metin, bağlantı ve görsel; sonra bu sıra.</li>
+          <li><strong>Hobi veya kişisel site yapıyorsan</strong> &rarr; semantik yapı, görsel performansı ve SEO temeli öne; iframe güvenliği ve Constraint Validation API sonraya.</li>
+          <li><strong>Kamu veya kurumsal projede çalışıyorsan</strong> &rarr; erişilebilirlik ve form maddeleri en üstte; WCAG denetim araçları (axe, Lighthouse, ekran okuyucu testi) zorunlu adım.</li>
+        </ul>
+
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Semantik yapı: header, nav, main, section, article, aside, footer</span>
+            <p>HTML mülakatının bir numaralı konusu. "div yerine neden bunlar?" sorusunun üç ayaklı cevabını
+            ezberleme, kur: ekran okuyucu landmark'ları, arama motorunun içerik haritası, kod okunabilirliği. §&nbsp;4.</p>
+            <span class="steps__meta">Öncelik: en yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Formlar: label/for, name, button type, readonly vs disabled, enctype</span>
+            <p>Formdan gelen veriyi işleyen backend geliştiricinin en çok işine yarayan bölüm; frontend'de de form her yerdedir. <code>name</code> ile <code>id</code> farkı ve
+            devre dışı alanın gönderilmemesi, hem mülakatta hem üretimde karşına çıkar. §&nbsp;8.</p>
+            <span class="steps__meta">Öncelik: en yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Erişilebilirlik temeli: label, alt, tabindex, aria-label, kontrast, klavye testi</span>
+            <p>Fareyi bırakıp sadece Tab ile kendi sayfanda gez. Bir saatlik bu deney, okuduğun on makaleden
+            fazla öğretir. Genel hedef WCAG 2.2 AA; yasal yükümlülük ürünün kime ve nerede sunulduğuna göre değişir (<a href="#erisilebilirlik-yukumluluk">§&nbsp;10'daki yükümlülük tablosu</a>).</p>
+            <span class="steps__meta">Öncelik: en yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Yerleşik doğrulama ve Constraint Validation API</span>
+            <p><code>required</code>, <code>pattern</code>, <code>min/max</code> ile başla; sonra
+            <code>setCustomValidity()</code> ile kendi hata mesajını yaz: tek dilli Türkçe sitede Türkçe; başka dilde veya
+            çok dilli sitede mesajlar i18n katmanından, sayfanın <code>lang</code> değerine göre gelsin. Özel mesaj vermezsen
+            tarayıcının varsayılan mesajları sayfa dilinde değil, tarayıcının/işletim sisteminin arayüz dilinde gelir;
+            tutarlı dil istiyorsan özel mesaj gerekir. "İstemci doğrulaması güvenlik değildir"
+            cümlesini mülakatta kur. §&nbsp;9.</p>
+            <span class="steps__meta">Öncelik: yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">iframe ve gömme güvenliği: sandbox, allow, frame-ancestors, clickjacking</span>
+            <p>Sık gözden kaçan bir güvenlik konusu. İki yönü ayrı ayrı çalış: gömerken <code>sandbox</code>, gömülürken
+            <code>CSP frame-ancestors</code>. <code>allow-scripts</code> + <code>allow-same-origin</code>
+            tuzağını bilmek seni ayırır. §&nbsp;7.</p>
+            <span class="steps__meta">Öncelik: yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Belge başı: charset, viewport, script defer/async</span>
+            <p>Üçü de tek satırlık ama üçünün de yanlışı pahalı. "defer ile async farkı" doğrudan sorulan bir
+            sorudur. §&nbsp;2.</p>
+            <span class="steps__meta">Öncelik: yüksek · Rozet: MÜLAKATTA SIK / TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">Görsel performansı: width/height, srcset/sizes, loading=lazy, picture</span>
+            <p>Core Web Vitals'ın en kolay kazanılan puanları burada. LCP görseline lazy koymama kuralını
+            not al. §&nbsp;6 ve §&nbsp;11.</p>
+            <span class="steps__meta">Öncelik: orta-yüksek · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Erişilebilir tablo: caption, thead/tbody, th scope, colspan/rowspan</span>
+            <p>Veritabanından gelen veriyi ekrana basarken doğrudan işe yarar. §&nbsp;5.</p>
+            <span class="steps__meta">Öncelik: orta · Rozet: MÜLAKATTA SIK / TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">Metin etiketlerinin anlamı: strong/b, em/i, details, dialog</span>
+            <p><code>&lt;dialog&gt;</code> ve <code>&lt;details&gt;</code> ikilisini mutlaka dene: JavaScript
+            yazmadan modal ve accordion elde edersin. §&nbsp;3.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">SEO temeli: title, description, canonical, JSON-LD, Core Web Vitals</span>
+            <p>SSR tartışmasına girdiğinde bu kelimeleri bilmen gerekir. Lighthouse'u kendi sayfanda bir kez
+            çalıştır. §&nbsp;11.</p>
+            <span class="steps__meta">Öncelik: orta · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">data-* öznitelikleri ve global öznitelikler</span>
+            <p>Sunucudan gelen kimliği DOM'a taşımanın doğru yolu. Boolean öznitelik kavramını da burada
+            netleştir. §&nbsp;12.</p>
+            <span class="steps__meta">Öncelik: orta · Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Doğrulama ve araçlar: W3C Validator, Lighthouse, axe, caniuse</span>
+            <p>Dördü de ücretsiz. Yazdığın her sayfayı bir kez validator'dan geçir; hatalarını okumak
+            başlı başına bir ders. §&nbsp;10 ve §&nbsp;12.</p>
+            <span class="steps__meta">Öncelik: orta</span>
+          </li>
+          <li>
+            <span class="steps__title">Web Components: custom elements, shadow DOM, template, slot</span>
+            <p>Şimdilik son sıra. Bilmen, React'in ne çözdüğünü anlamana yardım eder ama iş ilanlarında
+            nadiren aranır. §&nbsp;3 ve §&nbsp;12.</p>
+            <span class="steps__meta">Öncelik: düşük · Rozet: İLERİ</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu sayfadaki hiçbir madde okumakla öğrenilmez. En az beş kere şunu yap: boş bir
+          <code>.html</code> dosyası aç, elle yaz (kopyalama), tarayıcıda aç, F12 ile DevTools'u aç,
+          Elements ve Accessibility sekmelerine bak. HTML'in tamamı bir öğleden sonrada denenebilecek kadar
+          küçük; onu ertelemenin bir gerekçesi yok.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Sonraki sayfa: <a href="../02-css/index.html">02 &mdash; CSS</a>. Bu sayfayla birlikte okunacak diğer alanlar:
+          <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> (DOM, olaylar, FormData),
+          <a href="../../JavaScript-TypeScript/02-typescript/index.html">TypeScript</a> (JSX tipleri),
+          <a href="../../JavaScript-TypeScript/03-react/index.html">React</a> (JSX'in HTML'den farkları: <code>className</code>,
+          <code>htmlFor</code>, kendi kendine kapanan etiketler) ve
+          <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem ve Araçlar</a> (linter, formatter, derleyici).
+          Bölüm girişi: <a href="../index.html">HTML ve CSS genel bakış</a>; JavaScript tarafının girişi: <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript genel bakış</a>. Diğer alanlar:
+          <a href="../../CSharp-DotNet/index.html">.NET</a>, <a href="../../Java/index.html">Java</a>,
+          <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfaları. Site kökü:
+          <a href="../../index.html">ana sayfa</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Genel Bakış</span></a>
+        <a class="next" href="../02-css/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">CSS</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesajlaşma ve Dağıtık Sistemler — .NET Anahtar Listesi</title>
+<meta name="description" content="RabbitMQ, MassTransit, Kafka, gRPC, SignalR, arka plan işleri, outbox deseni ve dayanıklılık.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Mesajlaşma ve Dağıtık Sistemler</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 05 · Dağıtık Sistemler</div>
+        <h1 class="page-title">RabbitMQ, <em>MassTransit</em>, gRPC, SignalR</h1>
+        <p class="lede">İlanlarda sık istenen ama günlük işte herkesin elinin değmediği teknolojilerin çoğu burada. Mesaj kuyruğu mantığından outbox desenine, gerçek zamanlı iletişimden dayanıklılık kalıplarına.</p>
+        <div class="head-meta">Seviye: orta &rarr; ileri &middot; Mülakat önceliği yüksek</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu bir anlatım sayfası değil, <strong>arama listesi</strong>. Her satır bir terim,
+        bir cümlelik "bu nedir" notu ve varsa resmî doküman bağlantısı içerir. Sen her maddeyi kendi
+        kaynağından okuyup küçük bir örnek yazacaksın.</p>
+
+        <p>Rozetler bir konunun ilanlarda ve mülakatlarda ne sıklıkla geçtiğini gösterir, <em>öğrenme sırasını</em>
+        göstermez. Okuma sırasını amacına göre seç:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre okuma sırası</caption>
+            <thead><tr><th>Durumun</th><th>Önerilen sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Mülakata hazırlanıyorsun</td><td>Önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar (iş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz), sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>.</td></tr>
+              <tr><td>Sıfırdan öğreniyorsun / mesajlaşmayı hiç kullanmadın</td><td>Rozet sırası yerine kavram bağımlılığı sırası: önce tek süreç içinde arka plan işi (<code>BackgroundService</code>, sonra Hangfire), sonra § 1 kavram sözlüğü, en son broker (§ 2 RabbitMQ, § 3 MassTransit).</td></tr>
+              <tr><td>Hedef ekip Kafka, Azure Service Bus veya gerçek zamanlı arayüz ağırlıklı</td><td>İlgili başlığı öne al; ayrıntı: <a href="#ozet">§ 10 &mdash; Hedefe göre öncelik</a> tablosu.</td></tr>
+              <tr><td>Hâlihazırda mesajlaşma kullanan bir projede çalışıyorsun</td><td>Projendeki altyapının bölümüyle başla (RabbitMQ § 2, MassTransit § 3, diğerleri § 4); sonra güvenilirlik satırları (outbox, idempotency, dead letter) ve lisans durumu.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Bu sayfada ilanlarda en sık geçen dört başlık:
+        <strong>RabbitMQ</strong>, <strong>MassTransit</strong>, <strong>gRPC</strong>,
+        <strong>SignalR</strong> &mdash; artı <strong>Hangfire</strong> ve <strong>Redis</strong>.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu sayfadaki tek başına en riskli başlık RabbitMQ + MassTransit. İkisi de ilanlarda sık geçer,
+          ikisi de çoğu zaman pratikte denenmeden yazılır ve ikisi de "anlattır bakalım" sorusuna çok uygun. Bunlara ayrı bir çalışma bloğu
+          ayır: RabbitMQ'yu ayağa kaldır (kurulum seçenekleri § 2'de), iki konsol uygulaması arasında mesaj gönder, sonra
+          aynı işi MassTransit ile tekrarla.</p>
+          <p>Süre ritmine göre değişir: günün tamamını bu konuya ayırabiliyorsan yaklaşık bir hafta; işle birlikte akşamları/hafta sonu
+          çalışıyorsan 2–3 hafta; mesajlaşmayla daha önce çalıştıysan 1–2 gün.</p>
+        </div>
+
+        <p>Bağlantılı sayfalar: mimari desenler (CQRS, Mediator, saga'nın mimari tarafı) için
+        <a href="../04-mimari-ve-desenler/index.html">04 &mdash; Mimari ve Desenler</a>; outbox tablosunun veritabanı
+        tarafı ve EF Core transaction'ları için <a href="../03-veri-erisimi/index.html">03 &mdash; Veri Erişimi</a>;
+        loglama, tracing ve metrikler için <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 &mdash; DevOps ve
+        Gözlemlenebilirlik</a>; test harness ve Testcontainers için
+        <a href="../06-test-ve-kalite/index.html">06 &mdash; Test ve Kalite</a>; container'ları tek komutla ayağa
+        kaldırmak için <a href="../09-aspire-bulut-modern/index.html">09 &mdash; Aspire ve Modern Bulut</a>;
+        paket isimleri için <a href="../10-kutuphaneler/index.html">10 &mdash; Kütüphane Kataloğu</a>.
+        Aynı kavramların Java dünyasındaki karşılıkları (Spring Kafka, JMS) için
+        <a href="../../Java/index.html">Java bölümü</a>.</p>
+
+        <h2 id="temel-kavramlar"><span class="h-num">§ 1</span>Temel kavramlar</h2>
+
+        <p>Mesajlaşmanın tamamı bu 40 terimin üzerine kurulu. Kütüphane öğrenmeden önce sözlüğü öğren;
+        RabbitMQ ile Kafka arasındaki farkların çoğu bu tablodaki tanımların farklı yorumlanmasından
+        çıkıyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sözlük &mdash; iletişim biçimleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>senkron iletişim</strong> <small>request/response</small></td>
+                <td>Çağıran taraf cevabı bekler; HTTP ve gRPC böyledir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/interservice-communication">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>asenkron iletişim</strong></td>
+                <td>Mesaj bırakılır, gönderen cevabı beklemeden devam eder</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/interservice-communication">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>message</strong> <small>mesaj</small></td>
+                <td>Taşınan verinin zarfı: gövde + başlıklar + kimlik bilgileri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/messages">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>command</strong></td>
+                <td>"Şunu yap" &mdash; tek bir alıcısı vardır, emir kipiyle adlandırılır (CreateOrder)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/messages">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>event</strong></td>
+                <td>"Şu oldu" &mdash; sıfır veya çok alıcısı olur, geçmiş zamanla adlandırılır (OrderCreated)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/messages">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>message contract</strong></td>
+                <td>Gönderen ve alanın paylaştığı mesaj sınıfı/arayüzü; ayrı NuGet paketine konur</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/messages">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>producer</strong> <small>publisher</small></td>
+                <td>Mesajı üreten taraf</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/producers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>consumer</strong> <small>subscriber</small></td>
+                <td>Mesajı işleyen taraf</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>broker</strong></td>
+                <td>Mesajı saklayan ve yönlendiren aracı sunucu (RabbitMQ, Kafka, Service Bus)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>brokerless</strong></td>
+                <td>Aracı sunucu olmadan doğrudan soket üzerinden mesajlaşma (ZeroMQ)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://zeromq.org/">zeromq.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>queue</strong> <small>kuyruk</small></td>
+                <td>Mesajların biriktiği, tüketildikçe boşalan depo</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>topic</strong></td>
+                <td>Yayın kanalı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; RabbitMQ'daki "topic exchange" ile Kafka'daki "topic" AYNI ŞEY DEĞİL; ararken ürün adını da yaz</td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>publish/subscribe</strong> <small>pub/sub</small></td>
+                <td>Bir mesaj, ilgilenen bütün abonelere kopyalanır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>point-to-point</strong></td>
+                <td>Bir mesajı yalnızca bir tüketici alır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>competing consumers</strong></td>
+                <td>Aynı kuyruğa bağlı N tüketici; yük paylaşılır, yatay ölçekleme buradan gelir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/competing-consumers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fan-out</strong></td>
+                <td>Tek mesajın birden çok kuyruğa kopyalanması</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/tutorial-three-dotnet">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>async request-reply</strong></td>
+                <td>Asenkron altyapı üzerinden cevap bekleme; geçici cevap kuyruğu kullanılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/async-request-reply">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>queue-based load leveling</strong></td>
+                <td>Ani yükü kuyrukta biriktirip arkadaki servisi sabit hızda çalıştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>claim-check</strong></td>
+                <td>Büyük veriyi blob'a koy, mesajda sadece adresini taşı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/claim-check">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pipes and filters</strong></td>
+                <td>İşi zincirlenmiş küçük adımlara bölme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sözlük &mdash; teslimat garantisi, sıralama, akış</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>at-most-once</strong></td>
+                <td>Mesaj en fazla bir kez işlenir; kaybolabilir, tekrarlanmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>at-least-once</strong></td>
+                <td>Mesaj kaybolmaz ama aynı mesaj birden çok kez gelebilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; pratikte en sık karşılaşılan mod bu</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>exactly-once</strong></td>
+                <td>Tam bir kez işleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; broker tek başına vermez; at-least-once + idempotent tüketici ile "effectively once" elde edilir</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>idempotency</strong></td>
+                <td>Aynı işlemi 5 kez yapmakla 1 kez yapmanın sonucu aynı olsun</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; mülakatta "aynı mesaj iki kez gelirse ne yaparsın" sorusunun cevabı</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>idempotency key</strong></td>
+                <td>İşlenen mesaj kimliklerini tabloda tutup tekrarını eleme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>message ordering</strong></td>
+                <td>Mesajların gönderim sırasıyla işlenmesi</td>
+                <td><span class="tag">ORTA</span> &mdash; RabbitMQ'da tek kuyruk + tek tüketici, Kafka'da partition içinde garanti; paralel tüketici sırayı bozar</td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>sequential convoy</strong></td>
+                <td>Sıralı işlenmesi gereken mesajları grup anahtarına göre tek tüketiciye yönlendirme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sequential-convoy">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>partition key</strong> / <strong>routing key</strong></td>
+                <td>Mesajın hangi bölüme/kuyruğa gideceğini belirleyen anahtar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>backpressure</strong></td>
+                <td>Tüketici yetişemediğinde üreticiyi yavaşlatma / akışı sınırlama</td>
+                <td><span class="tag">ORTA</span> &mdash; RabbitMQ'daki karşılığı prefetch + flow control</td>
+                <td><a href="https://www.rabbitmq.com/docs/consumer-prefetch">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dead letter</strong></td>
+                <td>İşlenemeyen mesajın atıldığı ayrı kuyruk</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/dlx">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>poison message</strong></td>
+                <td>Her denemede aynı hatayı veren, kuyruğu tıkayan mesaj</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>message TTL</strong></td>
+                <td>Mesajın belirli süre sonra otomatik silinmesi/DLQ'ya düşmesi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/ttl">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>delayed / scheduled message</strong></td>
+                <td>"30 dakika sonra teslim et" tipi gecikmeli mesaj</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/scheduling">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>correlation id</strong></td>
+                <td>Bir iş akışının tüm mesajlarını birbirine bağlayan kimlik</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.w3.org/TR/trace-context/">w3.org &mdash; Trace Context</a></td>
+              </tr>
+              <tr>
+                <td><strong>causation id</strong></td>
+                <td>Bu mesaja sebep olan bir önceki mesajın kimliği</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>serialization</strong></td>
+                <td>Mesajın bayta çevrilmesi: JSON (varsayılan), Protobuf, MessagePack, Avro</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://protobuf.dev/">protobuf.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>schema evolution</strong> / <strong>message versioning</strong></td>
+                <td>Mesaj sözleşmesini eski tüketicileri kırmadan değiştirme</td>
+                <td><span class="tag">ORTA</span> &mdash; alan eklemek güvenli, alan silmek/yeniden adlandırmak kırar</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>CloudEvents</strong></td>
+                <td>Olay zarfı için CNCF standardı; farklı sistemler arası ortak format</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://cloudevents.io/">cloudevents.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>AsyncAPI</strong></td>
+                <td>Mesaj tabanlı API'lerin OpenAPI karşılığı; sözleşme dokümantasyonu</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.asyncapi.com/docs">asyncapi.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fallacies of distributed computing</strong></td>
+                <td>"Ağ güvenilirdir, gecikme sıfırdır" gibi 8 yanlış varsayım listesi</td>
+                <td><span class="tag">ORTA</span> &mdash; mülakat sohbetinde iyi durur</td>
+                <td>&mdash;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="rabbitmq"><span class="h-num">§ 2</span>RabbitMQ derinlemesine</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>RabbitMQ ilanlarda sık geçer ama hiç denemediysen bir mülakatçının ilk sorusu neredeyse kesin
+          "exchange türlerini anlatır mısın" veya "mesaj işlenemezse ne olur" olacak. Bu iki soruyu
+          cevaplayabilmek için aşağıdaki tablonun ilk 15 satırı yeterli; kalanı derinlik içindir.</p>
+        </div>
+
+        <p>Kurulum ortamına göre değişir:</p>
+        <ul>
+          <li><strong>Docker kurulu ve kullanabiliyorsan</strong> &rarr; en kolay yol: <code>rabbitmq:4-management</code> imajı hem broker'ı hem
+          yönetim arayüzünü (15672 portu) getirir.</li>
+          <li><strong>Docker Desktop lisansı gerektiren bir şirket bilgisayarındaysan</strong> (250'den fazla çalışanı veya yıllık geliri
+          10 milyon USD'yi aşan şirket) &rarr; şirketin lisansı yoksa Podman Desktop, Rancher Desktop veya WSL2 içinde Docker Engine kullan;
+          aynı imaj çalışır. Lisans eşikleri: <a href="../07-devops-ve-gozlemlenebilirlik/index.html#docker">07 § 5</a>.</li>
+          <li><strong>Docker hiç kurulamıyorsa</strong> (yönetici izni yok, eski donanım) &rarr; RabbitMQ'nun Windows/macOS/Linux kurulum paketi
+          (Erlang da kurulmalı; <a href="https://www.rabbitmq.com/docs/download">rabbitmq.com/docs/download</a>) veya yönetilen bir
+          hizmetin ücretsiz katmanı (ör. CloudAMQP; ücretsiz plan koşulları <span class="tag tag--warn">TEYİT</span> cloudamqp.com/plans.html).</li>
+        </ul>
+        <p>Resmî .NET öğreticisi altı bölümlük ve her biri
+        yarım saat sürer &mdash; <a href="https://www.rabbitmq.com/tutorials/tutorial-one-dotnet">tutorial-one-dotnet</a>
+        ile başla.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>RabbitMQ &mdash; yapı taşları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>AMQP 0-9-1</strong></td>
+                <td>RabbitMQ'nun ana protokolü; exchange/queue/binding modeli buradan gelir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AMQP 1.0</strong></td>
+                <td>Farklı bir protokol; RabbitMQ 4.x'te yerel olarak destekleniyor</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; 0-9-1 ile aynı şey değil, isim benzerliği yanıltır</td>
+                <td><a href="https://www.rabbitmq.com/docs/specification">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>connection</strong></td>
+                <td>İstemci ile broker arasındaki TCP bağlantısı; pahalıdır, uygulama başına birkaç tane</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/connections">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>channel</strong></td>
+                <td>Bağlantı içindeki hafif sanal oturum; işlemler kanal üzerinden yapılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; kanal thread-safe değildir, thread başına ayrı kanal aç</td>
+                <td><a href="https://www.rabbitmq.com/docs/channels">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>vhost</strong> <small>virtual host</small></td>
+                <td>Aynı broker içinde izole isim alanı; ortamları ayırmak için kullanılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/vhosts">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exchange</strong></td>
+                <td>Mesajın ilk düştüğü yer; kuyruk değildir, sadece yönlendirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/exchanges">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>direct exchange</strong></td>
+                <td>Routing key'i birebir eşleşen binding'lere yollar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/tutorial-four-dotnet">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fanout exchange</strong></td>
+                <td>Routing key'e bakmaz, bağlı tüm kuyruklara kopyalar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/tutorial-three-dotnet">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>topic exchange</strong></td>
+                <td>Noktalı routing key'de <code>*</code> (bir kelime) ve <code>#</code> (sıfır+ kelime) joker eşleşmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/tutorial-five-dotnet">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>headers exchange</strong></td>
+                <td>Routing key yerine mesaj başlıklarına göre eşleştirir (x-match: all/any)</td>
+                <td><span class="tag">ORTA</span> &mdash; nadiren kullanılır ama "dört tür" sorusunun dördüncüsü budur</td>
+                <td><a href="https://www.rabbitmq.com/docs/exchanges">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>default exchange</strong></td>
+                <td>Adı boş string olan direct exchange; routing key = kuyruk adı gibi çalışır</td>
+                <td><span class="tag">ORTA</span> &mdash; ilk öğreticide "exchange yokmuş gibi" görünmenin sebebi</td>
+                <td><a href="https://www.rabbitmq.com/docs/exchanges">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>alternate exchange</strong> <small>AE</small></td>
+                <td>Hiçbir binding'e uymayan mesajların yönlendirildiği yedek exchange</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/ae">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>queue</strong></td>
+                <td>Mesajın gerçekten beklediği yer</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>binding</strong></td>
+                <td>Exchange ile kuyruk arasındaki kural bağı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>routing key</strong> / <strong>binding key</strong></td>
+                <td>Mesajın üzerindeki etiket ile binding'in beklediği kalıp</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ikisi farklı şeydir, karıştırma</td>
+                <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>durable</strong> <small>exchange/queue</small></td>
+                <td>Broker yeniden başlayınca tanımın kaybolmaması</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>persistent message</strong></td>
+                <td>Mesajın diske yazılması (delivery mode 2)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; durable kuyruk + persistent mesaj İKİSİ birden gerekir</td>
+                <td><a href="https://www.rabbitmq.com/docs/persistence-conf">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exclusive / auto-delete queue</strong></td>
+                <td>Tek bağlantıya özel ve/veya son tüketici gidince silinen kuyruk</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>classic queue</strong></td>
+                <td>Klasik tek düğümlü kuyruk tipi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>quorum queue</strong></td>
+                <td>Raft tabanlı, çoğunluk oyuyla çoğaltılan dayanıklı kuyruk tipi</td>
+                <td><span class="tag">ORTA</span> &mdash; yeni projede varsayılan tercih</td>
+                <td><a href="https://www.rabbitmq.com/docs/quorum-queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>classic queue mirroring</strong> <small>HA queues</small></td>
+                <td>Eski çoğaltma yöntemi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; RabbitMQ 4.0 ile kaldırıldı, yerine quorum queue</td>
+                <td><a href="https://www.rabbitmq.com/docs/quorum-queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>lazy queue</strong></td>
+                <td>Mesajları mümkün olduğunca diskte tutan kuyruk modu</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; 3.12'den sonra davranış varsayılan hale geldi</td>
+                <td><a href="https://www.rabbitmq.com/docs/lazy-queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stream</strong> <small>RabbitMQ Streams</small></td>
+                <td>Kafka benzeri, tüketildiğinde silinmeyen, tekrar okunabilen append-only log</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/streams">rabbitmq.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>RabbitMQ &mdash; teslimat, güvenilirlik, işletme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>basic.publish / basic.consume</strong></td>
+                <td>AMQP'nin yayınlama ve tüketme komutları</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/amqp-0-9-1-reference">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>publisher confirms</strong></td>
+                <td>Broker'ın "mesajı aldım" onayı; yayınlarken kayıp olmaması için şart</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/confirms">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>consumer acknowledgement</strong> <small>ack</small></td>
+                <td>Tüketicinin "işledim, silebilirsin" onayı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/confirms">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nack / reject</strong></td>
+                <td>"İşleyemedim" cevabı; requeue=true ile kuyruğa geri koyar</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; requeue=true sonsuz döngü yapar, dikkat</td>
+                <td><a href="https://www.rabbitmq.com/docs/nack">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>automatic vs manual ack</strong></td>
+                <td>Otomatik onay mesajı teslimde siler (kayıp riski), manuel onay işlendikten sonra siler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/consumers">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefetch</strong> <small>basic.qos</small></td>
+                <td>Bir tüketicinin aynı anda onaysız tutabileceği mesaj sayısı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; ayarlanmazsa tek tüketici tüm kuyruğu kapar</td>
+                <td><a href="https://www.rabbitmq.com/docs/consumer-prefetch">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dead letter exchange</strong> <small>DLX</small></td>
+                <td>Reddedilen, süresi dolan veya taşan mesajların yönlendirildiği exchange</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/dlx">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>x-message-ttl / x-expires</strong></td>
+                <td>Mesaj ömrü ve boş kuyruğun ömrü</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/ttl">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>x-max-priority</strong> <small>priority queue</small></td>
+                <td>Kuyruk içinde öncelikli mesaj sırası</td>
+                <td><span class="tag">ORTA</span> &mdash; kuyruk oluşturulurken tanımlanmalı, sonradan eklenemez</td>
+                <td><a href="https://www.rabbitmq.com/docs/priority">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>max-length / overflow</strong></td>
+                <td>Kuyruk uzunluğu sınırı ve taşınca ne yapılacağı (drop-head, reject-publish)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>delayed message exchange plugin</strong></td>
+                <td>Gecikmeli teslim için resmî eklenti (rabbitmq_delayed_message_exchange)</td>
+                <td><span class="tag">ORTA</span> &mdash; çekirdekte yoktur, ayrı kurulur</td>
+                <td><a href="https://www.rabbitmq.com/docs/plugins">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>policy</strong></td>
+                <td>DLX, TTL, uzunluk gibi ayarları kod yerine merkezî politikayla atama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/parameters">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>heartbeat</strong></td>
+                <td>Ölü bağlantıları tespit eden periyodik sinyal</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/heartbeats">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>automatic connection recovery</strong></td>
+                <td>.NET istemcisinin bağlantı koptuğunda kendini toparlaması</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/client-libraries/dotnet-api-guide">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>reliability guide</strong></td>
+                <td>Kayıpsız yayın/tüketim için resmî kontrol listesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; tek sayfa oku, mülakatın yarısını karşılar</td>
+                <td><a href="https://www.rabbitmq.com/docs/reliability">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cluster</strong></td>
+                <td>Birden çok düğümün tek broker gibi çalışması</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/clustering">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>shovel</strong></td>
+                <td>Bir broker'dan diğerine mesaj taşıyan eklenti (tek yönlü aktarım)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/shovel">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>federation</strong></td>
+                <td>Coğrafi olarak ayrı broker'ları exchange/queue düzeyinde birbirine bağlama</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; shovel ile karıştırılır; federation abonelik, shovel taşıma</td>
+                <td><a href="https://www.rabbitmq.com/docs/federation">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>management UI</strong></td>
+                <td>15672 portundaki web arayüzü; kuyruk, mesaj hızı, tüketici sayısı burada görülür</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/management">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>rabbitmqctl / rabbitmqadmin</strong></td>
+                <td>Komut satırı yönetim araçları</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/management-cli">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>user / permission / vhost izinleri</strong></td>
+                <td>configure, write, read izin üçlüsü</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/access-control">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prometheus plugin</strong></td>
+                <td>Metrik dışa aktarımı; Grafana panolarıyla izleme</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; bkz. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a></td>
+                <td><a href="https://www.rabbitmq.com/docs/prometheus">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RabbitMQ.Client</strong></td>
+                <td>Resmî .NET istemci NuGet paketi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; v7 ile API tamamen async oldu; internetteki eski örnekler v6 senkron API'siyle yazılmış, derlenmez</td>
+                <td><a href="https://www.rabbitmq.com/client-libraries/dotnet-api-guide">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EasyNetQ</strong></td>
+                <td>RabbitMQ.Client üstüne ince, görüş sahibi sarmalayıcı</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz (MIT)</td>
+                <td><a href="https://github.com/EasyNetQ/EasyNetQ">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tanzu RabbitMQ</strong></td>
+                <td>Broadcom'un ticari destekli dağıtımı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; açık kaynak RabbitMQ (MPL 2.0) ücretsizdir</td>
+                <td><a href="https://www.rabbitmq.com/docs/download">rabbitmq.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="masstransit"><span class="h-num">§ 3</span>MassTransit ve alternatifleri</h2>
+
+        <p>MassTransit, RabbitMQ/Azure Service Bus/Kafka gibi taşıyıcıların üstüne oturan bir mesajlaşma
+        çatısı. Sen kuyruk açmazsın, sözleşme sınıfı yazar ve <code>IConsumer&lt;T&gt;</code> uygularsın;
+        kuyruk/exchange topolojisini o kurar. Hangi sırayla öğreneceğin durumuna bağlı:</p>
+        <ul>
+          <li><strong>Kavramı derinlemesine öğrenmek istiyorsan</strong> &rarr; önce RabbitMQ'yu çıplak istemciyle (<code>RabbitMQ.Client</code>) öğren,
+          sonra MassTransit'e geç &mdash; tersi olursa altında ne olduğunu hiç göremezsin.</li>
+          <li><strong>Ekibin Azure Service Bus / Amazon SQS kullanıyorsa</strong> &rarr; o taşıyıcının kendi SDK'sı ile başla, sonra MassTransit.</li>
+          <li><strong>Mevcut bir MassTransit projesine katılıyorsan</strong> &rarr; doğrudan MassTransit ile başla; altta oluşan topolojiyi
+          RabbitMQ yönetim arayüzünden (veya kullanılan taşıyıcının portalından) izleyerek öğren.</li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; lisans</p>
+          <p>MassTransit v9 ticari lisansa geçti; v8 açık kaynak (Apache-2.0) kaldı. Proje durumuna göre:</p>
+          <ul>
+            <li>Mevcut v8 projesi &rarr; ücretsiz kalır; destek/güvenlik güncellemesi süresi sınırlı. <span class="tag tag--warn">TEYİT</span> v8 destek bitiş tarihi: masstransit.massient.com</li>
+            <li>Yeni proje + v9 &rarr; ticari lisans; küçük işletme/ücretsiz katman olup olmadığı <span class="tag tag--warn">TEYİT</span> masstransit.massient.com</li>
+            <li>Lisans istemeyen yeni proje &rarr; Rebus, Wolverine, Brighter, CAP veya doğrudan <code>RabbitMQ.Client</code> (aşağıdaki ikinci tablo).</li>
+          </ul>
+          <p>Yeni bir projeye başlamadan önce güncel koşulları <a href="https://masstransit.io/support">masstransit.io/support</a>
+          (yeni adresi masstransit.massient.com) üzerinden doğrula. Mülakatta "MassTransit'in lisans durumu değişti, farkında mısın" sorusu
+          gelirse bu, konuyu takip ettiğini gösteren iyi bir cevap olur. Lisans koşulları değişebilir, kullanmadan önce kendi sayfasından teyit et. Ücretsiz alternatifler aşağıdaki
+          ikinci tabloda.</p>
+          <p>Adres notu: dokümantasyon <code>masstransit.io</code>'dan <code>masstransit.massient.com</code>'a taşındı. Bu sayfadaki <code>masstransit.io/...</code> bağlantıları yeni adrese yönleniyor; arama sonuçlarında iki adresi birden görürsen şaşırma. Aynı not <a href="../04-mimari-ve-desenler/index.html#mediator-ve-mediatr">04 &mdash; Mimari ve Desenler § 5</a> sayfasında da var.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>MassTransit kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>IBus</strong></td>
+                <td>Otobüsün kök arayüzü; uygulama başlangıcında DI'ya kaydedilir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Publish vs Send</strong></td>
+                <td>Publish event yayınlar (n abone), Send komutu belirli bir kuyruğa yollar (1 alıcı)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MassTransit'te en sık yapılan hata ikisini karıştırmak</td>
+                <td><a href="https://masstransit.io/documentation/concepts/producers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>IConsumer&lt;T&gt;</strong></td>
+                <td>Mesajı işleyen sınıf; tek metodu <code>Consume(ConsumeContext&lt;T&gt;)</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConsumeContext</strong></td>
+                <td>Mesaj + başlıklar + cevap yazma imkânı taşıyan bağlam nesnesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>receive endpoint</strong></td>
+                <td>Bir kuyruğa karşılık gelen alım noktası; consumer'lar buraya bağlanır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConfigureEndpoints</strong> / endpoint name formatter</td>
+                <td>Kuyruk adlarını sınıf adlarından otomatik türetme (kebab-case varsayılan)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>message contract as interface</strong></td>
+                <td>Sözleşmeyi arayüz olarak tanımlayıp anonim nesneyle yayınlama</td>
+                <td><span class="tag">ORTA</span> &mdash; MassTransit'e özgü, başka çatıda yok</td>
+                <td><a href="https://masstransit.io/documentation/concepts/messages">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>request/response</strong> <small>IRequestClient&lt;T&gt;</small></td>
+                <td>Mesaj üzerinden senkron gibi cevap alma; zaman aşımı zorunlu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/requests">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>saga</strong></td>
+                <td>Birden çok mesaj boyunca durum taşıyan uzun ömürlü iş akışı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; kavramsal tarafı için <a href="../04-mimari-ve-desenler/index.html">04</a></td>
+                <td><a href="https://masstransit.io/documentation/patterns/saga">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>state machine</strong> <small>MassTransitStateMachine</small></td>
+                <td>Saga'yı durum + olay + geçiş olarak yazma biçimi</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; eskiden "Automatonymous" adıyla ayrı paketti, artık dahili</td>
+                <td><a href="https://masstransit.io/documentation/patterns/saga/state-machine">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>saga repository</strong></td>
+                <td>Saga durumunun saklandığı yer: EF Core, Dapper, MongoDB, Redis, InMemory</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://masstransit.io/documentation/patterns/saga">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>retry policy</strong></td>
+                <td>Consumer hata verince aynı süreçte tekrar deneme (Immediate, Interval, Exponential)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/middleware/retry">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>redelivery</strong> <small>scheduled redelivery</small></td>
+                <td>Mesajı dakikalar sonra tekrar teslim etme; retry'dan farkı gecikmeli olması</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/middleware/redelivery">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>_error kuyruğu</strong></td>
+                <td>Tüm denemeler tükenince mesajın gittiği kuyruk (MassTransit otomatik oluşturur)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>_skipped kuyruğu</strong></td>
+                <td>Kuyruğa gelen ama hiçbir consumer'ın ilgilenmediği mesajlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fault&lt;T&gt;</strong></td>
+                <td>Hata durumunda otomatik yayınlanan olay mesajı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/concepts/consumers">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>outbox</strong></td>
+                <td>Veritabanı transaction'ı ile mesaj yayınını atomik hale getirme (EF Core outbox)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; "veri yazıldı ama mesaj gitmedi" sorununun tek doğru çözümü</td>
+                <td><a href="https://masstransit.io/documentation/configuration/middleware/outbox">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>scheduling</strong></td>
+                <td>Gecikmeli mesaj: delayed exchange, Quartz veya Hangfire üzerinden</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/scheduling">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>courier / routing slip</strong></td>
+                <td>Adımları ve her adımın telafisini mesajın içinde taşıyan dağıtık işlem modeli</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://masstransit.io/documentation/patterns/routing-slip">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>middleware / filter pipeline</strong></td>
+                <td>Mesajın consumer'a ulaşana kadar geçtiği filtre zinciri</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>circuit breaker / rate limiter filter</strong></td>
+                <td>Tüketim hattına takılan devre kesici ve hız sınırlayıcı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ITestHarness</strong></td>
+                <td>Bellek içi taşıyıcıyla consumer/saga testi; broker kurmadan test yazdırır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; mock testle yeni tanışıyorsan ekstra faydalı; bkz. <a href="../06-test-ve-kalite/index.html">06</a></td>
+                <td><a href="https://masstransit.io/documentation/concepts/testing">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>in-memory transport</strong></td>
+                <td>Broker'sız çalışan taşıyıcı</td>
+                <td><span class="tag">ORTA</span> &mdash; sadece test için; üretimde kullanma, kalıcı değil</td>
+                <td><a href="https://masstransit.io/documentation/concepts/testing">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>observability</strong></td>
+                <td>OpenTelemetry ile mesaj izleme ve metrikler</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/observability">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>transport seçimi</strong></td>
+                <td>RabbitMQ, Azure Service Bus, Amazon SQS, ActiveMQ, Kafka (rider olarak)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/transports/rabbitmq">masstransit.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>.NET mesajlaşma kütüphaneleri &mdash; seçenekler ve lisans</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MassTransit v8</strong></td>
+                <td>En yaygın .NET mesaj otobüsü; saga, outbox, test harness dahil</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; v8 ücretsiz</td>
+                <td><a href="https://masstransit.io/introduction">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>MassTransit v9</strong></td>
+                <td>Yeni ana sürüm</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; ticari lisansa geçti (v8 ücretsiz kaldı); koşulları doğrula</td>
+                <td><a href="https://masstransit.io/support">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>NServiceBus</strong> <small>Particular</small></td>
+                <td>Kurumsal mesajlaşma platformu; saga, outbox, ServicePulse izleme</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; geliştirici lisansı ücretsiz denenebilir</td>
+                <td><a href="https://particular.net/licensing">particular.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rebus</strong></td>
+                <td>Sade, öğrenmesi kolay mesaj otobüsü; saga desteği var</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz (MIT); MassTransit'e en yakın hafif alternatif</td>
+                <td><a href="https://github.com/rebus-org/Rebus">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Wolverine</strong></td>
+                <td>Mediator + mesaj otobüsü bir arada; Marten ile güçlü outbox</td>
+                <td><span class="tag">ORTA</span> &mdash; çekirdek ücretsiz (MIT), "Critter Stack Pro" eklentisi ücretli</td>
+                <td><a href="https://wolverinefx.net/guide/messaging/introduction.html">wolverinefx.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Brighter</strong></td>
+                <td>Command processor + mesajlaşma; Darker ile sorgu tarafı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz (MIT)</td>
+                <td><a href="https://github.com/BrighterCommand/Brighter">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CAP</strong> <small>DotNetCore.CAP</small></td>
+                <td>Outbox'ı merkeze alan event bus; RabbitMQ/Kafka/Azure Service Bus gibi taşıyıcılarla ve SQL Server, PostgreSQL, MySQL, MongoDB gibi depolarla çalışır</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz (MIT); dashboard'u da var</td>
+                <td><a href="https://cap.dotnetcore.xyz/">cap.dotnetcore.xyz</a></td>
+              </tr>
+              <tr>
+                <td><strong>RabbitMQ.Client (çıplak)</strong></td>
+                <td>Çatı kullanmadan doğrudan istemci</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ücretsiz; öğrenmek için EN İYİ başlangıç</td>
+                <td><a href="https://www.rabbitmq.com/client-libraries/dotnet-api-guide">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Silverback</strong></td>
+                <td>Kafka ve RabbitMQ için .NET mesajlaşma çatısı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; niş</td>
+                <td><a href="https://silverback-messaging.net/">silverback-messaging.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>KafkaFlow</strong></td>
+                <td>Kafka'ya özel .NET çatısı; middleware hattı ve admin arayüzü</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz</td>
+                <td><a href="https://farfetch.github.io/kafkaflow/">farfetch.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dapr pub/sub</strong></td>
+                <td>Yan araç (sidecar) üzerinden taşıyıcıdan bağımsız mesajlaşma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; Kubernetes odaklı</td>
+                <td><a href="https://docs.dapr.io/">docs.dapr.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Akka.NET</strong></td>
+                <td>Aktör modeli; mesajlaşmanın farklı bir felsefesi</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; ticari destek ayrı satılır</td>
+                <td><a href="https://getakka.net/">getakka.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Orleans</strong></td>
+                <td>Microsoft'un sanal aktör (grain) çatısı; dağıtık durum yönetimi</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/orleans/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-altyapilar"><span class="h-num">§ 4</span>Diğer mesaj altyapıları</h2>
+
+        <p>RabbitMQ tek seçenek değil. Aşağıdakilerin hepsini kurman gerekmiyor ama farklarını bir cümleyle
+        açıklayabilmen gerekiyor: <strong>kuyruk</strong> (mesaj tüketilince silinir) ile
+        <strong>log/stream</strong> (mesaj kalır, tekrar okunur) ayrımı bütün tablonun özeti.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Apache Kafka ve akış (stream) dünyası</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Apache Kafka</strong></td>
+                <td>Yüksek hacimli, kalıcı, tekrar okunabilir olay logu</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz (Apache 2.0)</td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>topic (Kafka)</strong></td>
+                <td>Olayların yazıldığı adlandırılmış log</td>
+                <td><span class="tag">ORTA</span> &mdash; RabbitMQ topic exchange ile ilgisi yok</td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>partition</strong></td>
+                <td>Topic'in paralel okunabilen parçası; sıralama garantisi partition içindedir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>offset</strong></td>
+                <td>Tüketicinin log içinde nerede kaldığını gösteren sayaç</td>
+                <td><span class="tag">ORTA</span> &mdash; mesaj silinmez, offset ilerler; RabbitMQ'dan en büyük fark</td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>consumer group</strong></td>
+                <td>Partition'ları aralarında paylaşan tüketici kümesi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>replication factor / ISR</strong></td>
+                <td>Kaç kopya tutulacağı ve senkron kalan kopyalar kümesi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>retention / log compaction</strong></td>
+                <td>Verinin ne kadar saklanacağı; compaction anahtar başına son değeri tutar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>KRaft</strong></td>
+                <td>ZooKeeper'sız Kafka; yeni kurulumların varsayılanı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; eski dokümanlar hâlâ ZooKeeper anlatır</td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kafka Connect</strong></td>
+                <td>Veritabanı/dosya gibi kaynakları Kafka'ya bağlayan hazır konektör altyapısı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kafka Streams / ksqlDB</strong></td>
+                <td>Akış üzerinde dönüşüm ve toplama (Java tarafı ağırlıklı)</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; bkz. <a href="../../Java/index.html">Java bölümü</a></td>
+                <td><a href="https://kafka.apache.org/documentation/streams/">kafka.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Schema Registry / Avro</strong></td>
+                <td>Mesaj şemalarını merkezî tutup uyumluluk denetimi yapma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Confluent bileşeni</td>
+                <td><a href="https://docs.confluent.io/">docs.confluent.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Confluent.Kafka</strong></td>
+                <td>Kafka'nın resmî .NET istemcisi</td>
+                <td><span class="tag">ORTA</span> &mdash; istemci ücretsiz, Confluent Cloud ücretli</td>
+                <td><a href="https://docs.confluent.io/kafka-clients/dotnet/current/overview.html">docs.confluent.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redpanda</strong></td>
+                <td>Kafka protokolüyle uyumlu, ZooKeeper/JVM'siz alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; kaynak açık ama tamamen özgür lisans değil, kontrol et</td>
+                <td>redpanda.com</td>
+              </tr>
+              <tr>
+                <td><strong>Apache Pulsar</strong></td>
+                <td>Kuyruk + akış modelini birleştiren alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; niş</td>
+                <td><a href="https://pulsar.apache.org/docs/">pulsar.apache.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bulut, gömülü ve niş kuyruk seçenekleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Azure Service Bus</strong></td>
+                <td>Yönetilen kurumsal kuyruk; queue, topic/subscription, session, DLQ dahili</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; kullandıkça öde</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/service-bus-messaging/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Event Hubs</strong></td>
+                <td>Kafka'ya benzeyen yüksek hacimli olay alım servisi (Kafka protokolü uyumlu)</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/event-hubs/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Event Grid</strong></td>
+                <td>Olay yönlendirme servisi; "bir şey değişti" bildirimleri için</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; Service Bus ile karıştırılır, Grid bildirim, Bus iş kuyruğu</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/event-grid/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Storage Queues</strong></td>
+                <td>Basit ve ucuz kuyruk; Service Bus'ın özellik zengini olmayan kardeşi</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/storage/queues/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS SQS</strong></td>
+                <td>Yönetilen kuyruk; Standard (sırasız, en az bir kez) ve FIFO türleri var</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS SNS</strong></td>
+                <td>Pub/sub bildirim servisi; genelde SNS &rarr; SQS zinciriyle kullanılır</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.aws.amazon.com/sns/latest/dg/welcome.html">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Amazon Kinesis</strong></td>
+                <td>AWS'nin akış servisi; shard, sequence number kavramları Kafka'ya benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.aws.amazon.com/streams/latest/dev/introduction.html">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Amazon MQ</strong></td>
+                <td>Yönetilen RabbitMQ / ActiveMQ; mevcut kodu değiştirmeden buluta taşımak için</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://aws.amazon.com/amazon-mq/">aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Cloud Pub/Sub</strong></td>
+                <td>Google'ın yönetilen pub/sub servisi</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://cloud.google.com/pubsub/docs">cloud.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis Pub/Sub</strong></td>
+                <td>Anlık yayın; abone o an bağlı değilse mesaj kaybolur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; kalıcı DEĞİL, kuyruk yerine kullanma</td>
+                <td><a href="https://redis.io/docs/latest/develop/interact/pubsub/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis Streams</strong></td>
+                <td>XADD/XREADGROUP ile kalıcı, consumer group destekli akış</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; Redis zaten varsa hafif kuyruk için iyi seçenek</td>
+                <td><a href="https://redis.io/docs/latest/develop/data-types/streams/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis List ile kuyruk</strong></td>
+                <td>LPUSH/BRPOP ile ilkel kuyruk</td>
+                <td><span class="tag">ORTA</span> &mdash; ack yok, kayıp riski var; öğrenmek için iyi, üretim için zayıf</td>
+                <td><a href="https://redis.io/docs/latest/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>StackExchange.Redis</strong></td>
+                <td>.NET'in fiilî Redis istemcisi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; ücretsiz; ayrıntı için <a href="../03-veri-erisimi/index.html">03</a></td>
+                <td><a href="https://stackexchange.github.io/StackExchange.Redis/">stackexchange.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis lisans değişikliği</strong></td>
+                <td>Redis'in lisansı 2024'te değişti; Valkey adında topluluk çatalı çıktı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> rozeti tek başına yanıltıcı; sonuç sürüme ve kullanım biçimine göre değişir:
+                <br>&bull; Redis 7.2 ve öncesi &rarr; BSD-3 (serbest).
+                <br>&bull; Redis 7.4–7.x &rarr; RSALv2 / SSPLv1: kendi uygulamanın arkasında kullanmak ücretsiz; Redis'i yönetilen hizmet olarak satmak kısıtlı.
+                <br>&bull; Redis 8.0+ &rarr; AGPLv3 seçeneği eklendi (RSALv2 / SSPLv1 / AGPLv3); AGPL yükümlülüklerini oku. <span class="tag tag--warn">TEYİT</span> redis.io/legal/licenses
+                <br>&bull; Valkey &rarr; BSD-3, tamamen serbest.
+                <br>&bull; Bulutta yönetilen Redis/Valkey (Azure Managed Redis, Amazon ElastiCache vb.) &rarr; lisans değil hizmet ücreti ödenir.</td>
+                <td><a href="https://redis.io/legal/licenses/">redis.io/legal/licenses</a></td>
+              </tr>
+              <tr>
+                <td><strong>NATS / JetStream</strong></td>
+                <td>Çok hafif, çok hızlı mesajlaşma; JetStream kalıcılığı ekler</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz (Apache 2.0)</td>
+                <td><a href="https://docs.nats.io/">docs.nats.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apache ActiveMQ Classic</strong></td>
+                <td>Eski nesil JMS broker'ı</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; kurumsal Java kalıntılarında karşına çıkar</td>
+                <td><a href="https://activemq.apache.org/components/classic/documentation">activemq.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ActiveMQ Artemis</strong></td>
+                <td>ActiveMQ'nun yeni nesli; AMQP 1.0 ve MQTT destekler</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://activemq.apache.org/components/artemis/documentation/">activemq.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>MQTT</strong></td>
+                <td>IoT için çok hafif pub/sub protokolü; QoS 0/1/2 seviyeleri</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">oasis-open.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>MQTTnet</strong></td>
+                <td>.NET'in MQTT istemci/sunucu kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz (MIT)</td>
+                <td><a href="https://github.com/dotnet/MQTTnet">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ZeroMQ</strong></td>
+                <td>Broker'sız soket kütüphanesi; kuyruk değil, iletişim deseni kiti</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz</td>
+                <td><a href="https://zeromq.org/">zeromq.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>SQL tablosu ile kuyruk</strong></td>
+                <td>Broker yerine tablo + satır kilidiyle iş çekme</td>
+                <td><span class="tag">ORTA</span> &mdash; ortamda broker'a izin verilmiyor, yalnız veritabanı varsa ÇALIŞAN çözüm budur. Veritabanına göre:
+                <br>&bull; SQL Server &rarr; <code>UPDATE TOP(1) ... WITH (UPDLOCK, READPAST, ROWLOCK)</code> + <code>OUTPUT</code>.
+                <br>&bull; PostgreSQL &rarr; <code>SELECT ... FOR UPDATE SKIP LOCKED</code>; bildirim için <code>LISTEN/NOTIFY</code>; hazır kütüphaneler de var.
+                <br>&bull; MySQL 8+ / MariaDB 10.6+ &rarr; <code>FOR UPDATE SKIP LOCKED</code>.
+                <br>&bull; Oracle &rarr; <code>SKIP LOCKED</code> veya yerleşik Advanced Queuing.
+                <br>&bull; İzin verilen tek altyapı Redis ise &rarr; Redis Streams (consumer group ile).
+                <br>Bkz. <a href="../03-veri-erisimi/index.html">03</a>.</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>SQL Server Service Broker</strong></td>
+                <td>SQL Server'ın içindeki mesajlaşma altyapısı</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; yalnız SQL Server'a özgüdür; yeni projede tercih edilmez, ama "sadece SQL Server var" senaryosunda bilinmesi iyi</td>
+                <td><a href="https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-service-broker">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dayaniklilik-kaliplari"><span class="h-num">§ 5</span>Dayanıklılık kalıpları</h2>
+
+        <p>Dağıtık sistemde her çağrı başarısız olabilir. Bu bölüm "başarısız olunca ne yapılır"ın
+        standart cevap listesi. .NET tarafında bunların çoğunun tek bir uygulaması var: <strong>Polly</strong>
+        (ve onun üzerine kurulu <code>Microsoft.Extensions.Http.Resilience</code>).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata toleransı kalıpları ve .NET karşılıkları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>transient fault</strong></td>
+                <td>Kendiliğinden geçen geçici hata (ağ titremesi, kısa süreli kilit)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; kalıcı hatadan ayırt etmeyi öğren, her hata tekrar denenmez</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/transient-faults">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>retry</strong></td>
+                <td>Başarısız işlemi tekrar deneme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/retry">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exponential backoff</strong></td>
+                <td>Denemeler arası bekleme süresini katlayarak artırma (1s, 2s, 4s, 8s)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.pollydocs.org/strategies/retry">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>jitter</strong></td>
+                <td>Bekleme süresine rastgelelik katma; tüm istemcilerin aynı anda saldırmasını engeller</td>
+                <td><span class="tag">ORTA</span> &mdash; "thundering herd" probleminin çözümü</td>
+                <td><a href="https://www.pollydocs.org/strategies/retry">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>circuit breaker</strong></td>
+                <td>Arka arkaya hata alınca devreyi açıp bir süre hiç denememe</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>half-open state</strong></td>
+                <td>Devre kesicinin "bir tane deneyeyim bakalım düzeldi mi" ara durumu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.pollydocs.org/strategies/circuit-breaker">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>timeout</strong></td>
+                <td>Belirli süre sonra çağrıyı bırakma</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; timeout olmayan çağrı, kaynak sızıntısının ilk sebebidir</td>
+                <td><a href="https://www.pollydocs.org/strategies/timeout">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>bulkhead</strong></td>
+                <td>Kaynakları bölmelere ayırıp bir bölümün çökmesinin diğerlerini batırmasını önleme</td>
+                <td><span class="tag">ORTA</span> &mdash; gemi bölmelerinden gelen isim</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fallback</strong></td>
+                <td>Başarısızlıkta yedek cevap dönme (önbellekten, varsayılan değer)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.pollydocs.org/strategies/fallback">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hedging</strong></td>
+                <td>Yavaş cevap gelirse paralel ikinci istek atma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Polly v8 ile geldi</td>
+                <td><a href="https://www.pollydocs.org/strategies/hedging">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rate limiter</strong></td>
+                <td>Birim zamanda yapılabilecek işlem sayısını sınırlama</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; API tarafı için <a href="../02-platform-ve-web-api/index.html">02</a></td>
+                <td><a href="https://www.pollydocs.org/strategies/rate-limiter">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Polly</strong></td>
+                <td>.NET'in dayanıklılık kütüphanesi; yukarıdaki kalıpların hepsi burada</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ücretsiz; v7 (Policy) ile v8 (ResiliencePipeline) API'leri tamamen farklı</td>
+                <td><a href="https://www.pollydocs.org/">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.Extensions.Http.Resilience</strong></td>
+                <td>HttpClient'a hazır dayanıklılık hattı ekleyen resmî paket</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; eski <code>Microsoft.Extensions.Http.Polly</code> paketinin yerini aldı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/resilience/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Simmy</strong></td>
+                <td>Polly'nin kaos mühendisliği eklentisi; kasten hata enjekte eder</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.pollydocs.org/chaos/">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>outbox pattern</strong></td>
+                <td>Mesajı önce aynı transaction'da tabloya yaz, sonra ayrı süreç broker'a gönderir</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; "veri kaydettim ama mesaj gitmedi" probleminin standart çözümü</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>inbox pattern</strong></td>
+                <td>Alınan mesaj kimliklerini tabloda tutup tekrarlananı yok sayma</td>
+                <td><span class="tag">ORTA</span> &mdash; outbox'ın alıcı taraftaki eşi</td>
+                <td><a href="https://masstransit.io/documentation/configuration/middleware/outbox">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>transactional outbox</strong></td>
+                <td>Outbox'ın veritabanı transaction'ına gerçekten bağlanmış hali</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://masstransit.io/documentation/configuration/middleware/outbox">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>change data capture</strong> <small>CDC / Debezium</small></td>
+                <td>Veritabanı log'unu okuyup olaya çevirme; outbox'a alternatif yaklaşım</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>saga</strong></td>
+                <td>Birden çok servise yayılan işlemi adım adım yürütme ve gerekirse geri alma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>orchestration</strong> <small>saga türü</small></td>
+                <td>Merkezî bir yönetici adımları sırayla tetikler</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; MassTransit state machine bu tarza girer</td>
+                <td><a href="https://masstransit.io/documentation/patterns/saga/state-machine">masstransit.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>choreography</strong> <small>saga türü</small></td>
+                <td>Merkez yok; her servis olayı dinler ve kendi olayını yayınlar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/choreography">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>compensating transaction</strong></td>
+                <td>Geri alınamayan adımı "ters işlem" ile telafi etme (iade, iptal kaydı)</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; dağıtık sistemde rollback yoktur, telafi vardır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>two-phase commit</strong> <small>2PC / XA</small></td>
+                <td>Birden çok kaynağı tek transaction'da bağlama girişimi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; mikroservislerde kaçınılır; "neden 2PC yerine saga" iyi bir mülakat sorusudur</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>scheduler agent supervisor</strong></td>
+                <td>Uzun süren işleri gözetleyip takılanları kurtaran denetleyici</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>graceful shutdown</strong></td>
+                <td>Kapanırken işlenmekte olan mesajı bitirip yenisini almama</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>IHostApplicationLifetime</code> ve CancellationToken ile</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>health check</strong></td>
+                <td>Servisin ve bağımlılıklarının canlılık/hazırlık kontrolü</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; ayrıntı <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="grpc"><span class="h-num">§ 6</span>gRPC</h2>
+
+        <p>gRPC, HTTP/2 üzerinde ikili (binary) Protobuf mesajlarıyla çalışan RPC protokolü. Servisler
+        arası dahili iletişimde REST'ten belirgin şekilde hızlıdır; tarayıcıdan doğrudan çağrılamaması
+        en büyük kısıtıdır. .NET'te birinci sınıf desteklenir: proje şablonu, kod üretimi ve istemci
+        fabrikası hazır gelir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>gRPC &mdash; protokol ve .NET tarafı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>gRPC</strong></td>
+                <td>HTTP/2 + Protobuf üzerine kurulu uzak yordam çağrısı çatısı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Protocol Buffers</strong> <small>protobuf</small></td>
+                <td>Şema tabanlı ikili serileştirme formatı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://protobuf.dev/">protobuf.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>.proto dosyası</strong></td>
+                <td>Servis ve mesajların tanımlandığı sözleşme dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/protobuf">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>field number</strong></td>
+                <td>Her alanın kalıcı sayısal kimliği; ikili uyumluluk buna bağlıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; numara ASLA değiştirilmez, silinen numara <code>reserved</code> yapılır</td>
+                <td><a href="https://protobuf.dev/programming-guides/proto3/">protobuf.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>service / rpc tanımı</strong></td>
+                <td>Uzaktan çağrılabilir metotların .proto içinde bildirimi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grpc.AspNetCore</strong></td>
+                <td>Sunucu tarafı NuGet paketi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ücretsiz</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grpc.Net.Client</strong> / <strong>Grpc.Net.ClientFactory</strong></td>
+                <td>İstemci tarafı; kanal (channel) oluşturma ve DI ile fabrika</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; kanal pahalıdır, tekrar kullan; her çağrıda yeni kanal açma</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/client">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grpc.Tools</strong></td>
+                <td>.proto dosyasından C# sınıflarını derleme sırasında üreten paket</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>unary call</strong></td>
+                <td>Bir istek, bir cevap &mdash; klasik metot çağrısı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>server streaming</strong></td>
+                <td>Bir istek, akış halinde çok cevap</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>client streaming</strong></td>
+                <td>Akış halinde çok istek, tek cevap</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>bidirectional streaming</strong></td>
+                <td>İki yönlü eş zamanlı akış</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>deadline</strong></td>
+                <td>Çağrının en geç ne zaman biteceği; zincir boyunca taşınır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; gRPC'de timeout'un adı budur, sorulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/deadlines-cancellation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cancellation</strong></td>
+                <td>İstemci iptal edince sunucunun da işi bırakması</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/deadlines-cancellation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>status code</strong></td>
+                <td>gRPC'nin kendi hata kodları (NotFound, InvalidArgument, Unavailable...)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; HTTP durum kodlarıyla aynı değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/error-handling">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>metadata</strong></td>
+                <td>gRPC'nin başlık mekanizması; kimlik doğrulama token'ı burada taşınır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/authn-and-authz">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>interceptor</strong></td>
+                <td>Sunucu/istemci tarafında çağrıyı saran ara katman (logging, auth, retry)</td>
+                <td><span class="tag">ORTA</span> &mdash; ASP.NET middleware'inin gRPC karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/interceptors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gRPC-Web</strong></td>
+                <td>Tarayıcıdan gRPC çağırabilmek için köprü</td>
+                <td><span class="tag">ORTA</span> &mdash; tarayıcı doğrudan gRPC konuşamaz; Grpc.AspNetCore.Web veya Envoy proxy gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/grpcweb">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gRPC JSON transcoding</strong></td>
+                <td>Aynı servisi hem gRPC hem REST/JSON olarak yayınlama</td>
+                <td><span class="tag">ORTA</span> &mdash; eski adı "gRPC HTTP API"</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>code-first gRPC</strong> <small>protobuf-net.Grpc</small></td>
+                <td>.proto yazmadan C# arayüzlerinden gRPC servisi üretme</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; .NET-.NET iletişiminde pratik, çok dilli ortamda uygun değil</td>
+                <td><a href="https://protobuf-net.github.io/protobuf-net.Grpc/">protobuf-net.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTTP/2 zorunluluğu</strong></td>
+                <td>gRPC HTTP/2 ister; bazı barındırma ortamlarında ek yapılandırma gerekir</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; barındırmaya göre:
+                <br>&bull; Kestrel &rarr; destekli; TLS kullanmıyorsan endpoint'i <code>Http2</code> protokolüyle açıkça yapılandır.
+                <br>&bull; IIS / HTTP.sys &rarr; Windows 11 / Windows Server 2022 ve sonrasında destekli, daha eski Windows'ta yok. <span class="tag tag--warn">TEYİT</span> learn.microsoft.com "gRPC on .NET supported platforms"
+                <br>&bull; Azure App Service &rarr; gRPC desteği var, ek ayar gerekir. <span class="tag tag--warn">TEYİT</span> güncel App Service dokümanı
+                <br>&bull; Nginx / YARP / Envoy arkasında &rarr; proxy'nin HTTP/2'yi backend'e de geçirmesi gerekir.
+                <br>&bull; Tarayıcı istemcisi &rarr; doğrudan gRPC yok; gRPC-Web veya JSON transcoding kullan.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/aspnetcore">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gRPC health checking</strong></td>
+                <td>gRPC'nin standart sağlık kontrol protokolü</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/health-checks">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>client-side load balancing</strong></td>
+                <td>gRPC istemcisinin adres çözüp yükü kendisi dağıtması</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/loadbalancing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>performance best practices</strong></td>
+                <td>Kanal tekrar kullanımı, streaming tercihi, bağlantı sayısı</td>
+                <td><span class="tag">ORTA</span> &mdash; performansla ilgileniyorsan bu sayfa iyi bir konuşma malzemesi</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/performance">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gRPC vs REST</strong></td>
+                <td>Resmî karşılaştırma; ne zaman hangisi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; mülakat sorusu olarak neredeyse garanti</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/comparison">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>grpcurl / Postman gRPC</strong></td>
+                <td>gRPC servisini elle test etme araçları</td>
+                <td><span class="tag">ORTA</span> &mdash; Swagger gibi hazır arayüz yoktur, test aracı gerekir</td>
+                <td><a href="https://grpc.io/docs/">grpc.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="signalr"><span class="h-num">§ 7</span>SignalR ve gerçek zamanlı iletişim</h2>
+
+        <p>SignalR, sunucudan istemciye anlık mesaj göndermek için kullanılan ASP.NET Core bileşeni.
+        Altta WebSocket kullanır, olmazsa Server-Sent Events veya long polling'e düşer. Bildirim,
+        canlı pano, sohbet ve ilerleme çubuğu senaryolarının standart cevabı.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>SignalR</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Hub</strong></td>
+                <td>İstemcilerin bağlandığı ve metot çağırdığı sunucu sınıfı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hub&lt;T&gt;</strong> <small>strongly typed hub</small></td>
+                <td>İstemci metotlarını string yerine arayüzle tanımlama</td>
+                <td><span class="tag">ORTA</span> &mdash; string yazım hatalarını derleme zamanında yakalar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Clients.All / Caller / Others</strong></td>
+                <td>Mesajın kime gideceğini seçen hedefleyiciler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Groups</strong></td>
+                <td>Bağlantıları adlandırılmış gruplara alıp topluca mesaj gönderme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; grup üyeliği kalıcı değildir, yeniden bağlanınca tekrar eklemelisin</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/groups">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Users / IUserIdProvider</strong></td>
+                <td>Kullanıcı kimliğine göre mesaj gönderme (bir kullanıcının tüm cihazlarına)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/groups">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConnectionId</strong></td>
+                <td>Her bağlantının benzersiz kimliği</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; kullanıcı kimliği değildir, bağlantı koptuğunda değişir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IHubContext&lt;THub&gt;</strong></td>
+                <td>Hub dışından (controller, background service) istemcilere mesaj gönderme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; en sık gereken şey budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubcontext">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>transport</strong></td>
+                <td>WebSockets &rarr; Server-Sent Events &rarr; Long Polling sırasıyla denenir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>hub protocol</strong></td>
+                <td>JSON (varsayılan) veya MessagePack (ikili, daha küçük)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/messagepackhubprotocol">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>streaming</strong></td>
+                <td>ChannelReader veya IAsyncEnumerable ile parça parça veri akıtma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/streaming">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>scale-out</strong> / <strong>backplane</strong></td>
+                <td>Birden çok sunucu örneği arasında mesajı yayan arka düzlem</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> &mdash; dağıtım biçimine göre:
+                <br>&bull; Tek sunucu &rarr; gerekmez.
+                <br>&bull; Birden çok sunucu, kendi barındırman &rarr; ŞART (ör. Redis backplane).
+                <br>&bull; Azure SignalR Service kullanıyorsan &rarr; gerekmez; bağlantıları servis yönetir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/scale">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis backplane</strong></td>
+                <td>Redis pub/sub ile örnekler arası mesaj dağıtımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; Redis yalnızca cache değildir; backplane tipik bir kullanımıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/redis-backplane">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure SignalR Service</strong></td>
+                <td>Bağlantı yönetimini üstlenen yönetilen servis</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; sınırlı ücretsiz katmanı var</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-signalr/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>sticky session</strong></td>
+                <td>Aynı istemcinin aynı sunucuya yönlendirilmesi</td>
+                <td><span class="tag">ORTA</span> &mdash; dağıtım biçimine göre:
+                <br>&bull; Tek sunucu &rarr; gerekmez.
+                <br>&bull; Birden çok sunucu, kendi barındırman &rarr; gerekir (load balancer ayarı); istisna: tüm istemciler yalnız WebSocket kullanıyor ve <code>SkipNegotiation = true</code>.
+                <br>&bull; Azure SignalR Service &rarr; gerekmez.
+                <br>&bull; Kubernetes &rarr; ingress'te session affinity ayarı.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/scale">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>authentication / authorization</strong></td>
+                <td>JWT ile hub koruma; tarayıcı WebSocket'te header gönderemediği için token query string'de taşınır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> &mdash; kimlik doğrulama türüne ve istemciye göre:
+                <br>&bull; Aynı origin'de cookie auth kullanan web uygulaması &rarr; cookie otomatik gider, ek iş yok.
+                <br>&bull; Tarayıcı + JWT &rarr; <code>accessTokenFactory</code> ile token query string'de (<code>access_token</code>) gider; sunucuda <code>OnMessageReceived</code> olayında okunur.
+                <br>&bull; .NET / mobil istemci + JWT &rarr; <code>Authorization</code> başlığı gönderilebilir.
+                <br>JWT'yi henüz bilmiyorsan önce <a href="../02-platform-ve-web-api/index.html">02</a>'deki JWT satırlarına bak.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>automatic reconnect</strong></td>
+                <td>İstemcinin bağlantı kopunca kendini yeniden bağlaması</td>
+                <td><span class="tag">ORTA</span> &mdash; varsayılan KAPALI, açman gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET client</strong></td>
+                <td>Konsol/masaüstü/mobil uygulamadan hub'a bağlanma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/dotnet-client">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>JavaScript client</strong> <small>@microsoft/signalr</small></td>
+                <td>Tarayıcı tarafı istemci kütüphanesi</td>
+                <td><span class="tag">ORTA</span> &mdash; JS'e yeni başlıyorsan buradaki 20 satırlık örnek iyi bir başlangıç; bkz. <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript bölümü</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>KeepAlive / ClientTimeout</strong></td>
+                <td>Bağlantının canlı sayılma süreleri</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/configuration">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>raw WebSocket</strong> <small>System.Net.WebSockets</small></td>
+                <td>SignalR olmadan doğrudan WebSocket kullanma</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz/dahili; protokolü kendin kurarsın</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/websockets">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Server-Sent Events</strong> <small>SSE</small></td>
+                <td>Tek yönlü (sunucu &rarr; istemci) hafif akış; HTTP üstünde çalışır</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz; sadece bildirim gerekiyorsa SignalR'dan basit</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Socket.IO</strong></td>
+                <td>Node.js dünyasının SignalR'ı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; .NET sunucusuyla uyumlu değildir</td>
+                <td><a href="https://socket.io/docs/v4/">socket.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor Server</strong></td>
+                <td>Arka planda SignalR üzerinden çalışan UI modeli</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ayrıntı <a href="../08-ui-blazor-mvc-maui/index.html">08</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="arka-plan-isleri"><span class="h-num">§ 8</span>Arka plan işleri ve zamanlama</h2>
+
+        <p>"Bu işi şimdi değil, sonra veya her gece yap" ihtiyacının .NET'teki seçenekleri. En hafifi
+        <code>BackgroundService</code>, en çok kullanılanı Hangfire, en esneği Quartz.NET.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Uygulama içi arka plan işleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>IHostedService</strong></td>
+                <td>Uygulamayla birlikte başlayıp duran servis arayüzü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BackgroundService</strong></td>
+                <td>IHostedService'in tek metotlu hazır soyut sınıfı (<code>ExecuteAsync</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; NuGet gerekmez; ek paket eklenemeyen projelerde de kullanılabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Worker Service şablonu</strong></td>
+                <td><code>dotnet new worker</code> ile gelen konsol barındırma projesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PeriodicTimer</strong></td>
+                <td>Async döngülerde <code>Timer</code>'a göre çok daha temiz periyodik bekleme</td>
+                <td><span class="tag">ORTA</span> &mdash; .NET 6+; eski <code>System.Threading.Timer</code> örneklerine takılma</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.periodictimer">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Channel&lt;T&gt;</strong></td>
+                <td>Süreç içi üretici-tüketici kuyruğu</td>
+                <td><span class="tag">ORTA</span> &mdash; broker'sız, tek uygulama içinde; süreç ölünce veri gider</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/channels">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IHostApplicationLifetime</strong></td>
+                <td>Başlama/durma olaylarını yakalama, düzgün kapanış</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>scoped service in singleton</strong></td>
+                <td>BackgroundService singleton'dır; DbContext gibi scoped bağımlılık için scope açman gerekir</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; en sık yapılan hata; <code>IServiceScopeFactory</code> kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/scoped-service">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Zamanlanmış iş kütüphaneleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Hangfire</strong></td>
+                <td>Kalıcı depolamalı arka plan işi kütüphanesi; işler veritabanında tutulur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hangfire Dashboard</strong></td>
+                <td><code>/hangfire</code> adresindeki web arayüzü; işleri görür, tekrar tetikler</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; varsayılan yetki filtresi (<code>LocalRequestsOnlyAuthorizationFilter</code>) yalnız yerel isteklere izin verir:
+                <br>&bull; Yerel geliştirme &rarr; dashboard açılır.
+                <br>&bull; Uzak sunucu / üretim &rarr; varsayılan olarak erişim reddedilir; uzaktan açmak için <code>IDashboardAuthorizationFilter</code> yaz ve bu filtre gerçek yetki kontrolü yapsın (her şeye <code>true</code> dönen filtre en sık hata).
+                <br>&bull; Aynı makinedeki reverse proxy arkasında &rarr; istekler "yerel" görünüp dashboard dışarı açılabilir; forwarded headers ayarına ve kendi filtrene dikkat.
+                <br><span class="tag tag--warn">TEYİT</span> docs.hangfire.io "Using Dashboard"</td>
+                <td><a href="https://docs.hangfire.io/en/latest/configuration/using-dashboard.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>fire-and-forget job</strong></td>
+                <td><code>BackgroundJob.Enqueue</code> &mdash; hemen kuyruğa at, bir kez çalışsın</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>delayed job</strong></td>
+                <td><code>BackgroundJob.Schedule</code> &mdash; belirli süre sonra çalışsın</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>recurring job</strong></td>
+                <td><code>RecurringJob.AddOrUpdate</code> + cron ifadesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.hangfire.io/en/latest/background-methods/performing-recurrent-tasks.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>continuation</strong></td>
+                <td>Bir iş bitince tetiklenen ikinci iş</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>storage</strong></td>
+                <td>SQL Server, PostgreSQL, MySQL, MongoDB, Redis (Pro)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; depolamaya göre:
+                <br>&bull; SQL Server &rarr; resmî paket, ücretsiz.
+                <br>&bull; PostgreSQL / MySQL / MongoDB &rarr; topluluk paketleri, ücretsiz (bakım durumunu kontrol et).
+                <br>&bull; Redis &rarr; resmî <code>Hangfire.Pro.Redis</code> ücretli; topluluk paketi ücretsiz alternatif.
+                <br>&bull; Test / deneme &rarr; <code>Hangfire.InMemory</code>.</td>
+                <td><a href="https://docs.hangfire.io/en/latest/configuration/using-sql-server.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>automatic retry</strong></td>
+                <td>Hata veren işin varsayılan olarak birden çok kez tekrar denenmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>AutomaticRetryAttribute</code> ile ayarlanır</td>
+                <td><a href="https://docs.hangfire.io/en/latest/background-processing/dealing-with-exceptions.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>job filter</strong></td>
+                <td>İş hattına takılan öznitelik tabanlı ara katman</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>DI ile bağımlılık</strong></td>
+                <td>İş sınıfının constructor'ına servis enjekte etme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.hangfire.io/en/latest/background-methods/passing-dependencies.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hangfire Pro / Ace</strong></td>
+                <td>Batch işler, Redis depolama, iş kısıtlama gibi ek özellikler</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; Pro/Ace eklentileri ücretli. Çekirdek Hangfire için kullanıma göre:
+                <br>&bull; Kapalı kaynak ticari uygulamada NuGet paketi olarak, değiştirmeden kullanım &rarr; LGPLv3 ile ücretsiz.
+                <br>&bull; Hangfire kaynak kodunu değiştirip dağıtırsan &rarr; LGPL yükümlülükleri (değişiklikleri paylaşma vb.) doğar.
+                <br>&bull; LGPL koşullarını kabul etmeyen kurum &rarr; ticari lisans.
+                <br><span class="tag tag--warn">TEYİT</span> hangfire.io/licensing</td>
+                <td><a href="https://www.hangfire.io/pro/">hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Quartz.NET</strong></td>
+                <td>Java Quartz'ın .NET portu; en esnek zamanlayıcı</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz (Apache 2.0); dashboard yok</td>
+                <td><a href="https://www.quartz-scheduler.net/documentation/">quartz-scheduler.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>IJob / Trigger / JobDetail</strong></td>
+                <td>Quartz'ın üç temel kavramı: ne yapılacak, ne zaman, hangi ayarla</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.quartz-scheduler.net/documentation/quartz-3.x/tutorial/index.html">quartz-scheduler.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Quartz clustering</strong></td>
+                <td>ADO.NET job store ile birden çok örnekte tek çalıştırma garantisi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.quartz-scheduler.net/documentation/">quartz-scheduler.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Coravel</strong></td>
+                <td>Sade zamanlama + kuyruk + mail; küçük projeler için hızlı</td>
+                <td><span class="tag">ORTA</span> &mdash; çekirdek ücretsiz, Coravel Pro arayüzü ücretli</td>
+                <td><a href="https://docs.coravel.net/">docs.coravel.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>cron expression</strong></td>
+                <td>"0 3 * * *" gibi zamanlama ifadesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; 5 alanlı (dakika başlangıçlı) ve 6 alanlı (saniyeli) sürümler farklıdır, kütüphanenin hangisini beklediğini kontrol et</td>
+                <td><a href="https://docs.hangfire.io/en/latest/background-methods/performing-recurrent-tasks.html">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Functions timer trigger</strong></td>
+                <td>Sunucusuz zamanlanmış iş</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; cömert ücretsiz katmanı var</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-functions/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS Lambda + EventBridge Scheduler</strong></td>
+                <td>AWS tarafındaki karşılığı</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kubernetes CronJob</strong></td>
+                <td>Zamanlamayı uygulamadan çıkarıp platforma bırakma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; bkz. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a></td>
+                <td><a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Windows Service / systemd host</strong></td>
+                <td>Worker Service'i işletim sistemi servisi olarak çalıştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tek örnek garantisi</strong></td>
+                <td>3 kopya çalışırken zamanlanmış işin bir kez çalışmasını sağlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; dağıtık kilit veya leader election gerekir; §9'a bak</td>
+                <td>&mdash;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dagitik-sistem-teorisi"><span class="h-num">§ 9</span>Dağıtık sistem teorisi</h2>
+
+        <p>Bu bölümdeki maddeler kod yazdırmaz ama mülakatın "senior mi değil mi" ayrımını burası yapar.
+        Hepsini derinlemesine bilmen gerekmiyor; her birini iki cümleyle anlatabilmen yeterli.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Teori, tutarlılık ve koordinasyon</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>CAP teoremi</strong></td>
+                <td>Ağ bölünmesi olduğunda tutarlılık ile erişilebilirlik arasında seçim yaparsın</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; "üçünden ikisini seç" özeti eksiktir; P'yi seçmek zorunludur, seçim C ile A arasındadır</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>PACELC</strong></td>
+                <td>CAP'in devamı: bölünme yokken bile gecikme ile tutarlılık arasında seçim var</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>eventual consistency</strong></td>
+                <td>Kopyalar bir süre sonra aynılaşır; o ana kadar eski veri okunabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>strong consistency</strong></td>
+                <td>Yazılan her şey hemen ve her yerden aynı okunur</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>read-your-writes / causal consistency</strong></td>
+                <td>Ara tutarlılık modelleri; kullanıcı kendi yazdığını görsün yeter</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>consensus</strong></td>
+                <td>Birden çok düğümün bir değer üzerinde anlaşması problemi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://raft.github.io/">raft.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Raft</strong></td>
+                <td>Anlaşılabilirlik için tasarlanmış konsensüs algoritması; lider seçimi + log çoğaltma</td>
+                <td><span class="tag">ORTA</span> &mdash; RabbitMQ quorum queue ve etcd bunu kullanır; sitedeki görsel anlatım çok iyi</td>
+                <td><a href="https://raft.github.io/">raft.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Paxos</strong></td>
+                <td>Raft'tan önceki klasik konsensüs algoritması</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; adını bil, detayına girme</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>quorum</strong></td>
+                <td>Çoğunluk (N/2+1) onayıyla karar alma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/quorum-queues">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>split brain</strong></td>
+                <td>Küme ikiye bölünüp iki tarafın da kendini lider sanması</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.rabbitmq.com/docs/clustering">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>leader election</strong></td>
+                <td>Kümedeki örneklerden birinin koordinatör seçilmesi</td>
+                <td><span class="tag">ORTA</span> &mdash; "zamanlanmış iş bir kez çalışsın" probleminin çözümlerinden biri</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/leader-election">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>distributed lock</strong></td>
+                <td>Birden çok süreç arasında karşılıklı dışlama</td>
+                <td><span class="tag">ORTA</span> &mdash; seçenekler altyapına göre: Redis (Redlock), SQL Server <code>sp_getapplock</code>, PostgreSQL advisory lock (<code>pg_advisory_lock</code>), ZooKeeper/etcd, blob lease</td>
+                <td><a href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>lease / fencing token</strong></td>
+                <td>Kilidin süreli olması ve artan sayaçla eski kilit sahibinin engellenmesi</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; dağıtık kilidin güvenli olmasını sağlayan asıl mekanizma</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>clock skew</strong></td>
+                <td>Sunucu saatlerinin birbirinden sapması</td>
+                <td><span class="tag">ORTA</span> &mdash; JWT süre doğrulama ve kilit zaman aşımı hatalarının gizli sebebi</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>logical clock / Lamport timestamp</strong></td>
+                <td>Gerçek saate güvenmeden olay sıralaması kurma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>vector clock</strong></td>
+                <td>Eşzamanlı değişiklikleri tespit eden sürüm vektörü</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>CRDT</strong></td>
+                <td>Çakışmasız birleşen veri tipleri (ortak doküman düzenleme)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>sharding / partitioning</strong></td>
+                <td>Veriyi anahtarına göre parçalara bölme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>consistent hashing</strong></td>
+                <td>Düğüm eklenip çıkarken en az veri taşınmasını sağlayan dağıtım</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>replication</strong> <small>leader-follower</small></td>
+                <td>Verinin kopyalanması; senkron kopya yavaş ama güvenli, asenkron hızlı ama kayıp riskli</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>gossip protocol</strong></td>
+                <td>Düğümlerin bilgiyi rastgele komşulara yayarak dağıtması</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>distributed tracing</strong></td>
+                <td>Bir isteğin servisler arası yolculuğunu tek görünümde izleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; .NET'te <code>Activity</code> + OpenTelemetry; bkz. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a></td>
+                <td><a href="https://opentelemetry.io/docs/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>W3C Trace Context</strong></td>
+                <td><code>traceparent</code> başlığıyla iz kimliğinin servisler arası taşınma standardı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.w3.org/TR/trace-context/">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Testcontainers</strong></td>
+                <td>Test sırasında gerçek RabbitMQ/Redis/SQL Server container'ı ayağa kaldırma</td>
+                <td><span class="tag">ORTA</span> &mdash; ücretsiz; mesajlaşma testinin en pratik yolu, bkz. <a href="../06-test-ve-kalite/index.html">06</a></td>
+                <td><a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Aspire</strong></td>
+                <td>RabbitMQ, Redis, Kafka container'larını tek komutla ayağa kaldıran geliştirme yığını</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; dokümantasyon aspire.dev adresine taşındı; bkz. <a href="../09-aspire-bulut-modern/index.html">09</a></td>
+                <td><a href="https://aspire.dev/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>mikroservis iletişim rehberi</strong></td>
+                <td>Microsoft'un servisler arası iletişim seçimlerini karşılaştıran resmî kılavuzu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 10</span>Özet &mdash; bu sayfanın öncelik sırası</h2>
+
+        <p>Bu sayfadaki 200'e yakın maddenin hepsi eşit değil. Aşağıdaki sıra <strong>genel .NET backend mülakatı</strong>
+        için kuruldu; hedefin farklıysa önce şu tabloya bak. Her adımın sonunda çalışan küçük bir örnek olsun, sadece okuma yapma.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hedefe göre öncelik</caption>
+            <thead><tr><th>Durumun</th><th>Ne değişir</th></tr></thead>
+            <tbody>
+              <tr><td>Genel .NET backend mülakatı</td><td>Aşağıdaki sıra olduğu gibi (RabbitMQ, Hangfire, gRPC, SignalR öncelikli).</td></tr>
+              <tr><td>Hedef şirket/ekip Kafka kullanıyor (yüksek hacimli e-ticaret, fintech, veri platformu)</td><td>Kafka "sadece kavramsal" kalmaz: <code>Confluent.Kafka</code> ile kur; partition, consumer group ve offset commit pratiği yap. RabbitMQ adımlarından önce gelebilir.</td></tr>
+              <tr><td>Azure ağırlıklı ekip</td><td>Azure Service Bus, RabbitMQ'nun yerine öne geçer (§ 4); MassTransit adımı Service Bus taşıyıcısıyla yapılır.</td></tr>
+              <tr><td>Gerçek zamanlı arayüzü olan ürün (bildirim, panel, sohbet)</td><td>SignalR adımı öne; ardından backplane ve sticky session satırları.</td></tr>
+              <tr><td>Sıfırdan öğreniyorsun</td><td>Önce tek süreç içinde arka plan işi (<code>BackgroundService</code>, sonra Hangfire), sonra § 1 kavram sözlüğü, en son broker (RabbitMQ).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">RabbitMQ &mdash; çıplak istemciyle "hello world"</span>
+            <p>Docker ile <code>rabbitmq:4-management</code> çalıştır, RabbitMQ.Client ile bir mesaj
+            gönderip al. Yönetim arayüzünde kuyruğu gör. Resmî öğreticinin 1-5. bölümleri.
+            Docker kurulu değilse veya şirket bilgisayarında Docker Desktop lisans sorunu varsa &rarr;
+            <a href="#rabbitmq">§ 2</a>'deki kurulum seçenekleri (Podman/Rancher Desktop, yerel kurulum paketi, yönetilen hizmet).</p>
+            <span class="steps__meta">Neden önce bu: ilanlarda sık geçiyor · exchange türleri sorusu buradan geliyor</span>
+          </li>
+          <li>
+            <span class="steps__title">RabbitMQ &mdash; güvenilirlik üçlüsü</span>
+            <p>durable queue + persistent message + manual ack. Sonra prefetch ayarla, sonra dead letter
+            exchange kur ve bilerek hata veren bir tüketici yaz. Reliability guide sayfasını oku.</p>
+            <span class="steps__meta">Mülakatta "mesaj kaybolmasın nasıl garanti edersin" sorusunun cevabı</span>
+          </li>
+          <li>
+            <span class="steps__title">Temel kavram sözlüğü (§ 1)</span>
+            <p>at-least-once, idempotency, ordering, backpressure, poison message. Sadece tanımlar &mdash;
+            yarım gün.</p>
+            <span class="steps__meta">Kod yok, terim var; ama bunlar olmadan diğer her şey havada kalır</span>
+          </li>
+          <li>
+            <span class="steps__title">MassTransit &mdash; consumer + publish/send</span>
+            <p>Aynı RabbitMQ üzerinde bir consumer yaz. Publish ile Send farkını uygulamada gör.
+            Sonra retry policy ve _error kuyruğunu incele.</p>
+            <span class="steps__meta">Mülakatta sık · v9 lisans değişikliğini not et</span>
+          </li>
+          <li>
+            <span class="steps__title">Hangfire &mdash; dashboard + recurring job</span>
+            <p>Elindeki veritabanına göre depolama seç: SQL Server / LocalDB / SQL Server Express (Windows) varsa
+            <code>Hangfire.SqlServer</code>; ekip PostgreSQL kullanıyorsa <code>Hangfire.PostgreSql</code>; hiç veritabanı kurulu
+            değilse Docker ile SQL Server veya PostgreSQL (Apple Silicon Mac'te SQL Server imajı yalnız x64 olduğu için
+            emülasyonla çalışır, PostgreSQL daha zahmetsiz); sadece denemek için <code>Hangfire.InMemory</code>.
+            Bir fire-and-forget, bir cron işi yaz, dashboard'u yetkilendir.</p>
+            <span class="steps__meta">Mülakatta sık · yarım günde bitiyor · en hızlı kazanç</span>
+          </li>
+          <li>
+            <span class="steps__title">gRPC &mdash; .proto'dan çalışan servise</span>
+            <p>Bir unary ve bir server streaming metodu yaz. Deadline ver. Sonra
+            "gRPC vs REST" resmî karşılaştırmasını oku ve kendi cümlelerinle özetle.</p>
+            <span class="steps__meta">İlanlarda sık · mülakat sorusu olarak çok olası</span>
+          </li>
+          <li>
+            <span class="steps__title">SignalR &mdash; hub + tarayıcı istemcisi</span>
+            <p>Basit bir bildirim hub'ı yaz, JavaScript istemcisiyle bağlan. JavaScript'e yeni başlıyorsan bu
+            iyi bir ilk örnek olur. Sonra Redis backplane'i oku (kurman şart değil).</p>
+            <span class="steps__meta">Mülakatta sık · JS pratiği için de çift kazanç</span>
+          </li>
+          <li>
+            <span class="steps__title">Dayanıklılık &mdash; Polly</span>
+            <p>HttpClient'a retry + exponential backoff + circuit breaker ekle. Polly v8 API'siyle yaz;
+            internetteki v7 örneklerini kopyalama.</p>
+            <span class="steps__meta">Performans ve mimari konularına yaslanır; konuşma malzemesi verir</span>
+          </li>
+          <li>
+            <span class="steps__title">Outbox pattern</span>
+            <p>Kavramı öğren, MassTransit EF Core outbox'ı ile veya elle bir tabloyla uygula.
+            "Veri kaydettim ama mesaj gitmedi" senaryosunu anlat.</p>
+            <span class="steps__meta">Kıdemli seviye sinyali veren tek maddedir</span>
+          </li>
+          <li>
+            <span class="steps__title">Kafka &mdash; sadece kavramsal</span>
+            <p>topic / partition / offset / consumer group dörtlüsünü ve RabbitMQ'dan farkını
+            (mesaj silinmez, offset ilerler) anlatabilecek kadar öğren. Genel mülakat için kurmak zorunda değilsin;
+            hedef ekip Kafka kullanıyorsa yukarıdaki tabloya göre bu adım uygulamalı hâle gelir.</p>
+            <span class="steps__meta">Genel mülakat için yatırım/getiri oranı düşük, iki saat yeter; Kafka kullanan ekip için geçerli değil</span>
+          </li>
+          <li>
+            <span class="steps__title">Teori &mdash; CAP, eventual consistency, idempotency, correlation id</span>
+            <p>Dört terim. Her birini iki cümleyle anlat. Raft'ı görsel anlatımdan bir kez izle.</p>
+            <span class="steps__meta">Sohbet sorusu; ezber değil, kavrayış aranır</span>
+          </li>
+          <li>
+            <span class="steps__title">Geri kalan her şey (İLERİ rozetliler)</span>
+            <p>Saga state machine, courier, federation, Pulsar, CRDT, vector clock... Bunlar "duydum,
+            şu işe yarıyor" seviyesinde kalsın. Mülakatta bilmemek normal.</p>
+            <span class="steps__meta">Genel mülakat hazırlığında acele etme; önceki 11 adım tamamlanmadan buraya girme (hedef ekip bu konuları kullanıyorsa ilgili satırı öne al)</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Bu sayfanın tamamını öğrenmene gerek yok. Genel .NET backend mülakatı için RabbitMQ'nun ilk iki adımı + Hangfire + gRPC
+          karşılaştırması + SignalR hub'ı, ilanlardaki bu başlıkları savunabilmen için yeterli; hedef ekip Kafka veya
+          Azure Service Bus kullanıyorsa o taşıyıcı bu listeye girer. Geri kalanı,
+          "bilmiyorum ama şu işe yarıyor" diyebileceğin bir harita olarak dursun &mdash; mülakatta
+          bilmediğini söylemek, yanlış bilmekten iyidir.</p>
+        </div>
+
+        <p>Devam: mimari kararlar için <a href="../04-mimari-ve-desenler/index.html">04 &mdash; Mimari ve Desenler</a>,
+        test tarafı için <a href="../06-test-ve-kalite/index.html">06 &mdash; Test ve Kalite</a>, izleme ve CI/CD için
+        <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 &mdash; DevOps ve Gözlemlenebilirlik</a>,
+        paket ve sürüm listesi için <a href="../10-kutuphaneler/index.html">10 &mdash; Kütüphane Kataloğu</a>.
+        Bütün alanların üst haritası: <a href="../../index.html">ana sayfa</a>.</p>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../04-mimari-ve-desenler/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Mimari ve Desenler</span></a>
+        <a class="next" href="../06-test-ve-kalite/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Test ve Kod Kalitesi</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

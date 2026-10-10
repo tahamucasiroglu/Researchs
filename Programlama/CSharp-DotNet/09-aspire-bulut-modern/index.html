@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aspire, Bulut ve Modern .NET — .NET Anahtar Listesi</title>
+<meta name="description" content="Aspire, .NET 10 yenilikleri, Native AOT, konteyner, sunucusuz, bulut sağlayıcı servisleri ve yapay zeka entegrasyonu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Aspire, Bulut ve Modern .NET</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 09 · Arayüz ve Modern</div>
+        <h1 class="page-title"><em>Aspire</em>, bulut ve modern .NET</h1>
+        <p class="lede">Aspire'ın ne olduğu ve neyi çözdüğü, sürüm sürüm .NET yenilikleri, AOT derleme, bulut servisleri ve .NET'te yapay zeka kütüphaneleri.</p>
+        <div class="head-meta">Seviye: orta &middot; Hızla değişen alan</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesidir</strong>. Her satır bir anahtar kelime, yanında
+        "bu nedir" notu ve mümkün olduğunca resmî doküman bağlantısı var. Konuyu buradan öğrenmeyeceksin; buradan
+        <em>ne arayacağını</em> öğrenip kendi kaynağından okuyup kod yazacaksın.</p>
+
+        <p>Not sütunu iki iş yapar: rozetle önceliği söyler, metinle de karışıklığı önler. Örneğin "resource" tek
+        başına arandığında Kubernetes veya REST sonuçları gelir; "Aspire resource" yazman gerekir.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Bu sayfadaki en kritik isim değişikliği</p>
+          <p>Eskiden <strong>".NET Aspire"</strong> denen ürün artık sadece <strong>"Aspire"</strong> olarak anılıyor ve
+          dokümantasyonu <a href="https://aspire.dev/">aspire.dev</a> adresine taşındı.
+          <code>learn.microsoft.com/dotnet/aspire/...</code> adreslerinin hepsi bugün aspire.dev'e yönleniyor.
+          Sürüm numarası da .NET sürümünden ayrıldı: Aspire kendi başına 13.x sürümünde ve artık sadece .NET değil
+          Python, Go, Java, Node.js, Rust, PowerShell projelerini de orkestre ediyor. Eski blog yazıları ve
+          videolar ".NET Aspire 8/9" derken bunu kastediyor; arama yaparken sürüm kafanı karıştırmasın.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Rozet sözlüğü</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> İş ilanlarında ve mülakatlarda sık geçen; en az bir
+          çalışan örnek yaz — en yüksek öncelik. &middot;
+          <span class="tag tag--ok">TEMEL</span> bu alanda olmazsa olmaz. &middot;
+          <span class="tag">ORTA</span> sonra gelir. &middot;
+          <span class="tag tag--info">İLERİ</span> derinleşme, acele etme. &middot;
+          <span class="tag tag--warn">ÜCRETLİ</span> lisansı paralı. &middot;
+          <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar ama yeni projede kullanılmaz.</p>
+        </div>
+
+        <p>İlgili sayfalar: <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık Sistemler</a> (RabbitMQ,
+        Redis, gRPC ayrıntısı orada), <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a>
+        (Docker, CI/CD, OpenTelemetry orada), <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>
+        (paket seçenekleri ve lisans durumları orada).</p>
+
+        <h2 id="aspire-temel"><span class="h-num">§ 2</span>Aspire — temel kavramlar</h2>
+
+        <p>Aspire'ı tek cümleyle tanımlamak gerekirse: <strong>"birden fazla servisten oluşan bir uygulamayı geliştirme
+        makinende tek komutla ayağa kaldıran, servisler arası bağlantı bilgilerini kendi üreten, hepsini tek bir panelden
+        izleten orkestrasyon çatısı."</strong> Production'a deploy eden bir şey değil (deploy'a yardımcı olur ama kendisi
+        çalışma ortamı değildir); esas olarak <em>geliştirme zamanı</em> aracıdır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Aspire — çekirdek kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Aspire</strong></td>
+                <td>Dağıtık uygulamaları geliştirme, orkestre etme ve izleme çatısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada ".NET Aspire" değil "Aspire" yaz; ".NET" öneki kaldırıldı</td>
+                <td><a href="https://aspire.dev/get-started/what-is-aspire/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>AppHost</strong></td>
+                <td>Uygulamanın hangi servislerden oluştuğunu C# kodu olarak tarif eden proje</td>
+                <td><span class="tag tag--ok">TEMEL</span> YAML değil, gerçek C# — <code>builder.AddProject&lt;...&gt;()</code>. Aspire'ın kalbi burası</td>
+                <td><a href="https://aspire.dev/get-started/app-host/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Service Defaults</strong></td>
+                <td>Her servise ortak eklenen hazır paket: telemetri, health check, service discovery, resilience</td>
+                <td><span class="tag tag--ok">TEMEL</span> Şablon çözüme bir <code>ServiceDefaults</code> projesi ekler; içine bakmayı ihmal etme</td>
+                <td><a href="https://aspire.dev/get-started/csharp-service-defaults/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>resource</strong></td>
+                <td>AppHost'un yönettiği her şey: proje, container, executable, bulut kaynağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Aspire resource" diye ara; tek başına "resource" Kubernetes/REST sonucu verir</td>
+                <td><a href="https://aspire.dev/architecture/resource-model/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>resource model</strong></td>
+                <td>Kaynakların birbirine referans verme ve bağımlılık kurma modeli</td>
+                <td><span class="tag">ORTA</span> <code>WithReference()</code>, <code>WaitFor()</code> burada anlatılır</td>
+                <td><a href="https://aspire.dev/architecture/resource-model/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>integration</strong></td>
+                <td>Redis, PostgreSQL, RabbitMQ gibi teknolojiler için hazır "hosting + client" paket çifti</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski adı "component"; eski yazılarda o adı görürsün</td>
+                <td><a href="https://aspire.dev/integrations/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>hosting integration</strong></td>
+                <td>AppHost tarafına eklenen paket — container'ı ayağa kaldıran taraf (<code>Aspire.Hosting.*</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bunu "client integration" ile karıştırma; ikisi ayrı NuGet paketidir</td>
+                <td><a href="https://aspire.dev/integrations/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>client integration</strong></td>
+                <td>Servis tarafına eklenen paket — DI'a yapılandırılmış client kaydeden taraf</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>AddRedisClient("cache")</code> gibi; adı AppHost'taki resource adıyla eşleşir</td>
+                <td><a href="https://aspire.dev/integrations/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>service discovery</strong></td>
+                <td>Servislerin birbirinin adresini isimle bulması; sabit port/URL yazmayı bitirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>https://apiservice</code> gibi mantıksal ad kullanırsın</td>
+                <td><a href="https://aspire.dev/fundamentals/service-discovery/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire dashboard</strong></td>
+                <td>Çalışan servisleri, logları, trace'leri, metrikleri gösteren web paneli</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aspire'ın en çok satan özelliği; ilk gün bunu gör</td>
+                <td><a href="https://aspire.dev/dashboard/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>standalone dashboard</strong></td>
+                <td>Dashboard'u Aspire'sız, tek başına bir OpenTelemetry görüntüleyicisi olarak çalıştırma</td>
+                <td><span class="tag">ORTA</span> Aspire kullanmayan projede bile işine yarar; tek container</td>
+                <td><a href="https://aspire.dev/dashboard/standalone/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>telemetry (Aspire)</strong></td>
+                <td>OpenTelemetry log/trace/metric'in service defaults ile otomatik kurulması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aspire kendi telemetri formatı icat etmiyor, OTel kullanıyor</td>
+                <td><a href="https://aspire.dev/fundamentals/telemetry/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>health checks (Aspire)</strong></td>
+                <td>Kaynakların hazır olup olmadığının AppHost tarafından takibi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HealthChecks ilanlarda sık geçer; ASP.NET Core tarafını da öğren</td>
+                <td><a href="https://aspire.dev/fundamentals/health-checks/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>WaitFor / WaitForCompletion</strong></td>
+                <td>Bir servisin, bağımlı olduğu kaynak sağlıklı olana kadar başlatılmaması</td>
+                <td><span class="tag">ORTA</span> Docker Compose'daki <code>depends_on</code>'un çalışan hali</td>
+                <td><a href="https://aspire.dev/fundamentals/health-checks/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>external parameters</strong></td>
+                <td>Parola, connection string gibi dışarıdan verilen değerlerin AppHost'a tanıtılması</td>
+                <td><span class="tag">ORTA</span> User Secrets ile birlikte kullanılır</td>
+                <td><a href="https://aspire.dev/fundamentals/external-parameters/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>environment variables (Aspire)</strong></td>
+                <td>Aspire'ın servislere hangi env var'ları enjekte ettiği</td>
+                <td><span class="tag">ORTA</span> "Connection string nereden geldi?" sorusunun cevabı burada</td>
+                <td><a href="https://aspire.dev/fundamentals/environment-variables/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>persist data volumes</strong></td>
+                <td>Container'lı veritabanının verisinin restart'ta silinmemesi için volume tanımlama</td>
+                <td><span class="tag">ORTA</span> Varsayılan davranış veriyi silmektir; bunu bilmezsen sürprizle karşılaşırsın</td>
+                <td><a href="https://aspire.dev/fundamentals/persist-data-volumes/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>container networking</strong></td>
+                <td>Aspire'ın container'lar ve host arasındaki ağ/port eşlemesini nasıl kurduğu</td>
+                <td><span class="tag tag--info">İLERİ</span> "localhost'tan erişemiyorum" hatalarının kaynağı</td>
+                <td><a href="https://aspire.dev/fundamentals/container-networking/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>resource lifetimes</strong></td>
+                <td>Container'ın her <code>run</code>'da yeniden mi yaratılacağı yoksa kalıcı mı olacağı</td>
+                <td><span class="tag">ORTA</span> <code>WithLifetime(ContainerLifetime.Persistent)</code></td>
+                <td><a href="https://aspire.dev/app-host/resource-lifetimes/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>eventing (Aspire)</strong></td>
+                <td>AppHost yaşam döngüsü olaylarına (kaynak başladı/hazır) kod bağlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Seed data, migration tetikleme gibi işler için</td>
+                <td><a href="https://aspire.dev/app-host/eventing/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom resource</strong></td>
+                <td>Hazır entegrasyonu olmayan bir teknoloji için kendi Aspire kaynağını yazma</td>
+                <td><span class="tag tag--info">İLERİ</span> Önce hazır entegrasyonları tüket, sonra buraya bak</td>
+                <td><a href="https://aspire.dev/extensibility/custom-resources/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>annotations (Aspire)</strong></td>
+                <td>Kaynaklara meta veri iliştirme mekanizması; Aspire'ın iç mimarisi buna dayanır</td>
+                <td><span class="tag tag--info">İLERİ</span> Kendi entegrasyonunu yazacaksan şart</td>
+                <td><a href="https://aspire.dev/fundamentals/annotations-overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire glossary</strong></td>
+                <td>Aspire'a özgü terimlerin resmî sözlüğü</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kafan karışınca ilk buraya bak, arama motoruna değil</td>
+                <td><a href="https://aspire.dev/get-started/glossary/">aspire.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="aspire-entegrasyonlar"><span class="h-num">§ 3</span>Aspire entegrasyonları — hazır gelen teknolojiler</h2>
+
+        <p>Buradaki liste özellikle bu teknolojileri hiç denememiş olanlar için bir fırsat. Aspire, hepsini <strong>tek satır C# ile</strong> kendi makinende
+        ayağa kaldırıyor — Dockerfile ya da Compose bilgisine gerek kalmadan. Ancak makinende bir <strong>container çalışma ortamı</strong>
+        (Docker Desktop, Podman vb.) bulunması gerekir. Redis ve RabbitMQ'yu ilk kez deneyecekler için en düşük sürtünmeli yol budur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Container çalıştırabilme durumuna göre yol</caption>
+            <thead><tr><th>Durum</th><th>Ne yapmalı</th></tr></thead>
+            <tbody>
+              <tr><td>Kendi bilgisayarın, yönetici yetkin var</td><td>Docker Desktop veya Podman kur (lisans için § 4'teki "prerequisites" satırına bak); gerisini Aspire halleder.</td></tr>
+              <tr><td>Windows kullanıyorsun</td><td>Varsayılan ve önerilen arka uç WSL2: önce WSL2'yi etkinleştir. Windows Pro/Enterprise/Education'da Docker Desktop Hyper-V arka ucuyla da çalışabilir; Podman 5+ da WSL2'ye ek olarak Hyper-V sağlayıcısını destekler. WSL2 ve Hyper-V ikisi de mümkün değilse (kurumsal kısıt, Home sürümünde sanallaştırma kapalı vb.) aşağıdaki Codespaces / dev container satırına bak. <span class="tag tag--warn">TEYİT</span> güncel gereksinimler: docs.docker.com/desktop/setup/install/windows-install ve podman.io</td></tr>
+              <tr><td>Kurumsal bilgisayar, kurulum yasak veya yetkin yok</td><td>GitHub Codespaces / dev container (ücretsiz kotası var) kullan ya da BT onayıyla Podman kurdur.</td></tr>
+              <tr><td>Container hiç kullanılamıyor</td><td>Redis/RabbitMQ'yu yönetilen bulut servisinin ücretsiz katmanından veya yerel kurulumdan çalıştır; AppHost'a <code>AddConnectionString("cache")</code> ile mevcut bağlantı olarak tanıt.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Önbellek ve veri deposu entegrasyonları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Aspire Redis integration</strong></td>
+                <td>Redis container'ını ayağa kaldırır, client'ı DI'a kaydeder</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Redis'i hiç kullanmadıysan öğrenmeye <em>buradan</em> başla, en kısa yol</td>
+                <td><a href="https://aspire.dev/integrations/caching/redis/redis-get-started/">aspire.dev</a> &middot; <a href="https://redis.io/docs/latest/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis distributed cache</strong></td>
+                <td>Redis'i <code>IDistributedCache</code> arkasına koyan entegrasyon</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Redis" değil "IDistributedCache" ara; .NET soyutlaması ayrı konudur</td>
+                <td><a href="https://aspire.dev/integrations/caching/redis-distributed/redis-distributed-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis output cache</strong></td>
+                <td>ASP.NET Core output caching'i Redis üzerinde tutan entegrasyon</td>
+                <td><span class="tag">ORTA</span> "Output cache" ile "response cache" farklı şeyler; ikisini de ara</td>
+                <td><a href="https://aspire.dev/integrations/caching/redis-output/redis-output-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Garnet</strong></td>
+                <td>Microsoft Research'ün Redis protokolü uyumlu, .NET ile yazılmış cache sunucusu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak. Redis alternatifi olarak mülakatta bilmek puan getirir</td>
+                <td><a href="https://microsoft.github.io/garnet/">microsoft.github.io/garnet</a></td>
+              </tr>
+              <tr>
+                <td><strong>Valkey</strong></td>
+                <td>Redis'in lisans değişikliği sonrası çıkan topluluk fork'u</td>
+                <td><span class="tag">ORTA</span> Ücretsiz/açık kaynak. Redis lisans tartışmasını bilmen gerekir</td>
+                <td><a href="https://valkey.io/">valkey.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire PostgreSQL integration</strong></td>
+                <td>PostgreSQL container + Npgsql client</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> SQL Server dışında en sık istenen ilişkisel veritabanı; container ile denemesi kolay</td>
+                <td><a href="https://aspire.dev/integrations/databases/postgres/postgres-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire SQL Server integration</strong></td>
+                <td>SQL Server container + client</td>
+                <td><span class="tag tag--ok">TEMEL</span> SQL Server biliyorsan tanıdık bir alandan başlamak için ilk denenecek entegrasyon bu; PostgreSQL/MySQL biliyorsan kendi veritabanının entegrasyonuyla başla, hiç veritabanı bilmiyorsan önce <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></td>
+                <td><a href="https://aspire.dev/integrations/databases/sql-server/sql-server-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire EF Core integrations</strong></td>
+                <td>EF Core DbContext'i doğrudan Aspire kaynağına bağlayan paketler</td>
+                <td><span class="tag tag--ok">TEMEL</span> EF Core biliyorsan giriş noktan burası olsun; Dapper/ADO.NET kullanıyorsan client integration'ın verdiği bağlantıyla kendi erişim kodunu yazabilirsin</td>
+                <td><a href="https://aspire.dev/integrations/databases/efcore/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire EF migrations</strong></td>
+                <td>Migration'ları AppHost başlatırken otomatik uygulama deseni</td>
+                <td><span class="tag">ORTA</span> "Migration worker service" deseni; production'da dikkatli kullanılır</td>
+                <td><a href="https://aspire.dev/integrations/databases/efcore/migrations/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>seed database (Aspire)</strong></td>
+                <td>Geliştirme veritabanını başlangıç verisiyle doldurma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://aspire.dev/integrations/databases/efcore/seed-database/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MongoDB (Aspire)</strong></td>
+                <td>Doküman veritabanı entegrasyonu</td>
+                <td><span class="tag">ORTA</span> Lisans karmaşık (SSPL); yönetilen servis fiyatlıdır</td>
+                <td><a href="https://aspire.dev/integrations/databases/mongodb/mongodb-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MySQL / MariaDB (Aspire)</strong></td>
+                <td>İlişkisel veritabanı entegrasyonu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://aspire.dev/integrations/databases/mysql/mysql-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Oracle (Aspire)</strong></td>
+                <td>Oracle Database entegrasyonu</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Oracle DB lisansı ücretlidir (XE sürümü ücretsiz)</td>
+                <td><a href="https://aspire.dev/integrations/databases/efcore/oracle/oracle-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Elasticsearch (Aspire)</strong></td>
+                <td>Arama ve log deposu entegrasyonu</td>
+                <td><span class="tag tag--info">İLERİ</span> Lisansı zamanla değişti (SSPL/Elastic License); "open source mu" sorusunu araştır</td>
+                <td><a href="https://aspire.dev/integrations/databases/elasticsearch/elasticsearch-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Qdrant (Aspire)</strong></td>
+                <td>Vektör veritabanı entegrasyonu — AI/RAG işleri için</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz self-host var, bulut sürümü ücretli</td>
+                <td><a href="https://aspire.dev/integrations/databases/qdrant/qdrant-get-started/">aspire.dev</a> &middot; <a href="https://qdrant.tech/documentation/">qdrant.tech</a></td>
+              </tr>
+              <tr>
+                <td><strong>Milvus (Aspire)</strong></td>
+                <td>Alternatif vektör veritabanı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak</td>
+                <td><a href="https://aspire.dev/integrations/databases/milvus/milvus-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>SQLite (Aspire)</strong></td>
+                <td>Dosya tabanlı veritabanı entegrasyonu</td>
+                <td><span class="tag">ORTA</span> Test ve prototip için; production'da nadiren</td>
+                <td><a href="https://aspire.dev/integrations/overview/">aspire.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mesajlaşma, güvenlik, gözlemlenebilirlik entegrasyonları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Aspire RabbitMQ integration</strong></td>
+                <td>RabbitMQ broker container'ı + client; yönetim paneliyle birlikte gelir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> RabbitMQ'yu ilk kez denemenin en hızlı yolu. Ayrıntı: <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma</a></td>
+                <td><a href="https://aspire.dev/integrations/messaging/rabbitmq/rabbitmq-get-started/">aspire.dev</a> &middot; <a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apache Kafka (Aspire)</strong></td>
+                <td>Yüksek hacimli olay akışı platformu entegrasyonu</td>
+                <td><span class="tag tag--info">İLERİ</span> Kafka ile RabbitMQ farklı problemleri çözer; ikisini karıştırma</td>
+                <td><a href="https://aspire.dev/integrations/messaging/apache-kafka/apache-kafka-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>NATS (Aspire)</strong></td>
+                <td>Hafif, hızlı mesajlaşma sistemi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak; RabbitMQ'ya niş alternatif</td>
+                <td><a href="https://aspire.dev/integrations/messaging/nats/nats-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>LavinMQ (Aspire)</strong></td>
+                <td>AMQP uyumlu, RabbitMQ'ya alternatif broker</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş seçenek; bilmek zorunda değilsin ama listede dursun</td>
+                <td><a href="https://aspire.dev/integrations/messaging/lavinmq/lavinmq-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Seq (Aspire)</strong></td>
+                <td>Yapılandırılmış log arama sunucusu entegrasyonu</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Serilog + Seq ilanlarda sık geçer. Lisans kullanım şekline göre: tek kullanıcı (geliştirme veya kişisel üretim) &rarr; ücretsiz bireysel lisans; birden fazla kullanıcının eriştiği ekip/şirket kurulumu &rarr; <span class="tag tag--warn">ÜCRETLİ</span>; ücretsiz alternatif isteyen ekip &rarr; Aspire standalone dashboard (geliştirme amaçlı), Grafana Loki, Elasticsearch/OpenSearch + Kibana/Dashboards ya da OpenTelemetry + istediğin backend. <span class="tag tag--warn">TEYİT</span> datalust.co/pricing</td>
+                <td><a href="https://aspire.dev/integrations/observability/seq/seq-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Keycloak (Aspire)</strong></td>
+                <td>Açık kaynak kimlik sunucusu (OpenID Connect / OAuth2) entegrasyonu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. IdentityServer artık ücretli olduğu için popülerleşti</td>
+                <td><a href="https://aspire.dev/integrations/security/keycloak/">aspire.dev</a> &middot; <a href="https://www.keycloak.org/documentation">keycloak.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dapr (Aspire)</strong></td>
+                <td>Dağıtık uygulama runtime'ı; state, pub/sub, secret soyutlamaları sunar</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/CNCF. Aspire'ın <em>rakibi değil</em>, tamamlayıcısı — bunu karıştırmak yaygın hata</td>
+                <td><a href="https://aspire.dev/integrations/frameworks/dapr/dapr-get-started/">aspire.dev</a> &middot; <a href="https://docs.dapr.io/">docs.dapr.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Orleans (Aspire)</strong></td>
+                <td>.NET'in "virtual actor" modeli — dağıtık durum yönetimi çatısı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/Microsoft. Oyun ve IoT gibi yüksek eşzamanlılıkta kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/orleans/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>YARP</strong></td>
+                <td>Microsoft'un .NET ile yazılmış ters proxy / API gateway kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Ocelot'un modern alternatifi; "Yet Another Reverse Proxy"</td>
+                <td><a href="https://microsoft.github.io/reverse-proxy/">microsoft.github.io/reverse-proxy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure integrations (Aspire)</strong></td>
+                <td>Key Vault, Service Bus, Cosmos DB, Storage, App Configuration için hazır kaynaklar</td>
+                <td><span class="tag">ORTA</span> Azure aboneliği ister (abonelik seçenekleri için § 4'teki <code>azd</code> satırına bak); çoğunun emülatör/container modu da var, yerelde abonelik olmadan denenebilir</td>
+                <td><a href="https://aspire.dev/integrations/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ollama (Aspire)</strong></td>
+                <td>Yerel LLM sunucusunu Aspire kaynağı olarak çalıştırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. API anahtarı olmadan AI denemenin yolu</td>
+                <td><a href="https://aspire.dev/integrations/ai/ollama/ollama-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenAI / GitHub Models (Aspire)</strong></td>
+                <td>Model sağlayıcılarını AppHost'tan yapılandırma</td>
+                <td><span class="tag tag--info">İLERİ</span> GitHub Models'ın ücretsiz kotası var, OpenAI ücretlidir</td>
+                <td><a href="https://aspire.dev/integrations/ai/github-models/github-models-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>integrations gallery</strong></td>
+                <td>Topluluk ve üçüncü taraf entegrasyonların listelendiği katalog</td>
+                <td><span class="tag">ORTA</span> "Aspire'da X var mı?" sorusunun tek doğru adresi</td>
+                <td><a href="https://aspire.dev/integrations/gallery/">aspire.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="aspire-arac-ve-deploy"><span class="h-num">§ 4</span>Aspire — CLI, test ve deployment</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Aspire araçları ve dağıtım</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Aspire CLI</strong></td>
+                <td><code>aspire new</code>, <code>aspire run</code>, <code>aspire add</code>, <code>aspire publish</code> komutları</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>dotnet</code> CLI'dan ayrı bir araçtır; ayrıca kurulur</td>
+                <td><a href="https://aspire.dev/reference/cli/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>aspire CLI kurulumu</strong></td>
+                <td>Kurulum betiği (<code>install.ps1</code> / <code>install.sh</code>) veya SDK üzerinden</td>
+                <td><span class="tag tag--ok">TEMEL</span> Windows'ta PowerShell betiği kullanılır</td>
+                <td><a href="https://aspire.dev/get-started/install-cli/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire SDK</strong></td>
+                <td>Projeye eklenen MSBuild SDK'sı; AppHost bunun üzerine kurulur</td>
+                <td><span class="tag">ORTA</span> <code>Aspire.AppHost.Sdk</code> — proje dosyasında görürsün</td>
+                <td><a href="https://aspire.dev/get-started/aspire-sdk/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>prerequisites (Aspire)</strong></td>
+                <td>Gerekli .NET sürümü ve container runtime (Docker Desktop / Podman)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Docker Desktop lisansı kullanana göre değişir: kişisel kullanım, eğitim, ticari olmayan açık kaynak &rarr; ücretsiz; küçük işletme (250'den az çalışan <em>ve</em> yıllık geliri 10 milyon USD altı) &rarr; ücretsiz; bu eşiklerin üstündeki şirket &rarr; <span class="tag tag--warn">ÜCRETLİ</span> abonelik (Pro/Team/Business). Linux'ta Desktop olmadan Docker Engine ücretsiz/açık kaynaktır. Lisans istemiyorsan Podman veya Rancher Desktop. <span class="tag tag--warn">TEYİT</span> docker.com/pricing</td>
+                <td><a href="https://aspire.dev/get-started/prerequisites/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>first app (Aspire)</strong></td>
+                <td>Sıfırdan ilk Aspire çözümünü oluşturma adımları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Buradan başla; 20 dakikada dashboard'u görürsün</td>
+                <td><a href="https://aspire.dev/get-started/first-app/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>add Aspire to existing app</strong></td>
+                <td>Mevcut bir çözüme Aspire ekleme yolu</td>
+                <td><span class="tag">ORTA</span> Sıfırdan proje kurmadan denemek istersen bu sayfa</td>
+                <td><a href="https://aspire.dev/get-started/add-aspire-existing-app/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>hot reload &amp; watch (Aspire)</strong></td>
+                <td>Kod değişince servisleri yeniden başlatmadan güncelleme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://aspire.dev/app-host/hot-reload-and-watch/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire testing</strong></td>
+                <td>AppHost'u test içinden ayağa kaldırıp gerçek bağımlılıklara karşı entegrasyon testi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Mock test yazmaya alışık değilsen bu yol mock'suz test kurmanı sağlar; Moq/NSubstitute'a alışıksan bunu onların yerine değil yanına koy (birim test + entegrasyon testi). Ayrıntı: <a href="../06-test-ve-kalite/index.html">06 — Test</a></td>
+                <td><a href="https://aspire.dev/testing/overview/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>testing in CI (Aspire)</strong></td>
+                <td>Aspire testlerini CI hattında çalıştırma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CI/CD hattı kurmaya bu sayfa somut bir başlangıç verir</td>
+                <td><a href="https://aspire.dev/testing/testing-in-ci/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>aspire publish</strong></td>
+                <td>AppHost modelinden dağıtım artefaktı üretme (manifest, Compose, K8s)</td>
+                <td><span class="tag">ORTA</span> Eski adı <code>aspire manifest</code>; blog yazılarında o adı görebilirsin</td>
+                <td><a href="https://aspire.dev/deployment/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>deployment overview (Aspire)</strong></td>
+                <td>Aspire uygulamasını nereye ve nasıl deploy edeceğinin haritası</td>
+                <td><span class="tag">ORTA</span> Aspire kendisi production'da <em>çalışmaz</em>; modeli çıktıya çevirir</td>
+                <td><a href="https://aspire.dev/deployment/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>azd (Azure Developer CLI)</strong></td>
+                <td>Aspire çözümünü tek komutla Azure'a deploy eden araç</td>
+                <td><span class="tag">ORTA</span> <code>azd up</code>. Azure aboneliği ister; durumuna göre: ilk kez hesap açıyorsan ücretsiz hesap (sınırlı süreli başlangıç kredisi + bazı servislerde ücretsiz kota; kart doğrulaması ister); öğrenciysen Azure for Students (kartsız, okul e-postasıyla, sınırlı kredi); daha önce ücretsiz hesap açtıysan kredi yok &rarr; kullandıkça öde ve bütçe uyarısı (cost alert) kur; işveren üzerinden Visual Studio aboneliğin varsa aylık Azure kredisi. Azure kullanmak istemiyorsan <code>aspire publish</code> ile Docker Compose/Kubernetes çıktısı üretip başka sağlayıcıya veya kendi sunucuna dağıt. <span class="tag tag--warn">TEYİT</span> azure.microsoft.com/free</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire &rarr; Kubernetes</strong></td>
+                <td>AppHost modelinden Kubernetes manifest/Helm chart üretme</td>
+                <td><span class="tag tag--info">İLERİ</span> Önce Kubernetes'i ayrı öğren, sonra Aspire köprüsüne bak</td>
+                <td><a href="https://aspire.dev/deployment/kubernetes/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>deployment pipelines (Aspire)</strong></td>
+                <td>Aspire dağıtımını CI/CD hattına bağlama</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> GitHub Actions ve Azure DevOps ilanlarda sık istenir</td>
+                <td><a href="https://aspire.dev/deployment/pipelines/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire MCP server</strong></td>
+                <td>AI kodlama ajanlarının Aspire uygulamanı okuyup yönetmesini sağlayan MCP sunucusu</td>
+                <td><span class="tag tag--info">İLERİ</span> Çok yeni; mülakatta bilmen beklenmez ama "haberim var" demek iyi</td>
+                <td><a href="https://aspire.dev/get-started/aspire-mcp-server/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>dev containers / Codespaces</strong></td>
+                <td>Aspire'ı hazır konteyner geliştirme ortamında çalıştırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Codespaces'in ücretsiz kotası var, aşarsan <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://aspire.dev/get-started/github-codespaces/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>languages and runtimes (Aspire)</strong></td>
+                <td>Aspire'ın .NET dışı dilleri (Python, Go, Java, Node, Rust) orkestre etmesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Aspire'ın artık ".NET" öneki taşımamasının sebebi bu. Bkz. <a href="../../Java/index.html">Java</a>, <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a>, <a href="../../Rust/index.html">Rust</a></td>
+                <td><a href="https://aspire.dev/languages-and-runtimes/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeScript AppHost</strong></td>
+                <td>AppHost'u C# yerine TypeScript ile yazma seçeneği</td>
+                <td><span class="tag tag--info">İLERİ</span> Çok yeni. Bkz. <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript</a></td>
+                <td><a href="https://aspire.dev/app-host/typescript-apphost/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire troubleshooting</strong></td>
+                <td>Sık karşılaşılan hata ve çözümleri</td>
+                <td><span class="tag">ORTA</span> Port çakışması, container runtime hatası gibi ilk gün sorunları</td>
+                <td><a href="https://aspire.dev/get-started/troubleshooting/">aspire.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="aspire-vs-compose"><span class="h-num">§ 5</span>Aspire ile Docker Compose karşılaştırması</h2>
+
+        <p>Bu karşılaştırma mülakatta sorulabilecek türden bir şey. Kısa cevap: <strong>ikisi aynı problemin farklı
+        katmanlarını çözer.</strong> Compose bir <em>container orkestrasyonu</em> tarifidir; Aspire bir
+        <em>uygulama geliştirme modelidir</em> ve çıktısı olarak Compose dosyası da üretebilir.</p>
+
+        <div class="compare">
+          <div class="pane">
+            <p class="pane__title">Docker Compose</p>
+            <ul>
+              <li>Tarif YAML dosyasında; dil bağımsız.</li>
+              <li>Sadece container'ları bilir; projeni derlemez, F5 ile debug'a bağlamaz.</li>
+              <li>Connection string'i sen elle yazarsın.</li>
+              <li>Log/trace görüntüleme yoktur; ayrı araç kurarsın.</li>
+              <li>Her ekosistemde bilinir, öğrenmesi zorunludur.</li>
+            </ul>
+          </div>
+          <div class="pane">
+            <p class="pane__title">Aspire</p>
+            <ul>
+              <li>Tarif C# (veya TypeScript) kodunda; IntelliSense, tip güvenliği, refactor var.</li>
+              <li>Projeleri derler, doğrudan debugger'a bağlar.</li>
+              <li>Connection string'i ve service discovery'yi kendi enjekte eder.</li>
+              <li>Dashboard'da log, trace, metrik hazır gelir.</li>
+              <li>Sadece .NET ekosisteminde yaygın; Compose'un yerine değil üstüne geçer.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Karşılaştırma için aranacak kelimeler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Docker Compose</strong></td>
+                <td>Çok container'lı uygulamayı YAML ile tarif edip tek komutla ayağa kaldırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aspire öğrenecek olsan bile bunu bilmen gerekir</td>
+                <td><a href="https://docs.docker.com/compose/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>migrate from Docker Compose</strong></td>
+                <td>Mevcut compose dosyasını AppHost'a çevirme rehberi</td>
+                <td><span class="tag">ORTA</span> Kavramların birebir eşlemesini gösterir; en hızlı öğrenme yolu</td>
+                <td><a href="https://aspire.dev/app-host/migrate-from-docker-compose/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>docker-compose to AppHost reference</strong></td>
+                <td>Compose direktifi &rarr; Aspire API'si karşılık tablosu</td>
+                <td><span class="tag">ORTA</span> <code>depends_on</code>, <code>volumes</code>, <code>ports</code> karşılıkları</td>
+                <td><a href="https://aspire.dev/app-host/docker-compose-to-apphost-reference/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>WithDockerfile</strong></td>
+                <td>Kendi Dockerfile'ını Aspire kaynağı olarak kullanma</td>
+                <td><span class="tag">ORTA</span> Aspire entegrasyonu olmayan servisler için kaçış kapısı</td>
+                <td><a href="https://aspire.dev/app-host/withdockerfile/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Podman</strong></td>
+                <td>Docker Desktop'a daemon'suz, ücretsiz alternatif container motoru</td>
+                <td><span class="tag">ORTA</span> Aspire destekler. Docker Desktop yalnızca 250+ çalışanı <em>veya</em> 10 milyon USD üstü yıllık geliri olan şirkette ticari kullanımda ücretli abonelik ister (ayrıntı § 4 "prerequisites") <span class="tag tag--warn">TEYİT</span></td>
+                <td><a href="https://podman.io/docs">podman.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Testcontainers</strong></td>
+                <td>Test içinde container ayağa kaldıran kütüphane; Aspire testing'e alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET sürümü ücretsiz; Testcontainers Cloud <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://testcontainers.com/">testcontainers.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tye</strong></td>
+                <td>Aspire'ın atası sayılan, artık geliştirilmeyen Microsoft deneysel projesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski blog yazılarında karşına çıkar; yeni projede kullanma</td>
+                <td>github.com/dotnet/tye</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="net-surumleri"><span class="h-num">§ 6</span>.NET sürümleri, destek takvimi ve yükseltme</h2>
+
+        <p>İlanlarda sıkça ".NET 6+" ya da ".NET 8" gibi sürüm aralıkları geçer. Mülakatçı "hangi sürümde ne geldi" diye sorabilir; en azından
+        <strong>LTS/STS ayrımını</strong> ve <strong>hangi sürümün desteğinin bittiğini</strong> bilmelisin.
+        Kesin tarihleri aşağıdaki resmî destek politikası sayfasından doğrula — takvim değişebiliyor. 2026 itibarıyla bilinen durum:
+        STS sürümlerin destek süresi 24 aya çıkarıldı; bu yüzden <strong>.NET 8 (LTS) ve .NET 9 (STS) desteği aynı anda, Kasım 2026'da</strong> bitiyor;
+        .NET 10 (LTS) Kasım 2028'e kadar destekleniyor; .NET 11 (STS) Kasım 2026'da çıkması planlanıyor <span class="tag tag--warn">TEYİT</span> dotnet.microsoft.com/platform/support/policy.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Durumuna göre hangi .NET sürümü</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Yeni proje, özel bir kısıt yok</td><td>.NET 10 (güncel LTS)</td></tr>
+              <tr><td>Mevcut .NET 8 / .NET 9 projesi</td><td>Kasım 2026 destek sonundan önce .NET 10'a yükseltme planı: breaking changes listesi + .NET Upgrade Assistant</td></tr>
+              <tr><td>Hosting veya kurum belirli bir sürüme bağlı (paylaşımlı hosting, onaylı imaj)</td><td>Desteklenen en yeni sürümü seç; destek bitiş tarihini kontrol et</td></tr>
+              <tr><td>Yeni özelliğe ihtiyacın var, ekip sık yükseltmeye hazır</td><td>STS sürüm (.NET 11, çıktıktan sonra) seçilebilir</td></tr>
+              <tr><td>.NET Framework 4.8 projesinin bakımı</td><td>Framework'te kal (Windows ile birlikte destek alır) ya da porting rehberiyle kademeli geçiş</td></tr>
+              <tr><td>NuGet kütüphanesi yazıyorsun</td><td>Çoklu hedef: ör. <code>net8.0;net10.0</code>, eski tüketiciler gerekiyorsa <code>netstandard2.0</code></td></tr>
+              <tr><td>Unity / oyun geliştirme</td><td>Unity'nin desteklediği profil (.NET Standard 2.1) belirleyicidir; en yeni .NET sürümü doğrudan kullanılamaz</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sürüm ve destek kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>LTS (Long Term Support)</strong></td>
+                <td>Uzun destekli sürüm; çift numaralı .NET sürümleri (6, 8, 10)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kararlılık ve seyrek yükseltme isteyen projeler (çoğu kurumsal proje) LTS seçer; yeni özelliğe ihtiyacı olan ve sık yükseltebilen ekip STS de seçebilir. Destek süresini resmî sayfadan doğrula</td>
+                <td><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">dotnet.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>STS (Standard Term Support)</strong></td>
+                <td>Kısa destekli sürüm; tek numaralı .NET sürümleri (7, 9, 11)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski adı "Current". Destek süresi 18 aydan 24 aya çıkarıldı (.NET 9 dahil) <span class="tag tag--warn">TEYİT</span></td>
+                <td><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">dotnet.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET support policy</strong></td>
+                <td>Hangi sürümün ne zaman destek dışı kalacağının resmî takvimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tarih ezberleme, bu sayfayı yer imine ekle</td>
+                <td><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">dotnet.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET versions</strong></td>
+                <td>Sürüm numaralandırma mantığı ve SDK/runtime ilişkisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> "SDK 10.0.1xx" ile "runtime 10.0.x" farkını burada öğren</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/versions/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TFM (Target Framework Moniker)</strong></td>
+                <td><code>net8.0</code>, <code>net10.0</code>, <code>net10.0-windows</code> gibi hedef çatı etiketleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> "TFM" diye ara; "target framework" tek başına bulanık sonuç verir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/frameworks">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>global.json</strong></td>
+                <td>Projenin hangi SDK sürümüyle derleneceğini sabitleyen dosya</td>
+                <td><span class="tag">ORTA</span> "Makinemde çalışıyor" sorunlarını bitirir; CI'da kritik</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-json">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 6</strong></td>
+                <td>Minimal API'ler, hot reload, <code>DateOnly</code>/<code>TimeOnly</code>, LINQ eklemeleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Minimal API'nin doğduğu sürüm</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 7</strong></td>
+                <td>Native AOT (console), Regex source generator, <code>LibraryImport</code>, rate limiting</td>
+                <td><span class="tag">ORTA</span> Destek dışı bir sürüm ama getirdiği özellikler hâlâ kullanımda</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-7">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 8</strong></td>
+                <td>Keyed DI, <code>TimeProvider</code>, frozen collections, ASP.NET Core Native AOT, Blazor SSR</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sahada hâlâ çok yaygın LTS; desteği Kasım 2026'da bitiyor. Bu sürümdeki projede çalışıyorsan .NET 10'a yükseltme planı gerekir <span class="tag tag--warn">TEYİT</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 9</strong></td>
+                <td>HybridCache, yerleşik OpenAPI, <code>System.Threading.Lock</code>, LINQ <code>CountBy</code>/<code>Index</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> STS; 24 aylık destekle .NET 8 ile aynı tarihte (Kasım 2026) destek dışı kalıyor <span class="tag tag--warn">TEYİT</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 10</strong></td>
+                <td>Güncel LTS; performans, AOT ve dil özellikleri (extension members) toplu geldi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kısıtın yoksa yeni projede varsayılan tercih (Kasım 2028'e kadar destek <span class="tag tag--warn">TEYİT</span>); hosting/kurum kısıtı varsa yukarıdaki karar tablosuna bak</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET 11</strong></td>
+                <td>Bir sonraki STS sürüm; önizleme notları yayınlanıyor</td>
+                <td><span class="tag tag--info">İLERİ</span> Çıkış tarihini kendin doğrula, ezbere söyleme</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>breaking changes</strong></td>
+                <td>Sürüm yükseltmede kodu bozan davranış değişikliklerinin resmî listesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yükseltme yaparken <em>ilk</em> okunacak sayfa</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Upgrade Assistant</strong></td>
+                <td>Sürüm yükseltmeyi yarı otomatik yapan Visual Studio / CLI aracı</td>
+                <td><span class="tag">ORTA</span> Depo adı <code>dotnet/modernize-dotnet</code> olarak değişti</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/porting/upgrade-assistant-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>porting to .NET</strong></td>
+                <td>.NET Framework 4.x'ten .NET'e geçiş rehberi</td>
+                <td><span class="tag">ORTA</span> Türkiye'de hâlâ çok Framework projesi var; mülakatta sorulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/porting/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Framework 4.8</strong></td>
+                <td>Windows'a bağlı eski, kapalı hattaki .NET</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni özellik almaz. "Legacy sistem" ilanlarında karşına çıkar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/framework/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Standard</strong></td>
+                <td>Framework ile .NET Core arasında kütüphane paylaşımı için tanımlanmış API sözleşmesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kütüphanede <code>net8.0</code>/<code>net10.0</code> hedefle. Eski NuGet paketlerinde görürsün</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/net-standard">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>runtime configuration</strong></td>
+                <td><code>runtimeconfig.json</code> ile GC, thread pool, uyumluluk anahtarlarını ayarlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Performans ayarı yaparken lazım olur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Server GC / Workstation GC</strong></td>
+                <td>Çöp toplayıcının sunucu mu masaüstü moduna göre çalışacağı</td>
+                <td><span class="tag tag--info">İLERİ</span> Container'da bellek limiti ile birlikte aranır: "GC container memory limit"</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DATAS</strong></td>
+                <td>Dynamic Adaptation To Application Sizes — GC'nin belleği dinamik ayarlaması</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET 8'de geldi, 9'da varsayılan oldu. Container bellek tüketimini etkiler</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet/core release notes</strong></td>
+                <td>Her sürüm ve yamanın ham sürüm notları deposu</td>
+                <td><span class="tag">ORTA</span> Blog yazısından daha kesin bilgi; CVE'ler de burada</td>
+                <td><a href="https://github.com/dotnet/core/tree/main/release-notes">github.com/dotnet/core</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="native-aot"><span class="h-num">§ 7</span>Native AOT, trimming ve yayınlama biçimleri</h2>
+
+        <p>Bu bölüm performans ve mimari kurgu sorularına doğrudan değiyor. Ama dikkat:
+        Native AOT'nin en önemli tarafı ne yaptığı değil, <strong>neyi yapamadığıdır</strong> — reflection ve dinamik
+        kod üretimi kısıtları. Mülakatta "AOT'ye geçince EF Core / AutoMapper / Newtonsoft neden bozulur" sorusu
+        buradan gelir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Derleme ve yayınlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Native AOT</strong></td>
+                <td>Uygulamayı JIT'siz, doğrudan makine koduna derleyip tek dosya olarak yayınlama</td>
+                <td><span class="tag">ORTA</span> "AOT" tek başına Angular/Java sonuçları getirir; ".NET Native AOT" yaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>JIT (Just-In-Time)</strong></td>
+                <td>Varsayılan model: IL kodu çalışma anında makine koduna çevrilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> AOT'yi anlamak için önce JIT'i anlaman gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tiered compilation</strong></td>
+                <td>JIT'in önce hızlı, sonra optimize kod üretmesi; OSR ile birlikte çalışır</td>
+                <td><span class="tag tag--info">İLERİ</span> Benchmark ölçümlerinde "warmup" kavramının sebebi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dynamic PGO</strong></td>
+                <td>JIT'in çalışma anındaki profile bakarak kodu yeniden optimize etmesi</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET 8'de varsayılan oldu; AOT'de <em>yoktur</em>, bu bir AOT dezavantajıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AOT limitations</strong></td>
+                <td>Reflection, <code>Assembly.Load</code>, dinamik kod üretimi, bazı serileştiricilerin çalışmaması</td>
+                <td><span class="tag">ORTA</span> Aranacak terim: "Native AOT deployment limitations" veya "trimming incompatibilities"</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/incompatibilities">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trimming</strong></td>
+                <td>Kullanılmayan kodu yayında atarak boyut küçültme (IL trimming)</td>
+                <td><span class="tag">ORTA</span> AOT trimming'i zorunlu kılar; trimming AOT'siz de kullanılabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trimming options</strong></td>
+                <td><code>TrimMode</code>, <code>PublishTrimmed</code>, uyarıların açılması</td>
+                <td><span class="tag">ORTA</span> <code>SuppressTrimAnalysisWarnings</code> yapma; uyarılar gerçek hataları gösterir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trimming-options">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trim-safe library</strong></td>
+                <td>Kendi kütüphaneni trimming/AOT uyumlu yazma kuralları</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>[DynamicallyAccessedMembers]</code>, <code>[RequiresUnreferencedCode]</code> öznitelikleri</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/prepare-libraries-for-trimming">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReadyToRun (R2R)</strong></td>
+                <td>Kısmi ön derleme: IL yanında makine kodu da gömülür; başlangıcı hızlandırır</td>
+                <td><span class="tag">ORTA</span> AOT'nin "yumuşak" hali. Reflection kısıtı <em>yoktur</em>, bu yüzden çok daha kolay uygulanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/ready-to-run">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>single-file publish</strong></td>
+                <td>Tüm dosyaları tek yürütülebilir dosyada toplama</td>
+                <td><span class="tag">ORTA</span> "Tek dosya" demek "AOT" demek değildir; bunlar bağımsız seçeneklerdir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>self-contained deployment</strong></td>
+                <td>Runtime'ı uygulamayla birlikte paketleme; hedefte .NET kurulu olması gerekmez</td>
+                <td><span class="tag tag--ok">TEMEL</span> Karşıtı: framework-dependent deployment (FDD)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>framework-dependent deployment</strong></td>
+                <td>Hedef makinede kurulu .NET runtime'ını kullanma; en küçük çıktı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan mod. Docker imajı seçerken bu ayrım kritik</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RID (Runtime Identifier)</strong></td>
+                <td><code>win-x64</code>, <code>linux-x64</code>, <code>linux-musl-arm64</code> gibi hedef platform kodu</td>
+                <td><span class="tag">ORTA</span> AOT ve self-contained yayında zorunlu. "musl" Alpine Linux demektir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/rid-catalog">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet publish</strong></td>
+                <td>Yayın çıktısı üreten komut ve tüm bayrakları</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>-c Release -r linux-x64 --self-contained</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET Core Native AOT</strong></td>
+                <td>Web uygulamalarının AOT ile derlenmesi; destek bileşene ve sürüme göre değişir</td>
+                <td><span class="tag">ORTA</span> Bileşene göre: gRPC &rarr; tam desteklenir; Minimal API &rarr; desteklenir ama Microsoft tablosunda "kısmi" geçer (bazı özellikleri AOT'ta çalışmaz); SignalR &rarr; .NET 8'de desteklenmez, .NET 9+ kısmen (yalnızca JSON protokolü, strongly-typed hub gibi özellikler yok); MVC, Razor Pages, Blazor Server &rarr; desteklenmez. Bu sınırı bilmek mülakat sorusudur <span class="tag tag--warn">TEYİT</span> güncel uyumluluk tablosu için kaynağa bak</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/native-aot">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AOT diagnostics</strong></td>
+                <td>AOT uygulamada debug ve profil alma kısıtları</td>
+                <td><span class="tag tag--info">İLERİ</span> Üretimde AOT'ye geçmeden önce bu sayfayı oku</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/diagnostics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AOT interop</strong></td>
+                <td>Native kütüphanelerle çalışma; AOT'nin asıl güçlü olduğu alan</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>LibraryImport</code> ile birlikte öğrenilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>optimizing AOT size</strong></td>
+                <td>Çıktı boyutunu küçültme ayarları (invariant globalization, stack trace kapatma)</td>
+                <td><span class="tag tag--info">İLERİ</span> Türkçe kültür gerekiyorsa <code>InvariantGlobalization</code> açma — tarih/karakter bozulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/optimizing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BenchmarkDotNet</strong></td>
+                <td>Mikro ölçüm kütüphanesi; JIT/AOT karşılaştırması yaparken kullanılır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanlarda sık geçer. Kullanması kolay, bir gün ayır</td>
+                <td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-counters / dotnet-trace</strong></td>
+                <td>Çalışan uygulamadan canlı metrik ve trace toplayan CLI araçları</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, kurulumu tek komut. Bkz. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bulut-yerel"><span class="h-num">§ 8</span>Bulut yerel (cloud native) kavramlar</h2>
+
+        <p>Bu bölümdeki kavramların çoğu dil bağımsızdır — Java, Go, Node dünyasında da aynı isimle geçer. Ne kadar
+        derin bilmen gerektiği amacına bağlı: mimari/bulut odaklı bir role başvuruyorsan veya özgeçmişinde mimari yetkinlik
+        yazıyorsan bu terimlerle somut örnek verebilmelisin; genel backend rolü için her birini bir cümleyle tanıman yeterli;
+        öğrenme amacıyla okuyorsan bunları "ölçeklenen uygulama için gereken kavramlar" olarak oku.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cloud native temelleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>12-factor app</strong></td>
+                <td>Bulutta çalışacak uygulamalar için 12 maddelik tasarım ilkesi seti</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kısa bir metin, bir saatte okunur. Mülakatta ismi geçerse cevabın hazır olsun</td>
+                <td><a href="https://12factor.net/">12factor.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET cloud native rehberi</strong></td>
+                <td>Microsoft'un ücretsiz e-kitabı; mikroservis, container, dayanıklılık konularını toplar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz PDF; bu sayfadaki kelimelerin çoğunu anlatır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stateless service</strong></td>
+                <td>Sunucunun istekler arasında bellekte durum tutmaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yatay ölçeklemenin ön şartı; <code>MemoryCache</code>'in dağıtık ortamda neden yetmediğinin cevabı</td>
+                <td><a href="https://12factor.net/processes">12factor.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>konteynerleştirme (containerization)</strong></td>
+                <td>Uygulamayı bağımlılıklarıyla birlikte taşınabilir bir imaja paketleme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CI/CD hattı kurmanın ilk adımı Docker'dır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet publish /t:PublishContainer</strong></td>
+                <td>Dockerfile yazmadan doğrudan container imajı üretme (SDK yerleşik özelliği)</td>
+                <td><span class="tag">ORTA</span> Bunun varlığını bilmek Dockerfile öğrenme yükünü azaltır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/containers/sdk-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>chiseled containers</strong></td>
+                <td>Kabuk ve paket yöneticisi olmayan, minimal Ubuntu tabanlı .NET imajları</td>
+                <td><span class="tag tag--info">İLERİ</span> Güvenlik yüzeyini küçültür. "distroless" fikrinin Microsoft sürümü</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/container-images">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kubernetes</strong></td>
+                <td>Container orkestrasyon platformu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak ama yönetimli hizmetler (AKS/EKS/GKE) ücretlidir</td>
+                <td><a href="https://kubernetes.io/docs/home/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Helm</strong></td>
+                <td>Kubernetes manifest'lerini paketleyip şablonlaştıran araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. K8s öğrenmeden buna girme</td>
+                <td><a href="https://helm.sh/docs/">helm.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Container Apps</strong></td>
+                <td>Kubernetes'i doğrudan yönetmeden container çalıştırma servisi</td>
+                <td><span class="tag">ORTA</span> Kullandığın kadar öde; Aspire'ın <code>azd</code> ile ilk hedefi genelde burasıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/container-apps/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure App Service</strong></td>
+                <td>Yönetilen web uygulaması barındırma (PaaS)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz katmanı var; production planları ücretli</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>serverless / Azure Functions</strong></td>
+                <td>Sunucu yönetmeden, olay tetiklemeli fonksiyon çalıştırma</td>
+                <td><span class="tag">ORTA</span> "Isolated worker model" ile "in-process model" farkını ara; in-process artık kullanılmıyor</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cold start</strong></td>
+                <td>Serverless/container'ın ilk istekte geç yanıt vermesi</td>
+                <td><span class="tag">ORTA</span> Native AOT ve ReadyToRun'ın en güçlü kullanım gerekçesi</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>distributed cache</strong></td>
+                <td>Birden fazla sunucunun paylaştığı önbellek (<code>IDistributedCache</code>)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> MemoryCache ile farkı kesin sorulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>distributed session</strong></td>
+                <td>Oturum verisinin bellek yerine ortak bir depoda tutulması</td>
+                <td><span class="tag">ORTA</span> "Sticky session" kavramını da ara; ikisi rakip çözümdür</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>data protection keys</strong></td>
+                <td>Cookie/token şifreleme anahtarlarının sunucular arasında paylaşılması</td>
+                <td><span class="tag">ORTA</span> Ölçeklenen ASP.NET Core uygulamasında unutulursa "cookie geçersiz" hataları başlar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>health checks (ASP.NET Core)</strong></td>
+                <td><code>/health</code>, <code>/alive</code>, <code>/ready</code> uçları; liveness ve readiness ayrımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Liveness/readiness farkını mutlaka öğren</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>graceful shutdown</strong></td>
+                <td>Kapanma sinyali gelince süren istekleri bitirip temiz kapanma</td>
+                <td><span class="tag">ORTA</span> Aranacak terim: <code>IHostApplicationLifetime</code>, <code>ShutdownTimeout</code>, SIGTERM</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BackgroundService / IHostedService</strong></td>
+                <td>Uygulama ömrü boyunca çalışan arka plan işleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Paket gerektirmeyen yerleşik çözüm; ama ihtiyaca göre seç: basit periyodik/sürekli iş, kalıcılık gerekmez &rarr; BackgroundService + <code>PeriodicTimer</code>; yeniden başlatmada kaybolmaması, yeniden denenmesi, panelden izlenmesi gereken işler &rarr; Hangfire (veritabanı destekli); cron ifadeleri ve çok sunuculu (cluster) zamanlama &rarr; Quartz.NET; uygulama birden fazla örnek (instance) çalışıyorsa BackgroundService her örnekte ayrı çalışır &rarr; dağıtık kilit veya tek örnekli worker gerekir; zaten mesaj kuyruğu varsa &rarr; işi kuyruğa at, ayrı tüketici servis işlesin (<a href="../05-mesajlasma-ve-dagitik/index.html">05</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>configuration providers</strong></td>
+                <td>appsettings, env var, User Secrets, Key Vault'tan ayar okuma zinciri</td>
+                <td><span class="tag tag--ok">TEMEL</span> 12-factor'ın "config in environment" maddesinin .NET karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IOptions / IOptionsMonitor</strong></td>
+                <td>Ayarları tipli sınıflara bağlama ve değişince yeniden okuma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>IOptions</code>, <code>IOptionsSnapshot</code>, <code>IOptionsMonitor</code> üçü farklıdır; üçünü de ara</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options-library-authors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>resilience / Polly</strong></td>
+                <td>Retry, circuit breaker, timeout, bulkhead desenleri</td>
+                <td><span class="tag">ORTA</span> Artık <code>Microsoft.Extensions.Resilience</code> altında paketli geliyor; Aspire service defaults bunu otomatik ekler</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/resilience/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IHttpClientFactory</strong></td>
+                <td>HttpClient ömrünü doğru yöneten fabrika; socket exhaustion sorununu çözer</td>
+                <td><span class="tag tag--ok">TEMEL</span> "HttpClient using ile kullanılır mı" klasik mülakat sorusunun cevabı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/httpclient-factory">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry (.NET)</strong></td>
+                <td>Log, metrik, trace için satıcıdan bağımsız standart</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Serilog/Seq'ten geliyorsan: OTel bunun standart hale gelmiş üst kümesidir. Hiç log altyapısı kurmadıysan doğrudan <code>ILogger&lt;T&gt;</code> + OTel + Aspire dashboard ile başla</td>
+                <td><a href="https://opentelemetry.io/docs/languages/dotnet/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Terraform / Pulumi / Bicep</strong></td>
+                <td>Altyapıyı kod olarak tanımlama (IaC) araçları</td>
+                <td><span class="tag tag--info">İLERİ</span> Terraform lisansı BSL'e geçti (OpenTofu ücretsiz fork); Bicep ve Pulumi'nin ücretsiz kullanımı var</td>
+                <td><a href="https://developer.hashicorp.com/terraform/docs">terraform</a> &middot; <a href="https://www.pulumi.com/docs/">pulumi</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="net-yapay-zeka"><span class="h-num">§ 9</span>.NET'te yapay zeka</h2>
+
+        <p>Bu alan 2024'ten beri hızla oturdu. Değeri şu: <strong>Python/TensorFlow gibi yapay zeka araçları</strong>
+        ile <strong>.NET tarafı</strong> arasında köprü kurar. Mülakatta "AI ile bir şey yaptın mı" sorusu artık
+        standart hale geldi; buradaki 3-4 kelimeyi bilmek yeterli.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>.NET AI kütüphaneleri ve kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Microsoft.Extensions.AI</strong></td>
+                <td>Model sağlayıcıdan bağımsız <code>IChatClient</code> / <code>IEmbeddingGenerator</code> soyutlamaları</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te AI'ın "IDistributedCache"i. Bir tane öğreneceksen bu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/microsoft-extensions-ai">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET AI overview</strong></td>
+                <td>Microsoft'un .NET + AI için giriş sayfası ve öğrenme yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Başlangıç noktan burası olsun</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Semantic Kernel</strong></td>
+                <td>Ajan, planlayıcı, plugin ve bellek kavramları içeren üst seviye AI orkestrasyon SDK'sı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz/açık kaynak. Microsoft.Extensions.AI'dan <em>daha üst</em> katmandır, rakibi değil</td>
+                <td><a href="https://learn.microsoft.com/en-us/semantic-kernel/overview/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ML.NET</strong></td>
+                <td>.NET içinde klasik makine öğrenmesi (sınıflandırma, regresyon, öneri) çatısı</td>
+                <td><span class="tag">ORTA</span> LLM ile ilgisi yok; TensorFlow/scikit-learn'ün .NET karşılığıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/machine-learning/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ONNX Runtime</strong></td>
+                <td>Başka çatılarda (PyTorch, TensorFlow) eğitilmiş modelleri .NET'te çalıştırma motoru</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Python'da eğit, .NET'te çalıştır senaryosunun anahtarı</td>
+                <td><a href="https://onnxruntime.ai/docs/get-started/with-csharp.html">onnxruntime.ai</a></td>
+              </tr>
+              <tr>
+                <td><strong>embedding</strong></td>
+                <td>Metni anlamını temsil eden sayı vektörüne çevirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> RAG'ın temel taşı. "vector embedding" diye ara</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/conceptual/embeddings">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tokenization / token</strong></td>
+                <td>Metnin modelin işlediği parçalara bölünmesi; maliyet ve limit token ile ölçülür</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Context window" kavramıyla birlikte öğrenilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/conceptual/understanding-tokens">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RAG (Retrieval-Augmented Generation)</strong></td>
+                <td>Modele, kendi verinden bulunan ilgili parçaları ekleyerek cevap ürettirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kurumsal AI projelerinin %80'i bu. Kavramı anlatabilmen yeterli</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/conceptual/rag">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>vector store / vektör veritabanı</strong></td>
+                <td>Embedding'leri saklayıp benzerlik araması yapan veri deposu</td>
+                <td><span class="tag">ORTA</span> Ayrı ürün almak çoğu zaman şart değil; seçim mevcut veritabanına göre: PostgreSQL kullanıyorsan &rarr; pgvector; SQL Server / Azure SQL kullanıyorsan &rarr; yerleşik <code>vector</code> veri tipi ve vektör fonksiyonları (SQL Server 2025 / Azure SQL) <span class="tag tag--warn">TEYİT</span> learn.microsoft.com/sql/relational-databases/vectors; zaten Redis varsa &rarr; Redis vector search; MongoDB Atlas kullanıyorsan &rarr; Atlas Vector Search; çok büyük hacim, yüksek sorgu yükü veya gelişmiş filtreli arama &rarr; Qdrant, Milvus, Weaviate (yönetilen istersen Azure AI Search); prototip/küçük veri &rarr; bellek içi vektör deposu (Microsoft.Extensions.VectorData InMemory)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/vector-stores/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pgvector</strong></td>
+                <td>PostgreSQL'e vektör arama yeteneği ekleyen uzantı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Zaten PostgreSQL kullanıyorsan yeni bir veritabanı öğrenmeden RAG kurmanın en ucuz yolu; başka veritabanın varsa yukarıdaki satıra bak</td>
+                <td><a href="https://github.com/pgvector/pgvector">github.com/pgvector</a></td>
+              </tr>
+              <tr>
+                <td><strong>Qdrant</strong></td>
+                <td>Rust ile yazılmış, yaygın kullanılan vektör veritabanı</td>
+                <td><span class="tag tag--info">İLERİ</span> Self-host ücretsiz, bulut sürümü <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://qdrant.tech/documentation/">qdrant.tech</a></td>
+              </tr>
+              <tr>
+                <td><strong>Milvus / Weaviate</strong></td>
+                <td>Alternatif açık kaynak vektör veritabanları</td>
+                <td><span class="tag tag--info">İLERİ</span> Seçenek olsun diye listede; birini öğrenmen yeterli</td>
+                <td><a href="https://milvus.io/docs">milvus.io</a> &middot; <a href="https://docs.weaviate.io/weaviate">weaviate</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redis vector search</strong></td>
+                <td>Redis'i vektör deposu olarak kullanma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Redis'in önbellek dışındaki ikinci bir kullanım alanı</td>
+                <td><a href="https://redis.io/docs/latest/develop/interact/search-and-query/query/vector-search/">redis.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure AI Search</strong></td>
+                <td>Microsoft'un yönetilen arama + vektör servisi</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Sınırlı ücretsiz katmanı var; production ücretli</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/search/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ollama</strong></td>
+                <td>Yerel makinede açık ağırlıklı LLM çalıştırma aracı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz ve çevrimdışı; veri makineden çıkmadığı için kişisel veriyle denemede KVKK açısından en az riskli seçenek. Donanım ister: küçük modeller için yaklaşık 8 GB+ RAM, tercihen GPU <span class="tag tag--warn">TEYİT</span> ollama.com model sayfaları. Donanımın zayıfsa GitHub Models (ücretsiz kota, kart gerekmez) veya sağlayıcıların ücretsiz deneme kotaları</td>
+                <td><a href="https://ollama.com/">ollama.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenAI .NET SDK</strong></td>
+                <td>OpenAI API'sinin resmî .NET istemcisi</td>
+                <td><span class="tag">ORTA</span> Kullanım <span class="tag tag--warn">ÜCRETLİ</span> (token başına)</td>
+                <td><a href="https://github.com/openai/openai-dotnet">github.com/openai</a></td>
+              </tr>
+              <tr>
+                <td><strong>Anthropic Claude API</strong></td>
+                <td>Claude modellerinin API'si; resmî SDK'lar ve topluluk .NET paketleri var</td>
+                <td><span class="tag">ORTA</span> Kullanım <span class="tag tag--warn">ÜCRETLİ</span>. Microsoft.Extensions.AI üzerinden de bağlanabilir</td>
+                <td><a href="https://docs.claude.com/en/api/client-sdks">docs.claude.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure OpenAI</strong></td>
+                <td>OpenAI modellerinin Azure üzerinden, kurumsal uyumlulukla sunulması</td>
+                <td><span class="tag">ORTA</span> Kurumsal tercih nedeni: kurumsal sözleşme, veri işleme eki (DPA), "verin model eğitiminde kullanılmaz" taahhüdü ve AB veri sınırı seçeneği. "Veri Türkiye'de kalır" anlamına gelmez; Azure'un Türkiye'de bölgesi bulunmuyor <span class="tag tag--warn">TEYİT</span> azure.microsoft.com/explore/global-infrastructure. KVKK açısından dallar: modele kişisel veri gönderilmiyorsa yurt dışı aktarım hükümleri devreye girmez, seçim maliyet/kalite/sözleşmeye göre yapılır; kişisel veri yurt dışındaki bir sağlayıcıya gidiyorsa (Azure OpenAI dahil) KVKK md. 9 uygulanır (7499 sayılı Kanun'la 1 Haziran 2024'ten itibaren): yeterlilik kararı yoksa uygun güvence gerekir — Kurul'un standart sözleşmesi imzalanıp 5 iş günü içinde Kurum'a bildirilir ya da bağlayıcı şirket kuralları/taahhütname; yalnızca istisnai hallerde md. 9/6; sektörel yerellik şartı varsa (ör. bankacılıkta BDDK düzenlemeleri, kamu kurumları) yurt içi veri merkezi veya kurum içinde barındırılan açık ağırlıklı model (Ollama/vLLM) gerekebilir <span class="tag tag--warn">TEYİT</span> kvkk.gov.tr, bddk.org.tr</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Models</strong></td>
+                <td>GitHub üzerinden ücretsiz kotayla model deneme</td>
+                <td><span class="tag">ORTA</span> Kredi kartı vermeden AI kodu yazmanın yolu</td>
+                <td><a href="https://aspire.dev/integrations/ai/github-models/github-models-get-started/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MCP (Model Context Protocol)</strong></td>
+                <td>AI modellerinin dış araç ve verilere standart şekilde bağlanma protokolü</td>
+                <td><span class="tag tag--info">İLERİ</span> Resmî C# SDK'sı var. 2025-2026'nın en çok konuşulan konusu</td>
+                <td><a href="https://modelcontextprotocol.io/">modelcontextprotocol.io</a> &middot; <a href="https://github.com/modelcontextprotocol/csharp-sdk">C# SDK</a></td>
+              </tr>
+              <tr>
+                <td><strong>function calling / tool use</strong></td>
+                <td>Modelin geliştiricinin yazdığı C# metodunu çağırabilmesi</td>
+                <td><span class="tag">ORTA</span> Microsoft.Extensions.AI'da <code>AIFunction</code> olarak geçer</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/quickstarts/build-chat-app">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AI evaluation (.NET)</strong></td>
+                <td>Model cevaplarının kalitesini otomatik ölçen kütüphane</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>Microsoft.Extensions.AI.Evaluation</code>; AI için "unit test" karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/ai/evaluation/evaluate-ai-response">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Numerics.Tensors</strong></td>
+                <td>Vektör/tensör işlemleri için SIMD hızlandırmalı yerleşik API</td>
+                <td><span class="tag tag--info">İLERİ</span> Kosinüs benzerliğini elle hesaplayacaksan burada</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.numerics.tensors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>chunking</strong></td>
+                <td>Uzun belgeyi embedding öncesi anlamlı parçalara bölme</td>
+                <td><span class="tag">ORTA</span> RAG kalitesini en çok etkileyen adım; "text chunking strategies" diye ara</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>prompt engineering</strong></td>
+                <td>Model girdisini sonucu iyileştirecek şekilde yazma</td>
+                <td><span class="tag">ORTA</span> Resmî tek bir kaynağı yok; sağlayıcıların kendi rehberlerine bak</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="performans-source-generator"><span class="h-num">§ 10</span>Performans: source generator ve modern API'ler</h2>
+
+        <p>Performans odaklı bir role başvuruyorsan veya kod performansını yetkinlik olarak yazıyorsan bu bölümü derinlemesine bilmelisin;
+        genel backend rolü için terimleri tanıman, öğrenme amacıyla okuyorsan "performanslı uygulama için gereken araçlar" olarak okuman yeterli.
+        Ortak fikir şudur: <strong>çalışma anında reflection ile yapılan işi, derleme anında üretilen kodla değiştir.</strong>
+        Hem hızlanır hem Native AOT uyumlu olur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Source generator ve düşük seviye performans</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>source generator</strong></td>
+                <td>Derleme sırasında C# kodu üreten Roslyn bileşeni</td>
+                <td><span class="tag">ORTA</span> "C# source generator" diye ara; "code generator" farklı sonuçlar getirir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>incremental generator</strong></td>
+                <td>Source generator'ın performanslı, önerilen modern biçimi</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski <code>ISourceGenerator</code> arayüzü <span class="tag tag--warn">ESKİMİŞ</span>; <code>IIncrementalGenerator</code> kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Text.Json source generation</strong></td>
+                <td>JSON serileştirmeyi reflection yerine üretilmiş kodla yapma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>JsonSerializerContext</code>. AOT'de JSON çalışmasının şartı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Regex source generator</strong></td>
+                <td><code>[GeneratedRegex]</code> ile derleme anında regex motoru üretme</td>
+                <td><span class="tag">ORTA</span> <code>RegexOptions.Compiled</code>'ın AOT uyumlu, daha hızlı halefi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-source-generators">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LibraryImport</strong></td>
+                <td><code>[LibraryImport]</code> ile kaynak üretimli P/Invoke</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>[DllImport]</code>'un AOT uyumlu halefi; native kütüphane veya başka dillerle interop gerekiyorsa işine yarar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke-source-generation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LoggerMessage source generator</strong></td>
+                <td><code>[LoggerMessage]</code> ile tahsissiz, hızlı yapılandırılmış log</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Serilog kullanmadan da yapılandırılmış log yazmanın yolu budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging/source-generation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Options validation generator</strong></td>
+                <td>Ayar sınıflarının doğrulamasını derleme anında üretme</td>
+                <td><span class="tag tag--info">İLERİ</span> FluentValidation'a gerek kalmadan ayar doğrulama</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/syslib-diagnostics/source-generator-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>frozen collections</strong></td>
+                <td><code>FrozenDictionary</code>, <code>FrozenSet</code> — bir kez kurulan, sonra çok okunan koleksiyonlar</td>
+                <td><span class="tag">ORTA</span> "Immutable" ile karıştırma: frozen kurulumda yavaş, okumada çok hızlıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SearchValues</strong></td>
+                <td>Bir karakter/bayt kümesini önceden hazırlayıp çok hızlı arama yapma</td>
+                <td><span class="tag">ORTA</span> <code>IndexOfAny</code>'nin optimize hali; .NET 9'da string aramayı da destekledi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.searchvalues">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Span&lt;T&gt; / ReadOnlySpan&lt;T&gt;</strong></td>
+                <td>Bellek üzerinde kopyasız çalışma tipi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kopyasız bellek işlemenin, dolayısıyla performans çalışmasının en temel aracı. Bkz. <a href="../01-csharp-dili/index.html">01 — C# Dili</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.span-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArrayPool / MemoryPool</strong></td>
+                <td>Dizi ayırmayı azaltmak için havuzdan tampon kiralama</td>
+                <td><span class="tag tag--info">İLERİ</span> Geri vermeyi unutursan sızıntı olur; <code>try/finally</code> şart</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SIMD / Vector&lt;T&gt;</strong></td>
+                <td>Tek komutla çok veri işleyerek döngüleri hızlandırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Elle yazmadan önce ölç; çoğu zaman BCL zaten SIMD kullanıyor</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/simd">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>struct / ref struct</strong></td>
+                <td>Öbek (heap) yerine yığın (stack) üzerinde çalışan değer tipleri</td>
+                <td><span class="tag">ORTA</span> Yanlış kullanınca performans <em>düşer</em>; boyut ve kopyalama maliyetini araştır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic math</strong></td>
+                <td>Statik soyut arayüz üyeleriyle sayısal tipler üzerinde generic yazma</td>
+                <td><span class="tag tag--info">İLERİ</span> Generic kullanımının modern zirvesi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/generics/math">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>collection expressions</strong></td>
+                <td><code>[1, 2, 3]</code> sözdizimi; derleyici en verimli koleksiyonu seçer</td>
+                <td><span class="tag">ORTA</span> C# 12 ile geldi; <code>..</code> spread operatörünü de ara</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>allocation-free</strong></td>
+                <td>Sıcak yolda hiç heap ayırmama hedefi</td>
+                <td><span class="tag tag--info">İLERİ</span> BenchmarkDotNet'in <code>[MemoryDiagnoser]</code>'ı ile ölçülür</td>
+                <td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="modern-api"><span class="h-num">§ 11</span>Modern .NET API'leri ve olgunlaşan konular</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Son sürümlerle gelen ve artık standart sayılan API'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Minimal API</strong></td>
+                <td>Controller olmadan, doğrudan uç noktası tanımlama modeli</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlanlarda sık geçer. Artık "oyuncak" değil: filtreler, gruplar, validation, OpenAPI hepsi olgunlaştı</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>endpoint filters</strong></td>
+                <td>Minimal API için middleware benzeri, uç noktaya özel filtreleme</td>
+                <td><span class="tag">ORTA</span> MVC'deki action filter'ın Minimal API karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>route groups</strong></td>
+                <td><code>MapGroup()</code> ile uç noktaları ortak prefix ve politikada toplama</td>
+                <td><span class="tag">ORTA</span> Minimal API'nin "controller"a en yakın hali</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/route-handlers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypedResults</strong></td>
+                <td>Dönüş tipini derleme anında belli eden sonuç yardımcıları</td>
+                <td><span class="tag">ORTA</span> <code>Results</code> ile <code>TypedResults</code> farkını ara; OpenAPI dokümanını etkiler</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>yerleşik OpenAPI</strong></td>
+                <td><code>Microsoft.AspNetCore.OpenApi</code> ile OpenAPI dokümanının çerçeveden üretilmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> ÖNEMLİ: .NET 9'dan itibaren şablonlardan <strong>Swashbuckle çıkarıldı</strong>. Swagger bilen herkesin bu değişikliği bilmesi gerekir. Seçim: .NET 9+ yeni proje, yalnızca OpenAPI JSON gerekli &rarr; <code>Microsoft.AspNetCore.OpenApi</code>; etkileşimli arayüz de istiyorsan &rarr; yerleşik OpenAPI + Scalar veya yalnızca UI paketi (<code>Swashbuckle.AspNetCore.SwaggerUI</code>); .NET 8 veya daha eski hedef &rarr; Swashbuckle ya da NSwag (yerleşik paket .NET 9 ile geldi); C#/TypeScript istemci kodu üretmen gerekiyorsa &rarr; NSwag veya Kiota</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Swashbuckle</strong></td>
+                <td>Eski, en yaygın Swagger/OpenAPI paketi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Şablonlardan çıkarıldı ama hâlâ çalışır, bakımı sürüyor ve çok projede var <span class="tag tag--warn">TEYİT</span> github.com/domaindrivendev/Swashbuckle.AspNetCore. Mevcut Swashbuckle projesi çalışıyorsa zorunlu geçiş yok; .NET 9+ yeni projede yerleşik OpenAPI tercih edilir</td>
+                <td><a href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore">github</a></td>
+              </tr>
+              <tr>
+                <td><strong>NSwag</strong></td>
+                <td>OpenAPI dokümanından client kodu da üreten alternatif araç</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Swashbuckle'a alternatif olarak bilinmeli</td>
+                <td><a href="https://github.com/RicoSuter/NSwag">github</a></td>
+              </tr>
+              <tr>
+                <td><strong>Scalar / Swagger UI</strong></td>
+                <td>OpenAPI dokümanını görsel arayüzle sunma seçenekleri</td>
+                <td><span class="tag">ORTA</span> Yerleşik OpenAPI sadece JSON üretir; arayüzü ayrıca eklersin. Scalar ücretsiz ve popüler oldu</td>
+                <td><a href="https://github.com/scalar/scalar">github.com/scalar</a></td>
+              </tr>
+              <tr>
+                <td><strong>HybridCache</strong></td>
+                <td>Bellek + dağıtık önbelleği tek API'de birleştiren, stampede korumalı önbellek</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> HybridCache, MemoryCache + Redis'in doğru yapılmış hali — iki konuyu birden kapsar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cache stampede</strong></td>
+                <td>Önbellek boşalınca aynı anda yüzlerce isteğin veritabanına gitmesi</td>
+                <td><span class="tag">ORTA</span> HybridCache'in var oluş sebebi. Mülakatta iyi bir cevap konusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>keyed DI services</strong></td>
+                <td>Aynı arayüzün birden çok kaydını anahtarla ayırt etme</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET 8 ile geldi. Eskiden factory deseniyle çözülen problem artık yerleşik</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[FromKeyedServices]</strong></td>
+                <td>Keyed servisi controller/minimal API parametresine enjekte eden öznitelik</td>
+                <td><span class="tag">ORTA</span> Multi-tenant senaryolarda çok işe yarar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimeProvider</strong></td>
+                <td>Zamanı soyutlayan tip; <code>DateTime.Now</code>'ı test edilebilir hale getirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Bu tip, mock'suz zaman testinin yerleşik cevabı — <code>FakeTimeProvider</code> ile birlikte ara</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Threading.Lock</strong></td>
+                <td><code>lock</code> için özel, daha hızlı kilit tipi (.NET 9)</td>
+                <td><span class="tag">ORTA</span> <code>lock(object)</code> yerine <code>Lock</code> nesnesi. Derleyici uyarısı görürsen sebebi bu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>rate limiting (yerleşik)</strong></td>
+                <td>ASP.NET Core'un kendi hız sınırlama middleware'i</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> AspNetCoreRateLimit paketine gerek yok; .NET 7'den beri çerçevede</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>output caching</strong></td>
+                <td>Yanıtı sunucu tarafında önbelleğe alan yerleşik middleware</td>
+                <td><span class="tag">ORTA</span> "Response caching" istemci/proxy tarafıdır; ikisi farklıdır, mutlaka ayır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.Testing.Platform</strong></td>
+                <td>VSTest'in yerini alan yeni, hafif test çalıştırma platformu</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> xUnit v3 bu platformu kullanıyor; test dünyası değişiyor. Bkz. <a href="../06-test-ve-kalite/index.html">06 — Test</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-intro">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Central Package Management</strong></td>
+                <td><code>Directory.Packages.props</code> ile tüm çözümdeki paket sürümlerini tek yerden yönetme</td>
+                <td><span class="tag">ORTA</span> Çok projeli çözümlerde sürüm kaosunu bitirir</td>
+                <td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>NuGet lock file / audit</strong></td>
+                <td>Paket sürümlerini kilitleme ve güvenlik açığı taraması</td>
+                <td><span class="tag">ORTA</span> <code>NuGetAudit</code> .NET 8'den beri varsayılan açık; CI'da kırılma sebebi olabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet run app.cs</strong></td>
+                <td>Proje dosyası olmadan tek C# dosyası çalıştırma (.NET 10)</td>
+                <td><span class="tag">ORTA</span> Öğrenirken deneme yapmanın en hızlı yolu; script gibi kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10/overview">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="takip-kaynaklari"><span class="h-num">§ 12</span>Takip kaynakları</h2>
+
+        <p>Bu alan hızlı değişiyor. Aşağıdakileri düzenli takip edersen mülakattaki "son sürümde ne değişti"
+        sorularına kendiliğinden cevabın olur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Resmî kaynaklar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>.NET Blog</strong></td>
+                <td>Microsoft'un resmî .NET duyuru ve derinlemesine yazı bloğu</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Performance improvements in .NET X" yazı serisi yılın en değerli teknik metnidir</td>
+                <td><a href="https://devblogs.microsoft.com/dotnet/">devblogs.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>What's new in .NET</strong></td>
+                <td>Her sürümün özellik listesinin resmî derlemesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Blogdan daha derli toplu; mülakat öncesi hızlı tarama için ideal</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet/core release notes</strong></td>
+                <td>Sürüm ve yama notlarının ham deposu</td>
+                <td><span class="tag">ORTA</span> Güvenlik yamalarını buradan takip et</td>
+                <td><a href="https://github.com/dotnet/core/tree/main/release-notes">github.com/dotnet/core</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET download / support page</strong></td>
+                <td>Hangi sürümün desteklendiğini gösteren canlı liste</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tarih ezberleme, buraya bak</td>
+                <td><a href="https://dotnet.microsoft.com/en-us/download/dotnet">dotnet.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire what's new</strong></td>
+                <td>Aspire'ın kendi sürüm notları (13.x serisi)</td>
+                <td><span class="tag">ORTA</span> Aspire .NET'ten ayrı sürüm takvimiyle çıkıyor; ayrı takip et</td>
+                <td><a href="https://aspire.dev/whats-new/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Conf</strong></td>
+                <td>Her kasım yapılan ücretsiz çevrimiçi .NET konferansı</td>
+                <td><span class="tag">ORTA</span> Yeni LTS sürüm burada duyurulur; kayıtlar ücretsiz izlenir</td>
+                <td><a href="https://www.dotnetconf.net/">dotnetconf.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>breaking changes sayfası</strong></td>
+                <td>Sürüm yükseltme öncesi okunacak resmî liste</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet/runtime &amp; dotnet/aspnetcore</strong></td>
+                <td>Kaynak kodun kendisi; tasarım tartışmaları issue'larda döner</td>
+                <td><span class="tag tag--info">İLERİ</span> "Bu neden böyle çalışıyor" sorusunun en kesin cevabı</td>
+                <td><a href="https://github.com/dotnet/runtime">github.com/dotnet/runtime</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nick Chapsas</strong></td>
+                <td>.NET performans, yeni özellikler ve kütüphane karşılaştırmaları anlatan YouTube kanalı</td>
+                <td><span class="tag">ORTA</span> Kısa videolar; performans konularına en yakın kanal</td>
+                <td>YouTube</td>
+              </tr>
+              <tr>
+                <td><strong>Milan Jovanović</strong></td>
+                <td>Mimari, CQRS, Clean Architecture anlatan .NET kanalı ve bülteni</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CQRS ilk okumada zor kavranır; bu kanal o konuda en anlaşılır kaynaklardan</td>
+                <td>YouTube</td>
+              </tr>
+              <tr>
+                <td><strong>Aspire resmî örnekleri</strong></td>
+                <td>Çalışan örnek çözümler (eShop vb.)</td>
+                <td><span class="tag">ORTA</span> Kod okuyarak öğrenmenin en hızlı yolu</td>
+                <td><a href="https://aspire.dev/get-started/resources/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>eShop referans uygulaması</strong></td>
+                <td>Microsoft'un Aspire tabanlı, mikroservis mimarili örnek e-ticaret uygulaması</td>
+                <td><span class="tag tag--info">İLERİ</span> Redis, RabbitMQ, gRPC, CQRS — ilanlarda sık geçen bu teknolojilerin hepsi burada çalışır halde</td>
+                <td><a href="https://github.com/dotnet/eShop">github.com/dotnet/eShop</a></td>
+              </tr>
+              <tr>
+                <td><strong>Andrew Lock — .NET Escapades</strong></td>
+                <td>ASP.NET Core iç yapısını derinlemesine anlatan blog</td>
+                <td><span class="tag tag--info">İLERİ</span> Middleware ve DI'ın gerçekte nasıl çalıştığını öğreten kaynak</td>
+                <td>andrewlock.net</td>
+              </tr>
+              <tr>
+                <td><strong>Stephen Toub performans yazıları</strong></td>
+                <td>Her sürümde çıkan, çok uzun ve çok değerli performans yazı serisi</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET Blog'da yayınlanır. Bir oturuşta bitmez, bölüm bölüm oku</td>
+                <td><a href="https://devblogs.microsoft.com/dotnet/">devblogs.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>Aşağıdaki numaralı sıra <strong>iş arayan</strong> okur içindir: üstteki maddeler mülakatta sorulma olasılığı en yüksek olanlar; alttakiler
+        "haberim var" demenin yettiği konular. Durumun farklıysa sırayı şöyle uyarla:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Durumuna göre sırayı uyarlama</caption>
+            <thead><tr><th>Durum</th><th>Ne değişir</th></tr></thead>
+            <tbody>
+              <tr><td>İş arıyorsun</td><td>Aşağıdaki sıra olduğu gibi.</td></tr>
+              <tr><td>Redis/RabbitMQ'yu zaten kullandın</td><td>İlk iki adımı atla; doğrudan AppHost, service defaults, dashboard ve Aspire testing'e geç.</td></tr>
+              <tr><td>Mock testine (Moq/NSubstitute) alışıksın</td><td>TimeProvider ve Aspire testing'i mock'ların yerine değil yanına koy: birim test + entegrasyon testi ayrımı.</td></tr>
+              <tr><td>Serilog/Seq bilmiyorsun</td><td>OpenTelemetry'yi doğrudan <code>ILogger&lt;T&gt;</code> + Aspire dashboard üzerinden öğren; Serilog karşılaştırması sana gerekmez.</td></tr>
+              <tr><td>Bulut/DevOps rolü hedefliyorsun</td><td>§ 7 (yayınlama biçimleri) ve § 8 (cloud native) adımlarını öne al.</td></tr>
+              <tr><td>Yapay zeka odaklı proje yapıyorsun</td><td>§ 9 adımını öne al; vektör deposunu mevcut veritabanına göre seç.</td></tr>
+              <tr><td>Belirli bir projede çalışıyorsun / öğreniyorsun</td><td>Projenin kullandığı teknolojiden başla; "mülakatta sık" önceliği ikincil.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Redis'i Aspire ile çalıştır</span>
+            <p>İlanlarda en sık istenen dağıtık bileşenlerden biri. Aspire bir satırla Redis container'ı kaldırıp client'ı DI'a koyuyor;
+            Docker bilgisi gerekmiyor, yalnızca çalışan bir container ortamı (Docker Desktop/Podman) gerekiyor &mdash; kuramıyorsan
+            § 3'teki tabloya bak (Codespaces veya <code>AddConnectionString</code> ile dış Redis). Sonra <code>IDistributedCache</code> ve <code>HybridCache</code> ile
+            aynı işi yap, farkı gör.</p>
+            <span class="steps__meta">Hedef: Redis + IDistributedCache + HybridCache üçlüsünü anlatabilmek</span>
+          </li>
+          <li>
+            <span class="steps__title">RabbitMQ'yu Aspire ile çalıştır</span>
+            <p>Aynı yöntem. Yönetim paneli container'la birlikte geliyor; kuyruğa mesaj atıp tükettiğini gözünle
+            gör. Ardından <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma</a> sayfasındaki MassTransit
+            maddelerine geç.</p>
+            <span class="steps__meta">Hedef: producer/consumer, queue, exchange kelimelerini kendi kodunla eşleştirmek</span>
+          </li>
+          <li>
+            <span class="steps__title">Aspire'ın kendisini öğren: AppHost, service defaults, dashboard</span>
+            <p>Bu üçü Aspire'ın tamamı sayılır. Dashboard'da bir trace'i uçtan uca izlediğinde
+            OpenTelemetry'yi de öğrenmiş olursun. Serilog/Seq'ten geliyorsan bu onun standart hâle gelmiş modern karşılığıdır;
+            hiç log altyapısı kurmadıysan doğrudan <code>ILogger&lt;T&gt;</code> + dashboard ile başla.</p>
+            <span class="steps__meta">Hedef: 20 dakikalık bir demo kurup anlatabilmek</span>
+          </li>
+          <li>
+            <span class="steps__title">LTS/STS ayrımını ve hangi sürümde ne geldiğini öğren</span>
+            <p>Çalıştığın/hedeflediğin sürümün ve güncel LTS'in (.NET 10) önemli yeniliklerini sayabilmelisin.
+            Örnek: keyed DI, TimeProvider, frozen collections (8); HybridCache, yerleşik OpenAPI, Lock (9);
+            extension members, <code>dotnet run app.cs</code> (10). .NET 8/9 projesindeysen Kasım 2026 destek sonu
+            ve yükseltme planını da konuşabilmelisin (§ 6 karar tablosu).</p>
+            <span class="steps__meta">Hedef: destek takvimini ezbere değil, kaynağıyla bilmek</span>
+          </li>
+          <li>
+            <span class="steps__title">Yerleşik OpenAPI'nin şablonlarda Swashbuckle'ın yerini aldığını bil</span>
+            <p>Swagger/OpenAPI ilanlarda çok sık geçer. .NET 9'dan itibaren şablonlarda Swashbuckle yok. Bunu bilmemek
+            "güncel değil" izlenimi bırakır; bilmek ise tam tersini yapar. Hangisini kullanacağın hedef sürüme ve ihtiyaca bağlı:
+            .NET 9+ yeni projede yerleşik paket (+ arayüz için Scalar), .NET 8 ve öncesinde Swashbuckle/NSwag, istemci kodu
+            üretimi için NSwag/Kiota; çalışan Swashbuckle projesinde zorunlu geçiş yok (§ 11).</p>
+            <span class="steps__meta">Hedef: iki cümlelik net cevap</span>
+          </li>
+          <li>
+            <span class="steps__title">Native AOT'yi "ne yapamaz" tarafından öğren</span>
+            <p>Reflection kısıtı, trimming zorunluluğu, MVC/Razor Pages/Blazor Server desteğinin olmaması, SignalR'da yalnızca kısmi destek (.NET 9+). Performans odaklı bir role
+            başvuruyorsan bu konuda konuşabilmen beklenir; değilse "ne yapamaz" listesini bilmen yeterli. Bir konsol projesini AOT ile yayınla, boyut ve başlangıç süresini ölç.</p>
+            <span class="steps__meta">Hedef: JIT / ReadyToRun / Native AOT üçlüsünü ayırt etmek</span>
+          </li>
+          <li>
+            <span class="steps__title">Source generator ailesini tanı</span>
+            <p>System.Text.Json, Regex, LoggerMessage, LibraryImport. Hepsinin ortak fikri aynı: reflection yerine
+            derleme anında kod. Performans konusunda bilgi iddia ediyorsan bunun en somut kanıtı olur.</p>
+            <span class="steps__meta">Hedef: JsonSerializerContext ve [GeneratedRegex] kullanmış olmak</span>
+          </li>
+          <li>
+            <span class="steps__title">Cloud native sözlüğünü ezberle: stateless, health check, graceful shutdown</span>
+            <p>Bunlar dil bağımsız kavramlar. Mimari odaklı role başvuruyorsan bu kelimelerle somut örnek verebilmelisin;
+            genel backend rolünde her biri için bir cümle yeterli. 12-factor metnini bir kez baştan sona oku, bir saat sürer.</p>
+            <span class="steps__meta">Hedef: MemoryCache'in neden ölçeklenmediğini açıklayabilmek</span>
+          </li>
+          <li>
+            <span class="steps__title">TimeProvider ve Aspire testing ile mock'suz test yaz</span>
+            <p>Mock test yazmaya alışık değilsen bu iki araç, Moq öğrenmeden test yazmanın modern yolu;
+            Moq/NSubstitute'u da öğren ama önce bunlarla başla. Mock'lara zaten alışıksan bunları onların yerine değil
+            yanına koy: mock'lar birim testte, Aspire testing gerçek bağımlılıklı entegrasyon testinde.</p>
+            <span class="steps__meta">Hedef: en az bir entegrasyon testi çalıştırmış olmak</span>
+          </li>
+          <li>
+            <span class="steps__title">AI tarafında sadece 4 kelime: Microsoft.Extensions.AI, embedding, RAG, vektör deposu</span>
+            <p>Derinleşmene gerek yok (AI odaklı proje yapmıyorsan). Microsoft.Extensions.AI ile bir sohbet uygulaması yazman
+            bir akşamlık iş; sağlayıcıyı durumuna göre seç: makinen yeterliyse (yaklaşık 8 GB+ RAM, tercihen GPU) Ollama ile yerel model;
+            donanımın zayıfsa GitHub Models'ın ücretsiz kotası; kurumsal/üretim senaryosunda Azure OpenAI, OpenAI veya Anthropic API
+            (token başına ücretli; kişisel veri varsa KVKK md. 9); kişisel veriyle çalışacaksan yerel model en az riskli seçenek.
+            Kod dört durumda da aynı kalır, yalnızca <code>IChatClient</code> sağlayıcısı değişir.</p>
+            <span class="steps__meta">Hedef: çalışan bir örnek (Ollama veya GitHub Models ile fatura ödemeden)</span>
+          </li>
+          <li>
+            <span class="steps__title">Kubernetes, Dapr, Orleans, MCP — sadece ne olduğunu bil</span>
+            <p>Bu seviyede derinleşme beklenmiyor. Her biri için bir cümlelik tanımın olsun, o kadar.
+            "Denemedim ama ne olduğunu biliyorum" demek, uydurmaktan çok daha iyidir.</p>
+            <span class="steps__meta">Hedef: birer cümlelik tanım</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Mülakatta dikkat</p>
+          <p>Kural her durumda aynı: yaptığından fazlasını söyleme; kullanmadığın şeyi kullandım demek en hızlı
+          eleme sebebidir. Cümlen deneyimine göre değişir:</p>
+          <ul>
+            <li><strong>Üretimde kullandıysan</strong> &rarr; "kullandım" de ve somut ayrıntı ver: hangi problemi çözdü, ölçek neydi, hangi sorunla karşılaştın.</li>
+            <li><strong>Kendi ortamında kurup denediysen</strong> &rarr; <em>"Üretimde kullanmadım, kendi ortamımda kurup denedim, şu problemi
+            çözdüğünü biliyorum."</em> Bu sayfadaki adımları yaptıysan bu cümle doğru olur ve mülakatçı bunu takdir eder.</li>
+            <li><strong>Yalnızca okuduysan</strong> &rarr; <em>"Denemedim, ama şu problemi çözdüğünü biliyorum."</em></li>
+          </ul>
+        </div>
+
+        <p>Devam: <a href="../10-kutuphaneler/index.html">10 — Kütüphaneler</a> (paketlerin lisans ve ücret
+        durumları), <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a>
+        (Docker, GitHub Actions, OpenTelemetry ayrıntısı),
+        <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a> (EF Core, Dapper, migration),
+        <a href="../index.html">C# / .NET bölümünün ana sayfası</a> &middot;
+        <a href="../../index.html">Programlama ana sayfası</a> &middot;
+        <a href="../../../index.html">Kütüphane ana dizini</a>.</p>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../08-ui-blazor-mvc-maui/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Blazor, MVC ve MAUI</span></a>
+        <a class="next" href="../10-kutuphaneler/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Kütüphane Kataloğu</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

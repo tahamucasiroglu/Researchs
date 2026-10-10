@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript — JavaScript ve TypeScript Anahtar Listesi</title>
+<meta name="description" content="Sözdiziminden asenkron programlamaya, DOM'dan modüllere, prototip zincirinden modern ES özelliklerine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">JavaScript</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · JavaScript / TypeScript</span>
+      <span class="brand__name">JavaScript ve TypeScript Anahtar Listesi</span>
+      <span class="brand__sub">JS → TS → React → Araçlar</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">01</span><span>JavaScript</span></a></li>
+          <li><a class="nav-item" href="../02-typescript/index.html"><span class="nav-num">02</span><span>TypeScript</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kütüphane ve araçlar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-react/index.html"><span class="nav-num">03</span><span>React</span></a></li>
+          <li><a class="nav-item" href="../04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Sıralı bir yol haritası: React'a doğrudan atlamak yerine altındaki dili kurar. Anlatım yok, araştırma başlığı var. Ön koşul: HTML ve CSS bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 01 · Dil</div>
+        <h1 class="page-title">JavaScript: <em>sıfırdan</em> ileriye</h1>
+        <p class="lede">JavaScript'e sıfırdan başlayanlar için. Bu bölüm dilin tamamını kategorilere ayırıyor. Başka bir dilden (ör. C#) geliyorsan tanıdık ve yeni kavramlar ayrıca işaretli; hiç programlama bilmiyorsan o notları atlayabilirsin.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; ileri &middot; En uzun bölüm</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Burası anlatım sayfası değil, <strong>arama listesi</strong>. Her satır bir terim, yanında
+        "bu nedir" notu ve resmî doküman bağlantısı. Sen her terimi kendin araştıracak, kendi kaynağından okuyacak
+        ve kod yazacaksın. Bu sayfa sana ne öğreneceğini söyler, nasıl öğreneceğini değil.</p>
+
+        <p><span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti, iş ilanlarında ve mülakatlarda sık geçen konuları
+        işaretler: en az bir çalışan örnek yaz. JavaScript iş ilanlarında neredeyse her zaman istendiği için rozeti
+        her satıra basmak anlamsız olurdu; yalnızca <em>mülakatta gerçekten sorulan</em> klasik konulara basıldı. O rozeti
+        gördüğün yerde dur, o konuyu kod yazarak öğren, sadece okuyup geçme.</p>
+
+        <p>Diğer rozetler: <span class="tag tag--ok">TEMEL</span> olmazsa olmaz, önce bu.
+        <span class="tag">ORTA</span> sonra gelir. <span class="tag tag--info">İLERİ</span> derinleşme, acele etme.
+        <span class="tag tag--warn">ESKİMİŞ</span> hâlâ eski kodda karşına çıkar ama yeni projede kullanma.
+        <span class="tag tag--warn">ÜCRETLİ</span> lisans parası ister.</p>
+
+        <p><strong>Başlangıç noktana göre okuma.</strong> "Kısaca" sütunu her terimi kendi başına tanımlar; Not
+        sütununda <strong>"C#:"</strong> ile başlayan ekler yalnızca C#'tan gelenler içindir.</p>
+
+        <ul>
+          <li><strong>Hiç programlama bilmiyorsan</strong> &rarr; C# notlarını atla; "Kısaca" sütunu ve rozetler yeterli. Sırayı §&nbsp;13'teki özetten izle.</li>
+          <li><strong>C#'tan geliyorsan</strong> &rarr; avantajlısın, ama en büyük tuzak da bu: JavaScript C#'a <em>benziyor</em>, aynı şey değil. <code>this</code>, <code>==</code>, <code>var</code> ve tip sistemi farklı davranır. Benzerliğe güvenip geçme.</li>
+          <li><strong>Java'dan geliyorsan</strong> &rarr; C# notlarının çoğu senin için de geçerli: LINQ yerine Stream (Stream de tembeldir, JS dizileri değildir), <code>Task</code> yerine <code>CompletableFuture</code>, NuGet yerine Maven/Gradle düşün.</li>
+          <li><strong>Python'dan geliyorsan</strong> &rarr; dinamik tipleme ve truthy/falsy tanıdık; list comprehension'ın yerini <code>map</code>/<code>filter</code>, <code>asyncio</code>'nun yerini event loop + Promise, pip'in yerini npm alır. Asıl farklar <code>this</code>, <code>==</code> ve tip zorlamasıdır.</li>
+        </ul>
+
+        <p>Komşu sayfalar: işaretleme tarafı <a href="../../HTML-CSS/01-html/index.html">HTML</a>, görsel taraf
+        <a href="../../HTML-CSS/02-css/index.html">CSS</a>, JavaScript'in tipli hâli
+        <a href="../02-typescript/index.html">02 &mdash; TypeScript</a>, kütüphane tarafı
+        <a href="../03-react/index.html">03 &mdash; React</a>, derleyici/paketleyici/linter
+        <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a>.
+        Bu bölümün kendi girişi <a href="../index.html">JavaScript ve TypeScript genel bakış</a>.
+        Backend tarafındaki karşılıkları için <a href="../../CSharp-DotNet/index.html">.NET bölümü</a>;
+        aynı kavramların Java dünyasındaki adı için <a href="../../Java/index.html">Java bölümü</a>;
+        diğer diller için <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfaları;
+        kütüphanenin tamamının haritası için <a href="../../index.html">ana sayfa</a>.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>TypeScript öğrenmeye JavaScript'i atlayarak başlama. TypeScript derleme zamanında yok olur; çalışma
+          zamanında koşan şey bu sayfadaki JavaScript'tir. <code>this</code> tuzağı, event loop, prototip &mdash;
+          hepsi TypeScript'te de aynen geçerlidir.</p>
+        </div>
+
+        <h2 id="temeller"><span class="h-num">§ 1</span>Temeller &mdash; dil çekirdeği</h2>
+
+        <p>Bu bölüm mülakatın ilk 10 dakikası. <code>var/let/const</code>, <code>==</code> vs <code>===</code>,
+        hoisting ve <code>null</code>/<code>undefined</code> ayrımı neredeyse her JavaScript mülakatında sorulur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Değişkenler ve kapsam</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>var</strong></td>
+                <td>Eski değişken tanımı; fonksiyon kapsamlı, hoisting'e uğrar</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kodda kullanma; yerine <code>let</code>/<code>const</code>. C#: C#'taki <code>var</code> ile <em>hiç</em> alakası yok; orada tip çıkarımıdır, burada kapsam kuralıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>let</strong></td>
+                <td>Blok kapsamlı, yeniden atanabilir değişken</td>
+                <td><span class="tag tag--ok">TEMEL</span> Değeri sonradan değişecek değişkenler için. C#: normal yerel değişkene en yakın olan bu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>const</strong></td>
+                <td>Blok kapsamlı, yeniden <em>atanamaz</em> bağlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan tercih; bağlama sabittir ama nesnenin/dizinin içi değişebilir. C#: <code>const</code> değil, <code>readonly</code> gibi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hoisting</strong></td>
+                <td>Bildirimlerin kapsamın tepesine "kaldırılmış" gibi davranması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik mülakat sorusu. C#/Java'da karşılığı yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Hoisting">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TDZ (temporal dead zone)</strong></td>
+                <td><code>let</code>/<code>const</code>'un bildirimden önce erişilince hata vermesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada "JavaScript temporal dead zone" yaz; <code>let</code> dokümanının içinde anlatılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>scope (global / function / block)</strong></td>
+                <td>Bir ismin hangi kod parçasından görülebildiği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Üç kapsam türünün farkını örnekle çıkar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>lexical scope</strong></td>
+                <td>Kapsamın çalışma anına değil, kodun yazıldığı yere göre belirlenmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Closure'ı anlamanın ön koşulu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>strict mode ("use strict")</strong></td>
+                <td>Dilin gevşek davranışlarını kapatan katı kip</td>
+                <td><span class="tag tag--ok">TEMEL</span> ES modülleri ve <code>class</code> gövdesi zaten otomatik strict'tir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>globalThis</strong></td>
+                <td>Ortamdan bağımsız global nesne referansı</td>
+                <td><span class="tag">ORTA</span> Tarayıcıda <code>window</code>, Node'da <code>global</code>; ikisini birleştirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>garbage collection</strong></td>
+                <td>Erişilemeyen nesnelerin otomatik bellekten atılması</td>
+                <td><span class="tag">ORTA</span> Bellek yönetimini sen yapmazsın; referansı kalmayan nesne toplanır. JS'te nesil (generation) kavramını mülakatta sormazlar. C#/Java: kendi GC'leriyle aynı fikir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tipler, karşılaştırma ve dönüşüm</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>primitive vs object</strong></td>
+                <td>7 ilkel tip (string, number, bigint, boolean, undefined, symbol, null) ve geri kalan her şey nesne</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlkeller değerle kopyalanır ve değiştirilemez (immutable); nesneler referansla taşınır. C#: değer tipi / referans tipi ayrımına benzer ama aynı değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>number</strong></td>
+                <td>Tek sayı tipi; hepsi 64-bit kayan nokta (IEEE 754)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrı tam sayı ve ondalık tipi yok. Para hesabı yaparken <code>0.1+0.2</code> tuzağına dikkat: para biriminin en küçük birimiyle tam sayı tut (2 ondalıklı TRY/USD/EUR'da &times;100, JPY/KRW'de doğrudan, KWD/BHD/TND'de &times;1000; basamak sayısı ISO 4217'den), çok büyük veya çok hassas tutarlarda <code>BigInt</code> ya da decimal.js / big.js / dinero.js, gösterimde <code>Intl.NumberFormat</code>. C#: <code>int</code>/<code>long</code>/<code>decimal</code> yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>BigInt</strong></td>
+                <td>Keyfi büyüklükte tam sayı tipi (<code>123n</code>)</td>
+                <td><span class="tag">ORTA</span> <code>number</code> ile aynı ifadede karıştırılamaz, hata verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>string</strong></td>
+                <td>UTF-16 kod birimlerinden oluşan değiştirilemez metin</td>
+                <td><span class="tag tag--ok">TEMEL</span> Değiştirilemez; her metot yeni string döndürür. <code>length</code> karakter değil kod birimi sayar (emoji = 2). C#: aynı mantık</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>typeof</strong></td>
+                <td>Bir değerin tip adını string olarak veren operatör</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>typeof null === "object"</code> dilin meşhur bug'ıdır, mülakatta sorulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>truthy / falsy</strong></td>
+                <td>Boolean bağlamında doğru/yanlış sayılan değerler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Falsy olanları ezberle: <code>false, 0, -0, 0n, "", null, undefined, NaN</code>. C#/Java'da böyle bir kavram yok; Python'dan geliyorsan dikkat: boş dizi ve boş nesne JS'te <em>truthy</em></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>== vs ===</strong></td>
+                <td>Gevşek eşitlik (tip dönüştürür) ve katı eşitlik (dönüştürmez)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kural: her zaman <code>===</code> kullan. Tek istisna <code>x == null</code> (hem null hem undefined yakalar)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.is</strong></td>
+                <td>Üçüncü eşitlik türü; <code>NaN</code> ve <code>-0</code> için <code>===</code>'den farklı davranır</td>
+                <td><span class="tag">ORTA</span> React'in state karşılaştırması buna dayanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type coercion</strong></td>
+                <td>Operatörlerin değerleri otomatik tip dönüştürmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>"5" - 2 === 3</code> ama <code>"5" + 2 === "52"</code>. Statik tipli dillerde (C#, Java) böyle bir sürpriz yok; Python da burada hata verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NaN</strong></td>
+                <td>"Not a Number"; sayı olmayan sayısal sonuç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kendisine eşit değildir; <code>Number.isNaN()</code> ile kontrol et, global <code>isNaN()</code> ile değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>null</strong></td>
+                <td>Programcının bilerek "değer yok" dediği durum</td>
+                <td><span class="tag tag--ok">TEMEL</span> JS'te iki tane "yokluk" var (<code>null</code> ve <code>undefined</code>), farkı bil. C#/Java: tek <code>null</code>; Python: tek <code>None</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>undefined</strong></td>
+                <td>Hiç atanmamış / var olmayan özelliğin değeri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sen atamazsın, dil atar. Fonksiyondan dönen varsayılan değer de budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Number() / parseInt() / parseFloat()</strong></td>
+                <td>String'den sayıya açık dönüşüm yolları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Üçü farklı davranır: <code>parseInt("12px")</code> 12 verir, <code>Number("12px")</code> NaN verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Number.isInteger / isSafeInteger / MAX_SAFE_INTEGER</strong></td>
+                <td>Güvenli tam sayı aralığı kontrolleri</td>
+                <td><span class="tag">ORTA</span> Backend <code>long</code> ID gönderirse JS'te bozulabilir; API'de ID'yi string yollamanın sebebi budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sözdizimi kolaylıkları (modern JS'in günlük yazımı)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>template literal</strong></td>
+                <td>Ters tırnakla yazılan, <code>${}</code> ile değer gömülen string</td>
+                <td><span class="tag tag--ok">TEMEL</span> Değer gömmeyi ve çok satırlı yazmayı sağlar. C#: <code>$"..."</code>; Python: f-string</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tagged template</strong></td>
+                <td>Template literal'ı bir fonksiyona parça parça geçirme</td>
+                <td><span class="tag tag--info">İLERİ</span> styled-components ve SQL kütüphaneleri bunu kullanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>optional chaining (?.)</strong></td>
+                <td>Ara değer null/undefined ise hata vermeden undefined dönme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>?.()</code> ve <code>?.[]</code> biçimleri de var. C#: <code>?.</code> ile birebir aynı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>nullish coalescing (??)</strong></td>
+                <td>Sadece null/undefined ise sağdakini alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>||</code> ile karıştırma: <code>0 || 5</code> 5 verir, <code>0 ?? 5</code> 0 verir. C#: <code>??</code> ile aynı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>logical assignment (&amp;&amp;= ||= ??=)</strong></td>
+                <td>Koşullu atama kısayolları</td>
+                <td><span class="tag">ORTA</span> <code>a ??= b</code>: <code>a</code> null/undefined ise <code>b</code>'yi ata. C#: <code>??=</code> var, diğer ikisi yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_assignment">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>destructuring</strong></td>
+                <td>Dizi/nesneden değerleri tek satırda değişkenlere çıkarma</td>
+                <td><span class="tag tag--ok">TEMEL</span> React kodunun her satırında görürsün. C#: tuple deconstruction'a benzer; Python: unpacking</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>spread syntax (...)</strong></td>
+                <td>Diziyi/nesneyi tek tek elemanlarına açma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sığ kopya (shallow copy) üretir, derin kopya değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rest parameters (...)</strong></td>
+                <td>Kalan argümanları diziye toplama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Spread ile aynı üç noktadır, yeri farklıdır. C#: <code>params</code>; Java: varargs; Python: <code>*args</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>for...of</strong></td>
+                <td>Yinelenebilir (iterable) değerlerin üzerinde dolaşma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dizide, string'de, Map/Set'te değerleri sırayla verir; dizide <code>for...in</code> yerine bunu kullan. C#: <code>foreach</code>; Python: <code>for x in ...</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>for...in</strong></td>
+                <td>Nesnenin <em>anahtarları</em> üzerinde dolaşma</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Dizide kullanma; prototipten gelen anahtarları da getirir. <code>Object.keys()</code> tercih et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ternary (?:)</strong></td>
+                <td>Tek satırlık koşullu ifade</td>
+                <td><span class="tag tag--ok">TEMEL</span> JSX içinde <code>if</code> yazılamadığı için React'te çok kullanılır. C#/Java: aynı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>switch</strong></td>
+                <td>Çoklu dal seçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>break</code> yazmazsan alttaki case'e düşer (fallthrough), uyarı da almazsın; karşılaştırma <code>===</code> ile yapılır. C#: orada fallthrough derleme hatasıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>label / break label</strong></td>
+                <td>İç içe döngüden etiketle çıkma</td>
+                <td><span class="tag tag--info">İLERİ</span> Nadiren gerekir, kodda görürsen tanı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASI (automatic semicolon insertion)</strong></td>
+                <td>Motorun eksik noktalı virgülleri kendi eklemesi</td>
+                <td><span class="tag">ORTA</span> <code>return</code>'den sonra alt satıra geçmenin neden hata olduğunu buradan öğren</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fonksiyonlar"><span class="h-num">§ 2</span>Fonksiyonlar</h2>
+
+        <p>JavaScript'te fonksiyon birinci sınıf değerdir: değişkene atanır, parametre olarak geçer, döndürülür.
+        <code>this</code> ve closure bu bölümün iki kritik konusu; ikisi de mülakatta doğrudan sorulur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fonksiyon tanımlama ve çağırma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>function declaration</strong></td>
+                <td><code>function ad() {}</code> biçimi; tümüyle hoist edilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tanımdan önce çağrılabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>function expression</strong></td>
+                <td>Fonksiyonun bir değere atanması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Declaration'dan farkı hoisting davranışı; mülakat sorusu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>arrow function (=&gt;)</strong></td>
+                <td>Kısa fonksiyon sözdizimi; kendi <code>this</code>'i yoktur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kendi <code>this</code>'i yoktur, dış kapsamınkini kullanır; <code>arguments</code>'ı da yoktur, <code>new</code> ile çağrılamaz. C#: lambda'ya benzer <em>ama</em> <code>this</code> davranışı asıl farktır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>this</strong></td>
+                <td>Çağrı biçimine göre değişen bağlam nesnesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> JavaScript'in en kritik konusu: <code>this</code>'i fonksiyonu <em>nasıl çağırdığın</em> belirler. C#/Java: orada <code>this</code> hep örneği gösterir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>call / apply</strong></td>
+                <td>Fonksiyonu belirli bir <code>this</code> ile hemen çağırma</td>
+                <td><span class="tag">ORTA</span> Farkı sadece argüman geçme biçimi: <code>call</code> tek tek, <code>apply</code> dizi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>bind</strong></td>
+                <td><code>this</code>'i sabitlenmiş yeni bir fonksiyon üretme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski React sınıf bileşenlerinde her yerde görürsün. C#: delegate oluşturmaya benzer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>closure</strong></td>
+                <td>Fonksiyonun tanımlandığı kapsamı hatırlaması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> JS'te bilinçli bir tasarım aracıdır (sayaç, özel durum, React hook'ları). C#: lambda'nın dış değişkeni yakalaması ile aynı fikir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>IIFE</strong></td>
+                <td>Tanımlanır tanımlanmaz çağrılan fonksiyon</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Modül öncesi dönemde kapsam yalıtmak için kullanılırdı; eski kodda çok görürsün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>default parameters</strong></td>
+                <td>Parametreye varsayılan değer verme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan bir ifade de olabilir (her çağrıda yeniden hesaplanır). C#: benzer, ama orada yalnızca sabit değer olur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>arguments</strong></td>
+                <td>Klasik fonksiyonlarda tüm argümanları tutan dizi-benzeri nesne</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yerine rest parametre kullan; arrow function'da yoktur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>fonksiyon aşırı yükleme (overload) yok</strong></td>
+                <td>Aynı isimle farklı imzalı fonksiyon tanımlanamaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> İkincisi birincisini ezer; farklı argümanları tek fonksiyonda kontrol edersin. C#/Java'dan gelenin ilk şaşırdığı şey</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>higher-order function</strong></td>
+                <td>Fonksiyon alan veya fonksiyon döndüren fonksiyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>map</code>, <code>filter</code>, middleware, event handler &mdash; hepsi budur. MDN'de doğrudan sayfası yok, "first-class function" altında geçer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>callback</strong></td>
+                <td>Sonra çağrılmak üzere geçirilen fonksiyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dizi metotları, olay dinleyicileri ve eski asenkron kod bunun üzerine kurulu. C#: <code>Action</code>/<code>Func</code> parametresi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>currying</strong></td>
+                <td>Çok parametreli fonksiyonu tek parametreli zincire çevirme</td>
+                <td><span class="tag tag--info">İLERİ</span> MDN'de sayfası yok; aramada "JavaScript currying" yaz, "curry" tek başına yemek tarifi getirir</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>partial application</strong></td>
+                <td>Bazı argümanları önceden sabitleme</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>bind</code> ile yapılabilir; currying ile karıştırılır, aynı şey değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>recursion</strong></td>
+                <td>Fonksiyonun kendini çağırması</td>
+                <td><span class="tag">ORTA</span> JS'te tail call optimizasyonu pratikte yok; derin özyinelemede stack taşar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Recursion">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>pure function</strong></td>
+                <td>Aynı girdiye hep aynı çıktı, yan etkisiz fonksiyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in tüm zihniyeti buna dayanır. Terim MDN'de değil, fonksiyonel programlama literatüründe</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>memoization</strong></td>
+                <td>Hesaplanan sonucu saklayıp tekrar hesaplamama</td>
+                <td><span class="tag">ORTA</span> React'teki <code>useMemo</code>/<code>memo</code> bu fikrin uygulaması</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Memoization">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>debounce / throttle</strong></td>
+                <td>Sık tetiklenen olayı seyrekleştirme teknikleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arama kutusu ve scroll kodunda şart. İkisi farklı: debounce bekletir, throttle sınırlar</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>side effect</strong></td>
+                <td>Fonksiyonun dış dünyayı değiştirmesi (DOM, ağ, global)</td>
+                <td><span class="tag tag--ok">TEMEL</span> React <code>useEffect</code>'in "effect"i budur</td>
+                <td>&mdash;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nesneler-ve-prototip"><span class="h-num">§ 3</span>Nesneler, prototip ve class</h2>
+
+        <p>JavaScript'te <code>class</code> vardır ama altında klasik sınıf kalıtımı değil <strong>prototip zinciri</strong>
+        çalışır; <code>class</code> sadece sözdizimsel şekerdir. Okuma sırası geçmişine göre değişir:</p>
+
+        <ul>
+          <li><strong>Class tabanlı bir dilden</strong> (C#, Java) geliyorsan &rarr; en yanıltıcı bölüm budur; "class = sözdizimsel şeker" farkına, <code>this</code>'e ve interface olmamasına odaklan.</li>
+          <li><strong>Hiç OOP görmemişsen</strong> &rarr; önce nesne literal'i ve prototip zincirini, sonra <code>class</code>'ı öğren; React kodunda class'ı nadiren göreceğin için acele etme.</li>
+          <li><strong>Python'dan geliyorsan</strong> &rarr; class sözdizimi tanıdık gelir; <code>self</code> yerine örtük ve çağrıya göre değişen <code>this</code> asıl farktır.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Nesne temelleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>object literal</strong></td>
+                <td><code>{ ad: "x" }</code> ile doğrudan nesne yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sınıf tanımlamadan nesne üretmek JS'te normdur. C#: orada sınıfsız nesne (anonim tip dışında) üretemezsin</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>property shorthand</strong></td>
+                <td><code>{ ad }</code> yazınca <code>{ ad: ad }</code> anlamına gelmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>computed property name</strong></td>
+                <td><code>{ [degisken]: 1 }</code> ile anahtarı çalışma anında belirleme</td>
+                <td><span class="tag">ORTA</span> Form state güncellemelerinde çok kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>getter / setter (get, set)</strong></td>
+                <td>Özellik gibi görünen, arkada fonksiyon çalıştıran erişimciler</td>
+                <td><span class="tag">ORTA</span> Hesaplanan alan veya atamada doğrulama için. C#: property'nin karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.keys / values / entries</strong></td>
+                <td>Nesnenin anahtar, değer, çift listelerini dizi olarak alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Nesne üzerinde dolaşmanın doğru yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.assign</strong></td>
+                <td>Nesneleri birleştirme / sığ kopyalama</td>
+                <td><span class="tag">ORTA</span> Spread ile aynı işi yapar; spread daha okunaklı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.freeze</strong></td>
+                <td>Nesneyi değiştirilemez hâle getirme (sığ)</td>
+                <td><span class="tag">ORTA</span> Sadece bir seviye dondurur; iç nesneler hâlâ değişir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.create</strong></td>
+                <td>Prototipi doğrudan belirterek nesne üretme</td>
+                <td><span class="tag">ORTA</span> <code>Object.create(null)</code> prototipi olmayan saf sözlük üretir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.defineProperty</strong></td>
+                <td>Özelliğin yazılabilirlik/sayılabilirlik davranışını ayarlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Vue 2'nin reaktivitesi buna dayanıyordu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object.groupBy</strong></td>
+                <td>Diziyi bir anahtara göre gruplayıp nesne döndürme (ES2024)</td>
+                <td><span class="tag">ORTA</span> Eski tarayıcılarda yok, destek durumunu kontrol et. C#: LINQ <code>GroupBy</code>; Python: <code>itertools.groupby</code> benzeri</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>shallow copy vs deep copy</strong></td>
+                <td>Sığ kopya iç nesneleri paylaşır, derin kopya paylaşmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> Spread ve <code>Object.assign</code> sığdır; React'te en sık yapılan hatanın kaynağı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>structuredClone</strong></td>
+                <td>Yerleşik derin kopyalama fonksiyonu</td>
+                <td><span class="tag">ORTA</span> <code>JSON.parse(JSON.stringify())</code> hilesinin doğru yerine geçeni; ancak fonksiyonları kopyalayamaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>JSON.parse / JSON.stringify</strong></td>
+                <td>Metin ile nesne arasında dönüşüm</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>replacer</code>/<code>reviver</code> parametrelerini de öğren; <code>Date</code> metne döner, geri gelmez. C#: <code>System.Text.Json</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Proxy</strong></td>
+                <td>Nesne üzerindeki işlemleri araya girip yakalama</td>
+                <td><span class="tag tag--info">İLERİ</span> Vue 3'ün reaktivitesi budur. C#: <code>DispatchProxy</code>/interceptor benzeri</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reflect</strong></td>
+                <td>Nesne işlemlerinin fonksiyon hâlindeki karşılıkları</td>
+                <td><span class="tag tag--info">İLERİ</span> Genellikle Proxy ile birlikte, varsayılan davranışı çağırmak için kullanılır. C#: Reflection ile aynı şey <em>değildir</em>, çok daha dar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Prototip ve sınıflar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>prototype chain</strong></td>
+                <td>Nesnede bulunmayan özelliğin üst nesnede aranması zinciri</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> JavaScript'in kalıtım modeli: sabit bir sınıf hiyerarşisi değil, çalışma zamanında değişebilen canlı nesne zinciri</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>__proto__ vs prototype</strong></td>
+                <td>İlki nesnenin üst nesnesi, ikincisi kurucu fonksiyonun üreteceği nesnelerin şablonu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik kafa karışıklığı. <code>__proto__</code> yerine <code>Object.getPrototypeOf()</code> kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>constructor function + new</strong></td>
+                <td><code>class</code> öncesi nesne üretme biçimi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski kodda görürsün; <code>new</code>'in ne yaptığını anlamak için yine de öğren</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>class</strong></td>
+                <td>Prototip tabanlı nesne üretiminin okunaklı sözdizimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arkada prototip vardır, tip yoktur. C#/Java: class'a benzer görünür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>constructor</strong></td>
+                <td>Sınıfın kurucu metodu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bir sınıfta tek tane olabilir; aşırı yükleme yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>static</strong></td>
+                <td>Örneğe değil sınıfa ait üye</td>
+                <td><span class="tag">ORTA</span> Ayrıca <code>static</code> blok da var. C#: aynı kavram</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>private field (#ad)</strong></td>
+                <td>Gerçekten dışarıdan erişilemeyen alan</td>
+                <td><span class="tag">ORTA</span> Sözdizimi <code>#</code> ile başlar, anahtar kelime yok; çalışma zamanında da gerçekten gizlidir. C#: <code>private</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>extends</strong></td>
+                <td>Sınıftan türetme</td>
+                <td><span class="tag">ORTA</span> Tek kalıtım; kurucuda <code>super()</code> çağrısı zorunlu. C#: <code>:</code> ile aynı iş</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>super</strong></td>
+                <td>Üst sınıfın kurucusuna/metoduna erişim</td>
+                <td><span class="tag">ORTA</span> Türetilmiş sınıfta <code>this</code> kullanmadan önce <code>super()</code> çağırmak zorunludur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>instanceof</strong></td>
+                <td>Nesnenin prototip zincirinde bir kurucunun olup olmadığı</td>
+                <td><span class="tag">ORTA</span> Interface olmadığı için "şu şekle uyuyor mu" kontrolü yapamaz. C#: <code>is</code>'e benzer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>interface yok / duck typing</strong></td>
+                <td>Dilde arayüz kavramı yoktur; nesne gereken metodu taşıyorsa yeterlidir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arayüz istiyorsan <a href="../02-typescript/index.html">TypeScript</a>'e geçersin</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>mixin</strong></td>
+                <td>Davranışları nesneye kopyalayarak çoklu kalıtım taklidi</td>
+                <td><span class="tag tag--info">İLERİ</span> JS'te çoklu kalıtım yok; bunun yerine bu desen kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diziler-ve-koleksiyonlar"><span class="h-num">§ 4</span>Diziler ve koleksiyonlar</h2>
+
+        <p>JS dizi metotları hemen (eager) çalışır ve her adımda yeni dizi üretir. Bu bölümün zorluğu geçmişine göre değişir:</p>
+
+        <ul>
+          <li><strong>C#/LINQ biliyorsan</strong> &rarr; en kolay bölüm. Farkı bil: LINQ tembeldir (lazy), JS dizi metotları değildir.</li>
+          <li><strong>Java Stream biliyorsan</strong> &rarr; benzer; Stream de tembeldir, JS dizileri değildir.</li>
+          <li><strong>Python biliyorsan</strong> &rarr; <code>map</code>/<code>filter</code> ve list comprehension mantığı tanıdık.</li>
+          <li><strong>Fonksiyonel stil hiç görmediysen veya sıfırdan başlıyorsan</strong> &rarr; callback ve higher-order function kavramı oturmadan zor gelir; önce <a href="#fonksiyonlar">§&nbsp;2</a>'deki fonksiyonlar, sonra bu tablo.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dizi metotları (C# notları LINQ karşılıklarıdır)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>map</strong></td>
+                <td>Her elemanı dönüştürüp yeni dizi üretir</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'te liste render'ının standart yolu. C#: LINQ <code>Select</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>filter</strong></td>
+                <td>Koşulu sağlayanları yeni diziye alır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Asıl diziyi değiştirmez. C#: LINQ <code>Where</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>reduce</strong></td>
+                <td>Diziyi tek bir değere indirger</td>
+                <td><span class="tag tag--ok">TEMEL</span> Başlangıç değerini vermeyi unutma, boş dizide hata verir. C#: LINQ <code>Aggregate</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>forEach</strong></td>
+                <td>Her eleman için fonksiyon çalıştırır, değer döndürmez</td>
+                <td><span class="tag tag--ok">TEMEL</span> İçinden <code>break</code> edemezsin; <code>await</code> de beklemez. O durumda <code>for...of</code> kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>find / findIndex / findLast</strong></td>
+                <td>Koşulu sağlayan ilk (veya son) elemanı bulur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bulamazsa <code>undefined</code> döner. C#: LINQ <code>FirstOrDefault</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>some / every</strong></td>
+                <td>Herhangi biri / hepsi koşulu sağlıyor mu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>true</code>/<code>false</code> döner, ilk sonuçta durur. C#: LINQ <code>Any</code> ve <code>All</code>; Python: <code>any()</code>/<code>all()</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sort</strong></td>
+                <td>Diziyi <em>yerinde</em> sıralar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İki tuzak: orijinal diziyi bozar ve karşılaştırıcı vermezsen sayıları <em>string</em> gibi sıralar (10 &lt; 9 çıkar)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flat / flatMap</strong></td>
+                <td>İç içe dizileri düzleştirir</td>
+                <td><span class="tag">ORTA</span> <code>flatMap</code> önce dönüştürür, sonra bir seviye düzleştirir. C#: LINQ <code>SelectMany</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>includes / indexOf</strong></td>
+                <td>Eleman var mı / kaçıncı sırada</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>includes</code> <code>NaN</code>'ı bulur, <code>indexOf</code> bulamaz. C#: LINQ <code>Contains</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>at</strong></td>
+                <td>Negatif indeksle de eleman alma (<code>at(-1)</code> son eleman)</td>
+                <td><span class="tag">ORTA</span> <code>arr[arr.length - 1]</code> yazmaktan kurtarır. C#: <code>^1</code> indeksi; Python: <code>liste[-1]</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>slice vs splice</strong></td>
+                <td><code>slice</code> kopya çıkarır, <code>splice</code> orijinali değiştirir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İsimleri benziyor, davranışları zıt. Klasik mülakat sorusu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>push / pop / shift / unshift</strong></td>
+                <td>Sona/başa ekleme ve çıkarma; hepsi diziyi değiştirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> React state'inde bunları <em>kullanma</em>, yeni dizi üret</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>concat / join / reverse</strong></td>
+                <td>Birleştirme, metne çevirme, ters çevirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>reverse</code> yerinde çalışır, dikkat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>toSorted / toReversed / toSpliced / with</strong></td>
+                <td>Aynı işlerin orijinali bozmayan yeni sürümleri (ES2023)</td>
+                <td><span class="tag">ORTA</span> React ile çalışacaksan doğrudan bunları öğren, eskilerini değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Array.from / Array.of / Array.isArray</strong></td>
+                <td>Dizi üretme ve dizi mi diye kontrol etme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>Array.from(nodeList)</code> DOM sonuçlarını gerçek diziye çevirmenin yoludur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Array.fromAsync</strong></td>
+                <td>Asenkron yinelenebilirden dizi üretme (ES2024)</td>
+                <td><span class="tag tag--info">İLERİ</span> Tarayıcı desteğini kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sparse array / delete tuzağı</strong></td>
+                <td>Diziden <code>delete</code> ile eleman silince boşluk kalması</td>
+                <td><span class="tag">ORTA</span> Silmek için <code>splice</code> veya <code>filter</code> kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Diğer koleksiyonlar ve yineleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Set</strong></td>
+                <td>Tekrarsız değer kümesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Diziden tekrarları atmanın en kısa yolu: <code>[...new Set(dizi)]</code>. C#: <code>HashSet&lt;T&gt;</code>; Python: <code>set</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Map</strong></td>
+                <td>Her tipte anahtar kabul eden sözlük</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#: <code>Dictionary&lt;K,V&gt;</code>; Python: <code>dict</code>. Düz nesneden farkı: anahtar sırası korunur, <code>size</code> vardır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>WeakMap / WeakSet</strong></td>
+                <td>Anahtarı zayıf referansla tutan, GC'yi engellemeyen koleksiyonlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Bir nesneye ek veri iliştirip nesne silinince o verinin de toplanmasını sağlar. Üzerinde dolaşılamaz. C#: <code>ConditionalWeakTable</code> benzeri</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Symbol</strong></td>
+                <td>Benzersiz, çakışmayan özellik anahtarı tipi</td>
+                <td><span class="tag tag--info">İLERİ</span> C#/Java'da karşılığı yok. <code>Symbol.iterator</code> gibi "well-known symbol"lar dilin davranışını belirler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>iteration protocols (iterable / iterator)</strong></td>
+                <td>Bir nesnenin <code>for...of</code> ile dolaşılabilir olmasının kuralı</td>
+                <td><span class="tag">ORTA</span> <code>Symbol.iterator</code> metodu olan nesne iterable'dır; <code>next()</code> metodu olan nesne iterator'dır. C#: <code>IEnumerable</code>/<code>IEnumerator</code>; Python: <code>__iter__</code>/<code>__next__</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generator (function*, yield)</strong></td>
+                <td>Duraklatılıp devam ettirilebilen fonksiyon</td>
+                <td><span class="tag">ORTA</span> Değerleri istendikçe tek tek üretir; redux-saga bunun üzerine kuruludur. C#: <code>yield return</code>; Python: <code>yield</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Iterator helpers (map/filter/take)</strong></td>
+                <td>Yineleyiciler üzerinde tembel zincirleme (ES2025)</td>
+                <td><span class="tag tag--info">İLERİ</span> Dizi metotlarının aksine tembel çalışır; destek durumunu kontrol et. C#: LINQ'in tembelliğine en yakın şey</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypedArray / ArrayBuffer / DataView</strong></td>
+                <td>İkili veri üzerinde tipli görünümler</td>
+                <td><span class="tag tag--info">İLERİ</span> Dosya, WebGL, WebSocket binary trafiği için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Intl</strong></td>
+                <td>Tarih, sayı, para, sıralama için yerelleştirme API'si</td>
+                <td><span class="tag">ORTA</span> Türkçe tarih/para biçimlendirmesini elle yazma, bunu kullan (<code>tr-TR</code>)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Date</strong></td>
+                <td>Yerleşik tarih tipi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Tasarımı kötüdür (ay 0'dan başlar). Yeni projede Temporal veya date-fns / Day.js düşün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>RegExp</strong></td>
+                <td>Düzenli ifadeler</td>
+                <td><span class="tag">ORTA</span> Temel sözdizimi diller arasında ortak; başka bir dilde regex yazdıysan (ör. .NET, Java, Python) bilgin taşınır, named group ve lookbehind farklarına bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="asenkron"><span class="h-num">§ 5</span>Asenkron JavaScript ve event loop</h2>
+
+        <p><strong>JavaScript tek iş parçacıklıdır.</strong> Paralellik yok, sadece sıraya alma var. Event loop
+        neredeyse her frontend mülakatında sorulur. Geçmişine göre:</p>
+
+        <ul>
+          <li><strong>async/await bilen</strong> (C#, Python <code>asyncio</code>, Kotlin coroutine) &rarr; sözdizimi tanıdık gelecek ama altyapı bambaşka; event loop ve microtask/macrotask farkı yenidir.</li>
+          <li><strong>Hiç asenkron kod görmemiş</strong> &rarr; şu sırayla ilerle: callback &rarr; Promise &rarr; <code>async</code>/<code>await</code>. Doğrudan <code>async</code>/<code>await</code> ile başlarsan altındaki Promise'ı anlamadan kod yazarsın.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma modeli</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>event loop</strong></td>
+                <td>Kuyruktaki işleri tek tek çağrı yığınına alan döngü</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> MDN'de sayfanın adı "JavaScript execution model". Ayrıca "event loop" videolarını izle, tek okumayla oturmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>call stack</strong></td>
+                <td>Çalışan fonksiyon çağrılarının yığını</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Maximum call stack size exceeded" hatasının kaynağı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Call_stack">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>task queue (macrotask)</strong></td>
+                <td><code>setTimeout</code>, olaylar gibi işlerin beklediği kuyruk</td>
+                <td><span class="tag tag--ok">TEMEL</span> "macrotask" terimi spec'te geçmez, halk dilidir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>microtask queue</strong></td>
+                <td>Promise sürekliliklerinin beklediği, önceliği yüksek kuyruk</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Mülakatın klasiği: <code>setTimeout(…,0)</code> ile <code>Promise.resolve().then()</code> hangisi önce çalışır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>blocking / non-blocking</strong></td>
+                <td>Uzun süren senkron kodun tüm sayfayı dondurması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Uzun senkron kod yalnızca bir işi değil <em>tüm arayüzü</em> dondurur. C#/Java: orada yalnızca o thread'i bloklarsın</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>setTimeout / setInterval / clearInterval</strong></td>
+                <td>Gecikmeli ve tekrarlı çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Verdiğin süre <em>garanti değil</em>, "en erken" demektir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>queueMicrotask</strong></td>
+                <td>Mikro görev kuyruğuna doğrudan iş ekleme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>requestAnimationFrame</strong></td>
+                <td>Bir sonraki ekran çizimi öncesi çalışacak iş</td>
+                <td><span class="tag">ORTA</span> Animasyonu <code>setInterval</code> ile yapma, bunu kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>requestIdleCallback</strong></td>
+                <td>Tarayıcı boştayken düşük öncelikli iş çalıştırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Safari desteği sınırlı olabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Promise ve async/await</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>callback hell / pyramid of doom</strong></td>
+                <td>İç içe geçmiş callback'lerin okunmaz hâle gelmesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Promise'ın niçin çıktığını anlamak için bir örneğine bak, yeni kod yazma</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Promise</strong></td>
+                <td>Gelecekte tamamlanacak işin sonucunu temsil eden nesne</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Promise oluşturulduğu an çalışmaya başlar, "soğuk" (cold) Promise yoktur. C#: <code>Task</code>; Java: <code>CompletableFuture</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>pending / fulfilled / rejected</strong></td>
+                <td>Promise'ın üç durumu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Durum bir kez değişir, geri dönmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>then / catch / finally</strong></td>
+                <td>Promise zincirleme metotları</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>async/await</code> varken bile kütüphane kodunda karşına çıkar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise.all</strong></td>
+                <td>Hepsi bitene kadar bekler; biri hata verirse hemen reddeder</td>
+                <td><span class="tag tag--ok">TEMEL</span> Birbirinden bağımsız istekleri paralel beklemenin yolu; hepsinin sonucunu görmek istiyorsan <code>allSettled</code>. C#: <code>Task.WhenAll</code>; Python: <code>asyncio.gather</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise.allSettled</strong></td>
+                <td>Hepsini bekler, hata verse de sonuçları toplar</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Hepsi denensin, hangileri patladı göreyim" senaryosu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise.race</strong></td>
+                <td>İlk sonuçlanan (başarı veya hata) kazanır</td>
+                <td><span class="tag">ORTA</span> Timeout kurmak için kullanılır. C#: <code>Task.WhenAny</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise.any</strong></td>
+                <td>İlk <em>başarılı</em> olan kazanır; hepsi patlarsa AggregateError</td>
+                <td><span class="tag">ORTA</span> <code>race</code> ile karıştırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise.withResolvers</strong></td>
+                <td>resolve/reject fonksiyonlarını dışarı çıkaran kısayol (ES2024)</td>
+                <td><span class="tag tag--info">İLERİ</span> Callback tabanlı bir API'yi Promise'a çevirirken işe yarar. C#: <code>TaskCompletionSource</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>async / await</strong></td>
+                <td>Promise'ı senkron görünümlü yazma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>await</code> yalnızca o fonksiyonu bekletir, iş parçacığını kilitlemez; hatayı <code>try/catch</code> ile yakala. C#: aynı sözdizimi; <code>ConfigureAwait</code> yok, deadlock yok, <code>.Result</code> gibi bir kaçış da yok</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>async fonksiyon hep Promise döner</strong></td>
+                <td><code>async</code> işaretli fonksiyonun dönüş tipi daima Promise'tır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>return 5</code> yazsan bile çağıran taraf <code>Promise</code> alır. C#: <code>async Task&lt;T&gt;</code> mantığı; <code>async void</code> karşılığı yoktur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>unhandled rejection</strong></td>
+                <td>Yakalanmamış Promise hatası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sessizce kaybolur; Node'da süreci öldürür. <code>unhandledrejection</code> olayını dinle</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>top-level await</strong></td>
+                <td>Modül gövdesinde fonksiyon içine girmeden <code>await</code></td>
+                <td><span class="tag">ORTA</span> Sadece ES modüllerinde çalışır, CommonJS'te çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>for await...of</strong></td>
+                <td>Asenkron yinelenebilirler üzerinde dolaşma</td>
+                <td><span class="tag tag--info">İLERİ</span> Akış (stream) halinde gelen veriyi parça parça işlemek için. C#: <code>await foreach</code>; Python: <code>async for</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>AbortController / AbortSignal</strong></td>
+                <td>Devam eden isteği iptal etme mekanizması</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>fetch</code> ve event listener'lar destekler; React'ta bileşen kaldırılınca isteği iptal etmek için kullanılır. C#: <code>CancellationToken</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>race condition</strong></td>
+                <td>Sonucu geç dönen eski isteğin yenisini ezmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arama kutusu yazan her uygulamanın klasik hatası; çözümü AbortController</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Web Worker</strong></td>
+                <td>Ayrı iş parçacığında JS çalıştırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Bellek paylaşmaz, sadece mesajlaşır (<code>postMessage</code>). C#/Java: klasik thread'e benzemez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>postMessage / structured clone algorithm</strong></td>
+                <td>Worker ve iframe arası veri geçişi</td>
+                <td><span class="tag tag--info">İLERİ</span> Fonksiyon ve DOM nesnesi geçirilemez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dom"><span class="h-num">§ 6</span>DOM &mdash; sayfayı JavaScript ile değiştirme</h2>
+
+        <p>DOM, HTML'in bellekteki nesne hâli. <a href="../../HTML-CSS/01-html/index.html">HTML</a> sayfasındaki etiketlerin
+        her biri burada bir nesnedir. React kullanacak olsan bile DOM'u bilmen gerekir; React'in yaptığı iş budur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Seçme ve değiştirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>document</strong></td>
+                <td>Sayfanın kök nesnesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her DOM işinin başlangıç noktası</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>querySelector / querySelectorAll</strong></td>
+                <td>CSS seçicisiyle eleman bulma</td>
+                <td><span class="tag tag--ok">TEMEL</span> CSS seçicilerini bildiğin ölçüde işe yarar &mdash; bkz. <a href="../../HTML-CSS/02-css/index.html">CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>getElementById / getElementsByClassName</strong></td>
+                <td>Eski seçim yöntemleri</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> <code>getElementsBy*</code> canlı (live) koleksiyon döner; <code>querySelectorAll</code> statik. Fark mülakatta sorulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NodeList vs HTMLCollection</strong></td>
+                <td>İki farklı eleman koleksiyonu tipi</td>
+                <td><span class="tag">ORTA</span> İkisi de gerçek dizi değildir; <code>map</code> çalışmaz, önce <code>Array.from</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>createElement / append / appendChild / remove</strong></td>
+                <td>Eleman üretme, ekleme, silme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>append</code> metin de kabul eder ve çoklu eleman alır; <code>appendChild</code> almaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>innerHTML</strong></td>
+                <td>Elemanın içeriğini HTML olarak yazma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kullanıcı verisini buraya koymak doğrudan <a href="#guvenlik">XSS</a> açığıdır. Mülakatta sorulur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>textContent</strong></td>
+                <td>İçeriği düz metin olarak yazma/okuma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Güvenli olan bu. <code>innerText</code> ile de karıştırma: o CSS'e bakar, yavaştır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>setHTML / Sanitizer API</strong></td>
+                <td>HTML'i temizleyerek yazan yeni API</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni; tarayıcı desteğini kontrol et, şimdilik DOMPurify daha güvenli tercih</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>classList</strong></td>
+                <td>Sınıf ekleme/çıkarma/değiştirme (<code>add, remove, toggle, contains</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>className</code> ile string oynamaktan çok daha temiz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dataset (data-* öznitelikleri)</strong></td>
+                <td>Elemana özel veri saklama</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>data-user-id</code> &rarr; <code>el.dataset.userId</code> (camelCase'e döner)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>setAttribute / getAttribute</strong></td>
+                <td>Öznitelik okuma/yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Öznitelik (attribute) ile özellik (property) farkını öğren; <code>value</code> ikisinde farklı davranır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>style (inline stil)</strong></td>
+                <td>JS ile doğrudan CSS özelliği yazma</td>
+                <td><span class="tag">ORTA</span> Tercih etme; sınıf değiştir. CSS özelliği camelCase olur (<code>backgroundColor</code>)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>getComputedStyle</strong></td>
+                <td>Elemanın gerçekte uygulanan stilini okuma</td>
+                <td><span class="tag">ORTA</span> <code>el.style</code> sadece inline stili gösterir, hesaplananı değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>getBoundingClientRect</strong></td>
+                <td>Elemanın ekrandaki konum ve boyutu</td>
+                <td><span class="tag">ORTA</span> Sık çağırmak layout yeniden hesabı (reflow) tetikler, yavaşlatır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DocumentFragment</strong></td>
+                <td>Bellekte hazırlanıp tek seferde DOM'a eklenen kap</td>
+                <td><span class="tag">ORTA</span> Çok sayıda eleman eklerken performans için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>reflow / repaint</strong></td>
+                <td>Tarayıcının yerleşimi yeniden hesaplaması ve çizmesi</td>
+                <td><span class="tag tag--info">İLERİ</span> DOM performansının temel konusu; "layout thrashing" terimini de ara</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>DOMContentLoaded vs load</strong></td>
+                <td>DOM hazır olması ile tüm kaynakların yüklenmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Script'i <code>defer</code> ile yüklüyorsan çoğu zaman ikisine de gerek kalmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shadow DOM / Web Components</strong></td>
+                <td>Yalıtılmış DOM ağacı ve özel elemanlar</td>
+                <td><span class="tag tag--info">İLERİ</span> React alternatifi değil, tarayıcı standardı. Stil yalıtımı sağlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Olaylar (events)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>addEventListener / removeEventListener</strong></td>
+                <td>Olay dinleyicisi ekleme ve kaldırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kaldırmak için <em>aynı fonksiyon referansını</em> vermelisin; anonim fonksiyon kaldırılamaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event bubbling</strong></td>
+                <td>Olayın hedeften köke doğru yükselmesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik mülakat sorusu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event capturing</strong></td>
+                <td>Olayın kökten hedefe inen ilk aşaması</td>
+                <td><span class="tag">ORTA</span> <code>addEventListener</code>'ın üçüncü parametresiyle açılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event delegation</strong></td>
+                <td>Tek bir üst elemana dinleyici koyup alt elemanları yönetme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dinamik listelerde standart desen; <code>event.target</code> ile kimin tıkladığını bulursun</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event.target vs currentTarget</strong></td>
+                <td>Olayı çıkaran eleman ile dinleyicinin bağlı olduğu eleman</td>
+                <td><span class="tag tag--ok">TEMEL</span> Delegation'da en sık yapılan hatanın kaynağı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>preventDefault</strong></td>
+                <td>Tarayıcının varsayılan davranışını iptal etme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Form gönderimini ve link gezinmesini durdurmanın yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>stopPropagation / stopImmediatePropagation</strong></td>
+                <td>Olayın yukarı çıkmasını durdurma</td>
+                <td><span class="tag">ORTA</span> <code>preventDefault</code> ile karıştırma; ikisi tamamen farklı iş yapar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CustomEvent / dispatchEvent</strong></td>
+                <td>Kendi olayını üretip yayınlama</td>
+                <td><span class="tag">ORTA</span> Bileşenler arası gevşek bağlı iletişim için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>passive / once / signal seçenekleri</strong></td>
+                <td>Dinleyici davranış ayarları</td>
+                <td><span class="tag">ORTA</span> <code>{ once: true }</code> tek seferlik, <code>{ signal }</code> AbortController ile toplu kaldırma sağlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>MutationObserver</strong></td>
+                <td>DOM'daki değişiklikleri izleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Üçüncü parti script'lerin sayfayı değiştirmesini izlemek için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>IntersectionObserver</strong></td>
+                <td>Elemanın görünür alana girip çıkmasını izleme</td>
+                <td><span class="tag">ORTA</span> Sonsuz kaydırma ve lazy loading'in doğru yolu; scroll dinlemekten çok daha ucuz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ResizeObserver</strong></td>
+                <td>Eleman boyutu değişimini izleme</td>
+                <td><span class="tag">ORTA</span> <code>window.resize</code>'dan farkı: tek elemanı izler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tarayici-apileri"><span class="h-num">§ 7</span>Tarayıcı API'leri</h2>
+
+        <p>Bunlar JavaScript dilinin parçası değil, tarayıcının sunduğu servisler. Node.js'te çoğu yoktur;
+        bu ayrımı bilmek mülakatta işine yarar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Depolama ve durum</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>localStorage</strong></td>
+                <td>Tarayıcıda kalıcı anahtar-değer deposu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Senkron çalışır, sadece string tutar, ~5 MB sınırlıdır. <strong>JWT'yi burada tutma</strong> (XSS ile çalınır)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sessionStorage</strong></td>
+                <td>Sekme kapanınca silinen depo</td>
+                <td><span class="tag tag--ok">TEMEL</span> API'si localStorage ile aynı, ömrü farklı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>cookie / HttpOnly / SameSite</strong></td>
+                <td>Sunucuya otomatik giden küçük veri</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>HttpOnly</code> çerezi JS okuyamaz &mdash; token saklamanın güvenli yolu budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>IndexedDB</strong></td>
+                <td>Tarayıcıda asenkron, yapısal, büyük veri tabanı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ham API'si çok zahmetlidir; pratikte Dexie.js veya idb sarmalayıcısı kullanılır (ikisi de ücretsiz)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>History API (pushState, popstate)</strong></td>
+                <td>Sayfa yenilemeden URL değiştirme</td>
+                <td><span class="tag">ORTA</span> React Router gibi client-side router'ların altındaki mekanizma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>URL / URLSearchParams</strong></td>
+                <td>URL ve sorgu parametrelerini ayrıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Query string'i elle <code>split</code> ile parçalama, bunu kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ağ, dosya ve cihaz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>fetch</strong></td>
+                <td>Modern HTTP istemcisi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Tarayıcının yerleşik HTTP istemcisi. C#: <code>HttpClient</code>; Python: <code>requests</code>. Tuzak: 404/500'de hata <em>fırlatmaz</em>, <code>response.ok</code>'u kendin kontrol edersin</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Response / Request / Headers</strong></td>
+                <td>Fetch'in veri tipleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Gövde tek kez okunur; <code>json()</code> çağırdıktan sonra <code>text()</code> çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Response">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CORS</strong></td>
+                <td>Farklı kaynağa istek atmanın tarayıcı kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Frontend'ci sanır ki kendi hatası; çözüm <em>sunucu tarafındadır</em>. ASP.NET Core &rarr; <code>AddCors</code>; Express &rarr; <code>cors</code>, NestJS &rarr; <code>enableCors()</code>; Spring &rarr; <code>@CrossOrigin</code>; Django &rarr; <code>django-cors-headers</code>, FastAPI &rarr; <code>CORSMiddleware</code>; Laravel &rarr; <code>config/cors.php</code>. Kontrol etmediğin üçüncü taraf API &rarr; kendi sunucunda proxy/BFF; geliştirmede Vite proxy; aynı origin'den sunuluyorsa CORS gerekmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>XMLHttpRequest</strong></td>
+                <td>Fetch öncesi AJAX API'si</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kod yazma; yükleme ilerlemesi (progress) için hâlâ tek yol olabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>WebSocket</strong></td>
+                <td>Çift yönlü kalıcı bağlantı</td>
+                <td><span class="tag">ORTA</span> Sohbet, canlı bildirim, anlık panolar için. Üst seviye kütüphaneler bunu taşıyıcı olarak kullanır: SignalR (.NET, bkz. <a href="../../CSharp-DotNet/index.html">.NET bölümü</a>), Socket.IO (Node), Spring WebSocket/STOMP, Django Channels</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>EventSource (Server-Sent Events)</strong></td>
+                <td>Sunucudan tek yönlü sürekli veri akışı</td>
+                <td><span class="tag">ORTA</span> WebSocket'ten basit; LLM stream'lerinde çok kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>FormData</strong></td>
+                <td>Form verisini programatik olarak hazırlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dosya yüklemenin standart yolu; <code>Content-Type</code>'ı elle yazma, tarayıcı koyar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>File / Blob / FileReader</strong></td>
+                <td>İkili dosya verisiyle çalışma</td>
+                <td><span class="tag">ORTA</span> <code>URL.createObjectURL</code> ile önizleme yapılır; sonra <code>revokeObjectURL</code> ile bırak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Clipboard API</strong></td>
+                <td>Panoya kopyalama/yapıştırma</td>
+                <td><span class="tag">ORTA</span> HTTPS ve kullanıcı etkileşimi gerektirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Notification API</strong></td>
+                <td>Masaüstü bildirimi gösterme</td>
+                <td><span class="tag tag--info">İLERİ</span> İzin ister; Push API ile karıştırma (o sunucudan tetiklenir)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Geolocation API</strong></td>
+                <td>Kullanıcının konumunu alma</td>
+                <td><span class="tag tag--info">İLERİ</span> HTTPS ve açık izin şart</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Canvas API</strong></td>
+                <td>2B çizim yüzeyi</td>
+                <td><span class="tag tag--info">İLERİ</span> Grafik/imza/oyun için. Grafik çizeceksen Chart.js gibi kütüphaneler bunun üstüne kurulu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Web Audio API</strong></td>
+                <td>Ses üretme ve işleme grafiği</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş; sadece ses işi yapacaksan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Service Worker</strong></td>
+                <td>Sayfa ile ağ arasında duran proxy script</td>
+                <td><span class="tag tag--info">İLERİ</span> Çevrimdışı çalışma ve PWA'nın kalbi. Hata ayıklaması zordur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cache API</strong></td>
+                <td>İstek/yanıt çiftlerini saklama deposu</td>
+                <td><span class="tag tag--info">İLERİ</span> HTTP cache'i ile karıştırma; bu programatik olandır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>PWA (Progressive Web App)</strong></td>
+                <td>Manifest + service worker ile kurulabilir web uygulaması</td>
+                <td><span class="tag tag--info">İLERİ</span> Bir teknoloji değil, bir teknoloji paketinin adı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="moduller"><span class="h-num">§ 8</span>Modüller ve paketleme</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Modül sistemleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ES modules (ESM)</strong></td>
+                <td>Dilin standart modül sistemi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Dosya bazlıdır, ne export ettiysen o görünür. C#: <code>namespace</code>+<code>using</code>'den farkı budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>import / export</strong></td>
+                <td>Modülden değer alma ve dışa açma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>import</code> hoist edilir ve en tepede çalışır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>default export vs named export</strong></td>
+                <td>Tek varsayılan çıktı ile isimli çıktılar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ekipler genelde named export'u tercih eder (yeniden adlandırma ve otomatik tamamlama daha iyi)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dynamic import()</strong></td>
+                <td>Çalışma anında modül yükleyen, Promise dönen ifade</td>
+                <td><span class="tag">ORTA</span> Kod bölme (code splitting) bununla yapılır; React <code>lazy</code> bunu kullanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CommonJS (require / module.exports)</strong></td>
+                <td>Node'un klasik modül sistemi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni projede ESM kullan ama Node ekosisteminde hâlâ her yerde karşına çıkar</td>
+                <td><a href="https://nodejs.org/api/modules.html">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ESM vs CJS uyumsuzluğu</strong></td>
+                <td>İki sistemin birbirini çağırmasındaki kısıtlar</td>
+                <td><span class="tag">ORTA</span> "Cannot use import statement outside a module" hatasının kaynağı; <code>package.json</code>'daki <code>"type"</code> alanına bak</td>
+                <td><a href="https://nodejs.org/api/esm.html">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>UMD / AMD</strong></td>
+                <td>Modül öncesi dönemin evrensel/asenkron modül biçimleri</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> CDN'den <code>&lt;script&gt;</code> ile yüklenen kütüphaneler genelde UMD'dir</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>tree shaking</strong></td>
+                <td>Kullanılmayan export'ların paketten atılması</td>
+                <td><span class="tag">ORTA</span> Sadece ESM'de çalışır; CommonJS'te çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>bundling</strong></td>
+                <td>Çok sayıda modülü tarayıcıya uygun tek/az dosyaya toplama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Araçlar (Vite, webpack, esbuild, Rollup) <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem</a> sayfasında</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>circular dependency</strong></td>
+                <td>Modüllerin birbirini döngüsel import etmesi</td>
+                <td><span class="tag">ORTA</span> Hata vermez, <code>undefined</code> verir &mdash; bu yüzden bulması zordur</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>import maps</strong></td>
+                <td>Tarayıcıda bare import isimlerini URL'ye eşleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Paketleyicisiz çalışmayı mümkün kılar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hata-ve-hata-ayiklama"><span class="h-num">§ 9</span>Hata yönetimi ve hata ayıklama</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hatalar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>try / catch / finally</strong></td>
+                <td>Hata yakalama bloğu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>catch</code> parametresi opsiyoneldir, tip filtresi <em>yoktur</em>; türü <code>instanceof</code> ile kendin kontrol edersin. C#/Java: blok yapısı aynı, ama orada tipe göre birden çok <code>catch</code> yazılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>throw</strong></td>
+                <td>Hata fırlatma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her şeyi fırlatabilirsin (string bile) ama daima <code>Error</code> fırlat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Error ve türleri</strong></td>
+                <td><code>TypeError</code>, <code>RangeError</code>, <code>SyntaxError</code>, <code>ReferenceError</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Kendi hata sınıfını <code>class X extends Error</code> ile yazarsın. C#: <code>Exception</code> hiyerarşisinin çok küçük hâli</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom error (class X extends Error)</strong></td>
+                <td>Kendi hata tipini tanımlama</td>
+                <td><span class="tag">ORTA</span> <code>this.name</code>'i elle atamayı unutma; <code>instanceof</code> ile ayırt edersin</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Error cause</strong></td>
+                <td>Hatayı sararken asıl sebebi bağlama (<code>{ cause }</code>)</td>
+                <td><span class="tag">ORTA</span> Katmanlar arası hata sararken asıl hatayı kaybetmemek için. C#: <code>innerException</code>; Java: <code>getCause()</code>; Python: <code>raise ... from</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>AggregateError</strong></td>
+                <td>Birden çok hatayı tek nesnede toplama</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>Promise.any</code> hepsi patlarsa bunu fırlatır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>stack trace</strong></td>
+                <td>Hatanın çağrı geçmişi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Standart değildir ama tüm motorlarda <code>error.stack</code> vardır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>window.onerror / error olayı</strong></td>
+                <td>Yakalanmamış hataların global dinleyicisi</td>
+                <td><span class="tag">ORTA</span> Sentry gibi hata izleme araçları buraya bağlanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/error_event">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>JS hata mesajları sözlüğü</strong></td>
+                <td>MDN'in hata mesajı referansı</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Cannot read properties of undefined" gibi mesajları buradan ara</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata ayıklama araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>console API</strong></td>
+                <td><code>log</code> dışında <code>table, dir, group, time, count, trace, assert, warn, error</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>console.table</code> ve <code>console.time</code> hayat kurtarır; çoğu kişi sadece <code>log</code> bilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/console">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>debugger ifadesi</strong></td>
+                <td>Kod içinde kesme noktası</td>
+                <td><span class="tag tag--ok">TEMEL</span> DevTools açıkken durur; commit etmeyi unutma diye linter uyarır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chrome DevTools</strong></td>
+                <td>Sources, Network, Performance, Memory sekmeleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Visual Studio debugger'ına alıştıysan Sources sekmesi tanıdık gelecek</td>
+                <td><a href="https://developer.chrome.com/docs/devtools">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>source map</strong></td>
+                <td>Küçültülmüş kodu kaynak koda geri eşleyen dosya</td>
+                <td><span class="tag tag--ok">TEMEL</span> Olmazsa prod'da hata satırı anlamsız çıkar. Public sunucuda yayınlamamaya dikkat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Source_map">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>breakpoint türleri</strong></td>
+                <td>Satır, koşullu, DOM değişimi, XHR, event listener breakpoint</td>
+                <td><span class="tag">ORTA</span> DOM breakpoint'i "bu elemanı kim değiştiriyor" sorusunu çözer</td>
+                <td><a href="https://developer.chrome.com/docs/devtools">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Performance / Memory profili</strong></td>
+                <td>CPU zamanı ve bellek sızıntısı ölçümü</td>
+                <td><span class="tag tag--info">İLERİ</span> Tarayıcının profil ve bellek aracı; heap snapshot ile sızıntı avlanır. C#'tan geliyorsan: BenchmarkDotNet'in ve bellek profilerlarının tarayıcıdaki kaba karşılığı</td>
+                <td><a href="https://developer.chrome.com/docs/devtools">developer.chrome.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="modern-js"><span class="h-num">§ 10</span>Modern JavaScript (ES2015 &rarr; ES2025)</h2>
+
+        <p>Standart yılda bir güncellenir. "ES6" ile "ES2015" aynı şeydir; sonrasında yıl adı kullanılır.
+        İş ilanlarında "ES6+" yazması genelde "modern JavaScript bilsin" demektir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sürüm sürüm ne geldi</caption>
+            <thead><tr><th>Sürüm</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ES2015 (ES6)</strong></td>
+                <td><code>let/const</code>, arrow, class, module, Promise, Map/Set, destructuring, template literal, generator</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İş ilanlarında "ES6+" diye geçer. En büyük sıçrama budur; bu satırdaki her şeyi bilmen bekleniyor</td>
+                <td><a href="https://262.ecma-international.org/">262.ecma-international.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ES2016</strong></td>
+                <td><code>Array.includes</code>, üs operatörü <code>**</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Çok küçük sürüm</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2017</strong></td>
+                <td><code>async/await</code>, <code>Object.entries/values</code>, string padding</td>
+                <td><span class="tag tag--ok">TEMEL</span> async/await bu sürümle geldi</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2018</strong></td>
+                <td>Nesne spread/rest, <code>for await...of</code>, regex named group</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2019</strong></td>
+                <td><code>flat/flatMap</code>, <code>Object.fromEntries</code>, opsiyonel catch parametresi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2020</strong></td>
+                <td><code>?.</code>, <code>??</code>, BigInt, <code>Promise.allSettled</code>, dynamic import, <code>globalThis</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Günlük yazımı en çok değiştiren ikinci sürüm</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2021</strong></td>
+                <td><code>replaceAll</code>, <code>Promise.any</code>, mantıksal atama operatörleri, sayı ayırıcı <code>1_000</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2022</strong></td>
+                <td>Sınıf alanları, <code>#private</code>, top-level await, <code>at()</code>, <code>Error.cause</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>ES2023</strong></td>
+                <td><code>findLast</code>, <code>toSorted/toReversed/toSpliced/with</code>, hashbang</td>
+                <td><span class="tag">ORTA</span> Değiştirmeyen (immutable) dizi metotları buradan geldi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ES2024</strong></td>
+                <td><code>Object.groupBy</code>, <code>Promise.withResolvers</code>, <code>Array.fromAsync</code>, <code>/v</code> regex bayrağı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ES2025</strong></td>
+                <td>Iterator helpers, <code>Set</code> küme işlemleri (union, intersection), <code>RegExp.escape</code>, import attributes</td>
+                <td><span class="tag tag--info">İLERİ</span> Tarayıcı desteği karışık; kullanmadan önce kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TC39 süreci (Stage 0-4)</strong></td>
+                <td>Bir önerinin standarda girme aşamaları</td>
+                <td><span class="tag">ORTA</span> Blog yazılarında "Stage 3" görürsen: henüz standart değil, ama büyük ihtimalle gelecek</td>
+                <td><a href="https://github.com/tc39/proposals">github.com/tc39/proposals</a></td>
+              </tr>
+              <tr>
+                <td><strong>Temporal API</strong></td>
+                <td><code>Date</code>'in yerini alacak yeni tarih/saat API'si</td>
+                <td><span class="tag tag--info">İLERİ</span> Destek hedef ortama göre değişir: yerleşik Temporal'ı yayımlamış tarayıcılarda (Firefox 2025'ten, Chromium tabanlılar 2026 başından itibaren) polyfill gerekmez; desteklemeyen tarayıcılarda veya eski Node'da <code>@js-temporal/polyfill</code> ya da <code>temporal-polyfill</code>; geniş tarayıcı yelpazesi hedefleyen üretim projesinde caniuse / MDN Baseline durumuna göre karar ver, aksi halde date-fns, Day.js veya Luxon. TC39 aşaması ve tarayıcı sürümleri TEYİT: <a href="https://github.com/tc39/proposal-temporal">tc39/proposal-temporal</a>, MDN uyumluluk tablosu, <a href="https://caniuse.com/temporal">caniuse.com/temporal</a>. C#: <code>DateTimeOffset</code>/<code>NodaTime</code> zihniyetine yakın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Baseline / caniuse</strong></td>
+                <td>Bir özelliğin tarayıcılarda güvenle kullanılabilirlik durumu</td>
+                <td><span class="tag tag--ok">TEMEL</span> MDN sayfalarının altındaki uyumluluk tablosuna bakmayı alışkanlık edin</td>
+                <td><a href="https://caniuse.com/">caniuse.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>polyfill vs transpile</strong></td>
+                <td>Eksik API'yi eklemek ile yeni sözdizimini eskiye çevirmek</td>
+                <td><span class="tag">ORTA</span> Farkı bilmek gerekir; ikisi farklı problem çözer. Araçlar <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem</a> sayfasında</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nodejs"><span class="h-num">§ 11</span>Node.js ve paket yönetimi temelleri</h2>
+
+        <p>Tarayıcı tarafında çalışmasan bile modern frontend araçlarının hepsi Node üzerinde çalışır,
+        yani bu bölüm zorunlu. Ne kadar tanıdık geleceği geçmişine bağlı:</p>
+
+        <ul>
+          <li><strong>.NET geçmişi</strong> &rarr; en tanıdık bölüm: npm &asymp; NuGet, <code>package.json</code> &asymp; <code>.csproj</code> (satırlardaki "C#:" notları).</li>
+          <li><strong>Java geçmişi</strong> &rarr; npm &asymp; Maven/Gradle, <code>package.json</code> &asymp; <code>pom.xml</code>/<code>build.gradle</code>; fark: <code>node_modules</code> proje başına kopyadır, <code>~/.m2</code> gibi ortak bir önbellekten çalışmaz.</li>
+          <li><strong>Python geçmişi</strong> &rarr; npm &asymp; pip/uv, <code>package.json</code> &asymp; <code>pyproject.toml</code>/<code>requirements.txt</code>; <code>node_modules</code> bir venv gibi proje yereldir.</li>
+          <li><strong>Hiç paket yöneticisi kullanmamışsan</strong> &rarr; en yabancı bölüm bu olur; ilk gün boş bir klasörde <code>npm init -y</code>, <code>npm install</code> ve <code>npm run</code> ile alıştırma yap.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma ortamı ve paketler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Node.js</strong></td>
+                <td>Tarayıcı dışında JavaScript çalıştıran çalışma zamanı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, açık kaynak. Hangi sürüm: öğrenme, iş veya üretim projesi &rarr; Active LTS (veya Maintenance LTS); projenin <code>package.json</code> <code>engines</code> alanı ya da <code>.nvmrc</code> belirli bir sürüm istiyorsa &rarr; o sürüm (nvm/fnm/Volta ile); yeni bir dil/runtime özelliğini denemek veya kütüphaneni ileri sürümde test etmek &rarr; "Current", yalnızca deneme için. Takvim: <a href="https://nodejs.org/en/about/previous-releases">nodejs.org/en/about/previous-releases</a></td>
+                <td><a href="https://nodejs.org/api/">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm</strong></td>
+                <td>Node'un varsayılan paket yöneticisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Node ile birlikte kurulur, ayrıca kurulmaz. C#: NuGet; Java: Maven/Gradle; Python: pip</td>
+                <td><a href="https://docs.npmjs.com/">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pnpm</strong></td>
+                <td>Diski paylaşan, çok daha hızlı alternatif paket yöneticisi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Monorepo'da en çok tercih edilen</td>
+                <td><a href="https://pnpm.io/motivation">pnpm.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yarn</strong></td>
+                <td>Bir diğer paket yöneticisi (Berry / v4)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Eski projelerde <code>yarn.lock</code> görürsün</td>
+                <td><a href="https://yarnpkg.com/">yarnpkg.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>package.json</strong></td>
+                <td>Projenin bağımlılık ve script tanım dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>type</code>, <code>scripts</code>, <code>engines</code> alanlarını bil. C#: <code>.csproj</code>; Java: <code>pom.xml</code>/<code>build.gradle</code>; Python: <code>pyproject.toml</code></td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>package-lock.json / pnpm-lock.yaml</strong></td>
+                <td>Tam sürümleri sabitleyen kilit dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> <em>Mutlaka</em> git'e commit edilir. <code>npm ci</code> bunu kullanır</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>semver (^ ~ sabit)</strong></td>
+                <td>Sürüm numarası ve aralık işaretleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ana sürüme göre değişir: <code>^1.2.3</code> &rarr; <code>&gt;=1.2.3 &lt;2.0.0</code> (minor ve patch); <code>^0.2.3</code> &rarr; <code>&gt;=0.2.3 &lt;0.3.0</code> (yalnızca patch); <code>^0.0.3</code> &rarr; yalnızca 0.0.3 (fiilen sabit); <code>~1.2.3</code> &rarr; <code>&gt;=1.2.3 &lt;1.3.0</code> (yalnızca patch); <code>1.2.3</code> &rarr; tam o sürüm. Kaynak: <a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json#dependencies">npm package.json dokümanı</a>. C#: NuGet'in aralık sözdiziminden farklı, karıştırma</td>
+                <td><a href="https://semver.org/">semver.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dependencies vs devDependencies</strong></td>
+                <td>Çalışma zamanı ile geliştirme zamanı bağımlılıkları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Frontend'de fark bulanıklaşır; her şey zaten build'de paketlenir</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>peerDependencies</strong></td>
+                <td>"Bu paketi kullanacaksan şu sürümü sen kurmuş olmalısın"</td>
+                <td><span class="tag">ORTA</span> React eklentilerinde çıkan sürüm çakışmalarının kaynağı</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>node_modules</strong></td>
+                <td>Bağımlılıkların indirildiği klasör</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her projede ayrı kopya tutulur (C#: NuGet'in global cache'inden farkı bu; Java: <code>~/.m2</code> gibi değil; Python: venv'e benzer). Asla commit etme, <code>.gitignore</code>'a ekle</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/configuring-npm/folders">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm scripts</strong></td>
+                <td><code>npm run dev</code> gibi tanımlı komutlar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Projeyi nasıl çalıştıracağını önce buradan öğrenirsin</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/using-npm/scripts">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npx</strong></td>
+                <td>Kurmadan paket çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>npx create-vite</code> gibi tek seferlik komutlar için. C#: <code>dotnet tool run</code> benzeri; Python: <code>pipx run</code> / <code>uvx</code></td>
+                <td><a href="https://docs.npmjs.com/cli/v10/commands/npx">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm ci</strong></td>
+                <td>Kilit dosyasına birebir uyan temiz kurulum</td>
+                <td><span class="tag tag--ok">TEMEL</span> CI/CD hattında <code>npm install</code> değil bunu kullan</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/commands/npm-ci">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>process.env / .env dosyası</strong></td>
+                <td>Ortam değişkenleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Nerede çalıştığına göre: Node/sunucu tarafında <code>process.env</code> sunucuda kalır ve gizli tutulabilir; Vite gibi frontend build'lerinde yalnızca <code>VITE_</code> önekli değişkenler <code>import.meta.env</code> ile pakete gömülür ve <strong>herkese açıktır</strong>, oraya secret koyma. C#: <code>appsettings.json</code> + <code>IConfiguration</code> yerine geçer</td>
+                <td><a href="https://nodejs.org/api/process.html">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>nvm / fnm / Volta</strong></td>
+                <td>Makinede birden çok Node sürümü yönetme</td>
+                <td><span class="tag">ORTA</span> Hepsi ücretsiz. Windows'ta <code>nvm-windows</code> veya <code>fnm</code></td>
+                <td><a href="https://nodejs.org/en/download">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Deno</strong></td>
+                <td>Node'un yaratıcısının yaptığı, güvenlik odaklı alternatif çalışma zamanı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Bilmesi güzel, iş ilanlarında nadir</td>
+                <td><a href="https://deno.com/">deno.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bun</strong></td>
+                <td>Hızlı alternatif çalışma zamanı + paket yöneticisi + test koşucusu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Hızla yayılıyor; kurumsal projelerde henüz yaygın değil</td>
+                <td><a href="https://bun.com/docs">bun.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="guvenlik"><span class="h-num">§ 12</span>Güvenlik</h2>
+
+        <p>Backend'de yetkilendirme yazdıysan mantığı bilirsin; frontend'de saldırı yüzeyi farklıdır. Yazmadıysan
+        önce aşağıdaki <strong>same-origin policy</strong> ve <strong>XSS</strong> satırlarından başla, sonra çerez/token
+        konusuna geç. Bu bölüm mülakatta "JWT'yi nerede saklarsın" sorusuyla karşına çıkar. Sunucu tarafı örnekleri
+        farklı backend'ler için verildi; kendi yığınının satırına bak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Saldırı türleri ve savunma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>XSS (Cross-Site Scripting)</strong></td>
+                <td>Saldırganın hedef sayfada JS çalıştırması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Frontend'in bir numaralı açığı. Kaynağı genelde <code>innerHTML</code> ve React'te <code>dangerouslySetInnerHTML</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/XSS">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>stored / reflected / DOM-based XSS</strong></td>
+                <td>XSS'in üç türü</td>
+                <td><span class="tag tag--ok">TEMEL</span> DOM-based olan tamamen istemcide olur, sunucu logunda görünmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/XSS">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sanitization</strong></td>
+                <td>Kullanıcı HTML'inden tehlikeli parçaları temizleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kendi regex'ini yazma; iş bu değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DOMPurify</strong></td>
+                <td>Fiilen standart olan HTML temizleme kütüphanesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (Apache-2.0/MPL). Alternatif: tarayıcı yerleşik Sanitizer API (yeni), sunucu tarafında yığınına göre ör. <code>HtmlSanitizer</code> (.NET), OWASP Java HTML Sanitizer (Java), <code>nh3</code>/<code>bleach</code> (Python; bleach artık geliştirilmiyor, TEYİT)</td>
+                <td><a href="https://github.com/cure53/DOMPurify">github.com/cure53/DOMPurify</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSP (Content Security Policy)</strong></td>
+                <td>Hangi kaynaklardan script/stil yüklenebileceğini kısıtlayan HTTP başlığı</td>
+                <td><span class="tag">ORTA</span> XSS'in etkisini sınırlar; sunucudan HTTP başlığı olarak gönderilir. Yığına göre: ASP.NET Core &rarr; middleware veya NWebsec; Express &rarr; <code>helmet</code>; Spring Security &rarr; <code>headers().contentSecurityPolicy(...)</code>; Django &rarr; <code>django-csp</code> (yeni Django sürümlerinde yerleşik CSP desteği TEYİT: docs.djangoproject.com); Nginx/Apache &rarr; <code>add_header</code>/<code>Header</code>; statik barındırma &rarr; Netlify/Cloudflare Pages <code>_headers</code>, Vercel <code>vercel.json</code>. <code>&lt;meta http-equiv&gt;</code> ile de verilebilir ama <code>frame-ancestors</code>, <code>report-uri</code> ve <code>sandbox</code> meta'da çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSRF</strong></td>
+                <td>Kullanıcının oturumuyla istemsiz istek gönderilmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çözümü <code>SameSite</code> çerez ve anti-forgery token. Çoğu çatıda hazır gelir: ASP.NET Core antiforgery, Django <code>CsrfViewMiddleware</code>, Spring Security CSRF, Laravel <code>VerifyCsrfToken</code>, Rails <code>protect_from_forgery</code>. Token çerezde değil <code>Authorization</code> başlığında taşınıyorsa (çerezle oturum yoksa) CSRF riski oluşmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/CSRF">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prototype pollution</strong></td>
+                <td><code>Object.prototype</code>'a özellik enjekte ederek tüm nesneleri bozma</td>
+                <td><span class="tag">ORTA</span> MDN'de sayfası yok; aramada "JavaScript prototype pollution" yaz. Derin birleştirme (deep merge) yazan kodlarda çıkar</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>supply chain riski</strong></td>
+                <td>Bağımlılığın bağımlılığının zararlı hâle gelmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Node'da bir proje kolayca 1.000+ paket çeker; dolaylı bağımlılıklar da senin sorumluluğundadır. Daha az ve daha büyük paketlerle çalışan ekosistemlerden (ör. .NET) geliyorsan tam tersi bir dünya</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/commands/npm-audit">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm audit / Dependabot</strong></td>
+                <td>Bilinen açıklı paketleri tarama</td>
+                <td><span class="tag">ORTA</span> Dependabot GitHub'da ücretsiz; <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem</a> sayfasında CI tarafı var</td>
+                <td><a href="https://docs.npmjs.com/cli/v10/commands/npm-audit">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Subresource Integrity (SRI)</strong></td>
+                <td>CDN'den gelen dosyanın hash'ini doğrulama</td>
+                <td><span class="tag">ORTA</span> <code>integrity</code> özniteliği ile</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/SRI">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Same-origin policy</strong></td>
+                <td>Farklı kaynakların birbirinin verisine erişememesi kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> CORS bu kuralın kontrollü gevşetilmesidir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>token saklama (localStorage vs HttpOnly cookie)</strong></td>
+                <td>JWT'yi nerede tutacağın kararı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Backend'de JWT ile çalışmış birine tarayıcı tarafı mutlaka sorulur; çalışmadıysan önce çerez ile token farkını öğren. Kısa cevap: <code>HttpOnly</code> + <code>Secure</code> + <code>SameSite</code> çerez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>güvenlik başlıkları</strong></td>
+                <td><code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>, <code>Permissions-Policy</code>, HSTS</td>
+                <td><span class="tag">ORTA</span> Sunucudan gönderilir; CSP satırındaki yollarla eklenir (ASP.NET Core middleware, Express <code>helmet</code>, Spring Security headers, Nginx/Apache, statik barındırmada <code>_headers</code>)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>eval / new Function</strong></td>
+                <td>String'i kod olarak çalıştırma</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Kullanma. CSP zaten engeller. Kodda görürsen kırmızı bayrak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet &mdash; önerilen sıra (sıfırdan başlayan için) ve geçmişine göre kısayollar</h2>
+
+        <p class="intro">JavaScript'e sıfırdan başlayan biri için aşağıdaki sıra "önce neyi öğren" sorusunun
+        cevabıdır; her adımda okumak yetmez, kod yaz. Geçmişin varsa bazı adımlar kısalır:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Geçmişine göre kısayollar</caption>
+            <thead><tr><th>Geçmişin</th><th>Ne kısalır</th><th>Ne uzar / dikkat</th></tr></thead>
+            <tbody>
+              <tr><td><strong>C#/.NET backend</strong></td><td>Dizi metotları (LINQ), modüller ve npm (NuGet), fetch/HTTP</td><td><code>this</code>, <code>==</code>, event loop; "aynı sanma" tuzağı</td></tr>
+              <tr><td><strong>Başka backend dili</strong> (Java, Python, Go)</td><td>Aynı avantaj büyük ölçüde geçerli: LINQ yerine Stream veya comprehension, NuGet yerine Maven/Gradle veya pip</td><td>Java'dan: prototip ve yapısal davranış; Python'dan: <code>this</code> ve tip zorlaması</td></tr>
+              <tr><td><strong>Programlamaya sıfırdan</strong></td><td>&mdash;</td><td>Dizi metotları "bir günde" bitmez: önce <code>for</code> döngüsü, sonra callback, sonra <code>map/filter/reduce</code>. Asenkron için callback &rarr; Promise &rarr; <code>async/await</code>. fetch/CORS için önce HTTP temelleri (istek/yanıt, durum kodları)</td></tr>
+              <tr><td><strong>JWT/oturum yönetimiyle hiç çalışmamış</strong></td><td>&mdash;</td><td>Madde 8 mülakatta yine sorulur; önce çerez ve token kavramlarını öğren</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. Mülakatın klasik dörtlüsü &mdash; önce bunlar</span>
+            <p><code>var/let/const</code> + hoisting/TDZ · <code>==</code> vs <code>===</code> ve truthy/falsy ·
+            <code>this</code> ve arrow function farkı · closure. Bu dördü sorulmadan JavaScript mülakatı bitmez.
+            Her biri için tarayıcı konsolunda en az 5 örnek çalıştır.</p>
+            <span class="steps__meta">Bölüm: <a href="#temeller">§ 1</a> ve <a href="#fonksiyonlar">§ 2</a></span>
+          </li>
+          <li>
+            <span class="steps__title">2. Asenkron: event loop, Promise, async/await</span>
+            <p>Başka bir dilden (C#, Python, Kotlin) <code>async/await</code> biliyorsan bu bilgi seni yanıltmasın; hiç görmediysen callback &rarr; Promise &rarr; <code>async/await</code> sırasıyla ilerle. Event loop, microtask/macrotask ayrımı ve
+            <code>Promise.all</code>/<code>allSettled</code>/<code>race</code>/<code>any</code> farkları ayrıca öğrenilir.
+            "setTimeout 0 mı Promise.then mi önce çalışır" sorusuna cevap verebilmelisin.</p>
+            <span class="steps__meta">Bölüm: <a href="#asenkron">§ 5</a></span>
+          </li>
+          <li>
+            <span class="steps__title">3. Dizi metotları &mdash; başka dilden gelenin en hızlı kazancı</span>
+            <p><code>map/filter/reduce/find/some/every/sort</code>. LINQ, Java Stream veya Python comprehension biliyorsan burası çok kısa sürer; sıfırdan başlıyorsan önce döngü ve callback'i otur, sonra bu metotlara geç.
+            İki tuzağı ezberle: <code>sort</code> yerinde çalışır ve varsayılan olarak string sıralar;
+            <code>slice</code> ile <code>splice</code> zıt davranır.</p>
+            <span class="steps__meta">Bölüm: <a href="#diziler-ve-koleksiyonlar">§ 4</a></span>
+          </li>
+          <li>
+            <span class="steps__title">4. DOM ve olaylar</span>
+            <p><code>querySelector</code>, <code>classList</code>, <code>addEventListener</code>, bubbling ve delegation.
+            React öğrenecek olsan bile bu temel şart; React'in çözdüğü problemi anlamanın tek yolu bu.
+            <code>innerHTML</code> ile <code>textContent</code> farkını güvenlik açısından öğren.</p>
+            <span class="steps__meta">Bölüm: <a href="#dom">§ 6</a></span>
+          </li>
+          <li>
+            <span class="steps__title">5. fetch, CORS ve hata yönetimi</span>
+            <p>Backend geçmişin varsa burada güçlüsün; yoksa önce HTTP temellerini (istek/yanıt, metotlar, durum kodları) öğren. Her iki durumda <code>fetch</code>'in 404'te hata fırlatmadığını ve CORS'un
+            <em>sunucu</em> tarafında çözüldüğünü bilerek git.</p>
+            <span class="steps__meta">Bölüm: <a href="#tarayici-apileri">§ 7</a> ve <a href="#hata-ve-hata-ayiklama">§ 9</a></span>
+          </li>
+          <li>
+            <span class="steps__title">6. Modüller ve npm ekosistemi</span>
+            <p><code>import/export</code>, ESM/CJS ayrımı, <code>package.json</code>, semver, lock dosyası.
+            Bir paket yöneticisi (NuGet, Maven/Gradle, pip) kullandıysan kavramsal olarak kolay, kullanmadıysan §&nbsp;11'deki ilk gün alıştırmasıyla başla; tuzak <code>node_modules</code>'ın her projede ayrı kopya
+            tutması ve ESM/CJS uyumsuzluğudur.</p>
+            <span class="steps__meta">Bölüm: <a href="#moduller">§ 8</a> ve <a href="#nodejs">§ 11</a></span>
+          </li>
+          <li>
+            <span class="steps__title">7. Prototip, class ve nesne davranışı</span>
+            <p>Prototip zinciri mülakatta sorulur ama günlük kodda az kullanırsın. <code>class</code>'ın altında
+            prototip olduğunu ve JS'te interface bulunmadığını bil; sığ/derin kopya farkını mutlaka kavra.</p>
+            <span class="steps__meta">Bölüm: <a href="#nesneler-ve-prototip">§ 3</a></span>
+          </li>
+          <li>
+            <span class="steps__title">8. Güvenlik: XSS ve token saklama</span>
+            <p>Backend'de JWT ile çalışmış birine mutlaka sorulur (çalışmadıysan önce çerez ve token kavramını öğren): "Token'ı nerede saklarsın" sorusuna <code>localStorage</code> dersen sohbetin yönü
+            değişir. XSS, CSP, <code>HttpOnly</code> çerez üçlüsünü öğren.</p>
+            <span class="steps__meta">Bölüm: <a href="#guvenlik">§ 12</a></span>
+          </li>
+          <li>
+            <span class="steps__title">9. Sürüm bilgisi ve ileri konular</span>
+            <p>ES2015'in ne getirdiğini bilmek yeterli; ES2023-2025 detaylarını ezberleme, ihtiyaç oldukça bak.
+            Generator, Proxy, Web Worker, Service Worker en sona kalsın.</p>
+            <span class="steps__meta">Bölüm: <a href="#modern-js">§ 10</a></span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Varsayılan yol: yukarıdaki 1&ndash;6. adımları (ya da en azından TEMEL rozetli maddeleri) bitirmeden
+          <a href="../02-typescript/index.html">TypeScript</a> veya <a href="../03-react/index.html">React</a> sayfasına geçme;
+          ikisi de bu temelleri bildiğini varsayar. Durumuna göre istisnalar:</p>
+          <ul>
+            <li><strong>TypeScript'i JavaScript'le paralel öğreniyorsan</strong> &rarr; geçerli bir yol; her JS konusunu bitirince TS karşılığına bak.</li>
+            <li><strong>İşte mevcut bir React projesine katkı vermen gerekiyorsa</strong> &rarr; JS ve React'ı paralel yürüt; projede karşına çıkan JS boşluklarını o an kapat (<a href="../index.html#react-a-atlanir-mi">genel bakış § 1</a>).</li>
+            <li><strong>JavaScript'i zaten iyi biliyorsan</strong> &rarr; doğrudan 02 / 03'e geç; bu sayfayı referans olarak kullan.</li>
+          </ul>
+          <p>React hedefi için sıra: JavaScript &rarr; TypeScript &rarr; React &rarr;
+          <a href="../04-ekosistem-ve-araclar/index.html">araçlar</a>. Angular, Vue/Svelte, Node veya mobil hedefliyorsan
+          <a href="../index.html#react-a-atlanir-mi">genel bakıştaki "Hedefine göre sıra" tablosuna</a> bak.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bu sayfadaki bağlantıların neredeyse tamamı MDN'e (developer.mozilla.org) gider. MDN, tarayıcı
+          teknolojilerinin resmî referansıdır ve ücretsizdir; JavaScript için W3Schools yerine MDN oku.
+          Her MDN sayfasının altında tarayıcı uyumluluk tablosu vardır &mdash; yeni bir özellik kullanmadan önce
+          oraya bak. Standardın kendisi <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a> adresindedir ama
+          günlük iş için MDN yeterlidir.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Genel Bakış</span></a>
+        <a class="next" href="../02-typescript/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">TypeScript</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blockchain Temelleri — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Hash, dijital imza, Merkle ağacı, konsensüs, hesap modelleri, gas, EVM, L1/L2, cüzdan ve düğüm türleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Blockchain Temelleri</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 01 · Temel</div>
+        <h1 class="page-title">Zincir <em>nasıl</em> çalışıyor?</h1>
+        <p class="lede">Solidity yazmadan önce altındaki makineyi tanımak gerekiyor: blok, hash, imza, konsensüs, gas. Bu bölüm kavramları araştırma başlığı olarak sıralıyor; kod yok, mantık var.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; orta &middot; Kavram listesi</div>
+      </header>
+
+      <div class="content">
+        <h2 id="kriptografi-temelleri"><span class="h-num">§ 1</span>Kriptografi temelleri</h2>
+        <p class="intro">Bu sayfa bir anlatım değil, anahtar kelime listesi. Her satırda bir terim, onu karıştırmaman için tek cümlelik bir not ve resmî doküman var. İş ilanlarında "React, Solidity, Smart Contract" sık geçtiği için EVM, akıllı sözleşme ve dApp terimleri <span class="tag tag--bad">MÜLAKATTA SIK</span> ile işaretli; mülakatta önce bunlar açılır. Bağlantılar 13 Eylül 2026'da açılıp kontrol edildi.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Rozetler</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> en yüksek öncelik · <span class="tag tag--ok">TEMEL</span> olmazsa olmaz · <span class="tag">ORTA</span> sonra · <span class="tag tag--info">İLERİ</span> derinleşme · <span class="tag tag--warn">ÜCRETLİ</span> ücretli katmanı var · <span class="tag tag--warn">ESKİMİŞ</span> görürsün ama yeni projede kullanılmaz · <span class="tag tag--warn">RİSK</span> para/güvenlik riski</p>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Sıfır bütçe kuralı</p>
+          <p>Mainnet'e para koyma. Uygulama denemeleri Sepolia'da, validator denemeleri Hoodi testnet'inde yapılır. Test ETH'nin değeri yoktur ve faucet'lerden ücretsiz alınır. Ayrıntılar: <a href="../06-altyapi-araclar-guvenlik/index.html#testnet-ve-faucet">06 — Testnet ve faucet</a>.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1a · Hash ve veri yapıları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>hash function</strong></td><td>Girdiye sabit uzunlukta, geri çevrilemeyen özet üretir; blok bağlama, adres ve Merkle ağacının temeli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>SHA-256</strong></td><td>Bitcoin'in hash'i: blok başlığı, PoW, işlem kimliği</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final">NIST FIPS 180-4</a></td></tr>
+              <tr><td><strong>Keccak-256</strong></td><td>Ethereum'un hash'i: adres, function selector, event topic, storage slot</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://keccak.team/keccak.html">keccak.team</a></td></tr>
+              <tr><td><strong>SHA3-256 ≠ Keccak-256</strong></td><td>NIST standardı farklı padding kullanır. Aynı tuzak birçok dilde var: .NET 8+ <code>SHA3_256</code>, Python <code>hashlib.sha3_256</code>, Node.js <code>crypto.createHash('sha3-256')</code> Ethereum için yanlış sonuç verir. Doğrusu: viem/ethers <code>keccak256</code>, Nethereum, Python'da eth-hash/pycryptodome Keccak</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.sha3_256">learn.microsoft.com</a> · <a href="https://csrc.nist.gov/pubs/fips/202/final">FIPS 202</a></td></tr>
+              <tr><td><strong>RIPEMD-160 / HASH160</strong></td><td>Eski Bitcoin adreslerinde SHA-256'dan sonra uygulanır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://developer.bitcoin.org/devguide/transactions.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>Merkle tree</strong></td><td>Yaprak hash'lerinden köke çıkan ağaç; bloktaki tüm işlemleri tek hash'e bağlar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/devguide/block_chain.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>Merkle root</strong></td><td>Blok başlığındaki kök; tek bir işlem değişirse kök de değişir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/reference/block_chain.html">developer.bitcoin.org/reference</a></td></tr>
+              <tr><td><strong>Merkle proof</strong></td><td>Bir öğenin ağaçta olduğunu az sayıda hash ile ispatlar; allowlist ve airdrop sözleşmelerinde kullanılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils/cryptography">OpenZeppelin MerkleProof</a> · <a href="https://github.com/OpenZeppelin/merkle-tree">merkle-tree (JS)</a></td></tr>
+              <tr><td><strong>Merkle Patricia Trie</strong></td><td>Ethereum'da durum, storage, işlem ve receipt ağaçlarının veri yapısı</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/data-structures-and-encoding/patricia-merkle-trie/">ethereum.org/patricia-merkle-trie</a></td></tr>
+              <tr><td><strong>RLP</strong></td><td>Execution katmanının serileştirme biçimi (işlem, blok)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/data-structures-and-encoding/rlp/">ethereum.org/rlp</a></td></tr>
+              <tr><td><strong>SSZ</strong></td><td>Consensus katmanının serileştirme biçimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/data-structures-and-encoding/ssz/">ethereum.org/ssz</a></td></tr>
+              <tr><td><strong>commitment</strong> (commit-reveal)</td><td>Değerin önce hash'ini yazıp değeri sonra açma; teklif ve oylamada önden koşmayı engeller</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/solidity-by-example.html">Solidity — Blind Auction örneği</a></td></tr>
+              <tr><td><strong>KZG commitment</strong></td><td>Blob verisi için polinom taahhüdü; EIP-4844'ün kriptografisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4844">EIP-4844</a></td></tr>
+              <tr><td><strong>nonce</strong></td><td>"Bir kez kullanılan sayı". Üç anlamı var, karıştırma: PoW nonce'u, hesap nonce'u (işlem sayacı), imza nonce'u</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>entropy / CSPRNG</strong></td><td>Anahtar üretiminde kriptografik rastgelelik. Dile göre: .NET <code>RandomNumberGenerator</code> (<code>System.Random</code> asla); JS/TS <code>crypto.getRandomValues</code> (<code>Math.random</code> asla); Python <code>secrets</code> (<code>random</code> asla); Java <code>SecureRandom</code>; Go <code>crypto/rand</code> (<code>math/rand</code> asla)</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.randomnumbergenerator">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>zero-knowledge proof</strong></td><td>Bilgiyi açmadan doğruluğunu ispatlama; zk-rollup'ların temeli ("zk-SNARK vs zk-STARK" diye ara)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/zero-knowledge-proofs/">ethereum.org/zero-knowledge-proofs</a></td></tr>
+              <tr><td><strong>quantum resistance</strong></td><td>Kuantum bilgisayarlara karşı ECDSA/BLS'yi değiştirme araştırması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/security/quantum-resistance/">ethereum.org/roadmap</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1b · İmza, anahtar ve adres</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>private key / public key</strong></td><td>Özel anahtar 256-bit gizli bir sayıdır. Açık anahtar ondan eliptik eğriyle türetilir; tersi mümkün değildir. Özel anahtarı gören hesaptaki her şeyi alır: kimseyle paylaşma, koda ve repoya koyma</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>digital signature</strong></td><td>Özel anahtarla imzalanır, açık anahtarla doğrulanır; işlemi yetkilendiren şey budur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>ECDSA</strong></td><td>Bitcoin ve Ethereum'un işlem imza algoritması; imza <code>r</code>, <code>s</code>, <code>v</code> değerlerinden oluşur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://csrc.nist.gov/pubs/fips/186-5/final">NIST FIPS 186-5</a></td></tr>
+              <tr><td><strong>secp256k1</strong></td><td>Bitcoin/Ethereum'un eğrisi. .NET'ten geliyorsan: <code>ECCurve.NamedCurves</code> listesinde yok; Nethereum, NBitcoin veya BouncyCastle ile kullanılır. JS/TS'de @noble/curves (viem'in altyapısı), Python'da coincurve/eth-keys, Go'da go-ethereum <code>crypto</code> paketi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.secg.org/sec2-v2.pdf">SEC 2</a> · <a href="https://github.com/bitcoin-core/secp256k1">libsecp256k1</a></td></tr>
+              <tr><td><strong>secp256r1 (P-256)</strong></td><td>Passkey/WebAuthn eğrisi; Fusaka ile EVM precompile'ı geldi</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7951">EIP-7951</a></td></tr>
+              <tr><td><strong>Ed25519 (EdDSA)</strong></td><td>Solana hesapları ve CometBFT validator anahtarlarında kullanılır; imza deterministiktir</td><td><span class="tag">ORTA</span></td><td><a href="https://www.rfc-editor.org/rfc/rfc8032">RFC 8032</a></td></tr>
+              <tr><td><strong>Schnorr (BIP-340)</strong></td><td>Bitcoin Taproot imzası; imza birleştirmeye uygun</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki">BIP-340</a></td></tr>
+              <tr><td><strong>BLS signature (BLS12-381)</strong></td><td>Ethereum validator imzası; binlerce imza tek imzada birleşir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/keys/">ethereum.org/pos/keys</a></td></tr>
+              <tr><td><strong>ecrecover</strong></td><td>İmzadan imzalayan adresi çıkaran Solidity fonksiyonu; zincir üstünde imza doğrulamanın yolu</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html">Solidity — global variables</a></td></tr>
+              <tr><td><strong>address derivation</strong></td><td>Ethereum adresi: açık anahtarın Keccak-256 hash'inin son 20 baytı, başına <code>0x</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>EIP-55 checksum</strong></td><td>Adresteki büyük/küçük harf karışımı yazım hatasını yakalar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-55">EIP-55</a></td></tr>
+              <tr><td><strong>Bitcoin address types</strong></td><td>P2PKH (1…), P2SH (3…), Bech32/SegWit (bc1q…), Taproot (bc1p…)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki">BIP-173</a></td></tr>
+              <tr><td><strong>EIP-191 (personal_sign)</strong></td><td>Mesaj imzasına ön ek ekler; imzalı mesajın işlem gibi kullanılmasını önler</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-191">EIP-191</a></td></tr>
+              <tr><td><strong>EIP-712 (typed data)</strong></td><td>Yapılandırılmış veriyi okunur biçimde imzalatır; permit ve gasless onaylarda kullanılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a></td></tr>
+              <tr><td><strong>JS kripto karşılıkları</strong></td><td>ethers.js crypto modülü, viem <code>keccak256</code>, noble-curves; ayrıntılar <a href="../03-javascript-typescript/index.html">03</a> sayfasında</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ethers.org/v6/api/crypto/">docs.ethers.org</a> · <a href="https://viem.sh/docs/utilities/keccak256">viem.sh</a> · <a href="https://github.com/paulmillr/noble-curves">noble-curves</a></td></tr>
+              <tr><td><strong>.NET kripto karşılıkları</strong></td><td>Nethereum Keccak/imza sınıfları, NBitcoin, BouncyCastle; ayrıntılar <a href="../04-dotnet/index.html#dotnet-kriptografi-temelleri">04 — .NET kriptografi</a> bölümünde</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/MetacoSA/NBitcoin">NBitcoin</a> · <a href="https://www.bouncycastle.org/download/bouncy-castle-c/">BouncyCastle C#</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cuzdan-ve-anahtar-yonetimi"><span class="h-num">§ 2</span>Cüzdan ve anahtar yönetimi</h2>
+        <p class="intro">Cüzdan parayı değil anahtarı saklar. Bu bölümdeki <span class="tag tag--warn">RİSK</span> rozetleri gerçek para kaybı anlamına gelir. Doğru alışkanlığı testnet'te bile kur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2a · Anahtar türetme ve yedekleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>seed phrase / mnemonic (BIP-39)</strong></td><td>12–24 kelime, tüm anahtarların kaynağı. Kaybeden erişimini kaybeder; gören her şeyi alır</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP-39</a></td></tr>
+              <tr><td><strong>BIP-39 passphrase</strong></td><td>İsteğe bağlı ek parola ("25. kelime"); farklı parola farklı cüzdan demektir</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP-39</a></td></tr>
+              <tr><td><strong>HD wallet (BIP-32)</strong></td><td>Tek tohumdan ağaç yapısında sınırsız anahtar türetir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP-32</a></td></tr>
+              <tr><td><strong>derivation path (BIP-44)</strong></td><td><code>m/44'/60'/0'/0/0</code> = ilk Ethereum hesabı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">BIP-44</a></td></tr>
+              <tr><td><strong>coin type (SLIP-44)</strong></td><td>Path'teki zincir numarası: 0 Bitcoin, 60 Ethereum</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/satoshilabs/slips/blob/master/slip-0044.md">SLIP-44</a></td></tr>
+              <tr><td><strong>BIP-84 (native SegWit path)</strong></td><td>Bitcoin bc1q adresleri için <code>m/84'</code> türetme yolu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0084.mediawiki">BIP-84</a></td></tr>
+              <tr><td><strong>xpub (extended public key)</strong></td><td>Özel anahtar olmadan tüm adresleri türetir (izleme cüzdanı); paylaşırsan gizliliğin biter</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP-32</a></td></tr>
+              <tr><td><strong>SLIP-39 (Shamir backup)</strong></td><td>Tohumu M-of-N paya bölerek yedekler</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/satoshilabs/slips/blob/master/slip-0039.md">SLIP-39</a></td></tr>
+              <tr><td><strong>keystore file</strong></td><td>Özel anahtarın parolayla şifrelenmiş JSON'u (scrypt/PBKDF2 + AES)</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/data-structures-and-encoding/web3-secret-storage/">ethereum.org/web3-secret-storage</a></td></tr>
+              <tr><td><strong>EIP-2335</strong></td><td>Validator BLS anahtarları için keystore biçimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2335">EIP-2335</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2b · Cüzdan türleri ve dApp bağlantısı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>hot wallet</strong></td><td>İnternete bağlı cihazdaki cüzdan; kullanımı kolay, saldırıya açık</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/wallets/">ethereum.org/wallets</a></td></tr>
+              <tr><td><strong>cold wallet / cold storage</strong></td><td>Anahtar çevrimdışı durur, imza ağdan ayrı atılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://trezor.io/learn">trezor.io/learn</a></td></tr>
+              <tr><td><strong>hardware wallet</strong></td><td>Ledger, Trezor gibi imza cihazları; öğrenmek için gerekmez</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.ledger.com/academy">ledger.com/academy</a> · <a href="https://trezor.io/learn">trezor.io</a></td></tr>
+              <tr><td><strong>custodial</strong></td><td>Anahtar borsada ya da sağlayıcıda durur; hesabın dondurulabilir</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/wallets/">ethereum.org/wallets</a></td></tr>
+              <tr><td><strong>non-custodial / self-custody</strong></td><td>Anahtar kullanıcıdadır; yedeklemek de kullanıcının sorumluluğundadır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/guides/how-to-use-a-wallet/">ethereum.org/how-to-use-a-wallet</a></td></tr>
+              <tr><td><strong>browser extension wallet</strong></td><td>MetaMask gibi eklentiler; React dApp'in bağlandığı cüzdan</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.metamask.io/">docs.metamask.io</a></td></tr>
+              <tr><td><strong>EIP-1193 provider</strong></td><td><code>window.ethereum</code> arayüzü: <code>request</code>, <code>accountsChanged</code>, <code>chainChanged</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1193">EIP-1193</a></td></tr>
+              <tr><td><strong>EIP-6963</strong></td><td>Birden fazla cüzdan eklentisini çakışmadan bulma standardı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963</a></td></tr>
+              <tr><td><strong>WalletConnect (Reown)</strong></td><td>Mobil cüzdanı QR kodla dApp'e bağlayan protokol; proje kimliği ister</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.reown.com/">docs.reown.com</a></td></tr>
+              <tr><td><strong>multisig (Safe)</strong></td><td>M-of-N imza isteyen sözleşme cüzdanı; ekip hazinelerinde standart</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.safe.global/">docs.safe.global</a></td></tr>
+              <tr><td><strong>MPC / threshold wallet</strong></td><td>Anahtar hiçbir zaman tek parça halinde oluşmaz; kurumsal saklamada kullanılır</td><td><span class="tag tag--info">İLERİ</span></td><td>Tek bir resmî kaynak yok; "MPC wallet threshold signature" diye ara</td></tr>
+              <tr><td><strong>smart account (ERC-4337)</strong></td><td>Sözleşme hesabı: sosyal kurtarma, gas sponsoru, toplu işlem</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4337">ERC-4337</a> · <a href="../06-altyapi-araclar-guvenlik/index.html#hesap-soyutlama-ve-ux">06 — hesap soyutlama</a></td></tr>
+              <tr><td><strong>EIP-7702</strong></td><td>EOA'nın kodunu bir sözleşmeye devretmesi (Pectra, tip-4 işlem). Kötü niyetli bir delegasyon imzası hesabı boşaltabilir</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7702">EIP-7702</a></td></tr>
+              <tr><td><strong>ENS</strong></td><td><code>isim.eth</code> adını adrese çözer</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ens.domains/">docs.ens.domains</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2c · Private key hijyeni</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ayrı geliştirici cüzdanı</strong></td><td>Testnet için yalnızca bu işe açılmış bir hesap kullan; asıl cüzdanını geliştirme ortamına bağlama</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/security/">ethereum.org/security</a></td></tr>
+              <tr><td><strong>.env / Git sızıntısı</strong></td><td>Özel anahtarı koda ya da commit edilen <code>.env</code> dosyasına koyma; botlar herkese açık depoları sürekli tarar</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/security/">ethereum.org/security</a></td></tr>
+              <tr><td><strong>bilinen test anahtarları</strong></td><td>Hardhat/Foundry yerel ağlarının varsayılan hesapları herkesçe bilinir; mainnet'te kullanılırsa hemen boşaltılır</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/development-networks/">ethereum.org/development-networks</a></td></tr>
+              <tr><td><strong>approval / allowance</strong></td><td>Token harcama izni; sınırsız onaylar risk biriktirir, düzenli olarak geri al</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://revoke.cash/">revoke.cash</a></td></tr>
+              <tr><td><strong>seed phrase phishing / fake airdrop</strong></td><td>"Destek ekibi" ya da sahte airdrop sitesi kurtarma kelimelerini ister; gerçek hiçbir servis istemez</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/security/">ethereum.org/security</a></td></tr>
+              <tr><td><strong>blind signing</strong></td><td>Cüzdanın çözümleyemediği veriyi imzalamak; drainer saldırılarının yolu</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td>"blind signing wallet drainer" diye ara</td></tr>
+              <tr><td><strong>address poisoning</strong></td><td>Benzer görünen sahte adresten gelen sıfır değerli transfer, geçmişten kopyala-yapıştırda yanlış adres seçtirir</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td>"address poisoning attack" diye ara</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blok-ve-zincir"><span class="h-num">§ 3</span>Blok ve zincir</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>3 · Blok yapısı, kesinlik ve fork'lar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>block</strong></td><td>Sıralı işlemler ve önceki bloğa bağlayan başlık</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/blocks/">ethereum.org/blocks</a></td></tr>
+              <tr><td><strong>block header</strong></td><td>Bitcoin'de 80 bayt: version, prev hash, Merkle root, time, nBits, nonce</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/reference/block_chain.html">developer.bitcoin.org/reference</a></td></tr>
+              <tr><td><strong>parent hash</strong></td><td>Önceki bloğun hash'i; geçmişi değiştirmek sonraki tüm blokları geçersiz kılar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/blocks/">ethereum.org/blocks</a></td></tr>
+              <tr><td><strong>state root / receipts root</strong></td><td>Ethereum bloğunda durum ve receipt ağaçlarının kökleri</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/blocks/">ethereum.org/blocks</a></td></tr>
+              <tr><td><strong>execution payload</strong></td><td>Merge sonrası blok: consensus bloğunun içinde execution yükü taşınır</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/blocks/">ethereum.org/blocks</a></td></tr>
+              <tr><td><strong>timestamp</strong></td><td>Bloğu üreten belirler, saniyesine güvenilmez; <code>block.timestamp</code> ile rastgelelik kurma</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html">Solidity — global variables</a></td></tr>
+              <tr><td><strong>slot / epoch</strong></td><td>Ethereum PoS'ta slot 12 sn, epoch 32 slottur (6,4 dk)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/">ethereum.org/pos</a></td></tr>
+              <tr><td><strong>block height / number</strong></td><td>Genesis'ten itibaren blok sıra numarası</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/blocks/">ethereum.org/blocks</a></td></tr>
+              <tr><td><strong>genesis block</strong></td><td>Zincirin ilk bloğu; ağın başlangıç durumu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>confirmation</strong></td><td>İşlemin üstüne eklenen blok sayısı; arttıkça geri alınma olasılığı düşer</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/devguide/block_chain.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>reorg</strong></td><td>Zincirin ucunun başka bir dalla yer değiştirmesi; onaylanmamış işlem düşebilir</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/">ethereum.org/attack-and-defense</a></td></tr>
+              <tr><td><strong>orphan / stale / ommer block</strong></td><td>Kanonik zincire giremeyen blok. "Ommer" terimi yalnızca PoW Ethereum'daydı</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://developer.bitcoin.org/devguide/block_chain.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>finality</strong></td><td>Geri alınamazlık. Bitcoin'de olasılıksal; Ethereum'da ekonomik, normalde yaklaşık 2 epoch (≈12,8 dk)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>latest / safe / finalized</strong></td><td>JSON-RPC blok etiketleri; ödeme onayında <code>finalized</code> kullanılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a></td></tr>
+              <tr><td><strong>fork choice rule</strong></td><td>Düğümün hangi dalı kanonik sayacağı kuralı: Bitcoin'de en çok iş, Ethereum'da LMD-GHOST</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>soft fork</strong></td><td>Kuralları daraltan, eski düğümlerle uyumlu kalan değişiklik; örneği SegWit</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki">BIP-141</a></td></tr>
+              <tr><td><strong>hard fork</strong></td><td>Eski düğümlerle uyumsuz değişiklik; Ethereum yükseltmeleri böyle yapılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/ethereum-forks/">ethereum.org/ethereum-forks</a></td></tr>
+              <tr><td><strong>chain split</strong></td><td>Topluluk ayrışınca iki kalıcı zincir oluşur: ETH/ETC, BTC/BCH</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/ethereum-forks/">ethereum.org/ethereum-forks</a></td></tr>
+              <tr><td><strong>chain ID (EIP-155)</strong></td><td>İmzaya giren zincir kimliği; işlemin başka zincirde tekrar oynatılmasını önler (Sepolia: 11155111)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-155">EIP-155</a> · <a href="https://chainlist.org/">chainlist.org</a></td></tr>
+              <tr><td><strong>mainnet / testnet / devnet</strong></td><td>Gerçek ağ / değersiz test ağı (Sepolia, Hoodi, Ephemery; Holesky Eylül 2025'te emekliye ayrıldı) / yerel ağ</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/networks/">ethereum.org/networks</a></td></tr>
+              <tr><td><strong>difficulty bomb</strong></td><td>PoW zorluğunu artırarak PoS'a geçişi zorlayan mekanizma</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="konsensus"><span class="h-num">§ 4</span>Konsensüs</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>4a · Mekanizma aileleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>consensus mechanism</strong></td><td>Düğümlerin tek bir geçmişte anlaşmasını sağlayan kurallar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/">ethereum.org/consensus-mechanisms</a></td></tr>
+              <tr><td><strong>Bitcoin whitepaper</strong></td><td>Nakamoto konsensüsünün kaynağı; 9 sayfa</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://bitcoin.org/bitcoin.pdf">bitcoin.org/bitcoin.pdf</a></td></tr>
+              <tr><td><strong>Proof of Work</strong></td><td>Hash bulmacası çözerek blok üretme; saldırının maliyeti enerji ve donanım</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pow/">ethereum.org/pow</a></td></tr>
+              <tr><td><strong>mining / hashrate / difficulty</strong></td><td>PoW'da blok üretimi, toplam hesaplama gücü ve hedef zorluk. Bitcoin'de sürüyor, Ethereum'da bitti</td><td><span class="tag">ORTA</span></td><td><a href="https://developer.bitcoin.org/devguide/mining.html">developer.bitcoin.org/mining</a></td></tr>
+              <tr><td><strong>Ethash</strong></td><td>Ethereum'un eski PoW algoritması</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pow/mining/mining-algorithms/ethash/">ethereum.org/ethash</a></td></tr>
+              <tr><td><strong>Proof of Stake</strong></td><td>Kilitli sermayeyle blok önerip oylama; saldırının maliyeti stake kaybı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/">ethereum.org/pos</a></td></tr>
+              <tr><td><strong>PoW vs PoS</strong></td><td>Güvenlik, enerji ve merkeziyet karşılaştırması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/pos-vs-pow/">ethereum.org/pos-vs-pow</a></td></tr>
+              <tr><td><strong>Nakamoto consensus</strong></td><td>En ağır zincir kuralı; kesinlik olasılıksaldır, ağ bölünse de zincir çalışmaya devam eder</td><td><span class="tag">ORTA</span></td><td><a href="https://bitcoin.org/bitcoin.pdf">bitcoin.org/bitcoin.pdf</a></td></tr>
+              <tr><td><strong>BFT (Byzantine Fault Tolerance)</strong></td><td>Düğümlerin 1/3'ünden azı kötü niyetli olduğu sürece güvenli; oylamayla anında kesinlik sağlar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/cometbft">docs.cosmos.network/cometbft</a></td></tr>
+              <tr><td><strong>Nakamoto vs BFT</strong></td><td>Nakamoto canlılığı (liveness), BFT güvenliği (safety) öne alır; Ethereum'un Gasper'ı ikisini birleştirir</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>PBFT</strong></td><td>Klasik BFT algoritması (Castro &amp; Liskov, 1999); Tendermint ailesinin atası</td><td><span class="tag tag--info">İLERİ</span></td><td>"Practical Byzantine Fault Tolerance" makalesini ara</td></tr>
+              <tr><td><strong>Tendermint / CometBFT</strong></td><td>Cosmos ekosisteminin BFT motoru; CometBFT, Tendermint Core'un devamıdır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/cometbft">docs.cosmos.network/cometbft</a> · <a href="../05-diger-zincirler/index.html">05 — diğer zincirler</a></td></tr>
+              <tr><td><strong>delegated PoS</strong></td><td>Token sahipleri stake'lerini bir validator'a devreder; Cosmos Hub bu modeli kullanır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/hub/latest">Cosmos Hub docs</a></td></tr>
+              <tr><td><strong>Proof of Authority</strong></td><td>Önceden onaylanmış imzacılar; özel ve kurumsal ağlarda kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/poa/">ethereum.org/poa</a> · <a href="../04-dotnet/index.html#kurumsal-izinli-blockchain">04 — izinli blockchain</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>4b · Ethereum PoS ayrıntıları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>validator</strong></td><td>Stake yatırıp blok öneren ve oy veren yazılım</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/">ethereum.org/pos</a></td></tr>
+              <tr><td><strong>staking</strong></td><td>Validator olmak için ETH kilitlemek; solo staking 32 ETH ister. Öğrenmek için Hoodi testnet'i yeterli</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/staking/">ethereum.org/staking</a></td></tr>
+              <tr><td><strong>attestation</strong></td><td>Validator'ın zincir başı ve checkpoint'ler için verdiği oy</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/attestations/">ethereum.org/attestations</a></td></tr>
+              <tr><td><strong>block proposer / RANDAO</strong></td><td>Her slotta blok önericisini seçen sözde rastgelelik</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/block-proposal/">ethereum.org/block-proposal</a></td></tr>
+              <tr><td><strong>Gasper (Casper FFG + LMD-GHOST)</strong></td><td>Kesinleştirme aracı ile fork choice kuralının birleşimi</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>justified / finalized checkpoint</strong></td><td>Stake'in 2/3'ü oylayınca justified olur; üstüne bir justified daha gelince finalized</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>slashing</strong></td><td>Çelişkili oy ya da blok için stake'in yakılıp validator'ın atılması</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/">ethereum.org/rewards-and-penalties</a></td></tr>
+              <tr><td><strong>inactivity leak</strong></td><td>4 epoch'tan uzun süre kesinleşme olmazsa pasif validator'ların stake'i erir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/gasper/">ethereum.org/gasper</a></td></tr>
+              <tr><td><strong>weak subjectivity / checkpoint sync</strong></td><td>Yeni düğüm, güvenilir ve yakın bir checkpoint'ten başlar</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/weak-subjectivity/">ethereum.org/weak-subjectivity</a></td></tr>
+              <tr><td><strong>withdrawals</strong></td><td>Stake ve ödüllerin çekilmesi (Shapella ile geldi)</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/staking/withdrawals/">ethereum.org/withdrawals</a></td></tr>
+              <tr><td><strong>liquid staking (LST)</strong></td><td>Stake karşılığında devredilebilir token alma; ek sözleşme ve merkeziyet riski taşır</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.lido.fi/">docs.lido.fi</a></td></tr>
+              <tr><td><strong>single slot finality</strong></td><td>Tek slotta kesinleşme araştırması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/single-slot-finality/">ethereum.org/roadmap</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>4c · Saldırı modelleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>51% attack</strong></td><td>Hashrate ya da stake çoğunluğuyla reorg ve sansür</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>33% / 66% eşikleri</strong></td><td>PoS'ta stake'in 1/3'ü kesinleşmeyi durdurur, 2/3'ü istediği zinciri kesinleştirir</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/">ethereum.org/attack-and-defense</a></td></tr>
+              <tr><td><strong>double spend</strong></td><td>Aynı parayı iki kez harcamak; reorg ile mümkün olur, onay beklemenin nedeni budur</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://bitcoin.org/bitcoin.pdf">bitcoin.org/bitcoin.pdf</a></td></tr>
+              <tr><td><strong>Sybil attack</strong></td><td>Çok sayıda sahte kimlik açma; PoW ve PoS kimliğe maliyet ekleyerek bunu önler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/">ethereum.org/consensus-mechanisms</a></td></tr>
+              <tr><td><strong>long-range attack</strong></td><td>Eski anahtarlarla geçmişten alternatif zincir kurma; weak subjectivity ile önlenir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/">ethereum.org/attack-and-defense</a></td></tr>
+              <tr><td><strong>balancing attack</strong></td><td>Oyları iki dal arasında bölerek kesinleşmeyi geciktirme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/attack-and-defense/">ethereum.org/attack-and-defense</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hesap-modelleri"><span class="h-num">§ 5</span>Hesap modelleri</h2>
+        <div class="compare">
+          <div class="pane">
+            <p class="pane__title">UTXO (Bitcoin)</p>
+            <ul><li>Bakiye diye bir alan yok; harcanmamış çıktıların toplamı var</li><li>Bağımsız çıktılar paralel doğrulanabilir</li><li>Akıllı sözleşme yazmak zor</li></ul>
+          </div>
+          <div class="pane">
+            <p class="pane__title">Account-based (Ethereum)</p>
+            <ul><li>Global durumda adres → bakiye, nonce, kod, storage</li><li>Sözleşme mantığına doğal olarak uyar</li><li>Nonce sırası ve paylaşılan durum yüzünden paralellik zor</li></ul>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>5 · UTXO, hesap ve durum</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>UTXO</strong></td><td>Her işlem çıktı tüketir ve yeni çıktı üretir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/devguide/transactions.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>input / output</strong></td><td>Girdi önceki bir çıktıya işaret eder ve imza taşır; çıktı tutar ve kilit script'inden oluşur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/reference/transactions.html">developer.bitcoin.org/reference</a></td></tr>
+              <tr><td><strong>change output</strong></td><td>Tüketilen UTXO'nun fazlası gönderene döner; eklemeyi unutursan fark ücret olarak gider</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://developer.bitcoin.org/devguide/wallets.html">developer.bitcoin.org/wallets</a></td></tr>
+              <tr><td><strong>Bitcoin Script</strong></td><td>Çıktı kilitleme dili (P2PKH, P2SH, P2WPKH, P2TR); Turing-complete değildir</td><td><span class="tag">ORTA</span></td><td><a href="https://developer.bitcoin.org/devguide/transactions.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>SegWit / Taproot</strong></td><td>İmza verisini ayıran soft fork / Schnorr tabanlı yükseltme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki">BIP-141</a> · <a href="https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki">BIP-341</a></td></tr>
+              <tr><td><strong>account-based model</strong></td><td>Her adresin bakiyesi ve nonce'u global durumda tutulur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>EOA (externally owned account)</strong></td><td>Özel anahtarla kontrol edilir; işlem başlatabilen tek hesap türü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>contract account</strong></td><td>Kodla kontrol edilir; kendiliğinden işlem başlatamaz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>account nonce</strong></td><td>Gönderilen işlem sayacı; sırayı ve tekrar korumasını sağlar. Arada boşluk kalırsa sonraki işlemler bekler</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>wei / gwei / ether</strong></td><td>1 ETH = 10<sup>18</sup> wei, 1 gwei = 10<sup>9</sup> wei; arayüzde ondalık hatasına dikkat</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/intro-to-ether/">ethereum.org/intro-to-ether</a></td></tr>
+              <tr><td><strong>world state</strong></td><td>Tüm hesapların durumu; her blok bir durum geçişidir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/evm/">ethereum.org/evm</a></td></tr>
+              <tr><td><strong>storageRoot / codeHash</strong></td><td>Hesabın storage ağacının kökü / kodunun hash'i</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/accounts/">ethereum.org/accounts</a></td></tr>
+              <tr><td><strong>CREATE / CREATE2</strong></td><td>Sözleşme adresi deployer + nonce ile ya da salt ile önceden hesaplanabilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html">Solidity — salted create</a></td></tr>
+              <tr><td><strong>Solana account model</strong></td><td>Veri hesaplarda, kod ayrı program hesabında durur; bu yüzden Ethereum mantığı birebir taşınmaz</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/core/accounts">solana.com/docs</a> · <a href="../05-diger-zincirler/index.html">05</a></td></tr>
+              <tr><td><strong>state bloat / statelessness</strong></td><td>Büyüyen durum; düğümün durumun tamamını tutmadan doğrulama yapabilmesi hedefi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/statelessness/">ethereum.org/roadmap</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="islem-yasam-dongusu"><span class="h-num">§ 6</span>İşlem yaşam döngüsü</h2>
+        <p class="intro">Sıra şöyle: imzala → yayınla → mempool → bloğa gir → receipt → kesinleş. Arayüzdeki "pending / success / failed" durumlarının karşılığı bu adımlardır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6a · İşlem ve ücret</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>transaction</strong></td><td>EOA'nın imzalı talebi: <code>to</code>, <code>value</code>, <code>data</code>, <code>nonce</code> ve gas alanları</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>signed / raw transaction</strong></td><td>Yerelde imzalanıp <code>eth_sendRawTransaction</code> ile gönderilen bayt dizisi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a></td></tr>
+              <tr><td><strong>tx hash</strong></td><td>İşlemin kimliği; explorer'da bununla aranır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>mempool / txpool</strong></td><td>Bloğa girmeyi bekleyen işlemler; her düğümün kendi havuzu var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>private mempool / Protect RPC</strong></td><td>İşlemi açık havuza düşürmeden builder'a iletir; sandwich riskini azaltır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.flashbots.net/flashbots-protect/quick-start">Flashbots Protect</a> · <a href="https://mevblocker.io/">mevblocker.io</a></td></tr>
+              <tr><td><strong>gas</strong></td><td>Hesaplama adımlarının birimi; ücret = gas used × gas fiyatı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>gas limit</strong> (işlem)</td><td>İşlemin harcayabileceği azami gas; yetmezse işlem revert olur ve harcanan gas geri gelmez</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>21.000 gas</strong></td><td>Düz ETH transferinin sabit maliyeti</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>EIP-1559</strong></td><td>London (Ağustos 2021) ile gelen ücret modeli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1559">EIP-1559</a></td></tr>
+              <tr><td><strong>base fee</strong></td><td>Protokolün belirlediği taban ücret; yakılır ve blok doluluğuna göre blok başına en fazla %12,5 değişir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>priority fee (tip)</strong></td><td>Blok önericisine giden ek ücret</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>maxFeePerGas / maxPriorityFeePerGas</strong></td><td>Ödemeye razı olduğun tavan; fazlası iade edilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>gasPrice (legacy, tip-0)</strong></td><td>EIP-1559 öncesindeki tek fiyat alanı; eski örneklerde görürsün</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+              <tr><td><strong>block gas limit / target</strong></td><td>Blok başına toplam gas; hedefin üstüne çıkılırsa base fee artar</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>typed transactions (EIP-2718)</strong></td><td>İşlem tipleri: 0 legacy, 1 access list, 2 EIP-1559, 3 blob, 4 set-code</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2718">EIP-2718</a></td></tr>
+              <tr><td><strong>access list (EIP-2930)</strong></td><td>Dokunulacak adres ve slotları önceden bildiren tip-1 işlem</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2930">EIP-2930</a></td></tr>
+              <tr><td><strong>transaction gas cap (EIP-7825)</strong></td><td>Fusaka ile tek bir işlemin gas tavanı 16.777.216 (2<sup>24</sup>) oldu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7825">EIP-7825</a></td></tr>
+              <tr><td><strong>speed up / cancel</strong></td><td>Aynı nonce ile daha yüksek ücretli işlem göndererek bekleyen işlemi değiştirme</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/transactions/">ethereum.org/transactions</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6b · Sonuç, hata ve kayıt</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>eth_estimateGas</strong></td><td>Göndermeden önce gas tahmini; revert edecek işlem burada yakalanır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a></td></tr>
+              <tr><td><strong>eth_call</strong></td><td>Durumu değiştirmeden çağrı simülasyonu; view fonksiyonları böyle okunur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a></td></tr>
+              <tr><td><strong>revert</strong></td><td>İşlem geri alınır ama harcanan gas yanar; <code>require</code>, <code>revert</code>, custom error</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html">Solidity — error handling</a></td></tr>
+              <tr><td><strong>out of gas</strong></td><td>Gas limiti aşıldı; durum değişiklikleri geri alınır, gas iade edilmez</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org/gas</a></td></tr>
+              <tr><td><strong>receipt</strong></td><td>İşlem bloğa girince oluşur: <code>status</code> (1/0), <code>gasUsed</code>, <code>effectiveGasPrice</code>, <code>logs</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">eth_getTransactionReceipt</a></td></tr>
+              <tr><td><strong>event / log</strong></td><td><code>emit</code> ile yazılan ucuz kayıt; sözleşme okuyamaz, dApp'ler dinler</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#events">Solidity — events</a></td></tr>
+              <tr><td><strong>topics</strong></td><td>topic0 = event imzasının Keccak-256'sı; <code>indexed</code> alanlar diğer topic'lere yazılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity — ABI spec</a></td></tr>
+              <tr><td><strong>eth_getLogs</strong></td><td>Blok aralığında adres ve topic filtresiyle log çeker; sağlayıcılar aralığı sınırlar</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a></td></tr>
+              <tr><td><strong>internal transaction (trace)</strong></td><td>Sözleşmenin yaptığı iç çağrı ya da ETH hareketi; ayrı bir işlem değildir, <code>debug_trace*</code> ile görülür</td><td><span class="tag">ORTA</span></td><td><a href="https://geth.ethereum.org/docs/interacting-with-geth/rpc">geth.ethereum.org/rpc</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6c · Explorer ve sıfır maliyetli araçlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>block explorer</strong></td><td>İşlem, adres, sözleşme ve log görüntüleyici</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/data-and-analytics/block-explorers/">ethereum.org/block-explorers</a></td></tr>
+              <tr><td><strong>Etherscan</strong></td><td>En yaygın explorer; ücretsiz API anahtarı var, üst katmanları ücretli</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://etherscan.io/">etherscan.io</a> · <a href="https://docs.etherscan.io/">docs.etherscan.io</a></td></tr>
+              <tr><td><strong>Sepolia Etherscan</strong></td><td>Testnet explorer; öğrenirken asıl kullanacağın ekran</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a></td></tr>
+              <tr><td><strong>Blockscout</strong></td><td>Açık kaynak explorer; birçok L2 ve testnet'te çalışır</td><td><span class="tag">ORTA</span></td><td><a href="https://eth.blockscout.com/">eth.blockscout.com</a> · <a href="https://docs.blockscout.com/">docs.blockscout.com</a></td></tr>
+              <tr><td><strong>Tenderly</strong></td><td>İşlem simülasyonu ve adım adım hata ayıklama; ücretli planları var</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.tenderly.co/">docs.tenderly.co</a></td></tr>
+              <tr><td><strong>4byte signature database</strong></td><td>4 baytlık selector'dan fonksiyon adını bulur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://www.4byte.directory/">4byte.directory</a> · <a href="https://4byte.sourcify.dev/">4byte.sourcify.dev</a></td></tr>
+              <tr><td><strong>gas tracker</strong></td><td>Anlık base fee ve priority fee önerileri</td><td><span class="tag">ORTA</span></td><td><a href="https://etherscan.io/gastracker">etherscan.io/gastracker</a></td></tr>
+              <tr><td><strong>Blobscan</strong></td><td>Blob işlemleri için explorer</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://blobscan.com/">blobscan.com</a></td></tr>
+              <tr><td><strong>mempool.space</strong></td><td>Bitcoin explorer'ı ve mempool görselleştirmesi</td><td><span class="tag">ORTA</span></td><td><a href="https://mempool.space/">mempool.space</a></td></tr>
+              <tr><td><strong>Sepolia faucet</strong></td><td>Ücretsiz test ETH veren Google Cloud, Alchemy ve PoW faucet'leri; koşulları değişebilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">Google Cloud</a> · <a href="https://www.alchemy.com/faucets/ethereum-sepolia">Alchemy</a> · <a href="https://sepolia-faucet.pk910.de/">pk910</a></td></tr>
+              <tr><td><strong>Hoodi faucet</strong></td><td>Validator testleri için test ETH</td><td><span class="tag">ORTA</span></td><td><a href="https://hoodi.ethpandaops.io/">hoodi.ethpandaops.io</a></td></tr>
+              <tr><td><strong>testnet USDC</strong></td><td>Circle'ın test stablecoin faucet'i</td><td><span class="tag">ORTA</span></td><td><a href="https://faucet.circle.com/">faucet.circle.com</a></td></tr>
+              <tr><td><strong>Chainlist</strong></td><td>Chain ID ve RPC adresi listesi; tanımadığın RPC'yi cüzdana eklemek risklidir</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Explorer'da işlem okuma sırası</h3>
+        <ul class="checklist">
+          <li><strong>Status:</strong> Success mi Failed mi; failed ise revert nedeni</li>
+          <li><strong>Block:</strong> onay sayısı ve finalized olup olmadığı</li>
+          <li><strong>From / To:</strong> karşı taraf EOA mı, sözleşme mi</li>
+          <li><strong>Value</strong> ve <strong>Transaction Fee</strong> = Gas Used × Effective Gas Price</li>
+          <li><strong>Gas Limit</strong> ile <strong>Gas Used</strong> oranı</li>
+          <li><strong>Input Data:</strong> "Decode" ile fonksiyon adı ve parametreler</li>
+          <li><strong>Logs</strong> sekmesi: event'ler ve topic'ler</li>
+          <li><strong>Internal Txns / Token Transfers</strong> sekmeleri</li>
+        </ul>
+
+        <h2 id="evm"><span class="h-num">§ 7</span>EVM</h2>
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Solidity sözdizimi <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02</a> sayfasında. Burada makinenin kavramları var. "Storage ile memory farkı" ve "function selector nasıl hesaplanır" gibi sorular Solidity deneyimi soran mülakatlarda doğrudan çıkabilir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>7 · Sanal makine kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EVM</strong></td><td>Ethereum ve EVM uyumlu zincirlerde sözleşmeleri çalıştıran deterministik sanal makine</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/evm/">ethereum.org/evm</a></td></tr>
+              <tr><td><strong>stack machine</strong></td><td>256-bit kelimeler, en fazla 1024 derinlik; "stack too deep" hatası buradan gelir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/evm/">ethereum.org/evm</a></td></tr>
+              <tr><td><strong>bytecode</strong> (creation vs runtime)</td><td>Deploy sırasında çalışan kurulum kodu / zincirde kalan runtime kodu</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#the-ethereum-virtual-machine">Solidity — EVM</a></td></tr>
+              <tr><td><strong>opcode</strong></td><td>Tek baytlık komutlar (ADD, SSTORE, CALL…) ve her birinin gas maliyeti</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/evm/opcodes/">ethereum.org/opcodes</a> · <a href="https://www.evm.codes/">evm.codes</a></td></tr>
+              <tr><td><strong>storage</strong></td><td>Kalıcı anahtar-değer deposu; en pahalı alan</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html">Solidity — storage layout</a></td></tr>
+              <tr><td><strong>storage slot / layout</strong></td><td>Değişkenlerin slotlara yerleşimi; upgradeable proxy'de değişken sırası değişirse veri bozulur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html">Solidity — storage layout</a></td></tr>
+              <tr><td><strong>memory</strong></td><td>Çağrı süresince yaşayan geçici alan</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_memory.html">Solidity — memory layout</a></td></tr>
+              <tr><td><strong>calldata</strong></td><td>Çağrı girdisinin salt okunur alanı; external parametrelerde ucuzdur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_calldata.html">Solidity — calldata layout</a></td></tr>
+              <tr><td><strong>transient storage (EIP-1153)</strong></td><td>İşlem bitince silinen depo (TSTORE/TLOAD); reentrancy kilitlerinde kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1153">EIP-1153</a></td></tr>
+              <tr><td><strong>ABI</strong></td><td>Fonksiyon ve event arayüzünün JSON tanımı ve kodlama kuralları; frontend sözleşmeyi bununla çağırır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity — ABI spec</a></td></tr>
+              <tr><td><strong>abi.encode / abi.encodePacked</strong></td><td>Dolgulu kodlama / sıkışık kodlama; packed çıktının hash'i farklı girdilerde çakışabilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity — ABI spec</a></td></tr>
+              <tr><td><strong>function selector</strong></td><td><code>keccak256("transfer(address,uint256)")</code> değerinin ilk 4 baytı, yani <code>0xa9059cbb</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity — ABI spec</a></td></tr>
+              <tr><td><strong>custom error selector</strong></td><td>Hatalar da 4 baytlık selector ile kodlanır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">Solidity — ABI spec</a></td></tr>
+              <tr><td><strong>fallback / receive</strong></td><td>Selector eşleşmediğinde ya da düz ETH geldiğinde çalışan fonksiyonlar</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html">Solidity — contracts</a></td></tr>
+              <tr><td><strong>CALL / DELEGATECALL / STATICCALL</strong></td><td>Delegatecall, çağıranın storage'ında çalışır: proxy'lerin temeli, yanlış kullanılırsa güvenlik açığı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://www.evm.codes/">evm.codes</a></td></tr>
+              <tr><td><strong>precompile</strong></td><td>Sabit adresli yerleşik sözleşmeler: ecrecover (0x01), SHA-256, BLS12-381 (EIP-2537), P-256 (EIP-7951)</td><td><span class="tag">ORTA</span></td><td><a href="https://www.evm.codes/precompiled">evm.codes/precompiled</a></td></tr>
+              <tr><td><strong>PREVRANDAO</strong></td><td><code>block.prevrandao</code> güvenli rastgelelik değildir; oyun ve çekilişte VRF kullanılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4399">EIP-4399</a> · <a href="https://docs.chain.link/vrf">Chainlink VRF</a></td></tr>
+              <tr><td><strong>SELFDESTRUCT (EIP-6780)</strong></td><td>Dencun'dan beri yalnızca aynı işlemde oluşturulan sözleşmeyi siler; eski örneklerdeki davranışa güvenme</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-6780">EIP-6780</a></td></tr>
+              <tr><td><strong>contract size limit (EIP-170)</strong></td><td>Runtime kodu en fazla 24.576 bayt olabilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-170">EIP-170</a></td></tr>
+              <tr><td><strong>Yul / inline assembly</strong></td><td>EVM'e yakın ara dil; gas optimizasyonu ve düşük seviyeli erişim için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/yul.html">Solidity — Yul</a></td></tr>
+              <tr><td><strong>EVM implementations</strong></td><td>revm (Rust), evmone (C++), EthereumJS (TypeScript); Nethermind'ın kendi C# EVM'i de var</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bluealloy/revm">revm</a> · <a href="https://github.com/ipsilon/evmone">evmone</a> · <a href="https://github.com/ethereumjs/ethereumjs-monorepo">EthereumJS</a></td></tr>
+              <tr><td><strong>EVM-compatible chain</strong></td><td>Aynı bytecode'u çalıştıran L1/L2'ler; opcode, gas ve precompile farkları olabilir</td><td><span class="tag">ORTA</span></td><td><a href="../05-diger-zincirler/index.html">05 — diğer zincirler</a></td></tr>
+              <tr><td><strong>zkEVM</strong></td><td>EVM yürütmesini ZK ispatıyla doğrulama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/zkevm/">ethereum.org/roadmap/zkevm</a></td></tr>
+              <tr><td><strong>Remix debugger</strong></td><td>Tarayıcıda opcode, stack ve storage'ı adım adım izleme; kurulum gerektirmez, ücretsiz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://remix-ide.readthedocs.io/en/latest/">remix-ide.readthedocs.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ag-katmani"><span class="h-num">§ 8</span>Ağ katmanı ve düğümler</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8a · Düğüm türleri ve RPC</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>node</strong></td><td>Zincir yazılımını çalıştıran bilgisayar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/">ethereum.org/nodes-and-clients</a></td></tr>
+              <tr><td><strong>execution client / consensus client</strong></td><td>Merge sonrası bir düğüm iki yazılımdan oluşur: işlemleri yürüten ve PoS'u yürüten</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/node-architecture/">ethereum.org/node-architecture</a></td></tr>
+              <tr><td><strong>Engine API</strong></td><td>Execution ve consensus istemcileri arasındaki yerel API</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/ethereum/execution-apis/tree/main/src/engine">execution-apis/engine</a></td></tr>
+              <tr><td><strong>full node</strong></td><td>Blokları doğrular ve yakın tarihli durumu tutar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/">ethereum.org/nodes-and-clients</a></td></tr>
+              <tr><td><strong>archive node</strong></td><td>Tüm geçmiş durumları tutar; eski bir bloktaki bakiyeyi sorgulamak için gerekir</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/archive-nodes/">ethereum.org/archive-nodes</a></td></tr>
+              <tr><td><strong>light client</strong></td><td>Yalnızca blok başlıklarını izler, veriyi ispatla doğrular</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/light-clients/">ethereum.org/light-clients</a> · <a href="https://github.com/a16z/helios">Helios</a></td></tr>
+              <tr><td><strong>sync modes</strong></td><td>Execution tarafında snap/full, consensus tarafında checkpoint sync</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://geth.ethereum.org/docs/fundamentals/sync-modes">geth.ethereum.org/sync-modes</a></td></tr>
+              <tr><td><strong>history expiry (EIP-7642)</strong></td><td>Düğümlerin Merge öncesi geçmişi silebilmesi (Fusaka ile geldi)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/fusaka/">ethereum.org/roadmap/fusaka</a></td></tr>
+              <tr><td><strong>JSON-RPC 2.0</strong></td><td>İstek-yanıt protokolü: <code>method</code>, <code>params</code>, <code>id</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.jsonrpc.org/specification">jsonrpc.org</a></td></tr>
+              <tr><td><strong>Ethereum JSON-RPC API</strong></td><td><code>eth_blockNumber</code>, <code>eth_getBalance</code>, <code>eth_call</code>…; tüm kütüphaneler bu API'yi sarar</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/apis/json-rpc/">ethereum.org/json-rpc</a> · <a href="https://github.com/ethereum/execution-apis">execution-apis</a></td></tr>
+              <tr><td><strong>Beacon API</strong></td><td>Consensus istemcisinin REST API'si: validator, slot ve finality verisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.github.io/beacon-APIs/">beacon-APIs</a></td></tr>
+              <tr><td><strong>eth_subscribe (WebSocket)</strong></td><td>Yeni blok ve log akışı; HTTP üzerinden çalışmaz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://geth.ethereum.org/docs/interacting-with-geth/rpc">geth.ethereum.org/rpc</a></td></tr>
+              <tr><td><strong>node-as-a-service</strong></td><td>Alchemy, Infura gibi barındırılan RPC; ücretsiz katmanla başla</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/nodes-as-a-service/">ethereum.org/nodes-as-a-service</a> · <a href="https://www.alchemy.com/docs">Alchemy</a> · <a href="https://docs.infura.io/">Infura</a></td></tr>
+              <tr><td><strong>public RPC</strong></td><td>Hesap gerektirmeyen ücretsiz uç noktalar; hız sınırı, gizlilik ve güvenilirlik zayıf. Karşılaştırma için <a href="../06-altyapi-araclar-guvenlik/index.html#rpc-ve-dugum-saglayicilari">06 — RPC sağlayıcıları</a></td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+              <tr><td><strong>run a node</strong></td><td>Kendi düğümünü çalıştırmak; disk ve bant genişliği ister, sıfır bütçede şart değil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/run-a-node/">ethereum.org/run-a-node</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8b · P2P katmanı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>p2p network</strong></td><td>Merkezi sunucu olmadan düğümden düğüme iletişim</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/networking-layer/">ethereum.org/networking-layer</a></td></tr>
+              <tr><td><strong>devp2p / RLPx</strong></td><td>Execution katmanının p2p protokol yığını</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/ethereum/devp2p">github.com/ethereum/devp2p</a></td></tr>
+              <tr><td><strong>libp2p / gossipsub</strong></td><td>Consensus katmanının p2p ve yayın protokolü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.libp2p.io/">docs.libp2p.io</a></td></tr>
+              <tr><td><strong>discv5 / ENR / enode</strong></td><td>Düğüm keşfi ve düğüm adresi biçimleri</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/networking-layer/network-addresses/">ethereum.org/network-addresses</a></td></tr>
+              <tr><td><strong>bootnode</strong></td><td>Yeni düğümün ilk bağlandığı bilinen düğümler</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/bootnodes/">ethereum.org/bootnodes</a></td></tr>
+              <tr><td><strong>Portal Network</strong></td><td>Hafif istemcilere geçmiş ve durum verisi dağıtan ağ</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/networking-layer/portal-network/">ethereum.org/portal-network</a></td></tr>
+              <tr><td><strong>Bitcoin P2P</strong></td><td>Bitcoin düğümlerinin iletişimi ve blok yayılımı</td><td><span class="tag">ORTA</span></td><td><a href="https://developer.bitcoin.org/devguide/p2p_network.html">developer.bitcoin.org/p2p</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8c · İstemci çeşitliliği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>client diversity</strong></td><td>Tek istemcideki bir hata ağı çökertmesin diye kullanım farklı istemcilere dağıtılır; tek istemcinin %33'ü aşması risk sayılır</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/nodes-and-clients/client-diversity/">ethereum.org/client-diversity</a> · <a href="https://clientdiversity.org/">clientdiversity.org</a></td></tr>
+              <tr><td><strong>Geth</strong></td><td>Go ile yazılmış, en eski ve yaygın execution istemcisi. Go için: <a href="../../Go/index.html">Go sayfası</a></td><td><span class="tag">ORTA</span></td><td><a href="https://geth.ethereum.org/docs">geth.ethereum.org</a></td></tr>
+              <tr><td><strong>Nethermind</strong></td><td>C#/.NET ile yazılmış execution istemcisi; C#/.NET biliyorsan okunabilir, gerçek dünya kaynak kodu. Köprü: <a href="../04-dotnet/index.html">04 — .NET</a></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethermind.io/">docs.nethermind.io</a> · <a href="https://github.com/NethermindEth/nethermind">GitHub</a></td></tr>
+              <tr><td><strong>Besu</strong></td><td>Java; hem mainnet'te hem izinli kurumsal ağlarda çalışır (LF Decentralized Trust)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.besu-eth.org/">docs.besu-eth.org</a></td></tr>
+              <tr><td><strong>Reth</strong></td><td>Rust; Paradigm'in modüler node SDK'sı. Rust için: <a href="../../Rust/index.html">Rust sayfası</a></td><td><span class="tag">ORTA</span></td><td><a href="https://reth.rs/">reth.rs</a></td></tr>
+              <tr><td><strong>Erigon</strong></td><td>Go; disk verimliliği ve arşiv kullanımı odaklı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.erigon.tech/">docs.erigon.tech</a></td></tr>
+              <tr><td><strong>ethrex</strong></td><td>Rust; LambdaClass'ın minimal execution istemcisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/lambdaclass/ethrex">github.com/lambdaclass/ethrex</a></td></tr>
+              <tr><td><strong>consensus clients</strong></td><td>Lighthouse (Rust), Prysm (Go), Teku (Java), Nimbus (Nim), Lodestar (TypeScript), Grandine (Rust)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://lighthouse-book.sigmaprime.io/">Lighthouse</a> · <a href="https://prysm.offchainlabs.com/docs/">Prysm</a> · <a href="https://docs.teku.consensys.io/">Teku</a> · <a href="https://nimbus.guide/">Nimbus</a> · <a href="https://chainsafe.github.io/lodestar/">Lodestar</a> · <a href="https://docs.grandine.io/">Grandine</a></td></tr>
+              <tr><td><strong>Bitcoin Core</strong></td><td>Bitcoin'in referans düğüm yazılımı (C++)</td><td><span class="tag">ORTA</span></td><td><a href="https://bitcoincore.org/en/doc/">bitcoincore.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bildiğin dile göre kaynak kodunu okuyabileceğin istemci</caption>
+            <thead><tr><th>Bildiğin dil</th><th>Execution istemcisi / EVM</th><th>Consensus istemcisi</th></tr></thead>
+            <tbody>
+              <tr><td><strong>C# / .NET</strong></td><td>Nethermind</td><td>—</td></tr>
+              <tr><td><strong>Go</strong></td><td>Geth, Erigon</td><td>Prysm</td></tr>
+              <tr><td><strong>Rust</strong></td><td>Reth, ethrex; EVM: revm</td><td>Lighthouse, Grandine</td></tr>
+              <tr><td><strong>Java</strong></td><td>Besu</td><td>Teku</td></tr>
+              <tr><td><strong>TypeScript</strong></td><td>EVM: EthereumJS</td><td>Lodestar</td></tr>
+              <tr><td><strong>C++</strong></td><td>EVM: evmone; Bitcoin: Bitcoin Core</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="olcekleme"><span class="h-num">§ 9</span>Ölçekleme</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>9a · Katmanlar ve rollup'lar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>scalability trilemma</strong></td><td>Merkeziyetsizlik, güvenlik ve ölçeği aynı anda en üst düzeye çıkarmanın zorluğu</td><td><span class="tag tag--ok">TEMEL</span></td><td>"blockchain trilemma" diye ara</td></tr>
+              <tr><td><strong>Layer 1 / Layer 2</strong></td><td>L1 ana zincirdir. L2 işlemleri dışarıda yürütür ama güvenliğini L1'den alır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/">ethereum.org/scaling</a></td></tr>
+              <tr><td><strong>rollup</strong></td><td>İşlemleri toplu yürütüp verisini L1'e yazan L2</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/">ethereum.org/scaling</a></td></tr>
+              <tr><td><strong>optimistic rollup</strong></td><td>İşlemleri geçerli varsayar, itiraz gelirse fraud proof ile çözer (Arbitrum, OP Mainnet, Base)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/optimistic-rollups/">ethereum.org/optimistic-rollups</a></td></tr>
+              <tr><td><strong>fraud proof / fault proof</strong></td><td>Hatalı durum kökünü zincir üstünde çürütme ispatı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.optimism.io/op-stack/fault-proofs/explainer">docs.optimism.io</a></td></tr>
+              <tr><td><strong>challenge period</strong></td><td>L1'e çekimde itiraz penceresi; optimistic rollup'larda yaklaşık 7 gün</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/scaling/optimistic-rollups/">ethereum.org/optimistic-rollups</a></td></tr>
+              <tr><td><strong>ZK rollup</strong></td><td>Her toplu işlem için validity proof gönderir (ZKsync, Starknet, Scroll)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/zk-rollups/">ethereum.org/zk-rollups</a></td></tr>
+              <tr><td><strong>validity proof</strong></td><td>Durum geçişinin doğru olduğunu gösteren ZK ispatı</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/scaling/zk-rollups/">ethereum.org/zk-rollups</a></td></tr>
+              <tr><td><strong>sequencer</strong></td><td>L2'de işlemleri sıralayan ve toplu gönderen operatör; çoğu L2'de merkezî</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://l2beat.com/">l2beat.com</a></td></tr>
+              <tr><td><strong>L2BEAT stages</strong></td><td>Rollup olgunluk seviyesi (Stage 0/1/2) ve risk analizi</td><td><span class="tag">ORTA</span></td><td><a href="https://l2beat.com/">l2beat.com</a></td></tr>
+              <tr><td><strong>sidechain</strong></td><td>Kendi konsensüsü olan paralel EVM zinciri; güvenliği L1'den gelmez</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/sidechains/">ethereum.org/sidechains</a></td></tr>
+              <tr><td><strong>validium</strong></td><td>ZK ispatı L1'de, veri L1 dışında</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/scaling/validium/">ethereum.org/validium</a></td></tr>
+              <tr><td><strong>state channel</strong></td><td>Taraflar arasında zincir dışı işlem, sonuç L1'e yazılır; Bitcoin Lightning bu ailedendir</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/scaling/state-channels/">ethereum.org/state-channels</a></td></tr>
+              <tr><td><strong>plasma</strong></td><td>Fraud proof kullanan çocuk zincirler; yerini büyük ölçüde rollup'lara bıraktı</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/developers/docs/scaling/plasma/">ethereum.org/plasma</a></td></tr>
+              <tr><td><strong>L3 / appchain</strong></td><td>L2 üzerine kurulan, tek uygulamaya özel zincir (Arbitrum Orbit, OP Stack zincirleri)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.arbitrum.io/">docs.arbitrum.io</a> · <a href="https://docs.optimism.io/">docs.optimism.io</a></td></tr>
+              <tr><td><strong>L2 dokümanları</strong></td><td>Starknet'in Cairo dili kullandığını, EVM olmadığını unutma</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.zksync.io/">ZKsync</a> · <a href="https://docs.starknet.io/">Starknet</a> · <a href="https://docs.base.org/">Base</a> · <a href="https://docs.scroll.io/">Scroll</a> · <a href="https://docs.polygon.technology/">Polygon</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>9b · Veri erişilebilirliği ve blob</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>data availability (DA)</strong></td><td>Blok verisinin gerçekten yayımlandığının doğrulanabilmesi</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/data-availability/">ethereum.org/data-availability</a></td></tr>
+              <tr><td><strong>sharding</strong> (eski plan)</td><td>Ağ yükünü parçalara bölme; execution sharding planı rollup'lar lehine bırakıldı</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/developers/docs/scaling/">ethereum.org/scaling</a></td></tr>
+              <tr><td><strong>danksharding</strong></td><td>Blob tabanlı veri sharding'i hedefi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/danksharding/">ethereum.org/roadmap/danksharding</a></td></tr>
+              <tr><td><strong>proto-danksharding (EIP-4844)</strong></td><td>Blob taşıyan işlemler (tip-3); Dencun ile geldi</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4844">EIP-4844</a></td></tr>
+              <tr><td><strong>blob</strong></td><td>Yaklaşık 128 KiB veri (4.096 × 32 bayt); EVM içeriği okuyamaz, yalnızca hash'ini görür; yaklaşık 18 gün (4.096 epoch) saklanır</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/roadmap/dencun/">ethereum.org/roadmap/dencun</a></td></tr>
+              <tr><td><strong>blob base fee</strong></td><td>Blob'lar için ayrı ücret piyasası; Fusaka'da execution maliyetine bağlı bir alt sınır getirildi (EIP-7918)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/fusaka/">ethereum.org/roadmap/fusaka</a></td></tr>
+              <tr><td><strong>data availability sampling (DAS)</strong></td><td>Rastgele parça örnekleyerek verinin tamamını indirmeden doğrulama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/data-availability/">ethereum.org/data-availability</a></td></tr>
+              <tr><td><strong>PeerDAS (EIP-7594)</strong></td><td>Ethereum'un DAS uygulaması; Fusaka ile geldi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7594">EIP-7594</a></td></tr>
+              <tr><td><strong>erasure coding</strong></td><td>Veriyi yedekli kodlama; eksik parçalar geri üretilebilir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/data-availability/">ethereum.org/data-availability</a></td></tr>
+              <tr><td><strong>DAC (data availability committee)</strong></td><td>Veri erişilebilirliğini onaylayan güvenilir komite; validium'larda kullanılır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/data-availability/">ethereum.org/data-availability</a></td></tr>
+              <tr><td><strong>modular DA layer</strong></td><td>Veriyi ayrı bir zincirde yayımlama: Celestia, Avail</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.celestia.org/">docs.celestia.org</a> · <a href="https://docs.availproject.org/">docs.availproject.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>9c · Köprüler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>bridge</strong></td><td>Zincirler arasında varlık ya da mesaj taşır</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/bridges/">ethereum.org/bridges</a></td></tr>
+              <tr><td><strong>canonical bridge</strong></td><td>Rollup'ın kendi resmî L1 köprüsü</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/bridges/">ethereum.org/bridges</a></td></tr>
+              <tr><td><strong>lock-and-mint / burn-and-mint</strong></td><td>Kaynakta kilitleyip hedefte wrapped varlık basmak / kaynakta yakıp hedefte yeniden basmak</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/bridges/">ethereum.org/bridges</a></td></tr>
+              <tr><td><strong>cross-chain messaging</strong></td><td>Zincirler arası mesaj protokolü, örneğin Chainlink CCIP; testnet'te denenebilir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.chain.link/ccip">docs.chain.link/ccip</a></td></tr>
+              <tr><td><strong>bridge hack</strong></td><td>Büyük hack vakalarının önemli bir kısmı köprülerde yaşandı; post-mortem'leri oku</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://rekt.news/">rekt.news</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ethereum-yol-haritasi"><span class="h-num">§ 10</span>Ethereum yol haritası kavramları</h2>
+        <p class="intro">Tarihler ethereum.org'un fork listesinden doğrulandı. Yükseltme adı, execution ve consensus adlarının birleşimidir: Prague + Electra = Pectra, Fulu + Osaka = Fusaka.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10a · Yükseltmeler (eskiden yeniye)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Frontier → Homestead → Byzantium → Constantinople</strong></td><td>30 Temmuz 2015 ilk mainnet · 14 Mart 2016 · 16 Ekim 2017 · 28 Şubat 2019</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/ethereum-forks/">ethereum.org/ethereum-forks</a></td></tr>
+              <tr><td><strong>Berlin</strong></td><td>15 Nisan 2021; typed transaction (EIP-2718) ve access list (EIP-2930)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/ethereum-forks/">ethereum.org/ethereum-forks</a></td></tr>
+              <tr><td><strong>London</strong></td><td>5 Ağustos 2021; EIP-1559 ve base fee yakımı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1559">EIP-1559</a></td></tr>
+              <tr><td><strong>Beacon Chain</strong></td><td>Merge'den önce paralel çalışan PoS zinciri; bugünkü consensus katmanı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/glossary/">ethereum.org/glossary</a></td></tr>
+              <tr><td><strong>The Merge (Paris)</strong></td><td>15 Eylül 2022; PoW'dan PoS'a geçiş, execution ve consensus istemcilerinin ayrılması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/roadmap/merge/">ethereum.org/roadmap/merge</a> · <a href="https://eips.ethereum.org/EIPS/eip-3675">EIP-3675</a></td></tr>
+              <tr><td><strong>Shapella</strong></td><td>12 Nisan 2023; stake çekimleri (EIP-4895)</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4895">EIP-4895</a></td></tr>
+              <tr><td><strong>Dencun</strong></td><td>13 Mart 2024; blob'lar (EIP-4844), transient storage (EIP-1153), SELFDESTRUCT kısıtı (EIP-6780)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/roadmap/dencun/">ethereum.org/roadmap/dencun</a></td></tr>
+              <tr><td><strong>Pectra</strong></td><td>7 Mayıs 2025; EIP-7702 (EOA kod delegasyonu), EIP-7251 (validator azami bakiyesi 32 → 2.048 ETH), EIP-7691 (blob hedefi 3 → 6), EIP-7623 (calldata fiyatı), EIP-2537 (BLS precompile)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/roadmap/pectra/">ethereum.org/roadmap/pectra</a></td></tr>
+              <tr><td><strong>Fusaka</strong></td><td>3 Aralık 2025; PeerDAS (EIP-7594), BPO fork'ları (EIP-7892), işlem gas tavanı (EIP-7825), P-256 precompile (EIP-7951), CLZ opcode (EIP-7939), history expiry (EIP-7642)</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/roadmap/fusaka/">ethereum.org/roadmap/fusaka</a></td></tr>
+              <tr><td><strong>BPO fork (Blob Parameter Only)</strong></td><td>Büyük yükseltmeyi beklemeden blob hedefini ve azami değerini artıran mini fork</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/fusaka/">ethereum.org/roadmap/fusaka</a></td></tr>
+              <tr><td><strong>Glamsterdam</strong></td><td>Sıradaki yükseltme: ePBS (EIP-7732) ve block-level access lists (EIP-7928). 13 Eylül 2026 itibarıyla ethereum.org devnet testinde olduğunu, mainnet için 2026'nın 4. çeyreğinin hedeflendiğini yazıyor; tarih kayabilir</td><td><span class="tag tag--info">İLERİ</span> tarih tahmini; teyit et</td><td><a href="https://ethereum.org/roadmap/glamsterdam/">ethereum.org/roadmap/glamsterdam</a></td></tr>
+              <tr><td><strong>ePBS</strong></td><td>Blok önerici ile blok üretici ayrımını protokole gömer; bugün bu iş MEV-Boost ile protokol dışında yapılıyor</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-7732">EIP-7732</a></td></tr>
+              <tr><td><strong>Hegota</strong></td><td>Glamsterdam'dan sonra planlanan yükseltme; fork choice ile zorunlu kılınan inclusion list'ler (FOCIL) hedefleniyor</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/roadmap/hegota/">ethereum.org/roadmap/hegota</a></td></tr>
+              <tr><td><strong>account abstraction</strong> (yol haritası)</td><td>Akıllı sözleşme cüzdanlarının protokolde yerel desteği</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/roadmap/account-abstraction/">ethereum.org/roadmap/account-abstraction</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10b · Takip kaynakları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EIP</strong></td><td>Ethereum Improvement Proposal; durum akışı Draft → Review → Last Call → Final</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1">EIP-1</a></td></tr>
+              <tr><td><strong>ERC</strong></td><td>Uygulama katmanı standartlarının EIP kategorisi (ERC-20, ERC-721, ERC-4337)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>All Core Devs (ACD)</strong></td><td>Çekirdek geliştirici toplantılarının gündemleri ve notları</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/ethereum/pm">github.com/ethereum/pm</a></td></tr>
+              <tr><td><strong>consensus-specs / execution-apis</strong></td><td>Protokolün spesifikasyon depoları</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/ethereum/consensus-specs">consensus-specs</a> · <a href="https://github.com/ethereum/execution-apis">execution-apis</a></td></tr>
+              <tr><td><strong>ethresear.ch / Ethereum Magicians</strong></td><td>Araştırma forumu / EIP tartışma forumu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethresear.ch/">ethresear.ch</a> · <a href="https://ethereum-magicians.org/">ethereum-magicians.org</a></td></tr>
+              <tr><td><strong>Yellow Paper</strong></td><td>EVM'in biçimsel tanımı; güncel ayrıntılar için EIP'lere bak</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.github.io/yellowpaper/paper.pdf">yellowpaper</a></td></tr>
+              <tr><td><strong>Ethereum whitepaper</strong></td><td>Ethereum'un ilk tasarım belgesi</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/whitepaper/">ethereum.org/whitepaper</a></td></tr>
+              <tr><td><strong>Upgrading Ethereum (eth2book)</strong></td><td>PoS protokolünü ayrıntılı anlatan kitap</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eth2book.info/">eth2book.info</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ekonomi-kavramlari"><span class="h-num">§ 11</span>Ekonomi kavramları (teknik)</h2>
+        <div class="callout callout--danger">
+          <p class="callout__title">Yatırım tavsiyesi değildir</p>
+          <p>Bu bölümde fiyat, getiri ya da "hangi token" konusu yok. Buradaki terimler sözleşme yazarken ve teknik mülakatta geçen kavramlardır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11a · Token ve arz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>coin (native asset)</strong></td><td>Zincirin kendi varlığı (ETH, BTC); gas bununla ödenir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/intro-to-ether/">ethereum.org/intro-to-ether</a></td></tr>
+              <tr><td><strong>token</strong></td><td>Bir sözleşmenin tuttuğu bakiye kaydı; zincirin yerel varlığı değildir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/standards/tokens/">ethereum.org/tokens</a></td></tr>
+              <tr><td><strong>fungible token (ERC-20)</strong></td><td>Birimleri birbirinin aynısı olan token standardı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/standards/tokens/erc-20/">ethereum.org/erc-20</a> · <a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a></td></tr>
+              <tr><td><strong>non-fungible token (ERC-721)</strong></td><td>Her token kimliği eşsizdir (NFT)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/standards/tokens/erc-721/">ethereum.org/erc-721</a></td></tr>
+              <tr><td><strong>multi-token (ERC-1155)</strong></td><td>Tek sözleşmede hem fungible hem non-fungible token</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/standards/tokens/erc-1155/">ethereum.org/erc-1155</a></td></tr>
+              <tr><td><strong>decimals</strong></td><td>ERC-20 tutarı tam sayı olarak saklar; çoğu token 18, USDC 6 ondalıklıdır. Yanlış bölme yanlış tutar gösterir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a></td></tr>
+              <tr><td><strong>wrapped token (WETH)</strong></td><td>Yerel varlığın ERC-20 sarmalı</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/wrapped-eth/">ethereum.org/wrapped-eth</a></td></tr>
+              <tr><td><strong>mint</strong></td><td>Yeni token basmak; kimin basabileceği (erişim kontrolü) mülakatta sorulur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc20">OpenZeppelin ERC-20</a></td></tr>
+              <tr><td><strong>burn</strong></td><td>Token'ı dolaşımdan çıkarmak; ETH'de base fee yakımı da bir burn'dür</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc20">OpenZeppelin ERC-20</a> · <a href="https://eips.ethereum.org/EIPS/eip-1559">EIP-1559</a></td></tr>
+              <tr><td><strong>total / circulating / max supply</strong></td><td>Toplam basılan / dolaşımdaki / üst sınır; ERC-20'de <code>totalSupply()</code></td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a></td></tr>
+              <tr><td><strong>issuance / halving</strong></td><td>Protokolün yeni coin üretmesi (PoS ödülleri); Bitcoin'de blok ödülünün periyodik olarak yarılanması</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/consensus-mechanisms/pos/rewards-and-penalties/">ethereum.org/rewards-and-penalties</a></td></tr>
+              <tr><td><strong>tokenomics</strong></td><td>Arz, dağıtım, vesting ve teşvik tasarımının bütünü</td><td><span class="tag">ORTA</span></td><td>Tek bir resmî kaynak yok; genel bir kavram</td></tr>
+              <tr><td><strong>vesting</strong></td><td>Token'ların sözleşmeyle zamana yayılarak serbest bırakılması</td><td><span class="tag">ORTA</span></td><td>"token vesting contract" diye ara</td></tr>
+              <tr><td><strong>airdrop (Merkle)</strong></td><td>Merkle proof ile toplu dağıtım; sahte airdrop siteleri yaygın bir phishing yolu</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/OpenZeppelin/merkle-tree">OpenZeppelin merkle-tree</a></td></tr>
+              <tr><td><strong>governance token / DAO</strong></td><td>Oy hakkı veren token ve zincir üstü yönetim</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/dao/">ethereum.org/dao</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11b · Stablecoin türleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>stablecoin</strong></td><td>Değeri bir varlığa sabitlenmeye çalışan token</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a></td></tr>
+              <tr><td><strong>fiat-backed</strong></td><td>Rezervi bankada tutulur (USDC, USDT); ihraççı adresleri dondurabilir</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a> · <a href="https://developers.circle.com/">developers.circle.com</a></td></tr>
+              <tr><td><strong>crypto-backed</strong></td><td>Fazla teminatlı kripto rezervi (DAI/USDS)</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a></td></tr>
+              <tr><td><strong>algorithmic</strong></td><td>Teminat yerine arz algoritması; 2022'deki TerraUSD (UST) çöküşü bu türün riskini gösterdi</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a></td></tr>
+              <tr><td><strong>commodity-backed</strong></td><td>Altın gibi bir emtiaya dayalı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a></td></tr>
+              <tr><td><strong>peg / depeg</strong></td><td>Hedef değer / o değerden kopma</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/stablecoins/">ethereum.org/stablecoins</a></td></tr>
+              <tr><td><strong>oracle</strong></td><td>Fiyat gibi zincir dışı veriyi sözleşmeye taşıyan servis. Araçlar: <a href="../06-altyapi-araclar-guvenlik/index.html#oracle">06 — Oracle</a></td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/oracles/">ethereum.org/oracles</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11c · MEV</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MEV (maximal extractable value)</strong></td><td>İşlemleri sıralama, ekleme ya da çıkarma yetkisiyle elde edilen ek değer</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org/mev</a></td></tr>
+              <tr><td><strong>searcher / builder / relay / proposer</strong></td><td>MEV tedarik zincirindeki roller</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org/mev</a></td></tr>
+              <tr><td><strong>PBS / MEV-Boost</strong></td><td>Blok üretimini önericiden ayırmak; bugün MEV-Boost ile protokol dışında yapılır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.flashbots.net/flashbots-mev-boost/introduction">docs.flashbots.net</a></td></tr>
+              <tr><td><strong>frontrunning / sandwich</strong></td><td>Bir kullanıcının işleminin önüne ve arkasına işlem koyarak fiyat hareketinden kâr etmek; kullanıcıya zarar verir</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org/mev</a></td></tr>
+              <tr><td><strong>arbitrage / liquidation</strong></td><td>DEX'ler arası fiyat farkı / teminatı yetersiz pozisyonu kapatma</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org/mev</a></td></tr>
+              <tr><td><strong>slippage</strong></td><td>İşlemi gönderdiğin an ile onaylandığı an arasındaki fiyat kayması; sınır koymamak sandwich'e kapı açar</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/developers/docs/design-and-ux/dex-design-best-practice/">ethereum.org/dex-design</a></td></tr>
+              <tr><td><strong>MEV protection RPC</strong></td><td>Flashbots Protect ve MEV Blocker gibi ücretsiz özel RPC'ler. Ayrıntılar: <a href="../06-altyapi-araclar-guvenlik/index.html#mev-ve-islem-gizliligi">06 — MEV ve işlem gizliliği</a></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.flashbots.net/flashbots-protect/quick-start">Flashbots Protect</a> · <a href="https://mevblocker.io/">mevblocker.io</a></td></tr>
+              <tr><td><strong>rug pull / honeypot</strong></td><td>Geliştiricinin likiditeyi çekip kaçması / alınıp satılamayan token sözleşmesi</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/security/">ethereum.org/security</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sozluk"><span class="h-num">§ 12</span>Türkçe / İngilizce kavram sözlüğü</h2>
+        <p class="intro">Sektörde çoğu terim İngilizce kullanılır. Mülakatta ve aramada İngilizcesini kullan; Türkçe karşılık yalnızca anlamayı kolaylaştırmak için.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>12 · Kavram sözlüğü</caption>
+            <thead><tr><th>İngilizce</th><th>Türkçe karşılığı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td>hash</td><td>özet (karma değer)</td><td>§ 1</td></tr>
+              <tr><td>digital signature</td><td>dijital imza</td><td>§ 1</td></tr>
+              <tr><td>private key / public key</td><td>özel anahtar / açık anahtar</td><td>§ 1</td></tr>
+              <tr><td>elliptic curve</td><td>eliptik eğri</td><td>§ 1</td></tr>
+              <tr><td>Merkle tree</td><td>Merkle ağacı</td><td>§ 1</td></tr>
+              <tr><td>commitment</td><td>taahhüt</td><td>§ 1</td></tr>
+              <tr><td>nonce</td><td>tek kullanımlık sayı</td><td>§ 1, § 5</td></tr>
+              <tr><td>entropy</td><td>entropi (rastgelelik kaynağı)</td><td>§ 1</td></tr>
+              <tr><td>zero-knowledge proof</td><td>sıfır bilgi ispatı</td><td>§ 1, § 9</td></tr>
+              <tr><td>wallet</td><td>cüzdan</td><td>§ 2</td></tr>
+              <tr><td>seed phrase / mnemonic</td><td>kurtarma ifadesi / anımsatıcı kelimeler</td><td>§ 2</td></tr>
+              <tr><td>derivation path</td><td>türetme yolu</td><td>§ 2</td></tr>
+              <tr><td>custodial / non-custodial</td><td>emanetçi / kendi saklamalı</td><td>§ 2</td></tr>
+              <tr><td>hardware wallet</td><td>donanım cüzdanı</td><td>§ 2</td></tr>
+              <tr><td>allowance / approval</td><td>harcama izni / onay</td><td>§ 2</td></tr>
+              <tr><td>block / block header</td><td>blok / blok başlığı</td><td>§ 3</td></tr>
+              <tr><td>genesis block</td><td>başlangıç bloğu</td><td>§ 3</td></tr>
+              <tr><td>confirmation</td><td>onay</td><td>§ 3</td></tr>
+              <tr><td>finality</td><td>kesinlik, kesinleşme</td><td>§ 3</td></tr>
+              <tr><td>fork</td><td>çatallanma</td><td>§ 3</td></tr>
+              <tr><td>reorg (chain reorganization)</td><td>zincirin yeniden düzenlenmesi</td><td>§ 3</td></tr>
+              <tr><td>consensus</td><td>mutabakat, uzlaşı</td><td>§ 4</td></tr>
+              <tr><td>proof of work / proof of stake</td><td>iş ispatı / hisse (stake) ispatı</td><td>§ 4</td></tr>
+              <tr><td>validator / miner</td><td>doğrulayıcı / madenci</td><td>§ 4</td></tr>
+              <tr><td>staking</td><td>stake etme, kilitleme</td><td>§ 4</td></tr>
+              <tr><td>slashing</td><td>ceza kesintisi</td><td>§ 4</td></tr>
+              <tr><td>attestation</td><td>onay oyu</td><td>§ 4</td></tr>
+              <tr><td>double spend</td><td>çift harcama</td><td>§ 4</td></tr>
+              <tr><td>account</td><td>hesap</td><td>§ 5</td></tr>
+              <tr><td>externally owned account (EOA)</td><td>harici sahipli hesap</td><td>§ 5</td></tr>
+              <tr><td>UTXO (unspent transaction output)</td><td>harcanmamış işlem çıktısı</td><td>§ 5</td></tr>
+              <tr><td>state</td><td>durum</td><td>§ 5</td></tr>
+              <tr><td>transaction</td><td>işlem</td><td>§ 6</td></tr>
+              <tr><td>mempool</td><td>bekleyen işlem havuzu</td><td>§ 6</td></tr>
+              <tr><td>gas / gas limit</td><td>gas (hesaplama birimi) / gas sınırı</td><td>§ 6</td></tr>
+              <tr><td>base fee / priority fee</td><td>taban ücret / öncelik ücreti</td><td>§ 6</td></tr>
+              <tr><td>receipt</td><td>işlem makbuzu</td><td>§ 6</td></tr>
+              <tr><td>revert</td><td>geri alma</td><td>§ 6</td></tr>
+              <tr><td>event / log</td><td>olay / kayıt</td><td>§ 6</td></tr>
+              <tr><td>block explorer</td><td>blok gezgini</td><td>§ 6</td></tr>
+              <tr><td>faucet</td><td>musluk (ücretsiz test token dağıtıcısı)</td><td>§ 6</td></tr>
+              <tr><td>smart contract</td><td>akıllı sözleşme</td><td>§ 7</td></tr>
+              <tr><td>bytecode / opcode</td><td>bayt kodu / işlem kodu</td><td>§ 7</td></tr>
+              <tr><td>storage / memory / calldata</td><td>kalıcı depolama / geçici bellek / çağrı verisi</td><td>§ 7</td></tr>
+              <tr><td>ABI (application binary interface)</td><td>uygulama ikili arayüzü</td><td>§ 7</td></tr>
+              <tr><td>function selector</td><td>fonksiyon seçicisi</td><td>§ 7</td></tr>
+              <tr><td>node / client</td><td>düğüm / istemci</td><td>§ 8</td></tr>
+              <tr><td>full / archive / light node</td><td>tam / arşiv / hafif düğüm</td><td>§ 8</td></tr>
+              <tr><td>peer-to-peer</td><td>eşler arası</td><td>§ 8</td></tr>
+              <tr><td>layer 1 / layer 2</td><td>katman 1 / katman 2</td><td>§ 9</td></tr>
+              <tr><td>rollup</td><td>toplayıcı zincir (genelde çevrilmez)</td><td>§ 9</td></tr>
+              <tr><td>sidechain</td><td>yan zincir</td><td>§ 9</td></tr>
+              <tr><td>bridge</td><td>köprü</td><td>§ 9</td></tr>
+              <tr><td>data availability</td><td>veri erişilebilirliği</td><td>§ 9</td></tr>
+              <tr><td>sequencer</td><td>sıralayıcı</td><td>§ 9</td></tr>
+              <tr><td>fraud proof / validity proof</td><td>itiraz ispatı / geçerlilik ispatı</td><td>§ 9</td></tr>
+              <tr><td>sharding</td><td>parçalama</td><td>§ 9</td></tr>
+              <tr><td>network upgrade / hard fork</td><td>ağ yükseltmesi</td><td>§ 10</td></tr>
+              <tr><td>token / coin</td><td>jeton / yerel varlık</td><td>§ 11</td></tr>
+              <tr><td>fungible / non-fungible</td><td>birbirinin yerine geçebilir / eşsiz</td><td>§ 11</td></tr>
+              <tr><td>mint / burn</td><td>basma / yakma</td><td>§ 11</td></tr>
+              <tr><td>stablecoin</td><td>sabit değerli token</td><td>§ 11</td></tr>
+              <tr><td>MEV</td><td>azami çıkarılabilir değer</td><td>§ 11</td></tr>
+              <tr><td>slippage</td><td>fiyat kayması</td><td>§ 11</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet — bu sayfadaki öncelik sırası</h2>
+        <ol>
+          <li><strong>Önce ana hat.</strong> Hedefine göre: blockchain senin için yan alansa (çoğu geliştirici için öyledir) ana dil/platform hazırlığı (ör. <a href="../../CSharp-DotNet/index.html">C# ve .NET</a>, <a href="../../JavaScript-TypeScript/index.html">JavaScript/TypeScript</a>, <a href="../../Java/index.html">Java</a>, <a href="../../Python/index.html">Python</a>) sağlam değilse önce oraya zaman ayır. Blockchain ana hedefinse (Solidity geliştirici, denetçi, protokol geliştirici) bu sayfanın TEMEL ve ORTA maddeleri, özellikle § 4 konsensüs, § 7 EVM ve § 9 ölçekleme, ana hattın kendisidir. Hiç programlama bilmiyorsan bu sayfayı kavram sözlüğü olarak oku, sonra <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> ile başla.</li>
+          <li><strong><span class="tag tag--bad">MÜLAKATTA SIK</span> terimleri mülakata hazırlık için ilk sırada:</strong> EVM (storage/memory/calldata, ABI, function selector, bytecode), EOA ve contract account, gas/revert/receipt/event, ERC-20/721, EIP-1193 ve MetaMask bağlantısı. Önceki bir blockchain deneyimin varsa onu mülakatta anlatırken kullanılacak dil bu terimlerdir: <a href="../07-projeler/index.html#mulakatta-anlatim">07 — mülakatta deneyimi anlatmak</a>. Önceki deneyimin yoksa bunlar ilk projeyi yaparken öğreneceğin sözlüktür: <a href="../07-projeler/index.html">07 — projeler</a> § 2.</li>
+          <li><strong><span class="tag tag--ok">TEMEL</span> ikinci sırada:</strong> Keccak-256 ve adres türetme, ECDSA/secp256k1, BIP-39/32/44, işlem yaşam döngüsü ve EIP-1559, Sepolia Etherscan'de işlem okuma, PoW/PoS ve finality, L1/L2 ve rollup ayrımı.</li>
+          <li><strong><span class="tag tag--warn">RİSK</span> alışkanlıkları ilk günden:</strong> ayrı geliştirici cüzdanı, özel anahtarı koda koymamak, bilinen test anahtarlarını mainnet'te kullanmamak, onayları geri almak. Mainnet'e para yok.</li>
+          <li><strong><span class="tag">ORTA</span> sonra:</strong> düğüm türleri ve JSON-RPC, client diversity ve kaynak kodu okunacak istemci bildiğin dile göre: C# &rarr; Nethermind (bkz. <a href="../04-dotnet/index.html">04</a>), Go &rarr; Geth/Erigon/Prysm, Rust &rarr; Reth/Lighthouse/Grandine, Java &rarr; Besu/Teku, TypeScript &rarr; Lodestar/EthereumJS (§ 8c), blob ve DA, MEV, stablecoin türleri, Pectra/Fusaka değişiklikleri.</li>
+          <li><strong><span class="tag tag--info">İLERİ</span> yalnızca merak edersen:</strong> BLS, KZG, PeerDAS, Engine API, devp2p/libp2p, ePBS/Glamsterdam, eth2book.</li>
+          <li><strong>SHA3 tuzağı (her dilde):</strong> standart SHA3-256 Keccak-256 değildir (.NET <code>SHA3_256</code>, Python <code>hashlib.sha3_256</code>, Node.js <code>sha3-256</code>). Ethereum hash'i için .NET'te Nethereum ya da BouncyCastle, JS/TS'de viem/ethers <code>keccak256</code>, Python'da eth-hash kullan.</li>
+          <li><strong>Sıradaki sayfalar:</strong> <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 — Solidity</a>, ardından <a href="../03-javascript-typescript/index.html">03 — JavaScript/TypeScript</a>; başlangıç noktana göre farklı sıra için <a href="../index.html#ogrenme-sirasi">Genel Bakış § 5</a>. JavaScript bilmiyorsan önce <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> ve <a href="../../JavaScript-TypeScript/03-react/index.html">React</a> sayfalarına bak.</li>
+        </ol>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Genel Bakış</span></a>
+        <a class="next" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Solidity ve Akıllı Sözleşmeler</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

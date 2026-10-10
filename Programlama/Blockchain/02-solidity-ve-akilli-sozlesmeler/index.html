@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solidity ve Akıllı Sözleşmeler — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Solidity dili, EVM, Foundry ve Hardhat, OpenZeppelin, ERC standartları, yükseltilebilir sözleşmeler, güvenlik açıkları ve test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Solidity ve Akıllı Sözleşmeler</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Temel</div>
+        <h1 class="page-title">Solidity: <em>dilin tamamı</em> ve güvenlik</h1>
+        <p class="lede">Dil özelliklerinden ERC standartlarına, en pahalı güvenlik hatalarından test ve dağıtım araçlarına kadar sıralı liste. Güvenlik başlıkları ayrı işaretli — bu alanda hata para kaybettirir.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; Güvenlik bölümü ayrı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="cerceve"><span class="h-num">§ 1</span>Çerçeve: bu sayfa neden var, nasıl okunur</h2>
+        <p class="intro">Bu sayfa anlatım değil, <strong>anahtar kelime listesidir</strong>. Her satır: terim, bir-iki cümlelik not, resmî doküman. Konuyu dokümandan ve pratikten öğreneceksin.</p>
+        <div class="callout callout--warn">
+          <p class="callout__title">Öncelik sırası</p>
+          <p><strong>Solidity, Smart Contract, React</strong> iş ilanlarında birlikte sık geçer. Bu sayfada neye ne kadar zaman ayıracağın durumuna göre değişir:</p>
+          <ul>
+            <li><strong>Blockchain yan alansa</strong> (çoğu geliştirici için öyledir) &rarr; <span class="tag tag--bad">MÜLAKATTA SIK</span> maddeler önce; geri kalanı ana öğrenme hattını aksatmadan, boş zamanda.</li>
+            <li><strong>Solidity geliştirici ya da denetçi olmak ana hedefinse</strong> &rarr; "boş zamanda" geçerli değil: § 6 güvenlik, § 8 test ve § 10 gas optimizasyonu TEMEL düzeyine çıkar; § 11 denetim köprüsü ve <a href="../06-altyapi-araclar-guvenlik/index.html">06</a> § 8–9 araçları da ana hattır.</li>
+            <li><strong>Özgeçmişinde blockchain deneyimi yoksa</strong> &rarr; bu "tazeleme" değil sıfırdan öğrenmedir: Remix &rarr; Foundry &rarr; <a href="../07-projeler/index.html">07</a> § 2 denemeleri.</li>
+            <li><strong>Kısa deneyimin varsa</strong> (gönüllü proje, staj, kişisel proje) &rarr; mülakatta "çok derin değil" demek dürüsttür; yine de MÜLAKATTA SIK maddeleri tazelemen gerekir.</li>
+            <li><strong>Üretim (mainnet) deneyimin varsa</strong> &rarr; MÜLAKATTA SIK maddeler asgari düzeydir; § 6'daki olay vakaları ve § 11 audit araçları üzerine konuşman beklenir.</li>
+          </ul>
+        </div>
+        <div class="callout callout--win">
+          <p class="callout__title">Sıfır bütçe</p>
+          <p>Bu sayfadaki her şey yerel zincir (Anvil / Hardhat), Sepolia testnet ve ücretsiz faucet ile öğrenilebilir. Mainnet'e para koyman gerekmez. Ücretli ürünler <span class="tag tag--warn">ÜCRETLİ</span> ile işaretli; ücretsiz katman varsa notta yazıyor.</p>
+        </div>
+        <p>İlgili sayfalar: temel kavramlar (EVM, gas, hesaplar) için <a href="../01-temeller/index.html">01 — Temeller</a>; ethers/viem ve dApp arayüzü için <a href="../03-javascript-typescript/index.html">03 — JavaScript/TypeScript</a> ve <a href="../../JavaScript-TypeScript/03-react/index.html">React</a>; C# ile sözleşme çağırmak için <a href="../04-dotnet/index.html">04 — .NET (Nethereum)</a> (TypeScript ile aynı iş 03'te); audit ve statik analiz için <a href="../06-altyapi-araclar-guvenlik/index.html">06 — Altyapı, araçlar, güvenlik</a>; uygulama fikirleri için <a href="../07-projeler/index.html">07 — Projeler</a>.</p>
+        <h3>Rozet sözlüğü</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bu sayfadaki rozetler</caption>
+            <thead><tr><th>Rozet</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik.</td></tr>
+              <tr><td><span class="tag tag--ok">TEMEL</span></td><td>Olmazsa olmaz.</td></tr>
+              <tr><td><span class="tag">ORTA</span></td><td>Temelden sonra.</td></tr>
+              <tr><td><span class="tag tag--info">İLERİ</span></td><td>Derinleşme.</td></tr>
+              <tr><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>Ücretli ürün veya ücretli katmanı var.</td></tr>
+              <tr><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>Hâlâ görürsün, yeni projede kullanılmaz.</td></tr>
+              <tr><td><span class="tag tag--warn">RİSK</span></td><td>Para veya güvenlik riski taşıyan konu.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>13 Eylül 2026 itibarıyla sürümler</h3>
+        <div class="figures">
+          <div class="figure">
+            <div class="figure__label">Solidity</div>
+            <div class="figure__value">0.8.37</div>
+            <div class="figure__meta">10 Eylül 2026 · soliditylang.org/blog</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">Foundry</div>
+            <div class="figure__value">v1.8.1</div>
+            <div class="figure__meta">28 Ağustos 2026 · GitHub releases</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">Hardhat</div>
+            <div class="figure__value">3.16.0</div>
+            <div class="figure__meta">7 Eylül 2026 · GitHub releases</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">OpenZeppelin Contracts</div>
+            <div class="figure__value">v5.7.0</div>
+            <div class="figure__meta">29 Temmuz 2026 · GitHub releases</div>
+          </div>
+        </div>
+        <h3>Mülakat öncesi kontrol listesi (mülakatta sık sorulanlar)</h3>
+        <ul class="checklist">
+          <li>storage, memory ve calldata farkı; hangisi ne zaman ucuz</li>
+          <li>view ile pure farkı; payable ne demek</li>
+          <li>public / external / internal / private farkı; "private veri gizli değildir"</li>
+          <li>require, revert, assert ve custom error farkı</li>
+          <li>ERC-20 approve + transferFrom akışı; ERC-721 ile farkı</li>
+          <li>Reentrancy nedir, Checks-Effects-Interactions ile nasıl önlenir</li>
+          <li>tx.origin neden yetki kontrolünde kullanılmaz</li>
+          <li>Proxy ile yükseltme nasıl çalışır (delegatecall + storage)</li>
+          <li>Bir sözleşmeyi testnet'e deploy edip Etherscan/Sourcify'da doğrulamak</li>
+          <li>Foundry veya Hardhat ile basit bir unit test yazmak</li>
+        </ul>
+
+        <h2 id="solidity-dili"><span class="h-num">§ 2</span>Solidity dili</h2>
+        <p class="intro">Ana doküman: <a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a>. Hızlı tarama için <a href="https://docs.soliditylang.org/en/latest/cheatsheet.html">cheatsheet</a>. Dil deposu artık <a href="https://github.com/argotorg/solidity">github.com/argotorg/solidity</a> adresinde.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dosya, sürüm ve derleyici</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SPDX-License-Identifier</strong></td><td>Dosyanın ilk satırındaki lisans yorumu; yoksa derleyici uyarır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/layout-of-source-files.html#spdx-license-identifier">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>pragma solidity</strong> (version pragma)</td><td>Hangi derleyici sürümleriyle derleneceğini sınırlar (<code>^0.8.20</code> gibi).</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/layout-of-source-files.html#version-pragma">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>import</strong> / remappings</td><td>Başka dosyadan sözleşme almak; <code>@openzeppelin/...</code> yolları remapping ile çözülür.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/layout-of-source-files.html#importing-other-source-files">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>solc</strong> ve optimizer</td><td>Derleyici; <code>runs</code> parametresi deploy maliyeti ile çağrı maliyeti arasındaki dengeyi ayarlar.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/using-the-compiler.html#optimizer-options">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>evmVersion</strong></td><td>Hedef EVM sürümü; L2 veya eski zincirde desteklenmeyen opcode riskini belirler.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/using-the-compiler.html#setting-the-evm-version-to-target">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>via-IR</strong></td><td>Yul ara katmanı üzerinden derleme hattı; "stack too deep" sorunlarında sık açılır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/ir-breaking-changes.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>solc-select</strong></td><td>Birden çok solc sürümü arasında geçiş aracı (niş; Foundry/Hardhat bunu kendisi yönetir).</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/crytic/solc-select">github.com/crytic</a></td></tr>
+              <tr><td><strong>ABI</strong> (Application Binary Interface)</td><td>Fonksiyonların dışarıdan nasıl kodlanıp çağrılacağının tarifi; Nethereum ve ethers bunu kullanır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/abi-spec.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>NatSpec</strong></td><td><code>/// @notice</code>, <code>@param</code> yorum formatı; C#'tan geliyorsan XML doc yorumları, JS/TS'den geliyorsan JSDoc, Python'dan geliyorsan docstring, Java'dan geliyorsan Javadoc karşılığı.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/natspec-format.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Style Guide</strong></td><td>Resmî isimlendirme ve dosya içi sıralama kuralları (order of layout).</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/style-guide.html#order-of-layout">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Vyper</strong></td><td>EVM için Python benzeri alternatif dil; kalıtım ve modifier yok. Varlığını bil yeter.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.vyperlang.org/en/stable/">docs.vyperlang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tipler ve veri yerleşimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>bool</strong></td><td>true/false; varsayılan değer false.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#booleans">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>uint / int</strong> (uint8…uint256)</td><td>Tam sayılar; ondalık yok. Para miktarı hep en küçük birimle (wei) tutulur.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#integers">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>address</strong> / address payable</td><td>20 baytlık hesap adresi; ETH gönderilecekse payable olmalı.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#address">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>bytes1…bytes32</strong></td><td>Sabit uzunluklu bayt dizisi; hash ve id için tipik.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#fixed-size-byte-arrays">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>bytes / string</strong></td><td>Dinamik uzunluklu; string'de indeksleme ve uzunluk doğrudan yok.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#bytes-and-string-as-arrays">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>enum</strong></td><td>Sabit durum listesi (ör. sipariş durumu); state machine kalıbında kullanılır.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#enums">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>struct</strong></td><td>Alan grubu; storage'da referansla tutulabilir. C#'tan geliyorsan: C# struct'ına benzer ama her konumda değer tipi gibi davranmaz. JS/TS'den geliyorsan: tipli nesne / TS interface'i; Python'dan: dataclass.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#structs">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>array</strong> (sabit / dinamik, push/pop)</td><td>Storage'daki dinamik dizi üzerinde sınırsız döngü gas bitirir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#arrays">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>mapping</strong></td><td>Anahtar-değer tablosu; üzerinde döngü yok, uzunluk yok, olmayan anahtar varsayılan değer döner.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#mapping-types">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>iterable mapping</strong></td><td>Mapping + anahtar dizisi birleşimi; "mapping'de döngü" ihtiyacının çözümü.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#iterable-mappings">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>storage / memory / calldata</strong></td><td>Veri yerleşimi: kalıcı (pahalı) / çağrı süresince / salt okunur girdi (en ucuz).</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> klasik mülakat sorusu</td><td><a href="https://docs.soliditylang.org/en/latest/types.html#data-location">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>user-defined value types</strong></td><td><code>type Price is uint256;</code> — tip güvenliği için sarmalayıcı.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#user-defined-value-types">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>delete</strong></td><td>Değişkeni varsayılan değere döndürür; mapping içeren struct'ta mapping'i temizlemez.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#delete">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>type conversion</strong> (explicit cast)</td><td><code>uint8(x)</code> gibi daraltma sessizce keser; güvenli sürüm için SafeCast.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#conversions-between-elementary-types">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>wei / gwei / ether</strong></td><td>Birim sonekleri; <code>1 ether == 1e18 wei</code>.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#ether-units">docs.soliditylang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fonksiyonlar, görünürlük, durum</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>contract</strong></td><td>Kod + kalıcı durum birimi; deploy edilince bir adreste yaşar. C#, Java, TS ya da Python'dan geliyorsan: class'ın karşılığı, ama durumu zincirde kalıcıdır.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>public / private / internal / external</strong></td><td>Görünürlük; private yalnızca başka sözleşmeden erişimi engeller, veri zincirde herkese açıktır.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#function-visibility">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>getter functions</strong></td><td>public durum değişkeni için derleyici otomatik okuma fonksiyonu üretir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#getter-functions">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>view</strong></td><td>Durumu okur, değiştirmez; dışarıdan çağrısı gas harcamaz (tx değilse).</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#view-functions">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>pure</strong></td><td>Durumu ne okur ne yazar; sadece girdiden hesap.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#pure-functions">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>payable</strong></td><td>Fonksiyonun ETH kabul edebilmesi için gerekli; yoksa ETH'li çağrı revert olur.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#state-mutability">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>modifier</strong></td><td>Fonksiyon öncesi/sonrası tekrar kullanılabilir kontrol (<code>onlyOwner</code>). C#'tan geliyorsan: ASP.NET filter/attribute; JS/TS'den: Express middleware; Python'dan: decorator; Java'dan: Spring <code>@PreAuthorize</code> benzeri.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>constructor</strong></td><td>Deploy anında bir kez çalışır; proxy arkasında çalışmaz (initializer gerekir).</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#constructors">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>event / emit</strong> (indexed)</td><td>Zincire log yazar; arayüz ve indexer dinler. Sözleşme kendi event'ini okuyamaz.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#events">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>receive()</strong></td><td>Veri olmadan gelen düz ETH transferini karşılayan özel fonksiyon.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#receive-ether-function">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>fallback()</strong></td><td>Eşleşmeyen fonksiyon seçicisi gelince çalışır; proxy'lerin temeli.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#fallback-function">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>function overloading</strong></td><td>Aynı isim, farklı parametre; ethers/Nethereum tarafında çağırmayı zorlaştırabilir.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#function-overloading">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>constant / immutable</strong></td><td>Derlemede sabit / constructor'da bir kez atanır; ikisi de storage slotu harcamaz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#constant-and-immutable-state-variables">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>transient</strong> (durum değişkeni)</td><td>İşlem bitince silinen depolama; 0.8.28 ile değer tiplerinde tam destek.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#transient-storage">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>new</strong> (sözleşmeden sözleşme oluşturma)</td><td>Factory kalıbı; <code>salt</code> verilirse CREATE2 kullanılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#creating-contracts-via-new">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>msg.sender / msg.value</strong></td><td>Çağıran adres / gönderilen wei; yetki kontrolünün temeli.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>block.timestamp / block.number</strong></td><td>Blok zamanı ve numarası; saniye hassasiyetinde güvenilmez.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>abi.encode / encodePacked / decode</strong></td><td>ABI kodlama yardımcıları; encodePacked + dinamik tipler hash çakışması üretebilir.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#abi-encoding-and-decoding-functions">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>keccak256 / ecrecover</strong></td><td>Hash ve imzadan adres kurtarma; ecrecover geçersiz imzada 0 adres döner.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#mathematical-and-cryptographic-functions">docs.soliditylang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata yönetimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>require</strong></td><td>Girdi/koşul kontrolü; başarısızsa tüm işlem geri alınır. 0.8.26'dan beri <code>require(koşul, CustomError())</code> da olur.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>revert</strong></td><td>Koşulsuz geri alma; genelde <code>if (...) revert HataAdi();</code> biçiminde.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#revert">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>assert</strong> (Panic)</td><td>"Asla olmamalı" iç tutarlılık kontrolü; tetiklenirse kodda bug var demektir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>custom error</strong></td><td><code>error Yetersiz(uint istenen);</code> — string mesajdan ucuz, parametre taşır. 0.8.4 ile geldi.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#custom-errors">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>try / catch</strong></td><td>Yalnızca harici çağrı ve <code>new</code> hatalarını yakalar; C#, Java, JS'deki try/catch ya da Python'daki try/except gibi her hatayı yakalamaz.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#try-catch">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>checked / unchecked</strong></td><td>0.8'den beri taşma otomatik revert; <code>unchecked { }</code> kontrolü kapatır. C#'tan geliyorsan: checked/unchecked ile aynı fikir. JS ya da Python'dan geliyorsan: sabit genişlikli, taşabilen tam sayıyı muhtemelen ilk kez burada görürsün.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#checked-or-unchecked-arithmetic">docs.soliditylang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sözleşme yapısı: kalıtım, arayüz, kütüphane</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>inheritance</strong> (<code>is</code>)</td><td>Çoklu kalıtım var; OpenZeppelin sözleşmeleri böyle genişletilir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#inheritance">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>virtual / override</strong></td><td>Ezilebilir fonksiyon / ezen fonksiyon. C#'tan geliyorsan aynı anahtar kelimeler; Java'dan geliyorsan <code>@Override</code> fikri, ama Solidity'de ezilecek fonksiyonun açıkça <code>virtual</code> işaretlenmesi zorunludur.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#function-overriding">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>C3 linearization</strong> / super</td><td>Çoklu kalıtımda çağrı sırası; <code>is A, B</code> sırası önemlidir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#multiple-inheritance-and-linearization">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>abstract contract</strong></td><td>En az bir fonksiyonu gövdesiz; doğrudan deploy edilemez.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#abstract-contracts">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>interface</strong></td><td>Sadece imza; başka sözleşmeyi çağırmak için (<code>IERC20(token).transfer(...)</code>).</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#interfaces">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>library</strong></td><td>Durumsuz yardımcı kod. C#'tan geliyorsan: static class; Java'dan: yalnızca static metotlu yardımcı sınıf; JS/TS ya da Python'dan: yardımcı fonksiyon modülü.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#libraries">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>using … for</strong></td><td>Kütüphane fonksiyonunu tipe metot gibi bağlar (<code>x.add(y)</code>). C#'tan geliyorsan: extension method; JS'den geliyorsan: prototype'a metot eklemeye benzer, ama global değildir, yalnızca bildirildiği kapsamda geçerlidir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#using-for">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>withdrawal pattern</strong></td><td>ETH'yi itmek yerine kullanıcının çekmesi (pull over push).</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/common-patterns.html#withdrawal-from-contracts">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>state machine</strong> kalıbı</td><td>enum + modifier ile aşamalı akış (ör. ihale: açık → kapalı → ödendi).</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/common-patterns.html#state-machine">docs.soliditylang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Düşük seviye: çağrılar, assembly, depolama düzeni</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>call</strong></td><td>Düşük seviye çağrı / ETH gönderme; <code>(bool ok, ) = to.call{value: x}("")</code>. Dönüşü kontrol edilmeli.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#members-of-addresses">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>staticcall</strong></td><td>Durum değiştiremeyen çağrı; view fonksiyonları dışarıdan böyle çağrılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#members-of-addresses">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>delegatecall</strong></td><td>Başkasının kodunu kendi storage'ında çalıştırır; proxy ve kütüphanelerin temeli.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#delegatecall-and-libraries">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>transfer / send</strong></td><td>2300 gas sınırlı eski ETH gönderme yolları; yeni kodda <code>call</code> tercih edilir.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#members-of-addresses">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>selfdestruct</strong></td><td>Kullanımdan kaldırılıyor; EIP-6780 sonrası yalnızca oluşturulduğu işlemde hesabı siler, aksi hâlde sadece bakiyeyi gönderir.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#deactivate-and-self-destruct">docs.soliditylang.org</a> · <a href="https://eips.ethereum.org/EIPS/eip-6780">EIP-6780</a></td></tr>
+              <tr><td><strong>assembly</strong> (inline)</td><td>Solidity içinde Yul yazmak; gas için kullanılır ama güvenlik kontrollerini atlar.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/assembly.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Yul</strong></td><td>EVM için ara dil; via-IR hattının ve inline assembly'nin dili.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/yul.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>storage layout</strong> (slot)</td><td>Durum değişkenlerinin slot yerleşimi; packing ve proxy çakışmalarını anlamak için şart.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>storage / memory / stack</strong> (EVM)</td><td>EVM'in üç veri alanı; gas maliyetleri buradan doğar.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#storage-transient-storage-memory-and-the-stack">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>gasleft()</strong></td><td>Kalan gas'ı döner; ölçüm ve koruma için.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#special-variables-and-functions">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>type(I).interfaceId</strong></td><td>Arayüz kimliği; ERC-165 <code>supportsInterface</code> ile birlikte.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#type-information">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>evm.codes</strong></td><td>Opcode başına gas ve davranışı gösteren etkileşimli referans (ücretsiz).</td><td><span class="tag">ORTA</span></td><td><a href="https://www.evm.codes/">evm.codes</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Solidity 0.8.x yenilikleri (sürüm notlarından)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>0.8.0 breaking changes</strong></td><td>Varsayılan taşma kontrolü; SafeMath ihtiyacı bitti. 2021-2023 dönemi kodların çoğu 0.8.x'tir.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/080-breaking-changes.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>custom errors</strong> (0.8.4)</td><td>Gas dostu, parametreli hatalar.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://soliditylang.org/blog/2021/04/21/custom-errors/">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>tload / tstore</strong> (0.8.24)</td><td>Assembly'de transient storage opcode'ları (EIP-1153).</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://soliditylang.org/blog/2024/01/26/transient-storage/">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>require(bool, error)</strong> (0.8.26)</td><td>require içinde custom error kullanımı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://soliditylang.org/blog/2024/05/21/solidity-0.8.26-release-announcement/">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>transient state variables</strong> (0.8.28)</td><td>Değer tipi durum değişkenlerinde <code>transient</code> için tam destek.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://soliditylang.org/blog/2024/10/09/solidity-0.8.28-release-announcement/">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>custom storage layout</strong> (0.8.29)</td><td><code>contract C layout at ...</code> ile storage başlangıç yerini taşıma.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://soliditylang.org/blog/2025/03/12/solidity-0.8.29-release-announcement/">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>erc7201 builtin</strong> (0.8.35)</td><td>ERC-7201 namespaced storage slotunu derleme anında hesaplayan yerleşik fonksiyon.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://soliditylang.org/blog/2026/04/29/solidity-0.8.35-release-announcement">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>0.8.37</strong> ve 0.9.0 hazırlığı</td><td>Amsterdam EVM'deki SLOTNUM desteği; 0.9.0'da kaldırılacak özellikler için uyarılar.</td><td><span class="tag">ORTA</span> uyarıları okumayı alışkanlık yap</td><td><a href="https://soliditylang.org/blog/2026/09/10/solidity-0.8.37-release-announcement">soliditylang.org/blog</a></td></tr>
+              <tr><td><strong>known bugs</strong> listesi</td><td>Derleyici hataları sürüm sürüm listelenir; audit'te derleyici sürümü bu yüzden sorulur.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/bugs.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Core Solidity</strong></td><td>Dilin gelecekteki yeni nesli üzerine ekip çalışması; şimdilik sadece takip et.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://soliditylang.org/blog/2026/05/05/pattern-matching-in-core-solidity/">soliditylang.org/blog</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="csharp-kopru"><span class="h-num">§ 3</span>Başka dilden Solidity'ye köprü tablosu (C# ayrıntılı, diğer diller özet)</h2>
+        <p class="intro"><strong>Hangi dilden gelirsen gel asıl zihinsel fark aynıdır:</strong> deploy edilen kod değişmez, her yazma para (gas) ister, hata tüm işlemi geri alır. Aşağıdaki büyük tablo .NET kavramlarından Solidity'ye geçiş içindir (C# bilenler için); başka başlangıç noktaları için tablonun altındaki kısa yönlendirmeye bak. .NET tarafı için <a href="../../CSharp-DotNet/index.html">C# ve .NET bölümü</a>, C#'tan sözleşme çağırmak için <a href="../04-dotnet/index.html">04 — .NET</a>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>C# / .NET &rarr; Solidity / EVM</caption>
+            <thead><tr><th>C# / .NET</th><th>Solidity karşılığı</th><th>Fark / tuzak</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>class</strong></td><td>contract</td><td>Deploy edilince kodu değişmez; yeni sürüm = yeni adres veya proxy.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>interface</strong></td><td>interface</td><td>Durum değişkeni ve gövde yok; fonksiyonlar external.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#interfaces">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>abstract class</strong></td><td>abstract contract</td><td>Neredeyse aynı fikir.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#abstract-contracts">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>static class / extension method</strong></td><td>library + <code>using for</code></td><td>Kütüphane durum tutmaz; external kütüphane ayrı deploy edilir.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#libraries">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>event</strong> (delegate)</td><td>event + emit (log)</td><td>Abone kod zincir dışındadır (arayüz, indexer); sözleşme log okuyamaz.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#events">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>throw / exception</strong></td><td>revert / custom error</td><td>Kısmi başarı yok: işlemdeki tüm durum değişikliği geri alınır, harcanan gas geri gelmez.</td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#revert">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Guard clause</strong> (ArgumentException)</td><td>require / <code>if + revert</code></td><td>Aynı kullanım; mesaj yerine custom error tercih et.</td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#panic-via-assert-and-error-via-require">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>[Authorize] / action filter</strong></td><td>modifier</td><td>Yetki = <code>msg.sender</code> kontrolü; kimlik, private key imzasıdır.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>const / readonly</strong></td><td>constant / immutable</td><td>Storage harcamaz; gas tasarrufu sağlar.</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#constant-and-immutable-state-variables">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Dictionary&lt;K,V&gt;</strong></td><td>mapping</td><td>Anahtar listesi, Count, foreach yok.</td><td><a href="https://docs.soliditylang.org/en/latest/types.html#mapping-types">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>List&lt;T&gt;</strong></td><td>dinamik array</td><td>Büyüyen dizi üzerinde döngü, gas limitine takılır (DoS).</td><td><a href="https://docs.soliditylang.org/en/latest/types.html#arrays">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>decimal / double</strong></td><td>yok (uint + decimals)</td><td>Ondalık sayı yok; 18 basamaklı tam sayı ile çalışılır, önce çarp sonra böl.</td><td><a href="https://docs.soliditylang.org/en/latest/types.html#fixed-point-numbers">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>checked / unchecked</strong></td><td>varsayılan checked, <code>unchecked { }</code></td><td>C#'ın tersine Solidity 0.8'de varsayılan checked'dır.</td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#checked-or-unchecked-arithmetic">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>private</strong> alan</td><td>private</td><td>Sadece derleme zamanı erişim kısıtı; herkes storage'ı okuyabilir. Parola, sır saklama.</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#private-information-and-randomness">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>DateTime.UtcNow</strong></td><td>block.timestamp</td><td>Blok üreticisi sınırlı oynatabilir; hassas zamanlama için güvenme.</td><td><a href="https://docs.soliditylang.org/en/latest/units-and-global-variables.html#block-and-transaction-properties">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Random</strong></td><td>yok (Chainlink VRF)</td><td>Zincirde gerçek rastgelelik yok; blok verisi tahmin edilebilir.</td><td><a href="https://docs.chain.link/vrf">docs.chain.link</a></td></tr>
+              <tr><td><strong>HttpClient</strong></td><td>yok (oracle)</td><td>Sözleşme dış dünyaya istek atamaz; veri oracle ile içeri itilir.</td><td><a href="https://docs.chain.link/data-feeds">docs.chain.link</a></td></tr>
+              <tr><td><strong>Dependency Injection</strong></td><td>yok</td><td>Bağımlılıklar constructor'da adres olarak verilir (genelde immutable).</td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#constructors">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>Garbage Collector</strong></td><td>yok</td><td>memory işlem sonunda silinir; storage kalıcıdır ve her yazma ücretlidir.</td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org</a></td></tr>
+              <tr><td><strong>SQL Server / EF Core</strong></td><td>storage + event'ler</td><td>Sorgu yok; listeleme/raporlama zincir dışı indexer ile yapılır (06'da).</td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>async / await</strong></td><td>yok</td><td>Çağrı senkron; işlemin onayını bekleme istemci (ethers, Nethereum) tarafındadır.</td><td><a href="https://ethereum.org/developers/docs/smart-contracts/">ethereum.org</a></td></tr>
+              <tr><td><strong>xUnit / NUnit</strong></td><td>forge test / Hardhat test</td><td>Foundry'de testler de Solidity ile yazılır.</td><td><a href="https://getfoundry.sh/forge/testing">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Roslyn analyzer</strong></td><td>forge lint / solhint / Slither</td><td>Statik analiz CI'da zorunlu kabul edilir.</td><td><a href="https://getfoundry.sh/forge/linting">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Visual Studio</strong></td><td>VS Code + Solidity eklentisi / Remix</td><td>Juan Blanco'nun eklentisi Nethereum ile C# kod üretimi de yapar.</td><td><a href="https://github.com/juanfranblanco/vscode-solidity">github.com/juanfranblanco</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başka bir başlangıç noktasından geliyorsan</caption>
+            <thead><tr><th>Nereden geliyorsun</th><th>Tanıdık olan</th><th>Asıl yeni olan</th><th>Sonraki adım</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JavaScript / TypeScript</strong></td><td>Süslü parantezli sözdizimi, class ≈ contract, JSDoc ≈ NatSpec, Jest/Vitest ≈ forge test</td><td>Ondalık sayı yok, tam sayılar sabit genişlikte (JS tarafında BigInt); async yok; her yazma gas; revert tüm işlemi geri alır</td><td>Bu sayfa + <a href="../03-javascript-typescript/index.html">03</a> (arayüz tarafı zaten senin alanın)</td></tr>
+              <tr><td><strong>Python</strong></td><td>Vyper'ın sözdizimi Python'a benzer (§ 2); Slither, Ape gibi araçlar Python ile yazılmış</td><td>Statik tipler, derleme adımı, süslü parantezli sözdizimi; dinamik tip yok</td><td>Solidity ile başla, Vyper'ı alternatif olarak tanı</td></tr>
+              <tr><td><strong>Java</strong></td><td>class / interface / abstract / override, throw &rarr; revert, final &rarr; constant/immutable, HashMap &rarr; mapping, ArrayList &rarr; dinamik array satırları Java için de geçerli; JUnit ≈ forge test</td><td>GC yok, ondalık yok, storage ücretli; dış dünyaya istek yok (oracle). Yukarıdaki tablonun bazı satırlarının Java'da birebir karşılığı yok veya farklı: extension method yok (library + <code>using for</code> yeni kavram), delegate/event yerine listener/observer deseni, checked/unchecked anahtar kelimesi yok (taşma sessizce sarar; <code>Math.addExact</code> ile yakalanır), decimal yerine BigDecimal, [Authorize] yerine Spring Security <code>@PreAuthorize</code> ≈ modifier, Roslyn analyzer yerine SpotBugs/Checkstyle ≈ Slither/solhint</td><td>Tabloyu bu farklarla birlikte oku; IDE olarak IntelliJ eklentisi yerine VS Code + Solidity eklentisi veya Remix yaygın</td></tr>
+              <tr><td><strong>Go / Rust</strong></td><td>Sabit genişlikli tam sayılar, açık hata yönetimi, derlenen dil</td><td>Durumun zincirde kalıcı ve ücretli olması; kalıtım (<code>is</code>) ve modifier</td><td>Bu sayfa; EVM dışı zincirler için <a href="../05-diger-zincirler/index.html">05</a></td></tr>
+              <tr><td><strong>Hiç dil bilmiyorsun</strong></td><td>—</td><td>Hem programlama hem zincir kavramları</td><td>Önce <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript sayfası</a>, sonra <a href="https://solidity-by-example.org/">Solidity by Example</a> ve Remix</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="standartlar"><span class="h-num">§ 4</span>Standartlar (EIP / ERC)</h2>
+        <p class="intro">EIP = Ethereum geliştirme önerisi; ERC = uygulama katmanı standardı. Hepsinin kaynağı <a href="https://eips.ethereum.org/">eips.ethereum.org</a>. Özet anlatım için <a href="https://ethereum.org/developers/docs/standards/tokens/">ethereum.org token standartları</a>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Token ve arayüz standartları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ERC-20</strong></td><td>Değiştirilebilir token: balanceOf, transfer, approve, transferFrom, allowance.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-20">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-721</strong></td><td>NFT; her tokenId benzersizdir. safeTransferFrom alıcıyı kontrol eder.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-721">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-1155</strong></td><td>Tek sözleşmede çoklu token (fungible + NFT), batch transfer.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1155">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-165</strong></td><td>Sözleşmenin hangi arayüzü desteklediğini sorgulama (<code>supportsInterface</code>).</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-165">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-2981</strong></td><td>NFT telif bilgisi (royaltyInfo); ödeme gönüllüdür, zorlamaz.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-2981">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-4626</strong></td><td>Tokenized vault: varlık yatır, pay (share) al. DeFi getiri kasalarının ortak API'si.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-4626">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-1363</strong></td><td>transferAndCall: transferden sonra alıcı kodunu çalıştıran ERC-20 uzantısı.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1363">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-6909</strong></td><td>ERC-1155'in callback'siz, sade çoklu token alternatifi.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-6909">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-3156</strong></td><td>Flash loan arayüzü; aynı işlemde geri ödenen teminatsız kredi.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-3156">eips.ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İmza standartları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EIP-712</strong></td><td>Tipli yapısal veri imzalama; cüzdan kullanıcıya okunur alanlar gösterir. Domain separator ile replay önlenir.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-712">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-191</strong></td><td>İmzalı veri öneki (<code>0x19</code>); personal_sign bu formattır.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-191">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-2612</strong> (permit)</td><td>İmza ile ERC-20 onayı; ayrı approve işlemine gerek kalmaz.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-2612">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Permit2</strong></td><td>Uniswap'in her ERC-20 için ortak imzalı onay sözleşmesi (EIP değil, yaygın).</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.uniswap.org/contracts/permit2/overview">developers.uniswap.org</a></td></tr>
+              <tr><td><strong>ERC-1271</strong></td><td>Sözleşme hesaplarının (Safe, akıllı cüzdan) imza doğrulaması: <code>isValidSignature</code>.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1271">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-155</strong></td><td>İşlem imzasına chainId eklenmesi; zincirler arası tekrar oynatmayı önler.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-155">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-2771</strong></td><td>Meta-transaction: güvenilir forwarder kullanıcının yerine gas öder.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-2771">eips.ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yükseltilebilirlik ve hesap soyutlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>proxy pattern</strong></td><td>Kullanıcı proxy adresini çağırır, proxy delegatecall ile mantık sözleşmesine iletir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/smart-contracts/upgrading/">ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-1967</strong></td><td>Proxy'nin implementation/admin/beacon adreslerini tuttuğu standart slotlar.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1967">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Transparent proxy</strong></td><td>Yükseltme mantığı proxy'de; admin ile kullanıcı çağrıları ayrılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/proxies">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>UUPS</strong> (ERC-1822)</td><td>Yükseltme fonksiyonu mantık sözleşmesinde; daha ucuz ama unutulursa sözleşme kilitlenir. EIP durumu Stagnant, kalıp yaygın.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1822">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Beacon proxy</strong></td><td>Çok sayıda proxy tek beacon üzerinden aynı anda yükseltilir.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/proxy">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>EIP-1167</strong> (minimal proxy / clones)</td><td>Aynı mantığın ucuz kopyalarını deploy etme (yükseltilemez).</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1167">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-2535</strong> (Diamond)</td><td>Çok parçalı (facet) proxy; 24 KB sınırını aşmak için. Karmaşık, audit maliyeti yüksek.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-2535">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-7201</strong></td><td>Namespaced storage; yükseltmede slot çakışmasını önler. OpenZeppelin v5 upgradeable bunu kullanır.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-7201">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-4337</strong> (account abstraction)</td><td>UserOperation, EntryPoint, bundler, paymaster ile akıllı sözleşme cüzdanları.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-4337">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-7702</strong></td><td>Normal hesabın (EOA) koduna sözleşme delegasyonu; batch ve gas sponsorluğu.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-7702">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ERC-7579</strong></td><td>Modüler akıllı hesap arayüzleri (validator, executor, hook).</td><td><span class="tag tag--info">İLERİ</span> Draft</td><td><a href="https://eips.ethereum.org/EIPS/eip-7579">eips.ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Protokol EIP'leri (sözleşme yazarını etkileyenler)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EIP-1559</strong></td><td>Base fee (yakılır) + priority fee (tip) ücret modeli.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1559">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-1014</strong> (CREATE2)</td><td>Salt ile önceden hesaplanabilir sözleşme adresi.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1014">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-6780</strong></td><td>SELFDESTRUCT yalnızca oluşturulduğu işlemde hesabı siler.</td><td><span class="tag">ORTA</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-6780">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-1153</strong></td><td>TLOAD/TSTORE transient storage; ucuz reentrancy kilidi için kullanılır.</td><td><span class="tag tag--info">İLERİ</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-1153">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-170</strong></td><td>Sözleşme kod boyutu sınırı: 24.576 bayt.</td><td><span class="tag tag--ok">TEMEL</span> Final</td><td><a href="https://eips.ethereum.org/EIPS/eip-170">eips.ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="openzeppelin"><span class="h-num">§ 5</span>OpenZeppelin ve alternatif kütüphaneler</h2>
+        <p class="intro">Standartları sıfırdan yazma; denetlenmiş kütüphaneden kalıt al. Ana doküman: <a href="https://docs.openzeppelin.com/contracts/5.x/">docs.openzeppelin.com/contracts/5.x</a>. 2022–2023 dönemindeki projelerin ve eğitimlerin çoğu v4 kullanır; bugün v5 serisi geçerli.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>OpenZeppelin Contracts</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>OpenZeppelin Contracts</strong></td><td>En yaygın denetlenmiş Solidity kütüphanesi; açık kaynak, ücretsiz. Güncel sürüm v5.7.0.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://github.com/OpenZeppelin/openzeppelin-contracts">github.com/OpenZeppelin</a></td></tr>
+              <tr><td><strong>v5 değişiklikleri</strong></td><td>En az 0.8.20; Ownable'a initialOwner zorunlu; custom error'lar; SafeMath/Counters kaldırıldı; hook'lar tek <code>_update</code>; Pausable ve ReentrancyGuard <code>utils</code>'e taşındı.</td><td><span class="tag tag--ok">TEMEL</span> eski v4 kodunu okurken şart</td><td><a href="https://docs.openzeppelin.com/contracts/5.x/changelog">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>backwards compatibility</strong></td><td>Hangi değişikliklerin sürüm içinde kırıcı sayıldığı politikası.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/backwards-compatibility">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC20</strong> (impl.)</td><td>Hazır ERC-20; decimals varsayılan 18. Uzantılar: ERC20Permit, ERC20Votes, ERC20Burnable.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc20">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC721</strong> (impl.)</td><td>Hazır NFT; ERC721URIStorage ile token başına metadata URI.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc721">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC1155</strong> (impl.)</td><td>Çoklu token; alıcı sözleşme ERC1155Holder olmalı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc1155">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC4626</strong> (impl.)</td><td>Vault; dokümanda inflation attack ve virtual shares savunması anlatılır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc4626">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC2981</strong> (impl.)</td><td>NFT royalty uygulaması, token/common altında.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/token/common">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Ownable</strong></td><td>Tek sahip; <code>onlyOwner</code> modifier'ı.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Ownable2Step</strong></td><td>Sahiplik devri iki adımlı: yeni sahip kabul etmeli; yanlış adrese devri önler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>AccessControl</strong></td><td>Rol tabanlı yetki (MINTER_ROLE vb.). C#'tan geliyorsan ASP.NET rol yetkilendirmesine, Java'dan geliyorsan Spring Security rollerine benzer.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/access">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>AccessManager</strong></td><td>Birden çok sözleşmenin yetkisini tek merkezden, gecikmeli yönetme.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>TimelockController</strong></td><td>Kritik işlemlere zorunlu bekleme süresi; kullanıcıya çıkış fırsatı verir.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/governance">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Governor</strong></td><td>Token oylamalı zincir üstü yönetişim (DAO) modülleri.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/governance">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Pausable</strong></td><td>Acil durumda fonksiyonları durdurma (circuit breaker).</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ReentrancyGuard</strong></td><td><code>nonReentrant</code> modifier'ı; ReentrancyGuardTransient sürümü EIP-1153 ile daha ucuz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>SafeERC20</strong></td><td>false dönen veya hiç dönmeyen tokenlarla güvenli transfer sarmalayıcısı.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/token/ERC20">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ECDSA / EIP712 / MerkleProof</strong></td><td>İmza doğrulama, tipli imza domain'i, Merkle ağacı ile allowlist.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils/cryptography">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Utilities</strong> (SafeCast, Math, Multicall, BitMaps)</td><td>Güvenli tip dönüşümü, matematik, toplu çağrı, bit haritaları.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/utilities">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Proxy sözleşmeleri</strong></td><td>ERC1967Proxy, TransparentUpgradeableProxy, UUPSUpgradeable, BeaconProxy, Clones.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/api/proxy">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>contracts-upgradeable</strong></td><td>Ayrı paket; constructor yerine initializer, ERC-7201 namespaced storage.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/upgradeable">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Initializable</strong> / writing upgradeable</td><td>Yükseltilebilir sözleşme yazma kuralları: initializer, değişken sırası, immutable kısıtı.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/writing-upgradeable">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Account Abstraction</strong> (OZ)</td><td>ERC-4337 hesap, paymaster ve ilgili yardımcılar.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/account-abstraction">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Community Contracts</strong></td><td>Topluluk katkılı, ana pakete girmemiş deneysel sözleşmeler.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/community-contracts">docs.openzeppelin.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>OpenZeppelin araçları ve alternatifler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Contracts Wizard</strong></td><td>Tarayıcıda seçenek işaretleyerek ERC-20/721/1155 iskeleti üretir; öğrenmek için ideal, ücretsiz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://wizard.openzeppelin.com/">wizard.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Upgrades Plugins</strong> (Hardhat)</td><td>Proxy deploy/upgrade ve storage uyumluluk kontrolü.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/hardhat-upgrades">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Foundry Upgrades</strong></td><td>Aynı kontrollerin Foundry kütüphanesi.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/foundry/foundry-upgrades">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Defender</strong></td><td>İzleme, relayer, otomasyon SaaS'ı. Yeni kayıtlar 30 Haziran 2025'te kapandı; son kapanış tarihi 1 Temmuz 2026 olarak duyuruldu. Durumu değişebilir, teyit et.</td><td><span class="tag tag--warn">ÜCRETLİ</span> <span class="tag tag--warn">ESKİMİŞ</span> eski yazılarda görürsün</td><td><a href="https://docs.openzeppelin.com/defender/">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>OpenZeppelin Monitor</strong></td><td>Defender Monitor yerine açık kaynak (Rust) zincir izleme servisi; kendin barındırırsın.</td><td><span class="tag tag--info">İLERİ</span> ücretsiz</td><td><a href="https://docs.openzeppelin.com/monitor">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>OpenZeppelin Relayer</strong></td><td>Defender Relayer yerine açık kaynak işlem gönderme altyapısı.</td><td><span class="tag tag--info">İLERİ</span> ücretsiz</td><td><a href="https://docs.openzeppelin.com/relayer">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Solady</strong></td><td>Assembly ağırlıklı, gas optimize kütüphane (niş); okuması ve denetlemesi zor.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Vectorized/solady">github.com/Vectorized</a></td></tr>
+              <tr><td><strong>Solmate</strong></td><td>Eski, minimal ve gas odaklı kütüphane; eski projelerde görürsün.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/transmissions11/solmate">github.com/transmissions11</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="guvenlik"><span class="h-num">§ 6</span>Güvenlik: açıklar ve bilinen olaylar</h2>
+        <p class="intro">Sözleşme hatası geri alınamaz ve doğrudan para kaybıdır. Olay adları sadece arama anahtarıdır; ayrıntı için "olay adı + post mortem" diye ara veya <a href="https://rekt.news/leaderboard/">rekt.news leaderboard</a>'a bak. Audit süreci ve statik analiz araçları <a href="../06-altyapi-araclar-guvenlik/index.html">06</a>'da.</p>
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Kendi yazdığın sözleşmeye gerçek para koyma. Öğrenme süresince her şey yerel zincirde ve testnet'te kalsın. Özel anahtarını (private key / seed) hiçbir dosyaya, repoya, ekran görüntüsüne koyma.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Açık türleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not / bilinen olay</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>reentrancy</strong></td><td>Dış çağrı, durum güncellenmeden önce fonksiyona geri girer ve bakiyeyi tekrar çeker.</td><td><span class="tag tag--warn">RİSK</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> The DAO (2016)</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#reentrancy">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>cross-function reentrancy</strong></td><td>Geri giriş aynı değil, aynı durumu paylaşan başka fonksiyondan olur.</td><td><span class="tag tag--warn">RİSK</span> Rari Capital / Fei (2022)</td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/reentrancy/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>read-only reentrancy</strong></td><td>Yarım kalmış durumdaki bir view fonksiyonu başka protokole yanlış fiyat okutur.</td><td><span class="tag tag--warn">RİSK</span> Sentiment (2023)</td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/reentrancy/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>callback / hook reentrancy</strong></td><td>ERC-777 hook'ları, ERC-721 safeTransfer ve ERC-1155 alıcı callback'leri geri giriş kapısı açar.</td><td><span class="tag tag--warn">RİSK</span> Lendf.Me (2020)</td><td><a href="https://eips.ethereum.org/EIPS/eip-1155">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>integer overflow / underflow</strong></td><td>0.8 öncesi sessiz taşma; bugün <code>unchecked</code> blok ve assembly içinde hâlâ mümkün.</td><td><span class="tag tag--warn">RİSK</span> BeautyChain BEC "batchOverflow" (2018)</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#two-s-complement-underflows-overflows">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>precision loss / rounding</strong></td><td>Önce bölüp sonra çarpma, yuvarlama yönü hatası; küçük farklar döngüyle büyütülür.</td><td><span class="tag tag--warn">RİSK</span> KyberSwap Elastic (2023)</td><td><a href="https://getfoundry.sh/forge/linting/divide-before-multiply">getfoundry.sh</a></td></tr>
+              <tr><td><strong>front-running / sandwich / MEV</strong></td><td>Mempool'daki işlemi gören bot önüne ve arkasına işlem koyar; slippage sınırı olmayan swap'ler hedeftir.</td><td><span class="tag tag--warn">RİSK</span> MEV-Boost relay istismarı (2023)</td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org</a> · <a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/frontrunning/">consensysdiligence</a></td></tr>
+              <tr><td><strong>oracle manipulation</strong></td><td>Anlık DEX fiyatını oracle diye okumak; tek işlemde fiyat bükülüp teminat şişirilir.</td><td><span class="tag tag--warn">RİSK</span> Mango Markets (2022), Cream Finance (2021)</td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/oracle-manipulation/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>flash loan saldırıları</strong></td><td>Teminatsız dev sermaye ile fiyat, oy veya oran manipülasyonu; açığı büyüten araçtır, açığın kendisi değil.</td><td><span class="tag tag--warn">RİSK</span> bZx (2020), Euler Finance (2023)</td><td><a href="https://eips.ethereum.org/EIPS/eip-3156">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>governance attack</strong></td><td>Anlık alınan oy gücüyle kötü öneriyi aynı işlemde geçirmek.</td><td><span class="tag tag--warn">RİSK</span> Beanstalk (2022)</td><td><a href="https://docs.openzeppelin.com/contracts/5.x/governance">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>access control hataları</strong></td><td>Eksik <code>onlyOwner</code>, herkese açık kritik fonksiyon, yanlış rol ataması. OWASP 2026 listesinde 1 numara.</td><td><span class="tag tag--warn">RİSK</span> Poly Network (2021)</td><td><a href="https://owasp.github.io/www-project-smart-contract-top-10">OWASP SC Top 10</a></td></tr>
+              <tr><td><strong>unprotected initializer</strong></td><td>Proxy arkasındaki initialize fonksiyonunu saldırganın ilk çağırması veya implementation'ın başlatılmamış kalması.</td><td><span class="tag tag--warn">RİSK</span> Parity Multisig (Kasım 2017), Nomad Bridge (2022)</td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/writing-upgradeable">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>tx.origin</strong> ile yetki</td><td>tx.origin işlemi başlatan kişidir; kurban kötü sözleşmeyi çağırınca kontrol geçilir. Yetkide msg.sender kullan.</td><td><span class="tag tag--warn">RİSK</span> SWC-115; büyük tek bir olaydan çok phishing senaryosu</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#tx-origin">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>delegatecall injection</strong></td><td>Güvenilmeyen adrese delegatecall; karşı taraf çağıran sözleşmenin storage'ını yazar.</td><td><span class="tag tag--warn">RİSK</span> Parity Multisig (Temmuz 2017), Furucombo (2021)</td><td><a href="https://swcregistry.io/docs/SWC-112/">SWC-112</a></td></tr>
+              <tr><td><strong>storage collision</strong> (proxy)</td><td>Proxy ile implementation (veya iki sürüm) aynı slotu farklı değişken için kullanır.</td><td><span class="tag tag--warn">RİSK</span> Audius (2022)</td><td><a href="https://docs.openzeppelin.com/upgrades-plugins/proxies">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>function selector clash</strong></td><td>Proxy ve implementation'da aynı 4 baytlık seçiciye düşen fonksiyonlar; Transparent proxy bu yüzden var.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://getfoundry.sh/forge/linting/function-selector-collision">getfoundry.sh</a></td></tr>
+              <tr><td><strong>signature replay</strong></td><td>Aynı imzanın tekrar, başka sözleşmede veya başka zincirde kullanılması; nonce, chainId, domain eksikliği.</td><td><span class="tag tag--warn">RİSK</span> Wintermute / Optimism OP (2022, zincirler arası tekrar)</td><td><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a> · <a href="https://eips.ethereum.org/EIPS/eip-155">EIP-155</a></td></tr>
+              <tr><td><strong>imza doğrulama hataları</strong></td><td>ecrecover'ın 0 adres dönmesi, malleability, doğrulamanın atlatılması.</td><td><span class="tag tag--warn">RİSK</span> Wormhole (2022)</td><td><a href="https://getfoundry.sh/forge/linting/ecrecover">getfoundry.sh</a></td></tr>
+              <tr><td><strong>denial of service</strong> (gas / döngü)</td><td>Sınırsız büyüyen dizi üzerinde döngü blok gas limitini aşar, fonksiyon kalıcı kilitlenir.</td><td><span class="tag tag--warn">RİSK</span> GovernMental (2016)</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#gas-limit-and-loops">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>DoS by revert</strong> / griefing</td><td>Ödeme alıcısı bilerek revert eder; push ödeme döngüsü herkes için durur.</td><td><span class="tag tag--warn">RİSK</span> King of the Ether Throne (2016)</td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/denial-of-service/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>timestamp dependence</strong></td><td>block.timestamp'e dayalı kısa süreli karar veya rastgelelik.</td><td><span class="tag tag--warn">RİSK</span> GovernMental (2016)</td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/timestamp-dependence/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>insecure randomness</strong></td><td>blockhash, timestamp, prevrandao ile "rastgele" sayı; tahmin edilebilir.</td><td><span class="tag tag--warn">RİSK</span> Fomo3D (2018)</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#private-information-and-randomness">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>unchecked return value</strong></td><td>Low-level call veya ERC-20 transfer'in false dönüşünü kontrol etmemek.</td><td><span class="tag tag--warn">RİSK</span> King of the Ether Throne (2016)</td><td><a href="https://swcregistry.io/docs/SWC-104/">SWC-104</a></td></tr>
+              <tr><td><strong>force feeding</strong></td><td>selfdestruct veya blok ödülüyle istenmeyen ETH gönderilir; <code>address(this).balance</code> varsayımı bozulur.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/force-feeding/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>ERC-4626 inflation / boş piyasa</strong></td><td>İlk yatıran bağışla pay oranını şişirir, sonraki kullanıcı yuvarlamada kaybeder.</td><td><span class="tag tag--warn">RİSK</span> Hundred Finance (2023)</td><td><a href="https://docs.openzeppelin.com/contracts/5.x/erc4626">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>business logic hataları</strong></td><td>Kod "doğru çalışır" ama iş kuralı yanlıştır; araçlar yakalayamaz. OWASP 2026'da 2 numara.</td><td><span class="tag tag--warn">RİSK</span> Euler Finance (2023)</td><td><a href="https://owasp.github.io/www-project-smart-contract-top-10">OWASP SC Top 10</a></td></tr>
+              <tr><td><strong>input validation eksikliği</strong></td><td>Sıfır adres, sınır dışı değer, kullanıcı verisinin doğrudan çağrıya aktarılması.</td><td><span class="tag tag--warn">RİSK</span> OWASP 2026 SC05</td><td><a href="https://getfoundry.sh/forge/linting/missing-zero-check">getfoundry.sh</a></td></tr>
+              <tr><td><strong>abi.encodePacked hash collision</strong></td><td>Yan yana iki dinamik tip farklı girdilerden aynı hash'i üretir.</td><td><span class="tag tag--warn">RİSK</span> SWC-133</td><td><a href="https://getfoundry.sh/forge/linting/encode-packed-collision">getfoundry.sh</a></td></tr>
+              <tr><td><strong>private veri sızıntısı</strong></td><td>private değişkendeki parola/sır herkes tarafından storage'dan okunur.</td><td><span class="tag tag--warn">RİSK</span> SWC-136</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#private-information-and-randomness">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>compiler bug</strong></td><td>Kaynak doğru, derleyici hatalı bytecode üretir; derleyici sürümünü sabitle, bilinen hataları kontrol et.</td><td><span class="tag tag--warn">RİSK</span> Curve / Vyper (2023)</td><td><a href="https://docs.soliditylang.org/en/latest/bugs.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>centralization riski</strong></td><td>Tek anahtar veya az imzacılı multisig her şeyi yükseltebilir, durdurabilir, çekebilir.</td><td><span class="tag tag--warn">RİSK</span> Ronin (2022), Harmony Horizon (2022), Multichain (2023)</td><td><a href="https://ethereum.org/developers/docs/smart-contracts/security/">ethereum.org</a></td></tr>
+              <tr><td><strong>multisig imzacı / arayüz ele geçirme</strong></td><td>Sözleşme sağlam, imzacı cihazı veya imzalama arayüzü kandırılır ("blind signing").</td><td><span class="tag tag--warn">RİSK</span> Bybit (2025), Radiant Capital (2024)</td><td><a href="https://rekt.news/leaderboard/">rekt.news</a></td></tr>
+              <tr><td><strong>approval phishing</strong> / sınırsız onay</td><td>Kullanıcıdan <code>approve(max)</code> alıp sonra bakiyeyi çekmek.</td><td><span class="tag tag--warn">RİSK</span> Badger DAO (2021)</td><td><a href="https://getfoundry.sh/forge/linting/arbitrary-send-erc20">getfoundry.sh</a></td></tr>
+              <tr><td><strong>rug pull</strong></td><td>Geliştiricinin kasıtlı olarak likiditeyi çekmesi veya satışı kilitleyen gizli kod; teknik açık değil, niyet sorunu.</td><td><span class="tag tag--warn">RİSK</span> Squid Game token (2021), AnubisDAO (2021)</td><td><a href="https://rekt.news/leaderboard/">rekt.news</a></td></tr>
+              <tr><td><strong>private key sızıntısı</strong></td><td><code>.env</code> dosyasını repoya göndermek, anahtarı düz metin saklamak.</td><td><span class="tag tag--warn">RİSK</span> çok sayıda bireysel vaka</td><td><a href="https://getfoundry.sh/reference/cast/wallet/import">getfoundry.sh</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Savunma kalıpları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Checks-Effects-Interactions</strong></td><td>Önce kontrol, sonra durum güncelle, en son dış çağrı. Reentrancy'ye karşı ilk savunma.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> mülakat klasiği</td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#use-the-checks-effects-interactions-pattern">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>pull over push</strong></td><td>Toplu ödeme gönderme yerine herkes kendi payını çeker; DoS ve reentrancy yüzeyini azaltır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/common-patterns.html#withdrawal-from-contracts">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>fail-safe / circuit breaker</strong></td><td>Acil durdurma ve limitli çekim; OpenZeppelin Pausable ile.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#include-a-fail-safe-mode">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>restrict the amount of Ether</strong></td><td>Yeni sözleşmede tutulacak tutarı sınırla; küçük ve modüler tut.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html#restrict-the-amount-of-ether">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>commit-reveal</strong></td><td>Önce hash gönder, sonra değeri aç; front-running'e karşı.</td><td><span class="tag">ORTA</span></td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/attacks/frontrunning/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>slippage / deadline</strong> parametresi</td><td>Swap'te en az alınacak miktar ve son geçerlilik zamanı; sandwich zararını sınırlar.</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/mev/">ethereum.org</a></td></tr>
+              <tr><td><strong>Chainlink Data Feeds</strong></td><td>Merkeziyetsiz fiyat oracle'ı; anlık DEX fiyatı yerine. Güncellik (timestamp) kontrolü de gerekir.</td><td><span class="tag">ORTA</span> testnet'te ücretsiz okunur</td><td><a href="https://docs.chain.link/data-feeds">docs.chain.link</a></td></tr>
+              <tr><td><strong>Chainlink VRF</strong></td><td>Doğrulanabilir rastgele sayı. Mainnet'te LINK/yerel token ile ödenir; testnet'te faucet ile denenebilir.</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.chain.link/vrf">docs.chain.link</a></td></tr>
+              <tr><td><strong>Flashbots Protect</strong></td><td>İşlemi özel mempool'a göndererek sandwich botlarından gizler (kullanıcı tarafı savunma).</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.flashbots.net/flashbots-protect/overview">docs.flashbots.net</a></td></tr>
+              <tr><td><strong>timelock + multisig</strong></td><td>Admin yetkisini tek anahtardan alıp gecikmeli çoklu imzaya taşımak; centralization riskini azaltır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.safe.global/home/what-is-safe">docs.safe.global</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Güvenlik kaynakları ve pratik alanları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Solidity Security Considerations</strong></td><td>Dilin resmî güvenlik bölümü; ilk okunacak kaynak.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>ethereum.org smart contract security</strong></td><td>Yönergeler, sık açıklar ve araç listesi.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/smart-contracts/security/">ethereum.org</a></td></tr>
+              <tr><td><strong>OWASP Smart Contract Top 10</strong> (2026)</td><td>2025 olay verisinden türetilmiş ilk 10 açık listesi.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://owasp.github.io/www-project-smart-contract-top-10">owasp.github.io</a></td></tr>
+              <tr><td><strong>SWC Registry</strong></td><td>SWC-107 gibi açık numaraları; 2020'den beri güncellenmiyor ama ID'ler hâlâ raporlarda geçer.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://swcregistry.io/">swcregistry.io</a></td></tr>
+              <tr><td><strong>Consensys Smart Contract Best Practices</strong></td><td>Saldırı ve öneri sayfaları; aktif bakımda değil, klasik referans.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/">consensysdiligence.github.io</a></td></tr>
+              <tr><td><strong>Smart Contract Security Field Guide</strong></td><td>Consensys rehberinin önerdiği güncel devam kaynağı.</td><td><span class="tag">ORTA</span></td><td><a href="https://scsfg.io/">scsfg.io</a></td></tr>
+              <tr><td><strong>rekt.news</strong></td><td>Büyük saldırıların kayıp sırasına göre listesi ve analizleri.</td><td><span class="tag">ORTA</span></td><td><a href="https://rekt.news/leaderboard/">rekt.news</a></td></tr>
+              <tr><td><strong>Solodit</strong></td><td>Audit bulgularının aranabilir veritabanı (Cyfrin); temel kullanım ücretsiz, ek özellikler hesapla.</td><td><span class="tag">ORTA</span></td><td><a href="https://solodit.cyfrin.io/">solodit.cyfrin.io</a></td></tr>
+              <tr><td><strong>Ethernaut</strong></td><td>OpenZeppelin'in seviyeli hack oyunu; reentrancy, delegatecall, tx.origin bölümleri var. Ücretsiz.</td><td><span class="tag tag--ok">TEMEL</span> Mülakat hazırlığı için en iyi pratik</td><td><a href="https://ethernaut.openzeppelin.com/">ethernaut.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Damn Vulnerable DeFi</strong></td><td>DeFi saldırı senaryolu CTF (flash loan, oracle, governance). Ücretsiz.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.damnvulnerabledefi.xyz/">damnvulnerabledefi.xyz</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="gelistirme-araclari"><span class="h-num">§ 7</span>Geliştirme araçları</h2>
+        <p class="intro">İki ana akım var: <strong>Foundry</strong> (testler Solidity ile, Rust ile yazılmış, hızlı) ve <strong>Hardhat 3</strong> (TypeScript ekosistemi, artık Solidity testlerini de destekler). İkisi de ücretsiz ve açık kaynak. Hangisiyle başlayacağın durumuna bağlı:</p>
+        <ul>
+          <li><strong>JavaScript bilmiyorsan</strong> &rarr; Foundry ile başla (daha az yeni şey); Hardhat 3'e <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> sonrası geç.</li>
+          <li><strong>JS/TS biliyorsan</strong> &rarr; Foundry veya Hardhat 3 ile başlayabilirsin. Hardhat 3 Solidity testlerini de desteklediği için ikisi arasında zorunlu bir öğrenme sırası yok.</li>
+          <li><strong>Katılacağın ekip ya da hedeflediğin ilan belirli bir aracı kullanıyorsa</strong> &rarr; önce o araç.</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Foundry</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Foundry</strong> (foundryup)</td><td>Solidity araç takımı; Windows seçenekleri için kurulum sayfasına bak.</td><td><span class="tag tag--ok">TEMEL</span> v1.8.1, ücretsiz</td><td><a href="https://getfoundry.sh/introduction/installation">getfoundry.sh</a></td></tr>
+              <tr><td><strong>forge</strong></td><td>Derleme, test, script ve deploy komutu.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/forge/testing">getfoundry.sh</a></td></tr>
+              <tr><td><strong>cast</strong></td><td>Komut satırından RPC çağrısı, işlem gönderme, ABI kodlama/çözme.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/cast/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>anvil</strong></td><td>Bellekte çalışan yerel Ethereum düğümü; herhangi bir EVM zincirini fork edebilir.</td><td><span class="tag tag--ok">TEMEL</span> sıfır maliyet</td><td><a href="https://getfoundry.sh/anvil/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>chisel</strong></td><td>Solidity REPL'i; satır satır dene. C#'tan geliyorsan C# Interactive, JS'den Node REPL, Python'dan Python REPL gibi.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/chisel/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>forge-std</strong></td><td>Test yardımcıları: Test sözleşmesi, assert'ler, console.log, stdStorage.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/foundry-rs/forge-std">github.com/foundry-rs</a></td></tr>
+              <tr><td><strong>cheatcodes</strong> (vm.prank, vm.warp, vm.deal, vm.expectRevert)</td><td>Testte çağıranı, zamanı, bakiyeyi değiştirme ve hata bekleme.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/reference/cheatcodes/overview">getfoundry.sh</a></td></tr>
+              <tr><td><strong>forge fmt</strong></td><td>Kod biçimlendirici. C#'tan geliyorsan dotnet format, JS/TS'den Prettier, Python'dan Black, Go'dan gofmt karşılığı.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/forge/formatting">getfoundry.sh</a></td></tr>
+              <tr><td><strong>forge lint</strong></td><td>Yerleşik linter; güvenlik ve gas kuralları içerir.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/forge/linting">getfoundry.sh</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hardhat ve diğer çatılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hardhat 3</strong></td><td>Kararlı ve üretime hazır; yerleşik Solidity testleri, viem/ethers ile TypeScript testleri, çok zincirli simülasyon (EDR).</td><td><span class="tag tag--ok">TEMEL</span> 3.16.0, ücretsiz</td><td><a href="https://hardhat.org/docs/hardhat3/whats-new">hardhat.org</a></td></tr>
+              <tr><td><strong>Hardhat 2</strong></td><td>2022–2023 projelerindeki sürüm; Hegota hard fork'u mainnet'e gelince veya en geç 1 Haziran 2027'de destek biter.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://hardhat.org/docs/reference/hardhat-2-end-of-life">hardhat.org</a></td></tr>
+              <tr><td><strong>Hardhat 2 &rarr; 3 migration</strong></td><td>Eski Hardhat projesini taşıma rehberi.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/migrate-from-hardhat2">hardhat.org</a></td></tr>
+              <tr><td><strong>configuration variables</strong> / keystore</td><td>RPC URL ve anahtarları düz metin yerine şifreli saklama.</td><td><span class="tag tag--warn">RİSK</span> mutlaka kullan</td><td><a href="https://hardhat.org/docs/guides/configuration-variables">hardhat.org</a></td></tr>
+              <tr><td><strong>Remix IDE</strong></td><td>Tarayıcıda kurulumsuz IDE; derle, JavaScript VM'de dene, MetaMask ile testnet'e deploy et.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> tazelemek için en hızlı yol</td><td><a href="https://remix.ethereum.org/">remix.ethereum.org</a> · <a href="https://remix-ide.readthedocs.io/en/latest/">docs</a></td></tr>
+              <tr><td><strong>Truffle / Ganache</strong></td><td>Eski çatı ve yerel zincir; Consensys 2023'te sonlandırdı, Hardhat'e geçiş önerdi.</td><td><span class="tag tag--warn">ESKİMİŞ</span> eski projede görürsün</td><td><a href="https://consensys.io/blog/consensys-announces-the-sunset-of-truffle-and-ganache-and-new-hardhat">consensys.io</a> · <a href="https://archive.trufflesuite.com/">arşiv</a></td></tr>
+              <tr><td><strong>Brownie</strong></td><td>Python çatısı; aktif bakımda değil, Ape öneriliyor.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/eth-brownie/brownie">github.com/eth-brownie</a></td></tr>
+              <tr><td><strong>Ape</strong></td><td>Python tabanlı çatı (ApeWorX); niş alternatif.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.apeworx.io/ape/stable/">docs.apeworx.io</a></td></tr>
+              <tr><td><strong>Wake</strong></td><td>Python test çatısı ve analiz aracı (Ackee); niş.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ackee.xyz/wake/docs/latest/">ackee.xyz</a></td></tr>
+              <tr><td><strong>Scaffold-ETH 2</strong></td><td>Next.js + wagmi + viem hazır dApp iskeleti; sözleşme ile arayüzü birlikte başlatır.</td><td><span class="tag">ORTA</span> React dApp tarafı <a href="../03-javascript-typescript/index.html">03</a>'te</td><td><a href="https://docs.scaffoldeth.io/">docs.scaffoldeth.io</a></td></tr>
+              <tr><td><strong>Tenderly</strong></td><td>İşlem simülasyonu, opcode seviyesinde debugger, sanal ortamlar.</td><td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz hesap var</td><td><a href="https://docs.tenderly.co/">docs.tenderly.co</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Editör ve kod kalitesi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Solidity (Nomic Foundation)</strong> VS Code eklentisi</td><td>Hardhat ekibinin dil sunucusu: tamamlama, hata, tanıma git.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/NomicFoundation/hardhat-vscode">github.com/NomicFoundation</a></td></tr>
+              <tr><td><strong>vscode-solidity</strong> (Juan Blanco)</td><td>Alternatif eklenti; Nethereum ile C# DTO/servis kodu üretir.</td><td><span class="tag">ORTA</span> .NET köprüsü</td><td><a href="https://github.com/juanfranblanco/vscode-solidity">github.com/juanfranblanco</a></td></tr>
+              <tr><td><strong>solhint</strong></td><td>Güvenlik ve stil linter'ı (npm).</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/protofire/solhint">github.com/protofire</a></td></tr>
+              <tr><td><strong>prettier-plugin-solidity</strong></td><td>Prettier ile Solidity biçimlendirme (Hardhat projelerinde yaygın).</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/prettier-solidity/prettier-plugin-solidity">github.com/prettier-solidity</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test"><span class="h-num">§ 8</span>Test</h2>
+        <p class="intro">Sözleşme testi, sıradan bir web/backend uygulamasındaki birim testten daha kritiktir: deploy sonrası düzeltme yok. Genel çerçeve için <a href="https://ethereum.org/developers/docs/smart-contracts/testing/">ethereum.org testing</a>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test türleri ve araçlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>unit test</strong> (forge test)</td><td><code>test</code> ile başlayan fonksiyonlar; <code>setUp()</code> her testten önce çalışır. Karşılığı: C#'tan geliyorsan xUnit constructor'ı, Java'dan JUnit <code>@BeforeEach</code>, JS/TS'den Jest/Vitest <code>beforeEach</code>, Python'dan pytest fixture.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://getfoundry.sh/forge/testing">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Hardhat Solidity tests</strong></td><td>Hardhat 3'te eklentisiz, <code>.t.sol</code> dosyalarıyla Foundry uyumlu testler.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hardhat.org/docs/guides/testing/using-solidity">hardhat.org</a></td></tr>
+              <tr><td><strong>TypeScript test</strong> (viem / ethers)</td><td>Node test runner veya Mocha ile istemci tarafından test; dApp akışına yakın.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/guides/testing/using-viem">hardhat.org (viem)</a> · <a href="https://hardhat.org/docs/guides/testing/using-ethers">ethers</a></td></tr>
+              <tr><td><strong>expectRevert / expectEmit</strong></td><td>Beklenen hata ve event'i doğrulama.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/reference/cheatcodes/overview">getfoundry.sh</a></td></tr>
+              <tr><td><strong>fuzz test</strong></td><td>Parametreli test; araç rastgele girdilerle defalarca çalıştırır.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/guides/fuzz-corpus">getfoundry.sh</a> · <a href="https://hardhat.org/docs/tutorial/fuzz-tests">hardhat.org</a></td></tr>
+              <tr><td><strong>invariant test</strong> (stateful fuzzing)</td><td>Rastgele çağrı dizilerinden sonra "toplam arz = bakiyeler toplamı" gibi kuralın hep doğru kaldığını test eder; handler kalıbı.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/guides/invariant-testing">getfoundry.sh</a></td></tr>
+              <tr><td><strong>fork test</strong> (mainnet fork)</td><td>Gerçek zincir durumunun kopyasında test; para harcamadan gerçek protokollerle entegrasyon. Ücretsiz RPC kotası yeter.</td><td><span class="tag">ORTA</span> sıfır maliyet</td><td><a href="https://getfoundry.sh/guides/fork-testing">getfoundry.sh</a> · <a href="https://hardhat.org/docs/guides/forking">hardhat.org</a></td></tr>
+              <tr><td><strong>gas snapshot / gas report</strong></td><td><code>forge snapshot</code> ile gas değişimini commit'ler arasında karşılaştırma.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/forge/gas-tracking">getfoundry.sh</a> · <a href="https://hardhat.org/docs/guides/testing/gas-snapshots">hardhat.org</a></td></tr>
+              <tr><td><strong>coverage</strong></td><td>Satır/dal kapsama raporu; yüksek kapsama güvenli demek değildir.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/guides/coverage">getfoundry.sh</a> · <a href="https://hardhat.org/docs/guides/testing/code-coverage">hardhat.org</a></td></tr>
+              <tr><td><strong>solidity-coverage</strong></td><td>Hardhat 2 döneminin kapsama eklentisi; eski projelerde görürsün.</td><td><span class="tag tag--warn">ESKİMİŞ</span> Hardhat 2 ile</td><td><a href="https://github.com/sc-forks/solidity-coverage">github.com/sc-forks</a></td></tr>
+              <tr><td><strong>mutation testing</strong></td><td>Kodu bilerek bozar (<code>+</code> yerine <code>-</code>); testler yakalamıyorsa test zayıftır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://getfoundry.sh/guides/mutation-testing">getfoundry.sh</a> · <a href="https://github.com/Certora/gambit">Gambit</a></td></tr>
+              <tr><td><strong>symbolic testing</strong></td><td>Somut değer yerine sembolik girdiyle tüm yolları arar; Halmos Foundry testlerini kullanır.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://getfoundry.sh/guides/symbolic-testing">getfoundry.sh</a> · <a href="https://github.com/a16z/halmos">Halmos</a></td></tr>
+              <tr><td><strong>Echidna</strong></td><td>Trail of Bits'in özellik tabanlı fuzzer'ı (Haskell).</td><td><span class="tag tag--info">İLERİ</span> ücretsiz</td><td><a href="https://github.com/crytic/echidna">github.com/crytic</a></td></tr>
+              <tr><td><strong>Medusa</strong></td><td>go-ethereum tabanlı paralel fuzzer; Go ile genişletilebilir (<a href="../../Go/index.html">Go sayfası</a>).</td><td><span class="tag tag--info">İLERİ</span> ücretsiz</td><td><a href="https://github.com/crytic/medusa">github.com/crytic</a></td></tr>
+              <tr><td><strong>formal verification</strong></td><td>Kuralın tüm girdiler için matematiksel ispatı; Certora Prover en bilinen araç.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/smart-contracts/formal-verification/">ethereum.org</a> · <a href="https://docs.certora.com/">Certora</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="dagitim-dogrulama"><span class="h-num">§ 9</span>Dağıtım (deploy) ve doğrulama</h2>
+        <p class="intro">Hedef: yerel zincirde dene, Sepolia'ya deploy et, kaynak kodu doğrula, sahipliği güvenli adrese devret. Hepsi testnet'te sıfır maliyetle yapılır. RPC sağlayıcıların ücretsiz katmanları <a href="../06-altyapi-araclar-guvenlik/index.html">06</a>'da.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Deploy script ve testnet</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>forge script</strong></td><td>Deploy adımlarını Solidity ile yazıp simüle etme, sonra <code>--broadcast</code> ile gönderme.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/forge/scripting">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Deploying contracts</strong> rehberi</td><td>Anvil &rarr; testnet &rarr; mainnet akışı ve <code>--verify</code> ile otomatik doğrulama.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/guides/deploying-contracts">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Hardhat Ignition</strong></td><td>Bildirimsel (modül tabanlı) deploy sistemi; yarıda kalan deploy'u kaldığı yerden sürdürür.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hardhat.org/docs/guides/deployment/using-ignition">hardhat.org</a></td></tr>
+              <tr><td><strong>Sepolia</strong></td><td>Uygulama geliştirme için önerilen varsayılan Ethereum testnet'i.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://ethereum.org/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Hoodi</strong></td><td>Validator ve protokol yükseltme testleri için testnet; dApp için Sepolia yeterli.</td><td><span class="tag">ORTA</span> ücretsiz</td><td><a href="https://ethereum.org/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Holesky</strong></td><td>ethereum.org'a göre Eylül 2025 itibarıyla kullanımdan kaldırıldı; eski eğitimlerde görürsün. Validator testlerinde yerini Hoodi aldı, dApp için Sepolia.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Ephemery</strong></td><td>Aylık sıfırlanan testnet; kısa denemeler için niş.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ethereum.org/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>faucet</strong> (Google Cloud Web3)</td><td>Sepolia test ETH'si dağıtan musluk; koşulları sayfada kontrol et.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">cloud.google.com</a></td></tr>
+              <tr><td><strong>PoW Faucet</strong></td><td>Tarayıcıda kısa süre hesaplama yaparak test ETH'si kazanma (Sepolia ve Hoodi).</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://sepolia-faucet.pk910.de/">sepolia-faucet.pk910.de</a> · <a href="https://hoodi-faucet.pk910.de/">Hoodi</a></td></tr>
+              <tr><td><strong>Alchemy Sepolia faucet</strong></td><td>Sağlayıcı musluğu; hesap ve kullanım koşulu isteyebilir.</td><td><span class="tag">ORTA</span> ücretsiz</td><td><a href="https://www.alchemy.com/faucets/ethereum-sepolia">alchemy.com</a></td></tr>
+              <tr><td><strong>chainId</strong> / Chainlist</td><td>Ağ kimliği ve halka açık RPC listesi; cüzdana ağ eklemek için.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+              <tr><td><strong>keystore</strong> (cast wallet import)</td><td>Özel anahtarı şifreli dosyada tutup script'e parola ile vermek; <code>.env</code>'de düz anahtar yerine.</td><td><span class="tag tag--warn">RİSK</span> alışkanlık edin</td><td><a href="https://getfoundry.sh/reference/cast/wallet/import">getfoundry.sh</a></td></tr>
+              <tr><td><strong>browser wallet</strong> ile deploy</td><td>Foundry script'ini anahtarı terminale vermeden tarayıcı cüzdanıyla imzalama.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/guides/browser-wallet">getfoundry.sh</a></td></tr>
+              <tr><td><strong>multi-chain deployment</strong></td><td>Aynı sözleşmeyi birden çok ağa script ile dağıtma.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://getfoundry.sh/guides/multi-chain-deployments">getfoundry.sh</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doğrulama (verify) ve explorer</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>source code verification</strong></td><td>Yayınlanan kaynak kodun zincirdeki bytecode ile aynı olduğunun kanıtı; full (metadata dahil) ve partial eşleşme.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://ethereum.org/developers/docs/smart-contracts/verifying/">ethereum.org</a></td></tr>
+              <tr><td><strong>Etherscan verify</strong></td><td>En yaygın explorer; API anahtarıyla Foundry/Hardhat/Remix'ten doğrulama.</td><td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz anahtar var; zincir kapsamı plana göre değişir</td><td><a href="https://docs.etherscan.io/contract-verification/verify-with-foundry">docs.etherscan.io</a></td></tr>
+              <tr><td><strong>Sepolia Etherscan</strong></td><td>Testnet işlemlerini ve doğrulanmış kodu görme.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a></td></tr>
+              <tr><td><strong>Sourcify</strong></td><td>Açık kaynak doğrulama servisi; Solidity metadata hash'i ile birebir (exact) eşleşme.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://docs.sourcify.dev/docs/how-to-verify/">docs.sourcify.dev</a></td></tr>
+              <tr><td><strong>Blockscout</strong></td><td>Açık kaynak explorer; birçok L2 ve testnet'te kullanılır, doğrulama destekler.</td><td><span class="tag">ORTA</span> ücretsiz</td><td><a href="https://docs.blockscout.com/">docs.blockscout.com</a></td></tr>
+              <tr><td><strong>hardhat-verify</strong></td><td>Hardhat'in Etherscan/Sourcify/Blockscout doğrulama eklentisi.</td><td><span class="tag">ORTA</span></td><td><a href="https://hardhat.org/docs/guides/smart-contract-verification">hardhat.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Adres belirleme ve sahiplik</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CREATE</strong></td><td>Adres, deploy eden hesabın adresi + nonce'undan türetilir.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#creating-contracts-via-new">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>CREATE2</strong></td><td>Adres salt + init code hash'inden; deploy öncesi bilinir.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/control-structures.html#salted-contract-creations-create2">docs.soliditylang.org</a> · <a href="https://eips.ethereum.org/EIPS/eip-1014">EIP-1014</a></td></tr>
+              <tr><td><strong>deterministic deployment</strong></td><td>Aynı sözleşmeyi her zincirde aynı adrese kurma (Foundry rehberi).</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/guides/deterministic-deployments-using-create2">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Deterministic Deployment Proxy</strong></td><td>Birçok zincirde aynı adreste duran CREATE2 factory (<code>0x4e59…956c</code>).</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Arachnid/deterministic-deployment-proxy">github.com/Arachnid</a></td></tr>
+              <tr><td><strong>CreateX</strong> (CREATE3)</td><td>CREATE/CREATE2/CREATE3 factory'si; init code'dan bağımsız adres. Repo kendini denetlenmemiş olarak belirtiyor.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/pcaversaccio/createx">github.com/pcaversaccio</a></td></tr>
+              <tr><td><strong>Safe</strong> (multisig)</td><td>M-of-N imzalı akıllı hesap; sözleşme sahipliğini tek anahtardan buraya devret. Uygulama ücretsiz, sadece gas.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.safe.global/home/what-is-safe">docs.safe.global</a> · <a href="https://app.safe.global/">app.safe.global</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="gas-optimizasyonu"><span class="h-num">§ 10</span>Gas optimizasyonu</h2>
+        <p class="intro">Önce doğruluk ve güvenlik, sonra gas. Her optimizasyonu gas snapshot ile ölç; derleyici sürümüne göre kazanç değişir. Kapsamlı liste: <a href="https://www.rareskills.io/post/gas-optimization">RareSkills Gas Optimization</a>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Gas kavramları ve teknikler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>gas / gas limit / base fee / priority fee</strong></td><td>İşlem maliyeti = kullanılan gas &times; gas fiyatı; düz ETH transferi 21.000 gas.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/gas/">ethereum.org</a></td></tr>
+              <tr><td><strong>cold / warm access</strong> (EIP-2929)</td><td>İşlemde ilk erişilen slot pahalı (SLOAD 2.100), sonrakiler ucuz (100).</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2929">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>access list</strong> (EIP-2930)</td><td>İşlemde erişilecek adres/slotları önceden bildirerek soğuk erişim maliyetini düşürme.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2930">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>storage packing</strong></td><td>Küçük tipleri (uint128, address, bool) yan yana dizip aynı 32 baytlık slota sığdırma.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/layout_in_storage.html#storage-inplace-encoding">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>storage okumayı önbellekleme</strong></td><td>Döngüde storage değişkenini tekrar okumak yerine yerel değişkene al.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/forge/linting/cache-array-length">getfoundry.sh</a></td></tr>
+              <tr><td><strong>calldata vs memory</strong></td><td>external fonksiyonun dizi/string parametresinde calldata kopyalamadığı için ucuz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/types.html#data-location">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>unchecked</strong> sayaç</td><td>Taşmayacağı kesin döngü sayacında kontrolü kapatma; derleyici bazı döngülerde bunu kendisi yapar.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/optimizer.html#unchecked-loop-increment">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>custom error vs revert string</strong></td><td>String mesaj bytecode ve revert verisini büyütür; custom error 4 baytlık seçiciyle döner.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/forge/linting/custom-errors">getfoundry.sh</a></td></tr>
+              <tr><td><strong>events vs storage</strong></td><td>Sadece zincir dışında okunacak geçmişi storage yerine event olarak yaz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#events">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>immutable / constant</strong></td><td>Değişmeyen değerler bytecode'a gömülür; SLOAD maliyeti yok.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/forge/linting/could-be-immutable">getfoundry.sh</a></td></tr>
+              <tr><td><strong>zero-to-nonzero SSTORE</strong></td><td>Boş slota ilk yazma en pahalı işlemlerdendir; tasarımı buna göre yap.</td><td><span class="tag">ORTA</span></td><td><a href="https://www.rareskills.io/post/gas-optimization">rareskills.io</a></td></tr>
+              <tr><td><strong>gas refund</strong> (EIP-3529)</td><td>SSTORE iadeleri azaltıldı, SELFDESTRUCT iadesi kaldırıldı; eski "gas token" hileleri çalışmaz.</td><td><span class="tag tag--warn">ESKİMİŞ</span> eski ipuçlarına dikkat</td><td><a href="https://eips.ethereum.org/EIPS/eip-3529">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>transient storage</strong> (EIP-1153)</td><td>İşlem içi geçici veri (kilit, geçici onay) için kalıcı storage'dan çok ucuz.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.soliditylang.org/en/latest/contracts.html#transient-storage">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>batch işlemler</strong> / Multicall</td><td>Birden çok işlemi tek çağrıda yapma; ERC-1155 batch transfer, OpenZeppelin Multicall.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/utilities">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>minimal proxy / clones</strong></td><td>Aynı sözleşmenin çok kopyası gerekiyorsa tam deploy yerine EIP-1167 klon.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1167">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>optimizer runs</strong></td><td>Düşük değer ucuz deploy, yüksek değer ucuz çağrı.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/internals/optimizer.html#optimizer-parameter-runs">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>contract size limit</strong></td><td>24.576 bayt sınırı; aşınca kütüphaneye bölme, optimizer ayarı veya Diamond.</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-170">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>assembly optimizasyonu</strong></td><td>Son çare; okunabilirlik ve güvenlik kaybı. Önce assembly'siz sürümü ölç.</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/assembly.html">docs.soliditylang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="denetim-kopru"><span class="h-num">§ 11</span>Denetim (audit) — kısa köprü</h2>
+        <p class="intro">Audit süreci, statik analiz ve bug bounty ayrıntıları <a href="../06-altyapi-araclar-guvenlik/index.html">06 — Altyapı, araçlar, güvenlik</a> sayfasında. Burada sadece isimleri tanı.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Audit araçları ve platformları (ayrıntı 06'da)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Slither</strong></td><td>Trail of Bits'in Python statik analizörü; 100'den fazla dedektör.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://github.com/crytic/slither">github.com/crytic</a></td></tr>
+              <tr><td><strong>Aderyn</strong></td><td>Cyfrin'in Rust ile yazılmış statik analizörü; Foundry/Hardhat projelerinde ayarsız çalışır.</td><td><span class="tag">ORTA</span> ücretsiz</td><td><a href="https://github.com/Cyfrin/aderyn">github.com/Cyfrin</a></td></tr>
+              <tr><td><strong>Mythril</strong></td><td>Sembolik yürütme tabanlı güvenlik analizi (Consensys).</td><td><span class="tag tag--info">İLERİ</span> ücretsiz</td><td><a href="https://github.com/Consensys/mythril">github.com/Consensys</a></td></tr>
+              <tr><td><strong>Certora Prover</strong></td><td>Kural (spec) yazarak formal doğrulama.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Certora/CertoraProver">github.com/Certora</a></td></tr>
+              <tr><td><strong>audit contest</strong> (Sherlock, Cantina, CodeHawks; Code4rena 2026'da "winding down", bkz. <a href="../06-altyapi-araclar-guvenlik/index.html#denetim-ve-topluluk">06 § 9</a>)</td><td>Açık yarışmalarda kod inceleyip bulgu raporlama; portföy ve öğrenme yolu.</td><td><span class="tag tag--info">İLERİ</span> katılım ücretsiz</td><td><a href="https://code4rena.com/">code4rena.com</a> · <a href="https://www.sherlock.xyz/">sherlock.xyz</a> · <a href="https://cantina.xyz/">cantina.xyz</a></td></tr>
+              <tr><td><strong>bug bounty</strong> (Immunefi)</td><td>Canlı protokollerde açık bulana ödül programları.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://immunefi.com/">immunefi.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ogrenme-kaynaklari"><span class="h-num">§ 12</span>Ücretsiz öğrenme kaynakları</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kurs ve alıştırma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ethereum.org smart contracts</strong></td><td>Sözleşme anatomisi, diller, test, güvenlik; resmî giriş dizisi.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://ethereum.org/developers/docs/smart-contracts/anatomy/">ethereum.org</a></td></tr>
+              <tr><td><strong>Solidity by Example</strong></td><td>Kısa, çalışır kod örnekleriyle dil özellikleri ve saldırı örnekleri.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> tazeleme için</td><td><a href="https://solidity-by-example.org/">solidity-by-example.org</a></td></tr>
+              <tr><td><strong>Cyfrin Updraft</strong></td><td>Solidity, Foundry, güvenlik ve DeFi video kursları.</td><td><span class="tag tag--ok">TEMEL</span> ücretsiz</td><td><a href="https://cyfrin.io/updraft">cyfrin.io/updraft</a></td></tr>
+              <tr><td><strong>Speedrun Ethereum</strong></td><td>Scaffold-ETH 2 ile token, DEX, oracle gibi aşamalı challenge'lar; testnet'e deploy ettirir.</td><td><span class="tag">ORTA</span> ücretsiz, portföy üretir</td><td><a href="https://speedrunethereum.com/">speedrunethereum.com</a></td></tr>
+              <tr><td><strong>CryptoZombies</strong></td><td>Tarayıcıda oyunlaştırılmış Solidity dersleri; eski sürüm sözdizimi görebilirsin, kavram için kullan.</td><td><span class="tag">ORTA</span> ücretsiz</td><td><a href="https://cryptozombies.io/">cryptozombies.io</a></td></tr>
+              <tr><td><strong>RareSkills gas kitabı</strong></td><td>80'den fazla gas ipucu ve uyarıları.</td><td><span class="tag tag--info">İLERİ</span> ücretsiz yazı</td><td><a href="https://www.rareskills.io/post/gas-optimization">rareskills.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Uygulama fikirleri (ERC-20 + testler, NFT + Sepolia deploy, Nethereum ile .NET'ten okuma) için <a href="../07-projeler/index.html">07 — Projeler</a>; alt sitenin girişi <a href="../index.html">Blockchain ana sayfası</a>; tüm programlama haritası <a href="../../index.html">Programlama</a>. Rust tabanlı araçların (Foundry, Aderyn) kaynağını okumak istersen <a href="../../Rust/index.html">Rust sayfası</a>.</p>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet: bu sayfadaki öncelik sırası</h2>
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Önce mülakatta sık sorulan Solidity temelini savunulabilir hâle getir; sonra güvenlik ve test; en son derinleşme.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Solidity temelini tazele (ya da sıfırdan öğren)</span>
+            <p>§ 2'deki <span class="tag tag--bad">MÜLAKATTA SIK</span> maddeleri: tipler, mapping, storage/memory/calldata, görünürlük, view/pure/payable, modifier, event, require/revert/custom error, kalıtım, interface. Remix ve Solidity by Example ile dene. Deneyimin varsa hızlı bir tazeleme; yoksa bu adım daha uzun sürer, § 3'teki başlangıç noktası tablosu yol gösterir.</p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: Remix, tarayıcı</span>
+          </li>
+          <li>
+            <span class="steps__title">ERC-20 ve ERC-721'i OpenZeppelin v5 ile yaz</span>
+            <p>Contracts Wizard ile iskelet üret, Ownable / AccessControl ekle, v4 &rarr; v5 farklarını bil (initialOwner, custom error, <code>_update</code>).</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 4, § 5</span>
+          </li>
+          <li>
+            <span class="steps__title">Güvenliğin çekirdeği</span>
+            <p>Reentrancy + Checks-Effects-Interactions, access control, tx.origin, unchecked return, oracle/flash loan kavramı, proxy storage collision. Ethernaut'un ilk seviyelerini çöz.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 6</span>
+          </li>
+          <li>
+            <span class="steps__title">Foundry ile test</span>
+            <p>forge test, cheatcodes, expectRevert, fuzz test; sonra invariant ve fork test. Daha önce herhangi bir dilde birim test yazdıysan (xUnit, JUnit, Jest/Vitest, pytest) alışkanlık doğrudan aktarılır. Hiç test yazmadıysan forge test ilk test deneyimin olabilir; önce <a href="https://getfoundry.sh/forge/testing">Foundry Book test bölümü</a>.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 7, § 8</span>
+          </li>
+          <li>
+            <span class="steps__title">Sepolia'ya deploy + doğrulama</span>
+            <p>Faucet'ten test ETH al, keystore ile anahtarı koru, forge script ile deploy et, Etherscan veya Sourcify'da doğrula. Özgeçmişte "smart contract" yazıyorsa gösterilebilir bir testnet adresi iyi kanıt olur.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 9</span>
+          </li>
+          <li>
+            <span class="steps__title">Ana diline köprü</span>
+            <p>Deploy ettiğin sözleşmeyi bildiğin dilden oku/yaz; bu, blockchain'i ana yetkinliğinle birleştirir. .NET biliyorsan &rarr; Nethereum (<a href="../04-dotnet/index.html">04</a>). JS/TS biliyorsan &rarr; viem/wagmi (<a href="../03-javascript-typescript/index.html">03</a>). Python biliyorsan &rarr; web3.py veya Ape ile okuma/yazma (güncel sürüm ve API <span class="tag tag--warn">TEYİT</span>, web3py.readthedocs.io). Hiçbirini bilmiyorsan &rarr; bu adımı atla, <code>cast call</code> / <code>cast send</code> ile komut satırından oku/yaz.</p>
+            <span class="steps__meta">Maliyet: 0 TL · <a href="../04-dotnet/index.html">04 — .NET</a> · <a href="../03-javascript-typescript/index.html">03 — JS/TS</a></span>
+          </li>
+          <li>
+            <span class="steps__title">Sonra: gas, yükseltilebilirlik, Hardhat 3</span>
+            <p>Storage packing, custom error, immutable; UUPS/Transparent proxy ve ERC-7201; Hardhat 3 ve TypeScript testleri: JS/TS biliyorsan şimdi (hatta Foundry yerine ilk araç olarak), bilmiyorsan JavaScript öğrendikten sonra.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 4, § 7, § 10</span>
+          </li>
+          <li>
+            <span class="steps__title">En son: derinleşme</span>
+            <p>ERC-4337 / EIP-7702, assembly/Yul, symbolic ve formal doğrulama, audit contest'leri. Temel ve orta maddeler bittikten sonraya bırakılabilir.</p>
+            <span class="steps__meta">Maliyet: 0 TL · § 4, § 8, § 11</span>
+          </li>
+        </ol>
+        <ul class="checklist">
+          <li>Eskimiş bilgiyi ayıkla: Truffle/Ganache, Brownie, Holesky, Hardhat 2 (1 Haziran 2027'ye kadar), OpenZeppelin Defender (kapanışı 1 Temmuz 2026 olarak duyuruldu), SWC Registry (güncellenmiyor), <code>transfer/send</code>, selfdestruct.</li>
+          <li>Gerçek para yok: yerel zincir, Sepolia, ücretsiz faucet ve ücretsiz katmanlar yeterli.</li>
+          <li>Private key hiçbir dosyada düz metin durmasın.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-temeller/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Blockchain Temelleri</span></a>
+        <a class="next" href="../03-javascript-typescript/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">JavaScript ve TypeScript Ekosistemi</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

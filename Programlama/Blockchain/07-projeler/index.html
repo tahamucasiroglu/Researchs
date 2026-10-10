@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projeler — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Küçükten büyüğe blockchain projeleri: token, NFT mint dApp, DAO oylaması, .NET indeksleyici; her biri hangi başlığı kanıtlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Projeler</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 07 · Uygulama</div>
+        <h1 class="page-title">Testnet'te <em>ne yapacaksın</em>?</h1>
+        <p class="lede">Okumak yetmez, sözleşme dağıtıp bir arayüzden çağırmalısın. Küçük denemelerden portfolyoya konabilecek tam yığın projelere kadar fikirler — hepsi testnet'te, hepsi ücretsiz. Önceki bir blockchain deneyimini mülakatta nasıl anlatacağın da burada.</p>
+        <div class="head-meta">Küçükten büyüğe &middot; Testnet &middot; GitHub odaklı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="sifir-maliyet-altyapi"><span class="h-num">§ 1</span>Sıfır maliyet altyapısı — her projede ortak parçalar</h2>
+        <p class="intro">Bu sayfa anlatım değil, proje listesidir. Her satır: proje adı, tek cümle, kanıtladığı başlıklar (rozet), zorluk (1–5), portfolyo değeri, kullanılan testnet ve maliyet. Liste sıfır bütçeye göre kuruldu: her proje testnet ve ücretsiz katmanlarla yapılır; bir satırda "0 TL" yazmıyorsa nedeni yanında yazıyor. Küçük bir bütçen varsa kalıcı veritabanı (Neon/Supabase ücretli plan), ücretli RPC ya da kendi alan adın kolaylık sağlar, ama hiçbir proje için zorunlu değildir.</p>
+        <p>Öncelik hatırlatması: blockchain çoğu geliştirici için yan alandır. Bu listedeki projelerin birinci amacı iş ilanlarında sık geçen <span class="tag tag--bad">MÜLAKATTA SIK</span> başlıkları (Solidity, Smart Contract, React dApp) mülakatta savunabilir hâle getirmek. İkinci amaç ana hattına göre değişir: ana hattın .NET ise .NET ile blockchain kesişiminde ayırt edici bir repo; JS/TS ise uçtan uca tam yığın bir dApp; hedefin güvenlik/denetimse denetim ve CTF portföyü (çözüm yazıları, bulgu raporları). Kavramlar için <a href="../01-temeller/index.html">01 Temeller</a>, Solidity başlıkları için <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a>, JavaScript/TypeScript tarafı için <a href="../03-javascript-typescript/index.html">03 JS/TS</a>, .NET tarafı için <a href="../04-dotnet/index.html">04 .NET</a>, araç ve güvenlik için <a href="../06-altyapi-araclar-guvenlik/index.html">06 Altyapı</a>. React'i hiç yazmadıysan önce <a href="../../JavaScript-TypeScript/03-react/index.html">React</a> sayfasına bak; JavaScript temeli için <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a>.</p>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Varsayılan testnet Sepolia; yerel geliştirme anvil; sözleşme aracı Foundry; arayüz React + wagmi/viem; backend .NET + Nethereum; veritabanı PostgreSQL. Bu sayfadaki her proje bu altı parçanın bir alt kümesidir. Backend ve arayüz parçası bildiğin yığına göre değişir:</p>
+          <ul>
+            <li><strong>Backend:</strong> .NET biliyorsan .NET + Nethereum; JS/TS biliyorsan Node.js + viem (ya da Ponder); backend yazmak istemiyorsan yalnızca sözleşme + React, indeksleme için Subgraph Studio ücretsiz katmanı.</li>
+            <li><strong>Arayüz:</strong> React biliyorsan React + wagmi/viem; React bilmeyen .NET geliştiricisiysen Blazor + Nethereum.Blazor (§ 3/15); hiç frontend bilmiyorsan önce Remix ve Etherscan'in "Read/Write Contract" sekmeleri, sonra Scaffold-ETH 2.</li>
+          </ul>
+        </div>
+
+        <div class="def">
+          <p class="def__term">Faucet <small>testnet musluğu</small></p>
+          <p>Testnet üzerinde gas ödemek için gereken sahte ETH'yi ücretsiz dağıtan servis. Bazıları mainnet'te bakiye ister; sıfır bütçede yalnızca istemeyenleri kullan (aşağıda işaretli).</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ücretsiz altyapı — testnet, faucet, RPC, explorer, cüzdan, barındırma, veritabanı, tünel</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Sepolia</strong></td>
+                <td>Uygulama geliştiricileri için önerilen Ethereum testnet'i; Holesky Eylül 2025'te kullanımdan kalktı, Hoodi validator testleri için. Bu sayfadaki varsayılan zincir.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>anvil</strong></td>
+                <td>Foundry'nin yerel EVM düğümü; anında blok, hazır fonlu 10 hesap; <code>--fork-url</code> ile mainnet'i yerelde kopyalar. Faucet beklemeden geliştirme yeri.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://getfoundry.sh/anvil/">getfoundry.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Cloud Sepolia faucet</strong></td>
+                <td>Google hesabı yeter; mainnet bakiyesi şartı yok. Sıfır bütçede birinci tercih.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">cloud.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PoW faucet (pk910)</strong></td>
+                <td>Tarayıcıda madencilik yaparak testnet ETH; hesap ve mainnet bakiyesi istemez. Google faucet yetmezse ikinci yol.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://sepolia-faucet.pk910.de/">sepolia-faucet.pk910.de</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chainlink faucet</strong></td>
+                <td>Sepolia ETH ve testnet LINK verir; VRF ve price feed projelerinde LINK buradan. Cüzdan bağlamanın yettiği ya da ETH dağıtımı için mainnet bakiyesi şartı eklendiği <span class="tag tag--warn">TEYİT</span> (faucets.chain.link). Şart yoksa herkes için 0 TL. Şart varsa: mainnet bakiyesi olmayan biri ETH'yi Google Cloud/PoW faucet'ten alır, testnet LINK ihtiyacını (§ 4/4 VRF) ayrıca sayfadan kontrol eder; mainnet bakiyesi olan kullanabilir ama gerçek varlıklı cüzdanı geliştirmeye bağlamamalı (§ 8).</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL (şart TEYİT)</td>
+                <td><a href="https://faucets.chain.link/">faucets.chain.link</a></td>
+              </tr>
+              <tr>
+                <td><strong>Alchemy faucet</strong></td>
+                <td>Günde 0,1 Sepolia ETH; ama cüzdanda mainnet'te en az 0,001 ETH ve işlem geçmişi ister. Sıfır bütçede kullanılamaz; bilerek listede, karşılaştırma için.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> mainnet bakiyesi şartı</td>
+                <td><a href="https://www.alchemy.com/faucets/ethereum-sepolia">alchemy.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Infura (MetaMask Developer) faucet</strong></td>
+                <td>Hesap açmayı ister; mainnet bakiyesi şartı sayfada yazmıyor. Yedek seçenek.</td>
+                <td><span class="tag">ORTA</span> 0 TL</td>
+                <td>infura.io (eski faucet adresi ana sayfaya yönleniyor; güncel adresi MetaMask Developer panelinden teyit et)</td>
+              </tr>
+              <tr>
+                <td><strong>public RPC (Chainlist)</strong></td>
+                <td>API anahtarı gerektirmeyen RPC uçlarının listesi; hız sınırı var ama öğrenme projeleri için yeter. <code>cast</code>, viem ve Nethereum bu adreslerle çalışır.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://chainlist.org/">chainlist.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Alchemy · MetaMask Developer (Infura) · QuickNode</strong></td>
+                <td>Ücretsiz katmanı olan RPC sağlayıcıları; anahtar <code>.env</code>'de durur, repoya girmez. Public RPC yetmediğinde (indexer projeleri) geç.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://www.alchemy.com/docs">alchemy.com/docs</a> · <a href="https://developer.metamask.io/">developer.metamask.io</a> · <a href="https://www.quicknode.com/docs">quicknode.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sepolia Etherscan</strong></td>
+                <td>Testnet explorer'ı; sözleşme doğrulama, "Read/Write Contract" sekmeleri, olay logları. API'nin ücretsiz planı 3 çağrı/sn, 100.000 çağrı/gün.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a> · <a href="https://etherscan.io/apis">etherscan.io/apis</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blockscout</strong></td>
+                <td>Açık kaynak explorer; Etherscan'a bağımlı kalmamak için alternatif, birçok L2 testnet'inde varsayılan.</td>
+                <td><span class="tag">ORTA</span> 0 TL</td>
+                <td><a href="https://docs.blockscout.com/">docs.blockscout.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sourcify</strong></td>
+                <td>Açık kaynak, ücretsiz sözleşme kaynak kodu doğrulama; Foundry <code>--verifier sourcify</code> ile çalışır.</td>
+                <td><span class="tag">ORTA</span> 0 TL</td>
+                <td><a href="https://docs.sourcify.dev/docs/intro">docs.sourcify.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MetaMask · Rabby</strong></td>
+                <td>Tarayıcı cüzdanı. Rabby işlem ön-izlemesi gösterir, geliştirici için rahat. Kural: geliştirme için ayrı, içinde gerçek para olmayan bir cüzdan.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://metamask.io/">metamask.io</a> · <a href="https://rabby.io/">rabby.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vercel Hobby</strong></td>
+                <td>React/Vite arayüzünü GitHub'dan otomatik dağıtır; Hobby planı kişisel ve ticari olmayan kullanım için ücretsiz. Portföy demosu &rarr; Hobby yeter. Ticari kullanım (müşteri projesi, gelir getiren ürün) &rarr; Pro planı ya da Cloudflare Pages / GitHub Pages (onların ticari kullanım şartları <span class="tag tag--warn">TEYİT</span>).</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Hobby ücretsiz</td>
+                <td><a href="https://vercel.com/pricing">vercel.com/pricing</a> · <a href="https://vercel.com/docs">vercel.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cloudflare Pages · GitHub Pages</strong></td>
+                <td>Statik arayüz için ücretsiz alternatifler; Cloudflare Free planında ayda 500 dağıtım.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://developers.cloudflare.com/pages/">developers.cloudflare.com</a> · <a href="https://docs.github.com/en/pages">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Render free</strong></td>
+                <td>Ücretsiz web servisi 15 dk boşta kalınca uyur; ücretsiz PostgreSQL 30 gün sonra silinir. Demo için yeter, kalıcı veri için değil. .NET için yerleşik çalışma zamanı olmadığından servis Docker imajıyla dağıtılır <span class="tag tag--warn">TEYİT</span> (render.com/docs); Node.js servisi doğrudan çalışır.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman sınırlı</td>
+                <td><a href="https://render.com/docs/free">render.com/docs/free</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure free services</strong></td>
+                <td>Hesapla gelen "always free" servisler; .NET backend'i için doğal ev. Hangi servislerin ücretsiz kaldığını sayfadan kontrol et. Durum &rarr; sonuç: kartın varsa Azure free account (kart bilgisi istenir); öğrenciysen Azure for Students (kart istemeyen, krediyle gelen öğrenci teklifi; güncel kredi ve şartlar <span class="tag tag--warn">TEYİT</span>); kartın yoksa ve öğrenci değilsen Render / Neon ya da yerelde Docker.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz katman var</td>
+                <td><a href="https://azure.microsoft.com/en-us/pricing/free-services">azure.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Neon · Supabase</strong></td>
+                <td>Yönetilen PostgreSQL; ikisinin de ücretsiz planı var (boşta kalan proje duraklatılır). Indexer demosunu buluta taşımak için.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz plan var</td>
+                <td><a href="https://neon.com/docs/introduction">neon.com/docs</a> · <a href="https://supabase.com/docs">supabase.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Compose + PostgreSQL</strong></td>
+                <td>Yerelde sıfır maliyetli veritabanı; testte Testcontainers ile aynı imajı kullan. Bulut DB'ye ancak demo yayınlarken geç.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://docs.docker.com/compose/">docs.docker.com</a> · <a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dev tunnels · cloudflared · ngrok</strong></td>
+                <td>localhost'taki .NET webhook'unu internete açar (WhatsApp bot projesi). Dev tunnels Microsoft'un, Visual Studio ile bütünleşik.</td>
+                <td><span class="tag">ORTA</span> ücretsiz katman var</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/">learn.microsoft.com</a> · <a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/">developers.cloudflare.com</a> · <a href="https://ngrok.com/docs">ngrok.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tenderly</strong></td>
+                <td>İşlem simülasyonu ve hata ayıklama; başarısız işlemin neden revert ettiğini satır satır gösterir. Ücretsiz hesap yeter.</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> ücretsiz hesap var</td>
+                <td><a href="https://docs.tenderly.co/">docs.tenderly.co</a></td>
+              </tr>
+              <tr>
+                <td><strong>Remix IDE</strong></td>
+                <td>Tarayıcıda Solidity IDE; kurulum yok. Doküman canlı adres olarak app.remix.live veriyor, remix.ethereum.org da açılıyor.</td>
+                <td><span class="tag tag--ok">TEMEL</span> 0 TL</td>
+                <td><a href="https://remix-ide.readthedocs.io/en/latest/">remix-ide.readthedocs.io</a> · <a href="https://remix.ethereum.org/">remix.ethereum.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tek-oturumluk-denemeler"><span class="h-num">§ 2</span>A) Tek oturumluk denemeler — 1 ile 3 saat</h2>
+        <p>Amaç: araç zincirini kurmak ve "ilk kez" engelini geçmek. Portfolyo değeri düşük; mülakat değeri yüksek çünkü "Sepolia'ya deploy ettin mi, Etherscan'da doğruladın mı" gibi sorulara evet dersin. Hepsi 0 TL. Sıra önerisi başlangıç noktana göre (gerisi keyfe göre):</p>
+        <ul>
+          <li><strong>.NET biliyorsan</strong> &rarr; 1 → 2 → 3 → 9 → 6 (Nethereum) → 7; istersen 11.</li>
+          <li><strong>JS/TS biliyorsan</strong> &rarr; 1 → 2 → 3 → 9 → 7 (viem) → 15 (wagmi); 6 ve 11 isteğe bağlı.</li>
+          <li><strong>Hiç programlama bilmiyorsan</strong> &rarr; 9 → 1 → 18 (CryptoZombies) → 13; Foundry adımlarına (2, 3, 12) JavaScript ve terminal temelinden sonra geç.</li>
+          <li><strong>Hedefin güvenlik/denetimse</strong> &rarr; 1 → 9 → 5 (Ethernaut) → 13 → 12.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tek oturumluk denemeler</caption>
+            <thead><tr><th>Proje</th><th>Tek cümle · kanıtladığı</th><th>Kapsam · zorluk · testnet · maliyet</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Remix'te ilk sözleşme</strong></td>
+                <td>Sayaç (Counter) sözleşmesini Remix VM'de, sonra MetaMask ile Sepolia'ya deploy et; Etherscan'da işlemi bul. Kanıt: deploy akışı, gas, tx hash.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> küçük · zorluk 1/5 · Sepolia · 0 TL</td>
+                <td><a href="https://remix-ide.readthedocs.io/en/latest/">remix-ide.readthedocs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>2. Foundry ile ERC-20: yaz, test et, deploy</strong></td>
+                <td><code>foundryup</code>, <code>forge init</code>, OpenZeppelin ERC20 miras al, 3 test yaz, anvil'e sonra Sepolia'ya <code>forge script --broadcast</code>. Kanıt: Foundry iş akışı, ERC-20 arayüzü.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://getfoundry.sh/forge/">getfoundry.sh/forge</a> · <a href="https://docs.openzeppelin.com/contracts/5.x/erc20">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>3. cast ile zincirden veri oku</strong></td>
+                <td><code>cast balance</code>, <code>cast block</code>, bir ERC-20'nin <code>balanceOf</code>'unu <code>cast call</code> ile oku; public RPC ile. Kanıt: RPC, ABI çağrısı, hex/decimal dönüşümü.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 1/5 · Sepolia veya mainnet (salt okuma) · 0 TL</td>
+                <td><a href="https://getfoundry.sh/cast/">getfoundry.sh/cast</a></td>
+              </tr>
+              <tr>
+                <td><strong>4. anvil'de mainnet fork</strong></td>
+                <td><code>anvil --fork-url</code> ile mainnet'i kopyala, bir mainnet cüzdanını <code>vm.prank</code>/impersonate ile kullanıp USDC bakiyesi oku; para harcamadan gerçek sözleşmelerle oyna. Kanıt: fork testi kavramı.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 2/5 · yerel fork · 0 TL</td>
+                <td><a href="https://getfoundry.sh/guides/fork-testing">getfoundry.sh</a> · <a href="https://developers.uniswap.org/">developers.uniswap.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>5. Ethernaut ilk 5 seviye</strong></td>
+                <td>OpenZeppelin'in tarayıcı CTF'i; her seviye bir güvenlik açığı. Kanıt: fallback, tx.origin, delegatecall gibi klasikler.</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span> küçük · zorluk 2/5 · Sepolia · 0 TL</td>
+                <td><a href="https://ethernaut.openzeppelin.com/">ethernaut.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>6. Nethereum konsol: bakiye ve olay oku</strong></td>
+                <td><code>dotnet new console</code>, Nethereum.Web3 paketi, Sepolia bakiye + bir ERC-20'nin son 1.000 bloktaki Transfer olaylarını listele. Kanıt: .NET'ten RPC, event decode.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.nethereum.com/docs/getting-started/welcome">docs.nethereum.com</a> · <a href="https://www.nuget.org/packages/Nethereum.Web3">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>7. viem ile blok okuyan Node script</strong></td>
+                <td>TypeScript, <code>createPublicClient</code>, <code>getBlock</code>, <code>getLogs</code>; Sepolia'dan son blok ve Transfer logları. Kanıt: JS/TS tarafında aynı işi yapabilmek (03 sayfası ile örtüşür).</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · Sepolia · 0 TL</td>
+                <td><a href="https://viem.sh/docs/getting-started">viem.sh</a> · <a href="https://viem.sh/docs/actions/public/getLogs">viem.sh/getLogs</a></td>
+              </tr>
+              <tr>
+                <td><strong>8. chisel REPL denemeleri</strong></td>
+                <td>Foundry'nin Solidity REPL'i; <code>keccak256</code>, <code>abi.encode</code>, <code>uint</code> taşması gibi şeyleri anında dene. Kanıt: ABI kodlama, hash.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 1/5 · yerel · 0 TL</td>
+                <td><a href="https://getfoundry.sh/chisel/">getfoundry.sh/chisel</a></td>
+              </tr>
+              <tr>
+                <td><strong>9. Test cüzdanı + faucet + ilk transfer</strong></td>
+                <td>Yeni MetaMask/Rabby cüzdanı (yalnızca test), Sepolia ağı, Google faucet'ten ETH, kendine transfer; Etherscan'da nonce, gas, status alanlarını oku. Kanıt: cüzdan/işlem yaşam döngüsü.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 1/5 · Sepolia · 0 TL</td>
+                <td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">cloud.google.com</a> · <a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>10. Etherscan'da sözleşme doğrulama</strong></td>
+                <td>2. projedeki ERC-20'yi <code>forge verify-contract</code> veya deploy sırasında <code>--verify</code> ile doğrula; yeşil tik ve "Read Contract" sekmesi. Kanıt: kaynak doğrulama kavramı.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · Sepolia · 0 TL (API anahtarı ücretsiz)</td>
+                <td><a href="https://docs.etherscan.io/contract-verification/verify-with-foundry">docs.etherscan.io</a> · <a href="https://getfoundry.sh/guides/deploying-contracts">getfoundry.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>11. ABI'den C# üret</strong></td>
+                <td>Doğrulanmış sözleşmenin ABI'sini indir, <code>Nethereum.Generator.Console</code> ile tipli C# servis sınıfı üret, konsoldan çağır. Kanıt: ABI → tipli istemci; .NET'te tanıdık "OpenAPI client" mantığı.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.nethereum.com/docs/smart-contracts/code-generation">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>12. Gas raporu + ilk fuzz test</strong></td>
+                <td><code>forge test --gas-report</code>, bir fonksiyona rastgele girdi alan fuzz testi, <code>forge snapshot</code>. Kanıt: gas farkındalığı, property-based test.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 2/5 · yerel · 0 TL</td>
+                <td><a href="https://getfoundry.sh/forge/gas-tracking">getfoundry.sh</a> · <a href="https://getfoundry.sh/forge/testing">getfoundry.sh/testing</a></td>
+              </tr>
+              <tr>
+                <td><strong>13. Solidity by Example: re-entrancy'yi kendin çalıştır</strong></td>
+                <td>Sitedeki savunmasız banka + saldırgan sözleşmesini Remix'te çalıştır, sonra <code>ReentrancyGuard</code> ile kapat. Kanıt: reentrancy'yi elle görmüş olmak.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span> küçük · zorluk 2/5 · Remix VM · 0 TL</td>
+                <td><a href="https://solidity-by-example.org/hacks/re-entrancy/">solidity-by-example.org</a> · <a href="https://docs.openzeppelin.com/contracts/5.x/api/utils">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>14. Chainlink price feed'i Remix'ten oku</strong></td>
+                <td><code>AggregatorV3Interface.latestRoundData()</code> ile Sepolia'daki ETH/USD feed'ini oku. Kanıt: oracle kavramı, arayüz üzerinden dış sözleşme çağrısı.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 1/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.chain.link/data-feeds/using-data-feeds">docs.chain.link</a> · <a href="https://docs.chain.link/data-feeds/price-feeds/addresses">adresler</a></td>
+              </tr>
+              <tr>
+                <td><strong>15. wagmi "connect wallet" iskeleti</strong></td>
+                <td><code>npm create vite@latest</code> (react-ts), wagmi + viem + TanStack Query, cüzdan bağla, adres ve bakiye göster. Kanıt: React dApp'in en küçük hâli.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> küçük · zorluk 3/5 (JS'ye yeniysen) · Sepolia · 0 TL</td>
+                <td><a href="https://wagmi.sh/react/guides/connect-wallet">wagmi.sh</a> · <a href="https://vite.dev/guide/">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>16. Safe{Wallet} ile 2/3 multisig kur</strong></td>
+                <td>Arayüzden Sepolia'da üç sahipli Safe oluştur, bir işlemi iki imzayla geçir. Kanıt: multisig kavramı; § 4'teki "mini Safe" projesinin ön hazırlığı.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 1/5 · Sepolia · 0 TL</td>
+                <td><a href="https://app.safe.global/">app.safe.global</a> · <a href="https://docs.safe.global/home/what-is-safe">docs.safe.global</a></td>
+              </tr>
+              <tr>
+                <td><strong>17. ENS çözümleme</strong></td>
+                <td>Bir ENS adını mainnet public RPC üzerinden adrese çevir (viem <code>getEnsAddress</code> veya <code>cast resolve-name</code>); salt okuma, para yok. Kanıt: isim çözümleme katmanı.</td>
+                <td><span class="tag tag--info">İLERİ</span> küçük · zorluk 1/5 · mainnet salt okuma · 0 TL</td>
+                <td><a href="https://docs.ens.domains/">docs.ens.domains</a></td>
+              </tr>
+              <tr>
+                <td><strong>18. CryptoZombies ilk ders</strong></td>
+                <td>Tarayıcıda adım adım Solidity; sıfır kurulum, ücretsiz. Solidity sözdizimini tazelemek için, teknik derinlik beklemeden.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 1/5 · yok · 0 TL</td>
+                <td><a href="https://cryptozombies.io/">cryptozombies.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>19. Nethereum Playground turu</strong></td>
+                <td>Tarayıcıda C# örneklerini çalıştır: bakiye, transfer, sözleşme çağrısı. Kurulum yok; 6. projeden önce fikir edinmek için.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 1/5 · yok · 0 TL</td>
+                <td><a href="https://playground.nethereum.com/">playground.nethereum.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kucuk-projeler"><span class="h-num">§ 3</span>B) Küçük projeler — 1 ile 3 gün</h2>
+        <p>Her biri tek repo, README'li, testli. Burada portfolyo değeri başlıyor. Öncelik sırası: önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli olanlar (1, 2, 3); ikinci adım ana hattına göre: .NET biliyorsan .NET kesişimi (6, 7); JS/TS biliyorsan aynı indeksleyiciyi subgraph (17) ya da Ponder ile kur; hedefin güvenlikse 9 ve ardından § 4/7–8. Sonra güvenlik (9) herkes için.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Küçük projeler</caption>
+            <thead><tr><th>Proje</th><th>Tek cümle · kanıtladığı</th><th>Kapsam · zorluk · testnet · maliyet</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1. ERC-20 + React/wagmi mint arayüzü</strong></td>
+                <td>Sahibin mint edebildiği ERC-20 (Ownable), Foundry testleri, Sepolia deploy; React sayfasında bağlan, bakiye oku, mint gönder, receipt bekle. Kanıt: ilanlarda birlikte geçen üç başlığın (Solidity, Smart Contract, React dApp) hepsi tek repoda.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> küçük · zorluk 3/5 · Sepolia · 0 TL (Vercel Hobby)</td>
+                <td><a href="https://wagmi.sh/react/api/hooks/useWriteContract">wagmi.sh/useWriteContract</a> · <a href="https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt">useWaitForTransactionReceipt</a> · <a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>2. ERC-721 NFT + IPFS metadata + mint sayfası</strong></td>
+                <td>Görsel ve JSON metadata'yı IPFS'e (Pinata ücretsiz hesap) yükle, <code>ipfs://</code> URI'yi <code>tokenURI</code>'ye yaz, mint sayfası. Kanıt: ERC-721, metadata şeması, içerik adresleme.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> küçük · zorluk 3/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/erc721">docs.openzeppelin.com</a> · <a href="https://docs.ipfs.tech/how-to/best-practices-for-nft-data/">docs.ipfs.tech</a> · <a href="https://docs.pinata.cloud/">docs.pinata.cloud</a> · <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a></td>
+              </tr>
+              <tr>
+                <td><strong>3. Basit oylama (DAO) sözleşmesi</strong></td>
+                <td>Önce elle: teklif oluştur, token ağırlıklı oy, süre bitiminde sonuç. Sonra Wizard'dan Governor + ERC20Votes üretip farkı karşılaştır. Kanıt: yönetişim, snapshot, quorum.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> küçük · zorluk 3/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/governance">docs.openzeppelin.com</a> · <a href="https://wizard.openzeppelin.com/">wizard.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>4. Escrow</strong></td>
+                <td>Alıcı-satıcı-hakem; fon kilitle, teslim onayı veya hakem kararıyla serbest bırak; durum makinesi (enum). Kanıt: checks-effects-interactions, pull payment, erişim kontrolü.</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span> küçük · zorluk 2/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>5. Zaman kilitli cüzdan</strong></td>
+                <td>Belirli bir <code>block.timestamp</code>'ten önce çekimi reddeden kasa; Foundry'de <code>vm.warp</code> ile zamanı ileri alarak test. Kanıt: zaman mantığı, cheatcode'lar.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · anvil · 0 TL</td>
+                <td><a href="https://getfoundry.sh/reference/cheatcodes/overview">getfoundry.sh/cheatcodes</a></td>
+              </tr>
+              <tr>
+                <td><strong>6. .NET BackgroundService ile Transfer olaylarını PostgreSQL'e indeksleme</strong></td>
+                <td>Worker Service, Nethereum ile blok aralıklarını tara, Transfer loglarını EF Core + Npgsql ile yaz, son işlenen bloğu sakla, yeniden başlatmada kaldığı yerden devam et. Kanıt: .NET + zincir kesişiminin çekirdeği.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 3/5 · Sepolia · 0 TL (Docker Postgres)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a> · <a href="https://docs.nethereum.com/docs/data-and-indexing/overview">docs.nethereum.com</a> · <a href="https://www.npgsql.org/efcore/">npgsql.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>7. SIWE ile .NET backend'e cüzdanla giriş</strong></td>
+                <td>Frontend viem <code>createSiweMessage</code> ile mesaj üretir, cüzdan imzalar; ASP.NET Core Minimal API nonce verir, Nethereum.Siwe ile imzayı doğrular, JWT döner. Kanıt: EIP-4361, imza doğrulama, kimlik doğrulama şeması.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 3/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.login.xyz/">docs.login.xyz</a> · <a href="https://www.nuget.org/packages/Nethereum.Siwe">nuget.org/Nethereum.Siwe</a> · <a href="https://viem.sh/docs/siwe/utilities/createSiweMessage">viem.sh</a> · <a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>8. Chainlink price feed okuyan sözleşme + test</strong></td>
+                <td>Fiyatı okuyup "ETH cinsinden 10 USD ödeme" hesaplayan sözleşme; testte mock aggregator veya Sepolia fork. Kanıt: oracle entegrasyonu, ondalık (decimals) hesabı, mock'lama.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 2/5 · Sepolia fork · 0 TL</td>
+                <td><a href="https://docs.chain.link/data-feeds">docs.chain.link</a> · <a href="https://getfoundry.sh/guides/fork-testing">getfoundry.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>9. Slither ile kendi sözleşmeni tarama raporu</strong></td>
+                <td><code>pip install slither-analyzer</code>, 1–5. projeleri tara, her bulguyu "gerçek / yanlış pozitif / kabul edilen risk" diye sınıfla, README'ye raporu koy; Aderyn ile ikinci görüş. Kanıt: statik analiz okuma becerisi.</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span> küçük · zorluk 2/5 · yerel · 0 TL</td>
+                <td><a href="https://github.com/crytic/slither">github.com/crytic/slither</a> · <a href="https://github.com/Cyfrin/aderyn">github.com/Cyfrin/aderyn</a></td>
+              </tr>
+              <tr>
+                <td><strong>10. Merkle allowlist / airdrop</strong></td>
+                <td>Adres listesinden Merkle ağacı üret, kökü sözleşmeye yaz, kullanıcı proof ile claim eder. Kanıt: Merkle proof, gas tasarrufu mantığı.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 3/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://github.com/OpenZeppelin/merkle-tree">github.com/OpenZeppelin/merkle-tree</a></td>
+              </tr>
+              <tr>
+                <td><strong>11. ERC-20 permit (EIP-2612) demosu</strong></td>
+                <td>İmzayla approve: kullanıcı EIP-712 tipli veri imzalar, üçüncü taraf <code>permit</code> çağırır. Kanıt: EIP-712, gasless onay, imza kavramı.</td>
+                <td><span class="tag tag--info">İLERİ</span> küçük · zorluk 3/5 · anvil · 0 TL</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-2612">EIP-2612</a> · <a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a></td>
+              </tr>
+              <tr>
+                <td><strong>12. English auction + tam test</strong></td>
+                <td>Solidity by Example'daki açık artırmayı Foundry'ye taşı; teklif, iade, süre bitimi, fuzz ile "en yüksek teklif hep kazanır" invariant'ı. Kanıt: test tasarımı.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 3/5 · anvil · 0 TL</td>
+                <td><a href="https://solidity-by-example.org/app/english-auction/">solidity-by-example.org</a> · <a href="https://getfoundry.sh/guides/invariant-testing">getfoundry.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>13. Kendi testnet faucet sözleşmen</strong></td>
+                <td>Kendi ERC-20'ni adres başına 24 saatte bir dağıtan faucet; rate limit, <code>Pausable</code>. Kanıt: zaman tabanlı kısıt, acil durdurma.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 2/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/api/utils">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>14. CI: GitHub Actions ile forge test + Slither</strong></td>
+                <td>Her push'ta <code>foundry-toolchain</code> kur, test, coverage (lcov), <code>slither-action</code> SARIF çıktısı; rozetleri README'ye. Kanıt: CI disiplini; § 7 için zorunlu.</td>
+                <td><span class="tag tag--ok">TEMEL</span> küçük · zorluk 2/5 · yok · 0 TL (açık repo)</td>
+                <td><a href="https://github.com/foundry-rs/foundry-toolchain">foundry-toolchain</a> · <a href="https://github.com/crytic/slither-action">slither-action</a> · <a href="https://docs.github.com/en/actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>15. Blazor WebAssembly dApp (Nethereum.Blazor)</strong></td>
+                <td>Tamamı .NET olan bir cüzdan bağla/bakiye göster/sözleşme çağır sayfası; EIP-6963 çoklu cüzdan keşfi, SIWE ile Blazor yetkilendirme. Kanıt: JS yazmadan dApp; niş ama .NET mülakatında dikkat çeker.</td>
+                <td><span class="tag tag--info">İLERİ</span> küçük · zorluk 3/5 · Sepolia · 0 TL</td>
+                <td><a href="https://docs.nethereum.com/docs/blazor-dapp-integration/overview">docs.nethereum.com</a> · <a href="https://eips.ethereum.org/EIPS/eip-6963">EIP-6963</a></td>
+              </tr>
+              <tr>
+                <td><strong>16. Aynı sözleşmeyi 3 testnet'e deploy</strong></td>
+                <td>Sepolia, Base Sepolia, OP Sepolia; <code>forge script</code> ile zincir başına adres tablosu README'de. Kanıt: L2 farkındalığı, çok zincirli dağıtım.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 2/5 · 3 testnet · 0 TL</td>
+                <td><a href="https://docs.base.org/">docs.base.org</a> · <a href="https://docs.optimism.io/">docs.optimism.io</a> · <a href="https://l2beat.com/">l2beat.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>17. İlk subgraph (The Graph Studio)</strong></td>
+                <td>1. projenin Transfer olaylarını subgraph ile indeksle, GraphQL'den sorgula; 6. projedeki .NET indexer'ınla karşılaştır. Kanıt: sektörde yaygın indexleme yolunu bilmek.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 3/5 · Sepolia · 0 TL (Studio dağıtımı ücretsiz)</td>
+                <td><a href="https://thegraph.com/docs/en/subgraphs/quick-start/">thegraph.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>18. Speedrun Ethereum: Tokenization + Crowdfunding</strong></td>
+                <td>Scaffold-ETH 2 (Next.js + RainbowKit + wagmi + Foundry) ile rehberli görevler. Kanıt: sektörün "hazır iskelet" akışını tanımak.</td>
+                <td><span class="tag">ORTA</span> küçük · zorluk 3/5 · yerel + Sepolia · 0 TL</td>
+                <td><a href="https://speedrunethereum.com/">speedrunethereum.com</a> · <a href="https://scaffoldeth.io/">scaffoldeth.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="orta-projeler"><span class="h-num">§ 4</span>C) Orta projeler — 1 ile 2 hafta</h2>
+        <p>Burada mimari kararlar ve dokümantasyon değer kazanır. Her biri § 7 kontrol listesinden geçmeli; geçmeyen orta proje, geçen küçük projeden daha az etkileyicidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Orta projeler</caption>
+            <thead><tr><th>Proje</th><th>Tek cümle · kanıtladığı</th><th>Kapsam · zorluk · testnet · maliyet</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Tam yığın dApp: Foundry + React/wagmi + .NET indexer + PostgreSQL</strong></td>
+                <td>Örnek konu: bağış kampanyası. Sözleşme olay yayar; .NET Worker olayları PostgreSQL'e indeksler; Minimal API tarih/istatistik sunar; React hem zincirden hem API'den okur. Kanıt: uçtan uca mimari; .NET backend ilanlarına başvuruyorsan en güçlü hikâye. JS/TS hattındaysan aynı projeyi .NET indexer yerine Node.js + viem ya da Ponder ile kur; hikâye "tam yığın dApp" olur.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> orta · zorluk 4/5 · Sepolia · 0 TL (Vercel + Render/Neon)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis">learn.microsoft.com</a> · <a href="https://docs.nethereum.com/docs/data-and-indexing/overview">docs.nethereum.com</a> · <a href="https://wagmi.sh/react/getting-started">wagmi.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>2. Çok imzalı cüzdan (mini Safe)</strong></td>
+                <td>N sahip, M onay; işlem öner/onayla/çalıştır; Solidity by Example'dan başla, Safe'in gerçek sözleşmelerini okuyarak eksiklerini listele. Kanıt: erişim kontrolü, düşük seviye <code>call</code>, replay koruması.</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span> orta · zorluk 3/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://solidity-by-example.org/app/multi-sig-wallet/">solidity-by-example.org</a> · <a href="https://github.com/safe-global/safe-smart-account">github.com/safe-global</a></td>
+              </tr>
+              <tr>
+                <td><strong>3. Yükseltilebilir sözleşme (UUPS) + yükseltme senaryosu</strong></td>
+                <td>V1 deploy, veri yaz, V2'ye yükselt, verinin korunduğunu ve storage çakışması olmadığını testle göster; OpenZeppelin Foundry Upgrades güvenlik kontrolleri. Kanıt: proxy, ERC-1967 slotları, initializer.</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span> orta · zorluk 4/5 · anvil + Sepolia · 0 TL</td>
+                <td><a href="https://docs.openzeppelin.com/upgrades-plugins/foundry/foundry-upgrades">docs.openzeppelin.com</a> · <a href="https://docs.openzeppelin.com/contracts/5.x/api/proxy">api/proxy</a> · <a href="https://eips.ethereum.org/EIPS/eip-1967">EIP-1967</a></td>
+              </tr>
+              <tr>
+                <td><strong>4. On-chain oyun: tic-tac-toe veya lottery + VRF</strong></td>
+                <td>Tic-tac-toe: iki oyuncu, hamle doğrulama, kazanan tespiti. Lottery: bilet al, Chainlink VRF v2.5 ile rastgele kazanan (Sepolia + faucet LINK). Kanıt: rastgeleliğin zincirde neden zor olduğu.</td>
+                <td><span class="tag">ORTA</span> orta · zorluk 3/5 · Sepolia · 0 TL (testnet LINK)</td>
+                <td><a href="https://docs.chain.link/vrf/v2-5/getting-started">docs.chain.link/vrf</a></td>
+              </tr>
+              <tr>
+                <td><strong>5. Token vesting</strong></td>
+                <td>Cliff + doğrusal serbest bırakma, birden çok hak sahibi, iptal edilebilirlik; OpenZeppelin <code>VestingWallet</code> ile kendi yazdığını karşılaştır. Kanıt: zaman-matematik, yuvarlama hataları, fuzz.</td>
+                <td><span class="tag">ORTA</span> orta · zorluk 3/5 · anvil · 0 TL</td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/api/finance">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>6. NFT marketplace iskeleti</strong></td>
+                <td>Listele, satın al, iptal; ERC-2981 royalty; ERC-165 ile arayüz tespiti; pull-payment ile satıcı çekimi. Kanıt: birden çok standardın birlikte çalışması.</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">RİSK</span> orta · zorluk 4/5 · Sepolia · 0 TL</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-2981">EIP-2981</a> · <a href="https://eips.ethereum.org/EIPS/eip-165">EIP-165</a> · <a href="https://eips.ethereum.org/EIPS/eip-1155">EIP-1155</a></td>
+              </tr>
+              <tr>
+                <td><strong>7. Damn Vulnerable DeFi'nin tamamı</strong></td>
+                <td>v4 Foundry tabanlı; her görev bir DeFi açığı (flash loan, oracle manipülasyonu, yönetişim). Çözümlerini kısa yazılarla repoya koy. Kanıt: saldırgan gözüyle okuma.</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span> orta · zorluk 5/5 · yerel · 0 TL</td>
+                <td><a href="https://github.com/theredguild/damn-vulnerable-defi">github.com/theredguild</a></td>
+              </tr>
+              <tr>
+                <td><strong>8. Ethernaut'un tamamı</strong></td>
+                <td>§ 2'de başladığın seviyelerin devamı; her seviye için "açık + düzeltme" notu. Kanıt: güvenlik sözlüğünü elle öğrenmiş olmak.</td>
+                <td><span class="tag">ORTA</span> orta · zorluk 4/5 · Sepolia · 0 TL</td>
+                <td><a href="https://ethernaut.openzeppelin.com/">ethernaut.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>9. Gerçek zamanlı indexer: SignalR ile canlı Transfer akışı</strong></td>
+                <td>§ 3/6'daki indexer'a yeni blok aboneliği ve SignalR hub ekle; React tarafı canlı liste. Kanıt: .NET'te olay odaklı mimari + WebSocket.</td>
+                <td><span class="tag">ORTA</span> orta · zorluk 3/5 · Sepolia · 0 TL</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a> · <a href="https://docs.nethereum.com/docs/smart-contracts/overview">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>10. EIP-712 imzalı sipariş defteri (mini)</strong></td>
+                <td>Kullanıcı off-chain tipli sipariş imzalar; .NET API siparişleri toplar; eşleşen çift zincirde tek işlemle settle edilir. Kanıt: off-chain/on-chain iş bölümü, imza doğrulama iki tarafta.</td>
+                <td><span class="tag tag--info">İLERİ</span> orta · zorluk 4/5 · Sepolia · 0 TL</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a> · <a href="https://docs.nethereum.com/docs/signing-and-key-management/overview">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>11. ERC-4337 hesap soyutlama demosu</strong></td>
+                <td>Basit bir smart account + UserOperation gönderimi; kavramı görmek için, üretim değil. Kanıt: cüzdan geleceği hakkında konuşabilmek.</td>
+                <td><span class="tag tag--info">İLERİ</span> orta · zorluk 5/5 · Sepolia · 0 TL</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-4337">EIP-4337</a> · <a href="https://docs.nethereum.com/docs/getting-started/welcome">docs.nethereum.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="portfolyo-projeleri"><span class="h-num">§ 5</span>D) Portfolyo projeleri — 2 ile 4 hafta</h2>
+        <p>Bunlar özgeçmişe yazılacak ve mülakatta 10 dakika anlatılacak projeler. Üçten fazlasını yapma; birini bitir, § 7'den geçir, sonra diğerine geç. Hepsi 0 TL; barındırma ücretsiz katmanlarda.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Portfolyo projeleri</caption>
+            <thead><tr><th>Proje</th><th>Tek cümle · kanıtladığı</th><th>Kapsam · zorluk · testnet · maliyet</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1. "Eski blockchain deneyimini yeniden inşa et"</strong></td>
+                <td>Daha önce (gönüllü proje, staj, kurs projesi) yapılmış bir Solidity sözleşme + React arayüz işini sıfırdan, bu kez testli, Slither raporlu, doğrulanmış ve CI'lı bir açık kaynak repo olarak yaz. Önceki deneyim yoksa aynı kapsamı ilk kez yap. README'de "o zaman böyleydi, şimdi şunları ekledim" bölümü. Kanıt: özgeçmişteki deneyimin somut karşılığı; mülakatta gösterilecek tek link.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> büyük · zorluk 4/5 · Sepolia · 0 TL</td>
+                <td><a href="https://getfoundry.sh/">getfoundry.sh</a> · <a href="https://wagmi.sh/react/getting-started">wagmi.sh</a> · <a href="https://github.com/crytic/slither">slither</a></td>
+              </tr>
+              <tr>
+                <td><strong>2. Fatura/belge hash doğrulama servisi (.NET + zincir)</strong></td>
+                <td>ASP.NET Core API belgeyi alır, SHA-256 hash'ini üretir, günlük Merkle kökünü tek işlemle Sepolia'daki sözleşmeye yazar; herkes belge + proof ile "bu belge o gün vardı" doğrular. OpenTimestamps ile karşılaştırma bölümü. Kanıt: .NET mimarisi + zincirin doğru kullanımı (veri değil, hash).</td>
+                <td><span class="tag tag--ok">TEMEL</span> büyük · zorluk 4/5 · Sepolia · 0 TL</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.sha256">learn.microsoft.com</a> · <a href="https://github.com/OpenZeppelin/merkle-tree">merkle-tree</a> · <a href="https://opentimestamps.org/">opentimestamps.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>3. WhatsApp bot + on-chain ödeme onayı</strong></td>
+                <td>Meta Cloud API test numarası (ücretsiz, ödeme yöntemi istemez) ile .NET webhook; kullanıcı "öde" der, bot Sepolia adresi ve tutar verir; indexer ödeme olayını görünce WhatsApp'tan onay mesajı gider. Mesajlaşma API'lerini zincirle birleştirmeyi gösterir. Kanıt: webhook, arka plan işleme, olay eşleştirme. README'ye "yalnızca testnet demo" notu yaz. Gerçek ürüne (mainnet) dönüştürmek istersen: Türkiye'de yerleşik kullanıcıdan mal/hizmet bedelinin kripto ile alınması TCMB'nin 2021 yönetmeliği kapsamında yasak riski taşır (<a href="../06-altyapi-araclar-guvenlik/index.html#turkiye-ve-uyum">06 § 12</a>, <span class="tag tag--warn">TEYİT</span>); yalnızca yurt dışı kullanıcıya yönelikse hedef ülke mevzuatı da devreye girer, ancak Türkiye'de yerleşik olarak kripto ile tahsilat yapmanın yönetmelik kapsamı ve TL'ye çevrim yine <span class="tag tag--warn">TEYİT</span> (<a href="../index.html#durust-cerceve">Genel Bakış § 2</a>); Meta test numarasından üretim numarasına geçiş ödeme yöntemi ve işletme doğrulaması ister (<span class="tag tag--warn">TEYİT</span>, developers.facebook.com; şirketsiz sınırlar için <a href="../../../Rehberler/Sirket-Kurma/12-sirketsiz.html#whatsapp">Şirket Kurma — Bölüm 12</a>).</td>
+                <td><span class="tag">ORTA</span> büyük · zorluk 4/5 · Sepolia · 0 TL (test numarası; dev tunnels)</td>
+                <td><a href="https://developers.facebook.com/docs/whatsapp/cloud-api">developers.facebook.com</a> · <a href="https://www.twilio.com/docs/whatsapp/sandbox">twilio.com (alternatif sandbox)</a> · <a href="https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/">dev tunnels</a></td>
+              </tr>
+              <tr>
+                <td><strong>4. Denetim yarışmasına katıl + bulgu raporu</strong></td>
+                <td>Başlangıç için CodeHawks "First Flights" (yeni başlayanlara göre), sonra Sherlock, Cantina veya CodeHawks yarışması (Code4rena'nın geçmiş raporları okuma malzemesi olarak kalır); bulgu bulamasan bile raporunu ve öğrendiklerini yaz. Kanıt: gerçek kod tabanında güvenlik okuması; sıfır maliyet, ödül ihtimali. Code4rena 2026'da "winding down" sürecinde olduğu için yeni yarışma önerilmez; ayrıntı <a href="../06-altyapi-araclar-guvenlik/index.html#denetim-ve-topluluk">06 § 9</a>. Ödül alırsan: platform ödeme öncesi KYC isteyebilir (şartlarına bak); Türkiye'de yerleşik için ödül beyan edilmesi gereken gelir olabilir, gelir türü ve istisna durumu <span class="tag tag--warn">TEYİT</span> (GİB/SMMM; <a href="../index.html#turkiye-yasal-cerceve">Genel Bakış § 7</a>); ödeme stablecoin ise TL'ye çevrim ve kayıt. Ödül almazsan vergi/KYC konusu doğmaz, yalnızca portföy değeri kalır.</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span> büyük · zorluk 5/5 · yok · 0 TL</td>
+                <td><a href="https://codehawks.cyfrin.io/">codehawks.cyfrin.io</a> · <a href="https://docs.code4rena.com/getting-started/how-to-participate">docs.code4rena.com</a> · <a href="https://docs.sherlock.xyz/">docs.sherlock.xyz</a> · <a href="https://immunefi.com/">immunefi.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>5. Nethereum'a açık kaynak katkı</strong></td>
+                <td>Doküman düzeltmesi, örnek ekleme veya küçük bug fix ile PR; .NET geliştiricisi için doğal katkı alanı. Başka dil biliyorsan aynı türde katkıyı kendi dilindeki projeye yap: JS/TS &rarr; viem/wagmi, Python &rarr; web3.py, Go &rarr; go-ethereum, Rust &rarr; Foundry/reth. Kanıt: açık kaynak süreci, kod okuma.</td>
+                <td><span class="tag">ORTA</span> büyük · zorluk 3/5 · yok · 0 TL</td>
+                <td><a href="https://github.com/Nethereum/Nethereum">github.com/Nethereum</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--win">
+          <p class="callout__title">.NET geliştiricisinin lehine</p>
+          <p>Piyasada Solidity yazan çok, ".NET backend + zincir olaylarını üretim kalitesinde indeksleyen" az. 2. ve 3. proje bir .NET geliştiricisini "blockchain geliştiricisi" değil, "blockchain'i de bilen .NET geliştiricisi" olarak konumlar; .NET ilanlarına başvuranlar için uyumlu olan da bu.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başka başlangıç noktaları için eşlenik portföy</caption>
+            <thead><tr><th>Durum</th><th>Lehine olan proje</th><th>Neden</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JS/TS geliştiricisi</strong></td><td>§ 4/1 tam yığın dApp'in Node.js/Ponder varyantı; Speedrun Ethereum (§ 3/18)</td><td>Repo kalitesi öne çıkar: wagmi testleri (Vitest + mock connector), Playwright/Synpress E2E</td></tr>
+              <tr><td><strong>Güvenlik / denetim hedefi</strong></td><td>§ 4/7–8 (DVDF, Ethernaut) çözüm yazıları + § 5/4 bulgu raporu</td><td>Denetim ilanlarında bakılan şey kod okuma ve yazılı rapor kalitesidir</td></tr>
+              <tr><td><strong>Python geçmişi</strong></td><td>Slither ya da Ape tabanlı bir analiz/otomasyon projesi (ör. kendi sözleşmelerin için özel Slither dedektörü)</td><td>Python bilgisini güvenlik araçlarına bağlar</td></tr>
+              <tr><td><strong>Java geçmişi</strong></td><td>§ 5/2'nin Spring Boot + web3j varyantı (web3j güncel durumu <span class="tag tag--warn">TEYİT</span>)</td><td>Kurumsal Java ilanlarında aynı "zinciri de bilen backend" konumu</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mulakatta-anlatim"><span class="h-num">§ 6</span>E) Mülakatta önceki blockchain deneyimini anlatmak</h2>
+        <p>Sık görülen durum: birkaç aylık, gönüllü ya da yarı zamanlı, "Solidity ile uğraştım ama çok derin değil" denebilecek bir deneyim. Bu bir zayıflık değil, çerçeveleme sorunu. Aşağıdakiler iletişim taktiğidir; amaç abartmamak ve küçültmemek, kontrolü elinde tutmak. Hangi kalıbın işe yarayacağı deneyimine ve başvurduğun pozisyona bağlı:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Deneyim ve hedef pozisyona göre — Durum → Sonuç</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Önceki blockchain deneyimin yok</strong></td><td>"Önceki deneyim" kalıpları kullanılmaz. Aşağıdaki "Şimdi ne yapıyorsun?" satırı ve § 5 projeleri senin hikâyendir.</td></tr>
+              <tr><td><strong>Kısa / gönüllü / staj deneyimi; başka alanda iş arıyorsun</strong></td><td>Aşağıdaki kalıplar olduğu gibi.</td></tr>
+              <tr><td><strong>Kısa deneyim; blockchain pozisyonuna başvuruyorsun</strong></td><td>"Yan alan, aradığım pozisyon [ana alan]" kalıbı ters etki yapar. Yerine: "Kısa bir deneyimle başladım, son [X] ayda şu testli ve doğrulanmış projeleri yaptım" + § 5/1 ve § 5/4 kanıtları.</td></tr>
+              <tr><td><strong>Üretim (mainnet) deneyimin var</strong></td><td>"Derinliği sınırlı" çerçevesi kullanılmaz; ölçek (kullanıcı, işlem hacmi), yaşanan olaylar (incident) ve denetim süreçleri anlatılır.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Konuşma kalıpları</caption>
+            <thead><tr><th>Durum</th><th>Kalıp</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Açılış (20 saniye)</strong></td>
+                <td>Şablon: "[Proje/kurum] bünyesinde [ay/yıl] – [ay/yıl] arasında [gönüllü / stajyer / yarı zamanlı] olarak çalıştım; [ör. Solidity ile küçük akıllı sözleşmeler ve bunlara bağlanan bir arayüz] yazdım. Kısa ve derinliği sınırlı bir deneyimdi; asıl uzmanlığım [ana alan, ör. .NET, Java, React, Node.js]." Blockchain pozisyonuna başvuruyorsan son cümle yerine: "O günden beri [şu projelerle] derinleştim."</td>
+                <td><span class="tag tag--ok">TEMEL</span> süreyi ve çalışma biçimini (gönüllü, staj vb.) sen söyle, karşı taraf keşfetmesin</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Kapsamı netleştir</strong></td>
+                <td>Nesne ve sayı ver: kaç sözleşme, kaç ekran, hangi standart (ERC-20 mi, özel mi), hangi test ağı. Hatırlamıyorsan "yaklaşık" de, uydurma.</td>
+                <td><span class="tag tag--ok">TEMEL</span> belirsizlik = şüphe</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Kanıta köprü</strong></td>
+                <td>"O dönem yaptığımın testli ve denetim raporlu versiyonunu geçen ay açık kaynak olarak yeniden yazdım; link şu." § 5/1 projesi bu cümle için var.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> repo yoksa cümle de yok</td>
+                <td><a href="https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>"Neden derin değil?"</strong></td>
+                <td>Şablon: "[Gönüllü / yarı zamanlı / kısa süreli] bir çalışmaydı; odağım [ana alan] idi. Blockchain'i yan alan olarak sürdürüyorum, aradığım pozisyon [ana alan]." Savunma değil, tercih olarak anlat. Bu kalıp yalnızca blockchain dışı bir pozisyona başvururken geçerlidir; blockchain pozisyonu için yukarıdaki tablonun üçüncü satırı.</td>
+                <td><span class="tag tag--ok">TEMEL</span> tek cümle, sonra sus</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Bilmediğin teknik soru</strong></td>
+                <td>"Bunu üretimde yapmadım. Bildiğim kadarıyla şöyle çalışıyor: … Test etmek istesem şunu yapardım." Bilgi + yöntem; tahmin ettiğini söyle.</td>
+                <td><span class="tag tag--ok">TEMEL</span> "bilmiyorum" tek başına bırakılmaz</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Kendi alanına yönlendir</strong></td>
+                <td>Şablon: "Bu deneyimden en çok işime yarayan şey [kazanım] oldu; [ana alanın aracıyla] [somut iş] yaptım." Örnekler: .NET &rarr; "BackgroundService ile zincir olaylarını PostgreSQL'e indeksleyen bir servis yazdım"; React &rarr; "wagmi ile işlem durumlarını (pending, onay, revert) kullanıcıya gösteren bir arayüz state'i kurdum"; Java &rarr; "Spring ile zincir olaylarını işleyen bir tüketici yazdım"; Node.js &rarr; "viem ile backfill + checkpoint yapan bir dinleyici yazdım". Konuşmayı en güçlü olduğun alana taşır.</td>
+                <td><span class="tag tag--ok">TEMEL</span> § 3/6 (.NET), § 3/1 (React), § 2/7 (Node) projeleri bu cümle için var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>STAR yapısı</strong></td>
+                <td>Durum (ör. gönüllü proje, staj, küçük ekip) → Görev (sözleşme + arayüz) → Eylem (ne yazdın, hangi araç) → Sonuç (testnet'te çalıştı / öğrendiklerin). 60–90 saniye.</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Özgeçmiş dilini hizala</strong></td>
+                <td>"React, Solidity, Smart Contract" yerine "Solidity (temel düzey, [proje türü]), React dApp arayüzü". Mülakatta söylenenle özgeçmişte yazan aynı olsun.</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>İngilizce tek cümle</strong></td>
+                <td>Örnek: "I worked on [project] for [duration], writing [what you built, e.g. small Solidity contracts and a front end]; it was a short, introductory experience and my core expertise is [main area]."</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>"Şimdi ne yapıyorsun?"</strong></td>
+                <td>Bu sayfadaki bitmiş projelerden birini söyle; bitmemişi söyleme. "Şu an Sepolia'da çalışan bir X var, README'de mimari şeması ve Etherscan linki var."</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Aşağıdaki kavramları sorulunca bir-iki cümleyle açıklayabilmen gerekir; liste <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a> sayfasındaki mülakat kontrol listesiyle aynıdır. Her satır için ilgili proje numarası verildi: kavramı ezberleme, o projede kullan.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mutlaka açıklayabilmen gereken kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EVM · gas · gas limit</strong></td><td>Her opcode'un maliyeti; işlem gas biterse revert ama ücret gider. § 2/12 gas raporu.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>işlem yaşam döngüsü</strong></td><td>İmzala → mempool → bloğa gir → receipt; nonce sırası; "pending" ile "confirmed" farkı. § 2/9.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a></td></tr>
+              <tr><td><strong>storage · memory · calldata</strong></td><td>Kalıcı ve pahalı / geçici / salt okunur giriş; gas farkının kaynağı. § 3/4 escrow.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>mapping · struct · enum</strong></td><td>Mapping'in iterasyonu yok, anahtarı sayılamaz; enum ile durum makinesi. § 3/4.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>event · indexed · log</strong></td><td>Sözleşme dışına ucuz veri; indexed alanlar filtrelenir; indexer'lar bunu okur. § 3/6.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://viem.sh/docs/actions/public/getLogs">viem.sh</a></td></tr>
+              <tr><td><strong>require · revert · custom error</strong></td><td>Koşul sağlanmazsa durumu geri al; custom error daha ucuz. Her projede.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>modifier · Ownable · AccessControl</strong></td><td>Yetki kontrolünü tekrar kullanılabilir hâle getirmek; rol tabanlı erişim. § 3/1.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/access-control">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>ERC-20 · approve/transferFrom</strong></td><td>İki adımlı harcama izni; "allowance" kavramı; neden gerekli. § 2/2, § 3/1.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a></td></tr>
+              <tr><td><strong>ERC-721 · tokenURI · metadata</strong></td><td>Benzersiz token; metadata zincir dışında (IPFS), zincirde yalnızca URI. § 3/2.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a></td></tr>
+              <tr><td><strong>reentrancy · checks-effects-interactions</strong></td><td>Dış çağrı durumdan önce yapılırsa saldırgan geri çağırır (The DAO). Önce kontrol, sonra durum, en son dış çağrı. § 2/13.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>msg.sender vs tx.origin</strong></td><td>Doğrudan çağıran vs zincirin başındaki EOA; yetki için tx.origin kullanma. Ethernaut'ta seviye var.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org</a></td></tr>
+              <tr><td><strong>ABI · function selector</strong></td><td>Fonksiyon imzasının keccak256'sının ilk 4 baytı; istemcinin sözleşmeyle konuşma sözlüğü. § 2/8, § 2/11.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/code-generation">docs.nethereum.com</a></td></tr>
+              <tr><td><strong>RPC · provider · EIP-1193</strong></td><td>Düğümle JSON-RPC konuşması; tarayıcıda cüzdanın enjekte ettiği provider; EIP-6963 ile çoklu cüzdan. § 2/15.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1193">EIP-1193</a></td></tr>
+              <tr><td><strong>React dApp akışı</strong></td><td>Cüzdan bağla → <code>readContract</code> ile oku → <code>writeContract</code> ile işlem → receipt bekle → yeniden oku. § 3/1.</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://wagmi.sh/react/api/hooks/useReadContract">wagmi.sh</a></td></tr>
+              <tr><td><strong>imza · EIP-712 · SIWE</strong></td><td>Mesaj imzalamak işlem değildir, gas yok; tipli veri (712) ve giriş (4361). § 3/7, § 3/11.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4361">EIP-4361</a></td></tr>
+              <tr><td><strong>testnet vs mainnet · faucet</strong></td><td>Aynı kod, sahte para; neden bütün geliştirmenin testnet'te olduğu. § 1.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>proxy · upgrade · initializer</strong></td><td>Kod değişmez, proxy ile arkadaki uygulama değişir; constructor yerine initializer. § 4/3.</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/contracts/5.x/upgradeable">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>oracle · price feed · VRF</strong></td><td>Zincir dışı veri ve rastgelelik zincire nasıl girer; neden <code>block.timestamp</code> rastgele değildir. § 3/8, § 4/4.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.chain.link/vrf">docs.chain.link</a></td></tr>
+              <tr><td><strong>fuzz · invariant test</strong></td><td>Rastgele girdi ve rastgele çağrı dizisi; "toplam arz hep sabit" gibi kuralları kırmaya çalışır. § 3/12.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/guides/invariant-testing">getfoundry.sh</a></td></tr>
+              <tr><td><strong>statik analiz · Slither</strong></td><td>Kodu çalıştırmadan bilinen açık kalıplarını bulur; yanlış pozitif normaldir, yorumlamayı bilmek gerekir. § 3/9.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/crytic/slither">github.com/crytic/slither</a></td></tr>
+              <tr><td><strong>L2 · rollup</strong></td><td>Ethereum'a yaslanan ucuz katman; Base/OP/Arbitrum Sepolia testnet'leri; L2BEAT ile karşılaştır. § 3/16, ayrıntı <a href="../05-diger-zincirler/index.html">05 Diğer zincirler</a>.</td><td><span class="tag">ORTA</span></td><td><a href="https://l2beat.com/">l2beat.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="portfolyo-kalitesi"><span class="h-num">§ 7</span>F) Portfolyo kalitesi kontrol listesi</h2>
+        <p>Bir repo bu listeden geçmiyorsa özgeçmişe yazma. Mülakatçı ilk 30 saniyede README'ye, ikinci 30 saniyede test klasörüne bakar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Repo kalite maddeleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>README: ne, neden, nasıl çalıştırılır</strong></td><td>İlk ekranda: tek cümle amaç, ekran görüntüsü, canlı demo linki, 3 komutla yerelde çalıştırma.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/othneildrew/Best-README-Template">Best-README-Template</a></td></tr>
+              <tr><td><strong>mimari şeması (Mermaid)</strong></td><td>Sözleşme ↔ indexer ↔ API ↔ arayüz akışı; GitHub Markdown içinde Mermaid doğrudan çizilir, görsel dosyası gerekmez.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://mermaid.js.org/">mermaid.js.org</a> · <a href="https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams">docs.github.com</a></td></tr>
+              <tr><td><strong>testnet adresi + Etherscan doğrulama linki</strong></td><td>README'de zincir, adres, doğrulanmış kaynak linki, deploy bloğu. Doğrulanmamış sözleşme = kanıtsız iddia.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.etherscan.io/contract-verification/verify-with-foundry">docs.etherscan.io</a> · <a href="https://docs.sourcify.dev/docs/intro">sourcify</a></td></tr>
+              <tr><td><strong>forge test + coverage</strong></td><td>Birim, fuzz, en az bir invariant; <code>forge coverage --report lcov</code>; yüzdeyi README'ye yaz. Sıfır coverage ile "test var" deme.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/guides/coverage">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Backend testleri (repodaki dile göre)</strong></td><td>Repoda .NET bileşeni varsa: xUnit; indexer için Testcontainers ile gerçek PostgreSQL; sözleşme çağrıları için anvil'e karşı entegrasyon testi. Backend Node/TS ise: Vitest + anvil entegrasyon testi + Testcontainers for Node. Yalnızca sözleşme + frontend ise: forge test + Vitest/wagmi mock connector + Playwright; bu madde uygulanmaz.</td><td><span class="tag tag--ok">TEMEL</span> (backend varsa)</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">learn.microsoft.com</a> · <a href="https://dotnet.testcontainers.org/">testcontainers</a></td></tr>
+              <tr><td><strong>CI: GitHub Actions</strong></td><td><code>foundry-toolchain@v1</code> ile forge build/test/fmt; repodaki backend'e göre <code>dotnet test</code> ya da <code>npm test</code>; PR'da kırmızı/yeşil. Açık repoda ücretsiz dakika.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/foundry-rs/foundry-toolchain">foundry-toolchain</a> · <a href="https://docs.github.com/en/actions">docs.github.com</a></td></tr>
+              <tr><td><strong>Slither raporu (CI'da)</strong></td><td><code>slither-action</code> SARIF çıktısı GitHub Code Scanning'e düşer; README'de "bulgular ve kararlar" tablosu.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/crytic/slither-action">slither-action</a></td></tr>
+              <tr><td><strong>coverage rozeti (Codecov)</strong></td><td>lcov'u Codecov'a yükle, rozeti README'ye; açık repolar için ücretsiz katman.</td><td><span class="tag tag--warn">ÜCRETLİ</span> açık repo ücretsiz</td><td><a href="https://docs.codecov.com/docs/quick-start">docs.codecov.com</a> · <a href="https://shields.io/">shields.io</a></td></tr>
+              <tr><td><strong>.env.example</strong></td><td>Gerekli değişkenlerin adları, değerleri değil; <code>.env</code> <code>.gitignore</code>'da. .NET tarafında user-secrets.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gitleaks / secret scanning</strong></td><td>pre-commit hook ile anahtar sızmasını yerelde yakala; GitHub secret scanning açık repoda otomatik ve ücretsiz.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/gitleaks/gitleaks">gitleaks</a> · <a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning">docs.github.com</a></td></tr>
+              <tr><td><strong>lisans</strong></td><td>MIT en yaygın; lisanssız repo "kullanılamaz" sayılır. OpenZeppelin MIT, Safe LGPL-3.0 — bağımlılık lisanslarını da yaz.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://choosealicense.com/licenses/mit/">choosealicense.com</a></td></tr>
+              <tr><td><strong>canlı demo (Vercel Hobby)</strong></td><td>Arayüz Vercel/Cloudflare Pages'te; README'de link; demo Sepolia'ya bağlı, "cüzdan yoksa salt okuma" modu.</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://vercel.com/docs">vercel.com/docs</a></td></tr>
+              <tr><td><strong>forge fmt · solhint · prettier-plugin-solidity</strong></td><td>Biçim ve lint CI'da; tartışma bitirir, profesyonel görünür.</td><td><span class="tag">ORTA</span></td><td><a href="https://protofire.github.io/solhint/">solhint</a> · <a href="https://github.com/prettier-solidity/prettier-plugin-solidity">prettier-plugin-solidity</a></td></tr>
+              <tr><td><strong>NatSpec yorumları</strong></td><td><code>@notice</code>, <code>@param</code>, <code>@dev</code>; Etherscan ve araçlar okur; kodu anlatma yükünü README'den alır.</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>gas snapshot</strong></td><td><code>forge snapshot</code> dosyası repoda; PR'da gas farkı görünür.</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/forge/gas-tracking">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Conventional Commits · SemVer · CHANGELOG</strong></td><td>Okunur commit geçmişi, sürüm etiketleri, değişiklik günlüğü; küçük repoda bile alışkanlık.</td><td><span class="tag">ORTA</span></td><td><a href="https://www.conventionalcommits.org/">conventionalcommits.org</a> · <a href="https://semver.org/">semver.org</a> · <a href="https://keepachangelog.com/">keepachangelog.com</a></td></tr>
+              <tr><td><strong>Dockerfile + compose</strong></td><td>.NET servisi ve PostgreSQL tek komutla kalksın; mülakatçı klonlayıp çalıştırabilsin.</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/build-container">learn.microsoft.com</a> · <a href="https://docs.docker.com/compose/">docs.docker.com</a></td></tr>
+              <tr><td><strong>OpenAPI dokümanı</strong></td><td>.NET API'nin uçları otomatik belgelensin; arayüz ekibi (sen) ve mülakatçı için tek bakış.</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>"Bilinen sınırlar" bölümü</strong></td><td>README'de: denetimsiz, testnet, üretim için değil; hangi saldırılara karşı korumasız. Dürüstlük mülakatta puandır.</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://secure-contracts.com/">secure-contracts.com</a></td></tr>
+              <tr><td><strong>proje şablonu</strong></td><td>Sıfırdan kurmak istemiyorsan Foundry şablonu (CI, OZ, lint hazır) veya Scaffold-ETH 2.</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/PaulRBerg/foundry-template">foundry-template</a> · <a href="https://scaffoldeth.io/">scaffoldeth.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="checklist">
+          <li>README: amaç, ekran görüntüsü, canlı demo, 3 komutla kurulum, Mermaid mimari şeması</li>
+          <li>Sepolia adresi ve doğrulanmış kaynak (Etherscan/Sourcify) linki</li>
+          <li>forge test yeşil, coverage yüzdesi yazılı, en az bir fuzz ve bir invariant test</li>
+          <li>Backend testleri repodaki dile göre: .NET &rarr; xUnit + Testcontainers; Node/TS &rarr; Vitest + anvil (+ Testcontainers for Node); backend yoksa frontend için Vitest/Playwright</li>
+          <li>GitHub Actions: build, test, fmt, Slither (SARIF)</li>
+          <li>.env.example var, .env yok, gitleaks pre-commit</li>
+          <li>LICENSE dosyası (MIT) ve bağımlılık lisansları</li>
+          <li>"Bilinen sınırlar / denetimsiz" bölümü</li>
+          <li>Canlı demo linki çalışıyor, cüzdansız salt okuma modu var</li>
+        </ul>
+
+        <h2 id="ne-yapilmamali"><span class="h-num">§ 8</span>G) Ne yapılmamalı</h2>
+        <p>Bu sayfadaki her şey testnet ve ücretsiz katman içindir. Aşağıdakiler para, güvenlik veya itibar riski taşır; "öğreniyorum" gerekçesi bunları haklı çıkarmaz.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yapılmayacaklar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>mainnet'e para koymak</strong></td><td>Öğrenme aşamasında gerçek ETH ile deploy veya işlem yok; Sepolia aynı kodu çalıştırır. Portfolyo değeri de artmaz.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>gerçek özel anahtarı repoya atmak</strong></td><td>Commit geçmişinden silinmez; botlar dakikalar içinde tarar. Test cüzdanı bile olsa <code>.env</code> + gitleaks. <code>cast wallet</code> keystore veya user-secrets kullan.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/gitleaks/gitleaks">gitleaks</a> · <a href="https://docs.nethereum.com/docs/signing-and-key-management/overview">docs.nethereum.com</a></td></tr>
+              <tr><td><strong>aynı cüzdanı test ve gerçek için kullanmak</strong></td><td>Geliştirme cüzdanında hiç gerçek varlık olmasın; seed'i asla kopyala-yapıştır etme.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://rabby.io/">rabby.io</a></td></tr>
+              <tr><td><strong>kopyala-yapıştır token</strong></td><td>Wizard çıktısını anlamadan deploy etmek portfolyoya bir şey katmaz; mülakatta ilk soruda çöker. Her satırı açıklayabilmelisin.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://wizard.openzeppelin.com/">wizard.openzeppelin.com</a></td></tr>
+              <tr><td><strong>"yatırım" projesi</strong></td><td>Getiri vaadi, staking APY, "coin" lansmanı: hukuki ve itibar riski, işe alımcıda kırmızı bayrak. Bu bir geliştirme listesidir; fiyat ve getiri konusu değil.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://rekt.news/">rekt.news</a></td></tr>
+              <tr><td><strong>denetimsiz sözleşmeyi başkalarına kullandırmak</strong></td><td>Arkadaşına bile "gerçek parayla kullan" deme; README'ye "denetimsiz, testnet" yaz. Kayıp olursa sorumluluk hissi seni bulur.</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org</a></td></tr>
+              <tr><td><strong>Alchemy faucet'ine mainnet ETH almak</strong></td><td>"0,001 ETH şartı" için mainnet'e para koymak bütçe kuralını bozar; Google veya PoW faucet kullan.</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://sepolia-faucet.pk910.de/">sepolia-faucet.pk910.de</a></td></tr>
+              <tr><td><strong>web3.js · Truffle · Ganache</strong></td><td>Hâlâ eski eğitimlerde görürsün; yeni projede viem/wagmi ve Foundry kullan. Eski rehberi takip edip zaman kaybetme.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://viem.sh/docs/getting-started">viem.sh</a></td></tr>
+              <tr><td><strong>Consensys best practices · SWC Registry</strong></td><td>Konsept olarak hâlâ doğru ama "artık aktif bakımı yok" notu var; güncel kaynak Trail of Bits secure-contracts ve Solodit.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://consensysdiligence.github.io/smart-contract-best-practices/">consensysdiligence.github.io</a> · <a href="https://solodit.cyfrin.io/">solodit.cyfrin.io</a></td></tr>
+              <tr><td><strong>Ropsten · Rinkeby · Goerli · Holesky rehberleri</strong></td><td>Kapanmış ya da kullanımdan kaldırılmış testnet'ler (Holesky: Eylül 2025); rehberde bunlar geçiyorsa rehber eski. Sepolia'ya çevir.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Solidity 0.8 öncesi örnek</strong></td><td>Overflow kontrolü olmayan eski kod; SafeMath artık gereksiz. Sürümü kontrol et.</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td></tr>
+              <tr><td><strong>ücretli kurs / sertifika</strong></td><td>Bu sayfadaki her şey ücretsiz kaynakla yapılır: Cyfrin Updraft, ethereum.org tutorials, Speedrun, Ethernaut. Sertifika işe alımda kod kadar sayılmaz. Durum &rarr; sonuç: kendi kendine öğrenebiliyorsan ücretsiz kaynaklar yeter; yapılandırılmış rehberlik istiyorsan önce ücretsiz ve yapılandırılmış olan Cyfrin Updraft / Speedrun Ethereum; bir ilan açıkça sertifika istiyorsa (nadir) yalnızca o durumda değerlendir.</td><td><span class="tag tag--warn">ÜCRETLİ</span> gereksiz</td><td><a href="https://cyfrin.io/updraft">cyfrin.io/updraft</a> · <a href="https://ethereum.org/en/developers/tutorials/">ethereum.org</a></td></tr>
+              <tr><td><strong>ücretli RPC planı</strong></td><td>Public RPC ve ücretsiz katmanlar öğrenme yükünü kaldırır; ücretli plana geçmek için hiçbir proje burada yok.</td><td><span class="tag tag--warn">ÜCRETLİ</span> gereksiz</td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+              <tr><td><strong>ana öğrenme hattını bırakıp buna dalmak</strong></td><td>Blockchain yan alansa haftalık saat sınırı koy ve ana dil/platformuna dön: <a href="../../CSharp-DotNet/index.html">C# ve .NET</a>, <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a>, <a href="../../Java/index.html">Java</a>, <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a>, <a href="../../Rust/index.html">Rust</a> ya da <a href="../../index.html">Programlama</a> ana sayfası. Blockchain ana hedefinse bu madde geçerli değil; haftalık sınır yerine <a href="../index.html#durust-cerceve">Genel Bakış § 2</a>'deki hedef satırına ve § 5 sırasına göre plan yap.</td><td><span class="tag tag--warn">RİSK</span> (yan alansa)</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Özel anahtar bir kez repoya girdiyse "sildim" yetmez: anahtarı yanmış say, cüzdanı terk et, yenisini üret. Test cüzdanında para olmadığı için kayıp sıfırdır; alışkanlık kazanmak için yine de aynı prosedürü uygula.</p>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 9</span>Özet — önce hangi üç proje</h2>
+        <p>Sıra, "mülakatta sık sorulanı savunabilir yap → ana platform kesişimini göster → güvenlik okuryazarlığını kanıtla" mantığıyla kuruldu. Aşağıdaki üçlü .NET bilen için yazıldı; ikinci adımın başka başlangıç noktalarındaki karşılığı adımın içinde. Her biri 0 TL.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">§ 3/1 — ERC-20 + React/wagmi mint arayüzü (1–3 gün)</span>
+            <p>İlanlarda birlikte geçen üç başlığı (Solidity, Smart Contract, React dApp) tek repoda kanıtlar; Foundry, Sepolia deploy, Etherscan doğrulama, wagmi akışı hepsi içinde. Önce § 2'deki 1, 2, 3, 9, 15 numaralı denemeleri yap, sonra buna geç. § 7 listesinden geçir.</p>
+            <span class="steps__meta">Zorluk 3/5 · Sepolia · 0 TL · Vercel Hobby demo</span>
+          </li>
+          <li>
+            <span class="steps__title">§ 3/6 — .NET BackgroundService ile Transfer indexer + PostgreSQL (1–3 gün)</span>
+            <p>.NET geliştiricisini farklılaştıran proje: tanıdık .NET araçlarıyla (Worker Service, EF Core, Npgsql, Testcontainers) zincir verisini işler. Mülakatta "olay tabanlı sistem" hikâyesinin kaynağı. İstersen § 3/7 SIWE'yi aynı repoya ekle. JS/TS biliyorsan bu adımın yerine aynı indeksleyiciyi Ponder ya da § 3/17 subgraph ile kur; hedefin güvenlikse bu adımı atla, § 3/9 ve § 4/7–8'e geç.</p>
+            <span class="steps__meta">Zorluk 3/5 · Sepolia · 0 TL · Docker PostgreSQL</span>
+          </li>
+          <li>
+            <span class="steps__title">§ 3/9 — Slither raporu + § 2/5 Ethernaut ilk 5 seviye (1–2 gün)</span>
+            <p>Kendi sözleşmelerini tarayıp bulguları sınıflandırman "güvenliği ciddiye alıyor" sinyali verir; Ethernaut ise reentrancy, tx.origin gibi mülakat sorularını elle öğretir. İkisini bitirdiğinde § 6'daki kavram tablosunun çoğunu yaşamış olursun.</p>
+            <span class="steps__meta">Zorluk 2/5 · yerel + Sepolia · 0 TL</span>
+          </li>
+        </ol>
+
+        <p>Bu üçü bitince: § 4/1 tam yığın dApp'i (üçünü birleştirir), ardından § 5/1 "eski blockchain deneyimini yeniden inşa et" (önceki deneyimin yoksa aynı kapsamı ilk kez yap). § 5/2 ve § 5/3 (.NET kesişimi) ancak zaman kalırsa; güvenlik hedefliyorsan § 5/4.</p>
+
+        <ul>
+          <li>Öncelik 1 — <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli her şey: § 2/1, 2, 13, 15; § 3/1, 2, 3; § 5/1; § 6'nın tamamı.</li>
+          <li>Öncelik 2 — ana platform kesişimi: .NET &rarr; § 2/6, 11; § 3/6, 7, 15; § 4/1, 9; § 5/2, 3. JS/TS &rarr; § 2/7, 15; § 3/17, 18; § 4/1 (Node/Ponder varyantı). Güvenlik hedefi &rarr; doğrudan Öncelik 3.</li>
+          <li>Öncelik 3 — güvenlik: § 2/5; § 3/9; § 4/7, 8; § 5/4.</li>
+          <li>Öncelik 4 — derinleşme (<span class="tag tag--info">İLERİ</span>): § 3/11; § 4/3, 10, 11.</li>
+          <li>Her proje için § 7 kontrol listesi; her zaman § 8 yasakları.</li>
+          <li>Sıfır bütçe kuralı: Sepolia + Google/PoW faucet (Chainlink faucet'in güncel şartı <span class="tag tag--warn">TEYİT</span>) + public RPC + Vercel Hobby (ticari olmayan kullanım) + Docker PostgreSQL; başka hiçbir şeye para gerekmez. Küçük bir bütçe yalnızca kolaylık (kalıcı DB, alan adı) sağlar.</li>
+        </ul>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bu sayfadaki dış bağlantılar 13 Eylül 2026'da açılarak kontrol edildi. docs.soliditylang.org otomatik erişime kapalı olduğu için (403) yalnızca kanonik adresleri verildi; Damn Vulnerable DeFi için sitesi yerine GitHub deposu bağlandı. Foundry kitabı book.getfoundry.sh'tan getfoundry.sh'a, Alchemy dokümanı alchemy.com/docs'a taşındı; eski adresler yönlendiriyor.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../06-altyapi-araclar-guvenlik/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Altyapı, Araçlar ve Güvenlik</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

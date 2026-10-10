@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rust — Programlama</title>
+<meta name="description" content="Sahiplik ve ödünç alma modeli, tip sistemi, eşzamanlılık, ekosistem ve öğrenme maliyeti değerlendirmesi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Rust</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Programlama · Rust</span>
+      <span class="brand__name">Rust Anahtar Listesi</span>
+      <span class="brand__sub">Sahiplik modeli · sistem programlama</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# / .NET</span></a></li>
+          <li><a class="nav-item" href="../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+          <li><a class="nav-item" href="../proje-fikirleri/index.html"><span class="nav-num">&larr;</span><span>Proje fikirleri</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Her dil kendi bölümünde ele alınır. Rozetler öncelik sırasını gösterir; bölüm önce "bu dil kime, ne için lazım?" sorusunu dürüstçe cevaplar, sonra listeyi sunar.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Programlama · Rust</div>
+        <h1 class="page-title">Rust: <em>zor</em> ama karşılığı var</h1>
+        <p class="lede">Öğrenme eğrisi en dik dillerden biri. Sahiplik modeli, çöp toplayıcılı dillerden alışık olunan her şeyi yeniden düşünmeyi gerektiriyor. Kısa vadede iş bulma hedefi varsa doğru zaman olmayabilir; gerekçesiyle birlikte.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; ileri &middot; En yüksek maliyetli</div>
+      </header>
+
+      <div class="content">
+        <h2 id="durust-degerlendirme"><span class="h-num">§ 1</span>Önce dürüst değerlendirme</h2>
+
+        <p class="intro">Bu sayfa bir anlatım değil, <strong>anahtar kelime listesidir</strong>. Her satırdaki terimi
+        kendin arayacak, resmî dokümanı okuyacak, kendi kodunu yazacaksın. Buradaki "Kısaca" sütunu sadece
+        terimi tanıman ve yanlış şeyi aramaman için var.</p>
+
+        <p>Rust, bu sitedeki diller arasında <strong>öğrenme maliyeti en yüksek</strong> olanıdır. Sebebi zor
+        sözdizimi değil; derleyicinin, birçok dilde çöp toplayıcıya (GC) veya programcının dikkatine bırakılan
+        bellek kararlarını <em>derleme zamanında</em> senden kanıtlamanı istemesidir. Bu duvarın yüksekliği
+        nereden geldiğine bağlıdır:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre Rust'ın zorluğu</caption>
+            <thead><tr><th>Nereden geliyorsun</th><th>Ne beklemeli</th></tr></thead>
+            <tbody>
+              <tr><td><strong>GC'li bir dilden</strong> (C#, Java, Go, Python, JavaScript...)</td><td>Asıl duvar burada: GC'nin çalışma zamanında yaptığını derleyiciye kanıtlarsın. Alıştığın dilde sorunsuz çalışan bir kod parçası Rust'ta derlenmez &mdash; ve derleyici çoğu zaman haklıdır. İlk haftalardaki "kod yazamama" hissi normaldir. <em>C#'tan geliyorsan:</em> sayfadaki C# karşılaştırmaları ve <a href="#csharp-farklari">§ 10</a> doğrudan sana yöneliktir.</td></tr>
+              <tr><td><strong>C / C++'tan</strong></td><td>RAII, move, yığın/öbek (stack/heap) ve yaşam süresi kavramları tanıdıktır. Yeni olan, bu kuralların borrow checker tarafından <em>derleme zamanında zorlanmasıdır</em>; duvar daha alçaktır.</td></tr>
+              <tr><td><strong>Hiç programlama bilmiyorsan</strong></td><td>Resmî kitap (The Book) başka bir dilde kod yazmış olmayı varsayar. Rust'ı ilk dil yapmak mümkündür ama en pahalı yoldur; önce temel programlama kavramlarını (değişken, döngü, fonksiyon, veri yapısı) daha yumuşak bir dilde öğrenmen önerilir &mdash; bkz. <a href="../index.html">Programlama ana sayfası</a>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; iş bulma hedefiyle ilişkisi</p>
+          <p>Rust'ın sana ne zaman yarayacağı hedefine ve bugünkü durumuna bağlıdır:</p>
+          <ul>
+            <li><strong>Kısa vadede yurt içinde iş + bir ana dilin var</strong> &rarr; Rust bu hedefe doğrudan hizmet etmez.
+            Önce o dilin ekosisteminde derinleş (<a href="../CSharp-DotNet/index.html">C# / .NET</a>,
+            <a href="../Java/index.html">Java</a>, <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a>,
+            <a href="../Python/index.html">Python</a>, <a href="../Go/index.html">Go</a>), ilanlarda sık istenen teknolojileri
+            (önbellek, mesaj kuyruğu, test, CI/CD) çalışan örneklerle kanıtla. Rust'ı sonra veya paralel bir "hafta sonu projesi" olarak yap.</li>
+            <li><strong>Kısa vadede iş + henüz bir ana dilin yok</strong> &rarr; önce ilanlarda yaygın bir dil seç (C#/.NET, Java,
+            JS/TS, Python; bkz. <a href="../index.html">Programlama ana sayfası</a>). Rust ilk iş dili olarak önerilmez.</li>
+            <li><strong>Hedefin yurt dışı / uzaktan iş</strong> &rarr; Rust niş ama anlamlıdır; açık kaynak katkı ve portföyle paralel yürüt.</li>
+            <li><strong>Hedefin blockchain (Solana, Substrate), gömülü, sistem programlama veya WASM</strong> &rarr; Rust doğrudan
+            hedef dildir; ertelemen gerekmez (bkz. <a href="#kullanim-alanlari">§ 9</a>).</li>
+            <li><strong>Zaten bir işin var; merak veya uzun vadeli yatırım</strong> &rarr; zamanlama serbest.</li>
+          </ul>
+        </div>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Mantıklı olabilir, eğer</p>
+            <ul>
+              <li><strong>Kod performansı, mimari kurgu ve generic kullanımı</strong> ilgi alanınsa:
+              Rust'ın tamamı bu üç konunun üzerine kurulu.</li>
+              <li><strong>Solidity/Smart Contract</strong> ile ilgileniyorsan: blockchain altyapı tarafı (Solana,
+              Polkadot/Substrate, EVM araçları) fiilen Rust ile yazılıyor &mdash; bkz. <a href="#kullanim-alanlari">§ 9</a>
+              ve <a href="../Blockchain/index.html">Blockchain bölümü</a>.</li>
+              <li>Düşük seviyeli yapı taşlarını "elle yazma" alışkanlığın varsa: Rust bunu güvenli biçimde yapmayı
+              kolaylaştırır; bu alışkanlık burada avantaj. (Ama standart kütüphane küçüktür; bkz. <a href="#arac-zinciri">§ 2</a>.)</li>
+              <li>Yurt dışı / uzaktan çalışma hedefin varsa: Rust niş ama iyi ücretli bir kulvar açar.</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Ertelemen için sebepler (hedefin kısa vadede yurt içi işse)</p>
+            <ul>
+              <li>Türkiye'de Rust ilanı sayısı ihmal edilebilir düzeyde; yurt içi mülakatlarda Rust nadiren sorulur.</li>
+              <li>Öğrenme eğrisinin ilk bölümü (ownership + borrow checker) motivasyon kırıcıdır ve
+              <strong>doğrudan iş çıktısı üretmez</strong>.</li>
+              <li>Yurt içi mülakatlarda önce ana dilin (hangisiyse) ekosistemindeki yaygın teknolojiler (önbellek, mesaj kuyruğu, CI/CD vb.) sorulur; henüz ana dilin yoksa önce onu seçmek gerekir.</li>
+              <li>Rust'ta ekosistem seçenekleri az ve genç; kurumsal "hazır çözüm" beklentisi karşılanmaz.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Ne kadar sürer &mdash; kaba tahmin</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Öğrenme aşamaları ve süre tahmini (haftada 6-8 saat çalışma varsayımıyla)</caption>
+            <thead><tr><th>Aşama</th><th>Kapsam</th><th>Süre</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sözdizimi</strong></td><td>Değişken, fonksiyon, struct, enum, match, Vec, String</td><td>1-2 hafta</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Ownership / borrowing</strong></td><td>Sahiplik, ödünç alma, lifetime, borrow checker hatalarını okuyabilme</td><td>4-8 hafta</td><td><span class="tag tag--warn">TAHMİN</span> Asıl duvar burası</td></tr>
+              <tr><td><strong>Trait + generic</strong></td><td>Trait bound, associated type, dyn Trait, iterator zincirleri</td><td>3-4 hafta</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Async + ekosistem</strong></td><td>tokio, axum, sqlx ile çalışan bir servis</td><td>4-6 hafta</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr class="total"><td>Toplam</td><td>"İş görebilir" seviye</td><td>~4-6 ay</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Yukarıdaki tablo, <strong>GC'li bir dilde (C#, Java, Go, Python, JS...) deneyimli</strong> biri için verilmiştir.
+        Başlangıç noktan ve ayırabildiğin süre farklıysa takvim şöyle değişir:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Duruma göre süre ayarı</caption>
+            <thead><tr><th>Durum</th><th>Takvime etkisi</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><strong>GC'li bir dilde deneyimli</strong></td><td>Tablo olduğu gibi geçerli</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>C / C++ deneyimli</strong></td><td>Ownership / borrowing aşaması genelde daha kısa sürer; diğer aşamalar benzer</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Hiç programlama bilmiyor</strong></td><td>Toplam belirgin şekilde uzar; sözdizimi aşamasından önce temel programlama kavramlarına ayrıca zaman gerekir</td><td><span class="tag tag--warn">TAHMİN</span> Bkz. § 1'deki "hiç bilmiyorsan" satırı</td></tr>
+              <tr><td><strong>Haftada 20 saat ve üzeri</strong> (tam zamanlı)</td><td>Takvim kabaca orantılı olarak kısalır; ownership aşamasında "oturma" süresi yine de tamamen sıkıştırılamaz</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Haftada 6 saatten az</strong></td><td>Takvim orantılı olarak uzar; aralar uzadıkça borrow checker refleksi zayıflar</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bu sayfadaki rozetler hakkında</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti: iş ilanlarında ve mülakatlarda sık geçen; en az bir
+          çalışan örnek yaz. Burada Rust'ın kendisi için değil, <strong>ilanlarda sık istenen bir teknolojinin</strong>
+          (Redis, RabbitMQ, gRPC, CQRS, Solidity, benchmark) Rust ekosistemindeki karşılığını işaretlemek için
+          kullanılır: "bu kavramı ana dilimin tarafında da bilmem lazım" hatırlatmasıdır. Ana diline göre okuması:</p>
+          <ul>
+            <li><strong>.NET</strong> &rarr; .NET karşılığı (StackExchange.Redis, MassTransit, Grpc.Net, Moq, BenchmarkDotNet...).</li>
+            <li><strong>Java</strong> &rarr; Spring ekosistemi karşılığı (Spring Data Redis / Lettuce, Spring AMQP, grpc-java, Mockito, JMH).</li>
+            <li><strong>Go, Python veya Node.js</strong> &rarr; o ekosistemin karşılığı (ör. go-redis, redis-py, ioredis).</li>
+            <li><strong>Ana dilin yoksa veya ana dilin Rust olacaksa</strong> &rarr; kavramın kendisini (Redis, RabbitMQ, gRPC) teknolojinin resmî dokümanından öğren, doğrudan Rust crate'iyle çalış.</li>
+          </ul>
+        </div>
+
+        <h2 id="arac-zinciri"><span class="h-num">§ 2</span>Araç zinciri, cargo ve proje yapısı</h2>
+
+        <p>Rust'ta derleyici, paket yöneticisi, formatlayıcı, linter ve test koşucusu <strong>tek bir resmî
+        araç zincirinden</strong> gelir: <code>cargo</code> tek komutla derler, bağımlılık indirir, test koşar, biçimlendirir ve denetler.
+        Başka dilden geliyorsan, orada ayrı ayrı kurduğun araçların birleşimi gibi düşün: C#'ta <code>dotnet</code> CLI + NuGet + analyzer'lar;
+        Java'da Maven/Gradle + Checkstyle; JavaScript'te npm + Prettier + ESLint; Python'da pip + venv + ruff/black.
+        Hiç programlama bilmiyorsan bu karşılaştırmaları atla; tek bir aracı (cargo) öğrenmen yeterli.</p>
+
+        <p>Dış paket kullanımının kısıtlı olduğu ortamlarda çalışanlar için uyarı: Rust'ın standart kütüphanesi <strong>küçük ama
+        keskindir</strong>. Rastgele sayı, düzenli ifade, tarih/saat ve HTTP istemcisi std'de yoktur; .NET veya Java'nın geniş
+        standart kütüphanesine göre daha erken crate'e ihtiyaç duyarsın. Kurum içinde crates.io erişimi kısıtlıysa
+        <code>cargo vendor</code> ile bağımlılıkları depoya almak veya iç ayna (registry mirror) kurmak gerekir.</p>
+
+        <p>Bu sayfadaki tablolarda <strong>"Kısaca"</strong> sütunu kavramı kendi başına tanımlar. <strong>"Not"</strong> sütunundaki
+        C# / .NET adları (ör. NuGet, LINQ, Serilog, BenchmarkDotNet) <em>C#'tan geliyorsan</em> işine yarayan ek karşılıklardır;
+        başka bir dilden geliyorsan kendi ekosistemindeki eşdeğerini düşün, hiç bilmiyorsan atlayabilirsin.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Araç zinciri ve komutlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>rustup</strong></td><td>Rust sürüm yöneticisi; derleyiciyi ve hedef platformları kurar</td><td><span class="tag tag--ok">TEMEL</span> İlk kuracağın şey budur, "rust indir" değil</td><td><a href="https://rust-lang.github.io/rustup/">rust-lang.github.io</a></td></tr>
+              <tr><td><strong>rustc</strong></td><td>Derleyicinin kendisi; günlük kullanımda doğrudan çağırmazsın</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/rustc/">doc.rust-lang.org</a></td></tr>
+              <tr><td><strong>cargo</strong></td><td>Paket yöneticisi + derleme + test + yayınlama aracı</td><td><span class="tag tag--ok">TEMEL</span> Her gün kullanacaksın</td><td><a href="https://doc.rust-lang.org/cargo/">doc.rust-lang.org/cargo</a></td></tr>
+              <tr><td><strong>crate</strong></td><td>Rust'ın derleme ve dağıtım birimi: bir kütüphane veya çalıştırılabilir program</td><td><span class="tag tag--ok">TEMEL</span> "Rust crate" diye ara; tek başına "crate" başka sonuç verir. Karşılığı: C#'ta kabaca NuGet paketi + assembly, Java'da JAR, JS'te npm paketi</td><td><a href="https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html">The Book §7</a></td></tr>
+              <tr><td><strong>package</strong></td><td>Bir <code>Cargo.toml</code> ile tanımlanan, bir veya birkaç crate içeren birim</td><td><span class="tag tag--ok">TEMEL</span> crate ile package aynı şey değil, karıştırma</td><td><a href="https://doc.rust-lang.org/cargo/reference/manifest.html">cargo reference</a></td></tr>
+              <tr><td><strong>module (mod)</strong></td><td>Crate içinde kodu gruplayan ad alanı ve görünürlük sınırı</td><td><span class="tag tag--ok">TEMEL</span> Dosya sistemi ile modül ağacı bağlantısı özeldir. C#'tan geliyorsan: namespace + erişim belirleyici karışımı; Java'da package</td><td><a href="https://doc.rust-lang.org/reference/items/modules.html">reference</a></td></tr>
+              <tr><td><strong>pub / pub(crate)</strong></td><td>Görünürlük belirleyicileri; varsayılan her şey private'tır</td><td><span class="tag tag--ok">TEMEL</span> <code>pub(crate)</code> = yalnızca bu crate içinde görünür. C#'tan geliyorsan: <code>internal</code> karşılığı</td><td><a href="https://doc.rust-lang.org/reference/visibility-and-privacy.html">reference</a></td></tr>
+              <tr><td><strong>Cargo.toml</strong></td><td>Proje manifestosu: ad, sürüm, edition, bağımlılıklar</td><td><span class="tag tag--ok">TEMEL</span> Karşılığı: C#'ta .csproj, Java'da pom.xml / build.gradle, JS'te package.json, Python'da pyproject.toml</td><td><a href="https://doc.rust-lang.org/cargo/reference/manifest.html">cargo reference</a></td></tr>
+              <tr><td><strong>Cargo.lock</strong></td><td>Kilit dosyası; bağımlılıkların kesin sürümlerini sabitler</td><td><span class="tag tag--ok">TEMEL</span> Uygulama/binary &rarr; commit'le. Kütüphane &rarr; Cargo ekibi Ağustos 2023'te rehberliği değiştirdi: varsayılan öneri artık yine commit etmektir (Cargo 1.74'ten beri <code>cargo new</code> onu .gitignore'a eklemiyor); en güncel bağımlılıklarla da test etmek istiyorsan CI'a ayrı bir <code>cargo update</code> işi ekle. Bkz. <a href="https://doc.rust-lang.org/cargo/faq.html">Cargo FAQ</a>. (Karşılığı: NuGet packages.lock.json, npm package-lock.json)</td><td><a href="https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html">cargo guide</a></td></tr>
+              <tr><td><strong>workspace</strong></td><td>Birden çok crate'i tek kilit dosyası ve ortak derleme çıktısıyla birlikte yönetme</td><td><span class="tag">ORTA</span> Katmanlı mimari kurarken lazım olur. Karşılığı: C#'ta .sln, Java'da Maven çok modüllü proje / Gradle multi-project, JS'te npm workspaces</td><td><a href="https://doc.rust-lang.org/cargo/reference/workspaces.html">cargo reference</a></td></tr>
+              <tr><td><strong>feature flag</strong></td><td>Derleme zamanı opsiyonel özellik anahtarları</td><td><span class="tag">ORTA</span> Kütüphaneler ağırlığı buradan ayarlar; <code>default-features = false</code> önemli</td><td><a href="https://doc.rust-lang.org/cargo/reference/features.html">cargo reference</a></td></tr>
+              <tr><td><strong>edition</strong></td><td>Dilin uyumluluk kuşağı: 2015 / 2018 / 2021 / 2024</td><td><span class="tag tag--ok">TEMEL</span> Sürüm numarası değildir. Yeni proje + Rust 1.85 veya sonrası &rarr; 2024 (1.85 ile kararlı hale geldi; <code>cargo new</code> varsayılan olarak bunu yazar). 1.85 öncesi bir toolchain'e bağlıysan &rarr; 2021. Mevcut projeyi taşıyorsan &rarr; <code>cargo fix --edition</code> ile geçiş yap, Edition Guide'daki adımları izle</td><td><a href="https://doc.rust-lang.org/edition-guide/rust-2024/index.html">edition guide</a></td></tr>
+              <tr><td><strong>SemVer (cargo)</strong></td><td>Bağımlılık sürüm aralığı kuralları</td><td><span class="tag">ORTA</span> <code>0.x</code> sürümlerde kural farklı işler</td><td><a href="https://doc.rust-lang.org/cargo/reference/semver.html">cargo reference</a></td></tr>
+              <tr><td><strong>profile (dev/release)</strong></td><td>Optimizasyon ayarları; debug yavaş, release hızlıdır</td><td><span class="tag tag--ok">TEMEL</span> Benchmark'ı asla debug profilinde alma</td><td><a href="https://doc.rust-lang.org/cargo/reference/profiles.html">cargo reference</a></td></tr>
+              <tr><td><strong>build.rs</strong></td><td>Derleme öncesi çalışan script (kod üretimi, C bağlama)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://doc.rust-lang.org/cargo/reference/build-scripts.html">cargo reference</a></td></tr>
+              <tr><td><strong>cargo add</strong></td><td>Bağımlılık ekler ve Cargo.toml'u günceller</td><td><span class="tag tag--ok">TEMEL</span> Karşılığı: C#'ta <code>dotnet add package</code>, JS'te <code>npm install</code>, Python'da <code>pip install</code> / <code>uv add</code></td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-add.html">cargo</a></td></tr>
+              <tr><td><strong>cargo build / run</strong></td><td>Derle / derle ve çalıştır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-build.html">cargo</a></td></tr>
+              <tr><td><strong>cargo check</strong></td><td>Kod üretmeden sadece tip/borrow denetimi &mdash; çok daha hızlı</td><td><span class="tag tag--ok">TEMEL</span> Geliştirirken build yerine bunu kullan</td><td><a href="https://doc.rust-lang.org/cargo/">cargo</a></td></tr>
+              <tr><td><strong>cargo test</strong></td><td>Birim + entegrasyon + doküman testlerini koşar</td><td><span class="tag tag--ok">TEMEL</span> Test çatısı dile gömülüdür; ayrı bir test çatısı (xUnit, JUnit, Jest, pytest gibi) kurmana gerek yok</td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-test.html">cargo</a></td></tr>
+              <tr><td><strong>cargo bench</strong></td><td>Benchmark koşar (stabil kanalda genelde criterion ile)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Pratikte criterion kullanılır (C#'ta BenchmarkDotNet, Java'da JMH karşılığı)</td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-bench.html">cargo</a></td></tr>
+              <tr><td><strong>cargo doc</strong></td><td>Kaynak yorumlarından HTML doküman üretir</td><td><span class="tag">ORTA</span> docs.rs bunun barındırılan hali</td><td><a href="https://doc.rust-lang.org/rustdoc/">rustdoc</a></td></tr>
+              <tr><td><strong>cargo tree</strong></td><td>Bağımlılık ağacını gösterir; çakışma teşhisi</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-tree.html">cargo</a></td></tr>
+              <tr><td><strong>cargo install</strong></td><td>crates.io'dan komut satırı aracı derleyip kurar</td><td><span class="tag">ORTA</span> Karşılığı: C#'ta <code>dotnet tool install</code>, JS'te <code>npm i -g</code>, Python'da <code>pipx install</code></td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-install.html">cargo</a></td></tr>
+              <tr><td><strong>cargo publish</strong></td><td>Paketi crates.io'ya yayınlar</td><td><span class="tag tag--info">İLERİ</span> Yayınlanan sürüm geri alınamaz (yank edilir)</td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-publish.html">cargo</a></td></tr>
+              <tr><td><strong>rustfmt / cargo fmt</strong></td><td>Resmî kod formatlayıcı; tartışma bitirir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/cargo/commands/cargo-fmt.html">cargo</a></td></tr>
+              <tr><td><strong>clippy</strong></td><td>Resmî linter; 700+ kural, "böyle yazma şöyle yaz" der</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: Roslyn analyzer'ların çok daha agresif hali; JS'ten geliyorsan ESLint sezgisi</td><td><a href="https://rust-lang.github.io/rust-clippy/">rust-clippy</a></td></tr>
+              <tr><td><strong>crates.io</strong></td><td>Resmî paket deposu; crate'ler buradan indirilir ve buraya yayımlanır</td><td><span class="tag tag--ok">TEMEL</span> Karşılığı: NuGet.org, Maven Central, npm, PyPI</td><td>crates.io</td></tr>
+              <tr><td><strong>docs.rs</strong></td><td>Her crate'in otomatik üretilmiş API dokümanı</td><td><span class="tag tag--ok">TEMEL</span> Bu sayfadaki bağlantıların çoğu buraya gider</td><td><a href="https://docs.rs/">docs.rs</a></td></tr>
+              <tr><td><strong>lib.rs</strong></td><td>crates.io'nun alternatif, kategorili arayüzü</td><td><span class="tag">ORTA</span> Kütüphane seçerken karşılaştırma için iyi</td><td><a href="https://lib.rs/">lib.rs</a></td></tr>
+              <tr><td><strong>blessed.rs</strong></td><td>"Hangi iş için hangi crate" önerileri, elle derlenmiş liste</td><td><span class="tag">ORTA</span> Resmî değil ama topluluk referansı</td><td><a href="https://blessed.rs/crates">blessed.rs</a></td></tr>
+              <tr><td><strong>rust-analyzer</strong></td><td>Resmî dil sunucusu (LSP); VS Code eklentisi</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz</td><td><a href="https://rust-analyzer.github.io/">rust-analyzer.github.io</a></td></tr>
+              <tr><td><strong>RustRover</strong></td><td>JetBrains'in Rust IDE'si</td><td><span class="tag tag--warn">ÜCRETLİ</span> Kişisel/ticari olmayan kullanımda ücretsiz katmanı var; ticari kullanım lisanslı</td><td><a href="https://www.jetbrains.com/rust/">jetbrains.com</a></td></tr>
+              <tr><td><strong>cargo-watch</strong></td><td>Dosya değişince otomatik yeniden derler / çalıştırır</td><td><span class="tag">ORTA</span> Karşılığı: <code>dotnet watch</code>, nodemon</td><td><a href="https://docs.rs/cargo-watch">docs.rs</a></td></tr>
+              <tr><td><strong>cargo-nextest</strong></td><td>Daha hızlı, paralel, okunaklı test koşucusu</td><td><span class="tag">ORTA</span> Ücretsiz</td><td><a href="https://nexte.st/">nexte.st</a></td></tr>
+              <tr><td><strong>cargo-audit / RustSec</strong></td><td>Bağımlılıklarda bilinen güvenlik açığı taraması</td><td><span class="tag">ORTA</span> CI hattında ilk koyacağın adım</td><td><a href="https://rustsec.org/">rustsec.org</a></td></tr>
+              <tr><td><strong>cargo-deny</strong></td><td>Lisans, kaynak ve yasaklı bağımlılık politikası denetimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://embarkstudios.github.io/cargo-deny/">cargo-deny</a></td></tr>
+              <tr><td><strong>cargo-expand</strong></td><td>Makroların açılmış halini gösterir</td><td><span class="tag tag--info">İLERİ</span> derive makrolarını anlamak için</td><td><a href="https://docs.rs/cargo-expand">docs.rs</a></td></tr>
+              <tr><td><strong>flamegraph</strong></td><td>CPU profil çıktısını alev grafiğine çevirir</td><td><span class="tag tag--info">İLERİ</span> Performansla ilgileniyorsan doğrudan hedef</td><td><a href="https://docs.rs/flamegraph">docs.rs</a></td></tr>
+              <tr><td><strong>miri</strong></td><td>Tanımsız davranış (UB) yakalayan yorumlayıcı; unsafe kod denetimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/rust-lang/miri">github.com/rust-lang</a></td></tr>
+              <tr><td><strong>kani</strong></td><td>Model denetleyici; koşulları biçimsel olarak doğrular</td><td><span class="tag tag--info">İLERİ</span> Niş</td><td><a href="https://model-checking.github.io/kani/">kani</a></td></tr>
+              <tr><td><strong>target triple</strong></td><td>Hedef platform kimliği: <code>x86_64-pc-windows-msvc</code>, <code>wasm32-unknown-unknown</code></td><td><span class="tag">ORTA</span> Çapraz derleme burayla başlar</td><td><a href="https://doc.rust-lang.org/rustc/platform-support.html">platform support</a></td></tr>
+              <tr><td><strong>no_std</strong></td><td>Standart kütüphanesiz derleme; gömülü sistem ve çekirdek için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rust-embedded.org/book/">embedded book</a></td></tr>
+              <tr><td><strong>error index (E0xxx)</strong></td><td>Derleyici hata kodlarının açıklamalı dizini</td><td><span class="tag tag--ok">TEMEL</span> Borrow checker hatasını buradan çöz</td><td><a href="https://doc.rust-lang.org/error_codes/error-index.html">error index</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sahiplik-ve-bellek"><span class="h-num">§ 3</span>Temeller: sahiplik, ödünç alma, yaşam süresi</h2>
+
+        <p>Bu bölüm Rust'ın <strong>tek gerçek zorluğu</strong>. Buradaki her terimi ayrı ayrı, kod yazarak
+        öğrenmen gerekir; okuyarak öğrenilmiyor. GC'li dillerde (C#, Java, Go, Python, JS) çöp toplayıcıya devredilen,
+        C/C++'ta ise programcının dikkatine bırakılan bellek kararlarını burada derleyiciye kanıtlıyorsun.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sahiplik ve bellek modeli</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ownership</strong> (sahiplik)</td><td>Her değerin tek bir sahibi vardır; sahip kapsam dışına çıkınca değer serbest bırakılır</td><td><span class="tag tag--ok">TEMEL</span> Rust'ın tamamı buna dayanır; ilk okuyacağın konu</td><td><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The Book §4.1</a></td></tr>
+              <tr><td><strong>move semantics</strong></td><td>Atama/parametre geçişi değeri kopyalamaz, sahipliği taşır; eski değişken kullanılamaz</td><td><span class="tag tag--ok">TEMEL</span> C++'taki move ile aynı fikir ama Rust'ta varsayılan davranış</td><td><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The Book §4.1</a></td></tr>
+              <tr><td><strong>borrowing</strong> (ödünç alma)</td><td>Sahipliği devretmeden referans verme: <code>&amp;T</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">The Book §4.2</a></td></tr>
+              <tr><td><strong>&amp;mut T</strong></td><td>Değiştirilebilir ödünç; aynı anda yalnızca bir tane olabilir</td><td><span class="tag tag--ok">TEMEL</span> "Bir yazar veya çok okuyucu" kuralı</td><td><a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">The Book §4.2</a></td></tr>
+              <tr><td><strong>borrow checker</strong></td><td>Ödünç kurallarını derleme zamanında denetleyen bileşen</td><td><span class="tag tag--ok">TEMEL</span> Hataları "kavga" gibi gelir; hata kodunu okumayı öğren</td><td><a href="https://doc.rust-lang.org/error_codes/error-index.html">error index</a></td></tr>
+              <tr><td><strong>lifetime</strong> ('a)</td><td>Bir referansın ne kadar süre geçerli olduğunu ifade eden derleme zamanı etiketi</td><td><span class="tag tag--ok">TEMEL</span> Çalışma zamanında karşılığı yoktur; sadece kanıt aracıdır</td><td><a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">The Book §10.3</a></td></tr>
+              <tr><td><strong>lifetime elision</strong></td><td>Derleyicinin yaşam sürelerini yazmadan çıkarabildiği kurallar</td><td><span class="tag">ORTA</span> Çoğu fonksiyonda <code>'a</code> yazmana gerek olmamasının sebebi</td><td><a href="https://doc.rust-lang.org/reference/lifetime-elision.html">reference</a></td></tr>
+              <tr><td><strong>'static</strong></td><td>Programın tamamı boyunca yaşayan referans/bağ</td><td><span class="tag">ORTA</span> Async ve thread imzalarında sık karşına çıkar</td><td><a href="https://doc.rust-lang.org/reference/">reference</a></td></tr>
+              <tr><td><strong>Copy</strong></td><td>Bit düzeyinde kopyalanabilen, taşınmayan tipler (i32, bool, char...)</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: struct/değer tipi sezgisine en yakın kavram; Java'da ilkel tipler (int, boolean)</td><td><a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">std</a></td></tr>
+              <tr><td><strong>Clone</strong></td><td>Açıkça <code>.clone()</code> çağrısıyla derin kopya</td><td><span class="tag tag--ok">TEMEL</span> Borrow checker'ı susturmak için clone atmak öğrenirken normaldir, üretimde bedeli var</td><td><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html">std</a></td></tr>
+              <tr><td><strong>Drop</strong></td><td>Değer kapsam dışına çıkarken otomatik çalışan temizlik kodu (yıkıcı)</td><td><span class="tag tag--ok">TEMEL</span> Kaynağı kapatmayı dil kendisi yapar. C#'tan geliyorsan: IDisposable'ın otomatik hali, <code>using</code> yazmana gerek yok; Java'da try-with-resources, Python'da <code>with</code>; C++'ta RAII ile aynı fikir</td><td><a href="https://doc.rust-lang.org/std/ops/trait.Drop.html">std</a></td></tr>
+              <tr><td><strong>stack vs heap</strong></td><td>Boyutu derleme zamanında bilinen değerler yığında; diğerleri öbekte</td><td><span class="tag tag--ok">TEMEL</span> GC'li dillerde bilmeden ilerlenebilir; Rust'ta bilmeden ilerleyemezsin</td><td><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The Book §4.1</a></td></tr>
+              <tr><td><strong>shadowing</strong></td><td>Aynı isimle yeni değişken tanımlayıp öncekini gölgeleme</td><td><span class="tag tag--ok">TEMEL</span> Mutasyon değildir; tipi bile değişebilir</td><td><a href="https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html">The Book §3.1</a></td></tr>
+              <tr><td><strong>mut</strong></td><td>Değişkenler varsayılan olarak değiştirilemez; <code>mut</code> ile açılır</td><td><span class="tag tag--ok">TEMEL</span> Çoğu dilin (C#, Java, Python, JS'te <code>let</code>) tersi: orada varsayılan değiştirilebilir, burada değiştirilemez</td><td><a href="https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html">The Book §3.1</a></td></tr>
+              <tr><td><strong>slice</strong> (<code>&amp;[T]</code>)</td><td>Bir dizinin/vektörün bir bölümüne sahiplenmeden bakan görünüm</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: <code>Span&lt;T&gt;</code> sezgisi</td><td><a href="https://doc.rust-lang.org/std/primitive.slice.html">std</a></td></tr>
+              <tr><td><strong>String vs &amp;str</strong></td><td><code>String</code> sahipli ve büyüyebilir; <code>&amp;str</code> ödünç alınmış dilim</td><td><span class="tag tag--ok">TEMEL</span> Yeni başlayanın en çok takıldığı ikili; ikisi de UTF-8</td><td><a href="https://doc.rust-lang.org/std/primitive.str.html">std</a></td></tr>
+              <tr><td><strong>Vec&lt;T&gt;</strong></td><td>Öbekte tutulan, büyüyebilen dizi</td><td><span class="tag tag--ok">TEMEL</span> Karşılığı: C#'ta <code>List&lt;T&gt;</code>, Java'da ArrayList, JS dizisi, Python list</td><td><a href="https://doc.rust-lang.org/std/vec/struct.Vec.html">std</a></td></tr>
+              <tr><td><strong>HashMap&lt;K,V&gt;</strong></td><td>Anahtar &rarr; değer sözlüğü (hash tablosu)</td><td><span class="tag tag--ok">TEMEL</span> Sıralama garantisi yok, hash tohumu rastgele. Karşılığı: C#'ta <code>Dictionary&lt;K,V&gt;</code>, Java'da HashMap, Python dict, JS Map</td><td><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html">std</a></td></tr>
+              <tr><td><strong>std::collections</strong></td><td>VecDeque, BTreeMap, HashSet, BinaryHeap...</td><td><span class="tag tag--ok">TEMEL</span> Hangi koleksiyonu ne zaman seçeceğin sayfada anlatılıyor</td><td><a href="https://doc.rust-lang.org/std/collections/index.html">std</a></td></tr>
+              <tr><td><strong>prelude</strong></td><td>Her dosyaya otomatik gelen tipler (Option, Result, Vec, String...)</td><td><span class="tag">ORTA</span> "Neden bunu import etmedim de çalıştı" sorusunun cevabı</td><td><a href="https://doc.rust-lang.org/std/prelude/index.html">std</a></td></tr>
+              <tr><td><strong>mem::take / replace / swap</strong></td><td>Sahipliği geçici olarak dışarı alma numaraları</td><td><span class="tag">ORTA</span> Borrow checker'a sıkıştığında ilk bakacağın üç fonksiyon</td><td><a href="https://doc.rust-lang.org/std/mem/fn.take.html">std::mem</a></td></tr>
+              <tr><td><strong>E0382 / E0499 / E0502 / E0597</strong></td><td>Sırasıyla: taşınmış değer kullanımı, çift mutable ödünç, ödünç çakışması, kısa yaşam süresi</td><td><span class="tag tag--ok">TEMEL</span> Bu dört kodu ezberle; zamanının yarısı bunlarla geçecek</td><td><a href="https://doc.rust-lang.org/error_codes/error-index.html">error index</a></td></tr>
+              <tr><td><strong>unsafe</strong></td><td>Derleyici garantilerinin bir kısmının askıya alındığı blok</td><td><span class="tag tag--info">İLERİ</span> "Kuralsız" demek değil; kuralı sen garanti ediyorsun demek</td><td><a href="https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html">The Book §20.1</a></td></tr>
+              <tr><td><strong>undefined behavior (UB)</strong></td><td>Rust'ın tanımsız saydığı davranışların resmî listesi</td><td><span class="tag tag--info">İLERİ</span> unsafe yazacaksan okunması zorunlu</td><td><a href="https://doc.rust-lang.org/stable/reference/behavior-considered-undefined.html">reference</a></td></tr>
+              <tr><td><strong>Nomicon</strong></td><td>Unsafe Rust'ın "kara büyü" kitabı</td><td><span class="tag tag--info">İLERİ</span> Aylar sonra aç</td><td><a href="https://doc.rust-lang.org/nomicon/">nomicon</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tip-sistemi"><span class="h-num">§ 4</span>Tip sistemi: struct, enum, trait, generic</h2>
+
+        <p>Buradaki tek cümlelik özet: <strong>Rust'ta sınıf kalıtımı yoktur, enum'ların her varyantı veri taşıyabilir,
+        davranış sözleşmesinin adı trait'tir.</strong> (C#, Java ve Go'da interface, Python'da Protocol/ABC bu rolü üstlenir.)
+        SOLID ve generic ile ilgileniyorsan bu bölüm en keyifli kısımdır &mdash; trait sistemi C# ve Java arayüzlerinin
+        yapamadığı birkaç şeyi yapar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tipler ve soyutlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>struct</strong></td><td>Alanlardan oluşan veri tipi; adlı, tuple ve birim (unit) biçimleri var</td><td><span class="tag tag--ok">TEMEL</span> Davranış ayrı bir <code>impl</code> bloğunda. C#/Java'dan geliyorsan: class'ın veri kısmı</td><td><a href="https://doc.rust-lang.org/book/ch05-00-structs.html">The Book §5</a></td></tr>
+              <tr><td><strong>enum</strong></td><td>Her varyantı veri taşıyabilen etiketli birleşim (sum type)</td><td><span class="tag tag--ok">TEMEL</span> C#/Java enum'u ile <em>alakası yok</em>; F# discriminated union'a, TypeScript'in ayrık birleşim (discriminated union) tiplerine benzer</td><td><a href="https://doc.rust-lang.org/book/ch06-00-enums.html">The Book §6</a></td></tr>
+              <tr><td><strong>impl</strong></td><td>Bir tipe metot ve ilişkili fonksiyon ekleme bloğu</td><td><span class="tag tag--ok">TEMEL</span> Veri ile davranış ayrıdır; partial class değildir</td><td><a href="https://doc.rust-lang.org/reference/items/implementations.html">reference</a></td></tr>
+              <tr><td><strong>trait</strong></td><td>Davranış sözleşmesi: bir tipin sağlaması gereken metotlar (varsayılan gövdeli olabilir)</td><td><span class="tag tag--ok">TEMEL</span> Kendi yazdığın trait'i başkasının tipine uygulayabilirsin. C#'tan geliyorsan: interface + varsayılan metot + extension method karışımı</td><td><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">The Book §10.2</a></td></tr>
+              <tr><td><strong>trait bound</strong></td><td>Generic parametrenin hangi trait'leri sağlaması gerektiği: <code>T: Display</code></td><td><span class="tag tag--ok">TEMEL</span> C#'ta <code>where T : IFoo</code>, Java'da <code>&lt;T extends Foo&gt;</code> karşılığı ama daha güçlü</td><td><a href="https://doc.rust-lang.org/reference/trait-bounds.html">reference</a></td></tr>
+              <tr><td><strong>where clause</strong></td><td>Karmaşık trait bound'ları imzadan ayırma</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: <code>where</code> ile aynı fikir</td><td><a href="https://doc.rust-lang.org/reference/items/generics.html">reference</a></td></tr>
+              <tr><td><strong>generics</strong></td><td>Tip parametreleri; monomorphization ile derleme zamanında somutlaşır</td><td><span class="tag tag--ok">TEMEL</span> Çalışma zamanı maliyeti sıfırdır (.NET'te değer tipleri için de öyle; Java'da ise tip silme / type erasure vardır)</td><td><a href="https://doc.rust-lang.org/book/ch10-01-syntax.html">The Book §10.1</a></td></tr>
+              <tr><td><strong>associated type</strong></td><td>Trait'e bağlı tip: <code>type Item;</code></td><td><span class="tag">ORTA</span> Generic parametre yerine kullanılır; Iterator'ın temelidir</td><td><a href="https://doc.rust-lang.org/reference/items/associated-items.html">reference</a></td></tr>
+              <tr><td><strong>associated const</strong></td><td>Trait/tip düzeyinde sabit</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/reference/items/associated-items.html">reference</a></td></tr>
+              <tr><td><strong>impl Trait</strong></td><td>Dönüş/parametre konumunda "bu trait'i sağlayan bir tip"</td><td><span class="tag">ORTA</span> Statik dağıtım; <code>dyn</code> ile karıştırma</td><td><a href="https://doc.rust-lang.org/std/keyword.impl.html">std</a></td></tr>
+              <tr><td><strong>dyn Trait</strong></td><td>Trait nesnesi; çalışma zamanı sanal dağıtım (vtable)</td><td><span class="tag">ORTA</span> C#/Java interface referansına en yakın şey budur</td><td><a href="https://doc.rust-lang.org/book/ch18-02-trait-objects.html">The Book §18.2</a></td></tr>
+              <tr><td><strong>blanket impl</strong></td><td>"Şu koşulu sağlayan her tip için" toplu uygulama</td><td><span class="tag tag--info">İLERİ</span> <code>impl&lt;T: Display&gt; ToString for T</code> örneği</td><td><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">The Book §10.2</a></td></tr>
+              <tr><td><strong>orphan rule</strong></td><td>Ne trait'i ne tipi sana ait değilse impl yazamazsın</td><td><span class="tag">ORTA</span> Newtype deseni bu kuralı aşmak için var</td><td><a href="https://doc.rust-lang.org/reference/items/implementations.html">reference</a></td></tr>
+              <tr><td><strong>newtype pattern</strong></td><td>Tek alanlı struct ile mevcut tipi sarmalama</td><td><span class="tag">ORTA</span> Tip güvenliği + orphan rule aşımı; DDD value object sezgisi</td><td><a href="https://rust-unofficial.github.io/patterns/">patterns</a></td></tr>
+              <tr><td><strong>marker trait / Sized</strong></td><td>Metotsuz, sadece işaretleme yapan trait'ler</td><td><span class="tag tag--info">İLERİ</span> <code>?Sized</code> imzalarını anlamak için gerekli</td><td><a href="https://doc.rust-lang.org/std/marker/trait.Sized.html">std</a></td></tr>
+              <tr><td><strong>Option&lt;T&gt;</strong></td><td>Değer var/yok; <code>Some(x)</code> veya <code>None</code></td><td><span class="tag tag--ok">TEMEL</span> Rust'ta <code>null</code> yoktur; NullReferenceException / NullPointerException türü hata da yoktur</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>Result&lt;T,E&gt;</strong></td><td>Başarı veya hata; <code>Ok(v)</code> veya <code>Err(e)</code></td><td><span class="tag tag--ok">TEMEL</span> Exception yerine geçer; hata imzada görünür</td><td><a href="https://doc.rust-lang.org/std/result/enum.Result.html">std</a></td></tr>
+              <tr><td><strong>pattern matching / match</strong></td><td>Değerin şeklini ayrıştıran, <em>tüm durumları kapsaması zorunlu</em> dallanma</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: switch expression'ın kapsayıcılık denetimli hali</td><td><a href="https://doc.rust-lang.org/book/ch19-00-patterns.html">The Book §19</a></td></tr>
+              <tr><td><strong>if let / let else</strong></td><td>Tek desen için kısa yazım; <code>let else</code> erken çıkış sağlar</td><td><span class="tag tag--ok">TEMEL</span> C#'tan geliyorsan: <code>is</code> pattern sezgisi</td><td><a href="https://doc.rust-lang.org/book/ch06-03-if-let.html">The Book §6.3</a></td></tr>
+              <tr><td><strong>while let</strong></td><td>Desen eşleştiği sürece dönen döngü</td><td><span class="tag tag--ok">TEMEL</span> Kanal/yığın tüketiminde standart kalıp</td><td><a href="https://doc.rust-lang.org/reference/expressions/loop-expr.html">reference</a></td></tr>
+              <tr><td><strong>matches! makrosu</strong></td><td>Bir değer şu desene uyuyor mu &rarr; bool</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/std/macro.matches.html">std</a></td></tr>
+              <tr><td><strong>? operatörü</strong></td><td>Hata varsa fonksiyondan erken döner, yoksa değeri çıkarır</td><td><span class="tag tag--ok">TEMEL</span> C#, Java, Python, JS'te karşılığı yok; en çok kullanacağın operatör</td><td><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html">reference</a></td></tr>
+              <tr><td><strong>From / Into</strong></td><td>Kayıpsız tip dönüşümü trait'leri; <code>?</code> operatörü hata çevrimini bunlarla yapar</td><td><span class="tag tag--ok">TEMEL</span> <code>From</code> yazınca <code>Into</code> bedava gelir</td><td><a href="https://doc.rust-lang.org/std/convert/trait.From.html">std</a></td></tr>
+              <tr><td><strong>TryFrom / TryInto</strong></td><td>Başarısız olabilen dönüşüm; Result döner</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/std/convert/trait.TryFrom.html">std</a></td></tr>
+              <tr><td><strong>AsRef / Borrow</strong></td><td>Ucuz referans dönüşümü; API'yi esnek yapan trait'ler</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/std/convert/trait.AsRef.html">std</a></td></tr>
+              <tr><td><strong>Deref</strong></td><td><code>*</code> davranışı ve otomatik dönüşüm (deref coercion)</td><td><span class="tag">ORTA</span> <code>&amp;String</code> &rarr; <code>&amp;str</code> geçişinin sebebi</td><td><a href="https://doc.rust-lang.org/std/ops/trait.Deref.html">std</a></td></tr>
+              <tr><td><strong>Display / Debug</strong></td><td>Kullanıcıya gösterim / geliştirici gösterimi</td><td><span class="tag tag--ok">TEMEL</span> <code>{}</code> Display, <code>{:?}</code> Debug ister</td><td><a href="https://doc.rust-lang.org/std/fmt/trait.Display.html">std</a></td></tr>
+              <tr><td><strong>PartialEq / Eq / Ord</strong></td><td>Eşitlik ve sıralama trait'leri</td><td><span class="tag tag--ok">TEMEL</span> Kayan noktalı sayılar <code>Eq</code> değildir, sadece <code>PartialEq</code></td><td><a href="https://doc.rust-lang.org/std/cmp/trait.PartialEq.html">std</a></td></tr>
+              <tr><td><strong>Hash / Default</strong></td><td>Sözlük anahtarı olabilme / varsayılan değer</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/std/default/trait.Default.html">std</a></td></tr>
+              <tr><td><strong>#[derive(...)]</strong></td><td>Trait uygulamalarını otomatik üreten öznitelik makrosu</td><td><span class="tag tag--ok">TEMEL</span> <code>#[derive(Debug, Clone, PartialEq)]</code> en sık gördüğün satır olacak</td><td><a href="https://doc.rust-lang.org/reference/attributes.html">reference</a></td></tr>
+              <tr><td><strong>type alias</strong></td><td>Tip için kısa ad: <code>type Res&lt;T&gt; = Result&lt;T, MyErr&gt;;</code></td><td><span class="tag">ORTA</span> Yeni tip yaratmaz, sadece ad verir</td><td><a href="https://doc.rust-lang.org/reference/items/generics.html">reference</a></td></tr>
+              <tr><td><strong>const generics</strong></td><td>Tip parametresi olarak sayı: <code>[T; N]</code></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://doc.rust-lang.org/reference/const_eval.html">reference</a></td></tr>
+              <tr><td><strong>closure</strong></td><td>Anonim fonksiyon; ortamı yakalar</td><td><span class="tag tag--ok">TEMEL</span> C#/Java lambda, JS arrow function karşılığı ama yakalama biçimi (ödünç/taşıma) önemli</td><td><a href="https://doc.rust-lang.org/book/ch13-01-closures.html">The Book §13.1</a></td></tr>
+              <tr><td><strong>Fn / FnMut / FnOnce</strong></td><td>Closure'ların üç çağrılabilirlik seviyesi</td><td><span class="tag">ORTA</span> Çağrılabilirlik üç ayrı trait'tir. C#'tan geliyorsan: <code>Func&lt;&gt;</code>/<code>Action&lt;&gt;</code> ayrımından farklı bir eksen</td><td><a href="https://doc.rust-lang.org/std/ops/trait.Fn.html">std</a></td></tr>
+              <tr><td><strong>move closure</strong></td><td>Yakalanan değerlerin sahipliğini alan closure</td><td><span class="tag">ORTA</span> Thread ve async'te neredeyse zorunlu</td><td><a href="https://doc.rust-lang.org/reference/types/closure.html">reference</a></td></tr>
+              <tr><td><strong>Iterator</strong></td><td>Tembel yineleme trait'i; <code>map/filter/fold/collect</code></td><td><span class="tag tag--ok">TEMEL</span> Tembel ve sıfır maliyetli. Karşılığı: C#'ta LINQ, Java'da Stream API, JS dizi metotları, Python generator'ları</td><td><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">std</a></td></tr>
+              <tr><td><strong>IntoIterator</strong></td><td><code>for</code> döngüsünün arkasındaki trait</td><td><span class="tag">ORTA</span> <code>iter()</code>, <code>iter_mut()</code>, <code>into_iter()</code> farkını öğren</td><td><a href="https://doc.rust-lang.org/std/iter/trait.IntoIterator.html">std</a></td></tr>
+              <tr><td><strong>collect()</strong></td><td>Yineleyiciyi koleksiyona toplar; hedef tipi sen belirlersin</td><td><span class="tag tag--ok">TEMEL</span> <code>Result</code> koleksiyonunu tek <code>Result</code>'a çevirme numarası buradadır</td><td><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">std</a></td></tr>
+              <tr><td><strong>macro_rules!</strong></td><td>Desen tabanlı bildirimsel makro</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://doc.rust-lang.org/reference/macros-by-example.html">reference</a></td></tr>
+              <tr><td><strong>procedural macro</strong></td><td>Kod üreten makro; <code>derive</code>, öznitelik ve fonksiyon biçimleri</td><td><span class="tag tag--info">İLERİ</span> C#'ta source generator, Java'da annotation processor sezgisi</td><td><a href="https://doc.rust-lang.org/reference/procedural-macros.html">reference</a></td></tr>
+              <tr><td><strong>syn / quote / proc-macro2</strong></td><td>Proc makro yazmanın standart üçlüsü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rs/syn">docs.rs/syn</a></td></tr>
+              <tr><td><strong>#[cfg(...)]</strong></td><td>Koşullu derleme: platforma, özelliğe veya test moduna göre kodu dahil etme</td><td><span class="tag">ORTA</span> <code>#[cfg(test)]</code> test modülü kalıbı. C/C#'tan geliyorsan: <code>#if</code> karşılığı</td><td><a href="https://doc.rust-lang.org/reference/conditional-compilation.html">reference</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="akilli-isaretciler"><span class="h-num">§ 5</span>Bellek yönetimi ve akıllı işaretçiler</h2>
+
+        <p>Ownership tek sahip kuralını dayatır. Gerçek uygulamada "iki yerden erişilen aynı nesne" gerekir.
+        Bu bölümdeki tipler o ihtiyacı <strong>maliyeti görünür kılarak</strong> çözer: paylaşım istiyorsan
+        sayaç veya kilit bedelini açıkça ödersin.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Akıllı işaretçiler ve paylaşımlı durum</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Box&lt;T&gt;</strong></td><td>Değeri öbekte tutan tek sahipli işaretçi</td><td><span class="tag tag--ok">TEMEL</span> Özyinelemeli veri yapısı ve <code>dyn Trait</code> için gerekli</td><td><a href="https://doc.rust-lang.org/std/boxed/struct.Box.html">std</a></td></tr>
+              <tr><td><strong>Rc&lt;T&gt;</strong></td><td>Tek thread'de referans sayımlı paylaşım</td><td><span class="tag tag--ok">TEMEL</span> Thread'ler arası kullanılamaz; derleyici engeller</td><td><a href="https://doc.rust-lang.org/std/rc/struct.Rc.html">std</a></td></tr>
+              <tr><td><strong>Arc&lt;T&gt;</strong></td><td>Atomik referans sayımlı paylaşım; thread'ler arası güvenli</td><td><span class="tag tag--ok">TEMEL</span> Async ve çok thread'li kodda her yerde göreceksin</td><td><a href="https://doc.rust-lang.org/std/sync/struct.Arc.html">std</a></td></tr>
+              <tr><td><strong>Weak&lt;T&gt;</strong></td><td>Sayacı artırmayan zayıf referans; döngüsel referansı kırar</td><td><span class="tag">ORTA</span> Rc/Arc sızıntısının tek çözümü budur</td><td><a href="https://doc.rust-lang.org/std/rc/struct.Weak.html">std</a></td></tr>
+              <tr><td><strong>RefCell&lt;T&gt;</strong></td><td>Ödünç kurallarını çalışma zamanına erteler; ihlalde panic</td><td><span class="tag">ORTA</span> Derleme hatasını çalışma zamanı hatasına çevirir; ölçülü kullan</td><td><a href="https://doc.rust-lang.org/std/cell/struct.RefCell.html">std</a></td></tr>
+              <tr><td><strong>Cell&lt;T&gt;</strong></td><td>Copy tipler için kopyalayarak değiştirme</td><td><span class="tag">ORTA</span> RefCell'den ucuz ama sadece küçük değerler için</td><td><a href="https://doc.rust-lang.org/std/cell/struct.Cell.html">std</a></td></tr>
+              <tr><td><strong>interior mutability</strong></td><td>Dıştan <code>&amp;T</code> görünen ama içeriği değişebilen tipler kalıbı</td><td><span class="tag">ORTA</span> Cell/RefCell/Mutex bu kalıbın örnekleri</td><td><a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">The Book §15.5</a></td></tr>
+              <tr><td><strong>Mutex&lt;T&gt;</strong></td><td>Kilitli erişim; veri kilidin <em>içinde</em> durur</td><td><span class="tag tag--ok">TEMEL</span> Kilidi almadan veriye erişilemez. C#/Java'dan geliyorsan: <code>lock</code>/<code>synchronized</code> veriyi korumaz, burada tip düzeyinde korur</td><td><a href="https://doc.rust-lang.org/std/sync/struct.Mutex.html">std</a></td></tr>
+              <tr><td><strong>RwLock&lt;T&gt;</strong></td><td>Çok okuyucu / tek yazıcı kilidi</td><td><span class="tag">ORTA</span> C#'ta <code>ReaderWriterLockSlim</code>, Java'da <code>ReentrantReadWriteLock</code> karşılığı</td><td><a href="https://doc.rust-lang.org/std/sync/struct.RwLock.html">std</a></td></tr>
+              <tr><td><strong>Arc&lt;Mutex&lt;T&gt;&gt;</strong></td><td>Paylaşımlı, değiştirilebilir durumun standart kalıbı</td><td><span class="tag tag--ok">TEMEL</span> Rust'ın "singleton state" cevabı; ezberle</td><td><a href="https://doc.rust-lang.org/book/ch16-00-concurrency.html">The Book §16</a></td></tr>
+              <tr><td><strong>atomic (AtomicUsize vb.)</strong></td><td>Kilitsiz sayaç ve bayraklar</td><td><span class="tag tag--info">İLERİ</span> Bellek sıralaması (Ordering) konusu ayrı çalışma ister</td><td><a href="https://doc.rust-lang.org/std/sync/atomic/index.html">std</a></td></tr>
+              <tr><td><strong>OnceLock / LazyLock</strong></td><td>İlk kullanımda bir kez başlatılan (global) değer</td><td><span class="tag">ORTA</span> Artık std'de; <code>once_cell</code> crate'ine çoğu durumda gerek yok. C#'tan geliyorsan: <code>Lazy&lt;T&gt;</code> karşılığı</td><td><a href="https://doc.rust-lang.org/std/sync/struct.OnceLock.html">std</a></td></tr>
+              <tr><td><strong>once_cell</strong></td><td>OnceLock/LazyLock std'ye girmeden önceki fiili standart</td><td><span class="tag tag--warn">ESKİMİŞ</span> Eski kodda çok görürsün; yeni projede std'yi tercih et</td><td><a href="https://docs.rs/once_cell">docs.rs</a></td></tr>
+              <tr><td><strong>Cow&lt;'a, T&gt;</strong></td><td>"Clone on write": gerekirse kopyalar, gerekmezse ödünç kalır</td><td><span class="tag">ORTA</span> Ayrıştırıcı ve metin işlemede tahsisat kazandırır</td><td><a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html">std</a></td></tr>
+              <tr><td><strong>Pin&lt;P&gt;</strong></td><td>Bellekte yer değiştirmemesi gereken değerler</td><td><span class="tag tag--info">İLERİ</span> Async'in iç mekaniğinde karşına çıkar; başta anlamamak normal</td><td><a href="https://doc.rust-lang.org/std/pin/struct.Pin.html">std</a></td></tr>
+              <tr><td><strong>parking_lot</strong></td><td>std'den daha hızlı Mutex/RwLock uygulamaları</td><td><span class="tag">ORTA</span> Ücretsiz; performansla ilgileniyorsan karşılaştırma yap</td><td><a href="https://docs.rs/parking_lot">docs.rs</a></td></tr>
+              <tr><td><strong>dashmap</strong></td><td>Birden çok thread'den güvenle erişilen HashMap</td><td><span class="tag">ORTA</span> Karşılığı: C#'ta <code>ConcurrentDictionary</code>, Java'da <code>ConcurrentHashMap</code></td><td><a href="https://docs.rs/dashmap">docs.rs</a></td></tr>
+              <tr><td><strong>zerocopy / bytemuck</strong></td><td>Güvenli bayt&harr;tip dönüşümleri</td><td><span class="tag tag--info">İLERİ</span> Serileştirme ve protokol işinde</td><td><a href="https://docs.rs/zerocopy">docs.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hata-yonetimi"><span class="h-num">§ 6</span>Hata yönetimi</h2>
+
+        <p>Rust'ta <strong>exception yoktur</strong>. Hata bir dönüş değeridir ve fonksiyon imzasında görünür.
+        Exception kullanan dillerdeki (C#, Python, JS; Java'da checked exception'lar kısmen istisna) "hangi metot ne fırlatıyor" belirsizliği burada yok;
+        Go'dan geliyorsan hatanın dönüş değeri olması tanıdıktır, fark tip sistemiyle zorlanmasıdır; karşılığında her hata yolunu elle
+        taşımak zorundasın. <code>?</code> operatörü bu taşımayı katlanılabilir kılar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata tipleri ve kütüphaneler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Result&lt;T,E&gt;</strong></td><td>Beklenen, kurtarılabilir hatanın taşıyıcısı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html">The Book §9.2</a></td></tr>
+              <tr><td><strong>panic!</strong></td><td>Kurtarılamaz hata; thread'i (veya süreci) sonlandırır</td><td><span class="tag tag--ok">TEMEL</span> Exception değildir; kontrol akışı aracı olarak kullanma</td><td><a href="https://doc.rust-lang.org/std/macro.panic.html">std</a></td></tr>
+              <tr><td><strong>unwrap()</strong></td><td>Değer yoksa panic eder</td><td><span class="tag tag--ok">TEMEL</span> Prototip ve testte serbest, üretim kodunda kırmızı bayrak</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>expect("mesaj")</strong></td><td>unwrap ama gerekçeli panic mesajıyla</td><td><span class="tag tag--ok">TEMEL</span> "Buranın asla olmayacağının gerekçesi" yazılır</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>unwrap_or / unwrap_or_else / unwrap_or_default</strong></td><td>Varsayılana düşerek panic'ten kaçınma</td><td><span class="tag tag--ok">TEMEL</span> C#/JS'teki <code>??</code> sezgisi</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>map / and_then / ok_or</strong></td><td>Option ve Result üzerinde zincirleme dönüşümler</td><td><span class="tag">ORTA</span> Bunları öğrenmeden kod <code>match</code> çöplüğüne döner</td><td><a href="https://doc.rust-lang.org/std/result/enum.Result.html">std</a></td></tr>
+              <tr><td><strong>? operatörü</strong></td><td>Hata varsa yayar, yoksa devam eder</td><td><span class="tag tag--ok">TEMEL</span> <code>main</code> fonksiyonu <code>Result</code> döndürebilir</td><td><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html">reference</a></td></tr>
+              <tr><td><strong>std::error::Error</strong></td><td>Hata tiplerinin standart trait'i; <code>source()</code> ile zincir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/std/error/trait.Error.html">std</a></td></tr>
+              <tr><td><strong>Box&lt;dyn Error&gt;</strong></td><td>Tip belirtmeden herhangi bir hatayı taşıma</td><td><span class="tag">ORTA</span> Küçük programlarda yeterli, kütüphanede uygun değil</td><td><a href="https://doc.rust-lang.org/std/error/trait.Error.html">std</a></td></tr>
+              <tr><td><strong>thiserror</strong></td><td><em>Kütüphane</em> için tipli hata enum'ları üretir</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz; fiili standart</td><td><a href="https://docs.rs/thiserror">docs.rs</a></td></tr>
+              <tr><td><strong>anyhow</strong></td><td><em>Uygulama</em> için tek tip, bağlam eklenebilir hata</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz; thiserror ile birlikte kullanılır, rakip değildir</td><td><a href="https://docs.rs/anyhow">docs.rs</a></td></tr>
+              <tr><td><strong>eyre / color-eyre</strong></td><td>anyhow benzeri, renkli ve raporlanabilir hata çıktısı</td><td><span class="tag">ORTA</span> Alternatif; ücretsiz</td><td><a href="https://docs.rs/color-eyre">docs.rs</a></td></tr>
+              <tr><td><strong>miette</strong></td><td>Derleyici tarzı, kaynak gösterimli teşhis çıktıları</td><td><span class="tag">ORTA</span> CLI araçlarında güzel duruyor; ücretsiz</td><td><a href="https://docs.rs/miette">docs.rs</a></td></tr>
+              <tr><td><strong>snafu</strong></td><td>Bağlam odaklı hata tanımlama; niş alternatif</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz</td><td><a href="https://docs.rs/snafu">docs.rs</a></td></tr>
+              <tr><td><strong>panic = "abort"</strong></td><td>Panic'te yığın çözmeyi kapatıp süreci düşürme ayarı</td><td><span class="tag tag--info">İLERİ</span> Binary boyutu küçültür, gömülüde tercih edilir</td><td><a href="https://doc.rust-lang.org/cargo/reference/profiles.html">cargo profiles</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="eszamanlilik"><span class="h-num">§ 7</span>Eşzamanlılık ve async</h2>
+
+        <p>Rust'ın satış argümanı "fearless concurrency": <strong>veri yarışı derlenmez</strong>. Bunu
+        <code>Send</code> ve <code>Sync</code> trait'leri sağlar. Async tarafında ise C#, JavaScript, Go veya Python'dan (asyncio) farklı bir
+        gerçek var: <strong>dilde yerleşik bir async çalışma zamanı yok</strong>. <code>async</code>/<code>await</code> sözdizimi
+        dilden, çalıştıran motor (runtime) ise kütüphaneden gelir &mdash; pratikte tokio'dan.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Thread'ler ve paylaşımlı eşzamanlılık</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>thread::spawn</strong></td><td>İşletim sistemi thread'i başlatır</td><td><span class="tag tag--ok">TEMEL</span> Havuz yoktur; her çağrı gerçek bir OS thread'i açar. C#'tan geliyorsan: <code>Thread</code>/<code>Task.Run</code> sezgisi</td><td><a href="https://doc.rust-lang.org/std/thread/index.html">std</a></td></tr>
+              <tr><td><strong>JoinHandle</strong></td><td>Thread sonucunu bekleyip alma tutamacı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://doc.rust-lang.org/std/thread/index.html">std</a></td></tr>
+              <tr><td><strong>thread::scope</strong></td><td>Kapsam bitmeden biten thread'ler; ödünç alınmış veriyi paylaşabilir</td><td><span class="tag">ORTA</span> <code>'static</code> zorunluluğunu kaldırır</td><td><a href="https://doc.rust-lang.org/std/thread/fn.scope.html">std</a></td></tr>
+              <tr><td><strong>mpsc channel</strong></td><td>Çok gönderici / tek alıcı kanal</td><td><span class="tag tag--ok">TEMEL</span> Go'daki channel ile aynı fikir &mdash; bkz. <a href="../Go/index.html">Go bölümü</a></td><td><a href="https://doc.rust-lang.org/std/sync/mpsc/index.html">std</a></td></tr>
+              <tr><td><strong>Send</strong></td><td>Değer başka thread'e taşınabilir mi</td><td><span class="tag tag--ok">TEMEL</span> Otomatik türetilir; ihlali derleme hatasıdır</td><td><a href="https://doc.rust-lang.org/std/marker/trait.Send.html">std</a></td></tr>
+              <tr><td><strong>Sync</strong></td><td><code>&amp;T</code> başka thread'e paylaşılabilir mi</td><td><span class="tag tag--ok">TEMEL</span> Send ile karıştırma; ikisi farklı soru sorar</td><td><a href="https://doc.rust-lang.org/std/marker/trait.Sync.html">std</a></td></tr>
+              <tr><td><strong>fearless concurrency</strong></td><td>Veri yarışlarının derleme zamanında elenmesi iddiası</td><td><span class="tag tag--ok">TEMEL</span> Deadlock'u <em>engellemez</em>; sadece veri yarışını engeller</td><td><a href="https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html">The Book §16.4</a></td></tr>
+              <tr><td><strong>rayon</strong></td><td>Veri paralelliği: <code>iter()</code> &rarr; <code>par_iter()</code></td><td><span class="tag tag--ok">TEMEL</span> Tek satır değişiklikle paralelleşir (C#'ta PLINQ, Java'da parallel stream karşılığı). Ücretsiz</td><td><a href="https://docs.rs/rayon">docs.rs</a></td></tr>
+              <tr><td><strong>crossbeam</strong></td><td>Gelişmiş kanallar, scope'lu thread'ler, kilitsiz yapılar</td><td><span class="tag">ORTA</span> Ücretsiz</td><td><a href="https://docs.rs/crossbeam">docs.rs</a></td></tr>
+              <tr><td><strong>flume</strong></td><td>Hem senkron hem async çalışan kanal</td><td><span class="tag">ORTA</span> Alternatif; ücretsiz</td><td><a href="https://docs.rs/flume">docs.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Async / await ve çalışma zamanları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>async / await</strong></td><td>Dil düzeyinde asenkron sözdizimi</td><td><span class="tag tag--ok">TEMEL</span> <code>async fn</code>'in döndürdüğü future <code>await</code> edilmedikçe <em>hiçbir şey çalışmaz</em> (tembel). C#'taki Task ve JS'teki Promise hemen başlar; Python coroutine'leri ise Rust gibi tembeldir</td><td><a href="https://doc.rust-lang.org/std/keyword.async.html">std</a></td></tr>
+              <tr><td><strong>Future</strong></td><td>Henüz tamamlanmamış hesabı temsil eden trait</td><td><span class="tag tag--ok">TEMEL</span> C#'ta <code>Task&lt;T&gt;</code>, JS'te Promise karşılığı ama "sıcak" değil, "soğuk"tur</td><td><a href="https://doc.rust-lang.org/std/future/trait.Future.html">std</a></td></tr>
+              <tr><td><strong>runtime / executor</strong></td><td>Future'ları yürüten motor; standart kütüphanede yoktur</td><td><span class="tag tag--ok">TEMEL</span> .NET, Go ve Node.js'te hazır gelen şey burada bağımlılıktır</td><td><a href="https://rust-lang.github.io/async-book/">async book</a></td></tr>
+              <tr><td><strong>tokio</strong></td><td>Fiili standart async runtime: zamanlayıcı, ağ, zamanlayıcılar, senkronizasyon</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz (MIT). Rust'ta sunucu yazacaksan bunu öğren</td><td><a href="https://tokio.rs/">tokio.rs</a></td></tr>
+              <tr><td><strong>#[tokio::main]</strong></td><td><code>main</code>'i async yapan öznitelik makrosu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.rs/tokio">docs.rs</a></td></tr>
+              <tr><td><strong>tokio::spawn</strong></td><td>Görev başlatır; thread değil, hafif görev</td><td><span class="tag tag--ok">TEMEL</span> Görev <code>Send + 'static</code> olmak zorundadır</td><td><a href="https://docs.rs/tokio">docs.rs</a></td></tr>
+              <tr><td><strong>select!</strong></td><td>Birden çok future'dan ilk bitene dallanma</td><td><span class="tag">ORTA</span> Go'daki <code>select</code> ile aynı fikir</td><td><a href="https://docs.rs/tokio">docs.rs</a></td></tr>
+              <tr><td><strong>spawn_blocking</strong></td><td>CPU yoğun / bloklayan işi ayrı havuza atma</td><td><span class="tag tag--ok">TEMEL</span> Async içinde bloklamak tüm runtime'ı durdurur</td><td><a href="https://docs.rs/tokio">docs.rs</a></td></tr>
+              <tr><td><strong>cancellation (drop)</strong></td><td>Future drop edilince (bırakılınca) iptal olur</td><td><span class="tag">ORTA</span> "Cancel safety" kavramını ayrıca oku. C#'tan geliyorsan: çoğu durumda <code>CancellationToken</code> taşıman gerekmez; Go'dan geliyorsan <code>context.Context</code> iptali yerine geçer</td><td><a href="https://docs.rs/tokio-util">tokio-util</a></td></tr>
+              <tr><td><strong>futures</strong></td><td>Future/Stream yardımcı trait ve birleştiricileri</td><td><span class="tag">ORTA</span> Ücretsiz; runtime bağımsız</td><td><a href="https://docs.rs/futures">docs.rs</a></td></tr>
+              <tr><td><strong>Stream / tokio-stream</strong></td><td>Asenkron yineleyici: değerleri zaman içinde birer birer üreten akış</td><td><span class="tag">ORTA</span> C#'ta <code>IAsyncEnumerable&lt;T&gt;</code>, JS/Python'da async iterator karşılığı</td><td><a href="https://docs.rs/tokio-stream">docs.rs</a></td></tr>
+              <tr><td><strong>async-trait</strong></td><td>Trait içinde async metot yazmayı kolaylaştıran makro</td><td><span class="tag">ORTA</span> Yeni sürümlerde dil bunu kısmen doğrudan destekliyor; yine de yaygın</td><td><a href="https://docs.rs/async-trait">docs.rs</a></td></tr>
+              <tr><td><strong>async-std</strong></td><td>std API'sini taklit eden alternatif runtime</td><td><span class="tag tag--warn">ESKİMİŞ</span> Bakımı durdu sayılır; yeni projede tokio seç</td><td><a href="https://docs.rs/async-std">docs.rs</a></td></tr>
+              <tr><td><strong>smol</strong></td><td>Küçük ve sade alternatif runtime</td><td><span class="tag">ORTA</span> Niş; ücretsiz</td><td><a href="https://docs.rs/smol">docs.rs</a></td></tr>
+              <tr><td><strong>tokio-console</strong></td><td>Async görevleri için canlı teşhis arayüzü</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz</td><td><a href="https://github.com/tokio-rs/console">github.com/tokio-rs</a></td></tr>
+              <tr><td><strong>async book</strong></td><td>Asenkron Rust'ın resmî rehberi</td><td><span class="tag">ORTA</span> The Book §17 ile birlikte oku</td><td><a href="https://rust-lang.github.io/async-book/">async book</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ekosistem"><span class="h-num">§ 8</span>Ekosistem: hangi iş için hangi crate</h2>
+
+        <p>Aşağıdaki tablolarda her satır bir seçenektir, hepsi <strong>ücretsiz ve açık kaynaktır</strong>
+        (Rust ekosisteminde ücretli kütüphane neredeyse yoktur; para barındırma ve destek tarafında döner).
+        "Tek doğru" aramak yerine, ilk projende yaygın olanı seç, alternatifi bildiğini not et.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8.1 &mdash; Web çatıları ve HTTP</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>axum</strong></td><td>tokio ekibinin web çatısı; tower üzerine kurulu</td><td><span class="tag tag--ok">TEMEL</span> Bugünün varsayılan tercihi; Minimal API sezgisine en yakın</td><td><a href="https://docs.rs/axum">docs.rs</a></td></tr>
+              <tr><td><strong>actix-web</strong></td><td>Olgun, çok hızlı, aktör modelinden gelen çatı</td><td><span class="tag tag--ok">TEMEL</span> En yaygın ikinci seçenek</td><td><a href="https://actix.rs/">actix.rs</a></td></tr>
+              <tr><td><strong>rocket</strong></td><td>Ergonomi odaklı, makro ağırlıklı çatı</td><td><span class="tag">ORTA</span> Öğrenmesi en kolayı; ekosistem entegrasyonu daha dar</td><td><a href="https://rocket.rs/">rocket.rs</a></td></tr>
+              <tr><td><strong>poem</strong></td><td>OpenAPI desteği güçlü, sade çatı</td><td><span class="tag">ORTA</span> Niş ama canlı</td><td><a href="https://docs.rs/poem">docs.rs</a></td></tr>
+              <tr><td><strong>salvo</strong></td><td>Yeni nesil, birleşik handler modeli olan çatı</td><td><span class="tag">ORTA</span> Niş</td><td><a href="https://docs.rs/salvo">docs.rs</a></td></tr>
+              <tr><td><strong>warp</strong></td><td>Filtre tabanlı çatı</td><td><span class="tag tag--warn">ESKİMİŞ</span> Aynı ekip axum'a yöneldi; yeni projede seçme</td><td><a href="https://docs.rs/warp">docs.rs</a></td></tr>
+              <tr><td><strong>tide</strong></td><td>async-std tabanlı çatı</td><td><span class="tag tag--warn">ESKİMİŞ</span> Bakımı durgun</td><td><a href="https://docs.rs/tide">docs.rs</a></td></tr>
+              <tr><td><strong>hyper</strong></td><td>Alt seviye HTTP/1 ve HTTP/2 uygulaması</td><td><span class="tag">ORTA</span> Çatıların çoğunun altında bu çalışır</td><td><a href="https://hyper.rs/">hyper.rs</a></td></tr>
+              <tr><td><strong>tower</strong></td><td>Servis/katman soyutlaması; middleware'in temeli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> ASP.NET middleware kavramının Rust karşılığı</td><td><a href="https://docs.rs/tower">docs.rs</a></td></tr>
+              <tr><td><strong>tower-http</strong></td><td>Hazır katmanlar: CORS, sıkıştırma, trace, statik dosya, timeout</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.rs/tower-http">docs.rs</a></td></tr>
+              <tr><td><strong>reqwest</strong></td><td>Yüksek seviye HTTP istemcisi</td><td><span class="tag tag--ok">TEMEL</span> Karşılığı: C#'ta <code>HttpClient</code>, Python'da requests/httpx, JS'te fetch/axios</td><td><a href="https://docs.rs/reqwest">docs.rs</a></td></tr>
+              <tr><td><strong>utoipa</strong></td><td>Kaynaktan OpenAPI/Swagger belgesi üretir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Swashbuckle karşılığı</td><td><a href="https://docs.rs/utoipa">docs.rs</a></td></tr>
+              <tr><td><strong>validator</strong></td><td>Öznitelikle model doğrulama</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> FluentValidation sezgisi; API'si farklı</td><td><a href="https://docs.rs/validator">docs.rs</a></td></tr>
+              <tr><td><strong>jsonwebtoken</strong></td><td>JWT üretme ve doğrulama</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> JWT Authentication'ın Rust tarafı</td><td><a href="https://docs.rs/jsonwebtoken">docs.rs</a></td></tr>
+              <tr><td><strong>argon2</strong></td><td>Parola özetleme (hash) &mdash; güncel önerilen algoritma</td><td><span class="tag">ORTA</span> <code>Identity</code>'nin yaptığı işin çekirdeği</td><td><a href="https://docs.rs/argon2">docs.rs</a></td></tr>
+              <tr><td><strong>rustls</strong></td><td>Saf Rust TLS; OpenSSL bağımlılığından kurtarır</td><td><span class="tag">ORTA</span> Docker imajını küçültür</td><td><a href="https://docs.rs/rustls">docs.rs</a></td></tr>
+              <tr><td><strong>governor</strong></td><td>Rate limiting (istek hız sınırlama)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> ASP.NET Core Rate Limiting karşılığı</td><td><a href="https://docs.rs/governor">docs.rs</a></td></tr>
+              <tr><td><strong>tokio-tungstenite</strong></td><td>WebSocket istemci/sunucu</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> SignalR'ın altındaki taşıma katmanı budur</td><td><a href="https://docs.rs/tokio-tungstenite">docs.rs</a></td></tr>
+              <tr><td><strong>socketioxide</strong></td><td>Socket.IO sunucu uygulaması</td><td><span class="tag">ORTA</span> SignalR'a kavramsal olarak en yakın seçenek</td><td><a href="https://docs.rs/socketioxide">docs.rs</a></td></tr>
+              <tr><td><strong>loco.rs</strong></td><td>"Rails benzeri" tam yığın çatı (axum üzerine)</td><td><span class="tag">ORTA</span> Katmanları hazır isteyene</td><td><a href="https://loco.rs/">loco.rs</a></td></tr>
+              <tr><td><strong>arewewebyet.org</strong></td><td>Web ekosisteminin olgunluk durumu takip sayfası</td><td><span class="tag">ORTA</span> Seçim yaparken bak</td><td><a href="https://www.arewewebyet.org/">arewewebyet.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8.2 &mdash; Veritabanı ve kalıcılık</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>sqlx</strong></td><td>Async SQL; sorguları <em>derleme zamanında</em> veritabanına karşı doğrular</td><td><span class="tag tag--ok">TEMEL</span> Dapper sezgisi + derleme zamanı kontrolü. ORM değildir</td><td><a href="https://docs.rs/sqlx">docs.rs</a></td></tr>
+              <tr><td><strong>diesel</strong></td><td>Tip güvenli sorgu üretici / ORM</td><td><span class="tag tag--ok">TEMEL</span> EF Core'a en yakın olan; öğrenme eğrisi dik</td><td><a href="https://diesel.rs/">diesel.rs</a></td></tr>
+              <tr><td><strong>sea-orm</strong></td><td>Async ORM; aktif kayıt + varlık modeli</td><td><span class="tag">ORTA</span> EF Core'a kullanım hissi olarak en yakın olan</td><td><a href="https://www.sea-ql.org/SeaORM/">sea-ql.org</a></td></tr>
+              <tr><td><strong>tokio-postgres</strong></td><td>PostgreSQL için alt seviye async sürücü</td><td><span class="tag">ORTA</span> Npgsql karşılığı</td><td><a href="https://docs.rs/tokio-postgres">docs.rs</a></td></tr>
+              <tr><td><strong>tiberius</strong></td><td><strong>SQL Server</strong> için Rust sürücüsü (TDS protokolü)</td><td><span class="tag tag--ok">TEMEL</span> SQL Server kullananlar için; Rust'ta SQL Server desteği bu crate ile sınırlıdır &mdash; olgunluğu Npgsql/EF seviyesinde değildir</td><td><a href="https://docs.rs/tiberius">docs.rs</a></td></tr>
+              <tr><td><strong>rusqlite</strong></td><td>SQLite bağlaması</td><td><span class="tag">ORTA</span> Yerel araç ve test için ideal</td><td><a href="https://docs.rs/rusqlite">docs.rs</a></td></tr>
+              <tr><td><strong>refinery</strong></td><td>Migration (şema göçü) aracı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> EF Core Migrations karşılığı; SQL dosyası tabanlı</td><td><a href="https://docs.rs/refinery">docs.rs</a></td></tr>
+              <tr><td><strong>sqlx-cli</strong></td><td>sqlx'in migration ve şema hazırlama komutları</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/sqlx-cli">docs.rs</a></td></tr>
+              <tr><td><strong>deadpool</strong></td><td>Genel amaçlı async bağlantı havuzu</td><td><span class="tag">ORTA</span> Havuzlama .NET'te sürücünün içindeydi, burada ayrı</td><td><a href="https://docs.rs/deadpool">docs.rs</a></td></tr>
+              <tr><td><strong>bb8</strong></td><td>Alternatif async bağlantı havuzu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/bb8">docs.rs</a></td></tr>
+              <tr><td><strong>mongodb</strong></td><td>Resmî MongoDB sürücüsü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/mongodb">docs.rs</a></td></tr>
+              <tr><td><strong>elasticsearch</strong></td><td>Elasticsearch istemcisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rs/elasticsearch">docs.rs</a></td></tr>
+              <tr><td><strong>polars</strong></td><td>Sütun tabanlı veri çerçevesi (DataFrame) motoru</td><td><span class="tag tag--info">İLERİ</span> Pandas'ın hızlı alternatifi; Python'dan da çağrılır &mdash; bkz. <a href="../Python/index.html">Python bölümü</a></td><td><a href="https://docs.rs/polars">docs.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8.3 &mdash; Serileştirme, mesajlaşma, önbellek</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>serde</strong></td><td>Serileştirme çatısı; <code>#[derive(Serialize, Deserialize)]</code></td><td><span class="tag tag--ok">TEMEL</span> Ekosistemin en temel crate'i; System.Text.Json + Newtonsoft karşılığı</td><td><a href="https://serde.rs/">serde.rs</a></td></tr>
+              <tr><td><strong>serde_json</strong></td><td>serde'nin JSON biçimi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.rs/serde_json">docs.rs</a></td></tr>
+              <tr><td><strong>serde_with</strong></td><td>Zor serileştirme durumları için yardımcılar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/serde_with">docs.rs</a></td></tr>
+              <tr><td><strong>toml / csv / quick-xml</strong></td><td>Diğer biçimler</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/toml">docs.rs/toml</a></td></tr>
+              <tr><td><strong>bincode / rkyv</strong></td><td>İkili (binary) serileştirme; rkyv sıfır kopyalıdır</td><td><span class="tag tag--info">İLERİ</span> Performans işlerinde</td><td><a href="https://docs.rs/rkyv">docs.rs/rkyv</a></td></tr>
+              <tr><td><strong>redis</strong></td><td>Redis istemcisi (async destekli)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Redis'i ana dilinin istemcisiyle öğren: .NET &rarr; StackExchange.Redis, Java &rarr; Lettuce/Jedis, Python &rarr; redis-py, Node &rarr; ioredis. Ana dilin yoksa veya Rust olacaksa kavramı redis.io'dan öğrenip doğrudan bu crate'le çalış</td><td><a href="https://docs.rs/redis">docs.rs</a></td></tr>
+              <tr><td><strong>lapin</strong></td><td>RabbitMQ (AMQP 0-9-1) istemcisi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> RabbitMQ ilanlarda sık geçer. Kavramları (exchange, queue, ack) ana dilinde öğren: .NET &rarr; RabbitMQ.Client/MassTransit, Java &rarr; Spring AMQP, Python &rarr; pika/aio-pika, Node &rarr; amqplib. Ana dilin yoksa rabbitmq.com öğreticileri + bu crate</td><td><a href="https://docs.rs/lapin">docs.rs</a></td></tr>
+              <tr><td><strong>rdkafka</strong></td><td>Kafka istemcisi (librdkafka bağlaması)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rs/rdkafka">docs.rs</a></td></tr>
+              <tr><td><strong>async-nats</strong></td><td>NATS mesajlaşma istemcisi</td><td><span class="tag tag--info">İLERİ</span> Hafif alternatif</td><td><a href="https://docs.rs/async-nats">docs.rs</a></td></tr>
+              <tr><td><strong>tonic</strong></td><td>gRPC istemci + sunucu</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Karşılığı: C#'ta Grpc.Net, Java'da grpc-java, Go'da grpc-go</td><td><a href="https://docs.rs/tonic">docs.rs</a></td></tr>
+              <tr><td><strong>prost</strong></td><td>Protocol Buffers uygulaması; tonic'in altında çalışır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/prost">docs.rs</a></td></tr>
+              <tr><td><strong>moka</strong></td><td>Yüksek performanslı bellek içi önbellek (TTL, LRU)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> MemoryCache/IMemoryCache karşılığı</td><td><a href="https://docs.rs/moka">docs.rs</a></td></tr>
+              <tr><td><strong>cached</strong></td><td>Fonksiyon sonucunu makroyla önbellekleme</td><td><span class="tag">ORTA</span> Daha basit alternatif</td><td><a href="https://docs.rs/cached">docs.rs</a></td></tr>
+              <tr><td><strong>apalis</strong></td><td>Arka plan iş/kuyruk çatısı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Hangfire'a en yakın Rust seçeneği; olgunluğu aynı değil</td><td><a href="https://docs.rs/apalis">docs.rs</a></td></tr>
+              <tr><td><strong>aws-sdk-s3 / azure_core</strong></td><td>Resmî bulut SDK'ları</td><td><span class="tag">ORTA</span> Azure SDK'sının Rust desteği .NET'e göre çok daha dardır</td><td><a href="https://docs.rs/aws-sdk-s3">docs.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8.4 &mdash; Log, izleme, test, benchmark</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>tracing</strong></td><td>Yapılandırılmış log + span tabanlı izleme çatısı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Serilog karşılığı; span kavramı ek olarak var</td><td><a href="https://docs.rs/tracing">docs.rs</a></td></tr>
+              <tr><td><strong>tracing-subscriber</strong></td><td>tracing çıktısını biçimlendirip yönlendiren katman</td><td><span class="tag tag--ok">TEMEL</span> "Sink" karşılığı burada</td><td><a href="https://docs.rs/tracing-subscriber">docs.rs</a></td></tr>
+              <tr><td><strong>log / env_logger</strong></td><td>Klasik, basit log cephesi ve konsol uygulaması</td><td><span class="tag">ORTA</span> tracing gelmeden önceki standart; hâlâ yaygın</td><td><a href="https://docs.rs/log">docs.rs</a></td></tr>
+              <tr><td><strong>opentelemetry</strong></td><td>Dağıtık izleme ve metrik standardı uygulaması</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Seq yerine burada Jaeger/Tempo/Grafana yığını kullanılır</td><td><a href="https://docs.rs/opentelemetry">docs.rs</a></td></tr>
+              <tr><td><strong>tracing-opentelemetry</strong></td><td>tracing span'lerini OTel'e köprüler</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/tracing-opentelemetry">docs.rs</a></td></tr>
+              <tr><td><strong>#[test] / #[cfg(test)]</strong></td><td>Dile gömülü test altyapısı; ayrı paket gerekmez</td><td><span class="tag tag--ok">TEMEL</span> Testler genelde <em>aynı dosyada</em> yazılır &mdash; C#'tan farklı</td><td><a href="https://doc.rust-lang.org/book/ch11-01-writing-tests.html">The Book §11.1</a></td></tr>
+              <tr><td><strong>doc test</strong></td><td>Doküman yorumundaki örnek kodun otomatik test edilmesi</td><td><span class="tag">ORTA</span> C#/Java'da yerleşik karşılığı yok (Python'daki doctest'e benzer); çok değerli</td><td><a href="https://doc.rust-lang.org/rustdoc/">rustdoc</a></td></tr>
+              <tr><td><strong>mockall</strong></td><td>Trait'lerden sahte (mock) nesne üretir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Karşılığı: .NET'te Moq, Java'da Mockito, Python'da unittest.mock, JS'te Jest/Vitest mock'ları. Mock teste yeniysen kavramı (stub, mock, fake) önce ana dilinde öğren; ana dilin yoksa veya Rust olacaksa doğrudan mockall ile başla</td><td><a href="https://docs.rs/mockall">docs.rs</a></td></tr>
+              <tr><td><strong>wiremock</strong></td><td>HTTP servislerini taklit eden test sunucusu</td><td><span class="tag">ORTA</span> WireMock.Net karşılığı</td><td><a href="https://docs.rs/wiremock">docs.rs</a></td></tr>
+              <tr><td><strong>testcontainers</strong></td><td>Testte Docker konteyneri (gerçek veritabanı) ayağa kaldırır</td><td><span class="tag">ORTA</span> Testcontainers.NET ile aynı fikir</td><td><a href="https://docs.rs/testcontainers">docs.rs</a></td></tr>
+              <tr><td><strong>insta</strong></td><td>Anlık görüntü (snapshot) testleri</td><td><span class="tag">ORTA</span> Verify sezgisi</td><td><a href="https://docs.rs/insta">docs.rs</a></td></tr>
+              <tr><td><strong>proptest</strong></td><td>Özellik tabanlı test; girdileri kendisi üretir</td><td><span class="tag tag--info">İLERİ</span> FsCheck karşılığı</td><td><a href="https://docs.rs/proptest">docs.rs</a></td></tr>
+              <tr><td><strong>cargo-fuzz</strong></td><td>Rastgele girdiyle çökme arama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://rust-fuzz.github.io/book/">rust-fuzz book</a></td></tr>
+              <tr><td><strong>criterion</strong></td><td>İstatistiksel benchmark çatısı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <strong>BenchmarkDotNet'in Rust karşılığı.</strong> Ücretsiz</td><td><a href="https://bheisler.github.io/criterion.rs/book/">criterion book</a></td></tr>
+              <tr><td><strong>divan</strong></td><td>Daha hafif, hızlı kurulan benchmark alternatifi</td><td><span class="tag">ORTA</span> Ücretsiz</td><td><a href="https://docs.rs/divan">docs.rs</a></td></tr>
+              <tr><td><strong>perf-book</strong></td><td>Rust performans optimizasyonu rehberi</td><td><span class="tag">ORTA</span> Performansla ilgileniyorsan doğrudan buradan başla</td><td><a href="https://nnethercote.github.io/perf-book/">perf-book</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8.5 &mdash; Genel amaçlı ve CLI</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>clap</strong></td><td>Komut satırı argüman ayrıştırıcı; derive API'si var</td><td><span class="tag tag--ok">TEMEL</span> System.CommandLine karşılığı, ondan çok daha olgun</td><td><a href="https://docs.rs/clap">docs.rs</a></td></tr>
+              <tr><td><strong>uuid</strong></td><td>GUID üretimi ve ayrıştırma</td><td><span class="tag tag--ok">TEMEL</span> v4/v7 sürüm farkına dikkat</td><td><a href="https://docs.rs/uuid">docs.rs</a></td></tr>
+              <tr><td><strong>chrono</strong></td><td>Tarih/saat kütüphanesi; yaygın olan</td><td><span class="tag tag--ok">TEMEL</span> std'de tarih tipi yoktur, sadece <code>Instant</code>/<code>Duration</code> vardır</td><td><a href="https://docs.rs/chrono">docs.rs</a></td></tr>
+              <tr><td><strong>time</strong></td><td>Alternatif tarih/saat kütüphanesi</td><td><span class="tag">ORTA</span> API'si daha katı; ikisi karışır, projede birini seç</td><td><a href="https://docs.rs/time">docs.rs</a></td></tr>
+              <tr><td><strong>regex</strong></td><td>Doğrusal zamanlı düzenli ifade motoru</td><td><span class="tag tag--ok">TEMEL</span> Geri izleme (backtracking) yoktur; ReDoS'a kapalıdır</td><td><a href="https://docs.rs/regex">docs.rs</a></td></tr>
+              <tr><td><strong>rand</strong></td><td>Rastgele sayı üretimi</td><td><span class="tag tag--ok">TEMEL</span> std'de yoktur</td><td><a href="https://docs.rs/rand">docs.rs</a></td></tr>
+              <tr><td><strong>itertools</strong></td><td>Ek yineleyici birleştiricileri (chunk, group_by, unique)</td><td><span class="tag">ORTA</span> LINQ'te olup std'de olmayanlar burada</td><td><a href="https://docs.rs/itertools">docs.rs</a></td></tr>
+              <tr><td><strong>indexmap</strong></td><td>Ekleme sırasını koruyan sözlük</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/indexmap">docs.rs</a></td></tr>
+              <tr><td><strong>bytes / smallvec</strong></td><td>Verimli tampon ve küçük vektör tipleri</td><td><span class="tag tag--info">İLERİ</span> Tahsisat azaltma</td><td><a href="https://docs.rs/bytes">docs.rs/bytes</a></td></tr>
+              <tr><td><strong>nom</strong></td><td>Birleştirici tabanlı ayrıştırıcı (parser) kütüphanesi</td><td><span class="tag tag--info">İLERİ</span> Kendi dosya biçimini ayrıştıracaksan</td><td><a href="https://docs.rs/nom">docs.rs</a></td></tr>
+              <tr><td><strong>config / dotenvy</strong></td><td>Yapılandırma dosyası ve .env okuma</td><td><span class="tag">ORTA</span> IConfiguration karşılığı</td><td><a href="https://docs.rs/config">docs.rs/config</a></td></tr>
+              <tr><td><strong>tempfile / walkdir / notify</strong></td><td>Geçici dosya, özyinelemeli gezinme, dosya izleme</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/walkdir">docs.rs/walkdir</a></td></tr>
+              <tr><td><strong>ratatui</strong></td><td>Terminal arayüzü (TUI) çatısı</td><td><span class="tag">ORTA</span> Spectre.Console sezgisi</td><td><a href="https://ratatui.rs/">ratatui.rs</a></td></tr>
+              <tr><td><strong>indicatif / dialoguer</strong></td><td>İlerleme çubuğu ve etkileşimli sorular</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/indicatif">docs.rs</a></td></tr>
+              <tr><td><strong>scraper</strong></td><td>HTML ayrıştırma ve CSS seçici ile veri çekme</td><td><span class="tag">ORTA</span> "Web scraping" işinin Rust karşılığı; Python'da BeautifulSoup</td><td><a href="https://docs.rs/scraper">docs.rs</a></td></tr>
+              <tr><td><strong>sha2 / aes-gcm / rsa / base64</strong></td><td>Kriptografi ve kodlama temelleri</td><td><span class="tag">ORTA</span> RSA ve hash işleri; RustCrypto ailesi bu işi yapar</td><td><a href="https://docs.rs/rsa">docs.rs/rsa</a></td></tr>
+              <tr><td><strong>ring</strong></td><td>Yüksek performanslı, denetlenmiş kripto temelleri</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rs/ring">docs.rs</a></td></tr>
+              <tr><td><strong>strum / derive_more</strong></td><td>Enum ve derive kolaylıkları</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.rs/strum">docs.rs/strum</a></td></tr>
+              <tr><td><strong>libc / windows</strong></td><td>İşletim sistemi API'lerine doğrudan erişim</td><td><span class="tag tag--info">İLERİ</span> <code>windows</code> crate'i Microsoft'un resmî bağlamasıdır</td><td><a href="https://docs.rs/windows">docs.rs/windows</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kullanim-alanlari"><span class="h-num">§ 9</span>Kullanım alanları</h2>
+
+        <p>Rust'ın istihdam ürettiği yerler, "web CRUD" değil. Aşağıdaki alanlardan biri seni çekiyorsa
+        Rust yatırımı anlamlı; hiçbiri çekmiyorsa <a href="#durust-degerlendirme">§ 1</a>'deki uyarıyı
+        tekrar oku.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Alanlar ve giriş noktaları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sistem programlama</strong></td><td>İşletim sistemi, sürücü, veritabanı motoru, ağ altyapısı</td><td><span class="tag tag--ok">TEMEL</span> Rust'ın var oluş sebebi; C/C++ yerine geçme iddiası</td><td><a href="https://www.rust-lang.org/">rust-lang.org</a></td></tr>
+              <tr><td><strong>CLI araçları</strong></td><td>Tek dosyalık, hızlı, bağımlılıksız komut satırı programları</td><td><span class="tag tag--ok">TEMEL</span> İlk gerçek projen bu olsun; clap + anyhow yeterli</td><td><a href="https://doc.rust-lang.org/book/ch12-00-an-io-project.html">The Book §12</a></td></tr>
+              <tr><td><strong>Performans kritik servis</strong></td><td>Yüksek istek hacminde düşük gecikme ve düşük bellek</td><td><span class="tag tag--ok">TEMEL</span> GC duraklaması olmaması ana argüman</td><td><a href="https://docs.rs/axum">axum</a></td></tr>
+              <tr><td><strong>WebAssembly (WASM)</strong></td><td>Tarayıcıda çalışan derlenmiş kod</td><td><span class="tag tag--ok">TEMEL</span> Rust, WASM'ın fiili birinci dili</td><td><a href="https://www.rust-lang.org/what/wasm">rust-lang.org</a></td></tr>
+              <tr><td><strong>wasm-bindgen</strong></td><td>Rust &harr; JavaScript arasında tip köprüsü</td><td><span class="tag">ORTA</span> JavaScript bilgisi temel; önce <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümüne</a> bak</td><td><a href="https://rustwasm.github.io/docs/wasm-bindgen/">rustwasm</a></td></tr>
+              <tr><td><strong>wasm-pack</strong></td><td>WASM paketini npm'e uygun biçimde derler</td><td><span class="tag">ORTA</span></td><td><a href="https://rustwasm.github.io/docs/wasm-pack/">rustwasm</a></td></tr>
+              <tr><td><strong>Rust and WebAssembly Book</strong></td><td>WASM'ın resmî rehberi</td><td><span class="tag">ORTA</span></td><td><a href="https://rustwasm.github.io/docs/book/">rustwasm book</a></td></tr>
+              <tr><td><strong>Leptos</strong></td><td>Sinyal tabanlı, sunucu+istemci tam yığın web çatısı</td><td><span class="tag tag--info">İLERİ</span> Blazor'un Rust karşılığı sayılabilir</td><td><a href="https://leptos.dev/">leptos.dev</a></td></tr>
+              <tr><td><strong>Yew</strong></td><td>React benzeri bileşen modelli WASM çatısı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://yew.rs/">yew.rs</a></td></tr>
+              <tr><td><strong>Dioxus</strong></td><td>Tek kod tabanından web, masaüstü ve mobil</td><td><span class="tag tag--info">İLERİ</span> MAUI/Flutter sezgisi</td><td><a href="https://dioxuslabs.com/">dioxuslabs.com</a></td></tr>
+              <tr><td><strong>Tauri</strong></td><td>Rust çekirdek + web arayüzü ile masaüstü uygulama</td><td><span class="tag">ORTA</span> Electron'un hafif alternatifi; Flutter ile de karşılaştırılabilir</td><td><a href="https://tauri.app/">tauri.app</a></td></tr>
+              <tr><td><strong>Bevy</strong></td><td>ECS mimarili oyun motoru</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak; Unity'ye göre çok daha erken aşamada</td><td><a href="https://bevyengine.org/">bevyengine.org</a></td></tr>
+              <tr><td><strong>egui</strong></td><td>Anlık mod (immediate mode) GUI kütüphanesi</td><td><span class="tag">ORTA</span> Araç arayüzü yazmak için pratik</td><td><a href="https://docs.rs/egui">docs.rs</a></td></tr>
+              <tr><td><strong>Embedded Rust Book</strong></td><td>Mikrodenetleyicide Rust; <code>no_std</code> dünyası</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.rust-embedded.org/book/">docs.rust-embedded.org</a></td></tr>
+              <tr><td><strong>Embassy</strong></td><td>Gömülü sistemler için async çatı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://embassy.dev/">embassy.dev</a></td></tr>
+              <tr><td><strong>Writing an OS in Rust</strong></td><td>Sıfırdan çekirdek yazma serisi</td><td><span class="tag tag--info">İLERİ</span> Öğretici değeri yüksek, iş değeri düşük</td><td><a href="https://os.phil-opp.com/">os.phil-opp.com</a></td></tr>
+              <tr><td><strong>FFI / extern "C"</strong></td><td>C ABI üzerinden diğer dillerle konuşma</td><td><span class="tag">ORTA</span> Rust'ın diğer dillere "hızlı modül" yazma yolu</td><td><a href="https://doc.rust-lang.org/nomicon/ffi.html">nomicon</a></td></tr>
+              <tr><td><strong>cbindgen</strong></td><td>Rust'tan C başlık dosyası üretir</td><td><span class="tag tag--info">İLERİ</span> <em>C/C++ projen varsa</em> Rust'ı oraya bağlamanın standart yolu</td><td><a href="https://docs.rs/cbindgen">docs.rs</a></td></tr>
+              <tr><td><strong>csbindgen</strong></td><td>Rust &rarr; <strong>C#</strong> P/Invoke bağlamalarını üretir</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET projen varsa</em> TEMEL: mevcut .NET projesine Rust ile hızlı bir modül eklemenin en pratik yolu</td><td><a href="https://github.com/Cysharp/csbindgen">github.com/Cysharp</a></td></tr>
+              <tr><td><strong>interoptopus</strong></td><td>Tek Rust API'sinden C#, Python, C bağlamaları üretir</td><td><span class="tag">ORTA</span> csbindgen alternatifi</td><td><a href="https://docs.rs/interoptopus">docs.rs</a></td></tr>
+              <tr><td><strong>PyO3</strong></td><td>Rust ile Python native modülü yazma</td><td><span class="tag tag--ok">TEMEL</span> <em><a href="../Python/index.html">Python</a> projen varsa</em> TEMEL: NumPy/Pandas darboğazını Rust'la çözmek gerçek bir kullanım; paketleme için maturin kullanılır</td><td><a href="https://pyo3.rs/">pyo3.rs</a></td></tr>
+              <tr><td><strong>napi-rs</strong></td><td>Rust ile Node.js native modülü yazma</td><td><span class="tag">ORTA</span> <em>Node.js projen varsa</em> TEMEL düzeyinde önemlidir. Modern JS araçlarının çoğu bu yolla hızlandı</td><td><a href="https://napi.rs/">napi.rs</a></td></tr>
+              <tr><td><strong>Neon</strong></td><td>Node.js bağlaması için alternatif</td><td><span class="tag">ORTA</span></td><td><a href="https://neon-bindings.com/">neon-bindings.com</a></td></tr>
+              <tr><td><strong>UniFFI</strong></td><td>Tek Rust çekirdeğinden Kotlin/Swift/Python bağlaması (Mozilla)</td><td><span class="tag">ORTA</span> <em>Kotlin/Swift (mobil) projen varsa</em> TEMEL düzeyinde önemlidir. Mobil ortak çekirdek senaryosu; Flutter/Dart biliyorsan onunla kıyasla</td><td><a href="https://mozilla.github.io/uniffi-rs/">uniffi-rs</a></td></tr>
+              <tr><td><strong>jni / Java FFM API</strong></td><td>Rust kodunu Java'dan çağırma yolları</td><td><span class="tag">ORTA</span> <em>Java projen varsa:</em> klasik yol <code>jni</code> crate'i; Java 22 ve sonrasında Foreign Function &amp; Memory API (FFM) ile C ABI üzerinden JNI'siz çağrı da mümkün <span class="tag tag--warn">TEYİT</span> openjdk.org JEP 454</td><td><a href="https://docs.rs/jni">docs.rs/jni</a></td></tr>
+              <tr><td><strong>Solana</strong></td><td>Zincir üstü programları Rust ile yazılan blockchain ağı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Solana'da Solidity değil Rust yazılır</td><td><a href="https://solana.com/docs">solana.com/docs</a></td></tr>
+              <tr><td><strong>Substrate / Polkadot</strong></td><td>Rust ile kendi blok zincirini kurma çatısı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.substrate.io/">docs.substrate.io</a></td></tr>
+              <tr><td><strong>revm</strong></td><td>Rust ile yazılmış EVM uygulaması</td><td><span class="tag tag--info">İLERİ</span> Solidity bilgisi burada karşılık bulur</td><td><a href="https://revm.dev/">revm.dev</a></td></tr>
+              <tr><td><strong>Foundry</strong></td><td>Solidity geliştirme araç zinciri &mdash; kendisi Rust ile yazılmıştır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Hangi zincirde çalıştığına bağlı: EVM / Solidity tarafında Foundry ve Hardhat (JS/TS) iki yaygın seçenektir, ekip hangisini kullanıyorsa o; Foundry'nin kendisi Rust ile yazılmıştır ama kullanmak için Rust bilmen gerekmez. Solana tarafında Solidity değil Rust yazılır ve yaygın çatı Anchor'dır (bkz. Solana satırı)</td><td><a href="https://book.getfoundry.sh/">book.getfoundry.sh</a></td></tr>
+              <tr><td><strong>candle / burn</strong></td><td>Rust ile makine öğrenmesi / tensör kütüphaneleri</td><td><span class="tag tag--info">İLERİ</span> Python ML kütüphanelerini (TensorFlow, PyTorch) biliyorsan merak edebilirsin; ekosistem Python kadar zengin değil</td><td><a href="https://docs.rs/candle-core">docs.rs/candle</a></td></tr>
+              <tr><td><strong>arewegameyet / areweasyncyet</strong></td><td>Alan bazlı olgunluk takip siteleri</td><td><span class="tag">ORTA</span> "Rust bu işe hazır mı" sorusunun dürüst cevabı</td><td><a href="https://areweasyncyet.rs/">areweasyncyet.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Interop rozetleri: kullandığın dile göre TEMEL</p>
+          <p>Yukarıdaki bağlama araçlarından hangisinin senin için TEMEL olduğu, Rust'ı hangi dilin yanına koyacağına bağlıdır:</p>
+          <ul>
+            <li><strong>.NET projen var</strong> &rarr; csbindgen (alternatif: interoptopus)</li>
+            <li><strong>Python projen var</strong> &rarr; PyO3 + maturin</li>
+            <li><strong>Node.js projen var</strong> &rarr; napi-rs (alternatif: Neon)</li>
+            <li><strong>Kotlin / Swift (mobil)</strong> &rarr; UniFFI</li>
+            <li><strong>Java</strong> &rarr; jni crate veya Java 22+ FFM API <span class="tag tag--warn">TEYİT</span></li>
+            <li><strong>C / C++</strong> &rarr; cbindgen (ters yön için bindgen)</li>
+            <li><strong>Web arayüzü</strong> &rarr; wasm-bindgen + wasm-pack</li>
+            <li><strong>Bunların hiçbiri yok</strong> &rarr; interop yerine bağımsız bir CLI aracı veya WASM modülüyle başla.</li>
+          </ul>
+        </div>
+
+        <h2 id="csharp-farklari"><span class="h-num">§ 10</span>Başka dilden geliyorsan: farklar (C# için ayrıntılı tablo)</h2>
+
+        <p>Bu bölüm, başka bir dili bilen biri için <strong>çeviri sözlüğüdür</strong>. Hiç programlama bilmiyorsan bu bölümü
+        atla; § 3-§ 7'deki tanımlar sana yeter. Geldiğin dile göre öne çıkan farklar:</p>
+
+        <ul>
+          <li><strong>C# / .NET'ten</strong> &rarr; aşağıdaki tablonun tamamı doğrudan sana yöneliktir.</li>
+          <li><strong>Java'dan</strong> &rarr; tablodaki satırların çoğu aynen geçerlidir: GC yok, <code>null</code> yok, exception yok,
+          sınıf kalıtımı yok; Spring'in DI konteyneri yerine bağımlılıklar elle kurulur; annotation yerine derive/öznitelik makroları vardır.</li>
+          <li><strong>Python / JavaScript'ten</strong> &rarr; tablodakilere ek olarak statik tipler, ayrı bir derleme adımı ve çalışma
+          zamanında reflection / dinamik nesne değiştirme olmaması yeni gelir. Hata ayıklama süresi azalır ama ilk yazım süresi uzar.</li>
+          <li><strong>C / C++'tan</strong> &rarr; RAII, move ve yığın/öbek tanıdıktır. Fark: safe Rust'ta tanımsız davranış (UB) yoktur,
+          borrow checker sarkan işaretçi ve veri yarışını derleme zamanında yakalar; başlık dosyası yerine modül sistemi, Make/CMake yerine cargo vardır.</li>
+          <li><strong>Go'dan</strong> &rarr; GC yoktur; goroutine yerine async + tokio görevleri veya OS thread'leri kullanılır;
+          hata yine dönüş değeridir ama <code>Result</code> + <code>?</code> ile tip sistemi zorlar; generic ve enum çok daha güçlüdür.</li>
+        </ul>
+
+        <p>C#'tan geliyorsan aşağıdaki tabloyu ezberleme, <strong>çeviri sözlüğü</strong> gibi kullan: sol sütundaki kavramı Rust'ta
+        ararken sağdaki terimi yaz.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>C# &rarr; Rust kavram eşlemesi</caption>
+            <thead><tr><th>C# / .NET</th><th>Rust karşılığı</th><th>Kritik fark</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Garbage Collector</strong></td><td>Ownership + Drop</td><td>Çöp toplayıcı <em>yoktur</em>. Bellek, sahibi kapsam dışına çıkınca serbest kalır; GC duraklaması olmaz</td><td><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The Book §4.1</a></td></tr>
+              <tr><td><strong>null / NullReferenceException</strong></td><td><code>Option&lt;T&gt;</code></td><td><code>null</code> dilde yoktur. Yokluğu tip sistemi taşır; kontrol etmeyi unutamazsın</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>try/catch/throw</strong></td><td><code>Result&lt;T,E&gt;</code> + <code>?</code></td><td>Exception yoktur. Hata dönüş değeridir ve imzada görünür; <code>panic!</code> exception değildir</td><td><a href="https://doc.rust-lang.org/book/ch09-00-error-handling.html">The Book §9</a></td></tr>
+              <tr><td><strong>class + kalıtım</strong></td><td><code>struct</code> + <code>trait</code> + kompozisyon</td><td>Sınıf kalıtımı <em>yoktur</em>. Kod paylaşımı trait varsayılan metotları ve kompozisyonla yapılır</td><td><a href="https://doc.rust-lang.org/book/ch10-02-traits.html">The Book §10.2</a></td></tr>
+              <tr><td><strong>interface</strong></td><td><code>trait</code></td><td>Trait'i başkasının tipine sonradan uygulayabilirsin (orphan rule sınırıyla)</td><td><a href="https://doc.rust-lang.org/reference/items/traits.html">reference</a></td></tr>
+              <tr><td><strong>IDisposable / using</strong></td><td><code>Drop</code></td><td>Otomatiktir; <code>using</code> yazmayı unutma riski yoktur</td><td><a href="https://doc.rust-lang.org/std/ops/trait.Drop.html">std</a></td></tr>
+              <tr><td><strong>LINQ</strong></td><td><code>Iterator</code> zincirleri</td><td>Tembel ve sıfır maliyetli; ama <code>IQueryable</code> gibi SQL'e çevrilmez</td><td><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">std</a></td></tr>
+              <tr><td><strong>Task&lt;T&gt; / async</strong></td><td><code>Future</code> + tokio</td><td>Future soğuktur: <code>await</code> edilmezse çalışmaz. Runtime dile dahil değildir</td><td><a href="https://tokio.rs/">tokio.rs</a></td></tr>
+              <tr><td><strong>Dependency Injection konteyneri</strong></td><td>Elle kurulum (constructor injection)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Rust'ta yaygın bir DI konteyneri kültürü <em>yoktur</em>; bağımlılıklar <code>main</code>'de elle bağlanır. Bu, DI'ı gerçekten anlamanı sağlar</td><td><a href="https://rust-unofficial.github.io/patterns/">patterns</a></td></tr>
+              <tr><td><strong>AutoMapper</strong></td><td><code>From</code>/<code>Into</code> impl'leri</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Otomatik eşleme kültürü yok; dönüşümü elle yazarsın (daha açık, daha uzun)</td><td><a href="https://doc.rust-lang.org/std/convert/trait.From.html">std</a></td></tr>
+              <tr><td><strong>Entity Framework Core</strong></td><td>diesel / sea-orm / sqlx</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Change tracking ve lazy loading beklentisini bırak; sqlx'te SQL'i geliştirici yazar</td><td><a href="https://docs.rs/sqlx">docs.rs/sqlx</a></td></tr>
+              <tr><td><strong>Dapper</strong></td><td>sqlx</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> En yakın eşleşme; sqlx ayrıca sorguyu derleme zamanında doğrular</td><td><a href="https://docs.rs/sqlx">docs.rs/sqlx</a></td></tr>
+              <tr><td><strong>Middleware pipeline</strong></td><td><code>tower</code> katmanları</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Aynı fikir, farklı isim: <code>Layer</code> ve <code>Service</code></td><td><a href="https://docs.rs/tower">docs.rs/tower</a></td></tr>
+              <tr><td><strong>record</strong></td><td><code>#[derive(PartialEq, Clone)] struct</code></td><td>Değer eşitliği derive ile gelir; <code>with</code> ifadesi karşılığı <code>..</code> struct update sözdizimidir</td><td><a href="https://doc.rust-lang.org/book/ch05-00-structs.html">The Book §5</a></td></tr>
+              <tr><td><strong>enum</strong></td><td><code>enum</code> (veri taşıyabilen)</td><td>Rust enum'u veri taşır ve <code>match</code> kapsayıcılığı zorunludur. C# enum'u sadece sayıdır</td><td><a href="https://doc.rust-lang.org/book/ch06-00-enums.html">The Book §6</a></td></tr>
+              <tr><td><strong>Nullable reference types</strong></td><td>Gereksiz</td><td>Sorun kaynağında çözüldüğü için böyle bir özelliğe ihtiyaç yok</td><td><a href="https://doc.rust-lang.org/std/option/enum.Option.html">std</a></td></tr>
+              <tr><td><strong>Reflection</strong></td><td>Neredeyse yok (<code>Any</code> sınırlı)</td><td>Çalışma zamanı yansıma kültürü yoktur; yerine derleme zamanı makrolar kullanılır</td><td><a href="https://doc.rust-lang.org/reference/procedural-macros.html">reference</a></td></tr>
+              <tr><td><strong>Derleme süresi</strong></td><td>&mdash;</td><td>Rust derlemesi .NET'e göre belirgin şekilde <em>yavaştır</em>. <code>cargo check</code> ve artımlı derleme öğren</td><td><a href="https://doc.rust-lang.org/cargo/reference/profiles.html">cargo profiles</a></td></tr>
+              <tr><td><strong>Derleyici katılığı</strong></td><td>&mdash;</td><td>C#'ta uyarı olan şeyler burada hatadır. İlk aylarda üretkenlik düşer, sonra hata ayıklama süresi çöker</td><td><a href="https://doc.rust-lang.org/error_codes/error-index.html">error index</a></td></tr>
+              <tr><td><strong>NuGet</strong></td><td>crates.io</td><td>Sürüm çakışması yönetimi daha katı; aynı crate'in iki büyük sürümü yan yana yaşayabilir</td><td><a href="https://docs.rs/">docs.rs</a></td></tr>
+              <tr><td><strong>xUnit + Moq</strong></td><td>Gömülü <code>#[test]</code> + mockall</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Test çatısı dile dahildir; mock kültürü ise trait tabanlıdır ve daha azdır</td><td><a href="https://docs.rs/mockall">docs.rs/mockall</a></td></tr>
+              <tr><td><strong>BenchmarkDotNet</strong></td><td>criterion</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Aynı iş, aynı istatistiksel yaklaşım</td><td><a href="https://bheisler.github.io/criterion.rs/book/">criterion</a></td></tr>
+              <tr><td><strong>Serilog + Seq</strong></td><td>tracing + OpenTelemetry</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Seq'in doğrudan karşılığı yok; Grafana/Jaeger yığını kullanılır</td><td><a href="https://docs.rs/tracing">docs.rs/tracing</a></td></tr>
+              <tr><td><strong>CQRS / MediatR</strong></td><td>Hazır kütüphane yok</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Rust'ta MediatR benzeri baskın bir çözüm yoktur; deseni elle kurarsın. CQRS'i önce ana dilinde öğren (.NET &rarr; MediatR, Java &rarr; Axon); ana dilin yoksa deseni kavram olarak (komut/sorgu ayrımı) öğrenip doğrudan Rust'ta elle kur</td><td><a href="../CSharp-DotNet/index.html">.NET sayfası</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="is-piyasasi"><span class="h-num">§ 11</span>İş piyasası ve öğrenme kaynakları</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Beklenti yönetimi</p>
+          <p>Türkiye'de "Rust geliştirici" ilanı <strong>ihmal edilebilir sayıdadır</strong>; olanlar da
+          çoğunlukla blockchain veya yurt dışı merkezli uzaktan pozisyonlardır. Rust bilmek yaygın backend (.NET, Java, Node.js, Python vb.)
+          mülakatlarında <em>doğrudan</em> bir avantaj sağlamaz. Sağladığı dolaylı fayda gerçektir ama
+          ölçülmesi zordur: bellek modeli, sahiplik ve eşzamanlılık konularında kazandığın netlik, ana dilindeki
+          kodu (C#, Java, Go, Python, C++...) da daha iyi yazmanı sağlar.</p>
+          <p>Bu uyarının seni ne kadar ilgilendirdiği hedefine ve bugünkü durumuna bağlıdır; durumuna göre karar listesi
+          <a href="#durust-degerlendirme">§ 1</a>'deki "Dikkat &mdash; iş bulma hedefiyle ilişkisi" kutusundadır. Hedefin blockchain,
+          gömülü, sistem, WASM veya yurt dışı uzaktan işse uyarı senin için daha zayıftır; aşağıdaki tablodaki ilgili satıra bak.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Piyasa gözlemleri &mdash; rakam iddiası yok, yön iddiası var</caption>
+            <thead><tr><th>Alan</th><th>Durum</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Türkiye &mdash; kurumsal</strong></td><td>Neredeyse yok</td><td><span class="tag tag--warn">TAHMİN</span> Kısa vadede yurt içi iş hedefliyorsan ne yapacağın ana dilinin olup olmamasına bağlıdır; bkz. <a href="#durust-degerlendirme">§ 1</a></td><td>&mdash;</td></tr>
+              <tr><td><strong>Türkiye &mdash; blockchain</strong></td><td>Sınırlı ama var</td><td>Solidity + Rust birlikte aranabiliyor</td><td><a href="https://solana.com/docs">solana.com/docs</a></td></tr>
+              <tr><td><strong>Yurt dışı &mdash; uzaktan</strong></td><td>Niş, rekabetçi, iyi ücretli</td><td><span class="tag tag--warn">TAHMİN</span> Portföy ve açık kaynak katkısı ilan başvurusundan daha etkili</td><td>&mdash;</td></tr>
+              <tr><td><strong>Altyapı / bulut / veritabanı</strong></td><td>Büyüyen alan</td><td>Yeni nesil veri araçlarının çoğu Rust ile yazılıyor</td><td><a href="https://this-week-in-rust.org/">this-week-in-rust.org</a></td></tr>
+              <tr><td><strong>Gömülü / otomotiv</strong></td><td>Yeni ve büyüyen</td><td>C yerine geçme çalışmaları sürüyor</td><td><a href="https://docs.rust-embedded.org/book/">embedded book</a></td></tr>
+              <tr><td><strong>Mevcut projeye katma değer</strong></td><td>Dolaylı</td><td>Bir Python / .NET / Node projen varsa PyO3 / csbindgen / napi-rs ile hızlandırıcı modül yazmak somut bir çıktıdır. Mevcut bir projen yoksa bağımsız bir CLI aracı veya crates.io'da yayımlanmış küçük bir crate aynı işi görür</td><td><a href="https://pyo3.rs/">pyo3.rs</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Öğrenme kaynakları &mdash; hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>The Rust Programming Language ("The Book")</strong></td><td>Resmî kitap; baştan sona okunacak ana kaynak</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Başka bir dilde deneyimliysen başlangıç noktası burasıdır (+ Rustlings). Kitap önceden programlama bilgisi varsayar: hiç programlama bilmiyorsan önce başka bir dilde (ör. Python) temel programlama kaynağıyla başla</td><td><a href="https://doc.rust-lang.org/book/">doc.rust-lang.org/book</a></td></tr>
+              <tr><td><strong>Rust by Example</strong></td><td>Çalıştırılabilir küçük örneklerle aynı konular</td><td><span class="tag tag--ok">TEMEL</span> Kitapla paralel oku</td><td><a href="https://doc.rust-lang.org/rust-by-example/">rust-by-example</a></td></tr>
+              <tr><td><strong>Rustlings</strong></td><td>Küçük alıştırmalarla pratik; derleyici hatalarını düzeltirsin</td><td><span class="tag tag--ok">TEMEL</span> Borrow checker refleksi burada oturur</td><td><a href="https://rustlings.rust-lang.org/">rustlings</a></td></tr>
+              <tr><td><strong>Comprehensive Rust (Google)</strong></td><td>Google'ın kurumsal eğitim materyali; slayt formatında</td><td><span class="tag tag--ok">TEMEL</span> Hızlı ve yoğun; deneyimli olup hızlı ilerlemek isteyen için The Book'a alternatif. Yeni başlayana uygun değil</td><td><a href="https://google.github.io/comprehensive-rust/">comprehensive-rust</a></td></tr>
+              <tr><td><strong>cheats.rs</strong></td><td>Tek sayfalık kapsamlı hatırlatma tablosu</td><td><span class="tag tag--ok">TEMEL</span> Yanında açık dursun</td><td><a href="https://cheats.rs/">cheats.rs</a></td></tr>
+              <tr><td><strong>Rust Reference</strong></td><td>Dilin biçimsel referansı</td><td><span class="tag">ORTA</span> Öğretici değil, kesin cevap kaynağı</td><td><a href="https://doc.rust-lang.org/reference/">reference</a></td></tr>
+              <tr><td><strong>std dokümantasyonu</strong></td><td>Standart kütüphanenin tamamı</td><td><span class="tag tag--ok">TEMEL</span> Her tipin sayfasında örnek kod var</td><td><a href="https://doc.rust-lang.org/std/">std</a></td></tr>
+              <tr><td><strong>Rust API Guidelines</strong></td><td>İyi API tasarımı için resmî kontrol listesi</td><td><span class="tag">ORTA</span> SOLID ile ilgileniyorsan doğrudan hedef</td><td><a href="https://rust-lang.github.io/api-guidelines/">api-guidelines</a></td></tr>
+              <tr><td><strong>Rust Design Patterns</strong></td><td>Deyimsel (idiomatic) desenler ve anti-desenler</td><td><span class="tag">ORTA</span> Topluluk kaynağı</td><td><a href="https://rust-unofficial.github.io/patterns/">patterns</a></td></tr>
+              <tr><td><strong>Edition Guide</strong></td><td>Sürüm kuşakları arası farklar</td><td><span class="tag">ORTA</span></td><td><a href="https://doc.rust-lang.org/edition-guide/">edition guide</a></td></tr>
+              <tr><td><strong>This Week in Rust</strong></td><td>Haftalık ekosistem bülteni</td><td><span class="tag">ORTA</span> Neyin canlı neyin ölü olduğunu buradan takip et</td><td><a href="https://this-week-in-rust.org/">this-week-in-rust.org</a></td></tr>
+              <tr><td><strong>users.rust-lang.org</strong></td><td>Resmî kullanıcı forumu; borrow checker sorularına iyi cevap alınır</td><td><span class="tag">ORTA</span></td><td><a href="https://users.rust-lang.org/">users.rust-lang.org</a></td></tr>
+              <tr><td><strong>Rust Blog / releases.rs</strong></td><td>Resmî sürüm duyuruları ve sürüm notları</td><td><span class="tag">ORTA</span> Yaklaşık 6 haftada bir yeni sürüm çıkar</td><td><a href="https://blog.rust-lang.org/">blog.rust-lang.org</a></td></tr>
+              <tr><td><strong>Exercism &mdash; Rust track</strong></td><td>Mentorlu alıştırma platformu</td><td><span class="tag">ORTA</span> Ücretsiz</td><td>exercism.org</td></tr>
+              <tr><td><strong>Rust Foundation</strong></td><td>Dilin arkasındaki bağımsız vakıf</td><td><span class="tag">ORTA</span> Tek şirkete bağlı olmaması yönetişim açısından önemli</td><td>foundation.rust-lang.org</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 12</span>Özet &mdash; bu sayfanın öncelik sırası</h2>
+
+        <p>Rust'a girmeye karar verirsen, aşağıdaki sırayı bozma. Özellikle 1. maddeyi atlayıp
+        doğrudan web çatısına geçme; ownership oturmadan yazılan async kod anlaşılmaz hatalar üretir.
+        Süreler, başka bir dilde deneyimli ve haftada 6-8 saat ayıran biri içindir (bkz. § 1'deki süre ayarı tablosu);
+        hiç programlama bilmiyorsan bu sıradan önce temel programlama kavramlarını öğren.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Önce kararı ver, sonra başla</span>
+            <p>Durumuna göre karar listesi <a href="#durust-degerlendirme">§ 1</a>'deki "Dikkat &mdash; iş bulma hedefiyle ilişkisi"
+            kutusundadır; oradan kendi durumunu seç. Sonuç "Rust şu an sırada değil" çıktıysa bu sırayı şimdilik bırak; "devam et"
+            çıktıysa aşağıdaki adımlara geç ve hedef alanın varsa (blockchain, gömülü, WASM...) <a href="#kullanim-alanlari">§ 9</a>'daki ilgili alanı öne çek.</p>
+            <span class="steps__meta">Karar &middot; 1 gün</span>
+          </li>
+          <li>
+            <span class="steps__title">Araç zincirini kur, "hello world"den öteye geçme</span>
+            <p>rustup, cargo, rust-analyzer, clippy, rustfmt. <a href="#arac-zinciri">§ 2</a>'deki
+            <span class="tag tag--ok">TEMEL</span> satırlar yeterli; geri kalanını sonra oku.</p>
+            <span class="steps__meta">1-2 gün</span>
+          </li>
+          <li>
+            <span class="steps__title">Ownership, borrowing, lifetime</span>
+            <p><a href="#sahiplik-ve-bellek">§ 3</a>'ün tamamı. The Book §4 + Rustlings.
+            Bu aşamada hiçbir kütüphane kurma, sadece derleyiciyle kavga et. <strong>Sayfadaki en
+            önemli bölüm burasıdır.</strong></p>
+            <span class="steps__meta">4-8 hafta &middot; <span class="tag tag--warn">TAHMİN</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Tip sistemi: enum, trait, generic, Option/Result</span>
+            <p><a href="#tip-sistemi">§ 4</a> ve <a href="#hata-yonetimi">§ 6</a>. Mimari ve
+            generic ilgisi olan için en keyifli aşama. <code>match</code>, <code>?</code>, <code>From/Into</code>
+            üçlüsünü otomatikleştir.</p>
+            <span class="steps__meta">3-4 hafta &middot; <span class="tag tag--warn">TAHMİN</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Gerçek bir CLI aracı yaz</span>
+            <p>clap + anyhow + serde. Ekosistemin geri kalanına geçmeden önce <em>bitirilmiş</em> bir şey
+            üret. The Book §12 tam olarak bunu anlatır.</p>
+            <span class="steps__meta">1-2 hafta</span>
+          </li>
+          <li>
+            <span class="steps__title">Akıllı işaretçiler ve eşzamanlılık</span>
+            <p><a href="#akilli-isaretciler">§ 5</a> ve <a href="#eszamanlilik">§ 7</a>.
+            <code>Arc&lt;Mutex&lt;T&gt;&gt;</code> kalıbı, <code>Send</code>/<code>Sync</code>, rayon ile
+            paralel yineleme. Async'e <em>en son</em> gir.</p>
+            <span class="steps__meta">3-4 hafta &middot; <span class="tag tag--warn">TAHMİN</span></span>
+          </li>
+          <li>
+            <span class="steps__title">tokio + axum + sqlx ile bir servis</span>
+            <p><a href="#ekosistem">§ 8</a>. Daha önce bir servis yazdıysan, bildiğin bir servisi birebir Rust'a taşı
+            (ASP.NET Core Web API, Spring Boot, Express, FastAPI veya Go <code>net/http</code> servisi); böylece dili değil, sadece farkları öğrenirsin.
+            Daha önce hiç servis yazmadıysan önce HTTP/REST temellerini öğren, sonra axum örneklerinden yola çıkarak küçük bir
+            CRUD/REST servisini sıfırdan yaz.</p>
+            <span class="steps__meta">4-6 hafta &middot; <span class="tag tag--warn">TAHMİN</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Somut çıktı üret: hedefine uygun bir proje</span>
+            <p>Mülakatta veya portföyde anlatılabilir olan, hedefine uygun somut bir çıktıdır (<a href="#kullanim-alanlari">§ 9</a>):</p>
+            <ul>
+              <li>.NET projen varsa &rarr; csbindgen ile Rust modülü; Python &rarr; PyO3 ile hızlandırıcı; Node &rarr; napi-rs ile native modül.</li>
+              <li>Web arayüzü &rarr; wasm-pack ile bir WASM modülü.</li>
+              <li>Blockchain hedefi &rarr; Solana/Anchor programı.</li>
+              <li>Gömülü hedef &rarr; Embassy ile bir mikrodenetleyici projesi.</li>
+              <li>Hiçbiri yoksa &rarr; crates.io'ya yayımlanmış bir CLI aracı veya kütüphane.</li>
+            </ul>
+            <span class="steps__meta">2-3 hafta</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Rust performans, mimari ve generic gibi alanların dilidir; kısa vadede yurt içi iş önceliği varsa sırası sonda gelir,
+          blockchain / gömülü / sistem / WASM hedefin varsa doğrudan hedef dildir. Girersen ownership'e zaman ayır, gerisi kolaydır.
+          Bu sayfadaki <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar, aynı kavramın ana dilindeki
+          karşılığını da (ör. <a href="../CSharp-DotNet/index.html">.NET</a>, <a href="../Java/index.html">Java</a>) bilmen gerektiğini
+          hatırlatır; ana dilin yoksa kavramı teknolojinin resmî dokümanından öğren.</p>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 13</span>Bu sayfanın ana kaynakları</h2>
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://doc.rust-lang.org/book/">The Rust Programming Language &mdash; resmî kitap</a></li>
+          <li><span class="src-n">02</span><a href="https://doc.rust-lang.org/std/">Rust Standard Library dokümantasyonu</a></li>
+          <li><span class="src-n">03</span><a href="https://doc.rust-lang.org/reference/">The Rust Reference</a></li>
+          <li><span class="src-n">04</span><a href="https://doc.rust-lang.org/cargo/">The Cargo Book</a></li>
+          <li><span class="src-n">05</span><a href="https://doc.rust-lang.org/error_codes/error-index.html">Rust Compiler Error Index</a></li>
+          <li><span class="src-n">06</span><a href="https://docs.rs/">docs.rs &mdash; crate API dokümantasyonu</a></li>
+          <li><span class="src-n">07</span><a href="https://tokio.rs/">Tokio &mdash; async runtime</a></li>
+          <li><span class="src-n">08</span><a href="https://rust-lang.github.io/async-book/">Asynchronous Programming in Rust</a></li>
+          <li><span class="src-n">09</span><a href="https://google.github.io/comprehensive-rust/">Comprehensive Rust &mdash; Google</a></li>
+          <li><span class="src-n">10</span>Diğer dil bölümleri: <a href="../Python/index.html">Python</a> &middot; <a href="../Go/index.html">Go</a> &middot; <a href="../CSharp-DotNet/index.html">C# / .NET</a> &middot; <a href="../index.html">Programlama ana sayfası</a></li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../Go/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Go</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

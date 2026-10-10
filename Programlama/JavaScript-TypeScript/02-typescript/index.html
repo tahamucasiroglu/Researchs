@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TypeScript — JavaScript ve TypeScript Anahtar Listesi</title>
+<meta name="description" content="Tip sistemi, interface, generics, utility types, tip daraltma, yapılandırma ve C#'tan gelenler için karşılaştırma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">TypeScript</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · JavaScript / TypeScript</span>
+      <span class="brand__name">JavaScript ve TypeScript Anahtar Listesi</span>
+      <span class="brand__sub">JS → TS → React → Araçlar</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-javascript/index.html"><span class="nav-num">01</span><span>JavaScript</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>TypeScript</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kütüphane ve araçlar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-react/index.html"><span class="nav-num">03</span><span>React</span></a></li>
+          <li><a class="nav-item" href="../04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Sıralı bir yol haritası: React'a doğrudan atlamak yerine altındaki dili kurar. Anlatım yok, araştırma başlığı var. Ön koşul: HTML ve CSS bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Dil</div>
+        <h1 class="page-title">TypeScript: <em>tip sistemi</em>, farklar ve tuzaklar</h1>
+        <p class="lede">JavaScript'in üstüne eklenen tip sistemi. Statik tipli bir dilden (C#, Java) geliyorsan benzerlikleri hızlı geçip farklara odaklanırsın; yalnızca JavaScript biliyorsan buradaki her şey yenidir. Aşağıda geçmişine göre nereden başlayacağın var.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; C#'tan gelenler için karşılaştırma sütunu</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesidir</strong>. Her satırdaki terimi kendi kaynağından
+        okuyacak, editörde deneyeceksin. "Kısaca" sütunu terimin ne olduğunu söyler, "C#'tan geliyorsan" sütunu
+        C# bilenler için tanıdık kavrama köprü kurar, "Not" sütunu sadece <em>karıştırma riskini</em> önlemek için vardır.
+        <strong>C# bilmiyorsan "C#'tan geliyorsan" sütununu atlayabilirsin; "Kısaca" ve "Not" yeterli.</strong></p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Geçmişine göre bu sayfaya yaklaşım</caption>
+            <thead><tr><th>Geçmişin</th><th>Odak</th><th>Resmî başlangıç kaynağı</th></tr></thead>
+            <tbody>
+              <tr><td><strong>C# veya Java</strong> (statik, nominal tipli)</td><td>Benzerlikleri hızlı geç; farklara odaklan: yapısal tipleme, type erasure, <code>any</code>/<code>unknown</code>, <code>private</code>'ın yalnızca derleme zamanı olması.</td><td><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html">TypeScript for Java/C# Programmers</a></td></tr>
+              <tr><td><strong>Yalnızca JavaScript</strong></td><td>TS'in kattığı her şey yeni: tip açıklamaları, <code>interface</code>/<code>type</code>, union, generics, daraltma ve <code>strict</code>. Generics ve sınıf farkları "kolay" değil; süre daha uzun.</td><td><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html">TypeScript for JavaScript Programmers</a></td></tr>
+              <tr><td><strong>Python</strong></td><td>Type hints / mypy bildiysen kavramlar kısmen tanıdık; yapısal tipleme <code>typing.Protocol</code>'e benzer. JS tuhaflıkları için 01'e dön.</td><td><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html">TypeScript for JavaScript Programmers</a> + 01</td></tr>
+              <tr><td><strong>Fonksiyonel dil</strong> (Haskell, F#, OCaml vb.)</td><td>Union ve daraltma tanıdık; JS çalışma modeline odaklan.</td><td><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html">TypeScript for Functional Programmers</a></td></tr>
+              <tr><td><strong>Programlamaya yeni</strong> (JS ile başladın)</td><td>JS'ten sonra handbook sırasıyla ilerle; ileri tipler (§&nbsp;6'nın ikinci yarısı, §&nbsp;8) ertelenir.</td><td><a href="https://www.typescriptlang.org/docs/handbook/intro.html">TypeScript Handbook</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>TypeScript iş ilanlarında artık JavaScript kadar sık istenir; bu yüzden bu sayfadaki neredeyse her başlık
+        mülakatta karşına çıkabilir. <span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti, iş ilanlarında ve mülakatlarda
+        sık geçen konuları işaretler: en az bir çalışan örnek yaz. Sıralama için doğrudan <a href="#ozet">§ 13 Özet</a> bölümüne bak.
+        TypeScript, JavaScript'in üstüne kurulu bir dil olduğu için önce <a href="../01-javascript/index.html">01 &mdash; JavaScript</a>
+        sayfasındaki temel maddeleri (scope, closure, prototype, Promise, ESM) bitirmiş olman gerekir.
+        Buradaki kalıpların pratikte nerede kullanıldığını <a href="../03-react/index.html">03 &mdash; React</a> sayfasında,
+        derleyici/paketleyici tarafını <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a> sayfasında bulacaksın.
+        C#'tan geliyorsan eşdeğerleri karşılaştırmak için <a href="../../CSharp-DotNet/index.html">.NET bölümüne</a>, Java'dan geliyorsan <a href="../../Java/index.html">Java bölümüne</a> dön.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>TypeScript'in en sık sorulan mülakat sorusu tek cümlelik bir kavramdır: <strong>tipler çalışma zamanında yoktur</strong>
+          (type erasure). Derleyici çıktısı düz JavaScript'tir; hiçbir tip kontrolü runtime'da yapılmaz. C# veya Java'daki
+          gibi <code>typeof</code>/reflection ile tip bilgisine ulaşamazsın. Bunu bilmeden gelen kişi ilk 5 dakikada belli olur.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma modeli — önce bunlar oturmalı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>TypeScript</strong></td>
+                <td>JavaScript'in üstüne statik tip sistemi ekleyen, JavaScript'e derlenen dil</td>
+                <td>C# dili (ama IL değil, JS üretir)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/intro.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type erasure</strong></td>
+                <td>Derleme sonrası tiplerin tamamen silinmesi; üretilen JS'te tip yoktur</td>
+                <td>Karşılığı yok — C#'ta tip bilgisi IL'de durur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatın 1 numaralı sorusu.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/basic-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>structural typing</strong></td>
+                <td>İki tip, aynı üyelere sahipse birbirine atanabilir; isim önemsizdir</td>
+                <td>C# <em>nominal</em>: isim/kalıtım şart</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'tan gelen en büyük zihinsel fark. <a href="#tip-sistemi">§ 3</a>'te ayrıntı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsc</strong></td>
+                <td>Resmî TypeScript derleyicisi (komut satırı)</td>
+                <td><code>csc</code> / <code>dotnet build</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>tsc --noEmit</code> = sadece tip kontrolü.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>.ts / .tsx</strong></td>
+                <td>Dosya uzantıları; <code>.tsx</code> içinde JSX yazılabilir</td>
+                <td><code>.cs</code> / <code>.razor</code> ayrımına benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>.tsx</code> içinde <code>&lt;T&gt;</code> generic yazımı JSX ile çakışır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/jsx.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>.mts / .cts</strong></td>
+                <td>Zorla ESM (<code>.mts</code>) veya CommonJS (<code>.cts</code>) modül dosyası</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Node tarafında modül kavgasını çözmek için var.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type checking vs transpiling</strong></td>
+                <td>Tip kontrolü ile JS'e çevirme iki ayrı iştir; esbuild/swc sadece çevirir, kontrol etmez</td>
+                <td>Roslyn'in analiz + derleme aşamalarına benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu yüzden CI'da ayrıca <code>tsc --noEmit</code> koşulur.</td>
+                <td><a href="https://esbuild.github.io/content-types/#typescript">esbuild.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeScript Playground</strong></td>
+                <td>Tarayıcıda TS yazıp üretilen JS'i ve tip hatalarını anında gören resmî araç</td>
+                <td>sharplab.io benzeri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu sayfadaki her maddeyi burada dene, kurulum gerekmez.</td>
+                <td><a href="https://www.typescriptlang.org/play">typescriptlang.org/play</a></td>
+              </tr>
+              <tr>
+                <td><strong>JSDoc ile tipleme</strong></td>
+                <td>Saf <code>.js</code> dosyasında yorum içinde tip yazıp <code>checkJs</code> ile denetletme</td>
+                <td>XML doc yorumları ama denetlenen hâli</td>
+                <td><span class="tag">ORTA</span> Bazı kütüphaneler derleyici kullanmamak için bunu seçiyor.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/intro.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type stripping (Node)</strong></td>
+                <td>Node'un <code>.ts</code> dosyasını tipleri silerek doğrudan çalıştırması</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Node sürümüne göre bayrak/davranış değişir, dokümanı kontrol et.</td>
+                <td><a href="https://nodejs.org/api/typescript.html">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>source map</strong></td>
+                <td>Üretilen JS'teki satırı kaynak TS satırına eşleyen harita dosyası</td>
+                <td>PDB dosyası</td>
+                <td><span class="tag">ORTA</span> Tarayıcıda TS kodunda breakpoint koymanı sağlar.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#sourceMap">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DefinitelyTyped / @types</strong></td>
+                <td>Tipsiz JS kütüphaneleri için topluluk tarafından yazılan tip paketleri</td>
+                <td>Karşılığı yok (NuGet paketi zaten tipli gelir)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>npm i -D @types/node</code> gibi.</td>
+                <td><a href="https://github.com/DefinitelyTyped/DefinitelyTyped">github.com/DefinitelyTyped</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="temel-tipler"><span class="h-num">§ 2</span>Temel tipler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İlkel tipler ve özel tipler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>string</strong></td>
+                <td>Metin tipi</td>
+                <td><code>string</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Küçük harfle <code>string</code>; büyük harfli <code>String</code> yazma (wrapper nesne, kullanılmaz).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>number</strong></td>
+                <td>Tek sayısal tip: tam sayı, ondalık, negatif — hepsi 64-bit float</td>
+                <td><code>double</code> (ama <code>int</code>/<code>decimal</code> yok)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>int</code>, <code>long</code>, <code>decimal</code> arama; TS'te yoklar. Para hesabı için <code>decimal</code> beklersen tuzağa düşersin.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>bigint</strong></td>
+                <td>Sınırsız büyüklükte tam sayı tipi (<code>10n</code>)</td>
+                <td><code>System.Numerics.BigInteger</code></td>
+                <td><span class="tag">ORTA</span> <code>number</code> ile aynı ifadede karıştırılamaz.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>boolean</strong></td>
+                <td><code>true</code> / <code>false</code></td>
+                <td><code>bool</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>symbol</strong></td>
+                <td>Benzersiz, çakışmayan özellik anahtarı üreten ilkel tip</td>
+                <td>Yakın karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>unique symbol</code> ile birlikte aranır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/symbols.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>null</strong></td>
+                <td>"Bilerek boş" değeri</td>
+                <td><code>null</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> TS'te <code>null</code> ile <code>undefined</code> <em>iki ayrı</em> tiptir; <code>strictNullChecks</code> açıkken ikisini de ayrıca ele alman gerekir. (C#/Java'dan geliyorsan: orada tek <code>null</code> var; Python'dan: tek <code>None</code>.)</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>undefined</strong></td>
+                <td>"Hiç atanmamış" değeri; tanımsız değişken ve eksik özellik bunu döner</td>
+                <td>Karşılığı yok (default(T) değil)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Opsiyonel özellik <code>?</code> aslında <code>| undefined</code> demektir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>any</strong></td>
+                <td>Tip kontrolünü tamamen kapatan kaçış kapağı</td>
+                <td><code>dynamic</code></td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yasak sayılır; kod incelemesinde ilk eleştirilen şey. Yerine <code>unknown</code>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>unknown</strong></td>
+                <td>"Ne olduğunu bilmiyorum" tipi; kullanmadan önce daraltmaya zorlar</td>
+                <td><code>object</code>'e yakın ama daha güvenli</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>any</code> ile farkını sorarlar: <code>unknown</code> güvenli, <code>any</code> değil.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>never</strong></td>
+                <td>Hiçbir değeri olmayan tip; asla dönmeyen fonksiyon veya imkânsız durum</td>
+                <td>Yakın: dönüşü olmayan <code>throw</code> yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Exhaustiveness check'in temel taşı — <a href="#tip-sistemi">§ 3</a>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>void</strong></td>
+                <td>Fonksiyonun anlamlı değer dönmediğini söyler</td>
+                <td><code>void</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Fark: <code>void</code> dönüşü beklenen yere değer dönen fonksiyon atanabilir (kasıtlı esneklik).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>object</strong></td>
+                <td>İlkel olmayan her şey (nesne, dizi, fonksiyon)</td>
+                <td><code>object</code> ama ilkelleri kapsamaz</td>
+                <td><span class="tag">ORTA</span> <code>Object</code> ve <code>{}</code> ile karıştırma; üçü farklıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>{} (boş nesne tipi)</strong></td>
+                <td>"null ve undefined dışında her şey" anlamına gelir</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Adı yanıltıcı: boş nesne değil, neredeyse her şey. Sık sorulan tuzak.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dizi, tuple, enum ve literal tipler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>T[] / Array&lt;T&gt;</strong></td>
+                <td>Dizi tipi; iki yazım da aynıdır</td>
+                <td><code>List&lt;T&gt;</code>'e yakın (JS dizisi dinamik boyutludur)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>T[]</code> sabit boyutlu C# dizisi değildir; <code>push</code> ile büyür.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>readonly T[] / ReadonlyArray&lt;T&gt;</strong></td>
+                <td>Değiştirilemeyen dizi görünümü</td>
+                <td><code>IReadOnlyList&lt;T&gt;</code></td>
+                <td><span class="tag">ORTA</span> Sadece derleme zamanı koruma; runtime'da dizi hâlâ değiştirilebilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tuple</strong></td>
+                <td>Uzunluğu ve her elemanın tipi sabit dizi: <code>[string, number]</code></td>
+                <td><code>(string, int)</code> ValueTuple</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'te <code>useState</code> dönüşü tuple'dır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>named tuple element</strong></td>
+                <td>Tuple elemanına isim verme: <code>[start: number, end: number]</code></td>
+                <td>Adlandırılmış ValueTuple alanı</td>
+                <td><span class="tag">ORTA</span> Sadece okunabilirlik; tip davranışı değişmez.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>variadic tuple types</strong></td>
+                <td>Tuple içinde <code>...T</code> ile değişken uzunluklu parça</td>
+                <td><code>params</code>'a uzaktan benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> Kütüphane yazımında (pipe, curry) kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>enum</strong></td>
+                <td>İsimli sabit kümesi; TS'te runtime'da gerçek nesne üretir</td>
+                <td><code>enum</code></td>
+                <td><span class="tag">ORTA</span> TS enum'u derlenince JavaScript nesnesi üretir; tiplerin çoğu gibi silinmez (<code>const enum</code> hariç). Modern kod çoğunlukla union literal tercih eder. C#'tan geliyorsan: C# enum'u da çalışma zamanında gerçek bir tiptir; fark, TS'te bunun JS çıktısına ek kod olarak yansıması ve union literal gibi bir alternatifin bulunmasıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/enums.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>const enum</strong></td>
+                <td>Kod üretmeyip çağrı yerine değeri gömen enum türü</td>
+                <td>C# <code>const</code> alanlarına benzer</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> <code>isolatedModules</code> ve esbuild/swc ile sorun çıkarır; yeni projede kaçın. Tartışmayı "const enum isolatedModules" diye ara.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/enums.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>literal type</strong></td>
+                <td>Tek bir değeri tip yapma: <code>"draft"</code>, <code>42</code>, <code>true</code></td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> TS'in en çok kullanılan özelliği; union ile birleşince enum yerine geçer.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>string literal union</strong></td>
+                <td><code>"draft" | "published" | "archived"</code> — enum yerine standart çözüm</td>
+                <td><code>enum</code> yerine geçer</td>
+                <td><span class="tag tag--ok">TEMEL</span> "TS enum mu union mu" tartışması mülakatta sorulur; ikisinin farkını hazırla.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>as const</strong></td>
+                <td>Değeri en dar, salt-okunur literal tipe sabitleyen ifade</td>
+                <td>Yakın: <code>const</code> + <code>readonly</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> "const assertion" diye de aranır. Nesne/dizi sabitlerini tipe çevirmenin yolu.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>index signature</strong></td>
+                <td><code>{ [key: string]: number }</code> — anahtarı önceden bilinmeyen nesne</td>
+                <td><code>Dictionary&lt;string, int&gt;</code></td>
+                <td><span class="tag">ORTA</span> <code>noUncheckedIndexedAccess</code> açıksa dönüş <code>T | undefined</code> olur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>lib tipleri (DOM, ES2023)</strong></td>
+                <td><code>Date</code>, <code>Map</code>, <code>Set</code>, <code>Promise</code>, <code>HTMLElement</code> gibi hazır tip tanımları</td>
+                <td>BCL / <code>System.*</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>lib</code> ayarı hangilerinin görüneceğini belirler — <a href="#modul-ve-yapilandirma">§ 7</a>.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#lib">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tip-sistemi"><span class="h-num">§ 3</span>Tip sistemi ve daraltma</h2>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>TypeScript'te aynı üyelere sahip <em>her</em> nesne <code>IUser</code>'dır (structural). C#/Java'dan
+          geliyorsan fark büyük: orada bir nesnenin <code>IUser</code> olması için <code>: IUser</code> /
+          <code>implements IUser</code> yazman gerekir (nominal). Go'dan geliyorsan interface'lerin örtük eşleşmesi
+          tanıdık gelir; Python'dan geliyorsan <code>typing.Protocol</code>'e benzer. Bu farkı anlamadan
+          "neden bu nesneyi kabul etti?" sorusuna hiç cevap veremezsin.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tip tanımlama ve birleştirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>structural typing</strong></td>
+                <td>Uyumluluk şekle bakar, isme değil</td>
+                <td>C# nominal tipleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> "duck typing" ile aynı fikir ama derleme zamanında.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>nominal typing</strong></td>
+                <td>Uyumluluğun isim/kalıtımla belirlenmesi</td>
+                <td>C#'ın varsayılan davranışı</td>
+                <td><span class="tag">ORTA</span> TS'te yok; taklidi için branded type — <a href="#ileri-tipler">§ 6</a>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type alias (type)</strong></td>
+                <td>Her tipe isim verme: union, tuple, fonksiyon, ilkel dahil</td>
+                <td>Yakın: <code>using</code> alias + <code>record</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>interface</code> ile farkı klasik mülakat sorusu.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>interface</strong></td>
+                <td>Nesne şekli tanımı; <code>extends</code> ile genişler, aynı isimle tekrar tanımlanabilir</td>
+                <td><code>interface</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'takinden farklı: sınıfın implement etmesi gerekmez, sadece şekil eşleşmesi yeter.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>declaration merging</strong></td>
+                <td>Aynı isimli iki <code>interface</code> tanımının birleşmesi</td>
+                <td><code>partial class</code>'a benzer</td>
+                <td><span class="tag">ORTA</span> <code>type</code> bunu yapamaz; interface'in tek gerçek üstünlüğü budur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>union (|)</strong></td>
+                <td>"Şu ya da bu" tipi: <code>string | number</code></td>
+                <td>Karşılığı yok (C# 14'te hâlâ yok)</td>
+                <td><span class="tag tag--ok">TEMEL</span> TS'in en güçlü aracı; C#'tan gelenin en çok özleyeceği şey.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>intersection (&amp;)</strong></td>
+                <td>"Hepsi birden" tipi: <code>A &amp; B</code></td>
+                <td>Çoklu interface implement etmeye benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çakışan alanlarda sonuç <code>never</code> olabilir, şaşırma.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>discriminated union</strong></td>
+                <td>Ortak bir literal alanla ayrılan union: <code>{ kind: "circle" } | { kind: "square" }</code></td>
+                <td>Sealed hiyerarşi + pattern matching</td>
+                <td><span class="tag tag--ok">TEMEL</span> "tagged union" diye de aranır. Redux/useReducer'ın temeli.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>extends (interface) vs &amp;</strong></td>
+                <td>Genişletmenin iki yolu; <code>extends</code> çakışmayı hata verir, <code>&amp;</code> sessizce birleştirir</td>
+                <td>Kalıtım vs birleştirme</td>
+                <td><span class="tag">ORTA</span> Hata mesajı kalitesi <code>extends</code>'te daha iyi.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>optional property (?)</strong></td>
+                <td>Olmayabilir alan: <code>name?: string</code></td>
+                <td>Nullable referans tipi <code>string?</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> "yok" ile "undefined atanmış" farkı için <code>exactOptionalPropertyTypes</code>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>readonly (özellik)</strong></td>
+                <td>Atanmasını engelleyen alan işareti</td>
+                <td><code>readonly</code> / <code>init</code></td>
+                <td><span class="tag">ORTA</span> Yalnızca derleme zamanı; kopyalama/atama ile aşılabilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>excess property check</strong></td>
+                <td>Doğrudan nesne literali atarken fazladan alanın hata vermesi</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Değişkene alıp atarsan hata kaybolur — bu tutarsızlık sık sorulur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>literal widening</strong></td>
+                <td><code>let x = "a"</code> tipinin <code>string</code>'e genişlemesi</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> <code>const</code> ve <code>as const</code> bunu engeller.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>assignability</strong></td>
+                <td>Bir tipin diğerine atanabilir olma kuralları</td>
+                <td>Implicit conversion + kalıtım kuralları</td>
+                <td><span class="tag tag--info">İLERİ</span> Hata mesajlarını okumak için gerekli sözlük.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Daraltma (narrowing) ve tip iddiaları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>narrowing</strong></td>
+                <td>Kontrol akışına bakarak tipin daraltılması</td>
+                <td>Pattern matching sonrası tip bilgisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu bölümdeki her madde bunun bir aracıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>control flow analysis</strong></td>
+                <td>Derleyicinin <code>if</code>/<code>return</code> akışını izleyip tip çıkarması</td>
+                <td>Definite assignment / nullable analizi</td>
+                <td><span class="tag">ORTA</span> Fonksiyona çıkarınca daralma kaybolur, bunu bilmek lazım.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>typeof guard</strong></td>
+                <td><code>typeof x === "string"</code> ile ilkel tip daraltma</td>
+                <td><code>x is string</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>typeof null === "object"</code> tuzağı JS'ten gelir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>instanceof guard</strong></td>
+                <td>Sınıf örneği kontrolü ile daraltma</td>
+                <td><code>is</code> operatörü</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sadece sınıflarda çalışır; interface'te işe yaramaz (interface runtime'da yok).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>in operator narrowing</strong></td>
+                <td><code>"radius" in shape</code> ile alan varlığına göre daraltma</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>truthiness narrowing</strong></td>
+                <td><code>if (x)</code> ile null/undefined/boş değerlerin elenmesi</td>
+                <td><code>if (x != null)</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>0</code> ve <code>""</code> de falsy'dir — sayı alanında hata kaynağı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>equality narrowing</strong></td>
+                <td><code>===</code> / <code>!==</code> karşılaştırmasıyla daraltma</td>
+                <td>Sabitle karşılaştırma</td>
+                <td><span class="tag">ORTA</span> <code>==</code> değil <code>===</code> kullan (JS sayfasına bak).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type predicate (x is T)</strong></td>
+                <td>Kendi yazdığın daraltıcı fonksiyon: <code>function isUser(x: unknown): x is User</code></td>
+                <td><code>bool TryGetUser(out User u)</code>'ya benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> "user-defined type guard" diye de aranır. Derleyici içeriğini doğrulamaz — yanlış yazarsan sessizce yalan söyler.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>assertion function (asserts)</strong></td>
+                <td><code>function assertIsUser(x: unknown): asserts x is User</code> — geçerse tip daralır</td>
+                <td><code>ArgumentNullException.ThrowIfNull</code> mantığı</td>
+                <td><span class="tag tag--info">İLERİ</span> Değişken tanımının tipi açıkça yazılmalı, yoksa çalışmaz.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>exhaustiveness check</strong></td>
+                <td><code>default</code> dalında <code>never</code>'a atayarak tüm union dallarının kapatıldığını derleyiciye doğrulatma</td>
+                <td>Switch expression'da eksik dal uyarısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Union'a yeni üye eklendiğinde derleme hatası almanın tek yolu. Mülakat favorisi.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type assertion (as)</strong></td>
+                <td>"Ben biliyorum, bu şu tip" demek; kontrol yapılmaz</td>
+                <td><code>(User)obj</code> ama <em>çalışma zamanı kontrolü yok</em></td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> C# cast'i gibi güvenli değildir; hatalıysa runtime'da patlar. Mümkün olduğunca kaçın.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>non-null assertion (!)</strong></td>
+                <td><code>x!.name</code> — "burası null değil" iddiası</td>
+                <td><code>x!.Name</code> null-forgiving operatörü</td>
+                <td><span class="tag">ORTA</span> C#'takiyle aynı sembol, aynı anlam. Kötüye kullanımı yaygın.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>satisfies</strong></td>
+                <td>Değeri bir tipe <em>uyduğunu doğrular</em> ama dar tipini korur (TS 4.9)</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yeni ve çok sorulur. <code>as</code> ile farkı: <code>as</code> zorlar, <code>satisfies</code> doğrular.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>optional chaining (?.)</strong></td>
+                <td>Null ise kısa devre yapan erişim</td>
+                <td><code>?.</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Aynı sembol, aynı davranış.</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>nullish coalescing (??)</strong></td>
+                <td>Sadece <code>null</code>/<code>undefined</code> için varsayılan</td>
+                <td><code>??</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>||</code> ile karıştırma: <code>||</code> <code>0</code> ve <code>""</code>'yi de yakalar.</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fonksiyon-tipleri"><span class="h-num">§ 4</span>Fonksiyon ve sınıf tipleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fonksiyon imzaları ve parametreler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>function type expression</strong></td>
+                <td><code>(a: string) =&gt; number</code> biçiminde fonksiyon tipi</td>
+                <td><code>Func&lt;string, int&gt;</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>=&gt;</code> burada tip yazımıdır, lambda değil.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>call signature</strong></td>
+                <td>Nesnenin çağrılabilir olduğunu tanımlayan imza</td>
+                <td><code>delegate</code> + ek üyeler</td>
+                <td><span class="tag">ORTA</span> Fonksiyona ekstra özellik iliştirmek için kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>construct signature (new)</strong></td>
+                <td><code>new (x: string) =&gt; T</code> — <code>new</code> ile çağrılabilirlik</td>
+                <td>Constructor kısıtı / <code>where T : new()</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Factory ve DI kalıplarında geçer.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>optional parameter</strong></td>
+                <td><code>function f(a: string, b?: number)</code></td>
+                <td>Varsayılan değerli parametre</td>
+                <td><span class="tag tag--ok">TEMEL</span> Opsiyonel parametreler sonda olmalı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>default parameter</strong></td>
+                <td><code>function f(a = 10)</code> — tip çıkarımı da yapılır</td>
+                <td><code>int a = 10</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'tan farklı: varsayılan değer sabit olmak zorunda değil.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rest parameter</strong></td>
+                <td><code>function f(...args: number[])</code></td>
+                <td><code>params int[] args</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>parameter destructuring</strong></td>
+                <td><code>function f({ id, name }: User)</code> — nesneyi parçalayarak alma</td>
+                <td>Karşılığı yok (deconstruct'a uzak benzer)</td>
+                <td><span class="tag tag--ok">TEMEL</span> React props'ta her yerde görürsün.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>function overload</strong></td>
+                <td>Birden çok imza bildirimi + tek gerçek gövde</td>
+                <td>Method overloading</td>
+                <td><span class="tag">ORTA</span> C#'tan farklı: gövde <em>tek</em>tir, imzaların hepsini elle karşılaman gerekir. Çoğu durumda union daha iyidir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>this parameter</strong></td>
+                <td>Fonksiyonun ilk "sahte" parametresi olarak <code>this</code> tipini bildirme</td>
+                <td>Extension method'un <code>this</code> parametresi</td>
+                <td><span class="tag tag--info">İLERİ</span> Derlenen JS'e yazılmaz, sadece tip içindir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ThisParameterType / OmitThisParameter</strong></td>
+                <td><code>this</code> parametresini okuyan/çıkaran yardımcı tipler</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>contextual typing</strong></td>
+                <td>Callback parametrelerinin bağlamdan otomatik tiplenmesi</td>
+                <td>Lambda parametre çıkarımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>arr.map(x =&gt; ...)</code> içinde <code>x</code>'i yazmana gerek olmamasının sebebi.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>void dönüş tuzağı</strong></td>
+                <td><code>() =&gt; void</code> beklenen yere değer dönen fonksiyon atanabilir</td>
+                <td>C#'ta izin verilmez</td>
+                <td><span class="tag">ORTA</span> "return type void assignability" diye ara; <code>forEach</code> kalıplarında karşına çıkar.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>strictFunctionTypes / bivariance</strong></td>
+                <td>Parametre tiplerinin ne kadar esnek eşleşeceğini belirleyen kural</td>
+                <td>Delegate variance kuralları</td>
+                <td><span class="tag tag--info">İLERİ</span> Metot sözdizimiyle yazılan üyeler bu kontrolün dışındadır (bilinçli boşluk).</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#strictFunctionTypes">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>async fonksiyon tipi</strong></td>
+                <td><code>async</code> fonksiyon her zaman <code>Promise&lt;T&gt;</code> döner</td>
+                <td><code>async Task&lt;T&gt;</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Dönüş tipini <code>T</code> yazamazsın, <code>Promise&lt;T&gt;</code> yazarsın.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>never dönüşü</strong></td>
+                <td>Her zaman hata fırlatan veya sonsuz döngüde kalan fonksiyonun dönüş tipi</td>
+                <td><code>[DoesNotReturn]</code></td>
+                <td><span class="tag">ORTA</span> Daraltmayı ilerletir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Promise&lt;T&gt;</strong></td>
+                <td>Gelecekte tamamlanacak işin tipi; <code>await</code> onu <code>T</code>'ye çözer</td>
+                <td><code>Task&lt;T&gt;</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>Promise</code> tipinin görünmesi <code>lib</code>/<code>target</code> ayarına bağlıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generator (function*)</strong></td>
+                <td>Duraklatılabilir fonksiyon; <code>Generator&lt;T&gt;</code> tipini döner</td>
+                <td><code>IEnumerable&lt;T&gt;</code> + <code>yield return</code></td>
+                <td><span class="tag">ORTA</span> Aramada <code>function*</code> yaz; "generator" tek başına başka sonuç verir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/iterators-and-generators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Iterable&lt;T&gt; / Iterator&lt;T&gt;</strong></td>
+                <td><code>for...of</code> ile dolaşılabilir olmanın tip sözleşmesi</td>
+                <td><code>IEnumerable&lt;T&gt;</code> / <code>IEnumerator&lt;T&gt;</code></td>
+                <td><span class="tag">ORTA</span> Eski <code>target</code> değerlerinde <code>downlevelIteration</code> ayarı gerekebilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/iterators-and-generators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>AsyncIterable / for await...of</strong></td>
+                <td>Asenkron akışı tipli olarak dolaşma</td>
+                <td><code>IAsyncEnumerable&lt;T&gt;</code> + <code>await foreach</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Stream döndüren API'lerde karşına çıkar.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/iterators-and-generators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>arrow function ve <code>this</code></strong></td>
+                <td>Ok fonksiyonunun kendi <code>this</code>'i yoktur, dıştakini kullanır</td>
+                <td>Lambda'nın <code>this</code>'i yakalaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sınıf metodunu callback olarak verirken <code>this</code> kaybının çözümü budur; ayrıntı <a href="../01-javascript/index.html">01 &mdash; JavaScript</a>.</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Önceliği geçmişine bağlı: OOP sınıfları olan bir dilden (C#, Java) geliyorsan en tanıdık gelen bölüm budur ve
+        tam da bu yüzden tuzaklıdır; fonksiyon ağırlıklı JS geçmişin varsa bu bölüm düşük öncelikli, çünkü React kodunda
+        sınıf nadiren görülür. Sözdizimi C#/Java'ya benzer, anlamı benzemez: <code>private</code> yalnızca derleme zamanı kısıtıdır, <code>implements</code> zorunlu
+        değildir, alan başlatma sırası ayara bağlıdır. Bu tablodaki her satırı Playground'da derlenmiş JS
+        çıktısıyla birlikte incele.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sınıflar ve OOP üyeleri &mdash; C#/Java'dan gelenin en çok karıştırdığı alan</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>class</strong></td>
+                <td>ES2015 sınıf sözdizimi; TS bunu tip ek açıklamalarıyla zenginleştirir</td>
+                <td><code>class</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> TS'te sınıf adı hem <em>değer</em> hem <em>tip</em> olarak kullanılabilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>class field (alan tanımı)</strong></td>
+                <td><code>ad: string = ""</code> biçiminde sınıf alanı</td>
+                <td>Field / property</td>
+                <td><span class="tag tag--ok">TEMEL</span> Alan tanımı ES2022 özelliğidir; üretilen kod <code>useDefineForClassFields</code> ayarına göre değişir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>parameter properties</strong></td>
+                <td><code>constructor(private readonly repo: Repo)</code> &mdash; alanı doğrudan constructor imzasında tanımlama</td>
+                <td>Primary constructor / elle atama boilerplate'i</td>
+                <td><span class="tag">ORTA</span> TS'e özgüdür, düz JS'te yoktur; <code>erasableSyntaxOnly</code> açıkken kullanılamaz.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>public / protected / private (TS)</strong></td>
+                <td>TS'in erişim belirteçleri</td>
+                <td>Aynı anahtar kelimeler</td>
+                <td><span class="tag tag--ok">TEMEL</span> <strong>Sadece derleme zamanında</strong> korur; üretilen JS'te alan dışarıdan okunabilir. Sık sorulan mülakat sorusu.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>#private (ECMAScript private field)</strong></td>
+                <td><code>#sayac</code> &mdash; dilin kendi gerçek gizli alanı</td>
+                <td>Gerçek <code>private</code></td>
+                <td><span class="tag">ORTA</span> Runtime'da da gizlidir. <code>private</code> ile aynı şey değildir; ikisi ayrı mekanizmadır.</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_elements">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>readonly (sınıf alanı)</strong></td>
+                <td>Yalnızca tanımda veya constructor içinde atanabilen alan</td>
+                <td><code>readonly</code> field</td>
+                <td><span class="tag">ORTA</span> Derleme zamanı kısıtıdır; <code>const</code> ile karıştırma.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>static üye / static block</strong></td>
+                <td>Örneğe değil sınıfa ait üyeler; <code>static { }</code> başlatma bloğu</td>
+                <td><code>static</code> üye / static constructor</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>abstract class / abstract member</strong></td>
+                <td>Örneklenemeyen taban sınıf ve gövdesiz üye</td>
+                <td><code>abstract</code></td>
+                <td><span class="tag">ORTA</span> Sözdizimi C# ile neredeyse birebir aynıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>implements</strong></td>
+                <td>Sınıfın bir interface'i sağladığını derleyiciye denetletme</td>
+                <td><code>: IInterface</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Yapısal tipleme yüzünden <strong>zorunlu değildir</strong>, sadece kontrol amaçlıdır. C#'ta zorunludur &mdash; asıl fark budur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>extends (sınıf kalıtımı)</strong></td>
+                <td>Taban sınıftan türetme</td>
+                <td><code>: BaseClass</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Generic kısıtındaki <code>extends</code> ile aynı kelime, farklı anlam.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>override / noImplicitOverride</strong></td>
+                <td>Taban üyeyi ezerken <code>override</code> yazmayı zorunlu kılan ayar</td>
+                <td><code>override</code> (dilde zorunlu)</td>
+                <td><span class="tag">ORTA</span> TS'te varsayılan kapalıdır; <code>strict</code> bile açmaz, ayrıca açman gerekir.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noImplicitOverride">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>get / set (accessor)</strong></td>
+                <td>Özellik gibi kullanılan metot çifti</td>
+                <td>Property <code>{ get; set; }</code></td>
+                <td><span class="tag">ORTA</span> TS 4.3+ ile get ve set farklı tipte olabilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>accessor (auto-accessor)</strong></td>
+                <td>Alanı otomatik get/set çiftine çeviren anahtar kelime</td>
+                <td>Otomatik property <code>{ get; set; }</code></td>
+                <td><span class="tag tag--info">İLERİ</span> TS 4.9 ile geldi; yeni decorator sistemiyle birlikte anılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>polymorphic <code>this</code> type</strong></td>
+                <td>Dönüş tipi olarak <code>this</code>; türeyen sınıfta o sınıfa daralır</td>
+                <td>Doğrudan karşılığı yok (fluent API'de generic ile taklit edilir)</td>
+                <td><span class="tag tag--info">İLERİ</span> Builder/fluent zincirleri için.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>class expression</strong></td>
+                <td>İsimsiz sınıfı bir değişkene atama</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Mixin kalıplarının temeli.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>abstract construct signature</strong></td>
+                <td><code>abstract new () =&gt; T</code> &mdash; soyut sınıfı tip olarak alma</td>
+                <td><code>Type</code> parametresi geçme</td>
+                <td><span class="tag tag--info">İLERİ</span> Fabrika/DI benzeri kodlarda gerekir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/classes.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>useDefineForClassFields</strong></td>
+                <td>Sınıf alanlarının atama ile mi <code>defineProperty</code> ile mi üretileceği</td>
+                <td>Alan başlatma sırası farkı</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski kodda başlatma sırasını değiştirip sessiz hataya yol açabilir; <code>target: ES2022</code> ve üstünde varsayılan açıktır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#useDefineForClassFields">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>using / Symbol.dispose</strong></td>
+                <td>Blok bitince kaynağı otomatik bırakan bildirim (TS 5.2)</td>
+                <td><code>using</code> + <code>IDisposable</code></td>
+                <td><span class="tag tag--info">İLERİ</span> <code>await using</code> karşılığı <code>IAsyncDisposable</code>'dır. Çalışma ortamı desteğini kontrol et.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>sınıf yerine fonksiyon kültürü</strong></td>
+                <td>JS/TS ekosisteminde iş mantığı çoğunlukla sınıf değil, fonksiyon ve düz nesne ile yazılır</td>
+                <td>Servis sınıfı alışkanlığı</td>
+                <td><span class="tag">ORTA</span> .NET'ten gelenin en görünür stil hatası her şeyi sınıfa sarmaktır. NestJS bunun istisnasıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="generics"><span class="h-num">§ 5</span>Generics</h2>
+
+        <p>Generic, bir fonksiyon veya tipin bir <em>tip parametresi</em> (<code>&lt;T&gt;</code>) alması ve bu parametreye
+        kısıt (<code>extends</code>) konabilmesidir. TS generic'leri <strong>runtime'da yoktur</strong>. Geçmişine göre:</p>
+
+        <ul>
+          <li><strong>C# veya Java generics biliyorsan</strong> &rarr; hızlı ilerlersin; şekil çok benzer. Farklar: type erasure (C#'taki <code>typeof(T)</code>, <code>new T()</code>, <code>where T : class</code> gibi şeylerin doğrudan karşılığı yoktur; Java'dan geliyorsan erasure tanıdık), <code>extends</code> kısıtı, <code>keyof</code> ve default type parameter.</li>
+          <li><strong>Generics'i hiç görmediysen</strong> (JS veya Python geçmişi, ya da sıfırdan) &rarr; önce handbook'un <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">Generics</a> sayfasıyla "tip parametresi nedir, kısıt ne işe yarar" sorusunu otur, sonra bu tabloya gel; süre daha uzun olur.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Generic temel ve kısıtlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>type parameter</strong></td>
+                <td><code>function id&lt;T&gt;(x: T): T</code> — tip değişkeni</td>
+                <td>Aynı sözdizimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>.tsx</code> dosyasında <code>&lt;T,&gt;</code> yazmak gerekebilir (JSX çakışması).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic function</strong></td>
+                <td>Tip parametreli fonksiyon</td>
+                <td>Generic method</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çoğu zaman <code>T</code>'yi yazmana gerek kalmaz, çıkarım yapar.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic interface / type</strong></td>
+                <td><code>interface Repo&lt;T&gt; { get(id: string): T }</code></td>
+                <td>Generic interface</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic class</strong></td>
+                <td>Tip parametreli sınıf</td>
+                <td>Generic class</td>
+                <td><span class="tag">ORTA</span> Statik üyeler tip parametresi kullanamaz (C#'la aynı kısıt).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>constraint (extends)</strong></td>
+                <td><code>&lt;T extends { id: string }&gt;</code> — tip parametresini sınırlama</td>
+                <td><code>where T : IHasId</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Anahtar kelime <code>where</code> değil <code>extends</code>. Kalıtım anlamına gelmez, "en az bunu içerir" demektir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>keyof constraint</strong></td>
+                <td><code>&lt;T, K extends keyof T&gt;</code> — anahtarı tipe bağlama</td>
+                <td>Karşılığı yok (Expression ağacıyla taklit edilir)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>get(obj, "name")</code> tipli erişimin temel kalıbı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/keyof-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>default type parameter</strong></td>
+                <td><code>&lt;T = string&gt;</code> — varsayılan tip argümanı</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> C#'ta olmayan bir özellik; kütüphane API'lerinde çok kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>const type parameter</strong></td>
+                <td><code>&lt;const T&gt;</code> — argümanı <code>as const</code> yazmadan dar tipte yakalar (TS 5.0)</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>const</code> kelimesi burada değişken tanımı değil.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NoInfer&lt;T&gt;</strong></td>
+                <td>Belirli bir konumdan tip çıkarımını engelleyen yardımcı (TS 5.4)</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Yanlış parametreden çıkarım yapılmasını engeller.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>infer</strong></td>
+                <td>Conditional type içinde tip yakalama: <code>T extends Array&lt;infer U&gt; ? U : never</code></td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Sadece <code>extends ... ?</code> ifadesi içinde geçerlidir. <code>ReturnType</code>'ın motoru.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>variance (covariance/contravariance)</strong></td>
+                <td>Generic tipin alt/üst tip ilişkisini nasıl taşıdığı</td>
+                <td><code>out T</code> / <code>in T</code></td>
+                <td><span class="tag tag--info">İLERİ</span> TS'te varsayılan olarak yapıdan <em>çıkarılır</em>, elle yazmazsın.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>variance annotations (in/out)</strong></td>
+                <td><code>interface Box&lt;out T&gt;</code> — varyansı elle bildirme (TS 4.7)</td>
+                <td><code>out T</code>/<code>in T</code> ile aynı harfler</td>
+                <td><span class="tag tag--info">İLERİ</span> TS'te bu sadece performans/doğrulama içindir, davranışı değiştirmez.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-7.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic factory (new () =&gt; T)</strong></td>
+                <td>Sınıfın kendisini parametre alıp örnek üretme</td>
+                <td><code>where T : new()</code></td>
+                <td><span class="tag tag--info">İLERİ</span> <code>new T()</code> doğrudan yazılamaz — en sık takılınan fark.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>kısmi tip argümanı verilemez</strong></td>
+                <td>Birden çok tip parametresinin bir kısmını yazıp kalanını çıkarttıramazsın</td>
+                <td>C#'ta da benzer kısıt vardır</td>
+                <td><span class="tag">ORTA</span> Çözüm: curry'lenmiş fonksiyon veya <code>NoInfer</code>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ileri-tipler"><span class="h-num">§ 6</span>İleri tipler ve utility types</h2>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bu bölüm TS'in C# veya Java gibi dillerde karşılığı olmayan kısmıdır: tip seviyesinde programlama. Mülakatta
+          "utility types'tan hangilerini bilirsin" sorusu neredeyse kesin gelir; en azından
+          <code>Partial</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>, <code>ReturnType</code> hazır olsun.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tip operatörleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>keyof</strong></td>
+                <td>Bir tipin anahtarlarını string literal union'a çevirir</td>
+                <td><code>nameof</code>'a uzak benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/keyof-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>typeof (tip konumunda)</strong></td>
+                <td>Bir <em>değişkenin</em> tipini alır: <code>typeof config</code></td>
+                <td><code>var</code> çıkarımına benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> JS'teki runtime <code>typeof</code> ile <em>aynı kelime, farklı iş</em>. En çok karıştırılan madde.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/typeof-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>indexed access type</strong></td>
+                <td><code>User["name"]</code> — bir alanın tipini alma</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>T[keyof T]</code> = tüm değerlerin union'ı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mapped type</strong></td>
+                <td><code>{ [K in keyof T]: ... }</code> — tipteki her alanı dönüştürme</td>
+                <td>Karşılığı yok (source generator'a benzetilebilir)</td>
+                <td><span class="tag tag--info">İLERİ</span> Tüm utility type'ların temeli.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>key remapping (as)</strong></td>
+                <td>Mapped type içinde anahtarı yeniden adlandırma: <code>[K in keyof T as `get${...}`]</code></td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Buradaki <code>as</code>, type assertion'ın <code>as</code>'ı değildir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mapped type modifiers (+/-)</strong></td>
+                <td><code>-readonly</code>, <code>-?</code> ile işaretleri kaldırma</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>Required</code> ve <code>Mutable</code> böyle yazılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>conditional type</strong></td>
+                <td><code>T extends U ? X : Y</code> — tip seviyesinde if</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>distributive conditional type</strong></td>
+                <td>Çıplak tip parametresi union ise koşulun her üye için ayrı çalışması</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>[T] extends [U]</code> yazımı dağıtımı kapatır — sık sorulan ince nokta.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>template literal type</strong></td>
+                <td>Tip seviyesinde string birleştirme: <code>`on${Capitalize&lt;K&gt;}`</code></td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Route ve event isimlerini tiplemekte kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Uppercase / Lowercase / Capitalize / Uncapitalize</strong></td>
+                <td>Derleyiciye gömülü string dönüştürme tipleri</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> "intrinsic string types" diye de geçer.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>recursive type</strong></td>
+                <td>Kendini referans eden tip: JSON, ağaç yapısı, <code>DeepPartial</code></td>
+                <td>Kendini referans eden sınıf</td>
+                <td><span class="tag tag--info">İLERİ</span> Derleyicinin özyineleme derinliği sınırlıdır; "type instantiation is excessively deep" hatasını göreceksin.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>branded / nominal type</strong></td>
+                <td><code>string &amp; { __brand: "UserId" }</code> — structural sistemde nominal davranış taklidi</td>
+                <td>Strongly-typed ID / value object</td>
+                <td><span class="tag tag--info">İLERİ</span> "branded types" veya "opaque types" diye ara.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>unique symbol</strong></td>
+                <td>Tekil, karşılaştırılabilir sembol tipi</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Branded type'ların temiz versiyonunda kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/symbols.html">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Utility types — ezberlenmesi gerekenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Partial&lt;T&gt;</strong></td>
+                <td>Tüm alanları opsiyonel yapar</td>
+                <td>PATCH DTO'su elle yazmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> PATCH/update senaryolarının standardı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Required&lt;T&gt;</strong></td>
+                <td>Tüm alanları zorunlu yapar</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Readonly&lt;T&gt;</strong></td>
+                <td>Tüm alanları salt-okunur yapar (yüzeysel)</td>
+                <td><code>init</code> only record</td>
+                <td><span class="tag tag--ok">TEMEL</span> Derin değil; iç nesneler hâlâ değişebilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pick&lt;T, K&gt;</strong></td>
+                <td>Seçilen alanlardan yeni tip</td>
+                <td>Projeksiyon DTO'su</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Omit&lt;T, K&gt;</strong></td>
+                <td>Belirtilen alanları çıkararak yeni tip</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> Olmayan alan adı yazarsan hata vermez — bilinen zayıflık.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Record&lt;K, V&gt;</strong></td>
+                <td>Anahtar-değer haritası tipi</td>
+                <td><code>Dictionary&lt;K, V&gt;</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'taki <code>record</code> ile <em>hiç alakası yok</em>; arama yaparken "TypeScript Record utility type" yaz.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Exclude&lt;T, U&gt;</strong></td>
+                <td>Union'dan üye çıkarır</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Union üzerinde çalışır, nesne alanında değil (o <code>Omit</code>).</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Extract&lt;T, U&gt;</strong></td>
+                <td>Union'dan eşleşen üyeleri seçer</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Discriminated union'dan tek dalı çekmek için kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NonNullable&lt;T&gt;</strong></td>
+                <td><code>null</code> ve <code>undefined</code>'ı çıkarır</td>
+                <td>Nullable olmayan karşılık</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReturnType&lt;F&gt;</strong></td>
+                <td>Fonksiyonun dönüş tipini çıkarır</td>
+                <td>Reflection ile <code>MethodInfo.ReturnType</code> (ama runtime)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>ReturnType&lt;typeof fn&gt;</code> biçiminde kullanılır — <code>typeof</code> unutulur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Parameters&lt;F&gt;</strong></td>
+                <td>Parametre tiplerini tuple olarak verir</td>
+                <td><code>MethodInfo.GetParameters()</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConstructorParameters&lt;T&gt;</strong></td>
+                <td>Constructor parametrelerini tuple olarak verir</td>
+                <td><code>ConstructorInfo.GetParameters()</code></td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>InstanceType&lt;T&gt;</strong></td>
+                <td>Sınıf tipinden örnek tipini alır</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Awaited&lt;T&gt;</strong></td>
+                <td>İç içe Promise'leri soyarak nihai değeri verir</td>
+                <td><code>Task&lt;T&gt;</code>'ten <code>T</code></td>
+                <td><span class="tag">ORTA</span> <code>Awaited&lt;ReturnType&lt;typeof f&gt;&gt;</code> çok yaygın kalıp.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ThisType&lt;T&gt;</strong></td>
+                <td>Nesne literalinde <code>this</code> tipini belirler</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>noImplicitThis</code> gerektirir; nadir kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prettify / Simplify kalıbı</strong></td>
+                <td>Karmaşık tipi editörde okunur hâle getiren ev yapımı mapped type</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Resmî bir tip değildir; topluluk kalıbıdır, kendin yazarsın.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/mapped-types.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>type-challenges</strong></td>
+                <td>Tip seviyesi programlama alıştırmaları deposu</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Bu bölümü gerçekten öğrenmenin en hızlı yolu; "easy" seti yeter.</td>
+                <td><a href="https://github.com/type-challenges/type-challenges">github.com/type-challenges</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tip seviyesi yardımcı kütüphaneler &mdash; seçenekler (hepsi ücretsiz/açık kaynak)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>type-fest</strong></td>
+                <td>Hazır ileri utility type koleksiyonu (<code>SetOptional</code>, <code>Jsonify</code>, ...)</td>
+                <td>Yardımcı sınıf kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz/MIT. Kendi mapped type'ını yazmadan önce burada var mı diye bak.</td>
+                <td><a href="https://github.com/sindresorhus/type-fest">github.com/sindresorhus/type-fest</a></td>
+              </tr>
+              <tr>
+                <td><strong>ts-pattern</strong></td>
+                <td>Tipli desen eşleme (pattern matching) kütüphanesi</td>
+                <td>C# <code>switch</code> pattern matching</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Discriminated union ile exhaustiveness kontrolünü okunur hâle getirir.</td>
+                <td><a href="https://github.com/gvergnaud/ts-pattern">github.com/gvergnaud/ts-pattern</a></td>
+              </tr>
+              <tr>
+                <td><strong>neverthrow</strong></td>
+                <td>İstisna yerine <code>Result&lt;T, E&gt;</code> dönme kalıbı</td>
+                <td><code>Result</code> / <code>OneOf</code> kalıpları</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Fonksiyonel hata yönetimini sevenlerin seçeneği; zorunlu değil.</td>
+                <td><a href="https://github.com/supermacro/neverthrow">github.com/supermacro/neverthrow</a></td>
+              </tr>
+              <tr>
+                <td><strong>ts-morph</strong></td>
+                <td>TS derleyici API'sini sarmalayan kod üretme/analiz kütüphanesi</td>
+                <td>Roslyn API'si ile kod analizi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Toplu refactor ve kod üretimi işlerinde kullanılır.</td>
+                <td><a href="https://ts-morph.com">ts-morph.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeScript Cheat Sheets</strong></td>
+                <td>Resmî tek sayfalık özet kartlar (tipler, sınıflar, interface, kontrol akışı)</td>
+                <td>&mdash;</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Ezber yerine yazdır ve masana koy.</td>
+                <td><a href="https://www.typescriptlang.org/cheatsheets">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="modul-ve-yapilandirma"><span class="h-num">§ 7</span>Modüller, tsconfig ve tip tanım dosyaları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Modül sistemi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ESM (import/export)</strong></td>
+                <td>JavaScript'in standart modül sistemi</td>
+                <td><code>using</code> + assembly referansı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Detay için <a href="../01-javascript/index.html">01 &mdash; JavaScript</a>.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/theory.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CommonJS (require)</strong></td>
+                <td>Node'un eski modül sistemi</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ her yerde; ESM ile karışması en sık hata kaynağı.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/theory.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>import type / export type</strong></td>
+                <td>Sadece tip taşıyan, derlemede silinen import</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> Döngüsel bağımlılık ve gereksiz bundle şişmesini önler.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>isolatedModules</strong></td>
+                <td>Her dosyanın tek başına derlenebilir olmasını zorlar</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> esbuild/swc/Vite kullanan her projede açık olmalı.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#isolatedModules">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>verbatimModuleSyntax</strong></td>
+                <td>Import ifadelerini yazdığın gibi bırakır; tip importlarını açıkça yazmaya zorlar</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Eski <code>importsNotUsedAsValues</code> ve <code>preserveValueImports</code>'un yerine geçti.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#verbatimModuleSyntax">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>moduleResolution</strong></td>
+                <td>Import yolunun dosyaya nasıl çözüleceği: <code>node16</code>, <code>nodenext</code>, <code>bundler</code>, <code>classic</code></td>
+                <td>Assembly probing'e uzak benzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Cannot find module" hatalarının %90'ı burada. <code>bundler</code> Vite/webpack için.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>esModuleInterop</strong></td>
+                <td>CommonJS paketlerini <code>import x from</code> ile alabilmeyi sağlar</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Kapalıysa <code>import * as</code> yazmak zorunda kalırsın.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#esModuleInterop">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>paths / baseUrl</strong></td>
+                <td>Takma yol tanımı: <code>@/components/*</code></td>
+                <td>Yakın karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tuzak: <code>tsc</code> bunu <em>runtime'da çözmez</em>; bundler'a da ayrıca tanıtmalısın.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#paths">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>module augmentation</strong></td>
+                <td>Başka bir paketin tiplerine alan ekleme</td>
+                <td>Extension method'a uzak benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> Express <code>Request</code>'e <code>user</code> eklemek klasik örnektir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>declare global</strong></td>
+                <td>Global kapsama tip ekleme</td>
+                <td>Global <code>using</code>'e uzak benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>window.myApp</code> gibi şeyler için.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>.d.ts (declaration file)</strong></td>
+                <td>Sadece tip içeren, kod içermeyen dosya</td>
+                <td>Referans assembly / metadata</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kütüphane yayınlarken <code>declaration: true</code> ile üretilir.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ambient declaration (declare)</strong></td>
+                <td>Var olduğunu bildiğin ama kodu burada olmayan şeyin tipini bildirme</td>
+                <td><code>extern</code>/P-Invoke bildirimine benzer</td>
+                <td><span class="tag">ORTA</span> Tipsiz paketleri geçici olarak susturmanın yolu: <code>declare module "paket";</code></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/2/type-declarations.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>triple-slash directive</strong></td>
+                <td><code>/// &lt;reference types="node" /&gt;</code> — tek satırlık derleyici yönergesi</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski projelerde görürsün; yenisinde <code>types</code> ayarı kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@types paketi arama</strong></td>
+                <td>Bir paketin tipi var mı diye bakma</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Resmî arama sayfası mevcut.</td>
+                <td><a href="https://www.typescriptlang.org/dt/search">typescriptlang.org/dt/search</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>tsconfig.json — bilmen gereken ayarlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>tsconfig.json</strong></td>
+                <td>Projenin derleyici ayar dosyası</td>
+                <td><code>.csproj</code> + <code>Directory.Build.props</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Tüm seçeneklerin resmî referansı tek sayfadadır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/">typescriptlang.org/tsconfig</a></td>
+              </tr>
+              <tr>
+                <td><strong>strict</strong></td>
+                <td>Katı kontrol ailesini topluca açar</td>
+                <td><code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code> + <code>TreatWarningsAsErrors</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Kapalı TS yazmak neredeyse anlamsızdır; mülakatta "açık mıydı?" diye sorulur.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#strict">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noImplicitAny</strong></td>
+                <td>Tipi çıkarılamayan yerlerde sessizce <code>any</code> kabul etmez</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>strict</code> içinde gelir.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noImplicitAny">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>strictNullChecks</strong></td>
+                <td><code>null</code>/<code>undefined</code>'ı ayrı tip sayar</td>
+                <td>Nullable reference types</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kapalıyken tüm null güvenliği kaybolur.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#strictNullChecks">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>strictPropertyInitialization</strong></td>
+                <td>Sınıf alanlarının constructor'da atanmasını zorlar</td>
+                <td>CS8618 uyarısı</td>
+                <td><span class="tag">ORTA</span> <code>!</code> ile susturulabilir (definite assignment assertion).</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#strictPropertyInitialization">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>useUnknownInCatchVariables</strong></td>
+                <td><code>catch (e)</code> içindeki <code>e</code>'yi <code>unknown</code> yapar</td>
+                <td><code>catch (Exception e)</code> her zaman tipli</td>
+                <td><span class="tag">ORTA</span> JS'te her şey fırlatılabilir; bu yüzden <code>Error</code> değil <code>unknown</code>.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#useUnknownInCatchVariables">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noUncheckedIndexedAccess</strong></td>
+                <td>Dizi/sözlük erişimine <code>| undefined</code> ekler</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> <code>strict</code>'e dahil <em>değildir</em>, ayrı açman gerekir.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>exactOptionalPropertyTypes</strong></td>
+                <td>"Alan yok" ile "alan undefined" ayrımını korur</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>strict</code>'e dahil değil.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#exactOptionalPropertyTypes">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noImplicitOverride</strong></td>
+                <td>Üst sınıf metodunu ezerken <code>override</code> yazmayı zorunlu kılar</td>
+                <td><code>override</code> zaten zorunlu</td>
+                <td><span class="tag">ORTA</span> Üst sınıf metodunu yanlışlıkla ezmeyi ve üst sınıfta silinen metodu fark etmemeyi önler; aç. (C#'tan geliyorsan: <code>override</code> zaten zorunlu, alışkanlığınla uyumlu.)</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noImplicitOverride">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noImplicitReturns</strong></td>
+                <td>Bazı dallardan değer dönmeyen fonksiyonu hata sayar</td>
+                <td>CS0161</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noImplicitReturns">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noFallthroughCasesInSwitch</strong></td>
+                <td><code>break</code> unutulan <code>case</code>'i hata sayar</td>
+                <td>C#'ta zaten derleme hatası</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noFallthroughCasesInSwitch">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>target</strong></td>
+                <td>Üretilecek JavaScript sürümü (<code>ES2022</code> vb.)</td>
+                <td><code>TargetFramework</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#target">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>lib</strong></td>
+                <td>Hangi hazır tip kümelerinin görüneceği (DOM, ES2023...)</td>
+                <td>Referans assembly seçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Node projesinde <code>DOM</code> eklemek yaygın hatadır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#lib">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>skipLibCheck</strong></td>
+                <td><code>.d.ts</code> dosyalarını denetlemeyi atlar</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Neredeyse her projede açık; derlemeyi hızlandırır ama üçüncü parti tip hatalarını gizler.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#skipLibCheck">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>declaration / declarationMap</strong></td>
+                <td><code>.d.ts</code> ve harita üretimi</td>
+                <td>XML doc + PDB</td>
+                <td><span class="tag">ORTA</span> Kütüphane yayınlıyorsan şart.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#declaration">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>incremental / tsBuildInfoFile</strong></td>
+                <td>Artımlı derleme durumunu diske yazar</td>
+                <td><code>obj/</code> ara çıktıları</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#incremental">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>composite / project references</strong></td>
+                <td>Çok projeli çözümlerde proje bağımlılığı ve artımlı derleme</td>
+                <td>Solution + ProjectReference</td>
+                <td><span class="tag tag--info">İLERİ</span> Monorepo'da işine yarar; <code>tsc --build</code> ile kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/project-references.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>jsx (ayar)</strong></td>
+                <td>JSX'in nasıl derleneceği: <code>react-jsx</code>, <code>preserve</code></td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> React 17+ için <code>react-jsx</code>.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#jsx">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>allowJs / checkJs</strong></td>
+                <td>JS dosyalarını projeye alma ve denetleme</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Kademeli TS'e geçiş stratejisinin aracı.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#allowJs">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>resolveJsonModule</strong></td>
+                <td>JSON dosyasını tipli olarak import etmeyi açar</td>
+                <td>Embedded resource'a uzak benzer</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#resolveJsonModule">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>extends (tsconfig)</strong></td>
+                <td>Başka bir tsconfig'i temel alma</td>
+                <td><code>Directory.Build.props</code> mirası</td>
+                <td><span class="tag">ORTA</span> Hazır tabanlar için <code>@tsconfig/*</code> paketlerini ara.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#extends">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>module</strong></td>
+                <td>Üretilecek modül biçimi: <code>esnext</code>, <code>nodenext</code>, <code>commonjs</code></td>
+                <td>Çıktı biçimi (dll/exe) seçimi gibi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>moduleResolution</code> ile birlikte ayarlanır; ikisini karıştırma. Node projesinde bugün <code>nodenext</code> yaygın.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#module">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>outDir / rootDir</strong></td>
+                <td>Derlenmiş dosyaların yazılacağı ve kaynakların okunacağı klasörler</td>
+                <td><code>bin/</code> ve proje kökü</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>outDir</code> verilmezse JS dosyaları kaynakların yanına düşer; ilk kurulumda en sık yapılan hata.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#outDir">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noEmit</strong></td>
+                <td>Hiç dosya üretmeden yalnızca tip kontrolü yapma</td>
+                <td>Sadece analiz çalıştırmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite/esbuild derliyorsa <code>tsc</code>'nin işi budur.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noEmit">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>types / typeRoots</strong></td>
+                <td>Otomatik dahil edilecek global tip paketlerini sınırlama</td>
+                <td>Referans verilen assembly listesi</td>
+                <td><span class="tag">ORTA</span> Yanlış ayarlandığında "cannot find name describe/process" hatalarının kaynağıdır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#types">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noUnusedLocals / noUnusedParameters</strong></td>
+                <td>Kullanılmayan değişken ve parametreyi hata sayma</td>
+                <td>Analyzer uyarısı (CS0168)</td>
+                <td><span class="tag">ORTA</span> Lint kuralı ile çakışabilir; ikisinden birini seç.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noUnusedLocals">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>erasableSyntaxOnly</strong></td>
+                <td>Yalnızca silinebilir TS sözdizimine izin verir (enum, namespace, parameter property yasak)</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Node'un tipleri çıkarıp doğrudan çalıştırması (type stripping) ile birlikte anlam kazandı; TS 5.8 ile geldi.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>moduleDetection</strong></td>
+                <td>Bir dosyanın modül mü script mi sayılacağını belirler</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> "Cannot redeclare block-scoped variable" hatalarının tipik sebebi budur.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#moduleDetection">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>forceConsistentCasingInFileNames</strong></td>
+                <td>Dosya adı büyük/küçük harf tutarlılığını zorunlu kılar</td>
+                <td>Karşılığı yok (Windows dosya sistemi farkı)</td>
+                <td><span class="tag">ORTA</span> Windows'ta geçen kod Linux CI'da patlıyorsa ilk bakılacak ayar. Yeni sürümlerde varsayılan açıktır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#forceConsistentCasingInFileNames">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>noPropertyAccessFromIndexSignature</strong></td>
+                <td>Index signature'a nokta ile erişimi yasaklar, köşeli parantez ister</td>
+                <td>Sözlük erişim disiplini</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>strict</code> içinde değildir; ayrıca açılır.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#noPropertyAccessFromIndexSignature">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>strictBindCallApply</strong></td>
+                <td><code>bind</code>/<code>call</code>/<code>apply</code> çağrılarını tipli denetler</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> <code>strict</code> içinde gelir; ne yaptığını bilmen yeter.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#strictBindCallApply">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rewriteRelativeImportExtensions</strong></td>
+                <td>Kaynaktaki <code>.ts</code> uzantılı importları çıktıda <code>.js</code>'e çevirir</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni bir ayardır; ESM + Node kurulumlarında uzantı sorunlarını çözmek için çıktı.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#rewriteRelativeImportExtensions">typescriptlang.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="decorator-ve-metadata"><span class="h-num">§ 8</span>Decorator ve metadata</h2>
+
+        <p>Decorator, bir sınıfın veya üyesinin üzerine yazılan ve onu saran/işaretleyen bir fonksiyondur
+        (<code>@Ad</code>). C#'tan geliyorsan attribute + reflection, Java'dan geliyorsan annotation kombinasyonunun TS
+        karşılığı burada; fark, metadata'nın kendiliğinden saklanmaması. Bu kavramları hiç görmediysen "decorator =
+        sınıf/üye üzerine çalışan fonksiyon" tanımıyla başla. Kritik fark:
+        <strong>iki ayrı decorator sistemi var</strong> ve ikisi uyumsuz. Aramanı hangisi olduğunu belirterek yap.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Decorator'lar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>decorator (standart, TS 5.0+)</strong></td>
+                <td>ECMAScript standardına uyan yeni decorator sistemi</td>
+                <td><code>[Attribute]</code> + davranış</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yeni projede bunu kullan. Eski yazılarla karışmaması için "TypeScript 5 decorators" diye ara.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>experimentalDecorators (legacy)</strong></td>
+                <td>Eski, standart öncesi decorator sistemi</td>
+                <td>—</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Angular ve NestJS hâlâ buna dayanır; yani "eskimiş ama zorunlu" bir alan.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/decorators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>class decorator</strong></td>
+                <td>Sınıfın tanımını saran/değiştiren decorator</td>
+                <td>Sınıf attribute'u</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/decorators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>method / field / accessor decorator</strong></td>
+                <td>Üye seviyesinde decorator türleri</td>
+                <td>Metot/özellik attribute'u</td>
+                <td><span class="tag">ORTA</span> İmzaları iki sistemde farklıdır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/decorators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>parameter decorator</strong></td>
+                <td>Constructor/metot parametresine uygulanan decorator</td>
+                <td><code>[FromBody]</code> gibi</td>
+                <td><span class="tag">ORTA</span> Yeni standartta yok; DI framework'leri legacy sisteme bağlı kalmasının sebebi budur.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/decorators.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>emitDecoratorMetadata</strong></td>
+                <td>Derleyicinin parametre tiplerini metadata olarak JS'e yazması</td>
+                <td>Reflection ile parametre tipi okuma</td>
+                <td><span class="tag tag--info">İLERİ</span> Tip erasure'ın <em>tek</em> istisnasıdır; DI için hayati.</td>
+                <td><a href="https://www.typescriptlang.org/tsconfig/#emitDecoratorMetadata">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>reflect-metadata</strong></td>
+                <td>Metadata okuma/yazma API'si sağlayan polyfill paketi</td>
+                <td><code>System.Reflection</code></td>
+                <td><span class="tag tag--info">İLERİ</span> NestJS/TypeORM projelerinde <code>import "reflect-metadata"</code> en üstte olmalı.</td>
+                <td><a href="https://github.com/rbuckton/reflect-metadata">github.com/rbuckton/reflect-metadata</a></td>
+              </tr>
+              <tr>
+                <td><strong>Symbol.metadata / decorator metadata</strong></td>
+                <td>Yeni standardın metadata mekanizması</td>
+                <td>Attribute verisi okuma</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni; çalışma ortamı desteğini kontrol et.</td>
+                <td><a href="https://github.com/tc39/proposal-decorators">github.com/tc39</a></td>
+              </tr>
+              <tr>
+                <td><strong>DI framework'leri (NestJS, InversifyJS, tsyringe)</strong></td>
+                <td>Decorator tabanlı bağımlılık enjeksiyonu kütüphaneleri</td>
+                <td><code>IServiceCollection</code></td>
+                <td><span class="tag">ORTA</span> Ücretsiz/açık kaynak. .NET'ten geliyorsan NestJS mimarisi tanıdık gelir.</td>
+                <td><a href="https://docs.nestjs.com/">docs.nestjs.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="araclar"><span class="h-num">§ 9</span>Araçlar: derleme, lint, test</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Derleyiciler ve çalıştırıcılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>tsc --noEmit</strong></td>
+                <td>Sadece tip kontrolü yapar, dosya üretmez</td>
+                <td><code>dotnet build</code>'in analiz kısmı</td>
+                <td><span class="tag tag--ok">TEMEL</span> CI hattında koşturulacak asıl komut.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsc --watch</strong></td>
+                <td>Dosya değişiminde otomatik yeniden derleme</td>
+                <td><code>dotnet watch</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsc --build (-b)</strong></td>
+                <td>Proje referanslarını sırayla, artımlı derler</td>
+                <td><code>dotnet build</code> solution modu</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>composite</code> ile birlikte kullanılır.</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/project-references.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ts-node</strong></td>
+                <td>TS dosyasını doğrudan Node'da çalıştırma (tip kontrolü yapar, yavaş)</td>
+                <td><code>dotnet run</code></td>
+                <td><span class="tag">ORTA</span> Kurulum/ESM ayarları zahmetli; çoğu ekip tsx'e geçti.</td>
+                <td><a href="https://typestrong.org/ts-node/">typestrong.org/ts-node</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsx</strong></td>
+                <td>esbuild tabanlı hızlı TS çalıştırıcı (tip kontrolü yapmaz)</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Dosya uzantısı <code>.tsx</code> ile karıştırma; bu bir CLI aracı.</td>
+                <td><a href="https://github.com/privatenumber/tsx">github.com/privatenumber/tsx</a></td>
+              </tr>
+              <tr>
+                <td><strong>esbuild</strong></td>
+                <td>Çok hızlı bundler/transpiler; TS tiplerini kontrol etmeden siler</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Vite'ın altında bunun kullanıldığını bil.</td>
+                <td><a href="https://esbuild.github.io">esbuild.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SWC</strong></td>
+                <td>Rust ile yazılmış TS/JS derleyici; Next.js ve Jest tarafında yaygın</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. esbuild'e alternatif; decorator desteği için tercih edilir.</td>
+                <td><a href="https://swc.rs">swc.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Babel + preset-typescript</strong></td>
+                <td>Eski ama hâlâ yaygın transpiler zinciri</td>
+                <td>—</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz. Yeni projede esbuild/swc tercih edilir.</td>
+                <td><a href="https://babeljs.io/docs/babel-preset-typescript">babeljs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vite</strong></td>
+                <td>Modern geliştirme sunucusu ve bundler</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Ayrıntı: <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem</a>.</td>
+                <td><a href="https://vite.dev">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>typescript-go (tsgo)</strong></td>
+                <td>TypeScript derleyicisinin Go ile yeniden yazılmış, çok daha hızlı sürümü</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Duyurulduğunda "TypeScript 7 / native port" olarak anıldı; durumu depodan doğrula.</td>
+                <td><a href="https://github.com/microsoft/typescript-go">github.com/microsoft/typescript-go</a></td>
+              </tr>
+              <tr>
+                <td><strong>Deno</strong></td>
+                <td>TypeScript'i yapılandırma olmadan doğrudan çalıştıran runtime</td>
+                <td>&mdash;</td>
+                <td><span class="tag">ORTA</span> Ücretsiz/açık kaynak. Node alternatifi; tip kontrolünü de kendi yapar.</td>
+                <td><a href="https://docs.deno.com">docs.deno.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bun</strong></td>
+                <td>TS/TSX dosyalarını doğrudan çalıştıran hızlı runtime ve paket yöneticisi</td>
+                <td>&mdash;</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Çalıştırır ama <strong>tip kontrolü yapmaz</strong>; <code>tsc --noEmit</code> yine gerekir.</td>
+                <td><a href="https://bun.sh/docs">bun.sh/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsup</strong></td>
+                <td>esbuild tabanlı, kütüphane paketlemek için hazır ayarlı derleyici</td>
+                <td>NuGet paketi üretmek için build hattı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. <code>.d.ts</code> üretimini de yönetir.</td>
+                <td><a href="https://tsup.egoist.dev">tsup.egoist.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Lint, biçim ve test</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ESLint</strong></td>
+                <td>JS/TS için standart statik analiz aracı</td>
+                <td>Roslyn analyzer'lar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Yeni sürümlerde ayar dosyası <code>eslint.config.js</code> (flat config); eski <code>.eslintrc</code> rehberleriyle karıştırma.</td>
+                <td><a href="https://eslint.org">eslint.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>typescript-eslint</strong></td>
+                <td>ESLint'e TS desteği ve tip bilgisine dayalı kurallar ekler</td>
+                <td>StyleCop + tip farkındalıklı analyzer</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. "typed linting" açmak yavaşlatır ama asıl değer oradadır.</td>
+                <td><a href="https://typescript-eslint.io">typescript-eslint.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prettier</strong></td>
+                <td>Tartışmasız kod biçimlendirici</td>
+                <td><code>dotnet format</code> + EditorConfig</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Lint değil sadece biçim; ikisini karıştırma.</td>
+                <td><a href="https://prettier.io">prettier.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Biome</strong></td>
+                <td>Lint + format'ı tek Rust aracında birleştiren alternatif</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. ESLint+Prettier ikilisine hızlı alternatif; kural kapsamı daha dar.</td>
+                <td><a href="https://biomejs.dev">biomejs.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>oxlint (Oxc)</strong></td>
+                <td>Çok hızlı Rust tabanlı linter</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş ama hızla yayılıyor.</td>
+                <td><a href="https://oxc.rs">oxc.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vitest</strong></td>
+                <td>Vite tabanlı, TS'i kutudan destekleyen test koşucusu</td>
+                <td>xUnit</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. xUnit bilgisi buraya doğrudan taşınır (arrange-act-assert aynı).</td>
+                <td><a href="https://vitest.dev">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jest</strong></td>
+                <td>Yaygın, olgun test framework'ü; TS için ts-jest veya SWC gerekir</td>
+                <td>NUnit/MSTest</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Eski projelerde standart.</td>
+                <td><a href="https://jestjs.io">jestjs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>type testing (expect-type, tsd)</strong></td>
+                <td>Tiplerin doğruluğunu test etme araçları</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Vitest'in <code>expectTypeOf</code> API'si de aynı işi görür.</td>
+                <td><a href="https://vitest.dev">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ts-reset</strong></td>
+                <td>Standart kütüphanenin gevşek tiplerini sıkılaştıran topluluk paketi</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. <code>JSON.parse</code>'ın <code>any</code> dönmesi gibi sorunları düzeltir.</td>
+                <td><a href="https://github.com/total-typescript/ts-reset">github.com/total-typescript/ts-reset</a></td>
+              </tr>
+              <tr>
+                <td><strong>derleyici performansı</strong></td>
+                <td>Yavaş tip kontrolünü teşhis etme rehberi</td>
+                <td>Build süresi analizi</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>--extendedDiagnostics</code> ve <code>--generateTrace</code> bayrakları.</td>
+                <td><a href="https://github.com/microsoft/TypeScript/wiki/Performance">github.com/microsoft/TypeScript wiki</a></td>
+              </tr>
+              <tr>
+                <td><strong>Knip</strong></td>
+                <td>Kullanılmayan dosya, export ve bağımlılıkları bulur</td>
+                <td>Kullanılmayan referans analizi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Büyüyen TS projelerinde ölü kodu temizlemenin standart aracı hâline geldi.</td>
+                <td><a href="https://knip.dev">knip.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Are the types wrong? (attw)</strong></td>
+                <td>Yayınlanan paketin tip dosyalarının ESM/CJS uyumunu denetler</td>
+                <td>Paket metadata doğrulaması</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Kütüphane yayınlıyorsan; uygulama yazıyorsan gerekmez.</td>
+                <td><a href="https://arethetypeswrong.github.io">arethetypeswrong.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>publint</strong></td>
+                <td>npm paketinin <code>package.json</code> alanlarındaki yayın hatalarını bulur</td>
+                <td>NuGet paket denetimi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. attw ile birlikte kullanılır.</td>
+                <td><a href="https://publint.dev">publint.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>API Extractor</strong></td>
+                <td>Kütüphane API yüzeyini <code>.d.ts</code>'ten çıkarıp raporlayan Microsoft aracı</td>
+                <td>Public API surface takibi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Kırıcı değişiklik (breaking change) denetimi için.</td>
+                <td><a href="https://api-extractor.com">api-extractor.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="pratik"><span class="h-num">§ 10</span>Pratik: React, API tipleri, runtime doğrulama</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>En sık yapılan hata: API'den gelen JSON'u <code>as User</code> ile tiplemek. Bu sadece derleyiciyi
+          susturur, veriyi <em>doğrulamaz</em>. Tip sistemi derleme zamanında, doğrulama çalışma zamanında çalışır.
+          Sınırdan (HTTP, localStorage, form, <code>JSON.parse</code>) gelen her şeyi <code>unknown</code> kabul edip
+          Zod benzeri bir doğrulayıcıdan geçirmelisin. Mülakatta bu ayrımı sorarlar.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>React ile TypeScript kalıpları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>@types/react</strong></td>
+                <td>React'in tip tanımları paketi</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in kendisi TS ile yazılmamıştır; tipler ayrı pakettedir.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>props tiplemesi</strong></td>
+                <td>Bileşen parametrelerini <code>type</code> veya <code>interface</code> ile tanımlama</td>
+                <td>Metot parametre nesnesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrıntı: <a href="../03-react/index.html">03 &mdash; React</a>.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React.FC tartışması</strong></td>
+                <td>Bileşeni <code>React.FC</code> ile tiplemek artık önerilmiyor</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Eski rehberlerde bolca görürsün; sadece props'u tiplemek yeterlidir.</td>
+                <td><a href="https://github.com/typescript-cheatsheets/react">typescript-cheatsheets/react</a></td>
+              </tr>
+              <tr>
+                <td><strong>PropsWithChildren</strong></td>
+                <td><code>children</code> alanını ekleyen yardımcı tip</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ComponentProps&lt;typeof X&gt;</strong></td>
+                <td>Var olan bir bileşenin/HTML elementinin props tipini çekme</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Sarmalayıcı (wrapper) bileşen yazmanın standart yolu.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReactNode vs ReactElement</strong></td>
+                <td>"Render edilebilir her şey" ile "tek JSX elemanı" farkı</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Sık karıştırılır; <code>children</code> için <code>ReactNode</code>.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useState&lt;T&gt;</strong></td>
+                <td>Başlangıç değeri <code>null</code> ise tip parametresini elle vermek gerekir</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>useState&lt;User | null&gt;(null)</code> en sık kalıp.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useRef tiplemesi</strong></td>
+                <td>DOM ref'i için <code>useRef&lt;HTMLInputElement&gt;(null)</code></td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Mutable ref ile DOM ref'inin tipleri farklıdır.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useReducer + discriminated union</strong></td>
+                <td>Action tiplerini union ile tanımlayıp exhaustive switch yazma</td>
+                <td>Sealed hiyerarşi + switch</td>
+                <td><span class="tag tag--ok">TEMEL</span> TS'in React'te en çok işe yaradığı yer.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>event tipleri</strong></td>
+                <td><code>React.ChangeEvent&lt;HTMLInputElement&gt;</code>, <code>MouseEvent</code> vb.</td>
+                <td>EventArgs</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in sentetik event tipleri DOM'unkilerden ayrıdır.</td>
+                <td><a href="https://react.dev/learn/typescript">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic component</strong></td>
+                <td>Tip parametreli bileşen (tablo, liste bileşenleri)</td>
+                <td>Generic kontrol</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>.tsx</code> içinde <code>&lt;T,&gt;</code> yazım tuzağı burada çıkar.</td>
+                <td><a href="https://github.com/typescript-cheatsheets/react">typescript-cheatsheets/react</a></td>
+              </tr>
+              <tr>
+                <td><strong>React TypeScript Cheatsheet</strong></td>
+                <td>Topluluk tarafından derlenen kalıp koleksiyonu</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. React+TS için fiilî başvuru kaynağı.</td>
+                <td><a href="https://github.com/typescript-cheatsheets/react">github.com/typescript-cheatsheets/react</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Runtime doğrulama — seçenekler (hepsi ücretsiz/açık kaynak)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>parse, don't validate</strong></td>
+                <td>Ham veriyi kontrol edip <em>tiplenmiş</em> yeni bir değere dönüştürme yaklaşımı</td>
+                <td>DTO'ya bind + validate</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bir kütüphane değil, yaklaşım adı.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Zod</strong></td>
+                <td>Şema tanımlar, doğrular ve şemadan TS tipini otomatik çıkarır</td>
+                <td>FluentValidation + DTO birleşimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Fiilî standart; <code>z.infer</code> ile tip üretimi kilit özellik.</td>
+                <td><a href="https://zod.dev">zod.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Valibot</strong></td>
+                <td>Zod'a çok benzeyen, bundle boyutu çok küçük alternatif</td>
+                <td>—</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Tarayıcı tarafında boyut önemliyse.</td>
+                <td><a href="https://valibot.dev">valibot.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yup</strong></td>
+                <td>Eski ve yaygın şema doğrulama kütüphanesi</td>
+                <td>—</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz. Form kütüphaneleriyle hâlâ çok görülür; TS çıkarımı Zod kadar iyi değil.</td>
+                <td><a href="https://github.com/jquense/yup">github.com/jquense/yup</a></td>
+              </tr>
+              <tr>
+                <td><strong>io-ts</strong></td>
+                <td>Fonksiyonel programlama tarzı doğrulama (fp-ts ekosistemi)</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş; öğrenme eğrisi dik.</td>
+                <td><a href="https://github.com/gcanti/io-ts">github.com/gcanti/io-ts</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeBox</strong></td>
+                <td>JSON Schema üretip aynı anda TS tipi veren şema kütüphanesi</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. OpenAPI ile çalışacaksan avantajlı.</td>
+                <td><a href="https://github.com/sinclairzx81/typebox">github.com/sinclairzx81/typebox</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArkType</strong></td>
+                <td>TS sözdizimine çok yakın şema dili</td>
+                <td>—</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş seçenek.</td>
+                <td><a href="https://arktype.io">arktype.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Typia</strong></td>
+                <td>TS tipinden derleme zamanında doğrulayıcı kod üreten araç</td>
+                <td>Source generator</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Çok hızlı ama derleyici eklentisi gerektirir.</td>
+                <td><a href="https://typia.io">typia.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>class-validator + class-transformer</strong></td>
+                <td>Decorator tabanlı doğrulama (NestJS varsayılanı)</td>
+                <td>DataAnnotations</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. .NET alışkanlığına en yakın duran seçenek.</td>
+                <td><a href="https://docs.nestjs.com/techniques/validation">docs.nestjs.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>API tiplerini üretme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>C#'tan geliyorsan</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>openapi-typescript</strong></td>
+                <td>OpenAPI/Swagger şemasından TS tipleri üretir</td>
+                <td>NSwag / Swagger Codegen</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. ASP.NET Core API'si Swagger üretiyorsa doğrudan bağlanır — bu köprüyü mülakatta anlat.</td>
+                <td><a href="https://openapi-ts.dev">openapi-ts.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Orval</strong></td>
+                <td>OpenAPI'den tip + istemci + React Query hook'ları üretir</td>
+                <td>NSwag client generator</td>
+                <td><span class="tag">ORTA</span> Ücretsiz.</td>
+                <td><a href="https://orval.dev">orval.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>NSwag</strong></td>
+                <td>.NET tarafında Swagger'dan TS istemcisi üreten araç</td>
+                <td>Zaten .NET aracı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. .NET ekosisteminden geldiği için .NET geliştiricilerine en tanıdık olanı.</td>
+                <td><a href="https://github.com/RicoSuter/NSwag">github.com/RicoSuter/NSwag</a></td>
+              </tr>
+              <tr>
+                <td><strong>tRPC</strong></td>
+                <td>Şema/kod üretimi olmadan uçtan uca tip güvenliği (sunucu da TS olmalı)</td>
+                <td>Karşılığı yok</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. .NET backend ile <em>kullanılamaz</em>; bunu bilmeden konuşma.</td>
+                <td><a href="https://trpc.io">trpc.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ts-rest</strong></td>
+                <td>Sözleşme (contract) temelli tip güvenli REST istemcisi</td>
+                <td>Refit'e benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz.</td>
+                <td><a href="https://ts-rest.com">ts-rest.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Effect</strong></td>
+                <td>Tip güvenli hata yönetimi ve efekt sistemi kütüphanesi</td>
+                <td>Karşılığı yok (Result pattern'e uzak benzer)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş, öğrenme eğrisi çok dik; adını bilmen yeter.</td>
+                <td><a href="https://effect.website">effect.website</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cs-gelistiricisinin-tuzaklari"><span class="h-num">§ 11</span>C# geliştiricisinin takıldığı yerler</h2>
+
+        <p>Bu tablo C#'tan gelenler içindir; Java'dan geliyorsan satırların çoğu (nominal interface, sınıf erişim belirleyicileri, overload) senin için de geçerlidir. C# veya Java bilmiyorsan bu bölümü atlayabilirsin; özeti "tipler çalışma zamanında yoktur ve şekle göre eşleşir" cümlesidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Aynı kelime, farklı anlam</caption>
+            <thead><tr><th>Terim</th><th>C#'ta ne demek</th><th>TypeScript'te ne demek</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>interface</strong></td>
+                <td>Sınıfın açıkça implement etmesi gereken sözleşme</td>
+                <td>Sadece bir şekil tarifi; kimse implement etmek zorunda değil</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>Record</strong></td>
+                <td><code>record</code> — değer eşitlikli tip</td>
+                <td><code>Record&lt;K,V&gt;</code> — sözlük tipi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tamamen ilgisiz iki şey.</td>
+              </tr>
+              <tr>
+                <td><strong>as</strong></td>
+                <td>Güvenli cast; başarısızsa <code>null</code></td>
+                <td>Tip iddiası; hiçbir kontrol yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> En tehlikeli benzerlik.</td>
+              </tr>
+              <tr>
+                <td><strong>extends</strong></td>
+                <td>Kalıtım</td>
+                <td>Generic kısıt (<code>where</code> yerine) veya interface genişletme</td>
+                <td><span class="tag">ORTA</span></td>
+              </tr>
+              <tr>
+                <td><strong>typeof</strong></td>
+                <td><code>Type</code> nesnesi döndürür (runtime)</td>
+                <td>Tip konumunda değişkenin tipini alır (derleme zamanı)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>enum</strong></td>
+                <td>Çalışma zamanında da var olan gerçek bir tip (<code>System.Enum</code>; <code>Enum.GetValues</code> ile reflection'la okunur); yalnızca değer sabitleri çağıran koda gömülür (inline)</td>
+                <td>Runtime'da gerçek nesne üretir (<code>const enum</code> hariç); çoğu kodda union literal tercih edilir</td>
+                <td><span class="tag">ORTA</span></td>
+              </tr>
+              <tr>
+                <td><strong>generic</strong></td>
+                <td>Runtime'da tip bilgisi korunur, <code>new T()</code> mümkün</td>
+                <td>Tamamen silinir, <code>new T()</code> imkânsız</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>private</strong></td>
+                <td>Runtime'da da erişilemez</td>
+                <td>Sadece derleyici uyarısı; JS'te erişilebilir. Gerçek gizlilik için <code>#field</code></td>
+                <td><span class="tag">ORTA</span> "ECMAScript private fields" diye ara.</td>
+              </tr>
+              <tr>
+                <td><strong>readonly</strong></td>
+                <td>Çalışma zamanında da korunur</td>
+                <td>Sadece derleme zamanı; <code>Object.freeze</code> ayrı iştir</td>
+                <td><span class="tag">ORTA</span></td>
+              </tr>
+              <tr>
+                <td><strong>null</strong></td>
+                <td>Tek bir "yok" değeri</td>
+                <td><code>null</code> ve <code>undefined</code> ayrı iki değer</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>decimal</strong></td>
+                <td>Para için doğru sayı tipi</td>
+                <td>Yok; <code>number</code> float'tır. Para için para biriminin en küçük birimi cinsinden tam sayı (TRY kuruş, USD/EUR cent: &times;100; JPY/KRW: doğrudan; KWD/BHD/TND: &times;1000; basamak sayısı ISO 4217'den), çok büyük/hassas tutar veya kur/faiz hesabında <code>BigInt</code> ya da decimal.js / big.js / dinero.js ve açık yuvarlama kuralı; gösterimde <code>Intl.NumberFormat</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>attribute / reflection</strong></td>
+                <td>Metadata runtime'da okunur</td>
+                <td>Tipler silindiği için yalnızca <code>emitDecoratorMetadata</code> ile kısmen mümkün</td>
+                <td><span class="tag">ORTA</span></td>
+              </tr>
+              <tr>
+                <td><strong>overload</strong></td>
+                <td>Her imzanın kendi gövdesi var</td>
+                <td>İmzalar bildirim, gövde tek</td>
+                <td><span class="tag">ORTA</span></td>
+              </tr>
+              <tr>
+                <td><strong>namespace</strong></td>
+                <td>Kod düzenlemenin temel birimi</td>
+                <td>Eskimiş; modüller (dosya = modül) kullanılır</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> TS <code>namespace</code>/<code>module</code> anahtar kelimesini yeni kodda kullanma.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Bu sayfanın ana kaynakları</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://www.typescriptlang.org/docs/handbook/intro.html">TypeScript Handbook — resmî el kitabı</a></li>
+          <li><span class="src-n">02</span><a href="https://www.typescriptlang.org/tsconfig/">tsconfig referansı — tüm derleyici seçenekleri</a></li>
+          <li><span class="src-n">03</span><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility Types listesi</a></li>
+          <li><span class="src-n">04</span><a href="https://www.typescriptlang.org/docs/handbook/modules/reference.html">Modules Reference — import/export ve çözümleme</a></li>
+          <li><span class="src-n">05</span><a href="https://www.typescriptlang.org/play">TypeScript Playground</a></li>
+          <li><span class="src-n">06</span><a href="https://react.dev/learn/typescript">React — TypeScript kullanımı</a></li>
+          <li><span class="src-n">07</span><a href="https://github.com/typescript-cheatsheets/react">React TypeScript Cheatsheet</a></li>
+          <li><span class="src-n">08</span><a href="https://github.com/type-challenges/type-challenges">type-challenges — tip seviyesi alıştırmalar</a></li>
+        </ul>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>TypeScript'e JavaScript'ten sonra başlayan biri için önerilen sıra şu. Sıra herkes için aynı; süre ve zorluk geçmişine göre değişir:</p>
+
+        <ul>
+          <li><strong>C#/Java'dan geliyorsan</strong> &rarr; aşağıdaki öncelikler ve sondaki "asıl eksik JS" uyarısı tam olarak senin için.</li>
+          <li><strong>JS'ten geliyorsan</strong> &rarr; asıl eksik tip sistemi kavramlarıdır; 6 ve 7. maddeler "kolay" değil, süre uzun. En önemli alışkanlık: <code>strict</code> modu baştan aç.</li>
+          <li><strong>Python'dan geliyorsan</strong> &rarr; hem JS tuhaflıkları hem nominal/yapısal fark yeni; sondaki "önce 01" önerisi senin için de geçerli.</li>
+          <li><strong>Programlamaya yeni başladıysan</strong> &rarr; 1&ndash;5 yeter; 12 ve 13. maddeleri tamamen ertele.</li>
+        </ul>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. Çalışma modeli (§ 1)</span>
+            <p>Type erasure, structural typing, "tip kontrolü ile transpile ayrı işlerdir". Bu üç cümleyi
+            kendi kelimelerinle kurabilmen mülakatın ilk filtresidir.</p>
+            <span class="steps__meta">Zorunlu · Playground'da 30 dakika</span>
+          </li>
+          <li>
+            <span class="steps__title">2. Temel tipler ve union (§ 2, § 3)</span>
+            <p><code>string</code>, <code>number</code>, <code>unknown</code> vs <code>any</code>, <code>never</code>,
+            literal type, union, <code>as const</code>. Enum yerine string literal union tercihinin sebebini bil.</p>
+            <span class="steps__meta">Zorunlu · en sık sorulan alan</span>
+          </li>
+          <li>
+            <span class="steps__title">3. Narrowing ve discriminated union (§ 3)</span>
+            <p><code>typeof</code>/<code>instanceof</code>/<code>in</code> guard, type predicate (<code>x is T</code>),
+            exhaustiveness check ile <code>never</code>. Bu, TS'in C# veya Java gibi dillere göre gerçek üstünlüğüdür; anlatabilmen lazım.</p>
+            <span class="steps__meta">Zorunlu · örnek kod yazarak</span>
+          </li>
+          <li>
+            <span class="steps__title">4. strict ve tsconfig (§ 7)</span>
+            <p>En azından <code>strict</code>, <code>strictNullChecks</code>, <code>noImplicitAny</code>,
+            <code>target</code>, <code>module</code>, <code>moduleResolution</code>, <code>paths</code>,
+            <code>isolatedModules</code>, <code>skipLibCheck</code>.</p>
+            <span class="steps__meta">Zorunlu · bir projede sıfırdan tsconfig yaz</span>
+          </li>
+          <li>
+            <span class="steps__title">5. Utility types (§ 6)</span>
+            <p><code>Partial</code>, <code>Required</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>,
+            <code>Exclude</code>, <code>Extract</code>, <code>ReturnType</code>, <code>Awaited</code>. Ne yaptıklarını
+            bilmek yeterli; nasıl yazıldıklarını sonra öğren.</p>
+            <span class="steps__meta">Yüksek öncelik</span>
+          </li>
+          <li>
+            <span class="steps__title">6. Generics farkları (§ 5)</span>
+            <p>C# veya Java'da generic biliyorsan temel hazır; sadece farkları öğren: <code>extends</code> kısıtı,
+            <code>new T()</code> yapılamaması, <code>keyof</code> kısıtı, default type parameter. Generics'i ilk kez
+            görüyorsan önce "tip parametresi ve kısıt" kavramını handbook'tan otur.</p>
+            <span class="steps__meta">Yüksek öncelik · statik tipli dilden gelene kolay; diğerlerine orta</span>
+          </li>
+          <li>
+            <span class="steps__title">7. Sınıf farkları (§ 4)</span>
+            <p>C#/Java'dan geliyorsan sözdizimi benziyor diye atlama; JS'ten geliyorsan bu bölüm daha düşük öncelikli: <code>private</code> sadece derleme zamanında korur,
+            <code>#private</code> gerçek gizliliktir, <code>implements</code> zorunlu değildir,
+            <code>override</code> ayrı bir ayarla zorunlu olur. Bir servis sınıfını hem sınıf hem düz fonksiyon
+            olarak yaz, ikisini karşılaştır.</p>
+            <span class="steps__meta">Yüksek öncelik (C#/Java'dan gelene en tanıdık, o yüzden en tuzaklı) &middot; JS'ten gelene orta</span>
+          </li>
+          <li>
+            <span class="steps__title">8. Runtime doğrulama ayrımı (§ 10)</span>
+            <p>Zod ile bir API cevabını doğrula. "Tip sistemi runtime'da yok, o yüzden sınırda doğrulama şart"
+            cümlesi seni tecrübeli gösterir.</p>
+            <span class="steps__meta">Yüksek öncelik · yarım gün</span>
+          </li>
+          <li>
+            <span class="steps__title">9. React kalıpları (§ 10)</span>
+            <p>props tipleme, <code>useState&lt;T&gt;</code>, event tipleri, <code>useReducer</code> + discriminated union.
+            Devamı <a href="../03-react/index.html">03 &mdash; React</a> sayfasında.</p>
+            <span class="steps__meta">Orta öncelik</span>
+          </li>
+          <li>
+            <span class="steps__title">10. Modül ve tip tanım dosyaları (§ 7)</span>
+            <p>ESM/CommonJS farkı, <code>import type</code>, <code>.d.ts</code>, <code>@types</code> paketleri,
+            module augmentation.</p>
+            <span class="steps__meta">Orta öncelik</span>
+          </li>
+          <li>
+            <span class="steps__title">11. Araç zinciri (§ 9)</span>
+            <p><code>tsc --noEmit</code>, ESLint + typescript-eslint, Prettier, Vitest. Daha önce CI hattı kurmadıysan
+            bu adım <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a>
+            sayfasıyla birlikte çalışılmalı.</p>
+            <span class="steps__meta">Orta öncelik · CI pratiği kazandırır</span>
+          </li>
+          <li>
+            <span class="steps__title">12. İleri tip programlama (§ 6)</span>
+            <p>mapped types, conditional types, <code>infer</code>, template literal types. Mülakatta bilmemek
+            normal karşılanır; acele etme, type-challenges "easy" setiyle başla.</p>
+            <span class="steps__meta">Düşük öncelik · en sona</span>
+          </li>
+          <li>
+            <span class="steps__title">13. Decorator ve metadata (§ 8)</span>
+            <p>Sadece Angular/NestJS'e girersen gerekir. İki decorator sistemi olduğunu bilmen şimdilik yeter.</p>
+            <span class="steps__meta">Düşük öncelik · koşullu</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>TypeScript öğrenirken JavaScript boşluğunu atlama. C#, Java veya Python'dan gelenlerde asıl eksik genellikle JS'tir; TS onun üstüne
+          binen bir katmandır. JS'ten geliyorsan asıl risk tersidir: <code>strict</code> kapalı, <code>any</code> dolu bir
+          "JS'e tip eklenmiş" kodla yetinmek; <code>strict</code>'i baştan aç. Önce <a href="../01-javascript/index.html">01 &mdash; JavaScript</a> sayfasındaki TEMEL rozetli
+          maddeleri bitir, sonra buraya dön. Genel sıralama için <a href="../index.html">bölüm giriş sayfasına</a>,
+          Java tarafını da karşılaştırmak istersen <a href="../../Java/index.html">Java bölümüne</a>, diğer dillerin tip sistemlerini merak edersen <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfalarına, tüm araştırmanın kökü için <a href="../../index.html">ana sayfaya</a> bakabilirsin.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-javascript/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">JavaScript</span></a>
+        <a class="next" href="../03-react/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">React</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

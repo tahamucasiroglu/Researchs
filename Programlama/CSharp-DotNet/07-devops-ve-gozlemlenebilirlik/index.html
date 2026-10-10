@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevOps ve Gözlemlenebilirlik — .NET Anahtar Listesi</title>
+<meta name="description" content="Git ileri kullanım, GitHub Actions, Azure DevOps, Docker, Kubernetes, Serilog, OpenTelemetry, health check.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">DevOps ve Gözlemlenebilirlik</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 07 · Kalite ve Operasyon</div>
+        <h1 class="page-title">Git, <em>GitHub Actions</em>, Docker, izleme</h1>
+        <p class="lede">CI/CD hattı kurmayı sıfırdan öğrenmek isteyenler için tam liste. Konteynerleştirme, dağıtım ve üretimde ne olduğunu görme araçları da burada.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; orta &middot; Mülakat önceliği yüksek</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesi</strong>. Her satır bir terim, bir cümlelik "bu nedir" notu ve resmî doküman bağlantısı içerir. Konuyu buradan öğrenmeyeceksin; buradan <em>ne arayacağını</em> öğrenip kendi kaynağından okuyup kod yazacaksın.</p>
+
+        <p>Rozetler ilanlarda ne sıklıkla geçtiğini gösterir; okuma sırası amacına göre değişir. <span class="tag tag--warn">ÜCRETLİ</span> ve <span class="tag tag--warn">ESKİMİŞ</span> rozetleri seçim yaparken işine yarar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca / role göre okuma sırası</caption>
+            <thead><tr><th>Durumun</th><th>Önerilen sıra</th></tr></thead>
+            <tbody>
+              <tr><td>İş arayan backend geliştirici</td><td>Önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar (en az bir çalışan örnek yaz), sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>; § 11'deki sıra.</td></tr>
+              <tr><td>Zaten bir şirkette çalışıyorsun</td><td>Önce şirketin kullandığı CI (GitHub Actions / Azure DevOps / GitLab / Jenkins) ve barındırma biçimi (IIS / Docker / Kubernetes / bulut PaaS); diğerleri sonra.</td></tr>
+              <tr><td>DevOps / platform / SRE rolü hedefliyorsun</td><td>Kubernetes, Helm, Terraform ve GitOps "acele etme" listesinden çıkar, ilk sıraya geçer (§ 4, § 6, § 7); gözlemlenebilirlik (§ 9) de derinlemesine.</td></tr>
+              <tr><td>Kişisel / yan proje yayınlamak istiyorsun</td><td>Docker (§ 5) + App Service veya Container Apps (§ 7) + GitHub Actions (§ 2) yeterli; Azure DevOps gerekmez.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu sayfadaki üç konu ilanlarda çok sık geçer ama çoğu geliştirici bunları kendisi kurmamıştır: <strong>GitHub Actions</strong>, <strong>Azure DevOps</strong>, <strong>CI/CD hattı kurma</strong>. Serilog, Seq ve HealthChecks de sık istenir; dış paket kullanımının kısıtlı olduğu ortamlarda çalışanların bunlarda pratiği sınırlı kalabilir. Bu sayfanın ilk üç bölümü ve § 8-§ 9 en yüksek öncelikli kısımlardır.</p>
+        </div>
+
+        <p>İlgili sayfalar: mesaj kuyruğu ve dağıtık sistem terimleri <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a> sayfasında, test/coverage terimleri <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a> sayfasında, .NET Aspire ve modern bulut yığını <a href="../09-aspire-bulut-modern/index.html">09 — Aspire ve Bulut</a> sayfasında.</p>
+
+        <h2 id="git-ileri-seviye"><span class="h-num">§ 1</span>Git — ileri seviye</h2>
+
+        <p>Git'i neredeyse her geliştirici günlük olarak kullanır, ama mülakatta sorulan Git soruları "commit/push" değil; <strong>rebase vs merge farkı</strong>, <strong>çakışma çözme</strong>, <strong>geçmişi düzeltme</strong> ve <strong>dallanma stratejisi</strong> üzerinedir. Aşağıdaki komutları terminalde deneme deposunda bizzat çalıştır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Git — geçmiş üzerinde çalışan komutlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>git merge</strong></td>
+                <td>İki dalı birleştirir, birleşme noktası için ayrı bir "merge commit" üretir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Geçmişi değiştirmez, dallanma izi kalır</td>
+                <td><a href="https://git-scm.com/docs/git-merge">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git rebase</strong></td>
+                <td>Commit'lerini başka bir dalın ucuna yeniden oynatır; geçmişi düz çizgi yapar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Commit hash'leri değişir. Paylaşılan dalda rebase yapma kuralını öğren</td>
+                <td><a href="https://git-scm.com/docs/git-rebase">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>interactive rebase</strong> (<code>rebase -i</code>)</td>
+                <td>Commit'leri sırala, birleştir (squash/fixup), mesajını düzelt, sil</td>
+                <td><span class="tag">ORTA</span> Aramada "git interactive rebase" yaz; "rebase" tek başına sadece temel anlatımı verir</td>
+                <td><a href="https://git-scm.com/docs/git-rebase">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>squash vs merge commit</strong></td>
+                <td>PR birleştirme biçimi: tek commit'e ez, birleşme commit'i üret veya rebase et</td>
+                <td><span class="tag tag--ok">TEMEL</span> GitHub'da üç düğme var; farkını sözle anlatabilmen istenir</td>
+                <td><a href="https://docs.github.com/en/get-started/using-github/github-flow">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git cherry-pick</strong></td>
+                <td>Başka daldaki tek bir commit'i mevcut dala kopyalar</td>
+                <td><span class="tag">ORTA</span> Hotfix'i release dalına taşımanın standart yolu</td>
+                <td><a href="https://git-scm.com/docs/git-cherry-pick">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git revert</strong></td>
+                <td>Bir commit'in etkisini tersine çeviren YENİ commit üretir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>reset</code> ile karıştırma: revert geçmişi silmez, paylaşılan dalda güvenlidir</td>
+                <td><a href="https://git-scm.com/docs/git-revert">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git reset</strong> (soft/mixed/hard)</td>
+                <td>HEAD'i geri alır; üç kip staging ve çalışma dizinini farklı etkiler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Üç kipin farkını ezberle, mülakat klasiği</td>
+                <td><a href="https://git-scm.com/docs/git-restore">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git stash</strong></td>
+                <td>Yarım kalan değişiklikleri commit etmeden rafa kaldırır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>stash pop</code> ile <code>stash apply</code> farkına bak</td>
+                <td><a href="https://git-scm.com/docs/git-stash">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git reflog</strong></td>
+                <td>HEAD'in gezdiği tüm noktaların yerel kaydı; "kaybolan" commit'i geri getirir</td>
+                <td><span class="tag">ORTA</span> Yanlış <code>reset --hard</code> sonrası kurtarma aracı. Sadece yereldir</td>
+                <td><a href="https://git-scm.com/docs/git-reflog">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git bisect</strong></td>
+                <td>İkili arama ile hatayı hangi commit'in soktuğunu bulur</td>
+                <td><span class="tag">ORTA</span> <code>bisect run</code> ile otomatik komut çalıştırabilirsin</td>
+                <td><a href="https://git-scm.com/docs/git-bisect">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git blame</strong></td>
+                <td>Her satırı en son kimin, hangi commit'te değiştirdiğini gösterir</td>
+                <td><span class="tag">ORTA</span> Suçlu aramak için değil, bağlam bulmak için kullanılır</td>
+                <td><a href="https://git-scm.com/docs/git-blame">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git rerere</strong></td>
+                <td>Aynı çakışmayı bir kez çözünce sonraki seferlerde otomatik uygular</td>
+                <td><span class="tag tag--info">İLERİ</span> "reuse recorded resolution" kısaltması; varsayılan kapalı</td>
+                <td><a href="https://git-scm.com/docs/git-rerere">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git log</strong> biçimlendirme</td>
+                <td><code>--graph --oneline --decorate</code> ile dal yapısını terminalde görmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Rebase/merge farkını gözle görmek için en pratik yol</td>
+                <td><a href="https://git-scm.com/docs/git-log">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git switch / git restore</strong></td>
+                <td><code>git checkout</code>'un yerini alan iki net komut (dal değiştir / dosya geri al)</td>
+                <td><span class="tag">ORTA</span> checkout hâlâ çalışır ama iki işi birden yaptığı için kafa karıştırıcıdır</td>
+                <td><a href="https://git-scm.com/docs/git-switch">git-scm.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Git — depo yapısı, sürümleme ve iş akışı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>.gitignore</strong></td>
+                <td>Depoya girmeyecek dosya kalıpları</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET için <code>dotnet new gitignore</code> hazır şablon üretir</td>
+                <td><a href="https://git-scm.com/docs/gitignore">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.gitattributes</strong></td>
+                <td>Satır sonu (CRLF/LF), diff davranışı, LFS eşlemesi tanımlar</td>
+                <td><span class="tag">ORTA</span> Windows ekibinde <code>* text=auto</code> satırı çoğu satır sonu kavgasını bitirir</td>
+                <td><a href="https://git-scm.com/docs/gitattributes">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git hooks</strong></td>
+                <td>commit/push anında çalışan yerel betikler (pre-commit, pre-push, commit-msg)</td>
+                <td><span class="tag">ORTA</span> Yerel klasördedir, klonlanmaz; paylaşmak için Husky gibi araç gerekir</td>
+                <td><a href="https://git-scm.com/docs/githooks">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Husky</strong> / <strong>Husky.Net</strong></td>
+                <td>Hook'ları depoya bağlayıp ekiple paylaştıran araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Aramada ".NET" ekle; "husky" tek başına Node.js sürümünü verir</td>
+                <td><a href="https://typicode.github.io/husky/">typicode.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>pre-commit</strong></td>
+                <td>Dil bağımsız hook yöneticisi (Python tabanlı ama her dilde kullanılır)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Husky'nin alternatifi</td>
+                <td><a href="https://pre-commit.com/">pre-commit.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git submodule</strong></td>
+                <td>Bir depoyu başka bir deponun içinde alt depo olarak tutma</td>
+                <td><span class="tag tag--info">İLERİ</span> Yönetimi zahmetlidir; çoğu ekip yerine NuGet paketi veya monorepo tercih eder</td>
+                <td><a href="https://git-scm.com/docs/git-submodule">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git worktree</strong></td>
+                <td>Aynı depodan aynı anda birden fazla çalışma dizini açma</td>
+                <td><span class="tag tag--info">İLERİ</span> İki dalı yan yana açmak için ikinci kez klonlamaya gerek kalmaz</td>
+                <td><a href="https://git-scm.com/docs/git-worktree">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Git LFS</strong></td>
+                <td>Büyük ikili dosyaları (video, tasarım dosyası) depo dışında tutan uzantı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz araç ama GitHub'da depolama/bant genişliği kotası ücretlidir</td>
+                <td><a href="https://git-lfs.com/">git-lfs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git sparse-checkout</strong></td>
+                <td>Büyük depodan sadece belirli klasörleri indirip çalışma</td>
+                <td><span class="tag tag--info">İLERİ</span> Monorepo'larda kullanılır</td>
+                <td><a href="https://git-scm.com/docs/git-sparse-checkout">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git tag</strong> (annotated vs lightweight)</td>
+                <td>Belirli bir commit'i sürüm olarak işaretleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yayın hattı çoğunlukla tag ile tetiklenir; annotated tag mesaj ve imza taşır</td>
+                <td><a href="https://git-scm.com/docs/git-tag">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Semantic Versioning (SemVer)</strong></td>
+                <td>MAJOR.MINOR.PATCH sürüm numarası sözleşmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> NuGet paket sürümlerinin de temeli. <code>1.2.3-beta.1</code> ön sürüm biçimini öğren</td>
+                <td><a href="https://semver.org/">semver.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Conventional Commits</strong></td>
+                <td><code>feat:</code>, <code>fix:</code>, <code>chore:</code> önekleriyle standart commit mesajı</td>
+                <td><span class="tag">ORTA</span> Otomatik sürüm ve changelog üretiminin ön şartıdır</td>
+                <td><a href="https://www.conventionalcommits.org/">conventionalcommits.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitVersion</strong></td>
+                <td>Dal ve tag yapısına bakıp sürüm numarasını CI'da otomatik hesaplar</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, açık kaynak. Azure DevOps ve GitHub Actions eklentileri var</td>
+                <td><a href="https://github.com/GitTools/GitVersion">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Git Flow</strong></td>
+                <td>develop + release + hotfix dallarının olduğu klasik, ağır dallanma modeli</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Rozet yalnız sürekli dağıtılan ürünler için geçerli. Ürün tipine göre:
+                <br>&bull; Sürekli dağıtılan web / SaaS &rarr; Git Flow ağır kalır; GitHub Flow veya trunk-based tercih edilir.
+                <br>&bull; Sürümlü ürün (masaüstü, mağaza sürümlü mobil uygulama, NuGet kütüphanesi, aynı anda birden çok sürümü desteklemek) &rarr; Git Flow veya release branch modeli hâlâ uygun.
+                <br>&bull; Düzenlemeye tabi, dönemsel sürüm çıkan ortam (banka, kamu) &rarr; release branch + hotfix dalları.</td>
+                <td><a href="https://nvie.com/posts/a-successful-git-branching-model/">nvie.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Flow</strong></td>
+                <td>Tek uzun ömürlü dal (main) + kısa ömürlü feature dalları + PR</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sürekli dağıtılan projelerde bugün en yaygın model. Mülakatta "hangi dallanma modelini kullanırsın" sorusunun güvenli cevabı, modeli ekibin teslim sıklığına göre seçtiğini söylemektir: sürekli dağıtımda GitHub Flow / trunk-based, sürümlü üründe release branch / Git Flow.</td>
+                <td><a href="https://docs.github.com/en/get-started/using-github/github-flow">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trunk-based development</strong></td>
+                <td>Herkes main'e günde birkaç kez küçük commit atar; dallar saatlerle ölçülür</td>
+                <td><span class="tag">ORTA</span> Feature flag ile birlikte anlamlıdır (bkz. § 10)</td>
+                <td><a href="https://trunkbaseddevelopment.com/">trunkbaseddevelopment.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>monorepo</strong> / <strong>polyrepo</strong></td>
+                <td>Tüm projeleri tek depoda mı yoksa ayrı depolarda mı tutma tercihi</td>
+                <td><span class="tag">ORTA</span> Monorepo'da CI'yı "sadece değişen projeyi derle" diye kurmak gerekir</td>
+                <td><a href="https://trunkbaseddevelopment.com/monorepos/">trunkbaseddevelopment.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>git filter-repo</strong></td>
+                <td>Geçmişten dosya/sır temizleme aracı</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>git filter-branch</code> resmî olarak önerilmiyor; yerine bunu kullan</td>
+                <td><a href="https://github.com/newren/git-filter-repo">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>branch protection</strong> / <strong>required review</strong></td>
+                <td>main dalına doğrudan push'u engelleme, PR ve onay zorunlu kılma</td>
+                <td><span class="tag tag--ok">TEMEL</span> CI kontrolünü "required check" yapmadan CI hattı kurmuş sayılmazsın</td>
+                <td><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pro Git</strong> (kitap)</td>
+                <td>Git'in resmî, ücretsiz ve tam kapsamlı kitabı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, çevrimiçi okunabilir; bu bölümün tek kaynağı olarak yeter</td>
+                <td><a href="https://git-scm.com/book/en/v2">git-scm.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="github-actions"><span class="h-num">§ 2</span>GitHub Actions <span class="tag tag--bad">MÜLAKATTA SIK</span></h2>
+
+        <p>İlanlarda sık geçer ve hiç kullanmadıysan bu sayfadaki en yüksek öncelikli bölüm bu. İyi haber: öğrenmek bir hafta sonunda mümkün. Boş bir depo aç, <code>.github/workflows/ci.yml</code> dosyası oluştur, .NET projesini derletip testleri koştur. Terimler aşağıda.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Ücretlendirme depo ve plan türüne göre değişir:</p>
+          <ul>
+            <li>Public depo + standart GitHub-hosted runner &rarr; ücretsiz; dakika çarpanı uygulanmaz (büyük/"larger" runner'lar hariç).</li>
+            <li>Private depo + GitHub-hosted runner &rarr; plana göre aylık ücretsiz dakika kotası (Free / Pro / Team / Enterprise farklı), aşınca dakika başına ücret. Windows ve macOS dakika çarpanı yalnız burada önemlidir.</li>
+            <li>Self-hosted runner &rarr; sunucu maliyeti sana ait. GitHub, 2026 için private depolarda self-hosted runner dakikalarına platform ücreti getireceğini duyurmuştu; güncel durum <span class="tag tag--warn">TEYİT</span> docs.github.com "About billing for GitHub Actions".</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>GitHub Actions — temel kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>workflow</strong></td>
+                <td><code>.github/workflows/</code> altındaki bir YAML dosyası; tüm otomasyonun kökü</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.github.com/en/actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>job</strong></td>
+                <td>Bir runner üzerinde çalışan adım grubu; job'lar varsayılan olarak paralel koşar</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>needs:</code> ile sıraya sokulur</td>
+                <td><a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>step</strong></td>
+                <td>Job içindeki tek iş: ya <code>run:</code> (kabuk komutu) ya <code>uses:</code> (hazır action)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>runner</strong></td>
+                <td>Job'ı çalıştıran sanal makine (<code>ubuntu-latest</code>, <code>windows-latest</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Private depoda ubuntu en ucuzu; windows ve macOS dakika çarpanı yüksektir. Public depoda standart runner'lar ücretsiz olduğu için çarpan fark etmez.</td>
+                <td><a href="https://docs.github.com/en/actions/writing-workflows/choosing-where-your-workflow-runs/choosing-the-runner-for-a-job">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>action</strong></td>
+                <td>Yeniden kullanılabilir paket; <code>uses: owner/repo@v4</code> ile çağrılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Üçüncü parti action'ı sürüm etiketiyle değil commit SHA'sıyla sabitlemek güvenlik iyi pratiğidir</td>
+                <td><a href="https://docs.github.com/en/actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trigger</strong> / <strong>on:</strong></td>
+                <td>Workflow'u ne tetikler: <code>push</code>, <code>pull_request</code>, <code>schedule</code>, <code>workflow_dispatch</code>, <code>release</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>workflow_dispatch</code> = elle çalıştırma düğmesi; <code>schedule</code> = cron</td>
+                <td><a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>matrix strategy</strong></td>
+                <td>Aynı job'ı birden çok kombinasyonda koşturma (ör. .NET 8 ve .NET 10, Linux ve Windows)</td>
+                <td><span class="tag">ORTA</span> <code>fail-fast</code> ve <code>include/exclude</code> ayarlarına bak</td>
+                <td><a href="https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cache</strong> (actions/cache)</td>
+                <td>NuGet paketlerini adımlar arasında saklayıp restore süresini kısaltma</td>
+                <td><span class="tag">ORTA</span> <code>setup-dotnet</code>'in kendi <code>cache: true</code> seçeneği de var</td>
+                <td><a href="https://github.com/actions/cache">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>artifact</strong></td>
+                <td>Job'ın ürettiği dosyaları (yayın çıktısı, test raporu) sonraki job'a veya indirmeye bırakma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>upload-artifact</code> / <code>download-artifact</code>. Cache ile karıştırma: artifact çıktı, cache hızlandırma</td>
+                <td><a href="https://github.com/actions/upload-artifact">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>secret</strong></td>
+                <td>Depo/organizasyon düzeyinde şifreli değişken; <code>${{ secrets.X }}</code> ile okunur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Log'a basılmaya çalışılırsa maskelenir ama yine de basma</td>
+                <td><a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>variable</strong> (<code>env:</code>, <code>vars</code>)</td>
+                <td>Sır olmayan yapılandırma değerleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>vars</code> depo değişkeni, <code>env</code> job/step düzeyi ortam değişkeni</td>
+                <td><a href="https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>environment</strong></td>
+                <td>dev/staging/prod hedefi; kendi sırlarını ve manuel onay kuralını taşır</td>
+                <td><span class="tag">ORTA</span> "Deploy öncesi onay" mekanizması burada kurulur</td>
+                <td><a href="https://docs.github.com/en/actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>reusable workflow</strong></td>
+                <td>Bir workflow'u başka workflow'dan <code>workflow_call</code> ile çağırma</td>
+                <td><span class="tag">ORTA</span> Çok projeli kurumlarda ortak CI mantığını tek yerde tutmanın yolu</td>
+                <td><a href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>composite action</strong></td>
+                <td>Birden çok adımı tek bir <code>action.yml</code> paketine sarma</td>
+                <td><span class="tag tag--info">İLERİ</span> Reusable workflow ile farkı: composite adım seviyesinde, reusable job seviyesinde</td>
+                <td><a href="https://docs.github.com/en/actions/creating-actions/creating-a-composite-action">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>self-hosted runner</strong></td>
+                <td>Kendi sunucunda çalıştırdığın runner</td>
+                <td><span class="tag tag--info">İLERİ</span> Şirket ağındaki veritabanına erişim gerektiğinde tercih edilir; güvenlik sorumluluğu sende</td>
+                <td><a href="https://docs.github.com/en/actions/hosting-your-own-runners">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>concurrency</strong></td>
+                <td>Aynı dal için eski koşuyu iptal edip sadece son commit'i çalıştırma</td>
+                <td><span class="tag">ORTA</span> <code>cancel-in-progress: true</code> — dakika kotası tasarrufunun en kolay yolu</td>
+                <td><a href="https://docs.github.com/en/actions/using-jobs/using-concurrency">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>permissions</strong> / <strong>GITHUB_TOKEN</strong></td>
+                <td>Workflow'un depoya hangi yetkilerle eriştiği; her koşuda otomatik üretilen token</td>
+                <td><span class="tag">ORTA</span> En az yetki ilkesi: <code>permissions: contents: read</code> ile başla</td>
+                <td><a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OIDC ile bulut kimlik doğrulama</strong></td>
+                <td>Azure/AWS'ye uzun ömürlü parola koymadan, kısa ömürlü token ile bağlanma</td>
+                <td><span class="tag tag--info">İLERİ</span> Aramada "GitHub Actions OIDC federated credentials" yaz. Bugünün doğru yöntemi; secret'a servis parolası koymak eski yöntem</td>
+                <td><a href="https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>expression / context</strong></td>
+                <td><code>${{ github.ref }}</code>, <code>${{ runner.os }}</code> gibi çalışma anı değerleri</td>
+                <td><span class="tag">ORTA</span> <code>if:</code> koşulları bu ifadelerle yazılır</td>
+                <td><a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>act</strong> / <strong>nektos/act</strong></td>
+                <td>GitHub Actions workflow'unu yerel makinede Docker ile çalıştıran araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Her push'ta CI beklemeden denemek için</td>
+                <td><a href="https://nektosact.com/">nektosact.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>.NET projesi için tipik workflow adımları — sırayla öğren</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>actions/checkout</strong></td>
+                <td>Depoyu runner'a klonlar; her workflow'un ilk adımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>fetch-depth: 0</code> tüm geçmişi çeker (GitVersion için gerekir)</td>
+                <td><a href="https://github.com/actions/checkout">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>actions/setup-dotnet</strong></td>
+                <td>Runner'a istenen .NET SDK sürümünü kurar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sürümü <code>global.json</code> ile sabitleyebilirsin</td>
+                <td><a href="https://github.com/actions/setup-dotnet">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet restore</strong></td>
+                <td>NuGet bağımlılıklarını indirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>dotnet build</code> zaten restore yapar; ayrı adım cache ölçmek için tutulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet build --configuration Release</strong></td>
+                <td>Derleme adımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> CI'da <code>-warnaserror</code> ile uyarıları hata yapmak yaygın</td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet test</strong></td>
+                <td>Test projelerini koşturur, sonuç dosyası (TRX) üretebilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Test detayları için <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>coverlet</strong></td>
+                <td>.NET için kod kapsama (code coverage) toplayıcı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. <code>--collect:"XPlat Code Coverage"</code> ile çalışır</td>
+                <td><a href="https://github.com/coverlet-coverage/coverlet">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReportGenerator</strong></td>
+                <td>Coverage dosyasını okunur HTML/Markdown rapora çevirir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (açık kaynak)</td>
+                <td><a href="https://github.com/danielpalme/ReportGenerator">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Codecov</strong> / <strong>Coveralls</strong></td>
+                <td>Coverage sonucunu PR'a yorum olarak basan bulut servisleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Public depoda ücretsiz, private'ta ücretli plan</td>
+                <td><a href="https://about.codecov.io/">codecov.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet publish</strong></td>
+                <td>Dağıtılabilir çıktı üretir (framework-dependent veya self-contained)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yayın çıktısını artifact olarak yükleyip deploy job'ında indirirsin</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>docker/build-push-action</strong></td>
+                <td>Görüntüyü derleyip registry'ye gönderen resmî action</td>
+                <td><span class="tag">ORTA</span> Buildx cache ile katman önbelleği kurulur</td>
+                <td><a href="https://github.com/docker/build-push-action">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Packages / GHCR</strong></td>
+                <td>GitHub'ın NuGet ve container registry hizmeti</td>
+                <td><span class="tag">ORTA</span> Public ücretsiz, private'ta depolama kotası var</td>
+                <td><a href="https://docs.github.com/en/packages">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>azure/login</strong></td>
+                <td>Azure'a OIDC veya service principal ile bağlanan resmî action</td>
+                <td><span class="tag">ORTA</span> Deploy adımlarının ön şartı</td>
+                <td><a href="https://github.com/azure/login">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>re-run / job summary</strong></td>
+                <td>Başarısız job'ı tekrar çalıştırma, koşu özet sayfasına Markdown basma</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>$GITHUB_STEP_SUMMARY</code> dosyasına yazarak rapor üretilir</td>
+                <td><a href="https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/re-running-workflows-and-jobs">docs.github.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="azure-devops"><span class="h-num">§ 3</span>Azure DevOps <span class="tag tag--bad">MÜLAKATTA SIK</span></h2>
+
+        <p>Hangi CI platformuyla karşılaşacağın işyeri türüne göre değişir:</p>
+        <ul>
+          <li><strong>Kurumsal şirket / banka / kamu</strong> &rarr; Azure DevOps Services veya şirket içi Azure DevOps Server sık görülür; GitLab (self-hosted) ve Jenkins de yaygındır.</li>
+          <li><strong>Startup / ürün şirketi / açık kaynak</strong> &rarr; ağırlıklı olarak GitHub Actions.</li>
+          <li><strong>Kişisel öğrenme</strong> &rarr; GitHub Actions yeterli; Azure DevOps ikinci adım.</li>
+        </ul>
+        <p>Kavramlar GitHub Actions ile birebir eşleşir; ikisini birden öğrenmek ikinci kez sıfırdan öğrenmek değildir.
+        Ücret: Azure DevOps Services'te ilk 5 Basic kullanıcı ücretsizdir; Microsoft-hosted ücretsiz paralel iş yeni organizasyonlarda
+        başvuruyla verilir. <span class="tag tag--warn">TEYİT</span> learn.microsoft.com "Configure and pay for parallel jobs"</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Azure DevOps — kavram karşılıkları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Azure Pipelines</strong></td>
+                <td>Azure DevOps'un CI/CD motoru</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>YAML pipeline vs classic (UI) pipeline</strong></td>
+                <td>Boru hattını kodla mı, arayüzde sürükle-bırak mı tanımladığın</td>
+                <td><span class="tag tag--ok">TEMEL</span> Classic hâlâ eski projelerde var ama yeni işte YAML kullanılır <span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stage / job / step / task</strong></td>
+                <td>Hiyerarşi: stage &rarr; job &rarr; step; step ya <code>script</code> ya hazır <code>task</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> GitHub Actions'ta "stage" karşılığı yok; oradaki karşılığı <code>needs</code> zinciridir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/stages">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>agent</strong> / <strong>agent pool</strong></td>
+                <td>Job'ı çalıştıran makine; Microsoft-hosted veya self-hosted</td>
+                <td><span class="tag tag--ok">TEMEL</span> GitHub'daki "runner" ile aynı kavram</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/agents">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>variable group</strong></td>
+                <td>Birden fazla pipeline'ın paylaştığı değişken kümesi; Key Vault'a bağlanabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> "secret variable" işaretlenirse log'da maskelenir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>service connection</strong></td>
+                <td>Azure aboneliği, Docker registry, SonarQube gibi dış sistemlere kimlik bilgisi köprüsü</td>
+                <td><span class="tag tag--ok">TEMEL</span> GitHub'daki "secret + azure/login" ikilisinin karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Artifacts</strong> (feed)</td>
+                <td>Şirket içi özel NuGet/npm paket deposu</td>
+                <td><span class="tag">ORTA</span> Kurumsal .NET ekiplerinde ortak kütüphaneler burada yayınlanır. Ücretsiz kota + üzeri ücretli</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/artifacts/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>environment</strong></td>
+                <td>Dağıtım hedefi kaydı; dağıtım geçmişini ve onayları tutar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>approval gate</strong> / <strong>check</strong></td>
+                <td>Prod'a çıkmadan önce insan onayı veya otomatik kontrol şartı</td>
+                <td><span class="tag">ORTA</span> "Manual approval" mülakatta sıkça sorulan bir CD kavramıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pipeline template</strong></td>
+                <td>Ortak YAML parçalarını başka pipeline'lardan çağırma</td>
+                <td><span class="tag tag--info">İLERİ</span> GitHub'daki reusable workflow karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/process/templates">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DotNetCoreCLI@2 task</strong></td>
+                <td>restore/build/test/publish adımlarını yapan hazır görev</td>
+                <td><span class="tag tag--ok">TEMEL</span> Alternatif: düz <code>script: dotnet build</code> yazmak da geçerlidir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/dotnet-core-cli-v2">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET pipeline şablonu</strong></td>
+                <td>Microsoft'un uçtan uca .NET Core CI örneği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kopyala, kendi projene uyarla, çalıştır — öğrenmenin en hızlı yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Classic Release pipeline</strong></td>
+                <td>Eski, arayüz tabanlı dağıtım hattı</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni proje kurma; devraldığın projede görürsün</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/release/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Repos</strong></td>
+                <td>Azure DevOps'un Git barındırma hizmeti</td>
+                <td><span class="tag">ORTA</span> Git komutları aynı; PR arayüzü farklı</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/repos/get-started/what-is-repos">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Boards</strong></td>
+                <td>İş takibi (work item, sprint, backlog, board)</td>
+                <td><span class="tag">ORTA</span> Commit mesajında <code>#123</code> ile work item bağlanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/boards/get-started/what-is-azure-boards">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-cicd"><span class="h-num">§ 4</span>Diğer CI/CD platformları</h2>
+
+        <p>Hepsini öğrenmene gerek yok; isimlerini ve hangisinin nerede kullanıldığını bilmen yeter. İlan okurken "GitLab CI deneyimi" yazdığında ne demek olduğunu anlaman lazım.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>CI/CD ve GitOps araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>GitLab CI/CD</strong></td>
+                <td><code>.gitlab-ci.yml</code> ile tanımlanan, GitLab'a gömülü hat</td>
+                <td><span class="tag">ORTA</span> Ücretsiz self-hosted (Community Edition) + ücretli SaaS planları. Türkiye'de kurum içi kurulumu yaygın</td>
+                <td><a href="https://docs.gitlab.com/ee/ci/">docs.gitlab.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jenkins</strong></td>
+                <td>Eklenti tabanlı, kendi sunucunda çalışan klasik CI sunucusu; <code>Jenkinsfile</code></td>
+                <td><span class="tag">ORTA</span> Ücretsiz, açık kaynak. Eski ama hâlâ çok yaygın; bakımı zahmetlidir</td>
+                <td><a href="https://www.jenkins.io/doc/">jenkins.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>TeamCity</strong></td>
+                <td>JetBrains'in CI sunucusu, .NET ekosisteminde iyi desteklenir</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Sınırlı ücretsiz katman var, ötesi lisanslı</td>
+                <td><a href="https://www.jetbrains.com/teamcity/">jetbrains.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CircleCI</strong></td>
+                <td>Bulut tabanlı CI servisi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz kota + ücretli planlar. .NET dünyasında az görülür</td>
+                <td><a href="https://circleci.com/docs/">circleci.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitOps</strong></td>
+                <td>Sistemin istenen hâli Git'te durur, bir araç kümeyi o hâle yakınsatır</td>
+                <td><span class="tag tag--info">İLERİ</span> Kavramı bil; Kubernetes olmadan pek anlamı yok</td>
+                <td><a href="https://fluxcd.io/">fluxcd.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Argo CD</strong></td>
+                <td>Kubernetes için en yaygın GitOps dağıtım aracı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, CNCF projesi</td>
+                <td><a href="https://argo-cd.readthedocs.io/en/stable/">argo-cd.readthedocs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flux CD</strong></td>
+                <td>Argo CD'nin alternatifi; arayüzsüz, operatör odaklı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, CNCF projesi</td>
+                <td><a href="https://fluxcd.io/">fluxcd.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Octopus Deploy</strong></td>
+                <td>.NET dünyasında yaygın, sadece dağıtıma odaklı ürün</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Kurumsal .NET ilanlarında adı geçer</td>
+                <td>octopus.com</td>
+              </tr>
+              <tr>
+                <td><strong>Central Package Management</strong></td>
+                <td><code>Directory.Packages.props</code> ile tüm çözümde NuGet sürümlerini tek yerden yönetme</td>
+                <td><span class="tag">ORTA</span> CI'da sürüm tutarsızlığı kaynaklı hataları bitirir</td>
+                <td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>global.json</strong></td>
+                <td>Projenin hangi .NET SDK sürümüyle derleneceğini sabitler</td>
+                <td><span class="tag">ORTA</span> "Bende çalışıyor, CI'da çalışmıyor" vakalarının bir numaralı çözümü</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-json">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Renovate</strong></td>
+                <td>Bağımlılık güncelleme PR'larını otomatik açan bot (Dependabot alternatifi)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz self-hosted + ücretsiz GitHub uygulaması</td>
+                <td><a href="https://renovatebot.com/docs/">renovatebot.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="docker"><span class="h-num">§ 5</span>Docker ve konteynerleştirme</h2>
+
+        <p>2026'da .NET ilanlarının çoğunda "Docker bilgisi" isteniyor ve mülakatta neredeyse kesin sorulur. Öğrenme sırası: image/container farkı &rarr; Dockerfile yazma &rarr; multi-stage build &rarr; compose ile veritabanı + API birlikte ayağa kaldırma.</p>
+
+        <p>Compose'ta hangi veritabanı imajını kullanacağın ortamına bağlı:</p>
+        <ul>
+          <li><strong>SQL Server kullanıyorsan</strong> &rarr; <code>mcr.microsoft.com/mssql/server</code> (yalnız x64; Apple Silicon Mac'te emülasyonla çalışır; en az 2 GB RAM ister).</li>
+          <li><strong>PostgreSQL kullanıyorsan</strong> &rarr; <code>postgres</code> imajı (ARM uyumlu, daha hafif).</li>
+          <li><strong>Düşük RAM'li makine</strong> &rarr; PostgreSQL veya SQLite tercih et.</li>
+          <li><strong>Docker Desktop kurulamayan şirket bilgisayarı</strong> &rarr; Podman Desktop, Rancher Desktop veya WSL2 içinde Docker Engine. Lisans eşikleri aşağıdaki "Docker Desktop lisansı" satırında.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Docker — temel kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>image vs container</strong></td>
+                <td>Image = salt okunur şablon; container = o şablondan çalışan örnek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sınıf/nesne benzetmesi doğru çalışır. Mülakatın ilk Docker sorusu genelde budur</td>
+                <td><a href="https://docs.docker.com/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dockerfile</strong></td>
+                <td>Image'ın nasıl inşa edileceğini anlatan komut dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>FROM</code>, <code>COPY</code>, <code>RUN</code>, <code>ENTRYPOINT</code>, <code>CMD</code> farklarını öğren</td>
+                <td><a href="https://docs.docker.com/reference/dockerfile/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>layer</strong> / <strong>layer caching</strong></td>
+                <td>Her komut bir katman üretir; değişmeyen katman yeniden derlenmez</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>.csproj</code>'u önce kopyalayıp <code>restore</code> etmek, kaynak kodu sonra kopyalamak standart hızlandırma hilesidir</td>
+                <td><a href="https://docs.docker.com/build/cache/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>multi-stage build</strong></td>
+                <td>Derlemeyi SDK image'ında yapıp sadece çıktıyı küçük runtime image'ına kopyalama</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te olmazsa olmaz; image boyutunu 800 MB'tan ~100 MB'a indirir</td>
+                <td><a href="https://docs.docker.com/build/building/multi-stage/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.dockerignore</strong></td>
+                <td>Build bağlamına girmeyecek dosyalar (<code>bin/</code>, <code>obj/</code>, <code>.git/</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Unutulursa build hem yavaşlar hem yerel <code>bin</code> çıktısı image'a sızar</td>
+                <td><a href="https://docs.docker.com/build/concepts/context/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>volume</strong> / <strong>bind mount</strong></td>
+                <td>Konteyner silinince kaybolmayan veri alanı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Veritabanı konteynerinde şart; ikisinin farkını öğren</td>
+                <td><a href="https://docs.docker.com/engine/storage/volumes/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>network</strong> (bridge, host)</td>
+                <td>Konteynerlerin birbirini servis adıyla bulmasını sağlayan ağ</td>
+                <td><span class="tag tag--ok">TEMEL</span> Compose'da bağlantı dizesi <code>localhost</code> değil, servis adıdır — sık yapılan hata</td>
+                <td><a href="https://docs.docker.com/engine/network/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>port mapping</strong> (<code>-p 8080:8080</code>)</td>
+                <td>Konteyner içi portu ana makineye açma</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET 8'den itibaren varsayılan konteyner portu 8080 (eskiden 80)</td>
+                <td><a href="https://docs.docker.com/engine/network/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Compose</strong></td>
+                <td><code>compose.yaml</code> ile birden çok servisi (API + SQL Server + Redis + Seq) tek komutla ayağa kaldırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yerel geliştirme için en değerli beceri. Kendi makinende denenebilir; veritabanı imajı seçimi ve Docker kurulamayan ortamlar için bölüm girişine bak</td>
+                <td><a href="https://docs.docker.com/compose/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>registry</strong></td>
+                <td>Image'ların saklandığı depo: Docker Hub, GHCR, Azure Container Registry</td>
+                <td><span class="tag tag--ok">TEMEL</span> Docker Hub'da public ücretsiz, private sınırlı; ACR ücretlidir</td>
+                <td><a href="https://hub.docker.com/">hub.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tag</strong> / <strong>digest</strong></td>
+                <td>Image sürüm etiketi; digest ise değişmez içerik parmak izi</td>
+                <td><span class="tag">ORTA</span> Prod'da <code>:latest</code> kullanma — hangi sürümün çalıştığını bilemezsin</td>
+                <td><a href="https://docs.docker.com/reference/dockerfile/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET resmî image etiketleri</strong></td>
+                <td><code>sdk</code>, <code>aspnet</code>, <code>runtime</code>, <code>runtime-deps</code> aileleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Build'de <code>sdk</code>, çalıştırmada <code>aspnet</code> kullanılır. mcr.microsoft.com üzerinden dağıtılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/container-images">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>chiseled / Ubuntu Chiseled image</strong></td>
+                <td>Kabuk ve paket yöneticisi çıkarılmış, çok küçük ve dar saldırı yüzeyli .NET image'ı</td>
+                <td><span class="tag">ORTA</span> Aramada "dotnet chiseled containers" yaz. Alpine'a modern alternatif</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/container-images">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>distroless</strong></td>
+                <td>İşletim sistemi araçları olmayan minimal image ailesi (Google)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Hata ayıklaması zordur çünkü içinde kabuk yoktur</td>
+                <td><a href="https://github.com/GoogleContainerTools/distroless">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet publish /t:PublishContainer</strong></td>
+                <td>Dockerfile yazmadan, SDK'nın kendisiyle image üretme</td>
+                <td><span class="tag">ORTA</span> Aramada "dotnet SDK container publish" yaz; en pratik başlangıç yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/containers/sdk-publish">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET Core konteyner rehberi</strong></td>
+                <td>Microsoft'un uçtan uca Dockerfile örneği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kopyala-çalıştır ile başla</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/build-container">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>non-root user</strong> (<code>USER app</code>)</td>
+                <td>Konteyneri root olmayan kullanıcıyla çalıştırma</td>
+                <td><span class="tag">ORTA</span> .NET 8+ resmî image'larda <code>app</code> kullanıcısı hazır gelir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/container-images">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Podman</strong></td>
+                <td>Daemon'suz, root'suz çalışabilen Docker alternatifi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Komutları Docker ile büyük ölçüde uyumlu; Red Hat dünyasında yaygın</td>
+                <td><a href="https://podman.io/docs">podman.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Desktop lisansı</strong></td>
+                <td>Kullanıma ve şirket büyüklüğüne göre ücretsiz veya ücretli</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Durum &rarr; sonuç:
+                <br>&bull; Kişisel kullanım, eğitim, ticari olmayan açık kaynak &rarr; ücretsiz.
+                <br>&bull; En fazla 250 çalışanı <em>ve</em> en fazla 10 milyon USD yıllık geliri olan şirket &rarr; ücretsiz.
+                <br>&bull; Bu eşiklerden birini aşan şirket (250'den fazla çalışan <em>veya</em> 10 milyon USD'yi aşan yıllık gelir) &rarr; ücretli abonelik (Pro / Team / Business).
+                <br>&bull; Tam sınırdaysan (tam 250 çalışan / tam 10 milyon USD) &rarr; Docker'ın kendi metinleri bu noktayı farklı ifade edebiliyor; şirketin hukuk/satın alma birimine sor.
+                <br>&bull; Linux'ta Docker Engine (Desktop değil) ve CI runner'ları &rarr; ücretsiz, Desktop lisansına tabi değil.
+                <br>&bull; Ücretsiz alternatifler &rarr; Podman Desktop, Rancher Desktop, WSL2 içinde Docker Engine.
+                <br><span class="tag tag--warn">TEYİT</span> docker.com/pricing güncel eşikler</td>
+                <td><a href="https://www.docker.com/pricing/">docker.com/pricing</a></td>
+              </tr>
+              <tr>
+                <td><strong>Testcontainers</strong></td>
+                <td>Testte gerçek SQL Server/Redis konteynerini kod içinden ayağa kaldırma</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Entegrasyon testi konusunda ayrıntı: <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a></td>
+                <td><a href="https://testcontainers.com/">testcontainers.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kubernetes"><span class="h-num">§ 6</span>Kubernetes — temel seviye</h2>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Ne kadar derin öğreneceğin rolüne ve şirketine bağlı:</p>
+          <ul>
+            <li><strong>Junior/mid uygulama geliştirici, şirket Kubernetes kullanmıyor</strong> &rarr; şu aşamada <strong>derinlemesine öğrenme</strong>; terimlerin ne anlama geldiğini bilmek ve <code>kubectl get pods</code> düzeyinde el yormuş olmak yeterlidir.</li>
+            <li><strong>Şirketin ürünü Kubernetes'te çalışıyor</strong> (özellikle senior backend) &rarr; probe, resource requests/limits, HPA, ConfigMap/Secret ve rolling update pratikte bilinmeli.</li>
+            <li><strong>DevOps / platform / SRE rolü</strong> &rarr; derinlemesine öğren (CKAD/CKA müfredatı, Helm, GitOps).</li>
+            <li><strong>Ekip Azure Container Apps / App Service kullanıyor</strong> &rarr; Kubernetes yerine o platform öncelikli.</li>
+          </ul>
+          <p>Her durumda Docker'ı iyi bilmek Kubernetes'i yarım bilmekten daha değerlidir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kubernetes — bilinmesi yeten kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>pod</strong></td>
+                <td>Kubernetes'in en küçük dağıtım birimi; bir veya birkaç konteyner</td>
+                <td><span class="tag">ORTA</span> Pod = konteyner değildir; pod konteyneri saran kabuktur</td>
+                <td><a href="https://kubernetes.io/docs/concepts/workloads/pods/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>deployment</strong></td>
+                <td>Kaç kopya pod çalışacağını ve nasıl güncelleneceğini tanımlar</td>
+                <td><span class="tag">ORTA</span> Rolling update ve rollback bu nesne üzerinden yapılır</td>
+                <td><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>service</strong> (ClusterIP, NodePort, LoadBalancer)</td>
+                <td>Pod'lara sabit bir ad ve IP üzerinden erişim sağlar</td>
+                <td><span class="tag">ORTA</span> Pod IP'leri sürekli değişir; service bu yüzden vardır</td>
+                <td><a href="https://kubernetes.io/docs/concepts/services-networking/service/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ingress</strong></td>
+                <td>Dış dünyadan gelen HTTP trafiğini alan adı/yola göre servislere dağıtır</td>
+                <td><span class="tag tag--info">İLERİ</span> Ingress controller (nginx, Traefik) ayrıca kurulmalıdır</td>
+                <td><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ConfigMap</strong></td>
+                <td>Sır olmayan yapılandırmayı pod'a ortam değişkeni/dosya olarak verir</td>
+                <td><span class="tag">ORTA</span> ASP.NET Core yapılandırma sağlayıcısıyla doğal eşleşir</td>
+                <td><a href="https://kubernetes.io/docs/concepts/configuration/configmap/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Secret</strong></td>
+                <td>Parola/bağlantı dizesi gibi hassas değerler</td>
+                <td><span class="tag">ORTA</span> Varsayılan olarak sadece base64'tür, şifreli değildir — bu bir mülakat tuzağıdır</td>
+                <td><a href="https://kubernetes.io/docs/concepts/configuration/secret/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>namespace</strong></td>
+                <td>Küme içinde mantıksal bölmeleme (dev, test, prod)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>HPA</strong> (Horizontal Pod Autoscaler)</td>
+                <td>CPU/bellek/özel metriğe göre pod sayısını otomatik artırıp azaltır</td>
+                <td><span class="tag tag--info">İLERİ</span> Ölçeklenme sorularının pratik cevabı</td>
+                <td><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>liveness / readiness / startup probe</strong></td>
+                <td>Kubernetes'in "bu pod yaşıyor mu / trafik alabilir mi" kontrolleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET tarafındaki karşılığı HealthChecks (bkz. § 9) — ilanlardaki "HealthChecks" maddesiyle doğrudan bağlantılı</td>
+                <td><a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>resource requests / limits</strong></td>
+                <td>Pod'un isteyeceği ve aşamayacağı CPU/bellek miktarı</td>
+                <td><span class="tag tag--info">İLERİ</span> Limit aşımı OOMKilled ile sonuçlanır; .NET GC bunu görmelidir</td>
+                <td><a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Helm</strong></td>
+                <td>Kubernetes manifest'lerini şablonlayıp paket (chart) olarak dağıtan araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, CNCF. Kurumsalda fiilen standart</td>
+                <td><a href="https://helm.sh/docs/">helm.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kustomize</strong></td>
+                <td>Şablon yerine "yamalama" mantığıyla ortam farklarını yöneten araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, <code>kubectl</code> içinde gömülü gelir</td>
+                <td><a href="https://kustomize.io/">kustomize.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>operator</strong> / <strong>CRD</strong></td>
+                <td>Kubernetes'i kendi nesne tiplerinle genişletme deseni</td>
+                <td><span class="tag tag--info">İLERİ</span> Bilmen gerekmez, adını duy yeter</td>
+                <td><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/operator/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>AKS</strong> (Azure Kubernetes Service)</td>
+                <td>Azure'un yönetilen Kubernetes hizmeti</td>
+                <td><span class="tag tag--info">İLERİ</span> Kontrol düzlemi ücretsiz katmanı var; düğüm makineleri ücretlidir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/aks/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bulut-ve-iac"><span class="h-num">§ 7</span>Bulut hizmetleri ve altyapı kodu (IaC)</h2>
+
+        <p>Kurumsal .NET dünyasında Azure baskındır; ama hangi bulutu önce öğreneceğin hedef şirkete bağlı:</p>
+        <ul>
+          <li><strong>Hedef şirket Azure kullanıyor</strong> (kurumsal .NET'te sık) &rarr; Azure önce, AWS karşılık tablosuyla.</li>
+          <li><strong>Hedef şirket AWS kullanıyor</strong> (birçok startup ve e-ticaret) &rarr; AWS önce: ECS/Fargate, Lambda, RDS.</li>
+          <li><strong>Hedef şirket GCP kullanıyor</strong> &rarr; Cloud Run ile başla.</li>
+        </ul>
+        <p>Hesap açma durumuna göre:</p>
+        <ul>
+          <li><strong>Kredi kartın varsa</strong> &rarr; Azure ücretsiz hesap (kart ve telefon doğrulaması gerekir); ilk iş bir Web API'yi App Service'e yayınlamak, bu bölümü öğrenmenin en hızlı yoludur.</li>
+          <li><strong>Öğrenciysen</strong> &rarr; Azure for Students (kart istemez; kredi miktarı ve uygunluk <span class="tag tag--warn">TEYİT</span> azure.microsoft.com/free/students).</li>
+          <li><strong>Kartın yoksa / hesap açamıyorsan</strong> &rarr; aynı akışı yerelde Docker + .NET Aspire ile kur; bulut adımını sonraya bırak.</li>
+        </ul>
+        <p> Modern .NET bulut yığını için ayrıca <a href="../09-aspire-bulut-modern/index.html">09 — Aspire ve Bulut</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Azure — .NET geliştiricisinin karşılaştığı hizmetler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Azure App Service</strong></td>
+                <td>Sunucu yönetmeden web uygulaması/API barındırma (PaaS)</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET için en kolay yayın hedefi. Ücretsiz F1 katmanı deneme için yeter</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/app-service/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>deployment slot</strong></td>
+                <td>App Service'te staging kopyası; "swap" ile kesintisiz geçiş</td>
+                <td><span class="tag">ORTA</span> Blue-green dağıtımın en kolay uygulaması. Ücretli katmanlarda mevcuttur</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Container Apps</strong></td>
+                <td>Kubernetes'i yönetmeden konteyner çalıştırma; sıfıra kadar ölçeklenir</td>
+                <td><span class="tag">ORTA</span> .NET Aspire'ın varsayılan dağıtım hedefi</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/container-apps/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Functions</strong></td>
+                <td>Olay tetiklemeli, sunucusuz (serverless) kod çalıştırma</td>
+                <td><span class="tag">ORTA</span> "Cold start" kavramını öğren; tüketim planında ücretsiz kota var</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-functions/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure SQL Database</strong></td>
+                <td>Yönetilen SQL Server; DTU veya vCore modelinde ücretlendirilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> SQL Server biliyorsan buradaki fark yalnızca yönetim ve fiyatlandırmadır; başka bir veritabanından geliyorsan önce T-SQL farklarına bak (<a href="../03-veri-erisimi/index.html">03</a>); ekip PostgreSQL / MySQL kullanıyorsa karşılığı Azure Database for PostgreSQL / MySQL'dir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-sql/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Blob Storage</strong></td>
+                <td>Dosya/nesne depolama</td>
+                <td><span class="tag">ORTA</span> Kullanıcı dosyalarını veritabanına değil buraya koymak standart yaklaşımdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/storage/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Key Vault</strong></td>
+                <td>Sır, sertifika ve anahtar saklama hizmeti</td>
+                <td><span class="tag tag--ok">TEMEL</span> ASP.NET Core yapılandırma sağlayıcısı ile doğrudan bağlanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/key-vault/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Service Bus</strong></td>
+                <td>Kurumsal mesaj kuyruğu (queue + topic/subscription)</td>
+                <td><span class="tag">ORTA</span> RabbitMQ'nun Azure'daki karşılığı. Ayrıntı: <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/service-bus-messaging/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Container Registry (ACR)</strong></td>
+                <td>Özel Docker image deposu</td>
+                <td><span class="tag">ORTA</span> Ücretlidir (Basic/Standard/Premium katmanları)</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/container-registry/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Monitor</strong></td>
+                <td>Log, metrik ve uyarıların toplandığı şemsiye hizmet</td>
+                <td><span class="tag">ORTA</span> Application Insights bunun bir parçasıdır (bkz. § 9)</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>managed identity</strong></td>
+                <td>Uygulamanın parola taşımadan Azure kaynaklarına erişmesi</td>
+                <td><span class="tag">ORTA</span> Bağlantı dizesinde parola tutmamanın doğru yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/key-vault/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>AWS ve altyapı kodu</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>AWS EC2</strong></td>
+                <td>Kiralık sanal sunucu (IaaS)</td>
+                <td><span class="tag tag--info">İLERİ</span> Azure karşılığı: Virtual Machines</td>
+                <td><a href="https://docs.aws.amazon.com/ec2/">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS ECS / Fargate</strong></td>
+                <td>Konteyner çalıştırma hizmeti; Fargate sunucusuz kipi</td>
+                <td><span class="tag tag--info">İLERİ</span> Azure karşılığı: Container Apps / Container Instances</td>
+                <td><a href="https://docs.aws.amazon.com/ecs/">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS Lambda</strong></td>
+                <td>Sunucusuz fonksiyon</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET desteklenir; Native AOT ile cold start ciddi düşer</td>
+                <td><a href="https://docs.aws.amazon.com/lambda/">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS RDS</strong></td>
+                <td>Yönetilen ilişkisel veritabanı (SQL Server, PostgreSQL dahil)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.aws.amazon.com/rds/">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AWS S3</strong></td>
+                <td>Nesne depolama; Blob Storage'ın karşılığı</td>
+                <td><span class="tag tag--info">İLERİ</span> "S3 uyumlu API" ifadesi sektörde fiili standart hâline geldi</td>
+                <td><a href="https://docs.aws.amazon.com/s3/">docs.aws.amazon.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IaC</strong> (Infrastructure as Code)</td>
+                <td>Sunucu ve hizmetleri arayüzden tıklayarak değil, dosyayla tanımlama</td>
+                <td><span class="tag">ORTA</span> Kavramı bil; hangi aracı seçtiğin ikinci mesele</td>
+                <td><a href="https://developer.hashicorp.com/terraform/docs">developer.hashicorp.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Terraform</strong></td>
+                <td>Bulut bağımsız, HCL diliyle yazılan en yaygın IaC aracı</td>
+                <td><span class="tag">ORTA</span> Lisansı BSL'e geçti; "kısıtlı" olmasının anlamı kullanım biçimine göre değişir:
+                <br>&bull; Kendi şirketinin altyapısını Terraform ile yönetmek &rarr; BSL altında ücretsiz ve serbest.
+                <br>&bull; Terraform'u gömen / onunla rekabet eden ticari ürün veya yönetilen hizmet sunmak &rarr; BSL kısıtına girer; HashiCorp (IBM) ile lisans gerekir.
+                <br>&bull; Tamamen OSI onaylı açık kaynak isteyen kurum &rarr; OpenTofu (MPL-2.0).
+                <br>&bull; HCP Terraform (bulut hizmeti) &rarr; ücretsiz kota + ücretli katmanlar. <span class="tag tag--warn">TEYİT</span> hashicorp.com/pricing</td>
+                <td><a href="https://developer.hashicorp.com/terraform/docs">developer.hashicorp.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTofu</strong></td>
+                <td>Terraform'un lisans değişikliği sonrası açılan topluluk çatalı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, Linux Foundation altında</td>
+                <td>opentofu.org</td>
+              </tr>
+              <tr>
+                <td><strong>Bicep</strong></td>
+                <td>Azure'a özel, ARM şablonlarının okunabilir hâli</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Sadece Azure ile çalışacaksan Terraform'dan daha kolaydır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pulumi</strong></td>
+                <td>Altyapıyı C# gibi gerçek programlama diliyle tanımlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Açık kaynak CLI ücretsiz, yönetilen bulut hizmeti ücretli. Hangi dilden geldiğine göre:
+                <br>&bull; C# biliyorsan &rarr; Pulumi'nin C# SDK'sı en tanıdık seçenek.
+                <br>&bull; TypeScript / Python / Go / Java biliyorsan &rarr; Pulumi bu dillerde de çalışır, yine tanıdık gelir.
+                <br>&bull; Programlama dışından gelen sistem yöneticisi / ops &rarr; bildirimsel oldukları için Terraform/OpenTofu (HCL) veya Bicep daha kolay olabilir.</td>
+                <td><a href="https://www.pulumi.com/docs/">pulumi.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>12-Factor App</strong></td>
+                <td>Bulutta çalışan uygulamanın uyması gereken 12 ilke</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, kısa; yapılandırma/log/süreç bölümleri doğrudan .NET'e uyar</td>
+                <td><a href="https://12factor.net/">12factor.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cloud Design Patterns</strong></td>
+                <td>Retry, Circuit Breaker, Bulkhead, Cache-Aside gibi bulut desenleri kataloğu</td>
+                <td><span class="tag">ORTA</span> Mimari sorularının hazır cevap havuzu</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="loglama"><span class="h-num">§ 8</span>Loglama</h2>
+
+        <p>Serilog ve Seq ilanlarda sık geçer. En azından bir konsol uygulamasında Serilog'u kurup Seq'e log yollamış olman gerekir (Seq'in tek kullanıcılık sürümü ücretsiz ve Docker ile tek komutta ayağa kalkar). Ekip içinde ücretsiz bir log sunucusu gerekiyorsa Grafana Loki veya OpenSearch; dış paket kullanımının kısıtlı olduğu kurumda yerleşik <code>ILogger</code> + dosya/EventLog sağlayıcıları ile başla.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Loglama — .NET yerleşik altyapısı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ILogger&lt;T&gt;</strong></td>
+                <td>.NET'in yerleşik loglama arayüzü; DI ile enjekte edilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Serilog dahil tüm kütüphaneler bunun arkasına takılır — sen hep <code>ILogger</code> kullanırsın</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>log level</strong></td>
+                <td>Trace &lt; Debug &lt; Information &lt; Warning &lt; Error &lt; Critical</td>
+                <td><span class="tag tag--ok">TEMEL</span> Prod'da varsayılan Information; Debug açık bırakmak performans ve maliyet yakar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loglevel">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>yapılandırılmış loglama</strong> (structured logging)</td>
+                <td>Log'u düz metin değil, alanları olan bir kayıt olarak yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>logger.LogInformation("User {UserId} failed", id)</code> — string interpolation ($) KULLANMA, yapı kaybolur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>log scope</strong> (<code>BeginScope</code>)</td>
+                <td>Bir blok içindeki tüm log'lara ortak alan ekleme (ör. RequestId)</td>
+                <td><span class="tag">ORTA</span> Correlation id'yi taşımanın standart yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>logging provider</strong></td>
+                <td>Log'un nereye yazılacağı: Console, Debug, EventLog, üçüncü parti</td>
+                <td><span class="tag tag--ok">TEMEL</span> Serilog'daki karşılığı "sink"tir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>log filtering</strong> (<code>appsettings.json</code>)</td>
+                <td>Kategori bazında seviye ayarı (ör. <code>Microsoft.AspNetCore</code> için Warning)</td>
+                <td><span class="tag tag--ok">TEMEL</span> EF Core'un SQL log'unu susturmanın yolu budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LoggerMessage source generator</strong></td>
+                <td>Derleme anında üretilen, tahsis yapmayan yüksek performanslı log metotları</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>[LoggerMessage]</code> özniteliği. Performans odaklı ekiplerde mülakatta fark yaratır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/high-performance-logging">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>W3CLogger / HTTP logging middleware</strong></td>
+                <td>ASP.NET Core'un istek/yanıt log'lama ara katmanı</td>
+                <td><span class="tag tag--info">İLERİ</span> Gövde log'lamak hassas veri sızdırabilir, dikkatli aç</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Log kütüphaneleri ve log toplama sistemleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Serilog</strong></td>
+                <td>.NET'in en yaygın yapılandırılmış loglama kütüphanesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> Ücretsiz, açık kaynak</td>
+                <td><a href="https://serilog.net/">serilog.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>sink</strong> (Serilog)</td>
+                <td>Log'un gideceği hedef: Console, File, Seq, Elasticsearch, MSSqlServer</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> Aramada "Serilog sink" yaz; "sink" tek başına farklı sonuç verir</td>
+                <td><a href="https://github.com/serilog/serilog/wiki">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>enricher</strong> (Serilog)</td>
+                <td>Her log kaydına otomatik alan ekleyen bileşen (makine adı, thread id, kullanıcı)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/serilog/serilog/wiki">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>message template</strong></td>
+                <td>Serilog'un <code>{PropertyName}</code> ile alan yakalayan log biçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yapılandırılmış loglamanın kalbi</td>
+                <td><a href="https://github.com/serilog/serilog/wiki">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Serilog.AspNetCore</strong> / <code>UseSerilog</code></td>
+                <td>Serilog'u ASP.NET Core barındırıcısına bağlayan paket</td>
+                <td><span class="tag tag--ok">TEMEL</span> Request logging ara katmanı da bu paketten gelir</td>
+                <td><a href="https://serilog.net/">serilog.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>rolling file</strong></td>
+                <td>Log dosyasını güne/boyuta göre bölme ve eski dosyaları silme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>rollingInterval</code> ve <code>retainedFileCountLimit</code> ayarlarını öğren, yoksa disk dolar</td>
+                <td><a href="https://serilog.net/">serilog.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>NLog</strong></td>
+                <td>Serilog'un en güçlü alternatifi; yapılandırma XML ağırlıklıdır</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Eski .NET Framework projelerinde çok görülür</td>
+                <td><a href="https://nlog-project.org/">nlog-project.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>log4net</strong></td>
+                <td>Apache'nin klasik .NET log kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz ama yeni projede kullanma; devraldığın eski kodda görürsün</td>
+                <td><a href="https://logging.apache.org/log4net/">logging.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Seq</strong></td>
+                <td>Yapılandırılmış log'ları arayıp filtreleyen, .NET dünyasına özel log sunucusu</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">ÜCRETLİ</span> Kullanıma göre:
+                <br>&bull; Tek kişi (yerel geliştirme veya tek kullanıcılı küçük kurulum) &rarr; Individual lisans ücretsiz; üretimde kullanım koşulu <span class="tag tag--warn">TEYİT</span> datalust.co/pricing
+                <br>&bull; Birden çok kullanıcılı ekip &rarr; Team / Business lisansı ücretli.
+                <br>&bull; Ücretsiz ekip alternatifi isteyen &rarr; Grafana Loki, OpenSearch, ELK temel sürüm; geliştirmede .NET Aspire panosu.
+                <br>&bull; Dış paket kısıtlı kurum &rarr; yerleşik <code>ILogger</code> + EventLog/dosya.</td>
+                <td><a href="https://datalust.co/seq">datalust.co</a></td>
+              </tr>
+              <tr>
+                <td><strong>Seq sorgu dili</strong></td>
+                <td>Log'lar üzerinde SQL benzeri filtreleme ve sinyal (signal) tanımlama</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> Docker ile 5 dakikada kurup denenebilir</td>
+                <td><a href="https://docs.datalust.co/docs">docs.datalust.co</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grafana Loki</strong></td>
+                <td>Etiket tabanlı, ucuz log toplama sistemi; Grafana ile görüntülenir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (AGPL) self-hosted; Grafana Cloud'da ücretsiz kota var</td>
+                <td><a href="https://grafana.com/docs/loki/latest/">grafana.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ELK Stack</strong> (Elasticsearch + Logstash + Kibana)</td>
+                <td>Kurumsalda en yaygın log arama yığını</td>
+                <td><span class="tag">ORTA</span> Temel özellikler ücretsiz, gelişmiş özellikler ücretli lisans. Kaynak tüketimi yüksektir</td>
+                <td><a href="https://www.elastic.co/elastic-stack">elastic.co</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenSearch</strong></td>
+                <td>Elasticsearch'ün lisans değişimi sonrası açılan AWS çatalı</td>
+                <td><span class="tag tag--info">İLERİ</span> Tamamen ücretsiz (Apache 2.0)</td>
+                <td>opensearch.org</td>
+              </tr>
+              <tr>
+                <td><strong>log korelasyonu</strong> / <strong>correlation id</strong></td>
+                <td>Bir isteğe ait tüm log'ları tek kimlikle bağlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te <code>Activity.Current.TraceId</code> bunu zaten üretir (bkz. § 9)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PII / hassas veri log'lama</strong></td>
+                <td>TC kimlik, kart, parola gibi verilerin log'a yazılmaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Gerçek bir hukuki risk; hangi kuralın uygulandığı veriye ve kapsama göre değişir:
+                <br>&bull; Türkiye'de kişisel veri işleyen &rarr; KVKK (6698 sayılı Kanun): log'daki kişisel veri de kişisel veridir; saklama süresi ve imha süreci tanımlanmalı (VERBİS'e kayıt yükümlüsüysen saklama ve imha politikası zorunlu).
+                <br>&bull; AB'deki kişilerin verisi &rarr; ayrıca GDPR.
+                <br>&bull; Kart verisi işleyen &rarr; PCI DSS: kart numarası (PAN) maskelenmeden/okunamaz hâle getirilmeden log'lanamaz, CVV hiç saklanamaz.
+                <br>&bull; Banka / ödeme kuruluşu &rarr; ayrıca BDDK / TCMB sektörel düzenlemeleri.
+                <br>&bull; Sağlık verisi &rarr; özel nitelikli kişisel veri (KVKK md. 6), daha sıkı koşullar.
+                <br>Hangi daldaysan teknik çözüm aynı: Serilog'da destructuring politikası / maskeleme veya <code>Microsoft.Extensions.Compliance.Redaction</code>.</td>
+                <td><a href="https://serilog.net/">serilog.net</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="gozlemlenebilirlik"><span class="h-num">§ 9</span>Gözlemlenebilirlik (observability)</h2>
+
+        <p>Loglama bu alanın sadece üçte biri. "Üç sütun" (log, metrik, iz) kavramını ve OpenTelemetry'yi bilmek, 2026 .NET ilanlarında giderek daha çok isteniyor. HealthChecks de ilanlarda sık geçer; bu bölümdeki son tablo doğrudan onunla ilgili.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Gözlemlenebilirlik — kavramlar ve OpenTelemetry</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>üç sütun</strong> (logs, metrics, traces)</td>
+                <td>Log = olaylar, metrik = sayısal zaman serisi, iz = bir isteğin uçtan uca yolculuğu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatta "gözlemlenebilirlik nedir" sorusunun cevabı bu üçlüdür</td>
+                <td><a href="https://opentelemetry.io/docs/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>monitoring vs observability</strong></td>
+                <td>İzleme = bilinen soruların panosu; gözlemlenebilirlik = bilinmeyen soruyu sorabilme</td>
+                <td><span class="tag tag--ok">TEMEL</span> İkisi eşanlamlı değildir; farkı söyleyebilmek iyi puan</td>
+                <td><a href="https://sre.google/books/">sre.google</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry (OTel)</strong></td>
+                <td>Log/metrik/iz toplamanın satıcı bağımsız açık standardı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, CNCF. Application Insights ve Jaeger dahil herkes bunu konuşuyor</td>
+                <td><a href="https://opentelemetry.io/docs/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry .NET</strong></td>
+                <td>Resmî .NET SDK'sı ve otomatik enstrümantasyon paketleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> ASP.NET Core, HttpClient, EF Core için hazır enstrümantasyon vardır</td>
+                <td><a href="https://opentelemetry.io/docs/languages/net/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET'te OTel rehberi</strong></td>
+                <td>Microsoft'un resmî uçtan uca kurulum yazısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu bölüme buradan başla</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/observability-with-otel">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exporter</strong></td>
+                <td>Toplanan veriyi nereye göndereceğini belirleyen bileşen (OTLP, Console, Prometheus)</td>
+                <td><span class="tag tag--ok">TEMEL</span> OTLP genel protokol; hedefi değiştirmek exporter değiştirmekten ibarettir</td>
+                <td><a href="https://opentelemetry.io/docs/languages/net/exporters/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry Collector</strong></td>
+                <td>Uygulamalardan veriyi alıp işleyip birden çok arka uca dağıtan ara sunucu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Uygulama kodunu değiştirmeden hedef değiştirmeyi sağlar</td>
+                <td><a href="https://opentelemetry.io/docs/collector/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>distributed tracing</strong></td>
+                <td>Bir isteğin servisler arası yolculuğunu uçtan uca izleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mikroservis mimarisinde vazgeçilmez; ayrıntı <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a></td>
+                <td><a href="https://opentelemetry.io/docs/concepts/signals/traces/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>trace / span</strong></td>
+                <td>Trace = tüm yolculuk; span = o yolculuktaki tek bir iş parçası</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te span'in karşılığı <code>Activity</code> sınıfıdır</td>
+                <td><a href="https://opentelemetry.io/docs/concepts/signals/traces/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Diagnostics.Activity</strong></td>
+                <td>.NET'in yerleşik iz/span tipi; ActivitySource ile üretilir</td>
+                <td><span class="tag">ORTA</span> Aramada ".NET Activity ActivitySource" yaz; "activity" tek başına çok farklı sonuç verir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.activity">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>W3C Trace Context</strong></td>
+                <td><code>traceparent</code> HTTP başlığıyla iz kimliğinin servisler arası taşınma standardı</td>
+                <td><span class="tag">ORTA</span> .NET bunu varsayılan olarak destekler</td>
+                <td><a href="https://www.w3.org/TR/trace-context/">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>correlation id</strong></td>
+                <td>Bir isteğe verilen ve tüm sistemde taşınan kimlik</td>
+                <td><span class="tag tag--ok">TEMEL</span> TraceId varken elle correlation id üretmek çoğu zaman gereksizdir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>sampling</strong></td>
+                <td>Her isteği değil, belirli oranını izleyerek maliyeti düşürme</td>
+                <td><span class="tag">ORTA</span> head-based ve tail-based sampling farkına bak</td>
+                <td><a href="https://opentelemetry.io/docs/concepts/signals/traces/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Metrics API</strong> (<code>Meter</code>, <code>Counter&lt;T&gt;</code>)</td>
+                <td>Uygulamanın kendi sayaç/histogram metriklerini üretmesi</td>
+                <td><span class="tag">ORTA</span> Eski <code>EventCounters</code>'ın yerini aldı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/metrics">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EventCounters</strong></td>
+                <td>.NET'in eski metrik mekanizması</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kodda <code>System.Diagnostics.Metrics</code> kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/event-counters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prometheus</strong></td>
+                <td>Metrik toplayan, uygulamadan çeken (pull) zaman serisi veritabanı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, CNCF. Uygulama <code>/metrics</code> uç noktası açar</td>
+                <td><a href="https://prometheus.io/docs/">prometheus.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>PromQL</strong></td>
+                <td>Prometheus'un sorgu dili</td>
+                <td><span class="tag tag--info">İLERİ</span> Grafana panolarının arkasında bu dil vardır</td>
+                <td><a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">prometheus.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grafana</strong></td>
+                <td>Metrik/log/iz verisini pano hâline getiren görselleştirme aracı</td>
+                <td><span class="tag">ORTA</span> Self-hosted ücretsiz (AGPL); Grafana Cloud'da ücretsiz kota + ücretli planlar</td>
+                <td><a href="https://grafana.com/docs/grafana/latest/">grafana.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jaeger</strong></td>
+                <td>Dağıtık iz görüntüleme aracı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, CNCF. Docker ile tek konteynerde denenebilir</td>
+                <td><a href="https://www.jaegertracing.io/docs/">jaegertracing.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zipkin</strong></td>
+                <td>Jaeger'in daha eski alternatifi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Yeni projede genelde Jaeger veya Tempo seçilir</td>
+                <td><a href="https://zipkin.io/">zipkin.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grafana Tempo</strong></td>
+                <td>Ucuz, nesne depolama tabanlı iz saklama sistemi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Loki'nin iz karşılığı</td>
+                <td><a href="https://grafana.com/docs/tempo/latest/">grafana.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Application Insights</strong></td>
+                <td>Azure'un APM hizmeti: iz, metrik, bağımlılık haritası, canlı metrik</td>
+                <td><span class="tag">ORTA</span> Ücretli (alınan veri hacmine göre); küçük kota ücretsizdir. .NET'e en kolay entegre olanıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>APM</strong> (Application Performance Monitoring)</td>
+                <td>Uygulama performansını üretimde ölçen ürün kategorisi</td>
+                <td><span class="tag">ORTA</span> Ücretli örnekler: Datadog, New Relic, Dynatrace, Elastic APM. Ücretsiz yol: OTel + Grafana yığını</td>
+                <td><a href="https://opentelemetry.io/docs/">opentelemetry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SLI / SLO / SLA</strong></td>
+                <td>Ölçülen gösterge / iç hedef / müşteriye verilen sözleşme taahhüdü</td>
+                <td><span class="tag">ORTA</span> Üçü karıştırılır; farkı söyleyebilmek mülakatta artı puan</td>
+                <td><a href="https://sre.google/books/">sre.google</a></td>
+              </tr>
+              <tr>
+                <td><strong>alerting</strong> / <strong>on-call</strong></td>
+                <td>Eşik aşılınca kimin uyarılacağı; nöbet düzeni</td>
+                <td><span class="tag tag--info">İLERİ</span> Alertmanager, Grafana Alerting, PagerDuty (ücretli)</td>
+                <td><a href="https://prometheus.io/docs/">prometheus.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>HealthChecks ve .NET tanılama araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Health Checks</strong> (ASP.NET Core)</td>
+                <td><code>/health</code> uç noktası ile uygulamanın ve bağımlılıklarının durumunu bildirme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> Yerleşiktir, ek paket gerekmez</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>readiness vs liveness</strong></td>
+                <td>"Trafik alabilir miyim" ile "yaşıyor muyum" ayrımı; tag ile iki ayrı uç nokta açılır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> Kubernetes probe'larıyla birebir eşleşir (bkz. § 6)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AspNetCore.Diagnostics.HealthChecks</strong> (Xabaril)</td>
+                <td>SQL Server, Redis, RabbitMQ vb. için hazır health check paketleri + UI</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag">ORTA</span> Ücretsiz. "HealthChecks UI" bu depodan gelir, Microsoft'tan değil</td>
+                <td><a href="https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-counters</strong></td>
+                <td>Çalışan .NET sürecinin canlı metriklerini terminalde izleme</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, SDK aracı. GC ve thread pool sorunlarını ilk teşhis aracı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-trace</strong></td>
+                <td>Süreçten performans izi toplama (profil çıkarma)</td>
+                <td><span class="tag tag--info">İLERİ</span> Performansla ilgileniyorsan değerli; BenchmarkDotNet'in üretim ortamı tamamlayıcısıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-dump</strong></td>
+                <td>Bellek dökümü alma ve inceleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Bellek sızıntısı ve donma (deadlock) teşhisi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET Aspire dashboard</strong></td>
+                <td>Yerelde log/metrik/iz'i tek panoda gösteren geliştirici panosu</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. OTel'i öğrenmenin en zahmetsiz yolu; ayrıntı <a href="../09-aspire-bulut-modern/index.html">09 — Aspire</a></td>
+                <td><a href="https://github.com/dotnet/aspire">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>k6</strong></td>
+                <td>Yük testi aracı; gözlemlenebilirlik kurulumunu doğrulamak için kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz (AGPL) + ücretli bulut. Alternatifler: NBomber (.NET), Apache JMeter</td>
+                <td><a href="https://k6.io/docs/">k6.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="guvenlik-ve-dagitim"><span class="h-num">§ 10</span>Güvenlik, sır yönetimi ve dağıtım stratejileri</h2>
+
+        <p>CI/CD hattı kurmayı öğrenirken bu bölüm ikinci yarıyı oluşturur: hattan geçen kodun güvenli olması ve prod'a kesintisiz çıkması. Kimlik doğrulama/yetkilendirme (JWT, policy) konuları bu sayfada değil, <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a> sayfasındadır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sır yönetimi ve tedarik zinciri güvenliği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>User Secrets</strong> (<code>dotnet user-secrets</code>)</td>
+                <td>Geliştirme sırasında sırları proje dışında, kullanıcı profilinde tutma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sadece geliştirme içindir, prod'da kullanılmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Key Vault yapılandırma sağlayıcısı</strong></td>
+                <td>Azure Key Vault'taki sırları <code>IConfiguration</code> içine akıtma</td>
+                <td><span class="tag">ORTA</span> Prod'da bağlantı dizesi saklamanın doğru yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/key-vault-configuration">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure App Configuration</strong></td>
+                <td>Merkezî yapılandırma ve feature flag hizmeti</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz katman + ücretli standart katman</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-app-configuration/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>HashiCorp Vault</strong></td>
+                <td>Bulut bağımsız sır yönetim sistemi</td>
+                <td><span class="tag tag--info">İLERİ</span> Açık kaynak sürüm var; kurumsal özellikler ücretli</td>
+                <td><a href="https://developer.hashicorp.com/vault/docs">developer.hashicorp.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>secret scanning</strong></td>
+                <td>Depoya kaçmış API anahtarı/parola tarama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Depo ve plana göre:
+                <br>&bull; GitHub public depo &rarr; secret scanning ve push protection ücretsiz.
+                <br>&bull; GitHub private depo (Team / Enterprise) &rarr; 2025'ten itibaren GitHub Secret Protection adlı ayrı ürün; Team planına da kullanıcı başı satın alınabilir. <span class="tag tag--warn">TEYİT</span> docs.github.com "About GitHub Advanced Security"
+                <br>&bull; Private depo, ücret istemeyen &rarr; gitleaks, trufflehog (CI'da veya pre-commit hook olarak).
+                <br>&bull; GitLab / Azure DevOps &rarr; kendi karşılıkları (GitLab Secret Detection, GitHub Advanced Security for Azure DevOps).</td>
+                <td><a href="https://docs.github.com/en/code-security/code-scanning">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dependabot</strong></td>
+                <td>Güvenlik açığı olan bağımlılıklar için otomatik güncelleme PR'ı açar</td>
+                <td><span class="tag">ORTA</span> GitHub'da ücretsiz; <code>dependabot.yml</code> ile yapılandırılır</td>
+                <td><a href="https://docs.github.com/en/code-security/dependabot">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet list package --vulnerable</strong></td>
+                <td>Projedeki güvenlik açığı bilinen NuGet paketlerini listeler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, tek komut; CI'ya eklemesi kolay bir kazanç</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-list-package">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Snyk</strong></td>
+                <td>Bağımlılık, kod ve konteyner güvenlik taraması yapan ticari platform</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Sınırlı ücretsiz katman var</td>
+                <td><a href="https://docs.snyk.io/">docs.snyk.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Trivy</strong></td>
+                <td>Konteyner image'ı ve bağımlılık zafiyet tarayıcısı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, açık kaynak. Snyk'in ücretsiz alternatifi; CI'da tek adımda çalışır</td>
+                <td><a href="https://trivy.dev/">trivy.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Scout</strong></td>
+                <td>Docker'ın kendi image zafiyet analizi</td>
+                <td><span class="tag tag--info">İLERİ</span> Sınırlı ücretsiz kullanım, ötesi abonelik</td>
+                <td><a href="https://docs.docker.com/scout/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SAST</strong> (statik analiz)</td>
+                <td>Kodu çalıştırmadan güvenlik açığı arama</td>
+                <td><span class="tag">ORTA</span> .NET'te yerleşik Roslyn analizörleri + CodeQL + SonarQube</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DAST</strong> (dinamik analiz)</td>
+                <td>Çalışan uygulamaya dışarıdan saldırarak açık arama</td>
+                <td><span class="tag tag--info">İLERİ</span> En bilinen ücretsiz araç: OWASP ZAP</td>
+                <td><a href="https://www.zaproxy.org/">zaproxy.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CodeQL / code scanning</strong></td>
+                <td>GitHub'ın kod sorgulama tabanlı güvenlik taraması</td>
+                <td><span class="tag">ORTA</span> Depo ve plana göre:
+                <br>&bull; GitHub public depo &rarr; ücretsiz.
+                <br>&bull; GitHub private depo &rarr; GitHub Code Security (eski adıyla Advanced Security'nin parçası) lisansı; 2025'ten itibaren Team planına da satılıyor. <span class="tag tag--warn">TEYİT</span> docs.github.com "About GitHub Advanced Security"
+                <br>&bull; Private depo, ücret istemeyen &rarr; Roslyn analizörleri + Semgrep CE veya SonarQube Community Build.
+                <br>&bull; GitLab / Azure DevOps &rarr; GitLab SAST, GitHub Advanced Security for Azure DevOps.</td>
+                <td><a href="https://docs.github.com/en/code-security/code-scanning">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube</strong> / <strong>SonarCloud</strong></td>
+                <td>Kod kalitesi + güvenlik + kapsama raporlayan kalite kapısı</td>
+                <td><span class="tag">ORTA</span> Community Edition ücretsiz self-hosted; SonarCloud public depolarda ücretsiz, private ücretli</td>
+                <td><a href="https://www.sonarsource.com/products/sonarqube/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OWASP Top 10</strong></td>
+                <td>Web uygulamalarındaki en yaygın 10 güvenlik açığı listesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Web API mülakatlarının klasik sorusu; en az başlıklarını bil</td>
+                <td><a href="https://owasp.org/www-project-top-ten/">owasp.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>OWASP Dependency-Check</strong></td>
+                <td>Bilinen zafiyetli bileşenleri tespit eden ücretsiz araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz</td>
+                <td><a href="https://owasp.org/www-project-dependency-check/">owasp.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>SBOM</strong> (Software Bill of Materials)</td>
+                <td>Uygulamanın içindeki tüm bileşenlerin makine okunur listesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Kamu/kurumsal ihalelerde istenmeye başladı</td>
+                <td><a href="https://slsa.dev/">slsa.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>artifact imzalama</strong> (Sigstore/cosign)</td>
+                <td>Üretilen image/paketin gerçekten kendi hattından çıktığını kanıtlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, açık kaynak</td>
+                <td><a href="https://www.sigstore.dev/">sigstore.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dağıtım stratejileri, barındırma ve feature flag</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>blue-green deployment</strong></td>
+                <td>İki özdeş ortam; yeni sürüm boştaki ortama kurulur, trafik anahtarla çevrilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Geri dönüş (rollback) anahtarı geri çevirmekten ibarettir</td>
+                <td><a href="https://martinfowler.com/bliki/BlueGreenDeployment.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>canary release</strong></td>
+                <td>Yeni sürümü önce kullanıcıların küçük bir yüzdesine açma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Metrik izleme (bkz. § 9) olmadan canary anlamsızdır</td>
+                <td><a href="https://martinfowler.com/bliki/CanaryRelease.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>rolling update</strong></td>
+                <td>Kopyaları teker teker yeni sürüme geçirme</td>
+                <td><span class="tag">ORTA</span> Kubernetes'in varsayılan davranışı</td>
+                <td><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">kubernetes.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>zero-downtime deployment</strong></td>
+                <td>Kullanıcı hiç hata görmeden sürüm geçme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Veritabanı migration'ı geriye uyumlu yazmadan mümkün değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>expand-contract migration</strong></td>
+                <td>Şemayı önce genişlet, kodu geçir, sonra eski kolonu sil — üç adımlı güvenli migration</td>
+                <td><span class="tag">ORTA</span> Aramada "expand and contract database refactoring" yaz. EF Core migration konusu: <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></td>
+                <td><a href="https://martinfowler.com/articles/evodb.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>rollback</strong> / <strong>roll forward</strong></td>
+                <td>Hatalı sürümden geri dönme veya hızlıca düzeltilmiş yeni sürüm çıkma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Migration uygulanmışsa rollback her zaman mümkün olmaz; bunu söyleyebilmek olgunluk göstergesidir</td>
+                <td><a href="https://martinfowler.com/bliki/BlueGreenDeployment.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>feature flag</strong> / <strong>feature toggle</strong></td>
+                <td>Kodu yayınlayıp özelliği kapalı tutma; açma kararını dağıtımdan ayırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Trunk-based development'ın olmazsa olmazı</td>
+                <td><a href="https://martinfowler.com/articles/feature-toggles.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.FeatureManagement</strong></td>
+                <td>Microsoft'un resmî .NET feature flag kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. <code>IFeatureManager</code>, filtre ve yüzdelik açma desteği vardır</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FeatureManagement-Dotnet</strong> (depo)</td>
+                <td>Kütüphanenin kaynak kodu ve örnekleri</td>
+                <td><span class="tag">ORTA</span> Ücretsiz</td>
+                <td><a href="https://github.com/microsoft/FeatureManagement-Dotnet">github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>LaunchDarkly</strong></td>
+                <td>Kurumsal feature flag platformu</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Deneme sürümü var; ilanlarda adı geçer</td>
+                <td><a href="https://launchdarkly.com/docs/home">launchdarkly.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Unleash</strong></td>
+                <td>Açık kaynak feature flag sunucusu</td>
+                <td><span class="tag tag--info">İLERİ</span> Self-hosted açık kaynak sürüm ücretsiz; bulut planları ücretli</td>
+                <td><a href="https://docs.getunleash.io/">getunleash.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET Core barındırma</strong></td>
+                <td>Uygulamayı IIS, Nginx, Docker veya bulut PaaS üzerinde çalıştırma seçenekleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Türkiye'de birçok kurumda hâlâ IIS + Windows Server kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IIS + ASP.NET Core Module</strong></td>
+                <td>Uygulamayı IIS arkasında (in-process/out-of-process) çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kurumsal .NET işlerinde hâlâ çok yaygın; <code>web.config</code> ve app pool kavramlarını bil</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kestrel</strong></td>
+                <td>ASP.NET Core'un yerleşik, çapraz platform web sunucusu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ters vekil (reverse proxy) arkasına konabilir veya doğrudan internete açılabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>reverse proxy</strong> (Nginx / Caddy / YARP)</td>
+                <td>Önde duran, TLS sonlandıran ve yönlendiren sunucu</td>
+                <td><span class="tag">ORTA</span> Hepsi ücretsiz. YARP .NET ile yazılmış kütüphanedir, ayrı ürün değil</td>
+                <td><a href="https://nginx.org/en/docs/">nginx.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>graceful shutdown</strong></td>
+                <td>Kapanırken devam eden isteklerin bitmesini bekleme</td>
+                <td><span class="tag">ORTA</span> <code>IHostApplicationLifetime</code> ve <code>ShutdownTimeout</code>. Zero-downtime'ın ön şartı</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>self-contained / trimming / Native AOT</strong></td>
+                <td>Çalışma zamanını içine alan, kırpılmış veya makine koduna derlenmiş yayın</td>
+                <td><span class="tag tag--info">İLERİ</span> Konteyner boyutunu ve başlangıç süresini düşürür; yansıma (reflection) kullanan kod kırılabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>NuGet paketi yayınlama</strong></td>
+                <td>Ortak kütüphaneni nuget.org'a veya özel feed'e gönderme</td>
+                <td><span class="tag">ORTA</span> CI hattı kurma pratiği için iyi bir kişisel proje hedefi</td>
+                <td><a href="https://learn.microsoft.com/en-us/nuget/nuget-org/publish-a-package">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.editorconfig</strong> + <strong>dotnet format</strong></td>
+                <td>Kod stilini dosyayla sabitleme ve CI'da biçim kontrolü</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Clean Code ilkelerini araçla somutlaştırmanın en ucuz yolu</td>
+                <td><a href="https://editorconfig.org/">editorconfig.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>quality gate</strong></td>
+                <td>Belirli eşikleri geçmeyen build'i PR'da durdurma</td>
+                <td><span class="tag">ORTA</span> Kapsama oranı, uyarı sayısı, zafiyet sayısı üzerinden kurulur</td>
+                <td><a href="https://www.sonarsource.com/products/sonarqube/">sonarsource.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 11</span>Özet — bu sayfanın öncelik sırası</h2>
+
+        <p>Sayfadaki her şeyi aynı anda öğrenmeye çalışma. Aşağıdaki sıra <strong>iş arayan backend geliştirici</strong> için, ilanlarda en sık istenen ve pratikte en çok eksik kalan başlıklara göre düzenlendi. Zaten bir şirkette çalışıyorsan, DevOps/SRE rolü hedefliyorsan veya yalnızca kişisel proje yayınlayacaksan <a href="#nasil-kullanilir">§ 0</a>'daki tabloya göre sırayı değiştir.</p>
+
+        <h3>Önce bunlar (ilanlarda sık geçen ama pratikte eksik kalanlar)</h3>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">GitHub Actions ile çalışan bir CI kur</span>
+            <p>Kişisel bir .NET deposunda <code>.github/workflows/ci.yml</code> yaz (şirketin başka bir CI kullanıyorsa aynı adımları o platformda kur): checkout &rarr; setup-dotnet &rarr; restore &rarr; build &rarr; test. Sonra cache, matrix, artifact ve concurrency ekle. § 2'deki iki tablo bu işin tam listesidir.</p>
+            <span class="steps__meta">Neden önce: ilanlarda sık geçiyor ve mülakatta "hangi CI'yı kullandın" sorusu neredeyse kesin gelir.</span>
+          </li>
+          <li>
+            <span class="steps__title">Aynı hattı Azure DevOps'ta tekrarla</span>
+            <p>Kavramlar birebir eşleşiyor: runner &rarr; agent, secret &rarr; variable group, environment &rarr; environment. § 3'teki eşleme tablosunu ezberlemen bile mülakatta iş görür.</p>
+            <span class="steps__meta">Süre: bir gün · Kurumsal / banka / kamu ilanlarında çok sorulur; hedefin startup veya kişisel projeyse bu adım ertelenebilir.</span>
+          </li>
+          <li>
+            <span class="steps__title">Serilog + Seq'i kendi makinende ayağa kaldır</span>
+            <p>Docker ile Seq konteyneri, projede Serilog + Seq sink, birkaç yapılandırılmış log. Tamamen kendi makinende denenebilir. § 8.</p>
+            <span class="steps__meta">Süre: yarım gün · ilanlardaki iki maddeyi aynı anda pratiğe döker.</span>
+          </li>
+          <li>
+            <span class="steps__title">HealthChecks ekle ve readiness/liveness ayrımını kur</span>
+            <p>Yerleşik <code>AddHealthChecks()</code> ile başla, kullandığın veritabanı için kontrol ekle (SQL Server, PostgreSQL vb.), iki ayrı uç nokta aç. § 9'un son tablosu.</p>
+            <span class="steps__meta">Süre: 2 saat · Kubernetes probe kavramıyla doğrudan bağlanır.</span>
+          </li>
+        </ol>
+
+        <h3>Sonra bunlar (bu alanın temel taşları)</h3>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Docker: Dockerfile + multi-stage + compose</span>
+            <p>API + veritabanını (SQL Server veya PostgreSQL; seçim § 5 girişinde) <code>compose.yaml</code> ile birlikte ayağa kaldır. § 5. Bu, Kubernetes'ten çok daha değerli bir beceridir ve tamamen kendi makinende öğrenilebilir.</p>
+            <span class="steps__meta">Süre: 2-3 gün · İlanların çoğunda isteniyor.</span>
+          </li>
+          <li>
+            <span class="steps__title">Git'in geçmiş düzenleme komutları</span>
+            <p>rebase (özellikle <code>-i</code>), cherry-pick, revert vs reset, reflog, stash. § 1. Deneme deposunda bilerek çakışma yarat ve çöz.</p>
+            <span class="steps__meta">Süre: 1 gün · Mülakatta "merge mi rebase mi" sorusu klasiktir.</span>
+          </li>
+          <li>
+            <span class="steps__title">OpenTelemetry temelleri</span>
+            <p>Üç sütun, trace/span, exporter, TraceId ile log korelasyonu. § 9. En kolay giriş kapısı .NET Aspire panosudur.</p>
+            <span class="steps__meta">Süre: 2 gün · Modern .NET ilanlarında giderek daha çok isteniyor.</span>
+          </li>
+          <li>
+            <span class="steps__title">Sır yönetimi ve dağıtım stratejileri</span>
+            <p>User Secrets, Key Vault, <code>dotnet list package --vulnerable</code>, blue-green, canary, feature flag, geriye uyumlu migration. § 10.</p>
+            <span class="steps__meta">Süre: 2 gün · Mimari sorularıyla doğrudan birleşir.</span>
+          </li>
+        </ol>
+
+        <h3>Acele etme (adını bilmen yeter)</h3>
+        <p>Bu liste uygulama geliştirici için geçerli. DevOps / platform / SRE rolü hedefliyorsan Kubernetes, Helm, Terraform ve GitOps maddeleri listeden çıkar ve ilk sıraya geçer (§ 0'daki tablo).</p>
+        <ul class="checklist">
+          <li>Kubernetes — uygulama geliştirici için pod/deployment/service/probe kavramları ve <code>kubectl get pods</code> düzeyi yeterli; şirketin ürünü Kubernetes'te çalışıyorsa veya DevOps/SRE rolü hedefliyorsan bu madde öne çıkar (§ 6)</li>
+          <li>Helm, Kustomize, Argo CD, Flux — GitOps kavramını duy, kurmaya kalkma (§ 4, § 6)</li>
+          <li>Terraform / Bicep / Pulumi — birini seç, "IaC nedir" sorusunu cevaplayabil (§ 7)</li>
+          <li>AWS — hedef şirket Azure kullanıyorsa Azure'u öğrendikten sonra karşılık tablosuna bak, ayrıca çalışma; hedef şirket AWS kullanıyorsa bu madde "önce bunlar" listesine çıkar (§ 7)</li>
+          <li>SBOM, Sigstore, SLSA — tedarik zinciri güvenliği; şimdilik sadece terim (§ 10)</li>
+          <li>dotnet-trace / dotnet-dump — performans odaklı işlerde değerli ama sonraya bırakılabilir (§ 9)</li>
+        </ul>
+
+        <h3>Mülakatta kaçınman gereken üç cümle</h3>
+        <p>Bu bölüm iş arayan geliştirici içindir.</p>
+        <blockquote>"CI/CD kurdum" deme, "CI/CD hattı olan bir projede çalıştım, adımlarını okuyup anlıyorum, kendi projemde şu hattı kurdum" de. İkincisi doğrulanabilir ve seni sorunun içine değil, cevabın içine koyar.</blockquote>
+
+        <ul class="checklist">
+          <li>"Kubernetes'te deploy ettim" — pod/deployment ayrımını anlatamıyorsan söyleme</li>
+          <li>"Docker biliyorum" deyip multi-stage build'in ne işe yaradığını anlatamamak — § 5'i bitirmeden bu cümleyi kurma</li>
+        </ul>
+
+        <p>İlgili diğer sayfalar: <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a> (buradaki paketlerin toplu listesi), <a href="../index.html">.NET ana sayfası</a>, <a href="../../index.html">Programlama ana sayfası</a>, <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript</a>, <a href="../../HTML-CSS/index.html">HTML ve CSS</a>, <a href="../../Java/index.html">Java</a>, <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a>, <a href="../../Rust/index.html">Rust</a>.</p>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Bu sayfanın ana kaynakları</h2>
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://git-scm.com/book/en/v2">Pro Git — Git'in resmî ve ücretsiz kitabı</a></li>
+          <li><span class="src-n">02</span><a href="https://docs.github.com/en/actions">GitHub Actions resmî dokümantasyonu</a></li>
+          <li><span class="src-n">03</span><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/">Azure Pipelines resmî dokümantasyonu</a></li>
+          <li><span class="src-n">04</span><a href="https://docs.docker.com/">Docker resmî dokümantasyonu</a></li>
+          <li><span class="src-n">05</span><a href="https://kubernetes.io/docs/home/">Kubernetes resmî dokümantasyonu</a></li>
+          <li><span class="src-n">06</span><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">.NET loglama — learn.microsoft.com</a></li>
+          <li><span class="src-n">07</span><a href="https://serilog.net/">Serilog resmî sitesi</a></li>
+          <li><span class="src-n">08</span><a href="https://docs.datalust.co/docs">Seq resmî dokümantasyonu</a></li>
+          <li><span class="src-n">09</span><a href="https://opentelemetry.io/docs/languages/net/">OpenTelemetry .NET dokümantasyonu</a></li>
+          <li><span class="src-n">10</span><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/observability-with-otel">.NET gözlemlenebilirlik rehberi — learn.microsoft.com</a></li>
+          <li><span class="src-n">11</span><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">ASP.NET Core Health Checks</a></li>
+          <li><span class="src-n">12</span><a href="https://owasp.org/www-project-top-ten/">OWASP Top 10</a></li>
+          <li><span class="src-n">13</span><a href="https://12factor.net/">The Twelve-Factor App</a></li>
+          <li><span class="src-n">14</span><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/">Azure Cloud Design Patterns</a></li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../06-test-ve-kalite/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Test ve Kod Kalitesi</span></a>
+        <a class="next" href="../08-ui-blazor-mvc-maui/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Blazor, MVC ve MAUI</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring Boot — Java Anahtar Listesi</title>
+<meta name="description" content="Spring çekirdeği, bağımlılık enjeksiyonu, otomatik yapılandırma, REST katmanı, güvenlik ve profil yönetimi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Spring Boot</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Java</span>
+      <span class="brand__name">Java Anahtar Listesi</span>
+      <span class="brand__sub">Backend odaklı · Spring Boot</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-java-dili/index.html"><span class="nav-num">01</span><span>Java Dili</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Çatı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>Spring Boot</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Dağıtık</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-ve-mesajlasma/index.html"><span class="nav-num">03</span><span>Veri ve Mesajlaşma</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistem</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# / .NET</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+          <li><a class="nav-item" href="../../proje-fikirleri/index.html"><span class="nav-num">&larr;</span><span>Proje fikirleri</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Backend odaklı liste. C#/.NET'ten geliyorsan eşleştirme tabloları kısa yoldur; başka bir dilden ya da sıfırdan geliyorsan "Java karşılığı" ve "Not" sütunlarını oku, dil temelleri için 01'den başla.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Çatı</div>
+        <h1 class="page-title">Spring Boot</h1>
+        <p class="lede">Bağımlılık enjeksiyonundan REST denetleyicilerine, güvenlikten yapılandırmaya kadar Spring'in tamamı. ASP.NET Core'dan geliyorsan her satırda <em>".NET'ten geliyorsan:"</em> etiketli karşılık var; başka bir web çatısından ya da ilk kez geliyorsan § 1'deki yol tablosundan başla.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; ileri &middot; En önemli bölüm</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa Spring'i anlatmaz. Spring ve Spring Boot öğrenirken karşına çıkacak
+        terimlerin listesidir. Her satırdaki terimi kendin araştıracak, resmî dokümandan okuyacak ve
+        kod yazacaksın. "Kısaca" sütunu sadece terimi tanıman ve karıştırmaman içindir, öğretmek için değildir.</p>
+
+        <p>Spring, bazı işleri çalışma anında proxy üreterek yapar; bu yüzden "neden çalışmadı" soruları çoğu çatıdakinden farklı bir yerden gelir. Nereden geldiğine göre:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktana göre bu sayfa</caption>
+            <thead><tr><th>Durumun</th><th>Nasıl ilerle</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ASP.NET Core biliyorsun</strong></td><td>Kavramlar neredeyse birebir örtüşür, isimler farklıdır; yeni olan proxy davranışı. Her tablodaki <em>".NET'ten geliyorsan:"</em> notlarını ve aşağıdaki kavram eşlemesini kullan.</td></tr>
+              <tr><td><strong>Başka bir web çatısı biliyorsun</strong> (NestJS, Express, Laravel, Django, Flask, FastAPI, Rails)</td><td>DI konteyneri + anotasyon + auto-configuration üçlüsüne odaklan. NestJS'ten geliyorsan controller/DI/decorator modeli çok yakındır; Express/Flask/FastAPI'den geliyorsan DI konteyneri ve anotasyon tabanlı yapılandırma yeni; Django/Rails'ten geliyorsan "konvansiyon" yerine auto-configuration'ın neyi neden kurduğunu öğren.</td></tr>
+              <tr><td><strong>Web çatısı deneyimin yok</strong></td><td>Önce HTTP/REST temelleri (metot, durum kodu, JSON); sonra § 2-§ 5'i sırayla, her birine çalışan bir örnekle. Temel süreyi (§ 17'deki dallanma tablosu) yaklaşık iki katı hesapla <span class="tag tag--warn">TAHMİN</span>.</td></tr>
+              <tr><td><strong>SOLID / katmanlı mimari bilgin yok</strong></td><td>Önce <a href="../index.html#esleme">genel bakış § 2.10</a>'daki SOLID ve katman satırlarına ve SOLID kaynaklarına bak; Spring'in DI'si bu kavramların üzerine kuruludur.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Java dilinin kendisini bilmeden bu sayfaya girme; önce
+        <a href="../01-java-dili/index.html">01 — Java Dili</a> sayfasındaki generics, annotation, lambda, Optional,
+        Stream API ve exception maddelerini bitir. Veritabanı (JPA/Hibernate) ve mesajlaşma (Kafka/RabbitMQ)
+        tarafı bu sayfada değil, <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a> sayfasındadır.
+        Maven/Gradle, IDE, derleme, CI ve kütüphane kataloğu için
+        <a href="../04-ekosistem-ve-araclar/index.html">04 — Ekosistem ve Araçlar</a> sayfasına bak.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Rozetlerin anlamı</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti, iş ilanlarında ve mülakatlarda sık geçen bir
+          konuyu işaret eder; çoğu başka ekosistemlerde de bilinen bir teknolojinin Spring'teki karşılığıdır (örneğin
+          "JWT Authentication" &rarr; Spring Security JWT). Her birine en az bir çalışan örnek yaz; önce
+          bunlara bak. <span class="tag tag--ok">TEMEL</span> bu alanda olmazsa olmaz,
+          <span class="tag">ORTA</span> sonra gelir, <span class="tag tag--info">İLERİ</span> derinleşme,
+          <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar ama yeni projede kullanılmaz.</p>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Sürüm karışıklığı</p>
+          <p>Aramada bulacağın içeriklerin çoğu Spring Boot 2.x dönemine aittir. Spring Boot 3.x ile
+          <code>javax.*</code> paketleri <code>jakarta.*</code> oldu (Jakarta EE 9 namespace değişimi),
+          minimum Java 17 zorunlu hâle geldi ve Spring Security 5'ten 6'ya geçişte
+          <code>WebSecurityConfigurerAdapter</code> kaldırıldı. Bir örnek kod derlenmiyorsa ilk bakacağın yer
+          budur. Ara: <em>"Spring Boot 3 migration guide"</em>.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>ASP.NET Core'dan geliyorsan: kavram eşlemesi (bilmiyorsan "Spring / Java" ve "Not" sütunlarını oku)</caption>
+            <thead><tr><th>Spring / Java</th><th>ASP.NET Core karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ApplicationContext</strong></td><td><code>IServiceProvider</code> + <code>WebApplication</code></td><td><span class="tag tag--ok">TEMEL</span> Hem DI container hem uygulama yaşam döngüsüdür</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>bean</strong></td><td>Kayıtlı servis (registered service)</td><td><span class="tag tag--ok">TEMEL</span> "Bean" sadece container'ın yönettiği nesne demektir; JavaBean (getter/setter) ile aynı şey değil</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/definition.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Component / @Service</strong></td><td><code>services.AddSingleton&lt;T&gt;()</code></td><td><span class="tag tag--ok">TEMEL</span> Spring'in varsayılan scope'u singleton'dır; .NET'teki Scoped yaşam süresinin karşılığı <code>@RequestScope</code>, Transient yaşam süresinin karşılığı <code>@Scope("prototype")</code> anotasyonudur (bkz. § 2'deki singleton scope satırı). Spring'te kayıt çoğunlukla sınıfın üstündeki anotasyonla olur, merkezî bir <code>Program.cs</code> listesi yoktur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Configuration + @Bean</strong></td><td><code>Program.cs</code>'teki manuel <code>Add...</code> çağrıları</td><td><span class="tag tag--ok">TEMEL</span> Üçüncü parti sınıfları kaydetmenin yolu</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/java/bean-annotation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RestController</strong></td><td><code>[ApiController] : ControllerBase</code></td><td><span class="tag tag--ok">TEMEL</span> Dönüş değerini otomatik JSON'a çevirir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Filter / Interceptor</strong></td><td>Middleware / Action Filter</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "Middleware" kavramının karşılığı ikiye bölünmüştür; farkı bilmek mülakat sorusudur</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/filters.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ControllerAdvice</strong></td><td>Exception handling middleware / <code>IExceptionFilter</code></td><td><span class="tag tag--ok">TEMEL</span> Global hata yakalama noktası</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Bean Validation (@Valid)</strong></td><td>FluentValidation / DataAnnotations</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki FluentValidation'ın karşılığı; Spring'te standart bir JSR spesifikasyonudur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Actuator</strong></td><td>HealthChecks + metrics</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "HealthChecks" kavramının Spring karşılığı</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>application.yml</strong></td><td><code>appsettings.json</code></td><td><span class="tag tag--ok">TEMEL</span> Profile mantığı da <code>appsettings.Development.json</code> ile birebir örtüşür</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ConfigurationProperties</strong></td><td>Options pattern (<code>IOptions&lt;T&gt;</code>)</td><td><span class="tag tag--ok">TEMEL</span> Aynı fikir, aynı amaç</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Transactional</strong></td><td><code>TransactionScope</code> / <code>SaveChanges</code> etrafındaki transaction</td><td><span class="tag tag--ok">TEMEL</span> Spring'te bu bir AOP proxy'sidir; nasıl çalıştığını bilmezsen sessizce devre dışı kalır</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@PreAuthorize</strong></td><td>Policy-Based Authorization / <code>[Authorize(Policy=...)]</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "Policy-Based Authorization" burada method security'dir</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>springdoc-openapi</strong></td><td>Swashbuckle / Swagger</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "Swagger/OpenAPI" kavramı; Spring'te resmî değil topluluk kütüphanesidir &middot; lisansı ücretsiz</td><td><a href="https://springdoc.org/">springdoc.org</a></td></tr>
+              <tr><td><strong>@Scheduled</strong></td><td>Hangfire / BackgroundService</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "Hangfire" için basit karşılık; kalıcı kuyruk isterseniz Quartz'a bakılır</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cache (@Cacheable)</strong></td><td>MemoryCache / IDistributedCache</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET'teki "MemoryCache"in karşılığı; Redis'e geçiş tek satır konfigürasyondur</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="spring-cekirdegi"><span class="h-num">§ 2</span>Spring çekirdeği: IoC container ve bean yaşam döngüsü</h2>
+
+        <p>Spring'in tamamı tek bir fikirden büyür: nesneleri sen <code>new</code> ile yaratmazsın, container yaratır.
+        <strong>ASP.NET Core'dan</strong> ya da <strong>NestJS/Angular'dan</strong> geliyorsan bu fikri zaten biliyorsun. <strong>DI'yi hiç kullanmadıysan</strong> önce IoC/DI kavramını öğren (Spring dokümanındaki "The IoC Container" bölümü), sonra scope'lara geç. Buradaki fark, Spring'in container'ının uygulama boyunca görünür bir nesne
+        olması (<code>ApplicationContext</code>) ve bean'lerin yaşam döngüsüne müdahale noktalarının çok daha fazla olmasıdır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>IoC container, context ve bean kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>IoC (Inversion of Control)</strong></td><td>Nesne yaratma sorumluluğunun sınıftan container'a devri</td><td><span class="tag tag--ok">TEMEL</span> DI'nin üst kavramıdır; mülakatta "IoC ile DI farkı" sorulur, hazır ol. <em>.NET'ten geliyorsan:</em> aynı kavram</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Dependency Injection</strong></td><td>Bağımlılığın dışarıdan verilmesi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'te DI bilen için Spring'te sadece sözdizimi değişir. DI'yi hiç kullanmadıysan bu satır temel: önce kavram, sonra constructor injection</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BeanFactory</strong></td><td>Container'ın en temel arayüzü</td><td><span class="tag tag--info">İLERİ</span> Pratikte doğrudan kullanmazsın; <code>ApplicationContext</code> bunun üst kümesidir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ApplicationContext</strong></td><td>Uygulamanın DI container'ı; event, i18n, kaynak yükleme de içerir</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>IServiceProvider</code>. Aramada "Spring ApplicationContext" yaz</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/basics.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>bean definition</strong></td><td>Bean'in nasıl yaratılacağının tarifi (metadata)</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>ServiceDescriptor</code>. Bean'in kendisi değil, tarifidir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/definition.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>bean name</strong></td><td>Her bean'in container içindeki benzersiz adı</td><td><span class="tag">ORTA</span> Varsayılan ad sınıf adının küçük harfle başlayan hâlidir; <code>@Qualifier</code> bu adı kullanır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/definition.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>singleton scope</strong></td><td>Container başına tek örnek (varsayılan)</td><td><span class="tag tag--ok">TEMEL</span> Spring'in varsayılanı singleton'dır: bean'de istek başına durum (state) tutma. <em>ASP.NET Core'dan geliyorsan:</em> .NET'in Scoped'ı değil Singleton'ıdır; Web API'deki Scoped alışkanlığıyla gelirsen tuzağa düşersin &mdash; en sık yapılan kavram hatası budur. <em>NestJS'ten geliyorsan:</em> varsayılan singleton sana tanıdıktır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>prototype scope</strong></td><td>Her istendiğinde yeni örnek</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Transient. Container prototype bean'in <code>destroy</code> aşamasını yönetmez</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>request scope</strong></td><td>HTTP isteği boyunca tek örnek</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Scoped'ın web karşılığı. Sadece web context'inde geçerlidir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>session scope</strong></td><td>HTTP oturumu boyunca tek örnek</td><td><span class="tag">ORTA</span> Stateless API yazıyorsan kullanma</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>application scope</strong></td><td><code>ServletContext</code> boyunca tek örnek</td><td><span class="tag tag--info">İLERİ</span> Singleton'dan farkı: birden fazla context varsa görünür olur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>scoped proxy</strong></td><td>Singleton bean'e daha kısa ömürlü bean enjekte etmenin yolu</td><td><span class="tag tag--info">İLERİ</span> <code>@Scope(proxyMode = ...)</code>. <em>.NET'ten geliyorsan:</em> .NET'teki "captive dependency" probleminin Spring'teki çözümü</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>bean lifecycle</strong></td><td>Yaratma &rarr; bağımlılık enjeksiyonu &rarr; init &rarr; kullanım &rarr; destroy</td><td><span class="tag tag--ok">TEMEL</span> Mülakatta çok sorulur. Aramada "Spring bean lifecycle" yaz</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-nature.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@PostConstruct / @PreDestroy</strong></td><td>Bean hazır olduğunda / yok edilmeden önce çalışan metotlar</td><td><span class="tag tag--ok">TEMEL</span> Boot 3'te paket <code>jakarta.annotation</code>. <em>.NET'ten geliyorsan:</em> constructor sonrası init + <code>IDisposable</code></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/postconstruct-and-predestroy-annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>InitializingBean / DisposableBean</strong></td><td>Aynı işin arayüz ile yapılan eski yolu</td><td><span class="tag tag--warn">ESKİMİŞ</span> Yeni kodda anotasyon tercih edilir; eski projelerde görürsün</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-nature.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BeanPostProcessor</strong></td><td>Her bean yaratıldıktan sonra araya girip onu değiştirebilen kanca</td><td><span class="tag tag--info">İLERİ</span> Spring'in sihirlerinin çoğu (AOP proxy dahil) buradan gelir; anlamak "Spring nasıl çalışıyor" sorusunu çözer</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-extension.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BeanFactoryPostProcessor</strong></td><td>Bean'ler yaratılmadan önce tarifleri değiştiren kanca</td><td><span class="tag tag--info">İLERİ</span> BeanPostProcessor ile karıştırma: bu tarifi, o örneği değiştirir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-extension.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ApplicationEvent / @EventListener</strong></td><td>Uygulama içi olay yayınlama ve dinleme</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> MediatR'ın notification tarafı. Süreç içidir, mesaj kuyruğu değildir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@TransactionalEventListener</strong></td><td>Olayı transaction commit sonrasına erteleyen dinleyici</td><td><span class="tag tag--info">İLERİ</span> "Commit olmadan mail gitti" hatasının çözümü</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/event.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Environment</strong></td><td>Aktif profiller ve property kaynaklarını temsil eden nesne</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>IConfiguration</code> + <code>IHostEnvironment</code></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/environment.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@DependsOn</strong></td><td>Bir bean'in başka bir bean oluştuktan sonra kurulmasını zorlar</td><td><span class="tag">ORTA</span> Sıralamayı elle kurmak son çaredir; normalde bağımlılığı constructor'a koymak yeter</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-dependson.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>FactoryBean&lt;T&gt;</strong></td><td>Bean'in kendisini üreten özel fabrika arayüzü</td><td><span class="tag tag--info">İLERİ</span> Aramada "Spring FactoryBean" yaz; <code>@Bean</code> metoduyla karıştırılır. <code>&amp;beanAdi</code> ile fabrikanın kendisine ulaşırsın</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-extension.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SmartLifecycle / graceful shutdown</strong></td><td>Kapanırken devam eden isteklerin bitmesini bekleme</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>IHostedService</code> + <code>IHostApplicationLifetime</code>. Ayar: <code>server.shutdown=graceful</code></td><td><a href="https://docs.spring.io/spring-boot/reference/web/graceful-shutdown.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bean-anotasyonlari"><span class="h-num">§ 3</span>Bean tanımlama ve enjeksiyon anotasyonları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sınıfı bean yapan ve bağımlılığı çözen anotasyonlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@Component</strong></td><td>"Bu sınıfı bean olarak kaydet" diyen genel anotasyon</td><td><span class="tag tag--ok">TEMEL</span> Diğer üçünün atasıdır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Service</strong></td><td>İş mantığı katmanı için anlamsal @Component</td><td><span class="tag tag--ok">TEMEL</span> Teknik olarak @Component'ten farkı yoktur, niyet belirtir. Layered/Onion mimari alışkanlığı buraya oturur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Repository</strong></td><td>Veri erişim katmanı için @Component</td><td><span class="tag tag--ok">TEMEL</span> Farkı var: veritabanı istisnalarını Spring'in <code>DataAccessException</code> hiyerarşisine çevirir</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/dao.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Controller</strong></td><td>MVC controller'ı; dönüş değeri view adı sayılır</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>Controller</code>. HTML döndürüyorsan bunu kullan</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RestController</strong></td><td>@Controller + @ResponseBody</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[ApiController]</code>. API yazıyorsan bu</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Configuration</strong></td><td>İçinde @Bean metotları barındıran yapılandırma sınıfı</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan olarak proxy'lenir (<code>proxyBeanMethods</code>), bu yüzden @Bean metodunu ikinci kez çağırdığında aynı örneği alırsın</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/java/configuration-annotation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Bean</strong></td><td>Bir metodun dönüş değerini bean olarak kaydeder</td><td><span class="tag tag--ok">TEMEL</span> Kaynak kodunu değiştiremediğin (üçüncü parti) sınıflar için tek yol</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/java/bean-annotation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Autowired</strong></td><td>Bağımlılığı container'dan çöz</td><td><span class="tag tag--ok">TEMEL</span> Tek constructor varsa yazmana gerek yok, Spring 4.3'ten beri opsiyoneldir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>constructor injection</strong></td><td>Bağımlılıkları constructor parametresiyle almak</td><td><span class="tag tag--ok">TEMEL</span> Spring ekibinin resmî tavsiyesi budur: alanlar <code>final</code> olur, test edilebilirlik artar, circular dependency başlangıçta patlar. Field injection (<code>@Autowired private</code>) yazma</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>field injection</strong></td><td>Alanın üstüne @Autowired koymak</td><td><span class="tag tag--warn">ESKİMİŞ</span> Eski eğitimlerin tamamı böyle yazar; IDE uyarı verir. Neden kötü olduğunu bilmen mülakat sorusudur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>setter injection</strong></td><td>Bağımlılığı setter metoduyla vermek</td><td><span class="tag">ORTA</span> Opsiyonel bağımlılıklar için savunulabilir; nadiren gerekir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Qualifier</strong></td><td>Aynı tipten birden fazla bean varsa hangisini istediğini adıyla söyler</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> .NET 8'deki keyed services'in karşılığı. Generic arayüzlerle çalışıyorsan sık kullanacaksın</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired-qualifiers.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Primary</strong></td><td>Belirsizlik durumunda varsayılan bean'i işaretler</td><td><span class="tag tag--ok">TEMEL</span> @Qualifier ile birlikte öğren; ikisi de "NoUniqueBeanDefinitionException" hatasının çözümüdür</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Lazy</strong></td><td>Bean'i başlangıçta değil ilk kullanımda yarat</td><td><span class="tag">ORTA</span> Circular dependency'yi kırmak için de kullanılır ama bu tedavi değil pansumandır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-lazy-init.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>circular dependency</strong></td><td>A B'ye, B A'ya bağımlı; container çözemez</td><td><span class="tag tag--ok">TEMEL</span> Boot 2.6'dan beri varsayılan olarak <em>hata verir</em>. Doğru çözüm tasarımı düzeltmektir; <code>spring.main.allow-circular-references=true</code> ile bastırma</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Scope</strong></td><td>Bean'in kapsamını belirler</td><td><span class="tag">ORTA</span> Yazmazsan singleton'dır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ComponentScan</strong></td><td>Hangi paketlerin taranacağını söyler</td><td><span class="tag tag--ok">TEMEL</span> <code>@SpringBootApplication</code> bunu kendi paketinden aşağı doğru otomatik yapar; sınıfını yanlış pakete koyarsan bean bulunamaz</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/classpath-scanning.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Import</strong></td><td>Başka bir @Configuration sınıfını dahil eder</td><td><span class="tag">ORTA</span> Kütüphane yazarken auto-configuration'ın temel taşı</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/java/composing-configuration-classes.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ObjectProvider</strong></td><td>Bean'i opsiyonel/geç çözmek için sarmalayıcı</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> <code>IServiceProvider.GetService</code> ile elle çözmenin temiz hâli</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-autowire.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Order / Ordered</strong></td><td>Aynı tipten bean listesi enjekte edilirken sıralamayı belirler</td><td><span class="tag">ORTA</span> Filter ve aspect sırasında da kullanılır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>List&lt;T&gt; enjeksiyonu</strong></td><td>Bir arayüzün tüm implementasyonlarını liste olarak almak</td><td><span class="tag">ORTA</span> Strategy pattern'in Spring'teki en temiz hâli; SOLID'deki açık/kapalı ilkesinin (open/closed) pratik uygulaması</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Inject (JSR-330)</strong></td><td>Standart Java DI anotasyonu</td><td><span class="tag tag--info">İLERİ</span> @Autowired ile aynı işi yapar; kütüphane yazarken taşınabilirlik için tercih edilir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/standard-annotations.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="spring-boot-cekirdek"><span class="h-num">§ 4</span>Spring Boot: auto-configuration ve starter'lar</h2>
+
+        <p>Spring ile Spring Boot aynı şey değildir. Spring, container ve modüllerdir. Spring Boot, o modülleri
+        "makul varsayılanlarla kendiliğinden kuran" bir katmandır. Mülakatta bu farkı sorarlar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring Boot'un kendine ait kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring Boot</strong></td><td>Spring'i sıfır XML ile, gömülü sunucuyla, hazır varsayılanlarla çalıştıran katman</td><td><span class="tag tag--ok">TEMEL</span> Aramada mutlaka "Spring Boot 3" yaz; sadece "Spring" araması 2010'lu yılların XML içeriğini getirir</td><td><a href="https://docs.spring.io/spring-boot/index.html">docs.spring.io/spring-boot</a></td></tr>
+              <tr><td><strong>auto-configuration</strong></td><td>Classpath'te ne varsa ona göre otomatik bean tanımlama</td><td><span class="tag tag--ok">TEMEL</span> Spring Boot'un kalbi. <em>.NET'ten geliyorsan:</em> .NET'te doğrudan karşılığı yoktur; en yakını <code>Add...</code> extension metotlarıdır ama orada çağrıyı sen yazarsın</td><td><a href="https://docs.spring.io/spring-boot/reference/using/auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@EnableAutoConfiguration</strong></td><td>Auto-configuration'ı açan anotasyon</td><td><span class="tag">ORTA</span> Genellikle doğrudan yazmazsın, @SpringBootApplication içindedir</td><td><a href="https://docs.spring.io/spring-boot/reference/using/auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@SpringBootApplication</strong></td><td>@Configuration + @EnableAutoConfiguration + @ComponentScan üçlüsü</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>Program.cs</code>'in tamamı. Bu sınıfın bulunduğu paket, tarama kökünü belirler</td><td><a href="https://docs.spring.io/spring-boot/reference/using/using-the-springbootapplication-annotation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>starter</strong></td><td><code>spring-boot-starter-*</code> adındaki, bir alanın tüm bağımlılıklarını getiren meta paket</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>Microsoft.AspNetCore.App</code> metapaketi mantığı. Sürüm yazmazsın, parent POM belirler</td><td><a href="https://docs.spring.io/spring-boot/reference/using/build-systems.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring-boot-starter-web</strong></td><td>Spring MVC + gömülü Tomcat + Jackson</td><td><span class="tag tag--ok">TEMEL</span> Web API için ilk ekleyeceğin bağımlılık</td><td><a href="https://docs.spring.io/spring-boot/reference/using/build-systems.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>starter-data-jpa / -security / -validation / -actuator</strong></td><td>Sırasıyla ORM, güvenlik, doğrulama ve izleme starter'ları</td><td><span class="tag tag--ok">TEMEL</span> Her birinin ne getirdiğini bilmek "auto-configuration nasıl tetiklenir" sorusunun cevabıdır</td><td><a href="https://docs.spring.io/spring-boot/reference/using/build-systems.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Conditional / @ConditionalOnClass</strong></td><td>Koşul sağlanırsa bean tanımla</td><td><span class="tag tag--info">İLERİ</span> Auto-configuration bu mekanizmayla çalışır; kendi starter'ını yazacaksan şart</td><td><a href="https://docs.spring.io/spring-boot/reference/features/developing-auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ConditionalOnMissingBean</strong></td><td>Kullanıcı kendi bean'ini tanımlamadıysa varsayılanı ver</td><td><span class="tag tag--info">İLERİ</span> Spring Boot'un "istersen ezersin" felsefesinin tek satırlık özeti</td><td><a href="https://docs.spring.io/spring-boot/reference/features/developing-auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AutoConfiguration.imports</strong></td><td>Auto-configuration sınıflarının listelendiği dosya</td><td><span class="tag tag--info">İLERİ</span> Boot 3'te yol: <code>META-INF/spring/...AutoConfiguration.imports</code>. Boot 2'deki <code>spring.factories</code> ile karıştırma</td><td><a href="https://docs.spring.io/spring-boot/reference/features/developing-auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring-boot-starter-parent</strong></td><td>Sürümleri merkezî yöneten Maven parent POM'u</td><td><span class="tag tag--ok">TEMEL</span> Bağımlılık sürümü yazmama rahatlığı buradan gelir. Detay: <a href="../04-ekosistem-ve-araclar/index.html">04 — Ekosistem</a></td><td><a href="https://docs.spring.io/spring-boot/reference/using/build-systems.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Initializr</strong></td><td>Proje iskeletini üreten resmî site</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>dotnet new webapi</code>. IntelliJ ve VS Code içinden de çağrılır</td><td><a href="https://start.spring.io/">start.spring.io</a></td></tr>
+              <tr><td><strong>fat jar / executable jar</strong></td><td>Tüm bağımlılıkları içeren, tek komutla çalışan jar</td><td><span class="tag tag--ok">TEMEL</span> <code>java -jar app.jar</code>. <em>.NET'ten geliyorsan:</em> self-contained publish</td><td><a href="https://docs.spring.io/spring-boot/reference/packaging/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>gömülü sunucu (Tomcat/Jetty/Undertow)</strong></td><td>Uygulamanın içine gömülü HTTP sunucusu</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> Kestrel. Varsayılan Tomcat'tir; starter'dan çıkarıp Undertow ekleyebilirsin</td><td><a href="https://docs.spring.io/spring-boot/reference/web/servlet.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SpringApplication</strong></td><td><code>main</code> içinden uygulamayı başlatan sınıf</td><td><span class="tag">ORTA</span> Banner, listener, başlangıç ayarları buradan yapılır</td><td><a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CommandLineRunner / ApplicationRunner</strong></td><td>Uygulama ayağa kalktıktan sonra bir kez çalışan kod</td><td><span class="tag">ORTA</span> Seed data, tek seferlik iş için. İkisinin farkı argüman tipidir (<code>String...</code> vs <code>ApplicationArguments</code>)</td><td><a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>banner</strong></td><td>Başlangıçta konsola basılan ASCII logo</td><td><span class="tag">ORTA</span> <code>banner.txt</code> ile değiştirilir, <code>spring.main.banner-mode=off</code> ile kapatılır</td><td><a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>DevTools</strong></td><td>Kod değişince otomatik yeniden başlatma, canlı yenileme</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>dotnet watch</code>. Sadece geliştirme için; paketlenmiş jar'da kendini devre dışı bırakır</td><td><a href="https://docs.spring.io/spring-boot/reference/using/devtools.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring-boot-maven-plugin</strong></td><td>Jar paketleme, çalıştırma ve imaj üretme eklentisi</td><td><span class="tag">ORTA</span> <code>mvn spring-boot:run</code> ve <code>spring-boot:build-image</code></td><td><a href="https://docs.spring.io/spring-boot/maven-plugin/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>build-image (Buildpacks)</strong></td><td>Dockerfile yazmadan konteyner imajı üretme</td><td><span class="tag">ORTA</span> Dockerfile'sız çalışır; CI/CD öğrenirken işine yarar</td><td><a href="https://docs.spring.io/spring-boot/maven-plugin/build-image.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>GraalVM native image</strong></td><td>Java kodunu makine koduna derleyip milisaniyede başlatma</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> AOT publish. Reflection kısıtları vardır, her kütüphane desteklemez</td><td><a href="https://docs.spring.io/spring-boot/reference/packaging/native-image/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Boot sürüm ve destek takvimi</strong></td><td>Hangi Boot sürümünün ne zamana kadar ücretsiz güvenlik yaması aldığı</td><td><span class="tag tag--warn">ÜCRETLİ</span> OSS destek penceresi kapandıktan sonra yamalar yalnızca ticari destek aboneliğiyle (Broadcom / VMware Tanzu Spring Runtime) gelir. Projeye başlamadan önce bu sayfaya bak &mdash; güncel sürümler &middot; lisansı ücretsiz</td><td><a href="https://spring.io/projects/spring-boot">spring.io</a></td></tr>
+              <tr><td><strong>Spring Boot 2 &rarr; 3 geçiş rehberi</strong></td><td>javax.* paketlerinin jakarta.* olması ve Java 17 tabanı</td><td><span class="tag tag--ok">TEMEL</span> Eğitim içeriklerinin büyük kısmı hâlâ Boot 2 anlatır; kopyaladığın kod derlenmiyorsa önce bu farka bak</td><td><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide">github.com</a></td></tr>
+              <tr><td><strong>layered jar / layertools</strong></td><td>Jar'ı Docker katmanlarına bölerek imaj üretimini hızlandırma</td><td><span class="tag">ORTA</span> Bağımlılıklar ayrı katmanda kalır, sadece uygulama kodunun katmanı yeniden yazılır. CI/CD öğrenirken işine yarar</td><td><a href="https://docs.spring.io/spring-boot/reference/packaging/efficient.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AOT processing / @ImportRuntimeHints</strong></td><td>Native image için reflection ipuçlarını derleme anında bildirme</td><td><span class="tag tag--info">İLERİ</span> GraalVM native image ile birlikte gelir; <em>.NET'ten geliyorsan:</em> .NET tarafındaki AOT trimming uyarılarının dengi</td><td><a href="https://docs.spring.io/spring-boot/reference/packaging/native-image/index.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="yapilandirma"><span class="h-num">§ 5</span>Yapılandırma: properties, YAML, profile</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Externalized configuration</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>application.properties</strong></td><td><code>anahtar=deger</code> biçiminde ayar dosyası</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>appsettings.json</code>. Yeri: <code>src/main/resources</code></td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>application.yml</strong></td><td>Aynı ayarların YAML hâli</td><td><span class="tag tag--ok">TEMEL</span> İkisi aynı işi yapar, ikisini aynı anda kullanma. YAML girinti hatasına duyarlıdır; sekme karakteri kabul etmez</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>externalized configuration</strong></td><td>Ayarın koddan ayrı, ortamdan gelmesi</td><td><span class="tag tag--ok">TEMEL</span> Öncelik sırası vardır: komut satırı &gt; ortam değişkeni &gt; profil dosyası &gt; varsayılan. Bu sıra mülakat sorusudur</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Value</strong></td><td>Tek bir ayarı alana enjekte eder</td><td><span class="tag tag--ok">TEMEL</span> <code>@Value("${db.url}")</code>. Süslü parantez tipini karıştırma: <code>${...}</code> property, <code>#{...}</code> SpEL ifadesidir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/expressions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ConfigurationProperties</strong></td><td>Bir ayar grubunu tipli bir sınıfa bağlar</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> Options pattern. @Value yerine bunu tercih et; doğrulanabilir ve test edilebilir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@EnableConfigurationProperties</strong></td><td>Properties sınıfını bean olarak kaydeder</td><td><span class="tag">ORTA</span> Sınıfa <code>@Component</code> koymak da olur, ama kütüphanelerde bu tercih edilir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ConfigurationProperties + validation</strong></td><td>Ayarların açılışta doğrulanması</td><td><span class="tag">ORTA</span> <code>@Validated</code> ile birlikte; yanlış ayar uygulamayı açılışta durdurur, üretimde geç fark etmekten iyidir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>profile</strong></td><td>dev / test / prod gibi ortam ayrımı</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>ASPNETCORE_ENVIRONMENT</code>. Dosya adı: <code>application-dev.yml</code></td><td><a href="https://docs.spring.io/spring-boot/reference/features/profiles.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Profile</strong></td><td>Bean'i sadece belirli profilde tanımla</td><td><span class="tag tag--ok">TEMEL</span> Sahte servis (stub) ile gerçek servisi ayırmanın standart yolu</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/environment.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring.profiles.active</strong></td><td>Hangi profilin açık olduğunu belirleyen ayar</td><td><span class="tag tag--ok">TEMEL</span> Ortam değişkeni karşılığı: <code>SPRING_PROFILES_ACTIVE</code>. Relaxed binding sayesinde nokta/alt çizgi dönüşümü otomatiktir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/profiles.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring.config.import</strong></td><td>Başka bir ayar kaynağını içeri alma</td><td><span class="tag">ORTA</span> Boot 2.4 ile geldi; Config Server ve Vault entegrasyonu bunu kullanır</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>relaxed binding</strong></td><td><code>my.db-url</code>, <code>MY_DBURL</code>, <code>myDbUrl</code> aynı ayarı gösterir</td><td><span class="tag">ORTA</span> Docker/Kubernetes'te ortam değişkeni verirken bilmen gerekir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/external-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>property placeholder</strong></td><td>Bir ayarın içinde başka ayara referans</td><td><span class="tag">ORTA</span> <code>url=${host}:${port}</code></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/value-annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SpEL (Spring Expression Language)</strong></td><td>Anotasyon içinde çalışan küçük ifade dili</td><td><span class="tag tag--info">İLERİ</span> <code>@PreAuthorize</code>, <code>@Cacheable</code>, <code>@Value</code> içinde karşına çıkar</td><td><a href="https://docs.spring.io/spring-framework/reference/core/expressions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>logging.level</strong></td><td>Paket bazında log seviyesi ayarı</td><td><span class="tag tag--ok">TEMEL</span> Hata ararken <code>logging.level.org.springframework=DEBUG</code> ilk hamlendir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/logging.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Logback / SLF4J</strong></td><td>Varsayılan loglama altyapısı ve önündeki arayüz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki "Serilog"un Java karşılığı. SLF4J arayüz, Logback uygulamadır &mdash; bu ayrımı sorarlar</td><td><a href="https://docs.spring.io/spring-boot/reference/features/logging.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Log4j2</strong></td><td>Alternatif loglama altyapısı</td><td><span class="tag">ORTA</span> Starter değiştirilerek kullanılır. Log4Shell (CVE-2021-44228) sonrası sürüm takibi önemlidir</td><td><a href="https://logging.apache.org/log4j/2.x/">logging.apache.org</a></td></tr>
+              <tr><td><strong>structured logging (JSON log)</strong></td><td>Logu makine okunur JSON olarak yazmak</td><td><span class="tag">ORTA</span> Boot 3.4'ten beri yerleşik destek var; <em>.NET'ten geliyorsan:</em> Seq/ELK/Loki'ye göndermenin ön koşuludur</td><td><a href="https://docs.spring.io/spring-boot/reference/features/logging.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="actuator"><span class="h-num">§ 6</span>Actuator: health, metrics, info</h2>
+
+        <p>Actuator, çalışan uygulamanın sağlık kontrolü ve metrik uç noktalarıdır (<em>.NET'ten geliyorsan:</em> <strong>HealthChecks</strong> karşılığı). Actuator sadece health değildir;
+        çalışan uygulamanın içini açan bir uç nokta kümesidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring Boot Actuator</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Actuator</strong></td><td>Çalışan uygulamayı izlemek için hazır HTTP uç noktaları</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki HealthChecks karşılığı. Bağımlılık: <code>spring-boot-starter-actuator</code></td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>/actuator/health</strong></td><td>Uygulamanın ve bağımlılıklarının sağlık durumu</td><td><span class="tag tag--ok">TEMEL</span> Kubernetes liveness/readiness probe'ları buraya bakar</td><td><a href="https://docs.spring.io/spring-boot/api/rest/actuator/health.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>HealthIndicator</strong></td><td>Kendi sağlık kontrolünü yazmanın arayüzü</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>IHealthCheck</code>. Veritabanı, Redis, disk için hazır olanlar zaten gelir</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>liveness / readiness</strong></td><td>"Ayakta mı" ve "trafik alabilir mi" ayrımı</td><td><span class="tag">ORTA</span> İkisini karıştırmak Kubernetes'te sonsuz yeniden başlatmaya yol açar</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>/actuator/metrics</strong></td><td>JVM, HTTP, veritabanı havuzu metrikleri</td><td><span class="tag tag--ok">TEMEL</span> Performans pozisyonu hedefliyorsan ya da özgeçmişinde performans iddiası varsa buradan başla ve <a href="../04-ekosistem-ve-araclar/index.html">JMH</a> ile birlikte bak; genel backend hedefinde metriklerin nereden okunduğunu bilmen yeter</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/metrics.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Micrometer</strong></td><td>Metrik toplamanın standart arayüzü</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>System.Diagnostics.Metrics</code>. "Metrik dünyasının SLF4J'si" denir</td><td><a href="https://micrometer.io/docs">micrometer.io</a></td></tr>
+              <tr><td><strong>Prometheus endpoint</strong></td><td>Metrikleri Prometheus'un okuyacağı biçimde sunmak</td><td><span class="tag">ORTA</span> <code>/actuator/prometheus</code>; Grafana ile birlikte kullanılır &middot; lisansı ücretsiz</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/metrics.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>/actuator/info</strong></td><td>Sürüm, git commit gibi serbest bilgi</td><td><span class="tag">ORTA</span> <code>git-commit-id-plugin</code> ile hangi commit'in çalıştığını gösterir</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>/actuator/env, /beans, /mappings</strong></td><td>Aktif ayarlar, tüm bean'ler, tüm URL eşlemeleri</td><td><span class="tag">ORTA</span> Hata ayıklarken altın değerinde; üretimde <em>kapalı</em> tut, ayar sızdırır</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>management.endpoints.web.exposure.include</strong></td><td>Hangi uç noktaların dışarı açılacağı</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan sadece <code>health</code>'tir. <code>*</code> yazıp üretime çıkma</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/endpoints.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>management.server.port</strong></td><td>Actuator'ı ayrı porttan yayınlama</td><td><span class="tag">ORTA</span> Yönetim trafiğini uygulama trafiğinden ayırmanın standart yolu</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/monitoring.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Micrometer Tracing</strong></td><td>Dağıtık izleme (trace/span) desteği</td><td><span class="tag tag--info">İLERİ</span> Eski adı Spring Cloud Sleuth'tur; aramada ikisini birden dene. <em>.NET'ten geliyorsan:</em> <code>Activity</code> / OpenTelemetry</td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/tracing.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>OpenTelemetry</strong></td><td>Log, metrik ve trace için satıcı bağımsız standart</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> .NET tarafında da aynı standart; ikisini birlikte öğrenmek verimli</td><td><a href="https://opentelemetry.io/docs/">opentelemetry.io</a></td></tr>
+              <tr><td><strong>Spring Boot Admin</strong></td><td>Actuator verisini gösteren topluluk arayüzü</td><td><span class="tag">ORTA</span> Resmî Spring projesi <em>değildir</em> (codecentric) &middot; lisansı ücretsiz</td><td><a href="https://docs.spring-boot-admin.com/">docs.spring-boot-admin.com</a></td></tr>
+              <tr><td><strong>Grafana</strong></td><td>Prometheus/Micrometer verisini panolaştıran arayüz</td><td><span class="tag">ORTA</span> Kendi sunucuna kurduğun sürüm &middot; lisansı ücretsiz &middot; Grafana Cloud barındırması <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://grafana.com/docs/grafana/latest/">grafana.com</a></td></tr>
+              <tr><td><strong>APM ürünleri (Datadog / New Relic / Dynatrace)</strong></td><td>Hazır metrik + iz + log toplama platformları</td><td><span class="tag tag--warn">ÜCRETLİ</span> Micrometer üzerinden Spring'e bağlanırlar. Ücretsiz alternatif: Prometheus + Grafana + OpenTelemetry Collector yığını</td><td><a href="https://docs.datadoghq.com/">docs.datadoghq.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="web-katmani"><span class="h-num">§ 7</span>Web katmanı: controller, routing, serileştirme</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring MVC — istek eşleme ve parametre bağlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring MVC</strong></td><td>Servlet tabanlı, senkron web çatısı</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> ASP.NET Core MVC/Web API. "MVC" adı aldatıcıdır, REST API'lerin de temeli budur</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>DispatcherServlet</strong></td><td>Tüm isteklerin girdiği tek merkezî servlet (front controller)</td><td><span class="tag tag--ok">TEMEL</span> Mülakatta "bir istek Spring'te nasıl akar" sorusunun cevabı burada başlar</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RequestMapping</strong></td><td>URL &rarr; metot eşlemesi</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[Route]</code>. Sınıf ve metot seviyesinde birleşerek çalışır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@GetMapping / @PostMapping / @PutMapping / @DeleteMapping / @PatchMapping</strong></td><td>HTTP metoduna özel kısayollar</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[HttpGet]</code> vb. Yeni kodda bunları kullan</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@PathVariable</strong></td><td>URL yolundaki değişkeni parametreye bağlar</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[FromRoute]</code></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/arguments.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RequestParam</strong></td><td>Query string veya form alanını bağlar</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[FromQuery]</code>. <code>required</code> ve <code>defaultValue</code> özniteliklerini öğren</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/requestparam.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RequestBody</strong></td><td>İstek gövdesindeki JSON'u nesneye çevirir</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>[FromBody]</code>. Bu olmadan gövde okunmaz</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/requestbody.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ResponseBody</strong></td><td>Dönüş değerini view değil gövde olarak yaz</td><td><span class="tag tag--ok">TEMEL</span> <code>@RestController</code> kullanırsan yazmana gerek yok</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/responsebody.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RequestHeader / @CookieValue</strong></td><td>Başlık ve çerez değerini bağlar</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>[FromHeader]</code></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/arguments.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ModelAttribute</strong></td><td>Form verisini nesneye bağlar</td><td><span class="tag">ORTA</span> HTML form senaryosu; saf JSON API'de kullanmazsın</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/modelattrib-method-args.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ResponseEntity&lt;T&gt;</strong></td><td>Durum kodu, başlık ve gövdeyi birlikte döndüren tip</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>ActionResult&lt;T&gt;</code> / <code>Results.Ok()</code>. 201 Created + Location başlığı için tek yol</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/responseentity.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ResponseStatus</strong></td><td>Metot veya istisna için sabit HTTP durum kodu</td><td><span class="tag">ORTA</span> Basit senaryoda ResponseEntity'ye alternatif</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>content negotiation</strong></td><td>İstemcinin <code>Accept</code> başlığına göre biçim seçme</td><td><span class="tag">ORTA</span> Varsayılan JSON'dur; XML için <code>jackson-dataformat-xml</code> eklenir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-config/content-negotiation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>HttpMessageConverter</strong></td><td>Gövdeyi nesneye / nesneyi gövdeye çeviren bileşen</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>InputFormatter</code>/<code>OutputFormatter</code>. JSON için varsayılanı Jackson'dır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-config/message-converters.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Jackson</strong></td><td>Varsayılan JSON kütüphanesi</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>System.Text.Json</code>. <code>@JsonProperty</code>, <code>@JsonIgnore</code>, <code>@JsonInclude</code> anotasyonlarını öğren &middot; lisansı ücretsiz</td><td><a href="https://github.com/FasterXML/jackson-docs">github.com/FasterXML</a></td></tr>
+              <tr><td><strong>Gson</strong></td><td>Google'ın alternatif JSON kütüphanesi</td><td><span class="tag">ORTA</span> Spring Boot destekler ama Jackson varsayılandır; karışık projede ikisini birden bulundurma &middot; lisansı ücretsiz</td><td><a href="https://github.com/google/gson">github.com/google/gson</a></td></tr>
+              <tr><td><strong>DTO</strong></td><td>API sınırında taşınan veri nesnesi</td><td><span class="tag tag--ok">TEMEL</span> Sürüme göre: <strong>Java 16+</strong> (record, JEP 395 ile Java 16'da kesinleşti) &rarr; DTO'yu <code>record</code> ile yaz (Jackson'ın record desteği 2.12+ ister <span class="tag tag--warn">TEYİT</span>); <strong>Java 8/11 legacy proje</strong> &rarr; sınıf + Lombok <code>@Value</code>/<code>@Data</code> veya elle değişmez sınıf. Her durumda entity'yi doğrudan döndürme alışkanlığından kaçın. Bkz. <a href="../01-java-dili/index.html">01 — Java Dili</a></td><td><a href="https://docs.oracle.com/en/java/javase/21/language/records.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>MapStruct</strong></td><td>Derleme anında mapper kodu üreten kütüphane</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki AutoMapper'ın Java karşılığı; farkı: reflection değil kod üretimi, bu yüzden daha hızlı &middot; lisansı ücretsiz</td><td><a href="https://mapstruct.org/documentation/">mapstruct.org</a></td></tr>
+              <tr><td><strong>ModelMapper</strong></td><td>Çalışma anında eşleme yapan alternatif</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> AutoMapper'a davranış olarak daha yakın, performansı düşüktür &middot; lisansı ücretsiz</td><td><a href="https://modelmapper.org/">modelmapper.org</a></td></tr>
+              <tr><td><strong>functional endpoints (RouterFunction)</strong></td><td>Anotasyonsuz, lambda tabanlı yönlendirme</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> Minimal APIs'in en yakın karşılığı. Mülakatta Minimal API karşılığı sorulursa cevap budur</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc-functional.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>RestClient</strong></td><td>Spring 6.1 ile gelen modern senkron HTTP istemcisi</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>HttpClient</code>. Yeni kodda bunu kullan</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>RestTemplate</strong></td><td>Eski senkron HTTP istemcisi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Bakım modunda; kaldırılmadı ama yeni projede kullanma. Eğitim videolarının çoğu bunu anlatır</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>WebClient</strong></td><td>Reaktif, non-blocking HTTP istemcisi</td><td><span class="tag">ORTA</span> WebFlux bağımlılığı ister; senkron uygulamada da kullanılabilir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webflux-webclient.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>HTTP Interface (@HttpExchange)</strong></td><td>Arayüz tanımlayıp istemciyi Spring'e ürettirmek</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Refit. Feign'in resmî Spring alternatifidir</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>springdoc-openapi</strong></td><td>Swagger UI ve OpenAPI şeması üretimi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki Swagger kavramı. Eski <em>springfox</em> paketini kullanma, terk edildi &middot; lisansı ücretsiz</td><td><a href="https://springdoc.org/">springdoc.org</a></td></tr>
+              <tr><td><strong>Spring HATEOAS</strong></td><td>Yanıta bağlantı (link) ekleyen REST olgunluk katmanı</td><td><span class="tag tag--info">İLERİ</span> "RESTful" tanımının en katı yorumu; pratikte az kullanılır ama mülakatta Richardson Maturity Model ile sorulur</td><td><a href="https://docs.spring.io/spring-hateoas/docs/current/reference/html/">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RequestPart / MultipartFile</strong></td><td>Dosya yükleme ve çok parçalı form okuma</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>IFormFile</code>. Boyut sınırı <code>spring.servlet.multipart.max-file-size</code> ile ayarlanır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-methods/multipart-forms.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@InitBinder / Converter / Formatter</strong></td><td>Gelen metni özel tipe çeviren dönüştürücü kancaları</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> model binder ve <code>TypeConverter</code>. Tarih biçimi sorunlarının çözüldüğü yer</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-initbinder.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hata-ve-dogrulama"><span class="h-num">§ 8</span>Hata yönetimi ve doğrulama</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Exception handling ve Bean Validation</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@ExceptionHandler</strong></td><td>Belirli bir istisnayı yakalayıp yanıta çeviren metot</td><td><span class="tag tag--ok">TEMEL</span> Controller içinde yerel, @ControllerAdvice içinde global çalışır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-exceptionhandler.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ControllerAdvice / @RestControllerAdvice</strong></td><td>Tüm controller'lar için ortak hata/veri bağlama kancası</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> exception handling middleware. Rest sürümü <code>@ResponseBody</code> ekler</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ProblemDetail (RFC 9457)</strong></td><td>Standart hata yanıtı gövdesi</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>ProblemDetails</code> ile birebir aynı standart. Eski RFC numarası 7807'dir, ikisini de görürsün</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ResponseStatusException</strong></td><td>Kod içinden durum kodu fırlatmanın hazır yolu</td><td><span class="tag">ORTA</span> Küçük projede özel istisna sınıfı yazmaya alternatif</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ErrorController / whitelabel error page</strong></td><td>Spring Boot'un varsayılan hata sayfası</td><td><span class="tag">ORTA</span> "Whitelabel Error Page" yazısını gördüysen hata yakalanmamış demektir</td><td><a href="https://docs.spring.io/spring-boot/reference/web/servlet.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Bean Validation (Jakarta Validation)</strong></td><td>Anotasyonla veri doğrulama standardı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki FluentValidation'ın yerini tutar. Boot 3'te paket <code>jakarta.validation</code>, Boot 2'de <code>javax.validation</code></td><td><a href="https://jakarta.ee/specifications/bean-validation/3.0/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Hibernate Validator</strong></td><td>Bean Validation'ın referans uygulaması</td><td><span class="tag tag--ok">TEMEL</span> Hibernate ORM ile ilgisi yoktur, sadece aynı çatı altındadır &mdash; sık karıştırılır &middot; lisansı ücretsiz</td><td><a href="https://hibernate.org/validator/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>@Valid</strong></td><td>Parametreyi doğrula</td><td><span class="tag tag--ok">TEMEL</span> Controller parametresinde <code>@RequestBody @Valid</code> sırasıyla kullanılır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Validated</strong></td><td>Spring'in sürümü; grup desteği ve metot seviyesi doğrulama sağlar</td><td><span class="tag">ORTA</span> @Valid ile farkını sorarlar: gruplar ve sınıf seviyesinde metot doğrulama</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@NotNull / @NotBlank / @NotEmpty</strong></td><td>Üç farklı boşluk kontrolü</td><td><span class="tag tag--ok">TEMEL</span> Farkı bilmek gerekir: NotNull null'ı, NotEmpty boş koleksiyon/metni, NotBlank sadece boşluktan oluşan metni de reddeder</td><td><a href="https://jakarta.ee/specifications/bean-validation/3.0/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Size / @Min / @Max / @Positive</strong></td><td>Uzunluk ve sayısal sınır kısıtları</td><td><span class="tag tag--ok">TEMEL</span> <code>@Size</code> metin ve koleksiyon içindir, sayı için <code>@Min/@Max</code></td><td><a href="https://jakarta.ee/specifications/bean-validation/3.0/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Email / @Pattern / @Past / @Future</strong></td><td>Biçim ve tarih kısıtları</td><td><span class="tag">ORTA</span> <code>@Email</code> gevşek doğrular; kritik ise kendi kuralını yaz</td><td><a href="https://jakarta.ee/specifications/bean-validation/3.0/">jakarta.ee</a></td></tr>
+              <tr><td><strong>custom constraint (@Constraint)</strong></td><td>Kendi doğrulama anotasyonunu yazmak</td><td><span class="tag">ORTA</span> <code>ConstraintValidator&lt;A, T&gt;</code> arayüzünü uygularsın; generic arayüz uygulamanın iyi bir pratik örneği</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>validation groups</strong></td><td>Aynı sınıfı farklı senaryolarda farklı doğrulamak</td><td><span class="tag tag--info">İLERİ</span> Create ve Update için tek DTO kullanmak isteyince gerekir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>MethodArgumentNotValidException</strong></td><td>@Valid başarısız olduğunda fırlatılan istisna</td><td><span class="tag tag--ok">TEMEL</span> Global handler'da bunu yakalayıp alan bazlı hata listesi döndürmek standart pratiktir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BindingResult</strong></td><td>Doğrulama sonucunu istisna yerine nesne olarak almak</td><td><span class="tag">ORTA</span> Parametre sırası önemlidir: doğrulanan nesnenin hemen ardından gelmeli</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/validator.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Validator arayüzü (Spring)</strong></td><td>Anotasyonsuz, programatik doğrulama</td><td><span class="tag tag--info">İLERİ</span> Bean Validation'dan bağımsız, daha eski bir yol; karmaşık iş kuralları için hâlâ kullanılır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/validation/validator.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="filter-interceptor"><span class="h-num">§ 9</span>Filter, interceptor, CORS</h2>
+
+        <p>İstek hattına araya girme kavramı (<em>.NET'ten geliyorsan:</em> <strong>Middleware</strong>; Express/NestJS'ten geliyorsan middleware/interceptor) Spring'te ikiye ayrılır ve bu ayrımı bilmek klasik bir
+        mülakat sorusudur: <strong>Filter</strong> Servlet standardına aittir ve DispatcherServlet'ten önce çalışır;
+        <strong>Interceptor</strong> Spring'e aittir ve hangi controller metodunun seçildiğini bilir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İstek hattına müdahale</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Servlet Filter</strong></td><td>Her HTTP isteğinden önce/sonra çalışan Servlet API bileşeni</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki Middleware'e en yakın olan budur. Spring bilgisi olmadan da çalışır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/filters.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>OncePerRequestFilter</strong></td><td>Forward/include durumunda tekrar çalışmayan filter tabanı</td><td><span class="tag tag--ok">TEMEL</span> JWT filtresi yazarken kullanacağın sınıf budur</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/filters.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>FilterRegistrationBean</strong></td><td>Filter'ın sırasını ve URL desenini belirleme</td><td><span class="tag">ORTA</span> Sıra önemliyse bunu kullan, sadece <code>@Component</code> koyup geçme</td><td><a href="https://docs.spring.io/spring-boot/reference/web/servlet.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>HandlerInterceptor</strong></td><td>Controller metodu seçildikten sonra çalışan Spring bileşeni</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> Action Filter. <code>preHandle</code> / <code>postHandle</code> / <code>afterCompletion</code></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-servlet/handlermapping-interceptor.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>WebMvcConfigurer</strong></td><td>Interceptor, CORS, converter kaydının yapıldığı yapılandırma arayüzü</td><td><span class="tag tag--ok">TEMEL</span> Eski <code>WebMvcConfigurerAdapter</code> sınıfını kullanma, kaldırıldı</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-config.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CORS</strong></td><td>Tarayıcının çapraz kaynak isteğine izin verme kuralları</td><td><span class="tag tag--ok">TEMEL</span> İstemci türüne göre: <strong>farklı origin'den çalışan tarayıcı SPA'sı</strong> (React, Angular, Vue, Svelte; ör. <code>localhost:5173</code> &rarr; <code>localhost:8080</code>) &rarr; CORS yapılandırması gerekir, ilk çarpacağın duvar budur. <strong>Arayüz aynı origin'den servis ediliyorsa</strong> (Thymeleaf, Spring Boot'un <code>static</code> klasörü, ters vekil arkasında aynı alan adı) &rarr; CORS gerekmez. <strong>Mobil uygulama veya sunucudan sunucuya çağrı</strong> &rarr; CORS tarayıcı kuralıdır, uygulanmaz. Arayüz tarafı için <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümü</a></td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc-cors.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@CrossOrigin</strong></td><td>Controller/metot seviyesinde CORS izni</td><td><span class="tag">ORTA</span> Küçük projede pratik; gerçek projede global yapılandırma tercih edilir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc-cors.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CorsConfigurationSource</strong></td><td>Global CORS ayarı</td><td><span class="tag">ORTA</span> Spring Security açıkken CORS'u <em>ayrıca</em> Security'ye tanıtman gerekir; en sık takılınan nokta budur</td><td><a href="https://docs.spring.io/spring-security/reference/reactive/integrations/cors.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>MDC (Mapped Diagnostic Context)</strong></td><td>Log satırlarına correlation id gibi bağlam eklemek</td><td><span class="tag">ORTA</span> Filter içinde doldurulur; dağıtık sistemde isteği takip etmenin en ucuz yolu</td><td><a href="https://logback.qos.ch/manual/mdc.html">logback.qos.ch</a></td></tr>
+              <tr><td><strong>rate limiting</strong></td><td>İstek hızını sınırlama</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanlarda sık geçer. Spring'in yerleşik karşılığı <em>yoktur</em>; Bucket4j, Resilience4j RateLimiter veya Gateway filtresi kullanılır &mdash; bunu bilmek iyi bir cevaptır</td><td><a href="https://bucket4j.com/">bucket4j.com</a></td></tr>
+              <tr><td><strong>Resilience4j</strong></td><td>Circuit breaker, retry, rate limiter, bulkhead kütüphanesi</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Polly. Netflix Hystrix'in yerini aldı &middot; lisansı ücretsiz</td><td><a href="https://resilience4j.readme.io/docs/getting-started">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>Hystrix</strong></td><td>Eski circuit breaker kütüphanesi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Netflix bakımını durdurdu; eski eğitim içeriğinde çok görülür</td><td><a href="https://github.com/Netflix/Hystrix">github.com/Netflix</a></td></tr>
+              <tr><td><strong>compression / HTTP caching</strong></td><td>Yanıt sıkıştırma ve ETag/Cache-Control başlıkları</td><td><span class="tag">ORTA</span> <code>server.compression.enabled</code> ve <code>ShallowEtagHeaderFilter</code></td><td><a href="https://docs.spring.io/spring-boot/reference/web/servlet.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="webflux"><span class="h-num">§ 10</span>WebFlux ve reaktif programlama</h2>
+
+        <p>Bu bölüme acele etme. WebFlux, Spring MVC'nin yerine geçen bir şey değildir; farklı bir çalışma modelidir
+        ve öğrenme maliyeti yüksektir. Java 21'in sanal iş parçacıkları (virtual threads) geldiğinden beri
+        "yüksek eşzamanlılık için WebFlux şart" argümanı da zayıfladı. Ne zaman gerektiğini bilmek, sözdizimini
+        bilmekten daha değerlidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Reaktif yığın</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring WebFlux</strong></td><td>Non-blocking, olay döngüsü tabanlı web çatısı</td><td><span class="tag tag--info">İLERİ</span> Spring MVC ile aynı projede karıştırma. <em>.NET'ten geliyorsan:</em> .NET'te doğrudan karşılığı yok; <code>async/await</code> zaten dilin içinde olduğu için bu ayrım garip gelir. <em>Node.js'ten geliyorsan:</em> olay döngüsü modeli tanıdıktır</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webflux.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Reactive Streams</strong></td><td>Publisher / Subscriber / Subscription / Processor standardı</td><td><span class="tag tag--info">İLERİ</span> Java 9'da <code>java.util.concurrent.Flow</code> olarak dile girdi</td><td><a href="https://www.reactive-streams.org/">reactive-streams.org</a></td></tr>
+              <tr><td><strong>Project Reactor</strong></td><td>Spring'in kullandığı reaktif kütüphane</td><td><span class="tag tag--info">İLERİ</span> RxJava'nın rakibi; Spring tarafında standart olan budur &middot; lisansı ücretsiz</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>Mono&lt;T&gt;</strong></td><td>0 veya 1 değer üreten reaktif tip</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> <code>Task&lt;T&gt;</code>'ye benzer ama tembeldir (subscribe edilmezse çalışmaz) &mdash; en kritik fark budur</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>Flux&lt;T&gt;</strong></td><td>0..N değer üreten reaktif akış</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> <code>IAsyncEnumerable&lt;T&gt;</code>. Kelime olarak <em>Flux</em>'ı React'in Flux mimarisiyle karıştırma</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>backpressure</strong></td><td>Tüketicinin üreticiyi yavaşlatabilmesi</td><td><span class="tag tag--info">İLERİ</span> Reaktif akışın var oluş sebebi; mülakatta "neden reactive" sorusunun cevabı budur</td><td><a href="https://www.reactive-streams.org/">reactive-streams.org</a></td></tr>
+              <tr><td><strong>map / flatMap / zip / switchIfEmpty</strong></td><td>Akış üzerinde dönüşüm operatörleri</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> LINQ bilgin işine yarar ama <code>flatMap</code>'in sıralamayı korumadığını unutma (<code>concatMap</code> korur)</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>subscribeOn / publishOn</strong></td><td>Hangi iş parçacığında çalışılacağını belirler</td><td><span class="tag tag--info">İLERİ</span> Yanlış kullanımı reaktif zincirin tüm faydasını yok eder</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>blocking call</strong></td><td>Reaktif zincir içinde bloklayan çağrı yapmak</td><td><span class="tag tag--info">İLERİ</span> En yaygın hata. <code>BlockHound</code> ile tespit edilir</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webflux/reactive-spring.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Netty</strong></td><td>WebFlux'un varsayılan non-blocking sunucusu</td><td><span class="tag tag--info">İLERİ</span> WebFlux ekleyince Tomcat devre dışı kalır</td><td><a href="https://docs.spring.io/spring-boot/reference/web/reactive.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>R2DBC</strong></td><td>Reaktif ilişkisel veritabanı sürücü standardı</td><td><span class="tag tag--info">İLERİ</span> JDBC'nin reaktif alternatifi. JPA/Hibernate ile <em>çalışmaz</em>; JPA bloklayıcıdır. Detay: <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a></td><td><a href="https://docs.spring.io/spring-data/relational/reference/r2dbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>WebTestClient</strong></td><td>Reaktif uç noktaları test etme istemcisi</td><td><span class="tag tag--info">İLERİ</span> MockMvc'nin WebFlux karşılığı; MVC projelerinde de kullanılabilir</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/webtestclient.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>virtual threads (Java 21)</strong></td><td>Hafif iş parçacıklarıyla bloklayan kodu ucuzlatma</td><td><span class="tag">ORTA</span> <code>spring.threads.virtual.enabled=true</code>. Çoğu proje için WebFlux'a girmeden aynı ölçekleme faydasını verir; bunu bilmek güçlü bir mülakat cevabıdır</td><td><a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Server-Sent Events (SSE)</strong></td><td>Sunucudan istemciye tek yönlü sürekli akış</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> SignalR'ın basit alternatifi. <code>SseEmitter</code> veya <code>Flux</code> ile</td><td><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-async.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>WebSocket / STOMP</strong></td><td>Çift yönlü gerçek zamanlı iletişim ve üstündeki mesaj protokolü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki SignalR'ın Java karşılığı budur; SignalR'ın aksine hazır hub soyutlaması yoktur, STOMP ile kendin kurarsın</td><td><a href="https://docs.spring.io/spring-framework/reference/web/websocket.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Sinks / Reactor Context (contextWrite)</strong></td><td>Elle olay üretme ve reaktif hatta veri taşıma</td><td><span class="tag tag--info">İLERİ</span> ThreadLocal reaktif hatta çalışmaz; korelasyon kimliği gibi verileri Context ile taşırsın</td><td><a href="https://projectreactor.io/docs/core/release/reference/">projectreactor.io</a></td></tr>
+              <tr><td><strong>BlockHound</strong></td><td>Reaktif hatta gizlenmiş blocking çağrıyı test sırasında yakalayan ajan</td><td><span class="tag">ORTA</span> WebFlux öğrenirken en çok işe yarayan araç; tek bir blocking satır tüm sunucuyu yavaşlatır &middot; lisansı ücretsiz</td><td><a href="https://github.com/reactor/BlockHound">github.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="spring-security"><span class="h-num">§ 11</span>Spring Security</h2>
+
+        <p>Spring'in en dik öğrenme eğrisi burasıdır ve ilanlarda sık geçen <strong>JWT Authentication</strong> ile
+        <strong>Policy-Based Authorization</strong> konularının tamamı bu bölüme düşer. Bir noktayı baştan bil:
+        Spring Security bir <em>filter zinciridir</em>. Anlamadığın her davranışın cevabı, o zincirde hangi
+        filtrenin ne yaptığındadır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kimlik doğrulama ve yetkilendirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring Security</strong></td><td>Kimlik doğrulama ve yetkilendirme çatısı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki JWT + Policy authorization kavramlarının evi. Bağımlılığı ekler eklemez her uç nokta kapanır, bu normaldir</td><td><a href="https://docs.spring.io/spring-security/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SecurityFilterChain</strong></td><td>İsteklerin geçtiği güvenlik filtreleri zinciri</td><td><span class="tag tag--ok">TEMEL</span> Yapılandırmayı bu bean'i tanımlayarak yaparsın. Eski <code>WebSecurityConfigurerAdapter</code> Security 6'da <em>kaldırıldı</em>; internetteki örneklerin çoğu hâlâ onu kullanıyor</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>DelegatingFilterProxy</strong></td><td>Servlet dünyasından Spring dünyasına köprü kuran filtre</td><td><span class="tag">ORTA</span> Güvenliğin istek hattına nereden bağlandığının cevabı</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>authentication vs authorization</strong></td><td>"Kimsin" ile "neye izinlisin" ayrımı</td><td><span class="tag tag--ok">TEMEL</span> 401 authentication, 403 authorization hatasıdır; bu eşleştirme klasik mülakat sorusudur</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SecurityContext / SecurityContextHolder</strong></td><td>O anki kullanıcının tutulduğu yer</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>HttpContext.User</code> / <code>ClaimsPrincipal</code>. Varsayılan olarak ThreadLocal'dır; async kodda taşınmayabilir</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Authentication / Principal</strong></td><td>Doğrulanmış kimliği temsil eden nesneler</td><td><span class="tag tag--ok">TEMEL</span> Controller'a <code>@AuthenticationPrincipal</code> ile enjekte edilir</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>UserDetails / UserDetailsService</strong></td><td>Kullanıcıyı veritabanından yüklemenin standart arayüzü</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> <code>UserManager</code>/Identity'nin çok daha ince hâli. Spring'te hazır kullanıcı tablosu gelmez, kendin yazarsın</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/user-details-service.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AuthenticationManager / AuthenticationProvider</strong></td><td>Doğrulama işini yürüten ve gerçekleştiren bileşenler</td><td><span class="tag">ORTA</span> Özel giriş yöntemi (LDAP, tek kullanımlık kod) yazacaksan buraya inersin</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>PasswordEncoder</strong></td><td>Parola özetleme arayüzü</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan <code>BCryptPasswordEncoder</code>. <code>NoOpPasswordEncoder</code> sadece testlik, üretimde asla</td><td><a href="https://docs.spring.io/spring-security/reference/features/authentication/password-storage.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BCrypt / Argon2 / SCrypt / PBKDF2</strong></td><td>Parola özetleme algoritmaları</td><td><span class="tag">ORTA</span> Yeni projede Argon2 veya BCrypt. MD5/SHA-1 parola için kullanılmaz</td><td><a href="https://docs.spring.io/spring-security/reference/features/authentication/password-storage.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>DelegatingPasswordEncoder</strong></td><td>Özetin başına <code>{bcrypt}</code> gibi önek koyarak algoritma geçişi</td><td><span class="tag">ORTA</span> Eski özetleri kırmadan algoritma değiştirmenin yolu</td><td><a href="https://docs.spring.io/spring-security/reference/features/authentication/password-storage.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JWT</strong></td><td>İmzalı, kendini taşıyan token</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Spring'te JWT üretimi/doğrulaması için "resmî tek yol" yoktur: ya OAuth2 Resource Server ya da <code>jjwt</code>/<code>nimbus-jose-jwt</code> ile elle yazılır</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>OAuth2 Resource Server</strong></td><td>Gelen JWT'yi doğrulayan hazır yapılandırma</td><td><span class="tag tag--ok">TEMEL</span> JWT için tercih edilmesi gereken yol budur; elle filtre yazmaktan çok daha az hata üretir</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>OAuth2 Client</strong></td><td>Google/GitHub gibi sağlayıcılarla giriş yapma tarafı</td><td><span class="tag">ORTA</span> Resource Server ile karıştırma: biri token tüketir, diğeri token alır</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>OpenID Connect (OIDC)</strong></td><td>OAuth2 üzerine kurulu kimlik katmanı</td><td><span class="tag">ORTA</span> OAuth2 yetkilendirme, OIDC kimlik doğrulama içindir &mdash; bu ayrımı sorarlar</td><td><a href="https://openid.net/developers/how-connect-works/">openid.net</a></td></tr>
+              <tr><td><strong>Spring Authorization Server</strong></td><td>Kendi OAuth2/OIDC sunucunu kurma projesi</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> IdentityServer/Duende karşılığı. Duende ticari kullanımda ücretlidir (küçük şirketler için ücretsiz Community Edition'ı vardır; koşulları <span class="tag tag--warn">TEYİT</span>: <a href="https://duendesoftware.com/products/identityserver">duendesoftware.com</a>); Spring Authorization Server ücretsizdir (Apache 2.0)</td><td><a href="https://docs.spring.io/spring-authorization-server/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Keycloak</strong></td><td>Hazır, açık kaynak kimlik sunucusu</td><td><span class="tag">ORTA</span> Kendi kimlik sunucunu yazmak yerine yaygın seçim &middot; lisansı ücretsiz</td><td><a href="https://www.keycloak.org/documentation">keycloak.org</a></td></tr>
+              <tr><td><strong>method security (@PreAuthorize)</strong></td><td>Metot çağrılmadan önce yetki kontrolü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki Policy-Based Authorization. SpEL yazılır: <code>hasRole('ADMIN')</code>. <code>@EnableMethodSecurity</code> ile açılır</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@PostAuthorize / @PreFilter / @PostFilter</strong></td><td>Dönüş değerine ve koleksiyonlara göre yetki</td><td><span class="tag tag--info">İLERİ</span> Güçlüdür ama performans tuzağıdır; büyük koleksiyonlarda kullanma</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>role vs authority</strong></td><td><code>ROLE_ADMIN</code> ile <code>user:read</code> ayrımı</td><td><span class="tag tag--ok">TEMEL</span> <code>hasRole("ADMIN")</code> arka planda <code>ROLE_</code> önekini kendisi ekler; <code>hasAuthority</code> eklemez. En sık yapılan hata budur</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>authorizeHttpRequests</strong></td><td>URL bazlı yetki kuralları</td><td><span class="tag tag--ok">TEMEL</span> Eski adı <code>authorizeRequests</code>; kural sırası önemlidir, en özel kural en üste</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CSRF</strong></td><td>Siteler arası istek sahteciliği ve buna karşı token</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan <em>açıktır</em> ve POST isteklerini reddeder. Stateless JWT API'de kapatılır; nedenini açıklayabilmen gerekir</td><td><a href="https://docs.spring.io/spring-security/reference/features/exploits/csrf.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SessionCreationPolicy.STATELESS</strong></td><td>Oturum tutmama ayarı</td><td><span class="tag tag--ok">TEMEL</span> JWT tabanlı API'nin standart yapılandırması</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/session-management.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>form login / httpBasic</strong></td><td>Hazır giriş formu ve Basic auth</td><td><span class="tag">ORTA</span> Öğrenirken en hızlı başlangıç; API'de kullanmazsın</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AccessDeniedHandler / AuthenticationEntryPoint</strong></td><td>403 ve 401 durumlarının özelleştirilmesi</td><td><span class="tag">ORTA</span> JSON hata gövdesi döndürmek istiyorsan bunları yazman gerekir</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>security headers</strong></td><td>HSTS, X-Frame-Options, CSP gibi koruyucu başlıklar</td><td><span class="tag">ORTA</span> Spring Security çoğunu varsayılan olarak ekler; kapatmadan önce ne olduğunu öğren</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/exploits/headers.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@WithMockUser</strong></td><td>Testte sahte kullanıcı ile çalışma</td><td><span class="tag">ORTA</span> Güvenlik testi yazmanın en kısa yolu; <a href="#test">§ 13</a> ile birlikte oku</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/test/method.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>NimbusJwtDecoder / JwtAuthenticationConverter</strong></td><td>JWT imza doğrulama ve claim &rarr; yetki dönüşümü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki JWT kavramının gerçek karşılığı. <code>issuer-uri</code> verirsen anahtarı Spring kendisi çeker; imza doğrulamayı elle yazma</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>authorization_code + PKCE</strong></td><td>Tarayıcı ve mobil istemciler için standart OAuth2 akışı</td><td><span class="tag">ORTA</span> "OAuth2 grant types" ile birlikte oku; implicit flow artık önerilmiyor</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/client/authorization-grants.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>remember-me</strong></td><td>Oturum bittikten sonra çerezle hatırlama</td><td><span class="tag">ORTA</span> Stateless JWT API'de kullanılmaz; klasik form login uygulamalarında karşına çıkar</td><td><a href="https://docs.spring.io/spring-security/reference/servlet/authentication/rememberme.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Auth0 / Okta / Entra ID</strong></td><td>Barındırılan kimlik sağlayıcılar (hazır OAuth2/OIDC sunucusu)</td><td><span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz katmanları kullanıcı sayısıyla sınırlıdır. Kendi sunucunda çalışan ücretsiz alternatifler: Keycloak, Spring Authorization Server</td><td><a href="https://auth0.com/pricing">auth0.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="aop"><span class="h-num">§ 12</span>AOP ve @Transactional'ın gerçekte nasıl çalıştığı</h2>
+
+        <p>Bu bölüm özellikle değerli: Spring'te "sihir" gibi görünen davranışların (transaction, cache,
+        security, retry) tamamı aynı mekanizmaya dayanır &mdash; container sınıfının etrafına bir proxy sarar.
+        Bu tek cümleyi anlarsan Spring'te karşına çıkacak en kafa karıştırıcı hataların çoğunu çözersin.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Aspect-Oriented Programming</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>AOP</strong></td><td>Loglama, transaction gibi kesişen ilgileri iş kodundan ayırma</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> .NET'te doğrudan karşılığı yoktur; en yakını middleware/filter ve Castle DynamicProxy'dir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>cross-cutting concern</strong></td><td>Birden çok katmanı kesen ilgi (log, güvenlik, ölçüm)</td><td><span class="tag tag--ok">TEMEL</span> SOLID'deki SRP tartışmasının pratik uzantısı</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/introduction-defn.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>aspect (@Aspect)</strong></td><td>Kesişen ilginin modüle edildiği sınıf</td><td><span class="tag">ORTA</span> <code>spring-boot-starter-aop</code> bağımlılığı gerekir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>join point</strong></td><td>Araya girilebilecek nokta</td><td><span class="tag">ORTA</span> Spring AOP'de bu <em>sadece metot çağrısıdır</em>; alan erişimi veya constructor değil</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/introduction-defn.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>pointcut</strong></td><td>Hangi join point'lerin seçileceğini tanımlayan ifade</td><td><span class="tag">ORTA</span> <code>execution(* com.x.service.*.*(..))</code> sözdizimi öğrenilmesi gereken kısımdır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/pointcuts.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>advice</strong></td><td>Seçilen noktada çalışacak kod</td><td><span class="tag">ORTA</span> Türleri: <code>@Before</code>, <code>@After</code>, <code>@AfterReturning</code>, <code>@AfterThrowing</code>, <code>@Around</code></td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/advice.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Around / ProceedingJoinPoint</strong></td><td>Metodu sarmalayıp öncesini, sonrasını ve dönüşünü kontrol etme</td><td><span class="tag">ORTA</span> En güçlü advice; <code>proceed()</code> çağırmayı unutursan metot hiç çalışmaz</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/advice.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>weaving</strong></td><td>Aspect'in hedef koda bağlanması</td><td><span class="tag tag--info">İLERİ</span> Spring AOP'de çalışma anında proxy ile; AspectJ'de derleme/yükleme anında bytecode ile</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/introduction-defn.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JDK dynamic proxy</strong></td><td>Arayüz üzerinden üretilen proxy</td><td><span class="tag">ORTA</span> Sınıfın arayüzü varsa varsayılan buydu; bugün Boot varsayılanı CGLIB'dir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/proxying.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CGLIB proxy</strong></td><td>Sınıftan türeterek üretilen proxy</td><td><span class="tag">ORTA</span> <code>final</code> sınıf ve <code>final</code>/<code>private</code> metot proxy'lenemez &mdash; "neden @Transactional çalışmadı" sorularının bir kısmı budur</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/proxying.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>self-invocation problemi</strong></td><td>Aynı sınıf içinden çağrılan metotta anotasyon çalışmaz</td><td><span class="tag tag--ok">TEMEL</span> Proxy devre dışı kalır çünkü çağrı <code>this</code> üzerinden gider. Spring'in en klasik mülakat sorusudur; çözüm: sınıfı ayır veya kendini enjekte et</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AspectJ</strong></td><td>Tam kapsamlı AOP dili/derleyicisi</td><td><span class="tag tag--info">İLERİ</span> Spring AOP'nin yapamadıklarını yapar (alan erişimi, constructor); kurulum maliyeti yüksektir</td><td><a href="https://eclipse.dev/aspectj/">eclipse.dev/aspectj</a></td></tr>
+              <tr><td><strong>@Transactional</strong></td><td>Metodu transaction içinde çalıştırır</td><td><span class="tag tag--ok">TEMEL</span> AOP proxy'sidir. Hangi metotlarda çalıştığı sürüme göre değişir: <strong>Spring 5 / Boot 2</strong> &rarr; yalnızca <code>public</code> metotlarda; <strong>Spring 6 / Boot 3+</strong> (varsayılan CGLIB, sınıf tabanlı proxy) &rarr; <code>protected</code> ve package-private metotlarda da çalışır, <code>private</code> ve <code>final</code> metotlarda çalışmaz (arayüz tabanlı JDK proxy kullanılıyorsa yine yalnızca arayüz metotları). Her sürümde self-invocation'da çalışmaz, checked exception'da varsayılan olarak <em>rollback yapmaz</em></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>propagation</strong></td><td>REQUIRED, REQUIRES_NEW, NESTED, SUPPORTS...</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan REQUIRED'dır (var olan transaction'a katılır). REQUIRES_NEW yeni bağlantı açar</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/tx-propagation.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>isolation</strong></td><td>READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE...</td><td><span class="tag">ORTA</span> Yalıtım düzeyi bilgin hangi veritabanından gelirse gelsin geçerli; <code>Isolation.DEFAULT</code> veritabanının kendi varsayılanını kullanır ve bu varsayılan değişir: <strong>SQL Server</strong> &rarr; READ COMMITTED (kilit tabanlı; <code>READ_COMMITTED_SNAPSHOT</code> açıksa satır sürümleme); <strong>PostgreSQL</strong> &rarr; READ COMMITTED (MVCC); <strong>Oracle</strong> &rarr; READ COMMITTED (MVCC); <strong>MySQL InnoDB</strong> &rarr; REPEATABLE READ. Ayrıntıyı veritabanının resmî dokümanından doğrula <span class="tag tag--warn">TEYİT</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>rollbackFor / noRollbackFor</strong></td><td>Hangi istisnada geri alınacağını belirtir</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan sadece <code>RuntimeException</code> ve <code>Error</code>'da rollback'tir; checked exception fırlatınca veri kaydolur ve fark etmezsin</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>readOnly = true</strong></td><td>Salt okunur transaction ipucu</td><td><span class="tag">ORTA</span> Hibernate'te dirty checking'i kapatır, performans kazandırır</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/declarative/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>TransactionTemplate</strong></td><td>Programatik transaction yönetimi</td><td><span class="tag">ORTA</span> Anotasyonun çalışmadığı yerlerde (lambda içi, self-invocation) kurtarıcıdır</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction/programmatic.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Async</strong></td><td>Metodu ayrı iş parçacığında çalıştırır</td><td><span class="tag">ORTA</span> Aynı proxy mekanizması, aynı self-invocation tuzağı. <code>@EnableAsync</code> gerekir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/task-execution-and-scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Scheduled</strong></td><td>Zamanlanmış görev (cron veya sabit aralık)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki Hangfire'ın basit karşılığı. Çok örnekli (multi-instance) kurulumda aynı iş her örnekte çalışır &mdash; ShedLock gibi bir kilit gerekir</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Quartz</strong></td><td>Kalıcı, kümelenebilir zamanlayıcı</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Hangfire'a en yakın olan budur; Spring Boot starter'ı vardır &middot; lisansı ücretsiz</td><td><a href="https://docs.spring.io/spring-boot/reference/io/quartz.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Cacheable / @CacheEvict / @CachePut</strong></td><td>Bildirimsel önbellekleme</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki MemoryCache karşılığı. Sağlayıcı değiştirilebilir: Caffeine (bellek içi), Redis, Ehcache</td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Caffeine</strong></td><td>Yüksek performanslı bellek içi cache kütüphanesi</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> <code>MemoryCache</code>. Redis'e geçmeden önce varsayılan tercih &middot; lisansı ücretsiz</td><td><a href="https://github.com/ben-manes/caffeine/wiki">github.com/ben-manes</a></td></tr>
+              <tr><td><strong>@Retryable (Spring Retry)</strong></td><td>Hata durumunda otomatik yeniden deneme</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Polly retry. Yine aynı proxy mekanizması &middot; lisansı ücretsiz</td><td><a href="https://github.com/spring-projects/spring-retry">github.com/spring-projects</a></td></tr>
+              <tr><td><strong>@EnableAspectJAutoProxy / proxyTargetClass</strong></td><td>Proxy üretimini ve JDK/CGLIB seçimini kontrol eden ayarlar</td><td><span class="tag tag--info">İLERİ</span> Spring Boot bunu kendisi açar; ayarı bilmek "neden arayüz yerine sınıf proxy'si üretildi" sorusunu cevaplar</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/proxying.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>AopContext.currentProxy()</strong></td><td>Aynı sınıf içinden proxy üzerinden çağrı yapma yolu</td><td><span class="tag tag--info">İLERİ</span> Self-invocation probleminin kirli ama resmî çözümü; tercih edilen yol metodu başka bean'e taşımaktır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/proxying.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>load-time weaving (LTW)</strong></td><td>Proxy yerine sınıfı yüklenirken değiştirerek aspect uygulama</td><td><span class="tag tag--info">İLERİ</span> Self-invocation kısıtını tamamen kaldırır ama java agent gerektirir; nadiren tercih edilir</td><td><a href="https://docs.spring.io/spring-framework/reference/core/aop/using-aspectj.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test"><span class="h-num">§ 13</span>Test: slice testleri, MockMvc, Testcontainers</h2>
+
+        <p><strong>TDD</strong>, birim test ve mock ilanlarda sık geçer. Test geçmişine göre: <strong>xUnit/NUnit + Moq biliyorsan</strong> &rarr; JUnit 5 ile xUnit, Mockito ile Moq neredeyse aynı zihinsel modeli paylaşır. <strong>Jest veya pytest biliyorsan</strong> &rarr; Mockito, <code>jest.fn()</code> / <code>unittest.mock</code> ile aynı işi yapar; yeni olan anotasyon tabanlı yaşam döngüsü (<code>@BeforeEach</code>). <strong>Hiç mock test yazmadıysan</strong> &rarr; bu bölüm o boşluğu kapatmak için en verimli yer: <code>@Mock</code>/<code>@InjectMocks</code> ile tek bir servis sınıfının testini yazarak başla.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test araçları ve Spring test desteği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JUnit 5 (Jupiter)</strong></td><td>Java'nın standart test çatısı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki xUnit'in karşılığı. JUnit 4 ile 5 farklıdır (<code>@Before</code> &rarr; <code>@BeforeEach</code>); aramada sürümü yaz &middot; lisansı ücretsiz</td><td><a href="https://junit.org/junit5/docs/current/user-guide/">junit.org</a></td></tr>
+              <tr><td><strong>AssertJ</strong></td><td>Akıcı (fluent) doğrulama kütüphanesi</td><td><span class="tag tag--ok">TEMEL</span> <code>assertThat(x).isEqualTo(y)</code>. Spring Boot starter-test ile hazır gelir &middot; lisansı ücretsiz</td><td><a href="https://assertj.github.io/doc/">assertj.github.io</a></td></tr>
+              <tr><td><strong>Hamcrest</strong></td><td>Eski matcher kütüphanesi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Yeni testte AssertJ tercih edilir; MockMvc örneklerinde hâlâ görürsün</td><td><a href="https://hamcrest.org/JavaHamcrest/">hamcrest.org</a></td></tr>
+              <tr><td><strong>Mockito</strong></td><td>Mock nesne kütüphanesi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki Moq'un karşılığı. Hiç mock yazmadıysan pratiğine burada başlayabilirsin &middot; lisansı ücretsiz</td><td><a href="https://site.mockito.org/">site.mockito.org</a></td></tr>
+              <tr><td><strong>@Mock / @InjectMocks</strong></td><td>Sahte bağımlılık üretme ve enjekte etme</td><td><span class="tag tag--ok">TEMEL</span> Spring context'i hiç ayağa kaldırmayan saf birim testi; en hızlı test türüdür</td><td><a href="https://site.mockito.org/">site.mockito.org</a></td></tr>
+              <tr><td><strong>when / thenReturn / verify</strong></td><td>Davranış tanımlama ve çağrı doğrulama</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> Moq'daki <code>Setup</code>/<code>Returns</code>/<code>Verify</code> üçlüsünün birebir karşılığı</td><td><a href="https://site.mockito.org/">site.mockito.org</a></td></tr>
+              <tr><td><strong>ArgumentCaptor</strong></td><td>Mock'a gelen argümanı yakalayıp incelemek</td><td><span class="tag">ORTA</span> "Doğru veriyle mi çağrıldı" testlerinin standart aracı</td><td><a href="https://site.mockito.org/">site.mockito.org</a></td></tr>
+              <tr><td><strong>@SpringBootTest</strong></td><td>Tüm uygulama context'ini ayağa kaldıran entegrasyon testi</td><td><span class="tag tag--ok">TEMEL</span> Yavaştır. Her testi böyle yazma; slice testlerini öğren</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>slice test</strong></td><td>Uygulamanın sadece bir dilimini yükleyen test</td><td><span class="tag tag--ok">TEMEL</span> Spring'e özgü ve çok değerli bir kavram; <em>.NET'ten geliyorsan:</em> .NET'te doğrudan karşılığı yoktur</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@WebMvcTest</strong></td><td>Sadece web katmanını yükler, servisleri mock'larsın</td><td><span class="tag tag--ok">TEMEL</span> Controller testinin doğru yolu. Veritabanı ayağa kalkmaz</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@DataJpaTest</strong></td><td>Sadece JPA katmanını ve gömülü veritabanını yükler</td><td><span class="tag tag--ok">TEMEL</span> Varsayılan olarak her testi rollback eder. Detay: <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a></td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@JsonTest / @RestClientTest / @DataRedisTest</strong></td><td>Diğer slice test türleri</td><td><span class="tag">ORTA</span> Tam listeyi bir kez oku; hangi dilimin hangi bean'leri yüklediğini bilmek zaman kazandırır</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>MockMvc</strong></td><td>Sunucu başlatmadan controller'a sahte HTTP isteği atma</td><td><span class="tag tag--ok">TEMEL</span> Ağ katmanı yoktur, bu yüzden çok hızlıdır. <em>.NET'ten geliyorsan:</em> <code>WebApplicationFactory</code>'nin daha hafif hâli</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/mockmvc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>TestRestTemplate</strong></td><td>Gerçek portta çalışan uygulamaya gerçek HTTP isteği</td><td><span class="tag">ORTA</span> <code>@SpringBootTest(webEnvironment = RANDOM_PORT)</code> ile birlikte kullanılır</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@MockitoBean</strong></td><td>Context içindeki bir bean'i mock ile değiştirir</td><td><span class="tag tag--ok">TEMEL</span> Boot 3.4'te <code>@MockBean</code>'in yerini aldı; eski adı hâlâ her yerde geçiyor, ikisini de bil</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@MockBean</strong></td><td>Aynı işin eski adı</td><td><span class="tag tag--warn">ESKİMİŞ</span> Boot 3.4 ile deprecated oldu; internetteki örneklerin %95'i bunu kullanıyor</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@TestConfiguration</strong></td><td>Sadece testte geçerli bean tanımları</td><td><span class="tag">ORTA</span> Gerçek yapılandırmayı bozmadan bean değiştirmenin temiz yolu</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@ActiveProfiles / @TestPropertySource</strong></td><td>Test için profil ve ayar geçersiz kılma</td><td><span class="tag">ORTA</span> Test veritabanı ayarını buradan verirsin</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@DirtiesContext</strong></td><td>Testten sonra context'i yeniden kurdurur</td><td><span class="tag">ORTA</span> Testleri çok yavaşlatır; son çare olarak kullan. Context caching'i bozar</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/annotations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>context caching</strong></td><td>Spring'in aynı yapılandırmalı testler için context'i yeniden kullanması</td><td><span class="tag tag--info">İLERİ</span> Test süitin neden bazen çok yavaşladığının cevabı budur</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/testcontext-framework/ctx-management/caching.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Testcontainers</strong></td><td>Test sırasında gerçek veritabanını/Redis'i Docker'da ayağa kaldırma</td><td><span class="tag tag--ok">TEMEL</span> H2 ile test edip PostgreSQL'de patlamayı bitirir. Docker gerektirir &middot; lisansı ücretsiz</td><td><a href="https://java.testcontainers.org/">java.testcontainers.org</a></td></tr>
+              <tr><td><strong>@ServiceConnection</strong></td><td>Testcontainers konteynerini otomatik olarak Spring ayarlarına bağlar</td><td><span class="tag">ORTA</span> Boot 3.1 ile geldi; elle <code>@DynamicPropertySource</code> yazmayı gereksiz kılar</td><td><a href="https://docs.spring.io/spring-boot/reference/testing/testcontainers.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Dev Services</strong></td><td>Geliştirme sırasında da konteyneri otomatik başlatma</td><td><span class="tag">ORTA</span> Quarkus'tan esinlenilmiştir; yerel geliştirmede kurulum yükünü sıfırlar</td><td><a href="https://docs.spring.io/spring-boot/reference/features/dev-services.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>WireMock</strong></td><td>Dış HTTP servisini taklit eden sahte sunucu</td><td><span class="tag">ORTA</span> Üçüncü parti API'ye bağımlı testler için &middot; lisansı ücretsiz</td><td><a href="https://wiremock.org/docs/">wiremock.org</a></td></tr>
+              <tr><td><strong>ArchUnit</strong></td><td>Mimari kuralları test olarak yazma</td><td><span class="tag">ORTA</span> "Controller repository'yi doğrudan çağıramaz" kuralını derleyiciye söyletmek. Senior/mimari pozisyon hedefliyorsan ya da özgeçmişinde mimari iddiası varsa öncelikli; değilse sonraya bırakılabilir &middot; lisansı ücretsiz</td><td><a href="https://www.archunit.org/userguide/html/000_Index.html">archunit.org</a></td></tr>
+              <tr><td><strong>JaCoCo</strong></td><td>Test kapsamı (coverage) ölçümü</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> coverlet. CI'da eşik koymak için kullanılır &middot; lisansı ücretsiz</td><td><a href="https://www.jacoco.org/jacoco/trunk/doc/">jacoco.org</a></td></tr>
+              <tr><td><strong>JMH</strong></td><td>Mikro benchmark aracı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki BenchmarkDotNet'in Java karşılığı. Performans pozisyonu hedefliyorsan ya da özgeçmişinde performans iddiası varsa öncelikli; genel backend hedefinde ORTA öncelik</td><td><a href="https://github.com/openjdk/jmh">github.com/openjdk/jmh</a></td></tr>
+              <tr><td><strong>@Sql / @SqlGroup</strong></td><td>Test öncesi/sonrası SQL betiği çalıştırma</td><td><span class="tag">ORTA</span> SQL bilgisini teste taşımanın en kısa yolu</td><td><a href="https://docs.spring.io/spring-framework/reference/testing/testcontext-framework/executing-sql.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ApplicationContextRunner</strong></td><td>Uygulamayı başlatmadan auto-configuration davranışını test etme</td><td><span class="tag tag--info">İLERİ</span> Kendi starter'ını yazarsan zorunlu; çok hızlıdır çünkü gerçek uygulama ayağa kalkmaz</td><td><a href="https://docs.spring.io/spring-boot/reference/features/developing-auto-configuration.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@MockitoSpyBean / @SpyBean</strong></td><td>Gerçek bean'i sarmalayıp sadece bazı metotlarını sahteleme</td><td><span class="tag">ORTA</span> Boot 3.4 ile ad <code>@MockitoSpyBean</code> oldu, eskisi <code>@SpyBean</code>. <em>.NET'ten geliyorsan:</em> Moq'ta <code>CallBase</code></td><td><a href="https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Awaitility</strong></td><td>Asenkron sonucu koşul sağlanana kadar bekleyen test kütüphanesi</td><td><span class="tag">ORTA</span> <code>Thread.sleep</code> ile bekleyen kırılgan testlerin çözümü &middot; lisansı ücretsiz</td><td><a href="https://github.com/awaitility/awaitility">github.com</a></td></tr>
+              <tr><td><strong>PIT (mutation testing)</strong></td><td>Kodu bilerek bozup testlerin bunu yakalayıp yakalamadığını ölçme</td><td><span class="tag tag--info">İLERİ</span> JaCoCo'nun ölçtüğü satır kapsaması yanıltıcıdır; testin gerçekten doğrulama yaptığını bu gösterir &middot; lisansı ücretsiz</td><td><a href="https://pitest.org/">pitest.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-spring-projeleri"><span class="h-num">§ 14</span>Diğer Spring projeleri</h2>
+
+        <p>"Spring" tek bir kütüphane değil, bir proje ailesidir. Aşağıdakiler ayrı ayrı sürümlenir ve ayrı
+        dokümana sahiptir; bir sorunu ararken doğru projenin dokümanına bakmak zaman kazandırır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring ailesi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring Data JPA</strong></td><td>Repository arayüzü yazınca sorguyu üreten katman</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> EF Core'un repository tarafı. <code>findByNameAndAgeGreaterThan</code> gibi metot adından sorgu türetir. Detay: <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Data JDBC</strong></td><td>ORM'siz, daha basit ve öngörülebilir veri erişimi</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> Dapper'a yaklaşan felsefe. Lazy loading, dirty checking yoktur</td><td><a href="https://docs.spring.io/spring-data/relational/reference/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JdbcTemplate / JdbcClient</strong></td><td>Ham SQL yazmanın Spring'teki yolu</td><td><span class="tag tag--ok">TEMEL</span> <em>.NET'ten geliyorsan:</em> Dapper karşılığı. <code>JdbcClient</code> Spring 6.1 ile gelen akıcı yeni API'dir; SQL deneyimin varsa (hangi veritabanından olursa olsun) burada doğrudan işe yarar, yoksa önce temel SQL</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc/core.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Data MongoDB / Redis / Elasticsearch</strong></td><td>Aynı repository modelinin NoSQL karşılıkları</td><td><span class="tag">ORTA</span> Redis buradan da kullanılabilir; ama Redis'i önce cache olarak öğrenmek daha faydalıdır</td><td><a href="https://spring.io/projects/spring-data">spring.io/projects</a></td></tr>
+              <tr><td><strong>Spring Session</strong></td><td>HTTP oturumunu Redis/JDBC gibi harici depoya taşır</td><td><span class="tag">ORTA</span> <em>.NET'ten geliyorsan:</em> distributed session. Çok örnekli kurulumda sticky session ihtiyacını kaldırır</td><td><a href="https://docs.spring.io/spring-session/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Batch</strong></td><td>Büyük hacimli toplu iş (job/step/chunk) çatısı</td><td><span class="tag">ORTA</span> Yeniden başlatılabilirlik, atlama, tekrar deneme gibi işleri hazır verir. <em>.NET'ten geliyorsan:</em> .NET'te dengi olan yaygın bir çatı yok</td><td><a href="https://docs.spring.io/spring-batch/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Integration</strong></td><td>Enterprise Integration Patterns uygulaması (kanal, mesaj, adaptör)</td><td><span class="tag tag--info">İLERİ</span> Ağır bir çatıdır; küçük projede kullanma</td><td><a href="https://docs.spring.io/spring-integration/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud Stream</strong></td><td>Kafka/RabbitMQ üstünde broker bağımsız mesajlaşma soyutlaması</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <em>.NET'ten geliyorsan:</em> .NET'teki RabbitMQ + MassTransit ikilisinin Java karşılığı. Kuyruk detayı: <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a></td><td><a href="https://docs.spring.io/spring-cloud-stream/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Modulith</strong></td><td>Tek uygulamayı modüllere ayırıp sınırları test eden proje</td><td><span class="tag">ORTA</span> Modüler monolit tasarlıyorsan ya da mimari ağırlıklı pozisyon hedefliyorsan doğrudan buraya bak; genel backend hedefinde adını bilmen yeter</td><td><a href="https://docs.spring.io/spring-modulith/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring gRPC</strong></td><td>gRPC servislerini Spring Boot ile yazma desteği</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanlarda gRPC sık geçer. Uzun süre resmî destek yoktu (<em>grpc-spring-boot-starter</em> topluluk paketi kullanılırdı), artık resmî proje var</td><td><a href="https://spring.io/projects/spring-grpc">spring.io/projects</a></td></tr>
+              <tr><td><strong>Spring for GraphQL</strong></td><td>GraphQL uç noktası kurma</td><td><span class="tag tag--info">İLERİ</span> REST alternatifi; ihtiyaç doğmadan öğrenme</td><td><a href="https://docs.spring.io/spring-graphql/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Shell</strong></td><td>Komut satırı uygulaması yazma</td><td><span class="tag tag--info">İLERİ</span> Niş; iç araç yazarken faydalı</td><td><a href="https://spring.io/projects/spring-shell">spring.io/projects</a></td></tr>
+              <tr><td><strong>Spring AI</strong></td><td>LLM ve vektör veritabanı entegrasyonu</td><td><span class="tag tag--info">İLERİ</span> Yeni ve hızlı değişen bir proje; API'si sürümler arası kırılabilir</td><td><a href="https://docs.spring.io/spring-ai/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring HATEOAS / REST Docs</strong></td><td>Bağlantı üretimi ve testten doküman üretimi</td><td><span class="tag tag--info">İLERİ</span> REST Docs, Swagger'a alternatif bir felsefedir: dokümanı testlerden üretir</td><td><a href="https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Boot Docker Compose desteği</strong></td><td><code>compose.yaml</code> dosyasını geliştirme sırasında otomatik çalıştırma</td><td><span class="tag">ORTA</span> Boot 3.1 ile geldi; yerel geliştirmede veritabanı kurma derdini bitirir</td><td><a href="https://docs.spring.io/spring-boot/reference/features/dev-services.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="spring-cloud"><span class="h-num">§ 15</span>Spring Cloud: dağıtık sistem parçaları</h2>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Buraya erken girme</p>
+          <p>Spring Cloud, mikroservis mimarisi için gerekli parçaları toplar. Tek bir uygulamayı düzgün
+          yazamadan buraya girmek zaman kaybıdır. Mülakatta ne diyeceğin deneyimine bağlı:</p>
+          <ul>
+            <li><strong>Monolit projelerde çalıştıysan</strong> &rarr; "monolitte çalıştım, mikroservis parçalarını kavram olarak biliyorum" demek çoğu zaman yeterlidir.</li>
+            <li><strong>Mikroservis projesinde (.NET veya başka yığında) çalıştıysan</strong> &rarr; kullandığın parçaları Spring Cloud karşılıklarıyla eşle (YARP/Ocelot &rarr; Gateway, Consul &rarr; Eureka/Kubernetes, Polly &rarr; Resilience4j) ve somut anlat.</li>
+            <li><strong>Hiç iş deneyimin yoksa</strong> &rarr; docker-compose ile iki servisli kişisel bir örnek (gateway + bir servis) kur ve "kişisel projede denedim" de.</li>
+            <li><strong>Hedef kıdeme göre</strong> &rarr; junior pozisyonda kavram bilgisi yeter; senior pozisyonda tasarım tartışması (servis sınırları, tutarlılık, dayanıklılık) beklenir.</li>
+          </ul>
+          <p>Ayrıca Spring Cloud kendi sürüm takvimine
+          sahiptir ve Spring Boot sürümüyle <em>uyumlu</em> olmak zorundadır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring Cloud bileşenleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spring Cloud</strong></td><td>Dağıtık sistem desenleri için proje şemsiyesi</td><td><span class="tag tag--info">İLERİ</span> Sürüm adları eskiden alfabetik sıralı Londra metro istasyonu adlarıydı (Angel, Brixton, ..., Hoxton, Ilford), artık <code>2024.0.x</code> gibi tarih tabanlıdır</td><td><a href="https://spring.io/projects/spring-cloud">spring.io/projects</a></td></tr>
+              <tr><td><strong>Spring Cloud Config</strong></td><td>Ayarları merkezî bir sunucudan (genelde Git) dağıtma</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> Azure App Configuration mantığı. Kubernetes ConfigMap ile de aynı ihtiyaç karşılanır</td><td><a href="https://docs.spring.io/spring-cloud-config/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud Gateway</strong></td><td>API Gateway / ters vekil sunucu</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> YARP / Ocelot. Rate limiting ve yönlendirme burada da yapılabilir. Reaktif (WebFlux) tabanlıdır</td><td><a href="https://docs.spring.io/spring-cloud-gateway/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud OpenFeign</strong></td><td>Arayüz tanımlayarak HTTP istemcisi üretme</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> Refit. Yeni projelerde Spring'in kendi <code>@HttpExchange</code>'i tercih ediliyor</td><td><a href="https://docs.spring.io/spring-cloud-openfeign/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud CircuitBreaker</strong></td><td>Resilience4j gibi kütüphaneler için ortak soyutlama</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> Polly. Bulkhead, fallback, timeout kavramlarıyla birlikte öğren</td><td><a href="https://docs.spring.io/spring-cloud-circuitbreaker/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>service discovery (Eureka / Consul)</strong></td><td>Servislerin birbirini adla bulması</td><td><span class="tag tag--info">İLERİ</span> Kubernetes kullanıyorsan çoğu zaman gerekmez; DNS bu işi yapar</td><td><a href="https://docs.spring.io/spring-cloud-netflix/docs/current/reference/html/">docs.spring.io</a></td></tr>
+              <tr><td><strong>client-side load balancing</strong></td><td>İstemcinin hedef örneği kendi seçmesi</td><td><span class="tag tag--info">İLERİ</span> Eski adı Ribbon'dur, yerini <code>spring-cloud-loadbalancer</code> aldı</td><td><a href="https://docs.spring.io/spring-cloud-commons/reference/spring-cloud-commons/loadbalancer.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud Bus</strong></td><td>Ayar değişikliğini tüm örneklere yayınlama</td><td><span class="tag tag--info">İLERİ</span> Config Server ile birlikte anlamlıdır</td><td><a href="https://docs.spring.io/spring-cloud-bus/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud Contract</strong></td><td>Servisler arası sözleşme testi</td><td><span class="tag tag--info">İLERİ</span> Consumer-driven contract testing kavramını araştır</td><td><a href="https://docs.spring.io/spring-cloud-contract/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Cloud Kubernetes</strong></td><td>ConfigMap/Secret ve servis keşfi entegrasyonu</td><td><span class="tag tag--info">İLERİ</span> Kubernetes'e taşınmışsan Config Server yerine bunu değerlendir</td><td><a href="https://docs.spring.io/spring-cloud-kubernetes/reference/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>saga / outbox pattern</strong></td><td>Dağıtık işlemde tutarlılık desenleri</td><td><span class="tag tag--info">İLERİ</span> Spring'e özgü değildir, mimari desendir. CQRS ile birlikte araştır; Java tarafında <em>Axon Framework</em> bu alanda öne çıkar</td><td><a href="https://docs.axoniq.io/">docs.axoniq.io</a></td></tr>
+              <tr><td><strong>CQRS / Mediator</strong></td><td>Okuma-yazma ayrımı ve istek yönlendirici desen</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Önce deseni anla, sonra kütüphaneye geç. <em>.NET'ten geliyorsan:</em> Java'da MediatR'ın doğrudan dengi yoktur; <code>ApplicationEventPublisher</code> veya Axon kullanılır. Bu farkı bilmek iyi bir cevaptır</td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>multi-tenancy</strong></td><td>Tek uygulamada birden çok müşteri verisini ayırma</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Spring'te hazır çözüm yoktur; <code>AbstractRoutingDataSource</code>, Hibernate multi-tenancy veya şema/filtre yaklaşımı seçilir</td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc/connections.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="alternatif-catilar"><span class="h-num">§ 16</span>Alternatif çatılar: Spring dışındaki dünya</h2>
+
+        <p>Java iş ilanlarının büyük çoğunluğu Spring Boot ister. Yine de aşağıdakileri <em>tanımak</em> gerekir;
+        mülakatta "Spring dışında ne biliyorsun" sorusuna "şunları biliyorum, şu durumda tercih edilir" cevabı
+        vermek, sessiz kalmaktan çok daha iyidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring'e alternatif JVM çatıları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Quarkus</strong></td><td>Red Hat'in konteyner ve native imaj odaklı çatısı</td><td><span class="tag">ORTA</span> Derleme anında iş yapar, bu yüzden başlama süresi ve bellek kullanımı çok düşüktür. Serverless ve yoğun konteyner senaryolarında tercih edilir &middot; lisansı ücretsiz</td><td><a href="https://quarkus.io/guides/">quarkus.io/guides</a></td></tr>
+              <tr><td><strong>Micronaut</strong></td><td>Reflection yerine derleme anında DI üreten çatı</td><td><span class="tag">ORTA</span> Spring'e sözdizimi olarak en benzeyen alternatif; hızlı başlangıç ve düşük bellek hedefler &middot; lisansı ücretsiz</td><td><a href="https://docs.micronaut.io/latest/guide/">docs.micronaut.io</a></td></tr>
+              <tr><td><strong>Helidon</strong></td><td>Oracle'ın hafif çatısı (SE ve MP profilleri)</td><td><span class="tag tag--info">İLERİ</span> Türkiye'de az karşılaşırsın; Helidon 4 sanal iş parçacıkları üzerine kuruludur &middot; lisansı ücretsiz</td><td><a href="https://helidon.io/docs/latest">helidon.io/docs</a></td></tr>
+              <tr><td><strong>Jakarta EE</strong></td><td>Kurumsal Java'nın standart spesifikasyon kümesi</td><td><span class="tag">ORTA</span> Eski adı Java EE'dir (öncesi J2EE). Spring bazı Jakarta spesifikasyonlarını kullanır ama Jakarta EE sunucusu değildir</td><td><a href="https://jakarta.ee/specifications/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Jakarta EE uygulama sunucuları</strong></td><td>WildFly, Payara, Open Liberty, TomEE</td><td><span class="tag">ORTA</span> Uygulamayı WAR olarak sunucuya deploy etme modeli; kamu ve banka projelerinde hâlâ yaygındır</td><td><a href="https://jakarta.ee/compatibility/">jakarta.ee</a></td></tr>
+              <tr><td><strong>MicroProfile</strong></td><td>Jakarta EE'nin mikroservis odaklı alt kümesi</td><td><span class="tag tag--info">İLERİ</span> Config, Health, Metrics, Fault Tolerance spesifikasyonları içerir; Quarkus ve Helidon bunu destekler</td><td><a href="https://microprofile.io/">microprofile.io</a></td></tr>
+              <tr><td><strong>Vert.x</strong></td><td>Olay döngüsü tabanlı, çok dilli araç seti</td><td><span class="tag tag--info">İLERİ</span> Çatı değil "toolkit" der kendine. Çok yüksek eşzamanlılık gerektiren niş işlerde tercih edilir &middot; lisansı ücretsiz</td><td><a href="https://vertx.io/docs/">vertx.io/docs</a></td></tr>
+              <tr><td><strong>Ktor</strong></td><td>Kotlin için hafif web çatısı</td><td><span class="tag tag--info">İLERİ</span> Java değil Kotlin odaklıdır; JetBrains geliştirir &middot; lisansı ücretsiz</td><td><a href="https://ktor.io/docs/">ktor.io/docs</a></td></tr>
+              <tr><td><strong>Javalin / Spark Java</strong></td><td>Çok küçük, minimal web çatıları</td><td><span class="tag tag--info">İLERİ</span> <em>.NET'ten geliyorsan:</em> Minimal APIs hissi. <em>Spark Java</em>'yı Apache Spark ile karıştırma, ilgisizdir</td><td><a href="https://javalin.io/documentation">javalin.io</a></td></tr>
+              <tr><td><strong>Dropwizard</strong></td><td>Üretime hazır servis kurmak için birleştirilmiş kütüphane seti</td><td><span class="tag tag--info">İLERİ</span> Spring Boot'tan önce popülerdi; yeni projede az tercih edilir &middot; lisansı ücretsiz</td><td><a href="https://www.dropwizard.io/">dropwizard.io</a></td></tr>
+              <tr><td><strong>Guice</strong></td><td>Google'ın sadece DI yapan hafif container'ı</td><td><span class="tag tag--info">İLERİ</span> Spring'in tamamına ihtiyaç duymayan projelerde; web katmanı içermez &middot; lisansı ücretsiz</td><td><a href="https://github.com/google/guice/wiki">github.com/google/guice</a></td></tr>
+              <tr><td><strong>Spring Boot 2 vs 3 farkı</strong></td><td>jakarta paket geçişi, Java 17 zorunluluğu, Security 6</td><td><span class="tag tag--ok">TEMEL</span> Alternatif çatı değil ama en sık karşılaşacağın "neden çalışmıyor" kaynağı. Aramada mutlaka sürüm belirt</td><td><a href="https://docs.spring.io/spring-boot/how-to/index.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 17</span>Özet: bu sayfadaki öncelik sırası</h2>
+
+        <p>Aşağıdaki sıra herkes için aynıdır ve mülakatta en sık sorulan konular dikkate alınarak kuruldu; adım notları nereden geldiğine göre dallanır. Her adımı bitirmeden
+        sonrakine geçme; Spring'te atlanan adım ilerideki "sihirli hata"lara dönüşür.</p>
+        <p>Temel süre, <a href="../index.html#ogrenme-sirasi">genel bakış § 3</a>'teki öğrenme sırasından gelir: adım 5 (Spring Boot ile REST API, 2-3 hafta) + adım 8 (Spring Security ve JWT, 1-2 hafta), yani bu sayfanın 1-11. adımları için günde 1-2 saatle toplam <strong>3-5 hafta</strong> <span class="tag tag--warn">TAHMİN</span>. Veri ve mesajlaşma adımları <a href="../03-veri-ve-mesajlasma/index.html">03</a>'te ayrıca sayılır.</p>
+        <ul>
+          <li><strong>ASP.NET Core'dan geliyorsan</strong> &rarr; temel sürenin alt ucu (yaklaşık 3 hafta); karşılık notlarını kullan.</li>
+          <li><strong>Başka bir web çatısından geliyorsan</strong> &rarr; kavramlar tanıdık, isimler ve proxy modeli yeni; temel sürenin orta-üst ucu (yaklaşık 4-5 hafta).</li>
+          <li><strong>İlk web çatın Spring ise</strong> &rarr; temel sürenin yaklaşık iki katı (6-10 hafta); adım 4 (AOP) ve adım 6'yı (Security) çalışan bir API'n olduktan sonraya bırak <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li><strong>Günde 6-8 saat (tam zamanlı) çalışabiliyorsan</strong> &rarr; yukarıdaki sürelerin yaklaşık üçte biri; <strong>bir işin yanında haftada birkaç saat ayırabiliyorsan</strong> &rarr; süreler uzar.</li>
+        </ul>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">IoC container ve bean yaşam döngüsü (§ 2, § 3)</span>
+            <p>ApplicationContext, bean, scope, constructor injection, @Qualifier/@Primary, circular dependency.
+            .NET'ten ya da NestJS'ten geliyorsan DI bilgin doğrudan aktarılır; sadece varsayılan scope'un singleton olduğunu içselleştir. DI'yi ilk kez görüyorsan bu adıma ayrıca zaman ayır.</p>
+            <span class="steps__meta">Sıra: 1 &middot; En hızlı kazanç</span>
+          </li>
+          <li>
+            <span class="steps__title">Spring Boot çekirdeği ve yapılandırma (§ 4, § 5)</span>
+            <p>@SpringBootApplication, starter, auto-configuration, application.yml, profile,
+            @ConfigurationProperties. "Neden bu bean var" sorusunu cevaplayabilir hâle gel.</p>
+            <span class="steps__meta">Sıra: 2 &middot; Auto-configuration mülakatta kesin sorulur</span>
+          </li>
+          <li>
+            <span class="steps__title">Web katmanı ve hata yönetimi (§ 7, § 8)</span>
+            <p>@RestController, mapping anotasyonları, ResponseEntity, @ControllerAdvice, ProblemDetail,
+            Bean Validation. Bu üçü olmadan çalışan bir API yazamazsın.</p>
+            <span class="steps__meta">Sıra: 3 &middot; ASP.NET Core'dan geliyorsan bilginin büyük kısmı aktarılır; başka çatıdan geliyorsan controller/routing kavramı tanıdık</span>
+          </li>
+          <li>
+            <span class="steps__title">AOP, proxy ve @Transactional (§ 12)</span>
+            <p>Self-invocation problemi, CGLIB proxy, propagation, rollbackFor. Spring'i "anlamak" ile
+            "kullanmak" arasındaki fark burada oluşur. <strong>Bu bölümü atlamamanı özellikle öneririm:</strong>
+            <code>@Transactional</code> tuzakları her seviyede sorulur; hedef pozisyon ya da özgeçmiş iddian mimari/performans ağırlıklıysa en çok karşılığını burada alırsın.</p>
+            <span class="steps__meta">Sıra: 4 &middot; En yüksek getirili tek bölüm</span>
+          </li>
+          <li>
+            <span class="steps__title">Test: slice testleri ve mock (§ 13)</span>
+            <p>JUnit 5, Mockito, @WebMvcTest, MockMvc, @MockitoBean, Testcontainers. .NET'ten geliyorsan
+            <strong>TDD / xUnit / Moq</strong> konularının karşılığı budur; Jest/pytest'ten geliyorsan kavramlar aynı, sözdizimi yeni; mock test hiç yazmadıysan
+            bu bölüm en büyük ve en kolay kapatılabilir açıktır.</p>
+            <span class="steps__meta">Sıra: 5 &middot; Mülakatta en çok kanıt istenen konu</span>
+          </li>
+          <li>
+            <span class="steps__title">Spring Security: JWT ve method security (§ 11)</span>
+            <p>SecurityFilterChain, UserDetailsService, PasswordEncoder, OAuth2 Resource Server ile JWT,
+            @PreAuthorize, CSRF/STATELESS. <strong>JWT Authentication</strong> ve
+            <strong>Policy-Based Authorization</strong> konularının evi.</p>
+            <span class="steps__meta">Sıra: 6 &middot; En dik öğrenme eğrisi, en çok sorulan alan</span>
+          </li>
+          <li>
+            <span class="steps__title">Filter/Interceptor ve Actuator (§ 9, § 6)</span>
+            <p>İstek hattına araya girme (.NET'te <strong>Middleware</strong>, Express/NestJS'te middleware/guard) ve sağlık kontrolü (.NET'te
+            <strong>HealthChecks</strong>) kavramlarının Spring karşılıkları. Filter ile Interceptor
+            farkını tek cümlede anlatabilecek hâle gel.</p>
+            <span class="steps__meta">Sıra: 7 &middot; Kısa ama sorulma olasılığı yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">Cache, @Scheduled, MapStruct, springdoc (§ 12, § 7)</span>
+            <p>Önbellek, zamanlanmış iş, nesne eşleme ve API dokümantasyonu (.NET'ten geliyorsan MemoryCache, Hangfire, AutoMapper ve Swagger karşılıkları).
+            Her biri yarım günlük iştir; dördü birden ilanlarda sık geçen dört maddeyi savunulabilir yapar.</p>
+            <span class="steps__meta">Sıra: 8 &middot; Düşük maliyet, yüksek görünürlük</span>
+          </li>
+          <li>
+            <span class="steps__title">Diğer Spring projeleri (§ 14)</span>
+            <p>Spring Data JDBC/JdbcTemplate ile SQL bilgini doğrudan kullanabilirsin; modüler monolit tasarlıyorsan ya da mimari ağırlıklı pozisyon hedefliyorsan Spring Modulith'e bak.
+            Veri ve mesajlaşma tarafını <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a>
+            sayfasından devam ettir.</p>
+            <span class="steps__meta">Sıra: 9</span>
+          </li>
+          <li>
+            <span class="steps__title">WebFlux ve Spring Cloud (§ 10, § 15)</span>
+            <p>Bu ikisini <strong>en sona bırak</strong>. Mülakatta "kavram olarak biliyorum, üretimde
+            kullanmadım" demek doğru cevaptır. WebFlux yerine önce virtual threads'i öğrenmek daha yüksek getirilidir.</p>
+            <span class="steps__meta">Sıra: 10 &middot; Acele etme</span>
+          </li>
+          <li>
+            <span class="steps__title">Alternatif çatılar (§ 16)</span>
+            <p>Quarkus ve Micronaut'un ne için var olduğunu bir paragrafta anlatabilmen yeterli. Kod yazmana gerek yok.</p>
+            <span class="steps__meta">Sıra: 11 &middot; Sadece tanı</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Mülakat için üç cümle</p>
+          <p>1) "Spring ile Spring Boot farkı nedir" &rarr; Spring container ve modüller, Boot ise
+          auto-configuration ile makul varsayılanları kuran katman.
+          2) "@Transactional neden çalışmadı" &rarr; Proxy tabanlıdır; aynı sınıf içinden çağrı (self-invocation),
+          private/final metot veya yanlış propagation.
+          3) "Filter ile Interceptor farkı" &rarr; Filter Servlet standardıdır ve DispatcherServlet'ten önce çalışır;
+          Interceptor Spring'e aittir ve hangi handler'ın seçildiğini bilir.
+          Bu üçünü akıcı anlatabiliyorsan Spring tarafında ciddiye alınırsın.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Devamı ve diğer bölümler</p>
+          <p>Java dilinin kendisi: <a href="../01-java-dili/index.html">01 — Java Dili</a>.
+          JPA/Hibernate, SQL, Kafka, RabbitMQ, Redis: <a href="../03-veri-ve-mesajlasma/index.html">03 — Veri ve Mesajlaşma</a>.
+          Maven/Gradle, IDE, Docker, CI/CD, kütüphane kataloğu:
+          <a href="../04-ekosistem-ve-araclar/index.html">04 — Ekosistem ve Araçlar</a>.
+          Java bölümünün girişi: <a href="../index.html">Java ana sayfa</a>.
+          Diğer alanlar: <a href="../../CSharp-DotNet/index.html">C# / .NET</a> &middot;
+          <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> &middot;
+          <a href="../../HTML-CSS/index.html">HTML / CSS</a> &middot;
+          <a href="../../Python/index.html">Python</a> &middot;
+          <a href="../../Go/index.html">Go</a> &middot;
+          <a href="../../Rust/index.html">Rust</a> &middot;
+          <a href="../../index.html">Site ana sayfası</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-java-dili/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Java Dili</span></a>
+        <a class="next" href="../03-veri-ve-mesajlasma/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Veri ve Mesajlaşma</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

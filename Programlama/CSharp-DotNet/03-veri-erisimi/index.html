@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veri Erişimi — .NET Anahtar Listesi</title>
+<meta name="description" content="EF Core, Dapper, SQL Server, PostgreSQL, migration, performans, NoSQL ve önbellekleme katmanı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Veri Erişimi</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 03 · Veri ve Mimari</div>
+        <h1 class="page-title">EF Core, Dapper ve <em>veritabanı</em></h1>
+        <p class="lede">ORM'in derinlikleri, ham SQL, migration stratejileri, sorgu performansı ve önbellekleme. Redis burada başlıyor.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; Performans başlıkları ayrı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+        <p class="intro">Bu bir anlatım değil, <strong>arama listesi</strong>. Her satır bir başlık; onu kendin araştıracak, kendi kaynağından okuyacak ve kod yazacaksın. "Kısaca" sütunu sadece terimi tanıman için, "Not" sütunu önceliğini söylüyor.</p>
+        <p>İş arıyorsan sıra şu: önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar (ilanlarda sık geçer, mülakatta bilmemek en pahalı senaryodur), sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>. Veritabanına yeni başlıyorsan önce <span class="tag tag--ok">TEMEL</span> satırlar; aşağıdaki tablo veri geçmişine göre nereden başlayacağını söyler.</p>
+        <p>Bir terimi aratırken tek başına arama; ön ek koy. Örnek: "migration" tek başına göç anlamına gelir, "EF Core migration" yaz. "Index" tek başına sayfa dizini getirir, "SQL Server clustered index" yaz.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p><strong>Entity Framework Core</strong>, <strong>Dapper</strong>, <strong>Redis</strong>, <strong>PostgreSQL</strong>, <strong>MemoryCache</strong> ve <strong>Fluent API</strong> .NET ilanlarında sık geçen başlıklardır. Hangisinin senin için "az denenmiş" olduğu, veri geçmişine bağlıdır; önceliğini aşağıdaki tablodan al. SQL Server ve LINQ tarafını düzenli kullananlar için oradaki satırlar tekrar/derinleştirme amaçlıdır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri geçmişine göre bu sayfada nereden başlanır</caption>
+            <thead><tr><th>Durum</th><th>Sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Hiç veritabanı bilmiyorsun</td><td>§&nbsp;2 temeller &rarr; bir motor (SQL Server §&nbsp;3 veya PostgreSQL §&nbsp;8) &rarr; EF Core §&nbsp;4–§&nbsp;6 &rarr; Dapper §&nbsp;7 &rarr; önbellek §&nbsp;11 &rarr; Redis §&nbsp;10</td></tr>
+              <tr><td>SQL Server'ı ADO.NET / stored procedure ile kullanıyorsun</td><td>EF Core §&nbsp;4–§&nbsp;6 öncelik; sonra Dapper §&nbsp;7, Redis §&nbsp;10</td></tr>
+              <tr><td>EF Core kullanıyorsun</td><td>Dapper §&nbsp;7, Redis §&nbsp;10, PostgreSQL §&nbsp;8, performans §&nbsp;14</td></tr>
+              <tr><td>PostgreSQL veya MySQL kullanıyorsun</td><td>Hedef ilan veya proje SQL Server istiyorsa &rarr; SQL Server §&nbsp;3 + EF Core ve sağlayıcı farkları. Hedefin PostgreSQL/MySQL ise &rarr; EF Core §&nbsp;4–§&nbsp;6'yı kendi sağlayıcınla (Npgsql veya Pomelo) çalış; motor farkları için §&nbsp;8</td></tr>
+              <tr><td>NoSQL'den (MongoDB vb.) geliyorsun</td><td>§&nbsp;2 ilişkisel temeller, özellikle transaction ve izolasyon düzeyleri; sonra EF Core</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>İlgili sayfalar: <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a> (DI, konfigürasyon, HealthChecks), <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a> (repository/CQRS tartışması burada devam eder), <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a> (Redis pub/sub ile RabbitMQ farkı), <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a> (veritabanı testi, Testcontainers), <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>.</p>
+
+        <h2 id="iliskisel-temeller"><span class="h-num">§ 2</span>İlişkisel veritabanı temelleri</h2>
+        <p>Bu bölüm ORM'den bağımsız. Mülakatta "EF Core biliyor musun" sorusundan daha sık "bu sorgu neden yavaş" sorusu gelir; cevabı burada.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Index ve fiziksel yapı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>clustered index</strong></td><td>Tablonun fiziksel sıralamasını belirleyen index; tabloda bir tane olur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>non-clustered index</strong></td><td>Ayrı bir yapı; anahtar + satır göstericisi tutar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>covering index / INCLUDE</strong></td><td>Sorgunun ihtiyacı olan tüm sütunları index'te taşıyıp tabloya gitmeyi engelleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/create-indexes-with-included-columns">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>composite index</strong></td><td>Birden çok sütunlu index; <em>sütun sırası</em> kritik (leftmost prefix kuralı)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>filtered index</strong></td><td>WHERE koşullu index; sadece satırların bir kısmını indeksler</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/create-filtered-indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>unique index / constraint</strong></td><td>Tekillik garantisi; aynı zamanda optimizer'a bilgi verir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/create-unique-indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>columnstore index</strong></td><td>Sütun bazlı depolama; analitik/raporlama sorgularında büyük hızlanma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/columnstore-indexes-overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>index fragmentation</strong></td><td>Sayfaların dağılması; REBUILD/REORGANIZE ile toplanır</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/reorganize-and-rebuild-indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>fill factor</strong></td><td>Index sayfalarında bırakılan boşluk oranı; page split'i azaltır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/specify-fill-factor-for-an-index">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>heap</strong></td><td>Clustered index'i olmayan tablo; arama = tam tarama</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/heaps-tables-without-clustered-indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>statistics / cardinality estimation</strong></td><td>Optimizer'ın satır sayısı tahmini; bozulursa plan bozulur</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/statistics/statistics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SARGability</strong></td><td>Sütuna fonksiyon uygulayınca index kullanılamaz olması; "SARGable query" diye ara</td><td><span class="tag tag--ok">TEMEL</span></td><td>learn.microsoft.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Execution plan ve sorgu işleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>execution plan</strong></td><td>Motorun sorguyu nasıl çalıştıracağının ağacı; estimated ve actual olmak üzere iki tür</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/execution-plans">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>index seek vs index scan</strong></td><td>Seek = hedefli erişim, scan = baştan sona tarama; plandaki ilk bakılacak şey</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/execution-plans">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>key lookup / RID lookup</strong></td><td>Index'te olmayan sütun için tabloya geri dönme; covering index ile silinir</td><td><span class="tag">ORTA</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>nested loops / merge join / hash join</strong></td><td>Üç fiziksel join operatörü; hangisinin ne zaman seçildiğini bil</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/joins">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>parameter sniffing</strong></td><td>İlk parametreye göre derlenen planın diğer parametreler için kötü olması</td><td><span class="tag tag--info">İLERİ</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>plan cache / recompile</strong></td><td>Planların saklandığı bellek; OPTION (RECOMPILE) ile plan yeniden üretilir</td><td><span class="tag tag--info">İLERİ</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>Query Store</strong></td><td>SQL Server'ın plan/performans geçmişi deposu; regresyon avında ilk durak</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SET STATISTICS IO / TIME</strong></td><td>Sorgunun okuduğu sayfa ve harcadığı süreyi yazdırır; ölçmenin en ucuz yolu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/set-statistics-io-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EXPLAIN / EXPLAIN ANALYZE</strong></td><td>PostgreSQL'in plan komutu; SQL Server'daki karşılığı execution plan</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/using-explain.html">postgresql.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Transaction, kilit, eşzamanlılık</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ACID</strong></td><td>Atomicity, Consistency, Isolation, Durability — transaction'ın dört garantisi</td><td><span class="tag tag--ok">TEMEL</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>transaction (BEGIN/COMMIT/ROLLBACK)</strong></td><td>Ya hep ya hiç çalışan işlem bloğu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/language-elements/transactions-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>isolation level</strong></td><td>READ UNCOMMITTED / READ COMMITTED / REPEATABLE READ / SERIALIZABLE / SNAPSHOT</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/set-transaction-isolation-level-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dirty read / non-repeatable read / phantom read</strong></td><td>İzolasyon seviyelerinin engellediği üç anomali; hangisi hangisini engeller ezberle</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.postgresql.org/docs/current/transaction-iso.html">postgresql.org</a></td></tr>
+              <tr><td><strong>READ COMMITTED SNAPSHOT (RCSI)</strong></td><td>SQL Server'da satır versiyonlama ile okumanın yazmayı bloklamaması</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MVCC</strong></td><td>Multi-Version Concurrency Control; PostgreSQL'in varsayılan modeli</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/mvcc.html">postgresql.org</a></td></tr>
+              <tr><td><strong>deadlock</strong></td><td>İki işlemin birbirinin kilidini beklemesi; motor birini kurban seçer</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/sql-server-deadlocks-guide">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>lock escalation</strong></td><td>Çok sayıda satır kilidinin tablo kilidine yükselmesi</td><td><span class="tag tag--info">İLERİ</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>optimistic vs pessimistic concurrency</strong></td><td>Versiyon kontrolüyle çakışmayı yakalamak mı, baştan kilitlemek mi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/saving/concurrency">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WITH (NOLOCK)</strong></td><td>READ UNCOMMITTED kısayolu; kirli okuma riski var, "çözüm" değil</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>TransactionScope / distributed transaction</strong></td><td>.NET tarafında birden çok kaynağı tek transaction'a alma; dağıtık işlem maliyetlidir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.transactions.transactionscope">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>saga / outbox pattern</strong></td><td>Dağıtık sistemde transaction yerine geçen desenler &rarr; <a href="../05-mesajlasma-ve-dagitik/index.html">05. sayfa</a></td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Şema tasarımı ve SQL dili</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>normalizasyon (1NF/2NF/3NF/BCNF)</strong></td><td>Tekrarlayan veriyi ayırma kuralları; mülakatta "3NF nedir" klasiktir</td><td><span class="tag tag--ok">TEMEL</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>denormalizasyon</strong></td><td>Okuma hızı için bilinçli tekrar; raporlama tablolarında yaygın</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>primary key / foreign key / cascade</strong></td><td>Bütünlük kısıtları; ON DELETE CASCADE davranışını bil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/tables/primary-and-foreign-key-constraints">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>surrogate key vs natural key</strong></td><td>Yapay kimlik (identity/GUID) mı, iş anahtarı mı</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>IDENTITY / SEQUENCE / GUID (uniqueidentifier)</strong></td><td>Kimlik üretme yolları; rastgele GUID clustered index'i parçalar</td><td><span class="tag tag--ok">TEMEL</span> Veritabanına göre: <strong>SQL Server</strong> &rarr; <code>NEWSEQUENTIALID()</code> veya EF Core'un SQL Server için varsayılan istemci tarafı sıralı GUID üreteci; <code>Guid.CreateVersion7</code> SQL Server'ın <code>uniqueidentifier</code> sıralamasında sıralı değildir (<a href="../01-csharp-dili/index.html">01 § 13</a>). <strong>PostgreSQL</strong> &rarr; clustered index yok, ama B-tree için UUIDv7 (<code>Guid.CreateVersion7</code>; PostgreSQL 18 ile gelen <code>uuidv7()</code> – TEYİT) iyi seçim. <strong>Kimliğin dağıtık / istemci tarafında üretilmesi gerekmiyorsa</strong> &rarr; IDENTITY / SEQUENCE en basit ve kompakt seçenek.</td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/create-sequence-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CTE (Common Table Expression)</strong></td><td>WITH ile tanımlanan geçici sorgu bloğu; recursive CTE ile ağaç gezilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/queries/with-common-table-expression-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>window function (OVER)</strong></td><td>ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, SUM OVER — gruplamadan satır bazlı hesap</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/queries/select-over-clause-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>view / indexed view</strong></td><td>Kayıtlı sorgu; indexed (materialized) view fiziksel olarak saklanır</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/views/views">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>materialized view</strong></td><td>PostgreSQL terimi; SQL Server'daki karşılığı indexed view</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/rules-materializedviews.html">postgresql.org</a></td></tr>
+              <tr><td><strong>stored procedure</strong></td><td>Veritabanında saklı kod bloğu; ne kadar kullanıldığı ortama bağlı</td><td><span class="tag tag--ok">TEMEL</span> <strong>Kurumsal/bankacılık, şemayı DBA'nın yönettiği veya güvenlik gereği uygulamaya yalnızca SP yetkisi verilen ortam</strong> &rarr; iş mantığı ve veri erişimi sıkça SP'lerde. <strong>ORM kullanan modern proje</strong> &rarr; SP daha çok raporlama, toplu işlem ve performans kritik sorgular için. <strong>Mikroservis / çok veritabanlı proje</strong> &rarr; SP az, iş mantığı uygulamada. Dapper veya EF Core ile SP çağırmayı her durumda bil.</td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/stored-procedures/stored-procedures-database-engine">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>user-defined function (scalar/table-valued)</strong></td><td>Skaler UDF satır satır çalışıp yavaşlatır; inline TVF tercih edilir</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/user-defined-functions/user-defined-functions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>trigger</strong></td><td>INSERT/UPDATE/DELETE'e bağlı otomatik kod; gizli yan etki kaynağı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/triggers/dml-triggers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MERGE</strong></td><td>Tek ifadede upsert; SQL Server'da bilinen tuzakları var, araştır</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>partitioning (table/index)</strong></td><td>Büyük tabloyu parçalara bölme; partition switch ile hızlı arşivleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/partitions/partitioned-tables-and-indexes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>sharding</strong></td><td>Veriyi ayrı sunuculara bölme; partitioning ile karıştırma</td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+              <tr><td><strong>collation</strong></td><td>Karakter sıralama/karşılaştırma kuralı; Türkçe I/ı sorunu buradan çıkar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL injection / parameterized query</strong></td><td>String birleştirme ile sorgu kurma açığı; parametre kullanmak tek doğru cevap</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/security/sql-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>keyset pagination (seek method)</strong></td><td>OFFSET/FETCH yerine son anahtardan devam etme; büyük sayfa numaralarında tek çözüm</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sql-server-tsql"><span class="h-num">§ 3</span>SQL Server ve T-SQL</h2>
+        <p>.NET ilanlarının çoğunda istenen ve .NET projelerinde en yaygın kullanılan veritabanı. Bu bölümü kullanma biçimin SQL Server'la ilişkine bağlı:</p>
+        <ul>
+          <li><strong>SQL Server'ı günlük kullanıyorsan</strong> &rarr; Satırları tara, hiç dokunmadığın başlıkları işaretle.</li>
+          <li><strong>Hiç kullanmadıysan</strong> &rarr; Önce kurulum: <strong>Windows</strong> &rarr; Developer veya Express sürümü + SSMS (ya da LocalDB). <strong>Linux</strong> &rarr; SQL Server for Linux'u desteklenen dağıtımlarda (RHEL, Ubuntu, SLES) paket yöneticisiyle (dnf/apt/zypper) doğrudan kur ya da Docker'da çalıştır; istemci olarak VS Code mssql eklentisi (desteklenen dağıtım ve sürümler için TEYİT: learn.microsoft.com SQL Server on Linux). <strong>macOS</strong> &rarr; yerel kurulum yok; Docker'da SQL Server (Apple Silicon Mac'te x64 emülasyonuyla) + VS Code mssql eklentisi; konteyner çalıştıramıyorsan uzak bir sunucuya veya Azure SQL'e bağlan. LocalDB yalnızca Windows'ta çalışır. Sonra T-SQL, index ve yedekleme satırlarını TEMEL olarak çalış.</li>
+          <li><strong>PostgreSQL kullanıyorsan</strong> &rarr; Bu bölümü "ilanda SQL Server isteniyorsa" koşuluyla çalış; farklar için §&nbsp;8.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>SQL Server — motor ve araçlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>T-SQL</strong></td><td>SQL Server'ın SQL lehçesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/t-sql/language-reference">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL Server sürümleri</strong></td><td>Express (ücretsiz, sınırlı), Developer (ücretsiz, üretimde kullanılamaz), Standard/Enterprise (ücretli)</td><td><span class="tag tag--warn">ÜCRETLİ</span> Kullanıma göre: <strong>öğrenme / geliştirme</strong> &rarr; Developer (tüm özellikler, üretimde yasak; SQL Server 2025 ile Standard Developer ve Enterprise Developer olarak ikiye ayrıldı – TEYİT). <strong>Küçük üretim</strong> (tek sunucu, sınırlı veri) &rarr; Express (SQL Server 2025'te veritabanı başına sınır 50 GB'a çıktı, öncesinde 10 GB – TEYİT: learn.microsoft.com SQL Server 2025 sürümleri). <strong>Büyük üretim</strong> &rarr; Standard/Enterprise (çekirdek başına lisans). <strong>Bulut</strong> &rarr; Azure SQL (kullanım başına ücret).</td><td><a href="https://learn.microsoft.com/en-us/sql/sql-server/editions-and-components-of-sql-server-2022">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>LocalDB</strong></td><td>Geliştirici makinesinde çalışan hafif SQL Server örneği</td><td><span class="tag">ORTA</span> Yalnızca Windows; Linux'ta yerine paketle kurulan SQL Server for Linux veya Docker, macOS'ta Docker'da SQL Server</td><td><a href="https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SSMS (SQL Server Management Studio)</strong></td><td>Klasik yönetim aracı; ücretsiz</td><td><span class="tag tag--ok">TEMEL</span> Yalnızca Windows; macOS/Linux'ta VS Code mssql eklentisi</td><td><a href="https://learn.microsoft.com/en-us/ssms/sql-server-management-studio-ssms">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure Data Studio / mssql VS Code eklentisi</strong></td><td>Çapraz platform sorgu istemcisi. Azure Data Studio 28 Şubat 2026'da emekliye ayrıldı; yeni kurulum için seçenek değil, yerine VS Code mssql eklentisi kullanılır (TEYİT: learn.microsoft.com Azure Data Studio retirement)</td><td><span class="tag">ORTA</span> Hâlâ ADS kullanan bir ekipteysen mssql eklentisine geçişi öğren</td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>SQL Server on Linux / Docker</strong></td><td>Konteynerde SQL Server; yerel geliştirme için pratik</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure SQL Database / Managed Instance</strong></td><td>Yönetilen bulut sürümleri; DTU/vCore modeli ücretlidir</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/azure-sql/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Extended Events (XEvents)</strong></td><td>SQL Profiler'ın modern yerine geçeni; olay izleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/extended-events/extended-events">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL Profiler</strong></td><td>Eski izleme aracı; hâlâ karşına çıkar, yeni işte XEvents kullan</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>DMV (Dynamic Management Views)</strong></td><td>sys.dm_exec_* ile canlı performans verisi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-views/system-dynamic-management-views">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL Agent Job</strong></td><td>Zamanlanmış görev; Hangfire ile karıştırma, bu veritabanı tarafı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/ssms/agent/sql-server-agent">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>backup / restore / recovery model</strong></td><td>FULL, SIMPLE, BULK_LOGGED; log dolmasının sebebi genelde budur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/recovery-models-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Always On Availability Groups</strong></td><td>Yüksek erişilebilirlik/replikasyon</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/database-engine/availability-groups/windows/always-on-availability-groups-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Temporal Tables (system-versioned)</strong></td><td>Geçmiş versiyonları otomatik tutan tablo; audit için hazır çözüm</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/tables/temporal-tables">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Change Data Capture (CDC) / Change Tracking</strong></td><td>Değişen satırları yakalama; entegrasyonlarda kullanılır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JSON desteği (OPENJSON, FOR JSON)</strong></td><td>SQL Server'da JSON okuma/üretme; 2025 ile birlikte json veri tipi geldi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/json/json-data-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Table-Valued Parameter (TVP)</strong></td><td>Tablo tipini parametre olarak gönderme; toplu insert'te klasik yöntem</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/tables/use-table-valued-parameters-database-engine">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Full-Text Search</strong></td><td>Metin arama motoru; Elasticsearch'e geçmeden önceki ilk adım</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/search/full-text-search">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SSIS / SSRS / SSAS</strong></td><td>ETL, raporlama, analiz servisleri; kurumsal ilanlarda geçer</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/integration-services/sql-server-integration-services">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SqlPackage / DACPAC / SSDT</strong></td><td>Şemayı proje olarak yönetip diff ile yayınlama (state-based deployment)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ef-core-cekirdek"><span class="h-num">§ 4</span>EF Core — çekirdek kavramlar</h2>
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>"Entity Framework Core" .NET ilanlarının neredeyse hepsinde geçer. Mülakatta EF Core'dan en az üç soru gelir: <em>change tracker nedir</em>, <em>N+1 problemi nedir</em>, <em>AsNoTracking ne yapar</em>. Bu bölümdeki her satırı elinle kod yazarak geç.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>DbContext ve yaşam döngüsü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Entity Framework Core</strong></td><td>Microsoft'un ORM'i; "Entity Framework 6" ile karıştırma, o eski .NET Framework sürümü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbContext</strong></td><td>Oturum nesnesi; bağlantıyı, change tracker'ı ve sorgu üretimini o taşır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbSet&lt;T&gt;</strong></td><td>Bir entity tipine karşılık gelen sorgulanabilir küme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>change tracker</strong></td><td>Yüklenen nesnelerin değişikliklerini izleyen bileşen; SaveChanges bunu okur</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/change-tracking/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>entity states</strong></td><td>Added, Modified, Deleted, Unchanged, Detached</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/change-tracking/explicit-tracking">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SaveChanges / SaveChangesAsync</strong></td><td>Takip edilen değişiklikleri tek transaction'da veritabanına yazar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/saving/basic">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Attach / Update / Entry()</strong></td><td>Bağlantısız (disconnected) nesneyi context'e tanıtma yolları</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/change-tracking/explicit-tracking">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbContext yaşam süresi (scoped)</strong></td><td>Singleton yapmak thread-safety hatasıdır; doğru ömür uygulama türüne bağlı</td><td><span class="tag tag--ok">TEMEL</span> <strong>MVC / Web API / Razor Pages</strong> &rarr; istek başına bir context (scoped). <strong>Blazor Server</strong> &rarr; scoped devre boyunca yaşar; <code>IDbContextFactory</code> ile işlem başına context. <strong>Worker / BackgroundService</strong> &rarr; <code>IServiceScopeFactory</code> ile elle kapsam veya <code>IDbContextFactory</code>. <strong>WPF / MAUI</strong> &rarr; işlem (unit of work) başına kısa ömürlü context.</td><td><a href="https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AddDbContext / AddDbContextPool</strong></td><td>DI kaydı; pooling context nesnesini yeniden kullanır</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IDbContextFactory&lt;T&gt;</strong></td><td>Kısa ömürlü context üretimi</td><td><span class="tag">ORTA</span> Blazor Server'da önerilen yol; arka plan işlerinde <code>IServiceScopeFactory</code> ile birlikte iki geçerli seçenekten biri; masaüstü/MAUI'de işlem başına context için uygun</td><td><a href="https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>database provider</strong></td><td>SqlServer, Npgsql, Sqlite, MySql, Cosmos, InMemory — sağlayıcı paketleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/providers/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>connection resiliency / EnableRetryOnFailure</strong></td><td>Geçici hatalarda otomatik tekrar deneme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbContext.Database.BeginTransaction</strong></td><td>Elle transaction yönetimi; SaveChanges zaten kendi transaction'ını açar</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/saving/transactions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF Core sürüm hizası</strong></td><td>EF Core sürümü .NET sürümüyle birlikte gider (EF Core 8 &rarr; .NET 8, 9 &rarr; 9, 10 &rarr; 10)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/what-is-new/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Modelleme ve konfigürasyon</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Data Annotation</strong></td><td>Entity sınıfına attribute ile kural yazma ([Required], [MaxLength])</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Fluent API</strong></td><td>OnModelCreating içinde modelBuilder ile konfigürasyon; annotation'ı ezer</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IEntityTypeConfiguration&lt;T&gt;</strong></td><td>Fluent konfigürasyonu ayrı sınıflara bölme; ApplyConfigurationsFromAssembly ile toplanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ilişki türleri (1-1, 1-N, N-N)</strong></td><td>EF Core 5+ ile many-to-many ara tablo yazmadan tanımlanabiliyor</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/relationships">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>navigation property</strong></td><td>İlişkili entity'ye giden özellik; reference ve collection olmak üzere iki tür</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/relationships/navigations">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>foreign key property / shadow FK</strong></td><td>Açık FK alanı tanımlamak mı, EF'in gizli alan üretmesine izin vermek mi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/relationships/foreign-and-principal-keys">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>shadow property</strong></td><td>C# sınıfında olmayan, sadece modelde var olan sütun (CreatedAt gibi)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/shadow-properties">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>value conversion (ValueConverter)</strong></td><td>Enum'u string'e, listeyi JSON'a çevirerek saklama</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/value-conversions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>value comparer</strong></td><td>Dönüştürülmüş/koleksiyon tipli alanların değişip değişmediğini anlama kuralı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/value-comparers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>owned entity type</strong></td><td>Kendi tablosu olmayan, sahibinin içine gömülen tip (Address gibi)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/owned-entities">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>complex type (EF Core 8+)</strong></td><td>Owned type'a alternatif, gerçek değer tipi davranışı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/complex-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TPH / TPT / TPC</strong></td><td>Kalıtım eşlemesi: tek tablo / tip başına tablo / somut tip başına tablo</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/inheritance">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>global query filter (HasQueryFilter)</strong></td><td>Her sorguya otomatik eklenen koşul; soft delete ve multi-tenant burada çözülür</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IgnoreQueryFilters()</strong></td><td>Global filtreyi tek sorguda devre dışı bırakma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>concurrency token / RowVersion</strong></td><td>Optimistic concurrency alanı; SQL Server'da rowversion (timestamp) tipi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/saving/concurrency">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>keyless entity type</strong></td><td>Anahtarsız tip; view ve ham SQL sonuçlarını eşlemek için</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/keyless-entity-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>backing field</strong></td><td>Özelliğin arkasındaki alanı doğrudan eşleme; kapsüllenmiş koleksiyonlar için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/backing-field">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JSON columns (EF Core 7+)</strong></td><td>Bir nesne ağacını tek JSON sütununa eşleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-7.0/whatsnew">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Multi-Tenant</strong></td><td>Tek uygulamada çok müşteri; ayrı veritabanı / ayrı şema / tek tablo + TenantId seçenekleri</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/miscellaneous/multitenancy">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Finbuckle.MultiTenant</strong></td><td>ASP.NET Core için hazır multi-tenant kütüphanesi; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://www.finbuckle.com/multitenant">finbuckle.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ef-core-sorgulama"><span class="h-num">§ 5</span>EF Core — sorgulama ve performans</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yükleme stratejileri ve N+1</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>eager loading (Include / ThenInclude)</strong></td><td>İlişkili veriyi aynı sorguda çekme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>lazy loading</strong></td><td>Navigation'a erişildiğinde otomatik sorgu; proxy paketi ister, N+1 üretir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/lazy">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>explicit loading (Entry().Load())</strong></td><td>İlişkili veriyi elle, istediğin anda yükleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/explicit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>N+1 problem</strong></td><td>Bir liste sorgusu + her satır için ek sorgu; ORM'in en klasik performans hatası</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cartesian explosion</strong></td><td>Çoklu Include'un satır sayısını çarparak şişirmesi; split query'nin var oluş sebebi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AsSplitQuery / AsSingleQuery</strong></td><td>Include'ları ayrı sorgulara bölme; tutarlılık bedeli var</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>filtered include</strong></td><td>Include içinde Where/OrderBy/Take kullanma (EF Core 5+)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sorgu yazımı ve hızlandırma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LINQ to Entities</strong></td><td>IQueryable üzerinde yazılan LINQ; ifade ağacı olarak SQL'e çevrilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IQueryable vs IEnumerable</strong></td><td>IEnumerable'a düşünce sorgu istemciye taşınır; en sık yapılan gizli hata</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>client evaluation</strong></td><td>Çevrilemeyen ifadenin bellekte çalışması; EF Core 3+ artık hata veriyor</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/client-eval">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AsNoTracking / AsNoTrackingWithIdentityResolution</strong></td><td>Change tracker'a yazmadan okuma; salt-okunur sorgularda varsayılan tercihin olsun</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/tracking">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>QueryTrackingBehavior</strong></td><td>Context genelinde takip davranışını değiştirme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/tracking">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>projection (Select ile DTO)</strong></td><td>Entity yerine sadece gereken alanları çekme; en etkili tek optimizasyon</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>compiled query (EF.CompileQuery)</strong></td><td>Sorgu ağacının derlenmesini önbelleğe alma; sıcak yollarda ölçülebilir kazanç</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>compiled model</strong></td><td>Büyük modellerde ilk sorgu gecikmesini azaltma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ExecuteUpdate / ExecuteDelete</strong></td><td>Nesneleri belleğe çekmeden toplu güncelleme/silme (EF Core 7+)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/saving/execute-insert-update-delete">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>FromSql / FromSqlRaw / FromSqlInterpolated</strong></td><td>Ham SQL'i EF sorgusuna sokma; Raw sürümünde injection'a dikkat</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/sql-queries">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SqlQuery&lt;T&gt; (EF Core 8+)</strong></td><td>Skaler/DTO döndüren ham SQL sorgusu</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/sql-queries">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ExecuteSqlRaw / ExecuteSqlInterpolated</strong></td><td>Sonuç döndürmeyen komut çalıştırma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/sql-queries">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ToQueryString()</strong></td><td>Üretilen SQL'i string olarak görme; debug'ın en hızlı yolu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>interceptor (IDbCommandInterceptor, ISaveChangesInterceptor)</strong></td><td>Komut ve kayıt işlemlerine araya girme; audit ve soft delete için</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/interceptors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF Core logging &amp; EnableSensitiveDataLogging</strong></td><td>Üretilen SQL'i loga basma; sensitive açıkken parametre değerleri de görünür (üretimde kapat)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbFunction / HasDbFunction</strong></td><td>Veritabanı fonksiyonunu LINQ'ten çağrılabilir hale getirme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/database-functions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF.Functions (Like, DateDiff, Contains)</strong></td><td>Sağlayıcıya özel SQL fonksiyonlarına LINQ köprüsü</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/database-functions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>bulk insert (SqlBulkCopy)</strong></td><td>ADO.NET'in toplu yükleme sınıfı; on binlerce satırda EF'ten kat kat hızlı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.data.sqlclient.sqlbulkcopy">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EFCore.BulkExtensions</strong></td><td>BulkInsert/BulkUpdate/BulkMerge; ticari lisans şartlarını mutlaka oku</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://github.com/borisdj/EFCore.BulkExtensions">github.com</a></td></tr>
+              <tr><td><strong>Z.EntityFramework.Extensions</strong></td><td>Toplu işlem kütüphanesi; ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://entityframework-extensions.net/">entityframework-extensions.net</a></td></tr>
+              <tr><td><strong>Linq.Dynamic.Core</strong></td><td>String ile dinamik LINQ; dinamik filtre/sıralama ekranlarında kullanılır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/zzzprojects/System.Linq.Dynamic.Core">github.com</a></td></tr>
+              <tr><td><strong>AutoMapper ProjectTo</strong></td><td>Projeksiyonu AutoMapper ile SQL'e indirgeme; AutoMapper 15 ile lisans modeli değişti</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.automapper.org/">docs.automapper.org</a></td></tr>
+              <tr><td><strong>Mapperly / Mapster</strong></td><td>AutoMapper'a ücretsiz alternatifler (Mapperly source generator tabanlı)</td><td><span class="tag">ORTA</span></td><td><a href="https://mapperly.riok.app/">mapperly.riok.app</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ef-core-migration"><span class="h-num">§ 6</span>EF Core — migration ve şema yönetimi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>EF Core migrations</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EF Core migration</strong></td><td>Model değişikliğini şema betiğine çeviren mekanizma; "migration" tek başına arama, "EF Core migration" yaz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotnet ef tool</strong></td><td>CLI aracı; <em>dotnet tool install --global dotnet-ef</em> ile kurulur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/cli/dotnet">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>migrations add / remove / list</strong></td><td>Yeni migration üretme, sonuncuyu geri alma, listeleme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/managing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>database update</strong></td><td>Migration'ları veritabanına uygulama</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>migrations script</strong></td><td>SQL betiği üretme; üretim ortamına genelde bu gider</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>idempotent script</strong></td><td>Kaç kez çalıştırılırsa çalıştırılsın aynı sonucu veren betik (--idempotent)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>migration bundle</strong></td><td>Migration'ları tek çalıştırılabilir dosyaya paketleme; CI/CD için tasarlandı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Database.Migrate() (uygulama açılışında)</strong></td><td>Kolay; uygunluğu dağıtım biçimine bağlı</td><td><span class="tag">ORTA</span> Duruma bağlı: <strong>geliştirme ortamı, tek örnekli küçük uygulama, masaüstü/mobilde gömülü SQLite</strong> &rarr; açılışta Migrate kabul edilebilir. <strong>EF Core 9+</strong> &rarr; migration uygulanırken veritabanı düzeyinde kilit alınır, eşzamanlı çalışma riski azaldı (TEYİT: learn.microsoft.com "What's new in EF Core 9"). <strong>Çok örnekli (multi-instance) üretim veya sıkı yetki ayrımı</strong> (uygulama kullanıcısının DDL yetkisi olmamalı) &rarr; idempotent script veya migration bundle ile ayrı dağıtım adımı; eski sürümlerde yarış durumu riski de vardır.</td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>__EFMigrationsHistory</strong></td><td>Uygulanmış migration'ların tutulduğu tablo</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/history-table">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>seed data (HasData)</strong></td><td>Migration'a gömülen başlangıç verisi; dinamik veri için uygun değildir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseSeeding / UseAsyncSeeding (EF Core 9+)</strong></td><td>HasData'nın kısıtlarını aşan yeni seed yolu</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IDesignTimeDbContextFactory</strong></td><td>Tasarım zamanında context üretimi; migration "cannot create DbContext" hatasının çözümü</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/cli/dbcontext-creation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>scaffold (reverse engineering)</strong></td><td>Var olan veritabanından entity üretme; database-first yaklaşımı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF Core Power Tools</strong></td><td>Visual Studio eklentisi; scaffold, model diyagramı, migration görselleştirme (ücretsiz)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/ErikEJ/EFCorePowerTools">github.com</a></td></tr>
+              <tr><td><strong>EnsureCreated / EnsureDeleted</strong></td><td>Migration'sız şema oluşturma; sadece test/prototip için, üretimde kullanma</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/ensure-created">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>state-based vs migration-based deployment</strong></td><td>DACPAC gibi hedef-şema karşılaştırması mı, sıralı betik mi; ekipte tartışılan konu</td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dapper-ve-mikro-orm"><span class="h-num">§ 7</span>Dapper ve mikro-ORM alternatifleri</h2>
+        <p>Dapper ilanlarda sık geçer. Anlatması kolay: "ADO.NET'in üstüne ince bir eşleme katmanı". Ama <em>ne zaman Dapper ne zaman EF Core</em> sorusuna hazırlıklı ol.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dapper</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Dapper</strong></td><td>IDbConnection'a extension metotlar ekleyen mikro-ORM; change tracking yok</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com/DapperLib</a></td></tr>
+              <tr><td><strong>Query&lt;T&gt; / QueryAsync&lt;T&gt;</strong></td><td>SQL sonucunu tipli listeye eşleme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>QueryFirstOrDefault / QuerySingle</strong></td><td>Tek satır döndüren varyantlar; First ve Single farkını bil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>Execute / ExecuteScalar</strong></td><td>Sonuç kümesi olmayan komut ve tek değer döndüren komut</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>anonymous parameters</strong></td><td><em>new { Id = 5 }</em> ile parametre geçme; injection koruması buradan gelir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>DynamicParameters</strong></td><td>Çıktı (output) parametreleri ve stored procedure dönüş değerleri için</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>multi-mapping (splitOn)</strong></td><td>Tek satırdan birden çok nesne üretme (Order + Customer)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>QueryMultiple (multiple result set)</strong></td><td>Tek gidiş-dönüşte birden çok sonuç kümesi okuma</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>buffered vs unbuffered</strong></td><td>Sonucu belleğe alıp almama; büyük sonuçlarda unbuffered</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>commandType: StoredProcedure</strong></td><td>Dapper ile saklı yordam çağırma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>Dapper.Contrib / Dapper.SimpleCRUD</strong></td><td>Basit CRUD extension'ları; Contrib bakımı yavaş</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/DapperLib/Dapper">github.com</a></td></tr>
+              <tr><td><strong>Dapper.AOT</strong></td><td>Source generator ile derleme zamanı Dapper; yansımayı azaltır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://aot.dapperlib.dev/">aot.dapperlib.dev</a></td></tr>
+              <tr><td><strong>EF Core + Dapper birlikte</strong></td><td>Yazma EF, ağır okuma Dapper; aynı DbConnection/transaction'ı paylaşabilirler</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>—</td></tr>
+              <tr><td><strong>learndapper.com</strong></td><td>Topluluk kılavuzu; resmî değil ama en derli toplu Dapper kaynağı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.learndapper.com/">learndapper.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Diğer ORM ve sorgu kütüphaneleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ADO.NET (SqlConnection, SqlCommand, DataReader)</strong></td><td>En alt katman; her ORM bunun üstünde çalışır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Microsoft.Data.SqlClient</strong></td><td>Güncel SQL Server sürücüsü; eski System.Data.SqlClient yerine bunu kullan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/connect/ado-net/microsoft-ado-net-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DataTable / DataSet</strong></td><td>Eski tipsiz veri yapıları; eski projelerde bolca görürsün</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RepoDB</strong></td><td>Dapper ile EF arası hibrit ORM; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://repodb.net/">repodb.net</a></td></tr>
+              <tr><td><strong>linq2db</strong></td><td>LINQ tabanlı, SQL'e çok yakın duran hızlı ORM; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://linq2db.github.io/">linq2db.github.io</a></td></tr>
+              <tr><td><strong>ServiceStack.OrmLite</strong></td><td>POCO tabanlı hafif ORM; ServiceStack ticari lisanslı (sınırlı ücretsiz katman)</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.servicestack.net/ormlite/">docs.servicestack.net</a></td></tr>
+              <tr><td><strong>SqlKata</strong></td><td>Fluent SQL query builder; ORM değil, sorgu üretir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://sqlkata.com/">sqlkata.com</a></td></tr>
+              <tr><td><strong>NHibernate</strong></td><td>Java Hibernate'in .NET karşılığı; eski kurumsal projelerde yaşıyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://nhibernate.info/">nhibernate.info</a></td></tr>
+              <tr><td><strong>Entity Framework 6</strong></td><td>.NET Framework dönemi ORM; EF Core ile aynı şey değil, karıştırma</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/ef6/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Marten</strong></td><td>PostgreSQL üstünde document DB + event store; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://martendb.io/">martendb.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="veritabani-motorlari"><span class="h-num">§ 8</span>İlişkisel veritabanı motorları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Motorlar ve .NET sürücüleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PostgreSQL</strong></td><td>Açık kaynak, ücretsiz; Türkiye'de ilanlarda SQL Server'dan sonra en çok geçen</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.postgresql.org/docs/current/">postgresql.org</a></td></tr>
+              <tr><td><strong>Npgsql</strong></td><td>PostgreSQL'in .NET sürücüsü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.npgsql.org/doc/index.html">npgsql.org</a></td></tr>
+              <tr><td><strong>Npgsql.EntityFrameworkCore.PostgreSQL</strong></td><td>EF Core sağlayıcısı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.npgsql.org/efcore/">npgsql.org/efcore</a></td></tr>
+              <tr><td><strong>jsonb</strong></td><td>PostgreSQL'in indekslenebilir ikili JSON tipi; json tipiyle farkını bil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.postgresql.org/docs/current/datatype-json.html">postgresql.org</a></td></tr>
+              <tr><td><strong>GIN / GiST / BRIN index</strong></td><td>PostgreSQL'e özgü index türleri; jsonb ve tam metin için GIN</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/indexes-types.html">postgresql.org</a></td></tr>
+              <tr><td><strong>PostgreSQL extension</strong></td><td>CREATE EXTENSION ile eklenen modüller (uuid-ossp, pg_trgm, postgis, pgvector)</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/sql-createextension.html">postgresql.org</a></td></tr>
+              <tr><td><strong>VACUUM / autovacuum</strong></td><td>MVCC'nin bıraktığı ölü satırları temizleme; PostgreSQL'in en kritik bakım işi</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/routine-vacuuming.html">postgresql.org</a></td></tr>
+              <tr><td><strong>pgAdmin / psql / DBeaver</strong></td><td>PostgreSQL istemcileri; DBeaver çok motorlu ve ücretsiz (CE)</td><td><span class="tag">ORTA</span></td><td><a href="https://www.pgadmin.org/">pgadmin.org</a></td></tr>
+              <tr><td><strong>MySQL</strong></td><td>Yaygın açık kaynak motor; Oracle'a ait, GPL + ticari çift lisans</td><td><span class="tag">ORTA</span></td><td><a href="https://dev.mysql.com/doc/">dev.mysql.com</a></td></tr>
+              <tr><td><strong>MariaDB</strong></td><td>MySQL çatallanması; tamamen açık kaynak</td><td><span class="tag">ORTA</span></td><td><a href="https://mariadb.com/kb/en/documentation/">mariadb.com</a></td></tr>
+              <tr><td><strong>Pomelo.EntityFrameworkCore.MySql</strong></td><td>MySQL için en yaygın EF Core sağlayıcısı; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql">github.com</a></td></tr>
+              <tr><td><strong>SQLite</strong></td><td>Dosya tabanlı, sunucusuz; MAUI/masaüstü ve testte ideal</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.sqlite.org/docs.html">sqlite.org</a></td></tr>
+              <tr><td><strong>Microsoft.Data.Sqlite</strong></td><td>SQLite'ın .NET sürücüsü</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/data/sqlite/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Oracle Database</strong></td><td>Kurumsal ilanlarda geçer; ODP.NET sürücüsü, PL/SQL dili</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.oracle.com/en/database/">docs.oracle.com</a></td></tr>
+              <tr><td><strong>DuckDB</strong></td><td>Analitik (OLAP) gömülü veritabanı; "SQLite'ın analitik kardeşi"</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://duckdb.org/docs/">duckdb.org</a></td></tr>
+              <tr><td><strong>connection string</strong></td><td>Sunucu, kimlik doğrulama, TrustServerCertificate, Pooling ayarları; sırlar burada sızar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/connection-strings">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>connection pooling</strong></td><td>Bağlantıların yeniden kullanımı; using ile kapatmak pooling'i bozmaz, aksine gerektirir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-connection-pooling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OLTP vs OLAP</strong></td><td>İşlem yükü mü analitik yük mü; veritabanı seçiminin ilk sorusu</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nosql"><span class="h-num">§ 9</span>NoSQL ve özel amaçlı veritabanları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doküman, arama, kolon ve grafik veritabanları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MongoDB</strong></td><td>En yaygın doküman veritabanı; BSON belgeler, koleksiyonlar</td><td><span class="tag">ORTA</span></td><td><a href="https://www.mongodb.com/docs/">mongodb.com</a></td></tr>
+              <tr><td><strong>MongoDB C#/.NET driver</strong></td><td>Resmî sürücü; IMongoCollection, filter builder, LINQ desteği</td><td><span class="tag">ORTA</span></td><td><a href="https://www.mongodb.com/docs/drivers/csharp/">mongodb.com</a></td></tr>
+              <tr><td><strong>MongoDB aggregation pipeline</strong></td><td>$match, $group, $lookup, $project ile aşamalı sorgu</td><td><span class="tag">ORTA</span></td><td><a href="https://www.mongodb.com/docs/manual/core/aggregation-pipeline/">mongodb.com</a></td></tr>
+              <tr><td><strong>MongoDB lisansı (SSPL)</strong></td><td>Açık kaynak değil sayılır; bulut sağlayıcıya kısıt getirir, kendi kurulumunda sorun yok</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.mongodb.com/legal/licensing/server-side-public-license">mongodb.com</a></td></tr>
+              <tr><td><strong>Elasticsearch</strong></td><td>Arama ve log analitiği motoru; Lucene tabanlı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.elastic.co/docs">elastic.co</a></td></tr>
+              <tr><td><strong>Elastic.Clients.Elasticsearch</strong></td><td>Güncel .NET istemcisi; eski NEST/Elasticsearch.Net yerine bunu ara</td><td><span class="tag">ORTA</span></td><td><a href="https://www.elastic.co/docs">elastic.co</a></td></tr>
+              <tr><td><strong>OpenSearch</strong></td><td>Elasticsearch'ün Apache 2.0 lisanslı çatallanması; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://opensearch.org/docs/latest/">opensearch.org</a></td></tr>
+              <tr><td><strong>Apache Lucene.NET</strong></td><td>Gömülü arama kütüphanesi; sunucu istemeyen senaryolarda</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://lucenenet.apache.org/">lucenenet.apache.org</a></td></tr>
+              <tr><td><strong>Apache Cassandra</strong></td><td>Kolon ailesi, yüksek yazma hacmi; partition key tasarımı hayati</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://cassandra.apache.org/doc/latest/">cassandra.apache.org</a></td></tr>
+              <tr><td><strong>ScyllaDB</strong></td><td>Cassandra uyumlu, C++ ile yazılmış hızlı alternatif</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.scylladb.com/">docs.scylladb.com</a></td></tr>
+              <tr><td><strong>Azure Cosmos DB</strong></td><td>Microsoft'un çok modelli dağıtık veritabanı; RU/s üzerinden ücretlendirilir</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/cosmos-db/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure Table Storage / DynamoDB</strong></td><td>Basit anahtar-değer/geniş sütun bulut depoları</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/storage/tables/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>LiteDB</strong></td><td>Tek dosyalık gömülü .NET doküman veritabanı; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://www.litedb.org/">litedb.org</a></td></tr>
+              <tr><td><strong>RavenDB</strong></td><td>.NET doğumlu doküman veritabanı; topluluk sürümü ücretsiz, kurumsal ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://ravendb.net/docs">ravendb.net</a></td></tr>
+              <tr><td><strong>Neo4j</strong></td><td>Grafik veritabanı, Cypher sorgu dili; community sürüm ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://neo4j.com/docs/">neo4j.com</a></td></tr>
+              <tr><td><strong>InfluxDB / TimescaleDB</strong></td><td>Zaman serisi veritabanları; Timescale PostgreSQL eklentisidir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.influxdata.com/">docs.influxdata.com</a></td></tr>
+              <tr><td><strong>vektör veritabanı</strong></td><td>Embedding araması; RAG ve yapay zekâ projelerinin veri katmanı</td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+              <tr><td><strong>Qdrant</strong></td><td>Rust ile yazılmış vektör veritabanı; .NET istemcisi var, ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://qdrant.tech/documentation/">qdrant.tech</a></td></tr>
+              <tr><td><strong>pgvector</strong></td><td>PostgreSQL'e vektör tipi ekleyen eklenti; ayrı sunucu kurmadan vektör arama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/pgvector/pgvector">github.com/pgvector</a></td></tr>
+              <tr><td><strong>Milvus / Weaviate / Chroma</strong></td><td>Diğer yaygın vektör veritabanları; hepsinin ücretsiz katmanı var</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://milvus.io/docs">milvus.io</a></td></tr>
+              <tr><td><strong>CAP teoremi</strong></td><td>Consistency, Availability, Partition tolerance; dağıtık veritabanı mülakat klasiği</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>eventual consistency</strong></td><td>Sonunda tutarlılık; NoSQL'in ACID yerine sunduğu model</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="redis"><span class="h-num">§ 10</span>Redis — derinlemesine</h2>
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>"Redis biliyorum" yazan ama "sadece duydum" diyen bir aday, tek soruda açığa çıkar. Klasik soru sırası: <em>Redis nedir</em> &rarr; <em>hangi veri tiplerini kullandın</em> &rarr; <em>cache invalidation'ı nasıl yaptın</em> &rarr; <em>TTL nasıl belirlediniz</em>. Docker ile bir Redis kaldır, StackExchange.Redis ile bağlan, hepsini elinle dene.</p>
+          <ul>
+            <li><strong>Öncelik</strong> &rarr; EF Core/SQL temeli oturmuş ve mülakata hazırlanıyorsan bu bölüm sayfanın en yüksek öncelikli bölümü. Veritabanı temelin yoksa önce §&nbsp;2 ve §&nbsp;4. Tek sunuculu küçük uygulamada önce IMemoryCache (§&nbsp;11); Redis'e çok sunucu veya paylaşılan önbellek gerektiğinde geç.</li>
+            <li><strong>Platform</strong> &rarr; Linux/macOS: Docker veya yerel paket (apt, brew). Windows: Docker Desktop veya WSL içinde Redis; resmî yerel Windows sürümü yok, alternatif olarak Garnet (.NET ile yazılmış, Windows'ta yerel çalışır) veya Memurai.</li>
+            <li><strong>Lisans</strong> &rarr; Redis 8 AGPLv3 / RSALv2 / SSPLv1 seçenekleriyle dağıtılır; daha serbest (BSD) lisans isteyen için Valkey (TEYİT: redis.io lisans sayfası).</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Redis — temel kavramlar ve veri tipleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Redis</strong></td><td>Bellekte çalışan anahtar-değer veri deposu; cache, kuyruk, kilit, sayaç olarak kullanılır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis lisansı (RSALv2/SSPL &rarr; AGPL)</strong></td><td>2024'te lisans değişti, 2025'te AGPLv3 seçeneği eklendi; "Redis açık kaynak mı" sorusu tuzaklı</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://redis.io/legal/licenses/">redis.io</a></td></tr>
+              <tr><td><strong>string</strong></td><td>En basit tip; SET/GET/INCR. JSON metnini de burada saklarsın</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/strings/">redis.io</a></td></tr>
+              <tr><td><strong>list</strong></td><td>Bağlı liste; LPUSH/RPOP ile basit kuyruk</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/lists/">redis.io</a></td></tr>
+              <tr><td><strong>set</strong></td><td>Sırasız tekil küme; SADD, SINTER ile kesişim</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/sets/">redis.io</a></td></tr>
+              <tr><td><strong>sorted set (zset)</strong></td><td>Skorlu sıralı küme; liderlik tablosu ve zaman pencereli rate limit için</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/sorted-sets/">redis.io</a></td></tr>
+              <tr><td><strong>hash</strong></td><td>Alan-değer çiftleri; bir nesneyi alan alan saklamak için</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/hashes/">redis.io</a></td></tr>
+              <tr><td><strong>bitmap</strong></td><td>String üstünde bit işlemleri; günlük aktif kullanıcı sayımı klasik örnek</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/bitmaps/">redis.io</a></td></tr>
+              <tr><td><strong>HyperLogLog</strong></td><td>Yaklaşık tekil sayım; çok az bellekle milyonlarca tekil değer</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Streams</strong></td><td>Append-only günlük yapısı; consumer group ile Kafka benzeri tüketim</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/streams/">redis.io</a></td></tr>
+              <tr><td><strong>geospatial (GEOADD)</strong></td><td>Konum tabanlı sorgular; sorted set üstüne kurulu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/geospatial/">redis.io</a></td></tr>
+              <tr><td><strong>RedisJSON / RediSearch / RedisTimeSeries</strong></td><td>Redis Stack modülleri; JSON sorgusu, ikincil index, zaman serisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>key naming convention</strong></td><td><em>uygulama:varlik:id</em> biçimi; iki nokta ile ad alanı ayırma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>KEYS vs SCAN</strong></td><td>KEYS üretimde sunucuyu kilitler; her zaman SCAN kullan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/commands/scan/">redis.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Redis — davranış, kalıcılık, ölçekleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>TTL / EXPIRE</strong></td><td>Anahtara ömür verme; cache'in temel mekanizması</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/commands/expire/">redis.io</a></td></tr>
+              <tr><td><strong>eviction policy</strong></td><td>Bellek dolunca ne silinecek: noeviction, allkeys-lru, volatile-ttl, allkeys-lfu...</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/develop/reference/eviction/">redis.io</a></td></tr>
+              <tr><td><strong>maxmemory</strong></td><td>Redis'in kullanabileceği bellek üst sınırı; eviction bununla anlamlı olur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/reference/eviction/">redis.io</a></td></tr>
+              <tr><td><strong>persistence: RDB</strong></td><td>Belirli aralıklarla anlık görüntü; hızlı ama son saniyeler kaybolabilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/">redis.io</a></td></tr>
+              <tr><td><strong>persistence: AOF</strong></td><td>Her yazma komutunu dosyaya yazma; daha güvenli, daha yavaş</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/">redis.io</a></td></tr>
+              <tr><td><strong>single-threaded model</strong></td><td>Komutlar tek iş parçacığında sırayla çalışır; yavaş komut herkesi bekletir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>pipeline</strong></td><td>Birden çok komutu tek gidiş-dönüşte gönderme; ağ gecikmesini yok eder</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>transaction (MULTI/EXEC/WATCH)</strong></td><td>Redis transaction'ı SQL'inkinden farklı: rollback yok, WATCH ile optimistic kilit</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>Lua script (EVAL)</strong></td><td>Sunucuda atomik çalışan betik; çok adımlı işlemleri tek parçaya indirger</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Functions</strong></td><td>EVAL'ın kalıcı, adlandırılmış hali (Redis 7+)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>pub/sub</strong></td><td>Yayın-abone; mesajı saklamaz, dinleyen yoksa kaybolur. RabbitMQ ile karıştırma</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>keyspace notifications</strong></td><td>Anahtar olaylarını (expire, del) pub/sub ile dinleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>replication (replica)</strong></td><td>Ana-kopya çoğaltma; okuma yükünü dağıtır</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/replication/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Sentinel</strong></td><td>Otomatik failover ve izleme; cluster ile aynı şey değil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/sentinel/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Cluster</strong></td><td>Hash slot ile veri bölme; çok anahtarlı komutlarda kısıt getirir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/">redis.io</a></td></tr>
+              <tr><td><strong>dağıtık kilit / Redlock</strong></td><td>Redis ile kilit alma algoritması; tartışmalıdır, sınırlarını bilerek kullan</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/">redis.io</a></td></tr>
+              <tr><td><strong>RedLock.net / DistributedLock</strong></td><td>.NET dağıtık kilit kütüphaneleri; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/madelson/DistributedLock">github.com</a></td></tr>
+              <tr><td><strong>SETNX / SET NX PX</strong></td><td>Kilidin temel komutu: yoksa yaz + süre ver</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/commands/set/">redis.io</a></td></tr>
+              <tr><td><strong>redis-cli</strong></td><td>Komut satırı istemcisi; MONITOR, INFO, SLOWLOG komutlarını öğren</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/tools/cli/">redis.io</a></td></tr>
+              <tr><td><strong>SLOWLOG / INFO / MEMORY USAGE</strong></td><td>Teşhis komutları; "Redis yavaş" dendiğinde ilk bakılacak yerler</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/commands/slowlog/">redis.io</a></td></tr>
+              <tr><td><strong>RedisInsight</strong></td><td>Resmî görsel istemci; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/insight/">redis.io/insight</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Redis — .NET tarafı ve alternatifler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>StackExchange.Redis</strong></td><td>.NET'in fiilî standart Redis istemcisi; ConnectionMultiplexer singleton olmalı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://stackexchange.github.io/StackExchange.Redis/">stackexchange.github.io</a></td></tr>
+              <tr><td><strong>ConnectionMultiplexer</strong></td><td>Bağlantı havuzunu yöneten pahalı nesne; her istekte yenisini açmak klasik hatadır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://stackexchange.github.io/StackExchange.Redis/Basics">stackexchange.github.io</a></td></tr>
+              <tr><td><strong>IDatabase / IServer / ISubscriber</strong></td><td>Sırasıyla komut, sunucu yönetimi ve pub/sub arayüzleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://stackexchange.github.io/StackExchange.Redis/">stackexchange.github.io</a></td></tr>
+              <tr><td><strong>IDistributedCache</strong></td><td>ASP.NET Core'un dağıtık cache soyutlaması; Redis ve SQL Server uygulamaları var</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AddStackExchangeRedisCache</strong></td><td>IDistributedCache'i Redis'e bağlayan DI kaydı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HybridCache (.NET 9+)</strong></td><td>L1 (bellek) + L2 (Redis) katmanlı cache; stampede korumasını hazır getirir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Redis Data Protection key store</strong></td><td>ASP.NET Core anahtarlarını Redis'te saklama; çok örnekli dağıtımda gerekli</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/implementation/key-storage-providers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SignalR Redis backplane</strong></td><td>Çok sunuculu SignalR'da mesaj dağıtımı &rarr; <a href="../05-mesajlasma-ve-dagitik/index.html">05. sayfa</a></td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/redis-backplane">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Valkey</strong></td><td>Redis lisans değişikliği sonrası Linux Foundation çatallanması; BSD, ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://valkey.io/">valkey.io</a></td></tr>
+              <tr><td><strong>KeyDB</strong></td><td>Çok iş parçacıklı Redis çatallanması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.keydb.dev/">keydb.dev</a></td></tr>
+              <tr><td><strong>Garnet</strong></td><td>Microsoft Research'ün .NET ile yazılmış Redis protokolü uyumlu sunucusu; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://microsoft.github.io/garnet/">microsoft.github.io/garnet</a></td></tr>
+              <tr><td><strong>Memcached</strong></td><td>Sadece cache yapan eski nesil sistem; veri tipi ve kalıcılık yok</td><td><span class="tag">ORTA</span></td><td><a href="https://memcached.org/">memcached.org</a></td></tr>
+              <tr><td><strong>NCache</strong></td><td>.NET doğumlu dağıtık cache; open source ve ücretli enterprise sürümleri var</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.alachisoft.com/ncache/">alachisoft.com</a></td></tr>
+              <tr><td><strong>Azure Cache for Redis</strong></td><td>Yönetilen Redis; katman başına ücretlendirilir</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="onbellekleme"><span class="h-num">§ 11</span>Önbellekleme stratejileri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cache katmanları ve desenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>IMemoryCache</strong></td><td>Uygulama içi bellek cache'i; tek sunucuda çalışır, ölçeklenince tutarsızlaşır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MemoryCacheEntryOptions</strong></td><td>AbsoluteExpiration, SlidingExpiration, Size, Priority ayarları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>absolute vs sliding expiration</strong></td><td>Sabit süre mi, her erişimde uzayan süre mi; ikisi birlikte de kullanılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache-aside (lazy loading)</strong></td><td>Önce cache'e bak, yoksa veritabanından al ve yaz; en yaygın desen</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>write-through / write-behind</strong></td><td>Yazmayı cache üzerinden yapma; write-behind gecikmeli yazar</td><td><span class="tag">ORTA</span></td><td>learn.microsoft.com</td></tr>
+              <tr><td><strong>read-through</strong></td><td>Cache'in kendi kendine kaynaktan doldurması</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>cache stampede (dogpile)</strong></td><td>TTL bittiği anda yüzlerce isteğin aynı anda kaynağa gitmesi; kilit veya HybridCache ile çözülür</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache invalidation</strong></td><td>Veriyi ne zaman geçersiz kılacağın sorusu; "iki zor problemden biri" esprisinin kaynağı</td><td><span class="tag tag--ok">TEMEL</span></td><td>—</td></tr>
+              <tr><td><strong>cache key tasarımı / versiyonlama</strong></td><td>Anahtara sürüm ekleyerek toplu geçersiz kılma tekniği</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>cache tag / CacheSignal</strong></td><td>İlişkili anahtarları etiketle toplu temizleme (HybridCache tag desteği)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>output caching (.NET 7+)</strong></td><td>Sunucu tarafında yanıtın tamamını saklama; response caching'ten farklı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>response caching (Cache-Control)</strong></td><td>HTTP başlıklarıyla istemci/ara sunucu cache'i</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/response">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ETag / If-None-Match / 304</strong></td><td>İçerik parmak izi ile koşullu istek; bant genişliği tasarrufu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>Last-Modified / If-Modified-Since</strong></td><td>ETag'in tarih tabanlı alternatifi</td><td><span class="tag">ORTA</span></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>CDN caching</strong></td><td>Statik içeriği kenar sunucularda tutma (Cloudflare, Azure Front Door)</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>ResponseCompression</strong></td><td>Cache değil ama aynı problemi çözer: Brotli/Gzip ile yanıt küçültme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/response-compression">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>FusionCache</strong></td><td>Katmanlı cache + fail-safe + stampede koruması; ücretsiz, çok beğenilen kütüphane</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/ZiggyCreatures/FusionCache">github.com</a></td></tr>
+              <tr><td><strong>LazyCache</strong></td><td>IMemoryCache üstünde kilitli GetOrAdd; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/alastairtree/LazyCache">github.com</a></td></tr>
+              <tr><td><strong>EasyCaching</strong></td><td>Çok sağlayıcılı cache soyutlaması; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/dotnetcore/EasyCaching">github.com</a></td></tr>
+              <tr><td><strong>EF Core second-level cache</strong></td><td>EF'in kendinde yok; EFCoreSecondLevelCacheInterceptor gibi paketlerle eklenir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor">github.com</a></td></tr>
+              <tr><td><strong>MemoryCache boyut sınırı (SizeLimit)</strong></td><td>Sınırsız bellek cache'i uygulamayı öldürür; Size vermeden SizeLimit çalışmaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="veri-erisim-kaliplari"><span class="h-num">§ 12</span>Veri erişim kalıpları</h2>
+        <p>Bu başlıklar <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a> sayfasıyla kesişir; orada mimari tarafı, burada veri tarafı var.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Repository ve arkadaşları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>repository pattern</strong></td><td>Veri erişimini arayüzün arkasına saklama; klasik katmanlı mimarinin bel kemiği</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>generic repository</strong></td><td>IRepository&lt;T&gt; ile tek tip CRUD; yazması kolay, ama eleştirisini de bil</td><td><span class="tag tag--ok">TEMEL</span></td><td>—</td></tr>
+              <tr><td><strong>unit of work</strong></td><td>Birden çok repository'nin değişikliğini tek transaction'da kaydetme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>"DbContext zaten UoW mu" tartışması</strong></td><td>DbContext = UoW, DbSet = repository görüşü; mülakatta bilinçli bir cevabı olmalı</td><td><span class="tag tag--ok">TEMEL</span></td><td>—</td></tr>
+              <tr><td><strong>specification pattern</strong></td><td>Sorgu kriterini nesneye çevirme; tekrar eden Where'leri toplar</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/ardalis/Specification">github.com/ardalis</a></td></tr>
+              <tr><td><strong>Ardalis.Specification</strong></td><td>Hazır specification kütüphanesi; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://specification.ardalis.com/">specification.ardalis.com</a></td></tr>
+              <tr><td><strong>DTO / projection</strong></td><td>Entity'yi dışarı sızdırmama; API sözleşmesini modelden ayırma</td><td><span class="tag tag--ok">TEMEL</span></td><td>—</td></tr>
+              <tr><td><strong>aggregate root (DDD)</strong></td><td>Repository'nin hangi seviyede olacağını belirleyen DDD kavramı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CQRS (veri tarafı)</strong></td><td>Okuma ve yazma modellerini ayırma; okuma Dapper, yazma EF klasik uygulaması</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>event sourcing</strong></td><td>Durum yerine olayları saklama; CQRS ile birlikte anılır ama aynı şey değil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>soft delete</strong></td><td>Kaydı silmek yerine işaretleme; global query filter ile birlikte kurulur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>audit trail (CreatedBy/UpdatedAt)</strong></td><td>Kim ne zaman değiştirdi; SaveChanges interceptor ile merkezileştirilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/interceptors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>outbox pattern</strong></td><td>Veritabanı yazması ile mesaj yayınını atomik yapma &rarr; <a href="../05-mesajlasma-ve-dagitik/index.html">05. sayfa</a></td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+              <tr><td><strong>anemic vs rich domain model</strong></td><td>Sadece property tutan model mi, davranış taşıyan model mi</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="migration-araclari"><span class="h-num">§ 13</span>Migration ve veri taşıma araçları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Şema versiyonlama araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EF Core migrations</strong></td><td>Kod-öncelikli; model sınıflarından üretilir &rarr; <a href="#ef-core-migration">§ 6</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbUp</strong></td><td>Sıralı SQL betiklerini bir kez çalıştıran hafif kütüphane; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://dbup.readthedocs.io/">dbup.readthedocs.io</a></td></tr>
+              <tr><td><strong>FluentMigrator</strong></td><td>C# ile Up/Down yazılan migration çerçevesi; EF'ten bağımsız, ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://fluentmigrator.github.io/">fluentmigrator.github.io</a></td></tr>
+              <tr><td><strong>Flyway</strong></td><td>Java dünyasından gelen, çok dilli standart; Community ücretsiz, üst katmanlar ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://documentation.red-gate.com/flyway">red-gate.com</a></td></tr>
+              <tr><td><strong>Liquibase</strong></td><td>XML/YAML/SQL changelog tabanlı; OSS sürüm ücretsiz, Pro ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.liquibase.com/">docs.liquibase.com</a></td></tr>
+              <tr><td><strong>grate / RoundhousE</strong></td><td>Betik klasörü tabanlı .NET migration araçları; ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://erikbra.github.io/grate/">erikbra.github.io/grate</a></td></tr>
+              <tr><td><strong>Redgate SQL Compare / SQL Change Automation</strong></td><td>Şema karşılaştırma ve yayın araçları; ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.red-gate.com/products/sql-compare/">red-gate.com</a></td></tr>
+              <tr><td><strong>zero-downtime migration (expand/contract)</strong></td><td>Önce ekle, kodu geçir, sonra sil; kesintisiz yayının şema tarafı</td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+              <tr><td><strong>backward compatible schema change</strong></td><td>Eski ve yeni uygulama sürümünün aynı şemayla çalışabilmesi</td><td><span class="tag">ORTA</span></td><td>—</td></tr>
+              <tr><td><strong>bcp / BULK INSERT</strong></td><td>SQL Server toplu içe/dışa aktarma araçları</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/tools/bcp-utility">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>migration'ı CI/CD hattına koyma</strong></td><td>Betiği yayın adımında çalıştırma &rarr; <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07. sayfa</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="performans-profilleme"><span class="h-num">§ 14</span>Performans ve profilleme</h2>
+        <p>Yavaş sorgu yaşanan her proje için bu bölüm geçerli. Kullanımı duruma göre değişir:</p>
+        <ul>
+          <li><strong>Performans deneyimin varsa</strong> (ya da özgeçmişte "kod performansı" iddiası varsa) &rarr; bu bölüm en rahat konuşulacak yer olmalı; çoğu zaman eksik olan <em>araç</em> tarafıdır.</li>
+          <li><strong>Yeni başlıyorsan</strong> &rarr; önce §&nbsp;5 (N+1, AsNoTracking, projection) ve <code>SET STATISTICS IO</code>; profil araçları sonra.</li>
+          <li><strong>PostgreSQL kullanıyorsan</strong> &rarr; <code>EXPLAIN ANALYZE</code> ve pg_stat_statements öne; First Responder Kit yalnızca SQL Server'da, SSMS ve Plan Explorer ise yalnızca Windows'ta çalışır.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ölçme, profilleme, ayar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MiniProfiler</strong></td><td>İstek başına sorgu sürelerini sayfada gösteren hafif profil aracı; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://miniprofiler.com/dotnet/">miniprofiler.com</a></td></tr>
+              <tr><td><strong>EF Core logging (LogTo)</strong></td><td>Üretilen SQL'i konsola/loga dökme; ilk teşhis aracın</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/simple-logging">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF Core CommandExecuted event</strong></td><td>Diagnostics ile yavaş komutları yakalama</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>BenchmarkDotNet</strong></td><td>Mikro ölçüm kütüphanesi; veritabanı çağrısı ölçmek için değil, kod ölçmek için</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td></tr>
+              <tr><td><strong>SQL Server Execution Plan (SSMS Ctrl+M)</strong></td><td>Gerçek planı görme kısayolu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/display-an-actual-execution-plan">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SolarWinds Plan Explorer</strong></td><td>Planı okunur hale getiren ücretsiz araç</td><td><span class="tag">ORTA</span></td><td><a href="https://www.solarwinds.com/free-tools/plan-explorer">solarwinds.com</a></td></tr>
+              <tr><td><strong>First Responder Kit (sp_Blitz, sp_BlitzIndex, sp_BlitzCache)</strong></td><td>Ücretsiz SQL Server teşhis prosedürleri; index önerileri için standart</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/BrentOzarULTD/SQL-Server-First-Responder-Kit">github.com</a></td></tr>
+              <tr><td><strong>missing index DMV</strong></td><td>SQL Server'ın eksik index önerileri; körlemesine uygulama, doğrula</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/tune-nonclustered-missing-index-suggestions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Database Engine Tuning Advisor</strong></td><td>Otomatik index/istatistik önerisi aracı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/database-engine-tuning-advisor">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>pg_stat_statements</strong></td><td>PostgreSQL'de en pahalı sorguları bulan eklenti</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/pgstatstatements.html">postgresql.org</a></td></tr>
+              <tr><td><strong>OpenTelemetry database instrumentation</strong></td><td>Sorguları izleme (trace) verisine dönüştürme &rarr; <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07. sayfa</a></td><td><span class="tag">ORTA</span></td><td><a href="https://opentelemetry.io/docs/languages/net/">opentelemetry.io</a></td></tr>
+              <tr><td><strong>async/await ve veritabanı</strong></td><td>ToListAsync, FirstOrDefaultAsync; thread havuzunu boşa tüketmemek için</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/miscellaneous/async">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CommandTimeout</strong></td><td>Sorgu zaman aşımı; varsayılan 30 sn, uzun raporlarda ayarlanır</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Max Pool Size / pool exhaustion</strong></td><td>Bağlantı havuzunun tükenmesi; "timeout expired" hatasının en sık sebebi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-connection-pooling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>batching (MaxBatchSize)</strong></td><td>EF'in birden çok INSERT'i tek gidiş-dönüşte göndermesi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/performance/efficient-updating">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>read replica / okuma-yazma ayrımı</strong></td><td>Okumaları kopyaya yönlendirme; replikasyon gecikmesini hesaba kat</td><td><span class="tag tag--info">İLERİ</span></td><td>—</td></tr>
+              <tr><td><strong>Testcontainers for .NET</strong></td><td>Testte gerçek SQL Server/PostgreSQL/Redis konteyneri kaldırma; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://testcontainers.com/">testcontainers.com</a></td></tr>
+              <tr><td><strong>Respawn</strong></td><td>Testler arası veritabanını sıfırlama; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/jbogard/Respawn">github.com</a></td></tr>
+              <tr><td><strong>EF Core InMemory provider</strong></td><td>Test için sahte sağlayıcı; ilişkisel davranışı taklit etmez, Microsoft önermiyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/testing/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQLite in-memory ile test</strong></td><td>InMemory'ye göre daha gerçekçi; yine de SQL Server değildir</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/testing/testing-with-the-database">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DbContext mocklama</strong></td><td>Mock test ayrıntısı &rarr; <a href="../06-test-ve-kalite/index.html">06. sayfa</a>; genelde mock yerine gerçek veritabanı önerilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://learn.microsoft.com/en-us/ef/core/testing/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Bogus</strong></td><td>Sahte test verisi üretme; ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bchavez/Bogus">github.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 15</span>Özet — bu sayfanın öncelik sırası</h2>
+        <p>Bu sayfa için iki sıra var:</p>
+        <ul>
+          <li><strong>(A) Mülakata hazırlanan, SQL Server + EF Core deneyimli okur</strong> &rarr; Aşağıdaki numaralı liste. Sırayla git; üsttekiler mülakatta doğrudan sorulur, alttakiler "biliyorsan artı" seviyesidir.</li>
+          <li><strong>(B) Sıfırdan öğrenen okur</strong> &rarr; §&nbsp;2 SQL temelleri &rarr; §&nbsp;3 veya §&nbsp;8 (tek motor) &rarr; §&nbsp;4 EF Core çekirdek &rarr; §&nbsp;5 sorgulama / N+1 &rarr; §&nbsp;6 migration &rarr; §&nbsp;7 Dapper &rarr; §&nbsp;11 IMemoryCache &rarr; §&nbsp;10 Redis &rarr; §&nbsp;12 desenler &rarr; §&nbsp;14 profilleme &rarr; §&nbsp;9 NoSQL.</li>
+        </ul>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. Redis — sıfırdan pratik (§ 10)</span>
+            <p>Docker ile Redis kaldır, redis-cli ile beş veri tipini dene, StackExchange.Redis ile bağlan, IDistributedCache ve HybridCache ile bir cache-aside örneği yaz. TTL, eviction policy ve cache stampede'i açıklayabilecek hale gel. (A) sırasında bu sayfadaki en yüksek öncelikli konu burası; temeli olmayan okur için (B) sırasındaki yerine bak.</p>
+            <span class="steps__meta">Mülakatta sık &middot; pratikte az denenir &middot; en çok sorulan</span>
+          </li>
+          <li>
+            <span class="steps__title">2. EF Core çekirdek + N+1 + AsNoTracking (§ 4, § 5)</span>
+            <p>DbContext yaşam döngüsü, change tracker, entity states, Include/lazy loading farkı, N+1'in nasıl oluştuğu ve nasıl görüldüğü (ToQueryString/LogTo), projection ile çözümü. Sonra ExecuteUpdate/ExecuteDelete.</p>
+            <span class="steps__meta">Mülakatta sık &middot; pratik eksikliği hemen fark edilir</span>
+          </li>
+          <li>
+            <span class="steps__title">3. EF Core migration hattı (§ 6)</span>
+            <p>dotnet ef kur, add/update/script/--idempotent/bundle akışını uçtan uca çalıştır. Database.Migrate()'in hangi durumda kabul edilebilir, hangi durumda riskli olduğunu anlat (§&nbsp;6).</p>
+            <span class="steps__meta">İlanlarda "Migration" sık geçer</span>
+          </li>
+          <li>
+            <span class="steps__title">4. Dapper ve "ne zaman hangisi" (§ 7)</span>
+            <p>Temel Query/Execute, parametreler, multi-mapping, QueryMultiple. Ardından EF Core ile birlikte kullanım stratejini bir paragrafta anlatabilecek hale gel.</p>
+            <span class="steps__meta">Mülakatta sık</span>
+          </li>
+          <li>
+            <span class="steps__title">5. Fluent API ve konfigürasyon (§ 4)</span>
+            <p>IEntityTypeConfiguration ile ilişkileri, index'leri, value converter'ları elle kur. Global query filter ile soft delete + multi-tenant örneği yaz.</p>
+            <span class="steps__meta">İlanlarda "Fluent API" ve "Multi-Tenant" sık geçer</span>
+          </li>
+          <li>
+            <span class="steps__title">6. PostgreSQL'e ilk temas (§ 8)</span>
+            <p>Geldiğin yere göre: <strong>SQL Server'dan geliyorsan</strong> Docker ile PostgreSQL kaldır, Npgsql sağlayıcısıyla aynı projeyi çalıştır, jsonb ve bir extension dene; "PostgreSQL kullandım" diyebilmek için minimum bu. <strong>PostgreSQL'den geliyorsan</strong> tersini yap: aynı projeyi SQL Server sağlayıcısıyla çalıştır, IDENTITY, collation ve <code>datetimeoffset</code> farklarını dene. <strong>Hiç motor bilmiyorsan</strong> tek motor seç; ikincisi sonra.</p>
+            <span class="steps__meta">Mülakatta sık &middot; ilan sayısı yüksek</span>
+          </li>
+          <li>
+            <span class="steps__title">7. IMemoryCache ve cache stratejileri (§ 11)</span>
+            <p>Absolute/sliding expiration, SizeLimit, output caching, ETag. IMemoryCache'in neden çok sunucuda yetmediğini anlat.</p>
+            <span class="steps__meta">İlanlarda "MemoryCache" sık geçer</span>
+          </li>
+          <li>
+            <span class="steps__title">8. SQL derinleştirme (§ 2, § 3)</span>
+            <p>SQL'i günlük işte kullananlarda bile eksik kalanlar genelde: execution plan okuma, isolation level tablosu, window function, CTE, partitioning, Query Store (SQL Server; PostgreSQL'de karşılığı pg_stat_statements ve EXPLAIN). Bunlar mülakatta seni öne çıkarır. SQL'e yeni başlıyorsan bu adım (B) sırasında olduğu gibi başa gelir.</p>
+            <span class="steps__meta">Tekrar ve derinleştirme</span>
+          </li>
+          <li>
+            <span class="steps__title">9. Repository / UoW / Specification tartışması (§ 12)</span>
+            <p>Generic repository yazmak zor değildir. Çoğu zaman eksik olan, "EF Core varken repository gerekli mi" sorusuna gerekçeli cevap. Devamı <a href="../04-mimari-ve-desenler/index.html">04. sayfada</a>.</p>
+            <span class="steps__meta">Kavramsal &middot; kod değil tartışma sorusu</span>
+          </li>
+          <li>
+            <span class="steps__title">10. Profilleme araçları (§ 14)</span>
+            <p>MiniProfiler, EF LogTo; SQL Server'da SET STATISTICS IO ve First Responder Kit, PostgreSQL'de EXPLAIN ANALYZE ve pg_stat_statements. Bir yavaş sorguyu bulup düzelttiğin somut bir hikâye hazırla.</p>
+            <span class="steps__meta">Performans iddiasını somutlaştırır</span>
+          </li>
+          <li>
+            <span class="steps__title">11. NoSQL farkındalığı (§ 9)</span>
+            <p>Hedefe göre: <strong>hedef ilan/proje ilişkisel ağırlıklıysa</strong> MongoDB'nin ne olduğunu, ne zaman seçileceğini, CAP teoremini anlatabil; kod yazmasan da olur, kavram düzeyi yeterli. <strong>İlan MongoDB, Cosmos DB veya Elasticsearch istiyorsa</strong> resmî .NET sürücüsüyle CRUD ve aggregation/sorgu kodu yaz, şema tasarımını (gömme vs referans) çalış. <strong>Arama/log projesi</strong> &rarr; Elasticsearch/OpenSearch öne. <strong>Yapay zekâ / RAG projesi</strong> &rarr; vektör veritabanı (pgvector, Qdrant) öne.</p>
+            <span class="steps__meta">İlişkisel hedefte kavram düzeyi yeterli; NoSQL hedefinde kod düzeyi</span>
+          </li>
+          <li>
+            <span class="steps__title">12. Migration araçları ve ileri konular (§ 13)</span>
+            <p>DbUp/FluentMigrator/Flyway farkını bil. Zero-downtime şema değişikliği kavramını oku. Acele etme.</p>
+            <span class="steps__meta">İleri &middot; sonraya bırakılabilir</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bu sayfadaki maddelerin bir kısmı diğer sayfalarda derinleşiyor: LINQ operatörleri ve ifade ağaçları <a href="../01-csharp-dili/index.html">01 — C# Dili</a>, DI ve konfigürasyon <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a>, CQRS/Mediator <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a>, RabbitMQ ve outbox <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a>, xUnit/Moq <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a>, CI/CD ve gözlemlenebilirlik <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a>, paket listesi <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>. Başka dillerde veri erişimi için <a href="../../Java/index.html">Java</a> (JDBC, JPA/Hibernate), <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfalarına bak; Programlama ana sayfası <a href="../../index.html">burada</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../02-platform-ve-web-api/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Platform ve Web API</span></a>
+        <a class="next" href="../04-mimari-ve-desenler/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Mimari ve Desenler</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

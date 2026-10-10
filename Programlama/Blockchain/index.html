@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genel Bakış — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Blockchain öğrenme yolu: gerçekçi çerçeve, JavaScript mi .NET mi, öğrenme sırası ve mülakatlarda sık sorulan Solidity/dApp kavramları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Genel Bakış</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Blockchain · Genel Bakış</div>
+        <h1 class="page-title">Blockchain: <em>sıfırdan</em> nereden başlanır?</h1>
+        <p class="lede">Solidity'ye biraz dokunmuş ya da hiç dokunmamış olabilirsin. Bu sayfa konuyu sistemli bir listeye çeviriyor: önce zincirin nasıl çalıştığı, sonra akıllı sözleşme, sonra JavaScript ve .NET tarafından ona bağlanmak.</p>
+        <div class="head-meta">8 bölüm &middot; Anahtar kelime listesi &middot; Testnet'te ücretsiz</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu dosya nasıl kullanılır</h2>
+        <p class="intro">Bu alt site bir ders kitabı değil, anahtar kelime listesidir. Her satır bir terim, bir-iki cümlelik "bu nedir / neden var" notu ve resmî doküman bağlantısı verir. Terimi al, dokümanı aç, gerekirse terimi arama motoruna yaz. Anlatım yok; yön var.</p>
+        <p>Sekiz sayfa var: bu genel bakış (00) ve 01'den 07'ye kadar konu sayfaları. Konu sayfaları <a href="#ogrenme-sirasi">§ 5'teki sırayla</a> okunmak üzere numaralandı; <a href="05-diger-zincirler/index.html">05 (diğer zincirler)</a> sıra dışıdır, tanıma amaçlıdır. Kardeş listeler: <a href="../index.html">Programlama ana sayfası</a>, <a href="../CSharp-DotNet/index.html">.NET listesi</a>, <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript listesi</a>.</p>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Bir satırı okuyup "bunu biliyorum" diyebiliyorsan geç. Diyemiyorsan dokümana gir, bir örnek yaz, geri dön. Sayfalar bu ritim için tasarlandı.</p>
+        </div>
+
+        <h3>Rozet sözlüğü</h3>
+        <p>Tüm sayfalarda aynı yedi rozet kullanılır. Öncelik sırası: <span class="tag tag--bad">MÜLAKATTA SIK</span> her şeyin önünde gelir (iş ilanlarında ve mülakatlarda sık geçen konular); sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rozetler ve anlamları</caption>
+            <thead><tr><th>Rozet</th><th>Anlamı</th><th>Ne yapmalısın</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td>İş ilanlarında ve mülakatlarda sık geçen; "React, Solidity, Smart Contract" deneyimi isteyen ilanlarda doğrudan sorulur.</td>
+                <td>En az bir çalışan örnek yaz. <a href="#cv-eslestirme">§ 4</a> asgari listeyi verir.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>Olmazsa olmaz. Bunu bilmeden bir sonraki sayfaya geçme.</td>
+                <td>Doküman + küçük örnek. Testnet'te dene.</td>
+              </tr>
+              <tr>
+                <td><span class="tag">ORTA</span></td>
+                <td>İlk projeyi bitirdikten sonra gerekecek.</td>
+                <td>Adını ve ne işe yaradığını bil; derinleşmeyi ertele.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>Derinleşme konusu; öğrenme sırasında en sona kalır.</td>
+                <td>Sadece adını tanı. Temel ve orta maddeler bitmeden buraya girme.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td>Ücretli katmanı olan servis. Ücretsiz katman varsa notta yazar.</td>
+                <td>Ücretsiz katman + testnet ile çalış. Kart bilgisi girme.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td>Eski projelerde ve eğitimlerde görürsün; yeni projede kullanılmaz.</td>
+                <td>Tanı ki eski bir tutorial'a saatler harcama (web3.js, Truffle, Ganache).</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag--warn">RİSK</span></td>
+                <td>Para veya güvenlik riski taşıyan konu (private key, mainnet, bridge).</td>
+                <td>Sadece testnet. Gerçek anahtarı asla kod deposuna koyma.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="durust-cerceve"><span class="h-num">§ 2</span>Dürüst çerçeve: blockchain neyi kazandırır, neyi kazandırmaz</h2>
+        <p class="intro">Blockchain'in senin için ne olduğu hedefine bağlıdır. Çoğu geliştirici için ana uzmanlık değil, yan alandır: ana dil/platform (ör. <a href="../CSharp-DotNet/index.html">C# ve .NET</a>, <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a>, <a href="../Java/index.html">Java</a>, <a href="../Python/index.html">Python</a>) sağlam değilse önce orada derinleşmek iş piyasasında daha çok karşılık bulur. Ama blockchain'i ana kariyer hedefi yapan biri için bu çerçeve tersine döner. Aşağıdaki tablo hangi durumda hangi yaklaşımın geçerli olduğunu verir; bölümün geri kalanı blockchain öğrenmeye ayrılan zamanın neyi getirip neyi getirmediğini özetler.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hedefe göre çerçeve — Durum → Sonuç</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th><th>Nereden başla</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Blockchain yan alan; ana hattın backend (.NET, Java, Node.js, Go, Python)</strong></td>
+                <td>Önce ana hat. Blockchain; kriptografi, dağıtık sistem ve güvenlik konularında köprü olarak değer katar. Haftalık saatini sınırla.</td>
+                <td><a href="#ogrenme-sirasi">§ 5</a> tablosunda kendi dilinin satırı</td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain yan alan; ana hattın frontend (React)</strong></td>
+                <td>wagmi/viem doğrudan React bilgisinin üstüne eklenir; yan alan ile ana hat burada en çok örtüşür.</td>
+                <td><a href="02-solidity-ve-akilli-sozlesmeler/index.html">02</a> &rarr; <a href="03-javascript-typescript/index.html">03</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain ana kariyer hedefi: Solidity / akıllı sözleşme geliştirici</strong></td>
+                <td>"Yan alan" çerçevesi geçerli değil. Solidity + Foundry + güvenlik ana hattın kendisidir; TypeScript (viem) ikinci dil olur.</td>
+                <td><a href="02-solidity-ve-akilli-sozlesmeler/index.html">02</a> (özellikle § 6 güvenlik, § 8 test) · <a href="06-altyapi-araclar-guvenlik/index.html">06</a> § 8–9</td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain ana hedef: akıllı sözleşme denetçisi (auditor)</strong></td>
+                <td>Kod okuma ve saldırı pratiği öne çıkar; arayüz ve backend yalnızca okuma düzeyinde yeter.</td>
+                <td>Ethernaut, Damn Vulnerable DeFi, CodeHawks ilk yarışmalar — <a href="06-altyapi-araclar-guvenlik/index.html">06</a> § 8–9, <a href="07-projeler/index.html">07</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain ana hedef: protokol / istemci (client) geliştirici</strong></td>
+                <td>Ana dil, katkı vereceğin istemciye göre değişir: Go (geth, Prysm), Rust (reth, Lighthouse), C# (Nethermind), Java (Besu, Teku), TypeScript (Lodestar), Nim (Nimbus); en yaygınları Go ve Rust. Solidity kavram düzeyinde yeter. Dağıtık sistem ve ağ bilgisi belirleyicidir.</td>
+                <td><a href="01-temeller/index.html">01</a> (konsensüs, istemci çeşitliliği) · <a href="06-altyapi-araclar-guvenlik/index.html">06</a> § 1 · <a href="../Go/index.html">Go</a> / <a href="../Rust/index.html">Rust</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hiç programlama bilmiyorsun</strong></td>
+                <td>Önce bir genel dil ve web temeli; blockchain sonraya. Ekosistemin ana akımı olduğu için JavaScript/TypeScript önerilir.</td>
+                <td><a href="../JavaScript-TypeScript/01-javascript/index.html">JavaScript sayfası</a> &rarr; <a href="../JavaScript-TypeScript/03-react/index.html">React</a> &rarr; 01</td>
+              </tr>
+              <tr>
+                <td><strong>Öğrenci / yeni mezun</strong></td>
+                <td>Genel yazılım temeli ile portföy projesi birlikte yürür. Hedef Türkiye'deki genel backend ilanlarıysa ilk satıra yakınsın; blockchain ilanıysa üçüncü satıra.</td>
+                <td><a href="07-projeler/index.html">07 projeler</a> § 2–3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Türkiye'de "blockchain developer" ilanı az; olanların çoğu borsa/kripto şirketlerinde backend ağırlıklıdır. Yurt dışı uzaktan ilanlarda Solidity ve TypeScript ağırlıklı pozisyonlar var, ancak rekabet küreseldir ve çoğu ilan üretimde çalışmış sözleşme (deployed contract) ister. Bu tespit nicel bir araştırmaya dayanmaz; ilan sitelerine bakarak kendin teyit et.</p>
+        <p>Türkiye'den yurt dışı bir işe uzaktan çalışmanın vergi ve SGK sonucu, sözleşmenin biçimine göre değişir (hukuki/mali görüş değildir):</p>
+        <ul>
+          <li><strong>Yabancı şirketin Türkiye'deki bordrosu (şube/iştirak) veya EOR (employer of record) üzerinden</strong> &rarr; ücret geliri; SGK (4/a) primi ve gelir vergisi stopajı işveren/EOR tarafından yapılır.</li>
+          <li><strong>Yabancı işverenle doğrudan iş sözleşmesi (Türkiye'de bordro, şube veya EOR yok)</strong> &rarr; Türkiye'de stopaj yapan bir işveren olmadığı için ücretin yıllık gelir vergisi beyannamesiyle senin tarafından beyan edilmesi gündeme gelir. SGK yönü ayrıca değerlendirilir: Türkiye'de işyeri olmayan işveren için 4/a tescili kurulamayabilir; isteğe bağlı sigorta, 4/b veya yalnızca GSS seçenekleri <span class="tag tag--warn">TEYİT</span> — GİB (VUK/GVK) ve SGK (ALO 170) ile netleştir; çifte vergilendirme anlaşması varsa <a href="../../Rehberler/Sirket-Kurma/09-yurtdisi-cerceve.html#cvoa">Şirket Kurma, Bölüm 09 § 10</a>.</li>
+          <li><strong>Sözleşmeli bağımsız çalışan (contractor)</strong> &rarr; Türkiye'de vergi mükellefiyeti ve yurt dışı müşteriye fatura gerekir. Hangi yapı ve hangi SGK sonucu, durumuna göre değişir (hukuki/mali görüş değildir):
+            <ul>
+              <li><strong>Yapı:</strong> şahıs işletmesi veya serbest meslek kaydı en basit yol; gelir büyüdükçe ya da ortak varsa limited/anonim şirket de seçenek — karşılaştırma <a href="../../Rehberler/Sirket-Kurma/06-karsilastirma.html">Şirket Kurma, Bölüm 06</a>.</li>
+              <li><strong>Başka bir işverende 4/a çalışırken yan iş olarak</strong> &rarr; 4/a önceliklidir, Bağ-Kur (4/b) primi doğmaz <span class="law">5510 md. 53</span>; vergi mükellefiyeti yine açılır. İş sözleşmendeki rekabet/yan iş maddesine bak.</li>
+              <li><strong>Yaşlılık aylığı alan emekliysen</strong> &rarr; aylık kesilmez, Bağ-Kur yerine sosyal güvenlik destek primi (SGDP) <span class="law">5510 md. 30</span>; oran ve matrah <span class="tag tag--warn">TEYİT</span>.</li>
+              <li><strong>29 yaşını doldurmamış ve ilk kez mükellef oluyorsan</strong> &rarr; genç girişimci kazanç istisnası (<span class="law">GVK mük. md. 20</span>, 3 dönem; 2026 için 400.000 TL) — <a href="../../Rehberler/Sirket-Kurma/07-genc-girisimci.html">Bölüm 07</a>. 1 yıllık Bağ-Kur prim desteği aynı bölüme göre 1 Ocak 2026'da kaldırıldı; güncel durumu <span class="tag tag--warn">TEYİT</span>.</li>
+              <li><strong>29 yaş ve üstü ya da daha önce mükellefiyetin olmuşsa</strong> &rarr; genç girişimci istisnası yok; diğer kurallar aynı.</li>
+              <li><strong>Yukarıdakilerin hiçbiri değilse (yalnızca kendi işinde çalışan)</strong> &rarr; kendi SGK (4/b) primini ödersin; ayrıntı <a href="../../Rehberler/Sirket-Kurma/02-sgk-bagkur.html#cakisma">Bölüm 02 § 7</a>.</li>
+              <li><strong>Her durumda:</strong> yazılım hizmeti ihracatına ilişkin kazanç indirimi (<span class="law">GVK md. 89/13</span>) gündeme gelebilir; oran ve şartlar <span class="tag tag--warn">TEYİT</span> — <a href="../../Rehberler/Sirket-Kurma/07-genc-girisimci.html">Bölüm 07</a> ve <a href="../../Rehberler/Sirket-Kurma/09-yurtdisi-cerceve.html">Bölüm 09</a>.</li>
+            </ul>
+          </li>
+          <li><strong>Ödeme stablecoin/kripto ile yapılıyorsa</strong> &rarr; gelir yine beyan edilir. Ödemelerde Kripto Varlıkların Kullanılmamasına Dair Yönetmelik (TCMB, RG 16.04.2021) nedeniyle bu ödeme biçiminin Türkiye'deki durumu, TL'ye çevrim ve banka kanalı <span class="tag tag--warn">TEYİT</span>; SMMM ve gerekirse avukata sor. Vergi yönü için <a href="#turkiye-yasal-cerceve">§ 7</a>.</li>
+        </ul>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Blockchain bilgisi sana ne kazandırır</p>
+            <ul>
+              <li>Kriptografi pratiği: hash, imza, anahtar yönetimi — ana platformun hangisiyse (.NET, Java, Node.js, Go) o mülakatın güvenlik sorularında konuşulur.</li>
+              <li>Dağıtık sistem sezgisi: konsensüs, finality, idempotent işlem, nonce — mikroservis mülakatlarında karşılık bulur.</li>
+              <li>Güvenlik düşüncesi: "kod para tutuyor" disiplini, saldırgan gözüyle okuma.</li>
+              <li>Özgeçmişte bir Solidity/dApp deneyimi varsa onu mülakatta somut kavramlarla savunabilme; yoksa testnet'te doğrulanmış bir projeyle bu deneyimi sıfırdan kurabilme.</li>
+              <li>Blockchain ana hedefse: doğrudan iş alanının kendisi (sözleşme geliştirme, denetim, protokol).</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Ne kazandırmaz</p>
+            <ul>
+              <li>Türkiye'de kısa vadede iş garantisi vermez.</li>
+              <li>Genel backend ilanlarında "Solidity biliyorum" tek başına puan getirmez; puanı ana platform bilgisi getirir: ana platformun .NET ise ASP.NET Core ve SQL, Java ise Spring Boot ve SQL, Node.js ise Express/NestJS ve veritabanı, Go ise standart kütüphane ve eşzamanlılık. (Blockchain'e özel ilanlarda bu tespit geçerli değildir.)</li>
+              <li>Para kazanma yolu değildir. Bu liste geliştirme listesidir; yatırım/fiyat konuşulmaz.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Blockchain'den genel yazılım geliştirmeye (.NET dahil) taşınan kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>hash function (Keccak-256, SHA-256)</strong></td>
+                <td>Tek yönlü özet; adres türetme, veri bütünlüğü, imza girdisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te <code>SHA256.HashData</code> ile aynı fikir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/security/cryptography-model">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ECDSA / secp256k1</strong></td>
+                <td>Eliptik eğri imza; her Ethereum işlemi bununla imzalanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te <code>ECDsa</code> sınıfı vardır (farklı eğri)</td>
+                <td><a href="https://ethereum.org/en/developers/docs/accounts/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>public/private key, address</strong></td>
+                <td>Adres = public key'in Keccak özeti (son 20 byte). Private key = tam kontrol</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/accounts/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Merkle tree / Patricia trie</strong></td>
+                <td>Büyük veri kümesinin tek kökle doğrulanması; Ethereum state'i böyle saklanır</td>
+                <td><span class="tag">ORTA</span> Git ve dosya sistemi mülakatlarında da çıkar</td>
+                <td><a href="https://ethereum.org/en/developers/docs/data-structures-and-encoding/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>consensus (PoS, finality)</strong></td>
+                <td>Dağıtık düğümlerin tek state üzerinde anlaşması; "işlem ne zaman kesin?"</td>
+                <td><span class="tag">ORTA</span> Dağıtık sistem sorularına köprü</td>
+                <td><a href="https://ethereum.org/en/developers/docs/consensus-mechanisms/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>nonce / idempotency</strong></td>
+                <td>Her hesabın işlem sayacı; aynı işlemin iki kez uygulanmasını engeller</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ödeme API'lerinde idempotency key ile aynı problem</td>
+                <td><a href="https://ethereum.org/en/developers/docs/transactions/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>immutability / append-only log</strong></td>
+                <td>Yazılan silinmez; hata düzeltme yerine yeni kayıt</td>
+                <td><span class="tag">ORTA</span> Event sourcing ile aynı zihniyet</td>
+                <td><a href="https://ethereum.org/en/developers/docs/intro-to-ethereum/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>JSON-RPC</strong></td>
+                <td>Düğümle konuşma protokolü; <code>eth_call</code>, <code>eth_sendRawTransaction</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> REST/gRPC yanına üçüncü protokol</td>
+                <td><a href="https://ethereum.org/en/developers/docs/apis/json-rpc/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event / log processing</strong></td>
+                <td>Sözleşme olaylarını dinleyip veritabanına yazmak (indexer)</td>
+                <td><span class="tag">ORTA</span> Arka plan servisi, kuyruk, retry — .NET'in güçlü olduğu yer</td>
+                <td><a href="https://docs.nethereum.com/docs/getting-started/welcome">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>threat modeling</strong></td>
+                <td>"Saldırgan bu fonksiyonu nasıl kötüye kullanır?" sorusunu her satırda sormak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Web güvenliği mülakatına doğrudan taşınır</td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Web2 vs Web3 mimari</strong></td>
+                <td>Sunucu yerine sözleşme + istemci; hangi veri zincirde, hangisi dışarıda</td>
+                <td><span class="tag">ORTA</span> Mimari tartışmalarda "neden blockchain değil" cevabı için</td>
+                <td><a href="https://ethereum.org/en/developers/docs/web2-vs-web3/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethermind</strong></td>
+                <td>C#/.NET ile yazılmış Ethereum execution client'ı; ".NET ile büyük dağıtık sistem yazılır" kanıtı</td>
+                <td><span class="tag tag--info">İLERİ</span> Kaynak kodu okumak için</td>
+                <td><a href="https://github.com/NethermindEth/nethermind">github.com/NethermindEth</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İş piyasası — nereye bakılır</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>web3.career</strong></td>
+                <td>Blockchain iş ilanları; "Remote" filtresi var</td>
+                <td><span class="tag">ORTA</span> Henüz projen yoksa gereksinimleri okumak için; § 4 listesi ve doğrulanmış bir projen hazırsa başvurmak için</td>
+                <td><a href="https://web3.career/">web3.career</a></td>
+              </tr>
+              <tr>
+                <td><strong>cryptojobslist</strong></td>
+                <td>Benzer ilan sitesi</td>
+                <td><span class="tag">ORTA</span> Adres doğrulanamadı; adını ara</td>
+                <td>cryptojobslist.com</td>
+              </tr>
+              <tr>
+                <td><strong>"Solidity developer" ilan analizi</strong></td>
+                <td>10 ilan aç, tekrar eden araçları say: Foundry, Hardhat, viem, TypeScript, OpenZeppelin</td>
+                <td><span class="tag tag--ok">TEMEL</span> Listenin gerçeklikle testi</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Türkiye kripto şirketleri (borsa, saklama)</strong></td>
+                <td>Genelde backend/.NET/Java ilanı; Solidity nadiren şart</td>
+                <td><span class="tag">ORTA</span> SPK listesindeki şirketlerin kariyer sayfaları — <a href="#turkiye-yasal-cerceve">§ 7</a></td>
+                <td><a href="https://spk.gov.tr/kurumlar/kripto-varlik-hizmet-saglayicilar">spk.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>portfolio &gt; sertifika</strong></td>
+                <td>Testnet'te doğrulanmış (verified) sözleşme + GitHub deposu, kursu bitirmekten daha çok konuşur</td>
+                <td><span class="tag tag--ok">TEMEL</span> <a href="07-projeler/index.html">07 projeler</a></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/verifying/">ethereum.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="javascript-mi-dotnet-mi"><span class="h-num">§ 3</span>JavaScript mi .NET mi?</h2>
+        <p class="intro">Net cevap: ana akım JavaScript/TypeScript'tir. Sözleşme testleri, deploy script'leri, cüzdan bağlantısı ve dApp arayüzü TS ekosisteminde yaşar (ethers, viem, wagmi, Hardhat). Foundry sözleşme tarafında Solidity ile test yazmanı sağlar ve JS'i kısmen devre dışı bırakır. .NET tarafı (Nethereum) arka plan servisleri için tamamlayıcıdır: indexer, ödeme doğrulama, cüzdan servisi. İkisi rakip değil.</p>
+        <p>JavaScript'i henüz bilmiyorsan temelini <a href="../JavaScript-TypeScript/01-javascript/index.html">JavaScript sayfasında</a> bulabilirsin. Sözleşme test aracı seçimi başlangıç noktana göre değişir:</p>
+        <ul>
+          <li><strong>JS/TS bilmiyorsan</strong> &rarr; Foundry. Testler de Solidity'de yazılır; iki yeni dili aynı anda öğrenme yükü kalkar.</li>
+          <li><strong>JS/TS biliyorsan</strong> &rarr; Foundry ve Hardhat 3 eşdeğer başlangıçtır. Hardhat 3 hem Solidity testlerini hem TypeScript testlerini çalıştırır; birini ötekinden sonraya bırakmak zorunlu değil.</li>
+          <li><strong>Katılacağın ekip ya da başvurduğun ilan belirli bir aracı kullanıyorsa</strong> &rarr; önce o araç; diğerini adıyla tanı.</li>
+        </ul>
+        <p>Sıra için <a href="#ogrenme-sirasi">§ 5</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi iş hangi dilde yapılır</caption>
+            <thead><tr><th>İş</th><th>Ana akım dil / araç</th><th>.NET karşılığı</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Akıllı sözleşme yazmak</strong></td>
+                <td>Solidity (EVM). Alternatif: Vyper</td>
+                <td>Yok. .NET zincir üstünde çalışmaz</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <a href="02-solidity-ve-akilli-sozlesmeler/index.html">02</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sözleşme testi</strong></td>
+                <td>Foundry (Solidity ile test) veya Hardhat 3 (TS ile test)</td>
+                <td>Nethereum ile entegrasyon testi yazılabilir; birim test için değil</td>
+                <td><span class="tag tag--ok">TEMEL</span> JS/TS bilmiyorsan Foundry; biliyorsan ikisi de olur; ekip/ilan hangisini kullanıyorsa o</td>
+              </tr>
+              <tr>
+                <td><strong>Deploy script</strong></td>
+                <td>forge script (Solidity) veya Hardhat Ignition (TS)</td>
+                <td>Nethereum ile deploy mümkün, yaygın değil</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>dApp arayüzü</strong></td>
+                <td>React + TypeScript + viem/wagmi (veya ethers v6)</td>
+                <td>Blazor + Nethereum.Blazor (niş)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <a href="03-javascript-typescript/index.html">03</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cüzdan bağlantısı</strong></td>
+                <td>wagmi connectors, RainbowKit, Reown AppKit (WalletConnect)</td>
+                <td>Nethereum Wallet SDK (masaüstü/Unity)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+              </tr>
+              <tr>
+                <td><strong>Zincir olaylarını dinleyip DB'ye yazmak (indexer)</strong></td>
+                <td>Node.js + viem, veya The Graph (subgraph, AssemblyScript)</td>
+                <td>Nethereum.BlockchainProcessing + Worker Service + SQL Server</td>
+                <td><span class="tag">ORTA</span> .NET biliyorsan en doğal giriş — <a href="04-dotnet/index.html">04</a>; Node.js biliyorsan viem veya Ponder — <a href="03-javascript-typescript/index.html">03</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ödeme/transfer doğrulama API'si</strong></td>
+                <td>Node.js (Express/NestJS + viem)</td>
+                <td>ASP.NET Core + Nethereum.Web3 (RPC okuma, imza doğrulama)</td>
+                <td><span class="tag">ORTA</span> .NET biliyorsan ASP.NET Core + Nethereum; Node.js biliyorsan Express/NestJS + viem. İkisi de aynı işi görür</td>
+              </tr>
+              <tr>
+                <td><strong>Sunucu tarafı imzalama / cüzdan servisi</strong></td>
+                <td>ethers Wallet, viem account</td>
+                <td>Nethereum Accounts + KeyStore</td>
+                <td><span class="tag tag--warn">RİSK</span> Anahtar yönetimi; testnet dışında yapma</td>
+              </tr>
+              <tr>
+                <td><strong>Node (düğüm) çalıştırmak</strong></td>
+                <td>Geth (Go), Reth (Rust)</td>
+                <td>Nethermind (C#)</td>
+                <td><span class="tag tag--info">İLERİ</span> <a href="../Go/index.html">Go</a>, <a href="../Rust/index.html">Rust</a> kardeş sayfaları</td>
+              </tr>
+              <tr>
+                <td><strong>Bitcoin entegrasyonu</strong></td>
+                <td>bitcoinjs-lib</td>
+                <td>NBitcoin</td>
+                <td><span class="tag tag--info">İLERİ</span> <a href="05-diger-zincirler/index.html">05</a></td>
+              </tr>
+              <tr>
+                <td><strong>Oyun içi zincir (Unity)</strong></td>
+                <td>—</td>
+                <td>Nethereum Unity paketleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş</td>
+              </tr>
+              <tr>
+                <td><strong>Solana / Cosmos / Starknet programı</strong></td>
+                <td>Rust (Anchor), Go (Cosmos SDK), Cairo</td>
+                <td>Yok</td>
+                <td><span class="tag tag--info">İLERİ</span> Tanıma amaçlı — <a href="05-diger-zincirler/index.html">05</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JavaScript/TypeScript tarafı — araç sözlüğü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ethers.js v6</strong></td>
+                <td>Provider/Signer/Contract soyutlaması; en çok eğitim materyali olan kütüphane</td>
+                <td><span class="tag tag--ok">TEMEL</span> v5 ve v6 API farklı; "ethers v6" diye ara</td>
+                <td><a href="https://docs.ethers.org/v6/">docs.ethers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>viem</strong></td>
+                <td>Tip güvenli, modüler Ethereum arayüzü; wagmi'nin altyapısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yeni projelerde ethers'ın yerini alıyor</td>
+                <td><a href="https://viem.sh/">viem.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>wagmi</strong></td>
+                <td>React hook'ları: <code>useAccount</code>, <code>useReadContract</code>, <code>useWriteContract</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React dApp'in bugünkü standardı</td>
+                <td><a href="https://wagmi.sh/">wagmi.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>web3.js</strong></td>
+                <td>İlk JS kütüphanesi; 4 Mart 2025'te sunset edildi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Eski tutorial'larda görürsün; yeni kod yazma</td>
+                <td><a href="https://docs.web3js.org/">docs.web3js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hardhat 3</strong></td>
+                <td>TS tabanlı geliştirme ortamı: derleme, test, yerel ağ, deploy</td>
+                <td><span class="tag">ORTA</span> İlanlarda çok geçer. JS/TS bilmiyorsan Foundry'den sonra; biliyorsan Foundry ile eşdeğer başlangıç (Solidity ve TS testlerini destekler)</td>
+                <td><a href="https://hardhat.org/docs">hardhat.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Foundry (forge, cast, anvil, chisel)</strong></td>
+                <td>Rust ile yazılmış araç seti; testler Solidity'de yazılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kurulum <code>foundryup</code> ile; npm paketi yok</td>
+                <td><a href="https://getfoundry.sh/">getfoundry.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>Truffle / Ganache</strong></td>
+                <td>Eski framework ve yerel zincir; Eylül 2023'te sunset edildi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> 2023 öncesi projelerde ve eğitimlerde sık görülür</td>
+                <td><a href="https://archive.trufflesuite.com/">archive.trufflesuite.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Remix IDE</strong></td>
+                <td>Tarayıcıda Solidity derle, test ağına deploy et; kurulum yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlk gün için</td>
+                <td><a href="https://remix.ethereum.org/">remix.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Scaffold-ETH 2</strong></td>
+                <td>Next.js + RainbowKit + wagmi + TS hazır iskelet</td>
+                <td><span class="tag">ORTA</span> İlk dApp'i bununla ayağa kaldır</td>
+                <td><a href="https://scaffoldeth.io/">scaffoldeth.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>RainbowKit</strong></td>
+                <td>Hazır "Connect Wallet" bileşeni (wagmi üstüne)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://rainbowkit.com/">rainbowkit.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reown AppKit (WalletConnect)</strong></td>
+                <td>Mobil cüzdanla QR üzerinden bağlantı; WalletConnect markasının SDK'sı</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz proje kotası var</td>
+                <td><a href="https://docs.reown.com/">docs.reown.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MetaMask</strong></td>
+                <td>Tarayıcı cüzdanı; geliştirici için test ağı ekleme, hesap içe aktarma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Geliştirme için ayrı profil/cüzdan kullan</td>
+                <td><a href="https://docs.metamask.io/">docs.metamask.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-1193 (window.ethereum)</strong></td>
+                <td>Tarayıcı cüzdanının sayfaya enjekte ettiği provider API'si</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React dApp'in cüzdana dokunduğu nokta</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-1193">eips.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeScript</strong></td>
+                <td>Ekosistemin fiilî dili; ABI tipleri viem ile derleme zamanında kontrol edilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'tan ya da Java'dan geliyorsan: tipli sözdizimi tanıdık, geçiş kolay. Python'dan geliyorsan: statik tip sistemi ve async/await yeni. Hiç dil bilmiyorsan: önce <a href="../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a>, sonra <a href="../JavaScript-TypeScript/02-typescript/index.html">TypeScript</a></td>
+                <td><a href="https://www.typescriptlang.org/docs/">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>React</strong></td>
+                <td>dApp arayüzlerinin varsayılan kütüphanesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kardeş sayfa: <a href="../JavaScript-TypeScript/03-react/index.html">React sayfası</a></td>
+                <td>react.dev</td>
+              </tr>
+              <tr>
+                <td><strong>The Graph (subgraph)</strong></td>
+                <td>Zincir verisini GraphQL ile sorgulanabilir hale getiren indexer ağı</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz sorgu kotası var</td>
+                <td><a href="https://thegraph.com/docs/en/">thegraph.com/docs</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>.NET tarafı — araç sözlüğü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Nethereum</strong></td>
+                <td>.NET için Ethereum/EVM entegrasyon platformu; 130+ NuGet paketi</td>
+                <td><span class="tag tag--ok">TEMEL</span> (04 sayfası için) netstandard2.0 – .NET 10</td>
+                <td><a href="https://docs.nethereum.com/">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethereum.Web3</strong></td>
+                <td>Tek giriş noktası: RPC, sözleşme çağrısı, hesap, birim dönüşümü</td>
+                <td><span class="tag tag--ok">TEMEL</span> 6.1.0 (Mart 2026)</td>
+                <td><a href="https://www.nuget.org/packages/Nethereum.Web3">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethereum Playground</strong></td>
+                <td>Tarayıcıda C# yazıp Ethereum ile konuşma; kurulum yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlk gün için</td>
+                <td><a href="https://playground.nethereum.com/">playground.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethereum code generation</strong></td>
+                <td>ABI'den C# sınıfı üretir (FunctionMessage, EventDTO)</td>
+                <td><span class="tag">ORTA</span> Elle DTO yazma</td>
+                <td><a href="https://docs.nethereum.com/docs/getting-started/welcome">docs.nethereum.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethereum.BlockchainProcessing</strong></td>
+                <td>Blok/log tarayıp işleyen indexer altyapısı</td>
+                <td><span class="tag">ORTA</span> Worker Service + SQL Server projesi için</td>
+                <td><a href="https://github.com/Nethereum/Nethereum">github.com/Nethereum</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethereum Blazor / Unity</strong></td>
+                <td>Blazor'da cüzdan ve explorer bileşenleri; Unity oyun entegrasyonu</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş</td>
+                <td><a href="https://ethereum.org/en/developers/docs/programming-languages/dot-net/">ethereum.org (.NET sayfası)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nethermind</strong></td>
+                <td>C# execution client; Geth alternatifi</td>
+                <td><span class="tag tag--info">İLERİ</span> Çalıştırmak disk ve bant ister; okumak ücretsiz</td>
+                <td><a href="https://ethereum.org/en/developers/docs/nodes-and-clients/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NBitcoin</strong></td>
+                <td>.NET için en kapsamlı Bitcoin kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Bitcoin testnet/regtest ile</td>
+                <td><a href="https://github.com/MetacoSA/NBitcoin">github.com/MetacoSA</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.Security.Cryptography</strong></td>
+                <td>.NET'in yerleşik kriptografi modeli; hash, HMAC, ECDsa, RandomNumberGenerator</td>
+                <td><span class="tag tag--ok">TEMEL</span> Blockchain'den bağımsız olarak .NET mülakat konusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/security/cryptography-model">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cv-eslestirme"><span class="h-num">§ 4</span>Mülakatta sık sorulanlar: Solidity ve React dApp</h2>
+        <p class="intro">"Solidity ile akıllı sözleşme, React ile arayüz" türü bir deneyim mülakatta açılırsa aşağıdaki kavramları savunabilmek gerekir. Listenin rolü deneyim durumuna ve başvurduğun pozisyona göre değişir:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bu liste senin için ne? — Durum → Sonuç</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Özgeçmişte blockchain deneyimi yok</strong></td>
+                <td>Liste mülakat savunması değil, öğrenme hedefidir. Önce <a href="07-projeler/index.html">07</a> § 2–3 projelerini yap; özgeçmişe ancak testnet'te doğrulanmış sözleşmesi olan bir repo ile yaz.</td>
+              </tr>
+              <tr>
+                <td><strong>Kısa / gönüllü / staj / kişisel proje deneyimi var</strong></td>
+                <td>Liste asgari savunma setidir; giriş seviyesi için fazlası beklenmez. Aşağıdaki "Örnek" şablonu bu durum için.</td>
+              </tr>
+              <tr>
+                <td><strong>Üretimde (mainnet) deneyimin var</strong></td>
+                <td>Liste asgari değil başlangıç seviyesidir. Denetim süreci, yaşadığın olaylar (incident) ve gas optimizasyonu örnekleri beklenir; şablondaki "üretim deneyimim yok" cümlesi çıkar.</td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain'e özel pozisyona başvuruyorsun</strong></td>
+                <td>MÜLAKATTA SIK listesi tek başına yetmez; <a href="02-solidity-ve-akilli-sozlesmeler/index.html">02</a> § 6 güvenlik açıkları ve <a href="06-altyapi-araclar-guvenlik/index.html">06</a> § 8 güvenlik araçları da sorulur.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>"Solidity yazdım" demek, "bir sözleşmeyi test ağına deploy ettim ve bir arayüzden çağırdım" demektir. Bu cümleyi kuramıyorsan özgeçmişteki ifadeyi yumuşat ("Solidity'ye giriş, küçük sözleşmeler") ya da bu listeyi kapatıp cümleyi kurabilir hale gel. Abartılı özgeçmiş ifadesi mülakatta anında görünür.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Solidity / Smart Contract — asgari savunma listesi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>EVM, bytecode, opcode</strong></td>
+                <td>Sözleşme derlenir, bytecode zincire yazılır, EVM opcode'ları çalıştırır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/evm/">ethereum.org</a> · <a href="https://www.evm.codes/">evm.codes</a></td>
+              </tr>
+              <tr>
+                <td><strong>gas, gas limit, base fee (EIP-1559)</strong></td>
+                <td>Her opcode'un maliyeti; işlem ücreti = gas × (base fee + priority fee)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Neden pahalı?" sorusunun cevabı</td>
+                <td><a href="https://ethereum.org/en/developers/docs/gas/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ABI</strong></td>
+                <td>Fonksiyon/olay imzalarının JSON tanımı; arayüz sözleşmeyi bununla çağırır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> React tarafına köprü</td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/compiling/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>storage / memory / calldata</strong></td>
+                <td>Kalıcı ve pahalı / geçici / salt okunur giriş; yanlış seçim gas ve hata üretir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/anatomy/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>public / external / internal / private</strong></td>
+                <td>Görünürlük; <code>external</code> dıştan çağrı için daha ucuz</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>view / pure / payable</strong></td>
+                <td>Okur / hiç dokunmaz / ETH alabilir; <code>view</code> çağrısı gas harcamaz (RPC üzerinden)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://docs.soliditylang.org/en/latest/">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>modifier (onlyOwner)</strong></td>
+                <td>Fonksiyon öncesi koşul; erişim kontrolünün standart biçimi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> OpenZeppelin <code>Ownable</code></td>
+                <td><a href="https://docs.openzeppelin.com/contracts">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>require / revert / custom error</strong></td>
+                <td>Koşul sağlanmazsa işlem geri alınır; state değişmez, gas gider</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event, emit, indexed</strong></td>
+                <td>Zincire yazılan log; arayüz ve indexer bunu dinler. Sözleşme kendi loglarını okuyamaz</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/anatomy/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mapping, struct, array</strong></td>
+                <td><code>mapping(address =&gt; uint256)</code> bakiye tablosu; mapping üzerinde döngü yok</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://solidity-by-example.org/">solidity-by-example.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>msg.sender / msg.value / tx.origin</strong></td>
+                <td>Çağıran adres / gönderilen ETH / işlemi başlatan EOA. <code>tx.origin</code> ile yetki kontrolü yapılmaz</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td>
+                <td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>constructor, receive, fallback</strong></td>
+                <td>Bir kez çalışan kurucu / düz ETH alımı / bilinmeyen çağrı yakalayıcı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/anatomy/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>reentrancy, checks-effects-interactions</strong></td>
+                <td>Dış çağrı, state güncellenmeden geri çağırır (The DAO). Önce kontrol, sonra state, en son dış çağrı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span> En klasik mülakat sorusu</td>
+                <td><a href="https://docs.soliditylang.org/en/latest/security-considerations.html">docs.soliditylang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ERC-20 / ERC-721 / ERC-1155</strong></td>
+                <td>Fungible token / NFT / çoklu token arayüzleri; OpenZeppelin'den miras alınır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Kendin yazma, miras al"</td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-20">EIP-20</a> · <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a> · <a href="https://eips.ethereum.org/EIPS/eip-1155">EIP-1155</a></td>
+              </tr>
+              <tr>
+                <td><strong>inheritance, interface, library</strong></td>
+                <td><code>is ERC20, Ownable</code>; arayüzle başka sözleşmeyi çağırma; <code>using ... for</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://docs.openzeppelin.com/contracts/5.x/erc20">docs.openzeppelin.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>integer overflow (0.8+ checked)</strong></td>
+                <td>Solidity 0.8'den itibaren taşma otomatik revert; eskiden SafeMath gerekirdi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "SafeMath hâlâ gerekli mi?" tuzak sorusu</td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/security/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>delegatecall, proxy, upgradeable (ERC-1967)</strong></td>
+                <td>Mantık sözleşmesini değiştirip adresi sabit tutma; storage slot çakışması riski</td>
+                <td><span class="tag">ORTA</span> Sadece kavramı bil</td>
+                <td><a href="https://ethereum.org/en/developers/docs/smart-contracts/upgrading/">ethereum.org</a> · <a href="https://eips.ethereum.org/EIPS/eip-1967">EIP-1967</a></td>
+              </tr>
+              <tr>
+                <td><strong>testnet deploy + source verification</strong></td>
+                <td>Sepolia'ya deploy, Etherscan/Blockscout'ta kaynak doğrulama; "kanıt" budur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Maliyet 0 TL (faucet)</td>
+                <td><a href="https://sepolia.etherscan.io/">sepolia.etherscan.io</a> · <a href="https://ethereum.org/en/developers/docs/smart-contracts/verifying/">ethereum.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>React dApp — asgari savunma listesi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>provider vs signer</strong></td>
+                <td>Okuma bağlantısı (RPC) ile imzalayan hesap (cüzdan) ayrımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> viem'de publicClient / walletClient</td>
+                <td><a href="https://viem.sh/">viem.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>connect wallet (EIP-1193)</strong></td>
+                <td><code>eth_requestAccounts</code>; kullanıcı onayı, hesap ve ağ değişim olayları</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-1193">eips.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>read (call) vs write (transaction)</strong></td>
+                <td>Okuma anında ve ücretsiz; yazma imza + gas + blok bekler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> wagmi: <code>useReadContract</code> / <code>useWriteContract</code></td>
+                <td><a href="https://wagmi.sh/">wagmi.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>chainId, network switch</strong></td>
+                <td>Kullanıcı yanlış ağdaysa çağrı başarısız; <code>wallet_switchEthereumChain</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://chainlist.org/">chainlist.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transaction lifecycle (pending, receipt, confirmations)</strong></td>
+                <td>Hash hemen gelir, receipt blokla gelir; arayüz bu arada ne gösterir?</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://ethereum.org/en/developers/docs/transactions/">ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>wei, gwei, ether; BigInt</strong></td>
+                <td>18 ondalık; JS number yetmez, <code>parseEther</code>/<code>formatEther</code> kullanılır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik hata kaynağı</td>
+                <td><a href="https://docs.ethers.org/v6/">docs.ethers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>event subscription (watch)</strong></td>
+                <td>Arayüz sözleşme olaylarını dinleyip listeyi günceller</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://viem.sh/">viem.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>user rejected / revert reason</strong></td>
+                <td>Kullanıcı imzayı reddetti veya sözleşme revert etti; hata mesajı arayüze nasıl gelir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.ethers.org/v6/">docs.ethers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>EIP-712 typed data signing</strong></td>
+                <td>Kullanıcıya okunabilir imza isteği (login, permit); gas'sız onay</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://eips.ethereum.org/EIPS/eip-712">eips.ethereum.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>RPC provider (Alchemy, Infura, public RPC)</strong></td>
+                <td>Kendi düğümün yoksa zincire buradan bağlanırsın</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> İkisinin de ücretsiz katmanı var; testnet için yeter</td>
+                <td><a href="https://www.alchemy.com/docs">alchemy.com/docs</a> · <a href="https://docs.infura.io/">docs.infura.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Mülakatta dürüst ve savunulabilir bir cümle şablonu: "[Proje türü] kapsamında [kısa süre] boyunca [sözleşme türü, ör. ERC-20] tabanlı küçük bir sözleşme ve [arayüz teknolojisi] üzerinde çalıştım; [araçlar] ile test ağına deploy ettim. Üretim ölçeğinde Solidity deneyimim yok; reentrancy, gas ve ABI kavramlarını biliyorum, Foundry ile testlerimi yeniden yazdım." Son cümleyi söyleyebilmek için <a href="07-projeler/index.html">07 projeler</a>.</p>
+          <p>Bu şablon kısa/gönüllü deneyim içindir. Üretim deneyimin varsa "üretim ölçeğinde deneyimim yok" yerine: "[Ağ] üzerinde [kullanıcı/TVL ölçeği] olan [sözleşme türü] geliştirdim; [denetim firması/yarışma] denetiminden geçti; [olay] yaşandığında [aldığımız önlem]." Hiç deneyimin yoksa şablon kullanılmaz; "Şu an [proje] üzerinde çalışıyorum, Sepolia adresi ve testleri repoda" demek daha güçlüdür.</p>
+        </div>
+
+        <h2 id="ogrenme-sirasi"><span class="h-num">§ 5</span>Öğrenme sırası</h2>
+        <p class="intro">Doğru sıra başlangıç noktana ve hedefine bağlıdır. Ortak ilke: aynı anda iki yeni dil öğrenme ve önce kavramı (01) bitir. Aşağıdaki tablodan kendi satırını seç; altındaki adım listesi, tablodaki ilk satırın (C#/.NET bilen, JS bilmeyen) ayrıntılı hâlidir ve diğer satırlar aynı sayfaları farklı sırayla kullanır. Her dalda maliyet 0 TL'dir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre öğrenme sırası</caption>
+            <thead><tr><th>Başlangıç noktası</th><th>Sıra</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>C#/.NET biliyorsun, JS bilmiyorsun</strong></td>
+                <td>01 &rarr; 02 (Foundry) &rarr; 03 &rarr; 04 &rarr; 06 &rarr; 07</td>
+                <td>Aşağıdaki adım listesi. Foundry, JS öğrenmeden sözleşme testi yazdırır; 04, .NET bilgini zincire bağlar.</td>
+              </tr>
+              <tr>
+                <td><strong>Java biliyorsun, JS bilmiyorsun</strong></td>
+                <td>01 &rarr; 02 (Foundry) &rarr; 03 &rarr; 06 &rarr; 07</td>
+                <td>04 isteğe bağlı (C# Java'ya yakın ama yeni dil). Backend parçası için web3j (Java) seçeneği var; kapsamı ve güncelliği <span class="tag tag--warn">TEYİT</span>, docs.web3j.io. Kurumsal zincir ilanı için 05 § 12 (Besu, Fabric).</td>
+              </tr>
+              <tr>
+                <td><strong>JS/TS + React biliyorsun</strong></td>
+                <td>01 &rarr; 02 (Foundry veya Hardhat 3) &rarr; 03 &rarr; 06 &rarr; 07</td>
+                <td>04 isteğe bağlı: backend'i Node.js + viem veya Ponder ile yap (03 § 8, § 11).</td>
+              </tr>
+              <tr>
+                <td><strong>Python biliyorsun</strong></td>
+                <td>01 &rarr; 02 (Foundry) &rarr; 03 &rarr; 06 &rarr; 07</td>
+                <td>Slither, Vyper ve Ape (Python araçları) tanıdık gelir. 03 için önce JavaScript sayfası.</td>
+              </tr>
+              <tr>
+                <td><strong>Rust veya Go biliyorsun</strong></td>
+                <td>01 &rarr; 02 &rarr; 05 (Rust: Solana; Go: Cosmos) &rarr; 06 &rarr; 07</td>
+                <td>05 öne alınabilir. İstemci kaynak kodu okuma (geth/reth) için 06 § 1.</td>
+              </tr>
+              <tr>
+                <td><strong>Hiç programlama bilmiyorsun</strong></td>
+                <td><a href="../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> &rarr; <a href="../JavaScript-TypeScript/03-react/index.html">React</a> &rarr; 01 &rarr; 02 (Remix ile) &rarr; 03 &rarr; 07</td>
+                <td>04 ve 05 sonraya. Foundry'yi terminal ve JS temelinden sonra ekle.</td>
+              </tr>
+              <tr>
+                <td><strong>Hedefin güvenlik / denetim</strong></td>
+                <td>01 &rarr; 02 (özellikle § 6 ve § 8) &rarr; 06 § 8–9 &rarr; 07 (denetim ve CTF projeleri)</td>
+                <td>03 ve 04 yalnızca okuma düzeyinde; zamanın çoğu kod okuma ve saldırı pratiğine gider.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">01 — Temeller</span>
+            <p>Hesap, işlem, gas, blok, EVM, konsensüs, testnet. Bir MetaMask geliştirici cüzdanı aç, Sepolia'dan faucet ETH al, bir transfer yap, Etherscan'de bul. <a href="01-temeller/index.html">01 temeller</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: MetaMask, Google Cloud Sepolia faucet, sepolia.etherscan.io</span>
+          </li>
+          <li>
+            <span class="steps__title">02 — Solidity, Foundry ile</span>
+            <p>Remix'te ilk sözleşme, sonra Foundry: <code>forge init</code>, test yaz, <code>anvil</code> yerel ağında çalıştır, Sepolia'ya deploy et, kaynağı doğrula. OpenZeppelin'den ERC-20 miras al. <a href="02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: Remix, Foundry, OpenZeppelin, Solidity by Example, Cyfrin Updraft (ücretsiz)</span>
+          </li>
+          <li>
+            <span class="steps__title">03 — JavaScript/TypeScript dApp</span>
+            <p>JS ve React bilmiyorsan önce <a href="../JavaScript-TypeScript/01-javascript/index.html">JavaScript sayfası</a> ve <a href="../JavaScript-TypeScript/03-react/index.html">React sayfası</a>; biliyorsan doğrudan bu adım. Sonra viem + wagmi ile 02'deki sözleşmeye bağlan: cüzdan bağla, oku, yaz, olay dinle. <a href="03-javascript-typescript/index.html">03 JS/TS</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: Scaffold-ETH 2, viem, wagmi, RainbowKit</span>
+          </li>
+          <li>
+            <span class="steps__title">04 — .NET tarafı</span>
+            <p>Nethereum Playground'da ısın; sonra .NET Worker Service ile 02'deki sözleşmenin olaylarını SQL Server'a ya da PostgreSQL'e indexle. Genel backend bilgisinin blockchain'e dokunduğu yer. .NET bilmiyorsan bu adımı atla ya da aynı işi Node.js + viem/Ponder ile yap (<a href="03-javascript-typescript/index.html">03</a>). <a href="04-dotnet/index.html">04 .NET</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: Nethereum.Web3, Nethereum.BlockchainProcessing, Anvil veya Sepolia RPC</span>
+          </li>
+          <li>
+            <span class="steps__title">06 — Altyapı, araçlar, güvenlik</span>
+            <p>RPC sağlayıcı ücretsiz katmanı, Slither ile statik analiz, Ethernaut ile saldırı pratiği, L2 farkları, IPFS ile arayüz barındırma. <a href="06-altyapi-araclar-guvenlik/index.html">06 altyapı</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Araç: Alchemy/Infura ücretsiz katman, Slither, Ethernaut, L2BEAT, IPFS</span>
+          </li>
+          <li>
+            <span class="steps__title">07 — Proje</span>
+            <p>Önceki adımları tek depoda birleştir: sözleşme + testler + React arayüzü + indexer (.NET veya Node.js; hangisini biliyorsan). GitHub'a koy, README'de Sepolia adreslerini ver. Özgeçmişe yazdığın ya da yazacağın deneyimin kanıtı. <a href="07-projeler/index.html">07 projeler</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Çıktı: verified contract adresi + repo</span>
+          </li>
+          <li>
+            <span class="steps__title">05 — Diğer zincirler (tanıma)</span>
+            <p>Bitcoin (NBitcoin), Solana (Rust/Anchor), Cosmos (Go), Starknet (Cairo). Çoğu okur için "ne farkı var" seviyesi; sıranın sonunda, isteğe bağlı. Rust/Go biliyorsan ya da hedefin EVM dışı bir zincirse yukarıdaki tabloya göre öne alınır. <a href="05-diger-zincirler/index.html">05 diğer zincirler</a></p>
+            <span class="steps__meta">Maliyet: 0 TL · Süre: sınırlı tut</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Sıfır bütçe yolu: yerel ağ için <strong>Anvil</strong> (Foundry) veya Hardhat network; test ağı için <strong>Sepolia</strong> (ethereum.org'un önerdiği varsayılan testnet; Holesky Eylül 2025'te kullanımdan kalktı). Faucet: <a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">Google Cloud Sepolia faucet</a> (Google hesabı ister). Testnet ETH'nin parasal değeri yoktur; almak ve harcamak ücretsizdir. Ağ listesi: <a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org/networks</a>.</p>
+        </div>
+
+        <h2 id="bolum-haritasi"><span class="h-num">§ 6</span>Bölüm haritası</h2>
+        <p>Yedi konu sayfası. Kartlardaki rozet, o sayfanın öncelik sınıfını gösterir.</p>
+
+        <div class="cards">
+          <a class="card" href="01-temeller/index.html">
+            <span class="card__num">01</span>
+            <h3 class="card__title">Temeller</h3>
+            <p class="card__desc">Hesap, işlem, gas, blok, EVM, konsensüs, testnet, cüzdan, explorer. Zincire dokunmadan önce sözlük; önce burayı oku.</p>
+            <span class="card__foot"><span class="tag tag--ok">TEMEL</span></span>
+          </a>
+          <a class="card" href="02-solidity-ve-akilli-sozlesmeler/index.html">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Solidity ve Akıllı Sözleşmeler</h3>
+            <p class="card__desc">Dil, EVM, Foundry, OpenZeppelin, token standartları, güvenlik açıkları. Mülakatta en çok sorulan sayfa.</p>
+            <span class="card__foot"><span class="tag tag--bad">MÜLAKATTA SIK</span><span class="tag tag--ok">TEMEL</span></span>
+          </a>
+          <a class="card" href="03-javascript-typescript/index.html">
+            <span class="card__num">03</span>
+            <h3 class="card__title">JavaScript / TypeScript</h3>
+            <p class="card__desc">viem, wagmi, ethers v6, Hardhat, cüzdan bağlantısı, React dApp. Ana akım araç zinciri.</p>
+            <span class="card__foot"><span class="tag tag--bad">MÜLAKATTA SIK</span><span class="tag tag--ok">TEMEL</span></span>
+          </a>
+          <a class="card" href="04-dotnet/index.html">
+            <span class="card__num">04</span>
+            <h3 class="card__title">.NET</h3>
+            <p class="card__desc">Nethereum, indexer, sunucu tarafı servisler, Nethermind, NBitcoin. C# bilen için zincire köprü; JS/TS hattının tamamlayıcısı, JS/TS bilen için isteğe bağlı.</p>
+            <span class="card__foot"><span class="tag tag--ok">TEMEL</span></span>
+          </a>
+          <a class="card" href="05-diger-zincirler/index.html">
+            <span class="card__num">05</span>
+            <h3 class="card__title">Diğer Zincirler</h3>
+            <p class="card__desc">Bitcoin, Solana, Cosmos, Starknet, L2'ler. Tanıma amaçlı, isteğe bağlı; sıranın sonunda.</p>
+            <span class="card__foot"><span class="tag tag--info">İLERİ</span></span>
+          </a>
+          <a class="card" href="06-altyapi-araclar-guvenlik/index.html">
+            <span class="card__num">06</span>
+            <h3 class="card__title">Altyapı, Araçlar, Güvenlik</h3>
+            <p class="card__desc">RPC sağlayıcılar, explorer, IPFS, oracle, statik analiz, denetim listeleri, MEV, bridge riskleri.</p>
+            <span class="card__foot"><span class="tag">ORTA</span><span class="tag tag--warn">RİSK</span></span>
+          </a>
+          <a class="card" href="07-projeler/index.html">
+            <span class="card__num">07</span>
+            <h3 class="card__title">Projeler</h3>
+            <p class="card__desc">Testnet'te doğrulanmış, GitHub'da duran, README'li uçtan uca proje tarifleri. Portföy kanıtı; hepsi 0 TL.</p>
+            <span class="card__foot"><span class="tag tag--ok">TEMEL</span></span>
+          </a>
+        </div>
+
+        <h2 id="turkiye-yasal-cerceve"><span class="h-num">§ 7</span>Türkiye'de yasal çerçeve (kısa)</h2>
+        <p class="intro">Yazılım geliştirmek ile kripto varlık hizmeti sunmak farklı şeylerdir. Türkiye'de düzenlenen ikincisidir. Bu bölüm hukuki görüş değildir; kesin olmayan yerler etiketlendi.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Türkiye — bilmen gereken başlıklar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>7518 sayılı Kanun</strong></td>
+                <td>Sermaye Piyasası Kanununda Değişiklik Yapılmasına Dair Kanun; kabul 26.06.2024, Resmî Gazete 02.07.2024 (sayı 32590). Kripto varlık ve kripto varlık hizmet sağlayıcısı tanımlarını SPKn'a ekledi</td>
+                <td>Doğrulandı: Resmî Gazete metni açıldı</td>
+                <td><a href="https://www.resmigazete.gov.tr/eskiler/2024/07/20240702-1.htm">resmigazete.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>SPK — kripto varlık hizmet sağlayıcıları</strong></td>
+                <td>Platform (borsa) ve saklama kuruluşu işletmek SPK iznine tabi. SPK sitesinde başvuru süreçleri, faaliyette olanlar ve tasfiyedekiler listesi var</td>
+                <td><span class="tag tag--warn">RİSK</span> SPK sayfasında doğrulandı</td>
+                <td><a href="https://spk.gov.tr/kurumlar/kripto-varlik-hizmet-saglayicilar">spk.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tebliğ III-35/B.1 ve III-35/B.2</strong></td>
+                <td>Kuruluş ve Faaliyet Esasları; Çalışma Usul ve Esasları ile Sermaye Yeterliliği tebliğleri</td>
+                <td>Adları SPK sayfasında doğrulandı; yayım tarihleri doğrulanamadı, SPK sitesinden teyit et</td>
+                <td><a href="https://spk.gov.tr/kurumlar/kripto-varlik-hizmet-saglayicilar/basvuru-surecleri">spk.gov.tr (başvuru süreçleri)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Açık kaynak sözleşme geliştirmek</strong></td>
+                <td>Kod yazmak, GitHub'a koymak, testnet'e deploy etmek bir "hizmet sağlama" değildir; lisans gerektiren faaliyet tanımına girmez</td>
+                <td>Kanun metninin makul okuması; hukuki görüş değil; doğrulanamadı</td>
+                <td><a href="https://www.resmigazete.gov.tr/eskiler/2024/07/20240702-1.htm">resmigazete.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>Testnet'te çalışmak</strong></td>
+                <td>Testnet varlıklarının parasal değeri yok; alım-satım, saklama veya müşteri yok</td>
+                <td>Aynı okuma; doğrulanamadı</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Başkası adına para/kripto toplamak, token satmak, borsa/cüzdan servisi işletmek</strong></td>
+                <td>Bunlar hizmet sağlayıcı faaliyetine girebilir; izinsiz yapılması cezai yaptırım kapsamında</td>
+                <td><span class="tag tag--warn">RİSK</span> Bu listenin hiçbir projesi bunu yapmaz</td>
+                <td><a href="https://spk.gov.tr/">spk.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>MASAK</strong></td>
+                <td>Mali Suçları Araştırma Kurulu; kripto varlık hizmet sağlayıcıları için kimlik tespiti ve bildirim yükümlülükleri</td>
+                <td>Yükümlü olan sağlayıcıdır, geliştirici değil; ayrıntı doğrulanamadı</td>
+                <td><a href="https://masak.hmb.gov.tr/">masak.hmb.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vergi (blockchain kaynaklı gelir)</strong></td>
+                <td>Sonuç, gelirin türüne göre değişir; aşağıdaki tablo yön gösterir. Kripto vergilendirmesi değişken bir alandır</td>
+                <td><span class="tag tag--warn">TEYİT</span> Kesin bilgi için SMMM</td>
+                <td><a href="https://www.gib.gov.tr/">gib.gov.tr</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Gelirin türüne göre vergi yönü — Durum → Sonuç (mali görüş değildir; her satır TEYİT)</caption>
+            <thead><tr><th>Durum</th><th>Sonuç (yön)</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Türkiye'deki işverenden bordrolu maaş</strong> (işin blockchain olması fark etmez)</td>
+                <td>Ücret geliri; gelir vergisi stopajı ve SGK işveren tarafından yapılır. Kripto bilgisi vergiyi değiştirmez</td>
+                <td>GVK (ücret) · <a href="https://www.gib.gov.tr/">gib.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yabancı işverenle doğrudan iş sözleşmesi</strong> (Türkiye'de bordro, şube veya EOR yok)</td>
+                <td>Ücret geliri, ancak stopaj yapan işveren olmadığı için yıllık beyanname ile beyan gündeme gelir; SGK yönü (isteğe bağlı sigorta / 4/b / GSS) ayrıca <span class="tag tag--warn">TEYİT</span>. EOR veya Türkiye bordrosu varsa üstteki bordrolu satır geçerlidir</td>
+                <td><a href="https://www.gib.gov.tr/">gib.gov.tr</a> · <a href="https://www.sgk.gov.tr/">sgk.gov.tr</a> · <a href="#durust-cerceve">§ 2</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yurt dışı şirkete uzaktan, sözleşmeli (freelance) geliştirme</strong> — ödeme döviz veya stablecoin</td>
+                <td>Bağımsız faaliyet geliri; vergi mükellefiyeti kaydı (şahıs işletmesi / serbest meslek ya da şirket) ve fatura gerekir; SGK sonucu 4/a çalışan, emekli, 29 yaş altı ve diğer durumlara göre değişir (<a href="#durust-cerceve">§ 2</a> listesi). Yurt dışına verilen yazılım hizmetine ilişkin kazanç indirimi (<span class="law">GVK md. 89/13</span>) ve KDV istisnası olabilir; oran ve şartlar <span class="tag tag--warn">TEYİT</span>. Stablecoin ile ödemenin durumu için <a href="#durust-cerceve">§ 2</a> notu</td>
+                <td><a href="../../Rehberler/Sirket-Kurma/07-genc-girisimci.html">Şirket Kurma — Bölüm 07</a> · <a href="../../Rehberler/Sirket-Kurma/09-yurtdisi-cerceve.html">Bölüm 09</a></td>
+              </tr>
+              <tr>
+                <td><strong>Denetim yarışması (audit contest) / bug bounty ödülü</strong> (Sherlock, Cantina, CodeHawks, Immunefi vb.; Code4rena 2026'da "winding down" — bkz. <a href="06-altyapi-araclar-guvenlik/index.html">06</a> § 9)</td>
+                <td>Beyan edilmesi gerekebilecek gelir; türü (serbest meslek kazancı mı, arızi kazanç mı) ve ödül kripto ise değerleme <span class="tag tag--warn">TEYİT</span>. Platformlar ödeme öncesi KYC isteyebilir</td>
+                <td>GİB, SMMM</td>
+              </tr>
+              <tr>
+                <td><strong>Kripto varlık alım-satım kazancı</strong></td>
+                <td>Bu liste yatırım konuşmaz. 2026 itibarıyla kripto kazancına özel bir vergi düzenlemesinin yürürlükte olup olmadığı <span class="tag tag--warn">TEYİT</span></td>
+                <td><a href="https://www.resmigazete.gov.tr/">resmigazete.gov.tr</a> · <a href="https://www.gib.gov.tr/">gib.gov.tr</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yalnızca testnet / öğrenme</strong></td>
+                <td>Testnet varlığının parasal değeri yok; gelir yok, vergi doğmaz</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Öğrenme sürecinde çizgi nettir: kendi kodun, kendi test cüzdanın, testnet. Başkasının parasına, gerçek token satışına veya "platform" kurma fikrine yaklaştığın an SPK ve MASAK çerçevesine girersin. Bu listedeki hiçbir proje o çizgiyi geçmez; geçecek bir fikir doğarsa önce avukat, sonra kod.</p>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 8</span>Özet</h2>
+        <ul class="checklist">
+          <li>Öncelik hedefe bağlı (<a href="#durust-cerceve">§ 2</a> tablosu): blockchain yan alansa ve ana dil/platform (ör. <a href="../CSharp-DotNet/index.html">C# ve .NET</a>, <a href="../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a>, <a href="../Java/index.html">Java</a>) sağlamsa iyi bir yan alandır, değilse önce ana hatta derinleş. Blockchain ana hedefse Solidity + Foundry + güvenlik (ya da protokol için Go/Rust) ana hattın kendisidir. Hiç programlama bilmiyorsan önce JavaScript.</li>
+          <li>En yüksek öncelik <span class="tag tag--bad">MÜLAKATTA SIK</span> maddeleri: <a href="#cv-eslestirme">§ 4</a>'teki Solidity ve React dApp listeleri. Özgeçmişte bir deneyim varsa bunlar onu savunulabilir yapar; yoksa ilk projenin öğrenme hedefidir; üretim deneyimi ya da blockchain'e özel pozisyon için yalnızca başlangıç seviyesidir.</li>
+          <li>Dil kararı: ana akım JavaScript/TypeScript (viem, wagmi, ethers v6, Hardhat 3, Foundry). .NET (Nethereum) arka plan servisleri için tamamlayıcı. Rakip değil.</li>
+          <li>Sıra başlangıç noktana göre (<a href="#ogrenme-sirasi">§ 5</a> tablosu). C#/.NET bilen, JS bilmeyen için: 01 temeller &rarr; 02 Solidity (Foundry) &rarr; 03 JS/TS dApp &rarr; 04 .NET &rarr; 06 altyapı &rarr; 07 proje. JS/TS bilen 04'ü atlayabilir; hiç dil bilmeyen önce JavaScript ve React; Rust/Go bilen 05'i öne alabilir; güvenlik hedefleyen 02 § 6 ve 06 § 8–9'a yoğunlaşır. 05 diğerleri için isteğe bağlı.</li>
+          <li>Bütçe: sıfır. Anvil, Remix, Sepolia faucet, ücretsiz RPC katmanları, Cyfrin Updraft. Mainnet'e para konmaz; gerçek private key kod deposuna girmez.</li>
+          <li>Eskimiş araçlara zaman harcama: web3.js (sunset Mart 2025), Truffle/Ganache (sunset Eylül 2023), Holesky testnet (Eylül 2025). Yeni tutorial seçerken tarihine bak.</li>
+          <li>Kariyere gerçek katkı: kriptografi, dağıtık sistem sezgisi, güvenlik düşüncesi. Bunlar ana platformun hangisiyse (.NET, Java, Node.js, Go) o backend mülakatında da anlatılabilir; <a href="#durust-cerceve">§ 2</a> tablosu köprüleri verir.</li>
+          <li>Yasal çizgi: kod yazmak ve testnet'te çalışmak düzenlenen faaliyet değil; borsa/saklama/token satışı SPK izni ister (7518 sayılı Kanun, 2024). Vergi gelirin türüne göre değişir (bordro, yurt dışı freelance, bug bounty ödülü, alım-satım, testnet; <a href="#turkiye-yasal-cerceve">§ 7</a> tablosu); türü belirle, kesin sonuç için SMMM.</li>
+          <li>Kanıt: Sepolia'da doğrulanmış sözleşme + GitHub deposu + README. Sertifika değil, proje. <a href="07-projeler/index.html">07 projeler</a>.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="next" href="01-temeller/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Blockchain Temelleri</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

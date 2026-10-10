@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kütüphaneler — .NET Anahtar Listesi</title>
+<meta name="description" content="İhtiyaç kategorisine göre NuGet kütüphaneleri: mapping, validation, JSON, HTTP, PDF, Excel, zamanlama, lisans notlarıyla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Kütüphane Kataloğu</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 10 · Kütüphaneler</div>
+        <h1 class="page-title">Hangi iş için <em>hangi kütüphane?</em></h1>
+        <p class="lede">Kategori kategori kütüphane listesi: her kategoride yaygın olan, ücretsiz alternatif ve niş seçenek. AutoMapper'ın ücretli olması gibi lisans değişiklikleri ayrıca işaretli.</p>
+        <div class="head-meta">Referans &middot; Kategori bazlı &middot; Lisans notlu</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--info">
+          <p class="callout__title">Bu bölüm nasıl büyür</p>
+          <p>Bu sayfa kütüphanelerin genel kataloğudur. Buradaki kütüphanelerden çalışılıp denenenler (ör. Redis, RabbitMQ) bu klasörün altına <strong>alt klasör</strong> olarak eklenir; her alt klasörün kendi README'si ve kod denemesi olur. Alt klasör eklendikçe bu sayfaya ve bölümün ana sayfasına bağlantısı eklenir.</p>
+        </div>
+
+<h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu katalog nasıl kullanılır</h2>
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesi</strong>dir. Her satır bir NuGet paketi ya da yerleşik .NET API'si; "ne yapar" sütunu sadece adını duyduğunda kafanın karışmaması için var. Öğrenmeyi sen yapacaksın: satırı seç, doküman bağlantısına git, 20 satırlık bir konsol projesinde dene, sonra bir sonrakine geç.</p>
+        <p>Her kategoride tek bir "doğru" kütüphane vermedim. Genelde üç kolon vardır: <strong>yaygın olan</strong> (mülakatta adı geçen), <strong>ücretsiz alternatif</strong> (lisans derdi olmayan) ve <strong>niş/modern</strong> (performans veya source generator tabanlı yenisi). Hangisini seçeceğin projeye göre değişir; ikisinin farkını söyleyebilmek, birini ezbere bilmekten değerlidir.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Lisans bilgisi eskir</p>
+          <p>Bu sayfadaki lisans sütunu yön göstermek içindir, hukuki dayanak değildir. Son yıllarda AutoMapper, MediatR, FluentAssertions, EPPlus, QuestPDF, ImageSharp gibi çok kullanılan paketler lisans modelini değiştirdi. Bir paketi işe koymadan önce <strong>NuGet sayfasındaki lisans alanını</strong> ve <strong>reponun LICENSE dosyasını</strong> kendin aç. Şirket ortamında bunu satın alma/hukuk tarafına da sormak gerekir.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Rozetlerin anlamı</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz &mdash; en yüksek öncelik. <span class="tag tag--ok">TEMEL</span> bu kategoride önce bunu öğren. <span class="tag">ORTA</span> sonra gelir. <span class="tag tag--info">İLERİ</span> derinleşme, acelesi yok. <span class="tag tag--warn">ÜCRETLİ</span> lisansı paralı ya da paralı hale gelmiş (çoğunda eşik altı/ticari olmayan kullanım ücretsizdir; satırdaki dallara bak). <span class="tag tag--warn">KAYNAK AÇMA</span> ücret değil, belirli durumlarda kaynak kodunu açma yükümlülüğü getiren lisans (GPL/AGPL). <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar, yeni projede seçilmez.</p>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dış paket kısıtı olan ortamlar</p>
+          <p>Bazı kurumlar güvenlik veya lisans politikası gereği dış NuGet paketlerini yasaklar ya da onay sürecine bağlar. Bu yüzden her kategoride yerleşik (paketsiz) seçenek de ayrıca işaretlidir. Mülakatta "AutoMapper kullandın mı?" gibi bir soruya cevabın kendi deneyimine göre değişir; bunun için bu sayfadaki satırların <em>ne işe yaradığını</em> bilmek yeter, hepsini kullanmış olmak gerekmez:</p>
+          <ul>
+            <li><strong>Dış paket kısıtlı ortamda çalıştıysan</strong> &rarr; bu dezavantaj değil, anlatılabilir bir deneyimdir. Örnek cevap: "Dış paket kısıtı vardı, mapping'i elle extension method'larla yazdık; AutoMapper'ın çözdüğü problemi ve maliyetini biliyorum."</li>
+            <li><strong>Onaylı paket listesi olan ortamda çalıştıysan</strong> (yasak değil, onay süreci) &rarr; bir paketi onaya sunarken § 20'deki kriterleri (lisans, bakım, güvenlik taraması) nasıl uyguladığını anlat.</li>
+            <li><strong>AutoMapper/MediatR gibi paketleri serbestçe kullandıysan</strong> &rarr; "Kullandım; şu problemi çözdü. Maliyeti reflection ve zor hata ayıklama, ayrıca AutoMapper v15 / MediatR v13 ile gelen lisans değişikliği; bugün olsa Mapperly veya elle mapping'i değerlendirirdim."</li>
+            <li><strong>Hiç ekip/iş deneyimin yoksa</strong> &rarr; "Kendi projemde şu nedenle şunu seçtim" biçiminde gerekçe ver; kullanmadığın paketi kullandım deme.</li>
+          </ul>
+        </div>
+
+        <h2 id="nesne-esleme"><span class="h-num">§ 2</span>Nesne eşleme (object mapping)</h2>
+        <p>Entity &rarr; DTO dönüşümü. Aramada "C# object mapping" ya da doğrudan paket adını yaz; "mapping" tek başına ORM ve veritabanı sonuçları getirir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mapping kütüphaneleri ve elle yaklaşım</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>AutoMapper</strong></td><td>İki tip arasında otomatik alan eşlemesi; profil sınıflarıyla yapılandırılır</td><td>v14'e kadar MIT; v15 ile ticari lisans modeli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> v15+ lisansı kullanana göre değişir: yıllık geliri belirli eşiğin altındaki şirket (yaygın bilinen eşik 5 milyon USD yıllık brüt gelir), kâr amacı gütmeyen kuruluş, eğitim, kişisel/üretim dışı kullanım &rarr; topluluk (Community) lisansıyla ücretsiz; eşiğin üstündeki ticari şirket &rarr; ücretli lisans; v14 ve öncesinde kalan mevcut proje &rarr; MIT şartlarıyla kullanmaya devam edebilir ama yeni güvenlik/özellik güncellemesi almaz; lisans istemeyen yeni proje &rarr; Mapperly, Mapster veya elle/extension method mapping. <span class="tag tag--warn">TEYİT</span> automapper.io (Lucky Penny Software). Mülakatta "runtime reflection maliyeti" ve "hata ayıklaması zor" eleştirileri sorulur.</td><td><a href="https://docs.automapper.org/">docs.automapper.org</a></td></tr>
+              <tr><td><strong>Mapster</strong></td><td>AutoMapper alternatifi; hem runtime hem kod üretimi (Mapster.Tool) modu var</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> AutoMapper'ın ücretsiz muadili olarak en çok önerilen paket.</td><td><a href="https://github.com/MapsterMapper/Mapster">github.com/MapsterMapper/Mapster</a></td></tr>
+              <tr><td><strong>Mapperly</strong> (Riok.Mapperly)</td><td>Source generator; derleme anında düz atama kodu üretir, runtime maliyeti sıfır</td><td>Apache-2.0</td><td><span class="tag tag--ok">TEMEL</span> Yeni projede seçim duruma göre: AOT/performans önemliyse veya kütüphane isteniyorsa &rarr; Mapperly; az sayıda DTO varsa &rarr; elle mapping yeterli; mevcut AutoMapper kod tabanı varsa &rarr; lisans durumuna göre kal ya da kademeli geçiş. Ürettiği kodu editörde görebilirsin &mdash; "sihir yok" argümanı budur.</td><td><a href="https://mapperly.riok.app/">mapperly.riok.app</a></td></tr>
+              <tr><td><strong>TinyMapper</strong></td><td>Minimalist, hızlı mapper</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Bakımı yavaş; son commit tarihine bak.</td><td><a href="https://github.com/TinyMapper/TinyMapper">github.com/TinyMapper/TinyMapper</a></td></tr>
+              <tr><td><strong>AgileMapper</strong></td><td>Yapılandırma gerektirmeyen, sözleşmeye dayalı mapper</td><td>MIT</td><td><span class="tag">ORTA</span> Niş; nadir karşılaşırsın.</td><td><a href="https://github.com/agileobjects/AgileMapper">github.com/agileobjects/AgileMapper</a></td></tr>
+              <tr><td><strong>Elle mapping</strong></td><td>Kütüphane yok; <code>new Dto { Ad = e.Ad }</code> ile doğrudan atama</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> Paket kısıtı olan projelerin varsayılanı. En hızlısı, en açık olanı; alan adı değişince derleyici hata verir. Savunulabilir bir tercihtir.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Extension method mapping</strong></td><td><code>public static UserDto ToDto(this User u)</code> kalıbı</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> Elle mapping'in düzenli hali; Mapperly de aslında bunu üretir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>EF Core projeksiyonu</strong> (<code>Select</code>)</td><td>Sorguyu doğrudan DTO'ya çevirir; SQL'de yalnız gereken kolonlar seçilir</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> Mapping'in en performanslı yeri burasıdır: entity çekip sonra map etmek yerine sorguda map et. <a href="../03-veri-erisimi/index.html">§ 03 Veri erişimi</a> sayfasına bak.</td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ProjectTo</strong> (AutoMapper.Extensions.EF)</td><td>AutoMapper profilini IQueryable üstünde çalıştırır</td><td>AutoMapper ile aynı</td><td><span class="tag">ORTA</span> AutoMapper kullanılan projelerde aşırı kolon çekme ve N+1 sorununu azaltır.</td><td><a href="https://docs.automapper.org/">docs.automapper.org</a></td></tr>
+              <tr><td><strong>ValueInjecter</strong></td><td>Eski nesil convention tabanlı mapper</td><td>MIT</td><td><span class="tag tag--warn">ESKİMİŞ</span> Legacy kodda görürsün, yeni projede seçilmez.</td><td>github.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dogrulama"><span class="h-num">§ 3</span>Doğrulama (validation) ve guard clause</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Girdi doğrulama seçenekleri</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>FluentValidation</strong></td><td>Doğrulama kurallarını ayrı sınıfta akıcı sözdizimiyle tanımlar</td><td>Apache-2.0 (ücretsiz)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> 2023'te ticari lisansa geçiş duyuruldu, sonra geri alındı; güncel LICENSE dosyasına bak. ASP.NET Core otomatik entegrasyonu ayrı pakettedir.</td><td><a href="https://docs.fluentvalidation.net/">docs.fluentvalidation.net</a></td></tr>
+              <tr><td><strong>DataAnnotations</strong></td><td>Yerleşik attribute tabanlı doğrulama: <code>[Required]</code>, <code>[MaxLength]</code>, <code>[Range]</code></td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Dış paket kullanılamıyorsa tek seçenek budur. MVC model binding ve Blazor EditForm ile otomatik çalışır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MiniValidation</strong></td><td>Minimal API'lerde DataAnnotations'ı elle tetikleyen küçük yardımcı</td><td>MIT</td><td><span class="tag">ORTA</span> Minimal API'de model doğrulama otomatik değildir; bu boşluğu kapatır.</td><td>github.com &mdash; "MiniValidation" ara</td></tr>
+              <tr><td><strong>Ardalis.GuardClauses</strong></td><td>Metot başında ön koşul kontrolü: <code>Guard.Against.Null(x)</code></td><td>MIT</td><td><span class="tag">ORTA</span> Doğrulama değil, <em>savunmacı programlama</em>. İkisini karıştırma: guard iç tutarlılık, validation kullanıcı girdisi içindir.</td><td><a href="https://github.com/ardalis/GuardClauses">github.com/ardalis/GuardClauses</a></td></tr>
+              <tr><td><strong>Valit</strong></td><td>Akıcı, immutable doğrulama kütüphanesi</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Niş; bakım durumunu kontrol et.</td><td><a href="https://github.com/valit-stack/Valit">github.com/valit-stack/Valit</a></td></tr>
+              <tr><td><strong>ArgumentNullException.ThrowIfNull</strong></td><td>.NET 6+ yerleşik guard; tek satırda null kontrolü</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Guard kütüphanesine gerek bırakmayan yerleşik yöntem. <code>ArgumentOutOfRangeException.ThrowIfNegative</code> gibi kardeşleri de var.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception.throwifnull">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IValidateOptions / ValidateOnStart</strong></td><td>appsettings'ten okunan yapılandırmayı uygulama açılırken doğrular</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Yanlış config yüzünden üretimde patlamayı önler. "Options pattern" diye ara.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options-validation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ValidationProblemDetails</strong></td><td>Doğrulama hatalarını standart JSON biçiminde döndürür</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> API hatalarını standart formatta dönmek olgunluk göstergesidir; mülakatta sorulur.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="json-ve-serilestirme"><span class="h-num">§ 4</span>JSON ve diğer serileştirme biçimleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JSON kütüphaneleri</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>System.Text.Json</strong></td><td>.NET yerleşik JSON serileştirici; ASP.NET Core'un varsayılanı</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Önce bunu öğren. Varsayılan olarak camelCase yazar ve büyük/küçük harfe duyarlıdır &mdash; Newtonsoft'tan geçişte en sık patlayan yer burasıdır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JsonSerializerContext</strong> (source generator)</td><td>Derleme anında serileştirme kodu üretir; reflection'ı kaldırır</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> Native AOT ve trimming için gereklidir. Performans mülakatında güçlü bir cevaptır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Newtonsoft.Json</strong> (Json.NET)</td><td>Uzun yıllar standart olan esnek JSON kütüphanesi</td><td>MIT</td><td><span class="tag">ORTA</span> Hâlâ çok yaygın: <code>JsonConvert</code>, polimorfik dönüşüm, JsonPatch, esnek converter'lar ve devasa Stack Overflow birikimi yüzünden. System.Text.Json'ın yetmediği yerde geri dönülür.</td><td><a href="https://www.newtonsoft.com/json">newtonsoft.com/json</a></td></tr>
+              <tr><td><strong>Utf8Json</strong></td><td>UTF-8 üzerinde çalışan çok hızlı serileştirici</td><td>MIT</td><td><span class="tag tag--warn">ESKİMİŞ</span> Arşivlendi. System.Text.Json aradaki farkı kapattı; yeni projede kullanma, eski karşılaştırma yazılarında adını görürsün.</td><td><a href="https://github.com/neuecc/Utf8Json">github.com/neuecc/Utf8Json</a></td></tr>
+              <tr><td><strong>Jil</strong></td><td>IL üretimiyle hızlanan eski nesil JSON serileştirici</td><td>MIT</td><td><span class="tag tag--warn">ESKİMİŞ</span> Tarihsel benchmark'larda geçer; artık bakımı yok.</td><td><a href="https://github.com/kevin-montrose/Jil">github.com/kevin-montrose/Jil</a></td></tr>
+              <tr><td><strong>ServiceStack.Text</strong></td><td>ServiceStack ekosisteminin serileştiricisi</td><td>Ticari (sınırlı ücretsiz katman)</td><td><span class="tag tag--warn">ÜCRETLİ</span> Ekosistemin tamamı ücretlidir; tek başına nadiren seçilir.</td><td>servicestack.net</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JSON dışındaki biçimler</caption>
+            <thead><tr><th>Kütüphane / biçim</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MessagePack-CSharp</strong></td><td>İkili (binary) serileştirme; JSON'dan küçük ve hızlı</td><td>MIT</td><td><span class="tag">ORTA</span> Redis'te veya SignalR'da yük küçültmek için kullanılır. <a href="../05-mesajlasma-ve-dagitik/index.html">§ 05 Mesajlaşma</a> ile birlikte oku.</td><td><a href="https://github.com/MessagePack-CSharp/MessagePack-CSharp">github.com/MessagePack-CSharp</a></td></tr>
+              <tr><td><strong>MemoryPack</strong></td><td>.NET'e özgü, sıfır kopyalı çok hızlı binary serileştirici</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Sadece .NET tarafları konuşuyorsa mantıklı; dil bağımsız değildir.</td><td>github.com/Cysharp/MemoryPack</td></tr>
+              <tr><td><strong>Google.Protobuf</strong></td><td>Protocol Buffers; gRPC'nin varsayılan veri biçimi</td><td>BSD-3</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> gRPC ile doğrudan ilişkili. <code>.proto</code> dosyası, alan numaraları ve şema evrimi sorulur.</td><td><a href="https://protobuf.dev/">protobuf.dev</a></td></tr>
+              <tr><td><strong>protobuf-net</strong></td><td>Protobuf'u attribute'larla, kod-öncelikli kullanmanı sağlar</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> <code>.proto</code> yazmadan C# sınıfından protobuf üretir.</td><td><a href="https://github.com/protobuf-net/protobuf-net">github.com/protobuf-net</a></td></tr>
+              <tr><td><strong>YamlDotNet</strong></td><td>YAML okuma/yazma</td><td>MIT</td><td><span class="tag">ORTA</span> CI dosyaları, Kubernetes manifestleri ve config için. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">§ 07 DevOps</a> sayfasıyla bağlantılı.</td><td><a href="https://github.com/aaubry/YamlDotNet">github.com/aaubry/YamlDotNet</a></td></tr>
+              <tr><td><strong>XmlSerializer</strong></td><td>Yerleşik XML serileştirme</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Türkiye'de e-Fatura, banka ve SOAP entegrasyonlarında hâlâ zorunlu.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/xml-serialization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>XDocument / LINQ to XML</strong></td><td>XML'i LINQ ile gezme ve düzenleme</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Şemasız XML okurken XmlSerializer'dan pratiktir. LINQ bilgisiyle doğrudan bağlantılı.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/linq/linq-xml-overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DataContractSerializer</strong></td><td>WCF döneminin serileştiricisi</td><td>Yerleşik</td><td><span class="tag tag--warn">ESKİMİŞ</span> Legacy WCF kodunda görürsün.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>BinaryFormatter</strong></td><td>Eski ikili serileştirici</td><td>Yerleşik (kaldırıldı)</td><td><span class="tag tag--warn">ESKİMİŞ</span> Güvenlik açığı nedeniyle modern .NET'te devre dışı bırakıldı. Eski kodda görürsen değiştirmek gerekir &mdash; "neden kaldırıldı" sorusu mülakatta sorulabilir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sonuc-ve-hata"><span class="h-num">§ 5</span>Sonuç ve hata yönetimi (Result pattern)</h2>
+        <p>Exception fırlatmak yerine "başarılı mı, değilse neden" bilgisini dönüş tipinde taşımak. Aramada "C# result pattern" yaz.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Result / hata taşıma seçenekleri</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Kendi Result&lt;T&gt; tipin</strong></td><td>30 satırlık bir record ile başarı/hata taşıyan dönüş tipi</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> Dış paket kısıtı olan ortamda en uygun seçenek. Önce bunu yaz, sonra kütüphanelere bak &mdash; ne çözdüklerini o zaman anlarsın.</td><td>&mdash;</td></tr>
+              <tr><td><strong>ErrorOr</strong></td><td><code>ErrorOr&lt;T&gt;</code> ile değer veya hata listesi döndürür</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Öğrenmesi en kolayı; hata tiplerinde (NotFound, Conflict, Validation) hazır sınıflandırma var.</td><td><a href="https://github.com/amantinband/error-or">github.com/amantinband/error-or</a></td></tr>
+              <tr><td><strong>OneOf</strong></td><td>Ayrık birleşim (discriminated union) tipi: <code>OneOf&lt;User, NotFound, Error&gt;</code></td><td>MIT</td><td><span class="tag">ORTA</span> C#'ta henüz yerleşik olmayan union tipini taklit eder. <code>Match</code> ile derleyici tüm halleri ele almanı zorlar.</td><td><a href="https://github.com/mcintyre321/OneOf">github.com/mcintyre321/OneOf</a></td></tr>
+              <tr><td><strong>FluentResults</strong></td><td>Başarı/hata sonucu + sebep zinciri (reasons) taşır</td><td>MIT</td><td><span class="tag">ORTA</span> Birden çok hata sebebini birlikte taşımak gerektiğinde.</td><td><a href="https://github.com/altmann/FluentResults">github.com/altmann/FluentResults</a></td></tr>
+              <tr><td><strong>Ardalis.Result</strong></td><td>Result tipi + ASP.NET Core HTTP durum kodu eşlemesi</td><td>MIT</td><td><span class="tag">ORTA</span> Result'ı doğrudan 404/400/409'a çeviren hazır köprüsü var.</td><td><a href="https://github.com/ardalis/Result">github.com/ardalis/Result</a></td></tr>
+              <tr><td><strong>LanguageExt</strong></td><td>C#'a fonksiyonel programlama tipleri getirir: Option, Either, Try, Fin</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Çok geniş, öğrenme eğrisi dik; ekipçe kabul edilmeden girme. Fikir: "değer olmayabilir" (Option) veya "hata ya da sonuç" (Either) durumlarını tipte açıkça gösterip null ve exception yerine bileşik fonksiyonlarla işlemek. F#, Haskell, Scala gibi fonksiyonel dillerden geliyorsan: aynı kavram ailesi.</td><td><a href="https://github.com/louthy/language-ext">github.com/louthy/language-ext</a></td></tr>
+              <tr><td><strong>ProblemDetails</strong></td><td>HTTP hata gövdesi için standart biçim (RFC 7807/9457)</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> <code>AddProblemDetails()</code> ile açılır. API'nin hata sözleşmesini standartlaştırır.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IExceptionHandler</strong></td><td>.NET 8+ merkezi hata yakalama arayüzü</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Eskiden custom exception middleware yazılırdı; artık bu var. <a href="../02-platform-ve-web-api/index.html">§ 02 Platform ve Web API</a> ile birlikte oku.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Ben.Demystifier</strong></td><td>Stack trace'i okunabilir hale getirir (async/lambda karmaşasını çözer)</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Log'larda async metotların anlamsız görünen çağrı yığınını düzeltir.</td><td>github.com/benaadams/Ben.Demystifier</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="http-istemcisi"><span class="h-num">§ 6</span>HTTP istemcisi ve dayanıklılık (resilience)</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dış servise istek atma</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HttpClient</strong></td><td>Yerleşik HTTP istemcisi</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Klasik mülakat sorusu: "HttpClient'ı neden her istekte <code>using</code> ile yaratmamalısın?" Cevap: socket exhaustion ve DNS değişikliğini görmeme.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHttpClientFactory</strong></td><td>HttpClient örneklerini havuzlar; named ve typed client tanımlar</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Yukarıdaki sorunun doğru cevabı budur. Önce bunu öğren.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/httpclient-factory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DelegatingHandler</strong></td><td>İstek/yanıt hattına araya girer: token ekleme, loglama, yeniden deneme</td><td>Yerleşik</td><td><span class="tag">ORTA</span> HTTP tarafının "middleware"i. ASP.NET Core middleware'i ile aynı desen.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>System.Net.Http.Json</strong></td><td><code>GetFromJsonAsync</code> / <code>PostAsJsonAsync</code> kısayolları</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Elle serialize/deserialize yazmayı bitirir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.json.httpclientjsonextensions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Refit</strong></td><td>Arayüz tanımından tip güvenli HTTP istemcisi üretir (source generator)</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Bir interface yazarsın, implementasyonu o üretir. Öğrenmesi yarım saat.</td><td><a href="https://github.com/reactiveui/refit">github.com/reactiveui/refit</a></td></tr>
+              <tr><td><strong>RestSharp</strong></td><td>Uzun yıllardır kullanılan HTTP istemci sarmalayıcısı</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Legacy projelerde çok görülür; yeni projede IHttpClientFactory + Refit tercih edilir.</td><td><a href="https://restsharp.dev/">restsharp.dev</a></td></tr>
+              <tr><td><strong>Flurl</strong></td><td>Akıcı URL kurma + HTTP istemci; test için sahte yanıt altyapısı var</td><td>MIT</td><td><span class="tag">ORTA</span> URL birleştirme derdini bitirir. Test edilebilirliği güçlü.</td><td><a href="https://flurl.dev/">flurl.dev</a></td></tr>
+              <tr><td><strong>Polly</strong></td><td>Yeniden deneme, devre kesici (circuit breaker), zaman aşımı, bulkhead, fallback</td><td>BSD-3</td><td><span class="tag tag--ok">TEMEL</span> Dağıtık sistem mülakatının klasik sorusu. "Retry + exponential backoff + jitter" terimlerini öğren.</td><td><a href="https://www.pollydocs.org/">pollydocs.org</a></td></tr>
+              <tr><td><strong>Microsoft.Extensions.Http.Resilience</strong></td><td>Polly'yi HttpClient'a hazır politika yığını olarak bağlar</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> <code>AddStandardResilienceHandler()</code> tek satırda birkaç politikayı birden açar. Yeni projede Polly'yi elle kurmak yerine bunu kullan.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Kiota</strong></td><td>OpenAPI tanımından istemci kodu üretir (Microsoft aracı)</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Swagger/OpenAPI'nin karşı ucu: şemadan istemci üretme.</td><td><a href="https://learn.microsoft.com/en-us/openapi/kiota/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>NSwag</strong></td><td>OpenAPI'den C#/TypeScript istemci üretir; Swagger UI de sunar</td><td>MIT</td><td><span class="tag">ORTA</span> TypeScript tarafına tip üretmek için de kullanılır &mdash; <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript rehberi</a> ile kesişir.</td><td>github.com/RicoSuter/NSwag</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="zamanlama"><span class="h-num">§ 7</span>Zamanlanmış ve arka plan işleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Job scheduling</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hangfire</strong></td><td>Kalıcı (veritabanı destekli) arka plan işleri: fire-and-forget, gecikmeli, tekrarlayan işler + web dashboard</td><td>LGPL-3 çekirdek; Pro/Ace ücretli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Öncelikli. Kurulum depolamaya göre değişir: SQL Server &rarr; resmî ve ücretsiz <code>Hangfire.SqlServer</code> (bir connection string ve iki satır); PostgreSQL, MySQL, SQLite, MongoDB &rarr; topluluk depolama paketleri (<code>Hangfire.PostgreSql</code> vb.; bakım durumunu kontrol et); Redis &rarr; resmî <code>Hangfire.Pro.Redis</code> ücretli, topluluk Redis paketleri de var <span class="tag tag--warn">TEYİT</span> hangfire.io/extensions. Kalıcı depolama istemiyorsan Coravel veya BackgroundService + PeriodicTimer; cron ve cluster ağırlıklıysa Quartz.NET. Lisans: çekirdek LGPL-3, değiştirmeden kullanıldığında kapalı kaynak ticari projede kullanılabilir; Pro/Ace ücretli. Dashboard'ı bir kez görmek anlatmayı kolaylaştırır.</td><td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td></tr>
+              <tr><td><strong>Quartz.NET</strong></td><td>Kurumsal iş zamanlayıcı; cron ifadeleri, cluster desteği, trigger/job ayrımı</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Job (yapılacak iş) ile trigger'ı (ne zaman) ayırır; cron ifadeleriyle zamanlar, veritabanı destekli cluster modunda bir işi yalnızca bir sunucu çalıştırır. Ücretsiz ve cluster'da güvenilir. Java'dan geliyorsan: Java Quartz'ın .NET portudur &mdash; <a href="../../Java/index.html">Java rehberi</a> ile ortak kavram.</td><td><a href="https://www.quartz-scheduler.net/">quartz-scheduler.net</a></td></tr>
+              <tr><td><strong>Coravel</strong></td><td>Zamanlama, kuyruk, cache ve event'i tek pakette veren hafif çözüm</td><td>MIT (Pro sürümü ücretli)</td><td><span class="tag">ORTA</span> Küçük projede Hangfire'a gerek kalmadan iş görür; veritabanı gerektirmez (kalıcılık da yoktur).</td><td><a href="https://docs.coravel.net/">docs.coravel.net</a></td></tr>
+              <tr><td><strong>Cronos</strong></td><td>Sadece cron ifadesini ayrıştırır ve sonraki çalışma zamanını hesaplar</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Zamanlayıcı değil, <em>parser</em>. Kendi scheduler'ını yazarken kullanılır; saat dilimi ve yaz saati hesabını doğru yapar.</td><td><a href="https://github.com/HangfireIO/Cronos">github.com/HangfireIO/Cronos</a></td></tr>
+              <tr><td><strong>BackgroundService / IHostedService</strong></td><td>Uygulama ile birlikte çalışan yerleşik arka plan servisi</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Paket kullanamadığın ortamda arka plan işinin cevabı budur. Önce bunu öğren, sonra Hangfire'ı.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>PeriodicTimer</strong></td><td>.NET 6+ async döngülerde düzenli aralık; <code>Timer</code>'ın modern hali</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> BackgroundService içinde <code>Task.Delay</code> yerine kullanılır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.periodictimer">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL Server Agent Job</strong></td><td>Veritabanı seviyesinde zamanlanmış iş</td><td>SQL Server lisansına dahil (Express sürümünde yok)</td><td><span class="tag">ORTA</span> Veritabanı ağırlıklı ekiplerde sık görülür. "Zamanlamayı uygulamada mı veritabanında mı yaparsın, neden?" sorusuna iki tarafı da tartışabilmek iyi bir cevaptır.</td><td><a href="https://learn.microsoft.com/en-us/sql/ssms/agent/sql-server-agent">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Windows Task Scheduler / cron</strong></td><td>İşletim sistemi seviyesinde zamanlama</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Konsol uygulamasını periyodik çalıştırmanın en basit yolu; kalıcılık ve izleme yoktur.</td><td>learn.microsoft.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="pdf"><span class="h-num">§ 8</span>PDF üretimi</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>PDF kütüphaneleri &mdash; lisansa özellikle dikkat</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>QuestPDF</strong></td><td>C# akıcı API ile sıfırdan PDF tasarlar; canlı önizleme aracı var</td><td>Community (belirli ciro eşiğinin altındaki şirketlere ücretsiz) + Professional/Enterprise ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span> <span class="tag tag--ok">TEMEL</span> Bugün .NET'te PDF için en çok önerilen. Lisans dalları: yıllık brüt geliri 1 milyon USD altındaki şirket, bireysel geliştirici, kâr amacı gütmeyen kuruluş, açık kaynak proje veya değerlendirme amaçlı kullanım &rarr; Community ücretsiz; eşiğin üstündeki şirket &rarr; Professional (sınırlı geliştirici sayısı) veya Enterprise. <span class="tag tag--warn">TEYİT</span> questpdf.com/license</td><td><a href="https://www.questpdf.com/">questpdf.com</a></td></tr>
+              <tr><td><strong>iText</strong> (iText 7/8)</td><td>Olgun, güçlü PDF üretme ve düzenleme kütüphanesi</td><td>AGPL-3 veya ticari</td><td><span class="tag tag--warn">ÜCRETLİ</span> AGPL kritik; durum &rarr; sonuç: projeni AGPL ile açık kaynak yapıyorsan &rarr; ücretsiz; kapalı kaynak ürünü dağıtıyorsan <em>veya</em> ağ üzerinden kullanıcılara sunuyorsan (SaaS) &rarr; ticari lisans almak zorundasın; yalnızca kurum içinde, değiştirilmeden kullanım gibi sınır durumlar &rarr; hukuk onayı al. <span class="tag tag--warn">TEYİT</span> itextpdf.com/how-buy/AGPLv3-license. Bunu bilmek başlı başına bir mülakat artısı.</td><td><a href="https://itextpdf.com/">itextpdf.com</a></td></tr>
+              <tr><td><strong>PDFsharp</strong></td><td>PDF oluşturma ve düzenleme; düşük seviyeli çizim API'si</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Tamamen ücretsiz alternatif. Rapor ve tablo düzeni için MigraDoc ile birlikte kullanılır.</td><td><a href="https://docs.pdfsharp.net/">docs.pdfsharp.net</a></td></tr>
+              <tr><td><strong>MigraDoc</strong></td><td>PDFsharp üstünde belge modeli (paragraf, tablo, başlık)</td><td>MIT</td><td><span class="tag">ORTA</span> PDFsharp'ta koordinatla çizim yapmak istemiyorsan bunu kullan.</td><td><a href="https://docs.pdfsharp.net/">docs.pdfsharp.net</a></td></tr>
+              <tr><td><strong>DinkToPdf</strong></td><td>HTML'i PDF'e çevirir (wkhtmltopdf sarmalayıcısı)</td><td>MIT (wkhtmltopdf LGPL)</td><td><span class="tag tag--warn">ESKİMİŞ</span> Native DLL bağımlılığı ve container'da kurulum derdi var; wkhtmltopdf projesi arşivlendi. Yeni projede seçme.</td><td><a href="https://github.com/rdvojmoc/DinkToPdf">github.com/rdvojmoc/DinkToPdf</a></td></tr>
+              <tr><td><strong>PuppeteerSharp</strong></td><td>Başsız Chrome'u sürer; HTML sayfasını PDF'e basar</td><td>MIT</td><td><span class="tag">ORTA</span> HTML/CSS ile tasarlanan faturayı PDF'e çevirmenin en doğru yolu; ama container'a Chromium kurmak gerekir.</td><td><a href="https://www.puppeteersharp.com/">puppeteersharp.com</a></td></tr>
+              <tr><td><strong>Playwright (.NET)</strong></td><td>Aynı işi Playwright ile yapar; <code>PdfAsync</code> metodu vardır</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Zaten E2E test için Playwright varsa PDF'i de ona verdirirsin. <a href="../06-test-ve-kalite/index.html">§ 06 Test</a> ile kesişir.</td><td><a href="https://playwright.dev/dotnet/">playwright.dev/dotnet</a></td></tr>
+              <tr><td><strong>IronPDF</strong></td><td>Ticari HTML&rarr;PDF ürünü</td><td>Ticari</td><td><span class="tag tag--warn">ÜCRETLİ</span> Blog reklamlarında çok görünür; ücretsiz sanıp projeye koyma.</td><td>ironpdf.com</td></tr>
+              <tr><td><strong>Aspose.PDF</strong></td><td>Kurumsal, çok kapsamlı belge kütüphanesi</td><td>Ticari (pahalı)</td><td><span class="tag tag--warn">ÜCRETLİ</span> Büyük kurumlarda satın alınmış olarak karşına çıkar.</td><td>aspose.com</td></tr>
+              <tr><td><strong>Syncfusion PDF</strong></td><td>Kurumsal PDF bileşeni</td><td>Ticari; küçük şirket/geliştirici için Community lisansı</td><td><span class="tag tag--warn">ÜCRETLİ</span> Community lisansı yalnızca şartları sağlayana ücretsizdir; yaygın bilinen şartlar: yıllık brüt gelir 1 milyon USD altı, en fazla 5 geliştirici, en fazla 10 çalışan ve belirli tutarın üstünde dış yatırım almamış olmak. Aksi halde ücretli. <span class="tag tag--warn">TEYİT</span> syncfusion.com/products/communitylicense</td><td>syncfusion.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Lisans istemiyorsan iki ücretsiz yol var: PDF'i kodla tasarlamak için PDFsharp/MigraDoc (MIT); HTML/CSS ile tasarlayıp basmak için Playwright veya PuppeteerSharp ile HTML&rarr;PDF.</p>
+
+        <h2 id="excel-office"><span class="h-num">§ 9</span>Excel ve Office dosyaları</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Excel/Word/PowerPoint okuma ve yazma</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ClosedXML</strong></td><td>xlsx okuma/yazma; kolay ve okunabilir API</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz Excel işinin varsayılan cevabı. Büyük dosyalarda belleği çok tüketir; bunu bilerek kullan.</td><td><a href="https://docs.closedxml.io/">docs.closedxml.io</a></td></tr>
+              <tr><td><strong>EPPlus</strong></td><td>xlsx okuma/yazma; pivot, grafik, formül desteği güçlü</td><td>v5+ ticari (Polyform Noncommercial); v4.5.3.3 LGPL</td><td><span class="tag tag--warn">ÜCRETLİ</span> Türkiye'deki eski projelerde çok yaygın; lisans değişikliğini bilmeyen ekipler farkında olmadan ihlal ediyor. Durum &rarr; sonuç: kişisel, hobi, öğrenme &rarr; ücretsiz (v5+ kodda lisans bağlamını "NonCommercial" olarak bildirmeni ister; v8'de bu API değişti <span class="tag tag--warn">TEYİT</span>); eğitim kurumu, kâr amacı gütmeyen kuruluş, kamu araştırma kurumu, kamu kurumu &rarr; Polyform Noncommercial metnine göre ticari olmayan kullanım sayılabilir <span class="tag tag--warn">TEYİT</span>; ticari şirket projesi &rarr; ücretli lisans; eski v4.5.3.3 &rarr; LGPL, ücretsiz ama bakımı yok; lisans istemeyen ticari proje &rarr; ClosedXML, MiniExcel, NPOI. Güncel şartlar: epplussoftware.com/licenseoverview.</td><td><a href="https://epplussoftware.com/">epplussoftware.com</a></td></tr>
+              <tr><td><strong>NPOI</strong></td><td>Apache POI'nin .NET portu; hem eski .xls hem .xlsx okur</td><td>Apache-2.0</td><td><span class="tag tag--ok">TEMEL</span> Eski <code>.xls</code> desteği veren tek yaygın ücretsiz seçenek; çalışma kitabı &rarr; sayfa &rarr; satır &rarr; hücre nesne modeliyle çalışır. Java'dan geliyorsan: Apache POI ile aynı API mantığı.</td><td><a href="https://github.com/nissl-lab/npoi">github.com/nissl-lab/npoi</a></td></tr>
+              <tr><td><strong>MiniExcel</strong></td><td>Akış (streaming) tabanlı; büyük dosyaları düşük bellekle işler</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> 100 bin satırlık export'ta ClosedXML bellekte zorlanırsa buraya geçilir.</td><td><a href="https://github.com/mini-software/MiniExcel">github.com/mini-software/MiniExcel</a></td></tr>
+              <tr><td><strong>DocumentFormat.OpenXml</strong></td><td>Microsoft'un resmî Open XML SDK'sı; xlsx/docx/pptx'in ham yapısına erişim</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> En düşük seviye, en çok kod. Diğerlerinin çoğu bunun üstüne kuruludur.</td><td><a href="https://learn.microsoft.com/en-us/office/open-xml/open-xml-sdk">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ExcelDataReader</strong></td><td>Sadece okuma; hızlı ve hafif</td><td>MIT</td><td><span class="tag">ORTA</span> Yalnızca import senaryosunda yazma yükünü taşımamak için.</td><td>github.com/ExcelDataReader/ExcelDataReader</td></tr>
+              <tr><td><strong>Aspose.Cells / Syncfusion XlsIO</strong></td><td>Kurumsal Excel bileşenleri</td><td>Ticari</td><td><span class="tag tag--warn">ÜCRETLİ</span> Kurumsal projelerde satın alınmış olarak karşına çıkar.</td><td>aspose.com &middot; syncfusion.com</td></tr>
+              <tr><td><strong>Interop.Excel</strong> (Office COM)</td><td>Sunucuda Excel uygulamasını çalıştırarak dosya üretme</td><td>Office lisansı gerekir</td><td><span class="tag tag--warn">ESKİMİŞ</span> Microsoft sunucu tarafında kullanılmasını önermez. Eski projelerde görürsün; "neden kötü" sorusunun cevabını hazırla.</td><td>learn.microsoft.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="goruntu-isleme"><span class="h-num">§ 10</span>Görüntü işleme</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Resim, barkod, video</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ImageSharp</strong> (SixLabors)</td><td>Tamamen yönetilen kodda resim işleme: yeniden boyutlandırma, kırpma, format dönüştürme</td><td>v2 Apache-2.0; v3+ Six Labors Split License (gelir eşiğinin üstündeki ticari kullanıma ücretli)</td><td><span class="tag tag--warn">ÜCRETLİ</span> <span class="tag tag--ok">TEMEL</span> v3+ lisans dalları: OSI onaylı açık kaynak lisanslı proje &rarr; Apache-2.0 şartlarında ücretsiz; yıllık brüt geliri 1 milyon USD altındaki ticari kuruluş/birey &rarr; ücretsiz; paket başka bir kütüphanenin geçişli (transitive) bağımlılığı olarak geliyor ve doğrudan kullanmıyorsan &rarr; ücretsiz; bunların dışındaki ticari kullanım &rarr; ücretli lisans. Lisans istemiyorsan v2 (Apache-2.0, bakımı sınırlı), SkiaSharp (MIT) veya Magick.NET (Apache-2.0). <span class="tag tag--warn">TEYİT</span> sixlabors.com/pricing. Native bağımlılığı olmadığı için Linux container'da sorunsuz çalışır.</td><td><a href="https://docs.sixlabors.com/">docs.sixlabors.com</a></td></tr>
+              <tr><td><strong>SkiaSharp</strong></td><td>Google Skia motorunun .NET sarmalayıcısı; çizim ve resim işleme</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz alternatif. MAUI'nin de altında bu var. Native kütüphane taşır, container imajında ek paket isteyebilir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/skiasharp">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Magick.NET</strong></td><td>ImageMagick sarmalayıcısı; 100+ format, en geniş yetenek</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Format çeşitliliği gerekiyorsa (TIFF, PSD, HEIC) tek makul seçenek. Paket boyutu büyüktür.</td><td><a href="https://github.com/dlemstra/Magick.NET">github.com/dlemstra/Magick.NET</a></td></tr>
+              <tr><td><strong>System.Drawing.Common</strong></td><td>Eski GDI+ tabanlı çizim API'si</td><td>Yerleşik paket</td><td><span class="tag tag--warn">ESKİMİŞ</span> .NET 6'dan itibaren <strong>yalnızca Windows</strong>. Linux'a taşınan projelerde patlayan klasik yer; mülakatta sorulabilir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>QRCoder</strong></td><td>QR kod üretir</td><td>MIT</td><td><span class="tag">ORTA</span> Türkiye'de e-Fatura/e-Arşiv ve ödeme senaryolarında sık gerekir.</td><td>github.com/codebude/QRCoder</td></tr>
+              <tr><td><strong>ZXing.Net</strong></td><td>Barkod ve QR okuma/yazma</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Okuma tarafı için asıl seçenek.</td><td>github.com/micjahn/ZXing.Net</td></tr>
+              <tr><td><strong>FFMpegCore</strong></td><td>FFmpeg'i .NET'ten sürer: video dönüştürme, thumbnail alma</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Sunucuda ffmpeg binary'si kurulu olmalı.</td><td>github.com/rosenbjerg/FFMpegCore</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="eposta-sms"><span class="h-num">§ 11</span>E-posta, SMS ve bildirim</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mesaj gönderme</caption>
+            <thead><tr><th>Kütüphane / servis</th><th>Ne yapar</th><th>Lisans / ücret</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MailKit / MimeKit</strong></td><td>SMTP, IMAP, POP3 istemcisi ve MIME oluşturma</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Microsoft'un kendisi <code>SmtpClient</code> yerine bunu önerir. E-posta işinin standart cevabı.</td><td><a href="https://github.com/jstedfast/MailKit">github.com/jstedfast/MailKit</a></td></tr>
+              <tr><td><strong>System.Net.Mail.SmtpClient</strong></td><td>Yerleşik SMTP istemcisi</td><td>Yerleşik</td><td><span class="tag tag--warn">ESKİMİŞ</span> Microsoft "yeni geliştirmede kullanmayın" diyor (modern kimlik doğrulamayı desteklemez). Dış paket kullanılamayan ortamda hâlâ tek seçenek olabilir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.mail.smtpclient">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>FluentEmail</strong></td><td>MailKit/SendGrid üstüne akıcı API + Razor şablonlu e-posta gövdesi</td><td>MIT</td><td><span class="tag">ORTA</span> Şablonlu e-posta (sipariş onayı vb.) için pratik. Gönderimin hukuki şartları içeriğe göre değişir; tablonun altındaki kutuya bak.</td><td><a href="https://github.com/lukencode/FluentEmail">github.com/lukencode/FluentEmail</a></td></tr>
+              <tr><td><strong>SendGrid</strong> (Twilio)</td><td>Bulut e-posta gönderim servisi + .NET SDK</td><td>Ücretli (sınırlı ücretsiz katman)</td><td><span class="tag">ORTA</span> Toplu e-postada teslim edilebilirlik (deliverability) sorununu çözer; ama toplu gönderim pazarlama amaçlıysa önce alıcı onayı ve İYS şartı gelir (aşağıdaki kutu).</td><td><a href="https://www.twilio.com/docs/sendgrid">twilio.com/docs/sendgrid</a></td></tr>
+              <tr><td><strong>Amazon SES</strong></td><td>AWS e-posta gönderim servisi</td><td>Kullanım başına ücretli</td><td><span class="tag">ORTA</span> Hacim arttıkça en ucuz seçeneklerden.</td><td><a href="https://docs.aws.amazon.com/ses/">docs.aws.amazon.com/ses</a></td></tr>
+              <tr><td><strong>Twilio</strong></td><td>SMS, WhatsApp ve arama API'si</td><td>Kullanım başına ücretli</td><td><span class="tag">ORTA</span> OTP/doğrulama kodu senaryosunda global standart.</td><td><a href="https://www.twilio.com/docs">twilio.com/docs</a></td></tr>
+              <tr><td><strong>Türkiye SMS sağlayıcıları</strong></td><td>Netgsm, İletimerkezi, Mutlucell gibi yerel SMS API'leri</td><td>Ücretli</td><td><span class="tag">ORTA</span> Alıcılar Türkiye'deyse SMS genelde bunlardan biriyle yapılır (gönderici başlığı/originator kaydı gerekir); alıcılar yurt dışındaysa Twilio, Amazon SNS gibi global sağlayıcılar. Hepsi basit REST/SOAP API sunar, resmî .NET SDK'ları zayıftır.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Firebase Cloud Messaging</strong></td><td>Mobil push bildirim</td><td>Ücretsiz katmanı geniş</td><td><span class="tag">ORTA</span> Flutter ve diğer mobil istemcilerle kesişir.</td><td>firebase.google.com/docs/cloud-messaging</td></tr>
+              <tr><td><strong>smtp4dev / Papercut-SMTP</strong></td><td>Yerelde sahte SMTP sunucusu; giden e-postayı tarayıcıda gösterir</td><td>Açık kaynak</td><td><span class="tag tag--ok">TEMEL</span> Geliştirirken gerçek e-posta göndermemek için. Docker ile tek komutta kalkar.</td><td>github.com/rnwood/smtp4dev</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; ileti türüne ve alıcıya göre hukuki şartlar</p>
+          <p>Kod aynıdır ama gönderebileceğin ileti, içeriğine ve alıcıya göre değişir (hukuki danışmanlık yerine geçmez; dayanak: 6563 sayılı Kanun ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik) <span class="tag tag--warn">TEYİT</span> iys.org.tr, mevzuat.gov.tr:</p>
+          <ul>
+            <li><strong>Pazarlama/kampanya amaçlı ticari elektronik ileti</strong> (SMS, e-posta, arama) &rarr; alıcının önceden onayı gerekir; gönderen hizmet sağlayıcının İleti Yönetim Sistemi'ne (İYS) kaydı ve onayların İYS'de bulunması gerekir; her iletide ret (abonelikten çıkma) imkânı sunulur.</li>
+            <li><strong>Bilgilendirme amaçlı ileti</strong> (OTP/doğrulama kodu, sipariş/kargo durumu, fatura bildirimi) &rarr; onay gerekmez; ancak içine tanıtım/kampanya eklenirse ticari ileti sayılır.</li>
+            <li><strong>Alıcı esnaf veya tacirse</strong> &rarr; onay rejiminde farklılık vardır (önceden onay aranmayabilir, ret hakkı yine geçerlidir) <span class="tag tag--warn">TEYİT</span>.</li>
+            <li><strong>Alıcı yurt dışındaysa</strong> &rarr; o ülkenin kuralları uygulanır (ör. AB'de GDPR ve ePrivacy kuralları).</li>
+            <li><strong>Her durumda</strong> &rarr; telefon numarası ve e-posta adresi kişisel veridir; KVKK aydınlatma yükümlülüğü geçerlidir, yurt dışındaki bir sağlayıcı kullanılıyorsa KVKK md. 9 aktarım şartları da gündeme gelir.</li>
+          </ul>
+        </div>
+
+        <h2 id="loglama"><span class="h-num">§ 12</span>Loglama</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Log kütüphaneleri ve hedefleri</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Microsoft.Extensions.Logging</strong></td><td>.NET'in soyut log arayüzü: <code>ILogger&lt;T&gt;</code></td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Serilog/NLog bunun <em>arkasına</em> takılır. Kodun <code>ILogger&lt;T&gt;</code> görür, sağlayıcı değişse kod değişmez &mdash; temiz bir DI/SOLID örneği.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Serilog</strong></td><td>Yapılandırılmış (structured) loglama; sink mimarisiyle her yere yazar</td><td>Apache-2.0</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Öncelikli. Kilit kavram: mesajı string birleştirmek yerine <code>{OrderId}</code> şablonu kullanmak; böylece log aranabilir veri olur.</td><td><a href="https://serilog.net/">serilog.net</a></td></tr>
+              <tr><td><strong>Seq</strong></td><td>Serilog loglarını toplayan, sorgulanabilir arayüz sunan sunucu</td><td>Tek kullanıcı/geliştirme için ücretsiz; ekip lisansı ücretli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">ÜCRETLİ</span> Docker ile birkaç dakikada kurulur. Lisans dalları: tek kullanıcı (geliştirme veya kişisel üretim) &rarr; ücretsiz bireysel lisans; birden fazla kullanıcı/ekip &rarr; ücretli lisans; ekipte ücretsiz merkezi log isteniyorsa &rarr; Grafana Loki, OpenSearch + Dashboards, Elasticsearch (lisans durumunu kontrol et) veya Aspire standalone dashboard (yalnızca geliştirme amaçlı, kalıcı depolama yok). <span class="tag tag--warn">TEYİT</span> datalust.co/pricing. Bir kez kurup log gönder; ekran görüntüsü mülakatta anlatmanı kolaylaştırır.</td><td><a href="https://datalust.co/seq">datalust.co/seq</a></td></tr>
+              <tr><td><strong>Serilog sink'leri</strong></td><td>Console, File, Seq, MSSqlServer, Elasticsearch, Grafana Loki hedefleri</td><td>Çoğu Apache-2.0</td><td><span class="tag tag--ok">TEMEL</span> "Sink" = logun gideceği yer. Aramada "Serilog sinks" yaz.</td><td><a href="https://github.com/serilog/serilog/wiki/Provided-Sinks">github.com/serilog wiki</a></td></tr>
+              <tr><td><strong>NLog</strong></td><td>Serilog'un başlıca alternatifi; XML/JSON yapılandırma dosyasıyla kurulur</td><td>BSD-3</td><td><span class="tag">ORTA</span> Eski kurumsal projelerde çok yaygın. Yeteneği Serilog'a çok yakındır.</td><td><a href="https://nlog-project.org/">nlog-project.org</a></td></tr>
+              <tr><td><strong>log4net</strong></td><td>Apache'nin eski log kütüphanesi</td><td>Apache-2.0</td><td><span class="tag tag--warn">ESKİMİŞ</span> Legacy .NET Framework projelerinde görürsün; yeni projede seçilmez. Logger, appender (hedef) ve XML yapılandırmayla çalışır. Java'dan geliyorsan: log4j ailesinden gelir, kavramlar aynıdır.</td><td><a href="https://logging.apache.org/log4net/">logging.apache.org/log4net</a></td></tr>
+              <tr><td><strong>ZLogger</strong></td><td>Sıfır tahsisli (zero-allocation) yüksek performanslı logger</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Saniyede yüz binlerce log yazan sistemler için. Performans odaklı mülakatlarda güzel bir konuşma konusu.</td><td><a href="https://github.com/Cysharp/ZLogger">github.com/Cysharp/ZLogger</a></td></tr>
+              <tr><td><strong>LoggerMessage source generator</strong></td><td><code>[LoggerMessage]</code> attribute'u ile tahsissiz log metodu üretir</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> Kütüphane eklemeden performanslı log. Sıcak yollarda (hot path) fark yaratır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Log seviyeleri</strong></td><td>Trace &lt; Debug &lt; Information &lt; Warning &lt; Error &lt; Critical</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> "Ne zaman Warning, ne zaman Error yazarsın?" mülakatta sorulur. Üretimde varsayılan seviye genelde Information'dır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loglevel">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OpenTelemetry</strong></td><td>Log + metrik + iz (trace) için üretici bağımsız standart</td><td>Apache-2.0</td><td><span class="tag tag--info">İLERİ</span> Loglamanın bir üst adımı. Ayrıntı için <a href="../07-devops-ve-gozlemlenebilirlik/index.html">§ 07 DevOps ve gözlemlenebilirlik</a>.</td><td><a href="https://opentelemetry.io/docs/languages/net/">opentelemetry.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="performans-ve-havuz"><span class="h-num">§ 13</span>Nesne havuzu, bellek ve performans</h2>
+        <p>Performans odaklı bir role başvuruyorsan veya kod performansını yetkinlik olarak yazıyorsan bu kategoriden soru gelir; burayı derinlemesine çalış. Genel backend rolünde terimleri tanıman, öğrenme amacıyla okuyorsan ölçüm yapmadan optimizasyona girmemeyi öğrenmen yeterli.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bellek ve performans araçları</caption>
+            <thead><tr><th>Terim / kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ObjectPool&lt;T&gt;</strong></td><td>Pahalı nesneleri yeniden kullanmak için havuz</td><td>Yerleşik (Microsoft.Extensions.ObjectPool)</td><td><span class="tag tag--ok">TEMEL</span> <code>StringBuilder</code> havuzu en bilinen örneği. GC baskısını azaltır.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/objectpool">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ArrayPool&lt;T&gt;</strong></td><td>Büyük dizileri kiralayıp geri veren paylaşımlı havuz</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> <code>Rent</code>/<code>Return</code> çifti. Return etmeyi unutmak sızıntı yapmaz ama havuzu işe yaramaz hale getirir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MemoryPool&lt;T&gt;</strong></td><td><code>Memory&lt;T&gt;</code> döndüren havuz</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> ArrayPool'un async senaryolara uygun kardeşi.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.memorypool-1">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RecyclableMemoryStream</strong></td><td><code>MemoryStream</code> yerine havuzlanmış tampon kullanır</td><td>MIT</td><td><span class="tag">ORTA</span> Dosya/JSON akışlarında Large Object Heap parçalanmasını önler. Microsoft'un kendi paketi.</td><td><a href="https://github.com/microsoft/Microsoft.IO.RecyclableMemoryStream">github.com/microsoft/RecyclableMemoryStream</a></td></tr>
+              <tr><td><strong>Span&lt;T&gt; / ReadOnlySpan&lt;T&gt;</strong></td><td>Tahsis yapmadan bellek dilimi üzerinde çalışma</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Performans mülakatının en sık sorulan konusu. <code>Substring</code> yerine <code>AsSpan().Slice()</code> klasik örnektir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.span-1">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>System.IO.Pipelines</strong></td><td>Yüksek performanslı akış okuma/yazma altyapısı</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> Kestrel'in altında bu var. Protokol yazarken gerekir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/io/pipelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>System.Threading.Channels</strong></td><td>Süreç içi üretici/tüketici kuyruğu</td><td>Yerleşik</td><td><span class="tag">ORTA</span> RabbitMQ'ya gerek olmayan durumlarda "kuyruk" ihtiyacının yerleşik cevabı. <a href="../05-mesajlasma-ve-dagitik/index.html">§ 05 Mesajlaşma</a> ile karşılaştır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.channels">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>BenchmarkDotNet</strong></td><td>Mikro benchmark çalıştırır; ısınma, istatistik ve tahsis ölçümü yapar</td><td>MIT</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Öncelikli ve kolay. <code>[MemoryDiagnoser]</code>, <code>[Benchmark]</code> ve "neden Stopwatch ile ölçmek yanıltıcıdır" sorularını hazırla.</td><td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td></tr>
+              <tr><td><strong>FrozenDictionary / FrozenSet</strong></td><td>Bir kez kurulup çok okunan koleksiyonlar için optimize tip (.NET 8+)</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> Uygulama açılışında kurulan sabit lookup tablolarında ölçülebilir kazanç.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SearchValues&lt;T&gt;</strong></td><td>Karakter/bayt kümesi aramasını vektörleştirir</td><td>Yerleşik</td><td><span class="tag tag--info">İLERİ</span> Ayrıştırıcı (parser) yazarken.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.buffers.searchvalues">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MiniProfiler</strong></td><td>İstek bazında hangi adımın kaç ms sürdüğünü sayfada gösterir</td><td>MIT</td><td><span class="tag">ORTA</span> EF Core'un ürettiği SQL'i ve süresini görmenin en kolay yolu.</td><td><a href="https://github.com/MiniProfiler/dotnet">github.com/MiniProfiler/dotnet</a></td></tr>
+              <tr><td><strong>dotnet-counters / dotnet-trace / dotnet-dump</strong></td><td>Yerleşik tanılama CLI araçları</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Üretimde CPU/bellek sorununu ölçmenin ücretsiz yolu. Ticari profiler almadan çok iş görür.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotMemory / dotTrace</strong> (JetBrains)</td><td>Ticari bellek ve CPU profiler</td><td>Ticari</td><td><span class="tag tag--warn">ÜCRETLİ</span> Kurumsal ortamda karşına çıkar; ücretsiz muadili yukarıdaki CLI araçlarıdır.</td><td>jetbrains.com</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cli-konsol"><span class="h-num">§ 14</span>CLI ve konsol uygulamaları</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Komut satırı araçları</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Spectre.Console</strong></td><td>Renkli tablo, ağaç, ilerleme çubuğu, soru-cevap istemi; ayrıca komut çatısı (Spectre.Console.Cli)</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> İç araç yazarken çıktıyı bir anda profesyonelleştirir. Öğrenmesi çok kolay, portföyde iyi görünür.</td><td><a href="https://spectreconsole.net/">spectreconsole.net</a></td></tr>
+              <tr><td><strong>System.CommandLine</strong></td><td>Microsoft'un argüman ayrıştırma kütüphanesi; alt komut, seçenek, tab-completion</td><td>MIT</td><td><span class="tag">ORTA</span> API'si sürümler arasında değişti; okuduğun örneğin sürümüne dikkat et.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/commandline/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CommandLineParser</strong></td><td>Attribute tabanlı klasik argüman ayrıştırıcı</td><td>MIT</td><td><span class="tag">ORTA</span> Uzun süredir var, çok örnek bulunur.</td><td><a href="https://github.com/commandlineparser/commandline">github.com/commandlineparser</a></td></tr>
+              <tr><td><strong>Cocona</strong></td><td>Metot imzasından komut üretir; DI ve konfigürasyon hazır gelir</td><td>MIT</td><td><span class="tag">ORTA</span> En az kodla CLI yazma yolu.</td><td><a href="https://github.com/mayuki/Cocona">github.com/mayuki/Cocona</a></td></tr>
+              <tr><td><strong>ConsoleAppFramework</strong></td><td>Source generator tabanlı, sıfır tahsisli CLI çatısı</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Başlangıç süresi kritikse.</td><td><a href="https://github.com/Cysharp/ConsoleAppFramework">github.com/Cysharp/ConsoleAppFramework</a></td></tr>
+              <tr><td><strong>Terminal.Gui</strong></td><td>Konsolda pencereli (TUI) arayüz</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Niş ama etkileyici; iç yönetim aracı için.</td><td>github.com/gui-cs/Terminal.Gui</td></tr>
+              <tr><td><strong>dotnet tool</strong></td><td>Kendi CLI'ını NuGet üzerinden global araç olarak dağıtma</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Yazdığın aracı <code>dotnet tool install -g</code> ile kurulabilir hale getirir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sifreleme-guvenlik"><span class="h-num">§ 15</span>Şifreleme ve güvenlik</h2>
+        <div class="callout callout--warn">
+          <p class="callout__title">Bu kategoride kendi algoritmanı yazma</p>
+          <p>Parola saklama, şifreleme ve token üretiminde "kendim yazdım" cevabı mülakatta olumsuz puandır. Doğru cevap her zaman standart, denenmiş kütüphaneyi kullanmaktır. Kendi yazdığın bir şifreleme denemesi (ör. RSA uygulaması) öğrenme amaçlıysa bunu açıkça belirt.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kriptografi ve kimlik</caption>
+            <thead><tr><th>Kütüphane / API</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>System.Security.Cryptography</strong></td><td>Yerleşik AES, RSA, SHA, HMAC, RandomNumberGenerator</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Dış paket kullanılamayan ortamda her şey bununla yapılır. <code>Random</code> ile <code>RandomNumberGenerator</code> farkını bil: güvenlik için ikincisi.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>BCrypt.Net-Next</strong></td><td>Parola hash'leme (bcrypt); tuz üretimi ve work factor içerir</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Parolayı SHA256 ile hash'lemek yanlıştır &mdash; neden yanlış olduğunu (hız = kırılabilirlik) açıklayabilmelisin. Argon2 kullanılamıyorsa veya ekip bcrypt biliyorsa uygun seçim: work factor en az 10, girdinin ilk 72 baytını kullandığını bil. Hangi algoritmanın seçileceği için tablonun altındaki karar listesine bak.</td><td><a href="https://github.com/BcryptNet/bcrypt.net">github.com/BcryptNet/bcrypt.net</a></td></tr>
+              <tr><td><strong>Konscious.Security.Cryptography</strong></td><td>Argon2 parola hash'leme (kısıt yoksa OWASP'ın ilk önerisi Argon2id)</td><td>MIT</td><td><span class="tag">ORTA</span> Argon2id, bcrypt'in modern alternatifi. Bellek maliyeti parametreli olduğu için GPU saldırısına daha dayanıklıdır.</td><td><a href="https://github.com/kmaragon/Konscious.Security.Cryptography">github.com/kmaragon/Konscious</a></td></tr>
+              <tr><td><strong>PasswordHasher&lt;TUser&gt;</strong></td><td>ASP.NET Core Identity'nin yerleşik PBKDF2 hash'leyicisi</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> ASP.NET Core Identity kullanıyorsan ekstra pakete gerek yok; sürüm formatını kendi yönetir, iterasyon sayısını güncel tut. Identity kullanmıyorsan aşağıdaki karar listesine bak.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Rfc2898DeriveBytes</strong> (PBKDF2)</td><td>Paroladan anahtar türetme</td><td>Yerleşik</td><td><span class="tag">ORTA</span> Yerleşik seçenek; dış paket yasaksa veya FIPS-140 uyumu zorunluysa (kamu/regüle sektör) doğru tercih. <code>Rfc2898DeriveBytes.Pbkdf2</code> + SHA-256 ve yüksek iterasyon (OWASP Password Storage Cheat Sheet'teki güncel öneri) kullan.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rfc2898derivebytes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Data Protection API</strong></td><td>ASP.NET Core'un cookie/token şifreleme altyapısı; anahtar yönetimini üstlenir</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Çok sunuculu ortamda anahtar halkasını (key ring) paylaşmazsan oturumlar bozulur &mdash; klasik üretim hatası.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Microsoft.IdentityModel.JsonWebTokens</strong></td><td>JWT üretme ve doğrulama</td><td>MIT</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> ASP.NET Core JWT Authentication'ın altındaki kütüphane. Eski adı <code>System.IdentityModel.Tokens.Jwt</code>; ikisini karıştırma.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.jsonwebtokens">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IdentityModel</strong></td><td>OAuth2/OIDC istemci yardımcıları: token endpoint çağrıları, discovery</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Kimlik sunucusuyla konuşan istemci tarafı için. IdentityServer'ın (Duende) artık ücretli olduğunu bil.</td><td><a href="https://github.com/IdentityModel/IdentityModel">github.com/IdentityModel</a></td></tr>
+              <tr><td><strong>Otp.NET</strong></td><td>TOTP/HOTP üretimi (Google Authenticator uyumlu iki adımlı doğrulama)</td><td>MIT</td><td><span class="tag">ORTA</span> 2FA eklemek isteyen her projede gerekir.</td><td><a href="https://github.com/kspearrin/Otp.NET">github.com/kspearrin/Otp.NET</a></td></tr>
+              <tr><td><strong>NSec</strong> (libsodium)</td><td>Modern kriptografi: Ed25519, X25519, ChaCha20-Poly1305</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Klasik AES/RSA dışına çıkman gerekirse. <a href="../../Blockchain/index.html">Blockchain</a> tarafıyla kavramsal kesişimi var.</td><td><a href="https://nsec.rocks/">nsec.rocks</a></td></tr>
+              <tr><td><strong>BouncyCastle</strong></td><td>Çok geniş kriptografi kütüphanesi; sertifika, CMS, PGP</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Türkiye'de e-imza ve e-Fatura işlerinde sıkça gerekir.</td><td>bouncycastle.org</td></tr>
+              <tr><td><strong>HtmlSanitizer</strong> (Ganss.Xss)</td><td>Kullanıcıdan gelen HTML'i temizler; XSS'i engeller</td><td>MIT</td><td><span class="tag">ORTA</span> Zengin metin editörü (rich text) olan her projede zorunlu.</td><td><a href="https://github.com/mganss/HtmlSanitizer">github.com/mganss/HtmlSanitizer</a></td></tr>
+              <tr><td><strong>user-secrets / Key Vault</strong></td><td>Bağlantı dizesi ve API anahtarını koddan ayırma</td><td>Yerleşik / bulut ücretli</td><td><span class="tag tag--ok">TEMEL</span> appsettings.json'a parola yazıp git'e göndermek en sık görülen hatadır. Ortama göre: geliştirme &rarr; user-secrets; Azure &rarr; Key Vault; AWS &rarr; Secrets Manager / Parameter Store; GCP &rarr; Secret Manager; bulut dışı/kendi sunucun &rarr; HashiCorp Vault / OpenBao ya da ortam değişkenleri + işletim sisteminin korumalı deposu; container ortamı &rarr; Kubernetes Secrets / Docker secrets. <a href="../07-devops-ve-gozlemlenebilirlik/index.html">§ 07 DevOps</a> ile birlikte oku.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Parola hash'leme: hangi durumda hangisi</caption>
+            <thead><tr><th>Durum</th><th>Seçim</th></tr></thead>
+            <tbody>
+              <tr><td>ASP.NET Core Identity kullanıyorsun</td><td>Yerleşik <code>PasswordHasher&lt;TUser&gt;</code> (PBKDF2); iterasyon sayısını güncel tut</td></tr>
+              <tr><td>Identity yok, özel bir kısıt yok</td><td>Argon2id; bellek/iterasyon parametrelerini OWASP Password Storage Cheat Sheet'e göre ayarla</td></tr>
+              <tr><td>Argon2 kütüphanesi kullanılamıyor veya ekip bcrypt biliyor</td><td>bcrypt (work factor ≥ 10; 72 bayt girdi sınırını bil)</td></tr>
+              <tr><td>FIPS-140 uyumu zorunlu (kamu/regüle sektör)</td><td>PBKDF2 (<code>Rfc2898DeriveBytes.Pbkdf2</code>, SHA-256, yüksek iterasyon)</td></tr>
+              <tr><td>Dış paket yasak</td><td>Yerleşik PBKDF2</td></tr>
+              <tr><td>Her durumda</td><td>Düz SHA-256/MD5 kullanma; parolayı asla geri çözülebilir biçimde (şifreleyerek) saklama</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="scraping-html"><span class="h-num">§ 16</span>Web scraping ve HTML işleme</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>HTML ayrıştırma ve tarayıcı otomasyonu</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HtmlAgilityPack</strong></td><td>Bozuk HTML'i bile ayrıştırır; XPath ile gezinir</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> .NET'te scraping denince ilk akla gelen: kapanmamış etiketli bozuk HTML'i bile ağaca çevirir, XPath ile istediğin düğümü seçersin. Python'dan geliyorsan: BeautifulSoup'un .NET karşılığı budur.</td><td><a href="https://html-agility-pack.net/">html-agility-pack.net</a></td></tr>
+              <tr><td><strong>AngleSharp</strong></td><td>Tarayıcı standartlarına uygun DOM kurar; CSS seçicileriyle sorgular</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> XPath yerine <code>QuerySelector</code> kullanmak istiyorsan bu. Standartlara HtmlAgilityPack'ten daha sadık.</td><td><a href="https://anglesharp.github.io/">anglesharp.github.io</a></td></tr>
+              <tr><td><strong>Fizzler</strong></td><td>HtmlAgilityPack'e CSS seçici desteği ekler</td><td>LGPL</td><td><span class="tag">ORTA</span> HAP kullanıp CSS seçici isteyenler için ara çözüm.</td><td>github.com/atifaziz/Fizzler</td></tr>
+              <tr><td><strong>Playwright (.NET)</strong></td><td>Gerçek tarayıcıyı sürer; JavaScript ile üretilen içeriği de görür</td><td>Apache-2.0</td><td><span class="tag tag--ok">TEMEL</span> Sayfa JS ile doluyorsa HTML ayrıştırıcılar boş döner; çözüm budur. Aynı zamanda E2E test aracıdır.</td><td><a href="https://playwright.dev/dotnet/">playwright.dev/dotnet</a></td></tr>
+              <tr><td><strong>PuppeteerSharp</strong></td><td>Chrome DevTools Protocol üzerinden başsız tarayıcı</td><td>MIT</td><td><span class="tag">ORTA</span> Playwright'ın öncülü; hâlâ yaygın.</td><td><a href="https://www.puppeteersharp.com/">puppeteersharp.com</a></td></tr>
+              <tr><td><strong>Selenium WebDriver</strong></td><td>Klasik tarayıcı otomasyonu</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Eski projelerde standart; yeni projede Playwright tercih ediliyor.</td><td><a href="https://www.selenium.dev/documentation/">selenium.dev</a></td></tr>
+              <tr><td><strong>robots.txt ve hukuki sınır</strong></td><td>Sitenin tarama kurallarını bildiren dosya</td><td>&mdash;</td><td><span class="tag tag--ok">TEMEL</span> Teknik konu değil ama hukuki sınır toplanan veriye göre değişir (hukuk danışmanlığı yerine geçmez <span class="tag tag--warn">TEYİT</span>): veri kişisel veri içeriyorsa (ad, telefon, profil) &rarr; KVKK kapsamında işlemedir; md. 5'teki bir hukuki sebep (ya da açık rıza) ve aydınlatma gerekir, "kamuya açık olması" tek başına serbestçe işleme izni vermez; telif veya veri tabanı hakkıyla korunan içerik (makale, görsel, sistematik veri tabanı) &rarr; 5846 sayılı FSEK kapsamında izin gerekebilir; sitenin kullanım şartları kazımayı yasaklıyorsa &rarr; sözleşme ihlali riski, resmî API varsa onu kullan; kişisel veri ve korunan içerik yoksa &rarr; robots.txt'e uy, hız sınırı koy, sunucuyu yorma; giriş/oturum gerektiren alanlarda ayrım yetkili ve yetkisiz erişimdir: başkasının hesabı, ele geçirilmiş ya da paylaşılmış kimlik bilgisi, CAPTCHA/erişim kontrolünü atlatma &rarr; yetkisiz erişim (TCK md. 243-244 riski), yapma; kendi meşru hesabınla erişim &rarr; kullanım şartları kazımayı yasaklıyorsa sözleşme ihlali ve hesap kapatma riski, resmî API varsa onu kullan, veri kişisel veri içeriyorsa yukarıdaki KVKK dalı yine geçerli (mevzuat metni: mevzuat.gov.tr). Mülakatta scraping'den bahsedeceksen bu sınırlara baktığını söylemek olgunluk gösterir.</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="metin-veri-dosya"><span class="h-num">§ 17</span>Metin, CSV, şablon ve dosya biçimleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>CSV, metin ve dosya işleme</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CsvHelper</strong></td><td>CSV okuma/yazma; sınıf eşlemesi, kültür ve ayraç yönetimi</td><td>MS-PL / Apache-2.0 çift lisans</td><td><span class="tag tag--ok">TEMEL</span> CSV'yi <code>Split(',')</code> ile ayırmak tırnak içindeki virgüllerde patlar &mdash; bu kütüphanenin varlık sebebi budur.</td><td><a href="https://joshclose.github.io/CsvHelper/">joshclose.github.io/CsvHelper</a></td></tr>
+              <tr><td><strong>Sylvan.Data.Csv</strong></td><td>Çok hızlı, düşük tahsisli CSV okuyucu</td><td>MIT</td><td><span class="tag">ORTA</span> Milyonlarca satırda CsvHelper'dan hızlıdır.</td><td><a href="https://github.com/MarkPflug/Sylvan">github.com/MarkPflug/Sylvan</a></td></tr>
+              <tr><td><strong>Sep</strong></td><td>Benchmark'larda en hızlı .NET CSV ayrıştırıcılarından</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Performans odaklı; API'si daha düşük seviyeli.</td><td><a href="https://github.com/nietras/Sep">github.com/nietras/Sep</a></td></tr>
+              <tr><td><strong>Markdig</strong></td><td>Markdown &rarr; HTML dönüştürücü; eklenti mimarisi var</td><td>BSD-2</td><td><span class="tag">ORTA</span> Blog veya dokümantasyon üreten .NET projelerinin standardı.</td><td><a href="https://github.com/xoofx/markdig">github.com/xoofx/markdig</a></td></tr>
+              <tr><td><strong>Scriban</strong></td><td>Hızlı metin şablon motoru (Liquid uyumlu modu var)</td><td>BSD-2</td><td><span class="tag">ORTA</span> E-posta gövdesi, kod üretimi ve rapor metni için.</td><td><a href="https://github.com/scriban/scriban">github.com/scriban/scriban</a></td></tr>
+              <tr><td><strong>Fluid</strong></td><td>Liquid şablon motoru; güvenli (kullanıcı şablon yazabilir)</td><td>MIT</td><td><span class="tag">ORTA</span> Şablonu son kullanıcı düzenleyecekse Razor yerine bunu seç.</td><td><a href="https://github.com/sebastienros/fluid">github.com/sebastienros/fluid</a></td></tr>
+              <tr><td><strong>RazorLight</strong></td><td>Razor şablonlarını MVC dışında (konsol, worker) çalıştırır</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Zaten Razor biliyorsan e-posta şablonu için en kısa yol.</td><td>github.com/toddams/RazorLight</td></tr>
+              <tr><td><strong>Handlebars.Net</strong></td><td>Handlebars şablon motoru</td><td>MIT</td><td><span class="tag">ORTA</span> Frontend ekibiyle aynı şablon dilini paylaşmak istersen.</td><td><a href="https://github.com/Handlebars-Net/Handlebars.Net">github.com/Handlebars-Net</a></td></tr>
+              <tr><td><strong>System.IO.Compression</strong></td><td>Yerleşik zip oluşturma/açma ve GZip/Deflate akışları</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> Basit zip için pakete gerek yok.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.compression">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SharpCompress</strong></td><td>RAR, 7z, tar dahil geniş arşiv desteği</td><td>MIT</td><td><span class="tag">ORTA</span> Zip dışı formatlar gerektiğinde.</td><td><a href="https://github.com/adamhathcock/sharpcompress">github.com/adamhathcock/sharpcompress</a></td></tr>
+              <tr><td><strong>SharpZipLib</strong></td><td>Eski, çok kullanılan sıkıştırma kütüphanesi</td><td>MIT</td><td><span class="tag tag--warn">ESKİMİŞ</span> Legacy projelerde görürsün.</td><td>github.com/icsharpcode/SharpZipLib</td></tr>
+              <tr><td><strong>System.IO.Abstractions</strong></td><td>Dosya sistemini arayüz arkasına alır; testte sahte dosya sistemi verir</td><td>MIT</td><td><span class="tag">ORTA</span> "Dosya okuyan kodu nasıl test edersin?" sorusunun cevabı. <a href="../06-test-ve-kalite/index.html">§ 06 Test</a> ile birlikte oku.</td><td>github.com/TestableIO/System.IO.Abstractions</td></tr>
+              <tr><td><strong>Azure.Storage.Blobs / AWSSDK.S3 / Minio</strong></td><td>Nesne depolamaya dosya yükleme</td><td>MIT / Apache-2.0 (servis ücretli)</td><td><span class="tag">ORTA</span> Seçim ölçeğe ve ortama göre: tek sunucu, küçük hacim &rarr; yerel disk yeterli (yedekleme şartıyla); birden fazla sunucu/container &rarr; disk ölçeklenmez, nesne depolama (Azure Blob, S3) veya paylaşımlı dosya sistemi; bulut kullanmıyorsan/kendi sunucun &rarr; MinIO gibi S3 uyumlu self-host; kişisel veri içeren dosyaları yurt dışı buluta koyuyorsan &rarr; KVKK md. 9 aktarım şartları, gerekirse yurt içi veri merkezi seçeneği.</td><td><a href="https://github.com/aws/aws-sdk-net">github.com/aws/aws-sdk-net</a></td></tr>
+              <tr><td><strong>FluentStorage</strong></td><td>Blob/S3/dosya sistemi için tek soyutlama</td><td>Apache-2.0</td><td><span class="tag tag--info">İLERİ</span> Sağlayıcı bağımsızlığı istiyorsan.</td><td>github.com/robinrodricks/FluentStorage</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-faydalilar"><span class="h-num">§ 18</span>Diğer sık kullanılan kütüphaneler</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mimari, DI ve genel amaçlı paketler</caption>
+            <thead><tr><th>Kütüphane</th><th>Ne yapar</th><th>Lisans</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MediatR</strong></td><td>Süreç içi mediator; request/handler ve pipeline behavior deseni</td><td>v12'ye kadar Apache-2.0; v13 ile ticari lisans modeli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> v13+ lisansı AutoMapper ile aynı modeldedir (gelir eşiği altı, kâr amacı gütmeyen, eğitim, üretim dışı kullanım &rarr; Community ücretsiz; eşik üstü ticari şirket &rarr; ücretli <span class="tag tag--warn">TEYİT</span> mediatr.io); v12 ve öncesi Apache-2.0 şartlarıyla kullanılmaya devam edebilir ama güncelleme almaz; lisans istemeyen yeni projede Immediate.Handlers, Wolverine ya da doğrudan servis çağrısı. "CQRS &amp; Mediator" denince akla gelen kütüphane; ilk dinlemede kavranması zor bir konudur &mdash; en yüksek öncelikli maddelerden. Önce <a href="../04-mimari-ve-desenler/index.html">§ 04 Mimari ve desenler</a> sayfasındaki CQRS bölümünü oku, sonra buraya dön.</td><td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td></tr>
+              <tr><td><strong>Wolverine</strong></td><td>Mediator + mesaj kuyruğu + saga'yı birlikte veren çatı</td><td>MIT çekirdek; JasperFx ticari destek/eklentiler</td><td><span class="tag">ORTA</span> MediatR ticarileşince öne çıkan alternatiflerden. <a href="../05-mesajlasma-ve-dagitik/index.html">§ 05 Mesajlaşma</a> ile kesişir.</td><td><a href="https://wolverinefx.net/">wolverinefx.net</a></td></tr>
+              <tr><td><strong>Brighter</strong></td><td>Command processor + mesajlaşma; outbox desteği güçlü</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Niş ama olgun.</td><td><a href="https://github.com/BrighterCommand/Brighter">github.com/BrighterCommand/Brighter</a></td></tr>
+              <tr><td><strong>Immediate.Handlers</strong></td><td>Source generator ile mediator; runtime reflection yok</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> "MediatR'ın ücretsiz ve hızlı alternatifi" tartışmasında adı geçer.</td><td><a href="https://github.com/ImmediatePlatform/Immediate.Handlers">github.com/ImmediatePlatform/Immediate.Handlers</a></td></tr>
+              <tr><td><strong>Scrutor</strong></td><td>DI kaydını assembly taramasıyla toplu yapar; decorator deseni ekler</td><td>MIT</td><td><span class="tag">ORTA</span> Uzun <code>services.AddScoped</code> listesini bitirir. <code>Decorate</code> metodu Open/Closed prensibinin somut örneğidir &mdash; tasarım prensipleri sorularında iyi bir örnek.</td><td><a href="https://github.com/khellang/Scrutor">github.com/khellang/Scrutor</a></td></tr>
+              <tr><td><strong>Autofac</strong></td><td>Gelişmiş DI container (yerleşik container'ın ötesinde özellikler)</td><td>MIT</td><td><span class="tag">ORTA</span> Yerleşik DI yetmediğinde (property injection, gelişmiş decorator, modül sistemi) tercih edilir.</td><td>autofac.org</td></tr>
+              <tr><td><strong>FastEndpoints</strong></td><td>REPR (Request-Endpoint-Response) deseniyle endpoint yazma çatısı</td><td>MIT</td><td><span class="tag">ORTA</span> Şişmiş controller sorununa alternatif. Minimal API'nin düzenli hali gibi düşün.</td><td><a href="https://fast-endpoints.com/">fast-endpoints.com</a></td></tr>
+              <tr><td><strong>Carter</strong></td><td>Minimal API rotalarını modüllere ayırır</td><td>MIT</td><td><span class="tag">ORTA</span> <code>Program.cs</code> şişmesin diye.</td><td><a href="https://github.com/CarterCommunity/Carter">github.com/CarterCommunity/Carter</a></td></tr>
+              <tr><td><strong>Humanizer</strong></td><td>Metin/tarih/sayıyı insan diline çevirir: "3 gün önce", tekil-çoğul, ordinal</td><td>MIT</td><td><span class="tag">ORTA</span> Türkçe dahil çok dil desteği var. UI metinlerinde çok iş görür.</td><td><a href="https://github.com/Humanizr/Humanizer">github.com/Humanizr/Humanizer</a></td></tr>
+              <tr><td><strong>Bogus</strong></td><td>Gerçekçi sahte veri üretir (isim, adres, e-posta, kart)</td><td>Açık kaynak (MIT)</td><td><span class="tag tag--ok">TEMEL</span> Test verisi ve demo veritabanı doldurmanın en hızlı yolu. Portföy projesinde tek satırda binlerce kayıt üretirsin.</td><td><a href="https://github.com/bchavez/Bogus">github.com/bchavez/Bogus</a></td></tr>
+              <tr><td><strong>NodaTime</strong></td><td>Tarih/saat için alternatif tip sistemi: Instant, LocalDate, ZonedDateTime</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> <code>DateTime</code>'ın belirsizliğini (bu UTC mi, yerel mi?) tiple çözer. Saat dilimi hatası yaşamış her ekip bunu konuşur.</td><td><a href="https://nodatime.org/">nodatime.org</a></td></tr>
+              <tr><td><strong>TimeProvider</strong></td><td>.NET 8+ yerleşik zaman soyutlaması; testte sahte zaman verir</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> "<code>DateTime.Now</code> kullanan kodu nasıl test edersin?" sorusunun modern cevabı. Eskiden <code>IDateTimeProvider</code> elle yazılırdı.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Ulid</strong> (Cysharp)</td><td>Sıralanabilir, zaman damgalı benzersiz kimlik</td><td>MIT</td><td><span class="tag">ORTA</span> Rastgele GUID'in kümelenmiş indeksi parçalamasını önler. SQL Server'daki <code>NEWSEQUENTIALID</code> ile aynı problemi çözer.</td><td><a href="https://github.com/Cysharp/Ulid">github.com/Cysharp/Ulid</a></td></tr>
+              <tr><td><strong>NUlid</strong></td><td>ULID'in bir başka .NET uygulaması</td><td>MIT</td><td><span class="tag">ORTA</span> Aynı işi yapar; API farkı var.</td><td><a href="https://github.com/RobThree/NUlid">github.com/RobThree/NUlid</a></td></tr>
+              <tr><td><strong>Guid.CreateVersion7()</strong></td><td>.NET 9+ ile yerleşik zaman sıralı GUID</td><td>Yerleşik</td><td><span class="tag tag--ok">TEMEL</span> ULID kütüphanesine çoğu durumda gerek bırakmaz.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.guid.createversion7">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Sieve</strong></td><td>Query string'den filtreleme, sıralama ve sayfalama üretir</td><td>Apache-2.0</td><td><span class="tag">ORTA</span> Liste endpoint'lerinde tekrar eden kodu bitirir.</td><td><a href="https://github.com/Biarity/Sieve">github.com/Biarity/Sieve</a></td></tr>
+              <tr><td><strong>Gridify</strong></td><td>Aynı iş; kendi sorgu dilini sunar</td><td>MIT</td><td><span class="tag">ORTA</span> Sieve'e alternatif. Dinamik LINQ ürettiği için güvenlik ve performans etkisini değerlendir.</td><td><a href="https://github.com/alirezanet/Gridify">github.com/alirezanet/Gridify</a></td></tr>
+              <tr><td><strong>LINQKit</strong></td><td>Dinamik predicate birleştirme (<code>PredicateBuilder</code>), ifade genişletme</td><td>MIT</td><td><span class="tag">ORTA</span> Çok kriterli arama ekranlarında <code>if</code> yığını yerine.</td><td><a href="https://github.com/scottksmith95/LINQKit">github.com/scottksmith95/LINQKit</a></td></tr>
+              <tr><td><strong>EFCore.BulkExtensions</strong></td><td>Toplu insert/update/delete (SqlBulkCopy tabanlı)</td><td>Çift lisans: ücretsiz + ticari sürüm</td><td><span class="tag tag--warn">ÜCRETLİ</span> Binlerce satır yazarken EF Core'un satır satır insert'ünü bitirir. Lisans: belirli gelir eşiğinin altındaki şirket ve bireysel kullanım ücretsiz, üstü ticari lisans <span class="tag tag--warn">TEYİT</span> github.com/borisdj/EFCore.BulkExtensions LICENSE. Lisans istemiyorsan: SQL Server'da <code>SqlBulkCopy</code>'yi elle kullan; PostgreSQL'de Npgsql binary COPY; toplu güncelleme/silme için EF Core 7+ yerleşik <code>ExecuteUpdate</code>/<code>ExecuteDelete</code>.</td><td><a href="https://github.com/borisdj/EFCore.BulkExtensions">github.com/borisdj/EFCore.BulkExtensions</a></td></tr>
+              <tr><td><strong>Nito.AsyncEx</strong></td><td>AsyncLock, AsyncManualResetEvent gibi async eşzamanlama tipleri</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> <code>lock</code> bloğu içinde <code>await</code> yazılamaz; bu problemi çözer.</td><td><a href="https://github.com/StephenCleary/AsyncEx">github.com/StephenCleary/AsyncEx</a></td></tr>
+              <tr><td><strong>Stripe.net / Iyzipay</strong></td><td>Ödeme altyapısı SDK'ları (global / Türkiye)</td><td>Açık kaynak SDK, servis komisyonlu</td><td><span class="tag">ORTA</span> Ödeme alan proje yazacaksan idempotency ve webhook imza doğrulaması kavramlarını öğren.</td><td><a href="https://stripe.com/docs/api">stripe.com/docs/api</a></td></tr>
+              <tr><td><strong>Testcontainers for .NET</strong></td><td>Testte gerçek SQL Server/Redis/RabbitMQ'yu Docker'da ayağa kaldırır</td><td>MIT</td><td><span class="tag tag--ok">TEMEL</span> Mock'a alternatif olarak entegrasyon testi. Redis ve RabbitMQ'yu <em>ilk kez</em> denemenin en zahmetsiz yolu da budur &mdash; Redis/RabbitMQ kurulumu yok, birkaç satır kod; ama makinede çalışan bir container ortamı (Docker Desktop, Podman vb.) gerekir. Container çalıştıramıyorsan CI'daki (ör. GitHub Actions) Linux runner'larda veya Codespaces'te çalıştırabilirsin.</td><td><a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td></tr>
+              <tr><td><strong>AutoFixture</strong></td><td>Test için nesneleri otomatik doldurur</td><td>MIT</td><td><span class="tag">ORTA</span> Ayrıntı <a href="../06-test-ve-kalite/index.html">§ 06 Test ve kalite</a> sayfasında.</td><td><a href="https://github.com/AutoFixture/AutoFixture">github.com/AutoFixture</a></td></tr>
+              <tr><td><strong>Moq / NSubstitute / FakeItEasy</strong></td><td>Mock (sahte bağımlılık) kütüphaneleri</td><td>MIT / BSD</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Mock test birim testin temelidir &mdash; öncelikli. Moq'un 4.20 sürümündeki SponsorLink tartışması yüzünden birçok ekip NSubstitute'a geçti; bunu bilmek güncel takip ettiğini gösterir.</td><td><a href="https://nsubstitute.github.io/">nsubstitute.github.io</a></td></tr>
+              <tr><td><strong>FluentAssertions</strong></td><td>Okunabilir assertion sözdizimi: <code>result.Should().Be(5)</code></td><td>v7'ye kadar Apache-2.0; v8 ile ticari</td><td><span class="tag tag--warn">ÜCRETLİ</span> v8 lisans dalları: ticari olmayan kullanım/açık kaynak &rarr; ücretsiz; ticari kullanım &rarr; geliştirici başına ücretli lisans; v7.x &rarr; Apache-2.0, kullanılmaya devam edilebilir <span class="tag tag--warn">TEYİT</span> xceed.com/fluent-assertions. Lisans istemiyorsan <strong>Shouldly</strong> veya xUnit/NUnit'in kendi assertion'ları. Bu lisans değişikliğini bilmek güncel bir bilgidir.</td><td><a href="https://fluentassertions.com/">fluentassertions.com</a></td></tr>
+              <tr><td><strong>Verify</strong></td><td>Snapshot testing: çıktıyı onaylanmış dosyayla karşılaştırır</td><td>MIT</td><td><span class="tag tag--info">İLERİ</span> Büyük JSON veya rapor çıktılarını test etmenin pratik yolu.</td><td><a href="https://github.com/VerifyTests/Verify">github.com/VerifyTests/Verify</a></td></tr>
+              <tr><td><strong>Respawn</strong></td><td>Testler arasında veritabanını hızlıca sıfırlar</td><td>MIT</td><td><span class="tag">ORTA</span> Entegrasyon testinde her testin temiz veritabanıyla başlaması için.</td><td><a href="https://github.com/jbogard/Respawn">github.com/jbogard/Respawn</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="lisans-sozlugu"><span class="h-num">§ 19</span>Lisans türleri sözlüğü</h2>
+        <p>Bir paketi projeye eklemeden önce bu kısaltmaların ne anlama geldiğini bilmen gerekir. "AGPL lisanslı bir paketi ticari üründe kullanabilir misin?" sorusu kıdemli pozisyonlarda gerçekten soruluyor.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Açık kaynak ve ticari lisans türleri</caption>
+            <thead><tr><th>Lisans</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MIT</strong></td><td>Neredeyse sınırsız izin; telif bildirimini korumak yeter</td><td><span class="tag tag--ok">TEMEL</span> Ticari kapalı kaynak üründe rahatça kullanılır. En yaygın .NET paket lisansı.</td><td><a href="https://opensource.org/license/mit">opensource.org</a></td></tr>
+              <tr><td><strong>Apache-2.0</strong></td><td>MIT'e benzer, ek olarak patent hakkı verir</td><td><span class="tag tag--ok">TEMEL</span> Kurumsal ortamda MIT kadar güvenli sayılır.</td><td><a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org</a></td></tr>
+              <tr><td><strong>BSD-2 / BSD-3</strong></td><td>MIT'e çok yakın izin verici lisanslar</td><td><span class="tag tag--ok">TEMEL</span> BSD-3'te ek olarak isim kullanma yasağı maddesi vardır.</td><td><a href="https://opensource.org/license/bsd-3-clause">opensource.org</a></td></tr>
+              <tr><td><strong>MPL-2.0</strong></td><td>Dosya bazında copyleft: değiştirdiğin dosyaları paylaşırsın</td><td><span class="tag">ORTA</span> Kendi kodunu açmanı gerektirmez; ara bir model.</td><td><a href="https://www.mozilla.org/en-US/MPL/2.0/">mozilla.org</a></td></tr>
+              <tr><td><strong>LGPL</strong></td><td>Kütüphaneyi değiştirmeden bağlarsan kendi kodun kapalı kalabilir</td><td><span class="tag">ORTA</span> Hangfire çekirdeği ve bazı native sarmalayıcılar böyledir. Değiştirmeden dinamik bağlama (NuGet paketi olarak kullanma) &rarr; kendi kodun kapalı kalabilir; kütüphanenin kendisini değiştirirsen &rarr; değişiklikleri paylaşmalısın. Statik bağlamada kurallar sertleşir.</td><td><a href="https://www.gnu.org/licenses/lgpl-3.0.html">gnu.org</a></td></tr>
+              <tr><td><strong>GPL</strong></td><td>Güçlü copyleft: dağıttığın ürünün kaynağını da açman gerekir</td><td><span class="tag tag--warn">KAYNAK AÇMA</span> GPL bir ücret değil, kaynak açma yükümlülüğüdür; sonuç dağıtım biçimine bağlı: GPL'li kütüphaneyi içeren yazılımı dağıtıyorsan (kurulum paketi, masaüstü/mobil uygulama, müşteriye teslim) &rarr; türev çalışmanın tamamının kaynağını GPL ile açmalısın, bu yüzden kapalı ticari üründe genelde kabul edilemez; yalnızca kendi sunucunda çalıştırıp ağ üzerinden hizmet veriyorsan (SaaS) ve dağıtmıyorsan &rarr; kaynak açma yükümlülüğü doğmaz (AGPL'den farkı budur); yalnızca kurum içinde kullanılıp dışarıya dağıtılmıyorsa &rarr; genellikle yükümlülük doğmaz, şirket hukukuna danış; projen zaten GPL uyumlu açık kaynaksa &rarr; sorun yok.</td><td><a href="https://www.gnu.org/licenses/gpl-3.0.html">gnu.org</a></td></tr>
+              <tr><td><strong>AGPL</strong></td><td>GPL + ağ üzerinden hizmet vermek de "dağıtım" sayılır</td><td><span class="tag tag--warn">KAYNAK AÇMA</span> SaaS için en kritik lisans. iText'in AGPL sürümünü web uygulamanda kullanırsan kaynak açma yükümlülüğü doğar &mdash; bu yüzden ticari lisans satılır.</td><td><a href="https://www.gnu.org/licenses/agpl-3.0.html">gnu.org</a></td></tr>
+              <tr><td><strong>Dual license</strong> (çift lisans)</td><td>Aynı kod hem açık (AGPL/GPL) hem ticari sürümle sunulur</td><td><span class="tag tag--warn">ÜCRETLİ</span> iText, MySQL, EFCore.BulkExtensions bu modeldedir. Seçim iki yönlüdür: kaynağını aç ya da lisans satın al.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Community / free tier</strong></td><td>Belirli ciro, çalışan sayısı ya da kullanım eşiğinin altında ücretsiz</td><td><span class="tag tag--warn">ÜCRETLİ</span> QuestPDF, ImageSharp, Syncfusion, Seq, AutoMapper v15+, MediatR v13+ bu modelde. Eşiğin altındaysan ücretsiz; şirket büyüyüp eşiği aşınca ücretli hale gelir &mdash; teknik borç gibi düşün.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Polyform Noncommercial</strong></td><td>Ticari olmayan kullanıma izin verir</td><td><span class="tag tag--warn">ÜCRETLİ</span> EPPlus v5+ burada. "Açık kaynak" değildir. Kişisel/hobi/öğrenme kullanımı ücretsizdir; lisans metni eğitim kurumu, kâr amacı gütmeyen kuruluş ve kamu kurumu kullanımını da ticari olmayan sayabilir <span class="tag tag--warn">TEYİT</span> polyformproject.org/licenses/noncommercial; ticari şirket projesinde lisans gerekir.</td><td><a href="https://polyformproject.org/">polyformproject.org</a></td></tr>
+              <tr><td><strong>Source-available</strong></td><td>Kaynak görünür ama özgür yazılım değil</td><td><span class="tag tag--warn">ÜCRETLİ</span> "GitHub'da açık" olması ücretsiz olduğu anlamına gelmez. En sık yapılan hata budur.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Ticari / proprietary</strong></td><td>Satın alınan lisans; genelde geliştirici başına yıllık</td><td><span class="tag tag--warn">ÜCRETLİ</span> Telerik, DevExpress, Aspose, IronPDF, JetBrains araçları.</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="secme-kriterleri"><span class="h-num">§ 20</span>Kütüphane seçme kriterleri</h2>
+        <p>Mülakatta "bir NuGet paketini projeye eklemeden önce neye bakarsın?" sorusu sık sorulur. Aşağıdaki liste, o sorunun tam cevabıdır. Paket kullanımının kısıtlı olduğu bir ortamda çalışmış olsan bile bu kriterleri sayabilmek, meseleye mühendis gibi baktığını gösterir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bir paketi değerlendirme kontrol listesi</caption>
+            <thead><tr><th>Kriter</th><th>Ne bakarsın</th><th>Not</th><th>Nerede</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Son commit / son yayın tarihi</strong></td><td>Repo son 6-12 ayda güncellendi mi</td><td><span class="tag tag--ok">TEMEL</span> İki yıldır commit yoksa terk edilmiş sayılır; .NET'in yeni sürümüne uyum gelmeyebilir.</td><td>GitHub &middot; nuget.org</td></tr>
+              <tr><td><strong>İndirme sayısı</strong></td><td>Toplam ve son haftalardaki indirme</td><td><span class="tag tag--ok">TEMEL</span> Toplam sayı geçmişi, haftalık sayı <em>bugünkü</em> canlılığı gösterir. İkisine ayrı bak.</td><td><a href="https://www.nuget.org/">nuget.org</a></td></tr>
+              <tr><td><strong>Açık issue / PR sayısı ve yaşı</strong></td><td>Issue'lar cevaplanıyor mu, yoksa yığılıyor mu</td><td><span class="tag tag--ok">TEMEL</span> 500 açık issue tek başına kötü değildir; 500 açık issue ve son cevap bir yıl önceyse kötüdür.</td><td>GitHub Issues</td></tr>
+              <tr><td><strong>Lisans türü</strong></td><td>MIT/Apache mı, AGPL/ticari mi</td><td><span class="tag tag--ok">TEMEL</span> §&nbsp;19'a bak. Şirkette hukuk onayı gerekebilir.</td><td>LICENSE dosyası &middot; nuget.org lisans alanı</td></tr>
+              <tr><td><strong>Bakımcı sayısı (bus factor)</strong></td><td>Tek kişi mi sürdürüyor, arkasında kurum var mı</td><td><span class="tag">ORTA</span> Tek kişilik projelerde lisans değişikliği ve terk riski yüksektir &mdash; AutoMapper/MediatR örneği tam olarak budur.</td><td>GitHub Contributors</td></tr>
+              <tr><td><strong>.NET sürüm desteği</strong></td><td>Hedef framework listesi (net8.0, net9.0, netstandard2.0)</td><td><span class="tag tag--ok">TEMEL</span> nuget.org'daki "Frameworks" sekmesinde görürsün.</td><td>nuget.org &rarr; Frameworks</td></tr>
+              <tr><td><strong>Bağımlılık ağacı</strong></td><td>Bu paket yanında kaç paket daha getiriyor</td><td><span class="tag">ORTA</span> Tek bir yardımcı için onlarca transitive bağımlılık gelmesi risktir (sürüm çakışması, güvenlik yüzeyi).</td><td>nuget.org &rarr; Dependencies</td></tr>
+              <tr><td><strong>Güvenlik açığı taraması</strong></td><td>Bilinen açık (CVE) var mı</td><td><span class="tag tag--ok">TEMEL</span> <code>dotnet list package --vulnerable --include-transitive</code> komutunu ezberle; mülakatta tek başına puan getirir.</td><td><a href="https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Dokümantasyon kalitesi</strong></td><td>README yeterli mi, örnek proje var mı</td><td><span class="tag">ORTA</span> Dokümantasyonu zayıf paket ekipteki herkesin zamanını yer.</td><td>Repo README</td></tr>
+              <tr><td><strong>Alternatif var mı</strong></td><td>Aynı işi yapan 2-3 paket ve yerleşik çözüm</td><td><span class="tag tag--ok">TEMEL</span> Tek pakete kilitlenmemek için önemli. Bu sayfanın her kategorisinde birden çok seçenek olmasının sebebi bu.</td><td>&mdash;</td></tr>
+              <tr><td><strong>Gerçekten gerekli mi</strong></td><td>Yerleşik API ya da 30 satır kod yeterli mi</td><td><span class="tag tag--ok">TEMEL</span> Paketsiz çalışma deneyimin varsa burada avantajdır: paketin ne kadarının gerçekten gerekli olduğunu değerlendirebilirsin.</td><td>&mdash;</td></tr>
+              <tr><td><strong>AOT / trimming uyumu</strong></td><td>Reflection'a dayanıyor mu</td><td><span class="tag tag--info">İLERİ</span> Native AOT hedefliyorsan reflection tabanlı paketler (eski mapper'lar, Newtonsoft) sorun çıkarır.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Paket kaynağı ve adı</strong></td><td>Resmî nuget.org'dan mı geliyor, isim benzeri sahte paket olabilir mi</td><td><span class="tag">ORTA</span> "Typosquatting" saldırısı gerçek bir risktir; paket adını yazarken dikkat et.</td><td><a href="https://learn.microsoft.com/en-us/nuget/what-is-nuget">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Central Package Management</strong></td><td>Sürümleri tek dosyada (<code>Directory.Packages.props</code>) yönetme</td><td><span class="tag">ORTA</span> Çok projeli çözümde sürüm karmaşasını bitirir. Bilmek olgunluk göstergesi.</td><td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 21</span>Özet &mdash; bu sayfada öncelik sırası</h2>
+        <p>Bu sayfadaki her satırı öğrenmen gerekmiyor. Sıra, bu sayfayı neden okuduğuna bağlıdır:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre sıra</caption>
+            <thead><tr><th>Amacın</th><th>Önerilen sıra</th></tr></thead>
+            <tbody>
+              <tr><td>İş arıyorsun</td><td>Aşağıdaki numaralı sıra: mülakatta sık &rarr; yerleşikler &rarr; lisans &rarr; seçme kriterleri &rarr; ilandaki kategoriler.</td></tr>
+              <tr><td>Çalıştığın bir proje için kütüphane seçiyorsun</td><td>Önce § 20 seçme kriterleri ve § 19 lisans, sonra ihtiyaç duyduğun kategori; "mülakatta sık" listesi ikincil.</td></tr>
+              <tr><td>Öğreniyorsun / öğrencisin</td><td>Önce yerleşikler (adım 2), sonra ücretsiz/MIT seçenekler; ticari lisanslı paketleri (AutoMapper v15, MediatR v13 vb.) kişisel/topluluk lisans şartlarını kontrol ederek dene.</td></tr>
+              <tr><td>Performans odaklı role başvuruyorsun</td><td>§ 13'ü öne al; değilse § 13'teki terimleri tanıman yeterli.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>İş arayan okur için sıralama şu:</p>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. Mülakatta sık sorulanlar</span>
+            <p>AutoMapper &middot; FluentValidation &middot; Serilog + Seq &middot; Hangfire &middot; MediatR &middot; Moq/NSubstitute &middot; BenchmarkDotNet. Her biri için bir konsol ya da küçük API projesi aç, en basit senaryoyu çalıştır, ekran görüntüsü al. AutoMapper v15+ ve MediatR v13+ ticari lisanslıdır; öğrenme/üretim dışı deneme Community lisansı kapsamında ücretsizdir, şartlarını kontrol et ya da eski MIT/Apache sürümüyle dene. Amaç uzman olmak değil; "denedim, şunu çözüyor, şu maliyeti var" diyebilmek (yalnızca denediysen "kullandım" deme).</p>
+            <span class="steps__meta">Her biri 1-3 saat &middot; toplam bir hafta akşamı</span>
+          </li>
+          <li>
+            <span class="steps__title">2. Yerleşik olanlar &mdash; paketsiz de iş görür</span>
+            <p>System.Text.Json &middot; IHttpClientFactory &middot; BackgroundService + PeriodicTimer &middot; ILogger&lt;T&gt; &middot; DataAnnotations &middot; ArgumentNullException.ThrowIfNull &middot; TimeProvider &middot; ArrayPool/ObjectPool &middot; Data Protection. Bunları bilmek, dış paket kullanılamayan bir ortamda da işi çözebileceğini ve .NET'in kendisini derinlemesine bildiğini gösterir. Öğreniyorsan bu adımla başla.</p>
+            <span class="steps__meta">Bildiklerini işaretle &middot; eksikleri tamamla</span>
+          </li>
+          <li>
+            <span class="steps__title">3. Lisans farkındalığı</span>
+            <p>§&nbsp;19'daki tabloyu bir kez oku. AutoMapper v15, MediatR v13, FluentAssertions v8, EPPlus v5, QuestPDF, ImageSharp, iText AGPL &mdash; bu yedi örneği hatırla. Bu konuyu açabilmek, kod yazmaktan bağımsız bir olgunluk sinyalidir.</p>
+            <span class="steps__meta">1 saat &middot; en yüksek getiri/çaba oranı</span>
+          </li>
+          <li>
+            <span class="steps__title">4. Paket seçme kriterleri</span>
+            <p>§&nbsp;20'deki listeyi ezberleme, mantığını anla. Özellikle <code>dotnet list package --vulnerable</code> komutunu bir kez çalıştır.</p>
+            <span class="steps__meta">30 dakika</span>
+          </li>
+          <li>
+            <span class="steps__title">5. İş ilanında gördüğün kategoriler</span>
+            <p>Başvurduğun ilanlarda (ya da projende) PDF, Excel, e-posta ya da scraping geçiyorsa o kategorinin ilk iki satırını dene; lisans dallarını ve hukuki notları (e-posta/SMS, scraping) atlama. Geçmiyorsa şimdilik atla; ihtiyaç anında bu sayfaya dönersin.</p>
+            <span class="steps__meta">İlana / projeye göre değişir</span>
+          </li>
+          <li>
+            <span class="steps__title">6. İLERİ rozetliler &mdash; erteleme listesi</span>
+            <p>LanguageExt &middot; System.IO.Pipelines &middot; MemoryPack &middot; SearchValues &middot; NSec &middot; Immediate.Handlers. Bunları bilmemen eksiklik değil; adlarını duymuş olman yeterli.</p>
+            <span class="steps__meta">Sonraki 6 ay</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Kütüphane bilgisi ezber değil, <strong>seçim gerekçesi</strong> demektir. Mülakatta yalnızca "AutoMapper kullandım" demek zayıf kalır; cevabın kendi deneyimine göre gerekçeli olmalı. Dış paket kısıtlı ortamda çalıştıysan örnek: "elle mapping yaptık çünkü dış paket kısıtı vardı; AutoMapper reflection maliyeti ve hata ayıklama zorluğu getiriyor; bugün olsa source generator olduğu için Mapperly'yi tercih ederdim." AutoMapper'ı serbestçe kullandıysan örnek: "kullandım, şu tekrarı kaldırdı; maliyeti reflection, zor hata ayıklama ve v15 lisansı; bugün Mapperly veya elle mapping'i değerlendirirdim." Ekip deneyimin yoksa: "kendi projemde şu nedenle şunu seçtim." Seçimin gerekçesini anlatan bu tür bir cevap çok daha güçlüdür. Bu sayfa sana o gerekçeyi kurduracak malzemeyi veriyor.</p>
+        </div>
+
+        <h2 id="ilgili-sayfalar"><span class="h-num">§ 22</span>İlgili sayfalar</h2>
+        <ul class="checklist">
+          <li><a href="../04-mimari-ve-desenler/index.html">§ 04 &mdash; Mimari ve desenler</a>: MediatR'a geçmeden önce CQRS ve mediator kavramını buradan oku.</li>
+          <li><a href="../03-veri-erisimi/index.html">§ 03 &mdash; Veri erişimi</a>: EF Core projeksiyonu, Dapper, migration ve toplu (bulk) işlemler.</li>
+          <li><a href="../05-mesajlasma-ve-dagitik/index.html">§ 05 &mdash; Mesajlaşma ve dağıtık sistemler</a>: Redis, RabbitMQ, MassTransit, gRPC &mdash; dağıtık sistem teknolojileri orada.</li>
+          <li><a href="../06-test-ve-kalite/index.html">§ 06 &mdash; Test ve kalite</a>: xUnit, mock kütüphaneleri, Testcontainers, kapsam ölçümü.</li>
+          <li><a href="../07-devops-ve-gozlemlenebilirlik/index.html">§ 07 &mdash; DevOps ve gözlemlenebilirlik</a>: GitHub Actions, CI/CD, OpenTelemetry, HealthChecks.</li>
+          <li><a href="../02-platform-ve-web-api/index.html">§ 02 &mdash; Platform ve Web API</a>: middleware, rate limiting, ProblemDetails, Swagger.</li>
+          <li><a href="../01-csharp-dili/index.html">§ 01 &mdash; C# dili</a>: record, span, source generator gibi bu sayfada geçen dil özellikleri.</li>
+          <li><a href="../index.html">.NET rehberi ana sayfası</a> &middot; <a href="../../index.html">tüm rehberlerin ana sayfası</a></li>
+          <li><a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript rehberi</a>: JavaScript/TypeScript tarafındaki karşılık kütüphaneler.</li>
+          <li><a href="../../Java/index.html">Java rehberi</a>: Quartz, POI, Jackson gibi bu sayfadaki paketlerin Java kökenleri.</li>
+          <li><a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> rehberleri: bu ekosistemlerdeki eşdeğerler.</li>
+        </ul>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 23</span>Bu bölümün kaynakları</h2>
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://www.nuget.org/">nuget.org &mdash; paket arama, indirme sayıları, lisans ve framework bilgisi</a></li>
+          <li><span class="src-n">02</span><a href="https://learn.microsoft.com/en-us/dotnet/">learn.microsoft.com/dotnet &mdash; yerleşik API'lerin resmî dokümantasyonu</a></li>
+          <li><span class="src-n">03</span><a href="https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages">learn.microsoft.com &mdash; NuGet paket güvenlik denetimi</a></li>
+          <li><span class="src-n">04</span><a href="https://opensource.org/licenses">opensource.org &mdash; onaylı açık kaynak lisans listesi</a></li>
+          <li><span class="src-n">05</span><a href="https://polyformproject.org/">polyformproject.org &mdash; Polyform lisans ailesi (EPPlus v5+ burada)</a></li>
+          <li><span class="src-n">06</span><a href="https://github.com/">github.com &mdash; her paketin son commit, issue ve LICENSE bilgisi</a></li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../09-aspire-bulut-modern/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Aspire, Bulut ve Modern .NET</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

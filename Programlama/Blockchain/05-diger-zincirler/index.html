@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diğer Zincirler ve Diller — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Solana ve Rust/Anchor, Bitcoin, Cosmos, Polkadot, Move dilleri, Starknet, kurumsal Hyperledger: hangi zincir hangi dil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Diğer Zincirler ve Diller</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../04-dotnet/index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 05 · Ekosistemler</div>
+        <h1 class="page-title">Ethereum dışı: hangi zincir <em>hangi dil</em>?</h1>
+        <p class="lede">Her zincirin kendi dili ve araç seti var. Bu bölüm bir harita: Rust ile Solana, Go ile Cosmos, Move ile Aptos ve Sui. <a href="../../Rust/index.html">Rust</a> ve <a href="../../Go/index.html">Go</a> sayfalarıyla bağlantılı.</p>
+        <div class="head-meta">Seviye: tanıma &middot; Harita niteliğinde</div>
+      </header>
+
+      <div class="content">
+        <h2 id="zincir-haritasi"><span class="h-num">§ 1</span>Zincir haritası: bu sayfa nasıl okunur</h2>
+        <p class="intro">Bu sayfa Ethereum dışındaki zincirlerin anahtar kelime haritası. Konu anlatımı yok; her satırda bir terim, karışmasın diye bir cümlelik not ve resmî doküman var. Çerçeve aynı: blockchain çoğu geliştirici için yan alandır (<a href="../index.html#durust-cerceve">dürüst çerçeve</a>). EVM'i hedefleyen çoğu okur için bu sayfa o alanın "sonra bakarım" katmanıdır. Ama ne zaman geleceğin hedefine ve bildiğin dile bağlı:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bu sayfaya ne zaman gelmeli — Durum → Sonuç</caption>
+            <thead><tr><th>Durum</th><th>Önce</th><th>Bu sayfada nereden başla</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hedef EVM, .NET biliyorsun</strong></td><td><a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 Solidity</a> ve <a href="../04-dotnet/index.html">04 .NET</a></td><td>§ 8 (L2), § 15 sıra</td></tr>
+              <tr><td><strong>Hedef EVM, JS/TS biliyorsun</strong></td><td>02 ve <a href="../03-javascript-typescript/index.html">03 JS/TS</a>; 04 gerekmez</td><td>§ 8 (L2), § 15 sıra</td></tr>
+              <tr><td><strong>Hedef Solana ya da Rust biliyorsun</strong></td><td><a href="../01-temeller/index.html">01</a>'in kavram kısmı; 02 kavram düzeyinde yeter, 04 gerekmez</td><td>§ 3 doğrudan</td></tr>
+              <tr><td><strong>Hedef Cosmos ya da Go biliyorsun</strong></td><td>01'in kavram kısmı</td><td>§ 4 doğrudan</td></tr>
+              <tr><td><strong>Hedef Bitcoin</strong></td><td>01'in kriptografi ve UTXO kısmı</td><td>§ 2 doğrudan; kütüphaneyi dile göre seç (NBitcoin, bitcoinjs-lib, BDK)</td></tr>
+              <tr><td><strong>Kurumsal ilan Fabric / Corda / Besu istiyor</strong></td><td>01'in kavram kısmı</td><td>§ 12 doğrudan</td></tr>
+              <tr><td><strong>Hiçbiri; EVM'i yeni öğreniyorsun</strong></td><td>02 ve 03/04 bitmeden buradaki yeni dillere geçme</td><td>§ 15 sırasının sonu</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Sıfır bütçe kuralı</p>
+          <p>Buradaki her şey testnet, devnet ya da yerel ağda denenir. Mainnet'e para koyma; cüzdanların kurtarma kelimelerini (seed phrase) ve özel anahtarlarını hiçbir dosyaya, repoya ya da siteye yazma. "Ücretsiz" görünen bazı faucet'ler mainnet bakiyesi şartı koyuyor; hangilerinin gerçekten bedava olduğu § 15'te. Bu bir geliştirme listesi: fiyat, getiri ya da yatırım konusu kapsam dışında.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">13 Eylül 2026 itibarıyla doğrulanan değişiklikler</p>
+          <p>Scroll Sepolia testnet'i 30 Temmuz 2026'dan sonra kapatıldı. ink! için Ocak 2026'da aktif geliştirmenin durduğu duyuruldu. TON'da Tact ve FunC'nin yerine Tolk öneriliyor; Blueprint'in yerini Acton alıyor. Aptos .NET SDK 12 Ağustos 2026'da arşivlendi. Tezos'ta Ghostnet kaldırıldı, yerine Shadownet geldi. Solana'da yeni projeler için <code>@solana/web3.js</code> yerine <code>@solana/kit</code> öneriliyor. Polygon zkEVM artık güncel dokümanda yer almıyor.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1 · Tek bakışta: konsensüs, dil, araç, cüzdan, testnet, bağlı dil sayfası</caption>
+            <thead><tr><th>Zincir</th><th>Konsensüs / tür</th><th>Sözleşme dili</th><th>Araç seti</th><th>Cüzdan</th><th>Testnet</th><th>İlgili dil sayfası</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bitcoin</strong></td><td>PoW</td><td>Bitcoin Script, Miniscript</td><td>Bitcoin Core, BDK, bitcoinjs-lib, NBitcoin</td><td>Sparrow</td><td>regtest, signet, testnet4</td><td><a href="../../Rust/index.html">Rust</a> (BDK, LDK) · <a href="../../Go/index.html">Go</a> (LND)</td></tr>
+              <tr><td><strong>Arbitrum · OP · Base</strong></td><td>Optimistic rollup (Ethereum'a yerleşir)</td><td>Solidity (Arbitrum'da ek olarak Rust/Stylus)</td><td>Foundry, Hardhat, viem, Nethereum</td><td>MetaMask vb.</td><td>Arbitrum Sepolia, OP Sepolia, Base Sepolia</td><td>Gerekmez · Stylus için <a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>ZKsync · Linea · Starknet</strong></td><td>ZK rollup</td><td>ZKsync/Linea: Solidity · Starknet: Cairo</td><td>Starknet: Scarb, Starknet Foundry</td><td>Starknet: Ready, Braavos</td><td>Linea Sepolia, Starknet Sepolia</td><td>Cairo için <a href="../../Rust/index.html">Rust</a> (benzer sözdizimi)</td></tr>
+              <tr><td><strong>BNB · Avalanche · Polygon</strong></td><td>EVM uyumlu L1 (Avalanche: Snowman; Polygon: Heimdall + Bor)</td><td>Solidity</td><td>EVM araçlarının tamamı</td><td>MetaMask, Core</td><td>BSC Testnet, Fuji, Amoy</td><td>Gerekmez</td></tr>
+              <tr><td><strong>Solana</strong></td><td>PoS + Proof of History</td><td>Rust (Anchor)</td><td>Solana CLI, Anchor, Surfpool, @solana/kit, Solnet</td><td>Phantom, Solflare</td><td>devnet, yerel Surfpool</td><td><a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>Cosmos</strong></td><td>CometBFT (BFT PoS)</td><td>Go (SDK modülü), Rust (CosmWasm), Solidity (Cosmos EVM)</td><td>Ignite CLI, CosmJS, Hermes</td><td>Keplr</td><td>Zincire göre (ör. Celestia Mocha)</td><td><a href="../../Go/index.html">Go</a> · <a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>Polkadot</strong></td><td>Relay chain + parachain (NPoS)</td><td>Rust (FRAME), Solidity (Polkadot Hub), ink! (bakımsız)</td><td>polkadot-sdk, PAPI</td><td>Talisman</td><td>Polkadot Hub TestNet (PAS)</td><td><a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>Aptos · Sui</strong></td><td>BFT PoS</td><td>Move · Sui Move</td><td>Aptos CLI, Sui CLI, TS SDK'lar</td><td>Petra · Slush</td><td>devnet, testnet</td><td><a href="../../Rust/index.html">Rust</a> (Move sözdizimi yakın)</td></tr>
+              <tr><td><strong>TON</strong></td><td>PoS BFT, sharding</td><td>Tolk (FunC/Tact eski)</td><td>Acton, TON Connect, TonSdk.NET</td><td>Tonkeeper</td><td>testnet (Telegram testgiver bot)</td><td>—</td></tr>
+              <tr><td><strong>Cardano</strong></td><td>Ouroboros PoS, eUTXO</td><td>Aiken, Plinth (Haskell), OpShin (Python)</td><td>Mesh, Blockfrost, Chrysalis</td><td>Lace</td><td>preprod, preview</td><td>—</td></tr>
+              <tr><td><strong>Algorand</strong></td><td>PoS</td><td>Algorand Python, Algorand TypeScript</td><td>AlgoKit, LocalNet</td><td>Pera</td><td>TestNet, LocalNet</td><td>—</td></tr>
+              <tr><td><strong>NEAR</strong></td><td>PoS, sharding</td><td>Rust, JS/TS</td><td>cargo-near, NEAR CLI</td><td>—</td><td>testnet (<code>--useFaucet</code>)</td><td><a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>Tezos</strong></td><td>PoS</td><td>Michelson, SmartPy, LIGO</td><td>Taquito, Netezos</td><td>Temple</td><td>Shadownet</td><td>—</td></tr>
+              <tr><td><strong>Hedera</strong></td><td>Hashgraph (aBFT)</td><td>Solidity + yerel servisler</td><td>JS/Java/Go SDK</td><td>HashPack</td><td>testnet (Hedera Portal)</td><td><a href="../../Go/index.html">Go</a> SDK</td></tr>
+              <tr><td><strong>XRP Ledger</strong></td><td>UNL tabanlı konsensüs</td><td>L1'de genel sözleşme yok; Hooks (Xahau), EVM Sidechain</td><td>xrpl.js, XrplCSharp</td><td>Xaman</td><td>Testnet, Devnet</td><td>—</td></tr>
+              <tr><td><strong>Stellar</strong></td><td>SCP (Federated Byzantine Agreement)</td><td>Rust (Soroban &rarr; Wasm)</td><td>Stellar Lab, .NET SDK</td><td>Freighter</td><td>Testnet + Friendbot</td><td><a href="../../Rust/index.html">Rust</a></td></tr>
+              <tr><td><strong>Hyperledger Fabric</strong></td><td>İzinli; Raft / BFT ordering</td><td>Go, Java, Node.js chaincode</td><td>Fabric Gateway, test-network</td><td>—</td><td>Docker ile yerel ağ</td><td><a href="../../Go/index.html">Go</a></td></tr>
+              <tr><td><strong>Corda</strong></td><td>İzinli; notary</td><td>Kotlin, Java (JVM)</td><td>CorDapp</td><td>—</td><td>Yerel</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bitcoin"><span class="h-num">§ 2</span>Bitcoin</h2>
+        <p>Akıllı sözleşme platformu değil, UTXO tabanlı bir para ağı. .NET tarafında en olgun köprü NBitcoin'dir (<a href="../04-dotnet/index.html#diger-dotnet-kutuphaneleri">04 · diğer .NET kütüphaneleri</a>).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2a · Protokol kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>UTXO</strong></td><td>Bakiye yok, harcanmamış çıktılar var; Ethereum'un account modelinden temel farkı bu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/devguide/transactions.html">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>Bitcoin Script</strong></td><td>Stack tabanlı, bilerek Turing-complete yapılmamış, döngüsüz kilit/açma dili</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://en.bitcoin.it/wiki/Script">bitcoin.it wiki</a></td></tr>
+              <tr><td><strong>SegWit</strong> (BIP 141)</td><td>İmza (witness) verisini ayrı taşır; malleability çözümü, <code>bc1q…</code> adresleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki">BIP 141</a></td></tr>
+              <tr><td><strong>Taproot</strong> (BIP 341) + <strong>Tapscript</strong> (BIP 342)</td><td>Key path / script path harcama, <code>bc1p…</code> adresleri</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki">BIP 341</a> · <a href="https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki">BIP 342</a></td></tr>
+              <tr><td><strong>Schnorr signatures</strong> (BIP 340)</td><td>Taproot'un kullandığı imza şeması; ECDSA'nın yerine geçer</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki">BIP 340</a></td></tr>
+              <tr><td><strong>PSBT</strong> (BIP 174, v2: BIP 370)</td><td>Kısmen imzalanmış işlem formatı; multisig ve donanım cüzdanı akışlarının ortak dili</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki">BIP 174</a> · <a href="https://bitcoinops.org/en/topics/psbt/">Optech</a></td></tr>
+              <tr><td><strong>BIP 32 / 39 / 84 / 86</strong></td><td>HD cüzdan, mnemonic, native SegWit ve Taproot için anahtar türetme yolları</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP 32</a> · <a href="https://github.com/bitcoin/bips/blob/master/bip-0086.mediawiki">BIP 86</a></td></tr>
+              <tr><td><strong>Miniscript</strong></td><td>Script'i yapılandırılmış ve analiz edilebilir biçimde yazma yolu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://bitcoinops.org/en/topics/miniscript/">Optech</a></td></tr>
+              <tr><td><strong>Covenants</strong></td><td>Harcamanın nereye gidebileceğini kısıtlama önerileri; soft fork tartışması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://bitcoinops.org/en/topics/covenants/">Optech</a></td></tr>
+              <tr><td><strong>Silent payments</strong></td><td>Tekrar kullanılabilir, gizliliği koruyan statik adres önerisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://bitcoinops.org/en/topics/silent-payments/">Optech</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2b · Katmanlar, varlıklar, yan zincirler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Lightning Network</strong> / BOLT</td><td>Ödeme kanallarıyla zincir dışı anlık BTC ödemesi; spesifikasyonu BOLT belgeleri</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/lightning/bolts">lightning/bolts</a></td></tr>
+              <tr><td><strong>LND</strong></td><td>Go ile yazılmış Lightning düğümü; gRPC ve REST API</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/lightningnetwork/lnd">lnd</a> · <a href="https://docs.lightning.engineering/">docs.lightning.engineering</a></td></tr>
+              <tr><td><strong>Core Lightning</strong></td><td>C ile yazılmış, eklenti mimarili Lightning düğümü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.corelightning.org/">docs.corelightning.org</a></td></tr>
+              <tr><td><strong>LDK</strong></td><td>Lightning'i uygulamaya SDK olarak gömme (Rust çekirdek)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://lightningdevkit.org/">lightningdevkit.org</a></td></tr>
+              <tr><td><strong>Polar</strong></td><td>Docker ile tek tıkla yerel regtest Lightning ağı (LND, Core Lightning, Eclair); ücretsiz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://lightningpolar.com/">lightningpolar.com</a></td></tr>
+              <tr><td><strong>L402</strong></td><td>Lightning ödemesiyle API erişim token'ı (macaroon + ödeme); backend'ciye ilginç</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.lightning.engineering/">docs.lightning.engineering</a></td></tr>
+              <tr><td><strong>Taproot Assets</strong></td><td>Bitcoin üzerinde varlık çıkarıp Lightning'de taşıma protokolü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.lightning.engineering/">docs.lightning.engineering</a></td></tr>
+              <tr><td><strong>Ordinals / inscriptions</strong></td><td>Tek tek satoshilere kimlik verip içerik yazma; ayrı zincir gerekmez (kavram olarak bil)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ordinals.com/">docs.ordinals.com</a></td></tr>
+              <tr><td><strong>Runes</strong></td><td>Bitcoin üzerinde fungible token protokolü: etch, mint, transfer</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.ordinals.com/runes.html">Runes</a></td></tr>
+              <tr><td><strong>Stacks</strong> / Clarity</td><td>Bitcoin'e bağlı L2; sözleşme dili Clarity; sBTC</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.stacks.co/">docs.stacks.co</a></td></tr>
+              <tr><td><strong>Rootstock</strong> (RSK)</td><td>Merge-mining ile güvenlenen EVM uyumlu Bitcoin yan zinciri; Solidity olduğu gibi çalışır, tRBTC faucet var</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://dev.rootstock.io/">dev.rootstock.io</a></td></tr>
+              <tr><td><strong>Liquid Network</strong></td><td>Federasyonlu Bitcoin yan zinciri; gizli işlem, varlık ihracı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.liquid.net/">docs.liquid.net</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2c · Düğüm, test ağları, kütüphaneler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>bitcoin-core</strong> (bitcoind, bitcoin-cli)</td><td>Referans düğüm ve RPC. Sürüm 31.1; tam düğüm ~600 GB, pruning ile ~10 GB</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://bitcoincore.org/en/download/">indir</a> · <a href="https://bitcoincore.org/en/doc/">RPC</a></td></tr>
+              <tr><td><strong>regtest</strong></td><td>Blokları geliştiricinin kendisinin ürettiği özel yerel zincir; senkron yok, bedava; <code>-regtest</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.bitcoin.org/examples/testing.html">Testing</a></td></tr>
+              <tr><td><strong>signet</strong></td><td>Blokları imzalı üreticilerin çıkardığı kararlı public test ağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://bitcoinops.org/en/topics/signet/">Optech</a></td></tr>
+              <tr><td><strong>testnet4</strong> / testnet3</td><td>Public PoW test ağları; yeni projede testnet4</td><td><span class="tag">ORTA</span></td><td><a href="https://bitcoinops.org/en/topics/testnet/">Optech</a></td></tr>
+              <tr><td><strong>mempool.space</strong></td><td>Açık kaynak blok gezgini; signet görünümü var</td><td><span class="tag">ORTA</span></td><td><a href="https://mempool.space/signet">mempool.space/signet</a></td></tr>
+              <tr><td><strong>BDK</strong> (Bitcoin Dev Kit)</td><td>Rust tabanlı cüzdan kütüphanesi; çok dilli bağlamaları var</td><td><span class="tag">ORTA</span></td><td><a href="https://bookofbdk.com/">Book of BDK</a></td></tr>
+              <tr><td><strong>bitcoinjs-lib</strong></td><td>TypeScript ile yazılmış JS kütüphanesi; PSBT ve Taproot örnekleri var</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoinjs/bitcoinjs-lib">github</a></td></tr>
+              <tr><td><strong>NBitcoin</strong></td><td>En kapsamlı .NET Bitcoin kütüphanesi: işlem kurma, script, RPC istemcisi, BIP 32/39/141</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/MetacoSA/NBitcoin">github</a> · <a href="https://metacosa.github.io/NBitcoin/api/index.html">API</a></td></tr>
+              <tr><td><strong>Programming The Blockchain in C#</strong></td><td>NBitcoin ile yazılmış ücretsiz kitap; eski tarihli, yeni konular için API'ye bak</td><td><span class="tag">ORTA</span></td><td><a href="https://programmingblockchain.gitbook.io/programmingblockchain/">gitbook</a></td></tr>
+              <tr><td><strong>BTCPay Server</strong></td><td>C#/.NET ile yazılmış, kendi sunucunda çalışan ödeme sunucusu; Greenfield API, Lightning. Kaynak kodunu okumak iyi .NET örneği</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.btcpayserver.org/">docs.btcpayserver.org</a></td></tr>
+              <tr><td><strong>Sparrow Wallet</strong></td><td>Masaüstü cüzdan; PSBT, multisig, testnet/regtest/signet desteği</td><td><span class="tag">ORTA</span></td><td><a href="https://sparrowwallet.com/">sparrowwallet.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="solana"><span class="h-num">§ 3</span>Solana</h2>
+        <p>Programlama modeli EVM'den farklı; Solidity bilgisi burada taşınmaz. Dil Rust, bu yüzden önce <a href="../../Rust/index.html">Rust</a> sayfasına bak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>3a · Model ve kavramlar (EVM'den farklı olanlar)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>account model</strong></td><td>Tüm durum account'larda (en fazla 10 MiB); kod ile veri ayrı account'larda tutulur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/core/accounts">core/accounts</a></td></tr>
+              <tr><td><strong>program</strong></td><td>Solana'da akıllı sözleşmenin adı; durum tutmaz, dışarıdaki account'lara yazar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/core/programs">core/programs</a></td></tr>
+              <tr><td><strong>transaction / instruction</strong></td><td>Bir işlemde birden çok instruction olur; kullanılacak account'lar önceden listelenir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/core/transactions">core/transactions</a></td></tr>
+              <tr><td><strong>fees</strong> / compute units / priority fee</td><td>Temel ücret + öncelik ücreti; hesaplama compute unit ile sınırlı</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/core/fees">core/fees</a></td></tr>
+              <tr><td><strong>rent-exempt</strong></td><td>Account açarken veri boyutuna göre kilitlenen SOL; account kapanınca geri alınır</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/core/accounts">core/accounts</a></td></tr>
+              <tr><td><strong>PDA</strong> (Program Derived Address)</td><td>Program ID + seed'lerden türetilir, özel anahtarı yoktur; yalnızca program <code>invoke_signed</code> ile imzalar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/core/pda">core/pda</a></td></tr>
+              <tr><td><strong>CPI</strong> (Cross-Program Invocation)</td><td>Bir programın başka bir programı çağırması</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/core/cpi">core/cpi</a></td></tr>
+              <tr><td><strong>SPL Token</strong></td><td>Tüm tokenlar ortak Token Program'ı kullanır; her token için ayrı sözleşme yazılmaz (ERC-20'den farkı)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/tokens">tokens</a></td></tr>
+              <tr><td><strong>mint account / ATA</strong></td><td>Mint tokenın kimliğidir; Associated Token Account sahip + mint'ten türetilen varsayılan bakiye hesabı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/tokens">tokens</a></td></tr>
+              <tr><td><strong>Token-2022</strong> (Token Extensions)</td><td>Transfer fee, confidential transfer gibi 30'dan fazla eklenti; çoğu mint oluştururken açılmalı</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/tokens/extensions">tokens/extensions</a></td></tr>
+              <tr><td><strong>Metaplex</strong></td><td>NFT/varlık programları: Token Metadata, Core, Bubblegum v2, Candy Machine; JS istemcisi Umi</td><td><span class="tag">ORTA</span></td><td><a href="https://metaplex.com/docs/">metaplex.com/docs</a></td></tr>
+              <tr><td><strong>sealevel attacks</strong></td><td>Solana'ya özgü açıklar: eksik signer/owner kontrolü, account karıştırma; Anchor ile çözümleri. "solana program security" diye ara</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://github.com/coral-xyz/sealevel-attacks">sealevel-attacks</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>3b · Araçlar, istemciler, test ağı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>tek komutla kurulum</strong></td><td>Rust, Solana CLI, Anchor, Surfpool, Node.js ve Yarn'ı birlikte kurar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/intro/installation">intro/installation</a></td></tr>
+              <tr><td><strong>Solana CLI</strong> / Agave</td><td>Agave, Anza'nın sürdürdüğü validator istemcisi ve CLI; cluster seçimi devnet/testnet/mainnet-beta</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.anza.xyz/">docs.anza.xyz</a></td></tr>
+              <tr><td><strong>Anchor</strong></td><td>Solana program framework'ü: account doğrulama makroları, test, deploy, güvenlik kontrolleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.anchor-lang.com/docs">anchor-lang.com</a></td></tr>
+              <tr><td><strong>IDL</strong> (Anchor)</td><td>Programın arayüz tanımı; EVM'deki ABI'nin karşılığı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.anchor-lang.com/docs/basics/idl">basics/idl</a></td></tr>
+              <tr><td><strong>Solana Playground</strong></td><td>Tarayıcıda IDE; kurulum yapmadan Anchor yazıp devnet'e deploy</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://beta.solpg.io/">beta.solpg.io</a> · <a href="https://www.anchor-lang.com/docs/quickstart/solpg">quickstart</a></td></tr>
+              <tr><td><strong>Surfpool</strong></td><td>solana-test-validator'ın önerilen yerine geçeni; mainnet account'larını anlık çeker</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/docs/tools/surfpool">tools/surfpool</a></td></tr>
+              <tr><td><strong>solana-test-validator</strong></td><td>Eski yerel doğrulayıcı; dokümanda "legacy" diye geçiyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://solana.com/docs/intro/installation">installation</a></td></tr>
+              <tr><td><strong>LiteSVM</strong></td><td>Süreç içinde çalışan hızlı program test kütüphanesi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/LiteSVM/litesvm">github</a></td></tr>
+              <tr><td><strong>@solana/kit</strong></td><td>Önerilen JS/TS SDK (web3.js 2.x'in yeni adı); modüler. JavaScript temeli: <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://solana.com/docs/clients/official/javascript">clients/javascript</a></td></tr>
+              <tr><td><strong>@solana/web3.js</strong> (1.x)</td><td>Eski SDK; eğitimlerde sık görürsün, dokümana göre yeni uygulamalar kit kullanmalı</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/anza-xyz/kit">anza-xyz/kit</a></td></tr>
+              <tr><td><strong>wallet-adapter</strong></td><td>React uygulamasında Solana cüzdanı bağlama bileşenleri (<a href="../../JavaScript-TypeScript/03-react/index.html">React</a>)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/anza-xyz/wallet-adapter">github</a></td></tr>
+              <tr><td><strong>Codama</strong></td><td>IDL'den JS, Rust, Go ve Python istemci kodu üretir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/codama-idl/codama">github</a></td></tr>
+              <tr><td><strong>Solnet</strong></td><td>.NET 8+ için Solana SDK: RPC, cüzdan, SPL token, ATA; NuGet'te</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/bmresearch/Solnet">github</a></td></tr>
+              <tr><td><strong>devnet</strong> + faucet</td><td>Ücretsiz test SOL: 8 saatte 2 istek, GitHub girişiyle limit artar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://faucet.solana.com/">faucet.solana.com</a></td></tr>
+              <tr><td><strong>Solana Cookbook</strong></td><td>JS, Rust, Python ve CLI kod parçaları</td><td><span class="tag">ORTA</span></td><td><a href="https://solana.com/developers/cookbook">cookbook</a></td></tr>
+              <tr><td><strong>Helius</strong></td><td>Solana RPC, DAS API, webhook; ücretsiz katmanı var</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.helius.dev/docs">helius.dev/docs</a></td></tr>
+              <tr><td><strong>Phantom</strong> · <strong>Solflare</strong></td><td>Yaygın Solana cüzdanları; Phantom Ethereum, Base, Polygon ve Bitcoin'i de destekler. Geliştirme için ayrı cüzdan aç; kurtarma kelimelerini (seed phrase) kimseyle paylaşma</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.phantom.com/">docs.phantom.com</a> · <a href="https://www.solflare.com/">solflare.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cosmos"><span class="h-num">§ 4</span>Cosmos ekosistemi</h2>
+        <p>Burada sözleşme deploy etmek yerine çoğu zaman zincirin kendisini yazarsın. SDK Go ile yazılmış (<a href="../../Go/index.html">Go</a>); sözleşme tarafı ise Rust/CosmWasm.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>4 · Cosmos SDK, CometBFT, IBC, CosmWasm</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>app-chain</strong></td><td>Tek uygulamaya özel zincir; validator seti, ücret ve yönetişim o zincire ait</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cosmos.network/sdk/latest/learn">sdk/learn</a></td></tr>
+              <tr><td><strong>Cosmos SDK</strong></td><td>Go ile modüler L1 framework'ü; dokümandaki sürüm v0.55</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cosmos.network/">docs.cosmos.network</a></td></tr>
+              <tr><td><strong>module</strong> (x/bank, x/staking)</td><td>Zincir özellikleri modül olarak eklenir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/sdk/latest/learn">sdk/learn</a></td></tr>
+              <tr><td><strong>CometBFT</strong></td><td>BFT konsensüs motoru, anlık kesinlik (instant finality) sağlar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cosmos.network/cometbft">cometbft</a></td></tr>
+              <tr><td><strong>Tendermint</strong></td><td>CometBFT'nin eski adı; eski kaynak ve ilanlarda bu adla geçer</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.cosmos.network/cometbft">cometbft</a></td></tr>
+              <tr><td><strong>ABCI</strong></td><td>Konsensüs motoru ile uygulama arasındaki arayüz</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/cometbft">cometbft</a></td></tr>
+              <tr><td><strong>IBC</strong></td><td>Zincirler arası token/mesaj protokolü; Go implementasyonu ibc-go, v10'dan itibaren IBC v2</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cosmos.network/ibc/">ibc</a></td></tr>
+              <tr><td><strong>light client</strong></td><td>Karşı zincirin konsensüs durumunu takip eden istemci; IBC güvenliği buna dayanır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.cosmos.network/ibc/">ibc</a></td></tr>
+              <tr><td><strong>relayer</strong> / Hermes</td><td>Paketleri zincirler arasında taşıyan zincir dışı süreç; Hermes Rust implementasyonu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hermes.informal.systems/">hermes.informal.systems</a></td></tr>
+              <tr><td><strong>CosmWasm</strong></td><td>Cosmos SDK modülü; Rust ile yazılıp Wasm'a derlenen sözleşmeler</td><td><span class="tag">ORTA</span></td><td><a href="https://cosmwasm.github.io/">cosmwasm docs</a> · <a href="https://book.cosmwasm.com/">book</a></td></tr>
+              <tr><td><strong>Cosmos EVM</strong></td><td>CometBFT zincirine tam EVM ekleyen modül; Solidity, Hardhat ve Foundry olduğu gibi çalışır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.cosmos.network/evm/latest/documentation/overview">evm/overview</a></td></tr>
+              <tr><td><strong>Ignite CLI</strong></td><td>Cosmos SDK zinciri için iskelet üretme aracı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ignite.com/">docs.ignite.com</a></td></tr>
+              <tr><td><strong>CosmJS</strong></td><td>TypeScript istemci kütüphanesi; bakım modunda ("yol haritası yok")</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/cosmos/cosmjs">github</a></td></tr>
+              <tr><td><strong>Keplr</strong></td><td>Cosmos cüzdanı ve dApp entegrasyon API'si</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.keplr.app/">docs.keplr.app</a></td></tr>
+              <tr><td><strong>Osmosis</strong> · <strong>Celestia</strong> · <strong>Injective</strong></td><td>Örnek app-chain'ler: DEX (CosmWasm destekli), veri erişilebilirliği katmanı (Mocha testnet), finans L1'i</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.osmosis.zone/">osmosis</a> · <a href="https://docs.celestia.org/">celestia</a> · <a href="https://docs.injective.network/">injective</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="polkadot-substrate"><span class="h-num">§ 5</span>Polkadot / Substrate</h2>
+        <p>Zincir tarafı Rust ile yazılır (<a href="../../Rust/index.html">Rust</a>). 2026 itibarıyla sözleşme için en kolay giriş Polkadot Hub'da Solidity; ink! artık aktif geliştirilmiyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>5 · Polkadot SDK, parachain, Hub, XCM</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Polkadot SDK</strong></td><td>Substrate, FRAME, Cumulus ve Polkadot tek repoda; üç ayda bir stable sürüm çıkar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/paritytech/polkadot-sdk">polkadot-sdk</a></td></tr>
+              <tr><td><strong>Substrate</strong></td><td>Rust blok zinciri framework'ü; docs.substrate.io artık docs.polkadot.com'a yönleniyor</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.polkadot.com/">docs.polkadot.com</a></td></tr>
+              <tr><td><strong>FRAME</strong> / pallet</td><td>Runtime'ı modülleri (pallet) birleştirerek kurma sistemi</td><td><span class="tag">ORTA</span></td><td><a href="https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/index.html">Rust docs</a></td></tr>
+              <tr><td><strong>relay chain / parachain</strong></td><td>Güvenliği paylaştıran ana zincir ve ona bağlı özel zincirler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.polkadot.com/parachains/get-started/">parachains</a></td></tr>
+              <tr><td><strong>Polkadot Hub</strong></td><td>Parachain kurmadan sözleşme, varlık, kimlik ve staking hizmetleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.polkadot.com/reference/polkadot-hub/">polkadot-hub</a></td></tr>
+              <tr><td><strong>REVM / PVM</strong> (PolkaVM)</td><td>Hub'da iki VM var: REVM değiştirilmemiş EVM sözleşmelerini, PVM RISC-V bytecode'u çalıştırır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.polkadot.com/smart-contracts/overview/">smart-contracts</a></td></tr>
+              <tr><td><strong>resolc</strong> (Solidity &rarr; PVM)</td><td>Solidity'yi PVM'e derler; MetaMask, Hardhat, Foundry ve Remix destekleniyor</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.polkadot.com/smart-contracts/overview/">smart-contracts</a></td></tr>
+              <tr><td><strong>ink!</strong></td><td>Rust akıllı sözleşme dili (v6); Ocak 2026'da aktif bakımın durduğu duyuruldu</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://use.ink/">use.ink</a></td></tr>
+              <tr><td><strong>XCM</strong></td><td>Zincirler arası mesaj formatı; köprüsüz token transferi ve uzaktan çalıştırma</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.polkadot.com/parachains/interoperability/">interoperability</a></td></tr>
+              <tr><td><strong>Polkadot Hub TestNet</strong> (PAS)</td><td>Ücretsiz test tokenı; hız sınırı var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.polkadot.com/smart-contracts/faucet/">faucet</a></td></tr>
+              <tr><td><strong>PAPI</strong> (polkadot-api)</td><td>Zincir metadata'sından tip üreten TypeScript istemcisi; light client öncelikli</td><td><span class="tag">ORTA</span></td><td><a href="https://papi.how/">papi.how</a></td></tr>
+              <tr><td><strong>polkadot.js</strong></td><td>Uzun süredir kullanılan JS API ve tarayıcı eklentisi; eski eğitimlerde standart</td><td><span class="tag">ORTA</span></td><td><a href="https://polkadot.js.org/docs/">polkadot.js.org</a></td></tr>
+              <tr><td><strong>Talisman</strong></td><td>EVM, Solana ve Polkadot'u destekleyen cüzdan</td><td><span class="tag">ORTA</span></td><td><a href="https://www.talisman.xyz/">talisman.xyz</a></td></tr>
+              <tr><td><strong>Substrate.NET.API</strong></td><td>.NET ve Unity için Substrate düğüm istemcisi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/SubstrateGaming/Substrate.NET.API">github</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="move-dilleri"><span class="h-num">§ 6</span>Move dilleri: Aptos ve Sui</h2>
+        <p>Move kaynak (resource) odaklı bir dildir: varlık bir tiptir, kopyalanamaz ve kaybolamaz. Sözdizimi Rust'a yakın, ama depolama modeli Solidity'den tamamen farklı.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6 · Move, Aptos, Sui</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Move</strong></td><td>Güvenli, sandbox'lı, biçimsel doğrulamaya uygun dil; resource tipleri varlığı temsil eder</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://aptos-labs.github.io/move-book/">Move on Aptos Book</a></td></tr>
+              <tr><td><strong>abilities</strong> (copy, drop, store, key)</td><td>Bir tipin kopyalanma, silinme ve saklanma iznini tip düzeyinde belirler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://aptos.dev/build/smart-contracts">aptos.dev</a></td></tr>
+              <tr><td><strong>Move Prover</strong></td><td>Move kodunun biçimsel doğrulama aracı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://aptos.dev/build/smart-contracts">aptos.dev</a></td></tr>
+              <tr><td><strong>Aptos CLI</strong></td><td>Derleme, test, deploy, yerel ağ</td><td><span class="tag">ORTA</span></td><td><a href="https://aptos.dev/build/cli">build/cli</a></td></tr>
+              <tr><td><strong>@aptos-labs/ts-sdk</strong></td><td>Aptos TypeScript SDK'sı</td><td><span class="tag">ORTA</span></td><td><a href="https://aptos.dev/build/sdks/ts-sdk">ts-sdk</a></td></tr>
+              <tr><td><strong>Aptos testnet faucet</strong></td><td>Ücretsiz test APT; Google girişi gerekir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://aptos.dev/network/faucet">network/faucet</a></td></tr>
+              <tr><td><strong>Keyless accounts</strong></td><td>Sosyal girişle hesap; seed phrase gerekmez</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://aptos.dev/">aptos.dev</a></td></tr>
+              <tr><td><strong>Petra</strong></td><td>Aptos cüzdanı: eklenti, mobil, web</td><td><span class="tag">ORTA</span></td><td><a href="https://petra.app/">petra.app</a></td></tr>
+              <tr><td><strong>Aptos .NET SDK</strong></td><td>12 Ağustos 2026'da arşivlendi, salt okunur; Unity için ayrı SDK var</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/aptos-labs/aptos-dotnet-sdk">github</a></td></tr>
+              <tr><td><strong>Sui Move</strong></td><td>Global storage yok, depolama nesne merkezli; tüm girdiler işlemde baştan belirtilir, bu sayede paralel çalışır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.sui.io/concepts/sui-move-concepts">Move concepts</a></td></tr>
+              <tr><td><strong>object model</strong> (UID; owned / shared / immutable / wrapped)</td><td>Her nesnenin benzersiz ID'si ve sahiplik türü var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.sui.io/concepts/object-model">object-model</a></td></tr>
+              <tr><td><strong>PTB</strong> (Programmable Transaction Block)</td><td>Tek işlemde birden çok Move çağrısını zincirleme; <code>entry</code> fonksiyonları buradan çağrılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.sui.io/concepts/sui-move-concepts">Move concepts</a></td></tr>
+              <tr><td><strong>zkLogin</strong></td><td>OAuth girişinden Sui adresi türetme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.sui.io/sui-stack/zklogin-integration/zklogin">zklogin</a></td></tr>
+              <tr><td><strong>Sui CLI</strong></td><td><code>sui client</code>, <code>sui move build/test</code>, publish</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.sui.io/references/cli">references/cli</a></td></tr>
+              <tr><td><strong>@mysten/sui</strong></td><td>Sui TypeScript SDK'sı: sorgu, işlem kurma ve imzalama</td><td><span class="tag">ORTA</span></td><td><a href="https://sdk.mystenlabs.com/typescript">sdk.mystenlabs.com</a></td></tr>
+              <tr><td><strong>Sui faucet</strong></td><td>devnet/testnet için ücretsiz; web, cURL ve Discord seçenekleri var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.sui.io/guides/developer/getting-started/get-coins">get-coins</a></td></tr>
+              <tr><td><strong>Slush</strong></td><td>Mysten Labs'in Sui cüzdanı. Phantom dokümanı Sui desteğinin 24 Eylül 2026 itibarıyla bırakıldığını ve yeni entegrasyon yapılmamasını söylüyor</td><td><span class="tag">ORTA</span></td><td><a href="https://slush.app/">slush.app</a></td></tr>
+              <tr><td><strong>The Move Book</strong> (Sui)</td><td>Move ve Sui için kapsamlı rehber</td><td><span class="tag">ORTA</span></td><td><a href="https://move-book.com/">move-book.com</a></td></tr>
+              <tr><td><strong>IOTA</strong></td><td>Move tabanlı sözleşmeler kullanan başka bir zincir; niş</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.iota.org/">docs.iota.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="zk-rolluplar-starknet"><span class="h-num">§ 7</span>ZK rollup'lar: Starknet, ZKsync, Linea ve diğerleri</h2>
+        <p>İki ayrı dünya var: <strong>Solidity uyumlu</strong> ZK rollup'lar (ZKsync Era, Linea, Taiko) bedava gelir; <strong>Starknet</strong> ise yeni bir dil (Cairo) ister. Rollup kavramı: <a href="../01-temeller/index.html">01 Temeller</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>7a · Starknet ve Cairo</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>zk-rollup</strong></td><td>İşlemleri toplayıp validity proof ile Ethereum'a yazar; optimistic'teki itiraz süresi yoktur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/zk-rollups/">ethereum.org</a></td></tr>
+              <tr><td><strong>Starknet</strong></td><td>Cairo tabanlı ZK rollup; EVM değildir, Solidity çalışmaz</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.starknet.io/">docs.starknet.io</a></td></tr>
+              <tr><td><strong>Cairo</strong></td><td>Kanıtlanabilir program dili; Rust'a benzer, ownership kavramı var. Kitap Cairo 2.16.1'e göre yazılmış</td><td><span class="tag">ORTA</span></td><td><a href="https://www.starknet.io/cairo-book/">Cairo Book</a></td></tr>
+              <tr><td><strong>Scarb</strong></td><td>Cairo derleyicisi ve paket yöneticisi (Cargo karşılığı)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.swmansion.com/scarb/">scarb</a></td></tr>
+              <tr><td><strong>Starknet Foundry</strong> (snforge, sncast)</td><td>snforge test yapar, sncast deploy eder ve sözleşmeyle etkileşir</td><td><span class="tag">ORTA</span></td><td><a href="https://foundry-rs.github.io/starknet-foundry/">Foundry Book</a></td></tr>
+              <tr><td><strong>starknet-devnet</strong></td><td>Önceden fonlanmış hesaplarla yerel ağ</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.starknet.io/build/quickstart/devnet">quickstart/devnet</a></td></tr>
+              <tr><td><strong>Starknet Sepolia</strong></td><td>sncast ile hesap aç, faucet'ten fonla, deploy et</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.starknet.io/build/quickstart/sepolia">quickstart/sepolia</a></td></tr>
+              <tr><td><strong>native account abstraction</strong></td><td>Starknet'te her hesap bir sözleşmedir (<a href="../06-altyapi-araclar-guvenlik/index.html#hesap-soyutlama-ve-ux">06 · hesap soyutlama</a>)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.starknet.io/build/starknet-by-example/advanced/account-abstraction">account-abstraction</a></td></tr>
+              <tr><td><strong>starknet.js</strong></td><td>Starknet JavaScript kütüphanesi</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/starknet-io/starknet.js">github</a></td></tr>
+              <tr><td><strong>OpenZeppelin Contracts for Cairo</strong></td><td>Denetlenmiş Cairo bileşenleri ve hazır şablonlar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.openzeppelin.com/contracts-cairo">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Ready</strong> (eski Argent) · <strong>Braavos</strong></td><td>Starknet cüzdanları; Braavos Bitcoin'i de destekler</td><td><span class="tag">ORTA</span></td><td><a href="https://www.ready.co/">ready.co</a> · <a href="https://braavos.app/">braavos.app</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>7b · Solidity uyumlu zkEVM'ler ve nişler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>zkEVM</strong></td><td>EVM'i ZK kanıtıyla çalıştırma; uyumluluk derecesi projeye göre değişir</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/developers/docs/scaling/zk-rollups/">ethereum.org</a></td></tr>
+              <tr><td><strong>ZKsync Era</strong></td><td>ZK rollup; EVM Bytecode Interpreter sayesinde standart Ethereum araçları doğrudan çalışır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.zksync.io/">docs.zksync.io</a></td></tr>
+              <tr><td><strong>foundry-zksync / zksolc</strong></td><td>Interpreter öncesinin EraVM'e özel araçları; dokümanda "legacy" diye geçiyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.zksync.io/zksync-network/tooling/foundry/overview">custom tooling</a></td></tr>
+              <tr><td><strong>ZK Stack</strong> / Prividium</td><td>Kendi ZK zincirini kurma; Prividium izinli, gizli ZK rollup (kurumsal)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.zksync.io/">docs.zksync.io</a></td></tr>
+              <tr><td><strong>Linea</strong></td><td>zkEVM rollup; testnet Linea Sepolia (chain ID 59141)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.linea.build/">docs.linea.build</a></td></tr>
+              <tr><td><strong>Scroll</strong></td><td>EVM-eşdeğer zkEVM. <strong>Scroll Sepolia 30 Temmuz 2026'dan sonra kapatıldı</strong>; eğitimlerdeki Scroll Sepolia adımları artık çalışmaz</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.scroll.io/en/developers/">developers FAQ</a></td></tr>
+              <tr><td><strong>Polygon zkEVM</strong></td><td>Güncel Polygon dokümanında yok; odak Polygon Chain, CDK ve Agglayer'a kaydı. Yeni projede seçme</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.polygon.technology/">docs.polygon.technology</a></td></tr>
+              <tr><td><strong>Taiko</strong></td><td>"Based rollup": blokları Ethereum L1 doğrulayıcıları sıralar, merkezî sequencer yok; type-1 zkEVM</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.taiko.xyz/">docs.taiko.xyz</a></td></tr>
+              <tr><td><strong>Mantle</strong></td><td>EVM uyumlu ZK validity rollup; OP Stack tabanlı değil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.mantle.xyz/">docs.mantle.xyz</a></td></tr>
+              <tr><td><strong>Aztec</strong></td><td>Gizlilik odaklı ZK L2; özel fonksiyonlar kullanıcının cihazında çalışır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.aztec.network/">docs.aztec.network</a></td></tr>
+              <tr><td><strong>Noir</strong></td><td>ZK programı yazma dili, Rust'a benzer; CLI aracı Nargo</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://noir-lang.org/docs/">noir-lang.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="optimistic-l2"><span class="h-num">§ 8</span>Optimistic L2'ler: Arbitrum, OP Stack, Base</h2>
+        <p class="intro">Ethereum dışına en kolay giriş burası: Solidity sözleşmen ve Foundry/Hardhat komutların aynen çalışır, değişen RPC URL ve chain ID olur. "Solidity, Smart Contract" deneyimini en ucuza genişleten adım budur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8a · Ortak kavramlar ve Ethereum'dan farklar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>optimistic rollup</strong></td><td>İşlemleri geçerli sayar, itiraz penceresinde fraud/fault proof ile denetler; L1'e çekim bu yüzden gecikir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/developers/docs/scaling/optimistic-rollups/">ethereum.org</a></td></tr>
+              <tr><td><strong>L2'ye Solidity deploy</strong></td><td>Aynı sözleşme ve aynı araçlar; Base dokümanı "her Ethereum aracı değişmeden çalışır" diyor</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.base.org/get-started/connect-to-base">docs.base.org</a></td></tr>
+              <tr><td><strong>sequencer</strong></td><td>İşlemleri sıralayan düğüm; public mempool yok</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.optimism.io/op-stack/protocol/differences">differences</a></td></tr>
+              <tr><td><strong>L1 data fee</strong></td><td>Execution gas'a ek olarak veriyi Ethereum'a yazmanın ücreti</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.optimism.io/op-stack/protocol/differences">differences</a></td></tr>
+              <tr><td><strong>address aliasing</strong></td><td>L1 sözleşmesinden L2'ye gelen mesajda gönderen adres kaydırılır; <code>msg.sender</code> kontrolünde tuzak</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.optimism.io/op-stack/protocol/differences">differences</a></td></tr>
+              <tr><td><strong>unsafe / safe / finalized</strong></td><td>L2 blok kesinlik seviyeleri</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.optimism.io/op-stack/protocol/differences">differences</a></td></tr>
+              <tr><td><strong>L2BEAT</strong></td><td>L2'leri risk, stage ve TVS ile karşılaştırır; zincir seçmeden önce bak</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://l2beat.com/scaling/summary">l2beat.com</a></td></tr>
+              <tr><td><strong>Stages</strong> (0 / 1 / 2)</td><td>Rollup olgunluk ölçüsü (Security Council yetkisi, çıkış penceresi); güvenlik puanı değil</td><td><span class="tag">ORTA</span></td><td><a href="https://l2beat.com/stages">l2beat.com/stages</a></td></tr>
+              <tr><td><strong>ethereum.org L2 listesi</strong></td><td>Resmî L2 ağları listesi ve olgunluk etiketleri</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/layer-2/networks/">layer-2/networks</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8b · Zincirler, testnet'ler, faucet'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Arbitrum One</strong></td><td>Arbitrum Rollup protokolünü kullanan optimistic rollup</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.arbitrum.io/build-decentralized-apps/public-chains">public-chains</a></td></tr>
+              <tr><td><strong>Arbitrum Nova</strong> (AnyTrust)</td><td>Veriyi bir komiteye emanet eden, daha ucuz ve "çoğunlukla trustless" zincir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.arbitrum.io/build-decentralized-apps/public-chains">public-chains</a></td></tr>
+              <tr><td><strong>Arbitrum Sepolia</strong></td><td>Arbitrum'un test ağı; Stylus da burada kullanılabilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.arbitrum.io/">docs.arbitrum.io</a></td></tr>
+              <tr><td><strong>Nitro</strong> / nitro-devnode</td><td>Arbitrum yazılım yığını; nitro-devnode fonlanmış cüzdanlı yerel ağ</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.arbitrum.io/stylus/quickstart">stylus/quickstart</a></td></tr>
+              <tr><td><strong>BoLD</strong></td><td>Herkesin durum doğrulamasına katılabildiği izinsiz itiraz protokolü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.arbitrum.io/how-arbitrum-works/bold/gentle-introduction">gentle-introduction</a></td></tr>
+              <tr><td><strong>Stylus</strong></td><td>Arbitrum'da Rust/C/C++ ile Wasm sözleşme yazılır, Solidity sözleşmeleriyle birlikte çalışır; <code>cargo stylus</code></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.arbitrum.io/stylus/gentle-introduction">stylus</a></td></tr>
+              <tr><td><strong>Arbitrum chains</strong> (Orbit)</td><td>Arbitrum teknolojisiyle kendi L2/L3 zincirini kurma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.arbitrum.io/">docs.arbitrum.io</a></td></tr>
+              <tr><td><strong>OP Stack</strong></td><td>Optimism'in açık kaynak rollup yığını; Base, Celo ve opBNB bunu kullanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.optimism.io/">docs.optimism.io</a></td></tr>
+              <tr><td><strong>OP Mainnet / OP Sepolia</strong></td><td>Optimism'in ana ağı ve test ağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.optimism.io/">docs.optimism.io</a></td></tr>
+              <tr><td><strong>Superchain</strong> / Superchain Registry / interop</td><td>OP Stack zincirlerinin ortak ağı, kayıt listesi ve zincirler arası birlikte çalışma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.optimism.io/">docs.optimism.io</a></td></tr>
+              <tr><td><strong>fault proofs</strong></td><td>OP Stack'in itiraz mekanizması (Arbitrum'daki karşılığı BoLD)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.optimism.io/">docs.optimism.io</a></td></tr>
+              <tr><td><strong>Superchain Faucet</strong></td><td>OP dokümanının ana faucet'i; OP Stack testnet'leri için ücretsiz test ETH. Dokümanda ETHGlobal, QuickNode, thirdweb gibi alternatifler de listeli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.optimism.io/app-developers/tools-sdks/faucets">faucets</a></td></tr>
+              <tr><td><strong>Base</strong></td><td>Coinbase'in OP Stack L2'si; standart bir EVM zinciri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.base.org/">docs.base.org</a></td></tr>
+              <tr><td><strong>Base Sepolia</strong></td><td>chain ID 84532, RPC <code>https://sepolia.base.org</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.base.org/get-started/connect-to-base">connect-to-base</a></td></tr>
+              <tr><td><strong>Base faucets</strong></td><td>Ücretsiz test ETH/USDC; test USDC için Circle faucet</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.base.org/base-chain/network-information/network-faucets">network-faucets</a></td></tr>
+              <tr><td><strong>Celo</strong></td><td>OP Stack tabanlı Ethereum L2'ye dönüştü; testnet Celo Sepolia (chain ID 11142220), Alfajores artık dokümanda yok</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.celo.org/">docs.celo.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="evm-uyumlu-l1"><span class="h-num">§ 9</span>EVM uyumlu diğer L1'ler</h2>
+        <p>Aynı Solidity ve Nethereum bilgisiyle çalışırsın. Değişen şeyler gas token, chain ID, blok süresi ve faucet koşulları. Chain ID ve RPC listesi için <a href="https://chainlist.org/">chainlist.org</a> kullan.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>9 · BNB Chain, Avalanche, Polygon ve yeni EVM L1'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>chain ID</strong></td><td>İmzada hangi ağ olduğunu belirler; yanlış chain ID yanlış ağa gitmek demek</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://chainlist.org/">chainlist.org</a></td></tr>
+              <tr><td><strong>BNB Smart Chain</strong> (BSC)</td><td>BNB Chain'in EVM uyumlu ana zinciri</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.bnbchain.org/">docs.bnbchain.org</a></td></tr>
+              <tr><td><strong>BSC Testnet faucet</strong></td><td>24 saatte bir 0,3 test BNB; ama BSC mainnet'te 0,002 BNB bakiye şartı var. Bakiyen yoksa sıfır bütçeyle kullanılamaz; varsa harcanmaz ama gerçek varlıklı cüzdanı geliştirmeye bağlamak gerekir (§ 15a notu)</td><td><span class="tag tag--warn">ÜCRETLİ</span> şartlı: mainnet bakiyesi</td><td><a href="https://www.bnbchain.org/en/testnet-faucet">testnet-faucet</a></td></tr>
+              <tr><td><strong>opBNB</strong> · <strong>BNB Greenfield</strong></td><td>BSC üzerinde OP Stack L2; merkeziyetsiz depolama zinciri</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.bnbchain.org/bnb-opbnb/">opBNB</a></td></tr>
+              <tr><td><strong>Avalanche C-Chain</strong></td><td>Avalanche'ın EVM zinciri; mainnet chain ID 43114</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://build.avax.network/docs">build.avax.network</a></td></tr>
+              <tr><td><strong>Fuji</strong> testnet</td><td>chain ID 43113, RPC <code>api.avax-test.network/ext/bc/C/rpc</code>; faucet Builder Console'da (şartları sayfada kontrol et)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://build.avax.network/docs">primary network</a></td></tr>
+              <tr><td><strong>Snowman consensus</strong></td><td>Tekrarlı alt örneklemeli oylama; saniyenin altında kesinlik</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://build.avax.network/docs/primary-network/avalanche-consensus">consensus</a></td></tr>
+              <tr><td><strong>Avalanche L1</strong> (eski adı subnet)</td><td>Kendi validator seti ve gas tokenı olan egemen ağ; Avalanche CLI ve L1 Toolbox ile kurulur</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://build.avax.network/docs/avalanche-l1s">avalanche-l1s</a></td></tr>
+              <tr><td><strong>Core</strong></td><td>Avalanche cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://core.app/">core.app</a></td></tr>
+              <tr><td><strong>Polygon Chain</strong> (eski Polygon PoS)</td><td>Konsensüs Heimdall (CometBFT tabanlı), yürütme Bor (Geth tabanlı); token POL</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.polygon.technology/pos/overview">pos/overview</a></td></tr>
+              <tr><td><strong>Amoy</strong> testnet</td><td>Polygon'un güncel test ağı; Mumbai'yi eğitimlerde görürsen eski</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.polygon.technology/">docs.polygon.technology</a></td></tr>
+              <tr><td><strong>Agglayer</strong> · <strong>Polygon CDK</strong></td><td>Farklı zincirler arası köprü katmanı; kendi L2'ni kurma kiti</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.polygon.technology/">docs.polygon.technology</a></td></tr>
+              <tr><td><strong>Monad</strong></td><td>Paralel yürütmeli EVM L1, konsensüsü MonadBFT; mainnet 24 Kasım 2025'te açıldı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.monad.xyz/">docs.monad.xyz</a></td></tr>
+              <tr><td><strong>Sei</strong></td><td>Paralel EVM, CosmWasm ile çapraz VM iletişimi; testnet atlantic-2 (chain ID 1328)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.sei.io/">docs.sei.io</a></td></tr>
+              <tr><td><strong>HyperEVM</strong></td><td>Hyperliquid L1 üzerindeki EVM; konsensüsü HyperBFT</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hyperliquid.gitbook.io/hyperliquid-docs">hyperliquid docs</a></td></tr>
+              <tr><td><strong>Gnosis Chain</strong></td><td>Topluluk odaklı EVM zinciri</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.gnosischain.com/">docs.gnosischain.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-l1-ton-cardano-algorand-near"><span class="h-num">§ 10</span>Diğer L1'ler (1): TON, Cardano, Algorand, NEAR</h2>
+        <p>Hepsi yeni bir zincir modeli ister; dil ise bildiğin dile göre tanıdık olabilir. Giriş eşiği:</p>
+        <ul>
+          <li><strong>Python biliyorsan</strong> &rarr; Algorand Python (PuyaPy), Cardano OpShin ve Tezos SmartPy (§ 11) düşük eşiklidir.</li>
+          <li><strong>JS/TS biliyorsan</strong> &rarr; Algorand TypeScript ve NEAR'ın JavaScript SDK'sı (near-sdk-js; bakım durumu <span class="tag tag--warn">TEYİT</span>).</li>
+          <li><strong>Rust biliyorsan</strong> &rarr; NEAR near-sdk-rs; ayrıca Stellar Soroban (§ 11).</li>
+          <li><strong>Haskell / fonksiyonel geçmişin varsa</strong> &rarr; Cardano Aiken ya da Plinth (eski adı Plutus Tx).</li>
+          <li><strong>Diğer durumlarda</strong> &rarr; başka bir şey için değil, yalnızca bir ilan ya da somut proje isterse bak.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10a · TON</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Tolk</strong></td><td>TON'un resmî sözleşme dili; FunC'den evrildi, önerilen dil bu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ton.org/tolk/overview">tolk/overview</a></td></tr>
+              <tr><td><strong>FunC</strong> · <strong>Fift</strong></td><td>Eski C benzeri dil ve düşük seviyeli dil; eski kodda görürsün</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.ton.org/">docs.ton.org</a></td></tr>
+              <tr><td><strong>Tact</strong></td><td>TypeScript benzeri dil; repo "Tact kullanımdan kalktı, Tolk öğrenin" diyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/tact-lang/tact">github</a></td></tr>
+              <tr><td><strong>TVM</strong></td><td>TON Virtual Machine; exit code, gas, instruction referansı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ton.org/">docs.ton.org</a></td></tr>
+              <tr><td><strong>Jetton</strong></td><td>TON'un fungible token standardı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ton.org/">docs.ton.org</a></td></tr>
+              <tr><td><strong>Acton</strong></td><td>Rust ile yazılmış hepsi bir arada TON toolkit'i: iskelet, derleme, test, deploy</td><td><span class="tag">ORTA</span></td><td><a href="https://ton-blockchain.github.io/acton/docs/welcome">acton</a></td></tr>
+              <tr><td><strong>Blueprint</strong></td><td>Eski geliştirme ortamı; repo Acton'a geçmeyi öneriyor</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/ton-org/blueprint">github</a></td></tr>
+              <tr><td><strong>TON Connect</strong></td><td>dApp ile cüzdan arasındaki uçtan uca şifreli bağlantı protokolü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.ton.org/applications/ton-connect/overview">ton-connect</a></td></tr>
+              <tr><td><strong>testnet coins</strong></td><td>Telegram'da @testgiver_ton_bot saatte 2 test coin veriyor (Toncoin'in yeni adı Gram)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ton.org/onboarding/wallet-apps/get-coins">get-coins</a></td></tr>
+              <tr><td><strong>Tonkeeper</strong></td><td>Kendi anahtarını tuttuğun TON cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://tonkeeper.com/">tonkeeper.com</a></td></tr>
+              <tr><td><strong>TonSdk.NET</strong></td><td>TON için .NET SDK: Core, Client, Contracts, Connect</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/continuation-team/TonSdk.NET">github</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10b · Cardano</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>eUTXO</strong></td><td>Bitcoin'in UTXO modelinin sözleşme ve çoklu varlık destekleyen genişletilmiş hâli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cardano.org/about-cardano/learn/eutxo-explainer">eutxo</a></td></tr>
+              <tr><td><strong>Ouroboros</strong></td><td>Hakemli araştırmaya dayanan PoS konsensüs ailesi</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cardano.org/about-cardano/learn/ouroboros-overview">ouroboros</a></td></tr>
+              <tr><td><strong>Aiken</strong></td><td>Modern, fonksiyonel sözleşme dili; UPLC'ye derlenir; tarayıcı playground'u var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://aiken-lang.org/">aiken-lang.org</a></td></tr>
+              <tr><td><strong>Plinth</strong> (eski adı Plutus Tx)</td><td>Haskell alt kümesiyle sözleşme; Plutus Core çalışma zemini</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://plutus.cardano.intersectmbo.org/docs/">plutus docs</a></td></tr>
+              <tr><td><strong>OpShin</strong></td><td>Geçerli Python ile Cardano sözleşmesi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/OpShin/opshin">github</a></td></tr>
+              <tr><td><strong>Mesh</strong></td><td>TypeScript SDK: işlem kurucu, cüzdan bağlayıcı, React bileşenleri</td><td><span class="tag">ORTA</span></td><td><a href="https://meshjs.dev/">meshjs.dev</a></td></tr>
+              <tr><td><strong>Blockfrost</strong></td><td>Barındırılan Cardano API'si; plan ve limitleri sitesinden kontrol et</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://blockfrost.io/">blockfrost.io</a></td></tr>
+              <tr><td><strong>Hydra</strong></td><td>Katılımcılar arasında zincir dışı "head" açan L2</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hydra.family/head-protocol/">hydra.family</a></td></tr>
+              <tr><td><strong>preprod / preview</strong> + faucet</td><td>Test ağları; web tabanlı faucet test ada verir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.cardano.org/cardano-testnets/tools/faucet">faucet</a></td></tr>
+              <tr><td><strong>Lace</strong></td><td>Input Output'un cüzdanı (Cardano ve Bitcoin)</td><td><span class="tag">ORTA</span></td><td><a href="https://www.lace.io/">lace.io</a></td></tr>
+              <tr><td><strong>Chrysalis</strong> · <strong>CardanoSharp</strong></td><td>.NET kütüphaneleri: CBOR, işlem kurma, cüzdan; Chrysalis ön sürüm (prerelease)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/SAIB-Inc/Chrysalis">Chrysalis</a> · <a href="https://github.com/CardanoSharp/cardanosharp-wallet">CardanoSharp</a></td></tr>
+              <tr><td><strong>Cardano Developer Portal</strong></td><td>SDK'lar, şablonlar, sözleşme kütüphanesi</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.cardano.org/">developers.cardano.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10c · Algorand</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>AVM</strong></td><td>Algorand Virtual Machine; sözleşmeler burada çalışır</td><td><span class="tag">ORTA</span></td><td><a href="https://dev.algorand.co/">dev.algorand.co</a></td></tr>
+              <tr><td><strong>Algorand Python</strong> (PuyaPy)</td><td>AVM'de çalışan, statik tipli Python alt kümesi ve optimize eden derleyici</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/algorandfoundation/puya">puya</a></td></tr>
+              <tr><td><strong>Algorand TypeScript</strong> · TEALScript</td><td>TypeScript ile sözleşme; AlgoKit'te seçenek olarak geliyor</td><td><span class="tag">ORTA</span></td><td><a href="https://dev.algorand.co/">dev.algorand.co</a></td></tr>
+              <tr><td><strong>AlgoKit CLI</strong> / LocalNet</td><td>Proje şablonları ve yerel Algorand ağı; ücretsiz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/algorandfoundation/algokit-cli">algokit-cli</a></td></tr>
+              <tr><td><strong>PyTeal</strong></td><td>Eski Python bağlaması; repoda kaldırma notu yok ama AlgoKit şablonlarında yer almıyor</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/algorand/pyteal">github</a></td></tr>
+              <tr><td><strong>Pera Wallet</strong></td><td>Algorand cüzdanı; dApp'lere WalletConnect ile bağlanır</td><td><span class="tag">ORTA</span></td><td><a href="https://perawallet.app/">perawallet.app</a></td></tr>
+              <tr><td><strong>dotnet-algorand-sdk</strong> (Algorand2)</td><td>.NET SDK; NuGet paketi Algorand2, ayrıca Unity sürümü var</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/FrankSzendzielarz/dotnet-algorand-sdk">github</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>10d · NEAR</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>near-sdk-rs</strong></td><td>Rust SDK; <code>#[near]</code> ile struct'ı sözleşmeye çevirir, Wasm'a derlenir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/near/near-sdk-rs">github</a> · <a href="https://docs.near.org/smart-contracts/quickstart">quickstart</a></td></tr>
+              <tr><td><strong>near-sdk-js</strong></td><td>JavaScript/TypeScript ile NEAR sözleşmesi</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/near/near-sdk-js">github</a></td></tr>
+              <tr><td><strong>cargo-near</strong> · NEAR CLI</td><td>Derleme ve deploy; <code>near create-account &lt;ad&gt;.testnet --useFaucet</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.near.org/smart-contracts/quickstart">quickstart</a></td></tr>
+              <tr><td><strong>named accounts</strong></td><td>Hesaplar hex adres yerine <code>ad.testnet</code> gibi okunabilir isimlerle açılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.near.org/">docs.near.org</a></td></tr>
+              <tr><td><strong>Chain Signatures</strong></td><td>NEAR hesabından Bitcoin, Ethereum ve Solana hesaplarını yönetme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.near.org/">docs.near.org</a></td></tr>
+              <tr><td><strong>Aurora</strong></td><td>NEAR üzerinde çalışan EVM uyumlu platform; Solidity çalışır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://doc.aurora.dev/">doc.aurora.dev</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-l1-tezos-hedera-xrpl-stellar"><span class="h-num">§ 11</span>Diğer L1'ler (2): Tezos, Hedera, XRP Ledger, Stellar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11a · Tezos</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Michelson</strong></td><td>Tezos'un stack tabanlı, güçlü tipli temel dili; üst diller buna derlenir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.tezos.com/smart-contracts/languages/michelson">michelson</a></td></tr>
+              <tr><td><strong>SmartPy</strong></td><td>Python sözdizimiyle sözleşme; online IDE ve test</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://smartpy.tezos.com/">smartpy.tezos.com</a></td></tr>
+              <tr><td><strong>LIGO</strong> (JsLIGO, CameLIGO)</td><td>TypeScript benzeri ya da OCaml benzeri sözdizimi; ikisi de aynı bytecode'a derlenir</td><td><span class="tag">ORTA</span></td><td><a href="https://ligo.tezos.com/">ligo.tezos.com</a></td></tr>
+              <tr><td><strong>Taquito</strong></td><td>Tezos TypeScript kütüphanesi</td><td><span class="tag">ORTA</span></td><td><a href="https://taquito.io/">taquito.io</a></td></tr>
+              <tr><td><strong>Netezos</strong></td><td>Tezos için .NET SDK (Baking Bad)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://netezos.dev/">netezos.dev</a></td></tr>
+              <tr><td><strong>Etherlink</strong></td><td>Tezos Smart Rollup üzerinde EVM uyumlu yürütme katmanı; Solidity çalışır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.etherlink.com/">docs.etherlink.com</a></td></tr>
+              <tr><td><strong>Shadownet</strong></td><td>Uygulama geliştirme için kalıcı test ağı; faucet teztnets'te</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://teztnets.com/">teztnets.com</a> · <a href="https://docs.tezos.com/developing/testnets">testnets</a></td></tr>
+              <tr><td><strong>Ghostnet</strong></td><td>Kaldırıldı; hâlâ Ghostnet'e bağlanan kod Shadownet'e taşınmalı</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.tezos.com/developing/testnets">testnets</a></td></tr>
+              <tr><td><strong>Temple</strong></td><td>Tezos ve Etherlink cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://templewallet.com/">templewallet.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11b · Hedera</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>hashgraph consensus</strong></td><td>Gossip + virtual voting ile aBFT. Hedera kendini "blockchain" değil DLT olarak tanımlar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.hedera.com/hedera/core-concepts/hashgraph-consensus-algorithms">hashgraph</a></td></tr>
+              <tr><td><strong>Smart Contracts</strong> (EVM)</td><td>Solidity sözleşmeleri; sistem sözleşmeleri üzerinden Hedera servislerine erişir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.hedera.com/">docs.hedera.com</a></td></tr>
+              <tr><td><strong>Token Service</strong> (HTS)</td><td>Sözleşme yazmadan yerel fungible/NFT token yönetimi</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.hedera.com/">docs.hedera.com</a></td></tr>
+              <tr><td><strong>Hiero</strong></td><td>Hedera'nın açık kaynak kod tabanı (LF Decentralized Trust); SDK paketleri <code>@hiero-ledger</code> adına taşınıyor</td><td><span class="tag">ORTA</span></td><td><a href="https://hiero.org/">hiero.org</a></td></tr>
+              <tr><td><strong>SDKs</strong></td><td>Resmî: JS, Java, Go, Swift, Rust, C++; Python topluluk. <strong>Resmî .NET SDK listede yok</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.hedera.com/hedera/sdks-and-apis/sdks">sdks</a></td></tr>
+              <tr><td><strong>Hedera Portal</strong></td><td>Testnet hesabı ve test HBAR alma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://portal.hedera.com/">portal.hedera.com</a></td></tr>
+              <tr><td><strong>HashPack</strong></td><td>Hedera cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.hashpack.app/">hashpack.app</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11c · XRP Ledger</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>XRPL consensus</strong> / UNL</td><td>PoW ya da PoS değil; her sunucu güvendiği validator listesini (UNL) seçer</td><td><span class="tag">ORTA</span></td><td><a href="https://xrpl.org/docs/concepts/consensus-protocol">consensus</a></td></tr>
+              <tr><td><strong>amendments</strong></td><td>Protokol değişikliklerinin validator oylamasıyla etkinleşmesi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://xrpl.org/docs">xrpl.org/docs</a></td></tr>
+              <tr><td><strong>xrpl.js</strong> / xrpl-py</td><td>Resmî istemci kütüphaneleri (JS, Python, Java, Go, PHP)</td><td><span class="tag">ORTA</span></td><td><a href="https://xrpl.org/docs">xrpl.org/docs</a></td></tr>
+              <tr><td><strong>XrplCSharp</strong></td><td>Saf C# XRPL kütüphanesi; .NET 6+ destekler, NuGet'te</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/Transia-RnD/XrplCSharp">github</a></td></tr>
+              <tr><td><strong>Testnet / Devnet faucets</strong></td><td>Ücretsiz test XRP; ağ geçmişi haber verilmeden sıfırlanabilir. WASM Devnet akıllı escrow önizlemesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://xrpl.org/resources/dev-tools/xrp-faucets">xrp-faucets</a></td></tr>
+              <tr><td><strong>Xahau</strong> / Hooks</td><td>XRPL'den türeyen ağ; Hooks C ile yazılıp WebAssembly'ye derlenen L1 sözleşmeleri</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://xahau.network/docs/">xahau.network/docs</a></td></tr>
+              <tr><td><strong>XRPL EVM Sidechain</strong></td><td>Cosmos SDK tabanlı, XRP'yi gas olarak kullanan EVM L1; Solidity çalışır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.xrplevm.org/">docs.xrplevm.org</a></td></tr>
+              <tr><td><strong>Xaman</strong> (eski Xumm)</td><td>XRPL ve Xahau mobil cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://xaman.app/">xaman.app</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>11d · Stellar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SCP</strong> (Stellar Consensus Protocol)</td><td>Federated Byzantine Agreement: hesaplama gücü ya da stake yerine güven ilişkileri</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.stellar.org/docs/learn/fundamentals/stellar-consensus-protocol">SCP</a></td></tr>
+              <tr><td><strong>Soroban</strong></td><td>Stellar'a entegre sözleşme platformu (yeni bir zincir değil); Rust &rarr; Wasm</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developers.stellar.org/docs/build/smart-contracts/overview">smart-contracts</a></td></tr>
+              <tr><td><strong>Stellar asset vs contract token</strong></td><td>Doküman, uyumluluk için tokenı Soroban sözleşmesi yerine Stellar asset olarak çıkarmayı öneriyor</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.stellar.org/docs/build/smart-contracts/overview">smart-contracts</a></td></tr>
+              <tr><td><strong>Testnet / Futurenet</strong> + Friendbot</td><td>Friendbot istek başına 10.000 test XLM verir; Testnet yılda 2-4 kez sıfırlanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developers.stellar.org/docs/networks">networks</a></td></tr>
+              <tr><td><strong>Horizon</strong> / Stellar RPC</td><td>Stellar'ın API katmanları</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.stellar.org/docs">developers.stellar.org</a></td></tr>
+              <tr><td><strong>Stellar Lab</strong></td><td>Tarayıcıda işlem kurma, imzalama, gönderme</td><td><span class="tag">ORTA</span></td><td><a href="https://lab.stellar.org/">lab.stellar.org</a></td></tr>
+              <tr><td><strong>dotnet-stellar-sdk</strong></td><td>Topluluğun sürdürdüğü C# SDK'sı; Horizon ve Stellar RPC'ye bağlanır</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.stellar.org/docs/tools/sdks/client-sdks">client-sdks</a> · <a href="https://github.com/Beans-BV/dotnet-stellar-sdk">github</a></td></tr>
+              <tr><td><strong>Freighter</strong></td><td>SDF'nin açık kaynak Stellar cüzdanı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.freighter.app/">freighter.app</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kurumsal"><span class="h-num">§ 12</span>Kurumsal ve izinli platformlar</h2>
+        <p>İlanlarda "blockchain developer" başlığı altında bazen Solidity yerine Fabric (Go/Java), Corda (Kotlin) ya da özel ağda Besu istenir. İlan metninde hangisinin geçtiğine bak. .NET tarafıyla kesişim için: <a href="../04-dotnet/index.html#kurumsal-izinli-blockchain">04 · kurumsal/izinli blockchain</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>12 · Fabric, Corda, Besu ve diğerleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LF Decentralized Trust</strong></td><td>Hyperledger Foundation'ın yeni adı; Fabric, Besu, Cacti, Web3j, FireFly bu çatı altında</td><td><span class="tag">ORTA</span></td><td><a href="https://www.lfdecentralizedtrust.org/">lfdecentralizedtrust.org</a></td></tr>
+              <tr><td><strong>Hyperledger Fabric</strong></td><td>Kurumsal, izinli (permissioned) dağıtık defter</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hyperledger-fabric.readthedocs.io/en/latest/">fabric docs</a></td></tr>
+              <tr><td><strong>chaincode</strong> / Contract API</td><td>Fabric'te akıllı sözleşme; Go, Node.js ya da Java ile yazılır (<a href="../../Go/index.html">Go</a>)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hyperledger-fabric.readthedocs.io/en/latest/chaincode4ade.html">chaincode4ade</a></td></tr>
+              <tr><td><strong>Fabric Gateway</strong></td><td>İstemci API'si (Go, Node, Java)</td><td><span class="tag">ORTA</span></td><td><a href="https://hyperledger.github.io/fabric-gateway/">fabric-gateway</a></td></tr>
+              <tr><td><strong>test-network</strong> / Raft / BFT</td><td>Docker Compose ile yerel ağ; varsayılan Raft, v3.0 ile BFT ordering eklendi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://hyperledger-fabric.readthedocs.io/en/latest/test_network.html">test_network</a></td></tr>
+              <tr><td><strong>fabric-samples</strong> (asset-transfer-basic)</td><td>Resmî örnekler; yeni başlayanlar için önerilen örnek bu</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/hyperledger/fabric-samples">github</a></td></tr>
+              <tr><td><strong>Corda</strong> / CorDapp</td><td>Gizliliği ön planda tutan iş odaklı JVM platformu; Kotlin, notary, flow</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/corda/corda">Corda 4</a> · <a href="https://github.com/corda/corda-runtime-os">Corda 5</a></td></tr>
+              <tr><td><strong>Besu</strong></td><td>Java ile yazılmış Ethereum istemcisi; public ağlar ve kurumsal özel ağlar</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.besu-eth.org/">docs.besu-eth.org</a></td></tr>
+              <tr><td><strong>Web3j</strong></td><td>Java/Android Ethereum kütüphanesi; Nethereum'un JVM karşılığı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.web3j.io/latest/">docs.web3j.io</a></td></tr>
+              <tr><td><strong>GoQuorum</strong></td><td>Eski kurumsal Ethereum istemcisi; eski ilanlarda görürsün. docs.goquorum.consensys.io 13 Eylül 2026'da açılmıyordu</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>docs.goquorum.consensys.io</td></tr>
+              <tr><td><strong>Daml</strong> / Canton</td><td>Çok taraflı iş akışı sözleşme dili ve Digital Asset'in ağı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.daml.com/">docs.daml.com</a> · <a href="https://docs.digitalasset.com/">digitalasset</a></td></tr>
+              <tr><td><strong>Hyperledger Cacti</strong></td><td>Farklı defterler arası birlikte çalışma altyapısı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.lfdecentralizedtrust.org/">lfdecentralizedtrust.org</a></td></tr>
+              <tr><td><strong>Amazon Managed Blockchain</strong></td><td>Yönetilen servis: Fabric ile Ethereum, Polygon ve Bitcoin erişimi</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://aws.amazon.com/managed-blockchain/">aws.amazon.com</a></td></tr>
+              <tr><td><strong>Kaleido</strong></td><td>Kurumsal blockchain-as-a-service; doküman giriş istiyor</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>kaleido.io</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="zincirler-arasi"><span class="h-num">§ 13</span>Zincirler arası köprüler ve çok zincirli araçlar</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Köprüler tarihin en büyük hack'lerinin hedefi oldu: rekt.news listesinde Ronin 624 milyon $ (Mart 2022), Wormhole 326 milyon $ (Şubat 2022), Nomad 190 milyon $ (Ağustos 2022). Öğrenme projesinde köprüyü sadece testnet'te dene; kendi köprünü yazma. Güvenlik araçları: <a href="../06-altyapi-araclar-guvenlik/index.html#guvenlik-araclari">06 · güvenlik araçları</a>.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>13 · Köprü, mesajlaşma, çok zincirli cüzdan ve gezgin</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>bridge hack</strong></td><td>Köprü sözleşmesi ya da doğrulayıcı anahtarlarının ele geçirilmesi; "bridge exploit postmortem" diye ara</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://rekt.news/leaderboard/">rekt.news</a></td></tr>
+              <tr><td><strong>Chainlink CCIP</strong></td><td>Token ve mesaj taşıma protokolü; Solana, Aptos, TON ve Canton'u da destekler, testnet dizini var</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.chain.link/ccip">docs.chain.link/ccip</a></td></tr>
+              <tr><td><strong>Wormhole</strong></td><td>EVM, Solana, Sui, Aptos ve Cosmos arasında mesaj/token altyapısı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://wormhole.com/docs/">wormhole.com/docs</a></td></tr>
+              <tr><td><strong>LayerZero</strong> (OApp, OFT)</td><td>Omnichain mesajlaşma; OFT çok zincirli fungible token</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.layerzero.network/">docs.layerzero.network</a></td></tr>
+              <tr><td><strong>Hyperlane</strong> (Warp Routes)</td><td>İzinsiz birlikte çalışma çerçevesi; token köprüleme ve interchain accounts</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.hyperlane.xyz/">docs.hyperlane.xyz</a></td></tr>
+              <tr><td><strong>IBC · XCM · Agglayer</strong></td><td>Ekosisteme özgü yerel çözümler (§ 4, § 5, § 9)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.cosmos.network/ibc/">ibc</a></td></tr>
+              <tr><td><strong>MetaMask</strong> (Snaps, Connect)</td><td>EVM cüzdanı; MetaMask Connect artık EVM ile Solana'yı birlikte destekliyor. Test cüzdanını gerçek varlık tutan cüzdandan ayır; seed phrase'i hiçbir siteye girme</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.metamask.io/">docs.metamask.io</a></td></tr>
+              <tr><td><strong>Reown AppKit</strong></td><td>Tek SDK ile EVM, Solana ve Bitcoin cüzdan bağlantısı; React dApp tarafı: <a href="../../JavaScript-TypeScript/03-react/index.html">React</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.reown.com/appkit/overview">docs.reown.com</a></td></tr>
+              <tr><td><strong>Blockscout</strong></td><td>1000'den fazla EVM L1/L2'yi destekleyen açık kaynak blok gezgini</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.blockscout.com/">docs.blockscout.com</a></td></tr>
+              <tr><td><strong>Etherscan API V2</strong></td><td>Tek anahtarla 60'tan fazla EVM zinciri (<code>chainid</code> parametresi); ücretli planları var, limitleri Rate Limits sayfasında</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.etherscan.io/">docs.etherscan.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dotnet-kopruleri"><span class="h-num">§ 14</span>C#/.NET köprüleri: hangi zincirde .NET ile kalabilirsin</h2>
+        <p>Blockchain dünyası çoğunlukla JavaScript/Rust/Go ağırlıklı. Aşağıdaki tablo C# ile hangi zincire nereye kadar gidebileceğini gösteriyor. Ayrıntılar: <a href="../04-dotnet/index.html#diger-dotnet-kutuphaneleri">04 · diğer .NET kütüphaneleri</a> · genel .NET: <a href="../../CSharp-DotNet/index.html">DotNet</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>14 · Zincir &rarr; .NET kütüphanesi (13 Eylül 2026 durumu)</caption>
+            <thead><tr><th>Zincir</th><th>Kütüphane</th><th>Durum</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td>Ethereum, tüm L2'ler, EVM L1'ler, Besu</td><td><strong>Nethereum</strong></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/">docs.nethereum.com</a></td></tr>
+              <tr><td>Bitcoin</td><td><strong>NBitcoin</strong> · BTCPay Server (örnek kod)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/MetacoSA/NBitcoin">NBitcoin</a></td></tr>
+              <tr><td>Solana</td><td><strong>Solnet</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bmresearch/Solnet">Solnet</a></td></tr>
+              <tr><td>Polkadot / Substrate</td><td><strong>Substrate.NET.API</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/SubstrateGaming/Substrate.NET.API">github</a></td></tr>
+              <tr><td>Aptos</td><td>Aptos .NET SDK (arşivlendi)</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/aptos-labs/aptos-dotnet-sdk">github</a></td></tr>
+              <tr><td>Tezos</td><td><strong>Netezos</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://netezos.dev/">netezos.dev</a></td></tr>
+              <tr><td>Cardano</td><td><strong>Chrysalis</strong> · <strong>CardanoSharp</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/SAIB-Inc/Chrysalis">Chrysalis</a></td></tr>
+              <tr><td>TON</td><td><strong>TonSdk.NET</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/continuation-team/TonSdk.NET">github</a></td></tr>
+              <tr><td>Algorand</td><td><strong>dotnet-algorand-sdk</strong> (Algorand2)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/FrankSzendzielarz/dotnet-algorand-sdk">github</a></td></tr>
+              <tr><td>XRP Ledger</td><td><strong>XrplCSharp</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Transia-RnD/XrplCSharp">github</a></td></tr>
+              <tr><td>Stellar</td><td><strong>dotnet-stellar-sdk</strong> (topluluk)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Beans-BV/dotnet-stellar-sdk">github</a></td></tr>
+              <tr><td>Hedera</td><td>Resmî .NET SDK yok; EVM tarafına JSON-RPC relay üzerinden Nethereum ile erişilebilir</td><td><span class="tag">ORTA</span></td><td><a href="https://hiero.org/">hiero.org</a></td></tr>
+              <tr><td>Sui, NEAR, Cosmos, Starknet</td><td>Bu doğrulamada resmî .NET SDK bulunamadı; TypeScript/Rust yoluna geç</td><td><span class="tag">ORTA</span></td><td><a href="../03-javascript-typescript/index.html">03 · JS/TS</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="karar-tablosu"><span class="h-num">§ 15</span>Karar tablosu: bedava gelenler, yeni dil isteyenler, önerilen sıra</h2>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Solidity biliyorsan bedavaya gelenler</p>
+            <ul>
+              <li>Optimistic L2: Arbitrum One, OP Mainnet, Base, Celo, opBNB</li>
+              <li>Solidity uyumlu ZK: ZKsync Era, Linea, Taiko, Mantle</li>
+              <li>EVM L1: BNB Smart Chain, Avalanche C-Chain, Polygon Chain, Monad, Sei, HyperEVM, Gnosis</li>
+              <li>Başka ekosistemlerin EVM kapısı: Rootstock (Bitcoin), Cosmos EVM, Polkadot Hub (resolc), Hedera, Etherlink (Tezos), Aurora (NEAR), XRPL EVM Sidechain</li>
+              <li>Kurumsal: Besu özel ağ</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Yeni dil ya da model gerektirenler</p>
+            <ul>
+              <li>Rust: Solana (Anchor), Stellar (Soroban), NEAR, CosmWasm, Polkadot SDK, Arbitrum Stylus</li>
+              <li>Go: Cosmos SDK, Fabric chaincode</li>
+              <li>Move: Aptos, Sui · Cairo: Starknet · Tolk: TON</li>
+              <li>Aiken/Haskell: Cardano · Python: Algorand, SmartPy (Tezos), OpShin</li>
+              <li>Kotlin: Corda · Script/Miniscript: Bitcoin</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>15a · Faucet gerçeği: sıfır bütçeye uyan ve uymayan (13 Eylül 2026)</caption>
+            <thead><tr><th>Faucet</th><th>Ağ</th><th>Şart</th><th>Sıfır bütçe</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia">Google Cloud Web3 Faucet</a></td><td>Ethereum Sepolia</td><td>Google hesabı</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://sepolia-faucet.pk910.de/">Sepolia PoW Faucet</a></td><td>Ethereum Sepolia</td><td>Tarayıcıda işlemci gücüyle "mining"</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://www.alchemy.com/faucets">Alchemy Faucets</a></td><td>Sepolia, Arbitrum/Base/OP Sepolia, Amoy…</td><td>Mainnet'te en az 0,001 ETH ve işlem geçmişi</td><td><span class="tag tag--warn">ÜCRETLİ</span> şartlı: mainnet bakiyesi (aşağıdaki not)</td></tr>
+              <tr><td><a href="https://docs.optimism.io/app-developers/tools-sdks/faucets">Superchain Faucet</a></td><td>OP Sepolia, Base Sepolia ve diğer OP Stack testnet'leri</td><td>Kimlik doğrulama yöntemleri faucet'e göre değişir</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://docs.base.org/base-chain/network-information/network-faucets">Base faucets</a></td><td>Base Sepolia</td><td>Dokümanda ek şart yazmıyor</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://www.bnbchain.org/en/testnet-faucet">BSC Testnet Faucet</a></td><td>BSC Testnet</td><td>BSC mainnet'te 0,002 BNB</td><td><span class="tag tag--warn">ÜCRETLİ</span> şartlı: mainnet bakiyesi</td></tr>
+              <tr><td><a href="https://faucet.solana.com/">Solana Faucet</a></td><td>devnet, testnet</td><td>8 saatte 2 istek; GitHub ile limit artar</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://docs.sui.io/guides/developer/getting-started/get-coins">Sui Faucet</a></td><td>devnet, testnet</td><td>Adres yeterli</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://aptos.dev/network/faucet">Aptos Faucet</a></td><td>testnet</td><td>Google girişi</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://docs.starknet.io/build/quickstart/sepolia">Starknet Sepolia faucet</a></td><td>Starknet Sepolia</td><td>Dokümandaki faucet bağlantısı</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://docs.polkadot.com/smart-contracts/faucet/">Polkadot Faucet</a></td><td>Polkadot Hub TestNet (PAS)</td><td>Hız sınırı</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://docs.ton.org/onboarding/wallet-apps/get-coins">@testgiver_ton_bot</a></td><td>TON testnet</td><td>Telegram + captcha; saatte 2 coin</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://developers.stellar.org/docs/networks">Friendbot</a></td><td>Stellar Testnet/Futurenet</td><td>İstek başına 10.000 XLM, hız sınırı</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://xrpl.org/resources/dev-tools/xrp-faucets">XRPL Faucets</a></td><td>XRPL Testnet/Devnet, Xahau-Testnet</td><td>Yok</td><td>Uygun, 0 TL</td></tr>
+              <tr><td><a href="https://teztnets.com/">teztnets</a></td><td>Tezos Shadownet</td><td>Yok</td><td>Uygun, 0 TL</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">"Mainnet bakiyesi şartı" olan faucet'ler: kimin için uygun?</p>
+          <ul>
+            <li><strong>Mainnet'te hiç varlığın yoksa</strong> &rarr; Alchemy ve BSC faucet'lerini kullanamazsın; Google Cloud, PoW, Superchain ve Base faucet'leri 0 TL ile yeter.</li>
+            <li><strong>Mainnet'te şartı karşılayan bakiyen zaten varsa</strong> &rarr; bakiye harcanmaz, faucet ek maliyetsiz çalışır. Ama şart alıcı adres üzerinden kontrol edildiği için gerçek varlık tutan cüzdanı geliştirme ortamına bağlaman gerekir; bu, <a href="../07-projeler/index.html">07</a> § 8'deki "test cüzdanı ile gerçek cüzdan ayrı" kuralıyla çelişir. Önerilmez.</li>
+            <li><strong>Şartı karşılamak için mainnet varlığı satın almak</strong> &rarr; sıfır bütçe kuralını bozar; gerek yok.</li>
+          </ul>
+          <p>Bu yüzden tablodaki <span class="tag tag--warn">ÜCRETLİ</span> etiketi "ödeme ister" değil, "mainnet bakiyesi şartlı" anlamındadır. Faucet şartları sık değişir; kullanmadan önce faucet sayfasını kontrol et.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Faucet'ten bağımsız bedava yollar</p>
+          <p>Yerel ağlar hiç faucet istemez: Bitcoin regtest, Polar (Lightning), Surfpool (Solana), nitro-devnode (Arbitrum), starknet-devnet, AlgoKit LocalNet, Fabric test-network. Ayrıntılı faucet listesi için <a href="../06-altyapi-araclar-guvenlik/index.html#testnet-ve-faucet">06 · testnet ve faucet</a>, sıfır maliyetli altyapı için <a href="../07-projeler/index.html#sifir-maliyet-altyapi">07 · projeler</a>.</p>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Ethereum Sepolia</span>
+            <p>02 (Solidity) ve bildiğin dile göre istemci tarafını Sepolia'da uygula: .NET biliyorsan 04 (Nethereum), JS/TS biliyorsan 03 (viem/wagmi), ikisini de bilmiyorsan Foundry'nin <code>cast</code> komutları. Test ETH'ini Google Cloud ya da PoW faucet'ten al; Alchemy'nin mainnet bakiyesi şartı mainnet cüzdanı olmayan için uymaz.</p>
+            <span class="steps__meta">Önkoşul: 02 + (04 veya 03 veya cast) · Maliyet: 0 TL</span>
+          </li>
+          <li>
+            <span class="steps__title">Bir optimistic L2 testnet'i: Base Sepolia ya da OP Sepolia</span>
+            <p>Aynı sözleşmeyi sadece RPC URL ve chain ID değiştirerek deploy et. OP "differences" sayfasındaki L1 data fee ve address aliasing notlarını oku, zinciri L2BEAT'te kontrol et. "Smart Contract" deneyimini en ucuza güçlendiren adım bu.</p>
+            <span class="steps__meta">Önkoşul: 1. adım · Maliyet: 0 TL (Superchain/Base faucet)</span>
+          </li>
+          <li>
+            <span class="steps__title">İsteğe bağlı: ikinci bir EVM ailesi</span>
+            <p>Arbitrum Sepolia, ZKsync Era ya da Linea Sepolia. Yeni bir şey öğrenmezsin; farkları görürsün. Scroll Sepolia kapandığı için onu seçme.</p>
+            <span class="steps__meta">Maliyet: 0 TL · Değer: düşük-orta</span>
+          </li>
+          <li>
+            <span class="steps__title">İstersen: tek bir EVM dışı zincir</span>
+            <p>Seçim bildiğin ya da öğrenmek istediğin dile göre: <strong>Rust</strong> biliyor ya da öğreneceksen Solana devnet (Solana Playground'da Anchor; account model, PDA, SPL Token) veya Stellar Soroban / NEAR. <strong>Go</strong> biliyorsan Cosmos SDK (§ 4). <strong>Move</strong>'a ilgin varsa Aptos ya da Sui (§ 6). <strong>Python</strong> biliyorsan en düşük eşik Algorand Python ya da SmartPy (§ 10–11). Telegram ekosistemi hedefindeyse TON (Tolk). Kurumsal ilan hedefindeyse Fabric / Corda (§ 12). Solana'da istemci tarafı: JS/TS için @solana/kit, .NET için Solnet.</p>
+            <span class="steps__meta">Önkoşul: seçtiğin dilin temeli (<a href="../../Rust/index.html">Rust</a>, <a href="../../Go/index.html">Go</a>, <a href="../../Python/index.html">Python</a>) · Maliyet: 0 TL</span>
+          </li>
+          <li>
+            <span class="steps__title">Geri kalan her şey: sadece talep olursa</span>
+            <p>Kurumsal ilan Fabric ya da Corda isterse § 12'ye; Move, Cairo, Cosmos, TON gibi zincirlere yalnızca somut bir proje ya da ilan gerekçesiyle geç.</p>
+            <span class="steps__meta">Öncelik: en son, ihtiyaç doğarsa</span>
+          </li>
+        </ol>
+
+        <details class="qa">
+          <summary>Mülakatta "Ethereum dışında hangi zinciri biliyorsun?" diye sorulursa?</summary>
+          <div class="qa__body">
+            <p>Örnek — dürüst ve savunulabilir bir cevap şablonu: "[Proje türü] kapsamında Solidity ile çalıştım, derinliğim [seviye]. Aynı sözleşmeleri EVM uyumlu L2 testnet'lerinde (ör. Base Sepolia) deploy ettim; L1 data fee ve address aliasing gibi farkları biliyorum. Solana ve Move'u kavram düzeyinde tanıyorum: account model, PDA, resource tipleri." Son cümleyi ancak 2. ve 4. adımları gerçekten yaptıysan kur.</p>
+          </div>
+        </details>
+
+        <h2 id="ozet"><span class="h-num">§ 16</span>Özet: bu sayfadaki öncelik sırası</h2>
+        <ul class="checklist">
+          <li><strong>Önce bildiğini genişlet:</strong> Solidity sözleşmeni bir optimistic L2 testnet'ine (Base Sepolia / OP Sepolia) deploy et. Değişen tek şey RPC ve chain ID (§ 8).</li>
+          <li><strong>L2 farklarını bil:</strong> sequencer, L1 data fee, address aliasing, fault proof / BoLD, L2BEAT stages (§ 8a).</li>
+          <li><strong>EVM L1'leri isim düzeyinde bil:</strong> BSC, Avalanche C-Chain/Fuji, Polygon Chain/Amoy, Monad. Faucet şartlarına dikkat: BSC ve Alchemy mainnet bakiyesi istiyor; bakiyen yoksa kullanamazsın, varsa gerçek cüzdanı geliştirmeye bağlamak gerektiği için önerilmez (§ 9, § 15a).</li>
+          <li><strong>ZK tarafı:</strong> ZKsync Era ve Linea Solidity ile gelir; Starknet için Cairo gerekir. Scroll Sepolia kapandı, Polygon zkEVM dokümandan çıktı (§ 7).</li>
+          <li><strong>Bitcoin'i bildiğin dille tanı:</strong> UTXO, SegWit, Taproot, PSBT kavramları + regtest; kütüphane dile göre: C# &rarr; NBitcoin, JS/TS &rarr; bitcoinjs-lib, Rust &rarr; BDK/LDK, Go &rarr; LND (Lightning) ve btcd. Lightning için Polar (§ 2).</li>
+          <li><strong>İstersen tek bir EVM dışı zincir, diline göre:</strong> Rust &rarr; Solana (account model, PDA, SPL Token, Anchor, Solana Playground, @solana/kit; .NET için Solnet) ya da Stellar/NEAR; Go &rarr; Cosmos SDK; Move ilgisi &rarr; Aptos/Sui; Python &rarr; Algorand Python veya SmartPy; Telegram ekosistemi &rarr; TON (Tolk); kurumsal ilan &rarr; Fabric/Corda (§ 3–12).</li>
+          <li><strong>Kavram düzeyinde yeterli:</strong> Cosmos (app-chain, CometBFT, IBC), Polkadot (parachain, XCM, Hub'da Solidity), Move (resource, abilities, Sui object model) (§ 4–6).</li>
+          <li><strong>Kurumsal ilan için:</strong> Fabric (chaincode Go/Java/Node, test-network), Corda (Kotlin), Besu (§ 12).</li>
+          <li><strong>Eskimiş, öğrenme:</strong> ink!, Tact, FunC, Blueprint, @solana/web3.js 1.x, solana-test-validator, foundry-zksync/zksolc, Aptos .NET SDK, GoQuorum, Tendermint adı, Ghostnet, Alfajores, Mumbai, Scroll Sepolia, Polygon zkEVM.</li>
+          <li><strong>Risk:</strong> köprüler (Ronin, Wormhole, Nomad) ve Solana'ya özgü account doğrulama açıkları; hepsi testnet'te kalır, mainnet'e para yok (§ 3a, § 13).</li>
+          <li><strong>Sıfır bütçe yolu:</strong> Google Cloud/PoW faucet &rarr; Superchain/Base faucet &rarr; yerel ağlar (regtest, Surfpool, nitro-devnode, starknet-devnet). Hepsi 0 TL.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../04-dotnet/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">.NET Ekosistemi</span></a>
+        <a class="next" href="../06-altyapi-araclar-guvenlik/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Altyapı, Araçlar ve Güvenlik</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1914 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blazor, MVC ve MAUI — .NET Anahtar Listesi</title>
+<meta name="description" content="Razor Pages, MVC, Blazor Server/WASM, .NET MAUI, MVVM ve masaüstü arayüz kütüphaneleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Blazor, MVC ve MAUI</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 08 · Arayüz ve Modern</div>
+        <h1 class="page-title">Blazor, MVC, <em>MAUI</em> ve masaüstü</h1>
+        <p class="lede">.NET'in arayüz tarafı: sunucu tarafı render'dan WebAssembly'ye, mobil ve masaüstü çok platformlu uygulamalara. Avalonia gibi alternatifler de listede.</p>
+        <div class="head-meta">Seviye: temel &rarr; orta &middot; JavaScript/TypeScript ve HTML/CSS bölümleriyle bağlantılı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama kelimesi listesidir</strong>. Her satır bir terim,
+        bir cümlelik "bu nedir" notu ve mümkünse resmî dokümanın bağlantısıdır. Konuyu buradan öğrenmeyeceksin;
+        buradaki terimi alıp kendi kaynağından okuyacak ve kod yazacaksın.</p>
+
+        <p>Notlar sadece <strong>karışıklığı önlemek</strong> için var. Örnek: "Razor" tek başına aratıldığında
+        Razor Pages, Razor view ve Blazor'un <code>.razor</code> dosyaları karışır; hangisini aradığını bilmen için
+        not düşülmüştür.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; bu sayfadaki rozet mantığı</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> rozeti, iş ilanlarında ve mülakatlarda sık geçen
+          teknolojiyi işaretler; bu maddeler için en az bir çalışan örnek yaz. Bu sayfada özellikle <strong>ASP.NET Core MVC</strong>
+          grubu ve <strong>JavaScript</strong> gerektiren her madde (Blazor JS interop dahil) bu rozeti taşır.
+          Rozetin ne kadar öncelik taşıdığı senin amacına bağlıdır:</p>
+          <ul>
+            <li><strong>İş arıyor / mülakata hazırlanıyorsan</strong> &rarr; MÜLAKATTA SIK rozetli maddeleri önce çalış.</li>
+            <li><strong>Mevcut işinde belirli bir yığın kullanıyorsan</strong> &rarr; önce o yığının bölümü (ör. ekip Blazor kullanıyorsa § 4&ndash;6, MAUI kullanıyorsa § 8 ve § 11); rozet ikincil.</li>
+            <li><strong>Kendi ürününü / girişimini yapıyorsan</strong> &rarr; ürünün gerektirdiği arayüz türü (web, mobil, masaüstü) belirleyicidir; rozeti öncelik ölçütü sayma.</li>
+            <li><strong>Öğrenci / yeni başlayansan ve C# bilmiyorsan</strong> &rarr; Razor, HTML içine C# gömdüğü için önce HTML/CSS ve temel C# (<a href="../01-csharp-dili/index.html">01 &mdash; C# Dili</a>), sonra Razor temelleri (§ 2) ve MVC (§ 3); ayrıntılı yol için § 13'teki "Hiç programlama/arayüz geçmişin yok" satırına bak. Mülakat önceliğini sonraya bırak.</li>
+            <li><strong>Öğrenci / yeni başlayansan ama temel C# biliyorsan</strong> &rarr; HTML/CSS eksiğini kapatıp doğrudan Razor temelleri (§ 2), sonra MVC (§ 3); mülakat önceliğini sonraya bırak.</li>
+          </ul>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi &mdash; .cshtml / .razor / .xaml ayrımı</p>
+          <p>Üç ayrı dosya uzantısı, üç ayrı dünya: <code>.cshtml</code> = MVC view veya Razor Pages (sunucuda HTML üretir),
+          <code>.razor</code> = Blazor bileşeni (bileşen ağacı üretir), <code>.xaml</code> = MAUI/WPF/Avalonia arayüzü
+          (nesne ağacı üretir). Arama yaparken uzantıyı da yaz, sonuçlar karışmasın.</p>
+        </div>
+
+        <h2 id="razor"><span class="h-num">§ 2</span>Razor: sözdizimi ve view katmanı</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Razor temel kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Razor syntax</strong></td>
+                <td>HTML içine <code>@</code> ile C# gömme dili</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; ara: "ASP.NET Core Razor syntax"</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@ ifadesi / @{ } bloğu</strong></td>
+                <td>Tek satırlık ifade ve çok satırlı kod bloğu ayrımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@@</code> literal @ demektir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@model / @using / @inject</strong></td>
+                <td>View'in model tipini, namespace'ini ve DI ile alacağı servisi bildiren direktifler</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@inject</code> Blazor'da da aynı isimle var</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>_ViewImports.cshtml</strong></td>
+                <td>Klasördeki tüm view'lere ortak <code>@using</code> / tag helper kaydı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; alt klasörde kalıtılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/layout">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>_ViewStart.cshtml</strong></td>
+                <td>Her view render edilmeden önce çalışan, genelde Layout atayan dosya</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/layout">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Layout</strong></td>
+                <td>Sayfaların ortak iskeleti (<code>_Layout.cshtml</code>), <code>@RenderBody()</code> ile içerik yerleşir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/layout">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>section / @RenderSection</strong></td>
+                <td>Layout'ta ayrılan, view'in doldurduğu opsiyonel alan (ör. sayfaya özel script)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>required: false</code> parametresini unutma</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/layout">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>partial view</strong></td>
+                <td>Tekrar eden HTML parçasını ayrı <code>.cshtml</code> dosyasına alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>&lt;partial&gt;</code> tag helper'ı tercih edilir, <code>Html.Partial</code> eski</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>view component</strong></td>
+                <td>Kendi mantığı + kendi view'i olan, controller'a bağlı olmayan parça (menü, sepet özeti)</td>
+                <td><span class="tag">ORTA</span> &mdash; partial'dan farkı: kendi <code>InvokeAsync</code>'i vardır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tag helper</strong></td>
+                <td>HTML etiketine sunucu tarafı davranış ekleyen bileşen (<code>asp-for</code>, <code>asp-action</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>built-in tag helpers</strong></td>
+                <td>Hazır gelenler: form, input, label, select, anchor, environment, cache, script/link</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom tag helper</strong></td>
+                <td>Kendi tag helper'ını yazma (<code>TagHelper</code> sınıfından türet)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/authoring">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML helper</strong></td>
+                <td>Tag helper öncesi yöntem: <code>@Html.TextBoxFor(...)</code></td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; eski projelerde bolca görürsün, yeni projede tag helper kullan</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ViewData</strong></td>
+                <td><code>Dictionary&lt;string, object&gt;</code> tabanlı, tek istek ömürlü veri taşıyıcı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; tip güvenli değil, cast gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ViewBag</strong></td>
+                <td>ViewData'nın <code>dynamic</code> sarmalayıcısı</td>
+                <td><span class="tag">ORTA</span> &mdash; derleme zamanı kontrolü yok; view model tercih et</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TempData</strong></td>
+                <td>Bir sonraki isteğe kadar yaşayan veri; redirect sonrası mesaj taşımak için</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; arkasında session veya cookie provider vardır; <code>Keep()</code>/<code>Peek()</code>'i öğren</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>view model</strong></td>
+                <td>View'in tam ihtiyacını karşılayan özel sınıf; entity'yi doğrudan view'e verme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; mimari tarafı için <a href="../04-mimari-ve-desenler/index.html">04 &mdash; Mimari ve Desenler</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Razor Pages</strong></td>
+                <td>Sayfa odaklı model: <code>.cshtml</code> + <code>.cshtml.cs</code> (PageModel), controller yok</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MVC'ye alternatif, CRUD ekranları için Microsoft'un varsayılan önerisi</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PageModel / OnGet / OnPost</strong></td>
+                <td>Razor Pages'te action karşılığı handler metotları</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>OnGetAsync</code>, <code>OnPostAsync</code>, named handler: <code>OnPostDelete</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[BindProperty]</strong></td>
+                <td>Razor Pages'te POST verisini PageModel özelliğine bağlayan attribute</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; GET'te de bağlamak için <code>SupportsGet = true</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Razor Pages route conventions</strong></td>
+                <td>Klasör yapısından URL üretimi ve bunu özelleştiren convention API'si</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages/razor-pages-conventions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Razor view compilation</strong></td>
+                <td>View'lerin derlenmesi, runtime compilation ve pre-compile ayrımı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; hot reload / <code>RuntimeCompilation</code> paketi burada</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RazorLight / Razor templating</strong></td>
+                <td>Razor'u web dışında (e-posta şablonu, rapor) çalıştırma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; niş; ücretsiz alternatifler: Scriban, Fluid, Handlebars.Net</td>
+                <td>github.com/toddams/RazorLight</td>
+              </tr>
+              <tr>
+                <td><strong>bundling &amp; minification</strong></td>
+                <td>CSS/JS dosyalarını birleştirip küçültme</td>
+                <td><span class="tag">ORTA</span> &mdash; eski <code>bundleconfig.json</code>, yeni projede Vite/esbuild yaygın</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/client-side/bundling-and-minification">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="aspnet-core-mvc"><span class="h-num">§ 3</span>ASP.NET Core MVC</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk &mdash; iş arayan için en yüksek öncelikli blok</p>
+          <p>İş ilanlarında "ASP.NET Core MVC" çok sık geçer. İş arıyorsan mülakatçı büyük ihtimalle <strong>controller yaşam döngüsü,
+          filter sırası, model binding ve anti-forgery</strong> sorar. Bu tablodaki her satırı en az bir kez
+          kendi elinle kodla; okumak yetmez.</p>
+          <p>Amacın farklıysa öncelik değişir: ekibin Blazor/SPA ya da yalnızca Web API kullanıyorsa MVC'yi Razor sözdizimi ve
+          istek hattı (routing, filter, model binding) kadar öğrenmen yeter; kendi ürününü mobil/masaüstü hedefle yapıyorsan
+          bu bölümü erteleyebilirsin. Yeni başlıyorsan önce § 2'deki Razor temellerini kapat, sonra buraya gel.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Controller, routing ve istek hattı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MVC pattern</strong></td>
+                <td>Model &mdash; View &mdash; Controller sorumluluk ayrımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Controller / ControllerBase</strong></td>
+                <td><code>Controller</code> view döndürebilir, <code>ControllerBase</code> sadece API içindir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; klasik mülakat sorusu</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>action method</strong></td>
+                <td>Bir HTTP isteğine karşılık gelen public controller metodu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IActionResult / ActionResult&lt;T&gt;</strong></td>
+                <td>Action dönüş tipi: <code>View()</code>, <code>Json()</code>, <code>Redirect()</code>, <code>NotFound()</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>conventional routing</strong></td>
+                <td><code>{controller}/{action}/{id?}</code> kalıbıyla eşleme; MVC'nin klasik yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>attribute routing</strong></td>
+                <td><code>[Route]</code>, <code>[HttpGet("{id:int}")]</code> ile metot üstünde rota tanımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; Web API'de varsayılan yöntem</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>route constraint</strong></td>
+                <td><code>:int</code>, <code>:guid</code>, <code>:minlength(3)</code> gibi rota parametre kısıtları</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>endpoint routing</strong></td>
+                <td>ASP.NET Core'un ortak yönlendirme altyapısı; MVC, Razor Pages, Blazor hepsi bunu kullanır</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>UseRouting</code> / <code>UseEndpoints</code> sırası önemlidir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>areas</strong></td>
+                <td>Büyük uygulamayı modüllere bölen klasör yapısı (Admin, Shop)</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>[Area("Admin")]</code> + <code>asp-area</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/areas">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>model binding</strong></td>
+                <td>Form/query/route/body verisinin action parametresine otomatik dönüşmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[FromBody] [FromQuery] [FromRoute] [FromForm]</strong></td>
+                <td>Bağlama kaynağını açıkça belirten attribute'lar</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; API'de <code>[FromBody]</code> yalnızca bir parametreye verilebilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom model binder</strong></td>
+                <td>Kendi bağlama mantığını yazma (<code>IModelBinder</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>over-posting / mass assignment</strong></td>
+                <td>Modelin fazla alanının istekten doldurulması güvenlik açığı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; çözüm: ayrı DTO/view model, <code>[Bind]</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Data Annotations validation</strong></td>
+                <td><code>[Required]</code>, <code>[StringLength]</code>, <code>[Range]</code> ile model doğrulama</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ModelState / ModelState.IsValid</strong></td>
+                <td>Doğrulama sonucunu taşıyan sözlük</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>[ApiController]</code> varsa otomatik 400 döner</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IValidatableObject</strong></td>
+                <td>Sınıf düzeyinde, alanlar arası doğrulama arayüzü</td>
+                <td><span class="tag">ORTA</span> &mdash; FluentValidation alternatifi için <a href="../10-kutuphaneler/index.html">10 &mdash; Kütüphane Kataloğu</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>client-side validation</strong></td>
+                <td><code>jquery.validate.unobtrusive</code> ile tarayıcıda doğrulama</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; jQuery gerektirir; JavaScript bilmiyorsan burada takılabilirsin</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>action filter</strong></td>
+                <td>Action öncesi/sonrası çalışan kesişen ilgi kodu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>filter pipeline sırası</strong></td>
+                <td>Authorization &rarr; Resource &rarr; Action &rarr; Exception &rarr; Result</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; sırayı ezberle, sık sorulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>exception filter</strong></td>
+                <td>Action içindeki hatayı yakalayan filtre</td>
+                <td><span class="tag">ORTA</span> &mdash; global hata için middleware genelde daha iyi; bkz. <a href="../02-platform-ve-web-api/index.html">02 &mdash; Platform ve Web API</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ServiceFilter / TypeFilter</strong></td>
+                <td>DI ile bağımlılık alan filtreleri kullanma yolu</td>
+                <td><span class="tag">ORTA</span> &mdash; attribute'lar doğrudan DI alamaz, bu yüzden var</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Razor Pages filter</strong></td>
+                <td><code>IPageFilter</code> / <code>IAsyncPageFilter</code></td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/razor-pages/filter">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>anti-forgery token</strong></td>
+                <td>CSRF saldırısına karşı forma gömülen gizli token</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; <code>@Html.AntiForgeryToken()</code> / <code>[ValidateAntiForgeryToken]</code>; form tag helper'ı otomatik ekler</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>session</strong></td>
+                <td>Sunucu tarafında kullanıcıya bağlı geçici durum</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>AddSession</code> + <code>UseSession</code>; dağıtık cache ile birlikte kullanılır (<a href="../05-mesajlasma-ve-dagitik/index.html">05</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cookie / query string / cache state</strong></td>
+                <td>Durum tutmanın diğer yolları ve ne zaman hangisi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MVC vs Web API farkı</strong></td>
+                <td>MVC HTML döner (view engine), Web API veri döner (content negotiation, <code>[ApiController]</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; <code>AddControllersWithViews</code> / <code>AddControllers</code> farkını bil</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>middleware</strong></td>
+                <td>İstek hattındaki her halkanın MVC'den önce çalışması</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET MVC 5 (klasik .NET Framework)</strong></td>
+                <td><code>System.Web.Mvc</code> tabanlı eski sürüm</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; kurumsal projelerde hâlâ karşına çıkar; ASP.NET Core ile aynı şey değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blazor-temel"><span class="h-num">§ 4</span>Blazor: barındırma modelleri ve render modes</h2>
+
+        <div class="def">
+          <p class="def__term">Blazor <small>bileşen tabanlı .NET UI çatısı</small></p>
+          <p>C# ile tarayıcı arayüzü yazmanı sağlayan çatı. JavaScript yerine C# yazarsın; DOM güncellemeleri
+          "render tree diff" ile yapılır. Kritik nokta: <strong>kodun nerede çalıştığı</strong> (sunucu mu, tarayıcıdaki
+          WebAssembly mi) barındırma modeline göre değişir ve tüm mimari kararlar buna bağlıdır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Barındırma modelleri ve render modları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Blazor (genel)</strong></td>
+                <td>.NET'in bileşen tabanlı web UI çatısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; .NET tarafında iş ilanlarında sık geçer</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>hosting models</strong></td>
+                <td>Server, WebAssembly, Hybrid barındırma seçenekleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; .NET 8 sonrası "hosting model" ile "render mode" ayrı kavramlar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor Server</strong></td>
+                <td>Bileşen sunucuda çalışır, DOM farkları SignalR ile tarayıcıya akar</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; kalıcı bağlantı gerektirir; gecikme (latency) her tıklamada hissedilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor WebAssembly (WASM)</strong></td>
+                <td>.NET çalışma zamanı tarayıcıda; uygulama istemcide çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ilk yükleme boyutu büyük; sır (secret) saklayamazsın</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>static SSR (static server rendering)</strong></td>
+                <td>.NET 8 ile gelen, etkileşimsiz sunucu tarafı HTML üretimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; varsayılan moddur; "neden butonum çalışmıyor" sorusunun cevabı genelde budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InteractiveServer render mode</strong></td>
+                <td>Bileşeni sunucuda etkileşimli kılan mod</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@rendermode InteractiveServer</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InteractiveWebAssembly render mode</strong></td>
+                <td>Bileşeni istemcide (WASM) etkileşimli kılan mod</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InteractiveAuto render mode</strong></td>
+                <td>İlk açılışta Server, WASM indikten sonra istemci</td>
+                <td><span class="tag">ORTA</span> &mdash; "Auto" ayrı bir barındırma modeli değil, bir render modudur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@rendermode direktifi</strong></td>
+                <td>Bileşen ya da bileşen örneği düzeyinde render modu atama</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; .NET 8+; global de atanabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>streaming rendering</strong></td>
+                <td>Yavaş veri gelene kadar iskeleti gönderip sonra parçayı akıtan SSR özelliği</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>@attribute [StreamRendering]</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>prerendering</strong></td>
+                <td>Etkileşim başlamadan önce sunucuda HTML üretme</td>
+                <td><span class="tag">ORTA</span> &mdash; klasik tuzak: <code>OnInitializedAsync</code> iki kez çalışır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/prerender">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>enhanced navigation / enhanced form handling</strong></td>
+                <td>Static SSR'de sayfayı tam yenilemeden gezinme ve form gönderme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor + SignalR circuit</strong></td>
+                <td>Blazor Server'da her kullanıcı için tutulan bağlantı/durum nesnesi</td>
+                <td><span class="tag">ORTA</span> &mdash; "circuit koptu" hatasının kaynağı; sunucu belleği kullanıcı sayısıyla artar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/signalr">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor tooling</strong></td>
+                <td>Proje şablonları, <code>dotnet new blazor</code>, hot reload</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/tooling">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>"Blazor United"</strong></td>
+                <td>.NET 8 öncesi blog/konferanslarda kullanılan, resmî olmayan isim</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; resmî adı yok; aradığın şey "render modes"</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/render-modes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor PWA</strong></td>
+                <td>WASM uygulamasını çevrimdışı çalışan progressive web app yapma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/progressive-web-app">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MVC/Razor Pages'e Blazor bileşeni gömme</strong></td>
+                <td>Mevcut MVC uygulamasına parça parça Blazor ekleme</td>
+                <td><span class="tag">ORTA</span> &mdash; kademeli geçiş senaryosu; mülakatta iyi cevap</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/integration">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blazor-bilesen"><span class="h-num">§ 5</span>Blazor: bileşen modeli ve yaşam döngüsü</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bileşen, parametre, olay</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Razor component (.razor)</strong></td>
+                <td>Blazor'un yapı taşı; markup + C# tek dosyada</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MVC view ile karıştırma: bu bir sınıfa derlenir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>code-behind (.razor.cs)</strong></td>
+                <td>Bileşenin C# kodunu ayrı partial sınıfa alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@code { }</code> bloğuna alternatif; test edilebilirlik artar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Parameter]</strong></td>
+                <td>Ebeveynden alınan bileşen girdisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; public olmalı; setter içinde iş yapma</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[CascadingParameter]</strong></td>
+                <td>Ağaçta yukarıdan aşağı otomatik akan parametre (tema, kullanıcı)</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>&lt;CascadingValue&gt;</code> ile sağlanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/cascading-values-and-parameters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[SupplyParameterFromQuery]</strong></td>
+                <td>Query string değerini bileşen parametresine bağlama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[EditorRequired]</strong></td>
+                <td>Verilmezse derleyici uyarısı üreten zorunlu parametre işareti</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EventCallback / EventCallback&lt;T&gt;</strong></td>
+                <td>Çocuktan ebeveyne olay bildirimi; otomatik <code>StateHasChanged</code> tetikler</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>Action</code>/<code>Func</code> yerine bunu kullan, fark budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@bind / @bind:event / @bind:after</strong></td>
+                <td>İki yönlü veri bağlama ve tetikleyici olay seçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@bind:after</code> .NET 8+</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/data-binding">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OnInitialized / OnInitializedAsync</strong></td>
+                <td>Bileşen oluşturulduğunda bir kez çalışan yaşam döngüsü metodu</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; prerender varsa iki kez çalışabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OnParametersSet / OnParametersSetAsync</strong></td>
+                <td>Parametreler her atandığında çalışır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OnAfterRender / OnAfterRenderAsync</strong></td>
+                <td>DOM oluştuktan sonra çalışır; JS interop'un yeri burasıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>firstRender</code> parametresini kontrol et</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ShouldRender</strong></td>
+                <td>Gereksiz yeniden render'ı engelleyen kanca</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SetParametersAsync</strong></td>
+                <td>Parametre atamasının en alt seviyedeki adımı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StateHasChanged()</strong></td>
+                <td>Bileşene "durumum değişti, yeniden çiz" demek</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; timer/olay dışı iş parçacığından çağırırken <code>InvokeAsync</code> ile sar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/rendering">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IDisposable / IAsyncDisposable bileşende</strong></td>
+                <td>Abonelik ve timer temizliği</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>@implements IDisposable</code>; sızıntının bir numaralı sebebi</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@key</strong></td>
+                <td>Liste render'ında öğe kimliği; diff algoritmasına yardım eder</td>
+                <td><span class="tag">ORTA</span> &mdash; liste öğesine kalıcı kimlik verir; yeniden sıralama/silmede doğru öğenin güncellenmesini sağlar. React'ten geliyorsan: <code>key</code> ile aynı fikir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@ref / ElementReference</strong></td>
+                <td>Bileşen veya DOM elemanına referans tutma</td>
+                <td><span class="tag">ORTA</span> &mdash; JS interop'ta elemanı geçmek için</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RenderFragment / ChildContent</strong></td>
+                <td>Bileşene markup parçası geçirme (slot mantığı)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/templated-components">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>templated component</strong></td>
+                <td><code>RenderFragment&lt;T&gt;</code> ile şablonlanabilir bileşen (kendi grid'ini yazmak)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/templated-components">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>generic component (@typeparam)</strong></td>
+                <td>Generic tip parametreli bileşen</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; generic tiplere hâkimsen burası kolay gelir; değilsen önce C# generics konusunu kapat (<a href="../01-csharp-dili/index.html">01 &mdash; C# Dili</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/generic-type-support">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SectionOutlet / SectionContent</strong></td>
+                <td>Blazor'un layout section karşılığı (.NET 8+)</td>
+                <td><span class="tag">ORTA</span> &mdash; MVC'deki <code>@section</code> ile aynı fikir, farklı API</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/sections">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Razor class library (RCL)</strong></td>
+                <td>Bileşenleri paylaşılabilir kütüphaneye taşıma; statik dosyalar dahil</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>_content/&lt;paket&gt;/</code> yolu buradan gelir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/class-libraries">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS isolation (.razor.css)</strong></td>
+                <td>Bileşene özel, kapsamlanmış stil dosyası</td>
+                <td><span class="tag">ORTA</span> &mdash; üretilen <code>b-xxxx</code> attribute'u budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ErrorBoundary</strong></td>
+                <td>Alt bileşendeki hatayı yakalayıp tüm sayfayı düşürmeyen sarmalayıcı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/handle-errors">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blazor-uygulama"><span class="h-num">§ 6</span>Blazor: form, routing, state, güvenlik, performans</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Uygulama seviyesi Blazor konuları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>EditForm</strong></td>
+                <td>Blazor'un form bileşeni; model bağlar, doğrulamayı yönetir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InputText / InputNumber / InputSelect / InputDate</strong></td>
+                <td>Doğrulamaya bağlı hazır girdi bileşenleri</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DataAnnotationsValidator / ValidationSummary</strong></td>
+                <td>Data Annotations doğrulamasını forma bağlayan bileşenler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EditContext / FieldIdentifier</strong></td>
+                <td>Formun doğrulama durumunu tutan nesne; alan bazlı doğrulama tetikleme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FluentValidation + Blazor</strong></td>
+                <td>Data Annotations yerine FluentValidation kullanma (3. parti köprü paketleri)</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; FluentValidation ilanlarda sık istenir; bkz. <a href="../10-kutuphaneler/index.html">10 &mdash; Kütüphaneler</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/forms/validation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@page direktifi</strong></td>
+                <td>Bileşene rota atar</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; birden fazla <code>@page</code> verilebilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Router / NavigationManager</strong></td>
+                <td>Rota eşleme bileşeni ve programatik gezinme servisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>NavigateTo</code>, <code>Uri</code>, <code>LocationChanged</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>NavLink</strong></td>
+                <td>Aktif rotayı işaretleyen bağlantı bileşeni</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor dependency injection</strong></td>
+                <td>Bileşene servis enjeksiyonu ve scope ömürleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; Blazor Server'da <code>Scoped</code> "circuit ömrü" demektir; DbContext tuzağı burada</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OwningComponentBase</strong></td>
+                <td>Servis ömrünü bileşene bağlayan taban sınıf</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; DbContext ömür sorununun resmî çözümlerinden biri</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>state management</strong></td>
+                <td>Bileşenler arası durum paylaşımı yolları</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; cascading value, singleton/scoped servis, tarayıcı depolaması</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/state-management/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PersistentComponentState</strong></td>
+                <td>Prerender'da alınan veriyi etkileşimli aşamaya taşıyıp iki kez sorgulamayı önleme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/prerender">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fluxor / Blazor-State</strong></td>
+                <td>Redux tarzı merkezî state kütüphaneleri (3. parti, ücretsiz)</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; küçük projede gereksiz; ara: "Fluxor Blazor"</td>
+                <td>github.com/mrpmorris/Fluxor</td>
+              </tr>
+              <tr>
+                <td><strong>JS interop (IJSRuntime)</strong></td>
+                <td>C#'tan JavaScript çağırma / JS'ten C# çağırma</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; Blazor'da bir noktada JavaScript mutlaka gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IJSObjectReference / JS module isolation</strong></td>
+                <td>ES module'ü <code>import</code> edip bileşene özel JS tutma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[JSInvokable]</strong></td>
+                <td>JavaScript'in çağırabileceği C# metodunu işaretler</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AuthenticationStateProvider</strong></td>
+                <td>Blazor'un kimlik durumunu sağlayan servis</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; JWT tarafı için <a href="../02-platform-ve-web-api/index.html">02 &mdash; Platform ve Web API</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/security/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AuthorizeView / [Authorize] / CascadingAuthenticationState</strong></td>
+                <td>Arayüzde yetkiye göre içerik gösterme</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; UI gizlemek güvenlik değildir; sunucuda da kontrol et</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/security/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor WASM güvenlik sınırı</strong></td>
+                <td>İstemcide çalışan kod tersine mühendisliğe açıktır; sır saklanamaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; mülakatta "Blazor WASM'de connection string tutar mısın?" sorusunun cevabı: hayır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/security/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>HttpClient / call web API</strong></td>
+                <td>Blazor'dan API çağırma; WASM'de CORS zorunlu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/call-web-api">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Virtualize bileşeni</strong></td>
+                <td>Uzun listelerde sadece görünen satırları render eder</td>
+                <td><span class="tag">ORTA</span> &mdash; performans sorusunun standart cevabı</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/virtualization">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>QuickGrid</strong></td>
+                <td>Microsoft'un hafif, ücretsiz veri tablosu bileşeni</td>
+                <td><span class="tag">ORTA</span> &mdash; EF Core adaptörü var; ağır grid ihtiyacında 3. parti gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/quickgrid">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor performance</strong></td>
+                <td>Render sayısını azaltma, parametre maliyeti, interop maliyeti</td>
+                <td><span class="tag">ORTA</span> &mdash; performans ölçümü için BenchmarkDotNet (<a href="../06-test-ve-kalite/index.html">06</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/performance">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AOT compilation (WASM)</strong></td>
+                <td>Ahead-of-time derleme: CPU yoğun işte hızlanır, indirme boyutu büyür</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-build-tools-and-aot">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IL trimming</strong></td>
+                <td>Kullanılmayan kodu atarak WASM boyutunu küçültme</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; reflection kullanan kütüphaneleri kırabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-trimmer">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>lazy loading assemblies</strong></td>
+                <td>WASM'de assembly'leri rotaya göre sonradan indirme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-lazy-load-assemblies">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor globalization / localization</strong></td>
+                <td>Kültür, tarih ve çeviri yönetimi</td>
+                <td><span class="tag">ORTA</span> &mdash; WASM'de kültür verisi ayrı indirilir (<code>InvariantGlobalization</code> tuzağı)</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/globalization-localization">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>host and deploy (WASM)</strong></td>
+                <td>Statik dosya olarak yayınlama, base path, sıkıştırma</td>
+                <td><span class="tag">ORTA</span> &mdash; CDN/statik hosting mümkündür; dağıtım için <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 &mdash; DevOps</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>bUnit</strong></td>
+                <td>Blazor bileşenleri için test kütüphanesi (ücretsiz)</td>
+                <td><span class="tag">ORTA</span> &mdash; xUnit ile çalışır; test tarafı için <a href="../06-test-ve-kalite/index.html">06 &mdash; Test ve Kalite</a></td>
+                <td>bunit.dev</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="blazor-ui-kutuphaneleri"><span class="h-num">§ 7</span>Blazor UI kütüphaneleri</h2>
+
+        <p>Hiçbiri zorunlu değil; ama Blazor'da grid, dialog, datepicker gibi bileşenleri sıfırdan yazmak zaman kaybıdır.
+        Lisans sütununa dikkat et: bazıları ücretsiz görünüp gelir eşiğine göre ücretli hale gelir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi durumda hangi kütüphane</caption>
+            <thead><tr><th>Durum</th><th>Önerilen yol</th><th>Lisans / maliyet</th></tr></thead>
+            <tbody>
+              <tr><td>CSS'e uzaksın, hazır görünümle hızlı sonuç istiyorsun</td><td>MudBlazor (alternatif: Radzen bileşenleri, Ant Design Blazor)</td><td>Ücretsiz (MIT)</td></tr>
+              <tr><td>Bootstrap biliyorsun veya mevcut proje Bootstrap kullanıyor</td><td>Havit Blazor veya BlazorBootstrap</td><td>Ücretsiz</td></tr>
+              <tr><td>Microsoft 365 / Fluent görünümü isteyen kurumsal proje</td><td>Fluent UI Blazor</td><td>Ücretsiz</td></tr>
+              <tr><td>CSS'te güçlüsün, tasarımı kendin kurmak istiyorsun</td><td>Tailwind CSS + kendi bileşenlerin</td><td>Ücretsiz; emek senin</td></tr>
+              <tr><td>Ağır grid, rapor, zamanlayıcı (scheduler) ihtiyacı</td><td>Telerik, Syncfusion, DevExpress</td><td>Ücretli (aşağıdaki lisans dallarına bak)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; ücretli setlerde lisansı kim öder?</p>
+          <ul>
+            <li><strong>İşveren projesi</strong> &rarr; lisansı genelde şirket alır; satın alma onayı gerekir, kendi başına kurup kullanma.</li>
+            <li><strong>Bireysel / serbest çalışan ticari proje</strong> &rarr; lisans senin sorumluluğundur; maliyeti teklifine yansıt.</li>
+            <li><strong>Syncfusion Community License</strong> &rarr; yalnızca şartları sağlayana ücretsizdir (yaygın bilinen şartlar: yıllık brüt gelir 1 milyon USD altı, en fazla 5 geliştirici ve 10 çalışan) <span class="tag tag--warn">TEYİT</span> güncel şartlar: <a href="https://www.syncfusion.com/products/communitylicense">syncfusion.com/products/communitylicense</a>.</li>
+            <li><strong>Hobi / öğrenme</strong> &rarr; ücretsiz setler veya ücretli setlerin deneme sürümü; deneme sürümüyle üretime çıkma.</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Blazor bileşen kütüphaneleri ve lisans durumu</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MudBlazor</strong></td>
+                <td>Material Design tabanlı, en yaygın ücretsiz Blazor bileşen seti</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MIT; C# ağırlıklı, CSS bilgisi az gerektirir &mdash; CSS'e uzak durup hızlı sonuç istiyorsan en kolay başlangıç (seçim için aşağıdaki karar tablosuna bak)</td>
+                <td><a href="https://mudblazor.com/">mudblazor.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Radzen Blazor Components</strong></td>
+                <td>Geniş bileşen seti; bileşenler ücretsiz, Radzen Studio tasarım aracı ayrı ücretli</td>
+                <td><span class="tag">ORTA</span> &mdash; bileşen kütüphanesi ile Studio ürününü karıştırma</td>
+                <td><a href="https://blazor.radzen.com/">blazor.radzen.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazorise</strong></td>
+                <td>Bootstrap / Bulma / Material gibi farklı CSS altyapılarıyla çalışabilen set</td>
+                <td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; ticari kullanımda lisans gerekebilir, sitesindeki güncel şartları oku</td>
+                <td><a href="https://blazorise.com/">blazorise.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ant Design Blazor</strong></td>
+                <td>Ant Design tasarım dilinin Blazor uyarlaması (ücretsiz)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://antblazor.com/">antblazor.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fluent UI Blazor</strong></td>
+                <td>Microsoft'un Fluent tasarım dili bileşenleri (ücretsiz)</td>
+                <td><span class="tag">ORTA</span> &mdash; Microsoft 365 görünümü isteyen kurumsal projelerde tercih edilir</td>
+                <td><a href="https://www.fluentui-blazor.net/">fluentui-blazor.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Havit Blazor (Bootstrap)</strong></td>
+                <td>Bootstrap 5 tabanlı ücretsiz bileşen seti</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Bootstrap bilen için tanıdık; bu set onu Blazor'a taşır</td>
+                <td><a href="https://havit.blazor.eu/">havit.blazor.eu</a></td>
+              </tr>
+              <tr>
+                <td><strong>BlazorBootstrap</strong></td>
+                <td>Bootstrap 5 bileşenlerinin bir başka ücretsiz sarmalayıcısı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://demos.blazorbootstrap.com/">demos.blazorbootstrap.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Telerik UI for Blazor</strong></td>
+                <td>Progress'in ticari, çok kapsamlı bileşen seti</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; kurumsal projelerde sık; deneme sürümü var</td>
+                <td><a href="https://www.telerik.com/blazor-ui">telerik.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Syncfusion Blazor</strong></td>
+                <td>Çok geniş ticari set; şartları sağlayan küçük şirket/bireye topluluk lisansı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; Community License koşullarını (ciro/çalışan sayısı) mutlaka oku</td>
+                <td><a href="https://www.syncfusion.com/products/communitylicense">syncfusion.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DevExpress Blazor</strong></td>
+                <td>Ticari bileşen seti; bazı Blazor bileşenleri ücretsiz sunulur</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; güncel ücretsiz kapsamı sitesinden doğrula</td>
+                <td><a href="https://www.devexpress.com/blazor/">devexpress.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tailwind CSS + Blazor</strong></td>
+                <td>Bileşen kütüphanesi yerine utility CSS ile kendi tasarımını kurma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; CSS bilgisi ister; bkz. <a href="../../HTML-CSS/index.html">HTML ve CSS bölümü</a></td>
+                <td><a href="https://tailwindcss.com/">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chart bileşenleri</strong></td>
+                <td>Grafik için ApexCharts.Blazor, ChartJs.Blazor, Radzen/MudBlazor chart'ları</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; çoğu JS kütüphanesinin sarmalayıcısıdır; JS interop devreye girer</td>
+                <td>apexcharts.github.io/Blazor-ApexCharts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="maui"><span class="h-num">§ 8</span>.NET MAUI</h2>
+
+        <div class="def">
+          <p class="def__term">.NET MAUI <small>Multi-platform App UI</small></p>
+          <p>Tek C#/XAML kod tabanından Android, iOS, macOS ve Windows uygulaması üreten çatı. Xamarin.Forms'un
+          devamıdır. Arama yaparken "MAUI" yerine <strong>".NET MAUI"</strong> yaz; "Maui" başka şeylerle karışır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>MAUI proje yapısı ve temel kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>.NET MAUI</strong></td>
+                <td>Çok platformlu istemci uygulama çatısı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>single project</strong></td>
+                <td>Tüm platformlar tek <code>.csproj</code> içinde; <code>Platforms/</code> klasörü</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; Xamarin'deki ayrı projeler yapısından farkı budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/single-project">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MauiProgram / CreateMauiApp</strong></td>
+                <td>Uygulamanın giriş noktası; DI kayıtları burada yapılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ASP.NET Core'daki <code>Program.cs</code>'in karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>XAML</strong></td>
+                <td>Arayüzü tanımlayan XML tabanlı işaretleme dili</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; arayüz ağacını (sayfa, layout, kontrol) bildirimsel tanımlar; davranış C# tarafında kalır. WPF/Avalonia'dan geliyorsan: aynı fikir, farklı lehçe (kontrol adları ve bazı özellikler farklı)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>markup extension</strong></td>
+                <td><code>{Binding}</code>, <code>{StaticResource}</code>, <code>{x:Static}</code> gibi XAML içi ifadeler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/markup-extensions/consume">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ContentPage</strong></td>
+                <td>Tek içerikli sayfa; MAUI'nin en temel sayfa tipi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/pages/contentpage">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>layout (Grid, StackLayout, FlexLayout)</strong></td>
+                <td>Yerleşim kapsayıcıları</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>Grid</code> performans açısından tercih edilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/layouts/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>controls</strong></td>
+                <td>Button, Entry, Label, Picker, CheckBox vb. hazır kontroller</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CollectionView</strong></td>
+                <td>Liste gösterimi; <code>ListView</code>'in modern halefi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>ItemsSource</code> + <code>ItemTemplate</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/collectionview/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>data binding</strong></td>
+                <td>XAML'deki görünüm ile ViewModel arasındaki bağ</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>BindingContext</code>, <code>Mode=TwoWay</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IValueConverter (converter)</strong></td>
+                <td>Bağlanan değeri görünüme uygun tipe çeviren sınıf (bool &rarr; renk)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/converters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BindableProperty</strong></td>
+                <td>Özel kontrolde bağlanabilir özellik tanımlama</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; özel kontrolün özelliğini binding, stil ve değişim bildirimiyle çalışır hâle getirir (<code>BindableProperty.Create</code>). WPF'ten geliyorsan: <code>DependencyProperty</code>'nin MAUI karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MVVM</strong></td>
+                <td>Model &mdash; View &mdash; ViewModel deseni; XAML dünyasının standardı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CommunityToolkit.Mvvm</strong></td>
+                <td>Kaynak üreteçli MVVM kütüphanesi (ücretsiz, MIT)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MVVM Toolkit olarak da geçer; elle <code>INotifyPropertyChanged</code> yazmayı bitirir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[ObservableProperty]</strong></td>
+                <td>Alandan otomatik bildirimli özellik üreten attribute</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>partial</code> sınıf zorunlu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/generators/observableproperty">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>[RelayCommand]</strong></td>
+                <td>Metottan <code>ICommand</code> üreten attribute</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>CanExecute</code> ve async destekli</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/relaycommand">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WeakReferenceMessenger</strong></td>
+                <td>ViewModel'ler arası gevşek bağlı mesajlaşma</td>
+                <td><span class="tag">ORTA</span> &mdash; uygulama içi mesajlaşmadır; RabbitMQ ile ilgisi yok (bkz. <a href="../05-mesajlasma-ve-dagitik/index.html">05</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/messenger">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shell (AppShell)</strong></td>
+                <td>MAUI'nin gezinme, flyout menü ve tab yapısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>Shell.Current.GoToAsync("//route")</code>; URI tabanlı gezinme</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dependency injection (MAUI)</strong></td>
+                <td>Sayfa ve ViewModel'lerin DI ile çözülmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ASP.NET Core'dan DI biliyorsan buradaki fark ömür yönetimidir (Singleton sayfa tuzağı); DI'a yeniysen önce <a href="../02-platform-ve-web-api/index.html">02</a>'deki DI ve servis ömürleri</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>app lifecycle</strong></td>
+                <td>Uygulamanın başlaması, arkaplana düşmesi, geri dönmesi</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>OnStart</code>, <code>OnSleep</code>, <code>OnResume</code></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>platform-specific code</strong></td>
+                <td><code>#if ANDROID</code>, partial class ve <code>Platforms/</code> klasörü ile platforma özel kod</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/configure-multi-targeting">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>handlers</strong></td>
+                <td>MAUI kontrolünü yerel platform kontrolüne bağlayan katman</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Xamarin'deki "renderer" yerine geldi; görünüm özelleştirmenin resmî yolu</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>platform integration (Essentials)</strong></td>
+                <td>Konum, kamera, dosya, tercihler, bağlantı durumu gibi cihaz API'leri</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; eski adı Xamarin.Essentials; artık MAUI içinde</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MainThread</strong></td>
+                <td>Arayüz güncellemesini UI iş parçacığında çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; "yalnızca ana iş parçacığından" hatasının çözümü</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/appmodel/main-thread">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>styles / resource dictionary</strong></td>
+                <td>XAML'de tema, stil ve kaynak yönetimi</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>AppThemeBinding</code> ile açık/koyu tema</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/styles/xaml">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>behaviors / triggers</strong></td>
+                <td>Kod yazmadan kontrole davranış ekleme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/behaviors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>graphics (Microsoft.Maui.Graphics)</strong></td>
+                <td>Platformdan bağımsız 2B çizim API'si</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; alternatif: SkiaSharp</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET MAUI Community Toolkit</strong></td>
+                <td>Popup, Snackbar, davranışlar, converter'lar içeren ücretsiz ek paket</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>CommunityToolkit.Mvvm</code> ile aynı şey değildir; ikisi ayrı paket</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blazor Hybrid / BlazorWebView</strong></td>
+                <td>MAUI uygulamasının içinde Blazor bileşeni çalıştırma</td>
+                <td><span class="tag">ORTA</span> &mdash; web bilgini masaüstü/mobile taşımanın yolu; ağır grafik için uygun değil</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MAUI + Blazor öğreticisi</strong></td>
+                <td>Adım adım BlazorWebView kurulumu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/maui">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>local web service (yerel API çağrısı)</strong></td>
+                <td>Emülatörden localhost API'ye erişme; sertifika ve IP tuzakları</td>
+                <td><span class="tag">ORTA</span> &mdash; adres, uygulamanın çalıştığı yere göre değişir: Android emülatör &rarr; <code>10.0.2.2</code> (host makinenin localhost'u); iOS simülatör (Mac'te) &rarr; <code>localhost</code> doğrudan çalışır; Windows / Mac Catalyst hedefi &rarr; <code>localhost</code>; fiziksel telefon (USB/Wi-Fi) &rarr; bilgisayarın yerel ağ IP'si (API'nin <code>0.0.0.0</code>'da dinlemesi ve güvenlik duvarı izni gerekir), Visual Studio dev tunnels ya da Android'de <code>adb reverse</code>. Her durumda HTTPS geliştirme sertifikası ve Android'in açık metin (cleartext) HTTP kısıtı ayrıca ele alınır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/data-cloud/local-web-services">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Xamarin.Forms</strong></td>
+                <td>MAUI'nin selefi; destek süresi dolmuştur</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; eski kaynakların çoğu Xamarin.Forms anlatır, doğrudan uygulanmaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/migration/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>yayınlama &mdash; Android</strong></td>
+                <td>Keystore ile imzalama, AAB üretme, Play Console</td>
+                <td><span class="tag">ORTA</span> &mdash; <code>dotnet publish -f net&lt;sürüm&gt;-android</code>. Google Play geliştirici hesabı tek seferlik kayıt ücretlidir (25 USD) <span class="tag tag--warn">TEYİT</span>; yeni kişisel hesaplarda üretime çıkmadan önce kapalı test şartı (test kullanıcı sayısı ve süresi) vardır, kurumsal hesapta bu şart farklıdır &mdash; güncel kurallar: support.google.com/googleplay/android-developer. Play dışında APK'yı doğrudan dağıtmak (iç kullanım, kurumsal MDM) da mümkündür</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>yayınlama &mdash; iOS</strong></td>
+                <td>Provisioning profile, sertifika, App Store dağıtımı</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; hedefe göre: yalnızca Android/Windows hedefliyorsan Mac ve Apple üyeliği gerekmez. iOS'u yalnızca kendi cihazında denemek için ücretsiz Apple ID ile geliştirici imzası mümkündür (kısa süreli profil) <span class="tag tag--warn">TEYİT</span>, ama bu durumda Mac gerekir (yerel ya da Visual Studio'nun "Pair to Mac" özelliğiyle ağdaki/buluttaki Mac). Ücretli Apple Developer Program üyeliğin varsa ve Windows'ta Visual Studio kullanıyorsan, "Hot Restart" ile Mac olmadan USB'ye bağlı fiziksel iOS cihazda deneme yapılabilir; ancak simülatör, tam derleme ve App Store yayını için yine Mac (ya da bulut macOS derleme ajanı) gerekir <span class="tag tag--warn">TEYİT</span> &mdash; güncel şartlar: learn.microsoft.com/dotnet/maui/ios/hot-restart. App Store'a yayın için Apple Developer Program yıllık ücretlidir (99 USD) <span class="tag tag--warn">TEYİT</span>; bireysel hesapta satıcı adı kişi adın olur, kurumsal hesapta D-U-N-S numarası gerekir &mdash; güncel şartlar: developer.apple.com/programs</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/ios/deployment/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>yayınlama &mdash; Windows / macOS</strong></td>
+                <td>MSIX paketleme, Mac Catalyst dağıtımı</td>
+                <td><span class="tag">ORTA</span> &mdash; macOS hedefi "Mac Catalyst" adıyla aranır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/deployment/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MAUI UI kütüphaneleri</strong></td>
+                <td>Syncfusion MAUI Toolkit, DevExpress MAUI, Telerik MAUI</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; DevExpress MAUI bileşenlerinin bir kısmı ücretsiz sunulur; şartları doğrula</td>
+                <td><a href="https://github.com/dotnet/maui">github.com/dotnet/maui</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="maui-flutter"><span class="h-num">§ 9</span>MAUI'ye giriş yolu: başlangıç noktasına göre (Flutter eşleştirme tablosu dahil)</h2>
+
+        <p>MAUI'ye nereden başlayacağın, daha önce ne bildiğine bağlıdır. Bu bölümdeki eşleştirme tablosu yalnızca
+        <strong>Flutter/Dart'tan geliyorsan</strong> işe yarayan ek bilgidir; diğer başlangıç noktaları için önce aşağıdaki karar tablosuna bak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre MAUI'ye giriş yolu</caption>
+            <thead><tr><th>Nereden geliyorsun</th><th>Ne tanıdık</th><th>Nereden başla</th></tr></thead>
+            <tbody>
+              <tr><td>Flutter / Dart</td><td>Widget ağacı, async-await, rota tabanlı gezinme</td><td>Bu bölümdeki eşleştirme tablosu &rarr; tek ekranlı liste + detay + Shell uygulaması (§ 8)</td></tr>
+              <tr><td>WPF / Avalonia / Xamarin.Forms (XAML + MVVM)</td><td>XAML, binding ve MVVM neredeyse aynı</td><td>Eşleştirme tablosunu atla; farkları oku: Shell gezinmesi, handler (Xamarin'deki renderer'ın yerine), single project, Essentials (§ 8)</td></tr>
+              <tr><td>React Native / Ionic gibi web tabanlı mobil çatılar</td><td>Bileşen ve state fikri</td><td>Asıl fark XAML + MVVM ve yerel kontrollerdir (§ 11, § 8); web bilgini taşımak istersen Blazor Hybrid (BlazorWebView)</td></tr>
+              <tr><td>Kotlin / Swift ile yerel mobil</td><td>Platform API'leri, yaşam döngüsü, mağaza yayını</td><td>MAUI'nin soyutlama katmanına odaklan: handlers, partial class + <code>Platforms/</code> klasörü, tek kod tabanı mantığı (§ 8)</td></tr>
+              <tr><td>Hiç mobil/arayüz deneyimin yok</td><td>&mdash;</td><td>Önce § 11 (MVVM, INotifyPropertyChanged, ICommand), sonra § 8'i sırasıyla; eşleştirme tablosunu atla</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Flutter/Dart'tan geliyorsan MAUI'yi sıfırdan öğrenmene gerek yok; kavramların çoğunun birebir karşılığı var.
+        Aşağıdaki tabloyu ezberleme, <strong>arama kelimesi haritası</strong> olarak kullan.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Flutter &rarr; .NET MAUI kavram eşleştirmesi</caption>
+            <thead><tr><th>Flutter / Dart</th><th>.NET MAUI karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Widget</strong></td>
+                <td>View / Control (Button, Label, Entry)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MAUI'de her şey widget değildir; sayfa, layout ve kontrol ayrı kavramlardır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StatelessWidget</strong></td>
+                <td>Basit View / ContentView</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StatefulWidget + setState()</strong></td>
+                <td>ViewModel + <code>INotifyPropertyChanged</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; en kritik zihinsel geçiş: MAUI'de "yeniden çiz" demezsin, "özellik değişti" dersin</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>build() metodu</strong></td>
+                <td>XAML dosyası (bildirimsel işaretleme)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MAUI'de arayüz genelde kodda değil XAML'de kurulur; C# Markup alternatifi de var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Column / Row</strong></td>
+                <td>VerticalStackLayout / HorizontalStackLayout</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <code>Grid</code> ikisinin yerine de geçer ve daha performanslıdır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/layouts/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ListView.builder</strong></td>
+                <td>CollectionView + ItemTemplate</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; sanallaştırma ikisinde de var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/collectionview/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Navigator / go_router</strong></td>
+                <td>Shell + <code>GoToAsync</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ikisi de URI/rota tabanlı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Provider / Riverpod / BLoC</strong></td>
+                <td>DI + ViewModel (CommunityToolkit.Mvvm)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MAUI'de tek "resmî" state yönetimi yoktur, MVVM standarttır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stream / StreamBuilder</strong></td>
+                <td><code>IObservable</code> (Rx.NET) veya <code>IAsyncEnumerable</code></td>
+                <td><span class="tag">ORTA</span> &mdash; birebir karşılık değil; ReactiveUI bu tarafı doldurur</td>
+                <td><a href="https://www.reactiveui.net/">reactiveui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Future / async-await</strong></td>
+                <td><code>Task</code> / <code>async-await</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; neredeyse birebir; ayrıntı için <a href="../01-csharp-dili/index.html">01 &mdash; C# Dili</a></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pub.dev / pubspec.yaml</strong></td>
+                <td>NuGet / <code>.csproj</code> PackageReference</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; paket kataloğu için <a href="../10-kutuphaneler/index.html">10 &mdash; Kütüphane Kataloğu</a></td>
+                <td><a href="https://www.nuget.org/">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hot reload</strong></td>
+                <td>.NET Hot Reload / XAML Hot Reload</td>
+                <td><span class="tag">ORTA</span> &mdash; MAUI'de Flutter kadar hızlı ve güvenilir değildir, beklentini ayarla</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MethodChannel (platform channel)</strong></td>
+                <td>Partial class + <code>#if ANDROID</code> / handler</td>
+                <td><span class="tag">ORTA</span> &mdash; MAUI'de platform API'sine doğrudan C#'tan erişirsin, köprü yazmazsın</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/configure-multi-targeting">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Skia / kendi çizim motoru</strong></td>
+                <td>Yerel (native) kontroller</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; <strong>en önemli felsefi fark:</strong> Flutter her pikseli kendi çizer, MAUI platformun kendi kontrolünü kullanır</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Theme / ThemeData</strong></td>
+                <td>ResourceDictionary + <code>AppThemeBinding</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/styles/xaml">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InheritedWidget</strong></td>
+                <td>BindingContext kalıtımı / Blazor'daki CascadingValue</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/data-binding/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>flutter build apk</strong></td>
+                <td><code>dotnet publish -f net&lt;sürüm&gt;-android</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/publish-cli">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flutter resmî dokümanı</strong></td>
+                <td>Karşılaştırırken orijinal kaynağı yanında tut</td>
+                <td><span class="tag">ORTA</span> &mdash; Dart/Flutter tarafının asıl kaynağı</td>
+                <td><a href="https://docs.flutter.dev/">docs.flutter.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="masaustu"><span class="h-num">§ 10</span>Masaüstü çatıları</h2>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi &mdash; Avalonia neden ayrı önemli</p>
+          <p>.NET ile Windows, Linux ve macOS'ta çalışan bir masaüstü arayüzü kurulmuşsa,
+          altındaki çatı sıkça <strong>Avalonia</strong> olur (Uno Platform, MAUI'nin masaüstü hedefleri veya Electron tabanlı çözümler de seçenekler arasındadır). Avalonia'da WPF'e çok benzeyen XAML yazarsın ama
+          uygulama Windows, Linux ve macOS'ta çalışır. İkisinin XAML'i benzer ama <strong>aynı değildir</strong> (Avalonia'da <code>Styles</code> CSS benzeri
+          seçicilerle çalışır, WPF'te <code>Style</code>/<code>Trigger</code> vardır).</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi hedefte hangi masaüstü çatısı</caption>
+            <thead><tr><th>Hedef</th><th>Uygun çatılar</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Yalnızca Windows</td><td>WPF, WinForms, WinUI 3</td><td>Olgun ekosistem ve kurumsal iş: WPF; hızlı iç araç: WinForms; modern Fluent görünüm: WinUI 3</td></tr>
+              <tr><td>Windows + Linux + macOS</td><td>Avalonia veya Uno Platform</td><td>MAUI resmî olarak Linux masaüstünü desteklemez</td></tr>
+              <tr><td>Mobil + masaüstü birlikte</td><td>MAUI, Avalonia veya Uno Platform</td><td>MAUI platformun yerel kontrollerini kullanır; Avalonia her platformda aynı görünür</td></tr>
+              <tr><td>Web (Blazor/HTML) bilgisini masaüstüne taşımak</td><td>Blazor Hybrid, Photino, Electron.NET</td><td>Paket boyutu ve bellek maliyetini karşılaştır</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat &mdash; "WPF mi kullandın, Avalonia mı?" sorusu</p>
+          <p>Mülakatta bu soru gelirse cevabın kendi deneyimine göre değişir; kural her durumda aynı: yaptığından fazlasını söyleme.</p>
+          <ul>
+            <li><strong>Avalonia kullandıysan</strong> &rarr; gerekçeyi söyle; ör. "Uygulamanın Linux/macOS'ta da çalışması gerekiyordu" veya "her platformda aynı görünüm için Skia çizimini tercih ettik".</li>
+            <li><strong>WPF kullandıysan</strong> &rarr; ör. "Yalnızca Windows hedefliydik; olgun ekosistem ve kurumsal standart buydu"; Avalonia'yı çok platform alternatifi olarak tanıdığını da ekle.</li>
+            <li><strong>WinForms / WinUI 3 / MAUI kullandıysan</strong> &rarr; kendi gerekçeni söyle (hızlı iç araç, Fluent görünüm, mobil + masaüstü tek kod tabanı).</li>
+            <li><strong>Hiç masaüstü projen yoksa</strong> &rarr; "kullandım" deme; seçim kriterlerini (hedef işletim sistemleri, ekibin XAML bilgisi, lisans, görünüm tutarlılığı) anlatabilmen yeterli.</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Masaüstü UI çatıları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>WPF</strong></td>
+                <td>Windows'un XAML tabanlı masaüstü çatısı; olgun ve yaygın</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; sadece Windows; kurumsal iç uygulamalarda hâlâ çok iş var</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WPF data binding</strong></td>
+                <td>Binding, DataContext, INotifyPropertyChanged, ObservableCollection</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MAUI ve Avalonia'nın da temeli aynı fikirdir</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/data-binding-overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DependencyProperty</strong></td>
+                <td>WPF'te bağlanabilir/animasyona uygun özellik sistemi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ObservableCollection&lt;T&gt;</strong></td>
+                <td>Değişikliği arayüze bildiren koleksiyon</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; her XAML çatısında kullanılır; UI thread dışından değiştirme</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.observablecollection-1">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dispatcher</strong></td>
+                <td>UI iş parçacığına iş kuyruğa alma</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; MAUI'deki <code>MainThread</code>'in WPF karşılığı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/windows/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WinForms</strong></td>
+                <td>Sürükle-bırak tasarımcılı, en eski ve en hızlı öğrenilen Windows arayüz çatısı</td>
+                <td><span class="tag">ORTA</span> &mdash; ölmedi; .NET 8/9/10 destekliyor. İç araç yazmak için hâlâ en hızlısı</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WinUI 3</strong></td>
+                <td>Windows'un modern (Fluent) yerel arayüz katmanı</td>
+                <td><span class="tag">ORTA</span> &mdash; Windows App SDK ile birlikte gelir; UWP ile karıştırma</td>
+                <td><a href="https://learn.microsoft.com/en-us/windows/apps/winui/winui3/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Windows App SDK</strong></td>
+                <td>WinUI 3'ün de içinde olduğu modern Windows uygulama kütüphanesi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>UWP</strong></td>
+                <td>Windows 10 dönemi uygulama modeli</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> &mdash; yeni projede WinUI 3 kullanılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/windows/apps/design/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia UI</strong></td>
+                <td>Windows, Linux, macOS (ve mobil/WASM) çalışan, WPF'e benzeyen açık kaynak XAML çatısı</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; ücretsiz, MIT; kendi çizim motorunu (Skia) kullanır, bu yüzden her platformda aynı görünür</td>
+                <td><a href="https://docs.avaloniaui.net/docs/welcome">docs.avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia &mdash; başlangıç</strong></td>
+                <td>Şablonlar, <code>dotnet new avalonia.mvvm</code>, proje yapısı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.avaloniaui.net/docs/get-started/">docs.avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia &mdash; data binding</strong></td>
+                <td>Compiled binding (<code>x:DataType</code>) ile derleme zamanı kontrollü bağlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; WPF'te olmayan güçlü fark; performans avantajı buradan gelir</td>
+                <td><a href="https://docs.avaloniaui.net/docs/basics/data/data-binding/">docs.avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia &mdash; Styles / Selectors</strong></td>
+                <td>CSS benzeri seçicilerle stil verme</td>
+                <td><span class="tag">ORTA</span> &mdash; stil, seçiciyle (<code>Button.primary</code>, <code>:pointerover</code>) eşleşen kontrollere uygulanır; CSS biliyorsan mantık tanıdık gelir. WPF'ten geliyorsan: <code>Style</code>/<code>Trigger</code> alışkanlığı burada çalışmaz, en çok takılınan yer burasıdır</td>
+                <td><a href="https://docs.avaloniaui.net/docs/welcome">docs.avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia + ReactiveUI</strong></td>
+                <td>Avalonia şablonlarının varsayılan MVVM seçeneklerinden biri</td>
+                <td><span class="tag">ORTA</span> &mdash; CommunityToolkit.Mvvm ile de kullanılabilir; zorunlu değil</td>
+                <td><a href="https://docs.avaloniaui.net/docs/concepts/reactiveui/">docs.avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia XPF</strong></td>
+                <td>Mevcut WPF uygulamasını Linux/macOS'ta çalıştıran ticari ürün</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; Avalonia UI'nin kendisi ücretsizdir, XPF ayrı ve ticari üründür; karıştırma</td>
+                <td><a href="https://avaloniaui.net/xpf">avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Avalonia Accelerate</strong></td>
+                <td>Ticari araç/eklenti paketi (tasarımcı, profiler vb.)</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> &mdash; çekirdek çatı için gerekli değildir</td>
+                <td><a href="https://avaloniaui.net/accelerate">avaloniaui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Uno Platform</strong></td>
+                <td>WinUI/XAML API'siyle mobil, masaüstü ve WebAssembly hedefleyen çatı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; açık kaynak; ticari destek/araç paketleri ücretlidir</td>
+                <td><a href="https://platform.uno/docs/articles/intro.html">platform.uno</a></td>
+              </tr>
+              <tr>
+                <td><strong>Electron.NET</strong></td>
+                <td>ASP.NET Core uygulamasını Electron kabuğunda masaüstü uygulaması yapma</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; büyük paket boyutu ve bellek maliyeti var; bakım durumunu deposundan kontrol et</td>
+                <td><a href="https://github.com/ElectronNET/Electron.NET">github.com/ElectronNET</a></td>
+              </tr>
+              <tr>
+                <td><strong>Photino</strong></td>
+                <td>Sistemin kendi WebView'ını kullanan, çok hafif masaüstü kabuğu</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Electron'a hafif alternatif; Blazor ile birlikte kullanılır</td>
+                <td><a href="https://www.tryphotino.io/">tryphotino.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Windows Community Toolkit</strong></td>
+                <td>WinUI/Windows uygulamaları için ücretsiz yardımcı kontroller</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/windows/communitytoolkit/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SkiaSharp</strong></td>
+                <td>Skia grafik motorunun .NET bağlaması; özel çizim gerektiren arayüzler</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Avalonia ve MAUI'nin altında da kullanılır</td>
+                <td>github.com/mono/SkiaSharp</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="istemci-mimarisi"><span class="h-num">§ 11</span>İstemci tarafı mimari desenleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>MVVM, MVU ve yardımcı çatılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MVVM</strong></td>
+                <td>View bağlama yoluyla ViewModel'i izler; kod-arkasında iş mantığı olmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; XAML dünyasında fiilî standart</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/xaml/fundamentals/mvvm">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>INotifyPropertyChanged</strong></td>
+                <td>MVVM'in kalbi: özellik değişimini arayüze bildiren arayüz</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.inotifypropertychanged">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ICommand / RelayCommand</strong></td>
+                <td>Butona bağlanan komut nesnesi; <code>CanExecute</code> ile etkinlik kontrolü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/relaycommand">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CommunityToolkit.Mvvm (MVVM Toolkit)</strong></td>
+                <td>Kaynak üreteçli, hafif, bağımsız MVVM kütüphanesi (MIT)</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; WPF, MAUI, Avalonia, WinUI hepsinde kullanılabilir</td>
+                <td><a href="https://github.com/CommunityToolkit/dotnet">github.com/CommunityToolkit/dotnet</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReactiveUI</strong></td>
+                <td>Rx (Reactive Extensions) tabanlı MVVM çatısı</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ücretsiz; öğrenme eğrisi diktir, olay akışı yoğun uygulamalarda kazandırır</td>
+                <td><a href="https://www.reactiveui.net/">reactiveui.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prism</strong></td>
+                <td>Modüler uygulama, bölge (region) yönetimi, navigasyon, DI içeren olgun çatı</td>
+                <td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> &mdash; bazı paket/sürümleri ticari lisans gerektirir; kullanmadan önce lisans sayfasını oku</td>
+                <td><a href="https://prismlibrary.com/">prismlibrary.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MVU (Model-View-Update)</strong></td>
+                <td>Elm/Redux tarzı tek yönlü akış; durum &rarr; görünüm, olay &rarr; yeni durum</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; .NET tarafında Fabulous ve Comet gibi projelerle temsil edilir; MAUI'nin ana modeli değildir</td>
+                <td>fabulous.dev</td>
+              </tr>
+              <tr>
+                <td><strong>MVP (Model-View-Presenter)</strong></td>
+                <td>WinForms dünyasında sık kullanılan, view'i pasif tutan desen</td>
+                <td><span class="tag">ORTA</span> &mdash; eski WinForms kodlarını düzenlerken işine yarar</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ViewModel-first / View-first</strong></td>
+                <td>Sayfa mı ViewModel'i çözer, ViewModel mi sayfayı seçer</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; DI kurulumunu doğrudan etkiler</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>DataTemplate / DataTemplateSelector</strong></td>
+                <td>Veri tipine göre farklı görünüm üretme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/collectionview/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ViewModel testi</strong></td>
+                <td>UI olmadan ViewModel'i xUnit ile test etme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; mock test öğrenmek için MVVM en kolay zemin (<a href="../06-test-ve-kalite/index.html">06</a>)</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>UI otomasyon testi</strong></td>
+                <td>Appium (mobil/masaüstü), Playwright (web/Blazor)</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; ikisi de ücretsiz</td>
+                <td><a href="https://playwright.dev/dotnet/">playwright.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="frontend-koprusu"><span class="h-num">§ 12</span>Web arayüzü köprüsü: nereye kadar .NET, nereden sonra JavaScript</h2>
+
+        <p>.NET'ten gelip JavaScript bilmiyorsan Blazor, "JavaScript öğrenmeden web arayüzü yazayım" isteğini büyük ölçüde karşılar; ama tamamen değil.
+        Aşağıdaki üç durumda JavaScript/TypeScript bilgisi kaçınılmazdır ve o taraf
+        <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript</a> ile <a href="../../HTML-CSS/index.html">HTML ve CSS</a> bölümlerinde ayrıca çalışılır.</p>
+
+        <ul class="checklist">
+          <li>Bir JS kütüphanesini (harita, grafik, zengin metin editörü) Blazor'a bağlamak &mdash; JS interop yazmak gerekir.</li>
+          <li>MVC/Razor Pages projesinde istemci tarafı doğrulama, AJAX ve DOM işleri &mdash; jQuery veya vanilla JS.</li>
+          <li>İş ilanlarının önemli kısmı ASP.NET Core API + React/Angular ister &mdash; React, TypeScript ve JavaScript bilgisi bu yüzden değerlidir.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç noktasına göre JavaScript ihtiyacı</caption>
+            <thead><tr><th>Durum</th><th>Ne yapmalı</th></tr></thead>
+            <tbody>
+              <tr><td>.NET'ten geliyorsun, JavaScript bilmiyorsun</td><td>Blazor'la başla; JS interop'ta zorlandığın anda JavaScript ve TypeScript bölümüne geç, temel JS'i orada kapat, geri dön.</td></tr>
+              <tr><td>JavaScript/TypeScript ve React/Angular biliyorsun</td><td>Blazor'un senin için değeri "JS'ten kaçmak" değil, ön yüz ve arka yüzde aynı dili ve tipleri paylaşmaktır. React + ASP.NET Core Web API (<a href="../02-platform-ve-web-api/index.html">02</a>) seçeneğiyle artı/eksi karşılaştırması yap; JS interop senin için kolay kısımdır.</td></tr>
+              <tr><td>Hiç programlama geçmişin yok</td><td>Önce HTML/CSS ve temel C# (<a href="../01-csharp-dili/index.html">01</a>); JavaScript'i Blazor'dan sonra, ihtiyaç anında öğren.</td></tr>
+              <tr><td>Yalnızca mobil/masaüstü (MAUI, WPF, Avalonia) hedefliyorsun</td><td>JavaScript zorunlu değildir (Blazor Hybrid kullanmıyorsan).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bu sayfadan çıkan çapraz bağlantılar</caption>
+            <thead><tr><th>Konu</th><th>Nerede</th><th>Not</th><th>Bağlantı</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>JavaScript, TypeScript, React</strong></td>
+                <td>JavaScript ve TypeScript bölümü</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; yalnızca .NET'ten gelen geliştiricide sık görülen eksik; JS/TS biliyorsan bu satırı atlayabilirsin</td>
+                <td><a href="../../JavaScript-TypeScript/index.html">../../JavaScript-TypeScript/</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTML, CSS</strong></td>
+                <td>HTML ve CSS bölümü</td>
+                <td><span class="tag">ORTA</span> &mdash; Razor, Blazor ve UI kütüphaneleri bu temele dayanır</td>
+                <td><a href="../../HTML-CSS/index.html">HTML-CSS bölümü</a></td>
+              </tr>
+              <tr>
+                <td><strong>Middleware, JWT, rate limiting, Minimal API</strong></td>
+                <td>Platform ve Web API</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a></td>
+              </tr>
+              <tr>
+                <td><strong>EF Core, Dapper, SQL Server</strong></td>
+                <td>Veri erişimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> &mdash; arayüzün arkasındaki veri katmanı</td>
+                <td><a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></td>
+              </tr>
+              <tr>
+                <td><strong>CQRS, Mediator, katmanlı mimari</strong></td>
+                <td>Mimari ve desenler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; CQRS ilk okumada kavranması zor bir konudur</td>
+                <td><a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a></td>
+              </tr>
+              <tr>
+                <td><strong>SignalR, Redis, RabbitMQ</strong></td>
+                <td>Mesajlaşma ve dağıtık</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; Blazor Server SignalR üstünde çalışır, bağlantı buradan</td>
+                <td><a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a></td>
+              </tr>
+              <tr>
+                <td><strong>xUnit, Moq, bUnit, BenchmarkDotNet</strong></td>
+                <td>Test ve kalite</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Actions, Azure DevOps, yayınlama</strong></td>
+                <td>DevOps ve gözlemlenebilirlik</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> &mdash; mobil/masaüstü yayınlama da CI hattı ister</td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire, bulut ve modern .NET</strong></td>
+                <td>Aspire ve modern .NET</td>
+                <td><span class="tag tag--info">İLERİ</span> &mdash; Aspire dokümantasyonu ayrı bir adrese taşındı, o sayfada belirtiliyor</td>
+                <td><a href="../09-aspire-bulut-modern/index.html">09 — Aspire, Bulut ve Modern .NET</a></td>
+              </tr>
+              <tr>
+                <td><strong>Java ekosistemi karşılaştırması</strong></td>
+                <td>Java bölümü</td>
+                <td><span class="tag">ORTA</span> &mdash; Java'dan geliyorsan ya da iki ekosistemi karşılaştırıyorsan: Thymeleaf/JSF, Razor'un Java'daki karşılığıdır</td>
+                <td><a href="../../Java/index.html">Java bölümü</a></td>
+              </tr>
+              <tr>
+                <td><strong>Programlama genel bakış</strong></td>
+                <td>Programlama ana sayfası</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../../index.html">Programlama ana sayfası</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet &mdash; bu sayfanın öncelik sırası</h2>
+
+        <p>Tek bir doğru sıra yok; sıra, bu sayfayı neden okuduğuna bağlıdır. Önce hedefini aşağıdaki tablodan seç.
+        Hangi yolu seçersen seç, her adımda okuma değil, <strong>küçük bir çalışan proje</strong> üret.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hedefe göre öğrenme sırası</caption>
+            <thead><tr><th>Hedefin</th><th>Önerilen sıra</th><th>Ertelenebilir</th></tr></thead>
+            <tbody>
+              <tr><td>Sunucu tarafı web / iş ilanlarına hazırlık</td><td>Aşağıdaki numaralı sıra: MVC (§ 3) &rarr; Razor (§ 2) &rarr; Blazor (§ 4&ndash;7) &rarr; JS interop &rarr; MVVM &rarr; MAUI / masaüstü</td><td>MAUI, masaüstü ve ileri konular</td></tr>
+              <tr><td>C# ile etkileşimli web arayüzü (SPA benzeri)</td><td>§ 4 render modes &rarr; § 5 &rarr; § 6 &rarr; § 7; MVC'yi Razor sözdizimi kadar öğren (§ 2)</td><td>MVC'nin view katmanı, MAUI, masaüstü</td></tr>
+              <tr><td>Mobil uygulama</td><td>§ 11 MVVM &rarr; § 8 MAUI (§ 9'daki karar tablosuna göre giriş yolu)</td><td>MVC, Blazor (Blazor Hybrid kullanmayacaksan)</td></tr>
+              <tr><td>Masaüstü uygulama</td><td>§ 11 MVVM &rarr; § 10 (yalnızca Windows ise WPF/WinForms/WinUI 3, çok platformsa Avalonia/Uno)</td><td>MVC, Blazor, MAUI'nin mobil tarafı</td></tr>
+              <tr><td>Ön yüzü zaten React/Angular ile yazıyorsun</td><td>ASP.NET Core Web API (<a href="../02-platform-ve-web-api/index.html">02</a>) yeterli olabilir; Blazor'u alternatif olarak tanı (§ 4)</td><td>MVC view katmanı, Razor</td></tr>
+              <tr><td>Hiç programlama/arayüz geçmişin yok</td><td>HTML/CSS (<a href="../../HTML-CSS/index.html">HTML ve CSS</a>) ve temel C# (<a href="../01-csharp-dili/index.html">01</a>) &rarr; § 2 Razor &rarr; sonra yukarıdaki hedeflerden birini seç</td><td>Ücretli kütüphaneler ve ileri konular</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>"MÜLAKATTA SIK" önceliği yalnızca iş arıyorsan geçerlidir. Kendi ürününü yapıyorsan veya öğrenciysen öncelik,
+        projenin ihtiyacına göre belirlenir. Aşağıdaki numaralı sıra <strong>sunucu tarafı web / iş arama</strong> hedefi içindir;
+        başka bir hedef seçtiysen yalnızca ilgili adımları al.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">ASP.NET Core MVC'yi gerçekten kapat (§ 3)</span>
+            <p>İş ilanlarında en sık istenen UI çatısı bu (mobil/masaüstü hedefliyorsan bu adımı ertele). Controller/action, conventional + attribute routing,
+            model binding, ModelState doğrulama, filter pipeline sırası ve anti-forgery token. Bir CRUD ekranı yaz:
+            liste, detay, ekle, düzenle, sil. Redirect sonrası mesajı TempData ile taşı.</p>
+            <span class="steps__meta">Rozet: MÜLAKATTA SIK &middot; Kaynak: learn.microsoft.com/aspnet/core/mvc</span>
+          </li>
+          <li>
+            <span class="steps__title">Razor view katmanını sağlamlaştır (§ 2)</span>
+            <p>Layout, section, partial view, view component ve tag helper. HTML helper'ı sadece eski kod okuyabilmek
+            için tanı; yeni kod yazma. Aynı CRUD ekranını Razor Pages ile tekrar yaz &mdash; farkı hissedeceksin.</p>
+            <span class="steps__meta">Rozet: TEMEL &middot; Süre: MVC ile birlikte ilerler</span>
+          </li>
+          <li>
+            <span class="steps__title">Blazor'un render modes modelini öğren (§ 4)</span>
+            <p>Önce kavram: static SSR / InteractiveServer / InteractiveWebAssembly / InteractiveAuto. Bu ayrımı
+            kavramadan Blazor'da hata ayıklayamazsın. "Butonum tıklanmıyor" sorununun cevabı render modudur.</p>
+            <span class="steps__meta">Rozet: TEMEL &middot; Kaynak: blazor/components/render-modes</span>
+          </li>
+          <li>
+            <span class="steps__title">Blazor bileşen modelini kodla (§ 5)</span>
+            <p>Parameter, EventCallback, yaşam döngüsü metotları, StateHasChanged, IDisposable ve @key.
+            Generic bileşen yazmayı dene &mdash; generic tiplere hâkimsen bu seni hızla ileri seviyeye taşır; değilsen önce somut tipli bir tablo bileşeni yaz, generics'i (<a href="../01-csharp-dili/index.html">01</a>) öğrendikten sonra genelleştir.</p>
+            <span class="steps__meta">Rozet: TEMEL &middot; Çıktı: kendi yazdığın yeniden kullanılabilir tablo bileşeni</span>
+          </li>
+          <li>
+            <span class="steps__title">Blazor uygulama katmanı: form, routing, DI, state (§ 6)</span>
+            <p>EditForm + doğrulama, NavigationManager, servis ömürleri (Blazor Server'da Scoped tuzağı),
+            AuthorizeView. Sonra performans: Virtualize ve QuickGrid.</p>
+            <span class="steps__meta">Rozet: TEMEL/ORTA &middot; Not: DbContext ömür sorununu mutlaka test et</span>
+          </li>
+          <li>
+            <span class="steps__title">Bir UI kütüphanesi seç ve bir ekran bitir (§ 7)</span>
+            <p>Seçimi § 7'deki karar tablosuyla yap: CSS'e uzaksan MudBlazor, Bootstrap biliyorsan Havit Blazor veya
+            BlazorBootstrap, Fluent görünüm istiyorsan Fluent UI Blazor, CSS'te güçlüysen Tailwind + kendi bileşenlerin.
+            Ücretli setleri (Telerik, Syncfusion, DevExpress) ağır grid/rapor ihtiyacın yoksa sadece tanı; lisansı işveren
+            projesinde genelde şirket alır, bireysel ticari projede ise senin sorumluluğundadır.</p>
+            <span class="steps__meta">Rozet: TEMEL &middot; Maliyet: MIT'li ücretsiz bir set seçersen 0 TL</span>
+          </li>
+          <li>
+            <span class="steps__title">JS interop'a dokun, JavaScript ihtiyacını gör (§ 6, § 12)</span>
+            <p>Bir JS kütüphanesini Blazor'a bağla. JavaScript'e yabancıysan burada zorlanman normal.
+            Zorlandığın anda <a href="../../JavaScript-TypeScript/index.html">JavaScript ve TypeScript bölümüne</a> geç, temel JS'i orada kapat, geri dön.
+            JavaScript/TypeScript zaten biliyorsan bu adım kısa sürer; asıl işin interop'un C# tarafı (<code>IJSRuntime</code>, <code>[JSInvokable]</code>, modül izolasyonu).</p>
+            <span class="steps__meta">Rozet: MÜLAKATTA SIK &middot; Yalnızca .NET'ten gelenlerde sık görülen açık</span>
+          </li>
+          <li>
+            <span class="steps__title">MVVM'i CommunityToolkit.Mvvm ile öğren (§ 11)</span>
+            <p>MAUI'ye veya Avalonia'ya girmeden önce MVVM'i kavra: INotifyPropertyChanged, ICommand,
+            [ObservableProperty], [RelayCommand]. ViewModel'i xUnit ile test et &mdash; mock testine buradan
+            başlamak, Web API'den başlamaktan kolaydır.</p>
+            <span class="steps__meta">Rozet: TEMEL &middot; Yan kazanç: mock testi öğretir</span>
+          </li>
+          <li>
+            <span class="steps__title">.NET MAUI'ye kendi başlangıç noktandan gir (§ 8, § 9)</span>
+            <p>Giriş yolunu § 9'daki karar tablosundan seç. Flutter/Dart'tan geliyorsan eşleştirme tablosunu oku
+            (en kritik zihinsel geçiş: <code>setState()</code> yerine <code>INotifyPropertyChanged</code>; kendi çizen motor yerine yerel kontroller).
+            WPF/Xamarin'den geliyorsan Shell, handler ve single project farklarına bak; React Native'den geliyorsan XAML + MVVM'e,
+            Kotlin/Swift'ten geliyorsan MAUI'nin soyutlama katmanına odaklan; hiç deneyimin yoksa § 11'den başla.
+            Her durumda çıktı aynı: tek ekranlı bir uygulama &mdash; liste + detay + Shell gezinme.</p>
+            <span class="steps__meta">Rozet: ORTA &middot; Android/Windows için Mac gerekmez; iOS'ta ücretsiz Apple ID ile cihazda deneme için Mac gerekir; ücretli Apple üyeliğiyle Windows'tan Hot Restart üzerinden Mac'siz cihazda deneme mümkündür (TEYİT); simülatör ve App Store yayını için Mac (ya da bulut macOS) ve ücretli üyelik gerekir (§ 8)</span>
+          </li>
+          <li>
+            <span class="steps__title">Masaüstü: WPF temeli, sonra Avalonia (§ 10)</span>
+            <p>Hedefin yalnızca Windows ise WPF binding ve Dispatcher'ı öğren (kurumsal iş çok); hızlı iç araç için WinForms
+            da yeterlidir. Çok platform gerekiyorsa Avalonia'ya geç; compiled binding ve Styles/Selectors farkını bil.
+            Mülakatta çatı seçimini soran olursa cevabın deneyimine göre değişir (§ 10'daki "WPF mi, Avalonia mı?" kutusu):
+            Avalonia kullandıysan ör. "Linux'ta da çalışması gerekiyordu", WPF kullandıysan ör. "yalnızca Windows hedefliydik";
+            hiç masaüstü projen yoksa "kullandım" deme, seçim kriterlerini anlat.</p>
+            <span class="steps__meta">Rozet: TEMEL/ORTA &middot; Avalonia MIT, XPF ve Accelerate ücretli</span>
+          </li>
+          <li>
+            <span class="steps__title">İleri konuları en sona bırak</span>
+            <p>AOT, trimming, lazy loading, handlers, ReactiveUI, Prism, MVU, Uno, Electron.NET, Photino.
+            Bunlar derinleşme konusudur; projen gerektirmedikçe adını bilmen ve ne işe yaradığını bir cümleyle
+            anlatabilmen yeterlidir.</p>
+            <span class="steps__meta">Rozet: İLERİ &middot; Acele etme</span>
+          </li>
+        </ol>
+
+        <blockquote>Bu sayfada tek bir cümle ezberleyeceksen: barındırma modeli ve render modu neyse,
+        kodun nerede çalıştığı odur; güvenlik, performans ve hata ayıklama kararlarının hepsi buradan türer.</blockquote>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Sıra hedefine bağlı (§ 13 tablosu). MVC &rarr; iş arıyorsan ilanlarda en sık istenen, önce onu kapat; mobil/masaüstü hedefliyorsan ertele.
+          Blazor &rarr; render modes'u anlamadan başlama. MAUI &rarr; Flutter biliyorsan § 9 tablosuyla en hızlı öğreneceğin kısım;
+          XAML/MVVM biliyorsan farkları oku, hiç deneyimin yoksa MVVM'den (§ 11) başla. Masaüstü &rarr; yalnızca Windows ise WPF/WinForms/WinUI,
+          çok platformsa Avalonia/Uno. JavaScript &rarr; .NET'ten geliyorsan Blazor'da bile bir noktada gerekir; JS biliyorsan avantajın,
+          yalnızca MAUI/WPF/Avalonia hedefliyorsan zorunlu değil.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">DevOps ve Gözlemlenebilirlik</span></a>
+        <a class="next" href="../09-aspire-bulut-modern/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Aspire, Bulut ve Modern .NET</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

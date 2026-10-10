@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mimari ve Desenler — .NET Anahtar Listesi</title>
+<meta name="description" content="Katmanlı, Onion, Clean, Vertical Slice mimarileri; CQRS, MediatR, DDD, SOLID ve tasarım desenleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Mimari ve Desenler</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 04 · Veri ve Mimari</div>
+        <h1 class="page-title">Mimari, <em>CQRS</em> ve tasarım desenleri</h1>
+        <p class="lede">Backend mülakatlarının omurgası; katmanlı mimariyi bilenlerin bile çoğunlukla eksik kaldığı parçalar burada. CQRS ve MediatR'ın ne olduğu, ne zaman gerektiği ve alternatifleri dahil.</p>
+        <div class="head-meta">Seviye: orta &rarr; ileri &middot; Backend mülakatlarında en çok sorulan konulardan; okuma sırası amacına göre § 1'de</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesi</strong>. Her satır bir anahtar kelime,
+        yanında karıştırmaman için kısa bir not ve dokümanı. Konuyu buradan öğrenmeyeceksin; buradan
+        <em>ne arayacağını</em> öğrenip kendi kaynağından okuyacak ve kod yazacaksın.</p>
+
+        <p>Rozetler bir konunun ilanlarda ve mülakatlarda ne sıklıkla geçtiğini gösterir, <em>öğrenme sırasını</em>
+        göstermez. Okuma sırasını amacına göre seç:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre okuma sırası</caption>
+            <thead><tr><th>Durumun</th><th>Önerilen sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Mülakata hazırlanıyorsun</td><td>Önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar (mülakatta ilk bunlar sorulur), sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>.</td></tr>
+              <tr><td>Sıfırdan öğreniyorsun / ilk backend projen</td><td>Rozet sırası yerine kavram bağımlılığı sırası: önce prensipler (§ 2) ve katmanlı mimari (§ 3), sonra Repository/Unit of Work/Result (§ 9), ardından GoF desenleri (§ 8); CQRS (§ 4–5) ve DDD (§ 6) en sona.</td></tr>
+              <tr><td>Hâlihazırda bir .NET projesinde çalışıyorsun</td><td>Kendi kod tabanındaki desenleri tanıyarak başla (§ 3, § 9); sonra "ne zaman gereksiz" satırlarına geç (CQRS, Event Sourcing) ve projendeki kararları bunlarla tart.</td></tr>
+              <tr><td>Mimari karar veriyorsun / ekip lideri</td><td>Önce Modular Monolith (§ 3), servis sınırı (§ 10), ADR (§ 12) ve tüm "ne zaman gereksiz" satırları; desen ayrıntıları ihtiyaç oldukça.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Hangi yolu seçersen seç, bir maddeyi "biliyorum" diye atlama; adını duymakla
+        beyaz tahtada anlatmak farklı şeyler.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rozet sözlüğü</caption>
+            <thead><tr><th>Rozet</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik: mülakatta sorulma ihtimali en yüksek satırlar bunlar.</td></tr>
+              <tr><td><span class="tag tag--ok">TEMEL</span></td><td>Bu alanda olmazsa olmaz. Önce bunları bitir.</td></tr>
+              <tr><td><span class="tag">ORTA</span></td><td>Temel oturduktan sonra gelir.</td></tr>
+              <tr><td><span class="tag tag--info">İLERİ</span></td><td>Derinleşme konusu. Acele etme, iş ilanında geçmiyorsa erteleyebilirsin.</td></tr>
+              <tr><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>Lisansı ücretli veya sonradan ücretli hale gelmiş. Ücretsiz alternatifi mutlaka listelendi.</td></tr>
+              <tr><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>Hâlâ eski projelerde karşına çıkar, yeni projede tercih edilmez.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>İlgili sayfalar: dil seviyesindeki karşılıklar için <a href="../01-csharp-dili/index.html">01 — C# Dili</a>,
+        DI konteyneri ve middleware için <a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a>,
+        repository/EF Core tarafı için <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>,
+        outbox/saga'nın altyapısı için <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a>,
+        test edilebilirlik için <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a>.</p>
+
+        <h2 id="prensipler"><span class="h-num">§ 2</span>Prensipler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>SOLID — beş harf tek tek</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Single Responsibility Principle (SRP)</strong></td>
+                <td>Bir sınıfın değişmek için tek bir sebebi olmalı</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Tek iş yapar" diye ezberlenir ama aslı "tek <em>aktör</em>e karşı sorumludur"; ikisini ayırt edebilmen sorulur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Open/Closed Principle (OCP)</strong></td>
+                <td>Geliştirmeye açık, değiştirmeye kapalı</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'ta pratik karşılığı: yeni <code>if</code> eklemek yerine yeni bir strategy/handler sınıfı ekleyip DI'a kaydetmek.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Liskov Substitution Principle (LSP)</strong></td>
+                <td>Alt tip, üst tipin yerine sorunsuz geçebilmeli</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik ihlal örneği kare/dikdörtgen ve <code>NotSupportedException</code> fırlatan override'lar.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Interface Segregation Principle (ISP)</strong></td>
+                <td>Şişman arayüz yerine küçük, amaca özel arayüzler</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Fat interface", "role interface" terimleriyle de aranır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dependency Inversion Principle (DIP)</strong></td>
+                <td>Üst katman alt katmana değil, ikisi de soyutlamaya bağlı olmalı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Onion/Clean Architecture'ın tek dayanağı bu maddedir; sonraki satırda DI ile farkına bak.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat — mülakat tuzağı</p>
+          <p><strong>Dependency Inversion</strong> bir <em>tasarım prensibidir</em> (bağımlılık yönünü soyutlamaya çevirirsin).
+          <strong>Dependency Injection</strong> bir <em>tekniktir</em> (bağımlılığı dışarıdan verirsin). <strong>IoC Container</strong>
+          ise bu tekniği otomatikleştiren <em>araçtır</em> (<code>IServiceCollection</code>). Üçü aynı şey değil; DI kullanmadan
+          da DIP uygulayabilirsin, DIP'e uymadan da DI kullanabilirsin.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Diğer tasarım prensipleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>DRY — Don't Repeat Yourself</strong></td>
+                <td>Aynı <em>bilginin</em> tek bir yerde bulunması</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Aynı kod iki yerde olmasın" değil; benzer görünen ama farklı sebeplerle değişen kodu birleştirmek DRY değil, hatadır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>KISS — Keep It Simple, Stupid</strong></td>
+                <td>En basit çalışan çözümü seç</td>
+                <td><span class="tag tag--ok">TEMEL</span> —</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>YAGNI — You Aren't Gonna Need It</strong></td>
+                <td>İhtiyaç doğmadan özellik/soyutlama yazma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Fowler'ın yazısı kısa, oku; "gereksiz interface" tartışmalarının kaynağı budur.</td>
+                <td><a href="https://martinfowler.com/bliki/Yagni.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Separation of Concerns (SoC)</strong></td>
+                <td>Farklı ilgi alanlarını farklı modüllere ayırmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Katmanlı mimarilerin gerekçesi. "Cross-cutting concern" (log, cache, auth) terimini de bu başlıkta öğren.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Composition over inheritance</strong></td>
+                <td>Kalıtım yerine nesne birleştirme tercihi</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'ta çoklu kalıtım olmadığı için pratikte zaten buraya sürüklenirsin; decorator deseniyle birlikte çalış.</td>
+                <td><a href="https://refactoring.guru/design-patterns/decorator">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Law of Demeter (LoD)</strong></td>
+                <td>"Sadece yakın komşunla konuş"; zincirleme erişimden kaçın</td>
+                <td><span class="tag">ORTA</span> <code>a.B.C.D.Yap()</code> ihlaldir. "Train wreck" terimiyle de geçer.</td>
+                <td><a href="https://en.wikipedia.org/wiki/Law_of_Demeter">wikipedia.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tell, Don't Ask</strong></td>
+                <td>Nesnenin verisini alıp dışarıda karar verme; nesneye emret</td>
+                <td><span class="tag">ORTA</span> Anemic domain model'in panzehiri. Getter/setter yığınından kurtulmanın yolu.</td>
+                <td><a href="https://martinfowler.com/bliki/TellDontAsk.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Encapsulation / invariant</strong></td>
+                <td>İç durumu gizleme; nesnenin her an geçerli kalması gereken kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Invariant" DDD'nin en çok kullanılan kelimesidir; aggregate bölümünde tekrar karşına çıkacak.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/net-core-microservice-domain-model">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Coupling / Cohesion</strong></td>
+                <td>Modüller arası bağ (az olsun) / modül içi bütünlük (çok olsun)</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Loose coupling, high cohesion" kalıbı olarak sorulur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Explicit dependencies principle</strong></td>
+                <td>Sınıf ihtiyaçlarını constructor'da açıkça istesin</td>
+                <td><span class="tag">ORTA</span> Service locator anti-pattern'inin karşıtı; <code>new</code> ve statik erişim gizli bağımlılıktır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Persistence ignorance</strong></td>
+                <td>Domain modelin veritabanını bilmemesi</td>
+                <td><span class="tag">ORTA</span> EF Core attribute'larını entity'ye serpiştirmek bunu bozar; çözüm Fluent API + ayrı configuration sınıfları (<a href="../03-veri-erisimi/index.html">03</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fail fast</strong></td>
+                <td>Hatalı durumu erken ve gürültülü şekilde bildirmek</td>
+                <td><span class="tag">ORTA</span> Guard clause + <code>ArgumentNullException.ThrowIfNull</code> ile pratikte uygulanır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception.thrownull">—</a></td>
+              </tr>
+              <tr>
+                <td><strong>Principle of least astonishment</strong></td>
+                <td>API beklenmedik davranmasın</td>
+                <td><span class="tag tag--info">İLERİ</span> Kütüphane/SDK tasarlarken adı geçer.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>CUPID</strong></td>
+                <td>SOLID'e alternatif olarak önerilen modern prensip seti (Dan North)</td>
+                <td><span class="tag tag--info">İLERİ</span> SOLID'i eleştiren tartışmalarda geçer; bilmen bonus, zorunlu değil.</td>
+                <td>dannorth.net</td>
+              </tr>
+              <tr>
+                <td><strong>Conway's Law</strong></td>
+                <td>Sistem mimarisi, organizasyonun iletişim yapısına benzer</td>
+                <td><span class="tag tag--info">İLERİ</span> Mikroservis sınırı tartışmalarında mutlaka anılır.</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="katmanli-mimariler"><span class="h-num">§ 3</span>Katmanlı ve modüler mimariler</h2>
+
+        <p>"Layered/Onion Architecture" iş ilanlarında en sık geçen mimari ifadedir. Bu tabloyu nasıl okuyacağın
+        başlangıç noktana bağlı:</p>
+
+        <ul>
+          <li><strong>.NET'te katmanlı bir projede çalışıyorsan</strong> &rarr; satırların çoğu tazeleme niteliğinde; asıl yeni olanlar
+          <strong>Hexagonal</strong>, <strong>Vertical Slice</strong> ve <strong>Modular Monolith</strong>.</li>
+          <li><strong>Hiç backend / katmanlı mimari görmediysen</strong> &rarr; tablo sıfırdan öğrenilecek: Layered &rarr; Onion &rarr; Clean
+          sırasıyla ilerle; <code>ardalis/CleanArchitecture</code> şablonunu klonlayıp klasörlerini tek tek incele.</li>
+          <li><strong>C#'tan gelmiyorsan</strong> (Java/Spring, Node/NestJS, Python/Django) &rarr; kavramlar aynı, adlar farklı: Spring'deki
+          controller/service/repository paketleri Layered'ın karşılığıdır; NestJS modülleri Modular Monolith'e yakındır;
+          Django'nun "app" yapısı da modül sınırı gibi düşünülebilir.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mimari stiller</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>N-Tier / N-Katman</strong></td>
+                <td>Fiziksel dağıtım katmanları (web sunucusu, uygulama sunucusu, DB sunucusu)</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Tier" fiziksel, "Layer" mantıksaldır; Türkçede ikisi de "katman" diye çevrildiği için karışır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Layered Architecture</strong></td>
+                <td>UI &rarr; Business/Service &rarr; Data Access &rarr; DB; bağımlılık yukarıdan aşağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik <code>*.Web / *.Business / *.DataAccess / *.Entities</code> proje şablonu budur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Onion Architecture</strong></td>
+                <td>Merkezde domain, dışa doğru application &rarr; infrastructure; bağımlılık içe doğru</td>
+                <td><span class="tag tag--ok">TEMEL</span> Jeffrey Palermo'nun terimi. Klasik proje düzeni: <code>Domain</code>, <code>Application</code>, <code>Infrastructure</code>, <code>Web</code>.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hexagonal Architecture (Ports &amp; Adapters)</strong></td>
+                <td>Çekirdek uygulamanın dış dünyaya "port"lar (interface) üzerinden bağlanması</td>
+                <td><span class="tag">ORTA</span> Onion ile aynı fikri farklı kelimelerle anlatır; "hangi farkı var" diye sorulursa "aynı bağımlılık kuralı, farklı görselleştirme" doğru cevaptır. Driving/driven adapter ayrımını öğren.</td>
+                <td><a href="https://alistair.cockburn.us/hexagonal-architecture/">alistair.cockburn.us</a></td>
+              </tr>
+              <tr>
+                <td><strong>Clean Architecture</strong></td>
+                <td>Uncle Bob'un, Onion + Hexagonal + use case katmanını birleştiren şeması</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Clean Architecture" ile "Clean Code" ayrı şeylerdir, karıştırma. .NET'te en yaygın şablon: Ardalis ve Jason Taylor repoları.</td>
+                <td><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">blog.cleancoder.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ardalis/CleanArchitecture</strong></td>
+                <td>Steve Smith'in .NET Clean Architecture çözüm şablonu (<code>dotnet new</code> template)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, MIT. Klasör yapısını görmek için klonlayıp incele.</td>
+                <td><a href="https://github.com/ardalis/CleanArchitecture">github.com/ardalis</a></td>
+              </tr>
+              <tr>
+                <td><strong>jasontaylordev/CleanArchitecture</strong></td>
+                <td>CQRS + MediatR odaklı alternatif Clean Architecture şablonu</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. CQRS'i somut görmek için en hızlı yol; MediatR bağımlılığı taşır (lisans notuna bak).</td>
+                <td><a href="https://github.com/jasontaylordev/CleanArchitecture">github.com/jasontaylordev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vertical Slice Architecture</strong></td>
+                <td>Katman yerine <em>özellik</em> bazlı klasörleme: her use case kendi request/handler/validator/endpoint'i ile tek klasörde</td>
+                <td><span class="tag">ORTA</span> Jimmy Bogard'ın terimi. "Feature folder" diye de aranır. Katmanlı mimariden bıkanların gittiği yer; küçük-orta projede çok verimli.</td>
+                <td><a href="https://www.jimmybogard.com/vertical-slice-architecture/">jimmybogard.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Modular Monolith</strong></td>
+                <td>Tek deploy edilen uygulama içinde, birbirine sadece sözleşmeyle bağlı bağımsız modüller</td>
+                <td><span class="tag">ORTA</span> Mikroservise geçmeden önceki doğru adım. Kamil Grzybek'in örnek reposu bu konudaki referans kaynaktır.</td>
+                <td><a href="https://github.com/kgrzybek/modular-monolith-with-ddd">github.com/kgrzybek</a></td>
+              </tr>
+              <tr>
+                <td><strong>Modular monolith primer</strong></td>
+                <td>Modüler monolit kavramının yazılı anlatımı</td>
+                <td><span class="tag">ORTA</span> Repodan önce bunu oku.</td>
+                <td><a href="https://www.kamilgrzybek.com/blog/posts/modular-monolith-primer">kamilgrzybek.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Screaming Architecture</strong></td>
+                <td>Klasör isimleri teknolojiyi değil işi anlatsın (<code>Controllers</code> değil <code>Siparis</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span> Vertical slice'ın gerekçesi.</td>
+                <td>blog.cleancoder.com</td>
+              </tr>
+              <tr>
+                <td><strong>Transaction Script</strong></td>
+                <td>İş mantığının prosedürel biçimde tek metotta yazılması</td>
+                <td><span class="tag">ORTA</span> "Kötü" değildir; basit CRUD'da domain model'den daha doğru seçimdir. Fowler'ın PoEAA kataloğundan.</td>
+                <td><a href="https://martinfowler.com/eaaCatalog/repository.html">martinfowler.com (katalog)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Anemic vs Rich domain model</strong></td>
+                <td>Sadece property tutan model / davranışı da içeren model</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tipik bir kurumsal CRUD kod tabanı büyük ihtimalle anemic'tir; bu normaldir, ama farkı anlatabilmen gerekir.</td>
+                <td><a href="https://martinfowler.com/bliki/AnemicDomainModel.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>eShopOnWeb / dotnet/eShop</strong></td>
+                <td>Microsoft'un referans örnek uygulamaları (monolit ve mikroservis)</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>eShopOnWeb</code> tek uygulama + Clean Architecture; <code>dotnet/eShop</code> dağıtık + .NET Aspire (bkz. <a href="../09-aspire-bulut-modern/index.html">09</a>).</td>
+                <td><a href="https://github.com/dotnet-architecture/eShopOnWeb">eShopOnWeb</a> &middot; <a href="https://github.com/dotnet/eShop">eShop</a></td>
+              </tr>
+              <tr>
+                <td><strong>Composition root</strong></td>
+                <td>Tüm bağımlılıkların tek noktada birleştirildiği yer (<code>Program.cs</code>)</td>
+                <td><span class="tag">ORTA</span> DI kayıtlarının neden sadece burada olması gerektiğini açıklar.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Assembly/proje bağımlılık kuralı testi</strong></td>
+                <td>Katman ihlallerini derleme değil <em>test</em> ile yakalamak (NetArchTest, ArchUnitNET)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. "Domain katmanı EF Core'a referans veremez" kuralını otomatik test edersin; <a href="../06-test-ve-kalite/index.html">06</a> ile birlikte çalış.</td>
+                <td>github.com/BenMorris/NetArchTest</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cqrs"><span class="h-num">§ 4</span>CQRS — derinlemesine</h2>
+
+        <p class="intro">"CQRS &amp; Mediator" ilanlarda çok sık geçer ama bir kez dinleyip oturtması zor bir konudur.
+        Bu sayfadaki en kritik bölüm burası. Aşağıdaki her satırı ayrı ayrı araştır ve <strong>küçük bir örnek proje yaz</strong>;
+        mülakatta "CQRS nedir" sorusunun ardından mutlaka "peki neden ayırdın" gelir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>CQRS kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>CQS — Command Query Separation</strong></td>
+                <td>Bir metot ya durumu değiştirir ya değer döndürür, ikisini birden yapmaz (Bertrand Meyer)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CQRS'in atasıdır ve <em>metot</em> seviyesindedir. CQRS ile karıştırma; mülakatta farkı sorulur.</td>
+                <td><a href="https://martinfowler.com/bliki/CommandQuerySeparation.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CQRS</strong></td>
+                <td>Yazma (command) ve okuma (query) için <em>ayrı modeller</em> kullanmak</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Greg Young'ın terimi. Dikkat: CQRS "ayrı veritabanı" demek değildir, "ayrı model" demektir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a> &middot; <a href="https://martinfowler.com/bliki/CQRS.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Command</strong></td>
+                <td>Sistemin durumunu değiştirme niyeti; emir kipinde adlandırılır (<code>CreateOrderCommand</code>)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Event ile farkı: command reddedilebilir, event olmuş bitmiştir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Query</strong></td>
+                <td>Yan etkisiz okuma isteği (<code>GetOrderByIdQuery</code>)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Query tarafında repository/domain model kullanmak zorunda değilsin; doğrudan Dapper ile DTO çekmek CQRS'in en büyük kazancıdır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Handler</strong></td>
+                <td>Bir command/query'yi işleyen tek sorumluluklu sınıf</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Şişmiş <code>Service</code> sınıflarının yerine geçer; SRP'nin doğal sonucudur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Read model</strong></td>
+                <td>Yalnızca okuma için tasarlanmış, ekrana birebir uyan düz veri modeli</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Denormalize" olması normaldir; join'siz tek tablo/tek view hedeflenir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Write model</strong></td>
+                <td>İş kurallarını ve invariant'ları koruyan domain modeli</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Aggregate kavramıyla birlikte çalışılır (§ 6).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tek veritabanı CQRS</strong></td>
+                <td>Aynı DB, farklı modeller: yazmada EF Core, okumada Dapper/SQL view</td>
+                <td><span class="tag tag--ok">TEMEL</span> Projelerin %90'ında CQRS bu demektir. Eventual consistency <em>yoktur</em>. Ham SQL veya Dapper ile çalışan ekiplerde en yaygın uygulama biçimi budur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>İki veritabanı CQRS</strong></td>
+                <td>Yazma ve okuma ayrı store'larda; arada senkronizasyon</td>
+                <td><span class="tag tag--info">İLERİ</span> Maliyeti yüksek: senkron gecikmesi, tutarsızlık, çift bakım. Gerçekten ölçek problemi yoksa yapma.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Projection</strong></td>
+                <td>Yazma tarafındaki olaylardan okuma modelini üretme işlemi</td>
+                <td><span class="tag tag--info">İLERİ</span> Event Sourcing ile birlikte kullanılır (§ 7). "Projection" kelimesi LINQ'te <code>Select</code> anlamında da kullanılır, karıştırma.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Materialized View pattern</strong></td>
+                <td>Okuma için önceden hesaplanmış, saklanan görünüm</td>
+                <td><span class="tag">ORTA</span> Veritabanı içi karşılığı kullandığın veritabanına göre değişir; birini biliyorsan CQRS'teki okuma modelini anlaman kolaylaşır:
+                <br>&bull; SQL Server / Azure SQL &rarr; <em>indexed view</em> (otomatik güncellenir; <code>SCHEMABINDING</code> gibi kısıtları var).
+                <br>&bull; PostgreSQL &rarr; <code>CREATE MATERIALIZED VIEW</code> + <code>REFRESH MATERIALIZED VIEW [CONCURRENTLY]</code>; elle veya zamanlanmış görevle yenilenir.
+                <br>&bull; Oracle &rarr; materialized view (<code>ON COMMIT</code> / <code>ON DEMAND</code> yenileme).
+                <br>&bull; MySQL / MariaDB &rarr; yerleşik materialized view yok; özet tablo + trigger veya zamanlanmış event ile taklit edilir.
+                <br>&bull; Veritabanı deneyimin yoksa &rarr; önce <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>'ndeki view konusundan başla.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/materialized-view">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Eventual consistency</strong></td>
+                <td>Okuma tarafının yazmayı bir süre gecikmeyle yansıtması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CQRS'in bedelidir. "Kullanıcı kaydetti, listede göremedi" problemini ve çözümlerini (optimistic UI, versiyon damgası) araştır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/distributed-data-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MediatR'sız CQRS</strong></td>
+                <td>Sadece <code>ICommandHandler&lt;T&gt;</code> / <code>IQueryHandler&lt;T,R&gt;</code> arayüzleri + DI ile</td>
+                <td><span class="tag tag--ok">TEMEL</span> CQRS bir kütüphane değildir. Endpoint'te handler'ı doğrudan constructor'dan enjekte etmek tam anlamıyla CQRS'tir. Önce böyle yaz, sonra MediatR'a bak.</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Generic handler + open generic DI kaydı</strong></td>
+                <td><code>services.AddScoped(typeof(ICommandHandler&lt;&gt;), typeof(...))</code> ile toplu kayıt</td>
+                <td><span class="tag">ORTA</span> Kendi mediator'ını yazarken tam olarak bu bilgi gerekir.
+                <br>&bull; C# generic'lerini biliyorsan &rarr; doğrudan open generic kayda geç.
+                <br>&bull; Bilmiyorsan &rarr; önce <a href="../01-csharp-dili/index.html">01 — C# Dili</a>'ndeki generic tipler ve kısıtlar (<code>where T :</code>) satırlarına dön, sonra buraya gel.
+                <br>&bull; Java'dan geliyorsan &rarr; C# generic'leri çalışma zamanında silinmez (type erasure yok); bu yüzden <code>typeof(ICommandHandler&lt;&gt;)</code> ile açık generic kayıt mümkündür.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Decorator ile cross-cutting</strong></td>
+                <td>Handler'ı logging/validation/transaction decorator'larıyla sarmak</td>
+                <td><span class="tag">ORTA</span> MediatR'ın "pipeline behavior"ının kütüphanesiz karşılığı. Scrutor'un <code>Decorate()</code> metodu bunu tek satıra indirir (ücretsiz, MIT).</td>
+                <td><a href="https://github.com/khellang/Scrutor">github.com/khellang/Scrutor</a></td>
+              </tr>
+              <tr>
+                <td><strong>Task-based UI</strong></td>
+                <td>Ekranın CRUD formu yerine iş görevleri sunması ("Adresi değiştir", "Siparişi iptal et")</td>
+                <td><span class="tag tag--info">İLERİ</span> CQRS'in doğduğu asıl gerekçe budur; command isimlerinin nereden geldiğini açıklar.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CQRS ne zaman gereksizdir</strong></td>
+                <td>Basit CRUD, tek ekip, düşük trafik, okuma-yazma yükü dengeli</td>
+                <td><span class="tag tag--ok">TEMEL</span> Fowler bile "çoğu sistemde CQRS zarar verir" der. Mülakatta bunu söyleyebilmek, CQRS'i ezberlemiş görünmekten daha değerlidir.</td>
+                <td><a href="https://martinfowler.com/bliki/CQRS.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CQRS ≠ Event Sourcing</strong></td>
+                <td>İkisi sık birlikte anılır ama bağımsızdır</td>
+                <td><span class="tag tag--ok">TEMEL</span> CQRS'i Event Sourcing'siz uygulayabilirsin (ve genelde öyle yapılır). Bu ayrımı bilmen doğrudan mülakat puanıdır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--example">
+          <p class="callout__title">Çalışma önerisi</p>
+          <p>Tek bir controller'ı al: <code>ProductsController</code>. Önce <code>IProductService</code> yerine
+          <code>CreateProductCommand + CreateProductCommandHandler</code> ve <code>GetProductsQuery + GetProductsQueryHandler</code>
+          yaz, hiçbir kütüphane kullanma. Query handler'da EF Core yerine Dapper ile düz SQL yaz. Bu 200 satırlık
+          alıştırma, CQRS'i anlatabilmen için yeterlidir. Başlangıç noktana göre:</p>
+          <ul>
+            <li><strong>Controller + Service katmanlı mevcut projen varsa</strong> &rarr; yukarıdaki gibi tek bir controller'ı dönüştür.</li>
+            <li><strong>Projen yoksa</strong> &rarr; <code>dotnet new webapi</code> ile boş proje kur; önce klasik <code>ProductsController</code> + <code>IProductService</code> yaz, sonra dönüştür (önce/sonra farkını görmek için).</li>
+            <li><strong>Minimal API kullanıyorsan</strong> &rarr; controller yerine bir <code>MapGroup</code> endpoint grubunu handler'lara böl.</li>
+            <li><strong>Dapper bilmiyorsan</strong> &rarr; query tarafını önce EF Core <code>AsNoTracking()</code> + <code>Select</code> ile DTO projeksiyonu olarak yaz, Dapper'ı ikinci adımda dene (<a href="../03-veri-erisimi/index.html">03</a>).</li>
+          </ul>
+        </div>
+
+        <h2 id="mediator-ve-mediatr"><span class="h-num">§ 5</span>Mediator, MediatR ve lisans meselesi</h2>
+
+        <p class="intro">Bu bölümü dikkatle oku: <strong>MediatR (v13) ve AutoMapper (v15) ticari lisans modeline geçti</strong>; eski sürümler açık lisansta kaldı.
+        İkisi de ilanlarda hâlâ çok geçer. "MediatR kullandım" dediğinde karşındaki teknik mülakatçının bugün soracağı ilk şey
+        büyük ihtimalle "lisans değişikliğinden sonra ne yapıyorsunuz" olacak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Lisans durumu — 2025 sonrası (genel model Eylül 2026 itibarıyla doğrulandı; TEYİT etiketli dallar ayrıca kontrol edilmeli)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>MediatR 13.0.0+</strong></td>
+                <td>Ticari lisans gerektirir; kod içine lisans anahtarı girilir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">ÜCRETLİ</span> Lisans doğrulaması kütüphanenin içindedir, lisans sunucusuna ağ bağlantısı gerekmez.</td>
+                <td><a href="https://mediatr.io/">mediatr.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>MediatR 12.x ve öncesi</strong></td>
+                <td>Açık kaynak (Apache-2.0) olarak kalmaya devam ediyor</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mevcut projeler v12'de kalarak ücret ödemez ama güvenlik/uyumluluk güncellemesi almaz. Bugün .NET dünyasında en sık rastlayacağın sürüm budur.</td>
+                <td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td>
+              </tr>
+              <tr>
+                <td><strong>AutoMapper 15.0.0+</strong></td>
+                <td>Aynı lisans modeline geçti (aynı yazar, aynı şirket)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">ÜCRETLİ</span> Alternatifleri: Mapperly (source generator, MIT), Mapster (MIT), elle yazılmış <code>ToDto()</code> extension metodu.</td>
+                <td><a href="https://mediatr.io/">mediatr.io (aynı lisans sayfası)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Community (ücretsiz) planı</strong></td>
+                <td>Yıllık brüt geliri 5 milyon USD altında ve 10 milyon USD üstü dış yatırım almamış şirketler ücretsiz kullanabiliyor; devlet/yükseköğretim kurumlarının durumu <span class="tag tag--warn">TEYİT</span></td>
+                <td><span class="tag tag--ok">TEMEL</span> Sonuç, kullanan kuruluşa göre değişir:
+                <br>&bull; Yıllık brüt gelir &lt; 5 milyon USD, toplam dış yatırım &lt; 10 milyon USD, kamu/yükseköğretim kurumu değil &rarr; Community lisansıyla ücretsiz; yine de lisans anahtarı alınması gerekir. <span class="tag tag--warn">TEYİT</span> mediatr.io
+                <br>&bull; Bu eşiklerden birini aşan şirket &rarr; ücretli ticari lisans.
+                <br>&bull; Devlet kurumu / üniversite (kurum olarak üretimde kullanım) &rarr; Community kapsamı dışında olabilir; ücretli veya ayrı koşul. <span class="tag tag--warn">TEYİT</span> mediatr.io
+                <br>&bull; Eğitim amaçlı / ticari olmayan kullanım (bireysel öğrenme, ders, kişisel deneme) &rarr; lisans sayfasında ayrıca anılıyor olabilir; ücretsiz olup olmadığını ve anahtar gerekip gerekmediğini kontrol et. <span class="tag tag--warn">TEYİT</span> mediatr.io / luckypennysoftware.com lisans sayfası
+                <br>&bull; Üretim dışı ortam (yalnızca geliştirme/test makinesi, üretime çıkmayan kod) &rarr; koşullar üretim kullanımından farklı olabilir; şirket eşiği aşsa bile ayrı bir dal olarak kontrol et. <span class="tag tag--warn">TEYİT</span> mediatr.io / luckypennysoftware.com lisans sayfası
+                <br>&bull; Açık kaynak proje &rarr; ayrı koşul olup olmadığına bak. <span class="tag tag--warn">TEYİT</span> mediatr.io
+                <br>&bull; Lisans süreciyle uğraşmak istemeyen / mevcut proje &rarr; v12.x'te kal (Apache-2.0, ama yeni güncelleme almaz) veya ücretsiz alternatife geç (martinothamar/Mediator, Wolverine, kendi mediator'ın).
+                <br>"Ücretsiz" ile "açık kaynak" aynı şey değil; şartlar değişebilir.</td>
+                <td><a href="https://mediatr.io/">mediatr.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>MassTransit v9</strong></td>
+                <td>Ticari lisansa geçti; arkasındaki yeni şirket Massient</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--warn">ÜCRETLİ</span> Dokümantasyon adresi <code>masstransit.io</code>'dan <code>masstransit.massient.com</code>'a taşındı. Proje durumuna göre:
+                <br>&bull; Mevcut v8 projesi &rarr; v8 Apache-2.0 olarak ücretsiz kalır; destek/güvenlik güncellemesi süresi sınırlı. <span class="tag tag--warn">TEYİT</span> v8 destek bitiş tarihi: masstransit.massient.com
+                <br>&bull; Yeni proje + v9 &rarr; ticari lisans; küçük işletme/ücretsiz katman olup olmadığı <span class="tag tag--warn">TEYİT</span> masstransit.massient.com
+                <br>&bull; Lisans istemeyen yeni proje &rarr; Rebus, Wolverine, Brighter, CAP veya doğrudan <code>RabbitMQ.Client</code>.
+                <br>Detay: <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a>.</td>
+                <td><a href="https://masstransit.massient.com/">masstransit.massient.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Lisans şartları ve fiyatlar zamanla değişir. Buradaki genel model (sürüm sınırları, ticari lisans, gelir/yatırım eşikli ücretsiz Community planı) Eylül 2026 itibarıyla
+          <a href="https://mediatr.io/">mediatr.io</a> üzerinden doğrulandı; <span class="tag tag--warn">TEYİT</span> etiketli ayrıntılı dallar (kamu/üniversite, eğitim, üretim dışı ortam, açık kaynak) doğrulanmadı. Mülakattan veya projeye almadan önce sayfayı bir kez daha aç.
+          Rakam ezberleme, <em>modeli</em> öğren: "belli bir sürümden sonra ticari, küçük şirketler için ücretsiz tier var".</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mediator kavramları (kütüphaneden bağımsız)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Mediator deseni</strong></td>
+                <td>Nesnelerin birbirini doğrudan tanımak yerine bir aracı üzerinden haberleşmesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> GoF davranışsal desenidir (§ 8). MediatR bu desenin bir uygulamasıdır, deseninin kendisi değil.</td>
+                <td><a href="https://refactoring.guru/design-patterns/mediator">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>In-process messaging</strong></td>
+                <td>Aynı süreç içinde, ağ olmadan mesaj gönderme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> MediatR ağ üzerinden mesaj göndermez; RabbitMQ ile karıştırma. Bu ayrımı sorarlar.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>IRequest / IRequestHandler</strong></td>
+                <td>MediatR'ın tek alıcılı istek/cevap sözleşmesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Bir <code>IRequest</code>'in tam olarak <em>bir</em> handler'ı olur.</td>
+                <td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td>
+              </tr>
+              <tr>
+                <td><strong>INotification / INotificationHandler</strong></td>
+                <td>Çok alıcılı yayın (publish); dönüş değeri yok</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Domain event'leri süreç içinde dağıtmanın en yaygın yolu. <code>Send</code> tek alıcı, <code>Publish</code> çok alıcı.</td>
+                <td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pipeline behavior</strong></td>
+                <td>Her isteğin öncesinde/sonrasında çalışan ara katman (validation, logging, transaction, cache)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> ASP.NET Core middleware'inin uygulama içi karşılığıdır; benzetmeyi kurarsan hemen anlarsın (<a href="../02-platform-ve-web-api/index.html">02</a>).</td>
+                <td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pre/Post processor</strong></td>
+                <td>Behavior'ın daha dar kapsamlı iki özel hali</td>
+                <td><span class="tag">ORTA</span> —</td>
+                <td><a href="https://github.com/jbogard/MediatR">github.com/jbogard/MediatR</a></td>
+              </tr>
+              <tr>
+                <td><strong>Command bus / Message bus</strong></td>
+                <td>Mesajı doğru handler'a yönlendiren soyutlama</td>
+                <td><span class="tag">ORTA</span> "Bus" kelimesi hem in-process (MediatR) hem dağıtık (MassTransit) bağlamda kullanılır; hangisi olduğunu her seferinde sor.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>MediatR gerçekten gerekli mi</strong></td>
+                <td>Handler'ı doğrudan enjekte etmek yerine araya bir soyutlama koymanın maliyeti</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eleştiri: gereksiz dolaylılık, "git to definition" çalışmaz, stack trace kirlenir. Karşı görüş: pipeline behavior'lar bedava gelir. İki tarafı da savunabilmelisin.</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>MediatR alternatifleri — hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Mediator (martinothamar)</strong></td>
+                <td>Source generator tabanlı, MediatR'a çok benzer API'li yüksek performanslı kütüphane</td>
+                <td><span class="tag tag--ok">TEMEL</span> MIT, ücretsiz. Reflection yok &rarr; Native AOT uyumlu. Aramada "martinothamar Mediator" yaz; "mediator" tek başına deseni getirir.</td>
+                <td><a href="https://github.com/martinothamar/Mediator">github.com/martinothamar/Mediator</a></td>
+              </tr>
+              <tr>
+                <td><strong>Wolverine</strong></td>
+                <td>Hem in-process command bus hem dağıtık mesajlaşma; handler'ları arayüzsüz konvansiyonla bulur</td>
+                <td><span class="tag">ORTA</span> Çekirdek MIT. "Critter Stack" (Marten + Wolverine) ailesinden; JasperFx tarafında ücretli destek/Pro eklentileri var, çekirdek kullanımı ücretsiz.</td>
+                <td><a href="https://wolverinefx.net/">wolverinefx.net</a> &middot; <a href="https://jasperfx.net/">jasperfx.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Brighter</strong></td>
+                <td>Command processor + mesajlaşma; outbox desteği yerleşik</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, açık kaynak. Darker adlı query tarafı kardeş projesiyle birlikte tam CQRS verir.</td>
+                <td><a href="https://github.com/BrighterCommand/Brighter">github.com/BrighterCommand</a></td>
+              </tr>
+              <tr>
+                <td><strong>FastEndpoints</strong></td>
+                <td>REPR (Request-Endpoint-Response) desenli endpoint kütüphanesi; içinde command bus ve event bus var</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Vertical slice mimarisiyle çok iyi eşleşir; MediatR + Controller ikilisinin yerine tek başına geçebilir.</td>
+                <td><a href="https://fast-endpoints.com/">fast-endpoints.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Immediate.Handlers</strong></td>
+                <td>Source generator ile handler çağrılarını derleme zamanında bağlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Çalışma zamanı maliyeti sıfıra yakın; farkı BenchmarkDotNet ile ölçmek iyi bir alıştırmadır (<a href="../06-test-ve-kalite/index.html">06</a>).</td>
+                <td><a href="https://github.com/ImmediatePlatform/Immediate.Handlers">github.com/ImmediatePlatform</a></td>
+              </tr>
+              <tr>
+                <td><strong>LiteBus</strong></td>
+                <td>Hafif, modüler command/query/event bus</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş; topluluğu küçük.</td>
+                <td><a href="https://github.com/litenova/LiteBus">github.com/litenova/LiteBus</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kendi mediator'ını yazmak</strong></td>
+                <td>~60 satır: <code>IRequest&lt;T&gt;</code>, <code>IRequestHandler&lt;TReq,TRes&gt;</code>, <code>IServiceProvider</code> ile çözümleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bunu <strong>mutlaka bir kez yaz</strong>. Generic tipler ve DI temeli oturduktan sonra bu alıştırma hem CQRS'i hem MediatR'ın ne yaptığını tek seferde çözer, mülakatta anlatacak somut hikâyen olur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Minimal API + handler sınıfı</strong></td>
+                <td>Hiç bus olmadan: endpoint doğrudan handler'ı parametre olarak enjekte eder</td>
+                <td><span class="tag tag--ok">TEMEL</span> En sade ve en hızlı yol. <code>[FromServices]</code> veya doğrudan parametre bağlama ile (<a href="../02-platform-ve-web-api/index.html">02</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MassTransit Mediator</strong></td>
+                <td>MassTransit'in ağsız, süreç içi modu</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> v9 ticari lisansa geçti; v8 Apache-2.0 olarak ücretsiz (destek süresi sınırlı, <span class="tag tag--warn">TEYİT</span> masstransit.massient.com). Sadece zaten MassTransit kullanıyorsan mantıklı; kullanmıyorsan yukarıdaki ücretsiz seçenekler yeterli.</td>
+                <td><a href="https://masstransit.massient.com/">masstransit.massient.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Scrutor</strong></td>
+                <td>Assembly taramasıyla toplu DI kaydı ve <code>Decorate()</code> desteği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, MIT. Kendi mediator'ını yazarken handler'ları tek satırda kaydetmeni sağlar.</td>
+                <td><a href="https://github.com/khellang/Scrutor">github.com/khellang/Scrutor</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ddd"><span class="h-num">§ 6</span>Domain-Driven Design</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Taktiksel DDD (kod seviyesi)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Entity</strong></td>
+                <td>Kimliği (Id) ile ayırt edilen, ömrü boyunca değişebilen nesne</td>
+                <td><span class="tag tag--ok">TEMEL</span> EF Core'un "entity" kelimesi ile DDD'nin "entity"si aynı değildir; EF'te tabloya karşılık gelen her sınıfa entity denir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/net-core-microservice-domain-model">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Value object</strong></td>
+                <td>Kimliği olmayan, değerleriyle eşit sayılan, değişmez nesne (Para, Adres, E-posta)</td>
+                <td><span class="tag tag--ok">TEMEL</span> C#'ta <code>record</code> veya <code>readonly record struct</code> ile yazılır (<a href="../01-csharp-dili/index.html">01</a>). EF Core tarafında karşılığı "owned entity" / "complex type".</td>
+                <td><a href="https://martinfowler.com/bliki/ValueObject.html">martinfowler.com</a> &middot; <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">record</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aggregate</strong></td>
+                <td>Birlikte tutarlı kalması gereken entity/value object kümesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Transaction sınırıdır: bir transaction'da tek aggregate değiştirilir kuralını araştır.</td>
+                <td><a href="https://martinfowler.com/bliki/DDD_Aggregate.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aggregate root</strong></td>
+                <td>Aggregate'e dışarıdan tek giriş kapısı olan entity</td>
+                <td><span class="tag tag--ok">TEMEL</span> Repository <em>sadece</em> aggregate root için yazılır; alt entity için ayrı repository açmak yaygın bir hatadır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/net-core-microservice-domain-model">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Repository (DDD anlamında)</strong></td>
+                <td>Aggregate'leri toplayan, koleksiyon gibi davranan soyutlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Generic <code>IRepository&lt;T&gt;</code> DDD'nin repository'si değildir; farkı ve tartışmayı <a href="../03-veri-erisimi/index.html">03</a> ile birlikte oku.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Domain service</strong></td>
+                <td>Tek bir entity'ye ait olmayan iş mantığını barındıran servis</td>
+                <td><span class="tag">ORTA</span> "Application service" ile karıştırma: domain service iş kuralı içerir, application service akışı yönetir (transaction, repository çağrısı).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Domain event</strong></td>
+                <td>Domain içinde olmuş bitmiş, iş anlamı taşıyan olay (<code>OrderPlaced</code>)</td>
+                <td><span class="tag">ORTA</span> Geçmiş zaman kipiyle adlandırılır. "Integration event" ile farkı: domain event süreç içi, integration event servisler arası.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implementation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Integration event</strong></td>
+                <td>Servisler arası yayınlanan, sözleşmesi kararlı olay</td>
+                <td><span class="tag">ORTA</span> Outbox ile birlikte gönderilir (§ 9). Mesaj altyapısı için <a href="../05-mesajlasma-ve-dagitik/index.html">05</a>.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/distributed-data-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Factory (DDD)</strong></td>
+                <td>Karmaşık aggregate'i geçerli halde yaratan yapı</td>
+                <td><span class="tag">ORTA</span> C#'ta genelde <code>private ctor + static Create()</code> olarak yazılır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/factory-method">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Specification (DDD)</strong></td>
+                <td>İş kuralını/sorgu kriterini nesne olarak ifade etme</td>
+                <td><span class="tag">ORTA</span> Ardalis.Specification kütüphanesi (ücretsiz, MIT) EF Core ile hazır entegre gelir.</td>
+                <td><a href="https://specification.ardalis.com/">specification.ardalis.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Invariant</strong></td>
+                <td>Aggregate'in her an sağlaması gereken kural</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Sipariş tutarı negatif olamaz" gibi. Setter'ları private yapmanın gerekçesi budur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/net-core-microservice-domain-model">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Strongly-typed ID</strong></td>
+                <td><code>Guid</code> yerine <code>OrderId</code> gibi kendi tipini kullanmak</td>
+                <td><span class="tag tag--info">İLERİ</span> Primitive obsession'ın panzehiri. EF Core'da value converter ile eşlenir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">record (yapı taşı)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Guard clause</strong></td>
+                <td>Metodun başında geçersiz girdiyi eleyen kontroller</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ardalis.GuardClauses kütüphanesi var ama elle yazmak da yeterlidir.</td>
+                <td>github.com/ardalis/GuardClauses</td>
+              </tr>
+              <tr>
+                <td><strong>Domain exception</strong></td>
+                <td>İş kuralı ihlalini temsil eden özel exception tipi</td>
+                <td><span class="tag">ORTA</span> Alternatifi Result pattern'dir (§ 9); ikisi arasındaki performans/okunabilirlik tartışmasını bil.</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Stratejik DDD (sistem seviyesi)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Ubiquitous language</strong></td>
+                <td>İş birimi ile yazılımcının aynı kelimeleri kullanması; kodun da o kelimeleri taşıması</td>
+                <td><span class="tag tag--ok">TEMEL</span> DDD'nin en temel maddesi ve en çok atlanan maddesi.</td>
+                <td><a href="https://martinfowler.com/bliki/UbiquitousLanguage.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bounded context</strong></td>
+                <td>Bir modelin geçerli olduğu sınır; sınır dışında aynı kelime başka anlama gelir</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Müşteri" satışta başka, muhasebede başkadır. Mikroservis sınırı çizmenin doğru yolu budur.</td>
+                <td><a href="https://martinfowler.com/bliki/BoundedContext.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Context map</strong></td>
+                <td>Bounded context'lerin birbiriyle ilişkisinin haritası</td>
+                <td><span class="tag">ORTA</span> İlişki tipleri: partnership, customer-supplier, conformist, shared kernel, published language.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/identify-microservice-domain-model-boundaries">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Anti-corruption layer (ACL)</strong></td>
+                <td>Dış sistemin modelini kendi modeline bulaştırmayan çeviri katmanı</td>
+                <td><span class="tag">ORTA</span> Legacy entegrasyonlarında en çok işe yarayan desen. Adapter deseninin mimari ölçekli hali.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shared kernel</strong></td>
+                <td>İki context'in ortak sahiplendiği küçük model parçası</td>
+                <td><span class="tag tag--info">İLERİ</span> Tehlikelidir: paylaşılan her tip iki ekibi birbirine bağlar.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Core / Supporting / Generic subdomain</strong></td>
+                <td>İşin asıl değeri / destekleyici / hazır alınabilecek alanlar</td>
+                <td><span class="tag">ORTA</span> "Nereye DDD uygulayayım" sorusunun cevabı: sadece core subdomain'e.</td>
+                <td><a href="https://martinfowler.com/bliki/DomainDrivenDesign.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Strategic vs tactical DDD</strong></td>
+                <td>Sınır/dil çizme (stratejik) ile entity/value object yazma (taktiksel) ayrımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çoğu ekip taktiksel kısmı uygulayıp stratejik kısmı atlar; asıl faydayı veren stratejik kısımdır.</td>
+                <td><a href="https://martinfowler.com/bliki/DomainDrivenDesign.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Event storming</strong></td>
+                <td>Post-it ile domain olaylarını haritalayan atölye tekniği</td>
+                <td><span class="tag tag--info">İLERİ</span> Alberto Brandolini. Analiz toplantısı formatıdır, kod tekniği değil.</td>
+                <td>eventstorming.com</td>
+              </tr>
+              <tr>
+                <td><strong>Bounded context canvas</strong></td>
+                <td>Bir context'i tanımlamak için hazır şablon</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, DDD Crew tarafından.</td>
+                <td><a href="https://github.com/ddd-crew/bounded-context-canvas">github.com/ddd-crew</a></td>
+              </tr>
+              <tr>
+                <td><strong>Published language</strong></td>
+                <td>Context'ler arası paylaşılan, sürümlenen sözleşme (ör. integration event şeması)</td>
+                <td><span class="tag tag--info">İLERİ</span> —</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="event-sourcing"><span class="h-num">§ 7</span>Event Sourcing</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Event Sourcing kavramları ve araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Event Sourcing</strong></td>
+                <td>Nesnenin son halini değil, ona ulaştıran olay dizisini saklamak</td>
+                <td><span class="tag tag--info">İLERİ</span> Muhasebe defteri mantığı: kayıt silinmez, ters kayıt atılır. CQRS'ten bağımsızdır ama genelde birlikte kullanılır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a> &middot; <a href="https://martinfowler.com/eaaDev/EventSourcing.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Event store</strong></td>
+                <td>Olayların sıralı ve değiştirilemez şekilde saklandığı depo</td>
+                <td><span class="tag tag--info">İLERİ</span> Özel bir ürün olmak zorunda değil; herhangi bir ilişkisel veritabanında (SQL Server, PostgreSQL, MySQL…) bir <code>Events</code> tablosu da event store'dur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stream</strong></td>
+                <td>Tek bir aggregate'e ait olay dizisi</td>
+                <td><span class="tag tag--info">İLERİ</span> Genelde <code>Order-{id}</code> gibi adlandırılır.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Replay / rehydration</strong></td>
+                <td>Olayları baştan uygulayarak nesnenin güncel halini yeniden kurmak</td>
+                <td><span class="tag tag--info">İLERİ</span> "Rehydrate" kelimesi bu bağlamda "yeniden canlandırmak" demektir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Snapshot</strong></td>
+                <td>Her seferinde binlerce olayı okumamak için ara durum fotoğrafı</td>
+                <td><span class="tag tag--info">İLERİ</span> Performans optimizasyonudur; başlangıçta gerekmez.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Projection / read model builder</strong></td>
+                <td>Olay akışından sorgulanabilir tablo üretmek</td>
+                <td><span class="tag tag--info">İLERİ</span> "Inline" (yazarken) ve "async" (arka planda) projection ayrımını öğren.</td>
+                <td><a href="https://martendb.io/events/">martendb.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Event versioning / upcasting</strong></td>
+                <td>Eski formatta kaydedilmiş olayları yeni şemaya çevirmek</td>
+                <td><span class="tag tag--info">İLERİ</span> Event Sourcing'in en zor kısmı budur; "olayları silemezsin" gerçeğinin bedeli.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Optimistic concurrency (expected version)</strong></td>
+                <td>Olay yazarken beklenen sürüm numarasını kontrol etmek</td>
+                <td><span class="tag tag--info">İLERİ</span> EF Core'daki <code>RowVersion</code> mantığının event store karşılığı (<a href="../03-veri-erisimi/index.html">03</a>).</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Marten</strong></td>
+                <td>PostgreSQL üzerinde document database + event store</td>
+                <td><span class="tag tag--info">İLERİ</span> Çekirdek ücretsiz/MIT. .NET dünyasında event sourcing'in en pratik girişi; sadece Postgres gerektirir, ayrı ürün kurmazsın.</td>
+                <td><a href="https://martendb.io/">martendb.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kurrent (eski adıyla EventStoreDB)</strong></td>
+                <td>Event sourcing için özelleşmiş veritabanı</td>
+                <td><span class="tag tag--info">İLERİ</span> <strong>Ürün yeniden markalandı:</strong> "EventStoreDB" diye ararsan eski dokümana düşersin; güncel ad Kurrent. Açık kaynak sürümü ve ticari bulut sürümü var.</td>
+                <td><a href="https://docs.kurrent.io/">docs.kurrent.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ne zaman gerekli</strong></td>
+                <td>Denetim izi zorunluluğu, "geçmişte ne olmuştu" sorusu, finansal/hukuki kayıt</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bunu bilmek Event Sourcing yazmaktan önemlidir.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ne zaman gereksiz</strong></td>
+                <td>CRUD ekranı, raporlama ağırlıklı sistem, küçük ekip</td>
+                <td><span class="tag tag--ok">TEMEL</span> Geri dönüşü çok pahalıdır; yanlış seçilirse projeyi batırır.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Audit log ile farkı</strong></td>
+                <td>Audit log yan üründür, event store <em>tek doğruluk kaynağıdır</em></td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakat sorusu olarak sık geçer; çoğu ihtiyaç aslında audit log ile çözülür.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Temporal tables / sistem sürümlü tablolar</strong></td>
+                <td>Veritabanının kendi sürüm geçmişi tutması</td>
+                <td><span class="tag">ORTA</span> Event sourcing kurmadan "geçmişi görme" ihtiyacını karşılayabilir (<a href="../03-veri-erisimi/index.html">03</a>). Veritabanına göre:
+                <br>&bull; SQL Server 2016+ / Azure SQL &rarr; system-versioned temporal tables; yerleşik, EF Core 6+ destekler.
+                <br>&bull; MariaDB 10.3+ &rarr; system-versioned tables; yerleşik.
+                <br>&bull; PostgreSQL &rarr; yerleşik değil; trigger ile history tablosu veya <code>temporal_tables</code> uzantısı.
+                <br>&bull; MySQL &rarr; yerleşik değil; trigger + audit tablosu.
+                <br>&bull; Oracle &rarr; Flashback Data Archive.
+                <br>Hangisini kullanırsan kullan, yukarıdaki "Audit log ile farkı" satırıyla birlikte düşün: bu yöntemler durum geçmişi tutar, olayın <em>niyetini</em> tutmaz.</td>
+                <td>learn.microsoft.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="gof-desenleri"><span class="h-num">§ 8</span>Gang of Four desenleri</h2>
+
+        <p>Her satırda desenin <strong>.NET'te nerede karşına çıktığı</strong> yazıyor. Ezberleme; hangi framework
+        parçasının hangi desen olduğunu bilmek, mülakatta "bir desen örneği ver" sorusuna verilecek en iyi cevaptır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yaratımsal (creational) desenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not — C#'ta nerede</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Factory Method</strong></td>
+                <td>Nesne yaratmayı alt sınıfa/metoda devretmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>ILoggerFactory.CreateLogger()</code>, <code>IHttpClientFactory.CreateClient()</code>.</td>
+                <td><a href="https://refactoring.guru/design-patterns/factory-method">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Abstract Factory</strong></td>
+                <td>Birbiriyle uyumlu nesne ailelerini üreten fabrika</td>
+                <td><span class="tag">ORTA</span> ADO.NET'teki <code>DbProviderFactory</code> (connection, command, parameter üretir).</td>
+                <td><a href="https://refactoring.guru/design-patterns/abstract-factory">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Builder</strong></td>
+                <td>Karmaşık nesneyi adım adım kurmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>WebApplicationBuilder</code>, <code>StringBuilder</code>, EF Core <code>ModelBuilder</code> (Fluent API). ASP.NET Core geliştiricisi bunları sürekli kullanır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/builder">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Singleton</strong></td>
+                <td>Tek örnek garantisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Klasik statik singleton anti-pattern sayılır; doğrusu DI konteynerinde <code>AddSingleton</code>. <code>Lazy&lt;T&gt;</code> thread-safe kurulum için kullanılır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/singleton">refactoring.guru</a> &middot; <a href="https://learn.microsoft.com/en-us/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prototype</strong></td>
+                <td>Var olan nesneyi kopyalayarak yeni nesne üretmek</td>
+                <td><span class="tag">ORTA</span> C#'ta <code>record</code> üzerindeki <code>with</code> ifadesi tam olarak budur (<a href="../01-csharp-dili/index.html">01</a>). <code>ICloneable</code> ise kullanılması önerilmeyen eski arayüzdür.</td>
+                <td><a href="https://refactoring.guru/design-patterns/prototype">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Object Pool</strong></td>
+                <td>Pahalı nesneleri havuzda tutup yeniden kullanmak</td>
+                <td><span class="tag">ORTA</span> GoF listesinde yoktur ama .NET'te çok yaygın: <code>ArrayPool&lt;T&gt;</code>, <code>ObjectPool&lt;T&gt;</code>, ADO.NET connection pooling.</td>
+                <td>learn.microsoft.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yapısal (structural) desenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not — C#'ta nerede</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Adapter</strong></td>
+                <td>Uyumsuz iki arayüzü birbirine çevirmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Üçüncü parti SDK'yı kendi <code>IPaymentGateway</code> arayüzüne sarmak. ACL'in küçük ölçekli hali.</td>
+                <td><a href="https://refactoring.guru/design-patterns/adapter">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bridge</strong></td>
+                <td>Soyutlama ile uygulamayı ayrı hiyerarşilerde büyütmek</td>
+                <td><span class="tag tag--info">İLERİ</span> Adapter ile karıştırılır: adapter <em>sonradan</em> uyumlaştırır, bridge <em>baştan</em> ayırır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/bridge">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Composite</strong></td>
+                <td>Tekil ve grup nesneleri aynı arayüzle ele almak (ağaç yapısı)</td>
+                <td><span class="tag">ORTA</span> Menü/kategori ağaçları; <code>CompositeValidator</code>, <code>CompositeHealthCheck</code>.</td>
+                <td><a href="https://refactoring.guru/design-patterns/composite">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Decorator</strong></td>
+                <td>Nesneyi aynı arayüzle sarıp davranış eklemek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Cache/log/retry eklemenin en temiz yolu. <code>Stream</code> sınıfları (<code>GZipStream</code>, <code>BufferedStream</code>) ve Scrutor'un <code>Decorate()</code>'i.</td>
+                <td><a href="https://refactoring.guru/design-patterns/decorator">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Facade</strong></td>
+                <td>Karmaşık alt sistemi tek basit arayüzün arkasına almak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Application service sınıflarının çoğu aslında facade'dır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/facade">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flyweight</strong></td>
+                <td>Çok sayıda benzer nesnede ortak durumu paylaştırmak</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET'te string interning ve <code>ArrayPool</code> mantığı buna yakındır. Performansla ilgileniyorsan bu satırı atlama.</td>
+                <td><a href="https://refactoring.guru/design-patterns/flyweight">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Proxy</strong></td>
+                <td>Gerçek nesnenin yerine geçip erişimi denetlemek</td>
+                <td><span class="tag">ORTA</span> EF Core lazy loading proxy'leri, gRPC istemci proxy'si, <code>DispatchProxy</code>, Castle DynamicProxy (ücretsiz).</td>
+                <td><a href="https://refactoring.guru/design-patterns/proxy">refactoring.guru</a> &middot; <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.dispatchproxy">DispatchProxy</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Davranışsal (behavioral) desenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not — C#'ta nerede</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Chain of Responsibility</strong></td>
+                <td>İsteği zincirdeki halkalardan birinin işlemesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> ASP.NET Core <strong>middleware pipeline</strong>'ı tam olarak budur (<a href="../02-platform-ve-web-api/index.html">02</a>). MediatR pipeline behavior da aynı.</td>
+                <td><a href="https://refactoring.guru/design-patterns/chain-of-responsibility">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Command</strong></td>
+                <td>İsteği nesne olarak paketlemek (kuyruklanabilir, geri alınabilir)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CQRS'teki command bu desendir. Undo/redo mekanizmalarının temeli.</td>
+                <td><a href="https://refactoring.guru/design-patterns/command">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Iterator</strong></td>
+                <td>Koleksiyonu iç yapısını bilmeden gezmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>IEnumerable&lt;T&gt;</code> / <code>yield return</code>. LINQ'in tamamı bunun üstüne kurulu.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/iterators">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Mediator</strong></td>
+                <td>Nesneler arası iletişimi aracıya devretmek</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> § 5'e bak.</td>
+                <td><a href="https://refactoring.guru/design-patterns/mediator">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Memento</strong></td>
+                <td>Nesnenin durumunu dışarıya sızdırmadan kaydedip geri yükleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Snapshot mantığı; Event Sourcing ile birlikte anlamlanır.</td>
+                <td><a href="https://refactoring.guru/design-patterns/memento">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Observer</strong></td>
+                <td>Durum değişince ilgilenen herkese haber vermek</td>
+                <td><span class="tag tag--ok">TEMEL</span> C# <code>event</code>/<code>delegate</code>, <code>IObservable&lt;T&gt;</code>/<code>IObserver&lt;T&gt;</code>, Rx.NET. MediatR notification da bu.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>State</strong></td>
+                <td>Nesnenin davranışını iç durumuna göre değiştirmesi</td>
+                <td><span class="tag">ORTA</span> Sipariş durum makinesi (Beklemede &rarr; Onaylandı &rarr; Kargoda). Saga'nın da temelidir.</td>
+                <td><a href="https://refactoring.guru/design-patterns/state">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Strategy</strong></td>
+                <td>Algoritmayı çalışma zamanında değiştirilebilir kılmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> OCP'nin en doğal uygulaması. C#'ta çoğu zaman ayrı sınıf bile gerekmez, bir <code>Func&lt;T,TResult&gt;</code> yeterlidir.</td>
+                <td><a href="https://refactoring.guru/design-patterns/strategy">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Template Method</strong></td>
+                <td>İskeleti üst sınıfta, adımları alt sınıfta bırakmak</td>
+                <td><span class="tag">ORTA</span> <code>BackgroundService.ExecuteAsync</code>, <code>ControllerBase</code> yaşam döngüsü. Kalıtım gerektirdiği için Strategy tercih edilir.</td>
+                <td><a href="https://refactoring.guru/design-patterns/template-method">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Visitor</strong></td>
+                <td>Yapıyı değiştirmeden ona yeni işlem eklemek</td>
+                <td><span class="tag tag--info">İLERİ</span> Roslyn syntax tree gezginleri (<code>CSharpSyntaxWalker</code>), expression tree ziyaretçileri (<code>ExpressionVisitor</code>) &mdash; LINQ provider yazarsan karşına çıkar.</td>
+                <td><a href="https://refactoring.guru/design-patterns/visitor">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Interpreter</strong></td>
+                <td>Bir dilin gramerini nesnelerle temsil edip yorumlamak</td>
+                <td><span class="tag tag--info">İLERİ</span> GoF'un en az kullanılan deseni; kural motoru yazarsan gündeme gelir.</td>
+                <td><a href="https://refactoring.guru/design-patterns/catalog">refactoring.guru (katalog)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Null Object</strong></td>
+                <td>Null yerine "hiçbir şey yapmayan" nesne döndürmek</td>
+                <td><span class="tag">ORTA</span> GoF listesinde değil ama yaygın: <code>NullLogger</code>, <code>NullLoggerFactory</code>.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Options pattern</strong></td>
+                <td>Yapılandırmayı tipli sınıfa bağlama (<code>IOptions&lt;T&gt;</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> GoF deseni değil, .NET'e özgü desendir; <code>IOptionsSnapshot</code> ve <code>IOptionsMonitor</code> farkını mutlaka öğren.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kurumsal-desenler"><span class="h-num">§ 9</span>Kurumsal uygulama desenleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri erişimi ve akış desenleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Repository pattern</strong></td>
+                <td>Veri erişimini koleksiyon benzeri arayüzün arkasına almak</td>
+                <td><span class="tag tag--ok">TEMEL</span> "EF Core zaten repository, üstüne bir tane daha yazmalı mıyım" tartışmasını iki taraflı bil; <code>DbSet</code> repository, <code>DbContext</code> unit of work'tür.</td>
+                <td><a href="https://martinfowler.com/eaaCatalog/repository.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Unit of Work</strong></td>
+                <td>Birden çok değişikliği tek transaction'da toplayıp birlikte kaydetmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>SaveChangesAsync()</code> tam olarak budur. Detay: <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>.</td>
+                <td><a href="https://martinfowler.com/eaaCatalog/unitOfWork.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Specification pattern</strong></td>
+                <td>Sorgu/kural kriterini yeniden kullanılabilir nesneye çevirmek</td>
+                <td><span class="tag">ORTA</span> Repository'nin <code>GetByXAndYAndZ()</code> metot patlamasını çözer. Ardalis.Specification ücretsiz (MIT).</td>
+                <td><a href="https://deviq.com/design-patterns/specification-pattern">deviq.com</a> &middot; <a href="https://github.com/ardalis/Specification">github</a></td>
+              </tr>
+              <tr>
+                <td><strong>Result pattern</strong></td>
+                <td>Hata durumunu exception yerine dönüş değeri olarak taşımak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mülakatta sık sorulur. "Exception ne zaman, Result ne zaman" sorusuna hazırlan: beklenen iş hataları Result, beklenmeyen sistem hataları exception.</td>
+                <td><a href="https://github.com/ardalis/Result">github.com/ardalis/Result</a></td>
+              </tr>
+              <tr>
+                <td><strong>OneOf</strong></td>
+                <td>Discriminated union benzeri, birden çok dönüş tipini temsil eden kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, MIT. <code>OneOf&lt;Success, NotFound, Invalid&gt;</code> ve <code>Match()</code> ile switch'siz akış.</td>
+                <td><a href="https://github.com/mcintyre321/OneOf">github.com/mcintyre321/OneOf</a></td>
+              </tr>
+              <tr>
+                <td><strong>ErrorOr</strong></td>
+                <td>Result pattern'in hazır, hafif ve popüler uygulaması</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, MIT. Hata tiplerini (Validation, NotFound, Conflict) hazır getirir; HTTP status eşlemesi kolaydır.</td>
+                <td><a href="https://github.com/amantinband/error-or">github.com/amantinband/error-or</a></td>
+              </tr>
+              <tr>
+                <td><strong>FluentResults</strong></td>
+                <td>Result nesnesine birden çok hata/başarı mesajı iliştirebilen kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, MIT. Doğrulama sonuçlarını biriktirmek için uygundur.</td>
+                <td><a href="https://github.com/altmann/FluentResults">github.com/altmann/FluentResults</a></td>
+              </tr>
+              <tr>
+                <td><strong>LanguageExt</strong></td>
+                <td>C#'a fonksiyonel programlama tipleri getiren büyük kütüphane (<code>Option</code>, <code>Either</code>, <code>Try</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Öğrenme eğrisi diktir ve kod tarzını tamamen değiştirir; ekip kararı ister. Başka bir dilde fonksiyonel programlama deneyimi varsa yabancı gelmez.</td>
+                <td><a href="https://github.com/louthy/language-ext">github.com/louthy/language-ext</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kendi Result tipini yazmak</strong></td>
+                <td>20 satırlık <code>Result&lt;T&gt;</code> + <code>Error</code> record'u</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çoğu ekip bunu yapar; dış bağımlılık istemeyen (NuGet yasağı olan) iş yerlerinde tek seçenek budur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record">record</a></td>
+              </tr>
+              <tr>
+                <td><strong>Outbox pattern (transactional outbox)</strong></td>
+                <td>Mesajı iş verisiyle aynı transaction'da bir tabloya yazıp sonra göndermek</td>
+                <td><span class="tag">ORTA</span> "Veriyi kaydettim ama mesaj gitmedi" problemini çözen tek doğru yol. Detay: <a href="../05-mesajlasma-ve-dagitik/index.html">05</a>.</td>
+                <td><a href="https://microservices.io/patterns/data/transactional-outbox.html">microservices.io</a> &middot; <a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/transactional-outbox-cosmos">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Inbox pattern / idempotent consumer</strong></td>
+                <td>Aynı mesajın iki kez işlenmesini engellemek</td>
+                <td><span class="tag">ORTA</span> Outbox'ın kardeşi. "At-least-once delivery" olan her sistemde zorunludur.</td>
+                <td><a href="https://microservices.io/patterns/index.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Saga pattern</strong></td>
+                <td>Dağıtık işlemi, telafi adımları olan yerel işlemler dizisine bölmek</td>
+                <td><span class="tag">ORTA</span> İki tipi var: <em>orchestration</em> (merkezi yönetici) ve <em>choreography</em> (olayla tetiklenen zincir). Farkı sorulur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/saga">learn.microsoft.com</a> &middot; <a href="https://microservices.io/patterns/data/saga.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Compensating transaction</strong></td>
+                <td>Geri alınamayan işlemi "ters işlem" ile telafi etmek</td>
+                <td><span class="tag">ORTA</span> Saga'nın yapı taşı. Rollback değildir; ödeme iadesi gibi yeni bir iş adımıdır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Choreography</strong></td>
+                <td>Merkezi koordinatör olmadan, olaylarla ilerleyen iş akışı</td>
+                <td><span class="tag">ORTA</span> Takip etmesi zordur; gözlemlenebilirlik şart (<a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/choreography">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ambient context</strong></td>
+                <td>Bağlamı statik/thread-local bir yerden okumak (<code>HttpContext.Current</code>, <code>AsyncLocal&lt;T&gt;</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span> Genelde anti-pattern sayılır ama <code>Activity.Current</code> gibi meşru kullanımları var. Multi-tenant senaryolarında tenant bilgisi için sık kullanılır.</td>
+                <td>learn.microsoft.com (AsyncLocal)</td>
+              </tr>
+              <tr>
+                <td><strong>Service Locator</strong></td>
+                <td>Bağımlılığı konteynerden elle çekmek (<code>provider.GetService&lt;T&gt;()</code>)</td>
+                <td><strong>ANTİ-PATTERN.</strong> Bağımlılıkları gizler, testi zorlaştırır. Mark Seemann'ın yazısı bu konudaki referanstır. Nadiren meşru: factory içinde, scope oluştururken.</td>
+                <td><a href="https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/">blog.ploeh.dk</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pipes and Filters</strong></td>
+                <td>İşi ardışık, bağımsız adımlara bölmek</td>
+                <td><span class="tag">ORTA</span> Middleware ve pipeline behavior'ın mimari adı.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Publisher-Subscriber</strong></td>
+                <td>Yayıncının aboneleri bilmeden mesaj yayması</td>
+                <td><span class="tag">ORTA</span> Observer'ın dağıtık/altyapılı hali; arada broker vardır (<a href="../05-mesajlasma-ve-dagitik/index.html">05</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cache-Aside</strong></td>
+                <td>Önce cache'e bak, yoksa veritabanından al ve cache'e yaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>MemoryCache</code> veya Redis ile uygulanır; "MemoryCache kullandım" ifadesi aslında bu desendir (<a href="../05-mesajlasma-ve-dagitik/index.html">05</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/">learn.microsoft.com (patterns)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Retry / Circuit Breaker / Bulkhead</strong></td>
+                <td>Dayanıklılık (resilience) desenleri</td>
+                <td><span class="tag">ORTA</span> .NET tarafında Polly ve <code>Microsoft.Extensions.Http.Resilience</code> ile uygulanır (ücretsiz).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Architecture Center — Cloud Design Patterns</strong></td>
+                <td>Kırktan fazla mimari desenin resmî kataloğu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu sayfadaki desenlerin çoğunun tek adresi. Bir kez baştan sona başlıklarını oku, ne olduklarını bilmek yeter.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mikroservis"><span class="h-num">§ 10</span>Mikroservis kavramları</h2>
+
+        <p>Mikroservis yazmasan bile bu kelimeleri tanıman gerekir; iş ilanlarının çoğunda geçiyor.
+        Altyapı tarafı (RabbitMQ, gRPC, Redis) için <a href="../05-mesajlasma-ve-dagitik/index.html">05</a>,
+        çalıştırma tarafı (Docker, Kubernetes, CI/CD) için <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mikroservis ve dağıtık sistem kavramları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Servis sınırı (service boundary)</strong></td>
+                <td>Bir servisin nerede başlayıp nerede bittiği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Doğru yöntem: bounded context'e göre bölmek, tabloya veya katmana göre değil.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/identify-microservice-domain-model-boundaries">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Database per service</strong></td>
+                <td>Her servisin kendi veritabanına sahip olması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mikroservisin en zor ve en tartışmalı kuralı; JOIN yapamamanın bedelini kabul etmek demektir.</td>
+                <td><a href="https://microservices.io/patterns/data/database-per-service.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shared database (anti-pattern)</strong></td>
+                <td>Birden çok servisin aynı veritabanını yazması</td>
+                <td><strong>ANTİ-PATTERN.</strong> Yapılırsa "dağıtık monolit" elde edersin: mikroservisin tüm maliyeti, hiçbir faydası.</td>
+                <td><a href="https://microservices.io/patterns/index.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>API Gateway</strong></td>
+                <td>İstemci ile servisler arasındaki tek giriş noktası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yetkilendirme, rate limiting, yönlendirme burada toplanır.</td>
+                <td><a href="https://microservices.io/patterns/apigateway.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>YARP</strong></td>
+                <td>Microsoft'un .NET ile yazılmış reverse proxy kütüphanesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, açık kaynak; kendi ASP.NET Core uygulamanın içine gömülür. Altyapına göre:
+                <br>&bull; Kendi .NET gateway'ini yazacaksan &rarr; YARP ilk seçenek.
+                <br>&bull; Kubernetes'te çalışıyorsan &rarr; çoğu ekip ingress controller (NGINX, Traefik), Gateway API veya Envoy kullanır; YARP isteğe bağlıdır.
+                <br>&bull; Bulutta yönetilen çözüm istiyorsan &rarr; Azure API Management, AWS API Gateway (ücretli).
+                <br>&bull; Mevcut Ocelot projesi &rarr; bakımı sürüyor, geçiş zorunlu değil (aşağıdaki satır).</td>
+                <td><a href="https://microsoft.github.io/reverse-proxy/">microsoft.github.io/reverse-proxy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ocelot</strong></td>
+                <td>.NET için topluluk tarafından geliştirilen API gateway</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. YARP'tan önce standarttı; hâlâ bakımı sürüyor ama yeni projede önce YARP'a bak.</td>
+                <td><a href="https://ocelot.readthedocs.io/en/latest/">ocelot.readthedocs.io</a> &middot; <a href="https://github.com/ThreeMammals/Ocelot">github</a></td>
+              </tr>
+              <tr>
+                <td><strong>Gateway aggregation</strong></td>
+                <td>Gateway'in birden çok servis çağrısını tek cevapta birleştirmesi</td>
+                <td><span class="tag">ORTA</span> —</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Gateway routing / offloading</strong></td>
+                <td>Yönlendirme ve SSL/auth gibi işleri gateway'e devretme</td>
+                <td><span class="tag">ORTA</span> —</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BFF — Backends for Frontends</strong></td>
+                <td>Her istemci tipi (web, mobil) için ayrı backend katmanı</td>
+                <td><span class="tag">ORTA</span> Mobil ve web'in farklı veri ihtiyacını tek API'ye sığdırma çabasının çözümü.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Service discovery</strong></td>
+                <td>Servisin adresini sabit yazmak yerine çalışma zamanında bulmak</td>
+                <td><span class="tag">ORTA</span> Client-side / server-side discovery ayrımı var. .NET tarafında <code>Microsoft.Extensions.ServiceDiscovery</code> (Aspire ile gelir), altyapıda Consul veya Kubernetes DNS.</td>
+                <td><a href="https://aspire.dev/fundamentals/service-discovery/">aspire.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Strangler Fig</strong></td>
+                <td>Eski sistemi bir anda değil, parça parça yeni sistemle sarıp değiştirmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Legacy .NET Framework projelerini .NET'e taşıma sorusunun cevabıdır; bu mülakatta çok sorulur.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig">learn.microsoft.com</a> &middot; <a href="https://martinfowler.com/bliki/StranglerFigApplication.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Distributed transaction</strong></td>
+                <td>Birden çok servis/veritabanı üzerinde atomik işlem</td>
+                <td><span class="tag">ORTA</span> Kısa cevap: mikroservis dünyasında yapılmaz, saga ile aşılır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/distributed-data-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>2PC — Two-Phase Commit</strong></td>
+                <td>Hazırlık ve commit aşamalı dağıtık işlem protokolü</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Kilitlenme ve düşük erişilebilirlik nedeniyle mikroserviste kullanılmaz. .NET'teki eski karşılığı <code>MSDTC</code> / <code>TransactionScope</code>.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>2PC vs Saga</strong></td>
+                <td>Güçlü tutarlılık (2PC) ile nihai tutarlılık (saga) arasındaki takas</td>
+                <td><span class="tag tag--ok">TEMEL</span> Doğrudan mülakat sorusu. Cevap: 2PC kilitler ve ölçeklenmez; saga telafi eder ve karmaşıklığı uygulamaya taşır.</td>
+                <td><a href="https://microservices.io/patterns/data/saga.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>CAP teoremi</strong></td>
+                <td>Ağ bölünmesinde tutarlılık ve erişilebilirlikten birini seçmek zorunluluğu</td>
+                <td><span class="tag">ORTA</span> Klasik teori sorusu; "CP mi AP mi" cevabını hazırlıklı ver.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Idempotency</strong></td>
+                <td>Aynı isteğin tekrarının sonucu değiştirmemesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> HTTP metotlarının idempotent olup olmadığını da bil (<a href="../02-platform-ve-web-api/index.html">02</a>).</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Sidecar / Ambassador</strong></td>
+                <td>Uygulamanın yanında koşan yardımcı süreç</td>
+                <td><span class="tag tag--info">İLERİ</span> Kubernetes ve service mesh dünyasının kavramı.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar">sidecar</a> &middot; <a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/ambassador">ambassador</a></td>
+              </tr>
+              <tr>
+                <td><strong>Service mesh</strong></td>
+                <td>Servisler arası trafiği uygulamadan bağımsız yöneten altyapı (Istio, Linkerd)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz/açık kaynak seçenekler var. Küçük ekipte gereksiz karmaşıklık.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Dapr</strong></td>
+                <td>Dağıtık uygulama yapı taşlarını (state, pub/sub, secret) sidecar olarak sunan runtime</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz, CNCF projesi. .NET ile iyi entegre; mikroservis altyapısını kütüphane yerine platform seviyesinde çözer.</td>
+                <td><a href="https://docs.dapr.io/">docs.dapr.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Steeltoe</strong></td>
+                <td>Spring Cloud'un .NET karşılığı (config server, discovery, circuit breaker)</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz. Java dünyasından gelen ekiplerin .NET'te aradığı şey; <a href="../../Java/index.html">Java bölümü</a> ile birlikte bakılabilir.</td>
+                <td><a href="https://steeltoe.io/">steeltoe.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Interservice communication</strong></td>
+                <td>Senkron (HTTP/gRPC) ve asenkron (mesaj) haberleşme seçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Senkron zincir = dağıtık monolit" uyarısını bil.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/interservice-communication">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.NET mikroservis kitabı (ücretsiz e-book)</strong></td>
+                <td>Microsoft'un mikroservis mimarisi rehberi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, Türkçe değil ama en derli toplu kaynak. CQRS, DDD ve outbox bölümlerini oku.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Monolit &rarr; mikroservis geçiş kitabı</strong></td>
+                <td>Eski ASP.NET uygulamalarını taşıma rehberi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Strangler Fig'in pratik uygulaması.</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/porting-existing-aspnet-apps/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="anti-patternler"><span class="h-num">§ 11</span>Anti-pattern'ler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tanıman gereken kötü desenler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Anemic domain model</strong></td>
+                <td>Sadece property tutan, davranışsız model + her şeyi yapan service sınıfları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tartışmalı: "anti-pattern değil, geçerli bir stil" diyenler de var. İki tarafı da bilmek seni güçlü gösterir.</td>
+                <td><a href="https://martinfowler.com/bliki/AnemicDomainModel.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>God object / God class</strong></td>
+                <td>Her şeyi bilen, her şeyi yapan dev sınıf</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Manager", "Helper", "Utils" isimli sınıflar genelde buraya kayar.</td>
+                <td><a href="https://refactoring.guru/refactoring/smells">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Big ball of mud</strong></td>
+                <td>Görünür bir mimarisi olmayan, her şeyin her şeye bağlı olduğu sistem</td>
+                <td><span class="tag tag--ok">TEMEL</span> Terimin kaynağı Foote &amp; Yoder makalesidir.</td>
+                <td><a href="https://www.laputan.org/mud/">laputan.org/mud</a></td>
+              </tr>
+              <tr>
+                <td><strong>Premature optimization</strong></td>
+                <td>Ölçmeden, gerek yokken performans için kod bozmak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Panzehri BenchmarkDotNet ile <em>önce ölçmek</em>. BenchmarkDotNet'i bilip bu cümleyi kurabilmek mülakatta işine yarar (<a href="../06-test-ve-kalite/index.html">06</a>).</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Primitive obsession</strong></td>
+                <td><code>string</code>, <code>int</code>, <code>Guid</code> ile her şeyi temsil etmek</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çözüm: value object ve strongly-typed ID (§ 6).</td>
+                <td><a href="https://refactoring.guru/refactoring/smells">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Feature envy</strong></td>
+                <td>Bir metodun kendi sınıfından çok başka sınıfın verisiyle uğraşması</td>
+                <td><span class="tag">ORTA</span> Çözüm: metodu veriye taşı ("move method"). Tell Don't Ask ile aynı hastalık.</td>
+                <td><a href="https://refactoring.guru/refactoring/smells">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Distributed monolith</strong></td>
+                <td>Mikroservise bölünmüş ama birlikte deploy edilmesi gereken sistem</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mikroservisin en yaygın başarısızlık biçimi.</td>
+                <td><a href="https://microservices.io/patterns/index.html">microservices.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Golden hammer</strong></td>
+                <td>Bildiğin tek aracı her probleme uygulamak</td>
+                <td><span class="tag">ORTA</span> "Her yere CQRS/mikroservis koymak" bunun güncel hali.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Lava flow / dead code</strong></td>
+                <td>Kimsenin dokunmaya cesaret edemediği ölü kod</td>
+                <td><span class="tag">ORTA</span> —</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Leaky abstraction</strong></td>
+                <td>Soyutlamanın altındaki detayın dışarı sızması</td>
+                <td><span class="tag">ORTA</span> Repository'nin <code>IQueryable</code> döndürmesi klasik örnektir (<a href="../03-veri-erisimi/index.html">03</a>).</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Chatty I/O / N+1 query</strong></td>
+                <td>Tek seferde alınabilecek veriyi yüzlerce çağrıyla almak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Azure'un "performance antipatterns" kataloğunda resmî olarak listelidir; EF Core'da en sık yapılan hatadır.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/antipatterns/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Performance antipatterns kataloğu</strong></td>
+                <td>Busy database, synchronous I/O, retry storm, monolithic persistence vb.</td>
+                <td><span class="tag tag--ok">TEMEL</span> Performans odaklı çalışanlar için temel katalog; başlıkları bir kez oku.</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/architecture/antipatterns/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Singleton (kötü kullanımı)</strong></td>
+                <td>Statik durum, gizli bağımlılık, test edilemezlik</td>
+                <td><span class="tag">ORTA</span> Desen kötü değil, <em>statik uygulaması</em> kötü; DI ile yaşam süresi olarak kullan.</td>
+                <td><a href="https://refactoring.guru/design-patterns/singleton">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Captive dependency</strong></td>
+                <td>Singleton servisin scoped servisi tutması (ör. singleton içinde <code>DbContext</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET'te gerçek bir hata kaynağıdır; <code>ValidateScopes</code> ile yakalanır (<a href="../02-platform-ve-web-api/index.html">02</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kod-kalitesi"><span class="h-num">§ 12</span>Kod kalitesi, refactoring, teknik borç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Clean Code ve refactoring</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Clean Code</strong></td>
+                <td>İsimlendirme, küçük fonksiyon, tek soyutlama seviyesi, yorumsuz anlaşılırlık</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlanlarda çok geçer. Kitap Java üzerinden anlatır ama kurallar dilden bağımsızdır. Eleştirilerini de oku; körü körüne savunma.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Code smell</strong></td>
+                <td>Kötü tasarımın belirtisi (uzun metot, uzun parametre listesi, shotgun surgery, divergent change...)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Katalogdaki ~20 başlığı tek tek gözden geçir; üzerinde çalıştığın bir kod tabanı varsa orada, yoksa açık kaynak bir .NET projesinde (ör. eShopOnWeb) hangilerinin olduğunu gör.</td>
+                <td><a href="https://refactoring.guru/refactoring/smells">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Refactoring katalogu (Fowler)</strong></td>
+                <td>Extract Method, Introduce Parameter Object, Replace Conditional with Polymorphism vb.</td>
+                <td><span class="tag tag--ok">TEMEL</span> Adı olan bir teknik kullanmak, "kodu düzelttim" demekten farklıdır; mülakatta teknik adını söyleyebil.</td>
+                <td><a href="https://refactoring.com/catalog/">refactoring.com</a> &middot; <a href="https://refactoring.guru/refactoring/techniques">refactoring.guru</a></td>
+              </tr>
+              <tr>
+                <td><strong>Extract Method / Extract Class</strong></td>
+                <td>En sık kullanılan iki refactoring</td>
+                <td><span class="tag tag--ok">TEMEL</span> Elle yapılmaz; IDE'nin refactor menüsüyle otomatik yapılır. Kısayol IDE'ye göre değişir:
+                <br>&bull; Visual Studio (varsayılan şema) &rarr; <kbd>Ctrl+R, Ctrl+M</kbd> veya <kbd>Ctrl+.</kbd> hızlı eylem menüsü.
+                <br>&bull; Rider / ReSharper &rarr; IntelliJ şemasında <kbd>Ctrl+Alt+M</kbd>, Visual Studio şemasında <kbd>Ctrl+R, M</kbd>; tüm seçenekler için "Refactor This" menüsü.
+                <br>&bull; VS Code + C# Dev Kit &rarr; <kbd>Ctrl+.</kbd> (Quick Fix / Refactor) ile "Extract method".
+                <br>&bull; macOS &rarr; <kbd>Ctrl</kbd> yerine <kbd>Cmd</kbd>/<kbd>Option</kbd> kombinasyonları (ör. Rider'da <kbd>Cmd+Option+M</kbd>).</td>
+                <td><a href="https://refactoring.com/catalog/">refactoring.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Replace Conditional with Polymorphism</strong></td>
+                <td>Büyük <code>switch</code>/<code>if</code> zincirini strateji sınıflarına dönüştürmek</td>
+                <td><span class="tag">ORTA</span> OCP'yi somutlaştıran teknik. Dikkat: C# 8+ pattern matching bazen daha okunur bir alternatiftir (<a href="../01-csharp-dili/index.html">01</a>).</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Introduce Parameter Object</strong></td>
+                <td>Uzun parametre listesini tek nesneye toplamak</td>
+                <td><span class="tag">ORTA</span> C#'ta <code>record</code> ile tek satırda yapılır.</td>
+                <td><a href="https://refactoring.com/catalog/">refactoring.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Strangler / Branch by Abstraction</strong></td>
+                <td>Büyük yeniden yazımı küçük güvenli adımlara bölen iki teknik</td>
+                <td><span class="tag">ORTA</span> "Uzun süren refactor branch'i" probleminin çözümü.</td>
+                <td><a href="https://martinfowler.com/bliki/StranglerFigApplication.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Technical debt</strong></td>
+                <td>Hızlı çözümün ileride ödenecek faizi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Fowler'ın "debt quadrant"ı (kasıtlı/kasıtsız &times; ihtiyatlı/pervasız) mülakatta iyi bir cevaptır.</td>
+                <td><a href="https://martinfowler.com/bliki/TechnicalDebt.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Boy Scout Rule</strong></td>
+                <td>Dokunduğun kodu bulduğundan biraz daha temiz bırak</td>
+                <td><span class="tag">ORTA</span> —</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Cyclomatic complexity</strong></td>
+                <td>Bir metottaki bağımsız yol sayısı; karmaşıklık ölçüsü</td>
+                <td><span class="tag">ORTA</span> Visual Studio'da "Calculate Code Metrics" ile ölçülür. Cognitive complexity ile farkını bil.</td>
+                <td>learn.microsoft.com</td>
+              </tr>
+              <tr>
+                <td><strong>Code coverage</strong></td>
+                <td>Testlerin kodun ne kadarını çalıştırdığı</td>
+                <td><span class="tag">ORTA</span> Hedef sayı değil, kör nokta göstergesidir. Detay: <a href="../06-test-ve-kalite/index.html">06</a>.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Static analysis / analyzer</strong></td>
+                <td>Derleme sırasında kod kalitesi kuralları uygulamak</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET analyzer'ları ücretsiz ve SDK'ya gömülü; <code>.editorconfig</code> ile kural seviyelerini ayarlarsın.</td>
+                <td>learn.microsoft.com (code analysis)</td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube / SonarCloud</strong></td>
+                <td>Kod kalitesi ve güvenlik taraması platformu</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Community sürümü ücretsiz, kurumsal özellikler ücretli. Alternatif: ücretsiz Roslyn analyzer'ları + <code>dotnet format</code>.</td>
+                <td>sonarsource.com</td>
+              </tr>
+              <tr>
+                <td><strong>.editorconfig</strong></td>
+                <td>Kod stili ve analyzer kurallarının depoya işlenmiş hali</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz, framework'e gömülü. Ekip standardını tartışmadan uygulatmanın yolu.</td>
+                <td>learn.microsoft.com</td>
+              </tr>
+              <tr>
+                <td><strong>ADR — Architecture Decision Record</strong></td>
+                <td>Mimari kararı ve gerekçesini depoya kaydeden kısa markdown dosyası</td>
+                <td><span class="tag">ORTA</span> Ücretsiz pratik. "Neden Onion seçtiniz" sorusuna hazır cevap üretir; mülakatta bahsetmen artı puandır.</td>
+                <td>adr.github.io</td>
+              </tr>
+              <tr>
+                <td><strong>C4 model</strong></td>
+                <td>Mimariyi 4 seviyede (context, container, component, code) çizme yöntemi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. UML'den daha pratik; Structurizr ve PlantUML ile çizilir.</td>
+                <td>c4model.com</td>
+              </tr>
+              <tr>
+                <td><strong>Code review pratikleri</strong></td>
+                <td>Küçük PR, açıklayıcı başlık, kişiyi değil kodu eleştirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Süreç tarafı <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a>'de.</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Definition of Done</strong></td>
+                <td>Bir işin "bitti" sayılması için gereken ölçütler listesi</td>
+                <td><span class="tag">ORTA</span> Test, doküman, code review, deploy adımlarını içerir.</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 13</span>Özet — bu sayfada öncelik sırası</h2>
+
+        <p>Aşağıdaki 1–10 sırası <strong>mülakat hazırlığı</strong> için kuruldu. Amacın farklıysa aynı adımları şu sırayla oku:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre öncelik (numaralar aşağıdaki adımlardır)</caption>
+            <thead><tr><th>Durumun</th><th>Sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Mülakata hazırlanıyorsun</td><td>Aşağıdaki sıra: 1 &rarr; 10.</td></tr>
+              <tr><td>Sıfırdan öğreniyorsun</td><td>SOLID (3) &rarr; Katmanlı/Onion (4) &rarr; Repository/UoW/Result (6) &rarr; GoF (5) &rarr; CQRS (1) &rarr; Mediator (2) &rarr; DDD (7) &rarr; anti-pattern'ler (8) &rarr; mikroservis (9) &rarr; Event Sourcing (10).</td></tr>
+              <tr><td>Mevcut kurumsal CRUD projesinde çalışıyorsun</td><td>Result/Repository tartışması (6) ve anti-pattern'ler (8) öne; CQRS (1) "ne zaman gereksiz" satırıyla birlikte; sonra diğerleri.</td></tr>
+              <tr><td>Denetim izinin zorunlu olduğu bir alandasın (bankacılık, ödeme, sigorta, muhasebe)</td><td>Event Sourcing (10) ve temporal tables (§ 7) öne alınır; "en sona bırak" önerisi yalnızca genel CRUD işleri için geçerli.</td></tr>
+              <tr><td>Bir mikroservis ekibine giriyorsun</td><td>Mikroservis kavramları (9, § 10) ve <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a> öne; ardından CQRS (1) ve DDD'nin stratejik yarısı (7).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">CQRS'i sıfırdan, kütüphanesiz yaz (§ 4)</span>
+            <p>İlanlarda sık geçer, çoğu aday yüzeysel bilir ve en çok sorulacak başlık bu. Tek bir controller'ı command/query
+            handler'larına böl. Kütüphane kullanma. Sonra "tek DB vs iki DB", "read model", "eventual consistency"
+            ve "ne zaman gereksiz" sorularının cevabını yaz.</p>
+            <span class="steps__meta">Öncelik: 1 &middot; Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Kendi mediator'ını yaz, sonra MediatR lisans durumunu öğren (§ 5)</span>
+            <p><code>IRequest&lt;T&gt;</code> + <code>IRequestHandler</code> + <code>IServiceProvider</code> ile 60 satırlık
+            bir mediator yaz. Ardından MediatR 13+ / AutoMapper 15+ ticari lisans meselesini ve ücretsiz alternatifleri
+            (martinothamar/Mediator, Wolverine, Brighter, FastEndpoints) tanı. Bu güncel bir konu; bilmen fark yaratır.</p>
+            <span class="steps__meta">Öncelik: 2 &middot; Rozet: MÜLAKATTA SIK + ÜCRETLİ</span>
+          </li>
+          <li>
+            <span class="steps__title">SOLID'i beş harf tek tek, örnekle anlat (§ 2)</span>
+            <p>Çoğu aday iyi bildiğini düşünür; ama "DIP ile DI farkı nedir" sorusu buradaki en sık eleme sorusudur.
+            Her harf için bir ihlal ve bir düzeltme örneği hazırla: çalıştığın ya da yazdığın bir kod tabanı varsa
+            örnekleri oradan çıkar; yoksa refactoring.guru örneklerini veya küçük bir kata projesini kullan; başka dilden
+            geliyorsan önce kendi dilindeki bir projede ihlali bul, sonra C#'a çevir.</p>
+            <span class="steps__meta">Öncelik: 3 &middot; Rozet: TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">Onion/Clean Architecture'ı klasör klasör anlatabil (§ 3)</span>
+            <p>Kurumsal .NET projelerinde en çok karşılaşılan yapı. <code>ardalis/CleanArchitecture</code> şablonunu klonla;
+            üzerinde çalıştığın bir proje varsa onun yapısıyla, yoksa <code>dotnet-architecture/eShopOnWeb</code> örneğiyle
+            karşılaştır. Vertical Slice ve Modular Monolith'i de tanı; "her şeye katman mı" sorusuna
+            alternatif sunabilmelisin.</p>
+            <span class="steps__meta">Öncelik: 4 &middot; Rozet: TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">GoF desenlerini .NET karşılıklarıyla eşleştir (§ 8)</span>
+            <p>Ezber yerine eşleme yap: middleware = chain of responsibility, <code>WebApplicationBuilder</code> = builder,
+            <code>IEnumerable</code> = iterator, <code>record with</code> = prototype, <code>Stream</code> sınıfları = decorator.
+            23 deseni de en az bir cümleyle tanımlayabil.</p>
+            <span class="steps__meta">Öncelik: 5 &middot; Rozet: TEMEL / ORTA</span>
+          </li>
+          <li>
+            <span class="steps__title">Repository, Unit of Work ve Result pattern'i savun (§ 9)</span>
+            <p>Result pattern mülakatta sık konuşulan bir konudur. "EF Core üstüne repository yazmalı mı"
+            tartışmasında iki tarafı da bilerek konuş. Alternatif kütüphaneleri (ErrorOr, OneOf, FluentResults) en azından
+            adıyla tanı.</p>
+            <span class="steps__meta">Öncelik: 6 &middot; Rozet: TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">DDD'nin taktiksel yarısını öğren (§ 6)</span>
+            <p>Entity, value object, aggregate root, invariant, domain event. Value object'i <code>record</code> ile yaz,
+            EF Core'da owned type olarak eşle. Stratejik yarısı (bounded context, ubiquitous language) bir sonraki adım.</p>
+            <span class="steps__meta">Öncelik: 7 &middot; Rozet: TEMEL / ORTA</span>
+          </li>
+          <li>
+            <span class="steps__title">Anti-pattern'lerin adını öğren (§ 11)</span>
+            <p>Anemic domain model, god object, primitive obsession, distributed monolith, captive dependency, N+1.
+            Bunları <em>adıyla</em> söyleyebilmek, kod okuma sorularında hızlı puan getirir.</p>
+            <span class="steps__meta">Öncelik: 8 &middot; Rozet: TEMEL</span>
+          </li>
+          <li>
+            <span class="steps__title">Mikroservis kelimelerini tanı, uygulamak zorunda değilsin (§ 10)</span>
+            <p>API gateway (YARP), saga, outbox, database per service, 2PC vs saga, strangler fig. Deneyimin yoksa
+            "uygulamadım ama şu problemi çözer" demek dürüst ve yeterli bir cevaptır.</p>
+            <span class="steps__meta">Öncelik: 9 &middot; Rozet: ORTA</span>
+          </li>
+          <li>
+            <span class="steps__title">Event Sourcing'i en sona bırak (§ 7)</span>
+            <p>Genel .NET ilanlarında nadiren istenir. "Ne olduğunu, CQRS'ten farkını ve ne zaman gereksiz olduğunu" bilmen yeterli.
+            Merak edersen Marten ile PostgreSQL üzerinde dene. Denetim izinin zorunlu olduğu alanlarda (bankacılık, ödeme,
+            sigorta) ise bu adım öne alınır; yukarıdaki tabloya bak.</p>
+            <span class="steps__meta">Öncelik: 10 &middot; Rozet: İLERİ</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Bu sayfanın tek cümlelik özeti: <strong>CQRS ve Mediator</strong> ilanlarda sık geçip en çok yüzeysel bilinen iki
+          başlık; ikisini de kütüphanesiz, kendi elinle yazarsan hem öğrenirsin hem anlatacak somut bir hikâyen olur.
+          Mülakat hazırlığında geri kalan her şey bunun üzerine eklenir; sıfırdan öğreniyorsan bu ikisine SOLID ve
+          katmanlı mimariden sonra gel.</p>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 14</span>Bu bölümün ana kaynakları</h2>
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/">Microsoft Azure Architecture Center — Cloud Design Patterns kataloğu</a></li>
+          <li><span class="src-n">02</span><a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/">Microsoft — .NET Microservices: Architecture for Containerized .NET Applications (ücretsiz e-book)</a></li>
+          <li><span class="src-n">03</span><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures">Microsoft — Common web application architectures (Layered, Onion, Clean)</a></li>
+          <li><span class="src-n">04</span><a href="https://martinfowler.com/bliki/CQRS.html">Martin Fowler — CQRS</a></li>
+          <li><span class="src-n">05</span><a href="https://refactoring.guru/design-patterns/catalog">Refactoring.Guru — Design Patterns kataloğu (GoF, C# örnekli)</a></li>
+          <li><span class="src-n">06</span><a href="https://refactoring.guru/refactoring/smells">Refactoring.Guru — Code Smells</a></li>
+          <li><span class="src-n">07</span><a href="https://refactoring.com/catalog/">Martin Fowler — Refactoring kataloğu</a></li>
+          <li><span class="src-n">08</span><a href="https://microservices.io/patterns/index.html">Chris Richardson — Microservice Patterns</a></li>
+          <li><span class="src-n">09</span><a href="https://mediatr.io/">mediatr.io — MediatR ve AutoMapper lisans/fiyat sayfası</a></li>
+          <li><span class="src-n">10</span><a href="https://masstransit.massient.com/">masstransit.massient.com — MassTransit v9 dokümantasyonunun yeni adresi</a></li>
+          <li><span class="src-n">11</span><a href="https://alistair.cockburn.us/hexagonal-architecture/">Alistair Cockburn — Hexagonal Architecture</a></li>
+          <li><span class="src-n">12</span><a href="https://www.jimmybogard.com/vertical-slice-architecture/">Jimmy Bogard — Vertical Slice Architecture</a></li>
+        </ul>
+
+        <p>Sonraki sayfa: <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık Sistemler</a>.
+        Kütüphanelerin toplu listesi için <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>,
+        diğer teknoloji alanları için <a href="../../index.html">ana sayfa</a>,
+        Java karşılıkları için <a href="../../Java/index.html">Java bölümü</a>.</p>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../03-veri-erisimi/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Veri Erişimi</span></a>
+        <a class="next" href="../05-mesajlasma-ve-dagitik/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Mesajlaşma ve Dağıtık Sistemler</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

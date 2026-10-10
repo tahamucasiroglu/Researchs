@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ekosistem ve Araçlar — JavaScript ve TypeScript Anahtar Listesi</title>
+<meta name="description" content="Vite, Next.js, state yönetimi, veri çekme, form, UI kütüphaneleri, test araçları ve paket yöneticileri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Ekosistem ve Araçlar</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · JavaScript / TypeScript</span>
+      <span class="brand__name">JavaScript ve TypeScript Anahtar Listesi</span>
+      <span class="brand__sub">JS → TS → React → Araçlar</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-javascript/index.html"><span class="nav-num">01</span><span>JavaScript</span></a></li>
+          <li><a class="nav-item" href="../02-typescript/index.html"><span class="nav-num">02</span><span>TypeScript</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kütüphane ve araçlar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-react/index.html"><span class="nav-num">03</span><span>React</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Sıralı bir yol haritası: React'a doğrudan atlamak yerine altındaki dili kurar. Anlatım yok, araştırma başlığı var. Ön koşul: HTML ve CSS bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 04 · Araçlar</div>
+        <h1 class="page-title">Next.js, state yönetimi ve <em>araçlar</em></h1>
+        <p class="lede">React tek başına yetmiyor: yönlendirme, sunucu tarafı render, global state, veri çekme, form doğrulama, bileşen kütüphanesi ve test. Kategori kategori seçenekler.</p>
+        <div class="head-meta">Referans &middot; Kategori bazlı &middot; Ücretsiz seçenekler işaretli</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa bir anlatım değil, <strong>arama listesi</strong>. Her satır bir terim,
+        bir-iki cümlelik "bu nedir" notu ve varsa resmî doküman bağlantısıdır. Konuyu buradan öğrenmeyeceksin;
+        buradan hangi kelimeyi arayacağını öğrenip kendi kaynağından okuyacak, küçük bir örnek yazacaksın.</p>
+
+        <p>JavaScript ekosisteminin en kafa karıştırıcı yanı, <strong>her iş için beş ayrı kütüphane olması</strong>.
+        Bu yüzden aşağıdaki tablolarda tek bir "doğru seçim" verilmedi: yaygın olan, ücretsiz alternatif ve niş
+        seçenek yan yana duruyor. Ücretli olan her satır işaretlendi. Buradaki amaç listeden seçim yapmak değil,
+        <em>bir ismi duyduğunda "bu ne işe yarıyor" sorusuna cevap verebilmek</em>.</p>
+
+        <h3>Rozet sözlüğü</h3>
+        <ul>
+          <li><span class="tag tag--bad">MÜLAKATTA SIK</span> İş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz. En yüksek öncelik.</li>
+          <li><span class="tag tag--ok">TEMEL</span> Bu alanda olmazsa olmaz; önce bunu öğren.</li>
+          <li><span class="tag">ORTA</span> Sonra gelir; adı geçtiğinde ne olduğunu bilmen yeter.</li>
+          <li><span class="tag tag--info">İLERİ</span> Derinleşme konusu; acele etme.</li>
+          <li><span class="tag tag--warn">ÜCRETLİ</span> Lisansı paralı veya bir kısmı paralı.</li>
+          <li><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ eski projelerde karşına çıkar, yeni projede tercih edilmez.</li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat: bu sayfayı baştan sona öğrenme</p>
+          <p>Bu sayfadaki maddelerin çoğu, tarayıcı tarafına yeni başlayanlar için
+          yeni olacak; buradaki iki yüz küsur satırı öğrenmeye çalışmak zaman kaybı olur. Öğrenme sırasını
+          <a href="#ozet">§ 17 Özet</a> bölümünden al. Ne kadar derine ineceğin hedefine bağlı; aşağıdaki tablodan
+          kendi satırını bul.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hedefe göre bu sayfadan ne alınır</caption>
+            <thead><tr><th>Hedefin</th><th>Asgari yol</th><th>Derinlik</th></tr></thead>
+            <tbody>
+              <tr><td><strong>.NET backend geliştiricisi</strong>, tarayıcı tarafında farkındalık</td><td>Node kur &rarr; Vite ile React projesi aç &rarr; fetch ile .NET API'sine bağlan &rarr; JWT saklama sorusunu cevapla &rarr; çıktıyı <code>wwwroot</code>'tan yayınla</td><td>Geri kalanı "duydum, şu işe yarıyor" düzeyinde kalabilir; backend ağırlıklı bir pozisyonun tarayıcı tarafı sorularında bu fazlasıyla yeterlidir.</td></tr>
+              <tr><td><strong>Başka bir backend geliştiricisi</strong> (Java/Spring, Python/Django-FastAPI, Go, Node)</td><td>Aynı asgari yol; ".NET API" yerine kendi API'n, <code>wwwroot</code> yerine çatının statik dosya klasörü (Spring <code>src/main/resources/static</code>, Django <code>STATIC_ROOT</code> + whitenoise, FastAPI <code>StaticFiles</code>, Express <code>express.static</code>)</td><td>Bir üst satırla aynı: farkındalık düzeyi yeterli.</td></tr>
+              <tr><td><strong>Frontend veya full-stack JS pozisyonu</strong></td><td>Asgari yol yetmez</td><td><a href="#meta-framework">§ 4</a> (Next.js), <a href="#state-yonetimi">§ 5</a>&ndash;<a href="#form-dogrulama">§ 8</a>, <a href="#test">§ 12</a>&ndash;<a href="#kod-kalitesi">§ 13</a> ve <a href="#izleme-analiz">§ 16</a> "tanı" değil "kullan" düzeyinde.</td></tr>
+              <tr><td><strong>Kendi projesini yayınlayan bağımsız geliştirici</strong></td><td><a href="#veri-cekme">§ 6</a> veri çekme + <a href="#dagitim-barindirma">§ 14</a> statik barındırma (Netlify, Cloudflare Pages, GitHub Pages, Vercel)</td><td>Ayrı backend yoksa <a href="#meta-framework">§ 4</a>'teki "ayrı backend yok" satırına da bak.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Önce hangi sayfalar</p>
+          <p>Bu sayfanın ön koşulu: dilin kendisi için <a href="../01-javascript/index.html">01 &mdash; JavaScript</a>,
+          tip sistemi için <a href="../02-typescript/index.html">02 &mdash; TypeScript</a>, kütüphane için
+          <a href="../03-react/index.html">03 &mdash; React</a>. İşaretleme ve stil temeli için
+          <a href="../../HTML-CSS/01-html/index.html">HTML</a> ve <a href="../../HTML-CSS/02-css/index.html">CSS</a>.
+          Sunucu tarafı için örneğin <a href="../../CSharp-DotNet/index.html">.NET bölümü</a>, aynı kavramların Java
+          karşılıkları için <a href="../../Java/index.html">Java bölümü</a>, diğer diller için
+          <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfaları. Bütün alanların üst haritası
+          <a href="../../index.html">ana sayfa</a>, bu bölümün girişi <a href="../index.html">JavaScript ve TypeScript genel bakış</a>.</p>
+        </div>
+
+        <h2 id="paket-yoneticileri"><span class="h-num">§ 2</span>Node.js, paket yöneticileri ve monorepo</h2>
+
+        <p>Tarayıcı tarafına yeni geçen biri için en yabancı kısım çoğu zaman burasıdır. Bir mülakatta
+        "<code>package.json</code> ile <code>package-lock.json</code> farkı nedir" sorusu çok sık gelir. Cevap:
+        <strong><code>package.json</code> izin verilen sürüm aralıklarını ve script'leri tanımlar;
+        <code>package-lock.json</code> tüm bağımlılık ağacının çözülmüş tam sürümlerini ve bütünlük özetlerini
+        (integrity hash) sabitler; <code>npm ci</code> onu birebir uygular.</strong> Başka bir ekosistemden
+        geliyorsan köprüler:</p>
+
+        <ul>
+          <li><strong>C#'tan geliyorsan</strong> &rarr; bu bölüm NuGet + <code>dotnet restore</code> karşılığı; ilişki <code>.csproj</code> ile <code>packages.lock.json</code> ilişkisiyle aynı.</li>
+          <li><strong>Java'dan geliyorsan</strong> &rarr; <code>pom.xml</code>/<code>build.gradle</code> + Gradle lockfile (dependency locking).</li>
+          <li><strong>Python'dan geliyorsan</strong> &rarr; <code>pyproject.toml</code> + <code>poetry.lock</code>/<code>uv.lock</code>.</li>
+          <li><strong>Hiçbirini kullanmadıysan</strong> &rarr; yukarıdaki kalın cevap tek başına yeterli.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma zamanı ve temel dosyalar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Node.js</strong></td>
+                <td>JavaScript'i tarayıcı dışında çalıştıran çalışma zamanı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Frontend'de sunucu olarak değil, <em>araç çalıştırmak</em> için gerekir; Vite/ESLint/test hepsi Node ister</td>
+                <td><a href="https://nodejs.org/docs/latest/api/">nodejs.org/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>LTS sürüm</strong></td>
+                <td>Node'un uzun destekli, çift numaralı sürüm hattı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kurulumda daima LTS seç; "Current" hattı araçlarla uyumsuzluk çıkarabilir</td>
+                <td><a href="https://nodejs.org/docs/latest/api/">nodejs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>package.json</strong></td>
+                <td>Projenin bağımlılıklarını ve komutlarını tanımlayan dosya</td>
+                <td><span class="tag tag--ok">TEMEL</span> İzin verilen sürüm aralıkları, script'ler ve proje ayarları burada. C#'tan geliyorsan: <code>.csproj</code>; Java'dan: <code>pom.xml</code>/<code>build.gradle</code>; Python'dan: <code>pyproject.toml</code></td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>package-lock.json</strong></td>
+                <td>Kurulan her paketin tam sürümünü sabitleyen kilit dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> Mutlaka git'e commit edilir; "bende çalışıyor" sorununun ilaçtır</td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/package-lock-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>lock file</strong></td>
+                <td>Kilit dosyasının genel adı; her paket yöneticisinin kendi formatı var</td>
+                <td><span class="tag tag--ok">TEMEL</span> npm &rarr; <code>package-lock.json</code>, pnpm &rarr; <code>pnpm-lock.yaml</code>, yarn &rarr; <code>yarn.lock</code>, bun &rarr; <code>bun.lock</code></td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/package-lock-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>node_modules</strong></td>
+                <td>Bağımlılıkların indirildiği, git'e girmeyen klasör</td>
+                <td><span class="tag tag--ok">TEMEL</span> Devasa olması normaldir; <code>.gitignore</code>'a mutlaka eklenir</td>
+                <td><a href="https://docs.npmjs.com/">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dependencies / devDependencies</strong></td>
+                <td>Üründe gereken paketler ile sadece geliştirmede gerekenler</td>
+                <td><span class="tag tag--ok">TEMEL</span> ESLint, Vite, test kütüphaneleri devDependencies'e girer</td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>peerDependencies</strong></td>
+                <td>Paketin, kullanıldığı projede bulunmasını beklediği bağımlılık</td>
+                <td><span class="tag">ORTA</span> React eklentilerinde React'in kendisi böyle tanımlanır; sürüm çakışması hatalarının kaynağıdır</td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/package-json">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>semver (^ ve ~)</strong></td>
+                <td>Anlamsal sürümleme; <code>^1.2.3</code> minor'a, <code>~1.2.3</code> patch'e izin verir</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Caret" ve "tilde" diye okunur. Dikkat: ana sürüm 0 ise <code>^</code> daralır: <code>^0.2.3</code> yalnızca 0.2.x, <code>^0.0.3</code> yalnızca 0.0.3 demektir. C#'tan geliyorsan: NuGet'teki sürüm aralıklarının karşılığı, sözdizimi farklı</td>
+                <td><a href="https://docs.npmjs.com/about-semantic-versioning">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm scripts</strong></td>
+                <td><code>package.json</code> içindeki <code>scripts</code> bloğu; <code>npm run dev</code> gibi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Projeyi nasıl çalıştıracağını buradan öğrenirsin</td>
+                <td><a href="https://docs.npmjs.com/cli/using-npm/scripts">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npx</strong></td>
+                <td>Kurmadan tek seferlik paket çalıştırma komutu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>npx create-vite@latest</code> gibi; global kurulum kirliliğini önler</td>
+                <td><a href="https://docs.npmjs.com/cli/commands/npx">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm ci</strong></td>
+                <td>Kilit dosyasına birebir uyan, tekrarlanabilir kurulum</td>
+                <td><span class="tag tag--ok">TEMEL</span> CI hattında <code>npm install</code> değil bu kullanılır</td>
+                <td><a href="https://docs.npmjs.com/cli/commands/npm-ci">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>npm audit</strong></td>
+                <td>Bağımlılıklardaki bilinen güvenlik açıklarını listeler</td>
+                <td><span class="tag">ORTA</span> Çok fazla yanlış alarm üretir; <code>--production</code> ile daralt</td>
+                <td><a href="https://docs.npmjs.com/cli/commands/npm-audit">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>.npmrc</strong></td>
+                <td>Kayıt sunucusu (registry) ve kimlik ayarları dosyası</td>
+                <td><span class="tag">ORTA</span> Kurumsal ortamda özel registry (Azure Artifacts, Nexus) buradan tanımlanır</td>
+                <td><a href="https://docs.npmjs.com/cli/configuring-npm/npmrc">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ESM / CommonJS</strong></td>
+                <td>İki modül sistemi: <code>import</code> ile <code>require</code></td>
+                <td><span class="tag">ORTA</span> Aramada "ERR_REQUIRE_ESM" hatasını görürsen konu budur; yeni projeler ESM</td>
+                <td><a href="https://nodejs.org/api/esm.html">nodejs.org/api/esm</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Paket yöneticileri &mdash; hepsi ücretsiz ve açık kaynak</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>npm</strong></td>
+                <td>Node ile birlikte gelen varsayılan paket yöneticisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrıca kurulum gerektirmez; öğrenmen gereken tek yönetici budur</td>
+                <td><a href="https://docs.npmjs.com/">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>pnpm</strong></td>
+                <td>Paketleri tek merkezde tutup sabit bağ ile bağlayan hızlı yönetici</td>
+                <td><span class="tag">ORTA</span> Disk ve kurulum süresinde ciddi kazanç; monorepo'da yaygın</td>
+                <td><a href="https://pnpm.io/">pnpm.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yarn</strong></td>
+                <td>npm'e alternatif, uzun süre standart olmuş yönetici</td>
+                <td><span class="tag">ORTA</span> "Yarn Classic (1.x)" ile "Yarn Berry (2+, PnP)" çok farklıdır; hangi sürüm olduğunu sor</td>
+                <td><a href="https://yarnpkg.com/getting-started">yarnpkg.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bun</strong></td>
+                <td>Paket yöneticisi + çalışma zamanı + test koşucusu olan tek araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Aramada "bun" tek başına farklı sonuç verir; "bun javascript runtime" yaz</td>
+                <td><a href="https://bun.com/docs">bun.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Corepack</strong></td>
+                <td>Node ile gelen, projenin istediği yönetici sürümünü sabitleyen araç</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>packageManager</code> alanıyla çalışır; ekipte sürüm kavgasını bitirir</td>
+                <td><a href="https://nodejs.org/api/corepack.html">nodejs.org/api/corepack</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Monorepo ve çok paketli yapı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>monorepo</strong></td>
+                <td>Birden çok uygulamayı/paketi tek git deposunda tutma yaklaşımı</td>
+                <td><span class="tag">ORTA</span> Ortak kodu paketler arasında yayınlamadan paylaşmayı sağlar. C#'tan geliyorsan: tek solution altında çok proje; Java'dan: Maven/Gradle çok modüllü proje</td>
+                <td><a href="https://docs.npmjs.com/cli/using-npm/workspaces">docs.npmjs.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>workspaces</strong></td>
+                <td>Paket yöneticisinin monorepo desteği; alt paketleri birbirine bağlar</td>
+                <td><span class="tag">ORTA</span> npm, pnpm ve yarn'ın üçünde de var; sözdizimi farklı</td>
+                <td><a href="https://pnpm.io/workspaces">pnpm.io/workspaces</a></td>
+              </tr>
+              <tr>
+                <td><strong>Turborepo</strong></td>
+                <td>Monorepo'da görev planlayan ve sonuçları önbelleğe alan koşucu</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; uzak önbellek Vercel hesabıyla ücretli olabilir. Adres <em>turborepo.dev</em> oldu</td>
+                <td><a href="https://turborepo.dev/docs">turborepo.dev/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nx</strong></td>
+                <td>Monorepo yönetimi + kod üreteçleri + bağımlılık grafiği</td>
+                <td><span class="tag tag--info">İLERİ</span> Turborepo'dan daha kuralcı ve daha kapsamlı; Angular dünyasından geldi</td>
+                <td><a href="https://nx.dev/">nx.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Changesets</strong></td>
+                <td>Monorepo'da sürüm numarası ve değişiklik notu üretme aracı</td>
+                <td><span class="tag tag--info">İLERİ</span> Kütüphane yayınlamıyorsan gerekmez</td>
+                <td><a href="https://turborepo.dev/docs">turborepo.dev (rehberde geçer)</a></td>
+              </tr>
+              <tr>
+                <td><strong>Dependabot / Renovate</strong></td>
+                <td>Bağımlılıkları otomatik güncelleyen bot</td>
+                <td><span class="tag">ORTA</span> Dependabot GitHub'da ücretsiz gelir</td>
+                <td><a href="https://docs.github.com/en/code-security/dependabot">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Knip</strong></td>
+                <td>Kullanılmayan dosya, export ve bağımlılıkları bulan araç</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; eski projeyi temizlerken çok işe yarar</td>
+                <td><a href="https://knip.dev/">knip.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="derleme-araclari"><span class="h-num">§ 3</span>Derleme araçları</h2>
+
+        <p>Tarayıcı yazdığın JSX'i, TypeScript'i, birbirini <code>import</code> eden yüzlerce dosyayı
+        doğrudan anlamaz. Arada bunları tek (veya birkaç) dosyaya derleyen bir araç vardır (C#'tan geliyorsan: <code>dotnet build</code>
+        ve Roslyn; Java'dan: <code>javac</code> + Maven/Gradle). JavaScript'te işi ikiye bölmüşlerdir:
+        <strong>transpiler</strong> (dili çevirir) ve <strong>bundler</strong> (dosyaları birleştirir).</p>
+
+        <div class="def">
+          <p class="def__term">bundler <small>paketleyici</small></p>
+          <p>Yüzlerce kaynak dosyayı, bağımlılık grafiğini çözerek tarayıcının indirebileceği birkaç dosyaya
+          indiren araç. Aramada "javascript bundler" yaz; "bundler" tek başına Ruby'nin paket aracını getirir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Derleyici ve paketleyiciler &mdash; hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Vite</strong></td>
+                <td>Geliştirmede anında açılan, üretimde paketleyen modern build aracı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yeni React projesi için varsayılan seçim; başlangıçta öğrenmen gereken tek build aracı budur</td>
+                <td><a href="https://vite.dev/guide/">vite.dev/guide</a></td>
+              </tr>
+              <tr>
+                <td><strong>webpack</strong></td>
+                <td>Uzun yıllar standart olmuş, ayarı bol paketleyici</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni projede seçilmez ama devraldığın her eski projede karşına çıkar</td>
+                <td><a href="https://webpack.js.org/concepts/">webpack.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rollup</strong></td>
+                <td>Kütüphane paketlemede güçlü, temiz çıktı üreten paketleyici</td>
+                <td><span class="tag">ORTA</span> Vite üretim derlemesinde uzun süre bunu kullandı</td>
+                <td><a href="https://rollupjs.org/">rollupjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rolldown</strong></td>
+                <td>Rust ile yazılmış, Rollup uyumlu yeni paketleyici</td>
+                <td><span class="tag tag--info">İLERİ</span> Vite'ın geçmekte olduğu motor; adı Rollup'a çok benzer, karıştırma</td>
+                <td><a href="https://rolldown.rs/">rolldown.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>esbuild</strong></td>
+                <td>Go ile yazılmış, çok hızlı paketleyici/transpiler</td>
+                <td><span class="tag">ORTA</span> Vite geliştirme modunda bunu kullanır; tek başına da kullanılabilir</td>
+                <td><a href="https://esbuild.github.io/">esbuild.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SWC</strong></td>
+                <td>Rust ile yazılmış Babel alternatifi transpiler</td>
+                <td><span class="tag">ORTA</span> Next.js ve bazı test araçları arka planda bunu kullanır</td>
+                <td><a href="https://swc.rs/">swc.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Babel</strong></td>
+                <td>Yeni JavaScript'i eski tarayıcıların anlayacağı biçime çeviren klasik transpiler</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ çalışır ve yaygındır ama yeni kurulumda yerini SWC/esbuild aldı</td>
+                <td><a href="https://babeljs.io/docs/">babeljs.io/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Turbopack</strong></td>
+                <td>Next.js için yazılmış Rust tabanlı paketleyici</td>
+                <td><span class="tag tag--info">İLERİ</span> Sadece Next.js bağlamında anlamlı; ayrı araç gibi kullanılmaz</td>
+                <td><a href="https://nextjs.org/docs/app/api-reference/turbopack">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Parcel</strong></td>
+                <td>Sıfır ayar iddiasıyla çıkan paketleyici</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş kaldı; küçük demo projelerde görürsün</td>
+                <td><a href="https://parceljs.org/">parceljs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>PostCSS</strong></td>
+                <td>CSS'i eklentilerle dönüştüren işlem hattı</td>
+                <td><span class="tag">ORTA</span> Tailwind ve autoprefixer bunun üstünde çalışır</td>
+                <td><a href="https://postcss.org/">postcss.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sass / SCSS</strong></td>
+                <td>Değişken ve iç içe kural desteği olan CSS ön işlemcisi</td>
+                <td><span class="tag">ORTA</span> Modern CSS değişkenleri sayesinde eski önemini kaybetti; bkz. <a href="../../HTML-CSS/02-css/index.html">CSS</a></td>
+                <td><a href="https://sass-lang.com/documentation/">sass-lang.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Build sırasında geçen kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>HMR (Hot Module Replacement)</strong></td>
+                <td>Kaydettiğin anda sayfayı yenilemeden modülü değiştirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite'ın en görünür özelliği; state kaybolmadan değişikliği görürsün. C#'tan geliyorsan: Hot Reload'un karşılığı</td>
+                <td><a href="https://vite.dev/guide/api-hmr">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>tree shaking</strong></td>
+                <td>Kullanılmayan kodu çıktı dosyasından atma</td>
+                <td><span class="tag">ORTA</span> Sadece ESM modüllerde düzgün çalışır</td>
+                <td><a href="https://webpack.js.org/guides/tree-shaking/">webpack.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>code splitting</strong></td>
+                <td>Çıktıyı parçalara bölüp gerekince yükleme</td>
+                <td><span class="tag">ORTA</span> React'te <code>lazy</code> + <code>Suspense</code> ile eşleşir</td>
+                <td><a href="https://webpack.js.org/guides/code-splitting/">webpack.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>minification</strong></td>
+                <td>Boşluk ve isimleri kısaltarak dosyayı küçültme</td>
+                <td><span class="tag">ORTA</span> Üretim derlemesinde otomatik yapılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Minification">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>source map</strong></td>
+                <td>Küçültülmüş kodu kaynak koda geri eşleyen harita dosyası</td>
+                <td><span class="tag">ORTA</span> Üretimde hata izlerini okuyabilmek için Sentry'ye yüklenir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Source_map">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>polyfill</strong></td>
+                <td>Eski tarayıcıda olmayan bir API'yi JavaScript ile taklit eden kod</td>
+                <td><span class="tag">ORTA</span> Bugün çoğu proje polyfill'siz gider; hedef tarayıcıya bağlı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>browserslist</strong></td>
+                <td>Desteklenecek tarayıcıları tanımlayan ortak yapılandırma</td>
+                <td><span class="tag tag--info">İLERİ</span> Babel, PostCSS ve Vite bu listeyi okur</td>
+                <td><a href="https://postcss.org/">postcss.org (eklenti ekosistemi)</a></td>
+              </tr>
+              <tr>
+                <td><strong>bundle analyzer</strong></td>
+                <td>Çıktının hangi paketten ne kadar şiştiğini gösteren görselleştirme</td>
+                <td><span class="tag">ORTA</span> "Sayfa neden 3 MB" sorusunun cevabı buradan çıkar</td>
+                <td><a href="https://webpack.js.org/guides/code-splitting/#bundle-analysis">webpack.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>env değişkenleri (import.meta.env)</strong></td>
+                <td>Derleme sırasında koda gömülen ortam ayarları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite'ta <code>VITE_</code> önekli olanlar tarayıcıya gider &mdash; <strong>gizli anahtar koyma</strong></td>
+                <td><a href="https://vite.dev/guide/env-and-mode">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>base path</strong></td>
+                <td>Uygulamanın alt klasörde yayınlanacağını bildiren ayar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Uygulamayı kök yerine <code>/app/</code> gibi bir alt yola koyacaksan (backend'inin altında, ör. .NET; reverse proxy arkasında veya GitHub Pages proje sitesinde) bunu ayarlaman şart</td>
+                <td><a href="https://vite.dev/config/shared-options#base">vite.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="meta-framework"><span class="h-num">§ 4</span>Meta-framework: Next.js ve alternatifleri</h2>
+
+        <p>React tek başına sadece arayüz kurar: yönlendirme (routing), sunucuda render, veri yükleme, derleme
+        yapılandırması yoktur. Bunları paket halinde veren araçlara <strong>meta-framework</strong> denir.
+        En yaygını Next.js'tir ve iş ilanlarında "React" yazan yerlerin çoğu aslında Next.js kastediyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Next.js &mdash; ücretsiz ve açık kaynak (barındırma ayrı konu)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Next.js</strong></td>
+                <td>React üstüne routing, sunucu render ve derleme ekleyen framework</td>
+                <td><span class="tag">ORTA</span> Kendisi ücretsiz; Vercel'de barındırmak zorunlu değildir</td>
+                <td><a href="https://nextjs.org/docs">nextjs.org/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>App Router</strong></td>
+                <td>Next.js 13 ile gelen, <code>app/</code> klasörüne dayalı yeni yönlendirme modeli</td>
+                <td><span class="tag">ORTA</span> Bugünkü varsayılan; internetteki eğitimlerin yarısı hâlâ eskisini anlatıyor, tarihe bak</td>
+                <td><a href="https://nextjs.org/docs/app">nextjs.org/docs/app</a></td>
+              </tr>
+              <tr>
+                <td><strong>Pages Router</strong></td>
+                <td><code>pages/</code> klasörüne dayalı eski yönlendirme modeli</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ destekleniyor; eski projelerde karşına çıkar. İkisini karıştırmamak kritik</td>
+                <td><a href="https://nextjs.org/docs/pages">nextjs.org/docs/pages</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSR</strong></td>
+                <td>Client-Side Rendering: HTML boş gelir, JavaScript doldurur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite + React'in varsayılan çalışma biçimi budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSR">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>SSR</strong></td>
+                <td>Server-Side Rendering: HTML sunucuda üretilip hazır gelir</td>
+                <td><span class="tag">ORTA</span> Sunucu taraflı şablon motorlarının (ASP.NET Core MVC/Razor, Spring + Thymeleaf, Django şablonları) yaptığı işin React tarafındaki karşılığı</td>
+                <td><a href="https://nextjs.org/docs/app">nextjs.org/docs/app</a></td>
+              </tr>
+              <tr>
+                <td><strong>SSG</strong></td>
+                <td>Static Site Generation: sayfalar derleme anında HTML'e dökülür</td>
+                <td><span class="tag">ORTA</span> Blog, dokümantasyon, tanıtım sitesi için ideal</td>
+                <td><a href="https://nextjs.org/docs/app/guides/static-exports">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ISR</strong></td>
+                <td>Incremental Static Regeneration: statik sayfayı belirli aralıkla arka planda tazeleme</td>
+                <td><span class="tag tag--info">İLERİ</span> "Statik hız + güncel veri" isteyen sayfalar için</td>
+                <td><a href="https://nextjs.org/docs/app/guides/incremental-static-regeneration">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>RSC (React Server Components)</strong></td>
+                <td>Sunucuda çalışıp tarayıcıya JavaScript göndermeyen bileşenler</td>
+                <td><span class="tag tag--info">İLERİ</span> Kavramsal olarak zor; <code>"use client"</code> direktifiyle birlikte öğrenilir</td>
+                <td><a href="https://react.dev/reference/rsc/server-components">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>"use client" / "use server"</strong></td>
+                <td>Bir dosyanın nerede çalışacağını belirten direktifler</td>
+                <td><span class="tag tag--info">İLERİ</span> Next.js hata mesajlarının çoğu bu sınırın ihlalinden çıkar</td>
+                <td><a href="https://react.dev/reference/rsc/directives">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Server Actions</strong></td>
+                <td>Formu doğrudan sunucu fonksiyonuna bağlayan mekanizma</td>
+                <td><span class="tag tag--info">İLERİ</span> Ayrı API yazmadan veri değiştirme; ayrı bir backend API'n (ör. .NET, Spring, Django) varsa gerekmeyebilir</td>
+                <td><a href="https://nextjs.org/docs/app/getting-started/mutating-data">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Route Handlers</strong></td>
+                <td>Next.js içinde HTTP uç noktası tanımlama (<code>route.ts</code>)</td>
+                <td><span class="tag">ORTA</span> Ayrı backend'in yoksa API uç noktası burada yazılır; ayrı bir backend'in varsa çoğunlukla gereksiz. C#'tan geliyorsan: Minimal API'nin Next tarafındaki karşılığı</td>
+                <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Next.js middleware</strong></td>
+                <td>İstek uç noktaya varmadan araya giren fonksiyon</td>
+                <td><span class="tag">ORTA</span> Yönlendirme, oturum kontrolü gibi işleri istek sayfaya varmadan yapar. Sunucu çatılarındaki middleware/filter fikriyle aynı (ASP.NET Core middleware, Express middleware, Spring filter), farklı çalışma ortamı</td>
+                <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/middleware">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>next/image</strong></td>
+                <td>Görselleri otomatik boyutlandırıp modern formata çeviren bileşen</td>
+                <td><span class="tag">ORTA</span> Next'in en somut faydalarından biri; kendi sunucunda çalıştırırken ek ayar ister</td>
+                <td><a href="https://nextjs.org/docs/app/api-reference/components/image">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>next/font</strong></td>
+                <td>Yazı tiplerini derlemede gömüp düzen kaymasını önleyen araç</td>
+                <td><span class="tag tag--info">İLERİ</span> CLS metriğiyle doğrudan ilgili</td>
+                <td><a href="https://nextjs.org/docs/app/api-reference/components/font">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>static export</strong></td>
+                <td>Next projesini tamamen statik dosyalara döken mod</td>
+                <td><span class="tag">ORTA</span> Node sunucusu istemiyorsan; SSR ve ISR bu modda çalışmaz</td>
+                <td><a href="https://nextjs.org/docs/app/guides/static-exports">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>PPR (Partial Prerendering)</strong></td>
+                <td>Sayfanın statik iskeletini hemen, dinamik parçasını akışla gönderme</td>
+                <td><span class="tag tag--info">İLERİ</span> Deneysel; adını duymak yeter</td>
+                <td><a href="https://nextjs.org/docs/app/getting-started/partial-prerendering">nextjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hydration</strong></td>
+                <td>Sunucudan gelen HTML'e tarayıcıda olay bağlama süreci</td>
+                <td><span class="tag">ORTA</span> "Hydration mismatch" hatası SSR'nin klasik tuzağıdır</td>
+                <td><a href="https://react.dev/reference/react-dom/client/hydrateRoot">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Next.js gerçekten gerekli mi</h3>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Gerekir</p>
+            <ul>
+              <li>Sayfaların Google'da çıkması gerekiyorsa (SEO, herkese açık pazarlama/e-ticaret sitesi).</li>
+              <li>İlk açılış hızı ticari olarak kritikse; boş HTML + geç dolan ekran kabul edilemiyorsa.</li>
+              <li>Frontend'in kendi hafif backend'i olacaksa ve ayrı bir API yazılmayacaksa.</li>
+              <li>Ekip zaten Next.js kullanıyorsa; tercih bireysel değil.</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Fazladır</p>
+            <ul>
+              <li>Ürün giriş ekranının arkasında olan bir yönetim paneli/iç uygulama ise. SEO yok, SSR'ın anlamı yok.</li>
+              <li>Zaten ayrı bir <strong>Web API</strong> varsa (ör. ASP.NET Core, Spring, Django); Next'in sunucu tarafı ikinci bir backend katmanı yaratır.</li>
+              <li>Ekip Node sunucusu işletmek istemiyorsa; herhangi bir web sunucusuna (IIS, Nginx, Apache) veya statik barındırmaya dosya koymak çok daha basittir.</li>
+              <li>Henüz React öğreniyorsan. Next, React'in üstüne <em>ek</em> kavramlar yığar; ikisini birlikte öğrenmek en sık yapılan hatadır.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Doğru seçim projenin türüne bağlı:</p>
+          <ul>
+            <li><strong>Ayrı bir backend API'si var</strong> (ör. ASP.NET Core, Spring, Django) <strong>ve uygulama giriş ekranının arkasında</strong> &rarr; çoğu zaman <strong>Vite + React</strong>; Next.js'i "ne olduğunu bilecek" kadar öğren, kurma.</li>
+            <li><strong>Herkese açık, SEO veya ilk yükleme hızı kritik site</strong> &rarr; Next.js (veya Astro, React Router framework modu).</li>
+            <li><strong>Ayrı backend yok, küçük/orta tam yığın JS uygulaması</strong> &rarr; Next.js'in Route Handler ve Server Actions'ı backend görevi görebilir.</li>
+            <li><strong>Ekip zaten Next.js kullanıyor veya iş ilanı Next.js istiyor</strong> &rarr; "kurma" değil: öğren ve kullan.</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Alternatif meta-framework ve router'lar &mdash; hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>React Router</strong></td>
+                <td>React'in en yaygın yönlendirme kütüphanesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite + React kuruyorsan ihtiyacın olan tek yönlendirici; v6 ve v7 arasında API farkı var</td>
+                <td><a href="https://reactrouter.com/">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Remix</strong></td>
+                <td>Web standartlarına yaslanan meta-framework</td>
+                <td><span class="tag tag--info">İLERİ</span> Remix v2, React Router v7 ile birleşti; "Remix" adı yeni bir projeye taşındı, karıştırma</td>
+                <td><a href="https://guides.remix.run/">guides.remix.run</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Router v7 (framework mode)</strong></td>
+                <td>Router'ın SSR ve veri yükleme de yapan tam framework kipi</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski Remix kullanıcıları buraya taşındı</td>
+                <td><a href="https://reactrouter.com/">reactrouter.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Router</strong></td>
+                <td>Tip güvenliği çok güçlü, React için yönlendirici</td>
+                <td><span class="tag tag--info">İLERİ</span> URL parametrelerini TypeScript ile denetler</td>
+                <td><a href="https://tanstack.com/router/latest">tanstack.com/router</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Start</strong></td>
+                <td>TanStack Router üstüne kurulu, SSR yapabilen meta-framework</td>
+                <td><span class="tag tag--info">İLERİ</span> Genç proje; Next.js alternatifi olarak konuşuluyor</td>
+                <td><a href="https://tanstack.com/start/latest">tanstack.com/start</a></td>
+              </tr>
+              <tr>
+                <td><strong>Astro</strong></td>
+                <td>Varsayılan olarak sıfır JavaScript gönderen içerik odaklı framework</td>
+                <td><span class="tag tag--info">İLERİ</span> Blog/doküman/tanıtım sitesi için; uygulama için değil. "Islands" kavramı buradan gelir</td>
+                <td><a href="https://docs.astro.build/en/getting-started/">docs.astro.build</a></td>
+              </tr>
+              <tr>
+                <td><strong>Angular</strong></td>
+                <td>Google'ın tam kapsamlı, kuralcı frontend framework'ü</td>
+                <td><span class="tag">ORTA</span> React değil, ayrı bir dünya; kurumsal ekiplerde (backend'i .NET veya Java olan projelerde sık) yaygındır, ilanlarda karşına çıkar. Hedefin Angular ise TS'i JS'ten hemen sonra al</td>
+                <td><a href="https://angular.dev/">angular.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vue / Nuxt, Svelte / SvelteKit</strong></td>
+                <td>React'e rakip iki ekosistem ve kendi meta-framework'leri</td>
+                <td><span class="tag tag--info">İLERİ</span> Öğrenmene gerek yok; adlarını ve nerede durduklarını bil</td>
+                <td>vuejs.org &middot; svelte.dev</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="state-yonetimi"><span class="h-num">§ 5</span>State yönetimi</h2>
+
+        <p>"State" ekranın o anki verisidir. Küçük uygulamada React'in kendi <code>useState</code>'i yeter;
+        veri birçok bileşen arasında paylaşılmaya başlayınca ayrı bir kütüphane devreye girer. Sık yapılan
+        hata, sunucudan gelen veriyi state kütüphanesine doldurmaktır &mdash; onun yeri
+        <a href="#veri-cekme">§ 6</a>'daki veri çekme kütüphaneleridir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi ölçekte hangisi &mdash; tümü ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>useState</strong></td>
+                <td>Tek bileşenin kendi durumu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Uygulamaların çoğu için gereken tek şey budur</td>
+                <td><a href="https://react.dev/reference/react/useState">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>useReducer</strong></td>
+                <td>Karmaşık durum geçişlerini tek fonksiyonda toplama</td>
+                <td><span class="tag">ORTA</span> Redux'ın küçük, kütüphanesiz hali</td>
+                <td><a href="https://react.dev/reference/react/useState">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Context API</strong></td>
+                <td>Veriyi ara katmanlardan geçirmeden derindeki bileşene ulaştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tema, dil, oturum bilgisi için doğru; sık değişen veri için performans sorunu çıkarır</td>
+                <td><a href="https://react.dev/learn/passing-data-deeply-with-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>prop drilling</strong></td>
+                <td>Veriyi katman katman aşağı geçirme sorunu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Context ve state kütüphanelerinin varlık sebebi; mülakatta terim olarak sorulur</td>
+                <td><a href="https://react.dev/learn/passing-data-deeply-with-context">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zustand</strong></td>
+                <td>Küçük, sade, hook tabanlı global state kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Bugün en çok önerilen ilk adım; Redux'a göre çok az kalıp kod ister</td>
+                <td><a href="https://zustand.docs.pmnd.rs/">zustand.docs.pmnd.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Redux Toolkit (RTK)</strong></td>
+                <td>Redux'ın resmî, kalıp kodu azaltılmış modern paketi</td>
+                <td><span class="tag">ORTA</span> Kurumsal projelerde hâlâ standart. Düz "Redux" öğrenme, doğrudan RTK öğren</td>
+                <td><a href="https://redux-toolkit.js.org/">redux-toolkit.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jotai</strong></td>
+                <td>Atom tabanlı, parça parça state yönetimi</td>
+                <td><span class="tag tag--info">İLERİ</span> Aynı ekipten Zustand da çıktı; ikisi farklı yaklaşımlardır</td>
+                <td><a href="https://jotai.org/">jotai.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Valtio</strong></td>
+                <td>Proxy ile çalışan, doğrudan atama yapılan state</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş; mutasyon yazıp React'in tepki vermesini istiyorsan</td>
+                <td><a href="https://valtio.dev/">valtio.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>MobX</strong></td>
+                <td>Gözlemlenebilir nesnelerle otomatik güncelleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Eski ve büyük projelerde karşına çıkar; nesne yönelimli tarza yakındır</td>
+                <td><a href="https://mobx.js.org/README.html">mobx.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>XState</strong></td>
+                <td>Durum makinesi (state machine) ile akış modelleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Sihirbaz ekranları, ödeme akışları gibi karmaşık geçişler için</td>
+                <td><a href="https://stately.ai/docs/xstate">stately.ai/docs/xstate</a></td>
+              </tr>
+              <tr>
+                <td><strong>Recoil</strong></td>
+                <td>Meta'nın atom tabanlı state kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Geliştirmesi durdu; yeni projede kullanma, eski projede görebilirsin</td>
+                <td>recoiljs.org</td>
+              </tr>
+              <tr>
+                <td><strong>Immer</strong></td>
+                <td>Değişmez (immutable) güncellemeyi mutasyon yazar gibi yapmayı sağlar</td>
+                <td><span class="tag">ORTA</span> RTK içinde zaten gömülü gelir</td>
+                <td><a href="https://immerjs.github.io/immer/">immerjs.github.io/immer</a></td>
+              </tr>
+              <tr>
+                <td><strong>immutability</strong></td>
+                <td>State'i değiştirmek yerine yeni kopya üretme kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> React'in yeniden render kararı buna dayanır; diziyi <code>push</code> ile değiştirirsen ekran güncellenmez</td>
+                <td><a href="https://react.dev/learn/updating-objects-in-state">react.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="veri-cekme"><span class="h-num">§ 6</span>Veri çekme ve sunucu durumu</h2>
+
+        <p>Backend geliştiricinin en çok işine yarayacak bölüm bu: burada tarayıcı tarafı kendi API'ne (ASP.NET Core,
+        Spring, Django/FastAPI, Express, Go&hellip;) bağlanır. Backend'in yoksa aynı alıştırmayı MSW veya bir mock API
+        ile yaparsın; bölüm yine geçerli. Önce <code>fetch</code>'i çıplak haliyle öğren; kütüphaneler ancak ondan
+        sonra anlamlı olur.</p>
+
+        <div class="def">
+          <p class="def__term">server state <small>sunucu durumu</small></p>
+          <p>Sahibi sunucu olan, istemcinin sadece kopyasını gösterdiği veri. Yükleniyor/hata/tazeleme durumları
+          ve önbellek gerektirdiği için normal state'ten ayrı ele alınır. TanStack Query gibi kütüphaneler
+          tam olarak bu iş için vardır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Temel araçlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>fetch</strong></td>
+                <td>Tarayıcıya gömülü HTTP istek fonksiyonu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kütüphanesiz çalışır. Hata durumunda <em>reject etmez</em>; <code>response.ok</code>'u sen kontrol edersin</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Axios</strong></td>
+                <td>Yaygın HTTP istemci kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Interceptor, otomatik JSON ve iptal desteği için tercih edilir; zorunlu değildir</td>
+                <td><a href="https://axios-http.com/docs/intro">axios-http.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>interceptor</strong></td>
+                <td>Her isteğe/yanıta otomatik müdahale noktası</td>
+                <td><span class="tag tag--ok">TEMEL</span> JWT başlığını eklemenin ve 401'de yenilemenin standart yeri. C#'tan geliyorsan: DelegatingHandler; Java'dan: OkHttp/Spring <code>ClientHttpRequestInterceptor</code></td>
+                <td><a href="https://axios-http.com/docs/interceptors">axios-http.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AbortController</strong></td>
+                <td>Devam eden isteği iptal etme mekanizması</td>
+                <td><span class="tag">ORTA</span> Devam eden fetch'i iptal eder; bileşen kaldırılınca veya yeni arama başlayınca eski isteği kes. C#'tan geliyorsan: <code>CancellationToken</code>'ın tarayıcı karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>URLSearchParams</strong></td>
+                <td>Sorgu dizesini güvenli biçimde kurma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Elle string birleştirme yapma; kaçış hatalarını bu önler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri çekme kütüphaneleri &mdash; hepsi ücretsiz çekirdek</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>TanStack Query</strong></td>
+                <td>Önbellek, tazeleme, yeniden deneme ve durum yönetimi yapan veri katmanı</td>
+                <td><span class="tag">ORTA</span> Eski adı <em>React Query</em>; aramada iki adı da dene. REST API'ye bağlanan React projesinde en çok değer katan tek paket</td>
+                <td><a href="https://tanstack.com/query/latest">tanstack.com/query</a></td>
+              </tr>
+              <tr>
+                <td><strong>staleTime / gcTime</strong></td>
+                <td>Verinin ne kadar taze sayıldığı ve önbellekte ne kadar tutulduğu</td>
+                <td><span class="tag">ORTA</span> Query'de en sık yanlış anlaşılan iki ayar</td>
+                <td><a href="https://tanstack.com/query/latest/docs/framework/react/guides/caching">tanstack.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>optimistic update</strong></td>
+                <td>Sunucu cevabını beklemeden arayüzü güncelleme, hatada geri alma</td>
+                <td><span class="tag tag--info">İLERİ</span> Hızlı hissettiren ama hata yönetimi isteyen kalıp</td>
+                <td><a href="https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates">tanstack.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SWR</strong></td>
+                <td>Vercel'in hafif veri çekme kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Adı "stale-while-revalidate" HTTP stratejisinden gelir</td>
+                <td><a href="https://swr.vercel.app/">swr.vercel.app</a></td>
+              </tr>
+              <tr>
+                <td><strong>RTK Query</strong></td>
+                <td>Redux Toolkit'in içinden gelen veri çekme çözümü</td>
+                <td><span class="tag">ORTA</span> Zaten Redux kullanıyorsan ayrı kütüphaneye gerek kalmaz</td>
+                <td><a href="https://redux-toolkit.js.org/rtk-query/overview">redux-toolkit.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>GraphQL</strong></td>
+                <td>İstemcinin hangi alanları istediğini belirttiği sorgu dili</td>
+                <td><span class="tag tag--info">İLERİ</span> REST'e alternatif; sunucu tarafında da destek gerekir</td>
+                <td><a href="https://graphql.org/learn/">graphql.org/learn</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apollo Client</strong></td>
+                <td>En yaygın GraphQL istemcisi</td>
+                <td><span class="tag tag--info">İLERİ</span> İstemci ücretsiz; Apollo'nun sunucu/GraphOS ürünlerinin ücretli katmanları var</td>
+                <td><a href="https://www.apollographql.com/docs/react">apollographql.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>urql</strong></td>
+                <td>Apollo'ya göre daha hafif GraphQL istemcisi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz alternatif</td>
+                <td><a href="https://nearform.com/open-source/urql/docs/">nearform.com/open-source/urql</a></td>
+              </tr>
+              <tr>
+                <td><strong>tRPC</strong></td>
+                <td>Şemasız, uçtan uca tip güvenli çağrı katmanı</td>
+                <td><span class="tag tag--info">İLERİ</span> <strong>Sadece backend de TypeScript ise</strong> çalışır; .NET, Java, Python veya Go backend ile kullanılamaz (onlarda OpenAPI'den istemci üretimi tercih edilir)</td>
+                <td><a href="https://trpc.io/docs">trpc.io/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>SSE (Server-Sent Events)</strong></td>
+                <td>Sunucudan tarayıcıya tek yönlü sürekli veri akışı</td>
+                <td><span class="tag tag--info">İLERİ</span> SignalR/WebSocket'ten daha basit; sadece sunucu &rarr; istemci</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ui-kutuphaneleri"><span class="h-num">§ 7</span>UI kütüphaneleri ve stil yaklaşımları</h2>
+
+        <p>Burada iki ayrı karar var ve sık karıştırılır: <strong>bileşen kütüphanesi</strong> (hazır buton,
+        tablo, modal) ile <strong>stil yöntemi</strong> (CSS'i nasıl yazacağın). Bootstrap iş ilanlarında hâlâ sık geçer;
+        onun bugünkü konumunu bilmen mülakatta işine yarar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Stil yöntemleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Düz CSS</strong></td>
+                <td>Ayrı <code>.css</code> dosyası yazıp içeri almak</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her şeyin temeli; bkz. <a href="../../HTML-CSS/02-css/index.html">CSS</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN CSS</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS Modules</strong></td>
+                <td>Sınıf adlarını dosya bazında benzersizleştiren yöntem</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite'ta ek kurulum istemez: <code>Button.module.css</code></td>
+                <td><a href="https://vite.dev/guide/features#css-modules">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tailwind CSS</strong></td>
+                <td>Hazır yardımcı sınıflarla doğrudan HTML içinde stil verme</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; hazır tasarım seti olan <em>Tailwind UI / Tailwind Plus</em> ücretlidir. v3 ile v4 kurulumu farklıdır</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS-in-JS (Emotion, styled-components)</strong></td>
+                <td>Stili JavaScript içinde tanımlama</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Sunucu bileşenleriyle uyum sorunları yüzünden gözden düştü; eski projelerde çok var</td>
+                <td><a href="https://emotion.sh/docs/introduction">emotion.sh</a></td>
+              </tr>
+              <tr>
+                <td><strong>headless bileşen</strong></td>
+                <td>Davranışı veren ama görünümü sana bırakan bileşen</td>
+                <td><span class="tag">ORTA</span> Radix, Headless UI ve React Aria bu kategoridedir</td>
+                <td><a href="https://www.radix-ui.com/primitives">radix-ui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>design token</strong></td>
+                <td>Renk, boşluk, yazı ölçüsü gibi değerlerin adlandırılmış hali</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS değişkenleriyle uygulanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/--*">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bileşen kütüphaneleri &mdash; lisans durumu sütunda</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Bootstrap</strong></td>
+                <td>Hazır sınıflarla çalışan klasik CSS çatısı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz. Hâlâ çok yaygın ama modern React projelerinde tercih edilmiyor; grid ve utility sınıflarını bilmen yeterli</td>
+                <td><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">getbootstrap.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>React-Bootstrap</strong></td>
+                <td>Bootstrap bileşenlerinin React sarmalayıcısı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; jQuery bağımlılığını ortadan kaldırır</td>
+                <td><a href="https://react-bootstrap.netlify.app/">react-bootstrap.netlify.app</a></td>
+              </tr>
+              <tr>
+                <td><strong>shadcn/ui</strong></td>
+                <td>Kütüphane değil; kodu projene kopyaladığın bileşen koleksiyonu</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. Radix + Tailwind üstüne kuruludur; <code>npm install</code> ile gelmez, CLI ile dosya ekler</td>
+                <td><a href="https://ui.shadcn.com/docs">ui.shadcn.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Radix UI</strong></td>
+                <td>Erişilebilirliği çözülmüş, stilsiz bileşen temelleri</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; modal, dropdown, tooltip gibi zor bileşenleri doğru yapar</td>
+                <td><a href="https://www.radix-ui.com/primitives">radix-ui.com/primitives</a></td>
+              </tr>
+              <tr>
+                <td><strong>Base UI</strong></td>
+                <td>Radix ve MUI ekiplerinin birleşiminden çıkan yeni headless set</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; genç</td>
+                <td><a href="https://base-ui.com/">base-ui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Headless UI</strong></td>
+                <td>Tailwind ekibinin stilsiz bileşen seti</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Radix'e göre daha dar kapsamlı</td>
+                <td><a href="https://headlessui.com/">headlessui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Aria</strong></td>
+                <td>Adobe'nin erişilebilirlik odaklı hook/bileşen seti</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; erişilebilirlik gereksinimi ciddi olan projelerde</td>
+                <td><a href="https://react-spectrum.adobe.com/react-aria/">react-spectrum.adobe.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MUI (Material UI)</strong></td>
+                <td>Google Material tasarımını uygulayan büyük bileşen kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Çekirdek ücretsiz (MIT); <em>MUI X</em> ileri bileşenleri ve <em>Pro/Premium</em> planları <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://mui.com/material-ui/getting-started/">mui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Ant Design</strong></td>
+                <td>Yönetim paneli ekranları için zengin bileşen seti</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; kurumsal iç uygulamalarda çok yaygın</td>
+                <td><a href="https://ant.design/docs/react/introduce">ant.design</a></td>
+              </tr>
+              <tr>
+                <td><strong>Mantine</strong></td>
+                <td>Bileşen + hook koleksiyonu içeren geniş kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; form ve tarih bileşenleri kutudan çıkar</td>
+                <td><a href="https://mantine.dev/getting-started/">mantine.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chakra UI</strong></td>
+                <td>Erişilebilirlik ve tema odaklı bileşen kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; v2 ile v3 arasında ciddi API değişikliği var</td>
+                <td><a href="https://chakra-ui.com/docs/get-started/installation">chakra-ui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PrimeReact</strong></td>
+                <td>Çok sayıda hazır bileşen içeren set</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; PrimeBlocks/tema paketleri <span class="tag tag--warn">ÜCRETLİ</span>. .NET dünyasındaki Telerik'e en yakın his</td>
+                <td><a href="https://primereact.org/">primereact.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>KendoReact</strong></td>
+                <td>Telerik'in React bileşen paketi</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Lisanslı; kurumsal .NET ekiplerinde sık satın alınır</td>
+                <td><a href="https://www.telerik.com/kendo-react-ui">telerik.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lucide / react-icons</strong></td>
+                <td>İkon setleri</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Lucide, Feather ikonlarının devamıdır</td>
+                <td><a href="https://lucide.dev/">lucide.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sonner / react-hot-toast</strong></td>
+                <td>Bildirim (toast) bileşenleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; küçük ama her projede ihtiyaç olur</td>
+                <td><a href="https://sonner.emilkowal.ski/">sonner.emilkowal.ski</a></td>
+              </tr>
+              <tr>
+                <td><strong>i18next</strong></td>
+                <td>Çok dilli arayüz (yerelleştirme) kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; bulut çeviri yönetimi <em>locize</em> ayrı ve ücretlidir</td>
+                <td><a href="https://www.i18next.com/">i18next.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Intl.NumberFormat / Intl.DateTimeFormat</strong></td>
+                <td>Tarayıcıya gömülü biçimlendirme API'leri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Türkçe para ve tarih biçimi için kütüphane gerekmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="form-dogrulama"><span class="h-num">§ 8</span>Form ve doğrulama</h2>
+
+        <p>Sunucu tarafında bir doğrulama kütüphanesi kullandıysan bu bölüm tanıdıktır (C#'tan geliyorsan
+        <strong>FluentValidation</strong>, Java'dan Bean Validation / Jakarta Validation, Python'dan Pydantic, Node'dan
+        Zod/Joi): Zod'un yaptığı iş kavramsal olarak aynıdır &mdash; kural tanımla, veriyi doğrula. Kullanmadıysan
+        fikir basit: veri şeklini bir şema olarak bir kez yaz, gelen veriyi ona göre doğrula. Fark, doğrulamanın burada
+        tarayıcıda çalışması. <em>Sunucu tarafındaki doğrulamanın yerini asla tutmaz</em>; ikisi de yapılır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Form yönetimi ve şema doğrulama &mdash; hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>controlled / uncontrolled input</strong></td>
+                <td>Değeri React'in mi yoksa DOM'un mu tuttuğu</td>
+                <td><span class="tag tag--ok">TEMEL</span> React formlarındaki en temel ayrım; mülakatta sık sorulur</td>
+                <td><a href="https://react.dev/reference/react-dom/components/input">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Hook Form</strong></td>
+                <td>Az render üreten, yaygın form kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Bugünkü varsayılan seçim; uncontrolled yaklaşımı kullanır</td>
+                <td><a href="https://react-hook-form.com/get-started">react-hook-form.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>resolver</strong></td>
+                <td>Form kütüphanesini bir doğrulama şemasına bağlayan köprü</td>
+                <td><span class="tag">ORTA</span> RHF + Zod birleşimi bu paket üzerinden kurulur</td>
+                <td><a href="https://react-hook-form.com/docs/useform#resolver">react-hook-form.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Formik</strong></td>
+                <td>Eski nesil form kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Bakımı yavaşladı; devraldığın projelerde görürsün</td>
+                <td><a href="https://formik.org/docs/overview">formik.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Zod</strong></td>
+                <td>TypeScript tipini şemadan üreten doğrulama kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Şemayı bir kez yazıp hem doğrularsın hem TS tipini üretirsin; API cevabını doğrulamak için de kullanılır. Karşılıklar: FluentValidation (.NET), Bean Validation (Java), Pydantic (Python)</td>
+                <td><a href="https://zod.dev/">zod.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Yup</strong></td>
+                <td>Zod'dan önceki yaygın şema kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Hâlâ çalışır; yeni projede Zod tercih ediliyor</td>
+                <td>github.com/jquense/yup</td>
+              </tr>
+              <tr>
+                <td><strong>Valibot</strong></td>
+                <td>Zod'a benzer ama çok daha küçük boyutlu doğrulayıcı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; paket boyutu kritikse</td>
+                <td><a href="https://valibot.dev/">valibot.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArkType</strong></td>
+                <td>Tip ifadelerini doğrudan şema olarak kullanan alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span> Niş; adını duyman yeter</td>
+                <td><a href="https://arktype.io/">arktype.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Constraint Validation API</strong></td>
+                <td>HTML'in kendi doğrulaması: <code>required</code>, <code>pattern</code>, <code>type="email"</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Kütüphaneye geçmeden önce bunu bil; bkz. <a href="../../HTML-CSS/01-html/index.html">HTML</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>IMask / react-number-format</strong></td>
+                <td>Telefon, TCKN, para gibi girişlerde maskeleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz</td>
+                <td><a href="https://imask.js.org/">imask.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ProblemDetails eşlemesi</strong></td>
+                <td>Sunucunun döndüğü standart hata gövdesini (RFC 9457 "Problem Details") form alanlarına dağıtma</td>
+                <td><span class="tag tag--ok">TEMEL</span> ASP.NET Core doğrulama hatalarında alan adlarıyla gelen bir <code>errors</code> sözlüğü döndürür; Spring 6+ da <code>ProblemDetail</code> destekler. Diğer çatılarda hata gövdesinin biçimi farklıdır (ör. Django REST Framework alan adı &rarr; mesaj listesi, FastAPI <code>detail</code> dizisi); eşlemeyi kendi API'nin biçimine göre yaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tablo-grafik"><span class="h-num">§ 9</span>Tablo ve veri görselleştirme</h2>
+
+        <p>Kurumsal iş uygulamalarının (backend'i .NET, Java veya başka bir yığın olsun) çoğu "veriyi tabloda göster, altına grafik koy" işidir. Bu bölümdeki
+        ücretli/ücretsiz ayrımına özellikle dikkat et; AG Grid ve Highcharts satırları mülakatta da,
+        proje bütçesinde de konu olur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tablo (grid) bileşenleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>TanStack Table</strong></td>
+                <td>Görünümsüz (headless) tablo mantığı: sıralama, filtreleme, sayfalama</td>
+                <td><span class="tag">ORTA</span> Ücretsiz. HTML'i sen yazarsın; eski adı <em>React Table</em></td>
+                <td><a href="https://tanstack.com/table/latest">tanstack.com/table</a></td>
+              </tr>
+              <tr>
+                <td><strong>AG Grid</strong></td>
+                <td>Kurumsal düzeyde, çok yetenekli veri ızgarası</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Community sürümü ücretsiz; pivot, grup toplamı, Excel dışa aktarma gibi Enterprise özellikler lisanslıdır</td>
+                <td><a href="https://www.ag-grid.com/react-data-grid/">ag-grid.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MUI X Data Grid</strong></td>
+                <td>MUI'nin veri ızgarası</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Temel sürüm ücretsiz; sütun gruplama/pivot gibi özellikler Pro-Premium plana bağlı</td>
+                <td><a href="https://mui.com/x/react-data-grid/">mui.com/x</a></td>
+              </tr>
+              <tr>
+                <td><strong>TanStack Virtual</strong></td>
+                <td>Uzun listeleri sanallaştırıp sadece görüneni çizme</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; on binlerce satırda performansın anahtarı</td>
+                <td><a href="https://tanstack.com/virtual/latest">tanstack.com/virtual</a></td>
+              </tr>
+              <tr>
+                <td><strong>sunucu tarafı sayfalama</strong></td>
+                <td>Sayfalama/sıralamayı veritabanına yaptırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Asıl iş backend'dedir; tarayıcı tarafında <code>skip/take</code> parametrelerini doğru geçirmek yeterli</td>
+                <td><a href="https://learn.microsoft.com/en-us/ef/core/querying/pagination">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Grafik kütüphaneleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Recharts</strong></td>
+                <td>React bileşenleriyle yazılan basit grafik kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; standart çizgi/sütun/pasta grafikler için en hızlı yol</td>
+                <td><a href="https://recharts.org/">recharts.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chart.js</strong></td>
+                <td>Canvas üzerine çizen klasik grafik kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; React sarmalayıcısı <em>react-chartjs-2</em></td>
+                <td><a href="https://www.chartjs.org/docs/latest/">chartjs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apache ECharts</strong></td>
+                <td>Çok zengin, büyük veri setlerinde iyi çalışan grafik kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (Apache 2.0); harita ve karmaşık grafiklerde güçlü</td>
+                <td><a href="https://echarts.apache.org/en/index.html">echarts.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ApexCharts</strong></td>
+                <td>Hazır görünümlü, kolay kurulan grafikler</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT); yönetim panellerinde yaygın</td>
+                <td><a href="https://apexcharts.com/docs/installation/">apexcharts.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>D3</strong></td>
+                <td>Grafik değil, veriyi DOM'a bağlayan düşük seviyeli araç seti</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; öğrenme eğrisi dik. "Hazır grafik" beklersen hayal kırıklığı olur</td>
+                <td><a href="https://d3js.org/">d3js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>visx</strong></td>
+                <td>Airbnb'nin D3 üstüne kurulu React bileşenleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; D3'ün gücü + React'in yapısı</td>
+                <td><a href="https://visx.airbnb.tech/">visx.airbnb.tech</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nivo</strong></td>
+                <td>D3 üstüne kurulu, hazır ve şık grafik seti</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz</td>
+                <td><a href="https://nivo.rocks/">nivo.rocks</a></td>
+              </tr>
+              <tr>
+                <td><strong>Highcharts</strong></td>
+                <td>Olgun, kurumsal grafik kütüphanesi</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Ticari kullanımda lisans gerekir; kişisel/açık kaynak kullanım ücretsizdir</td>
+                <td><a href="https://www.highcharts.com/docs/index">highcharts.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Canvas API / SVG</strong></td>
+                <td>Grafiklerin altında yatan iki çizim tekniği</td>
+                <td><span class="tag">ORTA</span> Çok noktalı grafikte Canvas, az elemanlı ve etkileşimli grafikte SVG</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="animasyon"><span class="h-num">§ 10</span>Animasyon</h2>
+
+        <p>Kurumsal iş uygulamalarında animasyon ihtiyacının çoğu düz CSS <code>transition</code> ile çözülür.
+        Kütüphane, ancak liste öğesi eklenip çıkarken veya sayfa geçişlerinde gerekir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Animasyon araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>CSS transition / animation</strong></td>
+                <td>Tarayıcının kendi animasyon mekanizması</td>
+                <td><span class="tag tag--ok">TEMEL</span> Önce bunu öğren; çoğu ihtiyaç burada biter</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Motion (eski adı Framer Motion)</strong></td>
+                <td>React için en yaygın animasyon kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Çekirdek ücretsiz; ismi değiştiği için aramada iki adı da dene. Bazı ileri özellikler için ücretli plan var</td>
+                <td><a href="https://motion.dev/docs/react">motion.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Spring</strong></td>
+                <td>Yay fiziğine dayalı animasyon kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; daha "doğal" hareket isteyenler için</td>
+                <td>react-spring.dev</td>
+              </tr>
+              <tr>
+                <td><strong>GSAP</strong></td>
+                <td>Çok güçlü, framework'ten bağımsız animasyon motoru</td>
+                <td><span class="tag">ORTA</span> Webflow tarafından alındı ve <strong>tüm eklentileriyle ücretsiz</strong> hale getirildi; eski kaynaklarda "Club GreenSock ücretli" yazar, o bilgi eskidir. Lisans koşulları değişebilir, kullanmadan önce kendi sayfasından teyit et</td>
+                <td><a href="https://gsap.com/docs/v3/">gsap.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>AutoAnimate</strong></td>
+                <td>Tek satırla liste ekleme/çıkarma animasyonu</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; en düşük maliyetli kazanç</td>
+                <td><a href="https://auto-animate.formkit.com/">auto-animate.formkit.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lottie</strong></td>
+                <td>After Effects animasyonlarını JSON olarak oynatma</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz oynatıcı; animasyonu bir tasarımcı üretir</td>
+                <td><a href="https://airbnb.io/lottie/#/web">airbnb.io/lottie</a></td>
+              </tr>
+              <tr>
+                <td><strong>Web Animations API</strong></td>
+                <td>Tarayıcının JavaScript animasyon API'si</td>
+                <td><span class="tag tag--info">İLERİ</span> Kütüphanesiz orta seviye animasyon için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-reduced-motion</strong></td>
+                <td>Kullanıcının "hareketi azalt" tercihini okuyan medya sorgusu</td>
+                <td><span class="tag">ORTA</span> Erişilebilirlik gereği; animasyon ekleyen herkes bunu uygulamalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tarih-saat"><span class="h-num">§ 11</span>Tarih, saat ve genel yardımcı kütüphaneler</h2>
+
+        <p>Hangi backend'den gelirsen gel en sinsi hata alanlarından biri budur: JavaScript'in yerleşik <code>Date</code>
+        nesnesi zayıftır ve saat dilimi davranışı şaşırtır. API'nden gelen tarih değerinin tarayıcıda bir gün
+        kayması klasik bir olaydır.</p>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Sunucu ile tarayıcı arasında tarih taşırken <strong>daima ISO 8601 ve UTC</strong> kullan
+          (<code>2026-09-04T08:30:00Z</code>). Yerel biçimlendirmeyi yalnızca ekrana basarken yap. Alan yalnızca bir
+          <strong>takvim tarihi</strong> ise (doğum tarihi, fatura tarihi) saat dilimine çevirme; <code>"YYYY-MM-DD"</code>
+          metni olarak taşı &mdash; "bir gün kayması"nın asıl kaynağı genelde budur. Backend'ine göre karşılık:</p>
+          <ul>
+            <li><strong>.NET</strong> &rarr; <code>DateTimeOffset</code> veya <code>DateTime</code> + <code>Kind=Utc</code>; yalnızca tarih için <code>DateOnly</code>.</li>
+            <li><strong>Java</strong> &rarr; <code>Instant</code>/<code>OffsetDateTime</code>; yalnızca tarih için <code>LocalDate</code>; Jackson'da <code>WRITE_DATES_AS_TIMESTAMPS=false</code>.</li>
+            <li><strong>Python</strong> &rarr; saat dilimi bilgili <code>datetime</code> (<code>datetime.now(timezone.utc)</code>); yalnızca tarih için <code>date</code>.</li>
+            <li><strong>Go</strong> &rarr; UTC'de <code>time.Time</code>, RFC 3339 biçimi.</li>
+            <li><strong>Node</strong> &rarr; <code>Date.toISOString()</code> veya <code>Temporal.Instant</code>.</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tarih ve saat</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Date</strong></td>
+                <td>JavaScript'in yerleşik tarih nesnesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ay numarası 0'dan başlar; en sık yapılan hata budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>toISOString</strong></td>
+                <td>Tarihi UTC ve ISO 8601 biçiminde metne çevirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> API'ye tarih gönderirken kullanılacak biçim</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Temporal</strong></td>
+                <td><code>Date</code>'in yerini alacak yeni tarih/saat API'si</td>
+                <td><span class="tag tag--info">İLERİ</span> Hedef ortama göre: yerleşik Temporal'ı yayımlamış tarayıcılarda (Firefox 2025'ten, Chromium tabanlılar 2026 başından itibaren) polyfill gerekmez; desteklemeyen tarayıcı veya eski Node'da <code>@js-temporal/polyfill</code> ya da <code>temporal-polyfill</code>; geniş tarayıcı yelpazesi hedefleyen üretim projesinde caniuse / MDN Baseline durumuna göre karar ver, aksi halde date-fns, Day.js veya Luxon. Sürümler ve TC39 aşaması TEYİT: <a href="https://caniuse.com/temporal">caniuse.com/temporal</a>, <a href="https://github.com/tc39/proposal-temporal">tc39/proposal-temporal</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>date-fns</strong></td>
+                <td>Fonksiyon tabanlı, parça parça alınabilen tarih kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; sadece kullandığın fonksiyon pakete girer</td>
+                <td><a href="https://date-fns.org/docs/Getting-Started">date-fns.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Day.js</strong></td>
+                <td>Moment.js'e çok benzeyen, çok küçük kütüphane</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Moment'ten geçiş için en kolay yol</td>
+                <td><a href="https://day.js.org/docs/en/installation/installation">day.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Luxon</strong></td>
+                <td>Saat dilimi işlemlerinde güçlü tarih kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Moment ekibinin yazdığı yeni kütüphane</td>
+                <td><a href="https://moment.github.io/luxon/">moment.github.io/luxon</a></td>
+              </tr>
+              <tr>
+                <td><strong>Moment.js</strong></td>
+                <td>Eski standart tarih kütüphanesi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Geliştiricileri "yeni projede kullanmayın" diyor; devraldığın projelerde bolca var</td>
+                <td><a href="https://momentjs.com/docs/#/-project-status/">momentjs.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Genel yardımcılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Lodash</strong></td>
+                <td>Dizi/nesne işlemleri için klasik yardımcı kütüphane</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz ama fonksiyonlarının çoğu artık dilde var; sadece <code>debounce</code>, <code>cloneDeep</code> gibi birkaçı için alınır</td>
+                <td><a href="https://lodash.com/docs/">lodash.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>debounce / throttle</strong></td>
+                <td>Sık tetiklenen olayı seyreltme teknikleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arama kutusunda her tuşta API çağırmamak için; mülakat sorusu olarak da gelir</td>
+                <td><a href="https://lodash.com/docs/">lodash.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>crypto.randomUUID</strong></td>
+                <td>Tarayıcıda GUID üretme</td>
+                <td><span class="tag">ORTA</span> Kütüphane gerekmez; idempotency anahtarı için pratik</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Intl.NumberFormat ile TL biçimi</strong></td>
+                <td>Para birimini yerel biçimde yazdırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Binlik ayracı ve virgül işini doğru yapar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>ondalık hassasiyet</strong></td>
+                <td>JavaScript'te <code>decimal</code> tipi yoktur; sayılar çift duyarlıklı kayan noktadır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Para hesabını sunucuda yap. Zorundaysan <em>decimal.js</em> veya tam sayı kuruş kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">MDN</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test"><span class="h-num">§ 12</span>Test</h2>
+
+        <p>Tarayıcı tarafında test üçlüsü Vitest/Jest (test koşucusu), React Testing Library (bileşeni kullanıcı gibi
+        test etme) ve MSW'dir (ağı taklit etme). Backend'de test yazdıysan kavramlar aynıdır ve buradan öğreneceğin
+        şey oraya da yarar: C#'tan geliyorsan TDD + xUnit + Moq (<a href="../../CSharp-DotNet/06-test-ve-kalite/index.html">.NET test sayfası</a>);
+        Java'dan JUnit + Mockito; Python'dan pytest + <code>unittest.mock</code>. Backend'in yoksa bu üçlü tek başına yeterli.</p>
+
+        <div class="def">
+          <p class="def__term">mock <small>sahte nesne</small></p>
+          <p>Gerçek bağımlılığın yerine geçen, kontrollü cevaplar veren sahte nesne. Frontend'de bu iş çoğu zaman
+          <em>HTTP seviyesinde</em> MSW ile yapılır &mdash; yani kodu değil, ağı taklit edersin. Moq (.NET) veya
+          Mockito (Java) ise bir arayüzü/sınıfı taklit eder. Katman farklıdır: MSW ağ sınırını, Moq/Mockito kod içi
+          bağımlılığı taklit eder; ikisi farklı test seviyeleri içindir, biri diğerinden "daha iyi" değildir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test araçları &mdash; hepsi ücretsiz çekirdek</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Vitest</strong></td>
+                <td>Vite ile aynı yapılandırmayı kullanan test koşucusu</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Vite projesinde teste başlanacak yer burasıdır. Jest ile API'si neredeyse aynı</td>
+                <td><a href="https://vitest.dev/guide/">vitest.dev/guide</a></td>
+              </tr>
+              <tr>
+                <td><strong>Jest</strong></td>
+                <td>Uzun yıllar standart olan test çatısı</td>
+                <td><span class="tag">ORTA</span> Hâlâ çok yaygın; eski projelerde bunu görürsün</td>
+                <td><a href="https://jestjs.io/docs/getting-started">jestjs.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>React Testing Library</strong></td>
+                <td>Bileşeni iç yapısından değil, kullanıcının gördüğünden test etme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Felsefesi net: "state'i değil, ekranda görüneni test et"</td>
+                <td><a href="https://testing-library.com/docs/react-testing-library/intro/">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>user-event</strong></td>
+                <td>Gerçek kullanıcı etkileşimini taklit eden yardımcı</td>
+                <td><span class="tag">ORTA</span> <code>fireEvent</code> yerine bunu kullan</td>
+                <td><a href="https://testing-library.com/docs/user-event/intro/">testing-library.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>MSW (Mock Service Worker)</strong></td>
+                <td>Ağ isteklerini yakalayıp sahte cevap döndüren mocking aracı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "Mock test" boşluğunu kapatacağın yer; hem testte hem tarayıcıda çalışır</td>
+                <td><a href="https://mswjs.io/docs/">mswjs.io/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>jsdom / happy-dom</strong></td>
+                <td>Node içinde tarayıcı DOM'unu taklit eden ortam</td>
+                <td><span class="tag">ORTA</span> Bileşen testleri gerçek tarayıcı olmadan böyle çalışır</td>
+                <td><a href="https://vitest.dev/guide/environment">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Playwright</strong></td>
+                <td>Gerçek tarayıcıda uçtan uca (E2E) test</td>
+                <td><span class="tag">ORTA</span> Ücretsiz, Microsoft geliştiriyor; JS/TS dışında .NET, Java ve Python bağlamaları da var</td>
+                <td><a href="https://playwright.dev/docs/intro">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cypress</strong></td>
+                <td>Uçtan uca test aracı</td>
+                <td><span class="tag">ORTA</span> Araç ücretsiz; <em>Cypress Cloud</em> kayıt/paralel çalıştırma servisi <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://docs.cypress.io/app/get-started/why-cypress">docs.cypress.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Storybook</strong></td>
+                <td>Bileşenleri uygulamadan bağımsız geliştirme ve gösterme ortamı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; tasarım sistemi olan ekiplerde standart</td>
+                <td><a href="https://storybook.js.org/docs">storybook.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Chromatic</strong></td>
+                <td>Storybook için görsel regresyon servisi</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz katmanı var, sonrası abonelik</td>
+                <td><a href="https://www.chromatic.com/docs/">chromatic.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>snapshot test</strong></td>
+                <td>Çıktının önceki haliyle karşılaştırılması</td>
+                <td><span class="tag">ORTA</span> Kolay yazılır ama kırılgandır; abartma</td>
+                <td><a href="https://vitest.dev/guide/snapshot">vitest.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>coverage</strong></td>
+                <td>Testlerin kodun ne kadarını çalıştırdığı ölçüsü</td>
+                <td><span class="tag">ORTA</span> Yüksek yüzde kaliteyi garanti etmez; her dilde aynı tartışma (C#'tan geliyorsan: Coverlet; Java'dan: JaCoCo; Python'dan: coverage.py)</td>
+                <td><a href="https://vitest.dev/guide/coverage">vitest.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kod-kalitesi"><span class="h-num">§ 13</span>Kod kalitesi ve git hook'ları</h2>
+
+        <p>Linter kodda hata ve kötü kalıpları yakalar, formatter biçimi standartlaştırır, git hook'ları bunları commit
+        öncesinde zorunlu kılar. C#'tan geliyorsan: Roslyn analizörleri ve <code>.editorconfig</code>; Java'dan:
+        Checkstyle/SpotBugs; Python'dan: ruff/black karşılığı. Buradaki
+        en kritik kırılma noktası, ESLint'in 9. sürümle birlikte yapılandırma dosyası biçimini tamamen
+        değiştirmiş olması: internetteki eski örneklerin çoğu artık çalışmıyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Linter, biçimlendirici ve hook'lar &mdash; hepsi ücretsiz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>ESLint</strong></td>
+                <td>JavaScript/TypeScript için statik kod analizi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite şablonu kurulu getirir; hata değil <em>kural</em> ihlali bildirir</td>
+                <td><a href="https://eslint.org/docs/latest/use/getting-started">eslint.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flat config (eslint.config.js)</strong></td>
+                <td>ESLint 9 ile gelen yeni yapılandırma biçimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski <code>.eslintrc</code> örnekleri artık geçersiz; aramada "eslint flat config" yaz</td>
+                <td><a href="https://eslint.org/docs/latest/use/configure/configuration-files">eslint.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>typescript-eslint</strong></td>
+                <td>ESLint'in TypeScript'i anlamasını sağlayan paket</td>
+                <td><span class="tag">ORTA</span> Tip bilgisine dayalı kurallar için ayrı ayar ister</td>
+                <td><a href="https://typescript-eslint.io/">typescript-eslint.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>eslint-plugin-react-hooks</strong></td>
+                <td>Hook kurallarını denetleyen resmî eklenti</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>useEffect</code> bağımlılık uyarılarının kaynağı; uyarıyı susturma, sebebini anla</td>
+                <td><a href="https://react.dev/reference/eslint-plugin-react-hooks">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prettier</strong></td>
+                <td>Kod biçimlendirici; tartışmayı bitiren araç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kural denetlemez, sadece biçimlendirir. ESLint ile görev çakışmasın diye ayrı tutulur</td>
+                <td><a href="https://prettier.io/docs/">prettier.io/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Biome</strong></td>
+                <td>Linter + formatter'ı tek Rust aracında birleştiren alternatif</td>
+                <td><span class="tag">ORTA</span> ESLint + Prettier ikilisinin yerine geçmeyi hedefler; çok hızlı</td>
+                <td><a href="https://biomejs.dev/">biomejs.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Oxlint</strong></td>
+                <td>Rust ile yazılmış çok hızlı linter</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; ESLint'i tamamen değiştirmez, önden hızlı tarama yapar</td>
+                <td><a href="https://oxc.rs/docs/guide/usage/linter.html">oxc.rs</a></td>
+              </tr>
+              <tr>
+                <td><strong>tsc --noEmit</strong></td>
+                <td>Kod üretmeden sadece tip denetimi çalıştırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Vite tipleri kontrol etmez, sadece derler; CI'da bu komutu ayrıca koşturmalısın</td>
+                <td><a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">typescriptlang.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>EditorConfig</strong></td>
+                <td>Editörler arası girinti/satır sonu ayarı</td>
+                <td><span class="tag">ORTA</span> Dilden bağımsızdır; backend tarafında da (ör. .NET, Java, Python) aynı dosyayı kullanırsın</td>
+                <td><a href="https://editorconfig.org/">editorconfig.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Husky</strong></td>
+                <td>Git hook'larını projeye bağlayan araç</td>
+                <td><span class="tag">ORTA</span> Commit öncesi lint/test çalıştırmak için</td>
+                <td><a href="https://typicode.github.io/husky/">typicode.github.io/husky</a></td>
+              </tr>
+              <tr>
+                <td><strong>lint-staged</strong></td>
+                <td>Sadece commit'e eklenmiş dosyaları denetler</td>
+                <td><span class="tag">ORTA</span> Husky ile birlikte kullanılır; tüm projeyi taramaktan kurtarır</td>
+                <td><a href="https://typicode.github.io/husky/">husky belgeleri</a></td>
+              </tr>
+              <tr>
+                <td><strong>commitlint</strong></td>
+                <td>Commit mesajı biçimini denetler</td>
+                <td><span class="tag tag--info">İLERİ</span> Conventional Commits ile birlikte kullanılır</td>
+                <td><a href="https://commitlint.js.org/">commitlint.js.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Conventional Commits</strong></td>
+                <td><code>feat:</code>, <code>fix:</code> önekli commit mesajı standardı</td>
+                <td><span class="tag">ORTA</span> Otomatik sürüm ve değişiklik notu üretmeyi mümkün kılar</td>
+                <td><a href="https://www.conventionalcommits.org/">conventionalcommits.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dagitim-barindirma"><span class="h-num">§ 14</span>Dağıtım ve barındırma</h2>
+
+        <p>Bir React projesinin üretim çıktısı, sonuçta <strong>bir klasör dolusu statik dosyadır</strong>
+        (<code>index.html</code>, JS ve CSS). Bunu herhangi bir web sunucusu (IIS, Nginx, Apache), backend'inin statik
+        dosya klasörü veya statik barındırma servisi yayınlayabilir.
+        Bu bilgi, bulut servislerinin pazarlama dilinden kurtulmanı sağlar.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Tek sayfa uygulamasının klasik hatası</p>
+          <p>Kullanıcı <code>/musteriler/5</code> adresini doğrudan açtığında sunucu o dosyayı arar, bulamaz,
+          <strong>404</strong> döner. Çözüm: sunucuya "bilinmeyen tüm yolları <code>index.html</code>'e
+          yönlendir" kuralı yazmak (<em>SPA fallback</em>). Mülakatta sorulan somut sorulardan biridir. Nerede
+          yayınladığına göre:</p>
+          <ul>
+            <li><strong>ASP.NET Core</strong> &rarr; <code>MapFallbackToFile("index.html")</code>, çıktı <code>wwwroot</code>'a.</li>
+            <li><strong>IIS</strong> &rarr; URL Rewrite modülü ve <code>web.config</code> rewrite kuralı.</li>
+            <li><strong>Nginx</strong> &rarr; <code>try_files $uri $uri/ /index.html;</code></li>
+            <li><strong>Apache</strong> &rarr; <code>FallbackResource /index.html</code> veya <code>mod_rewrite</code>.</li>
+            <li><strong>Express</strong> &rarr; <code>express.static</code> + bilinmeyen rotalarda <code>index.html</code> gönderen son rota.</li>
+            <li><strong>Spring Boot</strong> &rarr; <code>static</code> klasörü + bilinmeyen rotaları <code>index.html</code>'e forward eden controller.</li>
+            <li><strong>Netlify</strong> &rarr; <code>_redirects</code> içinde <code>/* /index.html 200</code>.</li>
+            <li><strong>Vercel</strong> &rarr; <code>vercel.json</code> içinde <code>rewrites</code>.</li>
+            <li><strong>Cloudflare Pages</strong> &rarr; kökte <code>404.html</code> yoksa SPA davranışı varsayılan.</li>
+            <li><strong>GitHub Pages</strong> &rarr; rewrite desteği yok: <code>index.html</code>'in <code>404.html</code> kopyası veya hash tabanlı router.</li>
+            <li><strong>S3 + CloudFront</strong> &rarr; 403/404 için <code>index.html</code>'e yönlenen özel hata yanıtı.</li>
+          </ul>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Barındırma seçenekleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>vite build / dist klasörü</strong></td>
+                <td>Üretim çıktısını üreten komut ve çıktı klasörü</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yayınlanacak şey bu klasörün içeriğidir</td>
+                <td><a href="https://vite.dev/guide/static-deploy">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>wwwroot'a kopyalama</strong></td>
+                <td>Statik çıktıyı ASP.NET Core projesinin içinden yayınlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> .NET backend'i olan projede en basit yol: tek uygulama, tek dağıtım, CORS derdi yok</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET Core SPA şablonları</strong></td>
+                <td>React/Angular projesini .NET çözümüne bağlayan resmî şablon</td>
+                <td><span class="tag">ORTA</span> Geliştirmede Vite sunucusuna vekil (proxy) yapar</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/client-side/spa/react">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>IIS'te yayınlama</strong></td>
+                <td>Windows sunucuda barındırma</td>
+                <td><span class="tag">ORTA</span> Statik dosya + URL Rewrite modülü ile SPA fallback kuralı gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vercel</strong></td>
+                <td>Next.js'in arkasındaki şirketin barındırma platformu</td>
+                <td><span class="tag">ORTA</span> Hobi katmanı ücretsiz, ticari kullanım <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://vercel.com/docs">vercel.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Netlify</strong></td>
+                <td>Statik site ve sunucusuz fonksiyon barındırma</td>
+                <td><span class="tag">ORTA</span> Ücretsiz katmanı var, sonrası abonelik</td>
+                <td><a href="https://docs.netlify.com/">docs.netlify.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cloudflare Pages</strong></td>
+                <td>Cloudflare ağı üzerinde statik site barındırma</td>
+                <td><span class="tag">ORTA</span> Cömert ücretsiz katman</td>
+                <td><a href="https://developers.cloudflare.com/pages/">developers.cloudflare.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Pages</strong></td>
+                <td>Depodan doğrudan statik yayın</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; alt klasörde yayınlarsan <code>base</code> ayarını unutma</td>
+                <td><a href="https://docs.github.com/en/pages">docs.github.com/en/pages</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Static Web Apps</strong></td>
+                <td>Azure'un statik frontend + API barındırma servisi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz katmanı var; .NET ekosisteminde en tanıdık seçenek</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/static-web-apps/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub Actions</strong></td>
+                <td>Depoya bağlı CI/CD hattı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Genel depolarda ücretsiz, özel depolarda dakika kotası var. En küçük iş akışı: <code>npm ci</code> &rarr; <code>npm run build</code></td>
+                <td><a href="https://docs.github.com/en/actions">docs.github.com/en/actions</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Pipelines</strong></td>
+                <td>Azure DevOps'un CI/CD hattı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Kurumsal .NET ekiplerinde çok yaygın; YAML sözdizimi Actions'a benzer ama aynı değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/pipelines/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Artifacts (npm)</strong></td>
+                <td>Özel npm paket deposu</td>
+                <td><span class="tag tag--info">İLERİ</span> Kurumsal ortamda dış registry kapalıysa</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/devops/artifacts/get-started-npm">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker multi-stage build</strong></td>
+                <td>Frontend'i bir katmanda derleyip çıktıyı hafif sunucuya kopyalama</td>
+                <td><span class="tag tag--info">İLERİ</span> .NET + React'i tek imajda paketlemenin standart yolu</td>
+                <td><a href="https://docs.docker.com/build/building/multi-stage/">docs.docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cache busting (dosya adında hash)</strong></td>
+                <td>Çıktı dosyalarına içerik özeti eklenmesi</td>
+                <td><span class="tag">ORTA</span> "Yayınladım ama kullanıcıda eski sürüm görünüyor" sorununu bu çözer; <code>index.html</code> önbelleğe alınmamalıdır</td>
+                <td><a href="https://vite.dev/guide/static-deploy">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>YARP</strong></td>
+                <td>.NET ile yazılmış ters vekil sunucu</td>
+                <td><span class="tag tag--info">İLERİ</span> Frontend ile API'yi tek alan adı altında toplamak için</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/yarp/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire</strong></td>
+                <td>.NET'in dağıtık uygulama düzenleme aracı; frontend'i de düğüm olarak alır</td>
+                <td><span class="tag tag--info">İLERİ</span> Dokümantasyon <em>aspire.dev</em> adresine taşındı; eski bağlantılar learn.microsoft.com altındaydı</td>
+                <td><a href="https://aspire.dev/">aspire.dev</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dotnet-entegrasyon"><span class="h-num">§ 15</span>Backend ile entegrasyon (örnekler .NET; diğer yığınlar için karşılıklar)</h2>
+
+        <p class="intro">Backend geliştiricisi için bu sayfadaki en önemli bölüm bu. Backend ağırlıklı bir rol hedefliyorsan diğer
+        başlıkların çoğunu atlayabilirsin ama burası backend bilgisiyle (kimlik doğrulama, JWT, gerçek zamanlı iletişim,
+        OpenAPI) doğrudan birleşiyor. Mülakatta "frontend'i backend'e nasıl bağlarsın" sorusuna buradan cevap
+        vereceksin. Tablolardaki örnekler ASP.NET Core üzerinden; başka bir yığın kullanıyorsan önce aşağıdaki
+        karşılık tablosuna bak.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Aynı iş, farklı backend yığınları</caption>
+            <thead><tr><th>Konu</th><th>ASP.NET Core</th><th>Diğer yığınlar</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CORS</strong></td><td><code>AddCors</code> / <code>UseCors</code></td><td>Express <code>cors</code>, NestJS <code>app.enableCors()</code>; Spring <code>@CrossOrigin</code> / <code>CorsConfigurationSource</code>; Django <code>django-cors-headers</code>, FastAPI <code>CORSMiddleware</code>; Go <code>rs/cors</code>; Laravel <code>config/cors.php</code>. Aynı origin'den sunuluyorsa gerekmez.</td></tr>
+              <tr><td><strong>Geliştirme HTTPS sertifikası</strong></td><td><code>dotnet dev-certs https --trust</code></td><td><code>mkcert</code> ile yerel sertifika; veya Vite proxy'de hedef için <code>secure: false</code>.</td></tr>
+              <tr><td><strong>JSON alan adları</strong></td><td>Varsayılan camelCase üretir</td><td>Spring/Jackson Java alan adlarını aynen yazar (Java kuralı gereği zaten camelCase); Django REST Framework ve FastAPI/Pydantic alan adlarını aynen yazar, Python kuralı gereği genelde snake_case (camelCase için <code>alias_generator</code> veya camelize paketi); Go <code>encoding/json</code>, <code>json</code> etiketi yoksa dışa açık alan adını (PascalCase) aynen yazar.</td></tr>
+              <tr><td><strong>Gerçek zamanlı iletişim</strong></td><td>SignalR</td><td>Socket.IO (Node), Spring WebSocket/STOMP, Django Channels; her yerde saf WebSocket veya SSE.</td></tr>
+              <tr><td><strong>Dosya yükleme</strong></td><td><code>IFormFile</code></td><td>Spring <code>MultipartFile</code>, FastAPI <code>UploadFile</code>, Express <code>multer</code>.</td></tr>
+              <tr><td><strong>OpenAPI şeması</strong></td><td>.NET 9+ <code>Microsoft.AspNetCore.OpenApi</code></td><td>Spring <code>springdoc-openapi</code>, FastAPI yerleşik, NestJS <code>@nestjs/swagger</code>, Go <code>swaggo</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Geliştirme ortamı ve CORS</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>same-origin policy</strong></td>
+                <td>Tarayıcının farklı kaynağa erişimi kısıtlayan temel güvenlik kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> CORS'un neden var olduğunu anlamak için önce bunu oku</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>CORS</strong></td>
+                <td>Sunucunun, başka kaynaktan gelen isteklere izin verdiğini bildirmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sorun tarayıcıdadır ama <strong>çözüm sunucudadır</strong>; Postman'de çalışıp tarayıcıda çalışmamanın sebebi budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASP.NET Core CORS ilkesi</strong></td>
+                <td><code>AddCors</code> / <code>UseCors</code> ile izin verilen kaynakların tanımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>AllowAnyOrigin</code> ile <code>AllowCredentials</code> birlikte kullanılamaz</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/cors">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>preflight (OPTIONS)</strong></td>
+                <td>Tarayıcının asıl istekten önce izin sorması</td>
+                <td><span class="tag">ORTA</span> Basit olmayan istekte tetiklenir: <code>GET</code>/<code>HEAD</code>/<code>POST</code> dışı metot (<code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>), özel başlık (ör. <code>Authorization</code>) veya <code>application/json</code> gibi basit olmayan <code>Content-Type</code> (basit sayılanlar yalnızca <code>text/plain</code>, <code>multipart/form-data</code>, <code>application/x-www-form-urlencoded</code>). JSON gönderen <code>fetch</code> bu yüzden OPTIONS üretir; loglarda beklenmedik OPTIONS isteklerinin sebebi</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vite dev proxy</strong></td>
+                <td>Geliştirmede <code>/api</code> isteklerini backend sunucusuna (ör. .NET) yönlendirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> CORS'u geliştirme aşamasında tamamen ortadan kaldıran en pratik yol</td>
+                <td><a href="https://vite.dev/config/server-options#server-proxy">vite.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>HTTPS geliştirme sertifikası</strong></td>
+                <td>Yerel <code>https://localhost</code> için .NET'in ürettiği sertifika</td>
+                <td><span class="tag">ORTA</span> Vite proxy'sinin sertifika hatası vermesinin klasik sebebi</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/client-side/spa/react">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kimlik doğrulama ve token saklama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>JWT</strong></td>
+                <td>İmzalı, taşınabilir kimlik belirteci</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> İmzalıdır, <strong>şifreli değildir</strong>; içindeki claim'ler herkesçe okunabilir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/configure-jwt-bearer-authentication">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>localStorage'da token</strong></td>
+                <td>Token'ı tarayıcı deposunda tutma</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> En kolay yol ama <strong>XSS'e açık</strong>: sayfada çalışan herhangi bir kötü betik token'ı okuyabilir</td>
+                <td><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP</a></td>
+              </tr>
+              <tr>
+                <td><strong>httpOnly cookie</strong></td>
+                <td>JavaScript'in okuyamadığı çerezde token tutma</td>
+                <td><span class="tag tag--ok">TEMEL</span> XSS'e karşı daha güvenli ama CSRF önlemi gerektirir; ikisinin dengesi mülakat sorusudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>SameSite</strong></td>
+                <td>Çerezin başka siteden gelen isteklerde gönderilip gönderilmeyeceği</td>
+                <td><span class="tag">ORTA</span> "Alan adı" ile "site" farklı şeylerdir. Aynı origin (aynı alan adı ve port; ör. <code>wwwroot</code> veya reverse proxy) &rarr; <code>Lax</code>/<code>Strict</code> yeterli, CORS yok. Aynı site, farklı alt alan adı (<code>app.ornek.com</code> &harr; <code>api.ornek.com</code>; aynı kayıtlı alan adı) &rarr; istek same-site sayılır, <code>Lax</code>/<code>Strict</code> çalışır, yalnızca CORS + credentials ayarı gerekir. Farklı kayıtlı alan adları (<code>ornek.com</code> &harr; <code>ornek-api.net</code>) &rarr; <code>SameSite=None; Secure</code> gerekir ve üçüncü taraf çerez kısıtlamaları (Safari ITP, Firefox Total Cookie Protection, tarayıcı politikaları) nedeniyle kırılgandır; API'yi aynı siteye taşımak veya BFF önerilir. Tarayıcı politikalarının güncel durumu TEYİT: MDN "Third-party cookies", web.dev</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSRF / antiforgery</strong></td>
+                <td>Çerezle kimlik doğrulanan uygulamalarda sahte istek saldırısı</td>
+                <td><span class="tag">ORTA</span> Çereze geçtiğin anda gündeme gelir; JWT başlığıyla çalışırken sorun değildir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>refresh token akışı</strong></td>
+                <td>Kısa ömürlü erişim token'ını sessizce yenileme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Doğru kurgu: erişim token'ı kısa ömürlü, yenileme token'ı httpOnly çerezde. 401 alınca tek seferlik yenile, isteği tekrarla</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>eşzamanlı 401 kuyruğu</strong></td>
+                <td>Aynı anda birden çok istek 401 alırsa tek yenileme yapıp diğerlerini bekletme</td>
+                <td><span class="tag tag--info">İLERİ</span> Interceptor yazarken kaçınılmaz olarak karşına çıkar; sonsuz döngü riski vardır</td>
+                <td><a href="https://axios-http.com/docs/interceptors">axios-http.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OIDC / Authorization Code + PKCE</strong></td>
+                <td>Tarayıcı uygulamaları için doğru oturum açma akışı</td>
+                <td><span class="tag tag--info">İLERİ</span> Implicit flow artık önerilmiyor; kurumsal projede standart budur</td>
+                <td><a href="https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Keycloak / Duende IdentityServer</strong></td>
+                <td>Kimlik sunucusu seçenekleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Keycloak ücretsiz ve açık kaynak; Duende IdentityServer belirli gelir eşiğinin üstünde <span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.keycloak.org/documentation">keycloak.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>policy-based authorization (arayüzde)</strong></td>
+                <td>Rol/claim'e göre menü ve düğme gizleme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arayüzde gizlemek <em>güvenlik değildir</em>; yetki kontrolü mutlaka sunucuda da yapılır</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sözleşme, tip üretimi ve gerçek zamanlı iletişim</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>OpenAPI</strong></td>
+                <td>HTTP API'sinin makine okunur tanımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET 9'dan itibaren <code>Microsoft.AspNetCore.OpenApi</code> ile şema üretilir; Swagger UI ayrı bir pakettir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>openapi-typescript</strong></td>
+                <td>OpenAPI şemasından TypeScript tipleri üretir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; frontend ile backend'i elle senkron tutma derdini bitirir</td>
+                <td><a href="https://openapi-ts.dev/">openapi-ts.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>NSwag</strong></td>
+                <td>OpenAPI'den TypeScript veya C# istemcisi üretir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; .NET dünyasında en tanıdık araç</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-nswag">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Kiota</strong></td>
+                <td>Microsoft'un çok dilli API istemci üreteci</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; TypeScript dahil birçok dile üretir</td>
+                <td><a href="https://learn.microsoft.com/en-us/openapi/kiota/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Orval</strong></td>
+                <td>OpenAPI'den TanStack Query hook'ları üretir</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; üretilen kod doğrudan React'te kullanılır</td>
+                <td><a href="https://orval.dev/">orval.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>camelCase / PascalCase uyuşmazlığı</strong></td>
+                <td>.NET'in PascalCase özelliklerinin JSON'da camelCase'e çevrilmesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> ASP.NET Core varsayılan olarak camelCase üretir; "alan neden undefined" hatalarının ilk sebebi</td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/customize-properties">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SignalR JavaScript istemcisi</strong></td>
+                <td>Gerçek zamanlı hub bağlantısının tarayıcı tarafı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Paket adı <code>@microsoft/signalr</code>; React'te bağlantıyı <code>useEffect</code> içinde kur ve <strong>temizlik fonksiyonunda kapat</strong></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gRPC-Web</strong></td>
+                <td>gRPC'nin tarayıcıdan kullanılabilen sınırlı biçimi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Tarayıcı düz gRPC konuşamaz; vekil katman gerekir. gRPC bilen birine "neden Web sürümü gerekiyor" sorusu sık sorulur</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/grpcweb">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FormData ile dosya yükleme</strong></td>
+                <td>Çok parçalı (multipart) form gönderimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>Content-Type</code> başlığını <em>elle yazma</em>; tarayıcı sınır dizesini kendi ekler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>IFormFile</strong></td>
+                <td>ASP.NET Core tarafında yüklenen dosyanın karşılığı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Büyük dosyalarda boyut sınırı ve akışla okuma ayarları gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blob / dosya indirme</strong></td>
+                <td>API'den gelen ikili veriyi tarayıcıda dosya olarak kaydettirme</td>
+                <td><span class="tag">ORTA</span> Rapor/Excel indirme ekranlarının standart yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">MDN</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rate limiting'in arayüz tarafı</strong></td>
+                <td>429 cevabını ve <code>Retry-After</code> başlığını doğru işleme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sunucuda sınır koyuyorsan istemcinin de bunu anlaması gerekir</td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="izleme-analiz"><span class="h-num">§ 16</span>İzleme, analiz ve performans</h2>
+
+        <p>Backend'de yapılandırılmış log ve izleme ile yapılan işin tarayıcı tarafındaki karşılığı (C#'tan geliyorsan
+        Serilog ve Seq; Java'dan Logback/SLF4J; Python'dan <code>logging</code>). Fark şu: hata artık
+        kendi sunucunda değil, kullanıcının bilmediğin bir tarayıcısında oluşuyor; bu yüzden hatayı toplayıp
+        geri göndermen gerekir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hata takibi ve ürün analitiği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Sentry</strong></td>
+                <td>Hata toplama ve izleme servisi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz katman var, sonrası <span class="tag tag--warn">ÜCRETLİ</span>; açık kaynak sürümü kendi sunucunda çalıştırılabilir. Serilog+Seq ikilisinin frontend karşılığı</td>
+                <td><a href="https://docs.sentry.io/platforms/javascript/guides/react/">docs.sentry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Error Boundary</strong></td>
+                <td>React'te render hatasını yakalayıp yedek ekran gösteren bileşen</td>
+                <td><span class="tag tag--ok">TEMEL</span> Hata izleme servisine raporu buradan gönderirsin</td>
+                <td><a href="https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>source map yükleme</strong></td>
+                <td>Küçültülmüş yığın izini okunur hale getirme</td>
+                <td><span class="tag">ORTA</span> Haritayı hata servisine yükle, herkese açık sunma</td>
+                <td><a href="https://docs.sentry.io/platforms/javascript/guides/react/">docs.sentry.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>LogRocket</strong></td>
+                <td>Oturum kaydı ve hata izleme</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Sınırlı ücretsiz katman; KVKK açısından kayıt içeriğine dikkat</td>
+                <td><a href="https://docs.logrocket.com/">docs.logrocket.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PostHog</strong></td>
+                <td>Ürün analitiği, özellik bayrakları, oturum kaydı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz katman var; açık kaynak sürümü kendi sunucunda kurulabilir</td>
+                <td><a href="https://posthog.com/docs">posthog.com/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Analytics (GA4)</strong></td>
+                <td>En yaygın ziyaretçi analitiği</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Avrupa'da rıza yönetimi (KVKK/GDPR) gerektirir</td>
+                <td><a href="https://support.google.com/analytics/answer/9304153">support.google.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Umami / Plausible</strong></td>
+                <td>Gizlilik odaklı, hafif analitik alternatifleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Umami açık kaynak ve kendi sunucunda ücretsiz; barındırılan sürümler ücretlidir</td>
+                <td><a href="https://umami.is/docs">umami.is/docs</a></td>
+              </tr>
+              <tr>
+                <td><strong>Application Insights (JavaScript SDK)</strong></td>
+                <td>Azure'un izleme servisinin tarayıcı tarafı</td>
+                <td><span class="tag">ORTA</span> Kullanım başına ücretli; .NET tarafıyla aynı panelde uçtan uca iz</td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/javascript">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry (JS)</strong></td>
+                <td>Satıcıdan bağımsız izleme standardı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; tarayıcıdan API'ye uzanan tek iz kimliği (trace id) kurmak için</td>
+                <td><a href="https://opentelemetry.io/docs/languages/js/">opentelemetry.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Performans ölçümü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Core Web Vitals</strong></td>
+                <td>Google'ın kullanıcı deneyimi metrik seti</td>
+                <td><span class="tag">ORTA</span> Kısaltmalar: LCP (en büyük içeriğin gelme süresi), INP (etkileşim gecikmesi), CLS (düzen kayması)</td>
+                <td><a href="https://web.dev/articles/vitals">web.dev/articles/vitals</a></td>
+              </tr>
+              <tr>
+                <td><strong>web-vitals kütüphanesi</strong></td>
+                <td>Bu metrikleri gerçek kullanıcılardan ölçen küçük paket</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; ölçümü kendi API'ne gönderebilirsin</td>
+                <td><a href="https://github.com/GoogleChrome/web-vitals">github.com/GoogleChrome/web-vitals</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lighthouse</strong></td>
+                <td>Chrome'a gömülü performans/erişilebilirlik denetimi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; CI'da da çalıştırılabilir</td>
+                <td><a href="https://developer.chrome.com/docs/lighthouse/overview">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>React DevTools Profiler</strong></td>
+                <td>Hangi bileşenin ne kadar sürede render olduğunu gösterir</td>
+                <td><span class="tag">ORTA</span> BenchmarkDotNet'in tarayıcıdaki muadili sayılmaz ama aynı refleksle kullanılır</td>
+                <td><a href="https://react.dev/learn/react-developer-tools">react.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Network / Performance sekmesi</strong></td>
+                <td>Tarayıcı geliştirici araçlarındaki ölçüm panelleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kütüphane kurmadan önce buraya bak; çoğu sorun tek bir yavaş istekten çıkar</td>
+                <td><a href="https://developer.chrome.com/docs/lighthouse/overview">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OWASP XSS önleme</strong></td>
+                <td>Kullanıcı girdisini ekrana basarken oluşan en yaygın açık</td>
+                <td><span class="tag tag--ok">TEMEL</span> React varsayılan olarak kaçış yapar; <code>dangerouslySetInnerHTML</code> bu korumayı kapatır</td>
+                <td><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP</a></td>
+              </tr>
+              <tr>
+                <td><strong>Content Security Policy (CSP)</strong></td>
+                <td>Sayfanın hangi kaynaklardan kod yükleyebileceğini kısıtlayan başlık</td>
+                <td><span class="tag tag--info">İLERİ</span> XSS etkisini sınırlar; sunucudan HTTP başlığı olarak eklenir: ASP.NET Core middleware, Express <code>helmet</code>, Spring Security headers, Nginx/Apache <code>add_header</code>, statik barındırmada <code>_headers</code>/<code>vercel.json</code></td>
+                <td><a href="https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html">OWASP</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 17</span>Özet &mdash; bu sayfadaki öncelik sırası</h2>
+
+        <p class="intro">Bu sayfada iki yüzden fazla madde var. Hepsini öğrenmeyeceksin. Aşağıdaki sıra,
+        <strong>bir backend geliştiricisinin (örnekler .NET; Java, Python, Go için aynı yol) tarayıcı tarafı sorularını
+        geçmesi</strong> için gereken asgari yoldur. Frontend veya full-stack JS pozisyonu hedefliyorsan bu yol yetmez;
+        <a href="#nasil-kullanilir">§ 1</a>'deki hedef tablosuna göre "Sonra bunlar" listesini de "kullan" düzeyine çıkar.</p>
+
+        <h3>Önce bunlar (gerçekten yap, kod yaz)</h3>
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Node LTS kur, npm'i tanı</span>
+            <p><code>package.json</code>, <code>package-lock.json</code>, <code>node_modules</code>,
+            <code>npm run</code>, <code>npx</code>. Beş terim, yarım gün. Bunlar
+            bütün tarayıcı tarafı araçlarının temelidir.</p>
+            <span class="steps__meta">§ 2 &middot; hedef: bir projeyi indirip çalıştırabilmek</span>
+          </li>
+          <li>
+            <span class="steps__title">Vite ile React projesi aç</span>
+            <p><code>npm create vite@latest</code>, ardından <code>dev</code> ve <code>build</code> komutları,
+            <code>dist</code> klasörü, <code>import.meta.env</code>. Webpack'e hiç girme.</p>
+            <span class="steps__meta">§ 3 &middot; hedef: boş sayfayı ayağa kaldırmak</span>
+          </li>
+          <li>
+            <span class="steps__title">fetch ile kendi API'ne (ör. .NET) bağlan</span>
+            <p>CORS hatasını bilerek al ve backend'inde çöz (ASP.NET Core <code>UseCors</code>; diğer yığınlar §&nbsp;15'teki karşılık tablosunda); backend'in yoksa MSW veya bir mock API kullan; sonra Vite proxy ile hatayı ortadan
+            kaldır. Alan adı (camelCase/snake_case) uyuşmazlığını, 400 doğrulama hatası cevabını (ASP.NET Core'da ProblemDetails) ve 401 durumunu ele al.</p>
+            <span class="steps__meta">§ 6 ve § 15 &middot; bu sayfanın asıl amacı</span>
+          </li>
+          <li>
+            <span class="steps__title">JWT'yi nerede saklayacağını cevaplayabil</span>
+            <p>localStorage &rarr; XSS riski; httpOnly cookie &rarr; CSRF önlemi. Refresh token akışını tek
+            paragrafta anlat. Bu, JWT ile çalıştığını söyleyen herkese sorulan sorudur.</p>
+            <span class="steps__meta">§ 15 &middot; kod yazmasan da cevabını ezberle</span>
+          </li>
+          <li>
+            <span class="steps__title">Çıktıyı backend'inin statik klasörüne (ör. wwwroot) veya statik barındırmaya koyup yayınla</span>
+            <p>SPA fallback kuralını kur, <code>base</code> ayarını doğru ver. "React uygulaması aslında
+            statik dosyadır" cümlesini içine sindir.</p>
+            <span class="steps__meta">§ 14 &middot; yarım gün</span>
+          </li>
+        </ol>
+
+        <h3>Sonra bunlar (tanı, gerekirse kullan)</h3>
+        <ul class="checklist">
+          <li>React Router &mdash; sayfa yönlendirme; Vite projesinde ikinci kuracağın paket.</li>
+          <li>TanStack Query &mdash; API'ye bağlanan uygulamada en çok işi azaltan tek paket.</li>
+          <li>Zustand &mdash; global state gerekirse; Redux'a doğrudan atlama.</li>
+          <li>React Hook Form + Zod &mdash; sunucu tarafı doğrulama refleksinin (FluentValidation, Bean Validation, Pydantic) frontend karşılığı.</li>
+          <li>ESLint (flat config) + Prettier &mdash; ekip standardı; kurulumu zaten şablondan gelir.</li>
+          <li>Vitest + React Testing Library + MSW &mdash; test ve mock pratiği kazandıran üçlü.</li>
+          <li>Bootstrap veya Ant Design &mdash; hazır bileşen gerekirse; tasarımla vakit kaybetme.</li>
+          <li>Recharts &mdash; grafik gerekirse en hızlı yol.</li>
+          <li>GitHub Actions &mdash; üç satırlık iş akışı yaz: <code>npm ci</code>, <code>npm run build</code>, çıktıyı sakla.</li>
+        </ul>
+
+        <h3>Sadece adını bil, kurma</h3>
+        <ul>
+          <li><strong>Next.js ve RSC</strong> &mdash; ne işe yaradığını ve <em>ayrı bir backend API'si (ör. .NET, Spring, Django) olan login arkası projede neden çoğu zaman gereksiz
+          olduğunu</em> açıklayabil. Bu cevap, kurulum bilgisinden daha değerlidir. İstisna: herkese açık/SEO kritik site, ayrı backend'i olmayan tam yığın JS uygulaması veya ekibin/ilanın Next.js istemesi; bu durumlarda "kurma" değil, öğren ve kullan (<a href="#meta-framework">§ 4</a>).</li>
+          <li><strong>Turborepo, Nx, monorepo</strong> &mdash; büyük ekip meselesi.</li>
+          <li><strong>D3, visx, XState, tRPC, Astro, GraphQL</strong> &mdash; ihtiyaç doğmadan yaklaşma.
+          Özellikle tRPC, backend'i TypeScript olmayan bir yığında zaten çalışmaz.</li>
+          <li><strong>MobX, Recoil, Formik, Moment.js, webpack, Babel</strong> &mdash; eski projelerde
+          karşılaşırsın; yeni proje kurarken seçme.</li>
+        </ul>
+
+        <h3>Ücret durumu &mdash; tek bakışta</h3>
+
+        <p>Bu tablo yön göstermek içindir, hukuki dayanak değildir. Lisans koşulları değişebilir, kullanmadan önce kendi sayfasından teyit et.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bu sayfada geçen ücretli veya kısmen ücretli olanlar</caption>
+            <thead><tr><th>Ürün</th><th>Ücretsiz kısmı</th><th>Ücretli kısmı</th></tr></thead>
+            <tbody>
+              <tr><td>AG Grid</td><td>Community sürümü</td><td>Enterprise özellikler (pivot, gruplama, dışa aktarma)</td></tr>
+              <tr><td>MUI</td><td>Material UI çekirdeği</td><td>MUI X Pro / Premium bileşenleri</td></tr>
+              <tr><td>Highcharts</td><td>Kişisel ve açık kaynak kullanım</td><td>Ticari kullanım lisansı</td></tr>
+              <tr><td>KendoReact</td><td>Yok (deneme sürümü)</td><td>Tam lisans</td></tr>
+              <tr><td>PrimeReact</td><td>Bileşen kütüphanesi</td><td>Tema ve blok paketleri</td></tr>
+              <tr><td>Tailwind CSS</td><td>Framework'ün tamamı</td><td>Tailwind Plus hazır tasarım seti</td></tr>
+              <tr><td>Cypress</td><td>Test aracı</td><td>Cypress Cloud kayıt ve paralel çalıştırma</td></tr>
+              <tr><td>Chromatic</td><td>Sınırlı ücretsiz katman</td><td>Abonelik</td></tr>
+              <tr><td>Sentry</td><td>Ücretsiz katman &middot; kendi sunucunda açık kaynak sürüm</td><td>Barındırılan planlar</td></tr>
+              <tr><td>LogRocket</td><td>Sınırlı ücretsiz katman</td><td>Abonelik</td></tr>
+              <tr><td>Vercel / Netlify</td><td>Kişisel/hobi katmanı</td><td>Ticari kullanım planları</td></tr>
+              <tr><td>Duende IdentityServer</td><td>Gelir eşiği altında ücretsiz</td><td>Ticari lisans</td></tr>
+              <tr><td>Application Insights</td><td>Küçük hacimde ücretsiz kota</td><td>Veri hacmine göre ücretlendirme</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--win">
+          <p class="callout__title">Backend geliştiricisinin lehine</p>
+          <p>Bir backend pozisyonunda (ör. .NET, Java, Python) tarayıcı tarafı soruları <strong>derinlik değil, farkındalık</strong> ölçer.
+          "Vite ile kuruyorum, fetch ile API'ye bağlanıyorum, CORS'u sunucuda çözüyorum, token'ı httpOnly
+          çerezde tutmak daha güvenli ama CSRF önlemi gerektiriyor, çıktı statik dosya olduğu için
+          backend'in statik klasöründen (ör. wwwroot) de yayınlanabiliyor" diyebilen bir aday, bu sayfadaki iki yüz maddeyi ezberlemiş
+          adaydan daha güçlü görünür. Mimari kurgu ve performans bilgisi backend'den taşınır;
+          tarayıcı tarafında da aynı dili konuşmak yeterli. Frontend pozisyonunda ise bu farkındalık başlangıçtır, yeterli değildir.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Devamı</p>
+          <p>Bu bölümün diğer sayfaları: <a href="../01-javascript/index.html">01 &mdash; JavaScript</a>,
+          <a href="../02-typescript/index.html">02 &mdash; TypeScript</a>, <a href="../03-react/index.html">03 &mdash; React</a>.
+          İşaretleme ve stil temeli: <a href="../../HTML-CSS/01-html/index.html">HTML</a> ve
+          <a href="../../HTML-CSS/02-css/index.html">CSS</a>.
+          Bu sayfadaki entegrasyon maddelerinin sunucu tarafı karşılıkları
+          <a href="../../CSharp-DotNet/index.html">.NET bölümünde</a>; Spring ve Maven/Gradle gibi eşdeğerleri
+          <a href="../../Java/index.html">Java bölümünde</a>; diğer dillerin araçları
+          <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfalarında. Üst harita:
+          <a href="../../index.html">ana sayfa</a>.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../03-react/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">React</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platform ve Web API — .NET Anahtar Listesi</title>
+<meta name="description" content=".NET runtime, dependency injection, configuration, middleware, ASP.NET Core Web API, minimal API, kimlik doğrulama.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Platform ve Web API</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-test-ve-kalite/index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Dil ve Platform</div>
+        <h1 class="page-title">Runtime, DI, middleware ve <em>Web API</em></h1>
+        <p class="lede">Uygulamanın ayağa kalkışından isteğin cevaba dönüşmesine kadar geçen her katman. Hosting modeli, DI konteyneri, konfigürasyon, middleware zinciri, routing, model binding, kimlik doğrulama.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; Backend geliştirmenin merkezi</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Burası anlatım sayfası değil, <strong>arama listesi</strong>. Her satır bir terim, yanında
+        "bu nedir" notu ve mümkünse resmî doküman bağlantısı. Konuyu buradan öğrenmeyeceksin; buradan
+        <em>ne aratacağını</em> öğrenip kendi kaynağından okuyacak ve kod yazacaksın.</p>
+
+        <p>Rozetleri öncelik sırası olarak oku: <span class="tag tag--bad">MÜLAKATTA SIK</span> yazan satırlar iş ilanlarında
+        sık geçtiği için mülakatta sorulma ihtimali en yüksek olanlar — iş arıyorsan önce onları kapat; yeni başlıyorsan önce
+        <span class="tag tag--ok">TEMEL</span> satırları (§&nbsp;18'deki ikinci sıra).
+        <span class="tag tag--ok">TEMEL</span> bu alanda olmazsa olmaz, <span class="tag">ORTA</span> sonra gelir,
+        <span class="tag tag--info">İLERİ</span> acele etme, <span class="tag tag--warn">ÜCRETLİ</span> lisans parası
+        ister, <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar ama yeni projede kullanma.</p>
+
+        <p>Aratırken terimi tek başına yazma, ön ek koy. "Middleware" tek başına genel yazılım terimi getirir,
+        <em>"ASP.NET Core middleware"</em> yaz. "Filter" tek başına LINQ filtrelemesi getirir,
+        <em>"ASP.NET Core action filter"</em> yaz. "Host" tek başına barındırma şirketlerini getirir,
+        <em>".NET generic host"</em> yaz.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>.NET backend ilanlarında bu sayfayı doğrudan ilgilendiren şu başlıklar sık geçer: <strong>ASP.NET Core MVC/Web API</strong>,
+          <strong>Minimal APIs</strong>, <strong>Dependency Injection</strong>, <strong>Middleware</strong>,
+          <strong>RESTful API</strong>, <strong>Swagger/OpenAPI</strong>, <strong>JWT Authentication</strong>,
+          <strong>Policy-Based Authorization</strong>, <strong>Rate Limiting</strong>, <strong>HealthChecks</strong>,
+          <strong>gRPC</strong>, <strong>SignalR</strong>, <strong>Multi-Tenant</strong>, <strong>.NET 6-10</strong>.
+          Bunlardan gRPC, Rate Limiting, HealthChecks, SignalR ve Multi-Tenant günlük işte çoğu zaman en az denenen ama
+          özgeçmişlerde sık yazılan başlıklardır.</p>
+          <ul>
+            <li><strong>Deneyimli geliştirici olarak iş arıyorsan</strong> &rarr; Mülakatçı özgeçmişten okuyup soracak; "kullanmadım" cevabı en pahalı cevaptır.</li>
+            <li><strong>İlk işini arıyorsan</strong> &rarr; "Özgeçmişte yazıyor" yerine "kişisel projede göster" mantığıyla çalış; ama önce §&nbsp;4–§&nbsp;9 temelini otur.</li>
+            <li><strong>Yeni başlıyorsan ve iş aramıyorsan</strong> &rarr; Temelden ileriye git: Program.cs ve host (§&nbsp;4), DI (§&nbsp;5), configuration (§&nbsp;6), middleware (§&nbsp;7), routing (§&nbsp;8), controller / minimal API (§&nbsp;9), kimlik doğrulama (§&nbsp;12).</li>
+            <li><strong>Ekibinde belirli bir teknolojiyi kullanacaksan</strong> &rarr; Doğrudan o başlığa git.</li>
+          </ul>
+        </div>
+
+        <p>İlgili sayfalar: dil özellikleri <a href="../01-csharp-dili/index.html">01 — C# Dili</a>, veritabanı ve önbellek
+        <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>, katman ve desen tartışması
+        <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a>, kuyruk ve dağıtık sistemler
+        <a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a>, test
+        <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a>, log, metrik ve deploy
+        <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a>, arayüz
+        <a href="../08-ui-blazor-mvc-maui/index.html">08 — UI: Blazor, MVC, MAUI</a>, bulut ve Aspire
+        <a href="../09-aspire-bulut-modern/index.html">09 — Aspire, Bulut ve Modern .NET</a>, paket listesi
+        <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>. Diğer bölümler:
+        <a href="../../index.html">Programlama ana sayfası</a> &middot; <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> &middot;
+        <a href="../../HTML-CSS/index.html">HTML / CSS</a> &middot; <a href="../../Java/index.html">Java</a> &middot;
+        <a href="../../Python/index.html">Python</a> &middot; <a href="../../Go/index.html">Go</a> &middot;
+        <a href="../../Rust/index.html">Rust</a> &middot; <a href="../../Blockchain/index.html">Blockchain</a>.</p>
+
+        <h2 id="runtime-ve-platform"><span class="h-num">§ 2</span>Runtime ve platform</h2>
+
+        <p>Bu bölümdeki terimler mülakatın en klasik giriş sorularıdır. "Kod nasıl çalışıyor" sorusuna
+        makine seviyesine kadar inebilmen beklenir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çalışma zamanı (runtime) çekirdeği</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>CLR / CoreCLR</strong></td><td>.NET'in çalışma zamanı motoru; bellek, tip güvenliği, exception ve GC ondan sorumlu</td><td><span class="tag tag--ok">TEMEL</span> Aramada "Common Language Runtime" yaz; CoreCLR modern .NET'in CLR'ıdır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/clr">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>managed / unmanaged code</strong></td><td>CLR gözetiminde çalışan kod ile doğrudan işletim sistemine derlenen kod ayrımı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-code">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IL / CIL / MSIL</strong></td><td>Derleyicinin ürettiği ara dil; DLL'in içinde makine kodu değil IL durur</td><td><span class="tag tag--ok">TEMEL</span> Üçü de aynı şeyin adı</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>assembly / manifest</strong></td><td>Derlenmiş .dll veya .exe birimi; içinde IL, metadata ve manifest bulunur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>metadata / reflection</strong></td><td>Assembly içindeki tip bilgisinin çalışma anında okunabilmesi</td><td><span class="tag">ORTA</span> Detay <a href="../01-csharp-dili/index.html">01 — C# Dili</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JIT (Just-In-Time)</strong></td><td>IL'i çalışma anında, metot ilk çağrıldığında makine koduna çeviren derleyici</td><td><span class="tag tag--ok">TEMEL</span> "İlk istek neden yavaş" sorusunun cevabı burada</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>tiered compilation</strong></td><td>JIT'in önce hızlı-kaba, sonra sıcak metotlar için yavaş-iyi kod üretmesi</td><td><span class="tag tag--info">İLERİ</span> Benchmark ölçümlerini bozan asıl sebep; <a href="../06-test-ve-kalite/index.html">06</a> sayfasındaki BenchmarkDotNet ile birlikte oku</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OSR (on-stack replacement)</strong></td><td>Çalışmakta olan uzun döngünün ortasında daha optimize koda geçiş</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dynamic PGO</strong></td><td>Çalışma anındaki gerçek kullanım verisine göre yeniden optimize etme</td><td><span class="tag tag--info">İLERİ</span> Aramada "dynamic profile-guided optimization .NET" yaz</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ReadyToRun (R2R)</strong></td><td>Yayın anında kısmen önceden derleme; başlangıç süresini kısaltır</td><td><span class="tag">ORTA</span> AOT ile karıştırma, R2R'de JIT hâlâ var</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/ready-to-run">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Native AOT</strong></td><td>Uygulamayı tamamen önceden makine koduna derleme; JIT ve reflection çoğunlukla devre dışı</td><td><span class="tag">ORTA</span> Aramada ".NET Native AOT" yaz, "AOT" tek başına Angular/Android sonuçları getirir</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>trimming / IL linker</strong></td><td>Kullanılmayan kodun yayın çıktısından atılması</td><td><span class="tag tag--info">İLERİ</span> Reflection kullanan kütüphaneleri sessizce bozar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>GC (garbage collector)</strong></td><td>Erişilemez nesnelerin belleğini otomatik geri alan mekanizma</td><td><span class="tag tag--ok">TEMEL</span> Performans iddiası olan biri GC'yi anlatabilmeli</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>generation 0 / 1 / 2</strong></td><td>Nesnelerin yaşına göre ayrıldığı kuşaklar; gen0 sık ve ucuz, gen2 seyrek ve pahalı toplanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>LOH (Large Object Heap)</strong></td><td>85 KB üstü nesnelerin gittiği ayrı alan; parçalanmaya (fragmentation) açık</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/large-object-heap">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>workstation GC vs server GC</strong></td><td>Tek çekirdek odaklı ile çekirdek başına heap açan iki GC modu</td><td><span class="tag">ORTA</span> Container'da yanlış mod ciddi bellek şişmesi yapar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>background GC</strong></td><td>Gen2 toplamasının uygulamayı tamamen durdurmadan arka planda yapılması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/background-gc">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DATAS</strong></td><td>Server GC'de heap sayısını yüke göre dinamik ayarlayan mod</td><td><span class="tag tag--info">İLERİ</span> Aramada "DATAS .NET GC" yaz</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IDisposable / using</strong></td><td>Yönetilmeyen kaynağı deterministik biçimde bırakma sözleşmesi</td><td><span class="tag tag--ok">TEMEL</span> GC ile karıştırma: GC belleği toplar, Dispose kaynağı kapatır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>finalizer</strong></td><td>GC nesneyi toplarken çağırdığı son şans temizleyici</td><td><span class="tag">ORTA</span> Nesneyi bir GC turu fazladan hayatta tutar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AppDomain</strong></td><td>.NET Framework'te izolasyon birimi; modern .NET'te yok</td><td><span class="tag tag--warn">ESKİMİŞ</span> Eski projede karşına çıkar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/application-domains">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AssemblyLoadContext</strong></td><td>Modern .NET'te assembly'leri izole yükleme; eklenti (plugin) mimarisi için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/dependency-loading/understanding-assemblyloadcontext">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>P/Invoke</strong></td><td>C# içinden yerel (C/C++) kütüphane fonksiyonu çağırma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Span&lt;T&gt; / Memory&lt;T&gt;</strong></td><td>Kopyalamadan bellek dilimi üzerinde çalışma; ayırma (allocation) azaltır</td><td><span class="tag">ORTA</span> Performans iddiası olan herkesin bilmesi gereken satır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ArrayPool / ObjectPool</strong></td><td>Nesne ve dizi yeniden kullanımıyla GC baskısını düşürme havuzları</td><td><span class="tag tag--info">İLERİ</span> ObjectPool ASP.NET Core tarafında ayrı bir paket</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/objectpool">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sürümler, proje dosyası, paket yönetimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>.NET Framework</strong></td><td>Sadece Windows'ta çalışan, 4.8'de donmuş klasik platform</td><td><span class="tag tag--warn">ESKİMİŞ</span> Yeni proje açılmaz, ama Türkiye'de bakım işi bol</td><td><a href="https://learn.microsoft.com/en-us/dotnet/framework/get-started/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>.NET Core / .NET 5+</strong></td><td>Çapraz platform, açık kaynak yeni nesil; 5'ten sonra isimden "Core" kalktı</td><td><span class="tag tag--ok">TEMEL</span> ".NET Core 3.1" ile ".NET 8" aynı soyun devamı</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>.NET Standard</strong></td><td>Framework ile Core'un ortak API sözleşmesi; kütüphane paylaşmak içindi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Kütüphanenin tüketicisine göre hedefle: <strong>yalnızca modern .NET</strong> &rarr; desteklenen en eski LTS (net8.0; .NET 8 desteği 10 Kasım 2026'da bitiyor, sonrasında net10.0) veya <code>TargetFrameworks</code> ile çoklu hedef. <strong>.NET Framework + modern .NET birlikte</strong> &rarr; netstandard2.0 + net8.0/net10.0 çoklu hedef. <strong>Unity veya eski Xamarin</strong> &rarr; netstandard2.1/2.0 (TEYİT: Unity'nin desteklediği API düzeyi). <strong>Yalnızca .NET Framework</strong> &rarr; net48.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/net-standard">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Mono</strong></td><td>Alternatif runtime; bugün ağırlıklı olarak mobil ve WebAssembly tarafında</td><td><span class="tag tag--info">İLERİ</span> <a href="../08-ui-blazor-mvc-maui/index.html">08</a> sayfasında MAUI/Blazor bağlamında geçer</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>LTS vs STS</strong></td><td>Uzun destekli (çift numaralı, 3 yıl) ile standart destekli (tek numaralı) sürüm ayrımı. STS süresi: .NET 5 ve 7 için 18 ay; Microsoft Eylül 2025'te .NET 9'dan itibaren STS desteğini 24 aya çıkardı, bu yüzden .NET 8 ve .NET 9 desteği aynı gün (10 Kasım 2026) biter (TEYİT: dotnet.microsoft.com destek politikası)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> İlanda ".NET 6-10" geçiyorsa hangisinin LTS olduğunu bilmen beklenir. Seçim: üretimde uzun ömürlü proje &rarr; LTS; yeni özellik isteyen ve sık yükseltebilen ekip &rarr; STS</td><td><a href="https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core">dotnet.microsoft.com</a></td></tr>
+              <tr><td><strong>TFM (target framework moniker)</strong></td><td>csproj'daki <code>net8.0</code>, <code>net8.0-windows</code> gibi hedef kısaltması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/frameworks">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>multi-targeting</strong></td><td>Tek projeyi birden çok TFM'e derleme (<code>TargetFrameworks</code> çoğul)</td><td><span class="tag">ORTA</span> Kütüphane yazarken lazım olur</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/frameworks">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SDK vs Runtime</strong></td><td>SDK derler ve çalıştırır, Runtime sadece çalıştırır; sunucuya ne kurulacağı yayın biçimine bağlıdır</td><td><span class="tag tag--ok">TEMEL</span> "ASP.NET Core Runtime" ile ".NET Runtime" farklı paketlerdir. <strong>Framework-dependent yayın, Linux/Windows sunucu</strong> &rarr; web için ASP.NET Core Runtime (.NET Runtime yetmez). <strong>IIS</strong> &rarr; ASP.NET Core Hosting Bundle (runtime + ANCM modülü). <strong>Self-contained veya Native AOT</strong> &rarr; sunucuya runtime kurulmaz. <strong>Konteyner</strong> &rarr; çalışma aşamasında <code>mcr.microsoft.com/dotnet/aspnet</code>, derleme aşamasında <code>sdk</code> imajı. <strong>CI / derleme sunucusu</strong> &rarr; SDK.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/install/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SDK-style project</strong></td><td>Modern kısa csproj biçimi; dosyaları tek tek listelemez</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MSBuild</strong></td><td>csproj'u yorumlayan derleme motoru; PropertyGroup / ItemGroup / Target kavramları</td><td><span class="tag">ORTA</span> Derleme çıktısını özelleştirmen gerektiğinde kaçış yok</td><td><a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Directory.Build.props</strong></td><td>Klasördeki tüm projelere ortak MSBuild ayarı uygulama dosyası</td><td><span class="tag">ORTA</span> Nullable, LangVersion, TreatWarningsAsErrors tek yerden verilir</td><td><a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>NuGet</strong></td><td>.NET paket yöneticisi ve paket deposu</td><td><span class="tag tag--ok">TEMEL</span> Paket kullanımı kısıtlı ortamlardan gelenler "paket seçerken neye bakarsın" sorusuna hazırlıklı olmalı</td><td><a href="https://learn.microsoft.com/en-us/nuget/what-is-nuget">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>PackageReference</strong></td><td>csproj içinde paket bağımlılığı tanımı; eski packages.config'in yerine geçti</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Central Package Management</strong></td><td><code>Directory.Packages.props</code> ile tüm çözümdeki paket sürümlerini tek dosyadan yönetme</td><td><span class="tag">ORTA</span> Aramada "NuGet central package management" yaz; kısaltması CPM</td><td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>transitive dependency</strong></td><td>Doğrudan eklediğin değil, kullandığın paketin çektiği bağımlılık</td><td><span class="tag">ORTA</span> Güvenlik açığı çoğunlukla buradan gelir</td><td><a href="https://learn.microsoft.com/en-us/nuget/concepts/dependency-resolution">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>packages.lock.json</strong></td><td>Sürümleri sabitleyip her makinede aynı bağımlılık ağacını garanti etme</td><td><span class="tag">ORTA</span> CI'da tekrarlanabilir derleme için</td><td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>NuGet.config / private feed</strong></td><td>Paket kaynaklarını belirleyen dosya; kurumsal özel feed tanımı burada</td><td><span class="tag">ORTA</span> Azure Artifacts, GitHub Packages, Nexus tipik özel feed'lerdir</td><td><a href="https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>NuGet audit</strong></td><td><code>dotnet list package --vulnerable</code> ile bilinen açıklı paketleri listeleme</td><td><span class="tag">ORTA</span> "Paket kullanmak risklidir" itirazına verilecek cevap budur</td><td><a href="https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>global.json</strong></td><td>Bir klasörde hangi SDK sürümünün kullanılacağını sabitleyen dosya</td><td><span class="tag">ORTA</span> "Bende çalışıyor, CI'da çalışmıyor" vakalarının klasik çözümü</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-json">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>roll forward</strong></td><td>Uygulamanın hedeflediği runtime yoksa hangi sürüme geçeceğini belirleyen politika</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/versions/selection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>solution (.sln / .slnx)</strong></td><td>Projeleri gruplayan çözüm dosyası; .slnx yeni XML tabanlı biçim</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-sln">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>solution filter (.slnf)</strong></td><td>Büyük çözümün sadece bir kısmını açma dosyası</td><td><span class="tag tag--info">İLERİ</span> Çok projeli monorepo'da açılış süresini kurtarır</td><td><a href="https://learn.microsoft.com/en-us/visualstudio/ide/filtered-solutions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotnet CLI</strong></td><td><code>dotnet new/build/run/test/publish/pack</code> komut ailesi</td><td><span class="tag tag--ok">TEMEL</span> Visual Studio'ya bağımlı kalma, CLI'yi bil</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotnet tool</strong></td><td>Global veya yerel .NET komut satırı aracı kurma (<code>dotnet-ef</code>, <code>dotnet-counters</code>)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>framework-dependent vs self-contained</strong></td><td>Sunucuda runtime bekleyen yayın ile runtime'ı yanında taşıyan yayın</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>single-file publish</strong></td><td>Çıktıyı tek çalıştırılabilir dosyada toplama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RID (runtime identifier)</strong></td><td><code>win-x64</code>, <code>linux-x64</code>, <code>linux-musl-arm64</code> gibi hedef platform kimliği</td><td><span class="tag">ORTA</span> Alpine container'da musl seçmezsen çalışmaz</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/rid-catalog">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="barindirma-ve-sunucu"><span class="h-num">§ 3</span>Barındırma ve sunucu</h2>
+
+        <p>"Uygulaman nerede çalışıyor" sorusuna "IIS'e attık" demek yetmez. Kestrel'in ne olduğunu, önünde
+        neden bir proxy durduğunu bilmen gerekir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sunucular ve barındırma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Kestrel</strong></td><td>ASP.NET Core'un kendi çapraz platform HTTP sunucusu; varsayılan budur</td><td><span class="tag tag--ok">TEMEL</span> "IIS uygulamayı çalıştırıyor" sanmak klasik yanlış; IIS sadece önündedir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Kestrel limits</strong></td><td>MaxRequestBodySize, MaxConcurrentConnections, KeepAliveTimeout gibi koruma ayarları</td><td><span class="tag">ORTA</span> Büyük dosya yüklemesi "413" veriyorsa buraya bak</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IIS / ASP.NET Core Module</strong></td><td>Windows'ta IIS'in Kestrel'i in-process veya out-of-process barındırması</td><td><span class="tag">ORTA</span> Türkiye'de kurumsal .NET dünyasında hâlâ çok yaygın</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>in-process vs out-of-process hosting</strong></td><td>IIS işçi sürecinin içinde çalışmak ile ayrı Kestrel süreci açmak</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/in-process-hosting">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HTTP.sys</strong></td><td>Windows'a özel alternatif sunucu; Windows kimlik doğrulaması ve port paylaşımı için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/httpsys">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>reverse proxy</strong></td><td>Kestrel'i doğrudan internete açmak yerine önüne Nginx/IIS/YARP koyma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>YARP</strong></td><td>Microsoft'un .NET ile yazılmış, kodla yapılandırılabilen reverse proxy kütüphanesi</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz. API gateway ihtiyacında Ocelot'un modern alternatifi</td><td><a href="https://microsoft.github.io/reverse-proxy/">microsoft.github.io/reverse-proxy</a></td></tr>
+              <tr><td><strong>Ocelot</strong></td><td>.NET tabanlı klasik API gateway kütüphanesi</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz. YARP çıktıktan sonra ivmesi düştü</td><td><a href="https://github.com/ThreeMammals/Ocelot">github.com/ThreeMammals/Ocelot</a></td></tr>
+              <tr><td><strong>UseForwardedHeaders</strong></td><td>Proxy arkasında gerçek istemci IP'sini ve şemasını (https) geri kazanma</td><td><span class="tag">ORTA</span> Rate limiting ve log'da IP yanlışsa ilk bakılacak yer</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HTTPS / HSTS / dev certificate</strong></td><td>Sertifika ile şifreli bağlantı; geliştirmede <code>dotnet dev-certs</code> kullanılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HTTP/1.1 &middot; HTTP/2 &middot; HTTP/3</strong></td><td>Protokol sürümleri; HTTP/2 çoğullama, HTTP/3 QUIC üzerine kurulu</td><td><span class="tag">ORTA</span> gRPC HTTP/2 gerektirir; bu yüzden önemli</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/http2">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>launchSettings.json</strong></td><td>Sadece geliştirici makinesindeki profil, port ve ortam ayarları</td><td><span class="tag tag--ok">TEMEL</span> Bunu prod ayarı sanmak klasik hata; sunucuda okunmaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ASPNETCORE_ENVIRONMENT</strong></td><td>Development / Staging / Production ortam adını belirleyen değişken</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ASPNETCORE_URLS</strong></td><td>Dinlenecek adres ve portu ortam değişkeniyle verme</td><td><span class="tag tag--ok">TEMEL</span> Container'da port ayarının standart yolu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotnet watch</strong></td><td>Dosya değişince otomatik yeniden derleyip çalıştırma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>graceful shutdown</strong></td><td>SIGTERM aldığında yeni istek almayı kesip mevcut istekleri bitirme</td><td><span class="tag">ORTA</span> Kubernetes'te 502 hatalarının klasik sebebi eksik shutdown</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ShutdownTimeout</strong></td><td>Kapanırken bekleme süresi; varsayılan kısa gelir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Docker / container image</strong></td><td>Uygulamayı bağımlılıklarıyla paketleyip her yerde aynı çalıştırma</td><td><span class="tag">ORTA</span> Detay <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/docker/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>dotnet publish /t:PublishContainer</strong></td><td>Dockerfile yazmadan doğrudan container imajı üretme</td><td><span class="tag tag--info">İLERİ</span> SDK'nın yerleşik özelliği</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/containers/sdk-publish">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="uygulama-baslangici"><span class="h-num">§ 4</span>Uygulama başlangıcı ve host</h2>
+
+        <p>Program.cs'in ilk on satırında ne olduğunu satır satır anlatabilmen beklenir. "Şablondan geldi"
+        cevabı mülakatta pahalıya patlar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başlangıç ve barındırma modeli</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Program.cs</strong></td><td>Uygulamanın giriş noktası; servis kaydı ve pipeline kurulumu burada</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>top-level statements</strong></td><td>class/Main yazmadan doğrudan kod yazabilme; modern şablonlar böyle</td><td><span class="tag tag--ok">TEMEL</span> Dil tarafı <a href="../01-csharp-dili/index.html">01 — C# Dili</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/top-level-statements">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>minimal hosting model</strong></td><td>.NET 6 ile gelen tek dosyalı kurulum; Startup.cs'i ortadan kaldırdı</td><td><span class="tag tag--ok">TEMEL</span> Minimal API ile aynı şey değil; bu barındırma modeli</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/migration/50-to-60">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Startup.cs (ConfigureServices/Configure)</strong></td><td>Eski iki metotlu kurulum sınıfı</td><td><span class="tag tag--warn">ESKİMİŞ</span> Mevcut projelerin çoğunda hâlâ var; her iki modeli de tanı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WebApplicationBuilder</strong></td><td><code>builder.Services</code>, <code>builder.Configuration</code>, <code>builder.Logging</code>'i taşıyan kurucu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WebApplication</strong></td><td><code>builder.Build()</code> sonucu; middleware ve endpoint'ler buna eklenir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>generic host (IHost)</strong></td><td>Web olmayan uygulamalar için de geçerli, DI + config + log taşıyan ortak barındırma</td><td><span class="tag tag--ok">TEMEL</span> Aramada ".NET generic host" yaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Host.CreateApplicationBuilder</strong></td><td>Konsol/worker uygulamaları için minimal hosting karşılığı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Worker Service şablonu</strong></td><td>Arka planda sürekli çalışan servis projesi (<code>dotnet new worker</code>)</td><td><span class="tag">ORTA</span> Windows Service veya systemd olarak da kurulabilir</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHostedService</strong></td><td>StartAsync/StopAsync sözleşmesi; host ile birlikte başlayıp duran iş</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>BackgroundService</strong></td><td>IHostedService'in soyut temel sınıfı; sadece <code>ExecuteAsync</code> yazarsın</td><td><span class="tag tag--ok">TEMEL</span> Kuyruk tüketicisi, zamanlanmış iş, ısıtma işlemleri için</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/workers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHostApplicationLifetime</strong></td><td>ApplicationStarted / ApplicationStopping / ApplicationStopped olayları</td><td><span class="tag">ORTA</span> Düzgün kapanış senaryosunda kullanılır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>stopping token / CancellationToken</strong></td><td>Kapanma sinyalini arka plan işine iletmek</td><td><span class="tag tag--ok">TEMEL</span> Yoksa deploy sırasında iş yarıda kesilir</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHostedLifecycleService</strong></td><td>Starting/Started/Stopping/Stopped için daha ince kancalar</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.hosting.ihostedlifecycleservice">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IStartupFilter</strong></td><td>Kütüphanenin, uygulamanın pipeline'ına dışarıdan middleware eklemesi</td><td><span class="tag tag--info">İLERİ</span> Ortak altyapı paketi yazarken tek temiz yol</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>startup task / ısıtma (warm-up)</strong></td><td>İlk istekten önce migration, cache doldurma gibi işleri yapma</td><td><span class="tag">ORTA</span> IHostedService ile yapılır; sonsuza kadar bloklamamaya dikkat</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WebApplicationFactory</strong></td><td>Testte tüm host'u bellek içinde ayağa kaldırma</td><td><span class="tag">ORTA</span> Detay <a href="../06-test-ve-kalite/index.html">06 — Test ve Kalite</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseWindowsService / UseSystemd</strong></td><td>Aynı uygulamayı Windows servisi veya systemd birimi olarak çalıştırma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ILogger&lt;T&gt; / logging başlangıcı</strong></td><td>Host'un varsayılan olarak kurduğu günlükleme soyutlaması</td><td><span class="tag tag--ok">TEMEL</span> Serilog/Seq tarafı <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>host ile app config ayrımı</strong></td><td>Host ayarları (ortam, içerik kökü) ile uygulama ayarlarının farklı aşamada okunması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dependency-injection"><span class="h-num">§ 5</span>Dependency Injection</h2>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p><strong>Dependency Injection</strong> ve <strong>SOLID</strong> ilanlarda neredeyse her zaman birlikte geçer. Mülakatçı buradan
+          şu üç soruyu sorar: (1) transient/scoped/singleton farkı, (2) singleton içine scoped enjekte edersen ne
+          olur, (3) DI'nin SOLID'in hangi harfiyle ilişkili olduğu. Üçüne de tek nefeste cevap verebilmelisin.
+          Desen tarafı <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a> sayfasında devam ediyor.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Konteyner ve yaşam döngüsü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Dependency Injection</strong></td><td>Bağımlılığı sınıfın kendisi üretmez, dışarıdan verilir</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Inversion of Control (IoC)</strong></td><td>Kontrolü çağıran koddan çerçeveye devretme ilkesi; DI bunun bir uygulaması</td><td><span class="tag tag--ok">TEMEL</span> DI ile IoC'yi eş anlamlı kullanmak yaygın ama teknik olarak yanlış</td><td><a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>constructor injection</strong></td><td>Bağımlılığı kurucu metottan alma; varsayılan ve tercih edilen yol</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>method / property injection</strong></td><td>Bağımlılığı metot parametresi veya özellik üzerinden alma</td><td><span class="tag">ORTA</span> Yerleşik konteyner property injection desteklemez</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IServiceCollection</strong></td><td>Servis kayıtlarının toplandığı koleksiyon (<code>builder.Services</code>)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IServiceProvider</strong></td><td>Kayıtlı servisleri çözen konteyner nesnesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.iserviceprovider">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ServiceDescriptor</strong></td><td>Bir kaydın üç bilgisi: servis tipi, uygulama tipi, ömür</td><td><span class="tag">ORTA</span> Kayıtları programatik incelemek/değiştirmek gerektiğinde</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicedescriptor">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>transient</strong></td><td>Her istendiğinde yeni örnek</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>scoped</strong></td><td>Kapsam başına tek örnek; kapsamın ne olduğu uygulama türüne bağlı</td><td><span class="tag tag--ok">TEMEL</span> DbContext'in varsayılan ömrü budur. <strong>MVC / Web API / Razor Pages</strong> &rarr; kapsam = bir HTTP isteği. <strong>Blazor Server / Interactive Server</strong> &rarr; kapsam = devre (circuit), saatlerce sürebilir; DbContext için <code>IDbContextFactory</code> ile işlem başına context. <strong>Blazor WebAssembly</strong> &rarr; scoped fiilen singleton gibi davranır. <strong>Worker / BackgroundService / konsol</strong> &rarr; otomatik kapsam yok; <code>IServiceScopeFactory</code> ile elle kapsam aç.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>singleton</strong></td><td>Uygulama ömrü boyunca tek örnek</td><td><span class="tag tag--ok">TEMEL</span> Thread-safe olmak zorundadır; içinde durum tutmak tehlikeli</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>captive dependency</strong></td><td>Uzun ömürlünün kısa ömürlüyü esir alması (singleton içinde scoped)</td><td><span class="tag tag--ok">TEMEL</span> Klasik mülakat sorusu; DbContext'i singleton'a enjekte etme senaryosu</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>scope validation</strong></td><td>Geliştirme ortamında captive dependency'yi hata olarak fırlatan doğrulama</td><td><span class="tag">ORTA</span> <code>ValidateScopes</code> / <code>ValidateOnBuild</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IServiceScopeFactory</strong></td><td>Singleton veya arka plan servisinde elle kapsam açma</td><td><span class="tag tag--ok">TEMEL</span> BackgroundService içinde DbContext kullanmanın iki geçerli yolundan biri; diğeri <code>IDbContextFactory</code> (<a href="../03-veri-erisimi/index.html">03</a>)</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>keyed services</strong></td><td>Aynı arayüzün birden çok kaydını anahtarla ayırma (<code>[FromKeyedServices]</code>)</td><td><span class="tag">ORTA</span> .NET 8 ile geldi; öncesinde factory yazmak gerekiyordu</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>factory registration</strong></td><td><code>services.AddScoped&lt;IX&gt;(sp =&gt; ...)</code> ile örneği elle üretme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TryAdd / TryAddEnumerable</strong></td><td>Zaten kayıtlıysa üzerine yazmayan kayıt; kütüphane yazarken şart</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IEnumerable&lt;T&gt; enjeksiyonu</strong></td><td>Aynı arayüzün tüm kayıtlarını liste olarak alma</td><td><span class="tag">ORTA</span> Strategy deseni ve kural motoru için doğal çözüm</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>open generic registration</strong></td><td><code>typeof(IRepository&lt;&gt;)</code> gibi açık generic tipi tek satırda kaydetme</td><td><span class="tag">ORTA</span> Generic repository kullanan projelerde çok işe yarar; bu satırı mutlaka dene</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>decorator kaydı</strong></td><td>Var olan servisi sarmalayan yeni servis kaydetme (log, cache, retry katmanı)</td><td><span class="tag">ORTA</span> Yerleşik konteyner doğrudan desteklemez; Scrutor ile veya elle factory ile yapılır</td><td><a href="https://github.com/khellang/Scrutor">github.com/khellang/Scrutor</a></td></tr>
+              <tr><td><strong>service locator anti-pattern</strong></td><td>Sınıfın içinden <code>IServiceProvider.GetService</code> çağırıp bağımlılık çekmesi</td><td><span class="tag">ORTA</span> Mülakatta "neden kötü" diye sorulur: bağımlılıklar gizlenir, test zorlaşır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IDisposable ve konteyner</strong></td><td>Konteynerin ürettiği disposable servisleri kapsam bitince kendisinin bırakması</td><td><span class="tag">ORTA</span> Transient disposable'ları singleton kapsamı biriktirir; bellek sızıntısı sebebi</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Autofac</strong></td><td>Olgun üçüncü parti konteyner; modül, interceptor, gelişmiş decorator desteği</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz (MIT). Yerleşik konteyner yetmediğinde ilk bakılan</td><td><a href="https://autofac.readthedocs.io/">autofac.readthedocs.io</a></td></tr>
+              <tr><td><strong>Scrutor</strong></td><td>Yerleşik konteynere assembly tarama (scanning) ve decorator yeteneği ekler</td><td><span class="tag">ORTA</span> Ücretsiz (MIT). Konteyneri değiştirmeden ihtiyacı kapatır</td><td><a href="https://github.com/khellang/Scrutor">github.com/khellang/Scrutor</a></td></tr>
+              <tr><td><strong>Lamar</strong></td><td>StructureMap'in devamı olan alternatif konteyner</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz. Niş; yeni projede tercih edilmiyor</td><td><a href="https://github.com/JasperFx/lamar">github.com/JasperFx/lamar</a></td></tr>
+              <tr><td><strong>Ninject / StructureMap / Unity</strong></td><td>.NET Framework döneminin yaygın konteynerleri</td><td><span class="tag tag--warn">ESKİMİŞ</span> Eski projede karşına çıkar; yeni projede kullanma</td><td>&mdash;</td></tr>
+              <tr><td><strong>IServiceProviderFactory</strong></td><td>Yerleşik konteyner yerine üçüncü partiyi host'a bağlama noktası</td><td><span class="tag tag--info">İLERİ</span> <code>UseServiceProviderFactory</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ActivatorUtilities</strong></td><td>DI'de kayıtlı olmayan bir tipi, bağımlılıklarını konteynerden alarak üretme</td><td><span class="tag tag--info">İLERİ</span> Middleware ve filter üretiminde çerçevenin kullandığı yol</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.activatorutilities">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="configuration"><span class="h-num">§ 6</span>Configuration ve Options</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Konfigürasyon kaynakları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>IConfiguration</strong></td><td>Tüm kaynakları birleştirip anahtar-değer olarak sunan soyutlama</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>configuration provider zinciri</strong></td><td>Kaynakların sırayla yüklenip sonrakinin öncekini ezmesi</td><td><span class="tag tag--ok">TEMEL</span> "Ayar neden okunmuyor" sorusunun cevabı hep bu sıradadır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>appsettings.json</strong></td><td>Varsayılan JSON ayar dosyası</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>appsettings.{Environment}.json</strong></td><td>Ortama özel dosyanın temel dosyanın üstüne binmesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ortam değişkeni (environment variable)</strong></td><td>İç içe anahtarların <code>__</code> (çift alt çizgi) ile yazılması</td><td><span class="tag tag--ok">TEMEL</span> Linux ve container'da tek nokta ile yazarsan okunmaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>command-line arguments</strong></td><td>Uygulamayı başlatırken argümanla ayar geçme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>User Secrets</strong></td><td>Geliştirici makinesinde parolayı repoya girmeden tutma (<code>dotnet user-secrets</code>)</td><td><span class="tag tag--ok">TEMEL</span> Sadece Development'ta çalışır; prod çözümü değildir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>connection string yönetimi</strong></td><td>Bağlantı dizesinin appsettings yerine gizli kaynaktan gelmesi</td><td><span class="tag tag--ok">TEMEL</span> Repoya parola gömmek en sık görülen güvenlik bulgusudur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure Key Vault provider</strong></td><td>Sırları Azure Key Vault'tan konfigürasyon olarak çekme</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> Azure aboneliği gerektirir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/key-vault-configuration">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HashiCorp Vault</strong></td><td>Bulut bağımsız sır yönetimi; açık kaynak sürümü ücretsiz</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz topluluk sürümü var, kurumsal sürüm ücretli</td><td><a href="https://developer.hashicorp.com/vault/docs">developer.hashicorp.com</a></td></tr>
+              <tr><td><strong>AWS Secrets Manager / SSM</strong></td><td>AWS tarafındaki sır ve parametre depoları</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.aws.amazon.com/secretsmanager/">docs.aws.amazon.com</a></td></tr>
+              <tr><td><strong>Azure App Configuration</strong></td><td>Merkezî ayar ve feature flag servisi</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/azure-app-configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>feature flag / feature management</strong></td><td>Kodu deploy edip özelliği ayarla açıp kapama</td><td><span class="tag">ORTA</span> <code>Microsoft.FeatureManagement</code> paketi ücretsiz</td><td><a href="https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>reloadOnChange</strong></td><td>Dosya değişince ayarın yeniden okunması</td><td><span class="tag">ORTA</span> IOptionsMonitor ile birlikte anlamlı olur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IConfigurationSection / GetSection</strong></td><td>Ayar ağacının bir dalını alma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>custom configuration provider</strong></td><td>Veritabanı, INI, XML gibi kendi kaynağını yazma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Options pattern</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Options pattern</strong></td><td>Ayarları sınıfa bağlayıp (bind) tip güvenli okuma</td><td><span class="tag tag--ok">TEMEL</span> <code>IConfiguration</code>'ı her yere enjekte etmenin doğru alternatifi</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IOptions&lt;T&gt;</strong></td><td>Singleton; uygulama başlarken bir kez okunur, değişikliği görmez</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IOptionsSnapshot&lt;T&gt;</strong></td><td>Scoped; istek başına yeniden okunur, singleton'a enjekte edilemez</td><td><span class="tag tag--ok">TEMEL</span> Üçünün farkı klasik mülakat sorusudur</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IOptionsMonitor&lt;T&gt;</strong></td><td>Singleton; güncel değeri verir ve <code>OnChange</code> ile değişimi bildirir</td><td><span class="tag tag--ok">TEMEL</span> Arka plan servisinde seçim ayara bağlı: <strong>ayar çalışma sırasında değişebilir ve değişikliği görmen gerekir</strong> &rarr; <code>IOptionsMonitor</code>. <strong>Ayar uygulama ömrü boyunca sabit</strong> &rarr; <code>IOptions&lt;T&gt;</code> de doğru ve yeterli. <code>IOptionsSnapshot</code> scoped olduğu için singleton/hosted service'e doğrudan enjekte edilemez; ancak elle açılan kapsam içinde çözülebilir.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>named options</strong></td><td>Aynı ayar sınıfının farklı isimlerle birden çok örneği</td><td><span class="tag">ORTA</span> Çok kiracılı senaryolarda işe yarar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>options validation</strong></td><td>Ayar eksik veya hatalıysa hata verme (<code>ValidateDataAnnotations</code>, <code>Validate</code>)</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ValidateOnStart</strong></td><td>Doğrulamayı ilk kullanımda değil uygulama açılışında yapma</td><td><span class="tag">ORTA</span> Yanlış ayarla ayağa kalkıp saatler sonra patlamayı önler</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IValidateOptions&lt;T&gt;</strong></td><td>Karmaşık doğrulama kuralını ayrı sınıfa alma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IConfigureOptions / PostConfigure</strong></td><td>Bağlama sonrası ayarı kodla düzeltme veya varsayılan doldurma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>options source generator</strong></td><td>Doğrulamayı reflection yerine derleme anında üretme; AOT uyumlu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/options-validation-generator">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="middleware"><span class="h-num">§ 7</span>Middleware ve pipeline</h2>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p><strong>Middleware</strong> ilanlarda sık geçer. Bu kelime tek başına genel bir yazılım terimi olduğu için
+          aratırken mutlaka <em>"ASP.NET Core middleware"</em> yaz. Mülakatta sorulan hâli hemen her zaman şudur:
+          "Bir istek geldiğinde pipeline'da sırayla ne oluyor, sıralamayı değiştirirsen ne bozulur?"</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Pipeline mantığı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>middleware pipeline</strong></td><td>İsteğin sırayla geçtiği, her biri bir sonrakini çağıran halkalar zinciri</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RequestDelegate / next</strong></td><td>Bir sonraki halkayı temsil eden delege; çağırmazsan zincir orada kesilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>sıralama (ordering)</strong></td><td>Kayıt sırası çalışma sırasıdır; auth middleware'lerini routing'den önce koyarsan beklenen biçimde çalışmaz (ayrıntı aşağıda UseAuthentication satırında)</td><td><span class="tag tag--ok">TEMEL</span> Resmî dokümandaki sıra tablosunu ezberle</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Use / Run / Map</strong></td><td>Zincire ekleme, zinciri sonlandırma, yola göre dallandırma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MapWhen / UseWhen</strong></td><td>Koşula göre pipeline dallandırma; UseWhen ana zincire geri döner</td><td><span class="tag">ORTA</span> İkisinin farkı ince ama önemli</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>custom middleware (convention-based)</strong></td><td>Kurucusunda <code>RequestDelegate</code> alan, <code>InvokeAsync</code> yazan sınıf</td><td><span class="tag tag--ok">TEMEL</span> Bunu ezberden yazabilmelisin</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IMiddleware (factory-based)</strong></td><td>DI'den scoped olarak çözülebilen middleware arayüzü</td><td><span class="tag">ORTA</span> Convention-based middleware singleton'dır. Bağımlılığa göre: <strong>singleton bağımlılık</strong> &rarr; kurucu enjeksiyonu yeterli. <strong>Scoped bağımlılık</strong> &rarr; iki yol: (a) convention-based middleware'de servisi kurucuya değil <code>InvokeAsync(HttpContext, IScopedService)</code> parametresine eklemek (resmî dokümandaki yol); (b) <code>IMiddleware</code> ile middleware'in kendisini DI'ye scoped/transient kaydetmek.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HttpContext</strong></td><td>İsteğe ait her şeyi taşıyan bağlam nesnesi (Request, Response, User, Items)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/use-http-context">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHttpContextAccessor</strong></td><td>Servis içinden mevcut isteğe erişme</td><td><span class="tag">ORTA</span> Kolayına kaçıp her yere enjekte etmek anti-pattern sayılır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/use-http-context">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HttpContext.Items</strong></td><td>Tek bir istek boyunca yaşayan geçici sözlük</td><td><span class="tag">ORTA</span> Middleware ile controller arasında veri taşımanın basit yolu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/use-http-context">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>response başladıktan sonra yazma hatası</strong></td><td>Yanıt gövdesi akmaya başladıktan sonra header değiştirilemez</td><td><span class="tag">ORTA</span> "Headers are read-only" hatasının sebebi budur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>request buffering / EnableBuffering</strong></td><td>İstek gövdesini birden çok kez okuyabilmek için tamponlama</td><td><span class="tag tag--info">İLERİ</span> Gövdeyi loglamak istediğinde şart</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yerleşik middleware'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>UseExceptionHandler</strong></td><td>Yakalanmamış hataları merkezî olarak yakalayıp düzgün yanıt üretme</td><td><span class="tag tag--ok">TEMEL</span> Her API'de olmalı; try-catch'i her metoda serpiştirmenin alternatifi</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IExceptionHandler</strong></td><td>.NET 8 ile gelen, hata tipine göre ayrı sınıf yazma arayüzü</td><td><span class="tag">ORTA</span> Zincirleme birden çok handler kaydedilebilir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ProblemDetails</strong></td><td>HTTP hatalarının standart JSON gövdesi (RFC 9457)</td><td><span class="tag tag--ok">TEMEL</span> Özgeçmişte "RESTful API" yazıyorsa hata formatının standarda oturtulmuş olması beklenir</td><td><a href="https://datatracker.ietf.org/doc/html/rfc9457">datatracker.ietf.org &mdash; RFC 9457</a></td></tr>
+              <tr><td><strong>AddProblemDetails</strong></td><td>ProblemDetails üretimini uygulama genelinde açma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseDeveloperExceptionPage</strong></td><td>Geliştirmede yığın izini (stack trace) tarayıcıda gösterme</td><td><span class="tag tag--ok">TEMEL</span> Production'da açık kalması güvenlik açığıdır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseStatusCodePages</strong></td><td>Gövdesiz 404/401 gibi yanıtlara içerik ekleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseStaticFiles</strong></td><td>wwwroot altındaki dosyaları doğrudan sunma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MapStaticAssets</strong></td><td>Yeni nesil statik dosya sunumu; sıkıştırma ve parmak izini derleme anında yapar</td><td><span class="tag tag--info">İLERİ</span> .NET 9 ile geldi; <a href="../08-ui-blazor-mvc-maui/index.html">08</a> sayfasıyla birlikte oku</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseCors</strong></td><td>Tarayıcının farklı kaynaktan çağrı yapmasına izin verme</td><td><span class="tag tag--ok">TEMEL</span> Ölçüt ekip değil origin: <strong>tarayıcıdaki ön yüz farklı origin'den</strong> (farklı alan adı, port veya şema; geliştirmede <code>localhost:5173</code> &rarr; <code>localhost:5000</code> dahil) çağırıyorsa gerekli. <strong>Ön yüz aynı origin'den sunuluyor</strong> veya reverse proxy ile aynı alan adı altındaysa gerekmez. <strong>İstemci tarayıcı değilse</strong> (mobil native, sunucudan sunucuya, Postman) CORS uygulanmaz.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/cors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>preflight / OPTIONS isteği</strong></td><td>Tarayıcının asıl istekten önce izin sorması</td><td><span class="tag tag--ok">TEMEL</span> CORS hatalarının çoğu buradan; <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> tarafında da geçer</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>UseResponseCompression</strong></td><td>Yanıtı Brotli/Gzip ile sıkıştırma</td><td><span class="tag">ORTA</span> Reverse proxy zaten yapıyorsa iki kez yapma</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/response-compression">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseResponseCaching</strong></td><td>HTTP cache başlıklarına göre yanıt önbellekleme</td><td><span class="tag">ORTA</span> Output caching çıktıktan sonra çoğu senaryoda ikinci planda kaldı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/response">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseHttpsRedirection / UseHsts</strong></td><td>HTTP'yi HTTPS'e yönlendirme ve tarayıcıya zorunlu kılma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseRouting / UseEndpoints</strong></td><td>Yolun hangi endpoint'e gittiğini bulma ve çalıştırma</td><td><span class="tag tag--ok">TEMEL</span> Auth middleware'leri ikisinin arasına girer</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseAuthentication / UseAuthorization</strong></td><td>Kimliği çözme ve yetkiyi denetleme halkaları</td><td><span class="tag tag--ok">TEMEL</span> Sıra hatasının sonucu hatanın türüne göre değişir: <strong>UseAuthorization, UseRouting'den önce</strong> &rarr; endpoint metadata'sı okunamaz; <code>[Authorize]</code> uygulanmaz ve endpoint çalışırken <code>InvalidOperationException</code> (500) alınabilir. <strong>UseAuthentication, UseAuthorization'dan sonra</strong> &rarr; kullanıcı anonim görünür, geçerli token ile bile 401. .NET 7+ <code>WebApplication</code> bu middleware'leri gerekirse otomatik ekler; elle çağırıyorsan sıra önemlidir (TEYİT: learn.microsoft.com "ASP.NET Core Middleware – middleware order").</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseRateLimiter</strong></td><td>İstek hızını sınırlama halkası</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> § 13'te ayrıntısı var</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseOutputCache</strong></td><td>Sunucu tarafında endpoint çıktısını önbellekleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseRequestLocalization</strong></td><td>İstek başına kültür (dil, sayı/tarih biçimi) belirleme</td><td><span class="tag">ORTA</span> § 17'de ayrıntısı var</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>W3CLogging / HTTP logging</strong></td><td>İstek ve yanıtları yerleşik olarak günlüğe yazma</td><td><span class="tag">ORTA</span> Gövde loglarken kişisel veri sızdırmamaya dikkat</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-logging/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseForwardedHeaders</strong></td><td>Proxy arkasında gerçek IP ve şemayı geri kazanma</td><td><span class="tag">ORTA</span> Rate limiting'den ÖNCE gelmeli</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>UseSession</strong></td><td>Sunucu tarafı oturum durumu</td><td><span class="tag">ORTA</span> <strong>Durumsuz Web API</strong> &rarr; istenmez; stateless kalmayı tercih et. <strong>MVC / Razor Pages'te sihirbaz veya çok adımlı form</strong> &rarr; kullanılabilir. Birden çok sunucuda dağıtık önbellek (ör. Redis) gerektirir.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/app-state">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Data Protection API</strong></td><td>Cookie, token ve geçici veriyi şifreleyen anahtar altyapısı</td><td><span class="tag">ORTA</span> Çok sunucuda anahtar halkasını paylaşmazsan oturumlar kopar</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>antiforgery (CSRF)</strong></td><td>Form gönderimlerinde sahte istek koruması</td><td><span class="tag">ORTA</span> Ölçüt kimlik bilgisinin nasıl gönderildiği: <strong>tarayıcının otomatik gönderdiği kimlik bilgisi</strong> (cookie auth; MVC, Razor ve SPA + cookie API dahil) &rarr; gerekli. <strong>Token Authorization başlığıyla elle gönderiliyorsa</strong> (Bearer JWT) &rarr; gerekmez. .NET 8+ minimal API'de form binding kullanan endpoint'lerde antiforgery doğrulaması otomatik devreye girer (TEYİT: learn.microsoft.com "Prevent CSRF attacks").</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HealthChecks middleware</strong></td><td><code>/health</code> uç noktasıyla uygulamanın ayakta olduğunu bildirme</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> liveness / readiness ayrımını da öğren</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AspNetCore.Diagnostics.HealthChecks</strong></td><td>SQL Server, Redis, RabbitMQ vb. için hazır sağlık kontrolleri ve UI</td><td><span class="tag">ORTA</span> Ücretsiz topluluk paketi; <a href="../10-kutuphaneler/index.html">10</a> sayfasında listeli</td><td><a href="https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks">github.com/Xabaril</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="routing"><span class="h-num">§ 8</span>Routing ve endpoint</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yönlendirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>endpoint routing</strong></td><td>İsteği bir endpoint nesnesine eşleyip metadata ile çalıştırma modeli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>attribute routing</strong></td><td><code>[Route]</code>, <code>[HttpGet("{id}")]</code> ile yolu metodun üstünde tanımlama</td><td><span class="tag tag--ok">TEMEL</span> Web API'de standart yaklaşım</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>conventional routing</strong></td><td><code>{controller}/{action}/{id?}</code> kalıbıyla merkezî tanım</td><td><span class="tag">ORTA</span> MVC tarafında hâlâ yaygın; API'de tercih edilmez</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route template</strong></td><td>Yol kalıbındaki sabit parçalar ve <code>{parametre}</code> yer tutucuları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route constraint</strong></td><td><code>{id:int}</code>, <code>{slug:alpha}</code>, <code>{k:min(1)}</code> gibi tip ve aralık kısıtları</td><td><span class="tag">ORTA</span> Yanlış tip 404 verir, 400 vermez; bunu bilerek kullan</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>custom route constraint</strong></td><td><code>IRouteConstraint</code> ile kendi kısıtını yazma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>catch-all parameter</strong></td><td><code>{*path}</code> ile kalan tüm yolu tek parametrede toplama</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route precedence / ambiguous route</strong></td><td>Birden çok kalıp eşleşince hangisinin kazandığı; eşitlikte hata verir</td><td><span class="tag">ORTA</span> "AmbiguousMatchException" bu yüzden çıkar</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route name / link generation</strong></td><td><code>LinkGenerator</code> ve <code>Url.Action</code> ile yolu koda gömmeden üretme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route groups (MapGroup)</strong></td><td>Minimal API'de ortak ön ek, filtre ve metadata paylaşan grup</td><td><span class="tag">ORTA</span> Minimal API'yi düzenli tutmanın anahtarı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/route-handlers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>endpoint metadata</strong></td><td>Endpoint'e iliştirilen özellikler (yetki, cache, rate limit politikası)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>lowercase URL / slug</strong></td><td>Üretilen bağlantıların küçük harfe ve tireye zorlanması</td><td><span class="tag tag--info">İLERİ</span> <code>RouteOptions.LowercaseUrls</code></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>area</strong></td><td>Büyük MVC uygulamasını yol düzeyinde bölme</td><td><span class="tag">ORTA</span> <a href="../08-ui-blazor-mvc-maui/index.html">08</a> sayfasında MVC bağlamında geçer</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/areas">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RESTful kaynak tasarımı</strong></td><td>Yolun fiil değil isim (kaynak) taşıması: <code>/orders/5/items</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> "RESTful API" iddiası bu tasarım disiplinini kapsar</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>idempotency</strong></td><td>Aynı isteğin tekrar gönderilmesinin sonucu değiştirmemesi (PUT, DELETE)</td><td><span class="tag">ORTA</span> Ödeme ve kuyruk senaryolarında kritik; <a href="../05-mesajlasma-ve-dagitik/index.html">05</a> sayfasında devam eder</td><td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Idempotent">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>HTTP metotları ve durum kodları</strong></td><td>GET/POST/PUT/PATCH/DELETE ve 200/201/204/400/401/403/404/409/422/500 anlamları</td><td><span class="tag tag--ok">TEMEL</span> Mülakatta "201 ne zaman dönersin" diye sorulur</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">developer.mozilla.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="web-api"><span class="h-num">§ 9</span>Web API: controller ve minimal API</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İki model ve temel yapı taşları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>controller-based API</strong></td><td><code>ControllerBase</code>'den türeyen sınıf ve action metotları</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> Kurumsal projelerin çoğu hâlâ böyle</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Minimal API</strong></td><td><code>app.MapGet("/x", () =&gt; ...)</code> ile controller'sız uç nokta</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Mülakatta "ne zaman hangisini seçersin" diye sorulur; cevabın hazır olsun</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Controller vs ControllerBase</strong></td><td>View döndüren MVC controller ile sadece API için olan taban sınıf</td><td><span class="tag tag--ok">TEMEL</span> API'de <code>ControllerBase</code> kullan, gereksiz View altyapısı yüklenmesin</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[ApiController]</strong></td><td>Otomatik model doğrulama, ProblemDetails hata yanıtı ve binding çıkarımı açar</td><td><span class="tag tag--ok">TEMEL</span> Bunun tam olarak neyi açtığını saymak klasik mülakat sorusudur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>action method</strong></td><td>Bir HTTP isteğine karşılık gelen controller metodu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route handler / delegate</strong></td><td>Minimal API'de endpoint'in kendisi olan lambda veya metot referansı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/route-handlers">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TypedResults</strong></td><td>Minimal API'de tipli, test edilebilir sonuç üreticisi (<code>TypedResults.Ok(x)</code>)</td><td><span class="tag">ORTA</span> <code>Results</code>'a göre birim testte çok daha rahat</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Results&lt;T1, T2&gt;</strong></td><td>Bir endpoint'in birden çok olası dönüş tipini imzada bildirmesi</td><td><span class="tag tag--info">İLERİ</span> OpenAPI dokümanını otomatik zenginleştirir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IActionResult / ActionResult&lt;T&gt;</strong></td><td>Controller'da dönüş tipi; generic olanı hem tipi hem durum kodunu ifade eder</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Ok / Created / NoContent / NotFound / BadRequest</strong></td><td>Yerleşik sonuç yardımcı metotları</td><td><span class="tag tag--ok">TEMEL</span> <code>CreatedAtAction</code> ile Location başlığı üretmeyi de öğren</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IResult</strong></td><td>Minimal API'nin sonuç soyutlaması</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>async action / CancellationToken</strong></td><td>Action imzasına iptal jetonu alıp aşağı taşıma</td><td><span class="tag tag--ok">TEMEL</span> İstemci bağlantıyı keserse boşuna sorgu çalıştırmazsın</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/best-practices">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IAsyncEnumerable dönüşü</strong></td><td>Sonuçları akış hâlinde, hepsini belleğe almadan gönderme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DTO / ViewModel</strong></td><td>Veritabanı varlığını doğrudan dışarı açmayıp aktarım nesnesi kullanma</td><td><span class="tag tag--ok">TEMEL</span> AutoMapper tartışması <a href="../04-mimari-ve-desenler/index.html">04</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>over-posting / mass assignment</strong></td><td>İstemcinin göndermemesi gereken alanı gönderip veri değiştirmesi</td><td><span class="tag">ORTA</span> Entity'yi doğrudan bind etmenin somut güvenlik zararı budur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Model binding ve doğrulama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>model binding</strong></td><td>HTTP isteğindeki verinin metot parametrelerine dönüştürülmesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[FromBody] / [FromQuery] / [FromRoute] / [FromForm] / [FromHeader]</strong></td><td>Verinin nereden okunacağını açıkça söyleme</td><td><span class="tag tag--ok">TEMEL</span> Gövdeden en fazla bir parametre bağlanabilir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[FromServices]</strong></td><td>Parametreyi DI konteynerinden çözme</td><td><span class="tag">ORTA</span> .NET 7+ minimal API'de çoğu durumda gereksiz, çıkarım yapılıyor</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[AsParameters]</strong></td><td>Minimal API'de çok sayıda parametreyi tek bir kayda toplama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/parameter-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TryParse / BindAsync</strong></td><td>Özel tipin minimal API'de nasıl bağlanacağını tanımlayan sözleşmeler</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/parameter-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>custom model binder</strong></td><td>Controller tarafında özel bağlama mantığı yazma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/advanced/custom-model-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ModelState</strong></td><td>Bağlama ve doğrulama hatalarının toplandığı sözlük</td><td><span class="tag tag--ok">TEMEL</span> <code>[ApiController]</code> varsa 400'ü otomatik döner</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DataAnnotations</strong></td><td><code>[Required]</code>, <code>[StringLength]</code>, <code>[Range]</code>, <code>[EmailAddress]</code> öznitelikleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IValidatableObject</strong></td><td>Nesnenin kendi içinde çapraz alan doğrulaması yapması</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>FluentValidation</strong></td><td>Doğrulama kurallarını akıcı arayüzle ayrı sınıfta yazan kütüphane</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz (Apache 2.0). Not: ASP.NET otomatik entegrasyon paketi artık aktif geliştirilmiyor, kuralları elle çağırman önerilir</td><td><a href="https://docs.fluentvalidation.net/">docs.fluentvalidation.net</a></td></tr>
+              <tr><td><strong>minimal API validation</strong></td><td>Minimal API'de DataAnnotations doğrulamasını açan yerleşik destek</td><td><span class="tag">ORTA</span> .NET 10 ile geldi; öncesinde elle veya endpoint filter ile yapılıyordu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>nullable reference types ve binding</strong></td><td>Nullable olmayan referans tipin zorunlu sayılması</td><td><span class="tag">ORTA</span> Sürpriz 400 hatalarının sebebi</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>file upload / IFormFile</strong></td><td>Çok parçalı form ile dosya alma</td><td><span class="tag">ORTA</span> Boyut limiti ve dosya tipi doğrulaması unutulmasın</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>System.Text.Json</strong></td><td>Yerleşik JSON serileştirici; varsayılan camelCase üretir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Newtonsoft.Json (Json.NET)</strong></td><td>Eski standart serileştirici; hâlâ bazı özelliklerde daha esnek</td><td><span class="tag">ORTA</span> Ücretsiz (MIT). Yeni projede System.Text.Json tercih et, gerekirse geçiş paketi ekle</td><td><a href="https://www.newtonsoft.com/json/help/html/Introduction.htm">newtonsoft.com</a></td></tr>
+              <tr><td><strong>JsonSerializerOptions</strong></td><td>İsimlendirme, null davranışı, enum dönüşümü, döngü işleme ayarları</td><td><span class="tag tag--ok">TEMEL</span> <code>ReferenceHandler.IgnoreCycles</code> ile döngüsel referans hatası çözülür</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/configure-options">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JSON source generator</strong></td><td>Serileştirmeyi reflection yerine derleme anında üretme; AOT ve performans için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>content negotiation</strong></td><td>İstemcinin <code>Accept</code> başlığına göre yanıt biçimini seçme</td><td><span class="tag">ORTA</span> Minimal API'de yoktur; her zaman JSON döner</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>output / input formatter</strong></td><td>XML, CSV gibi ek biçimleri destekleme mekanizması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/custom-formatters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[Consumes] / [Produces]</strong></td><td>Endpoint'in kabul ettiği ve ürettiği içerik tipini bildirme</td><td><span class="tag">ORTA</span> OpenAPI dokümanını doğru üretmek için gerekir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ETag / If-None-Match</strong></td><td>Değişmemiş kaynağa 304 dönerek bant genişliği koruma</td><td><span class="tag">ORTA</span> Eş zamanlılık denetimi (optimistic concurrency) için de kullanılır</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>pagination / filtering / sorting</strong></td><td>Liste uç noktalarında sayfalama, filtre ve sıralama sözleşmesi</td><td><span class="tag tag--ok">TEMEL</span> "Tüm kayıtları dönen endpoint" mülakatta kırmızı bayraktır</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>API versioning</strong></td><td>URL, query, header veya media type ile sürüm ayrımı</td><td><span class="tag">ORTA</span> <code>Asp.Versioning</code> paketleri ücretsiz; eski adı <code>Microsoft.AspNetCore.Mvc.Versioning</code></td><td><a href="https://github.com/dotnet/aspnet-api-versioning">github.com/dotnet/aspnet-api-versioning</a></td></tr>
+              <tr><td><strong>deprecation / Sunset başlığı</strong></td><td>Eski sürümün ne zaman kapanacağını istemciye bildirme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://datatracker.ietf.org/doc/html/rfc8594">datatracker.ietf.org &mdash; RFC 8594</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="openapi"><span class="h-num">§ 10</span>OpenAPI ve API dokümantasyonu</h2>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu alan .NET 9 ile değişti. Yeni şablonlarda Swashbuckle kaldırıldı, yerine
+          <code>Microsoft.AspNetCore.OpenApi</code> paketiyle gelen <strong>yerleşik OpenAPI üretimi</strong> var.
+          Yerleşik olan sadece JSON dokümanı üretir; ekranda gördüğün arayüzü ayrıca eklersin (Swagger UI veya
+          Scalar). "Swagger" derken çoğu kişi arayüzü kastediyor, oysa Swagger bir araç ailesi, OpenAPI ise
+          belirtimin (specification) adı. Aramada bu ikisini ayır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doküman üretimi ve arayüz</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>OpenAPI Specification</strong></td><td>HTTP API'sini makine okur biçimde tarif eden standart (eski adı Swagger Spec)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://spec.openapis.org/oas/latest.html">spec.openapis.org</a></td></tr>
+              <tr><td><strong>Microsoft.AspNetCore.OpenApi</strong></td><td>.NET'in yerleşik OpenAPI doküman üreticisi (<code>AddOpenApi</code> / <code>MapOpenApi</code>)</td><td><span class="tag tag--ok">TEMEL</span> .NET 9+ şablonlarının varsayılanı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Swashbuckle.AspNetCore</strong></td><td>Yıllarca standart olan doküman üreticisi + Swagger UI paketi</td><td><span class="tag">ORTA</span> Ücretsiz (MIT). Mevcut projelerin ezici çoğunluğunda bu var</td><td><a href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore">github.com/domaindrivendev</a></td></tr>
+              <tr><td><strong>NSwag</strong></td><td>Alternatif üretici; ayrıca C#/TypeScript istemci kodu üretir</td><td><span class="tag">ORTA</span> Ücretsiz (MIT). İstemci kodu üretimi asıl gücü</td><td><a href="https://github.com/RicoSuter/NSwag">github.com/RicoSuter/NSwag</a></td></tr>
+              <tr><td><strong>Swagger UI</strong></td><td>OpenAPI dokümanını tarayıcıda gezilebilir arayüze çeviren araç</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Doküman üretimiyle karıştırma; bu sadece görüntüleyici</td><td><a href="https://swagger.io/tools/swagger-ui/">swagger.io</a></td></tr>
+              <tr><td><strong>Scalar</strong></td><td>Modern OpenAPI arayüzü; .NET 9+ örneklerinde Swagger UI yerine sık öneriliyor</td><td><span class="tag">ORTA</span> Açık kaynak sürümü ücretsiz, barındırılan platformu ücretli</td><td><a href="https://scalar.com/">scalar.com</a></td></tr>
+              <tr><td><strong>ReDoc</strong></td><td>Okuma odaklı, üç sütunlu alternatif OpenAPI arayüzü</td><td><span class="tag tag--info">İLERİ</span> Açık kaynak sürümü ücretsiz</td><td><a href="https://github.com/Redocly/redoc">github.com/Redocly/redoc</a></td></tr>
+              <tr><td><strong>document transformer / schema transformer</strong></td><td>Üretilen OpenAPI dokümanını kodla değiştirme noktaları</td><td><span class="tag tag--info">İLERİ</span> Yerleşik OpenAPI'de Swashbuckle filter'larının karşılığı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/customize-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>XML doküman yorumları</strong></td><td><code>///</code> yorumlarının OpenAPI açıklamalarına dönüşmesi</td><td><span class="tag">ORTA</span> csproj'da <code>GenerateDocumentationFile</code> açılmalı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>[ProducesResponseType]</strong></td><td>Hangi durum kodunda hangi gövdenin döneceğini bildirme</td><td><span class="tag tag--ok">TEMEL</span> Dokümanın işe yarar olması için şart</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WithOpenApi / WithSummary / WithName</strong></td><td>Minimal API endpoint'lerini doküman için etiketleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OpenAPI'den istemci üretme</strong></td><td>Dokümandan otomatik C#/TypeScript istemcisi çıkarma</td><td><span class="tag">ORTA</span> NSwag, Kiota veya <code>dotnet openapi</code> ile; <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> tarafında çalışan ekibe faydası büyük</td><td><a href="https://learn.microsoft.com/en-us/openapi/kiota/overview">learn.microsoft.com &mdash; Kiota</a></td></tr>
+              <tr><td><strong>API açıklaması ve örnekler</strong></td><td>Örnek istek/yanıt gövdeleri ekleyerek dokümanı kullanılır kılma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/customize-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Swagger UI'yi production'da kapatma</strong></td><td>Dokümanı herkese açık bırakmanın bilgi ifşası riski</td><td><span class="tag">ORTA</span> Ya kapat ya yetkilendir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/aspnetcore-openapi">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>.http dosyaları</strong></td><td>Visual Studio ve VS Code'da istek deneme dosyaları</td><td><span class="tag">ORTA</span> Postman kurmadan hızlı deneme; yeni şablonlarda geliyor</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/http-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Postman / Bruno / Insomnia</strong></td><td>API deneme istemcileri</td><td><span class="tag">ORTA</span> Postman ücretsiz katmanlı, Bruno açık kaynak ve yerel dosya tabanlı</td><td><a href="https://learning.postman.com/docs/">learning.postman.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="filters"><span class="h-num">§ 11</span>Filters ve endpoint filter</h2>
+
+        <p>Filter'lar middleware'den farklıdır: middleware tüm pipeline'ı görür, filter sadece MVC/API
+        çalıştırma hattının içinde ve model binding sonrası devreye girer. Bu ayrımı sorabilirler.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Filter türleri ve çalışma sırası</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>filter pipeline</strong></td><td>Authorization &rarr; Resource &rarr; Action &rarr; Exception &rarr; Result sırası</td><td><span class="tag tag--ok">TEMEL</span> Sırayı ezberle; mülakatta çizdirirler</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>authorization filter</strong></td><td>En önce çalışan; yetki yoksa hattı hemen keser</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>resource filter</strong></td><td>Model binding'den önce ve sonuç yazımından sonra; önbellekleme için ideal</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>action filter</strong></td><td>Action metodundan hemen önce/sonra; en sık yazılan filter türü</td><td><span class="tag tag--ok">TEMEL</span> Loglama, doğrulama, ölçüm için</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>exception filter</strong></td><td>Action içinde çıkan hatayı yakalama</td><td><span class="tag">ORTA</span> Merkezî hata yönetimi için <code>IExceptionHandler</code> artık daha uygun</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>result filter</strong></td><td>Sonuç çalıştırılmadan önce/sonra; yanıtı sarmalamak için</td><td><span class="tag">ORTA</span> Ortak zarf (envelope) formatı üretmenin yeri</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IAsyncActionFilter</strong></td><td>Filter'ın asenkron sürümü; senkron olanla ikisini birden uygulama</td><td><span class="tag tag--ok">TEMEL</span> Async olanı tercih et</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>filter scope</strong></td><td>Global, controller ve action düzeyinde kayıt; çalışma sırasını etkiler</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IOrderedFilter / Order</strong></td><td>Aynı kapsamdaki filter'ların sırasını elle belirleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ServiceFilter / TypeFilter</strong></td><td>Filter'ın DI'den bağımlılık alabilmesini sağlayan öznitelikler</td><td><span class="tag">ORTA</span> Öznitelikler kurucu parametresi alamadığı için gerekir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IFilterFactory</strong></td><td>Filter örneğini kendi üreten fabrika arayüzü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>endpoint filter</strong></td><td>Minimal API'nin filter karşılığı (<code>AddEndpointFilter</code>)</td><td><span class="tag">ORTA</span> MVC filter'ları minimal API'de çalışmaz; karıştırma</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IEndpointFilter</strong></td><td>Endpoint filter'ı sınıf olarak yazma arayüzü</td><td><span class="tag">ORTA</span> Grup düzeyinde de uygulanabilir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>filter vs middleware</strong></td><td>Middleware tüm istekleri görür, filter sadece eşleşen action'ı ve model binding sonrasını</td><td><span class="tag tag--ok">TEMEL</span> Klasik mülakat sorusu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cross-cutting concern</strong></td><td>Loglama, yetki, önbellek gibi her yerde tekrarlanan endişeler</td><td><span class="tag tag--ok">TEMEL</span> Mediator pipeline behavior alternatifi <a href="../04-mimari-ve-desenler/index.html">04</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kimlik-ve-yetki"><span class="h-num">§ 12</span>Kimlik doğrulama ve yetkilendirme</h2>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p><strong>JWT Authentication</strong> ve <strong>Policy-Based Authorization</strong> ilanlarda
+          sık geçer. Bu ikisi bu sayfadaki en yüksek soru olasılığına sahip başlıklar. En sık gelen sorular:
+          "JWT'nin içinde ne var, sunucu neden veritabanına gitmeden doğrulayabiliyor?", "Token çalınırsa ne
+          olur?", "Refresh token neden var, nerede saklanır?", "Role-based ile policy-based farkı nedir?".
+          Bunlara ezber değil, kendi kurduğun bir örnek üzerinden cevap ver.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kimlik doğrulama (authentication)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>authentication vs authorization</strong></td><td>Kim olduğun ile ne yapabileceğin ayrımı</td><td><span class="tag tag--ok">TEMEL</span> Türkçe karşılıkları da bilinsin: kimlik doğrulama / yetkilendirme</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>authentication scheme</strong></td><td>Bearer, Cookie, Negotiate gibi adlandırılmış doğrulama yöntemleri</td><td><span class="tag tag--ok">TEMEL</span> Birden çok şema aynı anda kayıtlı olabilir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ClaimsPrincipal / ClaimsIdentity / Claim</strong></td><td>Doğrulanmış kullanıcının kimlik bilgilerini taşıyan üçlü yapı</td><td><span class="tag tag--ok">TEMEL</span> <code>HttpContext.User</code> bir ClaimsPrincipal'dır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.claims.claimsprincipal">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JWT (JSON Web Token)</strong></td><td>Header.Payload.Signature yapısında, imzalı, kendi kendini taşıyan token</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span> İmzalıdır, şifreli değildir; payload herkesçe okunabilir</td><td><a href="https://datatracker.ietf.org/doc/html/rfc7519">datatracker.ietf.org &mdash; RFC 7519</a></td></tr>
+              <tr><td><strong>JWT Bearer authentication</strong></td><td><code>Authorization: Bearer &lt;token&gt;</code> başlığıyla doğrulama</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TokenValidationParameters</strong></td><td>Issuer, audience, lifetime ve imza doğrulama ayarları</td><td><span class="tag tag--ok">TEMEL</span> Bunları kapatmak (ValidateIssuer=false) en sık güvenlik hatası</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>signing key: HMAC vs RSA</strong></td><td>Simetrik tek gizli anahtar ile asimetrik özel/açık anahtar çifti</td><td><span class="tag">ORTA</span> Asimetrik şifrelemeyi (RSA) biliyorsan kavram tanıdık gelir; bilmiyorsan önce açık/özel anahtar ve dijital imza kavramını oku. Seçim: <strong>token'ı aynı servis üretip doğruluyorsa</strong> &rarr; HMAC (tek gizli anahtar) yeterli; <strong>farklı servisler doğruluyorsa veya kimlik sağlayıcı kullanılıyorsa</strong> &rarr; asimetrik (RSA/ECDSA: özel anahtarla imzala, açık anahtarla birden çok servis doğrular).</td><td><a href="https://datatracker.ietf.org/doc/html/rfc7518">datatracker.ietf.org &mdash; RFC 7518</a></td></tr>
+              <tr><td><strong>claim türleri (sub, iss, aud, exp, nbf, jti)</strong></td><td>JWT'nin standart alanları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://datatracker.ietf.org/doc/html/rfc7519">datatracker.ietf.org</a></td></tr>
+              <tr><td><strong>access token vs refresh token</strong></td><td>Kısa ömürlü erişim jetonu ile onu yenileyen uzun ömürlü jeton</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Refresh token'ın veritabanında saklanması ve iptal edilebilmesi gerekir</td><td><a href="https://datatracker.ietf.org/doc/html/rfc6749">datatracker.ietf.org &mdash; RFC 6749</a></td></tr>
+              <tr><td><strong>refresh token rotation</strong></td><td>Her yenilemede eski refresh token'ı geçersiz kılma</td><td><span class="tag">ORTA</span> Çalınmayı tespit etmenin standart yolu</td><td><a href="https://datatracker.ietf.org/doc/html/rfc9700">datatracker.ietf.org</a></td></tr>
+              <tr><td><strong>token revocation / blacklist</strong></td><td>JWT stateless olduğu için iptalin ayrı bir liste gerektirmesi</td><td><span class="tag">ORTA</span> "Token'ı nasıl iptal edersin" sorusunun cevabı; Redis burada devreye girer</td><td><a href="https://datatracker.ietf.org/doc/html/rfc7009">datatracker.ietf.org &mdash; RFC 7009</a></td></tr>
+              <tr><td><strong>cookie authentication</strong></td><td>Sunucunun şifreli çerezle oturum taşıması</td><td><span class="tag tag--ok">TEMEL</span> İstemci türüne göre: <strong>aynı siteden sunulan web uygulaması</strong> (MVC, Razor, Blazor Server, aynı origin SPA) &rarr; cookie (HttpOnly, Secure, SameSite) + antiforgery; JWT'yi tarayıcıda saklamaktan daha güvenli. <strong>Farklı origin'deki SPA</strong> &rarr; BFF (backend-for-frontend) deseniyle cookie veya bellekte tutulan kısa ömürlü access token. <strong>Mobil / masaüstü native istemci</strong> &rarr; OAuth/OIDC + PKCE ile token. <strong>Sunucudan sunucuya</strong> &rarr; client credentials ile token veya API key.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SameSite / HttpOnly / Secure</strong></td><td>Çerez güvenlik bayrakları</td><td><span class="tag">ORTA</span> JWT'yi localStorage'da tutmanın XSS riski burada tartışılır</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>ASP.NET Core Identity</strong></td><td>Kullanıcı, parola, rol, e-posta onayı, 2FA için hazır üyelik altyapısı</td><td><span class="tag tag--ok">TEMEL</span> Ücretsiz. Kendi kullanıcı tablonu sıfırdan yazmadan önce bunu tanı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Identity API endpoints</strong></td><td><code>MapIdentityApi</code> ile hazır kayıt/giriş uç noktaları</td><td><span class="tag">ORTA</span> .NET 8 ile geldi; hızlı prototip için</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>password hashing</strong></td><td>Parolanın geri döndürülemez biçimde saklanması (PBKDF2, bcrypt, Argon2)</td><td><span class="tag tag--ok">TEMEL</span> MD5/SHA1 ile parola saklamak doğrudan eleme sebebidir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/consumer-apis/password-hashing">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OAuth 2.0</strong></td><td>Yetki devri (delegation) çerçevesi; kimlik doğrulama protokolü değildir</td><td><span class="tag">ORTA</span> "OAuth ile giriş yaptırıyoruz" cümlesi teknik olarak OIDC'yi anlatır</td><td><a href="https://datatracker.ietf.org/doc/html/rfc6749">datatracker.ietf.org &mdash; RFC 6749</a></td></tr>
+              <tr><td><strong>OpenID Connect (OIDC)</strong></td><td>OAuth 2.0 üstüne kimlik katmanı ekleyen protokol; id_token buradan gelir</td><td><span class="tag">ORTA</span></td><td><a href="https://openid.net/specs/openid-connect-core-1_0.html">openid.net</a></td></tr>
+              <tr><td><strong>authorization code + PKCE</strong></td><td>Bugün önerilen standart akış; SPA ve mobil için de bu</td><td><span class="tag">ORTA</span> Implicit flow artık önerilmiyor</td><td><a href="https://datatracker.ietf.org/doc/html/rfc7636">datatracker.ietf.org &mdash; RFC 7636</a></td></tr>
+              <tr><td><strong>client credentials flow</strong></td><td>Kullanıcı olmadan servis-servis kimlik doğrulama</td><td><span class="tag">ORTA</span> Mikroservisler arası çağrıda kullanılır</td><td><a href="https://datatracker.ietf.org/doc/html/rfc6749">datatracker.ietf.org</a></td></tr>
+              <tr><td><strong>Duende IdentityServer</strong></td><td>.NET için olgun OIDC/OAuth sunucusu</td><td><span class="tag tag--warn">ÜCRETLİ</span> Kullanıma göre: <strong>geliştirme, test, eğitim</strong> &rarr; ücretsiz. <strong>Yıllık brüt geliri belirli eşiğin (1 milyon USD) altındaki şirket</strong> &rarr; Community Edition ücretsiz; <strong>eşiğin üstü</strong> &rarr; ticari lisans (TEYİT: <a href="https://duendesoftware.com/products/communityedition">duendesoftware.com Community Edition</a>; eşik ve koşullar değişebilir). Lisans maliyetinden kaçınmak isteyen &rarr; OpenIddict (Apache 2.0) veya ayrı sunucu olarak Keycloak. Yönetilen hizmet tercih eden &rarr; Microsoft Entra ID, Auth0.</td><td><a href="https://docs.duendesoftware.com/identityserver/">docs.duendesoftware.com</a></td></tr>
+              <tr><td><strong>IdentityServer4</strong></td><td>Duende'nin ücretsiz atası</td><td><span class="tag tag--warn">ESKİMİŞ</span> Desteği bitti; yeni projede kullanma, eski projede karşına çıkar</td><td><a href="https://github.com/IdentityServer/IdentityServer4">github.com/IdentityServer</a></td></tr>
+              <tr><td><strong>OpenIddict</strong></td><td>Ücretsiz ve açık kaynak OIDC/OAuth sunucu kütüphanesi</td><td><span class="tag">ORTA</span> Duende'nin lisans maliyetine en yaygın alternatif</td><td><a href="https://documentation.openiddict.com/">documentation.openiddict.com</a></td></tr>
+              <tr><td><strong>Keycloak</strong></td><td>Java tabanlı, kendi sunucuna kurulan açık kaynak kimlik sunucusu</td><td><span class="tag">ORTA</span> Ücretsiz. .NET uygulaman ona OIDC istemcisi olarak bağlanır</td><td><a href="https://www.keycloak.org/documentation">keycloak.org</a></td></tr>
+              <tr><td><strong>Microsoft Entra ID</strong></td><td>Eski adı Azure AD olan bulut kimlik servisi</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz katmanı var, gelişmiş özellikler ücretli. Türkiye'de kurumsal işlerde sık</td><td><a href="https://learn.microsoft.com/en-us/entra/identity-platform/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Auth0 / Okta</strong></td><td>Barındırılan kimlik servisleri (identity as a service)</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> Ücretsiz başlangıç katmanı var</td><td><a href="https://auth0.com/docs">auth0.com/docs</a></td></tr>
+              <tr><td><strong>Windows / Negotiate authentication</strong></td><td>Kurumsal ağda Active Directory ile şeffaf giriş</td><td><span class="tag">ORTA</span> Türkiye'de intranet projelerinde çok yaygın</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/windowsauth">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>API key authentication</strong></td><td>Basit paylaşımlı anahtarla erişim; standart bir şeması yoktur, elle yazılır</td><td><span class="tag">ORTA</span> Servis-servis basit senaryolarda yaygın</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yetkilendirme (authorization)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>[Authorize] / [AllowAnonymous]</strong></td><td>Uç noktayı kapatma ve istisna tanıma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/simple">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>role-based authorization</strong></td><td><code>[Authorize(Roles = "Admin")]</code> ile rol denetimi</td><td><span class="tag tag--ok">TEMEL</span> Basit ama katı; rol sayısı artınca yönetilemez olur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/roles">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>claims-based authorization</strong></td><td>Rol yerine claim değerine bakma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/claims">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>policy-based authorization</strong></td><td>Kuralı adlandırılmış politikaya çevirip <code>[Authorize(Policy = "...")]</code> ile kullanma</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IAuthorizationRequirement</strong></td><td>Politikanın karşılanması gereken şartını temsil eden işaret arayüzü</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AuthorizationHandler&lt;T&gt;</strong></td><td>Şartın gerçekten sağlanıp sağlanmadığını değerlendiren sınıf</td><td><span class="tag">ORTA</span> Politika + requirement + handler üçlüsünü bir kez elle yaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>resource-based authorization</strong></td><td>"Bu kaydın sahibi bu kullanıcı mı" gibi veriye bağlı karar</td><td><span class="tag">ORTA</span> Öznitelikle yapılamaz; <code>IAuthorizationService</code> ile kod içinde çağrılır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IAuthorizationService</strong></td><td>Yetki kararını kod içinden sorma servisi</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/resourcebased">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>fallback / default policy</strong></td><td>Hiçbir öznitelik yoksa uygulanacak varsayılan kural</td><td><span class="tag">ORTA</span> "Varsayılan kapalı" yaklaşımını kurmanın yolu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RequireAuthorization()</strong></td><td>Minimal API endpoint veya grubuna yetki şartı ekleme</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/simple">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>401 vs 403</strong></td><td>Kimliğin yok (Unauthorized) ile kimliğin var ama yetkin yok (Forbidden)</td><td><span class="tag tag--ok">TEMEL</span> İsimlendirme yanıltıcıdır; 401 aslında "unauthenticated"</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>permission / ABAC yaklaşımı</strong></td><td>Rol yerine ince taneli izin veya öznitelik tabanlı erişim modeli</td><td><span class="tag tag--info">İLERİ</span> Aramada "attribute-based access control" yaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>OWASP Top 10</strong></td><td>En yaygın web güvenlik açıkları listesi</td><td><span class="tag tag--ok">TEMEL</span> Broken access control yıllardır bir numara; okumak zorunlu</td><td><a href="https://owasp.org/www-project-top-ten/">owasp.org</a></td></tr>
+              <tr><td><strong>security headers</strong></td><td>CSP, X-Content-Type-Options, Referrer-Policy gibi koruyucu başlıklar</td><td><span class="tag">ORTA</span> <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> ve <a href="../../HTML-CSS/index.html">HTML / CSS</a> tarafıyla ortak konu</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">developer.mozilla.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="rate-limit-ve-cache"><span class="h-num">§ 13</span>Rate limiting ve HTTP katmanı önbellekleme</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rate limiting</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>rate limiting</strong></td><td>Belirli sürede kabul edilen istek sayısını sınırlama</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> .NET 7'den beri yerleşik; ayrı paket gerekmiyor</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>fixed window limiter</strong></td><td>Sabit zaman penceresinde sayaç; pencere sınırında ani yığılma sorunu var</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>sliding window limiter</strong></td><td>Pencereyi dilimleyerek kaydıran, daha adil sayaç</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>token bucket limiter</strong></td><td>Jeton biriktirip harcayan model; kısa süreli patlamalara (burst) izin verir</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>concurrency limiter</strong></td><td>Hız değil, aynı anda çalışan istek sayısını sınırlar</td><td><span class="tag">ORTA</span> Diğer üçünden kavramsal olarak farklıdır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>partition key</strong></td><td>Limitin neye göre ayrılacağı: IP, kullanıcı, API anahtarı, kiracı</td><td><span class="tag tag--ok">TEMEL</span> Proxy arkasındaysan IP için ForwardedHeaders şart</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>queue limit / OnRejected</strong></td><td>Sıraya alma ve reddedilen isteğe verilecek yanıtı özelleştirme</td><td><span class="tag">ORTA</span> 429 ile birlikte <code>Retry-After</code> göndermek doğru davranış</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>429 Too Many Requests</strong></td><td>Limit aşıldığında dönen durum kodu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>dağıtık rate limiting</strong></td><td>Yerleşik limiter süreç içidir; çok sunucuda ortak sayaç gerekir</td><td><span class="tag tag--info">İLERİ</span> Redis veya API gateway ile çözülür; <a href="../03-veri-erisimi/index.html">03</a> sayfasıyla birlikte oku</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AspNetCoreRateLimit</strong></td><td>Yerleşik limiter gelmeden önceki yaygın topluluk paketi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Ücretsiz. Eski projelerde karşına çıkar</td><td><a href="https://github.com/stefanprodan/AspNetCoreRateLimit">github.com/stefanprodan</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Önbellekleme katmanları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>response caching</strong></td><td>HTTP <code>Cache-Control</code> başlıklarına dayalı, istemci ve proxy'yi de ilgilendiren önbellek</td><td><span class="tag">ORTA</span> Yetkili (authenticated) isteklerde çalışmaz</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/response">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>output caching</strong></td><td>Sunucu tarafında yanıtın tamamını saklama; başlıklardan bağımsız kontrol edilir</td><td><span class="tag">ORTA</span> .NET 7 ile geldi; response caching'in modern alternatifi</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache tag / eviction</strong></td><td>Etiketle gruplayıp veri değişince topluca geçersiz kılma</td><td><span class="tag">ORTA</span> Output caching'in en kullanışlı yanı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>VaryByQuery / VaryByHeader</strong></td><td>Önbellek anahtarının neye göre farklılaşacağı</td><td><span class="tag">ORTA</span> Yanlış kurgu bir kullanıcının verisini diğerine gösterir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IMemoryCache</strong></td><td>Süreç içi bellek önbelleği</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ayrıntısı <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/memory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IDistributedCache</strong></td><td>Redis/SQL Server gibi dış önbellek için ortak soyutlama</td><td><span class="tag">ORTA</span> Sadece byte dizisi tutar; serileştirme sana ait</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>HybridCache</strong></td><td>Bellek + dağıtık önbelleği tek API'de birleştiren, stampede korumalı yeni katman</td><td><span class="tag">ORTA</span> .NET 9 ile geldi; yeni projede IDistributedCache yerine bunu değerlendir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache stampede</strong></td><td>Önbellek boşalınca aynı anda yüzlerce isteğin veritabanına gitmesi</td><td><span class="tag">ORTA</span> HybridCache bunu yerleşik olarak engeller</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache-aside</strong></td><td>Önce önbelleğe bak, yoksa kaynaktan al ve yaz deseni</td><td><span class="tag tag--ok">TEMEL</span> En yaygın önbellek deseni</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>cache invalidation</strong></td><td>Veri değişince önbelleği güncel tutma sorunu</td><td><span class="tag tag--ok">TEMEL</span> Mülakatta "cache'i ne zaman temizlersin" diye sorulur</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/caching">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CDN / edge cache</strong></td><td>İçeriği kullanıcıya yakın noktada saklama</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> Cloudflare'ın ücretsiz katmanı var</td><td><a href="https://learn.microsoft.com/en-us/azure/cdn/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Cache-Control / max-age / no-store</strong></td><td>Önbellek davranışını belirleyen HTTP başlıkları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">developer.mozilla.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="http-istemcisi"><span class="h-num">§ 14</span>HTTP istemcisi ve dayanıklılık</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p><code>new HttpClient()</code> yazıp <code>using</code> ile bırakmak, .NET'in en bilinen tuzağıdır:
+          soket tükenmesine (socket exhaustion) yol açar. Tersine ayarsız tek bir statik HttpClient tutmak da DNS
+          değişikliklerini kaçırır. Doğru cevap uygulama türüne göre değişir (TEYİT: learn.microsoft.com "HttpClient guidelines for .NET"):</p>
+          <ul>
+            <li><strong>DI kullanan ASP.NET Core / worker uygulaması</strong> &rarr; <strong>IHttpClientFactory</strong> (typed veya named client) önerilen yoldur.</li>
+            <li><strong>DI olmayan konsol, masaüstü uygulaması veya kütüphane</strong> &rarr; uzun ömürlü (static/singleton) HttpClient + <code>SocketsHttpHandler { PooledConnectionLifetime = ör. 2 dakika }</code> da resmî olarak önerilen yoldur; DNS sorununu çözer.</li>
+            <li><strong>.NET Framework</strong> &rarr; SocketsHttpHandler yok; <code>ServicePointManager.ConnectionLeaseTimeout</code> veya Microsoft.Extensions.Http paketiyle IHttpClientFactory.</li>
+          </ul>
+          <p>Bu soru mülakatlarda çok sık sorulur.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Giden HTTP çağrıları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HttpClient</strong></td><td>Giden HTTP isteklerini yapan sınıf</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>socket exhaustion</strong></td><td>Çok sayıda HttpClient örneğinin TIME_WAIT'te soket bırakması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IHttpClientFactory</strong></td><td>Handler havuzunu yöneten, ömür ve DNS sorununu çözen fabrika</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>named client</strong></td><td>Ada göre yapılandırılmış istemci (<code>AddHttpClient("github", ...)</code>)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>typed client</strong></td><td>Kendi servis sınıfına HttpClient enjekte edilen, tip güvenli kullanım</td><td><span class="tag tag--ok">TEMEL</span> Tercih edilen yaklaşım budur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DelegatingHandler</strong></td><td>Giden isteklere ortak davranış ekleyen middleware benzeri halka</td><td><span class="tag">ORTA</span> Token ekleme, log, correlation id için</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SocketsHttpHandler / PooledConnectionLifetime</strong></td><td>Bağlantı havuzu ve DNS yenileme ayarları</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient-guidelines">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Microsoft.Extensions.Http.Resilience</strong></td><td>Retry, circuit breaker, timeout, hedging'i tek satırda ekleyen resmî paket</td><td><span class="tag">ORTA</span> Ücretsiz. İçinde Polly çalışır. Bağımlılık türüne göre: <strong>giden HttpClient çağrıları</strong> &rarr; bu paket (<code>AddStandardResilienceHandler</code>). <strong>HttpClient dışı bağımlılıklar</strong> (veritabanı, kuyruk, gRPC, dosya) &rarr; Polly v8 <code>ResiliencePipeline</code> doğrudan veya Microsoft.Extensions.Resilience. <strong>Polly v7 kodlu mevcut proje</strong> &rarr; API değişti, Polly'nin v8 geçiş rehberine bak. <strong>EF Core geçici veritabanı hataları</strong> &rarr; <code>EnableRetryOnFailure</code> (<a href="../03-veri-erisimi/index.html">03</a>).</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Polly</strong></td><td>Dayanıklılık desenleri kütüphanesi</td><td><span class="tag">ORTA</span> Ücretsiz (BSD). v8'de API tamamen değişti; eski örnekler uymaz</td><td><a href="https://www.pollydocs.org/">pollydocs.org</a></td></tr>
+              <tr><td><strong>retry / exponential backoff / jitter</strong></td><td>Hatada tekrar deneme, artan bekleme ve rastgele sapma ekleme</td><td><span class="tag">ORTA</span> Jitter olmadan tüm istemciler aynı anda tekrar dener</td><td><a href="https://www.pollydocs.org/strategies/retry.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>circuit breaker</strong></td><td>Sürekli hata veren bağımlılığa bir süre hiç gitmeme</td><td><span class="tag">ORTA</span> Aramada "circuit breaker pattern" yaz; elektrik sigortası benzetmesi</td><td><a href="https://www.pollydocs.org/strategies/circuit-breaker.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>timeout</strong></td><td>Cevap gelmezse belirli sürede vazgeçme</td><td><span class="tag tag--ok">TEMEL</span> Timeout'suz çağrı, tüm sistemi kilitleyen klasik arıza</td><td><a href="https://www.pollydocs.org/strategies/timeout.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>bulkhead / rate limiter stratejisi</strong></td><td>Kaynak havuzunu bölerek bir bağımlılığın tüm iş parçacıklarını yutmasını engelleme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.pollydocs.org/strategies/rate-limiter.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>fallback</strong></td><td>Hata durumunda varsayılan/bayat veri döndürme</td><td><span class="tag">ORTA</span></td><td><a href="https://www.pollydocs.org/strategies/fallback.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>hedging</strong></td><td>Yavaş kalan isteğe paralel ikinci istek gönderme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.pollydocs.org/strategies/hedging.html">pollydocs.org</a></td></tr>
+              <tr><td><strong>Refit</strong></td><td>Arayüz tanımından otomatik HTTP istemcisi üreten kütüphane</td><td><span class="tag">ORTA</span> Ücretsiz (MIT). Kaynak üreteci ile çalışır, reflection yok</td><td><a href="https://github.com/reactiveui/refit">github.com/reactiveui/refit</a></td></tr>
+              <tr><td><strong>RestSharp</strong></td><td>Uzun süredir var olan HTTP istemci sarmalayıcısı</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz (Apache 2.0). Yeni projede HttpClient + Refit daha yaygın</td><td><a href="https://restsharp.dev/">restsharp.dev</a></td></tr>
+              <tr><td><strong>Flurl</strong></td><td>Akıcı (fluent) URL kurma ve HTTP çağrısı kütüphanesi; test yardımcıları güçlü</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz (MIT)</td><td><a href="https://flurl.dev/">flurl.dev</a></td></tr>
+              <tr><td><strong>Kiota</strong></td><td>OpenAPI dokümanından istemci kodu üreten Microsoft aracı</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz</td><td><a href="https://learn.microsoft.com/en-us/openapi/kiota/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>correlation id / traceparent</strong></td><td>Bir isteği servisler arasında izlenebilir kılan kimlik</td><td><span class="tag">ORTA</span> Dağıtık izleme tarafı <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07</a> sayfasında</td><td><a href="https://www.w3.org/TR/trace-context/">w3.org &mdash; Trace Context</a></td></tr>
+              <tr><td><strong>HttpClient testi</strong></td><td>Sahte handler ile ağa çıkmadan test etme</td><td><span class="tag">ORTA</span> Mock/test double ayrıntısı <a href="../06-test-ve-kalite/index.html">06</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="realtime-ve-protokoller"><span class="h-num">§ 15</span>Real-time ve diğer protokoller</h2>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p><strong>SignalR</strong> ve <strong>gRPC</strong> ilanlarda sık geçer ama günlük işte, özellikle gRPC,
+          az denenir. İkisi de gösterilebilir: SignalR için tarayıcıdan bağlanan basit bir sohbet/bildirim örneği,
+          gRPC için iki konsol projesi arasında bir <code>.proto</code> sözleşmesi yeterli. Her biri bir akşamlık
+          iş, ama "yazdım" diyebilmen mülakatı tamamen değiştirir. İş aramıyorsan ölçüt farklı: gerçek zamanlı bildirim gerekiyorsa SignalR, servisler arası sözleşmeli iletişim gerekiyorsa gRPC; ihtiyaç yoksa bu bölüm bekleyebilir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>SignalR ve gerçek zamanlı iletişim</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SignalR</strong></td><td>Sunucudan istemciye anlık mesaj göndermeyi soyutlayan kütüphane</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz; ASP.NET Core'un parçası</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Hub</strong></td><td>İstemcilerin çağırabildiği sunucu metotlarını barındıran sınıf</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>strongly typed hub</strong></td><td><code>Hub&lt;T&gt;</code> ile istemci metotlarını arayüzle tanımlama</td><td><span class="tag">ORTA</span> Sihirli string'lerden kurtarır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Clients.All / Caller / Others / User / Group</strong></td><td>Mesajın kime gideceğini seçen hedefleme yolları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>group</strong></td><td>Bağlantıları adlandırılmış kümeye alıp toplu mesaj gönderme</td><td><span class="tag tag--ok">TEMEL</span> Oda, kiracı, kanal mantığı bununla kurulur</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/groups">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>connection id</strong></td><td>Her bağlantıya verilen kimlik; kullanıcı kimliğiyle aynı şey değildir</td><td><span class="tag tag--ok">TEMEL</span> Bir kullanıcının birden çok bağlantısı olabilir</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IUserIdProvider</strong></td><td>Bağlantıyı kullanıcıya eşleyen özelleştirme noktası</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>transport: WebSockets / SSE / long polling</strong></td><td>SignalR'ın sırayla denediği taşıma yöntemleri</td><td><span class="tag tag--ok">TEMEL</span> WebSocket kurulamayınca sessizce geriye düşer</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>backplane</strong></td><td>Çok sunuculu kurulumda mesajların tüm sunuculara dağıtılması</td><td><span class="tag">ORTA</span> Redis backplane en yaygın; <a href="../03-veri-erisimi/index.html">03</a> ve <a href="../05-mesajlasma-ve-dagitik/index.html">05</a> ile bağlantılı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/scale">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>sticky session</strong></td><td>İstemcinin hep aynı sunucuya yönlenmesi gereği</td><td><span class="tag">ORTA</span> WebSocket dışı taşımalarda zorunlu</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/scale">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure SignalR Service</strong></td><td>Ölçeklemeyi devralan yönetilen servis</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span> Sınırlı ücretsiz katmanı var</td><td><a href="https://learn.microsoft.com/en-us/azure/azure-signalr/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MessagePack protokolü</strong></td><td>SignalR mesajlarını JSON yerine ikili biçimde taşıma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/messagepackhubprotocol">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SignalR client (JS / .NET)</strong></td><td>Tarayıcı ve .NET tarafındaki istemci kütüphaneleri</td><td><span class="tag">ORTA</span> JavaScript hiç yazmadıysan bu iyi bir başlangıç alıştırması</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/javascript-client">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WebSocket (ham)</strong></td><td>SignalR olmadan doğrudan çift yönlü soket kullanımı</td><td><span class="tag">ORTA</span> Socket programlamayı biliyorsan kavram tanıdık; bilmiyorsan önce TCP bağlantısı, el sıkışma (HTTP Upgrade) ve tam çift yönlü iletişim kavramlarını <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">MDN WebSockets</a> sayfasından oku. Çoğu uygulamada ham WebSocket yerine SignalR yeterlidir.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/websockets">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Server-Sent Events (SSE)</strong></td><td>Sunucudan istemciye tek yönlü sürekli akış</td><td><span class="tag">ORTA</span> .NET 10'da <code>TypedResults.ServerSentEvents</code> yerleşik geldi</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">developer.mozilla.org</a></td></tr>
+              <tr><td><strong>long polling</strong></td><td>İstemcinin isteği açık tutup cevabı beklemesi</td><td><span class="tag tag--warn">ESKİMİŞ</span> Yalnızca geri düşüş (fallback) olarak anlamlı</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>gRPC ve GraphQL</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>gRPC</strong></td><td>HTTP/2 üzerinde, sözleşme tabanlı, ikili yüksek performanslı RPC çerçevesi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Pratikte az denenir; en riskli satırlardan biri</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Protocol Buffers (protobuf)</strong></td><td>gRPC'nin sözleşme ve serileştirme biçimi</td><td><span class="tag tag--ok">TEMEL</span> gRPC öğreneceksen önce bu</td><td><a href="https://protobuf.dev/">protobuf.dev</a></td></tr>
+              <tr><td><strong>.proto dosyası</strong></td><td>Servis ve mesajların tanımlandığı sözleşme dosyası; kod ondan üretilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>unary call</strong></td><td>Tek istek, tek yanıt; klasik metot çağrısına en yakın biçim</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>server / client / bidirectional streaming</strong></td><td>Tek veya çift taraflı akış türleri</td><td><span class="tag">ORTA</span> gRPC'yi REST'ten ayıran asıl özellik</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/basics">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC-Web</strong></td><td>Tarayıcıların gRPC çağrısı yapabilmesi için ara katman</td><td><span class="tag">ORTA</span> Tarayıcı ham gRPC konuşamaz; bu yüzden vardır</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/browser">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC JSON transcoding</strong></td><td>Aynı servisi hem gRPC hem REST/JSON olarak açma</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC client factory</strong></td><td>gRPC istemcilerini DI ve dayanıklılıkla birlikte kurma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/clientfactory">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC interceptor</strong></td><td>gRPC tarafındaki middleware karşılığı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/interceptors">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC status codes / deadline</strong></td><td>HTTP durum kodlarından farklı hata modeli ve çağrı süresi sınırı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/deadlines-cancellation">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>gRPC vs REST</strong></td><td>Ne zaman hangisi: kaba kural servis-servis dahili trafikte gRPC, dışa açık API'de REST; ayrıntı yandaki dallarda</td><td><span class="tag tag--ok">TEMEL</span> Mülakatta bu karşılaştırma doğrudan sorulur. <strong>Tarayıcıdan doğrudan çağrı</strong> &rarr; REST (veya gRPC-Web + proxy). <strong>Dış partner / herkese açık API</strong> &rarr; REST + OpenAPI (araç desteği geniş). <strong>Dahili servisler, sıkı sözleşme, düşük gecikme</strong> &rarr; gRPC. <strong>Çift yönlü / sunucu akışı</strong> &rarr; gRPC streaming (tarayıcıda SignalR veya SSE). <strong>HTTP/2 desteklemeyen ara katman / proxy</strong> &rarr; REST veya gRPC-Web. <strong>İkisi birden gerekiyorsa</strong> &rarr; gRPC JSON transcoding.</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/grpc/comparison">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>GraphQL</strong></td><td>İstemcinin hangi alanları istediğini kendi belirlediği sorgu dili</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://graphql.org/learn/">graphql.org</a></td></tr>
+              <tr><td><strong>Hot Chocolate</strong></td><td>.NET'in en yaygın GraphQL sunucusu</td><td><span class="tag tag--info">İLERİ</span> Ücretsiz (MIT); yanındaki bazı araçlar ticari</td><td><a href="https://chillicream.com/docs/hotchocolate">chillicream.com</a></td></tr>
+              <tr><td><strong>N+1 sorunu / DataLoader</strong></td><td>GraphQL'de her alan için ayrı sorgu çalışması ve toplu yükleme çözümü</td><td><span class="tag tag--info">İLERİ</span> Aynı sorunun EF Core hâli <a href="../03-veri-erisimi/index.html">03</a> sayfasında</td><td><a href="https://chillicream.com/docs/hotchocolate">chillicream.com</a></td></tr>
+              <tr><td><strong>OData</strong></td><td>Sorgulanabilir REST için standart; <code>$filter</code>, <code>$select</code> sözdizimi</td><td><span class="tag tag--info">İLERİ</span> Türkiye'de kurumsal .NET projelerinde hâlâ karşına çıkar</td><td><a href="https://learn.microsoft.com/en-us/odata/">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WCF / SOAP</strong></td><td>.NET Framework döneminin servis teknolojisi ve XML tabanlı protokol</td><td><span class="tag tag--warn">ESKİMİŞ</span> Kamu ve banka entegrasyonlarında hâlâ SOAP servisi tüketmen gerekebilir; CoreWCF ile istemci yazılır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/porting/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="multi-tenancy"><span class="h-num">§ 16</span>Multi-tenancy</h2>
+
+        <p><strong>Multi-Tenant</strong> özellikle SaaS ilanlarında sık geçer. Bu kelime aratılırken tek başına bulut pazarlama
+        metinleri getirir; <em>"multi-tenant ASP.NET Core"</em> veya <em>"multi-tenancy data isolation"</em> yaz.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Çok kiracılı mimari</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>multi-tenancy</strong></td><td>Tek uygulamanın birden çok müşteriye (kiracı) izole biçimde hizmet vermesi</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> Önce izolasyon stratejilerini öğren</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>tenant resolution</strong></td><td>Gelen isteğin hangi kiracıya ait olduğunu belirleme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/map-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>subdomain stratejisi</strong></td><td><code>musteri1.uygulama.com</code> ile ayırma</td><td><span class="tag">ORTA</span> Wildcard sertifika gerektirir</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/domain-names">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>route / header / claim stratejisi</strong></td><td>Kiracıyı yoldan, özel başlıktan veya token içindeki claim'den okuma</td><td><span class="tag tag--ok">TEMEL</span> İsteğin türüne göre: <strong>kimliği doğrulanmış istek</strong> &rarr; claim'den oku (en güvenlisi; başlık istemciden gelir, tek başına güvenilmez). <strong>Giriş öncesi / anonim istek</strong> (login, kayıt) &rarr; claim yok; subdomain/host veya route ile çözülür. <strong>Bir kullanıcının birden çok kiracıya erişimi varsa</strong> &rarr; kiracı başlık veya route ile seçilir, ama kullanıcının o kiracıya üyeliği sunucuda doğrulanır. <strong>Güvenilir ağda servisler arası çağrı</strong> (mTLS) &rarr; başlık kabul edilebilir.</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/map-requests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>database-per-tenant</strong></td><td>Her kiracıya ayrı veritabanı; en güçlü izolasyon, en yüksek işletme maliyeti</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/storage-data">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>schema-per-tenant</strong></td><td>Aynı veritabanında kiracı başına ayrı şema</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/storage-data">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>shared schema / discriminator</strong></td><td>Tek tabloda <code>TenantId</code> sütunuyla ayırma; en ucuz, en riskli</td><td><span class="tag tag--ok">TEMEL</span> Tek bir eksik WHERE kiracıların verisini birbirine gösterir</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/approaches/storage-data">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>global query filter</strong></td><td>EF Core'da TenantId filtresini her sorguya otomatik ekleme</td><td><span class="tag tag--ok">TEMEL</span> Ayrıntısı <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/ef/core/querying/filters">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>row-level security (RLS)</strong></td><td>İzolasyonu veritabanı motorunda zorunlu kılma</td><td><span class="tag tag--info">İLERİ</span> Uygulama katmanı hata yapsa bile korur</td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/security/row-level-security">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>tenant context / ITenantAccessor</strong></td><td>Aktif kiracı bilgisini istek boyunca taşıyan scoped servis</td><td><span class="tag tag--ok">TEMEL</span> Singleton'a enjekte etme; captive dependency olur (§ 5)</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Finbuckle.MultiTenant</strong></td><td>ASP.NET Core için hazır çok kiracılılık kütüphanesi</td><td><span class="tag">ORTA</span> Ücretsiz (Apache 2.0). Tenant çözümleme, kiracıya özel DI ve EF entegrasyonu getirir</td><td><a href="https://www.finbuckle.com/multitenant">finbuckle.com/multitenant</a></td></tr>
+              <tr><td><strong>kiracıya özel konfigürasyon</strong></td><td>Her kiracı için farklı bağlantı dizesi, tema veya limit</td><td><span class="tag">ORTA</span> Named options (§ 6) burada işe yarar</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/tenancy-models">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>noisy neighbor</strong></td><td>Bir kiracının kaynağı tüketip diğerlerini yavaşlatması</td><td><span class="tag">ORTA</span> Kiracı başına rate limiting (§ 13) çözümün parçasıdır</td><td><a href="https://learn.microsoft.com/en-us/azure/architecture/antipatterns/noisy-neighbor/noisy-neighbor">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>kiracı bazlı migration</strong></td><td>Şema değişikliğini onlarca veritabanına uygulama sorunu</td><td><span class="tag tag--info">İLERİ</span> database-per-tenant seçiminin gizli maliyeti</td><td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="localization"><span class="h-num">§ 17</span>Localization ve globalization</h2>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Risk</p>
+          <p>Türkçe kültürde <code>"I".ToLower()</code> "ı" verir, <code>"i".ToUpper()</code> "İ" verir. Buna literatürde
+          <strong>Turkish I problem</strong> denir. Kod içindeki karşılaştırmalarda kültüre duyarlı metot kullanırsan ne olacağını
+          ülke değil, sürecin kültürü belirler:</p>
+          <ul>
+            <li><strong><code>CurrentCulture</code> tr-TR veya az-* olan sunucu / masaüstü uygulaması</strong> &rarr; bozulur (sunucu yurt dışında olsa da).</li>
+            <li><strong>Sunucu kültürü en-US / Invariant</strong> &rarr; kod testte çalışır görünür; Türkçe kültürlü istemcide veya <code>RequestLocalization</code> ile tr-TR seçilen istekte bozulur.</li>
+            <li><strong><code>InvariantGlobalization</code> açık</strong> &rarr; kültüre duyarlı işlemler Invariant davranır; sorun görünmez ama Türkçe büyük/küçük harf dönüşümü de doğru yapılmaz.</li>
+          </ul>
+          <p>Çözüm herkes için aynı: makine karşılaştırmalarında <code>StringComparison.Ordinal</code> /
+          <code>OrdinalIgnoreCase</code> veya <code>ToUpperInvariant</code>, kullanıcıya gösterilen metinde kullanıcının kültürü.
+          Mülakat açısından: Türkiye'deki mülakatlarda sık sorulur; uluslararası ekiplerde "globalization bug" örneği olarak anlatılır.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kültür, dil ve biçimlendirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>globalization vs localization</strong></td><td>Uygulamayı çok kültüre hazır hâle getirmek ile belirli bir dile çevirmek</td><td><span class="tag tag--ok">TEMEL</span> Kısaltmaları i18n ve l10n</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CultureInfo</strong></td><td>Dil ve bölgeye göre tarih, sayı, para biçimini taşıyan sınıf</td><td><span class="tag tag--ok">TEMEL</span> <code>tr-TR</code> ondalık ayırıcı virgüldür</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CurrentCulture vs CurrentUICulture</strong></td><td>Biçimlendirme kültürü ile kaynak (çeviri) kültürü ayrımı</td><td><span class="tag tag--ok">TEMEL</span> İkisi farklı ayarlanabilir; karıştırılır</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>InvariantCulture</strong></td><td>Kültürden bağımsız, makine okuması için sabit biçim</td><td><span class="tag tag--ok">TEMEL</span> API'ye sayı yazarken ve parse ederken kural olarak bunu kullan</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>model binding culture sorunu</strong></td><td>Ondalık değerin kaynağına ve kültüre göre farklı bağlanması (<code>1,5</code> &rarr; 15 veya 1,5)</td><td><span class="tag tag--ok">TEMEL</span> Sunucu kültürü değişince sessizce bozulan klasik hata. Kaynağa göre: <strong>route ve query string</strong> &rarr; InvariantCulture ile bağlanır (<code>1.5</code> doğru, <code>1,5</code> hatalı). <strong>Form</strong> (x-www-form-urlencoded, multipart) &rarr; CurrentCulture ile bağlanır (tr-TR'de <code>1,5</code>). <strong>JSON gövde</strong> &rarr; System.Text.Json kültürden bağımsız; sayı her zaman noktalı. <strong>Minimal API</strong> &rarr; route/query için TryParse varsayılan olarak InvariantCulture (TEYİT: learn.microsoft.com "Model Binding – globalization behavior").</td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>JSON sayı ve tarih biçimi</strong></td><td>System.Text.Json'ın kültürden bağımsız, ISO 8601 tarih üretmesi</td><td><span class="tag tag--ok">TEMEL</span> API'de tarihleri UTC ve ISO 8601 taşı</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>DateTime vs DateTimeOffset vs DateOnly</strong></td><td>Zaman dilimi bilgisi olan ve olmayan tarih tipleri</td><td><span class="tag tag--ok">TEMEL</span> API sınırında <code>DateTimeOffset</code> veya UTC tercih et; veritabanına yazarken motor farkına dikkat (PostgreSQL <code>timestamptz</code> offset saklamaz, yalnızca UTC). Gelecekteki yerel randevu için yerel saat + IANA saat dilimi kimliği, yalnızca tarih için <code>DateOnly</code>. Ayrıntı <a href="../01-csharp-dili/index.html">01 § 13</a>.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>TimeProvider</strong></td><td>Zamanı soyutlayıp test edilebilir kılan tip</td><td><span class="tag">ORTA</span> .NET 8 ile geldi; <code>DateTime.Now</code> bağımlılığını kırar</td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>time zone / IANA vs Windows id</strong></td><td>"Europe/Istanbul" ile "Turkey Standard Time" ayrımı</td><td><span class="tag">ORTA</span> Sürüme göre: <strong>.NET 6+ ve ICU mevcut</strong> &rarr; iki kimlik de her işletim sisteminde kabul edilir (otomatik dönüşüm). <strong>.NET Framework, .NET Core 3.1 ve öncesi</strong> &rarr; aynı kod Linux ve Windows'ta farklı davranır; TimeZoneConverter paketi gerekir. <strong>Alpine/minimal konteyner (tzdata yok) veya InvariantGlobalization açık</strong> &rarr; imaja tzdata ekle.</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/time-zone-overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RequestLocalizationOptions</strong></td><td>Desteklenen kültürler ve varsayılan kültür tanımı</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>culture provider</strong></td><td>Kültürü query string, çerez veya <code>Accept-Language</code> başlığından okuma</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>IStringLocalizer</strong></td><td>Metinleri kaynak dosyasından çeviren servis</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>.resx kaynak dosyaları</strong></td><td>Çevirilerin tutulduğu XML tabanlı dosyalar</td><td><span class="tag">ORTA</span> JSON tabanlı topluluk alternatifleri de var</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/create-resource-files">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>data annotations localization</strong></td><td>Doğrulama hata mesajlarının çevrilmesi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>ICU vs NLS</strong></td><td>.NET 5+ kültür verisini ICU'dan alır; Windows'un eski NLS davranışından farklıdır</td><td><span class="tag tag--info">İLERİ</span> String sıralaması sürüm yükseltmesinde değişebilir</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/globalization-icu">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>InvariantGlobalization</strong></td><td>Container imajını küçültmek için kültür verisini tamamen kapatma</td><td><span class="tag">ORTA</span> Açıkken Türkçe sıralama ve biçimlendirme bozulur; farkında ol</td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>string karşılaştırma (Ordinal vs Culture)</strong></td><td>Bayt bazlı ile kültüre duyarlı karşılaştırma farkı</td><td><span class="tag tag--ok">TEMEL</span> Turkish I probleminin çözümü burada; <a href="../01-csharp-dili/index.html">01</a> sayfasıyla ortak konu</td><td><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Türkçe karakter ve veritabanı collation</strong></td><td>SQL Server'da <code>Turkish_CI_AS</code> gibi sıralama kuralları</td><td><span class="tag">ORTA</span> Veritabanı tarafı <a href="../03-veri-erisimi/index.html">03</a> sayfasında</td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/collations/collation-and-unicode-support">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 18</span>Özet — bu sayfanın öncelik sırası</h2>
+
+        <p>Bu sayfa için iki sıra var; amacına uyanı seç. Her iki durumda da hedef okumak değil, <strong>küçük de olsa çalışan bir örnek
+        yazmak</strong>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre bu sayfadaki çalışma sırası</caption>
+            <thead><tr><th>Durum</th><th>Sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Web API yazmış, iş arayan geliştirici</td><td>Aşağıdaki numaralı liste: ilanlarda sık geçen ama pratikte az denenen başlıklar önce; alttakiler "biliyorsan artı" seviyesi</td></tr>
+              <tr><td>Yeni başlayan, ilk işini arayan veya iş aramayan</td><td>Temelden ileriye: §&nbsp;2 platform &rarr; §&nbsp;4 Program.cs ve host &rarr; §&nbsp;5 DI &rarr; §&nbsp;6 configuration &rarr; §&nbsp;7 middleware &rarr; §&nbsp;8 routing &rarr; §&nbsp;9 controller / minimal API &rarr; §&nbsp;10 OpenAPI &rarr; §&nbsp;12 kimlik doğrulama; sonra numaralı listeye geç</td></tr>
+              <tr><td>Ekibinde belirli bir teknolojiyi kullanacak olan</td><td>Doğrudan o başlığın bölümü, sonra komşu başlıklar</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. JWT + policy-based authorization uçtan uca (§ 12)</span>
+            <p>Token üreten bir login endpoint'i, <code>AddAuthentication().AddJwtBearer(...)</code> kurulumu,
+            claim'lerle bir policy, bir de resource-based yetki kontrolü yaz. Sonra şu üç soruya kendi
+            örneğinden cevap ver: token'ın içinde ne var, sunucu neden veritabanına gitmeden doğruluyor,
+            token'ı nasıl iptal edersin.</p>
+            <span class="steps__meta">İlanlarda iki ayrı başlık olarak geçer &middot; en çok sorulan başlık</span>
+          </li>
+          <li>
+            <span class="steps__title">2. DI yaşam döngüleri ve captive dependency (§ 5)</span>
+            <p>Transient/scoped/singleton farkını bir deneyle göster: her birine bir <code>Guid</code> koy,
+            aynı istekte iki kez çözdür, farkı gözle gör. Sonra singleton'a scoped enjekte edip
+            <code>ValidateScopes</code> ile hatayı al. BackgroundService içinde
+            <code>IServiceScopeFactory</code> ile kapsam aç.</p>
+            <span class="steps__meta">Mülakatta sık &middot; SOLID bilgisinin ölçüldüğü yer</span>
+          </li>
+          <li>
+            <span class="steps__title">3. Middleware ve pipeline sırası (§ 7)</span>
+            <p>Kendi middleware'ini yaz (süre ölçen bir tane yeter), sıraya farklı yerlerde koy, ne değiştiğini
+            gör. <code>UseExceptionHandler</code> + <code>IExceptionHandler</code> + ProblemDetails ile merkezî
+            hata yönetimi kur. Auth middleware'lerini routing'in önüne alıp bozulmayı bizzat gözlemle.</p>
+            <span class="steps__meta">Mülakatta sık &middot; "pipeline'ı anlat" klasik sorudur</span>
+          </li>
+          <li>
+            <span class="steps__title">4. Minimal API ile controller'ı yan yana koy (§ 9)</span>
+            <p>Aynı üç uç noktayı iki modelle de yaz. MapGroup, TypedResults, endpoint filter (§ 11) dene.
+            "Hangisini ne zaman seçersin" sorusuna iki cümlelik net cevabın olsun.</p>
+            <span class="steps__meta">İlanlarda "Minimal APIs" ve "ASP.NET Core MVC/Web API" birlikte geçer</span>
+          </li>
+          <li>
+            <span class="steps__title">5. gRPC'ye ilk temas (§ 15)</span>
+            <p>Bir <code>.proto</code> yaz, sunucu ve istemci projesi kur, unary çağrıyı çalıştır, sonra bir
+            server streaming ekle. Bir akşamlık iş. Ardından "gRPC ile REST'i ne zaman seçerim" cevabını
+            hazırla. Az denendiği için bu sayfadaki en riskli satır burası.</p>
+            <span class="steps__meta">Mülakatta sık &middot; pratikte az denenir</span>
+          </li>
+          <li>
+            <span class="steps__title">6. Rate limiting ve HealthChecks (§ 13, § 7)</span>
+            <p>Dört limiter türünü tek projede dene, 429 ve <code>Retry-After</code> dön. Ardından
+            <code>/health</code> uç noktası ekle, liveness ve readiness ayrımını kur. İkisi de kısa iş,
+            ikisi de ilanlarda sık geçer.</p>
+            <span class="steps__meta">Mülakatta sık &middot; düşük maliyet, yüksek getiri</span>
+          </li>
+          <li>
+            <span class="steps__title">7. OpenAPI'nin yeni hâli (§ 10)</span>
+            <p>Yerleşik <code>AddOpenApi</code> ile doküman üret, üstüne Swagger UI veya Scalar bağla.
+            <code>[ProducesResponseType]</code> ile yanıt tiplerini bildir. "Swagger" ile "OpenAPI" farkını
+            açıklayabil; .NET 9 sonrası şablonlarda Swashbuckle'ın kaldırıldığını bil.</p>
+            <span class="steps__meta">Mülakatta sık &middot; son iki sürümde değişen alan</span>
+          </li>
+          <li>
+            <span class="steps__title">8. HttpClientFactory ve dayanıklılık (§ 14)</span>
+            <p>Typed client kur, <code>AddStandardResilienceHandler</code> ile retry + circuit breaker + timeout
+            ekle. Bilerek hata veren bir sahte servise istek atıp devrenin açıldığını gör. Socket exhaustion
+            sorusuna bir cümlede cevap verebil.</p>
+            <span class="steps__meta">Çok sorulan tuzak soru</span>
+          </li>
+          <li>
+            <span class="steps__title">9. Multi-tenancy (§ 16)</span>
+            <p>Shared-schema + <code>TenantId</code> + EF Core global query filter ile en küçük örneği yaz.
+            Üç izolasyon stratejisinin maliyet/risk karşılaştırmasını anlatabil. Finbuckle'a bak ama önce elle
+            yaz; elle yazınca ne çözdüğünü anlarsın.</p>
+            <span class="steps__meta">Mülakatta sık &middot; mimari bilgisiyle doğrudan ilgili</span>
+          </li>
+          <li>
+            <span class="steps__title">10. SignalR (§ 15)</span>
+            <p>Bir hub, bir grup, bir tarayıcı istemcisi. JavaScript'e yeni başlıyorsan bu iyi bir başlangıç:
+            SignalR JS istemcisi otuz satır. Ardından çok sunucuda neden backplane gerektiğini anlat.</p>
+            <span class="steps__meta">Mülakatta sık &middot; <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> tarafına da köprü</span>
+          </li>
+          <li>
+            <span class="steps__title">11. Configuration ve Options pattern (§ 6)</span>
+            <p>IOptions / IOptionsSnapshot / IOptionsMonitor üçlüsünün farkını bir örnekle göster.
+            <code>ValidateOnStart</code> ile eksik ayarda uygulamanın açılmamasını sağla. User Secrets'ı kur.</p>
+            <span class="steps__meta">Kısa iş, sık sorulan</span>
+          </li>
+          <li>
+            <span class="steps__title">12. Runtime derinliği: GC, JIT, AOT (§ 2)</span>
+            <p>Performans iddiası olan biri için bu bölüm ayırt edicidir. GC kuşaklarını, server GC'yi,
+            JIT ile Native AOT farkını anlatabil. <a href="../06-test-ve-kalite/index.html">06</a> sayfasındaki
+            BenchmarkDotNet ile birleştirince güçlü bir hikâye olur.</p>
+            <span class="steps__meta">Performans bilgisini görünür kılan bölüm</span>
+          </li>
+          <li>
+            <span class="steps__title">13. NuGet ve proje altyapısı (§ 2)</span>
+            <p>Dış paket kullanımının kısıtlı olduğu ortamlardan gelenlerde bu alan zayıf kalmış olabilir. Central Package Management,
+            <code>global.json</code>, <code>Directory.Build.props</code> ve <code>dotnet list package
+            --vulnerable</code> komutunu bir kez dene. "Paket seçerken neye bakarım" sorusuna lisans, bakım
+            sıklığı, transitive bağımlılık ve açık taraması diyerek cevap ver.</p>
+            <span class="steps__meta">Sık görülen boşluk</span>
+          </li>
+          <li>
+            <span class="steps__title">14. Localization ve Turkish I (§ 17)</span>
+            <p>Uygulaman Türkçe veya başka bir yerel kültürle çalışabiliyorsa ayırt edici: <code>ToUpper</code> / <code>ToLower</code> tuzağı,
+            InvariantCulture, model binding'de ondalık ayırıcı sorunu, tarih tipi seçimi. Türkiye'deki mülakatlarda sık sorulur;
+            uluslararası ekiplerde genel globalization sorusu olarak gelir.</p>
+            <span class="steps__meta">Düşük maliyet &middot; Türkçe kullanıcıya hizmet veren her uygulamada etkili</span>
+          </li>
+          <li>
+            <span class="steps__title">15. Barındırma, routing ve önbellek katmanları (§ 3, § 8, § 13)</span>
+            <p>Kestrel'in ne olduğu, proxy arkasında ForwardedHeaders, route constraint'ler, output caching
+            ve HybridCache. Bunlar tek başına soru olmasa da cevaplarının içine serpiştirdiğinde
+            deneyim izlenimi verir.</p>
+            <span class="steps__meta">Tamamlayıcı bilgi</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Numaralı listenin ölçütü şu: <strong>ilanlarda sık geçen ama pratikte az denenen şey</strong>. Bu, iş arayan
+          geliştirici için doğru ölçüttür; yeni başlıyorsan ölçüt temelden ileriye, kendi projen için öğreniyorsan projenin ihtiyacıdır (yukarıdaki tablo).
+          Mülakatçı önce özgeçmişi okur, oradan soru üretir. gRPC, rate limiting, SignalR, multi-tenancy ve
+          HealthChecks satırlarının her biri bir akşamlık çalışmayla "yazdım" diyebileceğin hâle gelir;
+          bu beş akşam, mülakatta cevaplayabildiğin soru sayısını en çok artıran yatırımdır.</p>
+        </div>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-csharp-dili/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">C# Dili</span></a>
+        <a class="next" href="../03-veri-erisimi/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Veri Erişimi</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

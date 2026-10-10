@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS — HTML ve CSS Anahtar Listesi</title>
+<meta name="description" content="Seçiciler, kutu modeli, flexbox, grid, responsive, animasyon, custom property, mimari yaklaşımlar ve Tailwind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">CSS</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · HTML / CSS</span>
+      <span class="brand__name">HTML ve CSS Anahtar Listesi</span>
+      <span class="brand__sub">HTML → CSS</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel katman</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-html/index.html"><span class="nav-num">01</span><span>HTML</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>CSS</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>.NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Web'in temel katmanı: yapı (HTML) ve görünüm (CSS). Anlatım yok, araştırma başlığı var. Sonraki adım: JavaScript ve TypeScript bölümü.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Temel Katman</div>
+        <h1 class="page-title">CSS: <em>düzen</em>, animasyon ve mimari</h1>
+        <p class="lede">Flexbox ve grid'i gerçekten öğrenmek, animasyonların derinliği, değişkenler ve büyük projede CSS'i yönetme yaklaşımları. Tailwind ve alternatifleri de burada.</p>
+        <div class="head-meta">Seviye: temel &rarr; ileri &middot; Animasyon bölümü ayrı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Burası anlatım sayfası değil, <strong>arama listesi</strong>. Her satır bir terim, yanında
+        bir cümlelik "bu nedir" notu ve mümkünse resmî doküman bağlantısı. Konu burada anlatılmıyor; her terimi
+        kendin aratacak, kendi kaynağından okuyacak ve tarayıcıda deneyeceksin.</p>
+
+        <p>Rozetleri öncelik sırası olarak oku: <span class="tag tag--bad">MÜLAKATTA SIK</span> iş ilanlarında ve
+        mülakatlarda sık geçen — en az bir çalışan örnek yaz, önce onu kapat. <span class="tag tag--ok">TEMEL</span> bu alanda
+        olmazsa olmaz, <span class="tag">ORTA</span> sonra gelir, <span class="tag tag--info">İLERİ</span> derinleşme,
+        acele etme, <span class="tag tag--warn">ÜCRETLİ</span> lisans parası ister,
+        <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar ama yeni projede kullanma.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>İş ilanlarında <strong>CSS3</strong> ve <strong>Bootstrap</strong> sık geçer. CSS bilgisi temel seçiciler ve
+          renk/arka plan seviyesinde kalan biri için tehlike şudur: özgeçmişte veya ilanda CSS3 gören mülakatçı ilk soruları sıkça şu üç
+          başlıktan sorar: <em>specificity (özgüllük)</em>, <em>flexbox</em>, <em>position/z-index</em>. Bu sayfada
+          o üç başlık önceliklendirildi. Frontend/UI pozisyonunda bunlara ek olarak bir tasarımı canlı kodlamaya
+          (live coding) dökmen de beklenir.</p>
+        </div>
+
+        <p>CSS tek başına iş görmez: işaretleme tarafı <a href="../01-html/index.html">01 &mdash; HTML</a>, davranış tarafı
+        <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a>, bileşen içinde stil yönetimi
+        <a href="../../JavaScript-TypeScript/03-react/index.html">React</a>, derleyici/paketleyici/linter tarafı
+        <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem ve Araçlar</a> sayfasında. Backend tarafı için
+        örneğin <a href="../../CSharp-DotNet/index.html">.NET bölümü</a>, dil karşılaştırmaları için
+        <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> sayfaları, bölüm girişi için
+        <a href="../index.html">HTML ve CSS genel bakış</a>, tüm sitenin girişi için
+        <a href="../../index.html">ana sayfa</a>.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bilgi</p>
+          <p>Bağlantıların büyük kısmı <strong>developer.mozilla.org</strong> (MDN). MDN, tarayıcı üreticilerinin
+          ortak referansı sayılır; W3C/WHATWG spesifikasyonundan daha okunabilirdir. Bir özelliğin tarayıcı desteğini
+          merak edersen <a href="https://caniuse.com/">caniuse.com</a> ve
+          <a href="https://web.dev/baseline">web.dev/baseline</a> bak.</p>
+        </div>
+
+        <h2 id="temeller"><span class="h-num">§ 1</span>Temeller: seçiciler, cascade, özgüllük</h2>
+
+        <p>Bu bölüm CSS'in "dilbilgisi"dir. Buradaki 4 kavramı (seçici, özgüllük, cascade, kalıtım) bilmeyen biri
+        büyük projede stil yazamaz; çünkü sorun "stil neden uygulanmadı" değil, "hangi kural kazandı" sorusudur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Basit seçiciler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>type / element selector</strong></td>
+                <td><code>p</code>, <code>div</code> gibi etiket adıyla seçme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada "CSS type selector" yaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>class selector</strong></td>
+                <td><code>.kart</code> — aynı sınıfı taşıyan tüm elemanlar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Pratikte kullandığın seçicilerin %90'ı bu olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>id selector</strong></td>
+                <td><code>#menu</code> — sayfada tek olan eleman</td>
+                <td><span class="tag tag--ok">TEMEL</span> Özgüllüğü çok yüksek olduğu için stil verirken kaçınılır; JS ve anchor için kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>attribute selector</strong></td>
+                <td><code>[type="email"]</code>, <code>[href^="https"]</code>, <code>[class*="btn"]</code></td>
+                <td><span class="tag">ORTA</span> <code>^=</code> ile başlayan, <code>$=</code> ile biten, <code>*=</code> içeren demek</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>universal selector</strong></td>
+                <td><code>*</code> — her eleman</td>
+                <td><span class="tag">ORTA</span> Genelde sadece reset için: <code>*{box-sizing:border-box}</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>selector list</strong></td>
+                <td>Virgülle birden fazla seçiciye aynı kuralı verme: <code>h1, h2, h3 { }</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski tarayıcıda listedeki bir seçici geçersizse tüm kural düşer &rarr; <code>:is()</code> bunu çözer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Selector_list">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Birleştiriciler (combinators)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>descendant combinator</strong></td>
+                <td>Boşluk: <code>.kart p</code> — kartın içindeki her derinlikteki p</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>child combinator</strong></td>
+                <td><code>&gt;</code>: <code>.liste &gt; li</code> — yalnızca doğrudan çocuk</td>
+                <td><span class="tag tag--ok">TEMEL</span> İç içe listelerde asıl fark burada ortaya çıkar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>next-sibling combinator</strong></td>
+                <td><code>+</code>: hemen ardından gelen kardeş</td>
+                <td><span class="tag">ORTA</span> Eski adı "adjacent sibling"</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Next-sibling_combinator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>subsequent-sibling combinator</strong></td>
+                <td><code>~</code>: sonradan gelen tüm kardeşler</td>
+                <td><span class="tag">ORTA</span> Eski adı "general sibling"</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Subsequent-sibling_combinator">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>owl selector</strong></td>
+                <td><code>* + *</code> — ardışık her elemana üst boşluk vermek için kullanılan kalıp</td>
+                <td><span class="tag tag--info">İLERİ</span> Resmî bir özellik değil, bir <em>desen</em>; "lobotomized owl" diye aratılır</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Pseudo-class (durum seçicileri)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>:hover</strong></td>
+                <td>Fare elemanın üstündeyken</td>
+                <td><span class="tag tag--ok">TEMEL</span> Dokunmatik cihazda karşılığı yok; tek etkileşim yolu olmasın</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:hover">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:focus</strong></td>
+                <td>Eleman klavye/fare odağını aldığında</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>outline:none</code> yazıp yerine bir şey koymamak erişilebilirlik hatasıdır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:focus-visible</strong></td>
+                <td>Sadece klavyeyle odaklanıldığında halka göster</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Tıklayınca çirkin çerçeve çıkıyor" sorununun doğru çözümü budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:focus-within</strong></td>
+                <td>İçindeki herhangi bir eleman odaklıysa ebeveyni seç</td>
+                <td><span class="tag">ORTA</span> Form grubunu vurgulamak için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-within">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:active</strong></td>
+                <td>Tıklama basılı tutulurken</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:active">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:visited</strong></td>
+                <td>Daha önce ziyaret edilmiş bağlantı</td>
+                <td><span class="tag">ORTA</span> Gizlilik nedeniyle sadece birkaç özellik değiştirilebilir (renk gibi)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:visited">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:nth-child()</strong></td>
+                <td><code>2n</code>, <code>odd</code>, <code>3n+1</code> gibi formülle sıraya göre seçme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kardeşler arasındaki sıraya bakar, <em>tip</em>e bakmaz; onun için <code>:nth-of-type()</code> var</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:nth-of-type()</strong></td>
+                <td>Aynı etiket tipindekiler arasında sıraya göre</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:first-child / :last-child / :only-child</strong></td>
+                <td>İlk, son, tek çocuk</td>
+                <td><span class="tag tag--ok">TEMEL</span> Listede son elemanın alt çizgisini kaldırmak için klasik kullanım</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:not()</strong></td>
+                <td>Verilen seçiciye uymayanları seç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Özgüllüğü, içindeki en güçlü seçici kadardır &rarr; dikkat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:not">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:is()</strong></td>
+                <td>Seçici listesini kısaltır: <code>:is(h1,h2,h3) &gt; p</code></td>
+                <td><span class="tag">ORTA</span> Eski adı <code>:matches()</code>/<code>:any()</code>; özgüllüğü içindeki en güçlü seçiciden alır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:is">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:where()</strong></td>
+                <td><code>:is()</code> ile aynı ama <strong>özgüllüğü sıfırdır</strong></td>
+                <td><span class="tag">ORTA</span> Kütüphane/reset yazarken tercih edilir; kullanıcı kolayca ezebilsin diye</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:where">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:has()</strong></td>
+                <td>"Ebeveyn seçici": <code>.kart:has(img)</code> — içinde img olan kartı seç</td>
+                <td><span class="tag">ORTA</span> CSS'in yıllarca eksik denen özelliği; artık tüm modern tarayıcılarda var. § 11'de tekrar geçiyor</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:disabled / :checked / :required / :invalid</strong></td>
+                <td>Form elemanı durum seçicileri</td>
+                <td><span class="tag tag--ok">TEMEL</span> JS yazmadan form doğrulama görselleştirmesi yapılabilir; bkz. <a href="../01-html/index.html">01 &mdash; HTML</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:root</strong></td>
+                <td>Belgenin kökü (HTML'de <code>&lt;html&gt;</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> CSS değişkenleri genelde burada tanımlanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:root">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:target</strong></td>
+                <td>URL'deki <code>#id</code> ile eşleşen eleman</td>
+                <td><span class="tag tag--info">İLERİ</span> JS'siz sekme/akordeon numaralarında kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:target">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>:empty</strong></td>
+                <td>İçinde hiç çocuk düğüm olmayan eleman</td>
+                <td><span class="tag tag--info">İLERİ</span> Boşluk karakteri bile "boş değil" sayılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:empty">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Pseudo-element (sanal eleman)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>::before / ::after</strong></td>
+                <td>Elemanın içine, başa/sona sanal içerik ekler</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>content</code> özelliği yazılmazsa hiç oluşmaz; ekran okuyucular içeriği okuyabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::before">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>::placeholder</strong></td>
+                <td>Input'un ipucu metnini biçimler</td>
+                <td><span class="tag">ORTA</span> Placeholder <em>label yerine geçmez</em>; erişilebilirlik hatası</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>::selection</strong></td>
+                <td>Kullanıcının fareyle seçtiği metnin görünümü</td>
+                <td><span class="tag">ORTA</span> Sadece birkaç özellik uygulanır (color, background-color vb.)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::selection">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>::first-line / ::first-letter</strong></td>
+                <td>Metnin ilk satırı / ilk harfi</td>
+                <td><span class="tag tag--info">İLERİ</span> Dergi tarzı büyük ilk harf (drop cap) için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::first-letter">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>::marker</strong></td>
+                <td>Liste maddesinin işaretini (nokta/numara) biçimler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>::backdrop</strong></td>
+                <td><code>&lt;dialog&gt;</code> / tam ekran öğesinin arkasındaki katman</td>
+                <td><span class="tag tag--info">İLERİ</span> Modal karartması için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::backdrop">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>tek iki nokta vs. çift</strong></td>
+                <td><code>:before</code> eski yazım, <code>::before</code> doğru yazım</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Tarayıcılar ikisini de kabul eder; sen çift yaz</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cascade, özgüllük, kalıtım</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>specificity (özgüllük)</strong></td>
+                <td>Çakışan kurallardan hangisinin kazanacağını belirleyen puan: (id, class, element)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> CSS mülakatının bir numaralı sorusu. Inline stil daha da üstte, <code>!important</code> hepsinin üstünde</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Specificity">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>cascade (basamaklama)</strong></td>
+                <td>Kaynak (tarayıcı/kullanıcı/yazar), katman, özgüllük ve sıra sırasıyla uygulanan kazanan-seçme algoritması</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "CSS" adındaki C bu. Eşit özgüllükte <em>sonra yazılan</em> kazanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inheritance (kalıtım)</strong></td>
+                <td>Bazı özellikler (color, font, line-height) çocuklara kendiliğinden geçer; border, padding geçmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Inheritance">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inherit / initial / unset / revert</strong></td>
+                <td>Bir özelliği ebeveynden al / spec varsayılanına dön / duruma göre birini yap / tarayıcı stiline dön</td>
+                <td><span class="tag">ORTA</span> Dördü de "CSS-wide keyword" diye aratılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Value_processing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>all: unset / all: revert</strong></td>
+                <td>Tek satırda tüm özellikleri sıfırlama</td>
+                <td><span class="tag tag--info">İLERİ</span> Buton stilini sıfırlamak için pratik</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/all">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>!important</strong></td>
+                <td>Kuralı normal cascade'in üstüne çıkarır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kullanma; kullandığın anda sonraki geliştirici de kullanmak zorunda kalır. Utility-first CSS'te istisna</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/important">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>user agent stylesheet</strong></td>
+                <td>Tarayıcının kendi varsayılan stilleri (h1 büyük, a mavi vb.)</td>
+                <td><span class="tag tag--ok">TEMEL</span> DevTools'ta "user agent stylesheet" yazan kutu budur</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>shorthand vs. longhand</strong></td>
+                <td><code>margin</code> kısayoldur, <code>margin-top</code> uzun yazımdır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kısayol yazılmayan alt özellikleri <em>varsayılana sıfırlar</em> — sık yapılan hata</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Shorthand_properties">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@import</strong></td>
+                <td>Bir CSS dosyasından başka bir CSS dosyası çağırma</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Üretimde performansı düşürür; bundler kullan. Sass'taki <code>@use</code> ile karıştırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@import">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>reset / normalize</strong></td>
+                <td>Tarayıcı varsayılanlarını eşitleyen başlangıç stil dosyası</td>
+                <td><span class="tag tag--ok">TEMEL</span> <a href="https://github.com/sindresorhus/modern-normalize">modern-normalize</a> güncel seçenek; eski <code>normalize.css</code> ve "Meyer reset" hâlâ karşına çıkar</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kutu-modeli"><span class="h-num">§ 2</span>Kutu modeli</h2>
+
+        <p>Her CSS elemanı bir dikdörtgendir. "Neden 100px verdim ama 120px oldu" sorusunun cevabı burada.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Box model</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>box model</strong></td>
+                <td>İçten dışa: content &rarr; padding &rarr; border &rarr; margin</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Klasik mülakat sorusu; sırayı ezbere bil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Introduction_to_the_CSS_box_model">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>box-sizing</strong></td>
+                <td><code>content-box</code> (varsayılan) genişliğe padding/border eklenir; <code>border-box</code> dahil edilir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Neredeyse her projede global olarak <code>border-box</code> yapılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>margin collapsing</strong></td>
+                <td>Dikey komşu margin'ler toplanmaz, büyüğü kazanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Boşluk neden 30px değil 20px" sorusunun cevabı. Flex/grid içinde <em>olmaz</em></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_model/Mastering_margin_collapsing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>padding</strong></td>
+                <td>İçerik ile kenarlık arası boşluk; arka plan rengi buraya da uygulanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Negatif değer alamaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>margin</strong></td>
+                <td>Dış boşluk; negatif olabilir; <code>auto</code> ile yatay ortalama yapılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>margin: 0 auto</code> klasiği yalnızca genişliği belirli block elemanda çalışır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>border</strong></td>
+                <td><code>width style color</code> üçlüsü; <code>style</code> yazılmazsa çizgi görünmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>outline</strong></td>
+                <td>Border gibi ama <strong>yer kaplamaz</strong>, düzeni kaydırmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span> Odak halkası bu yüzden outline'dır. <code>outline-offset</code> ile aralık verilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/outline">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>width / height</strong></td>
+                <td>İçerik kutusunun ölçüsü</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yüzde height çoğu zaman çalışmaz; ebeveynin yüksekliği belirli olmalı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>min-width / max-width / min-height / max-height</strong></td>
+                <td>Alt ve üst sınır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>max-width</code> her zaman <code>width</code>'i yener; responsive'in temel taşı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-width">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>min-content / max-content / fit-content</strong></td>
+                <td>İçeriğe göre otomatik boyutlanma anahtar kelimeleri</td>
+                <td><span class="tag">ORTA</span> Grid ve flex ile birlikte çok işe yarar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_box_sizing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>containing block</strong></td>
+                <td>Bir elemanın yüzde ölçülerinin ve konumunun hesaplandığı referans kutu</td>
+                <td><span class="tag">ORTA</span> <code>position:absolute</code> davranışını anlamanın anahtarı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_display/Containing_block">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>replaced element</strong></td>
+                <td><code>img</code>, <code>video</code>, <code>iframe</code> gibi içeriği CSS dışından gelen elemanlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Bazı özellikler bunlarda farklı davranır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_images/Replaced_element_properties">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="display-ve-konum"><span class="h-num">§ 3</span>Görüntüleme ve konumlandırma</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>display</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>display</strong></td>
+                <td>Elemanın hem dış (block/inline) hem iç (flow/flex/grid) düzen tipini belirler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Modern CSS'te iki değerli yazım da var: <code>display: inline flex</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>block</strong></td>
+                <td>Satırı kaplar, width/height alır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inline</strong></td>
+                <td>Metin akışında; width/height ve dikey margin işlemez</td>
+                <td><span class="tag tag--ok">TEMEL</span> "span'a height verdim olmuyor" sorusunun cevabı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inline-block</strong></td>
+                <td>Satır içinde durur ama ölçü alır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Elemanlar arasında beyaz boşluk kaynaklı 4px açıklık olur — bilinen tuzak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flow-root</strong></td>
+                <td>Yeni blok biçimlendirme bağlamı (BFC) açar; float'ları içine hapseder</td>
+                <td><span class="tag">ORTA</span> Eski "clearfix" hilesinin modern karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_display/Block_formatting_context">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>contents</strong></td>
+                <td>Elemanın kendi kutusunu kaldırır, çocukları üst düzene katılır</td>
+                <td><span class="tag tag--info">İLERİ</span> Bazı tarayıcılarda erişilebilirlik ağacını bozabilir; dikkatli kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>none</strong></td>
+                <td>Elemanı tamamen düzenden çıkarır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>visibility:hidden</code> yer kaplar, <code>display:none</code> kaplamaz; ekran okuyucu ikisini de okumaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>table / table-cell</strong></td>
+                <td>Tablo davranışını taklit eden display değerleri</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Flex/grid öncesi dikey ortalama hilesiydi; yeni projede kullanma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>position, katmanlar, taşma</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>position: static</strong></td>
+                <td>Varsayılan; top/left işlemez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>position: relative</strong></td>
+                <td>Yerini korur ama görsel olarak kayar; içindeki absolute'lar için referans olur</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Absolute'un çalışması için ebeveyne relative verilmesi en sık kullanılan kalıp</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>position: absolute</strong></td>
+                <td>Akıştan çıkar, en yakın konumlandırılmış ataya göre yerleşir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>position: fixed</strong></td>
+                <td>Viewport'a sabitlenir, sayfa kaysa da durur</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ata elemanda <code>transform</code>/<code>filter</code> varsa fixed o ataya göre çalışır — klasik tuzak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>position: sticky</strong></td>
+                <td>Eşiğe gelene kadar normal, sonra yapışır</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>top</code> gibi bir eşik vermezsen hiç çalışmaz; ebeveynde <code>overflow:hidden</code> varsa da çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>inset</strong></td>
+                <td><code>top/right/bottom/left</code> kısayolu: <code>inset: 0</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inset">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>z-index</strong></td>
+                <td>Katman sırası; yalnızca konumlandırılmış (veya flex/grid çocuğu) elemanlarda çalışır</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> "9999 verdim yine altta kaldı" &rarr; sorun stacking context'tir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>stacking context</strong></td>
+                <td>z-index'in kıyaslandığı yerel kutu; <code>opacity&lt;1</code>, <code>transform</code>, <code>filter</code>, <code>will-change</code> yenisini açar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Aramada "CSS stacking context" yaz; z-index sorunlarının %90'ı burada</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/z-index">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>float / clear</strong></td>
+                <td>Elemanı sola/sağa yaslar, metin etrafından akar</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Sayfa düzeni için kullanma (flex/grid var); metin içine görsel gömmek için hâlâ geçerli</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>clearfix</strong></td>
+                <td>Float'lanan çocukların ebeveyni yüksekliğini yitirmesini önleyen eski hile</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yerine <code>display:flow-root</code></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>overflow</strong></td>
+                <td><code>visible/hidden/scroll/auto/clip</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>hidden</code> yeni bir kaydırma bağlamı ve BFC açar; sticky'yi bozar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>overflow-x / overflow-y</strong></td>
+                <td>Tek eksende taşma yönetimi</td>
+                <td><span class="tag">ORTA</span> Birine <code>hidden</code> diğerine <code>visible</code> verilemez; tarayıcı auto'ya çevirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>visibility</strong></td>
+                <td><code>hidden</code> görünmez ama yer kaplar; <code>collapse</code> tabloda satır gizler</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>isolation</strong></td>
+                <td><code>isolate</code> ile bilinçli olarak yeni stacking context açar</td>
+                <td><span class="tag tag--info">İLERİ</span> z-index kavgalarını yalıtmak için temiz çözüm</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/isolation">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>pointer-events</strong></td>
+                <td><code>none</code> ile eleman fare olaylarını yutmaz, arkasındaki tıklanır</td>
+                <td><span class="tag">ORTA</span> Dekoratif overlay'lerde şart</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>scroll-behavior / scroll-margin-top</strong></td>
+                <td>Yumuşak kaydırma ve sabit başlık altında kalmayı önleme</td>
+                <td><span class="tag">ORTA</span> Anchor bağlantılarında başlığın içeriği örtmesini <code>scroll-margin-top</code> çözer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>scroll snap</strong></td>
+                <td><code>scroll-snap-type</code> / <code>scroll-snap-align</code> ile kaydırmanın karelere oturması</td>
+                <td><span class="tag tag--info">İLERİ</span> Carousel'i JS'siz yapmanın yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="flexbox"><span class="h-num">§ 4</span>Flexbox</h2>
+
+        <p>Tek eksenli (satır <em>veya</em> sütun) düzen motoru. Modern arayüzlerin büyük kısmı bununla dizilir.
+        Container özellikleri ile item özelliklerini <strong>ayrı ayrı</strong> öğren; en sık yapılan hata item
+        özelliğini container'a yazmaktır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Flex container (ebeveyn) özellikleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>display: flex / inline-flex</strong></td>
+                <td>Elemanı flex kabı yapar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Sadece <em>doğrudan çocukları</em> etkiler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>main axis / cross axis</strong></td>
+                <td>Ana eksen ve ona dik eksen kavramı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> <code>justify-*</code> ana eksende, <code>align-*</code> çapraz eksende çalışır. Bunu bilmeden flexbox öğrenilmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex-direction</strong></td>
+                <td><code>row</code> / <code>row-reverse</code> / <code>column</code> / <code>column-reverse</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>column</code> yaptığın anda justify ve align'ın anlamı yer değiştirir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex-wrap</strong></td>
+                <td>Sığmayan öğeler alt satıra insin mi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan <code>nowrap</code>; taşma sorunlarının sık nedeni</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex-flow</strong></td>
+                <td><code>flex-direction</code> + <code>flex-wrap</code> kısayolu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>justify-content</strong></td>
+                <td>Ana eksende dağıtım: <code>flex-start/center/space-between/space-around/space-evenly</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>align-items</strong></td>
+                <td>Çapraz eksende hizalama: <code>stretch/center/flex-start/flex-end/baseline</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Varsayılan <code>stretch</code> — "kutular neden aynı boyda" sorusunun cevabı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>align-content</strong></td>
+                <td>Çok satırlı flex'te <em>satırların</em> çapraz eksende dağılımı</td>
+                <td><span class="tag">ORTA</span> Sadece <code>flex-wrap: wrap</code> varken etkilidir; align-items ile karıştırılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>gap / row-gap / column-gap</strong></td>
+                <td>Öğeler arası boşluk</td>
+                <td><span class="tag tag--ok">TEMEL</span> Flexbox'ta da çalışır (eskiden sadece grid'deydi); margin hilelerinin yerini aldı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>place-content</strong></td>
+                <td><code>align-content</code> + <code>justify-content</code> kısayolu</td>
+                <td><span class="tag">ORTA</span> <code>place-content:center</code> ortalamanın en kısa yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-content">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Flex item (çocuk) özellikleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>flex-grow</strong></td>
+                <td>Boş alan varsa öğe hangi oranda büyüsün</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan 0 — yani kendiliğinden büyümez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex-shrink</strong></td>
+                <td>Yer daralınca hangi oranda küçülsün</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan 1 — "resmim neden eziliyor" sorusunun cevabı; <code>flex-shrink:0</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex-basis</strong></td>
+                <td>Dağıtımdan önceki başlangıç boyutu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>auto</code> içerik boyutunu, <code>0</code> tamamen orana dayalı bölüşümü verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>flex (kısayol)</strong></td>
+                <td><code>flex: 1</code> = <code>1 1 0%</code>; <code>flex: auto</code> = <code>1 1 auto</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Tek tek yazmak yerine kısayolu kullan; <code>flex:1</code> ile <code>flex:auto</code> farkını dene</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>align-self</strong></td>
+                <td>Tek bir öğenin çapraz eksen hizasını ezmek</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-self">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>order</strong></td>
+                <td>Görsel sırayı değiştirir</td>
+                <td><span class="tag">ORTA</span> DOM sırasını değiştirmez &rarr; klavye/ekran okuyucu sırası bozulur; dikkatli kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/order">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>margin-left: auto</strong></td>
+                <td>Flex içinde bir öğeyi sağa itmenin klasik yolu</td>
+                <td><span class="tag">ORTA</span> Navbar'da "sağdaki menü" için sık kullanılır</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>min-width: 0 tuzağı</strong></td>
+                <td>Flex öğesinin varsayılan <code>min-width:auto</code> değeri metnin taşmasına yol açar</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>text-overflow: ellipsis</code> flex içinde çalışmıyorsa çözüm budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-width">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flexbox Froggy / Flexbox Defense</strong></td>
+                <td>Oyunlaştırılmış flexbox alıştırmaları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz; <a href="https://flexboxfroggy.com/">flexboxfroggy.com</a> — bir saatte flexbox oturur</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="grid"><span class="h-num">§ 5</span>CSS Grid</h2>
+
+        <p>İki eksenli düzen motoru. Flexbox "içerikten düzene", Grid "düzenden içeriğe" çalışır. İkisi rakip değil;
+        sayfa iskeleti Grid, bileşen içi Flex tipik bir dağılımdır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Grid tanımlama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>display: grid / inline-grid</strong></td>
+                <td>Elemanı grid kabı yapar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-template-columns</strong></td>
+                <td>Sütunların sayısı ve ölçüsü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-template-rows</strong></td>
+                <td>Satırların ölçüsü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>fr birimi</strong></td>
+                <td>Kalan boş alanın kesri: <code>1fr 2fr</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Yalnızca grid'de geçerli; yüzde değil, <em>kalan</em> alanı böler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex_value">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>repeat()</strong></td>
+                <td><code>repeat(3, 1fr)</code> — tekrar eden parça tanımı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/repeat">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>minmax()</strong></td>
+                <td>Alt ve üst sınırlı parça: <code>minmax(200px, 1fr)</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/minmax">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>auto-fit / auto-fill</strong></td>
+                <td><code>repeat(auto-fit, minmax(200px,1fr))</code> ile media query'siz responsive ızgara</td>
+                <td><span class="tag tag--ok">TEMEL</span> Fark: <code>auto-fill</code> boş sütunları da bırakır, <code>auto-fit</code> daraltıp yok sayar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>gap / row-gap / column-gap</strong></td>
+                <td>Hücre araları</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski adı <code>grid-gap</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-auto-rows / grid-auto-columns</strong></td>
+                <td>Şablonda tanımlanmamış (implicit) parçaların ölçüsü</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-auto-flow</strong></td>
+                <td>Otomatik yerleştirme yönü: <code>row / column / dense</code></td>
+                <td><span class="tag">ORTA</span> <code>dense</code> boşlukları doldurur ama görsel sırayı bozabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>explicit vs. implicit grid</strong></td>
+                <td>Şablonda tanımladığın ızgara ile tarayıcının kendiliğinden ürettiği ek satır/sütunlar</td>
+                <td><span class="tag">ORTA</span> "Satır yüksekliği neden içerik kadar" sorusunun cevabı burada</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Grid'e yerleştirme ve hizalama</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>grid-column / grid-row</strong></td>
+                <td><code>grid-column: 1 / 3</code> — çizgi numarasıyla yerleştirme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>span 2</code> yazımı da var</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-area</strong></td>
+                <td>Dört kenarı tek satırda veya isimlendirilmiş alanı atama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>grid-template-areas</strong></td>
+                <td>ASCII şema ile düzen: <code>"header header" "sidebar main"</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Sayfa iskeleti için en okunabilir yöntem; media query içinde şemayı değiştirmek çok kolay</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>named grid lines</strong></td>
+                <td><code>[content-start] 1fr [content-end]</code> gibi çizgi isimlendirme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Grid_layout_using_named_grid_lines">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>justify-items / align-items</strong></td>
+                <td>Hücre <em>içindeki</em> öğelerin hizası (sütun / satır ekseni)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Grid'de justify = satır ekseni (yatay), align = blok ekseni (dikey)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>justify-content / align-content</strong></td>
+                <td>Izgaranın tamamının kap içindeki hizası</td>
+                <td><span class="tag">ORTA</span> Izgara kaptan küçükse anlam kazanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>justify-self / align-self</strong></td>
+                <td>Tek bir öğenin hizasını ezme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>place-items / place-self</strong></td>
+                <td>align + justify kısayolları</td>
+                <td><span class="tag">ORTA</span> <code>display:grid; place-items:center</code> — dikey+yatay ortalamanın en kısa hali</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-items">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>subgrid</strong></td>
+                <td>Çocuk grid'in, ebeveynin çizgilerini miras alması</td>
+                <td><span class="tag tag--info">İLERİ</span> Kart listelerinde başlık/metin/buton hizalarını eşitlemenin doğru yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>masonry (item flow)</strong></td>
+                <td>Pinterest tarzı, farklı yükseklikte tuğla düzeni</td>
+                <td><span class="tag tag--info">İLERİ</span> Standart hâlâ oturuyor; sözdizimi değişebilir. Bugün için JS kütüphanesi veya <code>columns</code> ile yapılıyor</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>columns / column-count / column-gap</strong></td>
+                <td>Çok sütunlu <em>metin</em> düzeni (gazete sütunu)</td>
+                <td><span class="tag">ORTA</span> Grid ile karıştırma; bu "multi-column layout" ayrı bir modül</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_multicol_layout">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grid Garden</strong></td>
+                <td>Grid öğrenmek için ücretsiz oyun</td>
+                <td><span class="tag tag--ok">TEMEL</span> <a href="https://cssgridgarden.com/">cssgridgarden.com</a></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="birimler"><span class="h-num">§ 6</span>Birimler, değerler ve değişkenler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Uzunluk birimleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>px</strong></td>
+                <td>CSS pikseli (fiziksel piksel değil, referans birim)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kenarlık ve gölge için uygun; yazı boyutunda tercih edilmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>em</strong></td>
+                <td>Elemanın <em>kendi</em> font-size'ına göre</td>
+                <td><span class="tag tag--ok">TEMEL</span> İç içe geçince katlanarak büyür — klasik tuzak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rem</strong></td>
+                <td>Kök elemanın (html) font-size'ına göre</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kullanıcının tarayıcı yazı boyutu ayarına saygı duyar; tipografi için varsayılan tercih</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>%</strong></td>
+                <td>Ebeveyne göre oran; hangi ebeveyn özelliğine göre olduğu özelliğe göre değişir</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>padding: 5%</code> dikeyde bile <em>genişliğe</em> göre hesaplanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/percentage">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>vw / vh / vmin / vmax</strong></td>
+                <td>Viewport genişliği/yüksekliği yüzdesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>100vw</code> kaydırma çubuğunu sayar &rarr; yatay taşma yapabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dvh / svh / lvh</strong></td>
+                <td>Dinamik / küçük / büyük viewport yüksekliği</td>
+                <td><span class="tag">ORTA</span> Mobil tarayıcı adres çubuğu gizlenince <code>100vh</code>'ın bozulma sorununun çözümü <code>100dvh</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ch / ex / cap / lh</strong></td>
+                <td>Yazı tipine bağlı birimler (0 karakteri genişliği, x yüksekliği, satır yüksekliği)</td>
+                <td><span class="tag">ORTA</span> Okunur satır uzunluğu için <code>max-width: 65ch</code> pratik bir kalıptır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>fr</strong></td>
+                <td>Grid'e özgü kesir birimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sadece grid şablonlarında geçerli</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex_value">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>cqw / cqi / cqb</strong></td>
+                <td>Container query birimleri: kaba göre oran</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>@container</code> ile birlikte kullanılır, § 9'a bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>deg / rad / turn</strong></td>
+                <td>Açı birimleri (transform, gradient)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/angle">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>s / ms</strong></td>
+                <td>Süre birimleri (transition, animation)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Birimsiz <code>0</code> yazılabilir ama <code>0.3</code> yazılamaz, <code>0.3s</code> gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/time">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fonksiyonlar ve özel değerler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>calc()</strong></td>
+                <td>Farklı birimleri karıştırarak hesap: <code>calc(100% - 2rem)</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>+</code> ve <code>-</code> etrafında boşluk <em>zorunlu</em>; unutunca sessizce çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/calc">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>clamp()</strong></td>
+                <td><code>clamp(min, tercih, max)</code> — akışkan ama sınırlı değer</td>
+                <td><span class="tag tag--ok">TEMEL</span> Akışkan tipografinin (fluid typography) standart aracı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clamp">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>min() / max()</strong></td>
+                <td>Verilen değerlerin küçüğünü/büyüğünü seçer</td>
+                <td><span class="tag">ORTA</span> <code>width: min(100%, 60rem)</code> kalıbı çok işe yarar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>custom properties (CSS değişkenleri)</strong></td>
+                <td><code>--renk: red;</code> tanımla, <code>var(--renk)</code> ile kullan</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sass değişkeninden farklı: bunlar <em>çalışma zamanında</em> yaşar, JS'ten değiştirilebilir, kalıtılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>var() fallback</strong></td>
+                <td><code>var(--x, 10px)</code> — değişken yoksa yedek değer</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/var">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@property</strong></td>
+                <td>Custom property'ye tip, başlangıç değeri ve kalıtım davranışı tanımlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Değişkeni <em>animasyonlanabilir</em> yapmanın tek yolu (örn. gradient açısını animasyonlamak)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>attr()</strong></td>
+                <td>HTML özniteliğini CSS'te okur: <code>content: attr(data-label)</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Uzun süre yalnızca <code>content</code> içinde çalıştı; diğer özelliklerde desteği yeni</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>env()</strong></td>
+                <td>Cihaz güvenli alanları: <code>env(safe-area-inset-bottom)</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Çentikli telefonlarda alt/üst boşluk için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/env">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>url()</strong></td>
+                <td>Görsel, font, mask kaynağı çağırma</td>
+                <td><span class="tag tag--ok">TEMEL</span> Yol, CSS dosyasına göre çözülür — HTML'e göre değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/url_function">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tipografi"><span class="h-num">§ 7</span>Tipografi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Metin ve yazı tipi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>font-family</strong></td>
+                <td>Yazı tipi yığını; ilk bulunan kullanılır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sonuna mutlaka genel aile yaz: <code>sans-serif</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>system font stack</strong></td>
+                <td>İşletim sisteminin kendi fontunu kullanma kalıbı</td>
+                <td><span class="tag">ORTA</span> Sıfır indirme maliyeti; <code>system-ui</code> anahtar kelimesi de var</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-family">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>font-size</strong></td>
+                <td>Yazı boyutu</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>rem</code> tercih et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-size">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>line-height</strong></td>
+                <td>Satır yüksekliği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Birimsiz yaz (<code>1.5</code>); birimli yazarsan kalıtımda yanlış hesaplanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/line-height">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>font-weight</strong></td>
+                <td>Kalınlık 100–900 veya <code>bold</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Font o ağırlığı içermiyorsa tarayıcı sahte kalın (faux bold) üretir, çirkin olur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>letter-spacing / word-spacing</strong></td>
+                <td>Harf ve kelime arası</td>
+                <td><span class="tag">ORTA</span> Büyük başlıkta hafif negatif, küçük büyük harf metinde hafif pozitif verilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-align</strong></td>
+                <td>Yatay hizalama</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>justify</code> web'de genelde kötü sonuç verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-transform</strong></td>
+                <td><code>uppercase/lowercase/capitalize</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Türkçe i/I sorunu tarayıcıya göre değişebilir; <code>lang="tr"</code> önemli</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-decoration</strong></td>
+                <td>Alt çizgi, üstü çizili; <code>-thickness</code> ve <code>-offset</code> alt özellikleri var</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-overflow: ellipsis</strong></td>
+                <td>Sığmayan metni "..." ile kes</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tek başına yetmez: <code>overflow:hidden</code> + <code>white-space:nowrap</code> gerekir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>-webkit-line-clamp / line-clamp</strong></td>
+                <td>N satırdan sonra kes</td>
+                <td><span class="tag">ORTA</span> Uzun süre yalnızca <code>-webkit-</code> önekiyle çalıştı; standart <code>line-clamp</code> yeni</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>white-space</strong></td>
+                <td><code>nowrap / pre / pre-wrap / break-spaces</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/white-space">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>word-break / overflow-wrap</strong></td>
+                <td>Uzun kelimenin/URL'nin kutudan taşmasını engelleme</td>
+                <td><span class="tag">ORTA</span> Genelde doğru olan <code>overflow-wrap: anywhere</code>, <code>word-break:break-all</code> değil</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-wrap: balance / pretty</strong></td>
+                <td>Başlık satırlarını dengeler, tek kelimelik son satırı (orphan) önler</td>
+                <td><span class="tag">ORTA</span> Ucuz ve etkili; başlıklarda <code>balance</code>, paragraflarda <code>pretty</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hyphens</strong></td>
+                <td>Otomatik heceleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Dile bağlıdır; HTML'de <code>lang</code> doğru değilse çalışmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@font-face</strong></td>
+                <td>Kendi font dosyanı tanımlama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Modern format <code>woff2</code>; eot/ttf artık gereksiz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>font-display</strong></td>
+                <td><code>swap / optional / fallback</code> — font yüklenirken metin nasıl davransın</td>
+                <td><span class="tag tag--ok">TEMEL</span> FOIT (görünmez metin) ve FOUT (stilsiz metin) terimlerini birlikte ara</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>variable fonts</strong></td>
+                <td>Tek dosyada tüm ağırlık/genişlik varyasyonları</td>
+                <td><span class="tag">ORTA</span> <code>font-variation-settings</code> ile eksenler ayarlanır; toplam boyutu düşürür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>font-feature-settings / font-variant-numeric</strong></td>
+                <td>OpenType özellikleri: ligatür, tabular rakam vb.</td>
+                <td><span class="tag tag--info">İLERİ</span> Tablolarda rakamların hizalanması için <code>tabular-nums</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Google Fonts</strong></td>
+                <td>Ücretsiz web font barındırma servisi</td>
+                <td><span class="tag">ORTA</span> KVKK/GDPR açısından fontları kendi sunucundan servis etmek daha güvenli; <a href="https://fonts.google.com/">fonts.google.com</a></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="renk-ve-gorsel"><span class="h-num">§ 8</span>Renk, arka plan, görsel efektler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Renk</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>hex (#rrggbb)</strong></td>
+                <td>Onaltılık renk; 8 haneli hali alfa içerir (<code>#00000080</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>rgb() / rgba()</strong></td>
+                <td>Kırmızı-yeşil-mavi + saydamlık</td>
+                <td><span class="tag tag--ok">TEMEL</span> Modern yazım virgülsüz: <code>rgb(0 0 0 / 50%)</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/rgb">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hsl()</strong></td>
+                <td>Ton-doygunluk-parlaklık; tema üretmek için insan diline en yakın model</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>oklch() / oklab()</strong></td>
+                <td>Algısal olarak eşit adımlı modern renk uzayı</td>
+                <td><span class="tag">ORTA</span> Aynı L değerinde renkler gerçekten aynı parlaklıkta görünür; palet üretmek için HSL'den üstün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>color-mix()</strong></td>
+                <td>İki rengi CSS içinde karıştırma: <code>color-mix(in oklch, blue 30%, white)</code></td>
+                <td><span class="tag">ORTA</span> Sass'ın <code>mix()</code> fonksiyonunun tarayıcıdaki karşılığı; hover tonu üretmek için ideal</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>currentColor</strong></td>
+                <td>O elemanın <code>color</code> değerini başka bir özellikte kullanma</td>
+                <td><span class="tag">ORTA</span> SVG ikon renklendirmenin en temiz yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>opacity</strong></td>
+                <td>Elemanın tamamının saydamlığı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Çocukları da etkiler ve yeni stacking context açar; sadece arka planı saydamlaştırmak için <code>rgb(... / .5)</code> kullan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>contrast ratio (WCAG)</strong></td>
+                <td>Metin/arka plan kontrast oranı; normal metin için en az 4,5:1 önerilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> DevTools renk seçicide oranı gösterir; erişilebilirlik denetimlerinin en sık bulgusu</td>
+                <td><a href="https://www.w3.org/WAI/WCAG22/quickref/">w3.org/WAI</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Arka plan ve görsel efektler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>background (kısayol)</strong></td>
+                <td>color, image, position, size, repeat, attachment, origin, clip tek satırda</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Yazmadığın alt özellikleri sıfırlar</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>background-image</strong></td>
+                <td>Görsel veya gradient; virgülle birden fazla katman verilebilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> İlk yazılan <em>en üstte</em> durur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>background-size</strong></td>
+                <td><code>cover</code> kırparak doldurur, <code>contain</code> sığdırır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>background-position / repeat / attachment</strong></td>
+                <td>Konum, tekrar, kaydırmayla birlikte hareket edip etmeme</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>attachment: fixed</code> mobilde performans sorunlu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>background-clip: text</strong></td>
+                <td>Arka planı metnin içine kırpar (gradient yazı efekti)</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>color: transparent</code> ile birlikte kullanılır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>linear-gradient / radial-gradient / conic-gradient</strong></td>
+                <td>CSS ile üretilen geçiş görselleri</td>
+                <td><span class="tag tag--ok">TEMEL</span> Gradient bir <em>image</em>'dır; <code>background-color</code> değil <code>background-image</code> yerine geçer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>repeating-linear-gradient</strong></td>
+                <td>Çizgili/desenli arka planlar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/repeating-linear-gradient">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>border-radius</strong></td>
+                <td>Köşe yuvarlama; <code>50%</code> daire yapar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Eliptik yazım da var: <code>border-radius: 10px / 20px</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>box-shadow</strong></td>
+                <td>Kutu gölgesi; <code>inset</code> ile içeri gölge</td>
+                <td><span class="tag tag--ok">TEMEL</span> Virgülle katmanlanır; büyük blur değerleri boyama maliyetini artırır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>text-shadow</strong></td>
+                <td>Metin gölgesi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>filter</strong></td>
+                <td><code>blur, brightness, grayscale, drop-shadow, saturate</code></td>
+                <td><span class="tag">ORTA</span> <code>drop-shadow</code> saydam PNG/SVG'nin gerçek konturunu takip eder, <code>box-shadow</code> etmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>backdrop-filter</strong></td>
+                <td>Elemanın <em>arkasındaki</em> içeriği bulanıklaştırır (buzlu cam)</td>
+                <td><span class="tag">ORTA</span> Performans maliyeti yüksektir; geniş alanlarda dikkat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mix-blend-mode / background-blend-mode</strong></td>
+                <td>Photoshop'taki katman karışım modları</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>isolation:isolate</code> ile hangi katmanla karışacağı sınırlanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mask / mask-image</strong></td>
+                <td>Bir görselin alfa kanalıyla elemanı maskeleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Bazı tarayıcılarda hâlâ <code>-webkit-mask</code> öneki gerekebilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>clip-path</strong></td>
+                <td>Elemanı çokgen/daire ile kesme</td>
+                <td><span class="tag tag--info">İLERİ</span> Animasyonlanabilir; <code>polygon()</code> en çok kullanılan</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>shape-outside</strong></td>
+                <td>Float'lanan elemanın etrafında metnin şekil alarak akması</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/shape-outside">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>image-rendering</strong></td>
+                <td>Ölçeklenen görselin yumuşatılma biçimi (<code>pixelated</code>)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="responsive"><span class="h-num">§ 9</span>Responsive tasarım</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sorgular ve uyum</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>@media</strong></td>
+                <td>Ekran genişliği/tipine göre koşullu stil</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Responsive denince ilk sorulan budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>viewport meta etiketi</strong></td>
+                <td><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Bu satır yoksa hiçbir media query mobilde beklendiği gibi çalışmaz. HTML tarafı: <a href="../01-html/index.html">01 &mdash; HTML</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Viewport_meta_element">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>mobile-first</strong></td>
+                <td>Önce dar ekranı yaz, <code>min-width</code> ile genişlet</td>
+                <td><span class="tag tag--ok">TEMEL</span> Karşıtı desktop-first (<code>max-width</code>); ikisini karıştırma</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>breakpoint stratejisi</strong></td>
+                <td>Kırılma noktalarını cihaza göre değil <em>içeriğin bozulduğu yere</em> göre seç</td>
+                <td><span class="tag tag--ok">TEMEL</span> Adlandırma (sm/md/lg) çatılar arasında ortaktır, piksel değerleri çatıya göre değişir: Bootstrap 5 &rarr; sm 576, md 768, lg 992, xl 1200, xxl 1400 px; Tailwind (varsayılan; v4'te <code>@theme</code> ile değiştirilebilir) &rarr; sm 640, md 768, lg 1024, xl 1280, 2xl 1536 px; MUI &rarr; xs 0, sm 600, md 900, lg 1200, xl 1536 px. Çatısız projede sabit cihaz genişlikleri yerine içeriğin kırıldığı noktaya göre eşik belirle; bileşen düzeyinde container query kullan</td>
+                <td><a href="https://getbootstrap.com/docs/5.3/layout/breakpoints/">getbootstrap.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>range syntax</strong></td>
+                <td>Modern yazım: <code>@media (width &gt;= 48rem)</code></td>
+                <td><span class="tag">ORTA</span> <code>min-width</code>/<code>max-width</code> yazımının okunur hali</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@container (container query)</strong></td>
+                <td>Bileşenin, ekrana değil <em>kendi kabının</em> genişliğine tepki vermesi</td>
+                <td><span class="tag">ORTA</span> Bileşen tabanlı arayüzde media query'den daha doğru araç; kapta <code>container-type</code> tanımlanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>container-type / container-name</strong></td>
+                <td>Hangi elemanın sorgulanabilir kap olduğunu tanımlar</td>
+                <td><span class="tag">ORTA</span> <code>inline-size</code> en yaygın değer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/container-type">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-color-scheme</strong></td>
+                <td>Kullanıcının koyu/açık tema tercihi</td>
+                <td><span class="tag tag--ok">TEMEL</span> CSS değişkenleriyle birleştirmek en pratik tema kurulumudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-reduced-motion</strong></td>
+                <td>Hareket azaltma tercihi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Animasyon yazan herkesin uygulaması gereken erişilebilirlik kuralı; § 10'a bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-contrast / forced-colors</strong></td>
+                <td>Yüksek kontrast ve Windows kontrast modu</td>
+                <td><span class="tag tag--info">İLERİ</span> Kurumsal/kamu projelerinde sorulabilir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/forced-colors">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>hover / pointer media özellikleri</strong></td>
+                <td>Cihazın hover yeteneği ve işaretleme hassasiyeti</td>
+                <td><span class="tag">ORTA</span> <code>@media (hover: hover)</code> ile dokunmatikte hover stillerini kapat</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>orientation</strong></td>
+                <td>Yatay/dikey ekran</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/orientation">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>aspect-ratio</strong></td>
+                <td>Kutuya oran verir: <code>aspect-ratio: 16/9</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Eski "padding-top: 56.25%" hilesinin yerini aldı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>object-fit / object-position</strong></td>
+                <td>Görselin kutusunu doldururken nasıl kırpılacağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>img</code> için <code>background-size</code>'ın karşılığı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>responsive images (srcset / picture)</strong></td>
+                <td>CSS değil HTML tarafı ama responsive'in yarısı burada</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ayrıntısı <a href="../01-html/index.html">01 &mdash; HTML</a> sayfasında</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>print stylesheet</strong></td>
+                <td><code>@media print</code> ile yazdırma düzeni</td>
+                <td><span class="tag">ORTA</span> Fatura/rapor çıktısı olan kurumsal projelerde beklenir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="animasyon"><span class="h-num">§ 10</span>Animasyon ve geçişler</h2>
+
+        <p>İki ayrı mekanizma var: <strong>transition</strong> (bir durumdan diğerine geçerken) ve
+        <strong>animation</strong> (@keyframes ile, kendi kendine çalışan). Karıştırma.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>transition</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>transition (kısayol)</strong></td>
+                <td><code>transition: opacity .2s ease-in-out .1s</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Sıra: property duration timing-function delay</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transition-property</strong></td>
+                <td>Hangi özelliğin animasyonlanacağı</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>all</code> yazma; gereksiz özellikleri de animasyonlar, performansı düşürür</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transition-duration / delay</strong></td>
+                <td>Süre ve gecikme</td>
+                <td><span class="tag tag--ok">TEMEL</span> Arayüz geçişlerinde 150–300ms tipik aralıktır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transition-timing-function</strong></td>
+                <td>Hız eğrisi: <code>linear, ease, ease-in, ease-out, ease-in-out</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Giren öğede <code>ease-out</code>, çıkan öğede <code>ease-in</code> genel kabul</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>cubic-bezier()</strong></td>
+                <td>Dört kontrol noktasıyla özel hız eğrisi</td>
+                <td><span class="tag">ORTA</span> Görsel araç: <a href="https://cubic-bezier.com/">cubic-bezier.com</a> (ücretsiz)</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>steps()</strong></td>
+                <td>Kademeli (kesik) hareket — sprite animasyonu, daktilo efekti</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>linear() easing</strong></td>
+                <td>Çok noktalı yaklaşık eğri; yay (spring) hissi taklit etmek için</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/easing-function">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transition-behavior: allow-discrete</strong></td>
+                <td><code>display</code> gibi kesikli özellikleri de geçişe dahil eder</td>
+                <td><span class="tag tag--info">İLERİ</span> <code>@starting-style</code> ile birlikte "görünürken animasyon" sorununu çözer</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@starting-style</strong></td>
+                <td>Eleman DOM'a ilk girdiğindeki başlangıç değerleri</td>
+                <td><span class="tag tag--info">İLERİ</span> Popover/dialog açılış animasyonu için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>transform</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>transform</strong></td>
+                <td><code>translate() rotate() scale() skew()</code> fonksiyonlarını sırayla uygular</td>
+                <td><span class="tag tag--ok">TEMEL</span> Sıra önemlidir: önce döndürüp sonra kaydırmak başka sonuç verir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>translate / rotate / scale (ayrı özellikler)</strong></td>
+                <td>Modern CSS'te bunlar bağımsız özellik olarak da yazılabilir</td>
+                <td><span class="tag">ORTA</span> Ayrı ayrı animasyonlamak istediğinde şart; <code>transform</code> ile karıştırma</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/translate">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transform-origin</strong></td>
+                <td>Dönüş/ölçek merkezini kaydırır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Varsayılan merkez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>perspective / perspective-origin</strong></td>
+                <td>3B derinlik hissi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ebeveyne yazılır; küçük değer = güçlü perspektif</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>transform-style: preserve-3d</strong></td>
+                <td>Çocukların 3B uzayda kalmasını sağlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Kart çevirme (flip card) efektinin olmazsa olmazı</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>backface-visibility</strong></td>
+                <td>Elemanın arka yüzü görünsün mü</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>translate(-50%, -50%) kalıbı</strong></td>
+                <td><code>top:50%; left:50%</code> ile birlikte tam ortalama</td>
+                <td><span class="tag tag--ok">TEMEL</span> Absolute konumlandırmada klasik; flex/grid varsa gerekmez</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>@keyframes ve animation</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>@keyframes</strong></td>
+                <td>Animasyonun ara karelerini tanımlar (<code>from/to</code> veya <code>0%/100%</code>)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-name / duration</strong></td>
+                <td>Hangi keyframe, ne kadar sürede</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>duration</code> yazılmazsa 0s'dir ve hiçbir şey görünmez</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-iteration-count</strong></td>
+                <td>Kaç kez tekrar; <code>infinite</code> sonsuz</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-direction</strong></td>
+                <td><code>normal / reverse / alternate / alternate-reverse</code></td>
+                <td><span class="tag">ORTA</span> Gidip gelen efektler için <code>alternate</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-fill-mode</strong></td>
+                <td>Animasyon öncesi/sonrası stillerin korunması: <code>forwards / backwards / both</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> "Animasyon bitince eski haline dönüyor" sorununun cevabı <code>forwards</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-play-state</strong></td>
+                <td><code>running / paused</code></td>
+                <td><span class="tag">ORTA</span> Hover'da durdurmak için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-delay</strong></td>
+                <td>Başlama gecikmesi; negatif değer animasyonu ortasından başlatır</td>
+                <td><span class="tag">ORTA</span> Liste öğelerini sırayla göstermek için</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>animation-composition</strong></td>
+                <td>Aynı özelliğe etki eden animasyonların birleşme kuralı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-composition">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Animasyon performansı ve modern API'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>compositor-only özellikler</strong></td>
+                <td>Yalnızca <code>transform</code> ve <code>opacity</code> GPU'da, layout/paint yapmadan animasyonlanır</td>
+                <td><span class="tag tag--ok">TEMEL</span> Animasyon performansı sorusunun tek cümlelik cevabı budur. <code>left/top/width/height</code> animasyonlama</td>
+                <td><a href="https://web.dev/articles/animations-guide">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>will-change</strong></td>
+                <td>Tarayıcıya "bu özellik değişecek, hazırlan" demek</td>
+                <td><span class="tag">ORTA</span> Her yere yazma; kalıcı bırakmak bellek harcar ve ters teper. Yeni katman + stacking context oluşturur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/will-change">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>layout / paint / composite</strong></td>
+                <td>Tarayıcının render hattının üç aşaması</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Reflow" = layout, "repaint" = paint. § 13'e bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>contain / content-visibility</strong></td>
+                <td>Tarayıcının hesaplamayı elemanla sınırlamasını sağlar</td>
+                <td><span class="tag tag--info">İLERİ</span> Uzun listelerde ciddi kazanç; <code>content-visibility: auto</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>scroll-driven animations</strong></td>
+                <td>Zamana değil kaydırmaya bağlı animasyon: <code>animation-timeline: scroll()</code>, <code>view()</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Eskiden JS gerektiren efektler artık saf CSS; tarayıcı desteğini kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>View Transitions API</strong></td>
+                <td>Sayfa/durum değişimlerinde yumuşak geçiş; <code>view-transition-name</code></td>
+                <td><span class="tag tag--info">İLERİ</span> Hem SPA hem çok sayfalı (MPA) sürümü var; JS tarafı <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Web Animations API (WAAPI)</strong></td>
+                <td><code>element.animate()</code> — JS'ten animasyon</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS animasyonuyla aynı motoru kullanır, kontrol daha iyidir</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>prefers-reduced-motion ile kapatma</strong></td>
+                <td>Hareket hassasiyeti olan kullanıcılar için animasyonu iptal etme kalıbı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Animasyon yazıp bunu yazmamak erişilebilirlik bulgusudur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Animate.css</strong></td>
+                <td>Hazır CSS animasyon sınıfları kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz (MIT) — <a href="https://animate.style/">animate.style</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>GSAP</strong></td>
+                <td>Endüstri standardı JS animasyon motoru; zaman çizelgesi (timeline) yönetimi güçlü</td>
+                <td><span class="tag">ORTA</span> Webflow bünyesine geçtikten sonra eklentileriyle birlikte ücretsizleşti; kullanmadan önce lisansı sitesinden doğrula</td>
+                <td><a href="https://gsap.com/docs/">gsap.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Motion (eski Framer Motion)</strong></td>
+                <td>React ağırlıklı, deklaratif animasyon kütüphanesi</td>
+                <td><span class="tag">ORTA</span> Ücretsiz çekirdek + ücretli bazı eklentiler; <a href="../../JavaScript-TypeScript/03-react/index.html">React</a> ile birlikte oku</td>
+                <td><a href="https://motion.dev/">motion.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>anime.js</strong></td>
+                <td>Hafif, bağımsız JS animasyon kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://animejs.com/">animejs.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Lottie</strong></td>
+                <td>After Effects animasyonlarını JSON olarak web'de oynatma</td>
+                <td><span class="tag tag--info">İLERİ</span> Tasarımcıdan hazır animasyon geldiğinde kullanılır</td>
+                <td><a href="https://airbnb.io/lottie/">airbnb.io/lottie</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="modern-css"><span class="h-num">§ 11</span>Modern CSS</h2>
+
+        <p>Son birkaç yılda gelen ve "CSS artık preprocessor'sız da yeter mi" tartışmasını başlatan özellikler.
+        Mülakatta "CSS'te yenilikleri takip ediyor musun" sorusunun cevabı bu bölümdür.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yeni yapılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>:has() ile ebeveyn seçme</strong></td>
+                <td><code>form:has(:invalid)</code>, <code>.kart:has(&gt; img)</code></td>
+                <td><span class="tag">ORTA</span> Yalnızca ebeveyn değil, "önceki kardeş" seçmeye de yarar: <code>li:has(+ li:hover)</code></td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:has">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS nesting</strong></td>
+                <td>Sass'taki iç içe yazımın tarayıcıya girmiş hali</td>
+                <td><span class="tag">ORTA</span> <code>&amp;</code> kullanımı Sass ile tam aynı değil; MDN'deki farklar bölümünü oku</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@layer (cascade layers)</strong></td>
+                <td>Katman sırası tanımlar; katmanlar arası öncelik özgüllüğün <em>üstündedir</em></td>
+                <td><span class="tag">ORTA</span> Kütüphane stillerini kendi stillerinin altına almanın <code>!important</code>'suz yolu</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@layer">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@scope</strong></td>
+                <td>Stili bir DOM alt ağacıyla sınırlar, alt sınır da verilebilir</td>
+                <td><span class="tag tag--info">İLERİ</span> "CSS'i bileşene hapsetme" sorununun yerli çözümü; tarayıcı desteğini kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@scope">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>@supports</strong></td>
+                <td>Özellik desteği varsa uygula (feature query)</td>
+                <td><span class="tag">ORTA</span> <code>@supports selector(:has(a))</code> yazımıyla seçici desteği de sorgulanır</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@supports">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>logical properties</strong></td>
+                <td><code>margin-inline</code>, <code>padding-block</code>, <code>inset-inline-start</code></td>
+                <td><span class="tag">ORTA</span> Sağdan-sola (Arapça) veya dikey yazımlı dillerde otomatik doğru çalışır; left/right yerine tercih et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>accent-color</strong></td>
+                <td>Checkbox/radio/range gibi form kontrollerinin vurgu rengi</td>
+                <td><span class="tag">ORTA</span> Tek satırla form elemanını markaya uydurur; sıfırdan checkbox çizmeye gerek kalmaz</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>color-scheme</strong></td>
+                <td>Tarayıcıya "bu sayfa koyu/açık temayı destekliyor" der; form kontrolleri ve kaydırma çubuğu uyum sağlar</td>
+                <td><span class="tag">ORTA</span> Koyu tema yaparken unutulan parça genelde budur</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>anchor positioning</strong></td>
+                <td>Bir elemanı başka bir elemana bağlayarak konumlandırma (tooltip, dropdown)</td>
+                <td><span class="tag tag--info">İLERİ</span> Yeni; tarayıcı desteği eşit değil, kullanmadan önce caniuse'a bak</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>field-sizing</strong></td>
+                <td>Input/textarea'nın içeriğe göre büyümesi</td>
+                <td><span class="tag tag--info">İLERİ</span> Uzun süre JS ile yapılan işi tek satıra indirir; destek kontrol et</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shadow DOM ve ::part / ::slotted</strong></td>
+                <td>Web Component stillerinin dış dünyadan yalıtımı ve delik açma noktaları</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS orada kalıtılmaz; ayrı bir dünya olarak öğren</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::part">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>vendor prefix</strong></td>
+                <td><code>-webkit-</code>, <code>-moz-</code>, <code>-ms-</code> önekleri</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Elle yazma; Autoprefixer yapsın. Eski kodda çokça görürsün</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix">developer.mozilla.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mimari-ve-araclar"><span class="h-num">§ 12</span>Mimari, metodoloji ve araçlar</h2>
+
+        <p>Bu yöntemler (BEM, ITCSS, utility-first) büyüyen CSS'in üç sorununu çözer: sınıf adlarının ve kuralların
+        <strong>çakışması</strong>, stilin <strong>yeniden kullanımı</strong> ve proje büyüdükçe <strong>ölçeklenmesi</strong>.
+        Backend'den (OOP/SOLID geçmişiyle) geliyorsan bu bölüm o bilginin CSS'teki karşılığıdır ve mülakatta
+        anlatabileceğin en kolay konudur. Mimari geçmişin yoksa "en kolay" değildir; önce yukarıdaki üç sorunu
+        küçük bir sayfada yaşa, sonra yöntemlere bak ve önceliği düşük tut.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Adlandırma ve mimari yöntemleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>BEM</strong></td>
+                <td>Block__Element--Modifier adlandırma kuralı</td>
+                <td><span class="tag tag--ok">TEMEL</span> En yaygın; özgüllüğü düz tutar. Kaynak olarak <a href="https://en.bem.info/">bem.info</a> kullan; getbem.com aynı konuyu anlatır ama yalnızca http üzerinden yayın yaptığı için buradan bağlantı verilmedi, adresi elle yazman gerekir</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>OOCSS</strong></td>
+                <td>Yapı ile görünümü, kap ile içeriği ayırma prensibi</td>
+                <td><span class="tag">ORTA</span> Nicole Sullivan'ın yöntemi; kavramsal, kütüphane değil</td>
+                <td><a href="https://github.com/stubbornella/oocss/wiki">github.com/stubbornella/oocss</a></td>
+              </tr>
+              <tr>
+                <td><strong>SMACSS</strong></td>
+                <td>Stilleri base/layout/module/state/theme kategorilerine ayırma</td>
+                <td><span class="tag">ORTA</span> <a href="https://smacss.com/">smacss.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>ITCSS</strong></td>
+                <td>Ters üçgen katmanlama: settings &rarr; tools &rarr; generic &rarr; elements &rarr; objects &rarr; components &rarr; utilities</td>
+                <td><span class="tag">ORTA</span> Harry Roberts'ın yöntemi; <code>@layer</code> ile çok iyi eşleşir. Resmî tek site yok, "ITCSS csswizardry" diye ara</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>utility-first</strong></td>
+                <td>Tek işi yapan küçük sınıfları HTML'de birleştirme yaklaşımı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tailwind'in felsefesi; BEM'in tam karşı kutbu</td>
+                <td><a href="https://tailwindcss.com/docs/styling-with-utility-classes">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>design tokens</strong></td>
+                <td>Renk/boşluk/tipografi değerlerinin isimlendirilmiş, platformdan bağımsız kaynağı</td>
+                <td><span class="tag">ORTA</span> CSS tarafındaki karşılığı custom property'lerdir</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>spacing scale</strong></td>
+                <td>4/8 px tabanlı boşluk ölçeği</td>
+                <td><span class="tag">ORTA</span> Rastgele değer yerine ölçekten seçmek tasarımı tutarlı kılar</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>atomic design</strong></td>
+                <td>Atom/molekül/organizma/şablon/sayfa hiyerarşisi</td>
+                <td><span class="tag tag--info">İLERİ</span> Brad Frost'un bileşen sınıflandırma yöntemi</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Preprocessor ve derleyiciler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Sass / SCSS</strong></td>
+                <td>Değişken, nesting, mixin, fonksiyon, partial ekleyen CSS önişlemcisi</td>
+                <td><span class="tag tag--ok">TEMEL</span> <code>.scss</code> CSS'e benzeyen sözdizimi, <code>.sass</code> girintili eski sözdizimi. <code>@import</code> kullanımdan kalktı, artık <code>@use</code>/<code>@forward</code></td>
+                <td><a href="https://sass-lang.com/documentation/">sass-lang.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Sass mixin / function / @extend</strong></td>
+                <td>Tekrar eden kuralları paketleme</td>
+                <td><span class="tag">ORTA</span> <code>@extend</code> çıktıda beklenmedik seçici patlamasına yol açar; mixin tercih edilir</td>
+                <td><a href="https://sass-lang.com/documentation/at-rules/mixin/">sass-lang.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Less</strong></td>
+                <td>Sass'ın rakibi olan eski önişlemci</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Bootstrap 3 Less'ti, 4'ten sonra Sass'a geçti. Eski projelerde karşına çıkar</td>
+                <td><a href="https://lesscss.org/">lesscss.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stylus</strong></td>
+                <td>Çok esnek sözdizimli niş önişlemci</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> <a href="https://stylus-lang.com/">stylus-lang.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>PostCSS</strong></td>
+                <td>CSS'i eklentilerle dönüştüren araç (önişlemci değil, <em>işlemci</em>)</td>
+                <td><span class="tag tag--ok">TEMEL</span> Tailwind ve Autoprefixer bunun üstünde çalışır</td>
+                <td><a href="https://postcss.org/">postcss.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Autoprefixer</strong></td>
+                <td>Gereken vendor prefix'leri otomatik ekler</td>
+                <td><span class="tag tag--ok">TEMEL</span> Hedef tarayıcıları <code>browserslist</code> ile belirlersin</td>
+                <td><a href="https://github.com/postcss/autoprefixer">github.com/postcss/autoprefixer</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lightning CSS</strong></td>
+                <td>Rust ile yazılmış çok hızlı CSS derleyici/minifier; modern sözdizimini eskiye çevirir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; Vite ve Tailwind ekosisteminde giderek yaygınlaşıyor</td>
+                <td><a href="https://lightningcss.dev/">lightningcss.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>cssnano</strong></td>
+                <td>CSS küçültücü (minifier)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; PostCSS eklentisi</td>
+                <td><a href="https://cssnano.github.io/cssnano/">cssnano.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stylelint</strong></td>
+                <td>CSS/SCSS linter</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; ESLint'in CSS karşılığı, <a href="../../JavaScript-TypeScript/04-ekosistem-ve-araclar/index.html">Ekosistem</a> ile birlikte oku</td>
+                <td><a href="https://stylelint.io/">stylelint.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tailwind CSS ve utility-first ekosistemi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Tailwind CSS</strong></td>
+                <td>Utility sınıflarıyla HTML içinde stil yazma çerçevesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz (MIT). İş ilanlarında en sık geçen CSS aracı; öğrenmeden önce saf CSS'i bitir</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>utility class</strong></td>
+                <td><code>flex</code>, <code>p-4</code>, <code>text-sm</code> gibi tek amaçlı sınıflar</td>
+                <td><span class="tag tag--ok">TEMEL</span> Her sınıfın karşılığı bir CSS bildirimidir; dokümanı "search" ile kullan</td>
+                <td><a href="https://tailwindcss.com/docs/styling-with-utility-classes">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>varyant önekleri</strong></td>
+                <td><code>hover:</code>, <code>md:</code>, <code>dark:</code>, <code>focus-visible:</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Media query ve pseudo-class'ı sınıf adına taşır</td>
+                <td><a href="https://tailwindcss.com/docs/hover-focus-and-other-states">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tailwind yapılandırması</strong></td>
+                <td>v3'te <code>tailwind.config.js</code>, v4'te CSS içinde <code>@theme</code></td>
+                <td><span class="tag tag--ok">TEMEL</span> Sürüm 4 ile yapılandırma yaklaşımı değişti; eğitim videosu izlerken hangi sürüm olduğuna bak</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>JIT / content taraması</strong></td>
+                <td>Yalnızca kullandığın sınıfları üretme</td>
+                <td><span class="tag">ORTA</span> Sınıf adını JS'te string birleştirerek üretirsen tarayıcı göremez ve stil kaybolur — bilinen tuzak</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>@apply</strong></td>
+                <td>Utility'leri kendi sınıfının içine toplama</td>
+                <td><span class="tag">ORTA</span> Aşırı kullanımı Tailwind'in amacını boşa çıkarır; resmî doküman da dikkatli olmayı önerir</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>arbitrary values</strong></td>
+                <td><code>w-[37px]</code> gibi ölçek dışı değer yazma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tailwind eklentileri</strong></td>
+                <td>typography (prose), forms, aspect-ratio, container-queries</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; resmî eklentiler</td>
+                <td><a href="https://tailwindcss.com/docs">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tailwind-merge / clsx / cva</strong></td>
+                <td>Sınıf çakışmalarını çözen ve koşullu sınıf üreten yardımcı paketler</td>
+                <td><span class="tag">ORTA</span> React projelerinde neredeyse standart; <a href="../../JavaScript-TypeScript/03-react/index.html">React</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Tailwind Plus (eski Tailwind UI)</strong></td>
+                <td>Resmî hazır bileşen/şablon koleksiyonu</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Tek seferlik lisans; Tailwind'in kendisi ücretsizdir, bu ayrı ürün</td>
+                <td><a href="https://tailwindcss.com/">tailwindcss.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>daisyUI</strong></td>
+                <td>Tailwind üstüne hazır bileşen sınıfları</td>
+                <td><span class="tag">ORTA</span> Ücretsiz — <a href="https://daisyui.com/">daisyui.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>UnoCSS</strong></td>
+                <td>Atomik CSS motoru; kural setleri değiştirilebilir, çok hızlı</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://unocss.dev/">unocss.dev</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Windi CSS</strong></td>
+                <td>Tailwind'in hızlı alternatifiydi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Proje bakımı durdu; yerine UnoCSS önerilir. Eski projede görürsen bunu bil</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bileşen-ölçekli stil ve hazır kütüphaneler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>CSS Modules</strong></td>
+                <td>Sınıf adlarını derleme sırasında benzersizleştirerek yerelleştirir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz; Vite/Next.js'te kutudan çıkar. Dosya adı <code>*.module.css</code></td>
+                <td><a href="https://github.com/css-modules/css-modules">github.com/css-modules</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS-in-JS</strong></td>
+                <td>Stili JS içinde tanımlama yaklaşımı</td>
+                <td><span class="tag">ORTA</span> Sunucu bileşenleri (RSC) ile uyumu sorunlu; yeni projede önce alternatiflere bak</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>styled-components</strong></td>
+                <td>Template literal ile stillenmiş bileşen üretir</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; çok yaygın ama proje bakım moduna geçtiğini duyurdu — yeni projede dikkat</td>
+                <td><a href="https://styled-components.com/docs">styled-components.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Emotion</strong></td>
+                <td>styled-components'e benzer, MUI'nin altyapısı</td>
+                <td><span class="tag">ORTA</span> Ücretsiz — <a href="https://emotion.sh/docs/introduction">emotion.sh</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>vanilla-extract</strong></td>
+                <td>TypeScript ile yazılan, derleme zamanında statik CSS üreten çözüm</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz; çalışma zamanı maliyeti yok. TS tarafı <a href="../../JavaScript-TypeScript/02-typescript/index.html">TypeScript</a></td>
+                <td><a href="https://vanilla-extract.style/">vanilla-extract.style</a></td>
+              </tr>
+              <tr>
+                <td><strong>Panda CSS</strong></td>
+                <td>Derleme zamanı atomik CSS üreten, tip güvenli çözüm</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://panda-css.com/">panda-css.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Linaria</strong></td>
+                <td>Sıfır çalışma zamanlı CSS-in-JS</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://linaria.dev/">linaria.dev</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Open Props</strong></td>
+                <td>Hazır CSS custom property koleksiyonu (renk, boşluk, gölge, easing)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; framework değil, sadece değişken seti — <a href="https://open-props.style/">open-props.style</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Bootstrap</strong></td>
+                <td>Hazır grid + bileşen kütüphanesi</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz. En az grid sistemi, utility sınıfları ve <code>data-bs-*</code> bileşenlerinin ne olduğunu bil</td>
+                <td><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">getbootstrap.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bulma</strong></td>
+                <td>Yalnızca CSS (JS içermeyen) framework</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://bulma.io/">bulma.io</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Pico CSS</strong></td>
+                <td>Sınıfsız (classless) minimal framework; semantik HTML'i doğrudan güzelleştirir</td>
+                <td><span class="tag tag--info">İLERİ</span> Ücretsiz — <a href="https://picocss.com/">picocss.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Foundation</strong></td>
+                <td>Bootstrap'in eski rakibi</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span> Yeni projede tercih edilmiyor</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>MUI / Chakra UI / Mantine</strong></td>
+                <td>React tabanlı hazır bileşen kütüphaneleri</td>
+                <td><span class="tag">ORTA</span> Çekirdek sürümleri ücretsiz; MUI'nin <em>X</em> ürünlerinin ileri özellikleri ücretlidir. <a href="../../JavaScript-TypeScript/03-react/index.html">React</a></td>
+                <td><a href="https://mui.com/">mui.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>shadcn/ui</strong></td>
+                <td>Kütüphane değil: bileşen kaynak kodunu projene kopyalayan koleksiyon (Tailwind + Radix)</td>
+                <td><span class="tag">ORTA</span> Ücretsiz; "npm install" ile gelmez, kodu doğrudan kendi repona girer — <a href="https://ui.shadcn.com/">ui.shadcn.com</a></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>headless UI kütüphaneleri</strong></td>
+                <td>Radix UI, Headless UI, React Aria — davranış ve erişilebilirlik verir, stil vermez</td>
+                <td><span class="tag">ORTA</span> Kendi tasarım sistemini kurarken doğru başlangıç</td>
+                <td><a href="https://www.radix-ui.com/">radix-ui.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hata-ayiklama-ve-performans"><span class="h-num">§ 13</span>Hata ayıklama ve performans</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>DevTools ve ölçüm</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>DevTools Elements / Styles paneli</strong></td>
+                <td>Uygulanan kuralları, üstü çizili (ezilmiş) bildirimleri ve kaynak dosyayı gösterir</td>
+                <td><span class="tag tag--ok">TEMEL</span> "Neden çalışmıyor" sorusunun ilk durağı; üstü çizili satır = cascade'i kaybetmiş</td>
+                <td><a href="https://developer.chrome.com/docs/devtools/css">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Computed sekmesi</strong></td>
+                <td>Nihai hesaplanmış değerler ve hangi kuraldan geldiği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Kalıtım kaynaklı sorunları burada bulursun</td>
+                <td><a href="https://developer.chrome.com/docs/devtools/css">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Flexbox / Grid overlay</strong></td>
+                <td>DevTools'un çizgileri ve alan adlarını ekranda göstermesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Grid öğrenirken en hızlı yol; Elements panelinde <code>grid</code> rozetine tıkla</td>
+                <td><a href="https://developer.chrome.com/docs/devtools/css/grid">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Layers / Rendering paneli</strong></td>
+                <td>Boyama alanlarını, katmanları, kare hızını görselleştirir</td>
+                <td><span class="tag">ORTA</span> "Paint flashing" seçeneği gereksiz repaint'i anında gösterir</td>
+                <td><a href="https://developer.chrome.com/docs/devtools/rendering">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Coverage sekmesi</strong></td>
+                <td>Sayfada kullanılmayan CSS/JS oranını ölçer</td>
+                <td><span class="tag">ORTA</span> "Unused CSS" tespitinin en hızlı yolu</td>
+                <td><a href="https://developer.chrome.com/docs/devtools/coverage">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>reflow (layout)</strong></td>
+                <td>Geometri değişince tarayıcının yeniden yerleşim hesabı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Pahalıdır; <code>width/height/top/left/margin</code> değiştirmek tetikler</td>
+                <td><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work">developer.mozilla.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>repaint (paint)</strong></td>
+                <td>Geometri aynıyken renk/gölge değişimi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Reflow'dan ucuz, composite'ten pahalı</td>
+                <td><a href="https://web.dev/articles/animations-guide">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>layout thrashing</strong></td>
+                <td>JS'te ölçüm ve yazmanın döngü içinde birbirini tetiklemesi</td>
+                <td><span class="tag tag--info">İLERİ</span> CSS değil JS kaynaklı; <a href="../../JavaScript-TypeScript/01-javascript/index.html">JavaScript</a> ile birlikte oku</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>CLS (Cumulative Layout Shift)</strong></td>
+                <td>Sayfa yüklenirken içeriğin zıplaması; Core Web Vitals metriği</td>
+                <td><span class="tag tag--ok">TEMEL</span> Görsele boyut/<code>aspect-ratio</code> vermek ve font-display seçimi doğrudan bunu etkiler</td>
+                <td><a href="https://web.dev/articles/cls">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>LCP ve render-blocking CSS</strong></td>
+                <td>CSS varsayılan olarak render'ı bloklar; büyük dosya ilk boyamayı geciktirir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://web.dev/articles/lcp">web.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>critical CSS</strong></td>
+                <td>İlk ekranda görünen kısmın CSS'ini satır içine alıp gerisini sonra yükleme</td>
+                <td><span class="tag tag--info">İLERİ</span> Aracı: <a href="https://github.com/addyosmani/critical">critical</a> (ücretsiz)</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>unused CSS temizliği</strong></td>
+                <td>Kullanılmayan kuralları çıkarma</td>
+                <td><span class="tag">ORTA</span> <a href="https://purgecss.com/">PurgeCSS</a> (ücretsiz); Tailwind zaten JIT ile bunu yapar</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Lighthouse</strong></td>
+                <td>Performans, erişilebilirlik ve SEO denetim aracı</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz; Chrome DevTools içinde</td>
+                <td><a href="https://developer.chrome.com/docs/lighthouse/overview">developer.chrome.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>caniuse.com / Baseline</strong></td>
+                <td>Özelliğin tarayıcı desteği ve "güvenle kullanılabilir mi" durumu</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz; modern CSS özelliği kullanmadan önce bak</td>
+                <td><a href="https://web.dev/baseline">web.dev/baseline</a></td>
+              </tr>
+              <tr>
+                <td><strong>CSS spesifikasyonları (W3C CSSWG)</strong></td>
+                <td>Nihai kaynak; MDN'nin dayandığı metin</td>
+                <td><span class="tag tag--info">İLERİ</span> Ağır okuma; ancak MDN'de cevap bulamadığında bak</td>
+                <td><a href="https://www.w3.org/Style/CSS/current-work">w3.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CodePen / JSFiddle</strong></td>
+                <td>Tarayıcıda hızlı CSS denemesi</td>
+                <td><span class="tag tag--ok">TEMEL</span> Ücretsiz katman yeterli; her yeni terimi burada 5 dakikada dene</td>
+                <td><a href="https://codepen.io/">codepen.io</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 14</span>Özet: bu sayfada öncelik sırası</h2>
+
+        <p>Sıfırdan başlıyorsan bu sırayla git. Her adımda tek kaynak seç, kod yaz, DevTools'ta aç ve kur.
+        Adımlardaki süreler <strong>temel CSS bilen biri için yaklaşık</strong> değerlerdir; sıfırdan başlıyorsan
+        flexbox da grid de birkaç gün sürebilir. Rolüne veya ekibine göre sıra değişir:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Profile göre sıra değişikliği</caption>
+            <thead><tr><th>Profil</th><th>Sıra / odak</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sıfırdan başlayan</strong></td><td>Aşağıdaki sıra.</td></tr>
+              <tr><td><strong>Backend ağırlıklı</strong></td><td>§ 1&ndash;§ 5 ve § 9 yeterli; sondaki "Dikkat" kutusu.</td></tr>
+              <tr><td><strong>Frontend/UI pozisyonu</strong></td><td>Listenin tamamı; animasyon, modern CSS, mimari ve erişilebilirlik (<code>prefers-reduced-motion</code>, <code>forced-colors</code>) üst sıralara çıkar. Mülakatta tasarımı canlı kodlamaya dökmen de beklenir.</td></tr>
+              <tr><td><strong>İşte Tailwind kullanan ekip</strong></td><td>Saf CSS temeli (§ 1&ndash;§ 5) sonrası doğrudan Tailwind (§ 12); BEM adımı atlanabilir.</td></tr>
+              <tr><td><strong>Bootstrap ağırlıklı kurumsal proje</strong></td><td>Bootstrap grid ve utility'leri temelden (§ 1&ndash;§ 4) hemen sonra; 10. sıraya bırakma.</td></tr>
+              <tr><td><strong>Tasarımcı</strong></td><td>Tipografi, renk ve kontrast (§ 7&ndash;§ 8) erken sıraya; responsive (§ 9) ile birlikte.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Seçiciler + özgüllük + cascade (§ 1)</span>
+            <p>CSS mülakatında en yüksek ihtimalle buradan soru gelir. "Neden bu kural kazandı"
+            sorusunu tahtada anlatabilecek düzeye gel. <code>!important</code> kullanmadan çakışma çözmeyi öğren.</p>
+            <span class="steps__meta">Öncelik: 1 &middot; Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Kutu modeli + box-sizing + margin collapse (§ 2)</span>
+            <p>"100px verdim 120px oldu" ve "boşluk neden birleşti" sorularının cevabı. Temel bilen için yarım saatlik konu, ömür boyu
+            işine yarar.</p>
+            <span class="steps__meta">Öncelik: 2 &middot; Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Flexbox (§ 4)</span>
+            <p>Bugün arayüzlerin çoğu bununla diziliyor. Flexbox Froggy'yi bir oturuşta bitir, sonra kendi navbar ve
+            kart listeni yaz. Container/item özelliklerini ayırt et.</p>
+            <span class="steps__meta">Öncelik: 3 &middot; Temel bilen için yaklaşık bir gün; sıfırdan birkaç gün</span>
+          </li>
+          <li>
+            <span class="steps__title">display + position + z-index/stacking context (§ 3)</span>
+            <p>Modal, dropdown, sticky başlık — hepsi buradan. "z-index 9999 verdim çalışmadı" sorusunun cevabını
+            bilmek seni ortalamanın üstüne çıkarır.</p>
+            <span class="steps__meta">Öncelik: 4 &middot; Rozet: MÜLAKATTA SIK</span>
+          </li>
+          <li>
+            <span class="steps__title">Responsive: viewport meta, media query, mobile-first (§ 9)</span>
+            <p>Sonra <code>aspect-ratio</code> ve <code>object-fit</code>. Kullandığın çatının breakpoint tablosuna bak
+            (Bootstrap, Tailwind, MUI); sm/md/lg adları ortak, piksel değerleri çatıya göre değişir.</p>
+            <span class="steps__meta">Öncelik: 5 &middot; Rozet: MÜLAKATTA SIK (Bootstrap)</span>
+          </li>
+          <li>
+            <span class="steps__title">Grid (§ 5)</span>
+            <p><code>grid-template-columns</code>, <code>fr</code>, <code>repeat(auto-fit, minmax())</code> ve
+            <code>grid-template-areas</code> dördü yeter. Grid Garden'ı bitir.</p>
+            <span class="steps__meta">Öncelik: 6 &middot; Temel bilen için yaklaşık yarım gün; sıfırdan birkaç gün</span>
+          </li>
+          <li>
+            <span class="steps__title">Birimler, calc/clamp, custom properties (§ 6)</span>
+            <p>rem/em farkı ve CSS değişkenleri; tema kurmanın temeli. Sass değişkeniyle CSS değişkeni farkını
+            anlatabil.</p>
+            <span class="steps__meta">Öncelik: 7</span>
+          </li>
+          <li>
+            <span class="steps__title">Animasyon: transition &rarr; transform &rarr; @keyframes (§ 10)</span>
+            <p>Kritik cümle: <strong>sadece transform ve opacity animasyonla</strong>. Bunu
+            bilmek, "animasyon performansı" sorusunun tam cevabıdır. Ardından <code>prefers-reduced-motion</code>
+            ekle.</p>
+            <span class="steps__meta">Öncelik: 8 &middot; Görsel olduğu için öğrenmesi keyifli</span>
+          </li>
+          <li>
+            <span class="steps__title">Tipografi ve renk (§ 7, § 8)</span>
+            <p>line-height birimsiz yazımı, <code>font-display: swap</code>, kontrast oranı, gradient. Tasarımcısız
+            projede farkı burada belli edersin.</p>
+            <span class="steps__meta">Öncelik: 9</span>
+          </li>
+          <li>
+            <span class="steps__title">Mimari: BEM veya utility-first, sonra Tailwind (§ 12)</span>
+            <p>Önce isimlendirme disiplinini kur, sonra Tailwind'e geç. Saf CSS'i bilmeden Tailwind öğrenmek sınıf
+            ezberlemeye dönüşür. Bootstrap'e de zaman ayır — iş ilanlarında hâlâ sık geçer: CSS temeli (kutu modeli, flexbox) oturmuşsa grid ve utility sınıflarıyla tanışmak bir&ndash;birkaç gün; ekibin Bootstrap kullanıyorsa öncelik yükselir.</p>
+            <span class="steps__meta">Öncelik: 10 &middot; Rozet: MÜLAKATTA SIK (Bootstrap)</span>
+          </li>
+          <li>
+            <span class="steps__title">Modern CSS: :has(), nesting, @layer, container query (§ 11)</span>
+            <p>"CSS'te yenilikleri takip ediyor musun" sorusuna verilecek cevap. Dört başlık yeter.</p>
+            <span class="steps__meta">Öncelik: 11</span>
+          </li>
+          <li>
+            <span class="steps__title">DevTools ve performans (§ 13)</span>
+            <p>Reflow/repaint/composite üçlüsü ve CLS. Bu bölüm, bir profiling/benchmark aracının yaptığı işin
+            tarayıcı tarafındaki karşılığı (C#'tan geliyorsan: BenchmarkDotNet).</p>
+            <span class="steps__meta">Öncelik: 12</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Ezberlenecek üç cümle: (1) Cascade'de kazananı sırasıyla köken/önem (<code>!important</code>), katman
+          (<code>@layer</code>), özgüllük ve kaynak sırası belirler; çakışmayı <code>!important</code> yerine özgüllük ve katmanla çöz. (2) Tek eksen Flexbox, iki eksen Grid. (3) Performanslı animasyon yalnızca
+          <code>transform</code> ve <code>opacity</code> ile yapılır.</p>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu sayfadaki her şeyi öğrenmene gerek yok. Asıl alanın backend ise (frontend/UI pozisyonu için geçerli değil) beklenen CSS seviyesi
+          "tasarımı çalışır hale getirebilmek" ve "neden bozulduğunu bulabilmek". § 1–§ 5 ile § 9 sağlamsa
+          mülakatta CSS3 sorularına rahat cevap verebilirsin. Kalanı iş üstünde öğrenilir.</p>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 15</span>Bu bölümün ana kaynakları</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">MDN — CSS referansı (tüm özellik listesi)</a></li>
+          <li><span class="src-n">02</span><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics">MDN — CSS öğrenme yolu</a></li>
+          <li><span class="src-n">03</span><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout">MDN — Flexbox modülü</a></li>
+          <li><span class="src-n">04</span><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">MDN — Grid modülü</a></li>
+          <li><span class="src-n">05</span><a href="https://web.dev/learn/css">web.dev — Learn CSS (ücretsiz kurs)</a></li>
+          <li><span class="src-n">06</span><a href="https://developer.chrome.com/docs/devtools/css">Chrome DevTools — CSS hata ayıklama</a></li>
+          <li><span class="src-n">07</span><a href="https://sass-lang.com/documentation/">Sass resmî dokümanı</a></li>
+          <li><span class="src-n">08</span><a href="https://tailwindcss.com/docs">Tailwind CSS resmî dokümanı</a></li>
+          <li><span class="src-n">09</span><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/">Bootstrap 5.3 dokümanı</a></li>
+          <li><span class="src-n">10</span><a href="https://caniuse.com/">caniuse.com — tarayıcı destek tabloları</a></li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-html/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">HTML</span></a>
+        <a class="next" href="../../JavaScript-TypeScript/01-javascript/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">JavaScript</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

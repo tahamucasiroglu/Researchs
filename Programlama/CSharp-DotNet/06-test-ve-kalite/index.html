@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test ve Kod Kalitesi — .NET Anahtar Listesi</title>
+<meta name="description" content="xUnit, Moq, NSubstitute, FluentAssertions, entegrasyon testi, Testcontainers, BenchmarkDotNet, statik analiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Test ve Kod Kalitesi</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · .NET</span>
+      <span class="brand__name">.NET Anahtar Listesi</span>
+      <span class="brand__sub">Araştırma başlıkları · anlatım yok</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil ve Platform</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-csharp-dili/index.html"><span class="nav-num">01</span><span>C# Dili</span></a></li>
+          <li><a class="nav-item" href="../02-platform-ve-web-api/index.html"><span class="nav-num">02</span><span>Platform ve Web API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Mimari</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-veri-erisimi/index.html"><span class="nav-num">03</span><span>Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../04-mimari-ve-desenler/index.html"><span class="nav-num">04</span><span>Mimari ve Desenler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dağıtık Sistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../05-mesajlasma-ve-dagitik/index.html"><span class="nav-num">05</span><span>Mesajlaşma ve Dağıtık Sistemler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Kalite ve Operasyon</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">06</span><span>Test ve Kod Kalitesi</span></a></li>
+          <li><a class="nav-item" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="nav-num">07</span><span>DevOps ve Gözlemlenebilirlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Arayüz ve Modern</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../08-ui-blazor-mvc-maui/index.html"><span class="nav-num">08</span><span>Blazor, MVC ve MAUI</span></a></li>
+          <li><a class="nav-item" href="../09-aspire-bulut-modern/index.html"><span class="nav-num">09</span><span>Aspire, Bulut ve Modern .NET</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Katalog</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../10-kutuphaneler/index.html"><span class="nav-num">10</span><span>Kütüphane Kataloğu</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML ve CSS</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Bu dosya anlatım içermez, araştırma başlığı verir. Her maddeyi kendi kaynağından öğren, küçük bir örnek yaz, sonra tikle. Bağlantılar resmî dokümantasyona gider.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 06 · Kalite ve Operasyon</div>
+        <h1 class="page-title">Test, <em>mock</em> ve kod kalitesi</h1>
+        <p class="lede">"Mock test ne?" sorusunun cevabı burada. Birim testten entegrasyon testine, sahte nesnelerden gerçek veritabanıyla teste, ölçüm ve statik analize kadar.</p>
+        <div class="head-meta">Seviye: sıfır &rarr; ileri &middot; Çoğu geliştiricinin en zayıf kaldığı alan</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Bu sayfa anlatım değil, <strong>arama listesi</strong>. Her satır bir anahtar kelime, yanında sadece
+        "bu nedir" düzeyinde bir not ve resmî doküman bağlantısı var. Konuyu kendin araştıracak, kendi kaynağından öğrenecek
+        ve kod yazacaksın. Notlar yalnızca yanlış şey aramanı engellemek için var.</p>
+
+        <p>Bu sayfada üç başlık öne çıkar: <strong>mock</strong> kavramı (ilanlarda genellikle <em>Moq</em> veya NSubstitute
+        adıyla geçer), <strong>TDD</strong> ve <strong>BenchmarkDotNet</strong>. Bu üçü ilanlarda sık geçer ve mülakatta ilk sorulacak
+        başlıklardır. Okuma sırası ise amacına göre değişir:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Amaca göre okuma sırası</caption>
+            <thead><tr><th>Durumun</th><th>Önerilen sıra</th></tr></thead>
+            <tbody>
+              <tr><td>Mülakata hazırlanıyorsun</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar önce; § 14'teki sıra olduğu gibi.</td></tr>
+              <tr><td>İlk kez test yazacaksın</td><td>AAA düzeni (§ 2) + xUnit <code>Fact</code>/<code>Theory</code> (§ 3) &rarr; mock (§ 4) &rarr; <code>WebApplicationFactory</code> ile entegrasyon testi (§ 7); TDD (§ 9) ve BenchmarkDotNet (§ 10) sonra.</td></tr>
+              <tr><td>Test kültürü olmayan mevcut bir projeye test ekliyorsun</td><td>Önce entegrasyon / karakterizasyon testleri (<code>WebApplicationFactory</code>, Testcontainers — § 7) ile mevcut davranışı sabitle, sonra unit test; TDD'yi yeni yazılan kodda uygula.</td></tr>
+              <tr><td>Performans sorunu yaşıyorsun</td><td>BenchmarkDotNet (§ 10) ve teşhis araçları (§ 11) öne.</td></tr>
+              <tr><td>QA / test otomasyon rolü hedefliyorsun</td><td>E2E ve UI testi (§ 8: Playwright/Selenium, Page Object Model) ve BDD (§ 9) öne.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>İlgili sayfalar: mimari kararların testi için <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a>,
+        test hattını otomatikleştirmek için <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a>,
+        veritabanı testleri için <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>, paket isimlerinin toplu listesi için
+        <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a>.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Rozet sözlüğü</p>
+          <p><span class="tag tag--bad">MÜLAKATTA SIK</span> iş ilanlarında ve mülakatlarda sık geçen; en az bir çalışan örnek yaz, en yüksek öncelik &middot;
+          <span class="tag tag--ok">TEMEL</span> olmazsa olmaz &middot;
+          <span class="tag">ORTA</span> sonra gelir &middot;
+          <span class="tag tag--info">İLERİ</span> derinleşme &middot;
+          <span class="tag tag--warn">ÜCRETLİ</span> lisans parası ister &middot;
+          <span class="tag tag--warn">ESKİMİŞ</span> hâlâ karşına çıkar, yeni projede seçilmez.</p>
+        </div>
+
+        <h2 id="test-turleri"><span class="h-num">§ 2</span>Test türleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test türleri — hangi seviyede ne test edilir</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>unit test</strong></td>
+                <td>Tek bir sınıf/metodu bağımlılıklarından yalıtarak test etme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>integration test</strong></td>
+                <td>Birden fazla bileşeni birlikte, gerçek veritabanı/HTTP ile test etme</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>end-to-end test (E2E)</strong></td>
+                <td>Kullanıcı gözünden, tarayıcı veya istemci üzerinden baştan sona akış testi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://playwright.dev/dotnet/">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>smoke test</strong></td>
+                <td>Deploy sonrası "ayakta mı" kontrolü; birkaç kritik uç nokta çağrılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>regression test</strong></td>
+                <td>Daha önce düzeltilmiş bir hatanın geri gelmediğini doğrulayan test</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>acceptance test</strong></td>
+                <td>İş biriminin kabul kriterini doğrulayan test; genelde BDD ile yazılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://reqnroll.net/">reqnroll.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>contract test</strong></td>
+                <td>İki servis arasındaki sözleşmeyi (istek/yanıt şekli) doğrulama; consumer-driven</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.pact.io/">docs.pact.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>snapshot test</strong> / approval test</td>
+                <td>Çıktıyı onaylanmış bir dosyayla karşılaştırma; "beklenen" elle yazılmaz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/VerifyTests/Verify">github.com/VerifyTests</a></td>
+              </tr>
+              <tr>
+                <td><strong>mutation test</strong></td>
+                <td>Koda kasten hata enjekte edip testlerin yakalayıp yakalamadığını ölçme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://stryker-mutator.io/docs/stryker-net/introduction/">stryker-mutator.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>load test</strong></td>
+                <td>Beklenen yük altında yanıt süresi/hata oranı ölçümü</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://nbomber.com/">nbomber.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stress test</strong></td>
+                <td>Sistemin kırılma noktasını bulmak için yükü kasten aşırıya çıkarma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>soak / endurance test</strong></td>
+                <td>Uzun süre (saatler) sabit yük; memory leak ve kaynak sızıntısı avı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>spike test</strong></td>
+                <td>Ani yük sıçraması karşısında davranış; autoscaling doğrulaması</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>chaos test</strong></td>
+                <td>Kasten arıza üretip (gecikme, hata, kapanma) dayanıklılığı ölçme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.pollydocs.org/chaos/">pollydocs.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>property-based test</strong></td>
+                <td>Tek tek örnek yerine "her girdi için şu özellik doğru olmalı" testi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://fscheck.github.io/FsCheck/">fscheck.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>architecture test</strong></td>
+                <td>Katman kurallarını (Domain, Infrastructure'a referans veremez) test olarak yazma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/BenMorris/NetArchTest">github.com/BenMorris</a></td>
+              </tr>
+              <tr>
+                <td><strong>exploratory / manual test</strong></td>
+                <td>Senaryosuz, elle keşif testi; otomasyonun yerini almaz ama tamamlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>security test</strong> / SAST / DAST</td>
+                <td>Statik ve dinamik güvenlik taraması; ayrıntısı DevOps sayfasında</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+              </tr>
+              <tr>
+                <td><strong>accessibility test</strong></td>
+                <td>Erişilebilirlik denetimi; arayüz (HTML/CSS) tarafının konusu</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="../../HTML-CSS/index.html">HTML ve CSS bölümü</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test kavramları — mülakatta terim olarak sorulur</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>test pyramid</strong></td>
+                <td>Çok unit, orta integration, az E2E önerisi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/articles/practical-test-pyramid.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>testing trophy</strong></td>
+                <td>Piramidin alternatifi; ağırlığı integration teste veren model</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://kentcdodds.com/blog/the-testing-trophy-and-testing-classifications">kentcdodds.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SUT</strong> (System Under Test)</td>
+                <td>Test edilen sınıf/nesne; test kodunda değişken adı olarak da geçer</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>AAA</strong> (Arrange-Act-Assert)</td>
+                <td>Test gövdesini üç bloğa ayırma düzeni</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Given-When-Then</strong></td>
+                <td>AAA'nın BDD'deki karşılığı; Gherkin sözdiziminin omurgası</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://cucumber.io/docs/gherkin/reference/">cucumber.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>test isolation</strong></td>
+                <td>Testlerin birbirini ve sıraya bağımlılığı etkilememesi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>flaky test</strong></td>
+                <td>Aynı kodda bazen geçen bazen kalan test; zaman/paralellik/dış servis kaynaklı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>code coverage</strong></td>
+                <td>Testlerin çalıştırdığı kod oranı; kalite değil kapsama ölçer</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>happy path</strong> / edge case</td>
+                <td>Beklenen akış ile sınır durumlar; ikisi de test edilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>deterministic test</strong></td>
+                <td>DateTime.Now, Random, Guid.NewGuid kullanan test deterministik değildir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>test naming</strong></td>
+                <td>Yaygın kalıp: Metot_Durum_BeklenenSonuç; ekip içinde tutarlı olması yeter</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>seam</strong></td>
+                <td>Kodun davranışını değiştirmeden araya girebildiğin nokta; test edilebilirliğin anahtarı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>humble object pattern</strong></td>
+                <td>Test edilemez kısmı (UI, framework) inceltip mantığı ayrı sınıfa taşıma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>shift-left testing</strong></td>
+                <td>Testi süreçte erkene çekme; CI'da her PR'da koşturma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>test fixture</strong></td>
+                <td>Testin ihtiyaç duyduğu ortak kurulum; xUnit'te sınıf/koleksiyon fixture olarak somutlaşır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/shared-context">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>test double</strong></td>
+                <td>Gerçek bağımlılığın yerine geçen sahte nesnelerin şemsiye adı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDouble.html">martinfowler.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test-catilari"><span class="h-num">§ 3</span>Test çatıları ve koşucular</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test çatıları — .NET'te seçenekler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>xUnit</strong></td>
+                <td>.NET'te en yaygın test çatısı; şablonların varsayılanı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>xUnit v3</strong></td>
+                <td>xUnit'in yeni ana sürümü; test projesi artık çalıştırılabilir uygulama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>NUnit</strong></td>
+                <td>Eski ve olgun alternatif; constraint tabanlı Assert.That sözdizimi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>MSTest</strong></td>
+                <td>Microsoft'un kendi çatısı; kurumsal ve eski projelerde sık</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TUnit</strong></td>
+                <td>Yeni nesil, kaynak üreteci (source generator) tabanlı, AOT dostu çatı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/thomhurst/TUnit">github.com/thomhurst</a></td>
+              </tr>
+              <tr>
+                <td><strong>Fixie</strong></td>
+                <td>Attribute yerine convention ile test keşfeden niş çatı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/fixie/fixie">github.com/fixie</a></td>
+              </tr>
+              <tr>
+                <td><strong>Machine.Specifications (MSpec)</strong></td>
+                <td>BDD tarzı context/specification sözdizimi; eski projelerde görülür</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://github.com/machine/machine.specifications">github.com/machine</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.Testing.Platform</strong></td>
+                <td>VSTest'in yerine gelen yeni test çalıştırma platformu; xUnit v3, MSTest, TUnit destekler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/microsoft-testing-platform-intro">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>VSTest</strong></td>
+                <td>Klasik test motoru; <code>dotnet test</code> arkasında uzun süre bu çalıştı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/test/vstest-console-options">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet test</strong></td>
+                <td>Komut satırından test koşturma; CI'da kullandığın komut</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>--filter</strong></td>
+                <td>Testleri ada/kategoriye göre süzme; ara "dotnet test filter syntax"</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/selective-unit-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>trx logger</strong> / JUnit logger</td>
+                <td>Test sonucunu CI'nin okuyacağı dosyaya yazma: <code>--logger trx</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Test Explorer</strong></td>
+                <td>Visual Studio / Rider'ın test penceresi; hangi testin neden kaldığını burada gör</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/test/run-unit-tests-with-test-explorer">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>xunit.runner.visualstudio</strong></td>
+                <td>Test adapter paketi; olmadan IDE testleri görmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.nuget.org/packages/xunit.runner.visualstudio">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NUnit3TestAdapter</strong> / MSTest.TestAdapter</td>
+                <td>Diğer çatıların adapter paketleri; aynı görev</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.nuget.org/packages/NUnit3TestAdapter">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.NET.Test.Sdk</strong></td>
+                <td>Test projesini test projesi yapan MSBuild paketi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.nuget.org/packages/Microsoft.NET.Test.Sdk">nuget.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>xUnit anahtar kelimeleri — ilanlarda en sık geçen çatı, ezberden değil elden geçir</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>[Fact]</strong></td>
+                <td>Parametresiz tek senaryo testi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Theory]</strong></td>
+                <td>Parametreli test; veri kaynağı attribute'u ile beslenir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>[InlineData]</strong></td>
+                <td>Theory'ye sabit değer seti verme; en basit veri kaynağı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>[MemberData]</strong></td>
+                <td>Statik property/metottan veri okuma; karmaşık nesneler için</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>[ClassData]</strong></td>
+                <td>Veri setini ayrı bir sınıfta toplama; IEnumerable döndürür</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>DataAttribute</strong></td>
+                <td>Kendi özel veri kaynağı attribute'unu yazmak için taban sınıf</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>constructor + IDisposable</strong></td>
+                <td>xUnit'te setup/teardown budur; her test için yeni sınıf örneği üretilir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/shared-context">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>IClassFixture&lt;T&gt;</strong></td>
+                <td>Aynı test sınıfındaki tüm testler için tek kurulum paylaşma</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/shared-context">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>ICollectionFixture&lt;T&gt;</strong> / [CollectionDefinition]</td>
+                <td>Birden çok test sınıfı arasında kurulum paylaşma; paralelliği de kapatır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/docs/shared-context">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>IAsyncLifetime</strong></td>
+                <td>Asenkron kurulum/temizlik; Testcontainers ile birlikte çok kullanılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/docs/shared-context">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>ITestOutputHelper</strong></td>
+                <td>Test içinden log yazma; xUnit'te Console.WriteLine görünmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/capturing-output">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Assert.Throws</strong> / ThrowsAsync</td>
+                <td>Beklenen istisnayı doğrulama</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Skip</strong></td>
+                <td>Testi geçici devre dışı bırakma: <code>[Fact(Skip = "...")]</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Trait]</strong></td>
+                <td>Teste kategori etiketi; CI'da <code>--filter</code> ile ayırmak için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>parallel execution</strong> / xunit.runner.json</td>
+                <td>xUnit varsayılan olarak koleksiyonları paralel koşar; veritabanı testlerinde kapatılır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/docs/running-tests-in-parallel">xunit.net</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>NUnit ve MSTest karşılıkları — başka projeye geçince lazım olur</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>[Test]</strong> / <strong>[TestMethod]</strong></td>
+                <td>NUnit ve MSTest'te [Fact] karşılığı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes.html">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[TestCase]</strong> / <strong>[DataRow]</strong></td>
+                <td>[InlineData] karşılığı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes.html">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[TestCaseSource]</strong> / <strong>[DynamicData]</strong></td>
+                <td>[MemberData] karşılığı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/articles/nunit/writing-tests/attributes.html">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[SetUp]</strong> / <strong>[TestInitialize]</strong></td>
+                <td>Her testten önce çalışan kurulum</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[OneTimeSetUp]</strong> / <strong>[ClassInitialize]</strong></td>
+                <td>Sınıf başına tek kurulum; xUnit'te fixture ile yapılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[AssemblyInitialize]</strong></td>
+                <td>Tüm test derlemesi için tek kurulum (MSTest)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Assert.That</strong> (constraint model)</td>
+                <td>NUnit'in okunabilir doğrulama sözdizimi: <code>Assert.That(x, Is.EqualTo(3))</code></td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/assertion-models/constraint.html">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Values]</strong> / [Range] / [Combinatorial]</td>
+                <td>NUnit'te kombinasyonlu veri üretimi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.nunit.org/">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[TestFixture]</strong></td>
+                <td>NUnit'te test sınıfı işareti; yeni sürümlerde çoğu durumda zorunlu değil</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/">docs.nunit.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mock-kavrami"><span class="h-num">§ 4</span>Mock kavramı ve test double türleri</h2>
+
+        <p>Aşağıdaki beş terim aynı şey değil; mülakatta "stub ile mock farkı nedir" diye
+        doğrudan sorulur. Başlangıç noktana göre:</p>
+        <ul>
+          <li><strong>Hiç test yazmadıysan</strong> &rarr; bu bölüm senin için yazıldı: önce Fowler'ın iki yazısını oku, sonra kütüphane dokümanına geç.</li>
+          <li><strong>Java'dan geliyorsan</strong> &rarr; Mockito'nun <code>when(...).thenReturn(...)</code> &harr; Moq <code>Setup(...).Returns(...)</code>,
+          <code>verify(...)</code> &harr; <code>Verify(...)</code>; JUnit <code>@BeforeEach</code> &harr; xUnit'te test sınıfının constructor'ı.</li>
+          <li><strong>JavaScript/TypeScript'ten geliyorsan</strong> &rarr; Jest <code>jest.fn()</code> / <code>mockResolvedValue</code> &harr; Moq <code>Setup(...).ReturnsAsync(...)</code>.</li>
+          <li><strong>Python'dan geliyorsan</strong> &rarr; <code>unittest.mock.Mock</code> / <code>patch</code> &harr; Moq; ama .NET'te monkey-patch yoktur,
+          bu yüzden mock'lanacak şeyin arayüz veya <code>virtual</code> üye olması gerekir (aşağıdaki ilgili satır) — en kritik fark bu.</li>
+        </ul>
+
+        <div class="def">
+          <p class="def__term">test double <small>test dublörü</small></p>
+          <p>Testte gerçek bağımlılığın (veritabanı, e-posta servisi, HTTP istemcisi) yerine geçen sahte nesnelerin
+          genel adı. Sinemadaki dublör gibi: aynı rolü oynar, gerçek olan değildir. Aşağıdaki beş tür bunun alt kümesidir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test double türleri — beşi de farklı şeydir</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>dummy</strong></td>
+                <td>Sadece parametre doldurmak için geçilen, hiç kullanılmayan nesne (çoğu zaman null)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDouble.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>fake</strong></td>
+                <td>Çalışan ama basitleştirilmiş gerçek implementasyon; ör. Dictionary tabanlı repository</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDouble.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>stub</strong></td>
+                <td>Sabit cevap döndüren nesne; "bu metot çağrılırsa şunu dön". Doğrulama yapmaz</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/articles/mocksArentStubs.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>spy</strong></td>
+                <td>Çağrıları kaydeden stub; test sonunda "kaç kez çağrıldı" diye bakarsın</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDouble.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>mock</strong></td>
+                <td>Beklenen çağrıları önceden tanımlayıp doğrulayan nesne; davranış (etkileşim) testi yapar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://martinfowler.com/articles/mocksArentStubs.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>shim</strong></td>
+                <td>Statik/sealed kodun çağrısını çalışma anında yönlendirme; Microsoft Fakes'in özelliği</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Kullanılabilirlik IDE ve lisansa bağlı; ayrıntı aşağıdaki "Microsoft Fakes" satırında.</td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/test/isolating-code-under-test-with-microsoft-fakes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>state verification</strong> vs <strong>behavior verification</strong></td>
+                <td>Sonucu mu doğruluyorsun, çağrının olup olmadığını mı; stub vs mock ayrımının özü</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/articles/mocksArentStubs.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>classicist (Chicago)</strong> vs <strong>mockist (London)</strong></td>
+                <td>Az mock kullanan ekol ile her bağımlılığı mock'layan ekol</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://martinfowler.com/articles/mocksArentStubs.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>over-mocking</strong></td>
+                <td>Her şeyi mock'layınca test, kodun kendisini değil kurgusunu doğrular; refactor'da hep kırılır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>don't mock what you don't own</strong></td>
+                <td>Üçüncü parti tipi doğrudan mock'lama, arayüzle sarmala; yaygın öğüt</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mock API terimleri — kütüphane dokümanında bu kelimeleri arayacaksın</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Setup / Returns</strong></td>
+                <td>Moq'ta "şu çağrı gelirse şunu dön" tanımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReturnsAsync</strong></td>
+                <td>Task döndüren metotlar için; async repository mock'larken gerekir</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>Verify / VerifyNoOtherCalls</strong></td>
+                <td>Çağrının olup olmadığını, kaç kez olduğunu doğrulama (Times.Once vb.)</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>Callback</strong></td>
+                <td>Çağrı sırasında araya kod sokma; gelen argümanı yakalamak için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>It.IsAny&lt;T&gt;</strong> / It.Is</td>
+                <td>Argument matcher: "herhangi bir int" veya "şu koşulu sağlayan değer"</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>Arg.Any&lt;T&gt;</strong> / Arg.Is</td>
+                <td>Aynı kavramın NSubstitute'taki adı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://nsubstitute.github.io/help/argument-matchers/">nsubstitute.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>MockBehavior.Strict</strong> vs Loose</td>
+                <td>Strict: tanımlanmamış her çağrı hata verir. Loose (varsayılan): default değer döner</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>SetupSequence</strong></td>
+                <td>Ardışık çağrılara farklı cevaplar; retry mantığı test ederken</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>Throws / ThrowsAsync</strong></td>
+                <td>Mock'un istisna fırlatmasını sağlama; hata yolunu test etmek için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/devlooped/moq/wiki/Quickstart">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>CallBase</strong> / partial mock</td>
+                <td>Sanal olmayan üyeleri gerçek sınıftan çalıştırma; genelde kaçınılır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/devlooped/moq">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>virtual / interface zorunluluğu</strong></td>
+                <td>Moq, NSubstitute, FakeItEasy sealed sınıf ve statik metodu mock'layamaz; arayüz gerekir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>auto-mocking container</strong></td>
+                <td>Constructor'daki tüm bağımlılıkları otomatik mock'layan yardımcı (Moq.AutoMock)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/moq/Moq.AutoMocker">github.com/moq</a></td>
+              </tr>
+              <tr>
+                <td><strong>TimeProvider</strong> / FakeTimeProvider</td>
+                <td>.NET 8+ zaman soyutlaması; DateTime.Now yerine bunu enjekte et, testte sahtesini ver</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeprovider">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>System.IO.Abstractions</strong></td>
+                <td>Dosya sistemini mock'lanabilir hale getiren soyutlama katmanı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/TestableIO/System.IO.Abstractions">github.com/TestableIO</a></td>
+              </tr>
+              <tr>
+                <td><strong>HttpMessageHandler mock</strong></td>
+                <td>HttpClient'ı mock'lamanın doğru yolu; handler'ı değiştirirsin, HttpClient'ı değil</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/richardszalay/mockhttp">github.com/richardszalay</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Mock kütüphaneleri — seçenekler ve lisans durumu</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Moq</strong></td>
+                <td>.NET'in en yaygın mock kütüphanesi; lambda tabanlı Setup/Verify API'si</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span> Ücretsiz (BSD-3). Java'dan geliyorsan API'si Mockito'ya en yakın olan budur.</td>
+                <td><a href="https://github.com/devlooped/moq">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>Moq SponsorLink tartışması</strong></td>
+                <td>2023'te 4.20 sürümü derleme sırasında e-posta hash'i gönderen bir bileşen ekledi; tepki üzerine geri alındı, ama birçok ekip NSubstitute'a geçti. Mülakatta çıkabilir</td>
+                <td><span class="tag tag--ok">TEMEL</span> Duruma göre:
+                <br>&bull; Yeni proje &rarr; Moq'un SponsorLink içermeyen güncel sürümü veya NSubstitute; ikisi de ücretsiz, seçim ekip tercihi.
+                <br>&bull; Mevcut projede SponsorLink'li sürüm (4.20.0 / 4.20.1) &rarr; güncel sürüme yükselt. <span class="tag tag--warn">TEYİT</span> SponsorLink'in kaldırıldığı sürüm: github.com/devlooped/moq releases
+                <br>&bull; Şirket politikası Moq'u yasaklıyorsa &rarr; NSubstitute veya FakeItEasy.</td>
+                <td><a href="https://github.com/devlooped/moq/issues/1372">github.com/devlooped</a></td>
+              </tr>
+              <tr>
+                <td><strong>NSubstitute</strong></td>
+                <td>Daha sade sözdizimi (<code>Substitute.For</code>, <code>Received()</code>); Moq'un en güçlü alternatifi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://nsubstitute.github.io/">nsubstitute.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>FakeItEasy</strong></td>
+                <td>Üçüncü yaygın seçenek; <code>A.Fake</code>, <code>A.CallTo</code> sözdizimi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://fakeiteasy.github.io/">fakeiteasy.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>JustMock Lite</strong></td>
+                <td>Telerik'in ücretsiz sürümü; sadece sanal üye/arayüz mock'lar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.telerik.com/products/mocking.aspx">telerik.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>JustMock (tam sürüm)</strong></td>
+                <td>Statik, sealed, private üyeleri de mock'lar (profiler kullanır)</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.telerik.com/products/mocking.aspx">telerik.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TypeMock Isolator</strong></td>
+                <td>Aynı sınıfta en eski ürün; legacy kodu değiştirmeden test etmek için</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.typemock.com/">typemock.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft Fakes</strong> (Stubs &amp; Shims)</td>
+                <td>Visual Studio'ya gömülü; kullanılabilirlik IDE ve lisansa bağlı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> IDE/lisansa göre:
+                <br>&bull; Visual Studio Enterprise &rarr; mevcut.
+                <br>&bull; Visual Studio Professional / Community &rarr; kullanılabilirlik sürüme göre değişti. <span class="tag tag--warn">TEYİT</span> learn.microsoft.com "Isolate code under test with Microsoft Fakes", gereksinimler bölümü
+                <br>&bull; Rider / VS Code / Linux-macOS CI &rarr; Fakes yok. Statik/sealed kod için ücretsiz yol: arayüzle sarmalamak; ücretli yol: JustMock / TypeMock.</td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/test/isolating-code-under-test-with-microsoft-fakes">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FakeLogger</strong></td>
+                <td>ILogger çağrılarını doğrulamak için resmî test yardımcısı (Microsoft.Extensions.Diagnostics.Testing)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.Testing">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>MockHttp</strong> (RichardSzalay)</td>
+                <td>HttpClient çağrılarını sahte cevaplarla karşılama</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/richardszalay/mockhttp">github.com/richardszalay</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat — mülakat sorusu</p>
+          <p>"Repository'yi mock'ladın, peki SQL sorgun doğru mu?" sorusunun cevabı: mock bunu test etmez.
+          Sorgu doğruluğu için gerçek veritabanına karşı entegrasyon testi gerekir (§ 7). Bu ayrımı bilmek,
+          mock kütüphanesinin API'sini ezberlemekten daha değerli.</p>
+        </div>
+
+        <h2 id="assertion"><span class="h-num">§ 5</span>Assertion (doğrulama) kütüphaneleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doğrulama kütüphaneleri — lisans durumu 2025'te değişti, dikkat</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>xUnit Assert</strong></td>
+                <td>Yerleşik doğrulama: Equal, True, Contains, Throws. Ek paket gerekmez</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://xunit.net/">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Assert.Equivalent</strong></td>
+                <td>xUnit v3'te nesne ağacını yapısal karşılaştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://xunit.net/docs/getting-started/v3/getting-started">xunit.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>FluentAssertions</strong></td>
+                <td>Akıcı sözdizimi: <code>result.Should().Be(3)</code>. .NET'te en yaygın olan</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Yalnız v8+ ve ticari kullanımda; dallar bir alt satırda.</td>
+                <td><a href="https://fluentassertions.com/">fluentassertions.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>FluentAssertions v8 lisans değişikliği</strong></td>
+                <td>Sürüm 8 ile ticari kullanım ücretli lisansa geçti (Xceed). v7 ücretsiz kaldı; yeni projede sürümü kontrol et</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Kullanıma göre:
+                <br>&bull; Ticari projede v8+ &rarr; geliştirici başı ücretli Xceed lisansı.
+                <br>&bull; Ticari olmayan / açık kaynak / kişisel öğrenme projesinde v8+ &rarr; ücretsiz kullanım izni var. <span class="tag tag--warn">TEYİT</span> xceed.com FluentAssertions lisans sayfası
+                <br>&bull; Mevcut projede v7.x &rarr; Apache-2.0, ücretsiz; v8'e yükseltilmedikçe ücret doğmaz.
+                <br>&bull; Yeni ticari proje, ücret istemeyen &rarr; AwesomeAssertions, Shouldly veya xUnit'in yerleşik <code>Assert</code>'i.</td>
+                <td><a href="https://fluentassertions.com/releases/">fluentassertions.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AwesomeAssertions</strong></td>
+                <td>FluentAssertions v7'nin topluluk fork'u; ücretsiz devam eder, API neredeyse aynı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://github.com/AwesomeAssertions/AwesomeAssertions">github.com/AwesomeAssertions</a></td>
+              </tr>
+              <tr>
+                <td><strong>Shouldly</strong></td>
+                <td>Ücretsiz alternatif: <code>result.ShouldBe(3)</code>; hata mesajları çok okunur</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://github.com/shouldly/shouldly">github.com/shouldly</a></td>
+              </tr>
+              <tr>
+                <td><strong>NUnit Assert.That</strong></td>
+                <td>NUnit'in yerleşik akıcı sözdizimi; ek kütüphaneye gerek bırakmaz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.nunit.org/articles/nunit/writing-tests/assertions/assertion-models/constraint.html">docs.nunit.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>CollectionAssert</strong> / StringAssert</td>
+                <td>MSTest'in koleksiyon ve metin doğrulayıcıları</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Verify</strong></td>
+                <td>Snapshot testing: çıktı <code>.verified.txt</code> dosyasıyla karşılaştırılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/VerifyTests/Verify">github.com/VerifyTests</a></td>
+              </tr>
+              <tr>
+                <td><strong>Snapshooter</strong></td>
+                <td>Verify'a alternatif snapshot kütüphanesi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/SwissLife-OSS/snapshooter">github.com/SwissLife-OSS</a></td>
+              </tr>
+              <tr>
+                <td><strong>ApprovalTests</strong></td>
+                <td>Snapshot fikrinin en eski uygulaması; hâlâ kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/approvals/ApprovalTests.Net">github.com/approvals</a></td>
+              </tr>
+              <tr>
+                <td><strong>FluentValidation.TestHelper</strong></td>
+                <td>Validator kurallarını test etmek için resmî yardımcı: <code>TestValidate</code></td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://docs.fluentvalidation.net/en/latest/testing.html">docs.fluentvalidation.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>assertion scope</strong></td>
+                <td>Birden çok doğrulamayı tek seferde raporlama; ilk hatada durmaz</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://fluentassertions.com/">fluentassertions.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>tek assert kuralı</strong></td>
+                <td>"Bir testte bir davranış doğrula" öğüdü; katı kural değil, rehber</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="test-verisi"><span class="h-num">§ 6</span>Test verisi üretimi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Test verisi — elle nesne doldurmayı bırakma zamanı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>AutoFixture</strong></td>
+                <td>Nesneleri otomatik, rastgele değerlerle dolduran kütüphane</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/AutoFixture/AutoFixture">github.com/AutoFixture</a></td>
+              </tr>
+              <tr>
+                <td><strong>[AutoData]</strong> / [InlineAutoData]</td>
+                <td>xUnit Theory parametrelerini AutoFixture'ın doldurması</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/AutoFixture/AutoFixture">github.com/AutoFixture</a></td>
+              </tr>
+              <tr>
+                <td><strong>AutoFixture.AutoMoq</strong> / AutoNSubstitute</td>
+                <td>Bağımlılıkları otomatik mock ile dolduran eklenti</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/AutoFixture.AutoMoq">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ISpecimenBuilder</strong> / Customization</td>
+                <td>AutoFixture'ın üretim kurallarını özelleştirme noktası</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/AutoFixture/AutoFixture">github.com/AutoFixture</a></td>
+              </tr>
+              <tr>
+                <td><strong>Bogus</strong></td>
+                <td>Gerçekçi sahte veri (isim, adres, e-posta) üretir; Faker.js portu, Türkçe locale var</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/bchavez/Bogus">github.com/bchavez</a></td>
+              </tr>
+              <tr>
+                <td><strong>Randomizer.Seed</strong></td>
+                <td>Bogus'ta sabit tohum; testin tekrarlanabilir olmasını sağlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/bchavez/Bogus">github.com/bchavez</a></td>
+              </tr>
+              <tr>
+                <td><strong>NBuilder</strong></td>
+                <td>Eski ama sade nesne üretici; liste üretmede pratik</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://github.com/nbuilder/nbuilder">github.com/nbuilder</a></td>
+              </tr>
+              <tr>
+                <td><strong>object mother</strong></td>
+                <td>Hazır test nesnesi üreten statik fabrika: <code>Customers.Valid()</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/bliki/ObjectMother.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>test data builder</strong></td>
+                <td>Akıcı kurucu: <code>new CustomerBuilder().WithName("x").Build()</code></td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a></td>
+              </tr>
+              <tr>
+                <td><strong>FsCheck</strong></td>
+                <td>Property-based test kütüphanesi; girdileri kendi üretir, karşı örnek arar</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://fscheck.github.io/FsCheck/">fscheck.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>CsCheck</strong></td>
+                <td>C# odaklı property-based alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/AnthonyLloyd/CsCheck">github.com/AnthonyLloyd</a></td>
+              </tr>
+              <tr>
+                <td><strong>anonymous variable</strong></td>
+                <td>Testte değeri önemsiz olan veri; AutoFixture bu fikri sistemleştirir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="entegrasyon-testi"><span class="h-num">§ 7</span>Entegrasyon testi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>ASP.NET Core entegrasyon testi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>WebApplicationFactory</strong></td>
+                <td>Uygulamayı bellekte ayağa kaldırıp HttpClient ile çağırma; API testinin merkezi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Microsoft.AspNetCore.Mvc.Testing</strong></td>
+                <td>WebApplicationFactory'nin geldiği paket</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>TestServer</strong></td>
+                <td>Gerçek soket açmadan HTTP hattını çalıştıran sunucu; fabrikanın altında bu var</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WithWebHostBuilder</strong> / ConfigureTestServices</td>
+                <td>Testte DI kaydını değiştirme (gerçek servisi sahtesiyle değiştirmek için)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>public partial class Program</strong></td>
+                <td>Minimal API'de fabrikanın Program'ı görebilmesi için gereken satır; sık takılınan nokta</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>InternalsVisibleTo</strong></td>
+                <td>Test projesinin internal üyeleri görmesi için derleme özniteliği</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.internalsvisibletoattribute">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ASPNETCORE_ENVIRONMENT</strong> / appsettings.Testing.json</td>
+                <td>Test ortamına özel yapılandırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>test authentication handler</strong></td>
+                <td>JWT üretmeden testte kimlik taklidi; sahte AuthenticationHandler kaydedilir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../02-platform-ve-web-api/index.html">02 — Platform ve Web API</a></td>
+              </tr>
+              <tr>
+                <td><strong>EF Core InMemory provider</strong></td>
+                <td>Bellek içi sağlayıcı; ilişkisel değildir, transaction/constraint/SQL davranışını taklit etmez</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/ef/core/testing/testing-without-the-database">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SQLite in-memory</strong></td>
+                <td>InMemory'den daha gerçekçi; yine de üretimde kullandığın veritabanıyla (SQL Server, PostgreSQL, MySQL…) birebir değil</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/ef/core/testing/testing-without-the-database">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Testcontainers for .NET</strong></td>
+                <td>Test sırasında Docker ile gerçek SQL Server/PostgreSQL/Redis konteyneri açar</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Desktop lisansı</strong></td>
+                <td>Kullanıma ve şirket büyüklüğüne göre ücretsiz veya ücretli; alternatifler Rancher Desktop, Podman</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Durum &rarr; sonuç:
+                <br>&bull; Kişisel kullanım, eğitim, ticari olmayan açık kaynak &rarr; ücretsiz.
+                <br>&bull; En fazla 250 çalışanı <em>ve</em> en fazla 10 milyon USD yıllık geliri olan şirket &rarr; ücretsiz.
+                <br>&bull; Bu eşiklerden birini aşan şirket (250'den fazla çalışan <em>veya</em> 10 milyon USD'yi aşan yıllık gelir) &rarr; ücretli abonelik (Pro / Team / Business).
+                <br>&bull; Tam sınırdaysan (tam 250 çalışan / tam 10 milyon USD) &rarr; Docker'ın kendi metinleri bu noktayı farklı ifade edebiliyor; şirketin hukuk/satın alma birimine sor.
+                <br>&bull; Linux'ta Docker Engine (Desktop değil) ve CI runner'ları &rarr; ücretsiz, Desktop lisansına tabi değil.
+                <br>&bull; Ücretsiz alternatifler &rarr; Podman Desktop, Rancher Desktop, WSL2 içinde Docker Engine.
+                <br><span class="tag tag--warn">TEYİT</span> docker.com/pricing güncel eşikler</td>
+                <td><a href="https://www.docker.com/pricing/">docker.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Respawn</strong></td>
+                <td>Test arasında veritabanı tablolarını hızla temizler; DELETE sırasını kendi çözer</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/jbogard/Respawn">github.com/jbogard</a></td>
+              </tr>
+              <tr>
+                <td><strong>transaction rollback per test</strong></td>
+                <td>Her testi transaction içinde açıp geri alma; Respawn'a alternatif yaklaşım</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a></td>
+              </tr>
+              <tr>
+                <td><strong>EnsureCreated</strong> vs <strong>Migrate</strong></td>
+                <td>Test veritabanını şema ile kurma yolları; Migrate gerçek migration'ları çalıştırır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WireMock.Net</strong></td>
+                <td>Sahte HTTP sunucusu; dış API'yi taklit eder, gecikme ve hata senaryosu üretir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/WireMock-Net/WireMock.Net">github.com/WireMock-Net</a></td>
+              </tr>
+              <tr>
+                <td><strong>Prism / OpenAPI mock server</strong></td>
+                <td>Swagger tanımından otomatik sahte sunucu üretme</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/stoplightio/prism">github.com/stoplightio</a></td>
+              </tr>
+              <tr>
+                <td><strong>MassTransit Test Harness</strong></td>
+                <td>Kuyruk olmadan consumer/publish davranışını test etme</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="../05-mesajlasma-ve-dagitik/index.html">05 — Mesajlaşma ve Dağıtık</a></td>
+              </tr>
+              <tr>
+                <td><strong>Aspire testing</strong></td>
+                <td>Aspire ile tüm bağımlılıkları (Redis, kuyruk, veritabanı) test için ayağa kaldırma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="../09-aspire-bulut-modern/index.html">09 — Aspire ve Modern Bulut</a></td>
+              </tr>
+              <tr>
+                <td><strong>Hangfire test</strong></td>
+                <td>Arka plan işlerini test ederken işi doğrudan çağır, zamanlayıcıyı bekleme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.hangfire.io/">docs.hangfire.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>test containers reuse</strong></td>
+                <td>Konteyneri testler arası yeniden kullanma; süreyi ciddi kısaltır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="e2e-ui-testi"><span class="h-num">§ 8</span>E2E ve UI testi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Tarayıcı ve arayüz testi araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Playwright for .NET</strong></td>
+                <td>Microsoft'un tarayıcı otomasyonu; C# API'si var, en güncel seçenek</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://playwright.dev/dotnet/">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Playwright codegen</strong></td>
+                <td>Tarayıcıda tıkladıklarını test koduna çeviren kayıt aracı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://playwright.dev/dotnet/docs/codegen">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Playwright trace viewer</strong></td>
+                <td>Kalan testin adım adım kaydını izleme; flaky test avında birinci araç</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://playwright.dev/dotnet/docs/trace-viewer">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Selenium WebDriver</strong></td>
+                <td>En eski ve en yaygın standart; kurumsal projelerde hâlâ baskın</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.selenium.dev/documentation/">selenium.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Selenium Grid</strong></td>
+                <td>Testleri birden çok makinede/tarayıcıda paralel koşturma</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.selenium.dev/documentation/grid/">selenium.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cypress</strong></td>
+                <td>JavaScript dünyasının E2E aracı; .NET'ten değil, frontend deposundan koşulur</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.cypress.io/">docs.cypress.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Puppeteer Sharp</strong></td>
+                <td>Chrome DevTools Protocol tabanlı .NET kütüphanesi; PDF üretiminde de kullanılır</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.puppeteersharp.com/">puppeteersharp.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>bUnit</strong></td>
+                <td>Blazor bileşenlerini tarayıcısız test etme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://bunit.dev/">bunit.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Appium</strong></td>
+                <td>Mobil uygulama UI otomasyonu (Android/iOS)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://appium.io/">appium.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>MAUI UI testi</strong></td>
+                <td>Appium tabanlı; ayrıntısı UI sayfasında</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="../08-ui-blazor-mvc-maui/index.html">08 — UI</a></td>
+              </tr>
+              <tr>
+                <td><strong>Page Object Model (POM)</strong></td>
+                <td>Sayfa seçicilerini ayrı sınıfta toplama; UI testinin bakım maliyetini düşürür</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://playwright.dev/dotnet/docs/pom">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>headless browser</strong></td>
+                <td>Arayüzsüz tarayıcı; CI sunucusunda test koşturmanın yolu</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://playwright.dev/dotnet/">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>visual regression testing</strong></td>
+                <td>Ekran görüntüsü karşılaştırması; Playwright yerleşik destekler</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://playwright.dev/dotnet/docs/screenshots">playwright.dev</a></td>
+              </tr>
+              <tr>
+                <td><strong>Applitools / Percy</strong></td>
+                <td>Bulut tabanlı görsel test servisleri</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://applitools.com/">applitools.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>BrowserStack / Sauce Labs</strong></td>
+                <td>Gerçek cihaz/tarayıcı çiftliği kiralama</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.browserstack.com/">browserstack.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tdd-bdd"><span class="h-num">§ 9</span>TDD ve BDD</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>TDD — ilanlarda sık geçer, terimlerini bil</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>TDD</strong> (Test Driven Development)</td>
+                <td>Önce testi yazıp sonra kodu yazma disiplini; bir test tekniği değil tasarım tekniği</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDrivenDevelopment.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>red-green-refactor</strong></td>
+                <td>Kalan test yaz &rarr; en basit haliyle geçir &rarr; temizle. TDD'nin üç adımı</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://martinfowler.com/bliki/TestDrivenDevelopment.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>test-after</strong></td>
+                <td>Kod yazılıp sonra test yazma; yaygın pratik, TDD değil. Farkı sorulur</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>baby steps</strong></td>
+                <td>Çok küçük adımlarla ilerleme; TDD'nin ritmi</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>triangulation</strong></td>
+                <td>İkinci test ekleyerek genellemeyi zorlama; sabit dönmekten kurtulma tekniği</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>outside-in</strong> vs <strong>inside-out TDD</strong></td>
+                <td>Uçtan (API) içeri mi, çekirdekten dışarı mı başlanacağı; London vs Chicago ekolüyle örtüşür</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://martinfowler.com/articles/mocksArentStubs.html">martinfowler.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TPP</strong> (transformation priority premise)</td>
+                <td>TDD'de kodu hangi sırayla genelleştireceğine dair kural listesi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>kata</strong> / coding dojo</td>
+                <td>Tekrarlayarak TDD alıştırması (FizzBuzz, Bowling, Roman Numerals)</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>ATDD</strong></td>
+                <td>Kabul testinden başlayan TDD varyantı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>BDD</strong> (Behavior Driven Development)</td>
+                <td>Testleri iş dilinde davranış cümleleriyle yazma yaklaşımı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://cucumber.io/docs/bdd/">cucumber.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Gherkin</strong></td>
+                <td>Given/When/Then söz dizimi; <code>.feature</code> dosyalarında yazılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://cucumber.io/docs/gherkin/reference/">cucumber.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SpecFlow</strong></td>
+                <td>.NET'in eski Gherkin çatısı; 2024'te bakımı durdu</td>
+                <td><span class="tag tag--warn">ESKİMİŞ</span></td>
+                <td><a href="https://specflow.org/">specflow.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Reqnroll</strong></td>
+                <td>SpecFlow'un açık kaynak devamı; yeni projede bunu ara</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://reqnroll.net/">reqnroll.net</a></td>
+              </tr>
+              <tr>
+                <td><strong>LightBDD</strong></td>
+                <td>Feature dosyasız, doğrudan C# ile BDD; daha hafif alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/LightBDD/LightBDD">github.com/LightBDD</a></td>
+              </tr>
+              <tr>
+                <td><strong>Xunit.Gherkin.Quick</strong></td>
+                <td>xUnit üstünde minimal Gherkin desteği</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/ttutisani/Xunit.Gherkin.Quick">github.com/ttutisani</a></td>
+              </tr>
+              <tr>
+                <td><strong>living documentation</strong></td>
+                <td>Testlerin aynı zamanda güncel dokümantasyon olması fikri</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://reqnroll.net/">reqnroll.net</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="benchmark"><span class="h-num">§ 10</span>BenchmarkDotNet ve performans ölçümü</h2>
+
+        <p>Kod performansı mülakatta fark yaratan bir konu; BenchmarkDotNet de ilanlarda giderek daha sık geçiyor.
+        Buradaki attribute'ları ve tuzakları bilmen mülakatta doğrudan işine yarar.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>BenchmarkDotNet</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>BenchmarkDotNet</strong></td>
+                <td>Mikro-benchmark kütüphanesi; ısınma, istatistik ve raporlamayı kendi yapar</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Benchmark]</strong></td>
+                <td>Ölçülecek metodu işaretler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/getting-started.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[MemoryDiagnoser]</strong></td>
+                <td>Allocated (ayrılan bellek) ve GC kuşak sayımlarını rapora ekler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/configs/diagnosers.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Baseline = true</strong></td>
+                <td>Karşılaştırma temeli; rapora Ratio sütunu ekler</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/features/baselines.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[Params]</strong></td>
+                <td>Aynı benchmark'ı farklı girdi boyutlarıyla koşturma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/features/parameterization.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>[GlobalSetup]</strong> / [IterationSetup]</td>
+                <td>Ölçüm dışında kalan hazırlık kodu; IterationSetup ölçüme gürültü katabilir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/features/setup-and-cleanup.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Job</strong> / [SimpleJob] / RuntimeMoniker</td>
+                <td>Aynı kodu farklı .NET sürümlerinde karşılaştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/configs/jobs.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>warmup / pilot / actual iteration</strong></td>
+                <td>Çalıştırma aşamaları; JIT ısınması bu yüzden sonucu bozmaz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/how-it-works.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>DisassemblyDiagnoser</strong></td>
+                <td>Üretilen assembly kodunu rapora ekler; JIT'in ne yaptığını görmek için</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/configs/diagnosers.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>ThreadingDiagnoser</strong> / EtwProfiler</td>
+                <td>Kilit çekişmesi ve ETW izleri; Windows'ta detay ölçüm</td>
+                <td><span class="tag tag--info">İLERİ</span> EtwProfiler yalnız Windows'ta çalışır; Linux/macOS'ta EventPipe tabanlı <code>EventPipeProfiler</code> kullanılır. ThreadingDiagnoser platformdan bağımsızdır.</td>
+                <td><a href="https://benchmarkdotnet.org/articles/configs/diagnosers.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>BenchmarkSwitcher</strong></td>
+                <td>Konsoldan hangi benchmark'ın koşacağını seçme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/how-to-run.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tuzak: Debug build</strong></td>
+                <td>Release dışında koşturmak sonucu anlamsız kılar; BenchmarkDotNet zaten uyarır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/good-practices.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tuzak: dead code elimination</strong></td>
+                <td>Sonucu kullanmazsan JIT kodu tamamen atabilir; metottan değer döndür veya Consumer kullan</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/good-practices.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Tuzak: Stopwatch ile ölçmek</strong></td>
+                <td>Tek çalıştırma + ısınmasız ölçüm yanıltır; mikro ölçümde Stopwatch yeterli değildir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://benchmarkdotnet.org/articles/guides/good-practices.html">benchmarkdotnet.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>micro vs macro benchmark</strong></td>
+                <td>Metot düzeyi ölçüm ile uçtan uca senaryo ölçümü; ikisi farklı soru cevaplar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Mean / StdDev / Allocated</strong></td>
+                <td>Rapordaki temel sütunlar; StdDev yüksekse ölçüm gürültülüdür</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://benchmarkdotnet.org/">benchmarkdotnet.org</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="yuk-testi-ve-teshis"><span class="h-num">§ 11</span>Yük testi ve teşhis araçları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yük testi araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>NBomber</strong></td>
+                <td>C# ile senaryo yazılan yük testi çatısı; .NET ekipleri için en doğal seçenek</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://nbomber.com/">nbomber.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>k6</strong></td>
+                <td>JavaScript ile senaryo yazılan modern yük test aracı; dokümanı artık Grafana altında</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://grafana.com/docs/k6/latest/">grafana.com/docs/k6</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apache JMeter</strong></td>
+                <td>Java tabanlı, GUI'li klasik yük test aracı; kurumsalda hâlâ standart</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://jmeter.apache.org/">jmeter.apache.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Gatling</strong></td>
+                <td>Scala/Java tabanlı, rapor kalitesiyle bilinen alternatif</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://gatling.io/">gatling.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Locust</strong></td>
+                <td>Python ile senaryo yazılan yük test aracı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://locust.io/">locust.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Artillery</strong></td>
+                <td>Node.js tabanlı, YAML senaryolu araç</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.artillery.io/">artillery.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>bombardier / wrk / hey</strong></td>
+                <td>Tek komutla hızlı HTTP yük üreten küçük araçlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/codesenberg/bombardier">github.com/codesenberg</a></td>
+              </tr>
+              <tr>
+                <td><strong>Azure Load Testing</strong></td>
+                <td>Bulutta yönetilen JMeter/k6 servisi</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/azure/load-testing/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>RPS / p95 / p99 latency</strong></td>
+                <td>Yük testi raporunun temel metrikleri; ortalama değil yüzdelik dilim bakılır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Teşhis ve profil araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>dotnet-counters</strong></td>
+                <td>Canlı süreçten CPU, GC, ThreadPool sayaçlarını okuma; ilk bakılacak araç</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-trace</strong></td>
+                <td>CPU örnekleme izi toplama; hangi metot yakıyor sorusunun cevabı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-dump</strong></td>
+                <td>Süreç dökümü alma ve SOS komutlarıyla inceleme</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-gcdump</strong></td>
+                <td>Yönetilen yığın (heap) anlık görüntüsü; memory leak avında kullanılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-gcdump">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-monitor</strong></td>
+                <td>Konteynerde çalışan uygulamadan uzaktan teşhis verisi toplama</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-monitor">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>PerfView</strong></td>
+                <td>Microsoft'un derin ETW analiz aracı; öğrenmesi zor, gücü yüksek</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/microsoft/perfview">github.com/microsoft</a></td>
+              </tr>
+              <tr>
+                <td><strong>Visual Studio Profiler</strong></td>
+                <td>CPU Usage, Memory Usage, Allocation araçları</td>
+                <td><span class="tag tag--ok">TEMEL</span> IDE / işletim sistemine göre:
+                <br>&bull; Visual Studio (Windows) &rarr; Debug &gt; Performance Profiler (<kbd>Alt+F2</kbd>); F5 ile hata ayıklarken yalnızca Diagnostic Tools penceresi açılır, tam profil için Release yapılandırmasında Performance Profiler kullan.
+                <br>&bull; Rider &rarr; dotTrace/dotMemory entegre (ticari kullanımda ücretli; aşağıdaki satır).
+                <br>&bull; VS Code / macOS / Linux &rarr; <code>dotnet-trace</code>, <code>dotnet-counters</code>, <code>dotnet-gcdump</code> (ücretsiz); görselleştirme için speedscope veya PerfView.</td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/profiling/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotTrace / dotMemory</strong></td>
+                <td>JetBrains'in profil araçları; Rider ile gelir</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Lisans dalları aşağıdaki Rider satırıyla aynı (ticari olmayan kişisel / öğrenci / açık kaynak / ticari).</td>
+                <td><a href="https://www.jetbrains.com/dotmemory/">jetbrains.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>WinDbg + SOS</strong></td>
+                <td>Düşük seviye döküm analizi; production çöküşlerinde son çare</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/debug-memory-leak">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>memory leak</strong> (.NET'te)</td>
+                <td>GC'li dilde sızıntı: statik referans, event handler, IDisposable atlanması</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/debug-memory-leak">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>gen0 / gen1 / gen2 / LOH</strong></td>
+                <td>GC kuşakları ve büyük nesne yığını; ayırma davranışını anlamak için</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Server GC</strong> vs <strong>Workstation GC</strong></td>
+                <td>Sunucu uygulamalarında GC modu ayarı; throughput'u ciddi etkiler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ThreadPool starvation</strong></td>
+                <td>Sync-over-async yüzünden havuzun tükenmesi; yavaşlamanın klasik sebebi</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>async deadlock</strong> / .Result / .Wait()</td>
+                <td>Asenkron kodu senkron bekleme; kilitlenme ve starvation üretir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="../01-csharp-dili/index.html">01 — C# Dili</a></td>
+              </tr>
+              <tr>
+                <td><strong>EventCounters / EventSource</strong></td>
+                <td>Kendi metriklerini .NET teşhis boru hattına yayınlama</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/event-counters">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>OpenTelemetry</strong></td>
+                <td>Üretimde izleme; test değil gözlemlenebilirlik konusudur</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kod-kalitesi"><span class="h-num">§ 12</span>Kod kalitesi araçları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Derleme sırasında çalışan denetimler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>.editorconfig</strong></td>
+                <td>Girinti, adlandırma ve kod stili kurallarının depoya konan tanımı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>EditorConfig standardı</strong></td>
+                <td>.NET'e özgü değil; dil bağımsız editör ayarı formatı</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://editorconfig.org/">editorconfig.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet format</strong></td>
+                <td>.editorconfig kurallarını koda uygulayan komut; CI'da doğrulama adımı olur</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Roslyn analyzers</strong></td>
+                <td>Derleyiciye eklenen statik analiz kuralları; CA ve IDE kod numaraları buradan gelir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CA kural listesi</strong></td>
+                <td>Yerleşik kalite kuralları (CA1822, CA2007 vb.); hangi kural ne der, listeden bak</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>AnalysisMode</strong> / EnforceCodeStyleInBuild</td>
+                <td>Analizör sıkılığını ve stil kurallarının derlemede zorunlu olmasını ayarlar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>TreatWarningsAsErrors</strong></td>
+                <td>Uyarıları hata sayma; kalite çıtasını derlemeye gömmenin en basit yolu</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/errors-warnings">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Directory.Build.props</strong></td>
+                <td>Tüm projelere ortak MSBuild ayarı; analizör ve nullable ayarı buraya yazılır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-your-build">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Central Package Management</strong></td>
+                <td>Paket sürümlerini tek dosyada toplama (Directory.Packages.props)</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>nullable reference types</strong></td>
+                <td>Derleme zamanı null denetimi; uyarıları hata yapınca gerçek fayda verir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>StyleCop.Analyzers</strong></td>
+                <td>Biçim ve dokümantasyon kuralları (SA kodları); ücretsiz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/DotNetAnalyzers/StyleCopAnalyzers">github.com/DotNetAnalyzers</a></td>
+              </tr>
+              <tr>
+                <td><strong>Roslynator</strong></td>
+                <td>Yüzlerce ek analizör ve refactoring; ücretsiz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.nuget.org/packages/Roslynator.Analyzers">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>SonarAnalyzer.CSharp</strong></td>
+                <td>SonarSource kurallarını sunucu olmadan yerelde çalıştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.nuget.org/packages/SonarAnalyzer.CSharp">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>Meziantou.Analyzer</strong></td>
+                <td>Performans ve doğruluk odaklı topluluk analizörü; ücretsiz</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/Meziantou.Analyzer">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>AsyncFixer</strong></td>
+                <td>Yaygın async/await hatalarını yakalayan analizör</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/AsyncFixer">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>BannedApiAnalyzers</strong></td>
+                <td>Ekipçe yasakladığın API'yi derlemede engelleme (ör. DateTime.Now)</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/Microsoft.CodeAnalysis.BannedApiAnalyzers">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>SecurityCodeScan</strong></td>
+                <td>Güvenlik odaklı statik analiz kuralları</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://www.nuget.org/packages/SecurityCodeScan.VS2019">nuget.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>NetArchTest</strong></td>
+                <td>Katman ve bağımlılık kurallarını unit test olarak yazma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/BenMorris/NetArchTest">github.com/BenMorris</a></td>
+              </tr>
+              <tr>
+                <td><strong>ArchUnitNET</strong></td>
+                <td>Aynı işin Java ArchUnit'ten gelen .NET karşılığı</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://github.com/TNG/ArchUnitNET">github.com/TNG</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kapsama (coverage), mutasyon ve dış denetim platformları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Coverlet</strong></td>
+                <td>.NET'in yaygın coverage toplayıcısı; coverlet.collector paketiyle gelir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://github.com/coverlet-coverage/coverlet">github.com/coverlet-coverage</a></td>
+              </tr>
+              <tr>
+                <td><strong>dotnet-coverage</strong></td>
+                <td>Microsoft'un coverage aracı; sonuçları birleştirme ve dönüştürme yapar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/additional-tools/dotnet-coverage">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReportGenerator</strong></td>
+                <td>Ham coverage dosyasını okunur HTML rapora çevirir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://github.com/danielpalme/ReportGenerator">github.com/danielpalme</a></td>
+              </tr>
+              <tr>
+                <td><strong>Cobertura / OpenCover / lcov</strong></td>
+                <td>Coverage çıktı formatları; CI aracının hangisini istediğine bak</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/coverlet-coverage/coverlet">github.com/coverlet-coverage</a></td>
+              </tr>
+              <tr>
+                <td><strong>line / branch / method coverage</strong></td>
+                <td>Farklı kapsama ölçüleri; branch coverage line'dan daha anlamlıdır</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>coverage threshold</strong></td>
+                <td>Belirli oranın altına düşünce derlemeyi kırma; sayı hedefe dönüşürse anlamını yitirir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://github.com/coverlet-coverage/coverlet">github.com/coverlet-coverage</a></td>
+              </tr>
+              <tr>
+                <td><strong>Stryker.NET</strong></td>
+                <td>Mutation testing aracı; testlerin gerçekten hata yakalayıp yakalamadığını ölçer</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://stryker-mutator.io/docs/stryker-net/introduction/">stryker-mutator.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>mutation score</strong></td>
+                <td>Öldürülen mutant oranı; coverage'dan daha dürüst bir kalite göstergesi</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://stryker-mutator.io/docs/">stryker-mutator.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube Server</strong></td>
+                <td>Kendi sunucunda kod kalitesi platformu; Community sürümü ücretsiz, üst sürümler ücretli</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.sonarsource.com/products/sonarqube/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube Cloud (SonarCloud)</strong></td>
+                <td>Bulut sürümü; açık kaynak depolar için ücretsiz</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Depo türüne göre:
+                <br>&bull; Public depo &rarr; ücretsiz.
+                <br>&bull; Private depo &rarr; küçük kod tabanı için ücretsiz plan var, sınırın üstü ücretli. <span class="tag tag--warn">TEYİT</span> satır sınırı: sonarsource.com/plans-and-pricing
+                <br>&bull; Buluta kod göndermek istemeyen kurum &rarr; kendi sunucusunda SonarQube Community Build (ücretsiz).</td>
+                <td><a href="https://www.sonarsource.com/products/sonarcloud/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>quality gate</strong></td>
+                <td>Sonar'ın "bu PR geçebilir mi" eşiği; yeni kodun kalitesine bakar</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.sonarsource.com/products/sonarqube/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>SonarQube for IDE (SonarLint)</strong></td>
+                <td>Aynı kuralları editörde anlık gösteren eklenti; ücretsiz</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.sonarsource.com/products/sonarlint/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Qodana</strong></td>
+                <td>JetBrains'in kod kalitesi platformu; ReSharper motorunu CI'da çalıştırır</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.jetbrains.com/qodana/">jetbrains.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>NDepend</strong></td>
+                <td>Bağımlılık grafiği, kod metriği ve kural sorgulama (CQLinq) aracı</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span></td>
+                <td><a href="https://www.ndepend.com/">ndepend.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>ReSharper</strong></td>
+                <td>Visual Studio eklentisi; inspection ve refactoring seti</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Ticari kullanımda ücretli; öğrenci/öğretmen ve açık kaynak bakımcısı için ücretsiz lisans yolları var, ticari olmayan kullanım koşulları <span class="tag tag--warn">TEYİT</span> jetbrains.com/resharper/buy. Ücretsiz alternatif: Visual Studio'nun yerleşik Roslyn analizörleri ve refactoring'leri.</td>
+                <td><a href="https://www.jetbrains.com/resharper/">jetbrains.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Rider</strong></td>
+                <td>JetBrains IDE'si; ticari olmayan kullanım için ücretsiz sürüm var</td>
+                <td><span class="tag tag--warn">ÜCRETLİ</span> Kullanıcı durumuna göre:
+                <br>&bull; Ticari olmayan kişisel kullanım (öğrenme, hobi, ticari olmayan açık kaynak) &rarr; ücretsiz.
+                <br>&bull; Öğrenci / öğretmen &rarr; eğitim lisansıyla ücretsiz.
+                <br>&bull; Açık kaynak bakımcısı &rarr; başvuruyla ücretsiz lisans.
+                <br>&bull; Ticari kullanım (şirkette, müşteri işi) &rarr; ücretli.
+                <br><span class="tag tag--warn">TEYİT</span> jetbrains.com/rider/buy</td>
+                <td><a href="https://www.jetbrains.com/rider/">jetbrains.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Codecov / Coveralls</strong></td>
+                <td>Coverage raporunu PR'a yorum olarak basan servisler</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://about.codecov.io/">codecov.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>SARIF</strong></td>
+                <td>Statik analiz sonuçlarının standart dosya formatı; GitHub bunu okur</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://docs.github.com/en/code-security/code-scanning">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>CodeQL</strong></td>
+                <td>GitHub'ın güvenlik analiz motoru; DevOps sayfasında ayrıntısı var</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+              </tr>
+              <tr>
+                <td><strong>cyclomatic complexity</strong></td>
+                <td>Metottaki bağımsız yol sayısı; yüksekse test etmesi de zor demektir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>cognitive complexity</strong></td>
+                <td>Okuma zorluğunu ölçen Sonar metriği; cyclomatic'e alternatif</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://www.sonarsource.com/">sonarsource.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>maintainability index</strong> / code metrics</td>
+                <td>Visual Studio'nun ürettiği kod metrikleri seti</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values">learn.microsoft.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>code smell</strong> / technical debt</td>
+                <td>Hataya yol açmayan ama bakımı zorlaştıran kalıplar ve birikmiş maliyet</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://martinfowler.com/bliki/TechnicalDebt.html">martinfowler.com</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kod-inceleme"><span class="h-num">§ 13</span>Kod inceleme ve ekip pratikleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Pull request ve inceleme kültürü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>pull request / merge request</strong></td>
+                <td>Değişikliği ana dala almadan önce inceleme talebi; GitHub PR, GitLab MR der</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.github.com/en/pull-requests">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>code review checklist</strong></td>
+                <td>İnceleme sırasında bakılacak sabit liste: doğruluk, test, isimlendirme, hata yönetimi, güvenlik</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://google.github.io/eng-practices/review/">google.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>CODEOWNERS</strong></td>
+                <td>Hangi dizini kimin onaylaması gerektiğini tanımlayan dosya</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>branch protection</strong></td>
+                <td>Ana dala doğrudan push'u engelleme, test/onay zorunluluğu koyma</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository">docs.github.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>required status checks</strong></td>
+                <td>Testler geçmeden merge'e izin vermeme; CI ile testin buluştuğu yer</td>
+                <td><span class="tag tag--bad">MÜLAKATTA SIK</span></td>
+                <td><a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps</a></td>
+              </tr>
+              <tr>
+                <td><strong>trunk based development</strong> / GitFlow</td>
+                <td>İki dallanma stratejisi; ekibin hangisini kullandığı mülakatta sorulur</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://trunkbaseddevelopment.com/">trunkbaseddevelopment.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>conventional commits</strong></td>
+                <td>feat/fix/chore önekli commit mesajı standardı; sürüm ve changelog üretimini otomatikleştirir</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://www.conventionalcommits.org/">conventionalcommits.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>semantic versioning</strong></td>
+                <td>MAJOR.MINOR.PATCH kuralı; kütüphane sürümlemesinin standardı</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://semver.org/">semver.org</a></td>
+              </tr>
+              <tr>
+                <td><strong>squash merge</strong> / rebase</td>
+                <td>Geçmişi sadeleştirme yolları; ekip kararıdır</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://git-scm.com/doc">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>küçük PR</strong></td>
+                <td>400 satırı aşan PR'da inceleme kalitesi düşer; bilinen pratik kural</td>
+                <td><span class="tag tag--ok">TEMEL</span></td>
+                <td><a href="https://google.github.io/eng-practices/review/reviewer/">google.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Husky.Net</strong></td>
+                <td>Git hook yönetimi; commit öncesi format ve test çalıştırma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://alirezanet.github.io/Husky.Net/">alirezanet.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>pre-commit hook</strong></td>
+                <td>Commit'ten önce çalışan denetim; hızlı olmayan şeyi buraya koyma</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://git-scm.com/docs/githooks">git-scm.com</a></td>
+              </tr>
+              <tr>
+                <td><strong>Danger</strong></td>
+                <td>PR kurallarını otomatik denetleyip yorum bırakan bot</td>
+                <td><span class="tag tag--info">İLERİ</span></td>
+                <td><a href="https://danger.systems/">danger.systems</a></td>
+              </tr>
+              <tr>
+                <td><strong>definition of done</strong></td>
+                <td>Bir işin "bitti" sayılma koşulları; test ve inceleme genelde içinde olur</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>ADR</strong> (architecture decision record)</td>
+                <td>Mimari kararı ve gerekçesini depoda saklama; mimari tartışmalarda somut bir örnek verir</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a></td>
+              </tr>
+              <tr>
+                <td><strong>pair / mob programming</strong></td>
+                <td>İnceleme yerine eş zamanlı ortak yazma pratikleri</td>
+                <td><span class="tag">ORTA</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>nit:</strong> ön eki</td>
+                <td>İnceleme yorumunda "önemli değil, isteğe bağlı" işareti; İngilizce PR kültüründe standart</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="https://google.github.io/eng-practices/review/">google.github.io</a></td>
+              </tr>
+              <tr>
+                <td><strong>Boy Scout Rule</strong></td>
+                <td>"Bulduğundan temiz bırak"; Clean Code'un pratik özeti</td>
+                <td><span class="tag">ORTA</span></td>
+                <td><a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 14</span>Özet — bu sayfadaki öncelik sırası</h2>
+
+        <p>Aşağıdaki sıra <strong>mülakat hazırlığı</strong> için kuruldu: yukarıdan aşağı takip et; her satır ayrı bir çalışma oturumu,
+        ilk beş madde mülakat için asgari seviyedir. Amacın farklıysa (ilk kez test yazmak, mevcut projeye test eklemek,
+        performans sorunu, QA rolü) <a href="#nasil-kullanilir">§ 1</a>'deki tabloya göre sırayı değiştir.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Test double beşlisini ayır: dummy, fake, stub, spy, mock</span>
+            <p>Fowler'ın <em>Mocks Aren't Stubs</em> yazısını oku. Mülakatta "stub ile mock farkı" doğrudan sorulur;
+            ilanda Moq veya NSubstitute geçiyorsa sorulması çok muhtemel.</p>
+            <span class="steps__meta">§ 4 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Moq veya NSubstitute ile gerçek bir test yaz</span>
+            <p>Setup, Returns, ReturnsAsync, Verify, It.IsAny beşlisini elinle yaz. Bir servisin repository bağımlılığını
+            mock'layıp iş kuralını test et. Hangisini seçeceğin ekibine bağlı (§ 4'teki SponsorLink satırındaki dallar); Moq'un 2023 SponsorLink tartışmasını da bil.</p>
+            <span class="steps__meta">§ 4 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">xUnit'i ezberden çıkar: Fact, Theory, InlineData, fixture, paralellik</span>
+            <p>İlanlarda en sık geçen test çatısı; en çok sorulan kısım Theory veri kaynakları ve fixture ile paylaşılan kurulum.</p>
+            <span class="steps__meta">§ 3 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">TDD döngüsünü bir kata üzerinde uygula</span>
+            <p>FizzBuzz veya Bowling katası ile red-green-refactor'ı üç kez çalış. "TDD ile test-after farkı" sorusuna
+            kendi deneyiminden cevap verebilecek hale gel.</p>
+            <span class="steps__meta">§ 9 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">BenchmarkDotNet ile bir karşılaştırma koştur</span>
+            <p>[Benchmark], [MemoryDiagnoser], Baseline ve [Params] yeter. Performans varsayımlarını
+            ölçülebilir hale getirir; string birleştirme veya LINQ karşılaştırması iyi bir ilk deney.</p>
+            <span class="steps__meta">§ 10 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">WebApplicationFactory ile bir API entegrasyon testi yaz</span>
+            <p>En yüksek getirili adımlardan biri: gerçek bir uçtan uca API testi.
+            <code>public partial class Program</code> satırını unutma.</p>
+            <span class="steps__meta">§ 7 &middot; <span class="tag tag--ok">TEMEL</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Assertion kütüphanesi seç ve lisans durumunu öğren</span>
+            <p>FluentAssertions v8 ticari kullanımda ücretli (ticari olmayan kullanım ve v7.x ücretsiz; § 5'teki dallar);
+            Shouldly veya AwesomeAssertions her durumda ücretsiz. Bu farkı bilmek mülakatta güncel takip ettiğini gösterir.</p>
+            <span class="steps__meta">§ 5 &middot; <span class="tag tag--warn">ÜCRETLİ</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Testcontainers ile gerçek veritabanına karşı test koştur</span>
+            <p>EF Core InMemory'nin neden yetersiz olduğunu bilip Testcontainers ile gerçek veritabanına karşı test yazman
+            güçlü bir cevap olur. Veritabanına ve ortamına göre:</p>
+            <ul>
+              <li>SQL Server kullanıyorsan &rarr; <code>Testcontainers.MsSql</code> (imaj yalnız x64; Apple Silicon Mac'te emülasyonla yavaş çalışır).</li>
+              <li>PostgreSQL &rarr; <code>Testcontainers.PostgreSql</code> (hafif, ARM uyumlu).</li>
+              <li>MySQL / MariaDB &rarr; <code>Testcontainers.MySql</code> / <code>Testcontainers.MariaDb</code>.</li>
+              <li>Docker yoksa / kurulamıyorsa &rarr; Podman, uzak bir Docker host veya Testcontainers Cloud (ücretsiz kota ve ücret <span class="tag tag--warn">TEYİT</span> testcontainers.com/cloud); son çare SQLite in-memory (birebir aynı davranmaz).</li>
+              <li>SQL'i henüz bilmiyorsan &rarr; önce <a href="../03-veri-erisimi/index.html">03 — Veri Erişimi</a>.</li>
+            </ul>
+            <span class="steps__meta">§ 7 &middot; <span class="tag tag--ok">TEMEL</span></span>
+          </li>
+          <li>
+            <span class="steps__title">.editorconfig + analizör + TreatWarningsAsErrors kur</span>
+            <p>Clean Code ve SOLID ilkelerini araçla somutlaştırır. Bir depoda kurup uyarıları sıfırlamak somut bir örnek olur.</p>
+            <span class="steps__meta">§ 12 &middot; <span class="tag tag--ok">TEMEL</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Coverlet + ReportGenerator ile kapsama raporu üret</span>
+            <p>Sayının kendisi hedef değil; branch coverage ile line coverage farkını bilmek yeterli.</p>
+            <span class="steps__meta">§ 12 &middot; <span class="tag">ORTA</span></span>
+          </li>
+          <li>
+            <span class="steps__title">NetArchTest ile katman kuralını teste dönüştür</span>
+            <p>Mimariye hâkimiyeti göstermenin iyi yolu; "Domain katmanı Infrastructure'a referans veremez" kuralını test olarak
+            yazmak mülakatta ayırt edici bir örnektir. Bkz. <a href="../04-mimari-ve-desenler/index.html">04 — Mimari ve Desenler</a>.</p>
+            <span class="steps__meta">§ 12 &middot; <span class="tag">ORTA</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Testleri CI'da koştur</span>
+            <p>En basit iş akışı her platformda <code>dotnet test</code> çalıştırmaktır; platforma göre:</p>
+            <ul>
+              <li>Depo GitHub'daysa veya hiç CI kullanmadıysan &rarr; GitHub Actions (ilanlarda sık geçer, başlamak için en kolayı).</li>
+              <li>Şirket Azure DevOps kullanıyorsa &rarr; Azure Pipelines'ta <code>DotNetCoreCLI@2</code> görevinin <code>test</code> komutu.</li>
+              <li>GitLab &rarr; <code>.gitlab-ci.yml</code> içinde <code>dotnet test</code> + JUnit formatında rapor (ör. JUnit logger paketi).</li>
+              <li>Jenkins &rarr; <code>dotnet test --logger trx</code> + sonuçları yayımlayan eklenti.</li>
+            </ul>
+            <p>Ayrıntısı <a href="../07-devops-ve-gozlemlenebilirlik/index.html">07 — DevOps ve Gözlemlenebilirlik</a> sayfasında.</p>
+            <span class="steps__meta">§ 13 &middot; <span class="tag tag--bad">MÜLAKATTA SIK</span></span>
+          </li>
+          <li>
+            <span class="steps__title">Sonraki tur: Playwright, Stryker.NET, mutation score, contract test</span>
+            <p>Junior seviyede bir ilk iş görüşmesi için gerekmiyor; yukarıdaki on iki madde oturduktan sonra dön.
+            Mid/senior rolü veya QA / test otomasyon rolü hedefliyorsan Playwright, Stryker.NET ve contract test birinci turda yer almalı.</p>
+            <span class="steps__meta">§ 8, § 12 &middot; <span class="tag tag--info">İLERİ</span></span>
+          </li>
+        </ol>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaca</p>
+          <p>Bu sayfanın omurgası üç şey: <strong>mock kavramını</strong> gerçekten anlamak (§ 4),
+          <strong>WebApplicationFactory + Testcontainers</strong> ile gerçek entegrasyon testi yazmak (§ 7) ve
+          <strong>analizör + coverage</strong> ile kod kalitesini ölçülebilir hale getirmek (§ 12).
+          Geri kalanı bu üçünün üstüne eklenir.</p>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 15</span>Bu bölümün ana kaynakları</h2>
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/">Microsoft Learn — Testing in .NET</a></li>
+          <li><span class="src-n">02</span><a href="https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices">Microsoft Learn — Unit testing best practices</a></li>
+          <li><span class="src-n">03</span><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">Microsoft Learn — Integration tests in ASP.NET Core</a></li>
+          <li><span class="src-n">04</span><a href="https://xunit.net/">xUnit.net resmî dokümantasyonu</a></li>
+          <li><span class="src-n">05</span><a href="https://martinfowler.com/articles/mocksArentStubs.html">Martin Fowler — Mocks Aren't Stubs</a></li>
+          <li><span class="src-n">06</span><a href="https://benchmarkdotnet.org/">BenchmarkDotNet resmî dokümantasyonu</a></li>
+          <li><span class="src-n">07</span><a href="https://dotnet.testcontainers.org/">Testcontainers for .NET</a></li>
+          <li><span class="src-n">08</span><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">Microsoft Learn — Code analysis overview</a></li>
+          <li><span class="src-n">09</span><a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/">Microsoft Learn — .NET diagnostics tools</a></li>
+          <li><span class="src-n">10</span><a href="https://google.github.io/eng-practices/review/">Google Engineering Practices — Code Review</a></li>
+          <li><span class="src-n">11</span><a href="../index.html">Bu dosyanın genel bakış sayfası</a> &middot; <a href="../10-kutuphaneler/index.html">10 — Kütüphane Kataloğu</a> &middot; <a href="../../Java/index.html">Java dosyası (JUnit, Mockito karşılıkları)</a></li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../05-mesajlasma-ve-dagitik/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Mesajlaşma ve Dağıtık Sistemler</span></a>
+        <a class="next" href="../07-devops-ve-gozlemlenebilirlik/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">DevOps ve Gözlemlenebilirlik</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>.NET Ekosistemi — Blockchain Anahtar Listesi</title>
+<meta name="description" content="Nethereum, NBitcoin, Solnet, .NET ile sözleşme etkileşimi, arka planda zincir dinleyen servisler, anahtar yönetimi ve kurumsal blockchain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">.NET Ekosistemi</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Blockchain</span>
+      <span class="brand__name">Blockchain Anahtar Listesi</span>
+      <span class="brand__sub">Solidity → JS/TS → .NET</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temel</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-temeller/index.html"><span class="nav-num">01</span><span>Blockchain Temelleri</span></a></li>
+          <li><a class="nav-item" href="../02-solidity-ve-akilli-sozlesmeler/index.html"><span class="nav-num">02</span><span>Solidity ve Akıllı Sözleşmeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistemler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../03-javascript-typescript/index.html"><span class="nav-num">03</span><span>JavaScript ve TypeScript Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">04</span><span>.NET Ekosistemi</span></a></li>
+          <li><a class="nav-item" href="../05-diger-zincirler/index.html"><span class="nav-num">05</span><span>Diğer Zincirler ve Diller</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../06-altyapi-araclar-guvenlik/index.html"><span class="nav-num">06</span><span>Altyapı, Araçlar ve Güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../07-projeler/index.html"><span class="nav-num">07</span><span>Projeler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# ve .NET</span></a></li>
+          <li><a class="nav-item" href="../../Java/index.html"><span class="nav-num">&larr;</span><span>Java</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Anahtar kelime listesi: anlatım yok, araştırma başlığı var. JavaScript/TypeScript ekosistemi ana akım; .NET tarafı (Nethereum) tamamlayıcı. Testnet'te her şey ücretsiz — mainnet'e para koymadan öğren.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 04 · Ekosistemler</div>
+        <h1 class="page-title">.NET ile blockchain: <em>Nethereum</em> ve ötesi</h1>
+        <p class="lede">.NET'in blockchain'deki yeri tarayıcı değil, arka plan: zinciri dinleyen, olayları indeksleyen, imza atan, cüzdan yöneten servisler. ASP.NET Core ile birleşen kısım burası; JavaScript ekosisteminin yerini almaz, onu tamamlar.</p>
+        <div class="head-meta">Seviye: orta &middot; .NET uzmanlığıyla kesişim</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nethereum-ana-kutuphane"><span class="h-num">§ 1</span>Nethereum — ana kütüphane</h2>
+        <p class="intro">Bu sayfa, blockchain'in .NET uzmanlığıyla kesiştiği yer: ASP.NET Core, SQL Server ve mimari konuları <a href="../../CSharp-DotNet/index.html">C# ve .NET bölümünde</a>; burada yalnızca o bilgiye eklenen zincir tarafı anahtar kelimeleri var. .NET temeli sağlam değilse önce oradan başla. Nethereum, .NET için Ethereum/EVM istemci kütüphanesidir; JavaScript dünyasındaki ethers.js / viem'in C# karşılığıdır (<a href="../03-javascript-typescript/index.html">03 — JavaScript/TypeScript</a> sayfasıyla yan yana oku).</p>
+        <ul>
+          <li><strong>.NET biliyorsan</strong> &rarr; bu sayfa blockchain'i ana yetkinliğine bağlayan yerdir; sırayla oku.</li>
+          <li><strong>.NET bilmiyorsan, JS/TS biliyorsan</strong> &rarr; bu sayfa okuma amaçlıdır; aynı işleri (indeksleyici, SIWE doğrulama, sunucu cüzdanı) <a href="../03-javascript-typescript/index.html">03</a> § 8 ve § 11'deki Node.js araçlarıyla yaparsın.</li>
+          <li><strong>Java, Python veya Go biliyorsan</strong> &rarr; desenler (backfill, checkpoint, reorg tamponu, idempotency) dilden bağımsızdır; buradaki kavram adlarını kendi dilindeki kütüphaneyle uygula (Java: web3j, Python: web3.py, Go: go-ethereum <code>ethclient</code>; güncel durumları <span class="tag tag--warn">TEYİT</span>).</li>
+        </ul>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Sürüm durumu (13 Eylül 2026 itibarıyla doğrulandı)</p>
+          <p>Nethereum.Web3 son kararlı sürüm <strong>6.1.0</strong> (25 Mart 2026, NuGet). Hedefler: netstandard 2.0, net451/net461, net6.0, net8.0, net9.0, net10.0; Unity için net461/net472/netstandard 2.1. Yani .NET 8/9/10 projelerinde doğrudan çalışır. Kurulum: <code>dotnet add package Nethereum.Web3</code>. 130'dan fazla paket var; hepsini değil, aşağıdaki çekirdeği öğren.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1a · Çekirdek: bağlantı, hesap, işlem</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Web3</strong> sınıfı</td><td>Giriş noktası; RPC, sözleşme, hesap ve imzayı toplar. <code>new Web3(url)</code> veya <code>new Web3(account, url)</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/getting-started/welcome">docs.nethereum.com</a></td></tr>
+              <tr><td><strong>web3.Eth</strong></td><td>Bakiye, blok, işlem, token servisleri; gas tahmini ve nonce'u otomatik yönetir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/overview">core-foundation</a></td></tr>
+              <tr><td><strong>RPC transport</strong> (HTTP / WebSocket / IPC)</td><td>Düğüme bağlanma yolları; WebSocket abonelik (eth_subscribe) için gerekli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-rpc-transport">guide-rpc-transport</a></td></tr>
+              <tr><td><strong>Account</strong> (private key)</td><td>Yerelde imzalayan hesap; sunucu ve otomasyon için. <code>new Account(privateKey, chainId)</code>. Anahtarı koda veya appsettings.json'a yazma; geliştirmede user-secrets</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-keys-accounts">guide-keys-accounts</a></td></tr>
+              <tr><td><strong>ViewOnlyAccount</strong></td><td>Anahtarsız, sadece okuma yapan hesap; indeksleyici servislerde yeterli</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-keys-accounts">guide-keys-accounts</a></td></tr>
+              <tr><td><strong>ExternalAccount</strong></td><td>İmzayı dış cihaza/servise devreder (KMS, donanım cüzdanı); anahtar uygulamaya hiç girmez</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/overview">signing overview</a></td></tr>
+              <tr><td><strong>ManagedAccount</strong></td><td>Düğümün yönettiği hesap (personal_ API). Geth personal namespace'i kullanımdan kaldırdı; yeni projede kullanma</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://geth.ethereum.org/docs/interacting-with-geth/rpc/ns-personal">geth.ethereum.org</a></td></tr>
+              <tr><td><strong>TransactionManager</strong></td><td>İşlem yaşam döngüsü: kur, imzala, gönder, kazınmasını bekle, receipt al</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-send-transaction">guide-send-transaction</a></td></tr>
+              <tr><td><strong>SendTransactionAndWaitForReceiptAsync</strong></td><td>Hash döndüren <code>SendTransactionAsync</code>'in aksine receipt'i bekler; <code>receipt.HasErrors()</code> ile revert kontrolü</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-send-transaction">guide-send-transaction</a></td></tr>
+              <tr><td><strong>EstimateGasAsync</strong></td><td>Göndermeden önce gas tahmini; <code>eth_estimateGas</code> sarmalayıcısı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-fee-estimation">guide-fee-estimation</a></td></tr>
+              <tr><td><strong>EIP-1559</strong> (MaxFeePerGas / MaxPriorityFeePerGas)</td><td>Varsayılan işlem tipi; <code>GasPrice</code> set edersen legacy işleme düşer</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1559">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Transaction models</strong> (Legacy / Type-2 / EIP-7702)</td><td>Hangi işlem tipi hangi alanları taşır; 7702 EOA'ya kod atama (Final)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-transaction-models">guide-transaction-models</a></td></tr>
+              <tr><td><strong>HexBigInteger</strong></td><td>RPC'nin hex string sayılarını C# <code>BigInteger</code>'a bağlayan tip; wei her zaman BigInteger'dır, <code>decimal</code> değil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-unit-conversion">guide-unit-conversion</a></td></tr>
+              <tr><td><strong>UnitConversion</strong> (Web3.Convert.FromWei / ToWei)</td><td>wei ↔ gwei ↔ ether; 18 ondalık tuzağı burada çözülür</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-unit-conversion">guide-unit-conversion</a></td></tr>
+              <tr><td><strong>BlockParameter</strong> (latest / pending / safe / finalized)</td><td>Hangi blok durumuna karşı sorgu yapıldığını belirtir; indeksleyicide "finalized" önemlidir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-query-blocks">guide-query-blocks</a></td></tr>
+              <tr><td><strong>StreamingWebSocketClient</strong> / Rx abonelikleri</td><td>Yeni blok ve log akışı için observable abonelik; polling'e alternatif</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-events">guide-events</a></td></tr>
+              <tr><td><strong>Ethereum JSON-RPC</strong></td><td>Nethereum'un altındaki protokol: eth_getLogs, eth_getBlockByNumber, eth_sendRawTransaction, eth_getTransactionCount</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/en/developers/docs/apis/json-rpc/">ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1b · Akıllı sözleşme etkileşimi ve kod üretimi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ContractHandler</strong></td><td>Adres + hesapla tipli sözleşme çağrısı: <code>QueryAsync&lt;T&gt;</code>, <code>SendRequestAndWaitForReceiptAsync</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span> <span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-smart-contract-interaction">guide-smart-contract-interaction</a></td></tr>
+              <tr><td><strong>FunctionMessage</strong> + <code>[Function]</code> / <code>[Parameter]</code></td><td>Solidity fonksiyonunu temsil eden C# sınıfı; ABI kodlaması attribute'lardan üretilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/overview">smart-contracts</a></td></tr>
+              <tr><td><strong>EventDTO</strong> + <code>[Event]</code></td><td>Solidity event'inin C# karşılığı; indexed parametreler topic olur ve düğüm tarafında filtrelenir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-events">guide-events</a></td></tr>
+              <tr><td><strong>GetEvent / CreateFilterInput / GetAllChangesAsync</strong></td><td>Tarihsel log sorgusu: blok aralığı + topic filtresi → decode edilmiş event listesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-events">guide-events</a></td></tr>
+              <tr><td><strong>Deployment message</strong> / deploy-a-contract</td><td>Bytecode + constructor parametreleriyle dağıtım; test zincirine deploy akışı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/deploy-a-contract">deploy-a-contract</a></td></tr>
+              <tr><td><strong>Service class</strong> (üretilen)</td><td>Codegen'in çıkardığı sarmalayıcı: her fonksiyon için tipli metot, deploy overload'ları; <code>partial</code> olduğu için genişletilebilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/code-generation">code-generation</a></td></tr>
+              <tr><td><strong>Custom error DTO</strong></td><td>Solidity <code>error X()</code> tanımlarını decode etme; revert sebebini okumanın yolu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-error-handling">guide-error-handling</a></td></tr>
+              <tr><td><strong>Untyped Contract</strong> (<code>GetFunction("name")</code>)</td><td>ABI JSON ile codegen'siz dinamik çağrı; hızlı prototip için, üretimde tipli yol</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/overview">smart-contracts</a></td></tr>
+              <tr><td><strong>Nethereum.Generator.Console</strong></td><td><code>dotnet tool</code>; ABI + bin'den C#/VB/F# üretir; CI ve Foundry projeleri için (6.0.0)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Generator.Console">nuget.org</a></td></tr>
+              <tr><td><strong>VS Code Solidity eklentisi</strong> (Juan Blanco)</td><td>Kaydedince derler ve <code>nethereum-gen.settings</code> / <code>.nethereum-gen.multisettings</code> ile C# üretir; TypeChain'in .NET karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity">marketplace.visualstudio.com</a></td></tr>
+              <tr><td><strong>nethereum-codegen</strong> (npm)</td><td>JS build sistemlerinden C# üretmek için Node API'si; Hardhat/Foundry pipeline'ına eklenir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/code-generation">code-generation</a></td></tr>
+              <tr><td><strong>ERC-20 / ERC-721 / ERC-1155 hazır servisleri</strong></td><td>Standart tokenlar için ABI ve codegen gerekmez; <code>web3.Eth.ERC20</code> gibi hazır servisler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-built-in-standards">guide-built-in-standards</a></td></tr>
+              <tr><td><strong>ENS</strong> çözümleme</td><td>İsim → adres; hazır servis içinde</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-built-in-standards">guide-built-in-standards</a></td></tr>
+              <tr><td><strong>Multicall3</strong></td><td>Birden çok okuma çağrısını tek <code>eth_call</code>'da toplar; RPC kotası olan ücretsiz katmanlarda hayat kurtarır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-multicall">guide-multicall</a></td></tr>
+              <tr><td><strong>CREATE2</strong> dağıtımı</td><td>Deterministik adresle deploy; adres önceden bilinir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-create2-deployment">guide-create2-deployment</a></td></tr>
+              <tr><td><strong>Nethereum.ABI</strong></td><td>ABI encode/decode motoru; elle kodlama gerektiğinde</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-abi-encoding">guide-abi-encoding</a></td></tr>
+              <tr><td><strong>Nethereum.RLP</strong></td><td>İşlem serileştirme formatı (Recursive Length Prefix); ham işlem imzalarken altta çalışır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1c · Anahtar, cüzdan ve imza paketleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>EthECKey</strong></td><td>secp256k1 anahtar çifti; <code>GenerateKey()</code>; adres = public key'in Keccak-256'sının son 20 baytı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-keys-accounts">guide-keys-accounts</a></td></tr>
+              <tr><td><strong>Nethereum.KeyStore</strong> (KeyStoreService)</td><td>Web3 Secret Storage v3 JSON; scrypt varsayılan, pbkdf2 uyumluluk için; MetaMask/Geth ile aynı format</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-keystore">guide-keystore</a></td></tr>
+              <tr><td><strong>Nethereum.HdWallet</strong> (Wallet, BIP-32/39/44)</td><td>Mnemonic'ten hesap türetme; varsayılan yol <code>m/44'/60'/0'/0/x</code>; NBitcoin'e dayanır. Mnemonic'i gören türetilen tüm hesapları alır; yalnızca test mnemonic'i kullan</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-hd-wallets">guide-hd-wallets</a></td></tr>
+              <tr><td><strong>Nethereum.Wallet</strong> (MinimalHDWallet)</td><td>Dış kripto bağımlılığı olmayan hafif HD cüzdan + cüzdan altyapısı; .NET 6+</td><td><span class="tag">ORTA</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Wallet">nuget.org</a></td></tr>
+              <tr><td><strong>Mesaj imzalama (EIP-191)</strong></td><td><code>personal_sign</code> formatı; imzadan adres geri kazanma (recover) ile kimlik doğrulama temeli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-message-signing">guide-message-signing</a></td></tr>
+              <tr><td><strong>Nethereum.Signer.EIP712</strong> (Eip712TypedDataSigner)</td><td><code>SignTypedDataV4</code> / <code>RecoverFromSignatureV4</code>; <code>TypedData&lt;Domain&gt;</code>, <code>[Struct]</code>; MetaMask eth_signTypedData_v4 uyumlu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-eip712-signing">guide-eip712-signing</a></td></tr>
+              <tr><td><strong>ERC-2612 permit</strong></td><td>EIP-712 ile gas'sız approve; Nethereum EIP-712 rehberindeki örnek</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-712">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Nethereum.Siwe</strong></td><td>Sign-In with Ethereum (EIP-4361) mesaj oluşturma ve doğrulama; .NET tarafı için tek hazır paket</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Siwe">nuget.org</a></td></tr>
+              <tr><td><strong>Nethereum.Signer.AzureKeyVault</strong></td><td>Key Vault'taki EC SECP256K1 anahtarla imzalar; anahtar uygulamaya inmez</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-cloud-kms">guide-cloud-kms</a></td></tr>
+              <tr><td><strong>Nethereum.Signer.AWSKeyManagement</strong></td><td>AWS KMS <code>ECC_SECG_P256K1</code> anahtarla imzalama; IAM tabanlı yetki</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Signer.AWSKeyManagement">nuget.org</a></td></tr>
+              <tr><td><strong>Nethereum.Signer.Trezor / Ledger</strong></td><td>Donanım cüzdanıyla imza; masaüstü ve Android USB</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-hardware-wallets">guide-hardware-wallets</a></td></tr>
+              <tr><td><strong>Nethereum.GnosisSafe</strong></td><td>Safe çoklu imza akıllı hesabıyla etkileşim; docs.safe.global ile birlikte oku</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+              <tr><td><strong>Wallet SDK</strong> (Blazor + MAUI)</td><td>Self-custodial cüzdan uygulaması için MVVM katmanı; <a href="../../CSharp-DotNet/08-ui-blazor-mvc-maui/index.html">DotNet 08</a> bilgisini kullanır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/wallet-sdk/overview">wallet-sdk</a></td></tr>
+              <tr><td><strong>EIP-7702</strong> rehberi</td><td>EOA'ya kod atama; Nethereum'da ayrı rehber var</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-eip7702">guide-eip7702</a></td></tr>
+              <tr><td><strong>Web3 Secret Storage Definition</strong></td><td>Keystore JSON standardının kendisi (aes-128-ctr, scrypt/pbkdf2, keccak MAC)</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/en/developers/docs/data-structures-and-encoding/web3-secret-storage/">ethereum.org</a></td></tr>
+              <tr><td><strong>BIP-39</strong></td><td>Mnemonic → seed standardı; HD cüzdanın altı</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">github.com/bitcoin/bips</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1d · Nethereum ekosistemi: Unity, Blazor, araçlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Nethereum.Unity</strong></td><td>Oyun motoru için AOT uyumlu dll'ler; <code>UnityWebRequestRpcTaskClient</code>; OpenUPM'den kurulur</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/unity/overview">unity</a></td></tr>
+              <tr><td><strong>Unity WebGL + EIP-6963 / MetaMask</strong></td><td>Tarayıcıda çalışan oyunun cüzdan keşfi; masaüstünde private key imzası</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/Nethereum/Nethereum.Unity">github.com/Nethereum</a></td></tr>
+              <tr><td><strong>Nethereum.Blazor</strong></td><td>Blazor'da cüzdan keşfi, bileşenler, ABI ile dinamik sözleşme çağrısı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/blazor-dapp-integration/overview">blazor-dapp-integration</a></td></tr>
+              <tr><td><strong>Nethereum.Metamask.Blazor</strong></td><td>MetaMask JS interop; SIWE ile <code>&lt;AuthorizeView&gt;</code> entegrasyonu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/blazor-dapp-integration/overview">blazor-dapp-integration</a></td></tr>
+              <tr><td><strong>Nethereum.Reown.AppKit.Blazor</strong></td><td>WalletConnect (yeni adı Reown) QR ile mobil cüzdan bağlantısı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.reown.com/">docs.reown.com</a></td></tr>
+              <tr><td><strong>Nethereum.Blazor.Solidity</strong></td><td>Tarayıcı içi Solidity debugger bileşeni</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/blazor-dapp-integration/overview">blazor-dapp-integration</a></td></tr>
+              <tr><td><strong>Nethereum.DevChain</strong></td><td>Süreç içi yerel EVM zinciri: Docker yok, SQLite depolama, snapshot/revert, Hardhat/Anvil dev metotlarıyla uyumlu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/devchain/overview">devchain</a></td></tr>
+              <tr><td><strong>Nethereum.EVM</strong></td><td>Süreç içi EVM yürütme motoru; opcode adımlama, gas hesabı, trace; Ethereum VM testlerini geçiyor</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.nuget.org/packages/Nethereum.EVM">nuget.org</a></td></tr>
+              <tr><td><strong>Nethereum.Merkle / Merkle.Patricia</strong></td><td>Merkle ağacı ve Ethereum state trie uygulamaları; allowlist kanıtı üretmek için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+              <tr><td><strong>Nethereum.Mud</strong></td><td>MUD (zincir üstü oyun motoru) tablolarına .NET erişimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://mud.dev/">mud.dev</a></td></tr>
+              <tr><td><strong>Nethereum.Uniswap</strong></td><td>Uniswap sözleşmeleri için hazır servisler; fiyat/swap sorgulama örneği</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://developers.uniswap.org/">developers.uniswap.org</a></td></tr>
+              <tr><td><strong>Nethereum.Optimism</strong></td><td>OP Stack L2 köprü sözleşmeleri; L2 kavramları için <a href="../05-diger-zincirler/index.html">05</a></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+              <tr><td><strong>Nethereum Playground</strong></td><td>Tarayıcıda C# örnekleri çalıştır (Mono WASM + Roslyn); ilk hafta için en hızlı deneme yolu, ücretsiz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://playground.nethereum.com/">playground.nethereum.com</a></td></tr>
+              <tr><td><strong>Nethereum.Templates.Pack</strong></td><td><code>dotnet new</code> şablonları: smartcontract (xUnit ERC-20), nethereum-siwe, nethereum-mm-blazor, nethereum-erc721-oz, nethereum-ws-stream</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Templates.Pack">nuget.org</a></td></tr>
+              <tr><td><strong>Nethereum GitHub</strong></td><td>Kaynak, sürüm notları (5.8 → 6.0 → 6.1), örnekler; sorun açmadan önce issues'ü ara</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/Nethereum/Nethereum">github.com/Nethereum</a></td></tr>
+              <tr><td><strong>ethereum.org — .NET geliştiriciler</strong></td><td>Resmî giriş sayfası; Nethereum ve Nethermind'i listeler</td><td><span class="tag">ORTA</span></td><td><a href="https://ethereum.org/en/developers/docs/programming-languages/dot-net/">ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="backend-desenleri"><span class="h-num">§ 2</span>Backend desenleri (.NET ile)</h2>
+        <p>Blockchain projelerinde .NET'in doğal yeri backend'dir: zinciri dinleyen, olayları veritabanına indeksleyen, imza doğrulayan ve işlem gönderen servis. Aşağıdaki desenlerin çoğunu <a href="../../CSharp-DotNet/05-mesajlasma-ve-dagitik/index.html">DotNet 05 — Mesajlaşma ve dağıtık sistemler</a> sayfasını okuduysan zaten biliyorsun; burada yalnızca zincire özgü kısımlar var.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2a · Blok/olay dinleme ve indeksleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>BackgroundService</strong> / IHostedService</td><td>Dinleyiciyi barındıran ASP.NET Core arka plan servisi; CancellationToken ile düzgün kapanış</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Nethereum.BlockchainProcessing</strong></td><td>Blok/işlem/receipt/log tarama çerçevesi; ilerleme takibi, onay bekleme, reorg tespiti, OpenTelemetry metrikleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>BlockCrawlOrchestrator</strong></td><td>Blok blok tarar: işlemler, receipt'ler, loglar; tam zincir analizi için</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>LogOrchestrator</strong></td><td>Geniş blok aralığında toplu <code>eth_getLogs</code>; sadece event lazımsa çok daha ucuz. Sağlayıcının aralık limitine dikkat</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>IBlockProgressRepository</strong></td><td>Kaldığı bloktan devam etme; JSON dosyası, bellek içi veya kendi SQL uygulaman</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>ReorgBufferedBlockProgressRepository</strong></td><td>Yeniden başlatmada son 12 bloğu tekrar işler; zincir yeniden düzenlemesine (reorg) karşı tampon</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>minimumBlockConfirmations</strong></td><td>Bloğu işlemek için beklenen onay sayısı (yaygın değer 12); finality kavramı için <a href="../01-temeller/index.html">01</a></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>Reorg</strong> tespiti / non-canonical kayıt</td><td>Blok hash'i saklanan değerle uyuşmazsa kayıtları "canonical değil" işaretle; sorgular filtreler. "chain reorganization indexer" diye ara</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>Nethereum.BlockchainStore.EFCore</strong></td><td>Temel DbContext, entity ve repository arayüzleri; SQL'e indeksleme için hazır şema</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-database-storage">guide-database-storage</a></td></tr>
+              <tr><td><strong>BlockchainStore.Postgres / .SqlServer / .Sqlite</strong></td><td>Üç sağlayıcı paketi. Veritabanı geçmişine göre: SQL Server biliyorsan <code>.SqlServer</code> ile başla, projede Postgres'e geç; PostgreSQL biliyorsan doğrudan <code>.Postgres</code>; hiç ilişkisel veritabanı bilmiyorsan kurulum gerektirmeyen <code>.Sqlite</code> ile başla, sonra Postgres; hedefin SQL Server / Azure SQL kullanan kurumsal ortamsa <code>.SqlServer</code> kalıcı seçim olabilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-database-storage">guide-database-storage</a></td></tr>
+              <tr><td><strong>Token indexing</strong> (ERC-20/721/1155 bakiye toplama)</td><td>Transfer olaylarından bakiye türeten hazır pipeline</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-token-indexing">guide-token-indexing</a></td></tr>
+              <tr><td><strong>Nethereum Explorer</strong> (Blazor UI)</td><td>İndekslenen veriyi gösteren hafif gezgin; portföy projesi için hazır arayüz</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-explorer">guide-explorer</a></td></tr>
+              <tr><td><strong>EF Core</strong> + <strong>Npgsql</strong></td><td>İndeks tablolarını yazacağın ORM ve PostgreSQL sağlayıcısı; <a href="../../CSharp-DotNet/03-veri-erisimi/index.html">DotNet 03</a></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.npgsql.org/">npgsql.org</a></td></tr>
+              <tr><td><strong>System.Threading.Channels</strong></td><td>Üretici/tüketici kuyruğu: log okuyucu ile SQL yazıcıyı ayırmak için; bounded kanal ile geri basınç</td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/channels">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SignalR</strong></td><td>İndekslenen yeni olayı tarayıcıya anlık itme; frontend tarafı için <a href="../../JavaScript-TypeScript/03-react/index.html">React</a></td><td><span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>The Graph</strong> (subgraph)</td><td>Hosted indeksleme alternatifi (AssemblyScript ile yazılır); .NET indeksleyicinle karşılaştırmak için bil</td><td><span class="tag">ORTA</span></td><td><a href="https://thegraph.com/docs/en/">thegraph.com/docs</a></td></tr>
+              <tr><td><strong>Ponder</strong></td><td>TypeScript indeksleme çerçevesi; JS ekosisteminin karşılığı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://ponder.sh/">ponder.sh</a></td></tr>
+              <tr><td><strong>Blockscout</strong></td><td>Açık kaynak, kendin barındırabildiğin blok gezgini; yerel/izinli zincir için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.blockscout.com/">docs.blockscout.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2b · Webhook, kimlik doğrulama, relayer</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Alchemy Notify / Webhooks</strong></td><td>Address Activity, NFT Activity ve Custom webhook tipleri; kendi dinleyicini yazmadan olay almanın yolu</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.alchemy.com/docs/reference/notify-api-quickstart">alchemy.com/docs</a></td></tr>
+              <tr><td><strong>Webhook imza doğrulama</strong> (HMAC)</td><td>Gelen isteğin gerçekten sağlayıcıdan geldiğini header'daki imzayla doğrula; doğrulamadan işleme = sahte olay riski</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://www.alchemy.com/docs/reference/notify-api-quickstart">alchemy.com/docs</a></td></tr>
+              <tr><td><strong>SIWE / EIP-4361</strong></td><td>Cüzdanla oturum açma: sunucu nonce üretir, istemci mesajı imzalar, sunucu adresi geri kazanıp karşılaştırır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4361">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>SIWE resmî dokümanı</strong></td><td>Kütüphane listesi TS/Rust/Python/Ruby; .NET için Nethereum.Siwe kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.login.xyz/">docs.login.xyz</a></td></tr>
+              <tr><td><strong>SIWE nonce + domain + expiration</strong></td><td>Replay ve phishing'e karşı zorunlu alanlar; nonce'u tek kullanımlık sakla (cache/DB)</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4361">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>JWT / AuthorizeView</strong> köprüsü</td><td>Doğrulanan adres için JWT üret, rol bazlı yetki; Blazor'da hazır entegrasyon var</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/blazor-dapp-integration/overview">blazor-dapp-integration</a></td></tr>
+              <tr><td><strong>EIP-191</strong></td><td>İmzalı veri ön eki (<code>0x19</code>); personal_sign'ın standardı</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-191">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>EIP-712 doğrulama endpoint'i</strong></td><td>Frontend'in imzaladığı yapılandırılmış veriyi backend'de recover et; sipariş, oy, permit senaryoları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-eip712-signing">guide-eip712-signing</a></td></tr>
+              <tr><td><strong>Meta-transaction / EIP-2771</strong></td><td>Kullanıcı imzalar, relayer gas öder; trusted forwarder sözleşmesi. .NET relayer bunun sunucu tarafıdır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-2771">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>OpenZeppelin Relayer</strong> (açık kaynak)</td><td>Rust ile yazılmış relayer servisi; nonce yönetimi, fee tahmini, izleme; kendin .NET ile yazmadan önce mimarisini oku</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.openzeppelin.com/relayer/">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>OpenZeppelin Defender</strong></td><td>Yönetilen relayer/monitor hizmeti; kapanış tarihi 1 Temmuz 2026 olarak duyuruldu, açık kaynak sürümlere (Monitor, Relayer) yönlendiriyor. Durumu değişebilir, teyit et</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.openzeppelin.com/defender/">docs.openzeppelin.com</a></td></tr>
+              <tr><td><strong>Gelato Relay</strong></td><td>Ticari gas'sız işlem relay hizmeti; doküman adresi bu yazım sırasında doğrulanamadı — gelato.network üzerinden ara</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>gelato.network</td></tr>
+              <tr><td><strong>ERC-4337</strong> (bundler / paymaster)</td><td>Akıllı sözleşme hesapları için ayrı mempool; paymaster gas'ı sponsor eder. Kavram olarak bil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-4337">eips.ethereum.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>2c · Gönderim güvenilirliği, anahtar yönetimi, sağlayıcılar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Nonce yönetimi</strong> (eth_getTransactionCount pending)</td><td>Aynı hesaptan paralel gönderimde nonce çakışır veya boşluk (gap) oluşur; tek imzacı + sıralı kuyruk en güvenli desen</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://ethereum.org/en/developers/docs/apis/json-rpc/">ethereum.org</a></td></tr>
+              <tr><td><strong>Stuck transaction / replacement</strong></td><td>Düşük fee ile takılan işlemi aynı nonce ve daha yüksek fee ile değiştir; "replace-by-fee nonce" diye ara</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-fee-estimation">guide-fee-estimation</a></td></tr>
+              <tr><td><strong>Gas tahmini toleransı</strong></td><td>estimateGas sonucuna pay ekleme; revert eden çağrıda tahmin de hata verir, önce simüle et</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-fee-estimation">guide-fee-estimation</a></td></tr>
+              <tr><td><strong>Polly</strong> (retry, circuit breaker, timeout)</td><td>RPC sağlayıcı hataları ve rate limit için dayanıklılık; yalnızca okuma çağrılarında körlemesine retry yap, gönderimde nonce'u düşün</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.pollydocs.org/">pollydocs.org</a></td></tr>
+              <tr><td><strong>Idempotency</strong> (tx hash / iş anahtarı)</td><td>Aynı iş için ikinci kez işlem göndermeyi engelle; işlem hash'i doğal idempotency anahtarıdır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="../../CSharp-DotNet/05-mesajlasma-ve-dagitik/index.html">DotNet 05</a></td></tr>
+              <tr><td><strong>Outbox pattern</strong></td><td>"DB'ye yaz + zincire gönder" çift yazımını güvenli hale getirir; DotNet 05'teki desen zincire birebir uygulanır</td><td><span class="tag">ORTA</span></td><td><a href="../../CSharp-DotNet/05-mesajlasma-ve-dagitik/index.html">DotNet 05</a></td></tr>
+              <tr><td><strong>Private key'i yapılandırmada saklama</strong></td><td>appsettings.json'a anahtar yazma = repo'ya sızma. Geliştirmede user-secrets/env, üretimde KMS</td><td><span class="tag tag--warn">RİSK</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/overview">signing overview</a></td></tr>
+              <tr><td><strong>Azure Key Vault</strong> (Standard / Premium HSM)</td><td>Anahtar, gizli bilgi, sertifika deposu; Premium katman HSM korumalı anahtar verir</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure.Security.KeyVault.Keys</strong> (CryptographyClient)</td><td>.NET SDK; imzala/doğrula işlemleri anahtar dışarı çıkmadan yapılır; Nethereum.Signer.AzureKeyVault bunun üstünde</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/security.keyvault.keys-readme">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>AWS KMS</strong> (ECC_SECG_P256K1)</td><td>secp256k1 anahtar spec'i resmî olarak destekleniyor ("kripto paralar için"); Sign/Verify API</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html">docs.aws.amazon.com</a></td></tr>
+              <tr><td><strong>HashiCorp Vault — Transit</strong></td><td>Sign/verify motoru; ancak eğriler P-256/384/521 ve ed25519 — secp256k1 yok. Ethereum imzası için tek başına yetmez</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://developer.hashicorp.com/vault/docs/secrets/transit">developer.hashicorp.com</a></td></tr>
+              <tr><td><strong>HSM</strong> kavramı</td><td>Anahtarın hiç çıkmadığı donanım; bulut KMS'lerin arkasında bu var. Ücretsiz katmanı yok, kavram olarak bil</td><td><span class="tag tag--info">İLERİ</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/azure/key-vault/general/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>RPC sağlayıcı — Alchemy</strong></td><td>Yönetilen düğüm erişimi; ücretsiz katman var, kota aşımı ücretli</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.alchemy.com/docs/reference/notify-api-quickstart">alchemy.com/docs</a></td></tr>
+              <tr><td><strong>RPC sağlayıcı — Infura</strong> (MetaMask Developer)</td><td>Aynı işlev; ücretsiz katman var</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.infura.io/">docs.infura.io</a></td></tr>
+              <tr><td><strong>RPC sağlayıcı — QuickNode</strong></td><td>80+ zincir; ücretsiz deneme; alternatif olarak bil</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.quicknode.com/docs">quicknode.com/docs</a></td></tr>
+              <tr><td><strong>Testnet: Sepolia / Hoodi</strong></td><td>Sepolia uygulama geliştirme için önerilen; Hoodi validator testleri için; Holesky Eylül 2025'te kullanımdan kalktı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Faucet</strong></td><td>Ücretsiz test ETH dağıtan web uygulamaları (Alchemy, Chainlink, Infura, QuickNode listeli). Sıfır bütçenin kaynağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://ethereum.org/en/developers/docs/networks/">ethereum.org</a></td></tr>
+              <tr><td><strong>Etherscan API</strong> (getsourcecode / ABI)</td><td>Doğrulanmış sözleşmenin ABI ve kaynağını çekme; codegen girdisi olarak kullanılabilir</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://docs.etherscan.io/">docs.etherscan.io</a></td></tr>
+              <tr><td><strong>Chainlink</strong> (oracle, fiyat beslemesi)</td><td>Zincir dışı veriyi zincire taşıma; backend'in okuduğu feed sözleşmeleri</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.chain.link/">docs.chain.link</a></td></tr>
+              <tr><td><strong>OpenTelemetry</strong> metrikleri</td><td>BlockchainProcessing metrik yayar; toplama ve gösterim için <a href="../../CSharp-DotNet/07-devops-ve-gozlemlenebilirlik/index.html">DotNet 07</a></td><td><span class="tag">ORTA</span></td><td><a href="https://www.nuget.org/packages/Nethereum.BlockchainProcessing">nuget.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-dotnet-kutuphaneleri"><span class="h-num">§ 3</span>Diğer .NET kütüphaneleri</h2>
+        <p>Ethereum dışı zincirler için .NET SDK'ları ve C# ile yazılmış altyapı projeleri. Kaynak kodunu okumak, mülakatta "gerçek bir .NET blockchain projesi incelemişim" diyebilmenin en ucuz yolu.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>3 · Zincir bazında .NET kütüphaneleri ve C# altyapı projeleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>NBitcoin</strong> (MetacoSA)</td><td>.NET için en kapsamlı Bitcoin kütüphanesi; BIP uygulamaları, PSBT, adres tipleri. 10.0.10 (27 Ağustos 2026), .NET 8 / netstandard</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/MetacoSA/NBitcoin">github.com/MetacoSA</a></td></tr>
+              <tr><td><strong>Programming The Blockchain in C#</strong></td><td>NBitcoin yazarının ücretsiz kitabı; Bitcoin temelini C# ile öğrenmenin standart yolu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://programmingblockchain.gitbook.io/programmingblockchain">programmingblockchain.gitbook.io</a></td></tr>
+              <tr><td><strong>NBitcoin.Secp256k1</strong></td><td>libsecp256k1'in saf C# portu; Nethereum da kullanır</td><td><span class="tag">ORTA</span></td><td><a href="https://www.nuget.org/packages/NBitcoin.Secp256k1">nuget.org</a></td></tr>
+              <tr><td><strong>NBXplorer</strong></td><td>HD cüzdanlar için minimalist UTXO izleyici; .NET ile yazılmış, pruned düğümle çalışır (.NET SDK 10 ister)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/dgarage/NBXplorer">github.com/dgarage</a></td></tr>
+              <tr><td><strong>BTCPay Server</strong></td><td>.NET ile yazılmış, kendin barındırdığın açık kaynak ödeme sunucusu; Greenfield API ve eklenti sistemi. En iyi "okunacak kod" örneği</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.btcpayserver.org/">docs.btcpayserver.org</a></td></tr>
+              <tr><td><strong>Bitcoin Core RPC</strong></td><td>NBXplorer/BTCPay'in konuştuğu düğüm API'si; regtest ile ücretsiz yerel deneme</td><td><span class="tag">ORTA</span></td><td><a href="https://developer.bitcoin.org/reference/rpc/">developer.bitcoin.org</a></td></tr>
+              <tr><td><strong>Solnet</strong> (Solana)</td><td>Solana C# SDK: RPC + streaming, cüzdan/keystore, System/Token/ATA programları; .NET 8+. NuGet sürümü 2022 tarihli, GitHub aktif — ikisini karşılaştır</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bmresearch/Solnet">github.com/bmresearch</a></td></tr>
+              <tr><td><strong>Nethermind</strong></td><td>C#/.NET ile yazılmış Ethereum yürütme istemcisi; .NET SDK 10, LGPL-3.0/GPL-3.0, eklenti sistemi. Kaynak okumak EVM'i öğretir</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethermind.io/">docs.nethermind.io</a></td></tr>
+              <tr><td><strong>Nethermind GitHub</strong></td><td>JSON-RPC, txpool, sync modüllerine bak; Go istemcisi geth için <a href="../../Go/index.html">Go</a>, Rust istemcisi reth için <a href="../../Rust/index.html">Rust</a> sayfaları</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/NethermindEth/nethermind">github.com/NethermindEth</a></td></tr>
+              <tr><td><strong>Neo N3 — C# akıllı sözleşme</strong></td><td>C# alt kümesiyle sözleşme yazılan zincir; Neo.SmartContract.Framework, <code>Storage</code> sınıfı</td><td><span class="tag">ORTA</span></td><td><a href="https://developers.neo.org/docs/n3/develop/write/basics">developers.neo.org</a></td></tr>
+              <tr><td><strong>neo-devpack-dotnet / nccs</strong></td><td>Neo.Compiler.CSharp: C#'ı NeoVM bytecode'a (NEF) derler; aktif repo</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/neo-project/neo-devpack-dotnet">github.com/neo-project</a></td></tr>
+              <tr><td><strong>Netezos</strong> (Tezos)</td><td>Tezos .NET SDK: Rpc, Forge, Keys (ed25519/secp256k1/nistp256/bls12381), Micheline sözleşme erişimi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://netezos.dev/">netezos.dev</a></td></tr>
+              <tr><td><strong>Substrate.NET.API</strong> (Polkadot)</td><td>Substrate düğümlerine C# erişimi; Unity odaklı, Ajuna Network kullanıyor; NuGet 0.9.24 (Haziran 2025)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/SubstrateGaming/Substrate.NET.API">github.com/SubstrateGaming</a></td></tr>
+              <tr><td><strong>TonSdk.NET</strong> (TON)</td><td>Cell/BOC serileştirme, TonCenter RPC istemcisi, Ton Connect 2.0; doküman alan adı bu yazım sırasında çözümlenmedi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/continuation-team/TonSdk.NET">github.com/continuation-team</a></td></tr>
+              <tr><td><strong>Stratis / StratisPlatform</strong></td><td>C# ile yazılmış zincir platformuydu; stratisplatform.com artık xertra.com'a yönleniyor, güncel durumu belirsiz. Yeni öğrenme için önceliksiz</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>xertra.com</td></tr>
+              <tr><td><strong>Hyperledger Fabric .NET SDK</strong></td><td>Resmî .NET SDK yok; Gateway istemci API'si Go/Node/Java. Fabric'e .NET'ten erişim = kendi REST köprün</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://hyperledger.github.io/fabric-gateway/">hyperledger.github.io</a></td></tr>
+              <tr><td><strong>WalletConnectSharp</strong></td><td>WalletConnect v2 .NET uygulamasıydı; 17 Şubat 2025'te EOL, Reown SDK'larına geçildi</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/WalletConnect/WalletConnectSharp">github.com/WalletConnect</a></td></tr>
+              <tr><td><strong>Secp256k1.Net</strong></td><td>Yerel libsecp256k1 için C# sarmalayıcı (Windows/Linux/macOS ikilileri paketli); performans gerektiğinde</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/MeadowSuite/Secp256k1.Net">github.com/MeadowSuite</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kurumsal-izinli-blockchain"><span class="h-num">§ 4</span>Kurumsal / izinli blockchain</h2>
+        <p>Türkiye'deki .NET iş ilanlarında "blockchain" kelimesi çoğunlukla bu başlık altında geçiyor gibi görünür: banka, tedarik zinciri, denetim izi. Bu tespit nicel bir araştırmaya dayanmaz <span class="tag tag--warn">TEYİT</span>; ilan sitelerinde kendin kontrol et. Burada amaç kripto değil, çok taraflı güven. Hangi satırın senin için öncelikli olduğu hedefine bağlı:</p>
+        <ul>
+          <li><strong>SQL Server / Azure SQL kullanıyorsan ya da kurumsal (banka, denetim izi) ilan hedefliyorsan</strong> &rarr; SQL Server ledger tabloları TEMEL; Besu izinli mod ve Confidential Ledger ORTA.</li>
+          <li><strong>PostgreSQL ya da başka veritabanı kullanıyorsan, ya da kamu zinciri (EVM) hedefliyorsan</strong> &rarr; ledger tablolarını kavram olarak bil (ORTA); öncelik § 1–2.</li>
+          <li><strong>Kurumsal ilan Java veya Go istiyorsa</strong> &rarr; Fabric (chaincode Go/Java/Node) ve Besu; ayrıntı <a href="../05-diger-zincirler/index.html">05</a> § 12.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>4 · İzinli ağlar ve kurumsal defterler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Hyperledger Fabric</strong></td><td>Kurumsal izinli defter platformu; kanal, MSP, chaincode kavramları</td><td><span class="tag">ORTA</span></td><td><a href="https://hyperledger-fabric.readthedocs.io/en/latest/">hyperledger-fabric.readthedocs.io</a></td></tr>
+              <tr><td><strong>Chaincode</strong> (Go / Node.js / Java)</td><td>Fabric'in akıllı sözleşmesi; C# desteklenmez. Java tarafı için <a href="../../Java/04-ekosistem-ve-araclar/index.html">Java 04</a></td><td><span class="tag">ORTA</span></td><td><a href="https://hyperledger-fabric.readthedocs.io/en/latest/chaincode4ade.html">chaincode4ade</a></td></tr>
+              <tr><td><strong>Fabric Gateway</strong></td><td>İstemci uygulama API'si (Go/Node/Java); .NET istemci için REST/gRPC köprü yazarsın</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hyperledger.github.io/fabric-gateway/">hyperledger.github.io</a></td></tr>
+              <tr><td><strong>Hyperledger Besu</strong> (izinli mod)</td><td>Java tabanlı Ethereum istemcisi; özel ağ modunda kurumsal EVM zinciri kurarsın; Nethereum ile doğrudan konuşur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.besu-eth.org/private-networks">docs.besu-eth.org</a></td></tr>
+              <tr><td><strong>QBFT / IBFT 2.0</strong></td><td>Besu özel ağlarının konsensüs protokolleri; validator seti sabit, blok kesinliği hızlı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.besu-eth.org/private-networks">docs.besu-eth.org</a></td></tr>
+              <tr><td><strong>GoQuorum</strong></td><td>Consensys artık bakmıyor, repo arşivlendi; yeni projede kullanılmaz, ilanlarda hâlâ görürsün</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/Consensys/quorum">github.com/Consensys</a></td></tr>
+              <tr><td><strong>Corda</strong> (R3)</td><td>Kotlin ile yazılmış, JVM hedefli iş blockchain'i; sözleşmeler Java/Kotlin. Dokümanlar docs.r3.com</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/corda/corda">github.com/corda</a></td></tr>
+              <tr><td><strong>Azure Blockchain Service</strong></td><td>Microsoft'un yönetilen Quorum hizmetiydi; Eylül 2021'de kapatıldı. Eski blog ve kurslarda çıkar, takip etme</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>learn.microsoft.com (kaldırıldı)</td></tr>
+              <tr><td><strong>Azure Confidential Ledger</strong></td><td>SGX enclave'lerde çalışan, yalnızca ekleme yapılan, kurcalanmaya karşı kanıtlı defter (CCF üstüne); REST + SDK</td><td><span class="tag">ORTA</span> <span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/confidential-ledger/overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Azure.Security.ConfidentialLedger</strong> (.NET SDK)</td><td><code>PostLedgerEntry</code>, receipt (Merkle kanıtı), collection id; DefaultAzureCredential ile</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/overview/azure/security.confidentialledger-readme">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>SQL Server Ledger tabloları</strong> (2022+, Azure SQL)</td><td>Updatable ve append-only ledger tabloları; Merkle ağacıyla SHA-256 zincirleme; digest'i Confidential Ledger'a yazma. SQL Server'ın yerleşik "blockchain" özelliği</td><td><span class="tag tag--ok">TEMEL</span> (SQL Server / Azure SQL kullanıyor ya da kurumsal ilan hedefliyorsan); diğerleri için <span class="tag">ORTA</span></td><td><a href="https://learn.microsoft.com/en-us/sql/relational-databases/security/ledger/ledger-overview">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>CCF</strong> (Confidential Consortium Framework)</td><td>Microsoft Research'ün açık kaynak çerçevesi; Confidential Ledger'ın altı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://learn.microsoft.com/en-us/azure/confidential-ledger/overview">learn.microsoft.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dotnet-kriptografi-temelleri"><span class="h-num">§ 5</span>.NET ile kriptografi temelleri</h2>
+        <p>Nethereum çoğunu gizler, ama mülakatta "adres nasıl türetilir, Keccak ile SHA-3 farkı ne" sorulur. Aşağıdakiler .NET'te nerede var, nerede yok.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>5 · Eğriler, hash'ler, sayı ve bayt tuzakları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>System.Security.Cryptography.ECDsa</strong></td><td>BCL'nin ECDSA sınıfı; NIST eğrileri (nistP256 vb.). secp256k1 desteği platforma bağlı ve güvenilmez — Ethereum için kullanma</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.ecdsa">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>secp256k1</strong></td><td>Bitcoin ve Ethereum'un eğrisi; .NET'te NBitcoin.Secp256k1, BouncyCastle veya Secp256k1.Net ile</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/NBitcoin.Secp256k1">nuget.org</a></td></tr>
+              <tr><td><strong>BouncyCastle.Cryptography</strong></td><td>Geniş kripto kütüphanesi (2.7.0); özel eğri parametreleri, PGP, X.509; Nethereum'un bağımlılıklarında</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/bcgit/bc-csharp">github.com/bcgit</a></td></tr>
+              <tr><td><strong>Keccak-256 ≠ SHA3-256</strong></td><td>Ethereum, NIST standardından önceki Keccak parametrelerini kullanır; .NET 8'deki <code>SHA3_256</code> sınıfı FIPS 202'dir ve FARKLI hash üretir</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.sha3_256">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Sha3Keccack</strong> (Nethereum.Util)</td><td>Doğru Keccak-256; fonksiyon seçicisi (ilk 4 bayt), event topic ve adres türetmede kullanılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Util">nuget.org</a></td></tr>
+              <tr><td><strong>AddressUtil / EIP-55 checksum</strong></td><td>Karışık büyük-küçük harfli adres doğrulama; karşılaştırmayı her zaman case-insensitive yap</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Util">nuget.org</a></td></tr>
+              <tr><td><strong>System.Numerics.BigInteger</strong></td><td>uint256 için tek doğru tip; <code>decimal</code> ve <code>long</code> taşar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Endianness tuzağı</strong> (BigInteger.ToByteArray)</td><td>BigInteger little-endian ve işaretli bayt üretir; EVM big-endian, işaretsiz 32 bayt ister. <code>ToByteArray(isUnsigned: true, isBigEndian: true)</code> kullan</td><td><span class="tag tag--ok">TEMEL</span> <span class="tag tag--warn">RİSK</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>Convert.ToHexString / FromHexString</strong></td><td>.NET 5+ hex dönüşümü (büyük harf üretir); 0x ön ekini kendin yönet, Nethereum.Hex uzantıları bunu yapar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.convert.tohexstring">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>18 ondalık</strong> (wei) aritmetiği</td><td>Token miktarları tam sayı; gösterim için böl, hesap için asla <code>double</code>. UnitConversion BigDecimal desteği</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-unit-conversion">guide-unit-conversion</a></td></tr>
+              <tr><td><strong>EIP-155</strong> (chainId ile replay koruması)</td><td>İmzaya zincir kimliği girer; yanlış chainId = "invalid sender" hatası</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-155">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>ECDSA recover (v, r, s)</strong></td><td>İmzadan public key ve adres geri kazanma; SIWE ve EIP-712 doğrulamasının matematiği</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-message-signing">guide-message-signing</a></td></tr>
+              <tr><td><strong>scrypt / PBKDF2</strong></td><td>Keystore'un parola türetme fonksiyonları; scrypt bellek-zor, N parametresi maliyeti belirler</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-keystore">guide-keystore</a></td></tr>
+              <tr><td><strong>BIP-32 / BIP-44 türetme yolu</strong></td><td><code>m/44'/60'/0'/0/x</code>: 60 = Ethereum coin type; Ledger farklı yol kullanır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-hd-wallets">guide-hd-wallets</a></td></tr>
+              <tr><td><strong>Merkle ağacı</strong></td><td>Allowlist ve airdrop kanıtları; Nethereum.Merkle ile üret, sözleşmede doğrula</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+              <tr><td><strong>RLP</strong></td><td>İşlem ve blok serileştirme; ham işlem baytlarını anlamak için</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/component-catalog">component-catalog</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="csharp-js-kavram-eslestirme"><span class="h-num">§ 6</span>C# ↔ JavaScript kavram eşleştirme</h2>
+        <p>"React dApp" deneyimi ve <a href="../03-javascript-typescript/index.html">03 — JavaScript/TypeScript</a> sayfasındaki terimlerin Nethereum karşılıkları. Mülakatta "bunu .NET'te nasıl yapardın" sorusuna hazır cevap.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6 · ethers / viem / wagmi → Nethereum</caption>
+            <thead><tr><th>JS tarafı</th><th>Nethereum karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ethers Provider</strong> / viem Public Client</td><td><code>Web3</code> (hesapsız) — salt okuma RPC</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.ethers.org/v6/">docs.ethers.org</a></td></tr>
+              <tr><td><strong>ethers Signer / Wallet</strong> / viem Wallet Client</td><td><code>Account</code> + <code>Web3(account, url)</code>; dış imzacı için <code>ExternalAccount</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://viem.sh/">viem.sh</a></td></tr>
+              <tr><td><strong>ethers Contract</strong> / viem getContract</td><td><code>ContractHandler</code> veya codegen'in ürettiği Service sınıfı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-smart-contract-interaction">guide-smart-contract-interaction</a></td></tr>
+              <tr><td><strong>TypeChain</strong> / abitype tip üretimi</td><td>Nethereum.Generator.Console + VS Code eklentisi; TypeChain artık "legacy" ilan edildi, viem/abitype öneriliyor</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/dethcrypto/TypeChain">github.com/dethcrypto</a></td></tr>
+              <tr><td><strong>contract.on("Transfer")</strong> / watchContractEvent</td><td><code>GetEvent&lt;TransferEventDTO&gt;()</code> + filter veya WebSocket aboneliği; toplu tarama için LogOrchestrator</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-events">guide-events</a></td></tr>
+              <tr><td><strong>signer.signTypedData</strong></td><td><code>Eip712TypedDataSigner.SignTypedDataV4</code>; doğrulama <code>RecoverFromSignatureV4</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-eip712-signing">guide-eip712-signing</a></td></tr>
+              <tr><td><strong>signer.signMessage</strong> (personal_sign)</td><td>Nethereum mesaj imzalama (EIP-191); backend'de recover ile SIWE doğrulaması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/signing-and-key-management/guide-message-signing">guide-message-signing</a></td></tr>
+              <tr><td><strong>ethers.parseEther / formatEther</strong></td><td><code>Web3.Convert.ToWei</code> / <code>FromWei</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/core-foundation/guide-unit-conversion">guide-unit-conversion</a></td></tr>
+              <tr><td><strong>wagmi hook'ları</strong> (useAccount, useReadContract)</td><td>Karşılığı yok — wagmi tarayıcı/React katmanı. .NET backend'dir; Blazor'da Nethereum.Blazor kısmen aynı rolü oynar</td><td><span class="tag">ORTA</span></td><td><a href="https://wagmi.sh/">wagmi.sh</a></td></tr>
+              <tr><td><strong>window.ethereum / EIP-1193</strong></td><td>Backend'de yok; Blazor WASM'da Nethereum.Metamask JS interop, Unity WebGL'de EIP-6963 keşfi</td><td><span class="tag">ORTA</span></td><td><a href="https://eips.ethereum.org/EIPS/eip-1193">eips.ethereum.org</a></td></tr>
+              <tr><td><strong>Hardhat network / anvil</strong> (test zinciri)</td><td>Nethereum.DevChain (süreç içi) veya aynı anvil/hardhat düğümüne HTTP ile bağlan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/devchain/overview">devchain</a></td></tr>
+              <tr><td><strong>multicall (viem)</strong></td><td>Nethereum Multicall3 servisi</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/smart-contracts/guide-multicall">guide-multicall</a></td></tr>
+              <tr><td><strong>Subgraph (The Graph)</strong></td><td>Nethereum.BlockchainProcessing + BlockchainStore ile kendi indeksleyicin</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/overview">data-and-indexing</a></td></tr>
+              <tr><td><strong>WalletConnect / RainbowKit</strong></td><td>Blazor'da Nethereum.Reown.AppKit.Blazor; backend tarafında karşılığı yok</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.reown.com/">docs.reown.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mimari-oneri"><span class="h-num">§ 7</span>Mimari öneri: tüm yığını birleştiren şablon</h2>
+        <p>Solidity/React hattını, .NET backend'i ve <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümündeki</a> JavaScript bilgisini tek projede toplayan iskelet. <a href="../07-projeler/index.html">07 — Projeler</a> sayfasındaki maddeler bu şablonun somut halleridir. Tamamı testnet ve yerel zincirle, sıfır maliyetle kurulur. Aşağıdaki adımlar .NET + React bilen için yazıldı; bildiğin yığına göre varyantlar:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>7 · Bildiğin yığına göre şablon varyantı (her dalda maliyet 0)</caption>
+            <thead><tr><th>Durum</th><th>Frontend</th><th>Backend / indeksleyici</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><strong>.NET + React biliyorsun</strong></td><td>React + wagmi + viem</td><td>ASP.NET Core + Worker (Nethereum)</td><td>Aşağıdaki adımlar olduğu gibi</td></tr>
+              <tr><td><strong>Yalnızca .NET biliyorsun, React bilmiyorsun</strong></td><td>Blazor + Nethereum.Blazor / Nethereum.Metamask.Blazor (§ 1d)</td><td>ASP.NET Core + Worker (Nethereum)</td><td>Niş ama JavaScript'siz; ilanlardaki React beklentisini karşılamaz</td></tr>
+              <tr><td><strong>Yalnızca JS/TS biliyorsun</strong></td><td>React + wagmi + viem</td><td>Node.js (viem + NestJS/Express), indeksleyici Ponder</td><td>Bu sayfa okuma amaçlı; <a href="../03-javascript-typescript/index.html">03</a> § 8, § 11</td></tr>
+              <tr><td><strong>Docker kuramıyor ya da istemiyorsun</strong></td><td>Aynı</td><td>Nethereum.DevChain (süreç içi zincir) + Sqlite</td><td>Orkestrasyon adımı yerine projeleri ayrı ayrı çalıştır; Testcontainers yerine DevChain</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">Sözleşme katmanı — Foundry (forge + anvil)</span>
+            <p>Solidity sözleşmesi, forge testleri, anvil yerel zinciri. Derleme çıktısındaki ABI, .NET codegen'in girdisi olur. Ayrıntı: <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02 — Solidity</a>.</p>
+            <span class="steps__meta">Araçlar: forge, anvil, OpenZeppelin Contracts · Maliyet: 0</span>
+          </li>
+          <li>
+            <span class="steps__title">Frontend — React + wagmi + viem</span>
+            <p>Cüzdan bağlantısı, imza isteme, okuma çağrıları tarayıcıda. Backend'e yalnızca SIWE imzası ve sorgu istekleri gider. Ayrıntı: <a href="../../JavaScript-TypeScript/03-react/index.html">React</a>, <a href="../03-javascript-typescript/index.html">03 — JS/TS</a>.</p>
+            <span class="steps__meta">Araçlar: wagmi, viem, Reown AppKit · Maliyet: 0</span>
+          </li>
+          <li>
+            <span class="steps__title">Backend — ASP.NET Core Web API + Nethereum</span>
+            <p>SIWE doğrulama endpoint'i (Nethereum.Siwe → JWT), EIP-712 doğrulama, sözleşme sorgu proxy'si. Minimal API veya controller; <a href="../../CSharp-DotNet/02-platform-ve-web-api/index.html">DotNet 02</a>.</p>
+            <span class="steps__meta">Paketler: Nethereum.Web3, Nethereum.Siwe, Nethereum.Signer.EIP712</span>
+          </li>
+          <li>
+            <span class="steps__title">İndeksleyici — BackgroundService + BlockchainProcessing</span>
+            <p>LogOrchestrator ile sözleşme event'lerini tara, reorg tamponuyla PostgreSQL'e yaz, SignalR ile frontend'e it. Ayrı bir Worker projesi olarak tut.</p>
+            <span class="steps__meta">Paketler: Nethereum.BlockchainProcessing, Nethereum.BlockchainStore.Postgres, Npgsql</span>
+          </li>
+          <li>
+            <span class="steps__title">Veri — PostgreSQL (EF Core)</span>
+            <p>İndeks tabloları + uygulama verisi. SQL Server yerine PostgreSQL seçmenin nedeni: ücretsiz, Docker'da bir satır, Nethereum sağlayıcısı hazır. SQL Server biliyorsan bilgin doğrudan aktarılır (istersen <code>.SqlServer</code> sağlayıcısıyla başla); hiç veritabanı bilmiyorsan önce Sqlite ile başla; hedef ortamın SQL Server ise onu kullan.</p>
+            <span class="steps__meta">Testcontainers ile test veritabanı · Maliyet: 0</span>
+          </li>
+          <li>
+            <span class="steps__title">Orkestrasyon — Docker Compose veya .NET Aspire</span>
+            <p>anvil + postgres + api + worker + frontend tek komutla ayağa kalksın. Aspire için <a href="../../CSharp-DotNet/09-aspire-bulut-modern/index.html">DotNet 09</a>.</p>
+            <span class="steps__meta">Dağıtım: yalnızca testnet (Sepolia); mainnet'e para koymadan</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu şablon bir portföy iskeletidir, yatırım aracı değil. Relayer veya imzalayan servis yazarsan private key'i asla repoya, appsettings'e veya log'a yazma; geliştirme anahtarı bile olsa user-secrets kullan. Testnet dışına çıkılacaksa KMS/HSM olmadan çıkılmamalı.</p>
+        </div>
+
+        <h2 id="test"><span class="h-num">§ 8</span>Test</h2>
+        <p>Sözleşme testleri Foundry'de (02), .NET tarafı xUnit'te. Burada yalnızca zincire dokunan .NET testlerinin anahtar kelimeleri; genel test pratiği için <a href="../../CSharp-DotNet/06-test-ve-kalite/index.html">DotNet 06 — Test ve kalite</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>8 · Nethereum ile entegrasyon testi</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>xUnit v3</strong></td><td>Güncel sürüm (4.0.1); v2 bakım modunda. Nethereum şablonları xUnit kullanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://xunit.net/">xunit.net</a></td></tr>
+              <tr><td><strong>Nethereum.DevChain</strong> (süreç içi)</td><td>Docker'sız en hızlı yol: <code>DevChainNode</code>, hesap fonlama, snapshot/revert ile test izolasyonu, zaman ilerletme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/devchain/overview">devchain</a></td></tr>
+              <tr><td><strong>anvil</strong> (Foundry)</td><td>Bellek içi yerel düğüm; ön fonlu hesaplar; <code>--fork-url</code> ile mainnet fork; Nethereum HTTP ile bağlanır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://getfoundry.sh/anvil/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Hardhat Network</strong> (<code>npx hardhat node</code>)</td><td>8545 portunda yerel düğüm; Solidity stack trace, console.log. v2 dokümanı; Hardhat 3 çıktı</td><td><span class="tag">ORTA</span></td><td><a href="https://v2.hardhat.org/hardhat-network/docs">v2.hardhat.org</a></td></tr>
+              <tr><td><strong>Testcontainers for .NET</strong></td><td>Testte geçici Docker konteyneri; <code>ContainerBuilder</code> ile herhangi bir imaj (anvil için Foundry imajı, veri için Postgres modülü)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://dotnet.testcontainers.org/">dotnet.testcontainers.org</a></td></tr>
+              <tr><td><strong>Foundry Docker imajı</strong></td><td>anvil'i konteynerde çalıştırmak için resmî imaj; "foundry docker image ghcr" diye ara, sürümü sabitle</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/anvil/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>Snapshot / revert</strong> (evm_snapshot, evm_revert)</td><td>Her testten önce zincir durumunu geri al; DevChain ve anvil destekler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.nethereum.com/docs/devchain/overview">devchain</a></td></tr>
+              <tr><td><strong>Fork mode</strong></td><td>Gerçek mainnet durumuna karşı ücretsiz test (RPC sağlayıcı ücretsiz katmanı yeter); gerçek Uniswap/USDC ile entegrasyon</td><td><span class="tag">ORTA</span></td><td><a href="https://getfoundry.sh/anvil/">getfoundry.sh</a></td></tr>
+              <tr><td><strong>WebApplicationFactory</strong></td><td>API'yi bellek içinde ayağa kaldır; SIWE endpoint'ini gerçek imzayla test et</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>WireMock.Net</strong></td><td>RPC sağlayıcıyı HTTP seviyesinde taklit et; rate limit ve hata senaryolarını deterministik test et</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/WireMock-Net/WireMock.Net">github.com/WireMock-Net</a></td></tr>
+              <tr><td><strong>Nethereum.EVM</strong> ile birim test</td><td>Düğüm olmadan bytecode yürütme ve trace; ileri seviye, opcode düzeyinde doğrulama</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.nuget.org/packages/Nethereum.EVM">nuget.org</a></td></tr>
+              <tr><td><strong>Reorg simülasyonu</strong></td><td>İndeksleyici testinde blok hash'i değiştirip yeniden işleme yolunu tetikle; DevChain snapshot ile kurgulanır</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.nethereum.com/docs/data-and-indexing/guide-blockchain-processing">guide-blockchain-processing</a></td></tr>
+              <tr><td><strong>smartcontract şablonu</strong> (Templates.Pack)</td><td><code>dotnet new smartcontract</code>: ERC-20 + xUnit örneği; ilk entegrasyon testini buradan kopyala</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.nuget.org/packages/Nethereum.Templates.Pack">nuget.org</a></td></tr>
+              <tr><td><strong>forge test</strong> (sözleşme tarafı)</td><td>Sözleşme mantığını Solidity'de test et; .NET testleri yalnızca entegrasyonu doğrular. Ayrıntı <a href="../02-solidity-ve-akilli-sozlesmeler/index.html">02</a>, güvenlik <a href="../06-altyapi-araclar-guvenlik/index.html">06</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hardhat.org/docs">hardhat.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 9</span>Özet: bu sayfadaki öncelik sırası</h2>
+        <ul class="checklist">
+          <li><strong>Önce mülakatta sık sorulanı savunabil:</strong> ContractHandler, Function/Event DTO ve codegen — Solidity sözleşmesini .NET'ten çağırabildiğini Playground'da 1 saatte göster (§ 1b).</li>
+          <li><strong>Çekirdek Nethereum:</strong> Web3, Account, TransactionManager, EIP-1559 fee, HexBigInteger/UnitConversion, eth_getLogs (§ 1a). Nethereum.Web3 6.1.0, .NET 8/9/10 uyumlu.</li>
+          <li><strong>Anahtar ve imza:</strong> EthECKey, KeyStore, HdWallet, EIP-191 mesaj imzası, EIP-712 (§ 1c). KMS/HSM paketlerini kavram olarak bil, ücretli oldukları için kurmana gerek yok.</li>
+          <li><strong>Backend deseni (.NET geliştiricisi için en güçlü alan):</strong> BackgroundService + BlockchainProcessing (LogOrchestrator, progress repo, reorg tamponu, 12 onay) → BlockchainStore.Postgres / .SqlServer / .Sqlite (§ 2a). .NET backend ilanlarını hedefliyorsan portföydeki en inandırıcı .NET+blockchain parçasıdır; JS/TS hattındaysan aynı rolü Ponder/viem indeksleyici oynar (03).</li>
+          <li><strong>Kimlik doğrulama:</strong> SIWE (EIP-4361) endpoint'i Nethereum.Siwe ile; nonce, domain, expiration olmadan yapma (§ 2b).</li>
+          <li><strong>Güvenilir gönderim:</strong> nonce eşzamanlılığı, stuck tx, Polly, idempotency, outbox — DotNet 05 konularını biliyorsan bilgin doğrudan geçer (§ 2c).</li>
+          <li><strong>Tuzaklar:</strong> Keccak-256 ≠ SHA3_256; BigInteger little-endian; ECDsa secp256k1 değil; wei için decimal/double yok (§ 5).</li>
+          <li><strong>Kurumsal kesişim:</strong> SQL Server ledger tabloları ve Azure Confidential Ledger — SQL Server kullanıyor ya da kurumsal ilan hedefliyorsan öncelikli; diğer durumlarda kavram olarak bil (§ 4). GoQuorum ve Azure Blockchain Service eskidi.</li>
+          <li><strong>Diğer zincirler:</strong> NBitcoin + BTCPay Server kaynak kodu okumak yeter; Solnet, Neo, Netezos, Substrate.NET.API isim düzeyinde (§ 3).</li>
+          <li><strong>Test:</strong> Nethereum.DevChain veya anvil + xUnit + Testcontainers; snapshot/revert ile izolasyon (§ 8).</li>
+          <li><strong>Eskimiş, öğrenme:</strong> ManagedAccount/personal_ API, OpenZeppelin Defender, WalletConnectSharp, GoQuorum, Azure Blockchain Service, TypeChain (legacy), Holesky.</li>
+          <li><strong>Sıfır bütçe yolu:</strong> Playground → DevChain → anvil → Sepolia faucet. Alchemy/Infura ücretsiz katmanı yeter; mainnet'e para koyma.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../03-javascript-typescript/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">JavaScript ve TypeScript Ekosistemi</span></a>
+        <a class="next" href="../05-diger-zincirler/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Diğer Zincirler ve Diller</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

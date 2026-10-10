@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veri ve Mesajlaşma — Java Anahtar Listesi</title>
+<meta name="description" content="JPA, Hibernate, Spring Data, migration araçları, Redis, RabbitMQ, Kafka ve dağıtık sistem kalıpları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Veri ve Mesajlaşma</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Programlama · Java</span>
+      <span class="brand__name">Java Anahtar Listesi</span>
+      <span class="brand__sub">Backend odaklı · Spring Boot</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Dil</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-java-dili/index.html"><span class="nav-num">01</span><span>Java Dili</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Çatı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../02-spring-boot/index.html"><span class="nav-num">02</span><span>Spring Boot</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Veri ve Dağıtık</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">03</span><span>Veri ve Mesajlaşma</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Ekosistem</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../04-ekosistem-ve-araclar/index.html"><span class="nav-num">04</span><span>Ekosistem ve Araçlar</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&larr;</span><span>C# / .NET</span></a></li>
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&larr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../HTML-CSS/index.html"><span class="nav-num">&larr;</span><span>HTML / CSS</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&larr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../Go/index.html"><span class="nav-num">&larr;</span><span>Go</span></a></li>
+          <li><a class="nav-item" href="../../Rust/index.html"><span class="nav-num">&larr;</span><span>Rust</span></a></li>
+          <li><a class="nav-item" href="../../Blockchain/index.html"><span class="nav-num">&larr;</span><span>Blockchain</span></a></li>
+          <li><a class="nav-item" href="../../proje-fikirleri/index.html"><span class="nav-num">&larr;</span><span>Proje fikirleri</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+Backend odaklı liste. C#/.NET'ten geliyorsan eşleştirme tabloları kısa yoldur; başka bir dilden ya da sıfırdan geliyorsan "Java karşılığı" ve "Not" sütunlarını oku, dil temelleri için 01'den başla.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 03 · Veri ve Dağıtık</div>
+        <h1 class="page-title">JPA, <em>Hibernate</em>, Kafka, Redis</h1>
+        <p class="lede">JDBC, JPA/Hibernate, Spring Data, migration, Redis, RabbitMQ ve Kafka: Java'da veri erişimi ve mesajlaşma katmanı. EF Core/MassTransit'ten geliyorsan karşılıklar <a href="#dotnet-karsiliklari">§ 14</a>'te ve satırlardaki <em>".NET'ten geliyorsan:"</em> notlarında.</p>
+        <div class="head-meta">Seviye: orta &middot; .NET'ten geliyorsan karşılaştırmalı</div>
+      </header>
+
+      <div class="content">
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+        <p class="intro">Bu bir anlatım değil, <strong>arama listesi</strong>. Her satır bir başlık; onu kendin araştıracak, kendi kaynağından okuyacak ve kod yazacaksın. "Kısaca" sütunu sadece terimi tanıman ve karıştırmaman için var, "Not" sütunu önceliğini söylüyor.</p>
+        <p>Sıra şu: önce <span class="tag tag--bad">MÜLAKATTA SIK</span> rozetli satırlar, sonra <span class="tag tag--ok">TEMEL</span>, sonra <span class="tag">ORTA</span>, en son <span class="tag tag--info">İLERİ</span>.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bu sayfada "MÜLAKATTA SIK" rozeti ne demek</p>
+          <p>Rozet, <strong>iş ilanlarında ve mülakatlarda sık geçen</strong> konuları işaret eder; her birine en az bir çalışan örnek yaz. Örnek: Redis, RabbitMQ, CQRS, önbellek, migration, ORM, mikro ORM. Mülakatçı "Redis'i nerede kullandın" diye sorduğunda dilin Java mı C# mı olduğu fark etmez; sorulan kavramdır. O yüzden bu satırlar en yüksek öncelikte.</p>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Dikkat</p>
+          <p>Arama yaparken terimi tek başına yazma, ön ek koy. "Entity" tek başına başka şey getirir, <strong>"JPA @Entity"</strong> yaz. "Template" değil <strong>"Spring JdbcTemplate"</strong>. "Session" değil <strong>"Hibernate Session"</strong>. "Stream" değil <strong>"Spring Cloud Stream"</strong> ya da <strong>"Kafka Streams"</strong> &mdash; bunlar da birbirinden farklı iki şey.</p>
+        </div>
+
+        <p>İlgili sayfalar: <a href="../01-java-dili/index.html">01 &mdash; Java Dili</a> (generics, Optional, Stream API, record &mdash; bu sayfadaki DTO ve projection konularının ön şartı), <a href="../02-spring-boot/index.html">02 &mdash; Spring Boot</a> (DI, konfigürasyon, AOP, starter mantığı), <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a> (Maven/Gradle, test, Testcontainers, CI). Bölüm ana sayfası: <a href="../index.html">Java başlangıç</a>.</p>
+        <p>Nereden geldiğine göre: <strong>SQL ve bir ORM'i başka bir dilde biliyorsan</strong> (EF Core, Django ORM, SQLAlchemy, Prisma, TypeORM, Hibernate) kavramlar (entity, oturum/unit of work, lazy loading, migration) aynıdır, isimleri öğrenirsin. <strong>SQL biliyor ama ORM kullanmadıysan</strong> &rarr; § 2 &rarr; § 3 &rarr; § 5 sırasını izle. <strong>Hiç SQL bilmiyorsan</strong> &rarr; bu sayfadan önce temel SQL (SELECT, JOIN, index, transaction) öğren; ORM SQL bilgisinin yerini tutmaz.</p>
+        <p>Karşılaştırmalı okuma: aynı konuların .NET karşılıkları <a href="../../CSharp-DotNet/index.html">.NET bölümünde</a>, site kökü <a href="../../index.html">burada</a>. Arayüz tarafı <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript</a> ve <a href="../../HTML-CSS/index.html">HTML / CSS</a> bölümlerinde; diğer diller <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> bölümlerinde.</p>
+
+        <h2 id="jdbc-temelleri"><span class="h-num">§ 2</span>JDBC temelleri</h2>
+        <p>JDBC, Java'nın veritabanına bağlanan düşük seviye standart API'sidir (<em>.NET'ten geliyorsan:</em> ADO.NET; Python'dan geliyorsan DB-API, Node'dan geliyorsan <code>pg</code>/<code>mysql2</code> sürücüsü). JPA/Hibernate dahil her şey en altta bunun üzerinde koşar. ORM öğrenmeden önce buraya bir gün ayır; N+1 problemini ve connection pool tükenmesini anlaman buradan geçiyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JDBC çekirdek API</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JDBC</strong></td><td>Java Database Connectivity; <em>.NET'ten geliyorsan:</em> ADO.NET'in karşılığı olan düşük seviye veri erişim API'si</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>JDBC driver</strong></td><td>Her veritabanının kendi sürücüsü; Maven bağımlılığı olarak eklenir (postgresql, mssql-jdbc, mysql-connector-j)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>DataSource</strong></td><td>Bağlantı üreten fabrika arayüzü; modern kodda <code>DriverManager</code> yerine bu kullanılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/javax/sql/DataSource.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Connection</strong></td><td>Tek bir veritabanı oturumu; <code>try-with-resources</code> ile kapatılır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Connection.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Statement</strong></td><td>Parametresiz SQL; string birleştirme yüzünden SQL injection açar, kullanma</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/Statement.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>PreparedStatement</strong></td><td>Parametreli, önceden derlenen sorgu; <code>SqlCommand</code> + parametre karşılığı. Varsayılan tercih bu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/PreparedStatement.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>CallableStatement</strong></td><td>Stored procedure çağırma arayüzü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/CallableStatement.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>ResultSet</strong></td><td>İleri yönlü satır imleci; <code>SqlDataReader</code> karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/ResultSet.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>ResultSetMetaData</strong></td><td>Sütun adı/tipi bilgisini çalışma zamanında okuma</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.oracle.com</td></tr>
+              <tr><td><strong>batch update (addBatch/executeBatch)</strong></td><td>Çok sayıda insert/update'i tek gidiş-dönüşte gönderme; toplu iş performansının anahtarı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/retrieving.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>setAutoCommit / commit / rollback</strong></td><td>JDBC seviyesinde transaction yönetimi; Spring bunu otomatik yapar ama altında bu var</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Savepoint</strong></td><td>Transaction içinde kısmi geri alma noktası</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.oracle.com</td></tr>
+              <tr><td><strong>SQLException / SQLState</strong></td><td>JDBC hata sınıfı ve standart hata kodu; Spring bunu <code>DataAccessException</code>'a çevirir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/SQLException.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>fetch size</strong></td><td>Sürücünün bir seferde çektiği satır sayısı; büyük sonuç kümelerinde belleği bu belirler</td><td><span class="tag">ORTA</span></td><td>docs.oracle.com</td></tr>
+              <tr><td><strong>R2DBC</strong></td><td>Reaktif (non-blocking) veri erişimi; JDBC'nin bloklayan yapısına alternatif. Niş, acele etme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://r2dbc.io/">r2dbc.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Connection pool</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>connection pool</strong></td><td>Bağlantıları açık tutup yeniden kullanan havuz; <em>.NET'ten geliyorsan:</em> .NET'te ADO.NET bunu kendi yapar, Java'da kütüphane seçersin</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com/brettwooldridge/HikariCP</a></td></tr>
+              <tr><td><strong>HikariCP</strong></td><td>Fiilî standart havuz; Spring Boot'un varsayılanı. Ücretsiz (Apache 2.0)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com/brettwooldridge/HikariCP</a></td></tr>
+              <tr><td><strong>maximumPoolSize</strong></td><td>Havuzdaki en fazla bağlantı; yanlış ayarı üretimdeki 1 numaralı tıkanma sebebi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com/brettwooldridge/HikariCP</a></td></tr>
+              <tr><td><strong>connectionTimeout / idleTimeout / maxLifetime</strong></td><td>Havuzun üç kritik süre ayarı; "connection is not available" hatasının kaynağı</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com/brettwooldridge/HikariCP</a></td></tr>
+              <tr><td><strong>leak detection threshold</strong></td><td>Kapatılmayan bağlantıyı loglayan Hikari ayarı</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/brettwooldridge/HikariCP">github.com/brettwooldridge/HikariCP</a></td></tr>
+              <tr><td><strong>Apache Commons DBCP2</strong></td><td>Eski, hâlâ karşına çıkan havuz; yeni projede Hikari kullan. Ücretsiz</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://commons.apache.org/proper/commons-dbcp/">commons.apache.org</a></td></tr>
+              <tr><td><strong>Tomcat JDBC Pool</strong></td><td>Alternatif havuz; Spring Boot'ta hâlâ desteklenir. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html">tomcat.apache.org</a></td></tr>
+              <tr><td><strong>Agroal</strong></td><td>Quarkus'un varsayılan havuzu; niş seçenek. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://agroal.github.io/">agroal.github.io</a></td></tr>
+              <tr><td><strong>spring.datasource.hikari.*</strong></td><td>Spring Boot'ta havuz ayarlarının yazıldığı konfigürasyon öneki</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring JDBC &mdash; ince SQL katmanı (.NET'ten geliyorsan Dapper karşılığı)</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JdbcTemplate</strong></td><td>Boilerplate'i kaldıran ince SQL sarmalayıcısı; <em>.NET'ten geliyorsan:</em> <strong>Dapper'ın en yakın karşılığı</strong></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JdbcClient</strong></td><td>Spring 6.1 ile gelen akıcı (fluent) yeni API; yeni projede tercih edilen. Aramada "Spring JdbcClient" yaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>NamedParameterJdbcTemplate</strong></td><td><code>?</code> yerine <code>:isim</code> ile parametre verme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>RowMapper</strong></td><td>Satırı nesneye çeviren arayüz; <em>.NET'ten geliyorsan:</em> Dapper'ın otomatik yaptığını sen yazarsın</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>BeanPropertyRowMapper / DataClassRowMapper</strong></td><td>Sütun&rarr;alan eşlemesini isimden otomatik kuran hazır mapper'lar; ikincisi <code>record</code> ile çalışır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ResultSetExtractor / RowCallbackHandler</strong></td><td>Tüm sonuç kümesini tek seferde işleme; birden çok satırı tek nesneye toplarken kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SimpleJdbcInsert</strong></td><td>Insert ve otomatik üretilen anahtarı okumak için kısa yol</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>DataAccessException hiyerarşisi</strong></td><td>Sürücüye özel <code>SQLException</code>'ı taşınabilir istisnalara çeviren Spring katmanı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/dao.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>batchUpdate</strong></td><td><code>JdbcTemplate</code> üzerinden toplu yazma</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>schema.sql / data.sql</strong></td><td>Spring Boot'un açılışta çalıştırdığı başlangıç betikleri; üretimde Flyway'e bırak</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-boot/how-to/data-initialization.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>embedded database (H2)</strong></td><td>Testlerde bellek içi veritabanı; gerçek motorla farkları yüzünden Testcontainers tercih edilir</td><td><span class="tag">ORTA</span></td><td><a href="https://www.h2database.com/html/main.html">h2database.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="jpa-esleme"><span class="h-num">§ 3</span>JPA ve Hibernate &mdash; eşleme (mapping)</h2>
+        <p>JPA bir <strong>spesifikasyon</strong>, Hibernate onun en yaygın <strong>uygulaması</strong>. <em>.NET'ten geliyorsan:</em> .NET'te bunun tek parça karşılığı Entity Framework Core; Python'dan geliyorsan SQLAlchemy ORM / Django ORM, Node'dan geliyorsan TypeORM/Prisma aynı işi yapar. Java'da standart ile uygulama ayrı isim ve mülakatta bu ayrımı bilmek beklenir. Aramada "JPA" ile "Hibernate" sonuçları farklıdır: standart davranış için "JPA", motora özel davranış için "Hibernate" yaz.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">İsim tuzağı: javax mı jakarta mı</p>
+          <p>Java EE, Jakarta EE'ye devredildiğinde paket adları <code>javax.persistence</code> &rarr; <code>jakarta.persistence</code> oldu. İnternetteki eski örneklerin çoğu <code>javax</code>. Spring Boot 3 ve sonrası <strong>sadece jakarta</strong> kabul eder. Arama yaparken tarihe dikkat et; 2022 öncesi örnekler derlenmez.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>JPA / Hibernate kimlik ve kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JPA (Jakarta Persistence)</strong></td><td>ORM standardı; arayüz ve anotasyonları tanımlar, kendisi çalışmaz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Hibernate ORM</strong></td><td>JPA'nın referans/fiilî uygulaması; Spring Boot varsayılanı. Ücretsiz (LGPL/Apache)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>EclipseLink</strong></td><td>JPA'nın diğer uygulaması; Jakarta EE referans implementasyonu. Ücretsiz, niş</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://eclipse.dev/eclipselink/">eclipse.dev</a></td></tr>
+              <tr><td><strong>Hibernate User Guide</strong></td><td>Tek sayfalık resmî kılavuz; bu sayfadaki JPA satırlarının çoğunun kaynağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>EntityManager</strong></td><td>JPA'nın <code>DbContext</code> karşılığı; persist/merge/remove/find yapar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>EntityManagerFactory</strong></td><td>Uygulama ömrü boyunca tek olan fabrika; <code>EntityManager</code> üretir</td><td><span class="tag">ORTA</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Hibernate Session / SessionFactory</strong></td><td>Hibernate'in kendi API'si; <code>EntityManager</code>'ın altındaki gerçek nesne</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>persistence.xml</strong></td><td>Saf JPA'da yapılandırma dosyası; Spring Boot kullanırsan buna hiç dokunmazsın</td><td><span class="tag">ORTA</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>Hibernate dialect</strong></td><td>Hangi veritabanı lehçesiyle SQL üretileceği; modern sürümlerde otomatik seçilir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>hibernate.hbm2ddl.auto / ddl-auto</strong></td><td>Şemayı otomatik oluşturma ayarı (none/validate/update/create). <strong>Üretimde asla update kullanma</strong>, Flyway kullan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>show-sql / hibernate.format_sql</strong></td><td>Üretilen SQL'i loga yazdırma; N+1 avında ilk açacağın ayar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Hibernate Validator</strong></td><td>Bean Validation uygulaması; <em>.NET'ten geliyorsan:</em> FluentValidation'ın anotasyon tabanlı karşılığı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/validator/documentation/">hibernate.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Temel eşleme anotasyonları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@Entity</strong></td><td>Sınıfı kalıcı varlık yapar; tek başına "entity" arama, "JPA @Entity" yaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Table</strong></td><td>Tablo adı, şema, benzersizlik kısıtı belirtir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Id</strong></td><td>Birincil anahtar alanı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@GeneratedValue</strong></td><td>Anahtar üretim stratejisi: IDENTITY, SEQUENCE, TABLE, AUTO</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>IDENTITY vs SEQUENCE</strong></td><td>IDENTITY toplu insert'te batching'i bozar; PostgreSQL/Oracle'da SEQUENCE tercih edilir. Mülakat sorusu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@SequenceGenerator / @TableGenerator</strong></td><td>Sequence adı, allocationSize gibi üretim ayrıntıları</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@Column</strong></td><td>Sütun adı, nullable, length, precision, insertable/updatable</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Transient</strong></td><td>Alanı veritabanına yazma; EF'teki <code>[NotMapped]</code> karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>@Enumerated</strong></td><td>Enum eşlemesi; <code>ORDINAL</code> tehlikeli, <code>STRING</code> kullan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@Temporal</strong></td><td>Eski tarih tipleri için; <code>java.time</code> kullanıyorsan gereksiz</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>@Lob</strong></td><td>Büyük metin/ikili veri (CLOB/BLOB) eşlemesi</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>@Basic(fetch = LAZY)</strong></td><td>Tek alanı tembel yükleme; bytecode enhancement olmadan çoğu zaman etkisiz</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>AttributeConverter / @Convert</strong></td><td>Özel tip dönüştürücü; <em>.NET'ten geliyorsan:</em> EF Core'daki <code>HasConversion</code> karşılığı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@Embeddable / @Embedded</strong></td><td>Değer nesnesini aynı tabloya gömme; EF'teki owned entity / complex type karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@AttributeOverride</strong></td><td>Gömülü nesnenin sütun adlarını ezme; aynı tipi iki kez gömünce şart olur</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@EmbeddedId / @IdClass</strong></td><td>Bileşik (composite) birincil anahtarın iki yolu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@ElementCollection</strong></td><td>Basit tip/gömülü nesne koleksiyonunu ayrı tabloda tutma</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@MappedSuperclass</strong></td><td>Ortak alanları taşıyan, kendisi tablo olmayan üst sınıf (BaseEntity kalıbı)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@Version</strong></td><td>Optimistic locking için versiyon sütunu; EF'teki concurrency token karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>equals/hashCode ve JPA</strong></td><td>Entity'de bunları yazmanın kuralları; yanlış yazmak Set içinde veri kaybettirir. Klasik mülakat sorusu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>no-arg constructor kuralı</strong></td><td>JPA entity'sinin parametresiz kurucuya ihtiyacı vardır; bu yüzden <code>record</code> entity olamaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kalıtım stratejileri ve isimlendirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@Inheritance</strong></td><td>Kalıtımın tabloya nasıl yansıyacağını seçer</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>SINGLE_TABLE</strong></td><td>Tek tablo + ayırt edici sütun; EF'teki TPH karşılığı. Varsayılan ve en hızlısı</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>JOINED</strong></td><td>Her sınıfa bir tablo, join ile birleşir; EF'teki TPT karşılığı</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>TABLE_PER_CLASS</strong></td><td>Her somut sınıfa tam tablo; EF'teki TPC karşılığı. Sorguları pahalıdır</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@DiscriminatorColumn / @DiscriminatorValue</strong></td><td>SINGLE_TABLE'da tipi ayırt eden sütun ve değer</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>naming strategy</strong></td><td>Java alan adının sütun adına çevrilme kuralı; Spring Boot varsayılanı snake_case üretir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>PhysicalNamingStrategy / ImplicitNamingStrategy</strong></td><td>İki ayrı isimlendirme katmanı; sütun adları beklediğin gibi çıkmıyorsa burası</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="jpa-iliskiler"><span class="h-num">§ 4</span>İlişkiler, yükleme ve N+1</h2>
+        <p>Bu bölüm, JPA'da en çok hata yapılan ve mülakatta en çok sorulan yer. N+1 her JPA mülakatının standart sorusudur <span class="tag tag--ok">TEMEL</span>: herkes kavramı ve çözümlerini (<code>JOIN FETCH</code>, <code>@EntityGraph</code>, batch size) bilmeli. Özgeçmişinde performans/optimizasyon iddiası varsa bir adım öte git: kasten N+1 üretip düzelttiğin bir hikâye hazırla.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İlişki anotasyonları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@OneToMany</strong></td><td>Bire-çok; koleksiyon tarafı. Varsayılan fetch <code>LAZY</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@ManyToOne</strong></td><td>Çoka-bir; yabancı anahtarın durduğu taraf. Varsayılan fetch <code>EAGER</code> &mdash; bu tuzak</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@ManyToMany</strong></td><td>Çoka-çok; ara tabloyu JPA yönetir. Ek alan gerekince iki ilişkiye bölünür</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@OneToOne</strong></td><td>Bire-bir; tembel yüklemesi diğerlerinden farklı davranır, dikkat</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>mappedBy</strong></td><td>İlişkinin sahibi olmayan tarafı işaretler; unutulursa fazladan tablo/sütun oluşur</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>owning side vs inverse side</strong></td><td>Yabancı anahtarı hangi tarafın güncellediği; çift yönlü ilişkide bilinmesi şart</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@JoinColumn</strong></td><td>Yabancı anahtar sütununun adı ve özellikleri</td><td><span class="tag tag--ok">TEMEL</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>@JoinTable</strong></td><td>Ara tablonun adı ve iki tarafın sütunları</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>@OrderBy / @OrderColumn</strong></td><td>Koleksiyonun sıralanması; ilki SQL ile sıralar, ikincisi sıra sütunu tutar</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>bidirectional helper method</strong></td><td>İki tarafı senkron tutan <code>addChild()</code> kalıbı; yazılmazsa bellek ile veritabanı ayrışır</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fetch, cascade ve N+1</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>FetchType.LAZY</strong></td><td>İlişkili veri erişilene kadar yüklenmez; proxy döner</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>FetchType.EAGER</strong></td><td>İlişkili veri hemen yüklenir; kontrolsüz kullanımı sorguları patlatır</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>N+1 select problem</strong></td><td>1 liste sorgusu + her satır için 1 sorgu daha. Java mülakatının klasik sorusu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>join fetch (JPQL)</strong></td><td>N+1'i tek sorguya indiren JPQL ifadesi; en yaygın çözüm</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@EntityGraph</strong></td><td>Hangi ilişkilerin yükleneceğini bildirimsel tanımlama; EF'teki <code>Include</code> karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/entity-persistence.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@NamedEntityGraph</strong></td><td>Entity üzerinde isimlendirilmiş graf tanımı</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>@BatchSize</strong></td><td>Hibernate'e özel; N sorguyu IN(...) ile gruplar. N+1'in ikinci çözümü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>@Fetch(SUBSELECT / JOIN / SELECT)</strong></td><td>Hibernate'e özel yükleme stratejileri</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>MultipleBagFetchException</strong></td><td>Aynı sorguda iki <code>List</code> koleksiyonu fetch etmenin hatası; <code>Set</code> ya da iki sorgu ile çözülür</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>kartezyen çarpım (cartesian product)</strong></td><td>Birden çok koleksiyonu join fetch edince satır sayısının çarpılması</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>LazyInitializationException</strong></td><td>Session kapandıktan sonra tembel alana erişme hatası; Java'nın en sık görülen JPA hatası</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>open-in-view</strong></td><td>Spring Boot'un varsayılan açık ayarı; <code>LazyInitializationException</code>'ı gizler ama performansı bozar. <strong>Kapatılması tartışılır, sebebini bil</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CascadeType (PERSIST, MERGE, REMOVE, REFRESH, DETACH, ALL)</strong></td><td>İşlemin ilişkili nesnelere yayılması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>orphanRemoval</strong></td><td>Koleksiyondan çıkarılan çocuğun silinmesi; <code>CascadeType.REMOVE</code> ile karıştırılır, farkını bil</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>Hibernate.initialize()</strong></td><td>Tembel proxy'yi elle yükleme</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>bytecode enhancement</strong></td><td>Derleme zamanı sınıf zenginleştirme; alan bazlı lazy yükleme ve dirty tracking için</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="persistence-context"><span class="h-num">§ 5</span>Persistence context, transaction ve kilitleme</h2>
+        <p>Persistence context, yüklediğin varlıkları izleyen ve değişiklikleri transaction sonunda veritabanına yazan katmandır (<em>.NET'ten geliyorsan:</em> EF Core'daki <code>DbContext</code> change tracker; Python'dan geliyorsan SQLAlchemy <code>Session</code>). "Neden <code>save()</code> çağırmadım ama güncellendi" sorusunun cevabı dirty checking'dir; bu bölümü atlarsan JPA'yı anlamış olmazsın.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Persistence context ve varlık yaşam döngüsü</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>persistence context</strong></td><td>Yönetilen varlıkların tutulduğu birinci seviye önbellek; <code>DbContext</code> karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>entity states: transient / managed / detached / removed</strong></td><td>Varlığın dört hâli; JPA mülakatının garanti sorusu</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>persist()</strong></td><td>Yeni varlığı yönetime alır; <code>Add</code> karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>merge()</strong></td><td>Detached varlığı kopyalayarak yönetime alır; <strong>parametreyi değil dönen nesneyi kullan</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>find() vs getReference()</strong></td><td>İlki veritabanına gider, ikincisi proxy döndürür</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>detach() / clear()</strong></td><td>Varlığı ya da tümünü yönetimden çıkarma</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>dirty checking</strong></td><td>Yönetilen nesnedeki değişikliğin flush'ta otomatik UPDATE'e dönüşmesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>flush() ve FlushModeType (AUTO / COMMIT)</strong></td><td>Bekleyen SQL'in veritabanına gönderilme anı ve politikası</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>write-behind / action queue</strong></td><td>Hibernate'in SQL'i biriktirip sıraya koyarak göndermesi</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>first level cache</strong></td><td>Persistence context'in kendisi; kapsamı tek transaction, kapatılamaz</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>second level cache</strong></td><td>SessionFactory kapsamlı, isteğe bağlı önbellek; Ehcache/Infinispan/Hazelcast ile</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>query cache</strong></td><td>Sorgu sonuçlarının önbelleklenmesi; second level cache ile birlikte çalışır</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@Cacheable (Hibernate) / @Cache</strong></td><td>İkinci seviye önbellek anotasyonları. <strong>Spring'in <code>@Cacheable</code>'ı ile aynı şey değil</strong>, karıştırma</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>StatelessSession</strong></td><td>Persistence context tutmayan Hibernate oturumu; toplu iş için</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>hibernate.jdbc.batch_size</strong></td><td>Toplu insert/update için JDBC batching ayarı</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@DynamicUpdate / @DynamicInsert</strong></td><td>Sadece değişen sütunları yazma; geniş tablolarda faydalı</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Transaction ve kilitleme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@Transactional (Spring)</strong></td><td>Metodu transaction sınırına alan anotasyon; <code>org.springframework</code> paketindekini kullan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>jakarta.transaction.Transactional</strong></td><td>Aynı adı taşıyan JTA anotasyonu; <strong>iki farklı import var</strong>, yanlışını seçmek klasik hata</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>self-invocation sorunu</strong></td><td>Aynı sınıf içinden çağrılan <code>@Transactional</code> metot proxy'den geçmez, çalışmaz. Garanti mülakat sorusu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>propagation (REQUIRED, REQUIRES_NEW, NESTED, SUPPORTS, MANDATORY, NEVER, NOT_SUPPORTED)</strong></td><td>İç içe çağrılarda transaction'ın nasıl davranacağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>isolation (READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE...)</strong></td><td>İzolasyon seviyesi; dirty/non-repeatable/phantom read'lerin hangisini engellediğini bil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>readOnly = true</strong></td><td>Salt okunur transaction; Hibernate dirty checking'i atlar, performans kazandırır</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>rollbackFor / noRollbackFor</strong></td><td>Varsayılanda sadece <code>RuntimeException</code> geri alır; checked exception'da rollback olmaz. Tuzak</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>PlatformTransactionManager</strong></td><td>Spring'in transaction soyutlaması; JPA, JDBC, JTA uygulamaları var</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>TransactionTemplate</strong></td><td>Programatik transaction yönetimi</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>TransactionSynchronizationManager / afterCommit</strong></td><td>Commit sonrası iş tetikleme; outbox ve olay yayınında kullanılır</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>optimistic locking</strong></td><td><code>@Version</code> ile çakışmayı yazarken yakalama; <code>OptimisticLockException</code> fırlatır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/locking.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>pessimistic locking</strong></td><td>Satırı baştan kilitleme; <code>SELECT ... FOR UPDATE</code> üretir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/locking.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Lock / LockModeType</strong></td><td>Repository metoduna kilit modu verme (PESSIMISTIC_READ/WRITE, OPTIMISTIC_FORCE_INCREMENT)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/locking.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JTA / XA distributed transaction</strong></td><td>Birden çok kaynağı tek transaction'a alma; maliyetli, mikroservis dünyasında saga tercih edilir</td><td><span class="tag tag--info">İLERİ</span></td><td>jakarta.ee</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="jpa-sorgulama"><span class="h-num">§ 6</span>Sorgulama: JPQL, Criteria, native, projection</h2>
+        <p>Java'da dile gömülü bir sorgu sözdizimi yok; dört ayrı sorgu yolu var ve hangisini ne zaman seçeceğini bilmen gerekiyor. Derlenmiş, tip güvenli dinamik sorgu için en yakın seçenek QueryDSL. <em>C#'tan geliyorsan:</em> Java'da LINQ yok; bu en büyük konfor kaybıdır ve LINQ'e en yakın seçenek QueryDSL'dir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sorgu dilleri ve API'ler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JPQL</strong></td><td>Tablolar değil <em>entity'ler</em> üzerinde çalışan sorgu dili; SQL'e benzer ama aynısı değil</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>HQL</strong></td><td>Hibernate'in JPQL üst kümesi; ekstra özellikler içerir</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@NamedQuery / @NamedNativeQuery</strong></td><td>Entity üzerinde isimlendirilmiş, açılışta doğrulanan sorgular</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>native query</strong></td><td>Ham SQL çalıştırma; <code>nativeQuery = true</code>. Taşınabilirlikten feragat edersin</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Criteria API</strong></td><td>Programatik, tip güvenli sorgu kurma; çok konuşkan (verbose), dinamik filtrede kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>Metamodel / @StaticMetamodel</strong></td><td>Criteria'da alan adlarını string yerine tip güvenli kullanmak için üretilen <code>Entity_</code> sınıfları</td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>QueryDSL</strong></td><td>Akıcı, tip güvenli sorgu kütüphanesi; <em>.NET'ten geliyorsan:</em> <strong>LINQ'e en yakın Java karşılığı</strong>. Ücretsiz (Apache 2.0)</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/querydsl/querydsl">github.com/querydsl/querydsl</a></td></tr>
+              <tr><td><strong>parametre bağlama (:name, ?1)</strong></td><td>İsimli ve konumsal parametre; string birleştirme yapma, JPQL injection mümkündür</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>setFirstResult / setMaxResults</strong></td><td>JPA seviyesinde sayfalama; Spring Data'da <code>Pageable</code> bunu sarar</td><td><span class="tag tag--ok">TEMEL</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>bulk update/delete (JPQL)</strong></td><td>Toplu güncelleme; persistence context'i <strong>atlar</strong>, önbellek tutarsızlığı yapar. <code>@Modifying</code> ile kullanılır</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>getSingleResult vs getResultList</strong></td><td>İlki bulamazsa istisna atar; Spring Data'da <code>Optional</code> tercih edilir</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>Hibernate 6 sorgu motoru</strong></td><td>6.x ile sorgu çevirici baştan yazıldı; eski HQL numaraları çalışmayabilir. Sürüm farkına dikkat</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Projection ve DTO</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>DTO projection</strong></td><td>Entity yerine sadece gereken alanları çekme; performansın en ucuz kazancı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/projections.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>constructor expression (<code>select new</code>)</strong></td><td>JPQL içinde doğrudan DTO kurucusu çağırma</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>interface-based projection</strong></td><td>Getter'ları olan arayüz tanımlayıp Spring Data'ya doldurtma; en pratik yol</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/projections.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>class-based (DTO) projection</strong></td><td><code>record</code> ya da sınıf ile projeksiyon</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/projections.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>dynamic projection</strong></td><td>Aynı repository metodundan tip parametresiyle farklı projeksiyon alma</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@SqlResultSetMapping / Tuple</strong></td><td>Native sorgu sonucunu nesneye eşleme yolları</td><td><span class="tag tag--info">İLERİ</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>MapStruct</strong></td><td>Derleme zamanı nesne eşleyici; <em>.NET'ten geliyorsan:</em> <strong>AutoMapper'ın karşılığı</strong>, ondan farklı olarak reflection kullanmaz. Ücretsiz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://mapstruct.org/documentation/stable/reference/html/">mapstruct.org</a></td></tr>
+              <tr><td><strong>ModelMapper</strong></td><td>Çalışma zamanı eşleyici; <em>.NET'ten geliyorsan:</em> AutoMapper'a davranış olarak daha yakın ama daha yavaş. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://modelmapper.org/">modelmapper.org</a></td></tr>
+              <tr><td><strong>Stream/Slice ile büyük sonuç</strong></td><td><code>Stream&lt;T&gt;</code> döndürme ve <code>Slice</code> ile sayım sorgusundan kaçınma</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="spring-data-jpa"><span class="h-num">§ 7</span>Spring Data JPA</h2>
+        <p>Repository'yi arayüz olarak yazarsın, uygulamasını Spring çalışma zamanında üretir. Generics'i biliyorsan (<code>JpaRepository&lt;T, ID&gt;</code>) mantığı hızla kavrarsın; bilmiyorsan önce <a href="../01-java-dili/index.html">01</a>'deki generics bölümünün temelini al, ama generic repository yazmayı bilmek ön koşul değildir. <em>.NET'ten geliyorsan:</em> .NET'te elle yazdığın generic repository burada hazır geliyor.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Repository arayüzleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Repository&lt;T, ID&gt;</strong></td><td>İşaretleyici (marker) arayüz; hiyerarşinin tepesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>CrudRepository</strong></td><td>save, findById, delete, count gibi temel işlemler</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ListCrudRepository</strong></td><td><code>Iterable</code> yerine <code>List</code> döndüren yeni varyant; genelde bunu tercih et</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>PagingAndSortingRepository</strong></td><td>Sayfalama ve sıralama ekler</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>JpaRepository</strong></td><td>JPA'ya özel ekler: <code>flush</code>, <code>saveAndFlush</code>, <code>deleteAllInBatch</code>. En yaygın kullanılan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Repository</strong></td><td>Stereotip anotasyonu; Spring Data arayüzlerinde zorunlu değil</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@NoRepositoryBean</strong></td><td>Ara/temel repository arayüzünün örneklenmesini engeller; ortak metot tanımlarken şart</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@EnableJpaRepositories</strong></td><td>Tarama paketini ve entity manager'ı seçme; çok veri kaynaklı projede gerekir</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>save() gerçekten ne yapar</strong></td><td>Yeni ise <code>persist</code>, değilse <code>merge</code> çağırır; yönetilen nesnede zaten gereksizdir. Mülakat sorusu</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sorgu türetme ve özelleştirme</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>query method derivation</strong></td><td>Metot <em>adından</em> sorgu üretme: <code>findByLastNameAndAgeGreaterThan</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>query keywords tablosu</strong></td><td>Containing, StartingWith, Between, In, IsNull, OrderBy... Resmî anahtar kelime listesi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-keywords-reference.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Query</strong></td><td>JPQL ya da native SQL'i doğrudan yazma; uzun metot adlarından kurtarır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Param</strong></td><td>İsimli parametre bağlama</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@Modifying</strong></td><td>UPDATE/DELETE sorgularında zorunlu; <code>clearAutomatically</code> ayarını da öğren</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>Pageable / PageRequest</strong></td><td>Sayfalama parametresi; controller'dan doğrudan bağlanabilir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Page vs Slice</strong></td><td><code>Page</code> toplam sayıyı bilmek için ek COUNT sorgusu atar, <code>Slice</code> atmaz</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>Sort</strong></td><td>Sıralama nesnesi; metot imzasına parametre olarak eklenir</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>countQuery</strong></td><td><code>@Query</code> ile sayfalama yaparken sayım sorgusunu elle verme</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>Specification</strong></td><td>Criteria tabanlı, birleştirilebilir filtre nesnesi; <strong>Specification pattern'in Spring Data karşılığı</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/specifications.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JpaSpecificationExecutor</strong></td><td>Repository'ye Specification desteği ekleyen arayüz</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>Query by Example (QBE)</strong></td><td>Örnek nesneyle filtreleme; basit arama ekranları için</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>QuerydslPredicateExecutor</strong></td><td>Repository'ye QueryDSL desteği ekler</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/querydsl/querydsl">github.com/querydsl/querydsl</a></td></tr>
+              <tr><td><strong>custom repository implementation</strong></td><td><code>XRepositoryCustom</code> + <code>XRepositoryImpl</code> kalıbı; <strong>Impl son eki zorunlu</strong></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/custom-implementations.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@EntityGraph (repository üzerinde)</strong></td><td>Türetilmiş sorguya fetch grafiği ekleme; N+1'in en temiz çözümü</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/entity-persistence.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@QueryHints</strong></td><td>Sorguya JPA ipucu geçirme (örn. salt okunur, fetch size)</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.spring.io</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Auditing ve yardımcı özellikler</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@EnableJpaAuditing</strong></td><td>Denetim alanlarının otomatik doldurulmasını açar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@CreatedDate / @LastModifiedDate</strong></td><td>Oluşturma ve güncelleme zamanını otomatik yazar</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/auditing.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@CreatedBy / @LastModifiedBy</strong></td><td>Kullanıcıyı yazar; <code>AuditorAware</code> bean'i gerekir</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@EntityListeners(AuditingEntityListener.class)</strong></td><td>Denetim dinleyicisini entity'ye bağlar</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>JPA lifecycle callbacks</strong></td><td>@PrePersist, @PostPersist, @PreUpdate, @PostLoad, @PreRemove</td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>Hibernate Envers</strong></td><td>Tam sürüm geçmişi/denetim kaydı tutan Hibernate modülü. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://hibernate.org/orm/envers/">hibernate.org</a></td></tr>
+              <tr><td><strong>@SoftDelete / @Where / @SQLDelete</strong></td><td>Yumuşak silme ve global filtre; EF'teki global query filter karşılığı (Hibernate'e özel)</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>@FilterDef / @Filter</strong></td><td>Açılıp kapatılabilir dinamik filtre; <strong>multi-tenant</strong> senaryosunun bir yolu</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>Hibernate multi-tenancy</strong></td><td>Ayrı veritabanı / ayrı şema / ayrık sütun stratejileri</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>Spring Data JDBC</strong></td><td>Aynı repository soyutlaması, ama lazy loading ve persistence context <em>yok</em>; daha basit ve öngörülebilir</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/relational/reference/">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="migration"><span class="h-num">§ 8</span>Şema göçü (migration)</h2>
+        <p>Şema göçü (migration) ilanlarda sık geçer. Java'da bu iş <code>ddl-auto</code> ile değil, ayrı bir araçla yapılır ve mülakatta "üretimde şemayı nasıl değiştirirsin" diye sorulur. İki hâkim araç var, ikisini de tanı.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Migration araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Flyway</strong></td><td>Sürümlenmiş SQL dosyalarıyla göç; en yaygın seçenek. Community sürümü ücretsiz, Teams/Enterprise ücretli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://documentation.red-gate.com/flyway">documentation.red-gate.com</a></td></tr>
+              <tr><td><strong>Flyway versioned migration (V1__ad.sql)</strong></td><td>Dosya adı kuralı; alt çizgi <strong>iki tane</strong>, bir tane yazmak en sık hata</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://documentation.red-gate.com/flyway">documentation.red-gate.com</a></td></tr>
+              <tr><td><strong>repeatable migration (R__)</strong></td><td>İçeriği değişince yeniden çalışan göç; view ve procedure için</td><td><span class="tag">ORTA</span></td><td>documentation.red-gate.com</td></tr>
+              <tr><td><strong>flyway_schema_history</strong></td><td>Uygulanan göçlerin ve checksum'ların tutulduğu tablo</td><td><span class="tag tag--ok">TEMEL</span></td><td>documentation.red-gate.com</td></tr>
+              <tr><td><strong>baseline / repair / validate</strong></td><td>Var olan veritabanına sonradan Flyway takma ve checksum bozulmasını onarma komutları</td><td><span class="tag">ORTA</span></td><td>documentation.red-gate.com</td></tr>
+              <tr><td><strong>Flyway undo</strong></td><td>Geri alma göçü; <strong>ücretli sürüm özelliği</strong>. Ücretsizde geri alma yoktur, ileri göç yazılır</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td>documentation.red-gate.com</td></tr>
+              <tr><td><strong>Liquibase</strong></td><td>XML/YAML/JSON/SQL changelog ile göç. Community sürümü ücretsizdir ve rollback onda da vardır; 5.0 sürümünden itibaren Community lisansı Apache 2.0'dan FSL'e (Functional Source License) geçti, yani OSI anlamında açık kaynak sayılmaz <span class="tag tag--warn">TEYİT</span>: <a href="https://www.liquibase.com/license">liquibase.com/license</a>. Pro sürümü ücretli</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.liquibase.com/">docs.liquibase.com</a></td></tr>
+              <tr><td><strong>changeSet / changelog</strong></td><td>Liquibase'in temel birimleri</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.liquibase.com/">docs.liquibase.com</a></td></tr>
+              <tr><td><strong>databasechangelog tablosu</strong></td><td>Liquibase'in geçmiş tablosu</td><td><span class="tag">ORTA</span></td><td>docs.liquibase.com</td></tr>
+              <tr><td><strong>spring.flyway.* / spring.liquibase.*</strong></td><td>Spring Boot'un açılışta göçü çalıştırma ayarları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/sql.html#data.sql.migration">docs.spring.io</a></td></tr>
+              <tr><td><strong>ddl-auto=validate</strong></td><td>Göçü araç yapsın, Hibernate sadece şemayı doğrulasın; üretimdeki doğru kombinasyon</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>zero-downtime migration / expand-contract</strong></td><td>Kesintisiz şema değişikliği deseni: önce ekle, sonra geçir, en son kaldır</td><td><span class="tag tag--info">İLERİ</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>Testcontainers ile göç testi</strong></td><td>Gerçek veritabanı imajında göçleri çalıştırıp doğrulama</td><td><span class="tag">ORTA</span></td><td><a href="https://java.testcontainers.org/">java.testcontainers.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="diger-veri-erisimi"><span class="h-num">§ 9</span>JPA dışı veri erişimi</h2>
+        <p>Java'da aynı işi yapan dört yaklaşım var: <strong>JPA/Hibernate</strong> (tam ORM), <strong>Spring Data JDBC</strong> (sade ORM), <strong>JdbcClient/JdbcTemplate</strong> (ham SQL), <strong>jOOQ/MyBatis</strong> (tip güvenli ya da eşlemeli SQL). Seçim gerekçesini bilmek mülakatta puan getirir:</p>
+        <ul>
+          <li><strong>Karmaşık alan modeli + yoğun CRUD</strong> &rarr; JPA/Hibernate.</li>
+          <li><strong>Basit ve öngörülebilir model, lazy loading istemiyorsan</strong> &rarr; Spring Data JDBC.</li>
+          <li><strong>Raporlama / ağır SQL</strong> &rarr; JdbcClient veya jOOQ (ticari veritabanında jOOQ ücretli).</li>
+          <li><strong>SQL'i XML/anotasyon eşleme dosyalarında tutan mevcut kurumsal proje</strong> &rarr; MyBatis.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Alternatif veri erişim kütüphaneleri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>jOOQ</strong></td><td>Veritabanı şemasından kod üretip <em>tip güvenli SQL</em> yazdırır; SQL'i seven ekiplerin tercihi. Lisans veritabanına bağlı: <strong>açık kaynak veritabanı</strong> (PostgreSQL, MySQL, MariaDB vb.) &rarr; ücretsiz; <strong>ticari veritabanı</strong> (Oracle, SQL Server, DB2) &rarr; ticari lisans ücretli</td><td><span class="tag tag--warn">ÜCRETLİ</span></td><td><a href="https://www.jooq.org/doc/latest/manual/">jooq.org</a></td></tr>
+              <tr><td><strong>MyBatis</strong></td><td>SQL'i XML ya da anotasyonda tutan eşleyici; ORM değil "SQL mapper". Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://mybatis.org/mybatis-3/">mybatis.org</a></td></tr>
+              <tr><td><strong>MyBatis dynamic SQL</strong></td><td>&lt;if&gt;, &lt;foreach&gt; ile koşullu sorgu kurma; MyBatis'in ana cazibesi</td><td><span class="tag">ORTA</span></td><td><a href="https://mybatis.org/mybatis-3/">mybatis.org</a></td></tr>
+              <tr><td><strong>Spring Data JDBC</strong></td><td>Aggregate kökü mantığıyla çalışan sade repository; JPA'nın karmaşıklığını istemeyenler için. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/relational/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Data R2DBC</strong></td><td>Reaktif ilişkisel erişim; WebFlux ile birlikte anlamlı. Ücretsiz, niş</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-data/relational/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>JdbcClient</strong></td><td>Bağımlılık eklemeden, Spring çekirdeğiyle gelen en hafif seçenek</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Batch</strong></td><td>Büyük toplu işler için chunk/reader/processor/writer çatısı; <em>.NET'ten geliyorsan:</em> Hangfire değil, ondan farklı bir iş. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-batch/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>hibernate-jpamodelgen</strong></td><td>Metamodel sınıflarını üreten anotasyon işlemcisi</td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>p6spy / datasource-proxy</strong></td><td>Çalışan SQL'i parametreleriyle loglayan araçlar; MiniProfiler ihtiyacını karşılar. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/p6spy/p6spy">github.com/p6spy/p6spy</a></td></tr>
+              <tr><td><strong>PostgreSQL</strong></td><td>İlanlarda sık istenir; JDBC sürücüsü, jsonb, sequence davranışı ve <code>EXPLAIN ANALYZE</code> ile en az bir proje yap</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.postgresql.org/docs/current/">postgresql.org</a></td></tr>
+              <tr><td><strong>SQL Server (mssql-jdbc)</strong></td><td>SQL Server'dan geliyorsan bilgin aynen geçerli; Java'dan bağlanmanın tek farkı sürücü ve bağlantı dizesi. Veritabanı geçmişine göre sürücü: PostgreSQL &rarr; <code>org.postgresql</code>; MySQL/MariaDB &rarr; <code>mysql-connector-j</code> / <code>mariadb-java-client</code>; Oracle &rarr; <code>ojdbc</code> (+ Oracle veritabanı lisansı)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://learn.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server">learn.microsoft.com</a></td></tr>
+              <tr><td><strong>MySQL / MariaDB sürücüleri</strong></td><td>Java iş ilanlarında sık görülür; bağlantı dizesi ve zaman dilimi ayarı tuzaklıdır</td><td><span class="tag">ORTA</span></td><td>dev.mysql.com</td></tr>
+              <tr><td><strong>H2 / HSQLDB</strong></td><td>Bellek içi test veritabanları; gerçek motorla uyuşmazlıkları vardır</td><td><span class="tag">ORTA</span></td><td><a href="https://www.h2database.com/html/main.html">h2database.com</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nosql-ve-onbellek"><span class="h-num">§ 10</span>NoSQL ve önbellek</h2>
+        <p><strong>Redis</strong> ve bellek içi önbellek (<em>.NET'ten geliyorsan:</em> <strong>MemoryCache</strong>) ilanlarda çok sık geçer. Deneyimine göre: <strong>Redis'i işte kullanıyorsan</strong> &rarr; yalnızca Spring Data Redis/Lettuce ve <code>@Cacheable</code> entegrasyonunu öğren, aciliyet düşük. <strong>Hiç kullanmadıysan</strong> &rarr; bu bölüm bu sayfanın en acil kısmı; iyi haber: Redis'i öğrenmek bir hafta sonu işi.</p>
+        <p>Kurulum ortamına göre: <strong>Docker varsa</strong> &rarr; tek komutla ayağa kalkar. <strong>Docker kullanamıyorsan</strong> &rarr; Windows'ta WSL2 içinde Redis veya Redis uyumlu Memurai, macOS'ta Homebrew, Linux'ta paket yöneticisi. <strong>Kurumsal makinede Docker Desktop</strong> &rarr; 250'den fazla çalışan veya 10 milyon dolardan fazla yıllık gelir olan kuruluşta ticari kullanım ücretli abonelik ister; alternatif Podman veya Rancher Desktop <span class="tag tag--warn">TEYİT</span>: <a href="https://www.docker.com/pricing/">docker.com/pricing</a>.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Karıştırma</p>
+          <p>Java'da üç ayrı "cache" var ve mülakatta ayırt etmen beklenir: (1) <strong>Hibernate second level cache</strong> &mdash; ORM'e gömülü, (2) <strong>Spring Cache abstraction</strong> (<code>@Cacheable</code>) &mdash; metot sonucu önbelleği, (3) <strong>Redis</strong> &mdash; ağ üzerinden erişilen dağıtık depo. Spring Cache bir <em>arayüz</em>dür; arkasına Caffeine, Redis, Hazelcast takarsın.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Redis ve Java istemcileri</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Redis</strong></td><td>Bellek içi anahtar-değer deposu; önbellek, oturum, sayaç, kuyruk, kilit. Ücretsiz sürüm mevcut, Redis Enterprise ücretli</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis veri tipleri</strong></td><td>String, Hash, List, Set, Sorted Set, Stream, Bitmap, HyperLogLog. İlk öğrenilecek şey</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/develop/data-types/">redis.io</a></td></tr>
+              <tr><td><strong>TTL / EXPIRE</strong></td><td>Anahtara ömür verme; önbelleğin temel mekanizması</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>eviction policy (LRU/LFU)</strong></td><td>Bellek dolunca hangi anahtarın atılacağı; <code>maxmemory-policy</code></td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis persistence (RDB / AOF)</strong></td><td>Diske yazma seçenekleri; "Redis veri kaybeder mi" sorusunun cevabı burada</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis pub/sub</strong></td><td>Hafif yayın-abone; <strong>kalıcı değildir</strong>, RabbitMQ/Kafka yerine geçmez</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/interact/pubsub/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Streams</strong></td><td>Kalıcı, tüketici gruplu akış yapısı; Kafka'nın küçük ölçekli alternatifi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Redis Cluster / Sentinel</strong></td><td>Yatay bölümleme ve otomatik yük devretme</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/">redis.io</a></td></tr>
+              <tr><td><strong>Spring Data Redis</strong></td><td>Spring'in Redis modülü; starter adı <code>spring-boot-starter-data-redis</code></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Lettuce</strong></td><td>Netty tabanlı, thread-safe, reaktif istemci; <strong>Spring Boot varsayılanı</strong>. Ücretsiz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/redis/lettuce">github.com/redis/lettuce</a></td></tr>
+              <tr><td><strong>Jedis</strong></td><td>Eski, senkron, bağlantı başına thread modeli olan istemci; hâlâ yaygın. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/redis/jedis">github.com/redis/jedis</a></td></tr>
+              <tr><td><strong>Lettuce vs Jedis</strong></td><td>Klasik mülakat karşılaştırması: Lettuce paylaşılan bağlantı + non-blocking, Jedis havuz + blocking</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Redisson</strong></td><td>Redis üzerine dağıtık kilit, semafor, koleksiyon veren üst seviye istemci. Ücretsiz + ücretli PRO sürümü var</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/redisson/redisson">github.com/redisson/redisson</a></td></tr>
+              <tr><td><strong>RedisTemplate</strong></td><td>Spring'in Redis işlem şablonu; <code>JdbcTemplate</code>'in Redis karşılığı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/redis/template.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>StringRedisTemplate</strong></td><td>Her şeyi string olarak serileştiren hazır şablon; en sık kullanılan</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/redis/template.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>RedisSerializer (Jackson/JDK)</strong></td><td>Nesnenin nasıl saklanacağı; varsayılan JDK serileştirme okunmaz çıktı üretir, Jackson'a çevir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/redis/template.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RedisHash / Redis repository</strong></td><td>Redis'i nesne deposu gibi kullanma; niş</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Session Data Redis</strong></td><td>HTTP oturumunu Redis'te tutma; çok sunuculu senaryonun standart çözümü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-session/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Valkey</strong></td><td>Redis'in lisans değişikliği sonrası çıkan açık kaynak çatalı; ilanlarda görünmeye başladı. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://valkey.io/">valkey.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Spring önbellek soyutlaması &mdash; MemoryCache'in karşılığı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@EnableCaching</strong></td><td>Önbellek soyutlamasını açan anotasyon</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Cacheable</strong></td><td>Metot sonucunu önbelleğe alır; ikinci çağrıda metot hiç çalışmaz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@CacheEvict</strong></td><td>Önbellekten kayıt düşürür; <code>allEntries = true</code> ile hepsini temizler</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/cache.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@CachePut</strong></td><td>Metodu her zaman çalıştırır ama sonucu önbelleğe yazar</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>@Caching / @CacheConfig</strong></td><td>Birden çok anotasyonu birleştirme ve sınıf düzeyi ortak ayar</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>key / keyGenerator / SpEL</strong></td><td>Önbellek anahtarının nasıl üretileceği; <code>#id</code> gibi SpEL ifadeleriyle</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>condition / unless</strong></td><td>Koşullu önbellekleme; <code>unless</code> sonuç üretildikten sonra değerlendirilir</td><td><span class="tag">ORTA</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>CacheManager</strong></td><td>Arkadaki sağlayıcıyı seçen soyutlama</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/io/caching.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ConcurrentMapCacheManager</strong></td><td>Varsayılan, bağımlılıksız bellek içi önbellek; <strong>IMemoryCache'e en yakın karşılık</strong>. Üretim için zayıf</td><td><span class="tag tag--ok">TEMEL</span></td><td>docs.spring.io</td></tr>
+              <tr><td><strong>Caffeine</strong></td><td>Yüksek performanslı yerel önbellek; boyut/TTL/istatistik verir. Java'da tek düğüm önbelleğinin standardı. Ücretsiz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/ben-manes/caffeine">github.com/ben-manes/caffeine</a></td></tr>
+              <tr><td><strong>Ehcache</strong></td><td>Eski ve yaygın önbellek; JSR-107 uyumlu. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://www.ehcache.org/">ehcache.org</a></td></tr>
+              <tr><td><strong>Hazelcast</strong></td><td>Dağıtık bellek ızgarası; önbellek + dağıtık veri yapıları. Açık kaynak sürüm + ücretli Enterprise</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.hazelcast.com/">docs.hazelcast.com</a></td></tr>
+              <tr><td><strong>Infinispan</strong></td><td>Red Hat'in dağıtık önbelleği; Hibernate 2. seviye önbellekte sık kullanılır. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://infinispan.org/documentation/">infinispan.org</a></td></tr>
+              <tr><td><strong>JCache (JSR-107)</strong></td><td>Java'nın standart önbellek API'si; sağlayıcı bağımsızlığı sağlar</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-boot/reference/io/caching.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>cache stampede / thundering herd</strong></td><td>Önbellek boşalınca aynı anda herkesin veritabanına gitmesi; mülakatta "nasıl önlersin" diye sorulur</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>cache-aside / read-through / write-through</strong></td><td>Üç önbellek stratejisi; <code>@Cacheable</code> cache-aside'dır</td><td><span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Diğer NoSQL depolar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>MongoDB</strong></td><td>Doküman veritabanı; şemasız JSON benzeri kayıtlar. Community ücretsiz (SSPL), Atlas bulut hizmeti ücretli</td><td><span class="tag">ORTA</span></td><td><a href="https://www.mongodb.com/docs/manual/">mongodb.com</a></td></tr>
+              <tr><td><strong>Spring Data MongoDB</strong></td><td>Aynı repository soyutlamasının Mongo sürümü</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/mongodb/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>MongoTemplate</strong></td><td>Mongo işlem şablonu; karmaşık sorgu ve aggregation için</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/mongodb/reference/mongodb/template-api.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Document / @Indexed / aggregation pipeline</strong></td><td>Mongo eşleme anotasyonları ve toplama boru hattı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-data/mongodb/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Elasticsearch</strong></td><td>Tam metin arama ve log analizi motoru. Ücretsiz katman + ücretli özellikler (Elastic License)</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.elastic.co/docs/solutions/search">elastic.co</a></td></tr>
+              <tr><td><strong>Spring Data Elasticsearch</strong></td><td>Elasticsearch için repository ve template</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-data/elasticsearch/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>OpenSearch</strong></td><td>Elasticsearch'ün Apache 2.0 lisanslı çatalı; ücretsiz alternatif</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://opensearch.org/docs/latest/">opensearch.org</a></td></tr>
+              <tr><td><strong>Apache Cassandra</strong></td><td>Yazma ağırlıklı, geniş sütunlu dağıtık veritabanı; sorgu odaklı modelleme ister. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://cassandra.apache.org/doc/latest/">cassandra.apache.org</a></td></tr>
+              <tr><td><strong>Spring Data Cassandra</strong></td><td>Cassandra için repository/template desteği</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-data/cassandra/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>CAP teoremi</strong></td><td>Tutarlılık / erişilebilirlik / bölünme toleransı üçlemesi; NoSQL sorularının açılışı</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>eventual consistency</strong></td><td>Sonunda tutarlılık; dağıtık sistemlerin varsayılan modeli</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>spring-boot-starter-data-*</strong></td><td>Her depo için ayrı starter; NoSQL yapılandırmasının giriş kapısı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/data/nosql.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="mesajlasma"><span class="h-num">§ 11</span>Mesajlaşma</h2>
+        <p>Java'da RabbitMQ'ya Spring AMQP ile, Kafka'ya Spring for Apache Kafka ile bağlanırsın; broker'dan bağımsız soyutlama için Spring Cloud Stream vardır. <em>.NET'ten geliyorsan:</em> .NET tarafında <strong>RabbitMQ</strong> genelde <strong>MassTransit</strong> ile kullanılır; Java'da MassTransit'in birebir karşılığı yok; en yakın kavram Spring Cloud Stream (soyutlama katmanı) ve Spring AMQP (doğrudan RabbitMQ). Java iş ilanlarında Kafka, RabbitMQ'dan daha sık geçer (gözlem; sektöre göre değişir, ilanlardan kendin doğrula <span class="tag tag--warn">TEYİT</span>) &mdash; ikisi de listede. Seçim hedefe bağlı: banka/telekom/büyük veri &rarr; Kafka; kurumsal entegrasyon ve iş kuyruğu ağırlıklı küçük-orta ölçek &rarr; RabbitMQ.</p>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Önce şu ayrımı oturt</p>
+          <p><strong>RabbitMQ</strong> bir <em>mesaj kuyruğu</em>dur: mesaj tüketilince kuyruktan gider, yönlendirme (routing) zengindir. <strong>Kafka</strong> bir <em>dağıtık kayıt günlüğü</em>dür: mesaj okununca silinmez, offset ile ilerlenir, geri sarılabilir. "Hangisini ne zaman" sorusu neredeyse her mülakatta sorulur.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>RabbitMQ ve Spring AMQP</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>RabbitMQ</strong></td><td>AMQP 0-9-1 konuşan mesaj aracısı. Açık kaynak ve ücretsiz; ticari destek ayrı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>RabbitMQ tutorials (1-6)</strong></td><td>Resmî altı adımlık öğretici; sıfırdan başlıyorsan doğrudan buradan başla</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/tutorials">rabbitmq.com</a></td></tr>
+              <tr><td><strong>exchange / queue / binding / routing key</strong></td><td>RabbitMQ'nun dört temel kavramı; bunları bilmeden hiçbir örnek anlaşılmaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>exchange tipleri: direct / topic / fanout / headers</strong></td><td>Mesajın kuyruklara nasıl dağıtılacağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>ack / nack / reject / prefetch</strong></td><td>Tüketici onay mekanizması ve aynı anda kaç mesaj alınacağı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>durable / persistent</strong></td><td>Kuyruğun ve mesajın yeniden başlatmada hayatta kalması; ikisi ayrı ayardır</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>dead letter queue (DLX/DLQ)</strong></td><td>İşlenemeyen mesajın atıldığı kuyruk; üretimde olmazsa olmaz</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://www.rabbitmq.com/docs/dlx">rabbitmq.com</a></td></tr>
+              <tr><td><strong>quorum queue</strong></td><td>Raft tabanlı, çoğaltılmış dayanıklı kuyruk; klasik mirrored queue'nun yerini aldı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.rabbitmq.com/docs/quorum-queues">rabbitmq.com</a></td></tr>
+              <tr><td><strong>RabbitMQ Streams</strong></td><td>Kafka benzeri, tekrar okunabilir akış tipi</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://www.rabbitmq.com/docs/streams">rabbitmq.com</a></td></tr>
+              <tr><td><strong>publisher confirms / returns</strong></td><td>Yayıncının mesajın gerçekten alındığını doğrulaması; "mesaj kayboldu" sorusunun cevabı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.rabbitmq.com/docs">rabbitmq.com</a></td></tr>
+              <tr><td><strong>Spring AMQP / spring-rabbit</strong></td><td>Spring'in RabbitMQ modülü</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>RabbitTemplate</strong></td><td>Mesaj gönderme şablonu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RabbitListener</strong></td><td>Metodu kuyruk tüketicisine çeviren anotasyon</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/amqp/receiving-messages.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SimpleRabbitListenerContainerFactory</strong></td><td>Eşzamanlılık, prefetch, ack modu ayarları burada</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Jackson2JsonMessageConverter</strong></td><td>Mesaj gövdesini JSON olarak serileştirme; varsayılan Java serileştirmesini değiştir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>RetryTemplate / RepublishMessageRecoverer</strong></td><td>Spring AMQP'de yeniden deneme ve başarısızları DLQ'ya yollama</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-amqp/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>spring.rabbitmq.*</strong></td><td>Boot yapılandırma önekleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/messaging/amqp.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Apache Kafka ve Spring for Apache Kafka</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Apache Kafka</strong></td><td>Yüksek hacimli dağıtık olay günlüğü. Ücretsiz (Apache 2.0); Confluent Platform ücretli</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>topic / partition / offset</strong></td><td>Kafka'nın üç temel kavramı; sıralama garantisi <em>partition içinde</em> geçerlidir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>consumer group</strong></td><td>Partition'ların tüketiciler arasında paylaştırılması; ölçeklemenin anahtarı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://kafka.apache.org/documentation/#design_consumerposition">kafka.apache.org</a></td></tr>
+              <tr><td><strong>rebalance</strong></td><td>Tüketici eklenip çıkınca partition'ların yeniden dağıtılması; duraklamalara sebep olur</td><td><span class="tag">ORTA</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>offset commit (auto/manual)</strong></td><td>Nereye kadar okunduğunun kaydı; at-least-once ve at-most-once farkı buradan çıkar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://kafka.apache.org/documentation/#consumerconfigs">kafka.apache.org</a></td></tr>
+              <tr><td><strong>replication factor / ISR / acks</strong></td><td>Dayanıklılık ayarları; <code>acks=all</code> ile veri kaybı riski düşer</td><td><span class="tag">ORTA</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>log compaction / retention</strong></td><td>Mesajların ne kadar ve nasıl saklandığı</td><td><span class="tag">ORTA</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>KRaft (ZooKeeper'sız Kafka)</strong></td><td>Yeni sürümlerde ZooKeeper kaldırıldı; eski dokümanlar ZooKeeper anlatır, karıştırma</td><td><span class="tag">ORTA</span></td><td><a href="https://kafka.apache.org/documentation/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>Spring for Apache Kafka</strong></td><td>Spring'in Kafka modülü; proje adı <code>spring-kafka</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>KafkaTemplate</strong></td><td>Mesaj üretme şablonu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>@KafkaListener</strong></td><td>Tüketici metodu tanımlama anotasyonu</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ConcurrentKafkaListenerContainerFactory</strong></td><td>Eşzamanlılık ve hata yönetimi ayarları</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>DefaultErrorHandler / DeadLetterPublishingRecoverer</strong></td><td>Spring Kafka'da yeniden deneme ve DLT (dead letter topic)</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>@RetryableTopic</strong></td><td>Kademeli yeniden deneme topic'lerini otomatik kuran anotasyon</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-kafka/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Kafka Streams</strong></td><td>Akış işleme kütüphanesi; <strong>Spring Cloud Stream ile aynı şey değil</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://kafka.apache.org/documentation/streams/">kafka.apache.org</a></td></tr>
+              <tr><td><strong>Kafka Connect</strong></td><td>Kaynak/hedef sistemleri Kafka'ya bağlayan hazır bağlayıcı çatısı</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://kafka.apache.org/documentation/#connect">kafka.apache.org</a></td></tr>
+              <tr><td><strong>Schema Registry / Avro</strong></td><td>Mesaj şemasının sürümlenmesi; Confluent tarafında, lisansına dikkat</td><td><span class="tag tag--info">İLERİ</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>spring.kafka.*</strong></td><td>Boot yapılandırma önekleri</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-boot/reference/messaging/kafka.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Diğer mesajlaşma seçenekleri ve ortak kavramlar</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JMS (Jakarta Messaging)</strong></td><td>Java'nın standart mesajlaşma API'si; broker bağımsız</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-boot/reference/messaging/jms.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>JmsTemplate / @JmsListener</strong></td><td>Spring'in JMS şablonu ve dinleyici anotasyonu</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/jms.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ActiveMQ Classic / Artemis</strong></td><td>Apache'nin JMS broker'ları; Artemis yeni nesil olanı. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://activemq.apache.org/components/classic/documentation">activemq.apache.org</a></td></tr>
+              <tr><td><strong>Spring Cloud Stream</strong></td><td>Broker'dan bağımsız mesajlaşma soyutlaması (binder mimarisi); <em>.NET'ten geliyorsan:</em> <strong>MassTransit'e kavramsal olarak en yakın Java projesi</strong>. Ücretsiz</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-cloud-stream/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>binder (Rabbit / Kafka)</strong></td><td>Spring Cloud Stream'i somut broker'a bağlayan modül</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-cloud-stream/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>functional binding (Supplier/Function/Consumer)</strong></td><td>Cloud Stream'in yeni programlama modeli; eski <code>@StreamListener</code> kaldırıldı</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-cloud-stream/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Integration</strong></td><td>Enterprise Integration Patterns uygulaması; kanal, dönüştürücü, yönlendirici. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-integration/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Apache Camel</strong></td><td>Entegrasyon yönlendirme motoru; yüzlerce hazır bileşen. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://camel.apache.org/docs/">camel.apache.org</a></td></tr>
+              <tr><td><strong>at-least-once / at-most-once / exactly-once</strong></td><td>Üç teslim garantisi; "exactly-once" pratikte idempotency ile sağlanır</td><td><span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>idempotency</strong></td><td>Aynı mesajın iki kez işlenmesinin sonucu değiştirmemesi; mesajlaşmanın altın kuralı</td><td><span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>idempotency key / deduplication table</strong></td><td>Tekrarları yakalamanın pratik yolu: işlenen mesaj kimliklerini veritabanında tut</td><td><span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>poison message</strong></td><td>Sürekli hata verip kuyruğu tıkayan mesaj; DLQ'nun varlık sebebi</td><td><span class="tag tag--ok">TEMEL</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>retry with backoff</strong></td><td>Artan bekleme süreleriyle yeniden deneme; sabit aralıklı retry sistemi boğar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/spring-projects/spring-retry">github.com/spring-projects/spring-retry</a></td></tr>
+              <tr><td><strong>message ordering</strong></td><td>Sıralama garantisinin nerede geçerli olduğu; RabbitMQ'da kuyruk, Kafka'da partition</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>competing consumers</strong></td><td>Aynı kuyruğu birden çok tüketicinin paylaşması; ölçekleme deseni</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+              <tr><td><strong>correlation id</strong></td><td>İstek ile cevabı eşleştiren kimlik; izleme (tracing) için de kullanılır</td><td><span class="tag">ORTA</span></td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dagitik-kaliplar"><span class="h-num">§ 12</span>Dağıtık kalıplar ve dayanıklılık</h2>
+        <p>Bu bölüm <strong>CQRS</strong> ve <strong>MassTransit</strong> gibi başlıkların arkasındaki gerçek konu. Kod yazmadan önce kavramları oturt: bunlar dil değil, mimari sorusu; mülakatta çoğunlukla beyaz tahtada sorulur ve hangi dilde olursa olsun aynı tartışmadır (.NET'ten geliyorsan <a href="../../CSharp-DotNet/index.html">.NET bölümündeki</a> karşılıklarıyla birebir aynı).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri tutarlılığı kalıpları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>transactional outbox</strong></td><td>Mesajı broker'a değil, aynı transaction'da bir tabloya yaz; ayrı bir süreç yayınlar. "Veritabanı ile mesaj nasıl atomik olur" sorusunun cevabı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://microservices.io/patterns/data/transactional-outbox.html">microservices.io</a></td></tr>
+              <tr><td><strong>dual write problem</strong></td><td>Aynı anda hem veritabanına hem kuyruğa yazmanın tutarsızlık üretmesi; outbox'ın varlık sebebi</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://debezium.io/documentation/">debezium.io</a></td></tr>
+              <tr><td><strong>CDC (change data capture)</strong></td><td>Veritabanı günlüğünü okuyup değişiklikleri olay olarak yayma</td><td><span class="tag">ORTA</span></td><td><a href="https://debezium.io/documentation/">debezium.io</a></td></tr>
+              <tr><td><strong>Debezium</strong></td><td>En yaygın açık kaynak CDC aracı; Kafka Connect üzerinde koşar. Ücretsiz (Apache 2.0)</td><td><span class="tag">ORTA</span></td><td><a href="https://debezium.io/documentation/reference/stable/index.html">debezium.io</a></td></tr>
+              <tr><td><strong>Debezium outbox event router</strong></td><td>Outbox tablosunu okuyup topic'lere yönlendiren hazır bileşen</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://debezium.io/documentation/reference/stable/index.html">debezium.io</a></td></tr>
+              <tr><td><strong>saga pattern</strong></td><td>Dağıtık transaction yerine, telafi (compensation) adımlarıyla ilerleyen iş akışı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://microservices.io/patterns/data/saga.html">microservices.io</a></td></tr>
+              <tr><td><strong>choreography vs orchestration</strong></td><td>Saga'nın iki kurgusu: servisler birbirini olayla tetikler ya da merkezî bir yönetici sıralar</td><td><span class="tag">ORTA</span></td><td><a href="https://microservices.io/patterns/data/saga.html">microservices.io</a></td></tr>
+              <tr><td><strong>compensating transaction</strong></td><td>Geri alınamayan adımı "tersine iş" ile telafi etme</td><td><span class="tag">ORTA</span></td><td>microservices.io</td></tr>
+              <tr><td><strong>event sourcing</strong></td><td>Durumu değil olay geçmişini saklama; CQRS ile birlikte anılır ama <strong>zorunlu ikili değildir</strong></td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://microservices.io/patterns/data/event-sourcing.html">microservices.io</a></td></tr>
+              <tr><td><strong>CQRS</strong></td><td>Okuma ve yazma modellerini ayırma; "bir kez dinleyip anlamadım" dediğin konu. Java'da hazır çatı şart değil, elle uygulanır</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://microservices.io/patterns/data/cqrs.html">microservices.io</a></td></tr>
+              <tr><td><strong>Axon Framework</strong></td><td>Java'nın CQRS/event sourcing çatısı; <em>.NET'ten geliyorsan:</em> MediatR+MassTransit'in ağır karşılığı. Açık kaynak + ücretli Axon Server sürümü</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.axoniq.io/">docs.axoniq.io</a></td></tr>
+              <tr><td><strong>ApplicationEventPublisher / @EventListener</strong></td><td>Spring'in uygulama içi olay mekanizması; <em>.NET'ten geliyorsan:</em> MediatR'ın notification kısmının en yakın karşılığı</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@TransactionalEventListener</strong></td><td>Olayı commit'ten <em>sonra</em> işleme; outbox'ın basit alternatifi</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Modulith</strong></td><td>Modüler monolit ve olay yayınlama için yeni Spring projesi; outbox benzeri event publication registry içerir. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-modulith/reference/">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dayanıklılık (resilience) &mdash; Polly'nin karşılığı</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Resilience4j</strong></td><td>Java'nın dayanıklılık kütüphanesi; <em>.NET'ten geliyorsan:</em> <strong>Polly'nin karşılığı</strong>. Ücretsiz (Apache 2.0)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://resilience4j.readme.io/docs/getting-started">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>circuit breaker</strong></td><td>Sürekli hata veren bağımlılığa çağrıyı kesme; closed/open/half-open durumları</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://resilience4j.readme.io/docs/circuitbreaker">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>@CircuitBreaker(fallbackMethod=...)</strong></td><td>Anotasyonla devre kesici ve yedek metot tanımlama</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://resilience4j.readme.io/docs/circuitbreaker">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>retry</strong></td><td>Geçici hatalarda yeniden deneme; <strong>idempotent olmayan işlemde tehlikelidir</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://resilience4j.readme.io/docs/retry">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>bulkhead</strong></td><td>Eşzamanlı çağrı sayısını sınırlayıp bir bağımlılığın tüm havuzu tüketmesini engelleme</td><td><span class="tag">ORTA</span></td><td><a href="https://resilience4j.readme.io/docs/bulkhead">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>rate limiter</strong></td><td>Birim zamanda izin verilen çağrı sayısı; <em>.NET'ten geliyorsan:</em> .NET'teki "Rate Limiting" karşılığı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://resilience4j.readme.io/docs/ratelimiter">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>time limiter</strong></td><td>Çağrıya zaman aşımı koyma</td><td><span class="tag">ORTA</span></td><td><a href="https://resilience4j.readme.io/docs/timeout">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>Spring Cloud CircuitBreaker</strong></td><td>Resilience4j gibi uygulamaları saran ortak soyutlama</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-cloud-circuitbreaker/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Spring Retry (@Retryable / @Recover)</strong></td><td>Spring'in kendi yeniden deneme modülü; Resilience4j'den daha basit</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/spring-projects/spring-retry">github.com/spring-projects/spring-retry</a></td></tr>
+              <tr><td><strong>Bucket4j</strong></td><td>Token bucket tabanlı hız sınırlama kütüphanesi; Redis ile dağıtık çalışır. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://bucket4j.com/">bucket4j.com</a></td></tr>
+              <tr><td><strong>Hystrix</strong></td><td>Netflix'in eski devre kesicisi; bakımı durdu, yerine Resilience4j</td><td><span class="tag tag--warn">ESKİMİŞ</span></td><td><a href="https://github.com/Netflix/Hystrix">github.com/Netflix/Hystrix</a></td></tr>
+              <tr><td><strong>Actuator health / readiness / liveness</strong></td><td>Uygulamanın sağlık, hazır olma ve canlılık uç noktaları (Kubernetes probe'ları bunları çağırır); <em>.NET'ten geliyorsan:</em> "HealthChecks" yapısının Java karşılığı</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/index.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dağıtık kilit ve koordinasyon</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>distributed lock</strong></td><td>Birden çok sunucudan sadece birinin işi yapmasını sağlama</td><td><span class="tag">ORTA</span></td><td><a href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">redis.io</a></td></tr>
+              <tr><td><strong>Redisson RLock</strong></td><td>Redis üzerinde hazır dağıtık kilit; en pratik çözüm</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/redisson/redisson">github.com/redisson/redisson</a></td></tr>
+              <tr><td><strong>Redlock algoritması</strong></td><td>Çok düğümlü Redis kilit algoritması; güvenilirliği tartışmalıdır, tartışmayı bil</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">redis.io</a></td></tr>
+              <tr><td><strong>Spring Integration LockRegistry</strong></td><td>JDBC, Redis, ZooKeeper destekli kilit soyutlaması</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-integration/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>veritabanı tabanlı kilit</strong></td><td><code>SELECT ... FOR UPDATE</code> ya da PostgreSQL advisory lock; ek altyapı gerektirmez</td><td><span class="tag">ORTA</span></td><td><a href="https://www.postgresql.org/docs/current/explicit-locking.html">postgresql.org</a></td></tr>
+              <tr><td><strong>ZooKeeper / etcd / Consul</strong></td><td>Koordinasyon ve servis keşfi sistemleri; kilit de verirler. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td>zookeeper.apache.org</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="zamanlanmis-isler"><span class="h-num">§ 13</span>Zamanlanmış işler</h2>
+        <p>Java'da zamanlanmış/arka plan işler için ihtiyaca göre üç ayrı seviye var (<em>.NET'ten geliyorsan:</em> tek bir Hangfire karşılığı yok; Python'dan geliyorsan Celery beat, Node'dan geliyorsan node-cron/BullMQ benzeri): basit <code>@Scheduled</code>, tam özellikli Quartz, ve çok sunuculu ortamda tekilliği sağlayan ShedLock. Mülakatta "iki sunucuda aynı iş iki kez çalışırsa ne yaparsın" sorusu buradan gelir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Zamanlama araçları</caption>
+            <thead><tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>@EnableScheduling</strong></td><td>Zamanlanmış görev desteğini açar</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Scheduled</strong></td><td>Metodu periyodik çalıştırır; en basit çözüm</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html#scheduling-annotation-support">docs.spring.io</a></td></tr>
+              <tr><td><strong>fixedRate / fixedDelay / initialDelay</strong></td><td>İkisinin farkı: rate başlangıçlar arası, delay bitişten sonraki bekleme</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>cron ifadesi (Spring)</strong></td><td><strong>Spring cron'u 6 alanlıdır</strong> (saniye ile başlar); klasik Unix cron 5 alanlıdır. En sık yapılan hata</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>TaskScheduler / ThreadPoolTaskScheduler</strong></td><td>Zamanlayıcının thread havuzu; <strong>varsayılan havuz tek thread'dir</strong>, işler birbirini bekletir</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html#scheduling-task-scheduler">docs.spring.io</a></td></tr>
+              <tr><td><strong>@Async / @EnableAsync</strong></td><td>Metodu ayrı thread'de çalıştırma; zamanlama değil, eşzamansızlık</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-framework/reference/integration/scheduling.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Quartz Scheduler</strong></td><td>Kalıcı (veritabanına yazan), kümelenebilir, tetikleyici tabanlı zamanlayıcı; <em>.NET'ten geliyorsan:</em> <strong>Hangfire'a en yakın olan</strong>. Ücretsiz (Apache 2.0)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.quartz-scheduler.org/documentation/">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>Job / JobDetail / Trigger</strong></td><td>Quartz'ın üç temel kavramı</td><td><span class="tag">ORTA</span></td><td><a href="https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/index.html">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>JobStore (RAM vs JDBC)</strong></td><td>İşlerin bellekte mi veritabanında mı tutulacağı; kümeleme için JDBC şart</td><td><span class="tag">ORTA</span></td><td><a href="https://www.quartz-scheduler.org/documentation/">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>Quartz clustering</strong></td><td>Çok sunucuda işin bir kez çalışmasını sağlayan yerleşik mekanizma</td><td><span class="tag">ORTA</span></td><td><a href="https://www.quartz-scheduler.org/documentation/">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>misfire handling</strong></td><td>Kaçırılan tetiklemede ne yapılacağı</td><td><span class="tag tag--info">İLERİ</span></td><td>quartz-scheduler.org</td></tr>
+              <tr><td><strong>spring-boot-starter-quartz</strong></td><td>Quartz'ı Boot'a bağlayan starter</td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-boot/reference/io/quartz.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>ShedLock</strong></td><td><code>@Scheduled</code> işini dağıtık ortamda <em>tek</em> sunucuda çalıştıran kilit kütüphanesi; zamanlayıcı değil, kilittir. Ücretsiz</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/lukas-krecan/ShedLock">github.com/lukas-krecan/ShedLock</a></td></tr>
+              <tr><td><strong>@SchedulerLock</strong></td><td>ShedLock'ın anotasyonu; <code>lockAtMostFor</code> ve <code>lockAtLeastFor</code> ayarlarını mutlaka anla</td><td><span class="tag">ORTA</span></td><td><a href="https://github.com/lukas-krecan/ShedLock">github.com/lukas-krecan/ShedLock</a></td></tr>
+              <tr><td><strong>JobRunr</strong></td><td>Gösterge paneli ve kalıcı iş kuyruğu olan arka plan iş kütüphanesi; <em>.NET'ten geliyorsan:</em> <strong>Hangfire'a kullanım hissi olarak en yakın</strong>. Ücretsiz sürüm + ücretli Pro</td><td><span class="tag">ORTA</span></td><td><a href="https://www.jobrunr.io/en/documentation/">jobrunr.io</a></td></tr>
+              <tr><td><strong>db-scheduler</strong></td><td>Hafif, veritabanı destekli zamanlayıcı; Quartz'a sade alternatif. Ücretsiz</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://github.com/kagkarlsson/db-scheduler">github.com/kagkarlsson/db-scheduler</a></td></tr>
+              <tr><td><strong>Spring Batch + Quartz</strong></td><td>Zamanlama Quartz'ta, işin kendisi Batch'te; büyük toplu işlerin standart kurgusu</td><td><span class="tag tag--info">İLERİ</span></td><td><a href="https://docs.spring.io/spring-batch/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>Kubernetes CronJob</strong></td><td>Zamanlamayı uygulamadan çıkarıp platforma verme; bazı ekiplerin tercihi</td><td><span class="tag">ORTA</span></td><td><a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">kubernetes.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dotnet-karsiliklari"><span class="h-num">§ 14</span>Hızlı çeviri sözlüğü: .NET &rarr; Java</h2>
+        <p><strong>.NET biliyorsan:</strong> sol sütun bildiğin, ezberlemen gereken sağ sütun. <strong>.NET bilmiyorsan</strong> bu bölüm sana gerekmez; sağ sütundaki terimler § 2-§ 13'te anlatıldı. Başka bir ORM'den geliyorsan kısa eşleme: Django ORM/SQLAlchemy/Prisma/TypeORM'deki model sınıfı &rarr; JPA <code>@Entity</code>; session/unit of work &rarr; persistence context (<code>EntityManager</code>); ilişki yükleme ayarları &rarr; <code>FetchType.LAZY/EAGER</code>; migration aracı &rarr; Flyway/Liquibase.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Veri erişimi karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ADO.NET</strong></td><td>JDBC</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html">docs.oracle.com</a></td></tr>
+              <tr><td><strong>Entity Framework Core</strong></td><td>JPA (standart) + Hibernate (uygulama)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/orm/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>DbContext</strong></td><td><code>EntityManager</code> / persistence context</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://jakarta.ee/specifications/persistence/">jakarta.ee</a></td></tr>
+              <tr><td><strong>DbSet&lt;T&gt;</strong></td><td><code>JpaRepository&lt;T, ID&gt;</code> (kavramsal olarak)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/repositories/core-concepts.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Dapper</strong></td><td><code>JdbcTemplate</code> / <code>JdbcClient</code> / MyBatis</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/jdbc.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>LINQ (IQueryable)</strong></td><td>JPQL / Criteria API / QueryDSL &mdash; <strong>birebir karşılığı yok</strong></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://github.com/querydsl/querydsl">github.com/querydsl/querydsl</a></td></tr>
+              <tr><td><strong>Include / ThenInclude</strong></td><td><code>join fetch</code> / <code>@EntityGraph</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/entity-persistence.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Fluent API (EF)</strong></td><td>JPA anotasyonları + <code>orm.xml</code>; Hibernate'de akıcı eşleme yaygın değil</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html">docs.jboss.org</a></td></tr>
+              <tr><td><strong>EF Migrations</strong></td><td>Flyway / Liquibase (ORM'den ayrı araç)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://documentation.red-gate.com/flyway">documentation.red-gate.com</a></td></tr>
+              <tr><td><strong>[NotMapped]</strong></td><td><code>@Transient</code></td><td><span class="tag">ORTA</span></td><td>jakarta.ee</td></tr>
+              <tr><td><strong>Owned Entity / Complex Type</strong></td><td><code>@Embeddable</code> / <code>@Embedded</code></td><td><span class="tag">ORTA</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>Concurrency token / rowversion</strong></td><td><code>@Version</code></td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-data/jpa/reference/jpa/locking.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Global query filter</strong></td><td>Hibernate <code>@Filter</code> / <code>@Where</code> / <code>@SoftDelete</code></td><td><span class="tag tag--info">İLERİ</span></td><td>docs.jboss.org</td></tr>
+              <tr><td><strong>AutoMapper</strong></td><td>MapStruct (derleme zamanı) / ModelMapper (çalışma zamanı)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://mapstruct.org/documentation/stable/reference/html/">mapstruct.org</a></td></tr>
+              <tr><td><strong>FluentValidation</strong></td><td>Bean Validation / Hibernate Validator</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://hibernate.org/validator/documentation/">hibernate.org</a></td></tr>
+              <tr><td><strong>TransactionScope</strong></td><td><code>@Transactional</code> / JTA</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://docs.spring.io/spring-framework/reference/data-access/transaction.html">docs.spring.io</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Önbellek, mesajlaşma, dayanıklılık karşılıkları</caption>
+            <thead><tr><th>.NET tarafı</th><th>Java karşılığı</th><th>Not</th><th>Doküman</th></tr></thead>
+            <tbody>
+              <tr><td><strong>IMemoryCache</strong></td><td>Spring Cache + Caffeine (ya da <code>ConcurrentMapCacheManager</code>)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-boot/reference/io/caching.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>IDistributedCache</strong></td><td>Spring Cache + <code>RedisCacheManager</code> (<code>spring-boot-starter-data-redis</code> + <code>spring.cache.type=redis</code>)</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-data/redis/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>StackExchange.Redis</strong></td><td>Lettuce (varsayılan) / Jedis / Redisson</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://github.com/redis/lettuce">github.com/redis/lettuce</a></td></tr>
+              <tr><td><strong>MassTransit</strong></td><td>Spring Cloud Stream (soyutlama) ya da doğrudan Spring AMQP / Spring Kafka</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-cloud-stream/reference/">docs.spring.io</a></td></tr>
+              <tr><td><strong>MediatR</strong></td><td><code>ApplicationEventPublisher</code> + <code>@EventListener</code>; birebir karşılığı yok, çoğu proje elle yazar</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Polly</strong></td><td>Resilience4j (ya da Spring Retry)</td><td><span class="tag tag--ok">TEMEL</span></td><td><a href="https://resilience4j.readme.io/docs/getting-started">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>Hangfire</strong></td><td>Quartz / JobRunr / @Scheduled + ShedLock</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.quartz-scheduler.org/documentation/">quartz-scheduler.org</a></td></tr>
+              <tr><td><strong>HealthChecks</strong></td><td>Spring Boot Actuator health endpoint</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-boot/reference/actuator/index.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Rate Limiting middleware</strong></td><td>Resilience4j RateLimiter / Bucket4j</td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://resilience4j.readme.io/docs/ratelimiter">resilience4j.readme.io</a></td></tr>
+              <tr><td><strong>BackgroundService / IHostedService</strong></td><td><code>ApplicationRunner</code> / <code>CommandLineRunner</code> / <code>@Scheduled</code></td><td><span class="tag">ORTA</span></td><td><a href="https://docs.spring.io/spring-boot/reference/features/spring-application.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>SignalR</strong></td><td>Spring WebSocket + STOMP &rarr; ayrıntısı <a href="../02-spring-boot/index.html">02. sayfada</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://docs.spring.io/spring-framework/reference/web/websocket.html">docs.spring.io</a></td></tr>
+              <tr><td><strong>Serilog + Seq</strong></td><td>SLF4J + Logback &rarr; ayrıntısı <a href="../04-ekosistem-ve-araclar/index.html">04. sayfada</a></td><td><span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><a href="https://www.slf4j.org/manual.html">slf4j.org</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ 15</span>Özet &mdash; bu sayfanın öncelik sırası</h2>
+        <p>Sırayla git. Her adımda kod yaz; okuyup geçme. Bu sayfadaki maddelerin hepsini öğrenmen gerekmiyor, ama ilk altı adımı atlarsan özgeçmişine yazacağın maddelerin arkasında mülakatta duramazsın.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="steps__title">1. JDBC + HikariCP + JdbcTemplate/JdbcClient (§ 2)</span>
+            <p>Bir gün (hiç SQL bilmiyorsan önce temel SQL'e 1-2 hafta <span class="tag tag--warn">TAHMİN</span>). <code>PreparedStatement</code> ile elle bir CRUD yaz, sonra aynısını <code>JdbcClient</code> ile yaz. Aradaki farkı görünce ince SQL katmanlarının (.NET'ten geliyorsan Dapper) neden sevildiğini anlarsın. Havuz ayarlarını (<code>maximumPoolSize</code>) mutlaka kurcala.</p>
+            <span class="steps__meta">.NET'ten geliyorsan Dapper karşılığı &middot; mülakatta sık</span>
+          </li>
+          <li>
+            <span class="steps__title">2. JPA eşleme + Spring Data JPA repository (§ 3, § 7)</span>
+            <p>En büyük blok. <code>@Entity</code>, <code>@Id</code>, <code>@Column</code>, ilişkiler ve <code>JpaRepository</code> ile çalışan bir proje çıkar. Query method türetmeyi ve <code>@Query</code>'yi dene. Başka bir ORM biliyorsan (EF Core, SQLAlchemy, Prisma vb.) burada işin çok kolaylaşır; ORM'i ilk kez öğreniyorsan bu blok için süreyi iki katı hesapla <span class="tag tag--warn">TAHMİN</span>.</p>
+            <span class="steps__meta">.NET'ten geliyorsan EF Core karşılığı &middot; mülakatta sık &middot; en yüksek getiri</span>
+          </li>
+          <li>
+            <span class="steps__title">3. N+1, fetch type, open-in-view (§ 4)</span>
+            <p><code>show-sql</code>'i aç, kasten N+1 üret, sonra <code>@EntityGraph</code> ve <code>join fetch</code> ile düzelt. Herkes için garanti mülakat sorusu; özgeçmişinde performans/optimizasyon iddiası varsa bu, mülakatta anlatacağın en somut hikâye olur.</p>
+            <span class="steps__meta">Garanti mülakat sorusu &middot; performans iddiası varsa kanıtı</span>
+          </li>
+          <li>
+            <span class="steps__title">4. @Transactional: propagation, rollback kuralı, self-invocation (§ 5)</span>
+            <p>Kavramsal ama kısa. Özellikle üç şeyi net bil: checked exception'da rollback olmaması, aynı sınıf içi çağrının proxy'den geçmemesi, <code>REQUIRES_NEW</code>'in ne zaman gerektiği.</p>
+            <span class="steps__meta">Ezber değil, sebep-sonuç &middot; kısa sürer</span>
+          </li>
+          <li>
+            <span class="steps__title">5. Redis: Docker'da kaldır, Spring Data Redis ile bağlan (§ 10)</span>
+            <p>Hiç kullanmadıysan bir hafta sonu; işte kullanıyorsan yalnızca Spring entegrasyonu için yarım gün. İlanlarda en görünür teknolojilerden biri. Veri tiplerini öğren, TTL ver, <code>StringRedisTemplate</code> ile yaz-oku, sonra <code>@Cacheable</code> ile bir metodu önbelleğe al. Redis'i hiç kullanmadıysan "sadece duymuştum" cevabından kurtulman için bu kadarı yeter.</p>
+            <span class="steps__meta">Mülakatta sık &middot; Redis deneyimin yoksa en acil</span>
+          </li>
+          <li>
+            <span class="steps__title">6. RabbitMQ: resmî 6 adımlık öğretici + @RabbitListener (§ 11)</span>
+            <p>İki gün. Exchange/queue/binding kavramlarını oturt, bir üretici bir tüketici yaz, DLQ kur, ack mekanizmasını gör. Sonra "Kafka'dan farkı ne" sorusuna iki cümlelik cevap hazırla.</p>
+            <span class="steps__meta">Mülakatta sık &middot; iki gün</span>
+          </li>
+          <li>
+            <span class="steps__title">7. Flyway ile şema göçü (§ 8)</span>
+            <p>Yarım gün. <code>V1__init.sql</code> yaz, <code>ddl-auto=validate</code> ile birlikte çalıştır. "Üretimde şemayı nasıl değiştirirsin" sorusunun cevabı hazır olsun.</p>
+            <span class="steps__meta">Migration karşılığı &middot; mülakatta sık</span>
+          </li>
+          <li>
+            <span class="steps__title">8. Kafka temelleri (§ 11)</span>
+            <p>Java ilanlarında RabbitMQ'dan daha sık geçiyor (gözlem <span class="tag tag--warn">TEYİT</span>); banka/telekom/büyük veri hedefliyorsan öncelikli. topic/partition/offset/consumer group dörtlüsünü ve <code>@KafkaListener</code>'ı öğren. Kod yazmasan bile kavram seviyesinde anlatabil.</p>
+            <span class="steps__meta">İlan sayısı yüksek &middot; kavram düzeyi bile değerli</span>
+          </li>
+          <li>
+            <span class="steps__title">9. Spring Cache soyutlaması ve Caffeine (§ 10)</span>
+            <p><code>@Cacheable</code>, <code>@CacheEvict</code>, anahtar üretimi (.NET'ten geliyorsan MemoryCache karşılığı). Üç "cache" türünü ayırt edebilmen mülakatta fark yaratır.</p>
+            <span class="steps__meta">.NET'ten geliyorsan MemoryCache karşılığı</span>
+          </li>
+          <li>
+            <span class="steps__title">10. Resilience4j: circuit breaker + retry + rate limiter (§ 12)</span>
+            <p>Dış servis çağrılarında dayanıklılık (.NET'ten geliyorsan Polly karşılığı). Anotasyonlarla yarım günde kurulur; Rate limiting konusunu da bu kapatır.</p>
+            <span class="steps__meta">.NET'ten geliyorsan Polly karşılığı &middot; hızlı kazanç</span>
+          </li>
+          <li>
+            <span class="steps__title">11. @Scheduled + ShedLock, sonra Quartz (§ 13)</span>
+            <p>Zamanlanmış işler (.NET'ten geliyorsan Hangfire karşılığı). Önce <code>@Scheduled</code> ile başla, "iki sunucuda iki kez çalışır" problemini gör, ShedLock ile çöz. Quartz'a ancak kalıcı iş kuyruğu gerekirse geç.</p>
+            <span class="steps__meta">.NET'ten geliyorsan Hangfire karşılığı</span>
+          </li>
+          <li>
+            <span class="steps__title">12. Outbox, saga, idempotency (§ 12)</span>
+            <p>Kavramsal. Kod yazmadan da anlatabilirsin ama <em>neden</em> gerektiğini (dual write problemi) mutlaka kavra. CQRS tartışmasını da burada kapat: "duydum ama tam bilmiyorum" cevabı yerine iki cümlelik net bir tanım hazırla.</p>
+            <span class="steps__meta">CQRS &amp; Mediator &middot; beyaz tahta sorusu</span>
+          </li>
+          <li>
+            <span class="steps__title">13. Criteria API, Specification, QueryDSL (§ 6, § 7)</span>
+            <p>Tip güvenli dinamik sorgu ihtiyacı (C#'tan geliyorsan LINQ'i özlediğin yer). Dinamik filtreleme gereken bir ekran yaz; önce Specification, sonra QueryDSL ile dene.</p>
+            <span class="steps__meta">Orta öncelik &middot; generics bilgisi burada işe yarar</span>
+          </li>
+          <li>
+            <span class="steps__title">14. jOOQ / MyBatis / Spring Data JDBC farkındalığı (§ 9)</span>
+            <p>Kod yazmana gerek yok; "JPA yerine ne kullanılır, neden" sorusuna cevap verebil. jOOQ'un ticari veritabanlarında ücretli olduğunu bilmek küçük ama iyi bir ayrıntı.</p>
+            <span class="steps__meta">Kavram düzeyi yeterli</span>
+          </li>
+          <li>
+            <span class="steps__title">15. İkinci seviye önbellek, Envers, multi-tenancy, Debezium (§ 5, § 7, § 12)</span>
+            <p>İleri konular. Acele etme; ilk on maddeyi bitirmeden buraya gelme. Yalnız multi-tenant mimari ilanlarda sık geçtiği için Hibernate'in üç multi-tenancy stratejisinin adını bilmen iyi olur.</p>
+            <span class="steps__meta">İleri &middot; sonraya bırakılabilir</span>
+          </li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Mülakatta dürüstlük çizgisi</p>
+          <p>Bu sayfadaki bir teknolojiyi bir hafta sonunda denemiş olmak "üretimde kullandım" demek için yeterli değil. Doğru cümle deneyimine göre değişir:</p>
+          <ul>
+            <li><strong>Üretimde kullandıysan</strong> &rarr; somut anlat: ölçek, karşılaştığın sorun, çözümün.</li>
+            <li><strong>Kişisel projede denediysen</strong> &rarr; "Üretimde kullanmadım, ama kavramları biliyorum ve kendi projemde şunu yaptım."</li>
+            <li><strong>Başka bir dildeki istemciyle üretimde kullandıysan</strong> &rarr; "X'i .NET/Python/Node'da üretimde kullandım, Java istemcisini kişisel projede denedim."</li>
+            <li><strong>Yalnızca okuduysan</strong> &rarr; "Kavram düzeyinde biliyorum, kod yazmadım." Özgeçmişe "kullandım" yazma.</li>
+          </ul>
+          <p>Somut bir şey anlatabildiğin sürece bu cevaplar seni yakmaz; uydurmak yakar.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Devamı nerede</p>
+          <p>Bu sayfadaki konuların ön şartları ve devamı: dil tarafı (generics, <code>Optional</code>, <code>record</code>, Stream API) <a href="../01-java-dili/index.html">01 &mdash; Java Dili</a>; DI, AOP, konfigürasyon, WebSocket ve Actuator <a href="../02-spring-boot/index.html">02 &mdash; Spring Boot</a>; Maven/Gradle, xUnit karşılığı JUnit, Mockito, Testcontainers, CI/CD <a href="../04-ekosistem-ve-araclar/index.html">04 &mdash; Ekosistem ve Araçlar</a>. Bölüm girişi <a href="../index.html">Java ana sayfası</a>. Aynı konuların .NET karşılıkları için <a href="../../CSharp-DotNet/index.html">.NET bölümü</a>, tarayıcı tarafı için <a href="../../JavaScript-TypeScript/index.html">JavaScript / TypeScript bölümü</a>, diğer diller için <a href="../../Python/index.html">Python</a>, <a href="../../Go/index.html">Go</a> ve <a href="../../Rust/index.html">Rust</a> bölümleri, site kökü <a href="../../index.html">burada</a>.</p>
+        </div>
+
+
+
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../02-spring-boot/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Spring Boot</span></a>
+        <a class="next" href="../04-ekosistem-ve-araclar/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Ekosistem ve Araçlar</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>
