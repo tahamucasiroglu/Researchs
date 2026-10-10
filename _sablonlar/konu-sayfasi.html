@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  KONU SAYFASI ŞABLONU
+  Kullanım: Bu dosyayı konu klasörüne index.html olarak kopyala
+  (ör. Programlama/Java/05-yeni-konu/index.html) ve {{...}} yer tutucularını doldur.
+  Yapı, Programlama/Java/04-ekosistem-ve-araclar/index.html sayfasından türetildi.
+
+  ASSETS YOLU: Tüm sayfalar kökteki assets/style.css ve assets/app.js dosyalarını
+  GÖRELİ yolla kullanır; assets kopyalanmaz. "../" sayısı = sayfanın kökten derinliği.
+    Programlama/Java/05-yeni-konu/index.html  -> ../../../assets/  (3 seviye)
+    Programlama/Python/index.html             -> ../../assets/     (2 seviye)
+    Rehberler/Issizlik/01-sayfa.html          -> ../../assets/     (2 seviye)
+  Bu şablondaki yollar 3 seviye derinlik (Bölüm/Dil/NN-konu/index.html) içindir.
+-->
+<title>{{Sayfa Başlığı}} — {{Bölüm Adı}}</title>
+<meta name="description" content="{{Sayfanın içeriğini anlatan tek cümle.}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">{{Sayfa Başlığı}}</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <!-- Marka: bölümün genel bakış sayfasına (../index.html) gider. -->
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">{{Kategori}} · {{Bölüm}}</span>
+      <span class="brand__name">{{Bölüm Adı}}</span>
+      <span class="brand__sub">{{Kısa alt satır}}</span>
+    </a>
+
+    <!--
+      SIDEBAR KURALI: Bölümün TÜM sayfaları burada listelenir.
+      Yeni sayfa eklenince aynı bölümdeki bütün sayfaların sidebar'ına ve
+      bölüm index.html'ine bağlantı eklenir. Kendi sayfanın bağlantısı "index.html" olur.
+    -->
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">{{Grup adı}}</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../01-{{konu}}/index.html"><span class="nav-num">01</span><span>{{Konu 1}}</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>{{Bu sayfa}}</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Diğer bölümlere çapraz bağlantılar (yollar sayfanın derinliğine göre ayarlanır). -->
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>{{Kategori}} (ana sayfa)</span></a></li>
+          <li><a class="nav-item" href="../../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      {{Bölüm hakkında bir–iki cümlelik not.}}
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm {{NN}} · {{Grup adı}}</div>
+        <h1 class="page-title">{{Ana başlık}} <em>{{vurgulu kısım}}</em></h1>
+        <p class="lede">{{Sayfanın ne anlattığını özetleyen 1–2 cümle.}}</p>
+        <div class="head-meta">{{Referans}} &middot; {{Kısa etiket}}</div>
+      </header>
+
+      <div class="content">
+        <!-- Her ana başlık h2 + benzersiz id (ASCII, kebab-case). Bağlantılar #id ile verilir. -->
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">{{Sayfanın amacı ve okuma yöntemi.}}</p>
+
+        <h2 id="{{baslik-1}}"><span class="h-num">§ 1</span>{{Başlık 1}}</h2>
+
+        <p>{{Anlatım paragrafı.}}</p>
+
+        <!-- Kutu türleri: callout--info, --warn, --danger, --def, --example, --win -->
+        <div class="callout callout--info">
+          <p class="callout__title">Not</p>
+          <p>{{Kısa not.}}</p>
+        </div>
+
+        <!-- Rozetler: tag--bad (MÜLAKATTA SIK), tag--ok (TEMEL), tag (ORTA), tag--info (İLERİ), tag--warn (ÜCRETLİ/ESKİMİŞ) -->
+        <div class="tablewrap">
+          <table class="data">
+            <caption>{{Tablo başlığı}}</caption>
+            <thead>
+              <tr><th>Anahtar kelime</th><th>Kısaca</th><th>Not</th><th>Doküman</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>{{terim}}</code></td>
+                <td>{{Bir cümlelik tanım}}</td>
+                <td><span class="tag tag--ok">TEMEL</span> {{not}}</td>
+                <td><a href="{{https://resmi-dokuman}}">{{alan adı}}</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ozet"><span class="h-num">§ {{N}}</span>Özet</h2>
+
+        <ul>
+          <li>{{Özet maddesi}}</li>
+        </ul>
+
+      </div>
+
+      <!-- Önceki / sonraki sayfa; ilk veya son sayfada ilgili bağlantı kaldırılır. -->
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="../01-{{konu}}/index.html"><span class="dir">&larr; Önceki</span><span class="ttl">{{Önceki sayfa}}</span></a>
+        <a class="next" href="../03-{{konu}}/index.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">{{Sonraki sayfa}}</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>
