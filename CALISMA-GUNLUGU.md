@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Ekim 2026
 
+- **12.10.2026** — Paycell, ödeme sağlayıcı test ortamları ve Turkcell e-Şirket e-Fatura API araştırması → [Sirket-Kurma/19](Rehberler/Sirket-Kurma/19-paycell-ve-e-fatura.html)
 - **12.10.2026** — Mesajlaşma API araştırması: Telegram Bot API, WhatsApp Business API, BiP Keşfet API, SMS hizmetleri → [Rehberler/Mesajlasma-Altyapilari](Rehberler/Mesajlasma-Altyapilari/)
 - **11.10.2026** — Commit kuralı eklendi (ayrıştırmada commit Claude'da, çalışma tarihiyle, push yok); ilk commitler atıldı.
 - **10.10.2026** — Depo düzenlendi: eski "Araştırmalar" klasörü konu-klasör yapısına taşındı, kişisel veriler temizlendi, README zinciri ve çalışma kuralları (`CLAUDE.md`, `.claude/rules/`) eklendi. Tek bir durumu varsayan anlatımlar, olası tüm durumları kapsayan "durum → sonuç" anlatımına çevrildi.

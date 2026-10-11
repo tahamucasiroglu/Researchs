@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paycell ve Turkcell e-Şirket — Ödeme Alma ve Geliştirici Servisleri</title>
+<meta name="description" content="Paycell ile ödeme almak (şirket şartı, ücretler, API durumu), Türk ve yabancı ödeme sağlayıcılarının test ortamları, ödeme sayfası akışı ve Turkcell e-Şirket e-Fatura/e-Arşiv REST API uç noktaları, JSON ve C# örnekleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Kod blokları (assets'te pre stili yok) — tema değişkenleriyle, koyu temada da okunur */
+  .content pre {
+    font-family: var(--f-mono); font-size: .8rem; line-height: 1.55;
+    background: var(--paper-sink); color: var(--ink);
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    border-radius: var(--radius); padding: .9rem 1rem; margin: 0 0 1.4rem;
+    overflow-x: auto; max-width: 100%;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+  .codecap { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .04em; color: var(--ink-faint); margin: 0 0 .35rem; text-transform: uppercase; }
+  .m { font-family: var(--f-mono); font-size: .78rem; font-weight: 600; white-space: nowrap; }
+  .m--get { color: var(--info); } .m--post { color: var(--accent); } .m--put { color: var(--gold); }
+  /* Ödeme sayfası akış şeması */
+  .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: .5rem; margin: 1.2rem 0 1.6rem; padding: 0; list-style: none; }
+  .flow > li { flex: 1 1 9.5rem; min-width: 0; background: var(--paper-raise); border: 1px solid var(--rule); border-top: 3px solid var(--c, var(--accent)); border-radius: var(--radius); padding: .6rem .7rem; font-size: .84rem; line-height: 1.4; position: relative; }
+  .flow > li b { display: block; font-size: .78rem; font-family: var(--f-mono); color: var(--c, var(--accent)); margin-bottom: .2rem; }
+  .flow .who { display: block; font-size: .7rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .05em; margin-top: .35rem; }
+  .flow .f-musteri { --c: var(--info); } .flow .f-sunucu { --c: var(--accent); } .flow .f-saglayici { --c: var(--gold); } .flow .f-banka { --c: var(--flag); }
+  .legend-flow { font-size: .8rem; color: var(--ink-soft); }
+  .legend-flow span { display: inline-block; width: .7rem; height: .7rem; border-radius: 2px; vertical-align: -1px; margin: 0 .25rem 0 .6rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Paycell ve Turkcell e-Şirket</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Türkiye · 2026/2027</span>
+      <span class="brand__name">Şirket Kurma Rehberi</span>
+      <span class="brand__sub">Ödeme alma + test ortamları + e-Fatura API · Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-sozluk.html"><span class="nav-num">01</span><span>Sıfırdan Sözlük</span></a></li>
+          <li><a class="nav-item" href="02-sgk-bagkur.html"><span class="nav-num">02</span><span>SGK, Bağ-Kur ve İşsizlik Maaşı</span></a></li>
+          <li><a class="nav-item" href="03-vergi-101.html"><span class="nav-num">03</span><span>Vergi 101</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Şirket Seçimi</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-sahis-sirketi.html"><span class="nav-num">04</span><span>Şahıs Şirketi</span></a></li>
+          <li><a class="nav-item" href="05-limited-sirket.html"><span class="nav-num">05</span><span>Limited Şirket</span></a></li>
+          <li><a class="nav-item" href="06-karsilastirma.html"><span class="nav-num">06</span><span>Şahıs mı, Limited mi?</span></a></li>
+          <li><a class="nav-item" href="07-genc-girisimci.html"><span class="nav-num">07</span><span>Genç Girişimci ve Teşvikler</span></a></li>
+          <li><a class="nav-item" href="08-giderler-ofis-arac.html"><span class="nav-num">08</span><span>Giderler, Ev-Ofis ve Araç</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Yurt Dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-yurtdisi-cerceve.html"><span class="nav-num">09</span><span>Yurt Dışı Şirketin Vergi Gerçeği</span></a></li>
+          <li><a class="nav-item" href="10-yurtdisi-ulkeler.html"><span class="nav-num">10</span><span>Ülke Ülke Seçenekler</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Para ve Altyapı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="11-odeme-altyapilari.html"><span class="nav-num">11</span><span>Ödeme Altyapıları</span></a></li>
+          <li><a class="nav-item" href="12-sirketsiz.html"><span class="nav-num">12</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="13-banka-krediler.html"><span class="nav-num">13</span><span>Ticari Hesap, Kart, Krediler</span></a></li>
+          <li><a class="nav-item" href="19-paycell-ve-e-fatura.html"><span class="nav-num">19</span><span>Paycell ve e-Fatura API</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Hesap ve Risk</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="14-maliyet-senaryolari.html"><span class="nav-num">14</span><span>Maliyet ve Senaryolar</span></a></li>
+          <li><a class="nav-item" href="15-riskler-kapanis.html"><span class="nav-num">15</span><span>Riskler ve Kapanış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Karar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="16-yol-haritasi.html"><span class="nav-num">16</span><span>Yol Haritası ve Takvim</span></a></li>
+          <li><a class="nav-item" href="17-tavsiye.html"><span class="nav-num">17</span><span>Karar Rehberi</span></a></li>
+          <li><a class="nav-item" href="18-kaynaklar.html"><span class="nav-num">18</span><span>Kaynaklar</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Araştırma tarihi 12 Ekim 2026. Yalnız herkese açık web sayfaları ve resmî API belgelerinden derlendi; hiçbir hesaba başvurulmadı, hiçbir API'ye istek atılmadı. Hukuki/mali danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Ödeme altyapısı · e-Belge API</div>
+        <h1 class="page-title">Paycell ile <em>ödeme almak</em>, test ortamları ve e-Şirket API</h1>
+        <p class="lede">Paycell: Turkcell grubunun lisanslı ödeme kuruluşu (sanal POS, link, fiziki POS). e-Şirket: e-Fatura/e-Arşiv REST API'si. Arada: sağlayıcıların test ortamları ve ödeme akışı.</p>
+        <div class="head-meta">Araştırma: 12 Ekim 2026 &middot; Kaynak: resmî sayfalar + işaretli 3. taraf &middot; Rakamlar değişir</div>
+      </header>
+
+      <div class="content">
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Hukuki / mali danışmanlık değildir</p>
+          <p>Koşullar okurun durumuna göre değişir. Başvurudan önce sağlayıcıdan, vergisel sonucu mali müşavirden teyit et. Fiyatlar araştırma tarihindeki hâlidir.</p>
+        </div>
+
+        <p class="intro">Etiketler: <span class="tag tag--ok">RESMİ</span> sağlayıcının kendi sayfası · <span class="tag">3. TARAF</span> entegratör/haber/blog · <span class="tag tag--warn">TAHMİN</span> çıkarım · <span class="tag tag--warn">DOĞRULANMADI</span> Eylül 2026 notundan, bu tarihte resmî kaynakta teyit edilemedi · <span class="tag tag--bad">BİLİNMİYOR</span> resmî kaynakta yok.</p>
+
+        <h2 id="hizli"><span class="h-num">§ 0</span>30 saniyede cevaplar</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Soru</th><th>Kısa cevap</th><th>Dayanak</th></tr></thead>
+            <tbody>
+              <tr><td>Paycell ile ödeme almak için şirket?</td><td>Pratikte <b>vergi mükellefiyeti</b> (en az şahıs şirketi / serbest meslek).</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Paycell API belgesi açık mı?</td><td><b>Hayır.</b> Herkese açık API belgesi yok; başvuru/sözleşme sonrası verilir.</td><td>§ 6</td></tr>
+              <tr><td>Komisyon?</td><td>Liste oranı yok. Kampanya: <b>%2,19</b> ertesi gün / <b>%1,59</b> 7 gün bloke (31.12.2026'ya kadar). Fiziki POS: <b>%3,26 + 399 TL/ay</b>.</td><td><span class="tag">3. TARAF</span> / <span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td>Şirketsiz test (sandbox) hangisinde?</td><td><b>iyzico</b> (kayıtla sandbox paneli), <b>Stripe</b> test modu, <b>Paddle</b> sandbox. Craftgate test üyeliği iletişimle.</td><td>§ 10</td></tr>
+              <tr><td>Stripe Türkiye'de?</td><td>Canlı hesap <b>açılamaz</b>; Türkiye desteklenen ülke listesinde yok.</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td>e-Şirket API açık mı?</td><td>Belge <b>herkese açık</b> (uç nokta, şema, test sunucusu). Anahtar yalnız e-Şirket müşterisine.</td><td>§ 13</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ============ A ============ -->
+        <h2 id="paycell-nedir"><span class="h-num">§ 1</span>Paycell nedir, lisansı</h2>
+        <ul>
+          <li><b>İşleten:</b> Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş. — 6493 sayılı Kanun'a tabi, <b>TCMB</b> lisanslı (2020 öncesi BDDK).</li>
+          <li><b>Tarihçe:</b> 2016 ödeme kuruluşu, 2017 e-para kuruluşu izni; Mart 2025'te TCMB izin kapsamını genişletti <span class="tag">3. TARAF</span>.</li>
+          <li><b>Bireysel taraf:</b> cüzdan, Paycell Kart, IBAN/numaraya para gönderme-isteme, QR, "Faturana Yansıt" <span class="tag tag--ok">RESMİ</span>.</li>
+          <li><b>Anlamı:</b> Banka değil ama sanal POS'u kendi adına sunar → tek entegrasyonla bütün bankaların kartları.</li>
+        </ul>
+
+        <h2 id="urunler"><span class="h-num">§ 2</span>İşyeri ürünleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ürün</th><th>→ Ne yapar</th><th>Kime</th><th>Durum</th></tr></thead>
+            <tbody>
+              <tr><td><b>Sanal POS</b></td><td>Site/uygulamada kartla ödeme, 3D Secure, iptal/iade</td><td>E-ticaret, uygulama, SaaS</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td><b>Linkle Ödeme</b></td><td>Siteye gerek yok; bağlantı üretip mesajla/e-postayla gönder</td><td>Sosyal medyadan satan, hizmet veren</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td><b>Paycell Vitrin</b></td><td>Basit satış sayfası</td><td>Küçük satıcı</td><td>Ad <span class="tag tag--ok">RESMİ</span>, ayrıntı <span class="tag tag--bad">BİLİNMİYOR</span></td></tr>
+              <tr><td><b>Paycell POS</b> (fiziki, Android)</td><td>Mağazada kart; cihaz ve hat Paycell'in</td><td>Dükkân, esnaf</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td><b>Cüzdan / QR</b></td><td>Paycell bakiyesi, kayıtlı kart veya QR ile ödeme</td><td>Paycell kullanıcılarına satan</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td><b>Faturana Yansıt</b></td><td>Tutar Turkcell faturasına / TL bakiyeye; kart gerekmez</td><td>Dijital içerik, oyun, abonelik</td><td>Tüketici <span class="tag tag--ok">RESMİ</span>, işyeri <span class="tag tag--bad">BİLİNMİYOR</span></td></tr>
+              <tr><td><b>Tekrarlı ödeme</b></td><td>Kart saklama (token) ile düzenli çekim</td><td>SaaS, üyelik</td><td>Sanal POS sayfasında yok <span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Başvuru ve işlem takibi: <b>İştePaycell</b> uygulaması (fiziki POS, link, sanal POS raporları, iptal/iade).</p>
+
+        <h2 id="sirket-gerekir-mi"><span class="h-num">§ 3</span>Şirket gerekir mi? Durum durum</h2>
+        <p>Paycell "kimler başvurabilir / hangi belgeler" sorularını yayımlamıyor <span class="tag tag--bad">BİLİNMİYOR</span>. Tablo genel sanal POS uygulamasına dayanır.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>→ Paycell'de</th><th>Dikkat</th></tr></thead>
+            <tbody>
+              <tr><td><b>Şirketsiz birey</b> (çalışan, öğrenci, işsiz, emekli)</td><td>Bireysel hesapla kişiden kişiye para; üye işyeri olamaz <span class="tag tag--warn">TAHMİN</span></td><td>Düzenli satış = ticari faaliyet; fatura kesilemez, hesap kısıtlanabilir.</td></tr>
+              <tr><td><b>Serbest meslek</b> (SMM keser)</td><td>Üye işyeri başvurusu yapılabilir <span class="tag tag--warn">TAHMİN</span></td><td>Faaliyet kodu satılan hizmete uymalı.</td></tr>
+              <tr><td><b>Şahıs şirketi</b></td><td>Sanal POS, link, fiziki POS — olağan başvuran</td><td>e-Arşiv (589 sıra no.lu VUK Tebliği): basit usul/işletme hesabı → 31.12.2026'ya kadar vergiler dahil 3.000 TL üstü, <b>1.1.2027'den</b> bütün faturalar; bilanço esası → erteleme yok <span class="tag">3. TARAF</span> özet.</td></tr>
+              <tr><td><b>Limited / anonim</b></td><td>Bütün ürünler; hacimle pazarlık</td><td>İmza sirküleri, sicil gazetesi.</td></tr>
+              <tr><td><b>Kurumsal / yüksek hacim</b></td><td>Özel oran, valör, doğrudan API</td><td>Kurumsal satış ekibi.</td></tr>
+              <tr><td><b>Yurt dışında yerleşik şirket</b></td><td>Türk vergi kimliği istenir <span class="tag tag--warn">TAHMİN</span></td><td>Bkz. § 7.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--warn">
+          <p class="callout__title">Bireysel hesapla ticari tahsilat → risk</p>
+          <ul>
+            <li><b>Vergi:</b> düzenli satış geliri ticari/serbest meslek kazancıdır; mükellefiyet gerekir.</li>
+            <li><b>Tevsik:</b> mükellefler 30.000 TL üstü tahsilat/ödemeyi banka veya ödeme kuruluşuyla belgeler (575 sıra no.lu VUK Tebliği, 30.11.2024'ten) <span class="tag">3. TARAF</span>.</li>
+            <li><b>MASAK:</b> bireysel IBAN'la ticari tahsilatı sıkılaştıran 2025 taslağının yürürlüğü doğrulanamadı <span class="tag tag--bad">BİLİNMİYOR</span>.</li>
+          </ul>
+          <p>Şirketsiz dönem için: <a href="12-sirketsiz.html">Şirketsiz Ne Yapabilirsin?</a></p>
+        </div>
+
+        <h2 id="basvuru"><span class="h-num">§ 4</span>Başvuru ve belgeler</h2>
+        <ol class="steps">
+          <li><p class="steps__title">Kanal seç</p><p class="steps__meta">İştePaycell uygulaması · kurumsal destek · hazır e-ticaret altyapısının "Paycell" sekmesi</p></li>
+          <li><p class="steps__title">Form</p><p class="steps__meta">Firma bilgisi, faaliyet alanı, site adresi, aylık planlanan hacim (3. taraf)</p></li>
+          <li><p class="steps__title">Kimlik doğrulama</p><p class="steps__meta">Uygulama içinden (RESMİ); belge listesi yayımlanmamış</p></li>
+          <li><p class="steps__title">Site denetimi</p><p class="steps__meta">HTTPS, iletişim, mesafeli satış sözleşmesi, iade koşulları, KVKK metni (genel uygulama, 3. taraf)</p></li>
+          <li><p class="steps__title">Sözleşme → canlı</p><p class="steps__meta">Bir entegratör "24 saatte satışa başlama" diyor (3. taraf)</p></li>
+        </ol>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sanal POS başvurularında sık istenen belgeler (genel uygulama — Paycell'e özgü değil)</caption>
+            <thead><tr><th>Şirket türü</th><th>Belgeler</th></tr></thead>
+            <tbody>
+              <tr><td>Şahıs şirketi / serbest meslek</td><td>Kimlik, vergi levhası, imza beyannamesi, oda kaydı/sicil gazetesi (tacirse), şirket adına IBAN</td></tr>
+              <tr><td>Limited / anonim</td><td>Vergi levhası, imza sirküleri, sicil gazetesi (kuruluş + son yönetim), yetkili kimlikleri, şirket IBAN</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ucretler"><span class="h-num">§ 5</span>Ücretler, komisyon ve valör</h2>
+        <p>Resmî sayfa: "tek çekimde tek bir avantajlı komisyon oranı", "komisyon kesintisi dışında ek ücret ödenmez". Liste oranı yok; teklifle belirlenir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Bilinen rakamlar (12 Ekim 2026)</caption>
+            <thead><tr><th>Model</th><th>Oran / ücret</th><th>Koşul</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td>Sanal POS — ertesi gün</td><td>%2,19 (≤250 bin TL) · %2,59 (250–500 bin) · %2,99 (&gt;500 bin)</td><td>Kampanya: ilk başvuru, yurt içi kart, 31.12.2026'ya kadar</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td>Sanal POS — 7 gün bloke</td><td>%1,59 · %1,99 · %2,39</td><td>Aynı kampanya</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td>Sanal POS — önceki kampanya</td><td>%1,99 / %1,29 (10 gün bloke), 100 bin TL'ye kadar</td><td>30.09.2026'da bitti</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td>Paycell POS (fiziki)</td><td><b>%3,26</b> (yurt içi tek çekim) + <b>399 TL/ay</b> cihaz başı (aidat KDV dahil); ilk işlemde 2,07 TL damga vergisi</td><td>Kurulum/servis bedeli yok</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td>Taksit</td><td>Yayımlanmamış</td><td>İzinli sektörler; Bonus, World, Paraf, Bankkart, Maximum, Axess, CardFinans</td><td><span class="tag tag--ok">RESMİ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><b>Valör:</b> ertesi gün standart; bloke modeli 7–10 gün bekletir, daha ucuz. Fiziki POS: "hak edişler dilediğiniz gün".</li>
+          <li><b>Kıyas çerçevesi:</b> TCMB bankalara üye işyeri ücret tavanı koyar; bir bankanın Haziran 2026 listesinde ertesi gün peşin kredi kartı %3,56, banka kartı %1,04 <span class="tag">3. TARAF</span>. Banka kartı oranını teklifte ayrıca sor.</li>
+        </ul>
+
+        <h2 id="paycell-api"><span class="h-num">§ 6</span>Paycell API durumu</h2>
+        <div class="callout callout--info">
+          <p class="callout__title">Herkese açık API belgesi yok — başvuru sonrası verilir</p>
+          <p>Paycell'in kayıt olmadan okunabilen bir geliştirici portalı, uç nokta listesi veya sandbox kaydı resmî sitede bulunamadı (12 Ekim 2026). Bu yüzden bu sayfada Paycell için <b>uç nokta tablosu, JSON veya C# örneği verilmiyor</b>; uydurma örnek yazılmadı.</p>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Bilinen</th><th>→ Ne anlama gelir</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td>SOAP (XML) + REST (JSON) servisler; Java/.NET/Node.js/Python örnek kodları; 3D yönlendirme sayfası</td><td>Klasik sanal POS yapısı; resmî SDK adı bilinmiyor</td><td><span class="tag">3. TARAF</span> açık kaynak istemci açıklaması</td></tr>
+              <tr><td>İşlevler: satış, 3D satış, sorgu, iade, iptal, güvenli kart tokenı</td><td>§ 9'daki genel akış uygulanır</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td>TEST ve PREPROD ortamları ortak test değerleriyle; canlı değerler işyerine özel</td><td>Test erişimi de Paycell ekibinden istenir</td><td><span class="tag">3. TARAF</span></td></tr>
+              <tr><td>Hazır e-ticaret altyapılarında panelden açılan ödeme yöntemi</td><td>Kod yazmadan kullanım mümkün</td><td><span class="tag">3. TARAF</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Pratik yol: kodu sağlayıcıdan bağımsız yaz (§ 11), önce self-servis sandbox'ı olan bir sağlayıcıyla geliştir, Paycell belgeleri gelince ayrı adaptör ekle.</p>
+
+        <h2 id="yurtdisi"><span class="h-num">§ 7</span>Yurt dışından ödeme</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Senaryo</th><th>Paycell ile</th><th>→ Daha uygun yol</th></tr></thead>
+            <tbody>
+              <tr><td>Yabancı kartlı müşteri, Türk şirketi</td><td>Sanal POS yurt içi kart için konumlanmış; kampanyalar yabancı kartı dışarıda bırakıyor <span class="tag tag--bad">BİLİNMİYOR</span></td><td>Yabancı kartı yazılı teyit eden TR sağlayıcı veya Merchant of Record</td></tr>
+              <tr><td>Global dijital ürün/abonelik (AB KDV vb.)</td><td>Uygun değil</td><td>Paddle, Stripe Managed Payments gibi MoR</td></tr>
+              <tr><td>Yurt dışındaki kişiden bireysel para</td><td>Yurt dışına gönderme var; alma koşulu yayımlanmamış</td><td>Banka SWIFT / uluslararası transfer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="arti-eksi"><span class="h-num">§ 8</span>Avantaj / dezavantaj</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Avantaj</th><th>Dezavantaj</th></tr></thead>
+            <tbody>
+              <tr><td>Turkcell kullanıcı tabanı: cüzdan, kayıtlı kart, QR</td><td>Liste fiyatı yok; teklif gerekir</td></tr>
+              <tr><td>"Faturana Yansıt" ile kartsız kitle <span class="tag tag--warn">TAHMİN</span></td><td>Açık API belgesi ve sandbox yok; self-servis değil</td></tr>
+              <tr><td>TCMB lisanslı, TL, ertesi gün valör</td><td>Abonelik ürünü öne çıkarılmıyor</td></tr>
+              <tr><td>Tek entegrasyonla bütün bankalar, taksit</td><td>Yabancı kart / döviz belirsiz</td></tr>
+              <tr><td>Sanal POS + link + fiziki POS + e-para tek yerde</td><td>Eklenti/kütüphane ekosistemi küçük</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ============ B ============ -->
+        <h2 id="akis"><span class="h-num">§ 9</span>Ödeme sayfası akışı (genel, 3D Secure)</h2>
+        <p>Türk sanal POS sağlayıcılarının çoğunda aynı iskelet. Adlar sağlayıcıya göre değişir; Paycell'e özgü değildir.</p>
+        <p class="legend-flow">Renk: <span style="background:var(--info)"></span>Müşteri <span style="background:var(--accent)"></span>Senin sunucun <span style="background:var(--gold)"></span>Ödeme sağlayıcı <span style="background:var(--flag)"></span>Kartı veren banka</p>
+        <ol class="flow" aria-label="Ödeme akışı">
+          <li class="f-musteri"><b>1 · Sepet</b>Müşteri "Öde"ye basar.<span class="who">Müşteri</span></li>
+          <li class="f-sunucu"><b>2 · Ödeme başlat</b>Sunucu tutar + sipariş no + dönüş URL'siyle sağlayıcıya istek atar. Gizli anahtar yalnız sunucuda.<span class="who">Sunucu</span></li>
+          <li class="f-saglayici"><b>3 · Ödeme formu</b>Sağlayıcının sayfası/iframe'i kart bilgisini alır; kart senin sunucuna değmez.<span class="who">Sağlayıcı</span></li>
+          <li class="f-banka"><b>4 · 3D Secure</b>Banka SMS şifresiyle doğrular.<span class="who">Banka</span></li>
+          <li class="f-saglayici"><b>5 · Dönüş</b>Tarayıcı dönüş URL'sine gelir; ayrıca webhook/bildirim gelebilir.<span class="who">Sağlayıcı</span></li>
+          <li class="f-sunucu"><b>6 · Doğrula</b>Dönüşe güvenme: imzayı doğrula veya sorgu ucuyla sonucu çek, tutarı karşılaştır.<span class="who">Sunucu</span></li>
+          <li class="f-sunucu"><b>7 · Sipariş + fatura</b>Siparişi onayla; e-Arşiv faturayı kes (§ 14).<span class="who">Sunucu</span></li>
+        </ol>
+        <div class="callout callout--warn">
+          <p class="callout__title">Sık hata</p>
+          <ul>
+            <li>Sonucu yalnız tarayıcı dönüşüne bakarak onaylamak → sahte dönüşle sipariş onaylatılabilir. Sunucu tarafında doğrula.</li>
+            <li>Aynı bildirimi iki kez işlemek → sipariş no ile tekil (idempotent) işle.</li>
+            <li>Kart numarasını kendi sunucundan geçirmek → PCI DSS yükü. Sağlayıcının formunu/token'ını kullan.</li>
+          </ul>
+        </div>
+
+        <h2 id="test-ortami"><span class="h-num">§ 10</span>Test ortamı (sandbox) kıyası</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Eylül 2026 notu + 12 Ekim 2026 kontrolü</caption>
+            <thead><tr><th>Sağlayıcı</th><th>Test ortamı → nasıl</th><th>Şirketsiz test</th><th>Abonelik</th><th>Canlı şartı</th><th>.NET</th></tr></thead>
+            <tbody>
+              <tr><td><b>iyzico</b></td><td>Ayrı sandbox paneli: kayıt → <i>Ayarlar › Firma Ayarları › API Anahtarları</i>; API key + secret + merchantId. Sandbox SMS şifresi hep <code>123456</code> <span class="tag tag--ok">RESMİ</span></td><td>Evet — sandbox sayfası şirket şartı yazmıyor</td><td>Var (Subscription API)</td><td>Şahıs şirketi yeterli <span class="tag tag--warn">DOĞRULANMADI</span></td><td>Resmî SDK <code>iyzipay-dotnet</code></td></tr>
+              <tr><td><b>Craftgate</b></td><td>Ayrı ortam: <code>sandbox-api.craftgate.io</code> + <code>sandbox-panel.craftgate.io</code>; anahtarlar panelde <i>Yönetim › API Yetkilendirme</i>; test kartları; test anahtarı canlıda çalışmaz <span class="tag tag--ok">RESMİ</span></td><td>Test üyeliği Craftgate'le iletişimle açılıyor (belgeye göre); "anında form" iddiası doğrulanamadı</td><td>Var</td><td>Şahıs şirketi <span class="tag tag--warn">DOĞRULANMADI</span></td><td>Resmî <code>craftgate-dotnet-client</code></td></tr>
+              <tr><td>PayTR</td><td>Ayrı sandbox yok; mağaza panelinde test modu</td><td>Kısmen</td><td>Düzenli ödeme var</td><td>Vergi no zorunlu</td><td>Resmî SDK yok, REST</td></tr>
+              <tr><td>Param</td><td>Panelde test hesabı</td><td><span class="tag tag--warn">DOĞRULANMADI</span></td><td>Var</td><td>Şahıs şirketi</td><td>Yok</td></tr>
+              <tr><td>Sipay</td><td>Test ortamı var; gerçek anahtar başvuru onayıyla</td><td>Kısmen</td><td><span class="tag tag--warn">DOĞRULANMADI</span></td><td>Şirket başvurusu</td><td>Yok, REST</td></tr>
+              <tr><td><b>Stripe</b></td><td>Test modu, kayıt olur olmaz</td><td>Evet</td><td>Çok olgun</td><td><b>Türkiye desteklenmiyor</b> <span class="tag tag--ok">RESMİ</span> → desteklenen ülkede şirket (ör. Stripe Atlas ile ABD)</td><td>Resmî <code>Stripe.net</code></td></tr>
+              <tr><td>Paddle (MoR)</td><td>Ayrı sandbox</td><td>Evet</td><td>Var</td><td>Bireysel satıcı kabul (kimlik doğrulama) <span class="tag tag--warn">DOĞRULANMADI</span>; TR satıcı koşulu bilinmiyor</td><td>Yok, REST</td></tr>
+              <tr><td>Lemon Squeezy (MoR)</td><td>Varsayılan test modu</td><td>Evet</td><td>Var</td><td>28 Oca 2026 duyurusu: <b>Stripe Managed Payments</b>'e geçiliyor (35+ ülke, bekleme listesi); desteklenmeyen ülkeye Stripe Atlas öneriliyor <span class="tag tag--ok">RESMİ</span></td><td>Yok, REST</td></tr>
+              <tr><td>Paycell</td><td>TEST/PREPROD var ama erişim Paycell ekibinden <span class="tag">3. TARAF</span></td><td>Hayır</td><td>Öne çıkarılmıyor</td><td>Üye işyeri sözleşmesi</td><td>Bilinmiyor</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>Merchant of Record (MoR):</b> faturayı ve yurt dışı vergiyi müşteriye MoR keser → şirketsiz/global dijital satışta işe yarar, komisyonu daha yüksektir.</p>
+
+        <h2 id="entegrasyon-adim"><span class="h-num">§ 11</span>Entegrasyon adımları (sağlayıcıdan bağımsız)</h2>
+        <ol class="steps">
+          <li><p class="steps__title">Ödeme arayüzü tanımla</p><p class="steps__meta">Ödeme başlat · sonucu doğrula · iade/iptal · abonelik durumu → tek arayüz; her sağlayıcı ayrı adaptör</p></li>
+          <li><p class="steps__title">Sandbox anahtarı al</p><p class="steps__meta">Ortam değişkenine koy; test ve canlı anahtarı ayrı tut (Craftgate gibi ortamlarda karışınca çalışmaz)</p></li>
+          <li><p class="steps__title">Ödeme başlat + dönüş URL'si</p><p class="steps__meta">Sipariş no = tekil anahtar; tutarı sunucuda hesapla</p></li>
+          <li><p class="steps__title">Webhook / sorgu ile doğrula</p><p class="steps__meta">İmza doğrulama; aynı olayı iki kez işleme</p></li>
+          <li><p class="steps__title">Test kartlarıyla senaryolar</p><p class="steps__meta">Başarılı · yetersiz bakiye · 3D başarısız · iade · kısmi iade · abonelik yenileme hatası</p></li>
+          <li><p class="steps__title">Canlı başvurusu</p><p class="steps__meta">Şirket belgeleri + site denetimi (§ 4); canlı anahtarla küçük tutarlı gerçek deneme</p></li>
+        </ol>
+
+        <h2 id="kiyas"><span class="h-num">§ 12</span>Konumlama kıyası</h2>
+        <p>Ayrıntılı oranlar: <a href="11-odeme-altyapilari.html">Ödeme Altyapıları</a>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sağlayıcı</th><th>Tür</th><th>Şirket şartı</th><th>Self-servis belge/sandbox</th><th>Yurt dışı müşteri</th><th>Öne çıkan</th></tr></thead>
+            <tbody>
+              <tr><td><b>Paycell</b></td><td>TR ödeme/e-para</td><td>Var</td><td>Yok</td><td>Belirsiz</td><td>Turkcell cüzdan/fatura kitlesi</td></tr>
+              <tr><td><b>iyzico</b></td><td>TR ödeme</td><td>Sanal POS: var · bireysel link ile ödeme şirketsiz açılabiliyor</td><td>Güçlü</td><td>Bkz. rehber</td><td>Abonelik, geniş eklenti</td></tr>
+              <tr><td><b>Craftgate</b></td><td>TR ödeme orkestrasyonu</td><td>Var</td><td>Belge açık, test üyeliği iletişimle</td><td>Bkz. rehber</td><td>Çoklu POS yönlendirme</td></tr>
+              <tr><td><b>PayTR</b></td><td>TR ödeme</td><td>Var</td><td>Belge açık, ayrı sandbox yok</td><td>Bkz. rehber</td><td>KOBİ, kart saklama</td></tr>
+              <tr><td><b>Param</b></td><td>TR ödeme/e-para</td><td>Var <span class="tag tag--warn">TAHMİN</span></td><td>Bkz. rehber</td><td>Bkz. rehber</td><td>POS + sanal POS</td></tr>
+              <tr><td><b>Stripe</b></td><td>Ödeme işlemcisi</td><td>Desteklenen ülkede şirket</td><td>En güçlü</td><td>Evet</td><td>TR yerleşiğe kapalı</td></tr>
+              <tr><td><b>Paddle / Stripe Managed Payments</b></td><td>MoR</td><td>Koşullu bireysel</td><td>Güçlü</td><td>Evet, vergi onlarda</td><td>Global dijital ürün</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ============ C ============ -->
+        <h2 id="esirket-portal"><span class="h-num">§ 13</span>e-Şirket: portal, erişim, kimlik</h2>
+        <p><code>developer.turkcellesirket.com</code> → e-Belge ve muhasebe API'leri (ödeme API'si <b>değil</b>). İşleten: Turkcell Dijital İş Servisleri A.Ş.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>→ Bilgi</th></tr></thead>
+            <tbody>
+              <tr><td>API'ler</td><td>e-Fatura/e-Arşiv · e-İrsaliye · e-Defter · e-MM · e-SMM · Genel Muhasebe · e-Bilet · e-Adisyon · Firma Yönetimi</td></tr>
+              <tr><td>Erişim</td><td>Belge herkese açık; kullanmadan önce satış ekibiyle anlaşma, sonra entegrasyon ekibi <span class="tag tag--ok">RESMİ</span></td></tr>
+              <tr><td>Kimlik — yol 1</td><td><code>X-Api-Key: {API_KEY}</code> başlığı; anahtar portalda <i>API Yönetimi › Yeni API Anahtarı</i></td></tr>
+              <tr><td>Kimlik — yol 2</td><td>"Servis Kullanıcısı" + <code>POST /v1/token</code> (form: <code>username</code>, <code>password</code>, <code>client_id=serviceApi</code>) → <code>Authorization: Bearer {TOKEN}</code>. Süre dolunca <b>401</b>; yenilemeyi istemci yapar. Token ömrü ve cevap alan adları belgede yok.</td></tr>
+              <tr><td>Test ortamı</td><td>API <code>efaturaservicetest.isim360.com</code> · token <code>coretest.isim360.com/v1/token</code> · test portalı <code>portaltest.isim360.com</code>. e-Belge denemeleri <b>yalnız testte</b> (canlıdaki belge GİB nezdinde resmîdir).</td></tr>
+              <tr><td>Canlı</td><td>API <code>efaturaservice.turkcellesirket.com</code> · token <code>core.turkcellesirket.com/v1/token</code></td></tr>
+              <tr><td>Webhook</td><td><b>Yok</b> (belgede geçmiyor) → durum <b>sorgulama (polling)</b> ile izlenir</td></tr>
+              <tr><td>Hata kodları</td><td>401 token/anahtar · 403 yetki · 404 kayıt yok · <b>422</b> doğrulama hatası (düzeltmeden tekrar gönderme) · <b>429</b> limit aşımı</td></tr>
+              <tr><td>Araçlar</td><td>NuGet (<code>eplatform</code> profili), Postman koleksiyonları, GitHub'da ePlatform örnekleri</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="esirket-uc"><span class="h-num">§ 14</span>e-Fatura / e-Arşiv uç nokta tablosu</h2>
+        <p>Taban: test <code>https://efaturaservicetest.isim360.com</code>, canlı <code>https://efaturaservice.turkcellesirket.com</code>. Sürüm (<code>/v1</code> veya <code>/v2</code>) uca göre değişir — belgedeki OpenAPI tanımından alındı.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Metot + yol</th><th>→ Ne yapar</th><th>Önemli parametre / sınır</th></tr></thead>
+            <tbody>
+              <tr><td><span class="m m--post">POST</span> <code>/v2/earchive/create</code></td><td>e-Arşiv fatura oluştur (JSON model)</td><td><code>recordType=0</code>, <code>status</code> 0 taslak / 20 kaydet-gönder; GİB UBL'iyle çalışmış olana UBL ucu önerilir</td></tr>
+              <tr><td><span class="m m--post">POST</span> <code>/v2/earchive</code></td><td>e-Arşiv fatura (hazır UBL)</td><td>GİB standart UBL-TR</td></tr>
+              <tr><td><span class="m m--get">GET</span> <code>/v2/earchive/{id}/status</code></td><td>Durum sorgula</td><td>0 taslak · 20 kuyruk · 30 GİB'e gönderiliyor · 40 hata · 50 iletildi · <b>60 onaylandı</b> · 100 iptal</td></tr>
+              <tr><td><span class="m m--get">GET</span> <code>/v2/earchive/{id}/pdf/{isStandartXslt}</code></td><td>PDF indir (dosya akışı)</td><td>PDF uçları 15–60 istek/dk (kademeye göre)</td></tr>
+              <tr><td><span class="m m--put">PUT</span> <code>/v1/earchive/cancelinvoice</code></td><td>e-Arşiv iptal</td><td>Gövde: GUID dizisi; yalnız <code>status=60</code> olanlar</td></tr>
+              <tr><td><span class="m m--post">POST</span> <code>/v1/outboxinvoice/create</code></td><td>Giden e-Fatura oluştur (JSON model)</td><td>Alıcı e-Fatura mükellefi olmalı; senaryo Temel/Ticari/İhracat…</td></tr>
+              <tr><td><span class="m m--get">GET</span> <code>/v2/outboxinvoice/{id}/status</code></td><td>Giden e-Fatura durumu</td><td>Duruma göre zarf bilgisi dönmeyebilir</td></tr>
+              <tr><td><span class="m m--get">GET</span> <code>/v1/inboxinvoice/list</code></td><td>Gelen e-Fatura listesi</td><td><code>isNew</code>, <code>startDate</code>, <code>endDate</code>…; <b>her kademede 6 istek / 15 dk</b></td></tr>
+              <tr><td><span class="m m--put">PUT</span> <code>/v1/inboxinvoice/updateisnew</code></td><td>Gelen faturayı "okundu" işaretle</td><td>Listeyi yeniden çekmeden yalnız yenileri almak için</td></tr>
+              <tr><td><span class="m m--get">GET</span> <code>/v1/staticlist/unit</code> · <code>/taxoffice</code> · <code>/taxexemptionreason</code></td><td>Birim, vergi dairesi, istisna kodları</td><td>Önbelleğe al; ör. adet = <code>C62</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="esirket-json"><span class="h-num">§ 15</span>JSON örnekleri (e-Arşiv, test ortamı)</h2>
+        <p>Değerler yer tutucudur. Alan adları resmî OpenAPI şemasından; zorunlular: <code>recordType</code>, <code>addressBook</code> (ad, VKN/TCKN, ilçe, il, ülke), <code>generalInfoModel</code> (senaryo, tip, tarih+saat, para birimi), kalemlerde ad/miktar/birim/fiyat/KDV.</p>
+        <p class="codecap">İstek · POST https://efaturaservicetest.isim360.com/v2/earchive/create · X-Api-Key: {API_KEY}</p>
+<pre><code>{
+  "recordType": 0,
+  "status": 20,
+  "localReferenceId": "{SIPARIS_NO}",
+  "addressBook": {
+    "name": "Örnek",
+    "receiverPersonSurName": "Müşteri",
+    "identificationNumber": "{ALICI_TCKN_VEYA_VKN}",
+    "receiverDistrict": "{ILCE}",
+    "receiverCity": "{IL}",
+    "receiverCountry": "Türkiye",
+    "receiverEmail": "{ALICI_EPOSTA}"
+  },
+  "generalInfoModel": {
+    "invoiceProfileType": 4,
+    "type": 1,
+    "issueDate": "2026-10-12T14:30:00",
+    "currencyCode": "TRY"
+  },
+  "invoiceLines": [
+    {
+      "inventoryCard": "Örnek Hizmet",
+      "amount": 1,
+      "unitCode": "C62",
+      "unitPrice": 1000.00,
+      "vatRate": 20
+    }
+  ],
+  "archiveInfoModel": {
+    "IsInternetSale": true,
+    "websiteUrl": "https://{ALAN_ADI}",
+    "shipmentSendType": "ELEKTRONIK"
+  },
+  "eArsivInfo": { "sendEMail": true }
+}</code></pre>
+        <p class="codecap">Cevap · 200</p>
+<pre><code>{
+  "Id": "{FATURA_GUID}",
+  "InvoiceNumber": "{16_HANELI_FATURA_NO}"
+}</code></pre>
+        <p class="codecap">Durum · GET /v2/earchive/{FATURA_GUID}/status → 200</p>
+<pre><code>{
+  "id": "{FATURA_GUID}",
+  "invoiceNumber": "{16_HANELI_FATURA_NO}",
+  "status": 60,
+  "message": null
+}</code></pre>
+        <p class="codecap">Hata · 422 (doğrulama)</p>
+<pre><code>{
+  "Error": {
+    "title": "{HATA_BASLIGI}",
+    "detail": "{HATA_AYRINTISI}"
+  }
+}</code></pre>
+        <ul>
+          <li><code>invoiceProfileType: 4</code> → e-Arşiv; <code>type: 1</code> → Satış (2 İade, 3 İstisna, 5 Tevkifat…).</li>
+          <li>e-Arşivde <b>saat zorunlu</b>. TCKN'li alıcıda soyad zorunlu.</li>
+          <li>İnternet satışında e-posta gönderimi açıksa <code>receiverEmail</code> gerekir; <code>shipmentSendType: "KAGIT"</code> seçilirse e-posta gitmez.</li>
+          <li>Fatura numarasını kendin vereceksen <code>useManualInvoiceId: true</code> + 16 haneli <code>invoiceNumber</code>.</li>
+        </ul>
+
+        <h2 id="esirket-csharp"><span class="h-num">§ 16</span>C# örneği (.NET, HttpClient + System.Text.Json)</h2>
+        <p>Gönder → durumu sorgula (webhook olmadığı için). Anahtar ve taban adres ortam değişkeninden.</p>
+<pre><code>using System;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+// ESIRKET_BASE_URL: test için https://efaturaservicetest.isim360.com
+var http = new HttpClient { BaseAddress = new Uri(
+    Environment.GetEnvironmentVariable("ESIRKET_BASE_URL")
+    ?? "https://efaturaservicetest.isim360.com") };
+http.DefaultRequestHeaders.Add("X-Api-Key",
+    Environment.GetEnvironmentVariable("ESIRKET_API_KEY")
+    ?? throw new InvalidOperationException("ESIRKET_API_KEY yok"));
+
+var istek = new
+{
+    recordType = 0,
+    status = 20,
+    localReferenceId = "SIP-0001",
+    addressBook = new
+    {
+        name = "Örnek", receiverPersonSurName = "Müşteri",
+        identificationNumber = Environment.GetEnvironmentVariable("ORNEK_ALICI_NO"),
+        receiverDistrict = "{ILCE}", receiverCity = "{IL}", receiverCountry = "Türkiye",
+        receiverEmail = "{ALICI_EPOSTA}"
+    },
+    generalInfoModel = new
+    {
+        invoiceProfileType = 4, type = 1,
+        issueDate = DateTime.Now.ToString("yyyy-MM-dd'T'HH:mm:ss"),
+        currencyCode = "TRY"
+    },
+    invoiceLines = new[]
+    {
+        new { inventoryCard = "Örnek Hizmet", amount = 1m, unitCode = "C62",
+              unitPrice = 1000m, vatRate = 20m }
+    },
+    archiveInfoModel = new { IsInternetSale = true, websiteUrl = "https://{ALAN_ADI}",
+                             shipmentSendType = "ELEKTRONIK" },
+    eArsivInfo = new { sendEMail = true }
+};
+
+// 1) Gönder
+var cevap = await http.PostAsJsonAsync("/v2/earchive/create", istek);
+if (cevap.StatusCode == HttpStatusCode.UnprocessableEntity)
+    throw new Exception("Doğrulama hatası (tekrar gönderme): "
+        + await cevap.Content.ReadAsStringAsync());
+cevap.EnsureSuccessStatusCode();
+var olusan = await cevap.Content.ReadFromJsonAsync&lt;Olusan&gt;();
+
+// 2) Durumu sorgula: 60 = onaylandı, 40 = hata, 100 = iptal
+var json = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+for (var deneme = 0; deneme &lt; 20; deneme++)
+{
+    await Task.Delay(TimeSpan.FromSeconds(15));
+    var r = await http.GetAsync($"/v2/earchive/{olusan!.Id}/status");
+    if (r.StatusCode == HttpStatusCode.TooManyRequests) continue; // 429: limit
+    r.EnsureSuccessStatusCode();
+    var d = await r.Content.ReadFromJsonAsync&lt;Durum&gt;(json);
+    if (d!.Status is 60 or 40 or 100)
+    {
+        Console.WriteLine($"{d.InvoiceNumber}: {d.Status} {d.Message}");
+        break;
+    }
+}
+
+record Olusan([property: JsonPropertyName("Id")] Guid Id,
+              [property: JsonPropertyName("InvoiceNumber")] string InvoiceNumber);
+record Durum(Guid Id, string? InvoiceNumber, int Status, string? Message);</code></pre>
+        <ul>
+          <li>Bearer yolu: <code>POST /v1/token</code>'a <code>FormUrlEncodedContent</code> ile <code>username</code>/<code>password</code>/<code>client_id=serviceApi</code> gönderilir; cevap alan adları belgede yazmıyor → test ortamında bak, 401'de yeniden al.</li>
+          <li>Sorgu aralığını limitlere göre seç (§ 17); gelen fatura listesi 15 dakikada 6 istekle sınırlı.</li>
+        </ul>
+
+        <h2 id="esirket-fiyat"><span class="h-num">§ 17</span>e-Şirket fiyat, limit, kimlere açık</h2>
+        <p>Kime: <b>vergi mükellefi bütün işletmeler</b> (şahıs, serbest meslek, limited/anonim). e-Fatura için GİB başvurusu + mali mühür. Şirketsiz kişi e-Fatura kesemez.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kontör paketleri — KDV hariç (%20 eklenir), resmî sayfa, Ekim 2026</caption>
+            <thead><tr><th>Kontör</th><th>Peşin</th><th>24 ay taksit (toplam)</th><th>Kontör başı (peşin)</th></tr></thead>
+            <tbody>
+              <tr><td>1.000</td><td>5.250 TL</td><td>7.980 TL</td><td>5,25 TL</td></tr>
+              <tr><td>2.500</td><td>12.000 TL</td><td>17.980 TL</td><td>4,80 TL</td></tr>
+              <tr><td>5.000</td><td>21.000 TL</td><td>31.980 TL</td><td>4,20 TL</td></tr>
+              <tr><td>10.000</td><td>33.600 TL</td><td>49.980 TL</td><td>3,36 TL</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><b>Sayım:</b> e-Fatura gelen + giden her biri 1 kontör · e-Arşiv yalnız giden 1 · e-Defter 60 satır = 1 sayfa = 1 kontör. Geçerlilik 24 ay; aşım kontör başı 6,3 TL.</li>
+          <li><b>Ek uygulamalar</b> (aylık, KDV hariç): Saklama 55–350 TL · Muhasebe kullanıcı başı 910 TL · Konnektör 1.300 TL (Saklama 24 ay, diğerleri 12 ay taahhüt).</li>
+          <li><b>Limit</b> (aşımda 429, kontör kademesine göre): gelen fatura listesi her kademede 6 / 15 dk · PDF 15 / dk (≤15 milyon kontör), 30 / dk (20–30 milyon), 60 / dk (40 milyon+) <span class="tag tag--ok">RESMİ</span>.</li>
+          <li><b>Ayrı API ücreti</b> yayımlanmamış; maliyet kontörden <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li><b>Düşük hacim:</b> en küçük paket yıllarca yetebilir ama 24 ayda kalan kontör yanar. GİB'in kendi portalı düşük hacimde ücretsiz, API yok <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+
+        <h2 id="diger-servisler"><span class="h-num">§ 18</span>Turkcell'in diğer servisleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Servis</th><th>→ Ne</th><th>Geliştiriciye açık mı?</th></tr></thead>
+            <tbody>
+              <tr><td><b>Mesaj Üssü</b> (toplu SMS)</td><td>Paket SMS, başlık talebi, zengin içerik/MMS (2 kredi), rapor. Kurumsal hatla ücretsiz kayıt, 50 deneme SMS; kredi 12 ayda silinir.</td><td>API bilgisi sayfada yok <span class="tag tag--bad">BİLİNMİYOR</span>; kurumsal hat → şirket şartı <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><b>BiP</b></td><td>Mesajlaşma; kurumsal hesap/API</td><td><a href="../Mesajlasma-Altyapilari/03-bip-kesfet-api.html">BiP mesajlaşma API</a></td></tr>
+              <tr><td><b>e-Şirket API</b></td><td>§ 13–17</td><td>Evet, müşterisine; belge herkese açık</td></tr>
+              <tr><td><b>Paycell API</b></td><td>§ 6</td><td>Sözleşme sonrası</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="karar"><span class="h-num">§ 19</span>Durum → Sonuç</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>→ Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Şirket yok, ara sıra kişiden para</td><td>Bireysel hesap yeter; satış karşılığı değilse gelir vergisi yok (yüksek bağışta veraset ve intikal vergisi).</td></tr>
+              <tr><td>Şirket yok, yalnız geliştirme/test</td><td>iyzico sandbox veya Stripe test modu; kodu adaptörlü yaz.</td></tr>
+              <tr><td>Şirket yok, düzenli satış</td><td>Paycell işyeri olmaz. Bireysel link ile ödeme kabul eden sağlayıcı veya global dijital üründe MoR; gelir düzenlenince mükellefiyet aç.</td></tr>
+              <tr><td>Şahıs şirketi, site yok, sosyal medyadan satış</td><td>Linkle Ödeme (Paycell veya rakip).</td></tr>
+              <tr><td>E-ticaret sitesi, müşteri Türkiye'de</td><td>Birden çok sanal POS teklifi; Turkcell kitlen büyükse Paycell.</td></tr>
+              <tr><td>Abonelik/SaaS (yurt içi)</td><td>Abonelik API'si yayımlanmış sağlayıcı (iyzico, Craftgate, PayTR); Paycell'e tekrarlı çekimi teklifte sor.</td></tr>
+              <tr><td>Müşteri çoğunlukla yurt dışında</td><td>Paycell değil; MoR (Paddle, Stripe Managed Payments) veya yurt dışı şirket + Stripe.</td></tr>
+              <tr><td>Fiziki dükkân, az işlem</td><td>399 TL/ay aidat düşük hacimde pahalı; aidatsız teklifleri kıyasla.</td></tr>
+              <tr><td>Kitle kart kullanmayan gençler</td><td>Operatör faturasına yansıtma; işyeri başvurusunu Turkcell kurumsaldan sor.</td></tr>
+              <tr><td>Yüksek hacim</td><td>Kurumsal görüşme; oran, valör, bloke pazarlıkla.</td></tr>
+              <tr><td>Ödeme sonrası e-Arşiv otomatik kesilsin</td><td>e-Belge entegratörü API'si (ör. e-Şirket: <code>/v2/earchive/create</code> + durum sorgusu); önce test ortamında.</td></tr>
+              <tr><td>Ayda birkaç fatura</td><td>GİB portalı veya en küçük kontör paketi; API gerekmeyebilir.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 20</span>Kaynaklar</h2>
+        <p><b>Resmî</b> (12 Ekim 2026'da okundu; Paycell POS oranı, sanal POS ifadeleri, e-Şirket kontör fiyatları, limitler, kimlik doğrulama ve e-Fatura OpenAPI tanımı aynı gün kaynağından kontrol edildi)</p>
+        <ol>
+          <li><a href="https://www.paycell.com.tr/">Paycell</a> · <a href="https://www.paycell.com.tr/sanal-pos">Sanal POS</a> · <a href="https://www.paycell.com.tr/ticari-kurallar">Ticari Kurallar</a></li>
+          <li><a href="https://apps.apple.com/us/app/-/id6471470149">İştePaycell — uygulama açıklaması</a></li>
+          <li><a href="https://www.turkcell.com.tr/kurumsal/dijital-is-servisleri/iot-nesnelerin-interneti/paycell-pos">Turkcell — Paycell POS</a> · <a href="https://www.turkcell.com.tr/servisler/turkcellmobilodeme">Faturana Yansıt</a></li>
+          <li><a href="https://developer.turkcellesirket.com/">e-Şirket Geliştirici Rehberi</a> · <a href="https://developer.turkcellesirket.com/pages/overview.html">Genel bakış</a> · <a href="https://developer.turkcellesirket.com/pages/authentication.html">Kimlik doğrulama</a> · <a href="https://developer.turkcellesirket.com/pages/rate-limits.html">API limitleri</a> · <a href="https://developer.turkcellesirket.com/fatura/">e-Fatura/e-Arşiv REST API kılavuzu</a></li>
+          <li><a href="https://github.com/ePlatform/postman-collections/tree/master/efaturaservice">e-Şirket Postman koleksiyonları</a> · <a href="https://www.nuget.org/profiles/eplatform">NuGet profili</a></li>
+          <li><a href="https://www.turkcell.com.tr/kurumsal/dijital-is-servisleri/is-uygulamalari/turkcell-e-sirket-2">e-Şirket ürün ve fiyatlar</a> · <a href="https://www.turkcell.com.tr/kurumsal/dijital-is-servisleri/diger-kurumsal-cozumler/turkcell-mesaj-ussu">Mesaj Üssü</a></li>
+          <li><a href="https://docs.iyzico.com/on-hazirliklar/sandbox">iyzico — Sandbox</a> · <a href="https://github.com/iyzico/iyzipay-dotnet">iyzipay-dotnet</a></li>
+          <li><a href="https://developer.craftgate.io/">Craftgate geliştirici belgeleri</a> · <a href="https://github.com/craftgate/craftgate-dotnet-client">craftgate-dotnet-client</a></li>
+          <li><a href="https://stripe.com/global">Stripe — desteklenen ülkeler</a> · <a href="https://stripe.com/atlas">Stripe Atlas</a></li>
+          <li><a href="https://www.lemonsqueezy.com/blog/2026-update">Lemon Squeezy — 2026 güncellemesi (28 Ocak 2026)</a> · <a href="https://docs.lemonsqueezy.com/help/getting-started/test-mode">Test modu</a></li>
+          <li><a href="https://www.paddle.com/help">Paddle yardım (kimlik/işletme doğrulama)</a> · <a href="https://apidocs.sipay.com.tr/">Sipay API belgeleri</a> — bu ikisindeki iddialar 12 Ekim'de yeniden doğrulanmadı</li>
+        </ol>
+        <p><b>3. taraf</b> (işaretli bilgiler için)</p>
+        <ol>
+          <li><a href="https://www.ticimax.com/ticimax-ve-paycell-isbirligi/">E-ticaret altyapısı × Paycell kampanya sayfası</a> — sanal POS oranları</li>
+          <li><a href="https://www.ideasoft.com.tr/eticaret-cozum-merkezi/odeme-sistemleri/paycell/">E-ticaret altyapısı Paycell entegrasyon sayfası</a> — özellikler, başvuru formu</li>
+          <li><a href="https://packagist.org/packages/yasinkuyu/omnipay-paycell">Açık kaynak Paycell istemci kütüphanesi</a> — API yapısı, TEST/PREPROD</li>
+          <li><a href="https://www.ekonomigazetesi.com/sirket-haberleri/2-sirketin-faaliyet-izni-kapsami-genisletildi-46534">TCMB faaliyet izni genişletme haberi (2025)</a></li>
+          <li><a href="https://www.ekonomigazetesi.com/kose-yazisi/mal-teslimi-veya-hizmet-ifalarinda-tahsilat-ve-odemelerin-finansal-kurumlar-araciligiyla-yapilma-zorunlulugu-limiti-30-000-tl-oldu-43982">Tevsik zorunluluğu 30.000 TL</a></li>
+          <li><a href="https://www.alomaliye.com/2025/12/31/vergi-usul-kanunu-genel-tebligi-sira-no-589/">589 sıra no.lu VUK Genel Tebliği (aktarım)</a> — e-Arşiv tarihleri</li>
+          <li><a href="https://www.akbank.com/kurumsal/uye-isyeri-pos/pos-cozumleri/pos-komisyon-oranlari">Bir bankanın POS komisyon tavanları</a> — kıyas çerçevesi</li>
+        </ol>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

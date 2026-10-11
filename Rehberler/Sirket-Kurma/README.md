@@ -27,6 +27,7 @@ Rehber farklı durumları birlikte ele alır (adres kurucunun mülkü mü, kiral
 - [16 · Yol Haritası](16-yol-haritasi.html) — Kuruluş öncesinden ilk yıl sonuna kadar göreli takvim, kuruluş günü kontrol listesi ve ilk yılın beyanname takvimi.
 - [17 · Karar Rehberi](17-tavsiye.html) — Senaryo bazlı karar: hangi durumda hangi yapı, ne zaman kurulmalı, hangi durumda vazgeçilmeli.
 - [18 · Kaynaklar](18-kaynaklar.html) — Kullanılan kaynaklar, doğrulama notları, belirsiz kalan konular ve mali müşavire sorulacak sorular.
+- [19 · Paycell ve e-Fatura API](19-paycell-ve-e-fatura.html) — Ek bölüm: Paycell ile ödeme almak (şirket şartı, ürünler, komisyon ve valör), ödeme sağlayıcılarının test ortamları ve 3D Secure akışı, Turkcell e-Şirket e-Fatura/e-Arşiv REST API'si, JSON ve C# örnekleri.
 
 HTML anlatım: [index.html](index.html) — GitHub HTML'i işlemez; dosyayı yerelde tarayıcıda açın.
 
