@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telegram Bot API — Mesajlaşma Altyapıları</title>
+<meta name="description" content="Telegram Bot API kısa başvuru: uç noktalar, JSON istek/cevap ve Update örnekleri, inline klavye, derin bağlantı, getUpdates ve webhook (secret_token), C# örnekleri, sınırlar, Gateway, Stars ve karar tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* kod blokları */
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .pre-label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.2rem 0 -.6rem; }
+
+  /* örnek mesaj görünümü (saf HTML/CSS, ekran görüntüsü değil) */
+  .tg-chat {
+    max-width: 24rem;
+    margin: 1.2rem 0 1.6rem;
+    padding: .9rem;
+    background: var(--paper-rail);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    font-family: var(--f-body);
+  }
+  .tg-chat__head { display: flex; align-items: center; gap: .55rem; padding-bottom: .65rem; margin-bottom: .75rem; border-bottom: 1px solid var(--rule-soft); }
+  .tg-chat__avatar { width: 2rem; height: 2rem; border-radius: 50%; background: var(--info-wash); color: var(--info); display: grid; place-items: center; font-size: .75rem; font-weight: 600; border: 1px solid var(--rule); }
+  .tg-chat__name { font-weight: 600; font-size: .9rem; color: var(--ink); line-height: 1.1; }
+  .tg-chat__sub { font-size: .72rem; color: var(--ink-faint); }
+  .tg-row { display: flex; margin: .35rem 0; }
+  .tg-row--out { justify-content: flex-end; }
+  .tg-bubble { max-width: 85%; padding: .5rem .7rem .35rem; border-radius: 12px; font-size: .88rem; line-height: 1.4; color: var(--ink); background: var(--paper-raise); border: 1px solid var(--rule); }
+  .tg-row--out .tg-bubble { background: var(--accent-wash); border-color: color-mix(in srgb, var(--accent) 30%, transparent); border-bottom-right-radius: 4px; }
+  .tg-row--in .tg-bubble { border-bottom-left-radius: 4px; }
+  .tg-time { display: block; text-align: right; font-size: .66rem; color: var(--ink-faint); margin-top: .2rem; }
+  .tg-kb { display: grid; gap: .3rem; margin-top: .3rem; max-width: 85%; }
+  .tg-kb__row { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .3rem; }
+  .tg-btn { padding: .45rem .5rem; text-align: center; font-size: .82rem; font-weight: 500; color: var(--info); background: var(--info-wash); border: 1px solid color-mix(in srgb, var(--info) 25%, transparent); border-radius: 8px; }
+  .tg-toast { margin: .6rem auto 0; width: fit-content; padding: .35rem .7rem; font-size: .76rem; color: var(--paper); background: var(--ink-soft); border-radius: 8px; }
+  .tg-replykb { margin-top: .75rem; padding-top: .6rem; border-top: 1px solid var(--rule-soft); display: grid; gap: .3rem; }
+  .tg-replykb .tg-btn { color: var(--ink); background: var(--paper-raise); border-color: var(--rule); }
+  .tg-caption { font-size: .74rem; color: var(--ink-faint); margin-top: .5rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Telegram Bot API</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Mesajlaşma · Bot</span>
+      <span class="brand__name">Telegram Bot API</span>
+      <span class="brand__sub">Kısa başvuru · Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">API'ler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-telegram-bot-api.html"><span class="nav-num">01</span><span>Telegram Bot API</span></a></li>
+          <li><a class="nav-item" href="02-whatsapp-business-api.html"><span class="nav-num">02</span><span>WhatsApp Business API</span></a></li>
+          <li><a class="nav-item" href="03-bip-kesfet-api.html"><span class="nav-num">03</span><span>BiP Keşfet API</span></a></li>
+          <li><a class="nav-item" href="04-sms-hizmetleri.html"><span class="nav-num">04</span><span>SMS Hizmetleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/11-odeme-altyapilari.html"><span class="nav-num">&rarr;</span><span>Ödeme Altyapıları</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      12 Ekim 2026'da resmî belgelerden doğrulandı (Bot API 10.3). Sınır ve fiyatlar değişir; kullanmadan önce kaynaktan teyit et. Ödeme kısımları hukuki/mali danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Mesajlaşma platformları · Bot geliştirme</div>
+        <h1 class="page-title">Telegram Bot API: <em>kısa başvuru</em></h1>
+        <p class="lede">Şu URL → bunu yapar. Uç noktalar, örnek JSON, C# kodu, sınırlar ve karar tablosu.</p>
+        <div class="head-meta">Bot API 10.3 (24 Ağustos 2026) &middot; Doğrulama: 12 Ekim 2026 &middot; Belgede olmayan bilgi <span class="tag tag--warn">3. TARAF</span> / <span class="tag tag--warn">TAHMİN</span> etiketli</div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===================================================== -->
+        <h2 id="bir-bakista"><span class="h-num">§ 1</span>Bir bakışta</h2>
+
+        <div class="figures">
+          <div class="figure figure--win">
+            <div class="figure__label">Bot açma + mesaj gönderme</div>
+            <div class="figure__value">Ücretsiz</div>
+            <div class="figure__meta">Ücretli toplu gönderim hariç (§ 10)</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">Yükleme / indirme (bulut)</div>
+            <div class="figure__value">50 / 20 <small>MB</small></div>
+            <div class="figure__meta">Yerel Bot API sunucusunda yükleme 2000 MB</div>
+          </div>
+          <div class="figure figure--flag">
+            <div class="figure__label">Bot kullanıcıya ilk yazabilir mi?</div>
+            <div class="figure__value">Hayır</div>
+            <div class="figure__meta">Kullanıcı önce /start demeli</div>
+          </div>
+        </div>
+
+        <ul class="checklist">
+          <li><strong>Onay süreci yok:</strong> bir Telegram hesabı yeter; şirket, vergi no, inceleme yok.</li>
+          <li><strong>Numaradan kullanıcı bulunmaz:</strong> tek yol kullanıcının botu başlatması (§ 9).</li>
+          <li><strong>Güncelleme alma:</strong> <code>getUpdates</code> (dışa kapalı sunucuda çalışır) ya da webhook (herkese açık HTTPS).</li>
+          <li><strong>Dijital ürün = Telegram Stars zorunlu;</strong> fiziksel ürün = 3. taraf ödeme sağlayıcısı.</li>
+          <li><strong>OTP için ayrı ücretli ürün:</strong> Telegram Gateway, 0,01 USD/kod.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="bot-acma"><span class="h-num">§ 2</span>Bot açma ve token</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Adım / kullanım</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td>@BotFather → <code>/newbot</code></td><td>Ad + kullanıcı adı ister. Kullanıcı adı <code>bot</code> ile biter, <strong>sonradan değişmez</strong>. Token verir (<code>123456:ABC-…</code>)</td></tr>
+              <tr><td>@BotFather → <code>/token</code> ya da <code>/revoke</code></td><td>Yeni token üretir; eski token anında geçersiz. Sızıntıda ilk iş</td></tr>
+              <tr><td>@BotFather → <code>/deletebot</code></td><td>Botu siler, kullanıcı adını boşa çıkarır. Geri alınamaz</td></tr>
+              <tr><td>@BotFather → <code>/setprivacy</code></td><td>Grup gizlilik kipini açar/kapatır (§ 11)</td></tr>
+              <tr><td><code>https://api.telegram.org/bot{TOKEN}/{METOT}</code></td><td>Bütün çağrıların adresi. Token'ın önüne <code>bot</code> eklenir. GET ya da POST (JSON / form / multipart)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Token = botun tamamı</p>
+          <p>Token'ı bilen mesajları okur ve bot adına yazar. Koda, ekran görüntüsüne, depoya koyma; ortam değişkeni / gizli anahtar deposu. Sahip hesapta iki adımlı doğrulama aç (hesap giderse bot da gider). Sahiplik devri kalıcıdır.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="uc-noktalar"><span class="h-num">§ 3</span>Uç noktalar</h2>
+
+        <p>Taban: <code>https://api.telegram.org/bot{TOKEN}/</code></p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sık kullanılan yöntemler (Bot API 10.3)</caption>
+            <thead><tr><th>Metot + URL</th><th>Ne yapar</th><th>Önemli parametre / sınır</th></tr></thead>
+            <tbody>
+              <tr><td><code>GET …/getMe</code></td><td>Token'ı sınar, bot bilgisini döner (<code>User</code>)</td><td>Parametre yok. <code>can_join_groups</code>, <code>can_read_all_group_messages</code>, <code>can_connect_to_business</code> yalnız burada gelir</td></tr>
+              <tr><td><code>POST …/sendMessage</code></td><td>Metin mesajı gönderir</td><td><code>chat_id</code>, <code>text</code> 1–4096 karakter (biçim çözüldükten sonra), <code>parse_mode</code> (<code>HTML</code> / <code>MarkdownV2</code>), <code>reply_markup</code></td></tr>
+              <tr><td><code>POST …/sendPhoto</code></td><td>Fotoğraf gönderir</td><td><code>photo</code> = <code>file_id</code> / URL / dosya. En çok 10 MB, en+boy ≤ 10000, oran ≤ 20. <code>caption</code> 0–1024</td></tr>
+              <tr><td><code>POST …/sendVideo</code></td><td>Video gönderir</td><td>En çok 50 MB (bulut). <code>caption</code> 0–1024, <code>supports_streaming</code></td></tr>
+              <tr><td><code>POST …/sendDocument</code></td><td>Herhangi bir dosya</td><td>50 MB (bulut)</td></tr>
+              <tr><td><code>GET …/getUpdates</code></td><td>Uzun yoklama ile gelen güncellemeleri çeker</td><td><code>offset</code> = son <code>update_id</code> + 1, <code>limit</code> 1–100 (vars. 100), <code>timeout</code> sn (vars. 0 = kısa yoklama), <code>allowed_updates</code></td></tr>
+              <tr><td><code>POST …/setWebhook</code></td><td>Güncellemeleri senin HTTPS adresine POST ettirir</td><td><code>url</code>, <code>secret_token</code> 1–256 karakter <code>A-Za-z0-9_-</code>, <code>max_connections</code> 1–100 (vars. 40), <code>allowed_updates</code>, <code>drop_pending_updates</code>. Port 443/80/88/8443</td></tr>
+              <tr><td><code>POST …/deleteWebhook</code></td><td>Webhook'u kaldırır (getUpdates'e dönmek için şart)</td><td><code>drop_pending_updates</code></td></tr>
+              <tr><td><code>GET …/getWebhookInfo</code></td><td>Webhook durumu, bekleyen sayı, son hata</td><td>—</td></tr>
+              <tr><td><code>POST …/answerCallbackQuery</code></td><td>Inline düğme basışına yanıt (yükleniyor simgesini kapatır)</td><td><code>callback_query_id</code>, <code>text</code> 0–200 karakter, <code>show_alert</code> (vars. false), <code>url</code>, <code>cache_time</code> (vars. 0)</td></tr>
+              <tr><td><code>POST …/editMessageText</code></td><td>Gönderilmiş mesajı / düğmeleri günceller</td><td><code>chat_id</code> + <code>message_id</code>, yeni <code>reply_markup</code></td></tr>
+              <tr><td><code>GET …/getFile</code></td><td>Gelen dosyanın indirme yolunu verir</td><td>20 MB'a kadar. İndirme: <code>https://api.telegram.org/file/bot{TOKEN}/{file_path}</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Dosya gönderme yolları</caption>
+            <thead><tr><th>Yol</th><th>Sınır</th></tr></thead>
+            <tbody>
+              <tr><td><code>file_id</code> (daha önce gönderilmiş dosya)</td><td>Sınır yok, yeniden yükleme yok — <code>file_id</code>'yi sakla</td></tr>
+              <tr><td>URL ver, Telegram indirsin</td><td>Fotoğraf 5 MB, diğerleri 20 MB</td></tr>
+              <tr><td>multipart/form-data yükleme</td><td>Fotoğraf 10 MB, diğerleri 50 MB</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="json"><span class="h-num">§ 4</span>İstek / cevap JSON</h2>
+
+        <p class="pre-label">sendMessage — istek (inline klavyeli)</p>
+<pre><code>POST https://api.telegram.org/bot{TOKEN}/sendMessage
+Content-Type: application/json
+
+{
+  "chat_id": 123456789,
+  "text": "Siparişiniz hazır. Teslim almak için saat seçin:",
+  "parse_mode": "HTML",
+  "reply_markup": {
+    "inline_keyboard": [
+      [ { "text": "Bugün 14:00", "callback_data": "slot:today:14" },
+        { "text": "Yarın 10:00", "callback_data": "slot:tmrw:10" } ],
+      [ { "text": "Siparişi gör", "url": "https://example.com/siparis/{ORDER_ID}" } ]
+    ]
+  }
+}</code></pre>
+
+        <p class="pre-label">sendMessage — başarılı cevap</p>
+<pre><code>{
+  "ok": true,
+  "result": {
+    "message_id": 4821,
+    "from": { "id": 987654321, "is_bot": true, "first_name": "Örnek İşletme", "username": "{BOT_USERNAME}" },
+    "chat": { "id": 123456789, "first_name": "Müşteri", "type": "private" },
+    "date": 1791800000,
+    "text": "Siparişiniz hazır. Teslim almak için saat seçin:",
+    "reply_markup": { "inline_keyboard": [ "…" ] }
+  }
+}</code></pre>
+
+        <p class="pre-label">getMe — cevap</p>
+<pre><code>{
+  "ok": true,
+  "result": {
+    "id": 987654321,
+    "is_bot": true,
+    "first_name": "Örnek İşletme",
+    "username": "{BOT_USERNAME}",
+    "can_join_groups": true,
+    "can_read_all_group_messages": false,
+    "supports_inline_queries": false,
+    "can_connect_to_business": false
+  }
+}</code></pre>
+
+        <p class="pre-label">Hata — 403 (kullanıcı botu engellemiş)</p>
+<pre><code>{ "ok": false, "error_code": 403, "description": "Forbidden: bot was blocked by the user" }</code></pre>
+
+        <p class="pre-label">Hata — 429 (hız sınırı; retry_after saniye bekle)</p>
+<pre><code>{ "ok": false, "error_code": 429, "description": "Too Many Requests: retry after 7",
+  "parameters": { "retry_after": 7 } }</code></pre>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cevap zarfı</caption>
+            <thead><tr><th>Alan</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><code>ok</code></td><td><code>true</code> → sonuç <code>result</code>'ta; <code>false</code> → hata</td></tr>
+              <tr><td><code>description</code></td><td>İnsan okunur açıklama. <strong>Metne göre dallanma</strong>; içerik değişebilir</td></tr>
+              <tr><td><code>error_code</code></td><td>HTTP koduna benzer (400, 403, 429…); belgeye göre ileride değişebilir</td></tr>
+              <tr><td><code>parameters.retry_after</code></td><td>429'da beklenecek saniye</td></tr>
+              <tr><td><code>parameters.migrate_to_chat_id</code></td><td>Grup süper gruba dönüştü; yeni <code>chat_id</code> bu</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="guncellemeler"><span class="h-num">§ 5</span>Güncelleme almak: getUpdates mi, webhook mu?</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th></th><th>getUpdates (uzun yoklama)</th><th>Webhook</th></tr></thead>
+            <tbody>
+              <tr><td>Kullanım</td><td><code>GET …/getUpdates?offset={SON_ID+1}&amp;timeout=30</code></td><td><code>POST …/setWebhook</code> (<code>url</code> + <code>secret_token</code>)</td></tr>
+              <tr><td>Nasıl çalışır</td><td>Bot sorar; Telegram yeni güncelleme gelene ya da <code>timeout</code> dolana kadar bekletir</td><td>Telegram her güncellemeyi adresine POST eder</td></tr>
+              <tr><td>Sunucu</td><td>Yalnız dışarı çıkış; NAT/ev ağı arkasında çalışır</td><td>İnternetten erişilen HTTPS, port 443/80/88/8443</td></tr>
+              <tr><td>Sertifika</td><td>Gerekmez</td><td>Geçerli sertifika ya da yüklenen öz-imzalı sertifika</td></tr>
+              <tr><td>Güvenlik</td><td>Token yeter</td><td>Gelen istekte <code>X-Telegram-Bot-Api-Secret-Token</code> başlığı = senin <code>secret_token</code>'ın olmalı</td></tr>
+              <tr><td>Ölçek</td><td>Tek süreç</td><td>1–100 eşzamanlı bağlantı (vars. 40); yatay ölçeklenir</td></tr>
+              <tr><td>Birlikte</td><td colspan="2">Webhook tanımlıyken getUpdates çalışmaz → önce <code>deleteWebhook</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Onaylama:</strong> işlediğin en büyük <code>update_id</code> + 1'i <code>offset</code> olarak gönder → öncekiler silinir.</li>
+          <li><strong>Saklama:</strong> alınmayan güncelleme en çok <strong>24 saat</strong> tutulur; bot bir günden uzun kapalıysa kayıp.</li>
+          <li><strong>timeout:</strong> 0 = kısa yoklama, yalnız deneme için. Üretimde 25–50 sn yaygın <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li><strong>allowed_updates:</strong> boş liste → <code>chat_member</code>, <code>message_reaction</code>, <code>message_reaction_count</code> dışındaki her şey; hiç verilmezse önceki ayar kalır.</li>
+          <li><strong>Webhook cevabı:</strong> hızlı <code>200</code> dön, işi kuyruğa at; aynı <code>update_id</code> tekrar gelebilir → tekilleştir <span class="tag tag--warn">TAHMİN</span> (genel pratik).</li>
+        </ul>
+
+        <p class="pre-label">getUpdates — cevap (derin bağlantıyla /start)</p>
+<pre><code>{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 700000101,
+      "message": {
+        "message_id": 1,
+        "from": { "id": 123456789, "is_bot": false, "first_name": "Müşteri", "language_code": "tr" },
+        "chat": { "id": 123456789, "first_name": "Müşteri", "type": "private" },
+        "date": 1791800000,
+        "text": "/start a7Kq2_x9LmZ",
+        "entities": [ { "offset": 0, "length": 6, "type": "bot_command" } ]
+      }
+    }
+  ]
+}</code></pre>
+
+        <p class="pre-label">Update — inline düğmeye basıldı (callback_query)</p>
+<pre><code>{
+  "update_id": 700000102,
+  "callback_query": {
+    "id": "{CALLBACK_QUERY_ID}",
+    "from": { "id": 123456789, "is_bot": false, "first_name": "Müşteri" },
+    "message": { "message_id": 4821, "chat": { "id": 123456789, "type": "private" }, "date": 1791800000, "text": "Siparişiniz hazır. …" },
+    "chat_instance": "{CHAT_INSTANCE}",
+    "data": "slot:today:14"
+  }
+}</code></pre>
+
+        <p class="pre-label">setWebhook — istek ve gelen POST</p>
+<pre><code>POST https://api.telegram.org/bot{TOKEN}/setWebhook
+Content-Type: application/json
+
+{ "url": "https://example.com/telegram/webhook",
+  "secret_token": "{WEBHOOK_SECRET}",
+  "allowed_updates": ["message", "callback_query"],
+  "drop_pending_updates": true }
+
+→ { "ok": true, "result": true, "description": "Webhook was set" }
+
+Telegram → senin sunucun:
+POST /telegram/webhook
+X-Telegram-Bot-Api-Secret-Token: {WEBHOOK_SECRET}
+Content-Type: application/json
+
+{ "update_id": 700000103, "message": { "message_id": 2, "chat": { "id": 123456789, "type": "private" }, "date": 1791800060, "text": "Merhaba" } }</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="klavye"><span class="h-num">§ 6</span>Klavyeler + örnek mesaj görünümü</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th></th><th>Inline keyboard (<code>inline_keyboard</code>)</th><th>Reply keyboard (<code>keyboard</code>)</th></tr></thead>
+            <tbody>
+              <tr><td>Nerede</td><td>Botun mesajının altında</td><td>Kullanıcının klavyesinin yerinde</td></tr>
+              <tr><td>Basınca</td><td>Sohbete mesaj düşmez; bota <code>callback_query</code> gelir ya da URL açılır</td><td>Düğme metni mesaj olarak gönderilir</td></tr>
+              <tr><td>Türler</td><td><code>callback_data</code>, <code>url</code>, ödeme, oyun, satır içi geçiş, kopyalanabilir metin, Web App</td><td><code>request_contact</code>, <code>request_location</code>, anket, kullanıcı/sohbet seçimi, Web App</td></tr>
+              <tr><td>Tipik</td><td>Onayla / Reddet, sayfalama, menü</td><td>Numara isteme, sabit ana menü</td></tr>
+              <tr><td>Sınır</td><td><code>callback_data</code> 1–64 <strong>bayt</strong> → büyük veriyi sunucuda tut, düğmeye kısa anahtar</td><td><code>one_time_keyboard</code>, <code>resize_keyboard</code>; kaldırmak için <code>remove_keyboard</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Kural:</strong> her <code>callback_query</code>'ye <code>answerCallbackQuery</code> ile yanıt ver; vermezsen düğmede yükleniyor simgesi döner.</p>
+
+        <div class="tg-chat" role="img" aria-label="Örnek mesaj görünümü: inline düğmeli bot mesajı">
+          <div class="tg-chat__head">
+            <div class="tg-chat__avatar" aria-hidden="true">ÖB</div>
+            <div>
+              <div class="tg-chat__name">Örnek İşletme</div>
+              <div class="tg-chat__sub">bot</div>
+            </div>
+          </div>
+          <div class="tg-row tg-row--out"><div class="tg-bubble">/start<span class="tg-time">14:02</span></div></div>
+          <div class="tg-row tg-row--in"><div class="tg-bubble">Siparişiniz hazır. Teslim almak için saat seçin:<span class="tg-time">14:02</span></div></div>
+          <div class="tg-kb">
+            <div class="tg-kb__row"><div class="tg-btn">Bugün 14:00</div><div class="tg-btn">Yarın 10:00</div></div>
+            <div class="tg-kb__row"><div class="tg-btn">Siparişi gör ↗</div></div>
+          </div>
+          <div class="tg-toast">Bugün 14:00 seçildi</div>
+          <div class="tg-caption">Düğmeye basınca sohbete mesaj düşmez; bot <code>callback_query</code> alır, <code>answerCallbackQuery(text)</code> üstteki kısa bildirimi gösterir.</div>
+        </div>
+
+        <p class="pre-label">Reply keyboard — numara isteme</p>
+<pre><code>{
+  "chat_id": 123456789,
+  "text": "Hesabınızı doğrulamak için numaranızı paylaşın.",
+  "reply_markup": {
+    "keyboard": [ [ { "text": "Numaramı paylaş", "request_contact": true } ] ],
+    "one_time_keyboard": true,
+    "resize_keyboard": true
+  }
+}</code></pre>
+
+        <div class="tg-chat" role="img" aria-label="Örnek mesaj görünümü: numara paylaşma düğmeli reply keyboard">
+          <div class="tg-row tg-row--in"><div class="tg-bubble">Hesabınızı doğrulamak için numaranızı paylaşın.<span class="tg-time">14:05</span></div></div>
+          <div class="tg-replykb"><div class="tg-btn">Numaramı paylaş</div></div>
+          <div class="tg-caption">Reply keyboard kullanıcının klavyesinin yerine çıkar. <code>request_contact</code> yalnız özel sohbette çalışır.</div>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="derin-baglanti"><span class="h-num">§ 7</span>Derin bağlantı ve numara doğrulama</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>URL / kullanım</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td><code>https://t.me/{BOT_USERNAME}?start={PAYLOAD}</code></td><td>Kullanıcı Başlat'a basar → bot <code>/start {PAYLOAD}</code> alır. Web'deki hesabı Telegram kullanıcısıyla eşlemenin standart yolu</td></tr>
+              <tr><td><code>https://t.me/{BOT_USERNAME}?startgroup={PAYLOAD}</code></td><td>Kullanıcı grup seçer, bot gruba eklenir → <code>/start@{BOT_USERNAME} {PAYLOAD}</code></td></tr>
+              <tr><td>PAYLOAD kuralı</td><td><code>A-Z a-z 0-9 _ -</code>, en çok <strong>64 karakter</strong>. Daha uzun / ikili veri → base64url ya da sunucuda tut, kısa anahtar gönder</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Güvenli eşleme</p>
+          <p>PAYLOAD'a kullanıcı no / e-posta gibi tahmin edilebilir değer koyma. <strong>Tek kullanımlık, süreli (ör. 10 dk), rastgele</strong> kod üret; bot alınca eşle, kodu sil, web tarafında "bağlandı" onayı göster. Bağlantı başkasına iletilirse yanlış kişi bağlanabilir.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Numara paylaşımı (request_contact)</caption>
+            <thead><tr><th>Adım</th><th>Ne yap</th></tr></thead>
+            <tbody>
+              <tr><td>1. Düğmeyi göster</td><td>§ 6'daki reply keyboard JSON'u. Bot numarayı kendiliğinden <strong>göremez</strong></td></tr>
+              <tr><td>2. Gelen kartı denetle</td><td><code>message.contact.user_id == message.from.id</code> olmalı. Ataç menüsünden başkasının kartı da gelebilir; eşleşmiyorsa reddet</td></tr>
+              <tr><td>3. Normalize et</td><td>Başında <code>+</code> olmayabilir → E.164'e çevir (ör. <code>+90 5XX XXX XX XX</code> → <code>+905XXXXXXXXX</code>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Eşleşme geçtiyse numara, Telegram'ın kayıtta doğruladığı numaradır; ama SMS doğrulamasının yasal karşılığı değildir (finans/kimlik işlerinde ayrıca değerlendir). Numarasız (anonim numaralı) hesaplar da olabilir.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="csharp"><span class="h-num">§ 8</span>C# örnekleri (.NET, HttpClient + System.Text.Json)</h2>
+
+        <p>Gizli değerler ortam değişkeninden: <code>TELEGRAM_BOT_TOKEN</code>, <code>TELEGRAM_WEBHOOK_SECRET</code>. Kütüphane gerekmez; hazır istemci isteyen <code>Telegram.Bot</code> NuGet paketine bakabilir.</p>
+
+        <p class="pre-label">Mesaj gönder (inline klavyeli) + 429 yönetimi</p>
+<pre><code>// Konsol uygulaması, .NET 8+ (ImplicitUsings açık)
+using System.Net.Http.Json;
+using System.Text.Json.Nodes;
+
+var token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN")
+            ?? throw new InvalidOperationException("TELEGRAM_BOT_TOKEN yok");
+var http = new HttpClient
+{
+    BaseAddress = new Uri($"https://api.telegram.org/bot{token}/"),
+    Timeout = TimeSpan.FromSeconds(60)                // getUpdates timeout(30) + pay; ilk istekten önce ayarlanmalı
+};
+
+async Task&lt;JsonNode?&gt; CallAsync(string method, object body, CancellationToken ct = default)
+{
+    while (true)
+    {
+        using var res = await http.PostAsJsonAsync(method, body, ct);
+        var json = JsonNode.Parse(await res.Content.ReadAsStringAsync(ct))!;
+        if (json["ok"]!.GetValue&lt;bool&gt;()) return json["result"];
+
+        var code = json["error_code"]?.GetValue&lt;int&gt;();
+        if (code == 429)                               // hız sınırı
+        {
+            var wait = json["parameters"]?["retry_after"]?.GetValue&lt;int&gt;() ?? 1;
+            await Task.Delay(TimeSpan.FromSeconds(wait), ct);
+            continue;
+        }
+        // 403: kullanıcı başlatmamış / engellemiş → kaydı pasif yap, tekrar deneme
+        throw new HttpRequestException($"{method}: {code} {json["description"]}");
+    }
+}
+
+await CallAsync("sendMessage", new
+{
+    chat_id = 123456789,                               // {CHAT_ID} — /start ile öğrenilir
+    text = "Siparişiniz hazır. Teslim almak için saat seçin:",
+    reply_markup = new
+    {
+        inline_keyboard = new[]
+        {
+            new object[] { new { text = "Bugün 14:00", callback_data = "slot:today:14" },
+                           new { text = "Yarın 10:00", callback_data = "slot:tmrw:10" } }
+        }
+    }
+});</code></pre>
+
+        <p class="pre-label">Uzun yoklama döngüsü (getUpdates + offset + timeout)</p>
+<pre><code>// Önceki parçanın devamı (aynı Program.cs: http + CallAsync)
+long offset = 0;
+using var cts = new CancellationTokenSource();
+Console.CancelKeyPress += (_, e) =&gt; { e.Cancel = true; cts.Cancel(); };
+
+while (!cts.IsCancellationRequested)
+{
+    JsonNode? updates;
+    try
+    {
+        updates = await CallAsync("getUpdates", new
+        {
+            offset,
+            timeout = 30,                              // uzun yoklama
+            allowed_updates = new[] { "message", "callback_query" }
+        }, cts.Token);
+    }
+    catch (OperationCanceledException) when (cts.IsCancellationRequested) { break; }
+    catch (Exception e) when (e is HttpRequestException or TaskCanceledException)
+    { await Task.Delay(5000); continue; }             // ağ hatası / HttpClient zaman aşımı: bekle, sürdür
+
+    foreach (var u in updates!.AsArray())
+    {
+        offset = u!["update_id"]!.GetValue&lt;long&gt;() + 1;   // onayla
+        await HandleUpdateAsync(u);
+    }
+}
+
+async Task HandleUpdateAsync(JsonNode u)
+{
+    if (u["message"]?["text"]?.GetValue&lt;string&gt;() is string text &amp;&amp; text.StartsWith("/start"))
+    {
+        var chatId  = u["message"]!["chat"]!["id"]!.GetValue&lt;long&gt;();
+        var payload = text.Length &gt; 7 ? text[7..] : null;   // derin bağlantı kodu
+        // payload → sunucuda tek kullanımlık kodla eşle, chatId'yi sakla
+        await CallAsync("sendMessage", new { chat_id = chatId, text = "Bağlantı kuruldu." });
+    }
+    else if (u["callback_query"] is JsonNode cq)
+    {
+        var data = cq["data"]?.GetValue&lt;string&gt;();
+        await CallAsync("answerCallbackQuery", new
+        {
+            callback_query_id = cq["id"]!.GetValue&lt;string&gt;(),
+            text = data == "slot:today:14" ? "Bugün 14:00 seçildi" : "Seçildi"
+        });
+    }
+}</code></pre>
+
+        <p class="pre-label">Webhook ucu + secret_token denetimi (ASP.NET Core minimal API)</p>
+<pre><code>// Ayrı proje: Microsoft.NET.Sdk.Web, .NET 9+ (JsonNode.ParseAsync)
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json.Nodes;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+var secret = Environment.GetEnvironmentVariable("TELEGRAM_WEBHOOK_SECRET")
+             ?? throw new InvalidOperationException("TELEGRAM_WEBHOOK_SECRET yok");
+
+app.MapPost("/telegram/webhook", async (HttpRequest req) =&gt;
+{
+    var got = req.Headers["X-Telegram-Bot-Api-Secret-Token"].ToString();
+    if (!CryptographicOperations.FixedTimeEquals(            // sabit zamanlı karşılaştırma
+            Encoding.UTF8.GetBytes(got), Encoding.UTF8.GetBytes(secret)))
+        return Results.Unauthorized();
+
+    var update = await JsonNode.ParseAsync(req.Body);
+    // update_id ile tekilleştir, kuyruğa at, hemen 200 dön
+    _ = update?["update_id"]?.GetValue&lt;long&gt;();
+    return Results.Ok();
+});
+
+app.Run();
+
+// Bir kez kur:
+// POST …/setWebhook { "url": "https://example.com/telegram/webhook",
+//                     "secret_token": "&lt;TELEGRAM_WEBHOOK_SECRET&gt;" }</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="ilk-mesaj"><span class="h-num">§ 9</span>İlk mesaj kuralı</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Durum → Sonuç</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Kullanıcı botu hiç başlatmadı</td><td>Gönderilemez → <code>403</code> (yaygın metin: <em>"bot can't initiate conversation with a user"</em>) <span class="tag tag--warn">3. TARAF</span></td></tr>
+              <tr><td>Kullanıcı başlattı (/start ya da yazdı)</td><td>Gönderilebilir; <code>chat_id</code>'yi sakla. Pencere/süre kuralı yok</td></tr>
+              <tr><td>Kullanıcı botu engelledi</td><td><code>403</code> (<em>"bot was blocked by the user"</em>) → kaydı pasif yap</td></tr>
+              <tr><td>Elinde yalnız telefon numarası</td><td>Bot API'de numaradan kullanıcı bulan yöntem <strong>yok</strong> → derin bağlantıya yönlendir (§ 7) ya da yalnız OTP için Gateway (§ 12)</td></tr>
+              <tr><td>Elinde yalnız @kullanıcı adı</td><td>Özel sohbete yine yazılamaz</td></tr>
+              <tr><td>Aynı gruptasınız</td><td>Gruba yazılır; özel sohbete yazılamaz</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>403 metinleri resmî belgede tablo olarak yok; koddaki karar <strong>403 koduna</strong> dayansın, metne değil.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="sinirlar"><span class="h-num">§ 10</span>Sınırlar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hız (Bots FAQ, 12 Ekim 2026)</caption>
+            <thead><tr><th>Kapsam</th><th>Sınır</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Tek sohbet</td><td>~1 mesaj/sn</td><td>Kısa patlama geçer, sürerse <code>429</code></td></tr>
+              <tr><td>Grup</td><td>20 mesaj/dk</td><td>Grup başına</td></tr>
+              <tr><td>Toplu (farklı kullanıcılar)</td><td>~30 mesaj/sn</td><td>Ücretsiz üst sınır</td></tr>
+              <tr><td>Ücretli toplu gönderim</td><td>1000 mesaj/sn'ye kadar</td><td>30/sn üstü her mesaj 0,1 Star (bot bakiyesinden). Şart: ≥ 100.000 Star bakiye + ≥ 100.000 aylık aktif kullanıcı. BotFather'dan açılır, istekte <code>allow_paid_broadcast</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Toplu duyuru: kuyruk + ~25–30 mesaj/sn; 1.000 kullanıcı ≈ 35–40 sn <span class="tag tag--warn">TAHMİN</span>. 429'da <code>retry_after</code> kadar bekle.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Boyut ve metin</caption>
+            <thead><tr><th></th><th>Bulut (api.telegram.org)</th><th>Yerel Bot API sunucusu</th></tr></thead>
+            <tbody>
+              <tr><td>Yükleme (bot → Telegram)</td><td>50 MB (fotoğraf 10 MB)</td><td>2000 MB</td></tr>
+              <tr><td>İndirme (<code>getFile</code>)</td><td>20 MB</td><td>Sınırsız</td></tr>
+              <tr><td>Webhook</td><td>HTTPS, 4 port</td><td>HTTP, yerel IP, her port</td></tr>
+              <tr><td>Kurulum</td><td>Yok</td><td>Açık kaynak <code>tdlib/telegram-bot-api</code>; <code>my.telegram.org</code>'dan <code>api_id</code>/<code>api_hash</code> gerekir</td></tr>
+              <tr><td>Mesaj metni / altyazı</td><td colspan="2">4096 / 1024 karakter (biçim çözüldükten sonra)</td></tr>
+              <tr><td><code>callback_data</code> / derin bağlantı</td><td colspan="2">1–64 bayt / 64 karakter</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kanal-grup"><span class="h-num">§ 11</span>Kanal, grup, Business bot, yeni mesaj türleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sohbet türü</th><th>Bot ne yapar</th><th>Gerekli</th></tr></thead>
+            <tbody>
+              <tr><td>Kanal (tek yönlü)</td><td>Gönderi atar, düzenler, siler</td><td>Bot <strong>yönetici</strong>; <code>can_post_messages</code>, düzenleme için <code>can_edit_messages</code>. <code>chat_id</code> = <code>@kanaladi</code> ya da <code>-100…</code></td></tr>
+              <tr><td>Grup / süper grup</td><td>Mesaj, moderasyon, karşılama</td><td>Gizlilik kipi varsayılan <strong>açık</strong>: yalnız komutlar, kendisine yanıtlar vb. Hepsini görmek için yönetici yap ya da kipi kapat (sonra botu gruba yeniden ekle)</td></tr>
+              <tr><td>Özel sohbet</td><td>Bire bir</td><td>Kullanıcı başlatmış olmalı (§ 9)</td></tr>
+              <tr><td>Telegram Business</td><td>İşletme kendi kişisel hesabına bot bağlar; bot <code>business_connection</code> / <code>business_message</code> alır, işletme adına yanıtlar (<code>business_connection_id</code> ile)</td><td>Bot API 10.0 (8 May 2026): Business botların kullanıcı hesabını yönetmesi için Premium şartı kalktı</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Yönetici yetkileri (<code>ChatAdministratorRights</code>): <code>can_manage_chat</code>, <code>can_delete_messages</code>, <code>can_restrict_members</code>, <code>can_promote_members</code>, <code>can_change_info</code>, <code>can_invite_users</code>, <code>can_pin_messages</code>, <code>can_manage_topics</code>, kanalda <code>can_post_messages</code>/<code>can_edit_messages</code>. <strong>En az yetki:</strong> işi neyse yalnız onu ver.</p>
+
+        <p>Bot–bot: botlar varsayılan olarak başka botların mesajını görmez; özel sohbette iki botta da bot-to-bot kipi gerekir (10.0). Döngüyü önlemek geliştiricinin işi.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Son sürümler (api-changelog, 12 Ekim 2026)</caption>
+            <thead><tr><th>Sürüm</th><th>Önemli değişiklik</th></tr></thead>
+            <tbody>
+              <tr><td>10.3 · 24 Ağu 2026</td><td>Rich mesajlara düğme (<code>RichMessageButton</code>), blok düğme grupları; geçici mesaj ayarları tek nesnede (<code>EphemeralMessageParameters</code>)</td></tr>
+              <tr><td>10.2 · 14 Tem 2026</td><td>Rich mesajlarda blok tabanlı biçim; <strong>geçici (ephemeral) mesaj</strong>: grupta yalnız bir kullanıcı ile botun gördüğü mesaj</td></tr>
+              <tr><td>10.1 · 11 Haz 2026</td><td><strong>Rich Messages</strong>: <code>sendRichMessage</code>, akışla parça parça gönderim <code>sendRichMessageDraft</code> (yapay zekâ cevapları için)</td></tr>
+              <tr><td>10.0 · 8 May 2026</td><td>Misafir kipi, bot-to-bot mesajlaşma, Business botlarda Premium şartı kalktı</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başkası adına bot işleten platform (çok müşterili) — iki model</caption>
+            <thead><tr><th>Model</th><th>Nasıl</th><th>Dikkat</th></tr></thead>
+            <tbody>
+              <tr><td>Müşteri kendi botunu getirir</td><td>Müşteri BotFather token'ını verir; bot başına ayrı webhook yolu + ayrı <code>secret_token</code></td><td>Token'lar şifreli saklanır; sızan token botu tamamen verir. Ayrı OAuth akışı yok</td></tr>
+              <tr><td>Platformun tek botu, Business bağlantısı</td><td>İşletme platform botunu Telegram Business ayarından bağlar; <code>business_connection_id</code> müşteri anahtarı olur</td><td>Yalnız Business özelliklerinin izin verdiği sohbetler</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="gateway"><span class="h-num">§ 12</span>Telegram Gateway (doğrulama kodu / OTP)</h2>
+
+        <p>Bot API'den ayrı, ücretli. Numarası bilinen ama botu hiç başlatmamış kullanıcıya Telegram'ın "Verification Codes" hesabından kod gönderir — SMS OTP yerine.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Bilgi</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td>Uç noktalar</td><td><code>POST https://gatewayapi.telegram.org/checkSendAbility</code>, <code>…/sendVerificationMessage</code>, <code>…/checkVerificationStatus</code>, <code>…/revokeVerificationMessage</code>; <code>Authorization: Bearer {GATEWAY_TOKEN}</code></td><td>Gateway API</td></tr>
+              <tr><td>Fiyat</td><td>Teslim edilen kod başı <strong>0,01 USD</strong></td><td>core.telegram.org/gateway</td></tr>
+              <tr><td>İade</td><td>Belirlediğin <code>ttl</code> (30–3600 sn) içinde teslim edilmezse otomatik iade</td><td>Gateway API</td></tr>
+              <tr><td>Ön kontrol</td><td><code>checkSendAbility</code>: gönderilemiyorsa ücretsiz; gönderilebiliyorsa ücretlenir, aynı <code>request_id</code> ile gönderim ek ücretsiz</td><td>Gateway API</td></tr>
+              <tr><td>Kod</td><td>Telegram üretir (4–8 hane) ya da kendi kodunu verirsin</td><td>Gateway API</td></tr>
+              <tr><td>Bakiye</td><td>Ön ödemeli, Fragment üzerinden; çekilemez, devredilemez, iade edilmez</td><td>Quick-start + ToS</td></tr>
+              <tr><td>En az yükleme</td><td>Resmî kaynakta yok; 2024 haberi 100 USD, yalnız TON diyor <span class="tag tag--warn">3. TARAF · ESKİ OLABİLİR</span></td><td>vc.ru</td></tr>
+              <tr><td>Deneme</td><td>Giriş yaptığın kendi numarana ücretsiz</td><td>Quick-start</td></tr>
+              <tr><td>Şart</td><td>Alıcıda Telegram hesabı; numara izinle alınmış (E.164). Fiyat habersiz değişebilir</td><td>Gateway + ToS</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Uygun değilse:</strong> kullanıcıların bir kısmında Telegram yoksa SMS yedeği gerekir; bakiye Fragment/kripto ile yüklendiği için fatura/gider belgesini önceden netleştir. Ücretsiz alternatif: derin bağlantı + <code>request_contact</code> (§ 7) — kullanıcının bota gelmesi şart.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="odeme"><span class="h-num">§ 13</span>Telegram Stars ve ödemeler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Satılan</th><th>Zorunlu yol</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Dijital ürün/hizmet (abonelik, içerik, yapay zekâ kredisi, oyun içi öğe)</td><td><strong>Telegram Stars</strong> (<code>XTR</code>); <code>sendInvoice</code> / <code>createInvoiceLink</code>, <code>provider_token</code> boş</td><td>Başka para birimi / dış ödeme kullanan bot mobilde gösterilmeyebilir (mağaza kuralları)</td></tr>
+              <tr><td>Fiziksel ürün, gerçek dünya hizmeti</td><td>3. taraf ödeme sağlayıcısı (BotFather'dan bağlanır)</td><td>Telegram ödeme verisini işlemez, komisyon almaz</td></tr>
+              <tr><td>Bot dışında (web sitesinde) satış</td><td>Kendi ödeme altyapın</td><td>Bot içinden dijital ürün için dış ödemeye yönlendirme Stars kuralına takılır</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul class="checklist">
+          <li><strong>Ön onay:</strong> <code>pre_checkout_query</code> → <code>answerPreCheckoutQuery</code> 10 sn içinde, yoksa iptal.</li>
+          <li><strong>İade:</strong> <code>refundStarPayment</code>; ters ibraz/uyuşmazlık sorumluluğu bot sahibinde.</li>
+          <li><strong>Zorunlu komutlar:</strong> <code>/terms</code> (satın almadan önce kabul), <code>/support</code>, <code>/paysupport</code>; Telegram desteğinin bot alımlarında yardım edemeyeceği söylenmeli.</li>
+          <li><strong>Star → para:</strong> resmî Bot belgesinde kur/çekim şartı yok. 3. taraf rehberler: 21 gün sonra Fragment üzerinden TON, en az 1.000 Star, ~0,013 USD/Star <span class="tag tag--warn">3. TARAF · DEĞİŞKEN</span>. Fragment/TON her ülkede kullanılamayabilir.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kim, hangi yapıyla? (genel çerçeve)</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Bireysel geliştirici, ücretsiz bot</td><td>Şirket gerekmez; ödeme/vergi konusu yok</td></tr>
+              <tr><td>Bireysel, Stars ile dijital satış</td><td>Teknik olarak mümkün; Star'ın paraya çevrilmesi gelir doğurur. Türkiye'de sürekli hâle gelirse ticari kazanç ve vergi kaydı gündeme gelir (bkz. Şirket Kurma → "Şirketsiz ne yapabilirsin?")</td></tr>
+              <tr><td>Şahıs şirketi / limited / A.Ş.</td><td>Kripto (TON) gelirinin belgelenmesi/değerlemesi ve Gateway gideri belgesi için mali müşavir</td></tr>
+              <tr><td>Fiziksel ürün satan işletme</td><td>Ödeme sağlayıcısının şartları; Türkiye'de genellikle vergi levhası istenir (bkz. Şirket Kurma → "Ödeme altyapıları")</td></tr>
+              <tr><td>Türkiye dışında yerleşik</td><td>Aynı Telegram kuralları; vergi yerleşik olunan ülkeye göre</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Hukuki / mali danışmanlık değildir</p>
+          <p>Gelir, vergi ve kripto varlık kuralları ülkeye ve yıla göre değişir; karar öncesi mali müşavir ve güncel mevzuat.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="gizlilik"><span class="h-num">§ 14</span>Gizlilik ve ücret</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Durum</th></tr></thead>
+            <tbody>
+              <tr><td>Bot ne görür</td><td><code>id</code>, ad, varsa kullanıcı adı, dil kodu; özel sohbette tüm mesajlar, grupta gizlilik kipine göre</td></tr>
+              <tr><td>Kullanıcının numarası</td><td>Göremez; yalnız kullanıcı paylaşırsa (§ 7)</td></tr>
+              <tr><td>Bot sahibinin kimliği</td><td>Bot profilinde sahip hesabı görünmez (gözlem; belgede açık cümle yok). Ödeme alan botta iletişim bilgisi <code>/terms</code> ya da açıklamada</td></tr>
+              <tr><td>Şifreleme</td><td>Bot sohbetleri uçtan uca şifreli değil; Telegram sunucusunda ve botun sunucusunda okunur</td></tr>
+              <tr><td>Kişisel veri mevzuatı</td><td>Toplanan veriden (numara, mesaj) bot sahibi sorumlu: Türkiye'de KVKK, AB'de GDPR → aydınlatma metni + saklama süresi</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ücret (12 Ekim 2026)</caption>
+            <thead><tr><th>Kalem</th><th>Ücret</th></tr></thead>
+            <tbody>
+              <tr><td>Bot açma, Bot API, mesaj gönderme</td><td><span class="tag tag--ok">ÜCRETSİZ</span></td></tr>
+              <tr><td>~30/sn üstü toplu gönderim</td><td>0,1 Star / mesaj (şartlı, § 10)</td></tr>
+              <tr><td>Telegram Gateway (OTP)</td><td>0,01 USD / teslim edilen kod</td></tr>
+              <tr><td>Stars satışı</td><td>Telegram + mağaza payı kurdan düşer; net oran resmî metinde rakamla yok</td></tr>
+              <tr><td>Fiziksel ürün ödemesi</td><td>Telegram komisyon almaz; sağlayıcı komisyonu</td></tr>
+              <tr><td>Sunucu</td><td>Kendi maliyetin (getUpdates ile küçük bir cihaz bile yeter)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="karar"><span class="h-num">§ 15</span>Durum → Sonuç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bildirim botu</strong> (kendine/abonelere uyarı, yeni içerik)</td><td>Ücretsiz Bot API. Derin bağlantıyla /start → <code>chat_id</code> sakla. Sunucu dışa kapalıysa <code>getUpdates</code>. 30/sn altı ek maliyet yok</td></tr>
+              <tr><td><strong>Kanal yayını</strong> (tek yönlü, çok takipçi)</td><td>Kanal + bot yönetici (<code>can_post_messages</code>). Tek gönderi, takipçi sayısından bağımsız — en ucuz yol</td></tr>
+              <tr><td><strong>Kişiye özel toplu bildirim</strong> (binlerce)</td><td>Kuyruk + ~30/sn; 100.000+ aylık aktif kullanıcı ve hız gerekiyorsa ücretli toplu gönderim</td></tr>
+              <tr><td><strong>Müşteri desteği</strong></td><td>Bot + inline menü; insana aktarım için destek grubu ya da Business bot. Kullanıcı önce yazmalı; proaktif kampanya yok</td></tr>
+              <tr><td><strong>OTP, kullanıcı botu başlatabilir</strong></td><td>Ücretsiz: <code>request_contact</code> + <code>user_id == from.id</code>, ya da derin bağlantıdaki tek kullanımlık kod</td></tr>
+              <tr><td><strong>OTP, kullanıcı botu başlatmadan</strong></td><td>Gateway (0,01 USD/kod) + Telegram'ı olmayanlar için SMS yedeği</td></tr>
+              <tr><td><strong>Dijital ürün satan bot</strong></td><td>Stars zorunlu; <code>/terms</code>, <code>/paysupport</code>; gelir için mali müşavir</td></tr>
+              <tr><td><strong>50 MB+ dosya</strong></td><td>Yerel Bot API sunucusu (2000 MB) ya da dosyayı başka yerde barındırıp bağlantı ver</td></tr>
+              <tr><td><strong>Kurumsal, yüksek hacim, çok sunucu</strong></td><td>Webhook + <code>secret_token</code> + yük dengeleme + tekilleştirme; token gizli anahtar deposunda; sahip hesapta iki adımlı doğrulama</td></tr>
+              <tr><td><strong>Başkalarının işletmesine hizmet (platform)</strong></td><td>Müşteri token'ı + bot başına webhook, ya da tek bot + Telegram Business (§ 11)</td></tr>
+              <tr><td><strong>Elinde yalnız numara listesi, mesaj atmak istiyorsun</strong></td><td>Bot API ile mümkün değil; pazarlama mesajı için resmî yol yok. Gateway yalnız doğrulama kodu içindir</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynaklar"><span class="h-num">§ 16</span>Kaynaklar</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://core.telegram.org/bots/api">Telegram Bot API — yöntem ve tür başvurusu (10.3, 24 Ağu 2026)</a></li>
+          <li><span class="src-n">02</span><a href="https://core.telegram.org/bots/api-changelog">Bot API changelog — 10.0–10.3 (Business, Rich Messages, ephemeral)</a></li>
+          <li><span class="src-n">03</span><a href="https://core.telegram.org/bots/faq">Bots FAQ — hız sınırları, dosya boyutu, ücretli toplu gönderim</a></li>
+          <li><span class="src-n">04</span><a href="https://core.telegram.org/bots/features">Bot Features — BotFather, derin bağlantı, gizlilik kipi, klavyeler</a></li>
+          <li><span class="src-n">05</span><a href="https://core.telegram.org/bots/webhooks">Marvin's Marvellous Guide to All Things Webhook — port ve sertifika</a></li>
+          <li><span class="src-n">06</span><a href="https://core.telegram.org/bots/payments-stars">Payments in Telegram Stars — dijital ürün kuralları</a></li>
+          <li><span class="src-n">07</span><a href="https://telegram.org/blog/telegram-business">Telegram Business — işletme hesabına bot bağlama</a></li>
+          <li><span class="src-n">08</span><a href="https://core.telegram.org/gateway">Telegram Gateway — tanıtım ve fiyat</a></li>
+          <li><span class="src-n">09</span><a href="https://core.telegram.org/gateway/api">Gateway API — checkSendAbility, sendVerificationMessage</a></li>
+          <li><span class="src-n">10</span><a href="https://core.telegram.org/gateway/verification-tutorial">Gateway quick-start — Fragment ile bakiye, ücretsiz deneme</a></li>
+          <li><span class="src-n">11</span><a href="https://telegram.org/tos/gateway">Gateway Kullanım Koşulları — bakiye ve fiyat değişikliği</a></li>
+          <li><span class="src-n">12</span><a href="https://github.com/tdlib/telegram-bot-api">tdlib/telegram-bot-api — yerel Bot API sunucusu</a></li>
+          <li><span class="src-n">13</span><a href="https://vc.ru/1547346">vc.ru (2024) — Gateway en az yükleme iddiası <em>(3. taraf)</em></a></li>
+          <li><span class="src-n">14</span><a href="https://blog.invitemember.com/withdraw-telegram-stars-and-convert-them-to-ton-in-2024">InviteMember — Star çekimi, 21 gün, kur <em>(3. taraf)</em></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

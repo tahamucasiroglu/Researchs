@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Türkiye'de SMS API Hizmetleri — Mesajlaşma Altyapıları</title>
+<meta name="description" content="Türkiye'de SMS API kısa başvuru: TurkeySMS v4 uç noktaları, JSON istek/cevap ve webhook örnekleri, HMAC imza denetimi, C# örnekleri, örnek SMS görünümü, BTK ve İYS kuralları, 6563 sayılı kanun, fiyat kıyası ve Durum → Sonuç tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* kod blokları */
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .pre-label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.2rem 0 -.6rem; }
+
+  /* örnek SMS görünümü (saf HTML/CSS, ekran görüntüsü değil) */
+  .sms-demo { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1.2rem 0 1.6rem; }
+  .sms-phone {
+    flex: 1 1 260px; max-width: 22rem;
+    padding: 1rem .8rem .9rem;
+    background: var(--paper-rail);
+    border: 1px solid var(--rule);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    font-family: var(--f-body);
+  }
+  .sms-phone__clock { text-align: center; font-size: 2.1rem; font-weight: 300; line-height: 1; color: var(--ink); letter-spacing: .02em; }
+  .sms-phone__date { text-align: center; font-size: .74rem; color: var(--ink-faint); margin: .25rem 0 .9rem; }
+  .sms-note {
+    display: grid; grid-template-columns: 2rem 1fr; gap: .1rem .6rem;
+    padding: .6rem .7rem .65rem;
+    background: var(--paper-raise);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    margin-bottom: .5rem;
+  }
+  .sms-note__icon {
+    grid-row: span 3; width: 2rem; height: 2rem; border-radius: 8px;
+    display: grid; place-items: center;
+    font-family: var(--f-mono); font-size: .6rem; font-weight: 600; letter-spacing: .04em;
+    color: var(--accent-ink); background: var(--accent-wash);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .sms-note__app { display: flex; justify-content: space-between; font-size: .68rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: .05em; }
+  .sms-note__title { font-weight: 600; font-size: .9rem; color: var(--ink); line-height: 1.25; }
+  .sms-note__text { font-size: .86rem; color: var(--ink-soft); line-height: 1.4; }
+  .sms-note__text b { color: var(--ink); font-weight: 600; letter-spacing: .04em; }
+  .sms-caption { font-size: .74rem; color: var(--ink-faint); margin-top: .6rem; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Türkiye'de SMS API Hizmetleri</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Mesajlaşma · SMS</span>
+      <span class="brand__name">SMS API Hizmetleri</span>
+      <span class="brand__sub">Türkiye · kısa başvuru · Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">API'ler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-telegram-bot-api.html"><span class="nav-num">01</span><span>Telegram Bot API</span></a></li>
+          <li><a class="nav-item" href="02-whatsapp-business-api.html"><span class="nav-num">02</span><span>WhatsApp Business API</span></a></li>
+          <li><a class="nav-item" href="03-bip-kesfet-api.html"><span class="nav-num">03</span><span>BiP Keşfet API</span></a></li>
+          <li><a class="nav-item" href="04-sms-hizmetleri.html"><span class="nav-num">04</span><span>SMS Hizmetleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/11-odeme-altyapilari.html"><span class="nav-num">&rarr;</span><span>Ödeme Altyapıları</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      12 Ekim 2026'da sağlayıcıların kendi sayfalarından ve TurkeySMS OpenAPI belgesinden (v4.0.0) okundu; API'ye istek atılmadı. Fiyat ve mevzuat sık değişir. Hukuki danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Mesajlaşma platformları · SMS</div>
+        <h1 class="page-title">Türkiye'de SMS API: <em>kısa başvuru</em></h1>
+        <p class="lede">Şu URL → bunu yapar. TurkeySMS v4 örneğiyle uç noktalar, JSON, webhook imzası, C# kodu; ardından BTK / İYS kuralları, fiyatlar ve karar tablosu.</p>
+        <div class="head-meta">TurkeySMS API 4.0.0 (OpenAPI 3.1) &middot; Doğrulama: 12 Ekim 2026 &middot; Etiketler: <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span> <span class="tag tag--bad">ÇELİŞKİ</span></div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===================================================== -->
+        <h2 id="bir-bakista"><span class="h-num">§ 1</span>Bir bakışta</h2>
+
+        <div class="figures">
+          <div class="figure">
+            <div class="figure__label">Yurt içi 10.000 SMS (liste)</div>
+            <div class="figure__value">1.600–1.700 <small>₺</small></div>
+            <div class="figure__meta">Yeni abone kampanyasında ≈ 870–900 ₺ (§ 13)</div>
+          </div>
+          <div class="figure figure--flag">
+            <div class="figure__label">Abonelik</div>
+            <div class="figure__value">BTK + KEP</div>
+            <div class="figure__meta">Sözleşme e-Devlet BTK e-Kayıt; çoğu yerde e-imza (§ 10)</div>
+          </div>
+          <div class="figure figure--win">
+            <div class="figure__label">OTP / bilgilendirme</div>
+            <div class="figure__value">İYS yok</div>
+            <div class="figure__meta">Tanıtım içerirse ticari ileti → izin + İYS (§ 12)</div>
+          </div>
+        </div>
+
+        <ul class="checklist">
+          <li><strong>SMS göndermek = BTK yetkili işletmecinin abonesi olmak.</strong> API anahtarı almak değil, sözleşme imzalamak.</li>
+          <li><strong>Başlık:</strong> 3–11 karakter alfanümerik; 1 Nisan 2026'dan beri yalnız rakamlı başlık yok, yurt dışından bağlantılı SMS engelli.</li>
+          <li><strong>Ticari ileti:</strong> izin + İYS + iletide kimlik + ret yolu. 2026 cezası 2.859–14.309 TL, toplu gönderimde on katına kadar.</li>
+          <li><strong>Yurt dışı API:</strong> Twilio ≈ 0,0305 USD/segment, yalnız OTP/işlemsel, başlık kaydı şart.</li>
+          <li><strong>Alternatif:</strong> Telegram Gateway 0,01 USD/kod; WhatsApp authentication şablonu.</li>
+          <li><strong>TurkeySMS v4:</strong> bireysel hesap kabul eden, OTP/toplu/rapor/webhook uçlu REST API; gelen SMS, HLR ve ses yok; fiyat sayfası kendi içinde çelişkili.</li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Etiketler</p>
+          <p><span class="tag tag--ok">RESMÎ</span> mevzuat metni veya sağlayıcının kendi sayfası &middot; <span class="tag tag--info">3. TARAF</span> haber, blog, bayi &middot; <span class="tag tag--warn">TAHMİN</span> / <span class="tag tag--warn">YORUM</span> hesaplama veya hukuki yorum &middot; <span class="tag tag--bad">ÇELİŞKİ</span> kaynaklar uyuşmuyor. Hukuki danışmanlık değildir; ticari ileti ve KVKK için hukukçuya danış.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kavramlar"><span class="h-num">§ 2</span>Kavramlar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A2P SMS</strong> <small>(application-to-person)</small></td><td>Yazılımın kişiye gönderdiği SMS: toplu, OTP, bildirim. Kişiden kişiye (P2P) SMS'ten ayrı kurallar</td></tr>
+              <tr><td><strong>Başlık</strong> <small>(originator, sender ID)</small></td><td>Telefonda numara yerine görünen ad (ör. <code>MARKAADI</code>). 3–11 karakter alfanümerik; sağlayıcı üzerinden belgeyle alınır. API'de <code>title</code></td></tr>
+              <tr><td><strong>OTP</strong></td><td>Tek kullanımlık kod (giriş, telefon doğrulama, ödeme onayı). Tanıtım içermez → genellikle ticari ileti değil (§ 12). Sağlayıcılar ayrı, öncelikli hat ve fiyat sunar</td></tr>
+              <tr><td><strong>İYS</strong></td><td>İleti Yönetim Sistemi: ticari SMS/arama/e-posta izinlerinin ulusal kaydı. Gönderen kaydolur, alıcı iznini oradan görüp geri alır (§ 11)</td></tr>
+              <tr><td><strong>Segment</strong></td><td>SMS boy birimi: GSM-7 ile 160, Unicode (ş, ğ, ı…) ile 70 karakter; uzun mesaj birden fazla segment olarak ücretlenir. Türkiye için operatör kodu nedeniyle 155/65 diyen yurt dışı sağlayıcı var <span class="tag tag--info">3. TARAF</span> (Twilio)</td></tr>
+              <tr><td><strong>MSISDN biçimi</strong></td><td>TurkeySMS'te numara <code>+</code> olmadan, ülke koduyla: <code>+90 5XX XXX XX XX</code> → <code>905XXXXXXXXX</code> <span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="uc-noktalar"><span class="h-num">§ 3</span>Uç noktalar (TurkeySMS v4)</h2>
+
+        <p>Kaynak: <code>turkeysms.com.tr/openapi.json</code> (OpenAPI 3.1, API 4.0.0) ve <code>/docs</code>, 12 Ekim 2026 <span class="tag tag--ok">RESMÎ</span> (sağlayıcı beyanı). API'ye istek atılmadı, hesap açılmadı.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Taban: <code>https://api.turkeysms.com.tr</code> · hepsi <code>POST</code> + <code>Content-Type: application/json</code> · her gövdede <code>api_key</code></caption>
+            <thead><tr><th>Metot + URL</th><th>Ne yapar</th><th>Önemli parametre / sınır</th></tr></thead>
+            <tbody>
+              <tr><td><code>POST /auth/check</code></td><td>Anahtarı sınar; izin matrisi + bakiye özeti</td><td>Yalnız <code>api_key</code>. Cevap: <code>key_details.permissions</code>, <code>account_summary.balance.main</code> / <code>.international</code></td></tr>
+              <tr><td><code>POST /sms/send</code></td><td>Tek alıcıya SMS; ileri tarihli gönderim</td><td>Zorunlu: <code>title</code> (onaylı başlık, büyük/küçük harf duyarlı), <code>sentto</code>, <code>text</code>. <code>sms_lang</code> 0 EN · 1 TR · 2 AR/Unicode (vars. 2). <code>content_type</code> 0 işlemsel (vars.) · 1 yüksek kalite · 2 reklam. Zamanlama: <code>scheduled_sms</code>=1 + <code>scheduled_date</code> (YYYY-MM-DD) + <code>scheduled_time</code> (HH:MM)</td></tr>
+              <tr><td><code>POST /otp/send</code></td><td>Standart şablonla OTP; kodu sistem üretir, öncelikli hat</td><td>Zorunlu: <code>mobile</code>. <code>digits</code> 4–6 (vars. 6), <code>lang</code> 0/1/2. <code>title</code> yok</td></tr>
+              <tr><td><code>POST /otp/detailed</code></td><td>Özel şablonlu OTP</td><td>Zorunlu: <code>mobile</code>, <code>title</code>, <code>text</code>. <code>text</code> içinde <code>TS-CODE</code> yoksa istek reddedilir</td></tr>
+              <tr><td><code>POST /group/send</code></td><td>Aynı metni çok alıcıya</td><td><code>sentto</code> = dizi. Yüksek hacimde tekil çağrı yerine bu (dakikalık sınır)</td></tr>
+              <tr><td><code>POST /group/sendMixed</code></td><td>Her alıcıya farklı metin</td><td><code>text</code> ve <code>sentto</code> eşit uzunlukta dizi, sıra eşleşir</td></tr>
+              <tr><td><code>POST /sms/status</code></td><td>Tek mesajın durumu</td><td><code>sms_id</code> → <code>status</code>: queued, sent, delivered, failed, expired</td></tr>
+              <tr><td><code>POST /reports/basic</code></td><td>Kampanya toplamı</td><td><code>sms_id</code> → <code>total</code>, <code>delivered</code>, <code>failed</code></td></tr>
+              <tr><td><code>POST /reports/detailed</code></td><td>Alıcı bazlı durum, sayfalı</td><td><code>sms_id</code>, <code>page</code> (≥ 1); sayfa başı en çok 500 satır</td></tr>
+              <tr><td><code>POST /balance/</code></td><td>Ana SMS bakiyesi</td><td>Cevap: <code>balance_main</code>. Sondaki <code>/</code> belgede böyle</td></tr>
+              <tr><td><code>POST /senderid/check</code></td><td>Onaylı başlıkların listesi</td><td>Cevap: <code>sender_ids[]</code> → <code>id</code>, <code>title</code>, <code>status</code>. Başlık <strong>başvurusu</strong> API'de yok</td></tr>
+              <tr><td>Webhook <code>deliveryEvent</code> (senin URL'n)</td><td>Teslim olaylarını iter</td><td>Anahtar başına panelden (API Merkezi → Güvenlik &amp; IP → Webhook). İmza + zaman damgası başlığı (§ 6)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Genel davranış</caption>
+            <thead><tr><th>Konu</th><th>Belgedeki bilgi</th></tr></thead>
+            <tbody>
+              <tr><td>Kimlik doğrulama</td><td>Gövdede <code>api_key</code>; <code>Authorization</code> / Bearer yok <span class="tag tag--ok">RESMÎ</span>. <span class="tag tag--bad">ÇELİŞKİ</span> OTP tanıtım sayfasındaki örnekte "Bearer token" geçiyor; esas olan dokümantasyon + OpenAPI</td></tr>
+              <tr><td>Anahtar yönetimi</td><td>Çoklu anahtar, anahtar başına izin, rotasyon, anında iptal, anahtar başına <strong>IP izin listesi</strong></td></tr>
+              <tr><td>Idempotency</td><td>Otomatik, ek başlık/parametre yok: sunucu isteğin parmak izini çıkarır, kısa pencerede aynı istek ikinci SMS ve ikinci ücret üretmez. "Mutlak garanti değil" diye yazıyor</td></tr>
+              <tr><td>Hız sınırı</td><td>Anahtar başına dakikalık; <strong>sayı yayımlanmamış</strong>. Aşımda <code>TS-1060</code></td></tr>
+              <tr><td>Test</td><td>"Sandbox, SMS harcamadan" deniyor; ama OpenAPI'de yalnız üretim sunucusu var, ayrı test adresi ve test kredisi miktarı yok</td></tr>
+              <tr><td>Sürüm</td><td>v4 içinde yalnız eklemeli değişiklik; bilinmeyen alanı yok say, alan sırasına güvenme</td></tr>
+              <tr><td>SDK / entegrasyon</td><td>PHP (<code>composer require turkeysms/sdk</code>), Node.js (<code>npm install @turkeysms/node</code>); WordPress/WooCommerce, Make, Zapier, n8n. Resmî .NET SDK yok → HttpClient (§ 8)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Belgede olmayanlar</p>
+          <p><strong>Gelen SMS</strong> (iki yönlü), <strong>HLR / operatör sorgusu</strong>, <strong>sesli mesaj / IVR / sesli OTP</strong>, <strong>başlık başvurusu</strong>, <strong>İYS</strong> alanı ve <strong>OTP doğrulama ucu</strong> yok. İzin matrisinde grup/kişi/kara liste bayrakları (<code>create_group</code>, <code>add_contact</code>, <code>blacklist_number</code>…) var ama karşılık gelen uç tanımlı değil.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="json"><span class="h-num">§ 4</span>İstek / cevap JSON</h2>
+
+        <p>Alan adları OpenAPI'den; değerler yer tutucu. Numara yer tutucusu <code>+90 5XX XXX XX XX</code>, API biçiminde <code>905XXXXXXXXX</code>.</p>
+
+        <p class="pre-label">POST https://api.turkeysms.com.tr/sms/send — istek</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "title": "MARKAADI",
+  "sentto": "905XXXXXXXXX",
+  "text": "Siparişiniz kargoya verildi. Takip no: {TAKIP_NO}",
+  "sms_lang": 1,
+  "content_type": 0
+}</code></pre>
+
+        <p class="pre-label">/sms/send — 200 cevap (TS-1024)</p>
+<pre data-json><code>{
+  "result": true,
+  "result_code": "TS-1024",
+  "result_message": "SMS dispatched successfully.",
+  "sms_id": 1000007721,
+  "number_of_sms": 1,
+  "total_recipients": 1,
+  "success_count": 1,
+  "sms_lang": "Turkish",
+  "content_type": "Transactional",
+  "country": "Turkey-TR"
+}</code></pre>
+
+        <p class="pre-label">/sms/send — ileri tarihli gönderim</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "title": "MARKAADI",
+  "sentto": "905XXXXXXXXX",
+  "text": "Randevunuz yarın 09:30'da.",
+  "scheduled_sms": 1,
+  "scheduled_date": "2026-12-31",
+  "scheduled_time": "09:00"
+}</code></pre>
+
+        <p class="pre-label">POST /otp/send — standart şablon</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "mobile": "905XXXXXXXXX",
+  "lang": 1,
+  "digits": 6
+}</code></pre>
+
+        <p class="pre-label">POST /otp/detailed — özel şablon (TS-CODE zorunlu)</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "mobile": "905XXXXXXXXX",
+  "title": "MARKAADI",
+  "text": "MARKAADI dogrulama kodunuz: TS-CODE. 5 dakika gecerlidir, kimseyle paylasmayin.",
+  "lang": 1,
+  "digits": 6
+}</code></pre>
+
+        <p>OTP cevabı <code>/sms/send</code> ile aynı şemadır (<code>SmsSendResponse</code>): <code>sms_id</code>, <code>number_of_sms</code>… <strong>Üretilen kod cevapta yok.</strong> Ayrıntı § 5.</p>
+
+        <p class="pre-label">POST /group/send — istek ve cevap</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "title": "MARKAADI",
+  "text": "Hizmet bakımı: 13 Ekim 02:00-04:00 arası erişim olmayacaktır.",
+  "sentto": ["905XXXXXXXX1", "905XXXXXXXX2"]
+}</code></pre>
+<pre data-json><code>{
+  "result": true,
+  "result_code": "TS-1024",
+  "result_message": "SMS dispatched successfully.",
+  "sms_id": 1000007800,
+  "total_recipients": 2,
+  "success_count": 2,
+  "number_of_sms": 1
+}</code></pre>
+
+        <p class="pre-label">POST /group/sendMixed — kişiye özel metin</p>
+<pre data-json><code>{
+  "api_key": "{API_KEY}",
+  "title": "MARKAADI",
+  "text": ["Siparişiniz {SIPARIS_1} kargoda.", "Siparişiniz {SIPARIS_2} kargoda."],
+  "sentto": ["905XXXXXXXX1", "905XXXXXXXX2"]
+}</code></pre>
+
+        <p class="pre-label">POST /auth/check — cevap</p>
+<pre data-json><code>{
+  "result": true,
+  "result_code": "TS-1000",
+  "key_details": {
+    "status": "Active",
+    "permissions": {
+      "send_single_sms": true,
+      "send_otp": true,
+      "send_bulk_sms": true,
+      "check_balance": true,
+      "check_sms_status": true
+    }
+  },
+  "account_summary": {
+    "account_status": "Active",
+    "balance": { "main": 1500, "international": 250 }
+  }
+}</code></pre>
+
+        <p class="pre-label">POST /sms/status — istek ve cevap</p>
+<pre data-json><code>{ "api_key": "{API_KEY}", "sms_id": 1000007721 }</code></pre>
+<pre data-json><code>{ "result": true, "result_code": "TS-1064", "sms_id": 1000007721, "status": "delivered" }</code></pre>
+
+        <p class="pre-label">POST /reports/detailed — cevap (sayfa başı ≤ 500 satır)</p>
+<pre data-json><code>{
+  "result": true,
+  "result_code": "TS-1064",
+  "page": 1,
+  "rows": [
+    { "sentto": "905XXXXXXXX1", "status": "delivered" },
+    { "sentto": "905XXXXXXXX2", "status": "failed" }
+  ]
+}</code></pre>
+
+        <p class="pre-label">Hata — 403 (bakiye yetersiz)</p>
+<pre data-json><code>{ "result": false, "result_code": "TS-1027", "result_message": "Insufficient balance." }</code></pre>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Cevap zarfı</caption>
+            <thead><tr><th>Alan</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><code>result</code></td><td><code>true</code> başarı, <code>false</code> hata</td></tr>
+              <tr><td><code>result_code</code></td><td>Kararlı <code>TS-####</code> kodu. <strong>Dallanma buna göre</strong></td></tr>
+              <tr><td><code>result_message</code></td><td>İnsan okunur metin; değişebilir, koda göre dallanma</td></tr>
+              <tr><td><code>sms_id</code></td><td>Mesaj / toplu iş kimliği; <code>/sms/status</code>, <code>/reports/*</code> ve webhook'ta aynı</td></tr>
+              <tr><td><code>number_of_sms</code></td><td>Mesajın bölündüğü segment sayısı → maliyeti buradan izle</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kodlar"><span class="h-num">§ 5</span>Cevap kodları, teslim durumu, yeniden deneme</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>TS kodları (OpenAPI <code>x-responseCodes</code>) ve ne yapılır</caption>
+            <thead><tr><th>Kod</th><th>HTTP</th><th>Anlamı</th><th>Tekrar dene?</th></tr></thead>
+            <tbody>
+              <tr><td><code>TS-1000</code></td><td>200</td><td>Anahtar doğrulama başarılı</td><td>—</td></tr>
+              <tr><td><code>TS-1024</code></td><td>200</td><td>SMS gönderime alındı</td><td>—</td></tr>
+              <tr><td><code>TS-1040</code></td><td>200</td><td>Bakiye / başlık sorgusu başarılı</td><td>—</td></tr>
+              <tr><td><code>TS-1064</code></td><td>200</td><td>İşlem başarılı (durum, rapor)</td><td>—</td></tr>
+              <tr><td><code>TS-1033</code></td><td>400</td><td>Geçersiz JSON gövdesi</td><td>Hayır — isteği düzelt</td></tr>
+              <tr><td><code>TS-1031</code></td><td>401</td><td>Geçersiz API anahtarı</td><td>Hayır</td></tr>
+              <tr><td><code>TS-1027</code></td><td>403</td><td>Bakiye yetersiz</td><td>Hayır</td></tr>
+              <tr><td><code>TS-1028</code></td><td>403</td><td>Başlık (SenderID) aktif değil</td><td>Hayır</td></tr>
+              <tr><td><code>TS-1060</code></td><td>403</td><td>Dakikalık hız sınırı aşıldı</td><td>Evet — bekledikten sonra</td></tr>
+              <tr><td><code>TS-1061</code></td><td>403</td><td>Anahtarda POST izni kapalı</td><td>Hayır</td></tr>
+              <tr><td><code>TS-1065</code></td><td>403</td><td>Anahtar izinleri bu işlem için yetersiz</td><td>Hayır</td></tr>
+              <tr><td>Ağ hatası / zaman aşımı / 5xx</td><td>—</td><td>—</td><td>Evet — üstel bekleme ile (idempotency korur)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Teslim yaşam döngüsü</caption>
+            <thead><tr><th>Durum</th><th>Anlamı</th><th>Geçiş</th></tr></thead>
+            <tbody>
+              <tr><td><code>queued</code></td><td>İstek kabul edildi, operatöre gitmedi. <strong>"Gönderildi" demek değil</strong></td><td>→ sent, → failed</td></tr>
+              <tr><td><code>sent</code></td><td>Operatör şebekesine iletildi</td><td>→ delivered, → failed, → expired</td></tr>
+              <tr><td><code>delivered</code></td><td>Cihaza teslim, şebeke onayı</td><td>Son</td></tr>
+              <tr><td><code>failed</code></td><td>Kalıcı hata / operatör reddi</td><td>Son</td></tr>
+              <tr><td><code>expired</code></td><td>Geçerlilik süresinde teslim edilemedi</td><td>Son (webhook <code>status</code> listesinde yok; <code>/sms/status</code> ile görülür)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Ücret anı:</strong> bakiye "mesaj sisteme kabul edilince" düşer (faturalama belgesi); defter kaydı benzersiz → aynı istek ikinci kez düşmez. <span class="tag tag--bad">ÇELİŞKİ</span> OTP tanıtım sayfası "yalnız başarılı gönderim ücretlendirilir" diyor.</li>
+          <li><strong>OTP doğrulama boşluğu:</strong> kod sağlayıcıda üretilir, cevapta dönmez, "kod doğru mu" ucu yok. Webhook'ta <code>otp.verified</code> olayı tanımlı ama neyin tetiklediği belgede yok. Kodu kendin doğrulayacaksan kodu kendin üret, <code>/sms/send</code> ile işlemsel gönder (§ 8) — bu yolda OTP'nin öncelikli hattı kullanılmaz <span class="tag tag--warn">YORUM</span>.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="webhook"><span class="h-num">§ 6</span>Teslim webhook'u</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Belgedeki bilgi</th></tr></thead>
+            <tbody>
+              <tr><td>Kurulum</td><td>Panel → API Merkezi → Güvenlik &amp; IP → Webhook; URL + secret <strong>anahtar başına</strong>. Aynı yerden test gönderimi (<code>key.test</code>)</td></tr>
+              <tr><td>Olaylar</td><td><code>sms.sent</code> operatöre iletildi · <code>sms.delivered</code> cihaza teslim · <code>sms.failed</code> kalıcı hata · <code>otp.verified</code> OTP doğrulandı · <code>key.test</code> elle test</td></tr>
+              <tr><td>İmza</td><td><code>X-TurkeySMS-Signature: sha256=&lt;hmac&gt;</code> = ham gövdenin webhook secret ile HMAC'i (PHP örneğinde küçük harf hex). İmzası tutmayanı işleme</td></tr>
+              <tr><td>Tekrar oynatma</td><td><code>X-TurkeySMS-Timestamp</code> gönderim zamanı; tolerans dışını (ör. birkaç dakika) reddet. Başlığın biçimi belgede açık değil; gövdedeki <code>timestamp</code> ISO-8601 <span class="tag tag--warn">TAHMİN</span>: başlık da ISO-8601</td></tr>
+              <tr><td>Cevap</td><td><code>200</code> dön; 2xx dışı = başarısız → yeniden denenir</td></tr>
+              <tr><td>Yeniden deneme</td><td>Webhook belgesi: sayı ve bekleme anahtar başına ayarlanır. <span class="tag tag--bad">ÇELİŞKİ</span> geliştirici sayfası: "5 deneme, üstel geri çekilme"</td></tr>
+              <tr><td>Sıra / tekrar</td><td>Sıra garanti değil, aynı olay birden çok gelebilir → idempotent işle; <code>delivered</code> sonrası gelen <code>sent</code> durumu geri almasın</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="pre-label">TurkeySMS → senin sunucun (başlıklar)</p>
+<pre><code>POST /sms/teslim
+Content-Type: application/json
+X-TurkeySMS-Signature: sha256={HMAC_HEX}
+X-TurkeySMS-Timestamp: 2026-10-12T09:14:07Z</code></pre>
+
+        <p class="pre-label">Olay gövdesi</p>
+<pre data-json><code>{
+  "event_type": "sms.delivered",
+  "timestamp": "2026-10-12T09:14:07Z",
+  "data": {
+    "sms_id": 1000007721,
+    "status": "delivered"
+  }
+}</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="gorunum"><span class="h-num">§ 7</span>Örnek SMS görünümü</h2>
+
+        <div class="sms-demo">
+          <div class="sms-phone" role="img" aria-label="Kilit ekranında OTP SMS bildirimi örneği">
+            <div class="sms-phone__clock">09:14</div>
+            <div class="sms-phone__date">Pazartesi, 12 Ekim</div>
+            <div class="sms-note">
+              <div class="sms-note__icon" aria-hidden="true">SMS</div>
+              <div class="sms-note__app"><span>Mesajlar</span><span>şimdi</span></div>
+              <div class="sms-note__title">MARKAADI</div>
+              <div class="sms-note__text">MARKAADI dogrulama kodunuz: <b>482913</b>. 5 dakika gecerlidir, kimseyle paylasmayin.</div>
+            </div>
+            <div class="sms-caption">OTP · <code>/otp/detailed</code> · 78 karakter, Türkçe karaktersiz → 1 segment (GSM-7). Aynı metin ş/ğ/ı ile 79 karakter → 70 sınırını aşar, 2 segment <span class="tag tag--warn">TAHMİN</span>.</div>
+          </div>
+
+          <div class="sms-phone" role="img" aria-label="Kilit ekranında bilgilendirme SMS bildirimi örneği">
+            <div class="sms-phone__clock">14:02</div>
+            <div class="sms-phone__date">Pazartesi, 12 Ekim</div>
+            <div class="sms-note">
+              <div class="sms-note__icon" aria-hidden="true">SMS</div>
+              <div class="sms-note__app"><span>Mesajlar</span><span>2 dk önce</span></div>
+              <div class="sms-note__title">MARKAADI</div>
+              <div class="sms-note__text">Siparişiniz kargoya verildi. Takip no: AB123456789</div>
+            </div>
+            <div class="sms-caption">Bilgilendirme · <code>/sms/send</code>, <code>content_type: 0</code> · 50 karakter Unicode → 1 segment. Tanıtım cümlesi eklenirse ticari ileti olur (§ 12).</div>
+          </div>
+        </div>
+
+        <p>Başlık satırında gönderenin <code>title</code> değeri görünür; numara görünmez. <code>sms_lang: 1</code> (Türkçe) seçeneğinin segment hesabını nasıl etkilediği belgede yok → gerçek değer için cevaptaki <code>number_of_sms</code>'e bak.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="csharp"><span class="h-num">§ 8</span>C# örnekleri (.NET, HttpClient + System.Text.Json)</h2>
+
+        <p>Gizli değerler ortam değişkeninden: <code>TURKEYSMS_API_KEY</code>, <code>TURKEYSMS_WEBHOOK_SECRET</code>. Resmî .NET SDK yok, kütüphane gerekmez. İki parça da .NET 10 SDK ile derlendi (uyarısız); webhook parçası yerelde imzalı/imzasız/eski istekle denendi (200 / 403 / 403). API'ye istek atılmadı.</p>
+
+        <p class="pre-label">Tekil SMS + OTP + durum sorgusu (konsol)</p>
+<pre><code>// Konsol uygulaması, .NET 8+ (ImplicitUsings açık)
+using System.Net.Http.Json;
+using System.Security.Cryptography;
+using System.Text.Json.Nodes;
+
+var apiKey = Environment.GetEnvironmentVariable("TURKEYSMS_API_KEY")
+             ?? throw new InvalidOperationException("TURKEYSMS_API_KEY yok");
+var http = new HttpClient
+{
+    BaseAddress = new Uri("https://api.turkeysms.com.tr/"),
+    Timeout = TimeSpan.FromSeconds(30)
+};
+
+// Ortak çağrı: api_key GÖVDEYE eklenir (başlık yok). Karar result_code'a göre, metne göre değil.
+async Task&lt;JsonObject&gt; CallAsync(string path, JsonObject body, CancellationToken ct = default)
+{
+    body["api_key"] = apiKey;
+    for (var attempt = 1; ; attempt++)
+    {
+        var wait = TimeSpan.FromSeconds(Math.Pow(2, attempt));       // 2, 4, 8 sn
+        HttpResponseMessage res;
+        try { res = await http.PostAsJsonAsync(path, body, ct); }
+        catch (Exception e) when (attempt &lt; 4 &amp;&amp; !ct.IsCancellationRequested
+                                  &amp;&amp; e is HttpRequestException or TaskCanceledException)
+        { await Task.Delay(wait, ct); continue; }                     // ağ / zaman aşımı → tekrar (idempotency korur)
+
+        using (res)
+        {
+            if ((int)res.StatusCode &gt;= 500 &amp;&amp; attempt &lt; 4) { await Task.Delay(wait, ct); continue; }
+
+            var json = await res.Content.ReadFromJsonAsync&lt;JsonObject&gt;(ct)
+                       ?? throw new InvalidOperationException($"{path}: boş cevap");
+            if (json["result"]?.GetValue&lt;bool&gt;() == true) return json;
+
+            var code = json["result_code"]?.GetValue&lt;string&gt;();
+            if (code == "TS-1060" &amp;&amp; attempt &lt; 4)                     // dakikalık hız sınırı
+            { await Task.Delay(TimeSpan.FromSeconds(60), ct); continue; }
+
+            // TS-1031 anahtar · TS-1027 bakiye · TS-1028 başlık · TS-1065 izin → tekrar deneme YOK
+            throw new InvalidOperationException($"{path}: {code} {json["result_message"]}");
+        }
+    }
+}
+
+// "+90 5XX XXX XX XX" / "05XX…" / "5XX…" → "905XXXXXXXXX" (sentto/mobile biçimi: + yok)
+static string ToMsisdn(string phone)
+{
+    var d = new string(phone.Where(char.IsAsciiDigit).ToArray());
+    if (d.StartsWith('0')) d = "9" + d;                 // 05XX… → 905XX…
+    else if (d.Length == 10) d = "90" + d;              // 5XX…  → 905XX…
+    return d.Length == 12 &amp;&amp; d.StartsWith("905") ? d : throw new ArgumentException("TR cep numarası değil");
+}
+
+// 1) Tekil SMS — bilgilendirme (işlemsel)
+var sms = await CallAsync("sms/send", new JsonObject
+{
+    ["title"] = "MARKAADI",                           // onaylı başlık, büyük/küçük harf duyarlı
+    ["sentto"] = ToMsisdn("+90 5XX XXX XX XX"),       // yer tutucu; gerçek numarayla değiştir
+    ["text"] = "Siparişiniz kargoya verildi. Takip no: {TAKIP_NO}",
+    ["sms_lang"] = 1,                                  // 0 EN · 1 TR · 2 AR/Unicode (vars.)
+    ["content_type"] = 0                               // 0 işlemsel · 1 yüksek kalite · 2 reklam
+});
+var smsId = sms["sms_id"]!.GetValue&lt;long&gt;();
+Console.WriteLine($"sms_id={smsId} segment={sms["number_of_sms"]}");
+
+// 2) OTP — kodu TurkeySMS üretir; metinde TS-CODE zorunlu. Cevapta kod DÖNMEZ.
+await CallAsync("otp/detailed", new JsonObject
+{
+    ["mobile"] = ToMsisdn("+90 5XX XXX XX XX"),
+    ["title"] = "MARKAADI",
+    ["text"] = "MARKAADI dogrulama kodunuz: TS-CODE. 5 dakika gecerlidir, kimseyle paylasmayin.",   // Türkçe karaktersiz → 1 segment
+    ["lang"] = 1,
+    ["digits"] = 6
+});
+
+// 2b) Kodu kendin doğrulayacaksan: kendin üret, /sms/send ile işlemsel gönder, özetini sakla
+var code = RandomNumberGenerator.GetInt32(0, 1_000_000).ToString("D6");
+await CallAsync("sms/send", new JsonObject
+{
+    ["title"] = "MARKAADI",
+    ["sentto"] = ToMsisdn("+90 5XX XXX XX XX"),
+    ["text"] = $"MARKAADI dogrulama kodunuz: {code}. 5 dakika gecerlidir, kimseyle paylasmayin.",
+    ["sms_lang"] = 1,
+    ["content_type"] = 0
+});
+// sakla: SHA256(code + kullanıcı), son geçerlilik = şimdi + 5 dk, deneme sayacı (ör. en çok 5)
+
+// 3) Durum sorgula (webhook yoksa): queued → sent → delivered | failed | expired
+var st = await CallAsync("sms/status", new JsonObject { ["sms_id"] = smsId });
+Console.WriteLine(st["status"]);</code></pre>
+
+        <p class="pre-label">Teslim webhook'u + imza ve zaman damgası denetimi (ASP.NET Core minimal API)</p>
+<pre><code>// Ayrı proje: Microsoft.NET.Sdk.Web, .NET 8+
+using System.Collections.Concurrent;
+using System.Globalization;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json.Nodes;
+
+var app = WebApplication.CreateBuilder(args).Build();
+var secret = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TURKEYSMS_WEBHOOK_SECRET")
+             ?? throw new InvalidOperationException("TURKEYSMS_WEBHOOK_SECRET yok"));
+var seen = new ConcurrentDictionary&lt;string, byte&gt;();   // örnek; üretimde DB'de benzersiz anahtar
+
+app.MapPost("/sms/teslim", async (HttpRequest req) =&gt;
+{
+    // 1) Ham gövde: imza bayt bayt bunun üzerinden (önce ayrıştırıp yeniden yazma)
+    using var ms = new MemoryStream();
+    await req.Body.CopyToAsync(ms);
+    var raw = ms.ToArray();
+
+    // 2) X-TurkeySMS-Signature: "sha256=&lt;hex&gt;" = HMAC(gövde, webhook secret)
+    var parts = req.Headers["X-TurkeySMS-Signature"].ToString().Split('=', 2);
+    if (parts.Length != 2 || parts[0] != "sha256") return Results.StatusCode(403);
+    byte[] got;
+    try { got = Convert.FromHexString(parts[1]); } catch (FormatException) { return Results.StatusCode(403); }
+    if (!CryptographicOperations.FixedTimeEquals(got, HMACSHA256.HashData(secret, raw)))
+        return Results.StatusCode(403);                // sabit zamanlı karşılaştırma
+
+    // 3) Tekrar oynatma: X-TurkeySMS-Timestamp ±5 dk (ISO-8601; Unix saniyesi gelirse onu da kabul et)
+    var tsText = req.Headers["X-TurkeySMS-Timestamp"].ToString();
+    DateTimeOffset ts;
+    if (long.TryParse(tsText, out var unix)) ts = DateTimeOffset.FromUnixTimeSeconds(unix);
+    else if (!DateTimeOffset.TryParse(tsText, CultureInfo.InvariantCulture,
+                                      DateTimeStyles.AssumeUniversal, out ts)) return Results.StatusCode(403);
+    if ((DateTimeOffset.UtcNow - ts).Duration() &gt; TimeSpan.FromMinutes(5)) return Results.StatusCode(403);
+
+    // 4) Ayrıştır, tekilleştir, hemen 200 dön (2xx dışı = yeniden deneme)
+    var ev = JsonNode.Parse(raw)!;
+    var type = ev["event_type"]?.GetValue&lt;string&gt;();      // sms.sent | sms.delivered | sms.failed | otp.verified | key.test
+    var smsId = ev["data"]?["sms_id"]?.GetValue&lt;long&gt;();
+    var status = ev["data"]?["status"]?.GetValue&lt;string&gt;();
+    if (!seen.TryAdd($"{type}:{smsId}:{status}", 0)) return Results.Ok();   // aynı olay ikinci kez
+
+    // Sıra garanti değil: "delivered" kaydedildiyse geç gelen "sent" durumu geri almasın.
+    // İşi kuyruğa at (DB güncelle vb.), burada bekletme.
+    Console.WriteLine($"{type} sms_id={smsId} status={status}");
+    return Results.Ok();
+});
+
+app.Run();</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="hesap"><span class="h-num">§ 9</span>TurkeySMS: hesap türü, belge, fiyat</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Bilgi (12 Ekim 2026, sağlayıcı sayfası)</th></tr></thead>
+            <tbody>
+              <tr><td>Hesap türleri</td><td>Bireysel · Bireysel–Şahıs Şirketi · Kurumsal (tüzel) · Dernek/Vakıf · Resmî Kurum → <strong>şirketsiz başvuru kabul ediliyor</strong></td></tr>
+              <tr><td>Bireysel belgeler</td><td>Kimlik (ön-arka), e-Devlet yerleşim yeri belgesi (PDF, karekodlu), tüm sayfaları ıslak imzalı abone sözleşmesi. İnceleme "genellikle 15–30 dk"</td></tr>
+              <tr><td>Şirket / dernek / kamu</td><td>Belge listesi yayımlanmamış; destekten istenir</td></tr>
+              <tr><td>Yabancı uyruklu / yurt dışı şirket</td><td>Ayrı tür yok</td></tr>
+              <tr><td>Yetki</td><td>"BTK tarafından yetkilendirilmiş işletme" beyanı + BTK, İYS, KVKK, ISO 27001 rozetleri; yetki türü/no yazmıyor → BTK işletmeci listesinden kendin doğrula</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Paket fiyatı — aynı sayfada iki kaynak</caption>
+            <thead><tr><th>Kaynak</th><th>Paket</th><th>Toplam</th><th>SMS başı <span class="tag tag--warn">TAHMİN</span></th></tr></thead>
+            <tbody>
+              <tr><td>Sayfada görünen metin</td><td>10.000 SMS</td><td>180 ₺ (KDV + ÖİV dahil, 365 gün)</td><td>0,018 ₺</td></tr>
+              <tr><td>Yapısal veri (schema.org)</td><td>1.000 / 2.000 / 5.000 / 10.000</td><td>160 / 260 / 480 / 800 ₺</td><td>0,16 / 0,13 / 0,096 / 0,08 ₺</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><span class="tag tag--bad">ÇELİŞKİ</span> 180 ₺ piyasanın (§ 13) yaklaşık onda biri; yapısal veri piyasayla uyumlu → satın almadan önce sağlayıcıya sor.</li>
+          <li>OTP fiyatı, yurt dışı fiyatı ve başlık ücreti sayfada yok.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="btk"><span class="h-num">§ 10</span>BTK, başlık ve abonelik</h2>
+
+        <p>SMS'i operatöre teslim eden firma (Netgsm, İleti Merkezi, Verimor, TurkeySMS vb.) BTK yetkili işletmecidir; gönderen onun <strong>abonesi</strong>dir → kayıt bir abonelik sözleşmesidir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>1 Nisan 2026'da yürürlüğe giren BTK düzenlemeleri — özet AA ve basından <span class="tag tag--info">3. TARAF</span> (karar metnine ulaşılamadı)</caption>
+            <thead><tr><th>Konu</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td>Başlık biçimi</td><td>Alfanümerik 3–11 karakter; ulusal plandaki kısa numaralar dışında <strong>yalnız rakamlı başlık yok</strong> (0850 / coğrafi numaradan toplu SMS durdu)</td></tr>
+              <tr><td>Güvenli e-imza</td><td>Gönderim yetkili kişinin güvenli e-imzasıyla (uygulamada panele giriş / başvuruda)</td></tr>
+              <tr><td>KEP</td><td>İşletmeciler abonelik başvurusunu ve belgeleri KEP'ten toplar</td></tr>
+              <tr><td>Yurt dışı + bağlantı</td><td>Yurt dışından gelen, URL içeren SMS/MMS operatörce iletilmez</td></tr>
+              <tr><td>Yaptırım</td><td>Yanıltıcı / izinsiz iletişimde idari yaptırım; sürerse işletmecinin çağrı taşıma/sonlandırma hizmeti kısıtlanabilir</td></tr>
+              <tr><td>İYS</td><td>Kalkmıyor; izin yönetimi İYS'de sürüyor</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Başvuru türüne göre tipik belgeler — İleti Merkezi listesi <span class="tag tag--ok">RESMÎ</span> (TurkeySMS bireysel listesi § 9)</caption>
+            <thead><tr><th>Başvuran</th><th>Belgeler</th><th>Başlık</th></tr></thead>
+            <tbody>
+              <tr><td>Gerçek kişi (şirketsiz)</td><td>Kimlik, e-Devlet yerleşim yeri belgesi</td><td>Ad-soyad; unvan (Dr., Av.) için unvan belgesi</td></tr>
+              <tr><td>Şahıs şirketi, limited, anonim</td><td>Yetkili kimliği, imza sirküleri / yetki belgesi, ticaret sicil gazetesi veya sicil kaydı</td><td>Şirket unvanı; tescilli marka için marka belgesi; bayi/temsilci için yetki yazısı</td></tr>
+              <tr><td>Dernek / STK</td><td>Yetkili kimliği, STK belgesi veya karar defteri, yerleşim yeri belgesi</td><td>Dernek adı</td></tr>
+              <tr><td>Hepsi</td><td>Sözleşme e-Devlet <strong>BTK e-Kayıt</strong> ile onaylanır; belgeler <strong>KEP'ten KEP'e</strong> (bireyselde kişisel KEP), ıslak imzalı tarama ya da e-imzalı PDF</td><td>Başlık onayı ayrı süreç: birkaç gün – 2 hafta</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Gizli maliyet: e-imza ve KEP</p>
+          <p>KEP adresi ve nitelikli e-imza yoksa yıllık ücretleri ve kurulum süresi (birkaç gün) toplam maliyete eklenir; tutar sertifika/KEP sağlayıcısına göre değişir.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="iys-6563"><span class="h-num">§ 11</span>6563 sayılı kanun, İYS ve izin</h2>
+
+        <p>Çerçeve: <span class="law">6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun</span> (kabul 23.10.2014) + <span class="law">Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik</span> (RG 15.07.2015/29417, son değişiklik 28.08.2020) <span class="tag tag--ok">RESMÎ</span>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Madde</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td>Kanun md. 2</td><td>Ticari elektronik ileti = SMS, e-posta, arama gibi araçlarla "ticari amaçlarla gönderilen" ileti</td></tr>
+              <tr><td>Kanun md. 6/1</td><td>Alıcının <strong>önceden onayı</strong> (yazılı / elektronik). Alıcı iletişim bilgisini kendi verdiyse, aldığı mal/hizmetin değişiklik, kullanım ve bakım iletisi için ayrıca onay gerekmez</td></tr>
+              <tr><td>Kanun md. 6/2</td><td>Esnaf ve tacire onaysız gönderilebilir; ret edene durulur, adresleri İYS'ye kaydedilir</td></tr>
+              <tr><td>Kanun md. 8</td><td>Gerekçesiz ret hakkı; her iletide kolay ve ücretsiz ret yolu; ret sonrası <strong>3 iş günü</strong> içinde gönderim durur</td></tr>
+              <tr><td>Yönetmelik md. 8</td><td>SMS'te tacir için MERSİS no; esnaf için ad-soyad + T.C./vergi kimlik no; en az bir iletişim bilgisi; nitelik anlaşılmıyorsa "tanıtım / kampanya / bilgilendirme" ibaresi</td></tr>
+              <tr><td>Yönetmelik md. 5, 7, 11</td><td>Ticari ileti gönderen İYS'ye kaydolur; İYS'de onayı olmayana ticari ileti yok; İYS dışında alınan onay 3 iş gününde yüklenmezse geçersiz; aracı (SMS firması) gönderimden önce İYS'yi denetler. Kayıt için ciro / adet eşiği yok</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>6563 md. 12 — 2026 idari para cezası (Ticaret Bakanlığı tebliği, RG 25.12.2025/33118)</caption>
+            <thead><tr><th>Bent</th><th>Aykırılık (özet)</th><th>2026 alt–üst</th></tr></thead>
+            <tbody>
+              <tr><td>12/1-a</td><td>Onaysız ticari ileti (md. 6/1), içerik onaya aykırı (md. 7/1) vb.</td><td>2.859 – 14.309 TL</td></tr>
+              <tr><td>12/1-b</td><td>İletide kimlik/iletişim bilgisi eksik (md. 7/2-3) vb.</td><td>2.859 – 28.620 TL</td></tr>
+              <tr><td>12/1-c</td><td>Ret yolu yok, ret 3 iş gününde uygulanmadı (md. 8/2-3) vb.</td><td>5.723 – 42.930 TL</td></tr>
+              <tr><td>12/2</td><td>Bir defada birden çok kişiye onaysız gönderim</td><td>(a) cezası <strong>on katına kadar</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li>Tutarlar her yıl yeniden değerlenir.</li>
+          <li>Şikâyet: Ticaret Bakanlığı Ticari Elektronik İleti Şikâyet Sistemi (TİSS, e-Devlet).</li>
+          <li>Telefon numarası kişisel veridir → ayrıca KVKK (aydınlatma, saklama süresi).</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="ileti-turleri"><span class="h-num">§ 12</span>OTP, bilgilendirme ve ticari ileti farkı</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Tür</th><th>Örnek</th><th>Önceden onay</th><th>İYS</th><th>Dayanak</th></tr></thead>
+            <tbody>
+              <tr><td>OTP / doğrulama kodu</td><td>"Giriş kodun: 482913"</td><td>Gerekmez <span class="tag tag--warn">YORUM</span></td><td>Yapılmaz</td><td>Ticari amaç/tanıtım yok → md. 2 tanımı dışında; koda reklam eklenirse ticari ileti</td></tr>
+              <tr><td>Bilgilendirme</td><td>Sipariş/kargo, abonelik yenileme, ödeme/borç hatırlatma, şifre değişikliği</td><td>Gerekmez</td><td>Yapılmaz</td><td>Yönetmelik md. 6/1-2, 6/5; <strong>mal/hizmet tanıtılamaz</strong></td></tr>
+              <tr><td>Ticari ileti (gerçek kişiye)</td><td>Kampanya, indirim, yeni ürün, "uygulamaya geri dön"</td><td><strong>Gerekir</strong></td><td><strong>Zorunlu</strong></td><td>6563 md. 6/1, Yönetmelik md. 5</td></tr>
+              <tr><td>Ticari ileti (esnaf/tacire)</td><td>B2B tanıtım</td><td>Gerekmez (ret edene kadar)</td><td>Ret durumu İYS'den</td><td>6563 md. 6/2, Yönetmelik md. 6/3, 6/6</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Sık hata</p>
+          <p>"Bilgilendirme" etiketiyle kampanya göndermek. Ürün/hizmet tanıtılıyorsa başlık ne derse desin ticari iletidir. API'deki <code>content_type</code> (0 işlemsel · 2 reklam) beyandır; yanlış beyan hesap kapatma ve cezaya yol açabilir.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="fiyatlar"><span class="h-num">§ 13</span>Fiyat aralıkları</h2>
+
+        <p>Sağlayıcıların kendi fiyat sayfaları, 12 Ekim 2026 <span class="tag tag--ok">RESMÎ</span>; KDV (%20) + ÖİV (%10) <strong>dahil</strong>, paketler 1 yıl. Parantez = SMS başı ₺ (toplam ÷ adet, 1 segment) <span class="tag tag--warn">TAHMİN</span>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yurt içi toplu SMS, standart paket (yeni abone kampanyası hariç)</caption>
+            <thead><tr><th>Sağlayıcı</th><th>1.000</th><th>10.000</th><th>100.000</th><th>1.000.000</th></tr></thead>
+            <tbody>
+              <tr><td>Netgsm</td><td>370 ₺ (0,37)</td><td>1.699 ₺ (0,17)</td><td>14.798 ₺ (0,148)</td><td>81.000 ₺ (0,081)</td></tr>
+              <tr><td>İleti Merkezi</td><td>359 ₺ (0,36)</td><td>1.599 ₺ (0,16)</td><td>14.499 ₺ (0,145)</td><td>73.999 ₺ (0,074)</td></tr>
+              <tr><td>Verimor (yıllık)</td><td>369 ₺ (0,37)</td><td>1.699 ₺ (0,17)</td><td>14.499 ₺ (0,145)</td><td>—</td></tr>
+              <tr><td>TurkeySMS</td><td>160 ₺ (0,16)</td><td>800 ₺ <span class="tag tag--bad">ÇELİŞKİ</span> (§ 9)</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Yeni abone kampanyası:</strong> 10.000 adet Netgsm 899 ₺, İleti Merkezi 879 ₺, Verimor 869 ₺ (≈ 0,09 ₺). Verimor yeni aboneye 2.000 SMS ücretsiz; Turkcell Mesaj Üssü 50 deneme SMS'i.</li>
+          <li><strong>Netgsm OTP tarifesi:</strong> 1.000 = 400 ₺ (0,40), 10.000 = 2.790 ₺ (0,28), 100.000 = 17.940 ₺ (0,18); paket dışı tekil 0,48 ₺. Yalnız API, tek boy, Türkçe karaktersiz, toplu / ileri tarihli değil. Verimor'da OTP = SMS fiyatı.</li>
+          <li><strong>Kaba kural</strong> <span class="tag tag--warn">TAHMİN</span>: az hacim 0,30–0,40 ₺, ~10 bin 0,16–0,17 ₺, milyon 0,05–0,08 ₺; OTP biraz pahalı. TL fiyatlar yılda birkaç kez güncellenir.</li>
+          <li><strong>Türkçe karakter</strong> 70'lik segmente düşürebilir → uzun Türkçe metin 2–3 kat kredi. Bazı sağlayıcılar özel Türkçe kodlama sunar; kendi kuralına bak.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="saglayicilar"><span class="h-num">§ 14</span>Sağlayıcı kıyası</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yurt içi sağlayıcılar (12 Ekim 2026, sağlayıcı sayfaları)</caption>
+            <thead><tr><th>Sağlayıcı</th><th>Bireysel (şirketsiz)</th><th>OTP</th><th>Diğer kanal</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>TurkeySMS</td><td>Var</td><td>Var, ayrı uç</td><td>—</td><td>REST v4, OpenAPI, webhook, idempotency; gelen SMS/HLR/ses yok; fiyat sayfası çelişkili</td></tr>
+              <tr><td>Netgsm</td><td>Sayfada açık değil <span class="tag tag--warn">TEYİT</span></td><td>Var, ayrı tarife</td><td>WhatsApp OTP, santral</td><td>Geniş entegrasyon; ayrıntılı fiyat sayfası</td></tr>
+              <tr><td>İleti Merkezi</td><td>Var (ad-soyad ile)</td><td>Var</td><td>Yurt dışı SMS fiyatı</td><td>Belge listesi açık; KEP + BTK e-Kayıt; 30 gün iade</td></tr>
+              <tr><td>Verimor</td><td>Var ("bireysel abonelik başvurusu yapılabilir")</td><td>Var</td><td>WhatsApp OTP, bulut santral, IVR</td><td>Aylık / yıllık paket; yeni aboneye 2.000 ücretsiz</td></tr>
+              <tr><td>Mutlucell</td><td>Bilinmiyor <span class="tag tag--warn">TEYİT</span></td><td>Bilinmiyor</td><td>—</td><td>Resmî site okunamadı (sertifika hatası); fiyat yok</td></tr>
+              <tr><td>Turkcell Mesaj Üssü</td><td>Kurumsal hat şartı <span class="tag tag--bad">ÇELİŞKİ</span> (SSS "iş yeri ve bireyler")</td><td>Sayfada yok</td><td>MMS</td><td>Web arayüzü odaklı; API anlatılmıyor; 50 deneme SMS; faturaya yansıtma</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Seçerken bak:</strong> (1) BTK yetkisi, (2) bireysel/şahıs/tüzel kabulü, (3) OTP hattı ve gerçek teslim süresi, (4) teslim raporu (webhook / sorgu), (5) başarısız SMS iadesi, (6) Türkçe karakter ve boy hesabı, (7) İYS entegrasyonu (ticari ileti için), (8) API belgesi (OpenAPI, SDK).</p>
+
+        <!-- ===================================================== -->
+        <h2 id="yurt-disi"><span class="h-num">§ 15</span>Yurt dışından gönderim (Twilio, Vonage)</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Durum</th></tr></thead>
+            <tbody>
+              <tr><td>Fiyat</td><td>Twilio, Türkiye: segment başı <strong>0,0305 USD</strong> (+ başarısız mesaja 0,001 USD) <span class="tag tag--ok">RESMÎ</span>; yurt içi 10 bin paketin birkaç katı <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Başlık kaydı</td><td>Twilio ve Vonage önceden kayıt şartı koşuyor; Twilio onayı ~2 hafta. "<strong>18 Kasım 2026'dan sonra kayıtsız başlık Türk şebekelerinde engellenecek</strong>" <span class="tag tag--info">3. TARAF</span> (sağlayıcı beyanı; BTK metniyle doğrulanamadı)</td></tr>
+              <tr><td>Promosyon</td><td>Twilio 15 Şubat 2021'den beri Türkiye'ye promosyonel trafik kabul etmiyor</td></tr>
+              <tr><td>URL</td><td>1 Nisan 2026'dan beri yerel şirketi olmayan, URL'li mesajı Türk numarasına gönderemiyor (§ 10)</td></tr>
+              <tr><td>İki yönlü / kısa kod</td><td>Twilio'da Türkiye için yok; sabit hat ve KKTC'ye teslim yok</td></tr>
+              <tr><td>Yasak içerik</td><td>Kumar, siyaset, din, P2P trafik</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Sonuç:</strong> yurt dışı API Türkiye'deki kullanıcıya yalnız OTP / işlemsel, başlık kaydı sonrası ve bağlantısız metinle anlamlı. Yurt içi sağlayıcı ucuz ve öngörülebilir; ama Türkiye'de kimlik/şirket, çoğunlukla e-imza + KEP ister.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="alternatifler"><span class="h-num">§ 16</span>SMS'e alternatifler: Telegram Gateway ve WhatsApp</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Doğrulama kodu için SMS dışı kanallar</caption>
+            <thead><tr><th>Kanal</th><th>Fiyat</th><th>Artı</th><th>Eksi</th></tr></thead>
+            <tbody>
+              <tr><td>Telegram Gateway</td><td><strong>0,01 USD</strong> / teslim edilen kod <span class="tag tag--ok">RESMÎ</span>; teslim edilmeyen iade; kendi numarana test ücretsiz</td><td>BTK başlık / SMS aboneliği yok; <code>checkSendAbility</code> ile önce sor (ücretsiz)</td><td>Yalnız Telegram kullananlar; numara gönüllü verilmiş olmalı; ön ödemeli bakiye</td></tr>
+              <tr><td>WhatsApp authentication şablonu</td><td>Mesaj başı, alıcı ülkesine göre; Meta 1 Nisan 2026'da Türkiye oranını düşürdü <span class="tag tag--ok">RESMÎ</span>; ~0,0009 USD <span class="tag tag--info">3. TARAF</span></td><td>Türkiye'de yaygın, çok ucuz; Netgsm/Verimor aracılık ediyor</td><td>Meta işletme doğrulaması + şablon onayı; WhatsApp'ı olmayana ulaşmaz</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Desen: önce Telegram / WhatsApp, ulaşmazsa SMS. Ayrıntı: <a href="01-telegram-bot-api.html#gateway">Telegram Bot API § 12 (Gateway)</a>, <a href="02-whatsapp-business-api.html">WhatsApp Business API</a>.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="karar"><span class="h-num">§ 17</span>Durum → Sonuç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>12 Ekim 2026 kurallarıyla; hukuki danışmanlık değildir</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Şirketsiz bireysel geliştirici, OTP, düşük hacim</strong></td><td>Bireysel abonelik kabul eden sağlayıcı (TurkeySMS, İleti Merkezi, Verimor) + ad-soyad başlığı; ya da abonelik olmadan Telegram Gateway / WhatsApp. İYS yok. e-Devlet yerleşim belgesi, çoğu yerde kişisel KEP + e-imza</td></tr>
+              <tr><td><strong>Bireysel, kampanya/duyuru</strong></td><td>Ticari ileti → izin + İYS + kimlik + ret yolu. Şirketsiz pratikte zor; gelir varsa vergisel olarak şirket gündeme gelir → önce danışmanlık</td></tr>
+              <tr><td><strong>Şahıs şirketi, OTP + bilgilendirme</strong></td><td>Şirket unvanıyla abonelik ve başlık; vergi levhası / sicil. İYS yok, içerikte tanıtım olmamalı</td></tr>
+              <tr><td><strong>Şahıs / limited / anonim, kampanya</strong></td><td>İYS'ye hizmet sağlayıcı kaydı; izinleri yükle (dışarıdakileri 3 iş gününde); SMS'te MERSİS (tacir) ya da ad-soyad + vergi no (esnaf); ret yolu, 3 iş gününde uygula; sağlayıcının İYS entegrasyonu</td></tr>
+              <tr><td><strong>Limited/anonim, yüz binler–milyonlar</strong></td><td>Birden çok tekliften seç (milyonda 0,05–0,08 ₺); OTP ayrı hatta; webhook ile teslim raporu; ikinci sağlayıcı yedek</td></tr>
+              <tr><td><strong>Esnaf/tacire (B2B) tanıtım</strong></td><td>Önceden onay şart değil; ret edene gönderme, adresleri İYS'ye kaydet, reddi İYS'den denetle</td></tr>
+              <tr><td><strong>Türkiye'de şirketi olmayan yabancı firma, OTP</strong></td><td>Twilio/Vonage + Türkiye başlık kaydı (18 Kasım 2026 sonrası kayıtsız engellenecek — sağlayıcı beyanı); URL yok; ya da Telegram / WhatsApp</td></tr>
+              <tr><td><strong>Yabancı firma, kampanya</strong></td><td>Pratikte yok (promosyon kabul edilmiyor, URL engelli) → Türkiye'de yerel şirket ya da ajans/iş ortağı</td></tr>
+              <tr><td><strong>Türk firması, yurt dışındaki kullanıcıya</strong></td><td>Yurt içi sağlayıcının yurt dışı tarifesi (çoğu paket dışı) ya da uluslararası API; hedef ülkenin başlık kuralı</td></tr>
+              <tr><td><strong>Çok düşük hacim (ayda birkaç yüz OTP)</strong></td><td>En küçük paket / kampanyalı ücretsiz kredi; ya da Telegram Gateway (0,01 USD/kod), SMS yalnız yedek</td></tr>
+              <tr><td><strong>Kodu kendi sunucunda doğrulaman gerekiyor</strong></td><td>TurkeySMS OTP uçları kodu döndürmez → kodu kendin üret, <code>/sms/send</code> + <code>content_type: 0</code> (§ 8); ya da doğrulama ucu sunan sağlayıcı</td></tr>
+              <tr><td><strong>Teslim raporu gerekiyor</strong></td><td>Webhook + HMAC imza + zaman damgası + tekilleştirme (§ 6); webhook kurulamıyorsa <code>/sms/status</code> sorgusu</td></tr>
+              <tr><td><strong>Gelen SMS (iki yönlü)</strong></td><td>Destekleyen yurt içi sağlayıcı (TurkeySMS v4'te yok); yurt dışı API'de Türkiye için yok</td></tr>
+              <tr><td><strong>Sesli OTP / IVR</strong></td><td>Santral/IVR olan sağlayıcı (ör. Verimor bulut santral); TurkeySMS'te ses yok</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynaklar"><span class="h-num">§ 18</span>Kaynaklar</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://turkeysms.com.tr/developer">TurkeySMS — Geliştirici sayfası (SDK, sandbox, "5 deneme" webhook beyanı)</a></li>
+          <li><span class="src-n">02</span><a href="https://turkeysms.com.tr/openapi.json">TurkeySMS — OpenAPI 3.1 belgesi (API 4.0.0, x-responseCodes, webhooks.deliveryEvent)</a></li>
+          <li><span class="src-n">03</span><a href="https://turkeysms.com.tr/docs">TurkeySMS — V4 dokümantasyon</a>: <a href="https://turkeysms.com.tr/docs/authentication">kimlik</a> · <a href="https://turkeysms.com.tr/docs/send-sms">SMS</a> · <a href="https://turkeysms.com.tr/docs/otp">OTP</a> · <a href="https://turkeysms.com.tr/docs/webhooks">webhook</a> · <a href="https://turkeysms.com.tr/docs/reliability">güvenilirlik</a> · <a href="https://turkeysms.com.tr/docs/billing">ücretlendirme</a> · <a href="https://turkeysms.com.tr/docs/delivery-lifecycle">yaşam döngüsü</a> · <a href="https://turkeysms.com.tr/docs/response-codes">cevap kodları</a></li>
+          <li><span class="src-n">04</span><a href="https://turkeysms.com.tr/Packages">TurkeySMS — Paketler ve fiyatlar</a></li>
+          <li><span class="src-n">05</span><a href="https://turkeysms.com.tr/hesap-turleri">TurkeySMS — Hesap türleri ve belgeler</a></li>
+          <li><span class="src-n">06</span><a href="https://www.mevzuat.gov.tr/mevzuatmetin/1.5.6563.pdf">6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun (md. 2, 6, 7, 8, 12 ve 2026 ceza tablosu)</a></li>
+          <li><span class="src-n">07</span><a href="https://ticaret.gov.tr/ic-ticaret/elektronik-ticaret/mevzuat">Ticaret Bakanlığı — Elektronik ticaret mevzuatı (Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik)</a></li>
+          <li><span class="src-n">08</span><a href="https://iys.org.tr/">İleti Yönetim Sistemi (İYS)</a></li>
+          <li><span class="src-n">09</span><a href="https://www.aa.com.tr/tr/ekonomi/rahatsiz-edici-sms-ve-aramalara-karsi-yeni-tedbirler-devrede/3889157">Anadolu Ajansı — Rahatsız edici SMS ve aramalara karşı yeni tedbirler (BTK kararları özeti)</a> <span class="tag tag--info">3. TARAF</span></li>
+          <li><span class="src-n">10</span><a href="https://www.btk.gov.tr/">BTK — karar metinleri ve işletmeci listesi</a></li>
+          <li><span class="src-n">11</span><a href="https://www.iletimerkezi.com/toplu-sms-gerekli-evraklar">İleti Merkezi — Gerekli evraklar</a> ve <a href="https://www.iletimerkezi.com/toplu-sms-fiyatlari">fiyatlar</a></li>
+          <li><span class="src-n">12</span><a href="https://www.netgsm.com.tr/fiyatlar/toplu-sms">Netgsm — Toplu SMS fiyatları</a> ve <a href="https://www.netgsm.com.tr/fiyatlar/otp-sms">OTP SMS fiyatları</a></li>
+          <li><span class="src-n">13</span><a href="https://www.verimor.com.tr/sms-paketleri/">Verimor — SMS paketleri</a></li>
+          <li><span class="src-n">14</span><a href="https://www.turkcell.com.tr/kurumsal/dijital-is-servisleri/diger-kurumsal-cozumler/turkcell-mesaj-ussu">Turkcell — Mesaj Üssü</a></li>
+          <li><span class="src-n">15</span><a href="https://www.twilio.com/en-us/guidelines/tr/sms">Twilio — Türkiye SMS kuralları</a> ve <a href="https://www.twilio.com/en-us/sms/pricing/tr">Türkiye SMS fiyatı</a></li>
+          <li><span class="src-n">16</span><a href="https://api.support.vonage.com/hc/en-us/articles/204017543-Turkey-SMS-Features-and-Restrictions">Vonage — Turkey SMS Features and Restrictions</a></li>
+          <li><span class="src-n">17</span><a href="https://core.telegram.org/gateway">Telegram Gateway</a></li>
+          <li><span class="src-n">18</span><a href="https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing">Meta — WhatsApp Business Platform fiyatlandırması</a> &middot; tutar için <a href="https://www.ycloud.com/blog/whatsapp-api-message-pricing-update-effective-april-1-2026">YCloud özeti</a> <span class="tag tag--info">3. TARAF</span></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

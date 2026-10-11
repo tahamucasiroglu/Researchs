@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesajlaşma Altyapıları — Rehberler</title>
+<meta name="description" content="Telegram, WhatsApp, BiP ve SMS ile uygulamadan mesaj göndermek için Türkçe başvuru sayfaları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* kod blokları */
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .pre-label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.2rem 0 -.6rem; }
+
+  /* örnek mesaj görünümü (saf HTML/CSS, ekran görüntüsü değil) */
+  .tg-chat {
+    max-width: 24rem;
+    margin: 1.2rem 0 1.6rem;
+    padding: .9rem;
+    background: var(--paper-rail);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    font-family: var(--f-body);
+  }
+  .tg-chat__head { display: flex; align-items: center; gap: .55rem; padding-bottom: .65rem; margin-bottom: .75rem; border-bottom: 1px solid var(--rule-soft); }
+  .tg-chat__avatar { width: 2rem; height: 2rem; border-radius: 50%; background: var(--info-wash); color: var(--info); display: grid; place-items: center; font-size: .75rem; font-weight: 600; border: 1px solid var(--rule); }
+  .tg-chat__name { font-weight: 600; font-size: .9rem; color: var(--ink); line-height: 1.1; }
+  .tg-chat__sub { font-size: .72rem; color: var(--ink-faint); }
+  .tg-row { display: flex; margin: .35rem 0; }
+  .tg-row--out { justify-content: flex-end; }
+  .tg-bubble { max-width: 85%; padding: .5rem .7rem .35rem; border-radius: 12px; font-size: .88rem; line-height: 1.4; color: var(--ink); background: var(--paper-raise); border: 1px solid var(--rule); }
+  .tg-row--out .tg-bubble { background: var(--accent-wash); border-color: color-mix(in srgb, var(--accent) 30%, transparent); border-bottom-right-radius: 4px; }
+  .tg-row--in .tg-bubble { border-bottom-left-radius: 4px; }
+  .tg-time { display: block; text-align: right; font-size: .66rem; color: var(--ink-faint); margin-top: .2rem; }
+  .tg-kb { display: grid; gap: .3rem; margin-top: .3rem; max-width: 85%; }
+  .tg-kb__row { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .3rem; }
+  .tg-btn { padding: .45rem .5rem; text-align: center; font-size: .82rem; font-weight: 500; color: var(--info); background: var(--info-wash); border: 1px solid color-mix(in srgb, var(--info) 25%, transparent); border-radius: 8px; }
+  .tg-toast { margin: .6rem auto 0; width: fit-content; padding: .35rem .7rem; font-size: .76rem; color: var(--paper); background: var(--ink-soft); border-radius: 8px; }
+  .tg-replykb { margin-top: .75rem; padding-top: .6rem; border-top: 1px solid var(--rule-soft); display: grid; gap: .3rem; }
+  .tg-replykb .tg-btn { color: var(--ink); background: var(--paper-raise); border-color: var(--rule); }
+  .tg-caption { font-size: .74rem; color: var(--ink-faint); margin-top: .5rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">BÖLÜMLER</button>
+  <span class="topbar__title">Mesajlaşma Altyapıları</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehberler &middot; 2026</span>
+      <span class="brand__name">Mesajlaşma Altyapıları</span>
+      <span class="brand__sub">Telegram &middot; WhatsApp &middot; BiP &middot; SMS</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">API'ler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-telegram-bot-api.html"><span class="nav-num">01</span><span>Telegram Bot API</span></a></li>
+          <li><a class="nav-item" href="02-whatsapp-business-api.html"><span class="nav-num">02</span><span>WhatsApp Business API</span></a></li>
+          <li><a class="nav-item" href="03-bip-kesfet-api.html"><span class="nav-num">03</span><span>BiP Keşfet API</span></a></li>
+          <li><a class="nav-item" href="04-sms-hizmetleri.html"><span class="nav-num">04</span><span>SMS Hizmetleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/11-odeme-altyapilari.html"><span class="nav-num">&rarr;</span><span>Ödeme Altyapıları</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Rehberler &middot; Mesajlaşma Altyapıları</div>
+        <h1 class="page-title">Uygulamadan <em>mesaj göndermek</em></h1>
+        <p class="lede">Bir uygulamadan Türkiye'deki kullanıcılara Telegram, WhatsApp, BiP veya SMS ile mesaj göndermek için kısa başvuru sayfaları: uç nokta tabloları, JSON örnekleri, webhook ve imza denetimi, C# örnekleri, sınırlar, fiyatlar ve Türkiye'deki kurallar (BTK, İYS, 6563 sayılı Kanun).</p>
+        <div class="head-meta">Araştırma tarihi: 12 Ekim 2026 &middot; Fiyat ve kurallar sık değişir; kullanmadan önce resmî sayfadan teyit et &middot; Hukuki danışmanlık değildir</div>
+      </header>
+
+      <div class="content">
+
+        <h2 id="sayfalar"><span class="h-num">§ 1</span>Sayfalar</h2>
+
+        <div class="cards">
+          <a class="card" href="01-telegram-bot-api.html">
+            <span class="card__num">01</span>
+            <h3 class="card__title">Telegram Bot API</h3>
+            <p class="card__desc">Ücretsiz HTTP bot arayüzü: BotFather, uç noktalar, klavyeler, derin bağlantı, getUpdates ve webhook, Telegram Gateway ile OTP, Stars ödemeleri.</p>
+            <span class="card__foot"><span class="tag">ücretsiz</span><span class="tag">C# örnekleri</span></span>
+          </a>
+          <a class="card" href="02-whatsapp-business-api.html">
+            <span class="card__num">02</span>
+            <h3 class="card__title">WhatsApp Business API</h3>
+            <p class="card__desc">Meta Cloud API: mesaj tipleri, şablonlar ve 24 saat penceresi, webhook imza denetimi, 2026 fiyat modeli, mesaj limitleri, onboarding ve yapay zekâ botu politikası.</p>
+            <span class="card__foot"><span class="tag">ücretli</span><span class="tag">C# örnekleri</span></span>
+          </a>
+          <a class="card" href="03-bip-kesfet-api.html">
+            <span class="card__num">03</span>
+            <h3 class="card__title">BiP Keşfet API (TES)</h3>
+            <p class="card__desc">BiP'te kurum servisi açma, TES REST uç noktaları, şablon/düğmeli/anket mesajları, geri besleme, oturum ve kota kuralları, REX ve ödeme API'si.</p>
+            <span class="card__foot"><span class="tag">yerli</span><span class="tag">C# örnekleri</span></span>
+          </a>
+          <a class="card" href="04-sms-hizmetleri.html">
+            <span class="card__num">04</span>
+            <h3 class="card__title">SMS Hizmetleri</h3>
+            <p class="card__desc">OTP, bilgilendirme ve ticari SMS: örnek SMS API'si, HMAC imzalı webhook, BTK başlık ve abonelik kuralları, İYS, yurt içi ve yurt dışı sağlayıcı kıyası.</p>
+            <span class="card__foot"><span class="tag">İYS / BTK</span><span class="tag">C# örnekleri</span></span>
+          </a>
+        </div>
+
+        <h2 id="hangisi"><span class="h-num">§ 2</span>Hangi kanal ne zaman?</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Durum &rarr; Sonuç (ayrıntısı her sayfanın karar tablosunda)</caption>
+            <thead><tr><th>Durum</th><th>Önerilen kanal</th></tr></thead>
+            <tbody>
+              <tr><td>Bütçe yok, kullanıcı Telegram'da</td><td><a href="01-telegram-bot-api.html">Telegram Bot API</a> — ücretsiz; ama bot ilk mesajı atamaz, kullanıcı başlatmalı.</td></tr>
+              <tr><td>Kullanıcı kitlesi WhatsApp'ta, işletme doğrulaması yapılabiliyor</td><td><a href="02-whatsapp-business-api.html">WhatsApp Cloud API</a> — mesaj başı ücretli, pencere dışı iletişim onaylı şablonla.</td></tr>
+              <tr><td>Kamu kurumu, okul veya yerli uygulama şartı</td><td><a href="03-bip-kesfet-api.html">BiP Keşfet API</a> — başvuruyla açılır, self-servis değil.</td></tr>
+              <tr><td>Uygulamasız herkese ulaşmak, giriş kodu (OTP)</td><td><a href="04-sms-hizmetleri.html">SMS</a> — başlık (gönderici adı) ve İYS kuralları geçerli; Telegram Gateway / WhatsApp authentication şablonu daha ucuz alternatif olabilir.</td></tr>
+              <tr><td>Ticari ileti (kampanya, indirim)</td><td>Kanal fark etmeksizin önceden onay ve İYS kaydı gerekir; ayrıntı <a href="04-sms-hizmetleri.html">SMS sayfası</a> ve <a href="../Sirket-Kurma/12-sirketsiz.html">Şirketsiz Ne Yapabilirsin?</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

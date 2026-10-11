@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BiP Keşfet API (TES) — Mesajlaşma Altyapıları</title>
+<meta name="description" content="BiP Keşfet API (TES) uç noktaları, gönderim ve geri besleme JSON örnekleri, şablon/düğmeli/anket mesajları, C# Basic Auth örneği, oturum ve kota kuralları, REX, ödeme, başvuru ve fiyat; Durum → Sonuç tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Kod blokları */
+  .content pre {
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: .85rem 1rem;
+    overflow-x: auto;
+    font-size: .8rem;
+    line-height: 1.5;
+    margin: .6rem 0 1.2rem;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+  .codelabel { font-family: var(--f-mono); font-size: .75rem; color: var(--ink-faint); margin: 1rem 0 -.3rem; text-transform: uppercase; letter-spacing: .04em; }
+
+  /* Örnek mesaj görünümü (saf HTML/CSS, gerçek ekran görüntüsü değildir) */
+  .chat-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; margin: 1rem 0 1.4rem; }
+  .phone { border: 1px solid var(--rule-strong); border-radius: 14px; background: var(--paper-raise); overflow: hidden; box-shadow: var(--shadow); }
+  .phone__bar { display: flex; align-items: center; gap: .55rem; padding: .55rem .8rem; background: var(--accent-wash); border-bottom: 1px solid var(--rule); }
+  .phone__avatar { width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--accent); color: var(--paper-raise); display: grid; place-items: center; font: 600 .75rem var(--f-body); }
+  .phone__name { font: 600 .85rem var(--f-body); color: var(--ink); line-height: 1.2; }
+  .phone__sub { font: .7rem var(--f-body); color: var(--ink-faint); }
+  .phone__body { padding: .8rem; display: flex; flex-direction: column; gap: .5rem; background: var(--paper); min-height: 9rem; }
+  .bub { max-width: 85%; padding: .45rem .65rem; border-radius: 12px; font: .82rem/1.4 var(--f-body); color: var(--ink); }
+  .bub--svc { align-self: flex-start; background: var(--paper-raise); border: 1px solid var(--rule); border-bottom-left-radius: 3px; }
+  .bub--usr { align-self: flex-end; background: var(--accent-wash); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-bottom-right-radius: 3px; }
+  .bub__time { display: block; text-align: right; font-size: .65rem; color: var(--ink-faint); margin-top: .15rem; }
+  .tmm { align-self: flex-start; width: 85%; border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: var(--paper-raise); }
+  .tmm__img { height: 4.6rem; background: linear-gradient(135deg, var(--accent-wash), var(--info-wash)); display: grid; place-items: center; position: relative; }
+  .tmm__imgbtn { font: 600 .72rem var(--f-body); color: var(--accent-ink); background: var(--paper-raise); border: 1px solid var(--rule); border-radius: 999px; padding: .15rem .6rem; }
+  .tmm__txt { padding: .5rem .65rem; font: .8rem/1.4 var(--f-body); color: var(--ink-soft); }
+  .tmm__txt strong { display: block; color: var(--ink); font-size: .85rem; }
+  .tmm__btn { display: block; text-align: center; padding: .42rem; border-top: 1px solid var(--rule); font: 600 .78rem var(--f-body); color: var(--accent); }
+  .qr { display: flex; flex-wrap: wrap; gap: .35rem; align-self: flex-start; }
+  .qr span { border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: .2rem .65rem; font: 500 .75rem var(--f-body); background: var(--paper-raise); }
+  .poll__opt { display: flex; align-items: center; gap: .45rem; padding: .3rem .65rem; font: .8rem var(--f-body); color: var(--ink); border-top: 1px solid var(--rule-soft); }
+  .poll__dot { width: .8rem; height: .8rem; border: 1.5px solid var(--ink-faint); border-radius: 50%; }
+  .finish { display: flex; align-items: center; gap: .5rem; font: .68rem var(--f-mono); color: var(--ink-faint); }
+  .finish::before, .finish::after { content: ""; flex: 1; border-top: 1px dashed var(--rule-strong); }
+  .demo-note { font-size: .8rem; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">BiP Keşfet API (TES)</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Mesajlaşma Altyapıları · BiP</span>
+      <span class="brand__name">BiP Keşfet API (TES)</span>
+      <span class="brand__sub">Araştırma tarihi: 12 Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">API'ler</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-telegram-bot-api.html"><span class="nav-num">01</span><span>Telegram Bot API</span></a></li>
+          <li><a class="nav-item" href="02-whatsapp-business-api.html"><span class="nav-num">02</span><span>WhatsApp Business API</span></a></li>
+          <li><a class="nav-item" href="03-bip-kesfet-api.html"><span class="nav-num">03</span><span>BiP Keşfet API</span></a></li>
+          <li><a class="nav-item" href="04-sms-hizmetleri.html"><span class="nav-num">04</span><span>SMS Hizmetleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/11-odeme-altyapilari.html"><span class="nav-num">&rarr;</span><span>Ödeme Altyapıları</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      12 Ekim 2026'da resmî BiP geliştirici belgelerinden derlendi; hiçbir API'ye istek atılmadı. Örneklerdeki değerler yer tutucudur. Fiyat ve koşullar değişebilir. Hukuki/mali danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Mesajlaşma platformları · Türkiye</div>
+        <h1 class="page-title">BiP Keşfet API (TES): <em>uç nokta, JSON, C#</em></h1>
+        <p class="lede">BiP'te kurumlar "Keşfet" altında servis (kanal) açar. TES bu servisin REST API'sidir: gönder, takipçi listele, gelen mesajı ve iletildi/okundu raporunu kendi HTTPS ucunda al.</p>
+        <div class="head-meta">Okuma ~10 dk &middot; Seviye: teknik &middot; Araştırma: 12 Ekim 2026</div>
+      </header>
+
+      <div class="content">
+
+        <h2 id="ozet"><span class="h-num">§ 1</span>Kısa cevaplar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Soru</th><th>Cevap</th></tr></thead>
+            <tbody>
+              <tr><td>Kendi kendine bot açılır mı?</td><td><span class="tag tag--bad">HAYIR</span> Servis BiP ekibinin onayıyla açılır. Başvuru: <code>partnering@bip.com</code>.</td></tr>
+              <tr><td>Kimlik doğrulama</td><td>HTTP Basic Auth; kullanıcı adı/şifre servis açılınca verilir.</td></tr>
+              <tr><td>Temel adres</td><td><code>https://tims.turkcell.com.tr/tes/rest/spi/{metot}</code>, hepsi <code>POST</code> + JSON.</td></tr>
+              <tr><td>Gelen mesaj</td><td>Yalnız sizin <strong>geri besleme URL'inize</strong> POST (webhook). Çekme (polling) yok.</td></tr>
+              <tr><td>Kullanıcıya serbest yazma</td><td><span class="tag tag--bad">HAYIR</span> Bire bir için açık oturum gerekir; yoksa <code>312</code>. İstisna: <code>sendmsgservlist</code> oturum istemez (kotalı).</td></tr>
+              <tr><td>Düğme / hızlı cevap / anket?</td><td><span class="tag tag--ok">VAR</span> "Şablon medya mesajı" (<code>type 13</code>): tekli kart, çoklu, anket, hızlı cevap, kaydırmalı.</td></tr>
+              <tr><td>Alıcı kimliği</td><td>Varsayılan <strong>şifrelenmiş (hash) numara</strong>; açık numara (MSISDN) özel yetkiyle.</td></tr>
+              <tr><td>Türkiye fiyatı</td><td><span class="tag tag--warn">YAYIMLANMAMIŞ</span> Teklif usulü. KKTC: kanal açma aylık 1.500 TL.</td></tr>
+              <tr><td>Kota/oturum süresi rakamı</td><td><span class="tag tag--warn">BELGEDE YOK</span> Servise özel, sözleşmede belirlenir.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="urunler"><span class="h-num">§ 2</span>Ürün haritası</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Parça</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Keşfet servisi</strong></td><td>Uygulamada kurum avatarı: toplu duyuru, 1-1 sohbet, bot. HTML ana sayfası panelden tasarlanır.</td></tr>
+              <tr><td><strong>BiP Panel</strong> (belgede "BiPÜssü")</td><td>Kodsuz: mesaj gönder/gör, istatistik, Chat BOT Editor. TES üzerine kurulu.</td></tr>
+              <tr><td><strong>TES</strong> (Keşfet API)</td><td>Gönderim, takipçi işlemleri, iletildi/okundu raporu.</td></tr>
+              <tr><td><strong>FTS</strong></td><td>Medya yükleme servisi; fotoğraf/video/ses/belge URL'i buradan alınır. Yükleme ucu resmî sayfalarda yok (örnek kod deposunda geçer).</td></tr>
+              <tr><td><strong>REX</strong></td><td>Otomatik yanıt: komut, etiketli içerik, AIML bot; eşleşmeyeni dış servise iletir.</td></tr>
+              <tr><td><strong>Ödeme API'si</strong></td><td>Kart (3D Secure), mağaza içi satın alma, Turkcell faturasına yansıtma.</td></tr>
+              <tr><td><strong>Kuruma Özel İletişim Platformu</strong></td><td>Kuruma markalı ayrı mesajlaşma uygulaması (iç iletişim).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="basvuru-adimlari"><span class="h-num">§ 3</span>Başvuru ve açılış adımları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Adım</th><th>Ne olur</th></tr></thead>
+            <tbody>
+              <tr><td>1. Başvuru</td><td><code>partnering@bip.com</code> ("BiP Kurumsal Çözüm Başvurusu"). Form ya da self-servis kayıt yok.</td></tr>
+              <tr><td>2. Servis tipi</td><td>Takip gerektiren (kitlesel: Keşfet'te görünür / lokal: aramayla bulunur), takip gerektirmeyen (doğrudan mesaj, takipçi kitlesi yok), özel üyelikli (yalnız yöneticinin belirlediği kullanıcılar).</td></tr>
+              <tr><td>3. Kategori</td><td>16 kategoriden en çok 2'si (Bankacılık &amp; Finans, Kamu Servisleri, Eğitim, Sağlık, Haber…).</td></tr>
+              <tr><td>4. Erişim modeli</td><td>Operasyon ekibi alıcı adres türünü belirler: varsayılan şifrelenmiş numara; MSISDN ve rapor alma yetkisi için "BiPÜssü süper admin" ile görüşülür.</td></tr>
+              <tr><td>5. Kimlik bilgisi + URL</td><td>TES kullanıcı adı/şifresi verilir; gelen mesajlar için web servis URL'iniz operasyon ekibine bildirilir.</td></tr>
+              <tr><td>6. Test</td><td>Entegrasyon canlıdan önce PRP (test) ortamında işlev testinden geçer.</td></tr>
+              <tr><td>7. Yayın</td><td>Ana sayfa tasarımı bitip BiP ekibi onaylayınca servis tüm kullanıcılara açılır.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="uc-noktalar"><span class="h-num">§ 4</span>Keşfet API (TES) uç noktaları</h2>
+
+        <p>Temel: <code>https://tims.turkcell.com.tr/tes/rest/spi/</code> · <code>Authorization: Basic base64(kullanıcı:şifre)</code> · <code>Content-Type: application/json</code>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Metot + URL</th><th>Ne yapar</th><th>Önemli parametre / sınır</th></tr></thead>
+            <tbody>
+              <tr><td><code>POST …/sendmsgserv</code></td><td>Tek kullanıcıya (eş zamanlı) ya da tüm takipçilere (eş zamansız) gönderir.</td><td><code>receiver.type</code>: 0 hash, 1 tüm takipçi (<code>address</code> yok), 2 MSISDN. Bire bir için oturum şart.</td></tr>
+              <tr><td><code>POST …/sendmsgservlist</code></td><td>Listedeki kullanıcılara aynı mesaj (eş zamansız).</td><td><code>receivers</code> en çok 500, hepsi aynı adres türü. <strong>Oturum gerekmez</strong>; filtreli kotaya tabi.</td></tr>
+              <tr><td><code>POST …/sendmultiusermulticontent</code></td><td>Her alıcıya farklı içerik (eş zamansız).</td><td><code>receivercontentlist</code> en çok 500, aynı alıcı iki kez olmaz. Bire bir kotası (oturum).</td></tr>
+              <tr><td><code>POST …/listcontacts</code></td><td>Takipçi listesini döner.</td><td>Liste, servisin adres türünde (çoğunlukla hash).</td></tr>
+              <tr><td><code>POST …/getinfo</code></td><td>Takipçi sayısını döner (<code>info.contacts</code>).</td><td>Yalnız <code>txnid</code>.</td></tr>
+              <tr><td><em>Sizin URL'iniz</em></td><td>Gelen mesaj, takip/bırakma, sohbet geçmişi, iletildi/okundu.</td><td>Eş zamansız gönderim raporu <code>{geri besleme URL}/report</code> adresine gelir.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Ortak kurallar (gönderim metotlarının doğrulama listeleri)</caption>
+            <thead><tr><th>Alan</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td><code>txnid</code></td><td>Her istekte yeni, en çok 40 karakter. Tekrar → <code>310</code>.</td></tr>
+              <tr><td><code>composition.list</code></td><td>En az 1, en çok 5 içerik (tek istekte 5 balon).</td></tr>
+              <tr><td>MSISDN</td><td>E.164, 3–15 karakter, <code>905XXXXXXXXX</code> biçimi (artı işaretsiz).</td></tr>
+              <tr><td><code>expire</code></td><td>İsteğe bağlı kaybolan mesaj: yalnız 3, 5, 10, 60 saniye.</td></tr>
+              <tr><td><code>ttl</code></td><td>İsteğe bağlı; süre dolarsa gönderim iptal (saniye).</td></tr>
+              <tr><td>JSON hatası</td><td>HTTP 400 + <code>errorcode</code> / <code>errordefinition</code> (1000–3007).</td></tr>
+              <tr><td>Eş zamansız 200</td><td>"İşlenmek üzere kabul edildi" demek, "gönderildi" değil.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="icerik-tipleri"><span class="h-num">§ 5</span>İçerik tipleri ve sınırlar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th><code>type</code></th><th>İçerik</th><th>Alanlar</th><th>Sınır</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>Metin</td><td><code>message</code></td><td>En çok 2048 karakter</td></tr>
+              <tr><td>2</td><td>Fotoğraf</td><td><code>message</code> (FTS URL), <code>size</code>, <code>ratio</code></td><td>image/*, 1 bayt–20 MB, oran 0,1–3, URL ≤512</td></tr>
+              <tr><td>3</td><td>Ses</td><td><code>message</code>, <code>size</code></td><td>audio/*, 1 bayt–20 MB</td></tr>
+              <tr><td>4</td><td>Video</td><td><code>message</code>, <code>size</code></td><td>video/*, 1 bayt–20 MB</td></tr>
+              <tr><td>5</td><td>Çıkartma</td><td><code>message</code>, <code>itemid</code></td><td>BiP'in yayımladığı çıkartma listesinden</td></tr>
+              <tr><td>6</td><td>Caps</td><td><code>message</code>, <code>size</code>, <code>ratio</code>, <code>itemid</code></td><td>image/*, 1 bayt–20 MB</td></tr>
+              <tr><td>7</td><td>Konum</td><td><code>location{lat,lon,title,desc,zoomlevel}</code></td><td>zoom 1–24</td></tr>
+              <tr><td>9</td><td>Bitiş çizgisi</td><td>—</td><td>Konuşmaları ayırır</td></tr>
+              <tr><td>10</td><td>Kişi kartı</td><td>vCard: ad, soyad, telefon, adres</td><td>En çok 3 numara, 3 adres</td></tr>
+              <tr><td>13</td><td>Şablon medya</td><td><code>tmmtype</code> + nesne</td><td>Aşağıdaki tablo</td></tr>
+              <tr><td>14</td><td>Belge</td><td><code>document{filename,filepath}</code></td><td>FTS URL ≤512</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="demo-note">Belgede küçük tutarsızlık: bitiş çizgisi ve kişi kartı sayfalarının metni 8 ve 9 diyor, örnek JSON ve tip listesi 9 ve 10. Tip listesi esas alındı; PRP ortamında doğrulanmalı.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Şablon medya mesajı (<code>type 13</code>)</caption>
+            <thead><tr><th><code>tmmtype</code></th><th>Nesne</th><th>Ne yapar</th><th>Sınır</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td><code>singletmm</code></td><td>Görsel + başlık + açıklama + düğmeler (kart)</td><td>Başlık 200, açıklama 400, düğme ≤6, düğme adı ≤20</td></tr>
+              <tr><td>1</td><td><code>multipletmm</code></td><td>Ana kart + alt kart listesi</td><td>Alt kart 2–5, alt kartta düğme ≤2</td></tr>
+              <tr><td>2</td><td><code>polltmm</code></td><td>Anket (tek/çok seçim)</td><td>Seçenek 2–6, seçenek adı ≤50, bitiş en az 30 dk sonra</td></tr>
+              <tr><td>3</td><td><code>quickreplytmm</code></td><td>Hızlı cevap düğmeleri</td><td>Düğme 2–15; tür 1 postback, 2 arama, 3 QR kod, 4 BiP sesli, 5 BiP görüntülü</td></tr>
+              <tr><td>4</td><td><code>carouseltmm</code></td><td>Kaydırmalı kartlar</td><td>Kart 2–15, kartta düğme ≤2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Düğme türü: <code>0</code> = bağlantı aç (<code>url</code> zorunlu), <code>1</code> = servise geri dön (<code>payload</code> ≤100 zorunlu, mesajda <code>postbackid</code> ≤100 zorunlu).</p>
+
+        <h2 id="gonderim-json"><span class="h-num">§ 6</span>Gönderim JSON örnekleri</h2>
+
+        <p class="codelabel">POST …/sendmsgserv — tek kullanıcıya metin</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receiver": { "type": 2, "address": "905XXXXXXXXX" },
+  "composition": {
+    "list": [ { "type": 0, "message": "Siparişiniz hazırlandı." } ]
+  }
+}</code></pre>
+
+        <p class="codelabel">Yanıt — rapor yetkisi olan servis (eş zamanlı)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "resultcode": 0,
+  "list": [ {
+    "resultcode": 0,
+    "receiver": "905XXXXXXXXX",
+    "reportid": "{REPORT_ID}",
+    "numberofmessage": 1,
+    "totalnumberofmessage": 1
+  } ]
+}</code></pre>
+
+        <p class="codelabel">Yanıt — rapor yetkisi yok</p>
+<pre><code>{ "txnid": "{TXNID}", "resultcode": 0 }</code></pre>
+
+        <p class="codelabel">Yanıt — hata (oturum yok / kota)</p>
+<pre><code>{ "txnid": "{TXNID}", "resultcode": 312 }</code></pre>
+
+        <p class="codelabel">POST …/sendmsgserv — tüm takipçilere (eş zamansız)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receiver": { "type": 1 },
+  "composition": { "list": [ { "type": 0, "message": "Haftalık duyuru" } ] }
+}</code></pre>
+
+        <p class="codelabel">POST …/sendmsgservlist — listeye (oturum gerekmez)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receivers": [
+    { "type": 0, "address": "{HASH_ADRES_1}" },
+    { "type": 0, "address": "{HASH_ADRES_2}" }
+  ],
+  "composition": { "list": [ { "type": 0, "message": "Randevunuz yarın 10:00." } ] }
+}</code></pre>
+
+        <p class="codelabel">Yanıt — sendmsgservlist</p>
+<pre><code>{ "txnid": "{TXNID}", "resultcode": 0, "report": null }</code></pre>
+
+        <p class="codelabel">Hızlı cevap düğmeleri (type 13, tmmtype 3)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receiver": { "type": 2, "address": "905XXXXXXXXX" },
+  "composition": { "list": [ {
+    "type": 13,
+    "tmmtype": 3,
+    "quickreplytmm": {
+      "postbackid": "{POSTBACK_ID}",
+      "buttonlist": [
+        { "type": 1, "name": "Sipariş durumu", "payload": "SIPARIS" },
+        { "type": 1, "name": "Temsilci", "payload": "TEMSILCI" }
+      ]
+    }
+  } ] }
+}</code></pre>
+
+        <p class="codelabel">Kart + düğmeler (type 13, tmmtype 0)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receiver": { "type": 2, "address": "905XXXXXXXXX" },
+  "composition": { "list": [ {
+    "type": 13,
+    "tmmtype": 0,
+    "singletmm": {
+      "title": "Kampanya",
+      "description": "Bu hafta geçerli fırsatlar.",
+      "postbackid": "{POSTBACK_ID}",
+      "image": { "url": "{FTS_GORSEL_URL}", "ratio": 1.0 },
+      "buttonlist": [
+        { "type": 0, "name": "İncele", "url": "https://ornek.example/kampanya" },
+        { "type": 1, "name": "Beni ara", "payload": "ARA" }
+      ]
+    }
+  } ] }
+}</code></pre>
+
+        <p class="codelabel">Anket (type 13, tmmtype 2)</p>
+<pre><code>{
+  "txnid": "{TXNID}",
+  "receiver": { "type": 2, "address": "905XXXXXXXXX" },
+  "composition": { "list": [ {
+    "type": 13,
+    "tmmtype": 2,
+    "polltmm": {
+      "title": "Memnuniyet",
+      "description": "Hizmetimizi nasıl buldunuz?",
+      "polltype": 0,
+      "pollid": "{POLL_ID}",
+      "optionlist": [ { "optionid": 1, "name": "İyi" }, { "optionid": 2, "name": "Geliştirilmeli" } ],
+      "buttonname": "Gönder"
+    }
+  } ] }
+}</code></pre>
+
+        <h2 id="geri-besleme"><span class="h-num">§ 7</span>Geri besleme (gelen) JSON</h2>
+
+        <p>TES, servis için tanımlı URL'e JSON POST eder. Olayı <code>type</code> ayırır; mesajda içerik türünü <code>ctype</code> ayırır.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th><code>type</code></th><th>Olay</th><th>Ayırt edici alan</th></tr></thead>
+            <tbody>
+              <tr><td><code>M</code></td><td>Kullanıcı mesajı</td><td><code>ctype</code>: T metin, I resim, V video, A ses, C caps, S çıkartma, L konum, <code>Postback</code>, <code>qrcode-response</code>, <code>Poll</code></td></tr>
+              <tr><td><code>E</code></td><td>Takip olayı</td><td><code>event</code>: S takip etti, U bıraktı</td></tr>
+              <tr><td><code>V</code></td><td>Sohbet geçmişini açtı (oturum başlatır)</td><td>—</td></tr>
+              <tr><td><code>R</code></td><td>İletildi / okundu raporu</td><td><code>report.reportid</code>, <code>report.reporttype</code></td></tr>
+              <tr><td>— (<code>/report</code>)</td><td>Eş zamansız gönderim sonucu</td><td><code>reqid</code>, alıcı başına <code>resultcode</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="codelabel">Gelen metin</p>
+<pre><code>{
+  "sender": "905XXXXXXXXX",
+  "msgid": 12341,
+  "sendtime": "12.10.2026 08:00:00.123 +0300",
+  "type": "M",
+  "ctype": "T",
+  "content": "Merhaba"
+}</code></pre>
+
+        <p class="codelabel">Gelen resim (ses/video/caps/çıkartma aynı biçim, content = medya URL'i)</p>
+<pre><code>{ "sender": "905XXXXXXXXX", "msgid": 1432, "sendtime": "…", "type": "M", "ctype": "I",
+  "content": "https://{MEDYA_SUNUCUSU}/scontent/…/dosya.jpg" }</code></pre>
+
+        <p class="codelabel">Gelen konum</p>
+<pre><code>{ "sender": "905XXXXXXXXX", "msgid": 1252, "sendtime": "…", "type": "M", "ctype": "L",
+  "content": "(lat:41.0000, lon:29.0000)" }</code></pre>
+
+        <p class="codelabel">Düğmeye basıldı (postback)</p>
+<pre><code>{
+  "sender": "905XXXXXXXXX",
+  "type": "M",
+  "msgid": 89267364,
+  "sendtime": "…",
+  "txnid": "{TXNID}",
+  "nickname": "{KULLANICI_TAKMA_ADI}",
+  "postback": { "postbackid": "{POSTBACK_ID}", "payload": "SIPARIS" },
+  "ctype": "Postback"
+}</code></pre>
+
+        <p class="codelabel">Anket cevabı</p>
+<pre><code>{ "sender": "905XXXXXXXXX", "type": "M", "msgid": 89267369, "sendtime": "…", "txnid": "{TXNID}",
+  "nickname": "{KULLANICI_TAKMA_ADI}", "poll": { "pollid": "{POLL_ID}", "optionids": [1] }, "ctype": "Poll" }</code></pre>
+
+        <p class="codelabel">Takip etti (bıraktıysa "event": "U")</p>
+<pre><code>{ "sender": "905XXXXXXXXX", "msgid": 1341, "sendtime": "…", "type": "E", "event": "S" }</code></pre>
+
+        <p class="codelabel">Sohbet geçmişini açtı</p>
+<pre><code>{ "sender": "905XXXXXXXXX", "type": "V", "msgid": 1484714, "sendtime": "…", "txnid": "{TXNID}" }</code></pre>
+
+        <p class="codelabel">İletildi / okundu raporu</p>
+<pre><code>{
+  "sender": "905XXXXXXXXX",
+  "type": "R",
+  "msgid": 89267368,
+  "sendtime": "…",
+  "txnid": "{TXNID}",
+  "report": { "reportid": "{REPORT_ID}", "reporttype": 0 }
+}</code></pre>
+        <p class="demo-note">Belgedeki "iletildi" ve "okundu" örneklerinin ikisi de <code>reporttype: 0</code> gösteriyor; okundu için hangi değerin geldiği belgeden çıkarılamıyor.</p>
+
+        <p class="codelabel">POST {geri besleme URL}/report — eş zamansız gönderim sonucu</p>
+<pre><code>{
+  "reqid": 12,
+  "txnid": "{TXNID}",
+  "resultcode": 0,
+  "list": [
+    { "receiver": "905XXXXXXXXX", "resultcode": 0,   "reportid": "{REPORT_ID}", "numberofmessage": 1, "totalnumberofmessage": 1 },
+    { "receiver": "905XXXXXXXXX", "resultcode": 312, "reportid": null, "numberofmessage": null, "totalnumberofmessage": 1 }
+  ]
+}</code></pre>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Belgede yok</p>
+          <p>İstek imzası, IP listesi, yeniden deneme (retry) politikası ve uç noktanızın dönmesi gereken cevap tanımlı değil. Güvenli varsayım: hızlıca HTTP 200 dön, işi kuyruğa at, <code>msgid</code> ile tekrarları ele. Örnek JSON'lar 2015–2018 tarihli; tarih biçimi <code>gg.aa.yyyy ss:dd:ss.fff +0300</code>.</p>
+        </div>
+
+        <h2 id="csharp"><span class="h-num">§ 8</span>C# örneği (.NET, HttpClient + System.Text.Json)</h2>
+
+        <p>Kimlik bilgileri ortam değişkeninden: <code>BIP_TES_USER</code>, <code>BIP_TES_PASS</code>. Alıcı adresi örnekte MSISDN; servisiniz hash adresle çalışıyorsa <code>type: 0</code>.</p>
+
+        <p class="codelabel">Gönderme</p>
+<pre><code>// Konsol projesi (.NET 8+), top-level statements
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
+
+var user = Environment.GetEnvironmentVariable("BIP_TES_USER")!;
+var pass = Environment.GetEnvironmentVariable("BIP_TES_PASS")!;
+
+var http = new HttpClient { BaseAddress = new Uri("https://tims.turkcell.com.tr/tes/rest/spi/") };
+http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+    "Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user}:{pass}")));
+
+var istek = new
+{
+    txnid = Guid.NewGuid().ToString("N"),            // her istekte yeni, en çok 40 karakter
+    receiver = new { type = 2, address = "905XXXXXXXXX" },
+    composition = new { list = new object[] { new { type = 0, message = "Siparişiniz hazırlandı." } } }
+};
+
+using var yanit = await http.PostAsJsonAsync("sendmsgserv", istek);
+var govde = await yanit.Content.ReadFromJsonAsync&lt;JsonElement&gt;();
+
+if (yanit.StatusCode == System.Net.HttpStatusCode.BadRequest)
+    Console.WriteLine($"Doğrulama hatası: {govde.GetProperty("errorcode")} {govde.GetProperty("errordefinition")}");
+else
+{
+    // resultcode belgede "string" yazıyor ama örneklerde sayı: ikisini de kabul et
+    var rc = govde.GetProperty("resultcode");
+    var kod = rc.ValueKind == JsonValueKind.Number ? rc.GetInt32() : int.Parse(rc.GetString()!);
+    Console.WriteLine(kod switch
+    {
+        0   => "Kabul edildi",
+        312 => "Kota doldu ya da kullanıcının açık oturumu yok",
+        310 => "txnid tekrarlandı",
+        _   => $"Hata: {kod}"
+    });
+}</code></pre>
+
+        <p class="codelabel">Geri besleme ucu (ASP.NET Core minimal API)</p>
+<pre><code>// Web projesi (Microsoft.NET.Sdk.Web, .NET 8+)
+using System;
+using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+
+var app = WebApplication.CreateBuilder(args).Build();
+
+// Operasyon ekibine bildirilen URL: https://{ALAN_ADINIZ}/bip
+app.MapPost("/bip", async (HttpRequest req) =>
+{
+    var olay = await JsonSerializer.DeserializeAsync&lt;JsonElement&gt;(req.Body);
+    var tur = olay.GetProperty("type").GetString();
+
+    switch (tur)
+    {
+        case "M":
+            var ctype = olay.GetProperty("ctype").GetString();
+            if (ctype == "T")
+                Console.WriteLine($"Metin: {olay.GetProperty("content").GetString()}");
+            else if (ctype == "Postback")
+                Console.WriteLine($"Düğme: {olay.GetProperty("postback").GetProperty("payload").GetString()}");
+            else if (ctype == "Poll")
+                Console.WriteLine($"Anket: {olay.GetProperty("poll").GetProperty("optionids")}");
+            break;
+        case "E":
+            Console.WriteLine(olay.GetProperty("event").GetString() == "S" ? "Takip etti" : "Takibi bıraktı");
+            break;
+        case "R":
+            Console.WriteLine($"Rapor: {olay.GetProperty("report").GetProperty("reportid").GetString()}");
+            break;
+    }
+    // Gönderen kimliği: olay.GetProperty("sender") — hash ya da MSISDN; kişi eşleştirmeyi numaraya bağlama.
+    return Results.Ok();                               // hızlı 200; ağır işi kuyruğa at
+});
+
+// Eş zamansız gönderim sonuçları
+app.MapPost("/bip/report", async (HttpRequest req) =>
+{
+    var rapor = await JsonSerializer.DeserializeAsync&lt;JsonElement&gt;(req.Body);
+    foreach (var a in rapor.GetProperty("list").EnumerateArray())
+        Console.WriteLine($"{a.GetProperty("resultcode")} → {a.GetProperty("reportid")}");
+    return Results.Ok();
+});
+
+app.Run();</code></pre>
+
+        <h2 id="gorunum"><span class="h-num">§ 9</span>Örnek mesaj görünümü</h2>
+
+        <p class="demo-note">Saf HTML/CSS ile çizilmiş temsilî görünüm; gerçek ekran görüntüsü değildir. Gerçek arayüzde renk ve yerleşim farklıdır.</p>
+
+        <div class="chat-demo">
+          <div class="phone" aria-label="Metin ve hızlı cevap örneği">
+            <div class="phone__bar"><span class="phone__avatar">Öİ</span><span><span class="phone__name">Örnek İşletme</span><br><span class="phone__sub">Servis · Keşfet</span></span></div>
+            <div class="phone__body">
+              <div class="bub bub--usr">Siparişim nerede?<span class="bub__time">10:02</span></div>
+              <div class="bub bub--svc">Siparişiniz hazırlandı, bugün kargoya verilecek.<span class="bub__time">10:02</span></div>
+              <div class="qr"><span>Sipariş durumu</span><span>Temsilci</span></div>
+              <div class="finish">bitiş çizgisi (type 9)</div>
+            </div>
+          </div>
+
+          <div class="phone" aria-label="Kart ve düğme örneği">
+            <div class="phone__bar"><span class="phone__avatar">Öİ</span><span><span class="phone__name">Örnek İşletme</span><br><span class="phone__sub">Servis · Keşfet</span></span></div>
+            <div class="phone__body">
+              <div class="tmm">
+                <div class="tmm__img"><span class="tmm__imgbtn">Görsel düğmesi</span></div>
+                <div class="tmm__txt"><strong>Kampanya</strong>Bu hafta geçerli fırsatlar.</div>
+                <span class="tmm__btn">İncele ↗</span>
+                <span class="tmm__btn">Beni ara</span>
+              </div>
+              <div class="bub bub--usr">Beni ara<span class="bub__time">10:05</span></div>
+            </div>
+          </div>
+
+          <div class="phone" aria-label="Anket örneği">
+            <div class="phone__bar"><span class="phone__avatar">Öİ</span><span><span class="phone__name">Örnek İşletme</span><br><span class="phone__sub">Servis · Keşfet</span></span></div>
+            <div class="phone__body">
+              <div class="tmm">
+                <div class="tmm__txt"><strong>Memnuniyet</strong>Hizmetimizi nasıl buldunuz?</div>
+                <div class="poll__opt"><span class="poll__dot"></span>İyi</div>
+                <div class="poll__opt"><span class="poll__dot"></span>Geliştirilmeli</div>
+                <span class="tmm__btn">Gönder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="oturum-kota"><span class="h-num">§ 10</span>Oturum ve kota</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Gönderim</th><th>Metot</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td>Tüm takipçilere</td><td><code>sendmsgserv</code> (<code>type 1</code>)</td><td>Günlük/haftalık/aylık kaç kez; aşılırsa <code>312</code></td></tr>
+              <tr><td>Listeye</td><td><code>sendmsgservlist</code></td><td>Kullanıcı başına günlük/haftalık/aylık; oturum gerekmez; aşılırsa <code>312</code></td></tr>
+              <tr><td>Bire bir</td><td><code>sendmsgserv</code> (<code>type 0/2</code>), <code>sendmultiusermulticontent</code></td><td>Açık oturum şart; yoksa <code>312</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Oturumu başlatan:</strong> kullanıcının mesaj yazması, takip etmesi, sohbet geçmişini açması. Mesaj atınca oturum yenilenir.</li>
+          <li><strong>Oturumu bitiren:</strong> süre dolması ya da belirlenen sayıda mesaj gönderilmesi. <span class="tag tag--warn">SÜRE VE SAYI BELGEDE YOK</span></li>
+          <li>WhatsApp'taki 24 saatlik pencereye benzer; ancak pencere dışı için onaylı şablon karşılığı yok. Proaktif bildirim için yol: <code>sendmsgservlist</code> (kotalı) ya da "takip gerektirmeyen" servis koşullarını sözleşmede netleştirmek.</li>
+          <li>Eski örnek kod deposunun README'si "servis kullanıcıya herhangi bir anda mesaj gönderebilir" der; güncel resmî Kota Kontrolü sayfası oturum şartı koyar. <strong>Resmî sayfa esas.</strong></li>
+        </ul>
+
+        <h2 id="kodlar"><span class="h-num">§ 11</span>Sonuç ve hata kodları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kod</th><th>Anlam</th><th>Ne yap</th></tr></thead>
+            <tbody>
+              <tr><td><code>0</code></td><td>Başarılı</td><td>Eş zamansızda <code>/report</code>'u bekle</td></tr>
+              <tr><td><code>1</code></td><td>Genel hata</td><td>Sonra yeniden dene</td></tr>
+              <tr><td><code>300</code></td><td>Servis TES'te aktif değil</td><td>Operasyon ekibi</td></tr>
+              <tr><td><code>301</code></td><td>BiP kullanıcısı tanımlı değil</td><td>Alıcıyı listeden çıkar</td></tr>
+              <tr><td><code>302</code>, <code>306</code>, <code>307</code>, <code>311</code></td><td>Yetki yok (kullanıcıya / açık numarayla / kullanım / metot)</td><td>Yetki tanımı iste</td></tr>
+              <tr><td><code>303–305</code></td><td>Kullanıcı dosyası yok / bozuk / hatalı kayıt</td><td>Listeyi düzelt</td></tr>
+              <tr><td><code>308</code></td><td>Gönderim limiti aşıldı</td><td>Hızı düşür</td></tr>
+              <tr><td><code>309</code></td><td>Eş zamanlı gönderim hatası</td><td>Yeniden dene</td></tr>
+              <tr><td><code>310</code></td><td>Tekrarlanan <code>txnid</code></td><td>Yeni <code>txnid</code></td></tr>
+              <tr><td><code>312</code></td><td>Kota doldu / oturum yok</td><td>Kullanıcının yazmasını bekle</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>HTTP 400 doğrulama kodlarından sık görülenler: <code>1000</code> txnid, <code>1001</code> expire, <code>1002</code> içerik (5'ten fazla), <code>1004</code> mesaj, <code>1005</code> boyut, <code>1008</code> alıcı adresi, <code>1009</code> karışık adres türü, <code>1010</code> tekrarlanan alıcı, <code>1054–1069</code> şablon alanları, <code>1070</code> belge.</p>
+
+        <h2 id="rex"><span class="h-num">§ 12</span>REX ve botlar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kullanım</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td>Komut / etiketli içerik</td><td>Panelde tanımlı anahtar kelimeye sabit yanıt.</td></tr>
+              <tr><td>AIML botu</td><td>Panelin AIML Editor'ünde XML tabanlı diyalog.</td></tr>
+              <tr><td>Dış bağlantı (External Link)</td><td>Mesajı sizin URL'e iletir, <strong>eş zamanlı</strong> dönen yanıtı kullanıcıya gönderir. HTTP 200 dışı = hata.</td></tr>
+              <tr><td>Kısmi REX</td><td>Eşleşme yoksa mesaj sizin TES entegre web servisinize gider.</td></tr>
+              <tr><td>Müşteri hizmetleri</td><td>AIML'de <code>bip_callcenter</code> (temsilciye aktar, <code>host</code> = dış WS URL), <code>bip_exitpattern</code> (bota dön), <code>bip_callcenter_result</code> (true/false).</td></tr>
+              <tr><td>Dış sisteme aktarım</td><td>REX yazışmaları toplu (liste) halinde dış web servisinize POST edilir. HTTP'de kimlik doğrulama yok, HTTPS'te Basic Auth. Müşteri hizmetleri yazışmaları aktarılmaz.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="codelabel">Dış sisteme aktarım — gövde (resmî örneğin sadeleştirilmiş hâli)</p>
+<pre><code>{
+  "list": [ {
+    "request": {
+      "msgId": "1", "transactionId": "1", "serviceId": 1234,
+      "receiveDate": "12/10/2026 08:00:00",
+      "sender": "905XXXXXXXXX", "type": "M",
+      "content": { "type": 0, "message": "destek" }
+    },
+    "response": {
+      "composition": { "list": [ { "type": 0, "message": "Temsilciye bağlanıyorsunuz." } ] }
+    }
+  } ]
+}</code></pre>
+
+        <p class="codelabel">request.content — düğme cevabı</p>
+<pre><code>{ "type": 103, "tmmType": 3, "tmmPostbackResponse": { "payload": "…", "postbackid": "…" } }</code></pre>
+
+        <p class="codelabel">request.content — anket cevabı</p>
+<pre><code>{ "type": 104, "tmmType": 2, "tmmPollResponse": { "pollid": "…", "optionids": [1, 3] } }</code></pre>
+        <p class="demo-note"><code>serviceId</code> resmî örnekte sayı (burada yer tutucu 1234); <code>msgId</code> ve <code>transactionId</code> metin.</p>
+        <p class="demo-note">Dikkat: REX aktarımında alan adları camelCase (<code>tmmType</code>, <code>tmmSingle</code>), TES gönderiminde küçük harf (<code>tmmtype</code>, <code>singletmm</code>).</p>
+
+        <h2 id="odeme"><span class="h-num">§ 13</span>Ödeme API'si</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kanal (kod)</th><th>Kim</th><th>Ne satılır</th></tr></thead>
+            <tbody>
+              <tr><td>Kredi kartı (<code>40</code>)</td><td>Tüm kullanıcılar, 3D Secure</td><td>Fiziksel ürün; birden çok ürün</td></tr>
+              <tr><td>Uygulama içi satın alma (<code>50</code>)</td><td>App Store / Google Play</td><td>Yalnız dijital; şimdilik servis başına 1 ürün</td></tr>
+              <tr><td>Faturaya yansıtma — rezervli (<code>10</code>) / direkt (<code>11</code>)</td><td>Yalnız Turkcell abonesi</td><td>Data gibi operatör ürünleri</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Satıcı firma adı, adresi, iletişim bilgisi tanımlanır; ürün fiyat, para birimi, logo, tip (dijital/fiziksel) ile kaydedilir.</li>
+          <li>Uygulama içi satın almayla fiziksel ürün satılamaz. Komisyon oranı <span class="tag tag--warn">BELGEDE YOK</span>.</li>
+          <li>Satış vergi mükellefiyeti ve e-belge yükümlülüğü doğurur; mali müşavire danışılmalı. Ödeme altyapıları kıyası için kardeş "Paycell ve Turkcell e-Şirket" sayfasına bakılabilir.</li>
+        </ul>
+
+        <h2 id="kurumsal"><span class="h-num">§ 14</span>Kuruma özel platform ve e-Şirket</h2>
+
+        <ul>
+          <li><strong>Kuruma Özel İletişim Platformu:</strong> logo/renkle markalı BiP sürümü; iOS, Android, web; kapalı devre ya da tüm BiP kullanıcılarına açık; ERP ve sistem uyarısı entegrasyonu, chatbot ile anket/belge; veri yurt içinde/kurumda. Fiyat, başvuru formu yok — teklif usulü.</li>
+          <li><strong><code>developer.turkcellesirket.com</code></strong> BiP içermez: e-Fatura/e-Arşiv, e-İrsaliye, e-Defter, e-MM vb. mali belge API'leri.</li>
+        </ul>
+
+        <h2 id="fiyat"><span class="h-num">§ 15</span>Fiyat ve kullanım verisi</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Bilgi</th><th>Dayanak</th></tr></thead>
+            <tbody>
+              <tr><td>Türkiye — servis/API</td><td><span class="tag tag--warn">YAYIMLANMAMIŞ</span> teklif usulü</td><td>Resmî sayfalarda fiyat yok</td></tr>
+              <tr><td>KKTC — Keşfet kanalı</td><td>Kanal açma <strong>aylık 1.500 TL</strong> (KDV belirtilmemiş); başvuru kurumsal temsilci / iletişim merkezi. Sayfa başlangıcı 10.05.2019. Türkiye'ye uyarlanamaz.</td><td>Kuzey Kıbrıs Turkcell sayfası (12.10.2026'da yeniden görüldü)</td></tr>
+              <tr><td>Aktif kullanıcı</td><td>2025–2026 resmî MAU bulunamadı. Bilinen: Mart 2021 30 milyon üzeri MAU; Ocak 2024 "100 milyon üzeri indirme" (aktif sayı verilmedi).</td><td><span class="tag">İKİNCİL</span> basın haberleri</td></tr>
+              <tr><td>Marka kanalı paketleri</td><td>Dizinde görünen "Perakende" paket sayfası 404; doğrulanamadı.</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="karar"><span class="h-num">§ 16</span>Durum → Sonuç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Bireysel geliştirici, hobi botu</td><td><span class="tag tag--bad">UYGUN DEĞİL</span> Onay ve kurumsal başvuru gerekir; Telegram Bot API daha uygun.</td></tr>
+              <tr><td>KOBİ, yerel kitle</td><td><span class="tag">DENENEBİLİR</span> Lokal servis + panel ile kodsuz. Müşteriler çoğunlukla WhatsApp'taysa getirisi düşük olabilir; önce kitle ölçülmeli.</td></tr>
+              <tr><td>Marka, Türkiye kitlesi</td><td><span class="tag tag--ok">UYGUN</span> Kanal + bot + ödeme; WhatsApp'a ek ikinci kanal.</td></tr>
+              <tr><td>Kamu kurumu, belediye, veri yerelliği şartı</td><td><span class="tag tag--ok">GÜÇLÜ ADAY</span> 2019/12 Genelgesi (md. 6) yerli haberleşme uygulamasını "tercih" eder; KVKK'nın 29.01.2026 duyurusu kamuda yurt dışı kökenli uygulamalarla resmî evrak/kişisel veri paylaşımına karşı uyardı. Örnek: MEB–Turkcell BiP servisleri (ÖBS, OVA; MEB 14.07.2025 duyurusu).</td></tr>
+              <tr><td>Kurum içi iletişim</td><td><span class="tag tag--ok">UYGUN</span> Kuruma Özel İletişim Platformu.</td></tr>
+              <tr><td>KKTC'deki kurum</td><td><span class="tag tag--ok">UYGUN</span> Yayımlanmış tarife ve operatör üzerinden başvuru.</td></tr>
+              <tr><td>Birden çok kurumun servisini yöneten yazılım (entegratör)</td><td><span class="tag tag--warn">BELİRSİZ</span> Tek hesapla çok servis yönetimi belgede yok; başvuruda sorulmalı. Turkcell iş ortaklığı programları ayrıdır ve genelde tüzel kişilik ister.</td></tr>
+              <tr><td>Proaktif bildirim (randevu, kargo)</td><td><span class="tag tag--warn">DİKKAT</span> Bire bir oturum ister; <code>sendmsgservlist</code> oturumsuz ama kotalı. Kota sözleşmede netleşmeli.</td></tr>
+              <tr><td>Etkileşimli akış (menü, düğme, anket)</td><td><span class="tag tag--ok">VAR</span> Şablon medya + postback; REX dış bağlantı ile kendi akış motorunuza bağlanabilir.</td></tr>
+              <tr><td>Müşteri kartını telefonla eşleştirme</td><td><span class="tag tag--warn">DİKKAT</span> Varsayılan alıcı hash; MSISDN ayrı yetki. Eşleştirmeyi numaraya bağlamayın.</td></tr>
+              <tr><td>Kendi sunucusu yok (NAT arkası)</td><td>Gelen mesaj için herkese açık HTTPS ucu gerekir (sunucu, tünel, bulut fonksiyonu).</td></tr>
+              <tr><td>Türkiye dışı kitle</td><td><span class="tag tag--bad">ZAYIF</span> Kullanıcıların çoğu Türkiye'de.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--danger">
+          <p class="callout__title">Hukuki danışmanlık değildir</p>
+          <p>Genelge "tercih" hükmüdür, bağlayıcı yasak değildir; somut kamu projesi için hukuki görüş alınmalı. Kamuda zorunlu BiP kullanımına karşı sendika tepkisi gibi itibar riskleri de vardır.</p>
+        </div>
+
+        <h2 id="kiyas"><span class="h-num">§ 17</span>Telegram / WhatsApp kıyası</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ölçüt</th><th>BiP (Keşfet)</th><th>Telegram Bot API</th><th>WhatsApp Business Platform</th></tr></thead>
+            <tbody>
+              <tr><td>Açılış</td><td>BiP ekibi onayı</td><td>Herkes, anında</td><td>Meta işletme hesabı + doğrulama</td></tr>
+              <tr><td>Fiyat</td><td>Türkiye'de yayımlanmamış</td><td>Ücretsiz</td><td>Mesaj/şablon başına</td></tr>
+              <tr><td>Gelen mesaj</td><td>Yalnız webhook</td><td>Webhook veya getUpdates</td><td>Webhook</td></tr>
+              <tr><td>Serbest yazma</td><td>Oturum (süre/sayı belgesiz)</td><td>Kullanıcı başlattıysa serbest</td><td>24 saat penceresi; dışında onaylı şablon</td></tr>
+              <tr><td>Düğme / liste</td><td>Şablon medya (kart, hızlı cevap, anket, kaydırmalı)</td><td>Inline/reply klavye</td><td>Düğmeli, liste mesajı</td></tr>
+              <tr><td>Alıcı kimliği</td><td>Hash numara (MSISDN yetkiyle)</td><td>chat_id</td><td>Telefon (wa_id)</td></tr>
+              <tr><td>Belge olgunluğu</td><td>Eski örnekler (2015–2018), rakamlar eksik</td><td>Güncel</td><td>Güncel</td></tr>
+              <tr><td>Ayırt edici</td><td>Yerli altyapı, veri Türkiye'de, faturaya ödeme</td><td>Sıfır maliyet</td><td>Kitle büyüklüğü</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="tuzaklar"><span class="h-num">§ 18</span>Tuzaklar ve başvuruda sorulacaklar</h2>
+
+        <ul class="checklist">
+          <li><strong>200 ≠ gönderildi:</strong> eş zamansız gönderimde sonuç <code>/report</code>'a gelir; dinlemeyen sistem hatayı göremez.</li>
+          <li><strong>Oturum düşmesi:</strong> destek/sipariş akışı <code>312</code> ile kesilir; kullanıcıdan yeniden mesaj isteyen akış tasarla.</li>
+          <li><strong>Medya önce FTS'e:</strong> fotoğraf/video/ses/belge URL'i FTS'ten gelmeli; harici URL kabul edilmez.</li>
+          <li><strong>Belge adresleri değişti:</strong> güncel yol <code>bip.com/tr/gelistiriciler/…</code> (İngilizcesi <code>bip.com/en/developers/…</code>); eski <code>/tr/category/dokumanlar/…</code> ve <code>/eng/category/developer/…</code> 404.</li>
+          <li><strong>Örnek kod eski:</strong> <code>Turkcell/BiP.AI</code> (Java/Spring, 20 commit) yol gösterir; aktif bakım izi yok. 2021 tarihli bir issue'da eski başvuru adresine e-posta gitmediği yazıyor — güncel adres <code>partnering@</code>.</li>
+          <li><strong>Sorulacaklar:</strong> şahıs şirketi kabul ediliyor mu · aylık ücret ve kurulum bedeli · kota değerleri · oturum süresi ve mesaj sayısı · kullanıcı yazmadan bildirim yolu · MSISDN şartı ve KVKK'da veri sorumlusu/işleyen rolleri · geri besleme isteklerinde imza, IP listesi, retry · PRP test hesabı · güncel <code>type</code> kodları · tek hesapla çok servis · ödeme komisyonu · API sürümleme/kullanımdan kaldırma planı.</li>
+        </ul>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 19</span>Kaynaklar</h2>
+
+        <p>Hepsine 12 Ekim 2026'da erişildi.</p>
+        <ul>
+          <li><span class="tag tag--ok">RESMÎ</span> <a href="https://bip.com/tr/gelistiriciler/baslarken/">Başlarken</a> · <a href="https://bip.com/tr/gelistiriciler/panel/">Panel</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/">Keşfet API</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> Gönderim: <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/servisler/kullanici-bazli-mesaj-gonderimi/">sendmsgserv</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/servisler/listedeki-kullanicilara-mesaj-gonderimi/">sendmsgservlist</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/servisler/kullanicilara-farkli-mesaj-gonderimi/">sendmultiusermulticontent</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/dogrulamalar/">Doğrulamalar</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/kota-kontrolu/">Kota Kontrolü</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/hata-kontrolu/">Hata Kontrolü</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> İçerik: <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/icerik-tipleri/">İçerik Tipleri</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/icerik-tipleri/metin/">Metin</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/icerik-tipleri/fotograf/">Fotoğraf</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/icerik-tipleri/sablon-medya-mesajlari/">Şablon Medya Mesajları</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/mesaj-gonderme/icerik-tipleri/dokuman/">Doküman</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> Gelen: <a href="https://bip.com/tr/gelistiriciler/kesfet-api/kullanici-aksiyonlari/mesaj-alma/">Mesaj Alma</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/kullanici-aksiyonlari/bildirim-alma/">Bildirim Alma</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/kullanici-aksiyonlari/sohbet-gecmisi/">Sohbet Geçmişi</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/rapor-alma/">Rapor Alma</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/abone-islemleri/">Abone İşlemleri</a> · <a href="https://bip.com/tr/gelistiriciler/kesfet-api/es-zamanli-es-zamansiz-gonderim/">Eş zamanlı/eş zamansız</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> <a href="https://bip.com/tr/gelistiriciler/rex-api/">REX API</a> · <a href="https://bip.com/tr/gelistiriciler/rex-api/mesajlarin-dis-sisteme-aktarilmasi/">Dış sisteme aktarım</a> · <a href="https://bip.com/tr/gelistiriciler/rex-api/musteri-hizmetleri/">Müşteri Hizmetleri</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> <a href="https://bip.com/tr/gelistiriciler/odeme-yontemi/">Ödeme Yöntemi</a> · <a href="https://bip.com/tr/bip-kesfet-is-birlikleri/">Keşfet İş Birlikleri</a> · <a href="https://bip.com/tr/kuruma-ozel-iletisim-platformu/">Kuruma Özel İletişim Platformu</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> İngilizce: <a href="https://bip.com/en/developers/discover-api/">Discover API</a> · <a href="https://bip.com/en/developers/discover-api/message-sending/error-handling/">Error Handling</a></li>
+          <li><span class="tag tag--ok">RESMÎ (operatör)</span> <a href="https://www.kktcell.com/kurumsal/servisler/bip-kesfletle-markanizi-tanitin">Kuzey Kıbrıs Turkcell — BiP Keşfet</a></li>
+          <li><span class="tag tag--ok">RESMÎ</span> <a href="https://developer.turkcellesirket.com/">Turkcell e-Şirket Geliştirici Rehberi</a></li>
+          <li><span class="tag tag--ok">RESMÎ (kamu)</span> <a href="https://www.kvkk.gov.tr/Icerik/8607/kamu-kurumlarinda-yurt-disi-menseli-haberlesme-uygulamalari-kullanimina-iliskin-kamuoyu-duyurusu">KVKK kamuoyu duyurusu (29.01.2026)</a> · <a href="https://www.mevzuat.gov.tr/MevzuatMetin/CumhurbaskanligiGenelgeleri/20190706-12.pdf">2019/12 Genelgesi</a> · <a href="https://www.meb.gov.tr/ogretmen-veli-iletisimi-yerli-ve-milli-uygulamayla-yurutulecek/haber/37770/tr">MEB haberi (14.07.2025)</a></li>
+          <li><span class="tag">ÖRNEK KOD</span> <a href="https://github.com/Turkcell/BiP.AI">github.com/Turkcell/BiP.AI</a></li>
+          <li><span class="tag">İKİNCİL</span> <a href="https://webrazzi.com/2021/03/26/bip-3-ayda-31-milyon-yeni-kullanici-kazandi/">Webrazzi (Mart 2021)</a> · <a href="https://www.ekonomim.com/sirketler/bip-100-milyonu-askin-indirildi-haberi-724389">Ekonomim (Ocak 2024)</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

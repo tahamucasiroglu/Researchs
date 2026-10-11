@@ -18,7 +18,8 @@
 │  └─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
 └─ Rehberler/
    ├─ Issizlik/           Türkiye'de işsizlik hakları — genel rehber
-   └─ Sirket-Kurma/       Türkiye'de şirket kurma — genel rehber
+   ├─ Mesajlasma-Altyapilari/  Telegram, WhatsApp, BiP, SMS API'leri ve kuralları
+   └─ Sirket-Kurma/       Türkiye'de şirket kurma — genel rehber (+ ödeme/e-fatura ek sayfaları)
 ```
 
 ## Konu klasörü düzeni (Dil ve Programlama)
