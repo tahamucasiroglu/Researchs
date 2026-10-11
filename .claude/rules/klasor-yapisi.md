@@ -15,7 +15,8 @@
 │  ├─ JavaScript-TypeScript/
 │  ├─ HTML-CSS/
 │  ├─ Python/  Go/  Rust/
-│  └─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
+│  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
+│  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/ …)
 └─ Rehberler/
    ├─ Issizlik/           Türkiye'de işsizlik hakları — genel rehber
    ├─ Mesajlasma-Altyapilari/  Telegram, WhatsApp, BiP, SMS API'leri ve kuralları

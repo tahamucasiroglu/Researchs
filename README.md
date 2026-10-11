@@ -32,6 +32,7 @@ Dile ve platforma göre ayrılmış anahtar kelime listeleri: her başlık için
 | [Go](Programlama/Go/) | Sade sözdizimi, goroutine/channel eşzamanlılık modeli, standart kütüphane ve bulut araçlarındaki yeri. |
 | [Rust](Programlama/Rust/) | Sahiplik ve ödünç alma modeli, tip sistemi, güvenli eşzamanlılık ve öğrenme maliyeti. |
 | [Blockchain](Programlama/Blockchain/) | Dil değil alan: temeller, Solidity ve akıllı sözleşmeler, JS/.NET ile dApp geliştirme, diğer zincirler, güvenlik ve proje fikirleri. |
+| [Yapay Zekâ](Programlama/Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini kullanmak; görüntü netleştirme (super-resolution, yüz düzeltme) modelleri, lisanslar ve ölçümler. |
 | [Proje Fikirleri](Programlama/proje-fikirleri/) | Öğrenileni kanıtlamak için tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu. |
 
 ### [Rehberler](Rehberler/)

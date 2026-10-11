@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Görüntü Netleştirme Modelleri — Yapay Zekâ</title>
+<meta name="description" content="Görüntü büyütme (super-resolution) ve yüz düzeltme modelleri kısa başvuru: Real-ESRGAN ncnn CLI bayrakları, PyTorch + spandrel, GFPGAN/CodeFormer, fal API JSON örneği, lisanslar, ölçümler ve Durum → Sonuç karar tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+<style>
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .pre-label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.2rem 0 -.6rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Görüntü Netleştirme Modelleri</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Yapay zekâ · Görüntü</span>
+      <span class="brand__name">Görüntü Netleştirme</span>
+      <span class="brand__sub">Kısa başvuru · Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Görüntü</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">01</span><span>Görüntü Netleştirme</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&rarr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama</span></a></li>
+          <li><a class="nav-item" href="../../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      12 Ekim 2026'da resmî depolardan ve model kartlarından derlendi. Fiyat, sürüm ve lisanslar değişir; kullanmadan önce kaynaktan doğrula. Lisans bilgisi hukuki görüş değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Yapay zekâ · Görüntü işleme</div>
+        <h1 class="page-title">Görüntü netleştirme: <em>model seçimi</em></h1>
+        <p class="lede">Model → ne yapar → lisans → donanım → nereden indirilir. CLI bayrakları, süreç olarak çağırma, bulut API örneği ve karar tablosu.</p>
+        <div class="head-meta">Doğrulama: 12 Ekim 2026 &middot; Ölçüm: 6 GB VRAM'li dizüstü NVIDIA kartı &middot; Ölçülmeyen değerler <span class="tag tag--warn">TAHMİN</span> etiketli</div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===================================================== -->
+        <h2 id="bir-bakista"><span class="h-num">§ 1</span>Bir bakışta</h2>
+
+        <div class="figures">
+          <div class="figure figure--win">
+            <div class="figure__label">Python'suz, her kartta</div>
+            <div class="figure__value">ncnn exe</div>
+            <div class="figure__meta">Real-ESRGAN-ncnn-vulkan, MIT; Vulkan ile NVIDIA / AMD / Intel</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">1080p → 4K (×4), 6 GB kart</div>
+            <div class="figure__value">5–36 <small>sn</small></div>
+            <div class="figure__meta">Compact modeller ~6 sn, ESRGAN ~15 sn (ncnn) / ~35 sn (PyTorch), DAT 164 sn</div>
+          </div>
+          <div class="figure figure--flag">
+            <div class="figure__label">Ticari üründe yasak</div>
+            <div class="figure__value">NC</div>
+            <div class="figure__meta">UltraSharp ailesi, Remacri, ClearReality, CodeFormer; Upscayl AGPL</div>
+          </div>
+        </div>
+
+        <p><strong>Netleştirme</strong> (upscaling, super-resolution) düşük çözünürlüklü görseli 2×–4× büyütüp ayrıntıyı yeniden kurar. Bicubic / Lanczos yalnız ara piksel hesaplar; SR modelleri eğitimde gördüğü dokuyu <em>uydurur</em>. Bu yüzden sonuç keskin ama aslından farklı olabilir: yazı harfleri, yüz hatları, ince desenler değişebilir.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="yollar"><span class="h-num">§ 2</span>Dört yol</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yol</th><th>Ne</th><th>Lisans</th><th>Artı</th><th>Eksi</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Real-ESRGAN-ncnn-vulkan</strong></td><td>Tek exe (Windows / Linux / macOS), Vulkan</td><td>MIT (kod) · BSD-3 (modeller)</td><td>Kurulum yok, Python yok, karo ile az VRAM, PyTorch'tan hızlı</td><td>Yalnız <code>.param/.bin</code> modeller; son sürüm 2022</td></tr>
+              <tr><td><strong>PyTorch + spandrel</strong></td><td><code>.pth/.safetensors</code> dosyasının mimarisini kendisi tanır</td><td>MIT (NC mimariler ayrı pakette)</td><td>OpenModelDB'deki yüzlerce model, yüz modelleri</td><td>Python + torch (CUDA) ortamı, GB'larca disk</td></tr>
+              <tr><td><strong>facexlib</strong></td><td>Yüz bul → hizala → modele ver → geri yapıştır</td><td>MIT</td><td>GFPGAN / CodeFormer'ın asıl yardımcısı</td><td>Ağırlıklar ayrıca iner</td></tr>
+              <tr><td><strong>Bulut API</strong> (fal vb.)</td><td>Sunucuda ESRGAN, SeedVR2, Topaz, Clarity…</td><td>Ücretli hizmet</td><td>Büyük modeller, donanım gerekmez</td><td>Ücret; görsel sağlayıcıya yüklenir (gizlilik)</td></tr>
+              <tr><td>Upscayl</td><td>ncnn exe için masaüstü arayüz (Electron)</td><td><span class="tag tag--bad">AGPL-3.0</span></td><td>Hazır uygulama</td><td>Kapalı kaynak ürüne gömülemez → motoru (ncnn exe) doğrudan kullan</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="buyutme"><span class="h-num">§ 3</span>Büyütme modelleri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Model</th><th>Ne yapar</th><th>Lisans</th><th>Donanım</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td><code>realesrgan-x4plus</code></td><td>Genel amaçlı 4× (fotoğraf, video karesi); yazıyı kalınlaştırır, yüzü düzleştirebilir</td><td><span class="tag tag--ok">BSD-3</span></td><td>ncnn ~1,3 GB (otomatik karo)</td><td><a href="https://github.com/xinntao/Real-ESRGAN/releases">xinntao/Real-ESRGAN</a> (ncnn zip içinde)</td></tr>
+              <tr><td><code>realesrgan-x4plus-anime</code> (6B)</td><td>Çizim / anime; çizgi ve yazıda çok temiz, gerçek yüzde plastik</td><td><span class="tag tag--ok">BSD-3</span></td><td>~1 GB, hızlı</td><td>aynı</td></tr>
+              <tr><td><code>realesr-animevideov3</code></td><td>Anime video karesi; 2×/3×/4× her biri ayrı ağırlık; en hızlı, girdiye en sadık</td><td><span class="tag tag--ok">BSD-3</span></td><td>~0,1 GB</td><td>aynı</td></tr>
+              <tr><td><code>realesr-general-x4v3</code> / <code>-wdn-x4v3</code></td><td>Küçük (4,9 MB) Compact genel model; wdn eşi gürültüyü daha çok siler</td><td><span class="tag tag--ok">BSD-3</span></td><td>~0,4 GB</td><td>Real-ESRGAN v0.2.5.0 <code>.pth</code></td></tr>
+              <tr><td><code>RealESRGAN_x2plus</code></td><td>Gerçek 2× model</td><td><span class="tag tag--ok">BSD-3</span></td><td>~1,9 GB (1080p)</td><td>Real-ESRGAN v0.2.1</td></tr>
+              <tr><td>4xLSDIRCompactC</td><td>Hafif; JPEG bozulmasını da onarır</td><td><span class="tag tag--ok">CC-BY-4.0</span></td><td>~0,4 GB</td><td><a href="https://github.com/Phhofm/models">Phhofm/models</a></td></tr>
+              <tr><td>4xNomos8kSC</td><td>Fotoğraf için keskin ESRGAN</td><td><span class="tag tag--ok">CC-BY-4.0</span></td><td>~5 GB @ karo 512 → küçük kartta karo 256</td><td>Phhofm/models</td></tr>
+              <tr><td>4xNomosWebPhoto_RealPLKSR</td><td>İnternetten inmiş (sıkıştırılmış) fotoğraf</td><td><span class="tag tag--ok">CC-BY-4.0</span></td><td>~1,5 GB (fp32)</td><td>Phhofm/models</td></tr>
+              <tr><td>4xHFA2k RealPLKSR</td><td>Anime / çizim</td><td><span class="tag tag--ok">CC-BY-4.0</span></td><td>~3,2 GB (fp32)</td><td>Phhofm/models</td></tr>
+              <tr><td>4xNomos2_hq_mosr</td><td>Yeni MoSR mimarisi; temiz girdide iyi, <strong>JPEG bloklarını büyütür</strong></td><td><span class="tag tag--ok">CC-BY-4.0</span></td><td>~1 GB</td><td>Phhofm/models</td></tr>
+              <tr><td>4x-UltraSharp</td><td>Topluluğun en sevilen genel modeli (ESRGAN); ncnn sürümü de var</td><td><span class="tag tag--bad">CC-BY-NC-SA</span></td><td>ncnn ~1,3 GB · PyTorch ~5 GB</td><td><a href="https://huggingface.co/Kim2091/UltraSharp">HF Kim2091/UltraSharp</a></td></tr>
+              <tr><td>4x-UltraSharpV2 (DAT) / V2 Lite</td><td>V2: genelde en iyi sonuç, en yavaş; Lite: hızlı ve iyi</td><td><span class="tag tag--bad">CC-BY-NC-SA</span></td><td>V2 ~3,7 GB @ karo 256 · Lite ~0,9 GB</td><td><a href="https://huggingface.co/Kim2091/UltraSharpV2">HF Kim2091/UltraSharpV2</a></td></tr>
+              <tr><td>4x Remacri (foolhardy)</td><td>Doğal doku, aşırı keskinleştirmez</td><td><span class="tag tag--bad">CC-BY-NC-SA</span> (OpenModelDB; HF kartında yazmıyor)</td><td>~5 GB @ karo 512</td><td><a href="https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri">HF FacehugmanIII</a></td></tr>
+              <tr><td>SeedVR2</td><td>Difüzyon tabanlı görüntü/video onarımı; çok güçlü</td><td><span class="tag tag--ok">Apache-2.0</span></td><td><span class="tag tag--warn">≥16–24 GB</span></td><td><a href="https://github.com/ByteDance-Seed/SeedVR">ByteDance-Seed/SeedVR</a> · bulutta fal</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">.pth dosyası = pickle</p>
+          <p>PyTorch ağırlıkları kod çalıştırabilen bir biçimdir. Yalnız resmî / yazar kaynağından indir, sha256'yı not edip sabitle; mümkünse <code>.safetensors</code> sürümünü seç.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="yuz"><span class="h-num">§ 4</span>Yüz düzeltme</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Model</th><th>Ne yapar</th><th>Lisans</th><th>Donanım</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td>GFPGAN v1.4</td><td>En doğal yüz; göz, diş, gözlük belirginleşir</td><td><span class="tag tag--ok">Apache-2.0</span> (StyleGAN2 kökenli CUDA op'ları ayrı lisanslı; "clean" mimari bunları kullanmaz)</td><td>+1,6 GB, +2–3 sn</td><td><a href="https://github.com/TencentARC/GFPGAN/releases">TencentARC/GFPGAN</a> v1.3.4 (348 MB)</td></tr>
+              <tr><td>RestoreFormer</td><td>Daha keskin, biraz parlak; kimlik az kayabilir</td><td><span class="tag tag--ok">Apache-2.0</span></td><td>~2 GB</td><td>aynı sürüm</td></tr>
+              <tr><td>CodeFormer</td><td>En güçlü onarım; <code>fidelity</code> 0 = en çok düzeltme, 1 = kaynağa sadık</td><td><span class="tag tag--bad">S-Lab 1.0 (NC)</span></td><td>~2 GB</td><td><a href="https://github.com/sczhou/CodeFormer/releases">sczhou/CodeFormer</a> v0.1.0 (377 MB)</td></tr>
+              <tr><td>RetinaFace + ParseNet</td><td>Yüz bulucu ve yüz maskesi (facexlib)</td><td><span class="tag tag--ok">MIT</span></td><td>—</td><td><a href="https://github.com/xinntao/facexlib/releases">xinntao/facexlib</a> v0.1.0 / v0.2.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Yüz modeli tek başına bütün görseli büyütmez: önce bir büyütme modeli bütün görseli işler, sonra yüzler kesilip düzeltilir ve geri yapıştırılır (iki geçiş).</p>
+
+        <!-- ===================================================== -->
+        <h2 id="olcum"><span class="h-num">§ 5</span>Ölçümler (6 GB dizüstü NVIDIA kartı)</h2>
+
+        <p>Kalite ölçüsü <strong>SSIM</strong> (aslına benzerlik, 1 = birebir). Girdi: 1280×720 kaynak → 320×180 + JPEG kalite 10 → modelle ×4. Taban (bicubic ×4): yüz 0,846 · desen 0,794. Süre: süreç açılışı dahil ilk görsel.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Model</th><th>Yol</th><th>1080p→4K</th><th>Küçük kare (ilk)</th><th>SSIM yüz · desen</th><th>Gözlem</th></tr></thead>
+            <tbody>
+              <tr><td>x4plus</td><td>ncnn</td><td>15,5 sn</td><td>12,6 sn</td><td>0,851 · 0,686</td><td>Yazı temiz, yüz yağlı boya gibi, ince desen silinir</td></tr>
+              <tr><td>x4plus-anime</td><td>ncnn</td><td>5,0 sn</td><td>3,8 sn</td><td>0,842 · 0,849</td><td>Çizgi / yazıda en temiz</td></tr>
+              <tr><td>animevideov3 ×2</td><td>ncnn</td><td>1,3 sn</td><td>1,7 sn</td><td>0,850 · 0,796</td><td>En hızlı, az iyileştirir</td></tr>
+              <tr><td>UltraSharp</td><td>ncnn / PyTorch</td><td>15,2 / 35,8 sn</td><td>6,3 sn</td><td>0,822 · 0,637</td><td>Keskin; aynı ağırlık ncnn'de 2,3× hızlı, ~4× az bellek</td></tr>
+              <tr><td>general-x4v3</td><td>PyTorch fp16</td><td>5,7 sn</td><td>6,7 sn</td><td>0,844 · 0,742</td><td>Dengeli ve hafif</td></tr>
+              <tr><td>Nomos2 MoSR</td><td>PyTorch</td><td>9,4 sn</td><td>5,7 sn</td><td>0,792 · 0,651</td><td>JPEG kare izlerini büyütür</td></tr>
+              <tr><td>UltraSharpV2 (DAT)</td><td>PyTorch, karo 256</td><td>164 sn</td><td>10,2 sn</td><td>0,847 · 0,848</td><td>Gözle genelde en iyi</td></tr>
+              <tr><td>UltraSharpV2 Lite</td><td>PyTorch</td><td>10,1 sn</td><td>6,1 sn</td><td>0,842 · 0,807</td><td>Hızlı ve iyi</td></tr>
+              <tr><td>Remacri</td><td>PyTorch</td><td>35,6 sn</td><td>6,2 sn</td><td>0,857 · 0,554</td><td>Yüzde iyi, desende zayıf</td></tr>
+              <tr><td>+ GFPGAN / RestoreFormer / CodeFormer</td><td>PyTorch</td><td>+2–3 sn</td><td>8,3–9,3 sn</td><td>0,839–0,843</td><td>GFPGAN en doğal, CodeFormer en keskin</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">SSIM'e tek başına bakma</p>
+          <p>GAN modelleri ayrıntı uydurup gürültüyü sildiği için aslından uzaklaşır; SSIM çoğu zaman bicubic'in altında kalır ama göz keskin sonucu tercih eder. Kararı yan yana yakın kırpımla ver. Küçük görselde süreyi model değil süreç açılışı (Python + torch yükleme ~5 sn) belirler.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="ncnn"><span class="h-num">§ 6</span>ncnn CLI: <code>realesrgan-ncnn-vulkan</code></h2>
+
+        <p>Windows zip (modeller dahil): <code>github.com/xinntao/Real-ESRGAN/releases/download/v0.2.5.0/realesrgan-ncnn-vulkan-20220424-windows.zip</code> — 45.474.481 bayt, sha256 <code>abc02804e17982a3be33675e4d471e91ea374e65b70167abc09e31acb412802d</code>. İçinde exe, <code>vcomp140.dll</code> ve <code>models/</code> (x4plus, x4plus-anime, animevideov3-x2/x3/x4).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Bayrak</th><th>Anlamı</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>-i</code> / <code>-o</code></td><td>Girdi / çıktı dosyası ya da klasörü</td><td>jpg, png, webp</td></tr>
+              <tr><td><code>-n</code></td><td>Model adı (<code>.param</code> dosyasının adı)</td><td>animevideov3'te çıplak ad: exe <code>-x2</code> ekini kendisi ekler</td></tr>
+              <tr><td><code>-s</code></td><td>Ölçek 2 / 3 / 4</td><td><span class="tag tag--bad">DİKKAT</span> modelin doğal ölçeğinden farklı verme (§ 10)</td></tr>
+              <tr><td><code>-t</code></td><td>Karo boyu (0 = otomatik, ≥32)</td><td>Küçük karo = az VRAM, biraz yavaş</td></tr>
+              <tr><td><code>-m</code></td><td>Model klasörü</td><td>Yolda "models" geçmeli (ör. <code>ncnn-models</code>)</td></tr>
+              <tr><td><code>-g</code></td><td>GPU numarası (Vulkan sırası)</td><td>Açıkça ver; <code>auto</code> tümleşik kartı seçebilir</td></tr>
+              <tr><td><code>-j</code></td><td>Yükle:işle:kaydet iş parçacığı</td><td>Varsayılan <code>1:2:2</code></td></tr>
+              <tr><td><code>-x</code></td><td>TTA (8 yönlü ortalama)</td><td>~8× yavaş, biraz daha temiz</td></tr>
+              <tr><td><code>-f</code></td><td>Çıktı biçimi</td><td>png / jpg / webp</td></tr>
+              <tr><td><code>-v</code></td><td>Ayrıntılı çıktı</td><td>Kart listesini stderr'e basar</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="pre-label">Örnek komutlar</p>
+<pre><code># 4× genel model, ayrık kart 0, otomatik karo
+realesrgan-ncnn-vulkan.exe -i kare.png -o kare_x4.png -n realesrgan-x4plus -s 4 -g 0 -t 0
+
+# anime video karesi 2× (animevideov3'te ölçek ayrı ağırlık, ad çıplak)
+realesrgan-ncnn-vulkan.exe -i kare.png -o kare_x2.png -n realesr-animevideov3 -s 2 -g 0
+
+# ek model (ör. UltraSharp ncnn) ayrı klasörden, az VRAM'le
+realesrgan-ncnn-vulkan.exe -i kare.png -o kare_us.png -m ncnn-models -n 4x-UltraSharp-fp16 -s 4 -t 128 -g 0
+
+# kart listesini görmek: var olmayan girdi + -v → listeyi basıp çıkar
+realesrgan-ncnn-vulkan.exe -i yok.png -o yok_x4.png -v</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="csharp"><span class="h-num">§ 7</span>C# ile süreç olarak çağırma</h2>
+
+        <p>Yolları <code>ArgumentList</code> ile ver (boşluk, <code>!</code>, Türkçe harf içeren yollar bozulmaz). İlerleme stderr'deki <code>12,34%</code> satırlarından okunur — ondalık ayırıcı bölge ayarına göre virgül ya da nokta. Başarıyı çıkış kodundan değil çıktı dosyasından anla.</p>
+
+<pre><code>using System.Diagnostics;
+using System.Globalization;
+using System.Text.RegularExpressions;
+
+static async Task&lt;bool&gt; NetlestirAsync(string exe, string girdi, string cikti, string model,
+    int olcek, int gpu, IProgress&lt;double&gt;? ilerleme, CancellationToken ct)
+{
+    var psi = new ProcessStartInfo(exe)
+    {
+        RedirectStandardError = true, RedirectStandardOutput = true,
+        UseShellExecute = false, CreateNoWindow = true,
+        WorkingDirectory = Path.GetDirectoryName(exe)!,   // models/ klasörü exe'nin yanında
+    };
+    foreach (var a in new[] { "-i", girdi, "-o", cikti, "-n", model,
+                              "-s", olcek.ToString(), "-g", gpu.ToString(), "-t", "0" })
+        psi.ArgumentList.Add(a);
+
+    using var p = Process.Start(psi)!;
+    var yuzde = new Regex(@"^(\d+[.,]\d+)%");
+    p.ErrorDataReceived += (_, e) =>
+    {
+        var m = yuzde.Match(e.Data ?? "");
+        if (m.Success &amp;&amp; double.TryParse(m.Groups[1].Value.Replace(',', '.'),
+                NumberStyles.Float, CultureInfo.InvariantCulture, out var v))
+            ilerleme?.Report(v / 100.0);
+    };
+    p.BeginErrorReadLine();
+    p.BeginOutputReadLine();
+    try { await p.WaitForExitAsync(ct); }
+    catch (OperationCanceledException) { p.Kill(entireProcessTree: true); throw; }
+
+    // girdi okunamasa da çıkış kodu 0 olabilir → çıktı dosyasına bak
+    return File.Exists(cikti) &amp;&amp; new FileInfo(cikti).Length &gt; 0;
+}</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="pytorch"><span class="h-num">§ 8</span>PyTorch yolu: spandrel + facexlib</h2>
+
+        <ul>
+          <li><code>pip install spandrel</code> (MIT). Mimariyi dosyadan bulur; <code>ModelLoader().load_from_file(yol)</code> → <code>ImageModelDescriptor</code> (ölçek bilgisi <code>.scale</code>).</li>
+          <li>NC mimariler (CodeFormer vb.) ayrı paket: <code>spandrel_extra_arches</code> → <code>install()</code>.</li>
+          <li>Büyük görselde karo karo işle (ör. 512 px + 32 px örtüşme); <code>half()</code> (fp16) VRAM'i ~yarıya indirir. RealPLKSR / DAT bazı sürümlerde fp16 desteklemez → fp32.</li>
+          <li>Yüz: <code>facexlib.utils.face_restoration_helper.FaceRestoreHelper</code> (bul, hizala 512×512, düzelt, geri yapıştır). <code>model_rootpath</code> verilmezse ağırlıkları kendisi indirmeye kalkar — çevrim dışı çalışacaksa dosyayı önceden koy.</li>
+          <li><span class="tag tag--bad">KAÇIN</span> <code>pip install gfpgan</code> / <code>basicsr</code>: torchvision 0.17'de kaldırılan <code>functional_tensor</code>'ı içe aktarır; güncel torch'la açılışta çöker.</li>
+          <li>Paket kurarken torch sürümünü bozmamak için <code>--no-deps</code> ile kurup eksik bağımlılığı (ör. <code>filterpy</code>) elle ekle.</li>
+          <li>Windows'ta <code>cv2.imread</code> Türkçe harfli / boşluklu yolda boş döner → <code>np.fromfile</code> + <code>cv2.imdecode</code>, yazarken <code>imencode</code> + <code>tofile</code>.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="fal"><span class="h-num">§ 9</span>Bulut API (fal.ai)</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Fiyatlar 12 Ekim 2026'da model sayfalarından okundu</caption>
+            <thead><tr><th>Uç</th><th>Ana alanlar</th><th>Fiyat</th></tr></thead>
+            <tbody>
+              <tr><td><code>fal-ai/esrgan</code></td><td><code>image_url</code>, <code>scale</code> 1–8, <code>tile</code>, <code>face</code> (GFPGAN), <code>model</code> (RealESRGAN_x4plus, x2plus, x4plus_anime_6B, x4_v3, x4_wdn_v3, x4_anime_v3), <code>output_format</code></td><td>0,00111 $ / işlem saniyesi</td></tr>
+              <tr><td><code>fal-ai/seedvr/upscale/image</code></td><td><code>upscale_mode</code> factor/target, <code>upscale_factor</code> 1–10, <code>target_resolution</code>, <code>noise_scale</code> (0,1), <code>seed</code></td><td>0,001 $ / MP</td></tr>
+              <tr><td><code>fal-ai/topaz/upscale/image</code></td><td><code>model</code> (Standard V2, High Fidelity V2, Low Resolution V2, CGI, Text Refine…), <code>upscale_factor</code> 1–4, <code>face_enhancement</code>, <code>sharpen</code></td><td>0,08 / 0,16 / 0,32 $ (≤24 / 48 / 96 MP)</td></tr>
+              <tr><td><code>fal-ai/clarity-upscaler</code></td><td><code>prompt</code>, <code>creativity</code> 0,35, <code>resemblance</code> 0,6, <code>upscale_factor</code> 1–4 — difüzyon, <strong>ayrıntı uydurur</strong></td><td>0,03 $ / MP</td></tr>
+              <tr><td><code>fal-ai/codeformer</code></td><td><code>fidelity</code> 0,5, <code>upscale_factor</code>, <code>face_upscale</code></td><td>0,0021 $ / MP</td></tr>
+              <tr><td><code>fal-ai/recraft/upscale/crisp</code></td><td>yalnız <code>image_url</code></td><td>0,004 $ / görsel</td></tr>
+              <tr><td><code>fal-ai/aura-sr</code>, <code>fal-ai/ccsr</code></td><td>—</td><td><span class="tag tag--warn">BELİRSİZ</span> sayfada "0 $" yer tutucusu</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Akış (kuyruk): yerel dosya önce fal CDN'e yüklenir (ya da herkese açık bir URL verilir) → <code>POST https://queue.fal.run/&lt;uç&gt;</code> → dönen <code>status_url</code> yoklanır → <code>response_url</code>'den sonuç alınır → <code>image.url</code> indirilir.</p>
+
+        <p class="pre-label">İstek (anahtar yer tutucu)</p>
+<pre><code>POST https://queue.fal.run/fal-ai/esrgan
+Authorization: Key FAL_ANAHTARI
+Content-Type: application/json
+
+{
+  "image_url": "https://ornek.cdn/kare.png",
+  "scale": 4,
+  "model": "RealESRGAN_x4plus",
+  "face": false,
+  "output_format": "png"
+}</code></pre>
+
+        <p class="pre-label">Kuyruk cevabı → sonuç (özet)</p>
+<pre><code>{ "request_id": "…", "status_url": "https://queue.fal.run/…/status",
+  "response_url": "https://queue.fal.run/…", "cancel_url": "…/cancel" }
+
+// durum "COMPLETED" olunca response_url:
+{ "image": { "url": "https://…/cikti.png", "width": 7680, "height": 4320,
+             "content_type": "image/png" } }</code></pre>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Gizlilik ve ücret</p>
+          <p>Görsel sağlayıcının sunucusuna gider; kişi yüzü / ekran görüntüsü içeriyorsa bunu kullanıcıya söyle. MP başına fiyatlandırmada çıktı boyutu (girdi × ölçek²) hesaplanır: 1080p ×4 = 33 MP. Alan adları ve fiyatlar sık değişir — gerçek isteği atmadan önce model sayfasındaki şemaya bak.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="tuzaklar"><span class="h-num">§ 10</span>Tuzaklar (ölçülmüş)</h2>
+
+        <ol>
+          <li><strong>4× modelle <code>-s 2</code></strong> resmin yalnız <em>sol üst çeyreğini</em> büyütür; boyut doğru, hata yok, çıkış 0. Doğal ölçekte çalıştırıp sonucu küçült (ör. Lanczos / Mitchell).</li>
+          <li><strong><code>-g auto</code></strong> çift kartlı dizüstünde tümleşik (Intel) kartı seçebilir: 3–4× yavaş. Vulkan sırası CUDA sırasıyla aynı olmak zorunda değil; <code>-v</code> listesinden ayrık kartı bul.</li>
+          <li><strong><code>-m</code> yolunda "models" yoksa</strong> exe <code>unknown model dir type</code> deyip çıkar.</li>
+          <li><strong>Çıkış kodu 0</strong> olsa da girdi okunamamış olabilir (<code>decode image … failed</code>) → çıktı dosyasını denetle.</li>
+          <li>Topluluğun ncnn dışa aktarımları 2022 exe'sinde her zaman çalışmaz (bazıları segfault). Çökenin <code>.pth</code>'si spandrel'de çalışır.</li>
+          <li>Bellek yetmezse karo küçültülerek (otomatik → 256 → 128 → 64) yeniden denenebilir.</li>
+          <li>VRAM taşınca Windows paylaşımlı belleğe düşer: hata yok ama 5–20× yavaşlar.</li>
+          <li>Çıktı büyük: 1080p ×4 PNG 40–60 MB, bellekte ~130 MB. Önizlemeyi küçültülmüş kopyadan yap; &gt;16 MP için uyar.</li>
+        </ol>
+
+        <!-- ===================================================== -->
+        <h2 id="karar"><span class="h-num">§ 11</span>Durum → Sonuç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Donanım</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>NVIDIA kart</td><td>ncnn (her model) + PyTorch CUDA (her model). ESRGAN mimarisinde ncnn daha hızlı.</td></tr>
+              <tr><td>AMD kart</td><td>ncnn (Vulkan) çalışır. PyTorch: Linux'ta ROCm; Windows'ta DirectML / ONNX gerekir <span class="tag tag--warn">DENENMEDİ</span>.</td></tr>
+              <tr><td>Intel ayrık / tümleşik kart</td><td>ncnn (Vulkan) çalışır; tümleşik kartta 3–4× yavaş (ölçüldü). PyTorch için XPU / OpenVINO <span class="tag tag--warn">DENENMEDİ</span>.</td></tr>
+              <tr><td>Apple Silicon</td><td>ncnn'nin macOS sürümü (MoltenVK) ya da PyTorch MPS <span class="tag tag--warn">DENENMEDİ</span>.</td></tr>
+              <tr><td>Yalnız işlemci (GPU yok)</td><td>PyTorch CPU'da Compact modeller (general-x4v3, LSDIRCompactC) kabul edilebilir; ESRGAN / DAT dakikalar sürer <span class="tag tag--warn">TAHMİN</span>. Pratik çözüm bulut API.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>VRAM</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>~4 GB</td><td>ncnn <code>-t 128</code> (~0,8 GB), Compact modeller, Lite modeller; ESRGAN PyTorch'ta karo 128–256 <span class="tag tag--warn">TAHMİN</span>.</td></tr>
+              <tr><td>6–8 GB</td><td>Yerelde her şey: ESRGAN PyTorch karo 256–512, DAT karo 256 (yavaş), yüz geçişi (+2 GB). 6 GB'ta ölçüldü.</td></tr>
+              <tr><td>12 GB</td><td>Daha büyük karo → daha hızlı; DAT rahat <span class="tag tag--warn">TAHMİN</span>.</td></tr>
+              <tr><td>≥16–24 GB</td><td>SeedVR2 gibi difüzyon tabanlı onarım yerelde denenebilir (yazarın belirttiği alt sınır).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İçerik türü</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Fotoğraf (temiz)</td><td>x4plus; NC serbestse UltraSharpV2 / Lite; ticaride Nomos8kSC / NomosWebPhoto (CC-BY).</td></tr>
+              <tr><td>İnternetten inmiş, JPEG'li fotoğraf</td><td>NomosWebPhoto RealPLKSR, LSDIRCompactC, general-wdn-x4v3. MoSR'den kaçın.</td></tr>
+              <tr><td>Sıkıştırılmış video karesi (yayın, ekran görüntüsü)</td><td>general-wdn-x4v3 (gürültü), x4plus (yazı), hız gerekiyorsa animevideov3.</td></tr>
+              <tr><td>Anime / çizim / arayüz yazısı</td><td>x4plus-anime, HFA2k RealPLKSR, animevideov3.</td></tr>
+              <tr><td>Yüz bulanık</td><td>Büyütme + GFPGAN 1.4 (Apache); NC serbestse CodeFormer (<code>fidelity</code> 0,5–0,7).</td></tr>
+              <tr><td>En yüksek kalite, ücret sorun değil</td><td>Bulutta SeedVR2 / Topaz. "Yaratıcı" (Clarity) yüz ve yazıyı değiştirebilir — belge / kimlik görüntüsünde kullanma.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kullanım amacı</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Kişisel / ticari olmayan deneme</td><td>Hepsi serbest (NC modeller dahil); lisans metnini yine oku.</td></tr>
+              <tr><td>Ticari ürün / satılan yazılım</td><td>MIT / BSD-3 / Apache-2.0 / CC-BY-4.0 (atıf yaz). UltraSharp, Remacri, ClearReality, CodeFormer çıkar. Upscayl'ı gömme (AGPL); ncnn exe'yi doğrudan kullan.</td></tr>
+              <tr><td>Ticari içerik üretimi (çıktıyı satmak)</td><td>NC lisanslarda çıktının ticari kullanımı da tartışmalı → ticari serbest model ya da bulut API'nin şartları. <span class="tag tag--warn">HUKUKİ GÖRÜŞ DEĞİL</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Kaynaklar</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://github.com/xinntao/Real-ESRGAN">xinntao/Real-ESRGAN — modeller, sürümler (BSD-3)</a></li>
+          <li><span class="src-n">02</span><a href="https://github.com/xinntao/Real-ESRGAN/blob/master/docs/model_zoo.md">Real-ESRGAN model zoo</a></li>
+          <li><span class="src-n">03</span><a href="https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan">xinntao/Real-ESRGAN-ncnn-vulkan — CLI (MIT)</a></li>
+          <li><span class="src-n">04</span><a href="https://github.com/chaiNNer-org/spandrel">chaiNNer-org/spandrel — mimari desteği, extra_arches lisans ayrımı</a></li>
+          <li><span class="src-n">05</span><a href="https://openmodeldb.info">OpenModelDB — topluluk modelleri, lisans kayıtları</a></li>
+          <li><span class="src-n">06</span><a href="https://github.com/TencentARC/GFPGAN">TencentARC/GFPGAN (Apache-2.0)</a></li>
+          <li><span class="src-n">07</span><a href="https://github.com/sczhou/CodeFormer">sczhou/CodeFormer (S-Lab License 1.0)</a></li>
+          <li><span class="src-n">08</span><a href="https://github.com/xinntao/facexlib">xinntao/facexlib (MIT)</a></li>
+          <li><span class="src-n">09</span><a href="https://huggingface.co/Kim2091/UltraSharp">Kim2091/UltraSharp</a> · <a href="https://huggingface.co/Kim2091/UltraSharpV2">UltraSharpV2</a> (CC-BY-NC-SA-4.0)</li>
+          <li><span class="src-n">10</span><a href="https://github.com/Phhofm/models">Phhofm/models (CC-BY-4.0)</a></li>
+          <li><span class="src-n">11</span><a href="https://github.com/ByteDance-Seed/SeedVR">ByteDance-Seed/SeedVR (Apache-2.0)</a></li>
+          <li><span class="src-n">12</span><a href="https://github.com/upscayl/upscayl">upscayl/upscayl (AGPL-3.0)</a></li>
+          <li><span class="src-n">13</span><a href="https://fal.ai/models/fal-ai/esrgan">fal: esrgan</a> · <a href="https://fal.ai/models/fal-ai/seedvr/upscale/image">seedvr</a> · <a href="https://fal.ai/models/fal-ai/topaz/upscale/image">topaz</a> · <a href="https://fal.ai/models/fal-ai/clarity-upscaler">clarity</a> · <a href="https://fal.ai/models/fal-ai/codeformer">codeformer</a> · <a href="https://fal.ai/models/fal-ai/recraft/upscale/crisp">recraft crisp</a></li>
+          <li><span class="src-n">14</span><a href="https://docs.fal.ai">fal belgeleri — kuyruk API, dosya yükleme</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>
