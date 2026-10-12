@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remotion ve Kodla Video — Kısa Başvuru</title>
+<meta name="description" content="Remotion ile React kodundan video üretimi: nasıl çalışır, parçaları, örnek kod, yapay zekâ ile kullanım, lisans ve fiyatlar, düşük VRAM'de yerel TTS/görsel/geçiş, alternatifler ve durum → öneri tablosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+<style>
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .pre-label { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 1.2rem 0 -.6rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Remotion ve Kodla Video</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Video · Kodla üretim</span>
+      <span class="brand__name">Remotion ve Kodla Video</span>
+      <span class="brand__sub">Kısa başvuru · Ekim 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Konular</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../goruntu-netlestirme/index.html"><span class="nav-num">01</span><span>Görüntü Netleştirme</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">02</span><span>Kodla Video (Remotion)</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../JavaScript-TypeScript/index.html"><span class="nav-num">&rarr;</span><span>JavaScript / TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&rarr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama</span></a></li>
+          <li><a class="nav-item" href="../../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      12 Ekim 2026'da resmî belgelerden derlendi. Fiyat, lisans ve sürümler değişir; kullanmadan önce kaynaktan teyit et. Hukuki danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Video üretimi · React ile programlanabilir video</div>
+        <h1 class="page-title">Remotion ve kodla video: <em>kısa başvuru</em></h1>
+        <p class="lede">Video = kare numarasının fonksiyonu. Remotion bunu React ile yapar. Bu sayfada nasıl çalıştığı, yapay zekâyla kullanımı, lisansı, yerel model seçenekleri ve alternatifleri var.</p>
+        <div class="head-meta">remotion 4.0.535 (npm) &middot; Araştırma: 12 Ekim 2026 &middot; Doğrulanmayan bilgi <span class="tag tag--warn">TAHMİN</span> / <span class="tag tag--warn">ÇELİŞKİLİ</span> etiketli</div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===================================================== -->
+        <h2 id="bir-bakista"><span class="h-num">§ 1</span>Bir bakışta</h2>
+
+        <div class="figures">
+          <div class="figure figure--win">
+            <div class="figure__label">Birey / ≤3 çalışanlı şirket</div>
+            <div class="figure__value">Ücretsiz</div>
+            <div class="figure__meta">Ticari kullanım dahil</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">4+ kişilik şirket</div>
+            <div class="figure__value">25 $<small>/ay/koltuk</small></div>
+            <div class="figure__meta">ya da render başı 0,01 $ (en az 100 $/ay)</div>
+          </div>
+          <div class="figure figure--flag">
+            <div class="figure__label">Açık kaynak mı?</div>
+            <div class="figure__value">Hayır</div>
+            <div class="figure__meta">"Source-available"; OSI lisansı değil</div>
+          </div>
+        </div>
+
+        <ul class="checklist">
+          <li><strong>Ne yapar:</strong> React bileşenini kare kare çizer, kareleri FFmpeg ile videoya çevirir.</li>
+          <li><strong>Neye ihtiyaç duyar:</strong> Node.js + Chrome (Headless Shell kendiliğinden iner) + FFmpeg ve yerel ikililer (paketle gelir).</li>
+          <li><strong>GPU şart değil:</strong> Chrome Headless Shell CPU ile çizer. GPU ile render yalnız Linux'ta.</li>
+          <li><strong>Yapay zekâ ile:</strong> resmî Agent Skills ve "prompt → video" şablonları var. Küçük yerel modeller kod yazmada zayıf; JSON doldurmada iyi.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="nasil-calisir"><span class="h-num">§ 2</span>Remotion nedir, nasıl çalışır</h2>
+
+        <p>Remotion, videoyu React bileşeni olarak yazdıran bir TypeScript çatısıdır. Bileşen her kare için yeniden çizilir; <code>useCurrentFrame()</code> o anki kare numarasını, <code>useVideoConfig()</code> genişlik, yükseklik, fps ve süreyi verir. Animasyon, kare numarasından değer hesaplamaktır (<code>interpolate</code>, <code>spring</code>). Bileşen <code>&lt;Composition&gt;</code> ile kaydedilir; render sırasında başsız Chrome her kareyi açar, ekran görüntüsünü alır ve FFmpeg bunları videoya kodlar.</p>
+
+        <ol class="steps">
+          <li><strong>React bileşeni</strong> — kareye bağlı JSX (yazı, SVG, görsel, video, ses).</li>
+          <li><strong>Kareler</strong> — başsız Chrome her kareyi çizer. Varsayılan JPEG; saydamlık gerekirse PNG.</li>
+          <li><strong>Kodlama</strong> — FFmpeg kareleri birleştirir. 4.0.534'ten beri "paralel kodlama" varsayılan: Chrome sonraki kareleri çizerken FFmpeg öncekileri kodlar (bedeli: daha yüksek tepe bellek).</li>
+          <li><strong>Paralellik</strong> — <code>concurrency</code> varsayılanı CPU iş parçacıklarının yarısı.</li>
+        </ol>
+
+        <!-- ===================================================== -->
+        <h2 id="parcalar"><span class="h-num">§ 3</span>Parçalar</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Remotion bileşenleri</caption>
+            <thead>
+              <tr><th>Parça</th><th>Ne işe yarar</th><th>Not</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Studio</strong></td><td>Tarayıcıda önizleme ve parametre düzenleme</td><td>"Render in browser" düğmesi var. Önizleme render sayılmaz.</td></tr>
+              <tr><td><strong>CLI</strong></td><td><code>npx remotion render</code></td><td>Yerel makinede render</td></tr>
+              <tr><td><strong>@remotion/renderer</strong></td><td>Node'dan render: <code>renderMedia()</code>, <code>renderFrames()</code>, <code>stitchFramesToVideo()</code></td><td>Sunucu / otomasyon için</td></tr>
+              <tr><td><strong>Player</strong></td><td>Kendi React uygulamana gömülü canlı önizleme</td><td>Önizleme render sayılmaz; ama Player gömen kod lisansta "Automators" kapsamında</td></tr>
+              <tr><td><strong>Lambda / Cloud Run</strong></td><td>Videoyu parçalara bölüp her parçayı ayrı fonksiyonda render eder</td><td>Toplu ve hızlı bulut render</td></tr>
+              <tr><td><strong>Web renderer</strong> (<code>renderMediaOnWeb</code>)</td><td>Tarayıcıda render, FFmpeg yerine WebCodecs</td><td>4.0.491'den beri kararlı; HTML'nin bir alt kümesi; kapatılamayan telemetri</td></tr>
+              <tr><td><strong>Electron</strong></td><td>Masaüstü uygulamada, kullanıcının makinesinde render</td><td>Çevrimdışı için tarayıcı pakete girer, boyut "ciddi büyür"</td></tr>
+              <tr><td><strong>Şablonlar</strong></td><td>Prompt to Motion Graphics, Prompt to Video, TikTok altyazı, Audiogram, Skia, Render Server…</td><td>Editor Starter, <code>&lt;Timeline/&gt;</code> ücretli</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="ornek"><span class="h-num">§ 4</span>En kısa örnek</h2>
+
+        <p class="pre-label">src/Baslik.tsx</p>
+<pre><code>import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+
+export const Baslik: React.FC&lt;{metin: string}&gt; = ({metin}) =&gt; {
+  const kare = useCurrentFrame();
+  const opaklik = interpolate(kare, [0, 30], [0, 1], {extrapolateRight: 'clamp'});
+  return (
+    &lt;AbsoluteFill style={{background: '#111', justifyContent: 'center', alignItems: 'center'}}&gt;
+      &lt;h1 style={{color: 'white', fontSize: 90, opacity: opaklik}}&gt;{metin}&lt;/h1&gt;
+    &lt;/AbsoluteFill&gt;
+  );
+};</code></pre>
+
+        <p class="pre-label">src/Root.tsx</p>
+<pre><code>import {Composition} from 'remotion';
+import {Baslik} from './Baslik';
+
+export const RemotionRoot = () =&gt; (
+  &lt;Composition
+    id="Baslik"
+    component={Baslik}
+    durationInFrames={90}   // 3 sn @ 30 fps
+    fps={30}
+    width={1080}
+    height={1920}           // dikey video
+    defaultProps={{metin: 'Merhaba'}}
+  /&gt;
+);</code></pre>
+
+        <p class="pre-label">Render</p>
+<pre><code>npx create-video@latest               # yeni proje
+npx remotion studio                    # önizleme
+npx remotion render Baslik out/baslik.mp4 --props='{"metin":"Tarih videosu"}'</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="ai-ile"><span class="h-num">§ 5</span>Yapay zekâ ile kullanım</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Resmî yapay zekâ kaynakları</caption>
+            <thead><tr><th>Kaynak</th><th>Ne</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Agent Skills</strong></td><td><code>npx skills add remotion-dev/skills</code> — <code>/remotion-best-practices</code>, <code>-create</code>, <code>-render</code>, <code>-captions</code>, <code>-docs</code>, <code>-upgrade</code>… Claude Code, Codex, Cursor, Kimi Code destekli.</td></tr>
+              <tr><td><strong>MCP sunucusu</strong></td><td><span class="tag tag--warn">ESKİMİŞ</span> En erken 31 Ağu 2026'da kapanıyor; yerine <code>/remotion-docs</code> becerisi.</td></tr>
+              <tr><td><strong>Belgeler markdown olarak</strong></td><td>Her belge URL'sine <code>.md</code> ekle ya da <code>Accept: text/markdown</code> gönder.</td></tr>
+              <tr><td><strong>Prompt to Motion Graphics</strong></td><td>SaaS başlangıç kiti: LLM Remotion kodu yazar, tarayıcıda derlenir, Player ile önizlenir, derleme hatasında model yeniden denenir. OpenAI anahtarı ister.</td></tr>
+              <tr><td><strong>Prompt to Video</strong></td><td>Tek istemden görsel + seslendirmeli hikâye videosu.</td></tr>
+              <tr><td><strong>"Generate" rehberi</strong></td><td>Uzun kural istemi gerekir, bağlam büyüdükçe kalite düşer ("context rot"), çıktıdaki markdown çitleri temizlenmeli.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Claude ile kodlatma: maliyet ve erişim kuralı</h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Claude API fiyatları (MTok başına, 12 Ekim 2026)</caption>
+            <thead><tr><th>Model</th><th>Giriş</th><th>Çıkış</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Haiku 5.5 (istem ≤100K)</td><td>0,10 $</td><td>0,50 $</td><td>100K üstünde 0,50 / 2,50 $ (5 kat sıçrama)</td></tr>
+              <tr><td>Sonnet 5.5</td><td>2 $</td><td>10 $</td><td>—</td></tr>
+              <tr><td>Opus 5.5</td><td>4 $</td><td>20 $</td><td>Kod yazımı için genel öneri</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Batch:</strong> giriş ve çıkışta %50 indirim; önbellekle birlikte kullanılabilir.</li>
+          <li><strong>Örnek hesap</strong> <span class="tag tag--warn">TAHMİN</span>: 50K giriş + 20K çıkışlık bir video ≈ Haiku 0,015 $ · Sonnet 0,30 $ · Opus 0,60 $. Çok turlu ajan döngüsünde 5–20 kat artabilir.</li>
+          <li><strong>Haiku "iyi" mi?</strong> Ucuzluğu doğrulandı; Remotion kodu için yeterliliği resmî kaynakta yok <span class="tag tag--warn">TAHMİN</span>, denenmeli.</li>
+        </ul>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Üçüncü taraf uygulamada "Claude aboneliğinle giriş" yasak</p>
+          <p>Anthropic'in hukuki sayfasına göre geliştiriciler kendi uygulamalarında Claude.ai girişi sunamaz, Free/Pro/Max kimliğiyle kullanıcı adına istek geçiremez, oturum token'ı toplayamaz/saklayamaz. İzinli yol: kullanıcının <strong>kendi API anahtarı</strong> (BYOK), Agent SDK + API anahtarı ya da Bedrock / Vertex / Foundry. 7 Ekim 2026'dan beri Max 5x'e aylık 100 $, Max 20x'e 200 $ API kredisi veriliyor; kullanıcı Console'da anahtar açar, kredi oraya yüklenir. Kapsam: API, Managed Agents, Agent SDK, Playground; Claude Code'da (resmî tablo etkileşimli / betik ayrımı yapmıyor), uygulamalardaki extra usage'da ve Bedrock / Vertex / Foundry'de geçmez; ay sonunda devretmez.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="yerel-llm"><span class="h-num">§ 6</span>Yerel LLM ile: mümkün olan / olmayan</h2>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Küçük model (4–9B) yapar</p>
+            <ul>
+              <li>Düz bir şemaya uyan <strong>sahne JSON'u</strong> (metin, süre, sahne türü, renk).</li>
+              <li>Verilen kaynak metni özetlemek / çevirmek.</li>
+              <li>Ollama <code>format</code> alanına JSON şeması verilir; sıcaklık 0 önerilir.</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Küçük model zayıf</p>
+            <ul>
+              <li>Her video için yeni React/TSX yazmak: <code>interpolate</code> aralıkları, SVG yolları, kare zamanlaması bozulur <span class="tag tag--warn">TAHMİN</span>.</li>
+              <li>Kaynaksız tarih/isim/rakam: uydurma riski yüksek.</li>
+              <li>Uzun istem + şema 4K bağlamı aşınca kuralları sessizce unutma.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>Doğru mimari:</strong> TSX sahne türleri (başlık, harita, zaman çizelgesi, karşılaştırma, alıntı…) <em>bir kez</em> yazılır. Composition'a Zod şeması bağlanır; LLM yalnız bu şemaya uyan sahne listesini üretir. Aynı şema hem Ollama <code>format</code>'ında hem Remotion doğrulamasında kullanılır.</p>
+
+        <p class="pre-label">Örnek sahne JSON'u (genel tarih videosu)</p>
+<pre><code>{
+  "sahneler": [
+    {"tur": "baslik", "metin": "Antik yapıların sırrı", "sure_sn": 4, "renk": "#c8a24a"},
+    {"tur": "alinti", "metin": "…", "kaynak_alinti": "kaynak metinden birebir cümle", "sure_sn": 6},
+    {"tur": "zaman_cizelgesi", "olaylar": [{"yil": "MÖ 27", "metin": "…"}], "sure_sn": 8}
+  ]
+}</code></pre>
+
+        <ul>
+          <li><strong>Uydurmaya karşı</strong> <span class="tag tag--warn">ÖNERİ</span>: kaynak metni (ör. Wikipedia) kod çeker ve isteme verir; her sahnede zorunlu <code>kaynak_alinti</code>; kod alıntının kaynakta birebir geçtiğini dize aramasıyla denetler, geçmeyen sahne reddedilir.</li>
+          <li><strong>Biçim ≠ içerik:</strong> şema kısıtı biçimi garanti eder; alanların anlamı istemde tarif edilmezse model en kısa geçerli değeri yazar. Karmaşık iç içe şema küçük modelde kaliteyi düşürür.</li>
+          <li><strong>Ollama bağlamı:</strong> 24 GiB'tan küçük kartlarda varsayılan 4K token. <code>num_ctx</code> / <code>OLLAMA_CONTEXT_LENGTH</code> ile elle büyüt (VRAM artar).</li>
+          <li><strong>Hata:</strong> düşünme kipi kapalıyken Qwen3.5/Gemma 4'te <code>format</code> yok sayılıyordu; Gemma 4 için Ollama v0.21.1, Qwen3.5 için v0.31.2'de düzeldi.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>VRAM'e göre yerel LLM önerisi <span class="tag tag--warn">TAHMİN</span> (boyutlar Ollama q4 etiketlerinden, doğrulandı)</caption>
+            <thead><tr><th>VRAM</th><th>Senaryo + sahne JSON'u</th><th>TSX yazdırma</th></tr></thead>
+            <tbody>
+              <tr><td>4 GB</td><td>qwen3.5:4b (3,3 GB) · gemma4:e2b-qat (4,3, sınırda)</td><td>Yapılmaz, sabit şablon</td></tr>
+              <tr><td>6 GB</td><td>gemma4:e2b · qwen3.5:4b · gemma3:4b</td><td>Yapılmaz</td></tr>
+              <tr><td>8 GB</td><td>gemma4:12b-it-qat (7,2, sınırda) · qwen3.5:9b (6,6)</td><td>Basit sahne + derleme döngüsü, riskli</td></tr>
+              <tr><td>12 GB</td><td>gemma4:12b (8,0) + 16–32K bağlam</td><td>qwen2.5-coder:14b ya da gemma4:12b + <code>tsc --noEmit</code> döngüsü</td></tr>
+              <tr><td>16 GB</td><td>gemma4:12b q8 (13)</td><td>gpt-oss-20b (14)</td></tr>
+              <tr><td>24 GB</td><td>gemma4:26b-a4b (18) · 31b (20)</td><td>qwen3-coder:30b-a3b (19), qwen3.6:27b — artık anlamlı</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Lisans:</strong> Gemma 4, Qwen3.5, Ministral 3, gpt-oss → Apache 2.0. Phi-4-mini → MIT. Gemma 3 → Gemma Terms of Use. Qwen2.5-Coder-3B → ticari değil.</li>
+          <li><strong>Türkçe:</strong> Gemma 3/4 ve Phi-4-mini listede; Llama 3.1 ve Ministral 3 resmî listede yok; Qwen3.5 "201 dil" diyor, Türkçe açıkça yazmıyor.</li>
+          <li><strong>Uydurma oranı</strong> (Vectara, verilen metni özetleme, İngilizce): gemma-3-4b %6,4 · gemma-3-12b %4,4 · qwen3-8b %4,8 · Phi-4-mini %23,5 · ministral-3-8b %21,7.</li>
+          <li><strong>Aynı kartta TTS de varsa:</strong> LLM bitince <code>keep_alive: 0</code> ile bellekten at, sonra TTS'i çalıştır <span class="tag tag--warn">ÖNERİ</span>.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="lisans"><span class="h-num">§ 7</span>Lisans ve ticari kullanım</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Remotion lisansı (remotion.pro, 12 Ekim 2026)</caption>
+            <thead><tr><th>Durum</th><th>Lisans</th><th>Ücret</th></tr></thead>
+            <tbody>
+              <tr><td>Birey, ≤3 çalışanlı kâr amaçlı şirket, kâr amacı gütmeyen kuruluş, ticari olmayan deneme</td><td>Ücretsiz lisans (ticari kullanım ve değiştirme serbest)</td><td><span class="tag tag--ok">0 $</span></td></tr>
+              <tr><td>4+ kişi, Remotion kodunu kendi yazan / ajana yazdıran kişi başına</td><td>Remotion for Creators</td><td>25 $/ay/koltuk</td></tr>
+              <tr><td>4+ kişi, <code>renderMedia()</code> / CLI render çağıran ya da Player gömen kod (editörler, prompt-to-video uygulamaları)</td><td>Remotion for Automators</td><td>Render başı 0,01 $, en az 100 $/ay</td></tr>
+              <tr><td>Özel şartlar, danışmanlık</td><td>Enterprise</td><td>500 $/ay'dan başlar</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>1 render</strong> = başarılı üretilmiş bir video, ses, GIF, durağan görüntü ya da PDF.</li>
+          <li><strong>Serbest:</strong> üretilen videoları satmak; kendi şablonundan kullanıcıya özel video render ettirmek; yalnız MP4 teslim eden ajansın müşterisi çalışan sayısına girmez.</li>
+          <li><strong>Yasak:</strong> Remotion kodunu kopyalayıp/değiştirip satmak, kiralamak, alt lisanslamak; kullanıcının kendi Remotion projesini yükleyip senin altyapında render ettirmesi.</li>
+          <li><strong>Ücretli masaüstü uygulamasına gömüp kullanıcının makinesinde render</strong> <span class="tag tag--warn">ÇELİŞKİLİ</span>: SSS'de açıkça geçmiyor; kod müşteriye dağıtıldığı için "alt lisanslama yasak" maddesine yakın. Büyük olasılıkla Automators + yazılı onay gerekir — Remotion'a sorulmalı.</li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Remotion 5.0 ile gelecek değişiklikler (çıkış tarihi doğrulanmadı)</p>
+          <p>Sözleşmeli çalışanlar da çalışan sayısına girecek. Automators müşterilerinde <code>licenseKey</code> ve telemetri zorunlu; telemetri engellenirse her ay doğrulanabilir render raporu verilecek. Çevrimdışı çalışan masaüstü ürünler için bu ciddi bir sorun; belgelerde ele alınmamış.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="yerel-medya"><span class="h-num">§ 8</span>Yerel imkânlar: TTS, görsel, geçiş, altyazı</h2>
+
+        <p>Yalnız lisansı ve dil desteği net olanlar. Türkçe ses için ticari kullanıma temiz ve CPU'da çalışan model <strong>yok</strong> (Piper tr, MMS-TTS tur, OmniVoice ticari değil; XTTS-v2 ticari değil).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>VRAM sınıfına göre yerel parçalar</caption>
+            <thead><tr><th>VRAM</th><th>TTS</th><th>Görsel</th><th>Geçiş / video</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>4 GB</td>
+                <td>EN: Kokoro-82M (Apache), Chatterbox Nano (MIT) — CPU'da. TR: Chatterbox V3 sığması belirsiz <span class="tag tag--warn">TAHMİN</span></td>
+                <td>Z-Image Turbo Q3_K + offload; FLUX.2 klein 4B Q4; SDXL-Lightning</td>
+                <td>RIFE (benzer kareler) + Remotion'da klasik geçişler</td>
+              </tr>
+              <tr>
+                <td>6 GB</td>
+                <td>TR+EN: Chatterbox Multilingual V3 (MIT, 23 dil, ~5 GB <span class="tag tag--warn">TAHMİN</span>) — LLM ile sırayla</td>
+                <td>Z-Image Q8 (bir ölçüm: ~71 sn @1280×720); klein 4B ~20 sn</td>
+                <td>RIFE; FramePack (yalnız tek kareden, 5 sn ≈ 25–50 dk <span class="tag tag--warn">TAHMİN</span>)</td>
+              </tr>
+              <tr>
+                <td>8 GB</td>
+                <td>VoxCPM2 (Apache, 30 dil, Türkçe dahil, ~8 GB)</td>
+                <td>Offload azalır</td>
+                <td>Wan2.2 TI2V-5B (ComfyUI offload + fp8/GGUF ile; resmî depo 24 GB der); Wan2.1 1.3B (8,19 GB)</td>
+              </tr>
+              <tr>
+                <td>12–16 GB</td>
+                <td>LLM ile aynı anda çalışabilir <span class="tag tag--warn">TAHMİN</span></td>
+                <td>Q8/bf16, offload yok; Z-Image bf16 "16 GB'a sığar"</td>
+                <td>Wan2.1 FLF2V 14B GGUF + offload <span class="tag tag--warn">TAHMİN</span></td>
+              </tr>
+              <tr>
+                <td>24 GB</td>
+                <td>—</td>
+                <td>Hepsi</td>
+                <td><strong>Wan2.1 FLF2V 14B</strong> (Apache): ilk + son kare arası gerçek geçiş</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Lisans notları:</strong> Chatterbox her çıktıya görünmez PerTh filigranı gömer. FLUX.2 klein <strong>9B</strong> ticari değil (4B Apache). SDXL-Turbo ticari için ayrı lisans ister. HunyuanVideo 1.5 AB, Birleşik Krallık ve Güney Kore'yi kapsam dışı bırakır. GIMM-VFI ticari değil.</li>
+          <li><strong>Trendyol-TTS</strong> (VoxCPM2 + Türkçe LoRA): MIT etiketli ama model kartı "araştırma/prototip" diyor, eğitim verisi gizli <span class="tag tag--warn">ÇELİŞKİLİ</span>.</li>
+          <li><strong>Ara kare (RIFE, MIT)</strong> benzer iki kare arasında akıcı hareket üretir; kompozisyonu farklı iki kare arasında bulanık karışım çıkar.</li>
+          <li><strong>Görsele yazı:</strong> Türkçe karakterli yazıyı görsel model değil, video çizici basmalı.</li>
+          <li><strong>Kelime kelime altyazı:</strong> metin zaten elde olduğu için sesten yeniden çıkarmak yerine hizala. Önce whisper.cpp (MIT) <code>-dtw</code> + <code>-ojf</code> / <code>-ml 1 -sow</code>; yetmezse WhisperX (BSD-2) + Türkçe wav2vec2 (<code>mpoyraz/wav2vec2-xls-r-300m-cv7-turkish</code>, CC-BY-4.0). Remotion'da <code>@remotion/install-whisper-cpp</code> ile <code>tokenLevelTimestamps: true</code>.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="alternatifler"><span class="h-num">§ 9</span>Alternatifler</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yıldız ve son push: GitHub API, 12 Ekim 2026</caption>
+            <thead><tr><th>Araç</th><th>Lisans</th><th>Dil / çalışma</th><th>Ne için</th><th>Durum</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HyperFrames</strong> (HeyGen)</td><td>Apache-2.0, render ücreti yok</td><td>HTML + <code>data-*</code> zamanlama; başsız Chrome + FFmpeg; Node 22+</td><td>Remotion'a en yakın açık seçenek; 21 agent skill, deterministik kare</td><td>61,5k ★, Mar 2026'da açıldı, aktif</td></tr>
+              <tr><td><strong>Revideo</strong></td><td>MIT</td><td>TypeScript; headless <code>renderVideo()</code>, React <code>&lt;Player/&gt;</code></td><td>Otomasyonla şablon video</td><td>4,1k ★, son push Tem 2026; bakım belirsiz</td></tr>
+              <tr><td><strong>Motion Canvas</strong></td><td>MIT</td><td>TypeScript; render yalnız tarayıcıdaki editörden</td><td>Elle anlatım/eğitim animasyonu</td><td>19,3k ★; otomasyona uygun değil</td></tr>
+              <tr><td><strong>editly</strong></td><td>MIT</td><td>Node; JSON5 bildirimsel kurgu + ffmpeg</td><td>Basit kesme/birleştirme şablonu</td><td>5,5k ★, son push May 2025</td></tr>
+              <tr><td><strong>FFCreator</strong></td><td>MIT</td><td>Node</td><td>—</td><td>Fiilen durmuş (Ara 2024)</td></tr>
+              <tr><td><strong>MoviePy</strong></td><td>MIT</td><td>Python</td><td>Kurgu, birleştirme; hareketli grafikte zayıf <span class="tag tag--warn">TAHMİN</span></td><td>15k ★, aktif</td></tr>
+              <tr><td><strong>Manim</strong> (Community)</td><td>MIT</td><td>Python</td><td>Matematik ve şema animasyonu</td><td>41,5k ★, aktif (v0.22.0)</td></tr>
+              <tr><td><strong>Lottie-web</strong></td><td>MIT</td><td>JS; After Effects → JSON oynatıcı</td><td>Hazır ikon/geçiş animasyonu</td><td>32,2k ★</td></tr>
+              <tr><td><strong>SkiaSharp.Skottie</strong></td><td>MIT</td><td>.NET; Lottie JSON'u Skia tuvaline çizer</td><td>.NET masaüstü uygulamada Lottie</td><td>Son kararlı 4.153.1 (30 Eyl 2026); 3.119.x de var</td></tr>
+              <tr><td><strong>Rive</strong></td><td>Çalışma zamanı MIT; editör ücretli (0–120 $/koltuk/ay)</td><td><code>.riv</code> dosyası, Rive editörü gerekir</td><td>Etkileşimli animasyon; LLM ile üretime uygun değil <span class="tag tag--warn">TAHMİN</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">GSAP uyarısı</p>
+          <p>GSAP ticari kullanımda ücretsiz ama MIT değil. "Prohibited Uses": kodsuz görsel animasyon araçlarında ve Webflow ile rekabet eden ürünlerde kullanmak yazılı onay ister; bir video editörü bu kapsama girebilir. HyperFrames'i satılık üründe kullanacaksan animasyonu CSS, WAAPI ya da Anime.js ile yap (Anime.js lisansı: MIT <span class="tag tag--warn">TAHMİN</span>).</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kendi-motor"><span class="h-num">§ 10</span>Kendi çizicini yazmak (Skia + FFmpeg)</h2>
+
+        <p>Remotion'un yaptığı iş özünde "her kareyi çiz → FFmpeg'e ver"dir. Uygulama zaten bir 2B çizim kütüphanesi (Skia/SkiaSharp vb.) ve FFmpeg kullanıyorsa, kareler bellekten doğrudan FFmpeg'e (<code>-f rawvideo</code> → stdin) verilebilir; Chrome ve ekran görüntüsü adımı olmaz.</p>
+
+        <div class="compare">
+          <div class="pane pane--pro">
+            <p class="pane__title">Artıları</p>
+            <ul>
+              <li>Node, Chrome, render ücreti, telemetri yok; tamamen çevrimdışı; lisans temiz.</li>
+              <li>Kurulum boyutu küçük kalır (Chrome paketlenmez).</li>
+              <li>2B vektör sahnelerde Chrome'dan hızlı olması beklenir <span class="tag tag--warn">TAHMİN</span> (ölçülmedi).</li>
+              <li>Lottie: <code>SkiaSharp.Skottie</code> (MIT) aynı tuvale çizer.</li>
+            </ul>
+          </div>
+          <div class="pane pane--con">
+            <p class="pane__title">Eksileri</p>
+            <ul>
+              <li>Düzen (flexbox benzeri), metin kaydırma/ölçme, easing/spring, SVG yolu animasyonu, maske/bulanıklık/gölge elle yazılır.</li>
+              <li>Remotion ekosistemi (haritalar, Three.js, Code Hike…) yok.</li>
+              <li>Animasyon kalitesi senin yazdığın kalıplar kadar.</li>
+              <li>Skottie AE ifadelerini ve bazı efektleri desteklemeyebilir <span class="tag tag--warn">TAHMİN</span>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>LLM'e kod yerine JSON sahne tarifi yazdırmak:</strong> kod çalıştırılmaz, yalnız şemaya karşı doğrulanan veri okunur (kum havuzu gerekmez). Remotion lisansının yasakladığı "kullanıcının kendi kodunu render ettirmesi" durumu da tümden ortadan kalkar. Bedeli: yeni bir görsel fikir için kalıbı geliştiricinin eklemesi gerekir.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="karar"><span class="h-num">§ 11</span>Durum → Öneri</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Hangi durumda hangisi</caption>
+            <thead><tr><th>Durum</th><th>Öneri</th><th>Neden</th></tr></thead>
+            <tbody>
+              <tr><td>Bireysel deneme, kişisel kanal, ≤3 kişilik ekip</td><td><strong>Remotion</strong> + Claude Code / Agent Skills</td><td>Ücretsiz lisans, en geniş ekosistem ve yapay zekâ desteği</td></tr>
+              <tr><td>4+ kişilik şirket, kendi içinde video üretiyor</td><td>Remotion Creators (25 $/koltuk) ya da HyperFrames</td><td>Düşük hacimde koltuk lisansı basit</td></tr>
+              <tr><td>Ücretli ürüne / masaüstü uygulamaya gömmek</td><td><strong>HyperFrames</strong> (GSAP'sız) ya da <strong>kendi çizici</strong> (Skia + FFmpeg + Skottie)</td><td>Remotion'da dağıtım + render başı ücret + 5.0 telemetrisi belirsiz <span class="tag tag--warn">ÇELİŞKİLİ</span></td></tr>
+              <tr><td>Kullanıcı istemiyle "prompt → video" SaaS</td><td>Remotion Automators ya da HyperFrames; LLM yalnız JSON üretsin</td><td>Kullanıcı kodu render etmek Remotion'da yasak; JSON güvenli</td></tr>
+              <tr><td>Sunucuda toplu render</td><td>Remotion Lambda / Cloud Run (Automators) ya da HyperFrames CLI kuyrukta</td><td>Parçalı paralel render; HyperFrames'te render ücreti yok</td></tr>
+              <tr><td>Düşük VRAM (4–6 GB), API'siz</td><td>Yerel LLM yalnız sahne JSON'u + sabit sahne kütüphanesi; TTS ve LLM sırayla</td><td>Render CPU ile; VRAM yalnız LLM ve TTS için önemli</td></tr>
+              <tr><td>12–24 GB VRAM</td><td>Daha büyük LLM; 24 GB'ta TSX üretimi + derleme hatası döngüsü denenebilir; Wan FLF2V ile gerçek geçiş</td><td>Sahne render'ı değişmez, kalite LLM/TTS/video modelinde artar</td></tr>
+              <tr><td>Matematik/şema anlatımı</td><td>Manim</td><td>Bu iş için tasarlandı</td></tr>
+              <tr><td>Basit kes-birleştir şablonu</td><td>editly / MoviePy / doğrudan FFmpeg</td><td>Tarayıcı gerekmez</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Kaynaklar</h2>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><a href="https://www.remotion.dev/docs/the-fundamentals">Remotion — temel kavramlar</a></li>
+          <li><span class="src-n">02</span><a href="https://www.remotion.dev/docs/renderer">@remotion/renderer</a></li>
+          <li><span class="src-n">03</span><a href="https://www.remotion.dev/docs/parallel-encoding">Paralel kodlama</a></li>
+          <li><span class="src-n">04</span><a href="https://remotion.dev/docs/cli/render">CLI render</a></li>
+          <li><span class="src-n">05</span><a href="https://www.remotion.dev/docs/miscellaneous/chrome-headless-shell">Chrome Headless Shell</a></li>
+          <li><span class="src-n">06</span><a href="https://www.remotion.dev/docs/player">Player</a></li>
+          <li><span class="src-n">07</span><a href="https://www.remotion.dev/docs/lambda/how-lambda-works">Lambda nasıl çalışır</a></li>
+          <li><span class="src-n">08</span><a href="https://www.remotion.dev/docs/client-side-rendering">İstemci tarafı render</a></li>
+          <li><span class="src-n">09</span><a href="https://www.remotion.dev/docs/electron">Electron</a></li>
+          <li><span class="src-n">10</span><a href="https://www.remotion.dev/templates">Şablonlar</a></li>
+          <li><span class="src-n">11</span><a href="https://www.remotion.dev/docs/ai/skills">Agent Skills</a> · <a href="https://www.remotion.dev/docs/ai/mcp">MCP</a> · <a href="https://www.remotion.dev/docs/ai/generate">Generate rehberi</a> · <a href="https://www.remotion.dev/docs/schemas">Zod şemaları</a></li>
+          <li><span class="src-n">12</span><a href="https://www.remotion.pro/license">remotion.pro — lisans ve fiyat</a> · <a href="https://www.remotion.dev/docs/license/faq">Lisans SSS</a> · <a href="https://www.remotion.dev/docs/5-0-migration">5.0 geçişi</a></li>
+          <li><span class="src-n">13</span><a href="https://platform.claude.com/docs/en/about-claude/pricing">Claude API fiyatları</a> · <a href="https://code.claude.com/docs/en/legal-and-compliance">Claude Code hukuki sayfa</a> · <a href="https://platform.claude.com/docs/en/about-claude/api-credits-for-subscribers">Abone API kredileri</a></li>
+          <li><span class="src-n">14</span><a href="https://docs.ollama.com/capabilities/structured-outputs">Ollama yapılandırılmış çıktı</a> · <a href="https://docs.ollama.com/context-length">Ollama bağlam uzunluğu</a> · <a href="https://github.com/vectara/hallucination-leaderboard">Vectara uydurma tablosu</a></li>
+          <li><span class="src-n">15</span><a href="https://github.com/heygen-com/hyperframes">HyperFrames</a> · <a href="https://gsap.com/standard-license/">GSAP lisansı</a> · <a href="https://www.nuget.org/packages/SkiaSharp.Skottie">SkiaSharp.Skottie</a></li>
+          <li><span class="src-n">16</span><a href="https://github.com/resemble-ai/chatterbox">Chatterbox</a> · <a href="https://github.com/OpenBMB/VoxCPM">VoxCPM</a> · <a href="https://github.com/hzwer/Practical-RIFE">RIFE</a> · <a href="https://huggingface.co/Wan-AI/Wan2.1-FLF2V-14B-720P">Wan2.1 FLF2V</a> · <a href="https://github.com/m-bain/whisperX">WhisperX</a></li>
+          <li><span class="src-n">17</span>Tam kaynakça: <a href="README.md">README.md</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

@@ -14,7 +14,7 @@ Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi kla
 | [Go](Go/) | Tek sayfa: paket sistemi, struct ve interface, hata yönetimi, goroutine/channel/context, standart kütüphane, web çatıları. |
 | [Rust](Rust/) | Tek sayfa: Cargo, sahiplik ve ödünç alma, yaşam süreleri, trait ve generic, async/Tokio, ekosistem ve öğrenme maliyeti. |
 | [Blockchain](Blockchain/) | 7 bölüm: zincir temelleri, Solidity ve akıllı sözleşmeler, JS/TS ve .NET ile dApp geliştirme, diğer zincirler, altyapı ve güvenlik, proje fikirleri. |
-| [Yapay Zekâ](Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini uygulamalarda kullanmak. İlk konu: görüntü netleştirme (super-resolution, yüz düzeltme). |
+| [Yapay Zekâ](Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini uygulamalarda kullanmak. Konular: görüntü netleştirme (super-resolution, yüz düzeltme), kodla video üretimi (Remotion). |
 | [Proje Fikirleri](proje-fikirleri/) | Tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu; her projenin hangi konuyu kanıtladığıyla birlikte. |
 
 ## Genel bakış sayfasının başlıkları

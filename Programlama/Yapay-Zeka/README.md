@@ -9,6 +9,7 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 | Konu | Açıklama |
 |---|---|
 | [Görüntü Netleştirme](goruntu-netlestirme/) | Düşük çözünürlüklü/bulanık görseli 2×–4× büyütüp ayrıntıyı yeniden kuran super-resolution modelleri (Real-ESRGAN, UltraSharp, DAT…) ve yüz düzeltme (GFPGAN, CodeFormer); ncnn-vulkan, PyTorch + spandrel ve bulut API yolları, lisanslar, 6 GB kartta ölçümler. |
+| [Kodla Video (Remotion)](kodla-video/) | React kodundan video üreten Remotion: çalışma mantığı, parçaları, yapay zekâ ile kullanımı, lisans ve fiyat; düşük VRAM'de yerel TTS, görsel ve altyazı seçenekleri; HyperFrames, Motion Canvas, MoviePy, Manim gibi alternatifler. |
 
 ## Nereden başlamalı?
 
