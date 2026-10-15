@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Ekim 2026
 
+- **15.10.2026** — Image-to-Pixel (görselleri piksel sanatına çeviren JS kütüphanesi) araştırması → [JavaScript-TypeScript/kutuphaneler/image-to-pixel](Programlama/JavaScript-TypeScript/kutuphaneler/image-to-pixel/)
 - **15.10.2026** — YouTube'da oyun: başlamadan önce süreç ve engel raporu (kayıttan gelire adımlar, engel envanteri, karar ağacı) → [surec-ve-engeller](Rehberler/YouTube-Oyun/surec-ve-engeller.html)
 - **15.10.2026** — YouTube'da oyun araştırması (Playables, oyun kanalı, gelir, telif, fikirler); yapay zekâ için `arastirma.md` + okunacak `index.html` → [Rehberler/YouTube-Oyun](Rehberler/YouTube-Oyun/). Yeni araştırmalar için iki biçim (md + html) kuralı eklendi.
 - **12.10.2026** — Remotion ile kodla video üretimi, AI ile kullanım ve yerel TTS/görsel seçenekleri araştırması → [Yapay-Zeka/kodla-video](Programlama/Yapay-Zeka/kodla-video/)

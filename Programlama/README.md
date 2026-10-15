@@ -8,7 +8,7 @@ Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi kla
 |---|---|
 | [C# / .NET](CSharp-DotNet/) | 10 bölüm: C# dili, platform ve ASP.NET Core Web API, veri erişimi (EF Core, Dapper), mimari ve desenler, mesajlaşma ve dağıtık sistemler, test, DevOps ve gözlemlenebilirlik, Blazor/MVC/MAUI, Aspire ve modern .NET, NuGet kütüphane kataloğu. |
 | [Java](Java/) | 4 bölüm: Java dili ve C# farkları, Spring Boot, JPA/Hibernate ile veri ve mesajlaşma, Maven/Gradle/JUnit/Mockito ekosistemi. C#'tan geliyorsan her başlığın .NET karşılığı ek bilgi olarak verilmiştir; Java'yı ilk dil olarak öğrenen de kullanabilir. |
-| [JavaScript / TypeScript](JavaScript-TypeScript/) | 4 bölüm: JavaScript dil çekirdeği ve tarayıcı API'leri, TypeScript tip sistemi, React, ekosistem araçları (paket yöneticileri, Vite, Next.js, test, dağıtım). |
+| [JavaScript / TypeScript](JavaScript-TypeScript/) | 4 bölüm: JavaScript dil çekirdeği ve tarayıcı API'leri, TypeScript tip sistemi, React, ekosistem araçları (paket yöneticileri, Vite, Next.js, test, dağıtım). Kütüphane denemeleri: [Image-to-Pixel](JavaScript-TypeScript/kutuphaneler/image-to-pixel/). |
 | [HTML / CSS](HTML-CSS/) | 2 bölüm: semantik HTML, formlar, erişilebilirlik ve SEO; CSS seçiciler, kutu modeli, flexbox, grid, responsive ve modern CSS. |
 | [Python](Python/) | Tek sayfa: dil temelleri, type hints, asyncio, NumPy/Pandas, TensorFlow/Keras ve PyTorch, web çatıları, otomasyon ve test. |
 | [Go](Go/) | Tek sayfa: paket sistemi, struct ve interface, hata yönetimi, goroutine/channel/context, standart kütüphane, web çatıları. |

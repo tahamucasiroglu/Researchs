@@ -12,7 +12,7 @@
 │  ├─ proje-fikirleri/    Seviyelere göre proje fikirleri kataloğu
 │  ├─ CSharp-DotNet/      01-csharp-dili/ … 10-kutuphaneler/ (Redis, RabbitMQ… burada alt klasör olur)
 │  ├─ Java/
-│  ├─ JavaScript-TypeScript/
+│  ├─ JavaScript-TypeScript/  01…04 + kutuphaneler/ (npm kütüphane denemeleri)
 │  ├─ HTML-CSS/
 │  ├─ Python/  Go/  Rust/
 │  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
