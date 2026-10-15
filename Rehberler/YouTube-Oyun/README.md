@@ -4,6 +4,8 @@
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
+Başlamadan önce: [Süreç ve engel raporu](surec-ve-engeller.html) — kayıttan gelire tüm adımlar ve olası engeller; [AI için Markdown](surec-ve-engeller.md)
+
 Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — bir AI asistanına bağlam olarak verilebilir (güven etiketleri [RESMÎ] / [3. TARAF] / [TAHMİN] / [ÇELİŞKİLİ] ile, en küçük Playable iskeleti ve sertifikasyon kontrol listesi dahil).
 
 > Araştırma tarihi: 15 Ekim 2026. Şartlar, gelir oranları, YPP eşikleri ve ülke listeleri sık değişir; kullanmadan önce kaynakçadaki resmî sayfalardan güncelini kontrol et. Gelir rakamları örnek ve tahmindir. Bu rehber hukuki veya mali danışmanlık değildir; somut durumda fikri mülkiyet avukatına ve mali müşavire danışılmalıdır.
@@ -28,6 +30,16 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — bir AI asistanına 
 | 14 | Riskler ve sık hatalar | Ret sebepleri, telif ve politika tuzakları, gerçekçi olmayan beklentiler. |
 | 15 | Genel karar tablosu | Okurun durumuna göre (bilgi seviyesi, amaç, yaş, çalışma durumu, ülke) önerilen yol. |
 | 16 | Kaynakça | Resmî Playables ve YouTube belgeleri, telif, vergi, motorlar, platformlar; bulunamayan açık noktalar. |
+
+## Engeller özeti
+
+Ayrıntı ve karar ağacı: [Süreç ve engel raporu](surec-ve-engeller.html) (§ 1).
+
+- **Amaca göre sonuç:** Öğrenme/portföy için başla (mutlak engel bulunamadı); doğrudan Playables'tan gelir hedefi bugün için durdurur; "garanti gelir yoksa başlamam" diyen için doğru karar beklemek.
+- **Erişim davetli:** İlgi formuna dönüş garantisi ve resmî süre yok; başvuru için oyunun bitmiş ve herkese açık bir sitede (itch.io vb.) yayında olması gerekir.
+- **Gelir pilotta:** Gelir paylaşımı yalnız seçili geliştiricilerle; başvuru yolu ve ölçüt yok, Türkiye'nin reklam bölgelerine dahil olup olmadığı bulunamadı.
+- **Vergi ve statü:** Playables geliri Türkiye'de 20/B değil ticari kazanç (özelge) → şahıs işletmesi gerekir. Kamu görevlileri (657 md. 28) ve yetim/ölüm aylığı alanlar için gelirli yol engellenebilir; yazılı teyit alınmalı.
+- **Konsept sınırları:** Dış ağ çağrısı yasak (online/çok oyunculu olmaz); 13+ genel kitle, çocuklara yönelik veya kumar/jeton temalı oyunlar ret riski taşır. Sözleşme metni kamuya açık değil, ihtilaf yeri yurt dışı.
 
 ## Kısa cevaplar
 
