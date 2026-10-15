@@ -20,6 +20,7 @@
 └─ Rehberler/
    ├─ Issizlik/           Türkiye'de işsizlik hakları — genel rehber
    ├─ Mesajlasma-Altyapilari/  Telegram, WhatsApp, BiP, SMS API'leri ve kuralları
+   ├─ YouTube-Oyun/       YouTube Playables ve oyun kanalı (index.html + arastirma.md)
    └─ Sirket-Kurma/       Türkiye'de şirket kurma — genel rehber (+ ödeme/e-fatura ek sayfaları)
 ```
 

@@ -8,6 +8,7 @@ Türkiye'de günlük hayatta karşılaşılan hukuki ve mali konuları sıfırda
 
 - [İşsizlik Rehberi](Issizlik/) — İşten çıkışta kıdem ve ihbar tazminatı, işsizlik ödeneği, İŞKUR başvurusu, borç yönetimi ve nakit planı. 2026 mevzuatına göre, hayali örnek senaryolarla.
 - [Şirket Kurma Rehberi](Sirket-Kurma/) — Şahıs şirketi ile limited şirketin karşılaştırması, SGK/Bağ-Kur, vergi, genç girişimci istisnası, yurt dışı şirket seçenekleri ve ödeme altyapıları.
+- [YouTube'da Oyun](YouTube-Oyun/) — YouTube Playables'a oyun yayınlamak ve oyun video kanalı: şartlar, başvuru, Playables SDK, AI ile geliştirme, gelir ve ödeme, telif, oyun fikirleri, Roblox benzeri ortam. Yapay zekâ için Markdown hâli de var.
 - [Mesajlaşma Altyapıları](Mesajlasma-Altyapilari/) — Uygulamadan Telegram, WhatsApp, BiP ve SMS ile mesaj göndermek: API uç noktaları, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları.
 
 ---

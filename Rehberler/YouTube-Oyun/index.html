@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube'a Oyun Yükleme — Rehberler</title>
+<meta name="description" content="YouTube'a oyun yükleme rehberi: YouTube Playables (HTML5 oyun) şartları, başvuru, SDK ve sertifikasyon; oyun video kanalı ve YPP; gelir, ödeme ve vergi; telif ve klon sınırları; oyun fikirleri; Roblox benzeri online seçenekler ve Durum → Sonuç tabloları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* kod blokları (Mesajlaşma Altyapıları sayfalarıyla aynı) */
+  .content pre {
+    margin: 1rem 0 1.4rem;
+    padding: .9rem 1rem;
+    background: var(--paper-sink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.5;
+  }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">YouTube'a Oyun Yükleme</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehberler &middot; 2026</span>
+      <span class="brand__name">YouTube'a Oyun Yükleme</span>
+      <span class="brand__sub">Playables &middot; oyun kanalı &middot; gelir &middot; telif</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Hızlı geçiş</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="#kisa-cevaplar"><span class="nav-num">§ 1</span><span>Kısa cevaplar</span></a></li>
+          <li><a class="nav-item" href="#b4-4"><span class="nav-num">4.4</span><span>Başvuru adımları</span></a></li>
+          <li><a class="nav-item" href="#b5-9"><span class="nav-num">5.9</span><span>Playable iskeleti (kod)</span></a></li>
+          <li><a class="nav-item" href="#b5-10"><span class="nav-num">5.10</span><span>Sertifikasyon kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="#b8-2"><span class="nav-num">8.2</span><span>Hafta hafta plan</span></a></li>
+          <li><a class="nav-item" href="#b9-6"><span class="nav-num">9.6</span><span>Gerçekçi gelir beklentisi</span></a></li>
+          <li><a class="nav-item" href="#b11-2"><span class="nav-num">11.2</span><span>20 oyun fikri</span></a></li>
+          <li><a class="nav-item" href="#karar-tablosu"><span class="nav-num">§ 15</span><span>Durum → Sonuç</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="arastirma.md"><span class="nav-num">MD</span><span>Yapay zekâ için Markdown hâli</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz Ne Yapabilirsin?</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/07-genc-girisimci.html"><span class="nav-num">&rarr;</span><span>Genç Girişimci İstisnası</span></a></li>
+          <li><a class="nav-item" href="../../Programlama/JavaScript-TypeScript/index.html"><span class="nav-num">&rarr;</span><span>JavaScript ve TypeScript</span></a></li>
+          <li><a class="nav-item" href="../../Programlama/Yapay-Zeka/index.html"><span class="nav-num">&rarr;</span><span>Yapay Zekâ</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      15 Ekim 2026'da resmî Playables, YouTube, AdSense belgeleri ve üçüncü taraf kaynaklardan derlendi. Şartlar, oranlar ve ülke listeleri sık değişir. Hukuki veya mali danışmanlık değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Rehberler &middot; YouTube &middot; Oyun geliştirme</div>
+        <h1 class="page-title">YouTube'a oyun yüklemek: <em>Playables ve oyun kanalı</em></h1>
+        <p class="lede">"YouTube'a oyun yüklemek" iki ayrı şey demektir: <strong>YouTube Playables</strong> (YouTube içinde kurulumsuz oynanan HTML5 oyunlar) ve <strong>oyun video kanalı</strong> (oynanış videolarını yükleyip YouTube Partner Programı ile para kazanmak). Şartlar, başvuru, SDK, gelir, ödeme, vergi, telif, oyun fikirleri ve online seçenekler; baştan sona başlangıç rehberiyle.</p>
+        <div class="head-meta">Araştırma tarihi: 15 Ekim 2026 &middot; Etiketler: <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span> <span class="tag tag--bad">ÇELİŞKİLİ</span></div>
+      </header>
+
+      <div class="content">
+
+        <div class="figures">
+          <div class="figure figure--flag">
+            <div class="figure__label">Playables geliştirici erişimi</div>
+            <div class="figure__value">Davetli</div>
+            <div class="figure__meta">Erken erişim; yalnızca bitmiş oyunla ilgi formu (§ 4)</div>
+          </div>
+          <div class="figure">
+            <div class="figure__label">Playables gelir paylaşımı</div>
+            <div class="figure__value">Pilot</div>
+            <div class="figure__meta">Seçili geliştiricilerle; oran açıklanmamış (§ 9)</div>
+          </div>
+          <div class="figure figure--win">
+            <div class="figure__label">AI ile basit 2D oyun</div>
+            <div class="figure__value">Gerçekçi</div>
+            <div class="figure__meta">Darboğaz kod değil: kabul, görsel kalite, eğlence (§ 7)</div>
+          </div>
+        </div>
+
+        <p class="intro">Playables'ta geliştirici erişimi hâlâ davetli "erken erişim" aşamasında, gelir paylaşımı yalnızca seçili geliştiricilerle pilot olarak yürüyor ve dış sunucuya bağlanmak yasak olduğu için Roblox benzeri online dünya Playables içinde kurulamıyor. Basit bir 2D HTML5 oyunu bir AI kodlama asistanıyla sıfırdan yapmak ise teknik olarak gerçekçi; asıl darboğaz kabul süreci, görsel kalite ve oyunun eğlenceli olması.</p>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Araştırma tarihi: 15 Ekim 2026</p>
+          <p>Fiyatlar, şartlar, oranlar ve ülke listeleri sık değişir; kullanmadan önce kaynak bağlantılarından güncelini kontrol et. Bu sayfa <strong>hukuki veya mali danışmanlık değildir</strong>; somut durumda fikri mülkiyet avukatına ve mali müşavire danışılmalıdır.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Bu sayfa nasıl okunur</p>
+          <p>Bu sayfanın yapay zekâ için Markdown hâli: <a href="arastirma.md">arastirma.md</a> — aynı içerik; bir AI asistanın okuyup seninle birlikte YouTube Playables uyumlu oyun geliştirebilmesi için saf Markdown olarak yazıldı.</p>
+          <ul>
+            <li>Her önemli iddianın yanında güven etiketi vardır: <span class="tag tag--ok">RESMÎ</span> platformun kendi belgesi (developers.google.com, support.google.com, resmî blog, resmî şart sayfası) &middot; <span class="tag tag--info">3. TARAF</span> haber sitesi, blog, yayıncı firma, forum &middot; <span class="tag tag--warn">TAHMİN</span> resmî bilgiden yapılmış çıkarım, doğrulanmamış &middot; <span class="tag tag--bad">ÇELİŞKİLİ</span> kaynaklar birbirini tutmuyor; resmî olan esas alınır.</li>
+            <li>Resmî sayfalar bir özetleme aracıyla okundu; kelimesi kelimesine alıntı gerektiğinde ilgili İngilizce sayfaya bakılmalı. <strong>Bağlayıcı olan İngilizce resmî metindir.</strong></li>
+            <li>Tek bir okur durumu varsayılmadı: hiç programlama bilmeyen / başka dilden gelen, bireysel / şirketli, Türkiye'de / yurt dışında yaşayan okurlar için "Durum → Sonuç" tabloları vardır.</li>
+          </ul>
+        </div>
+
+        <h3>İçindekiler</h3>
+        <ol>
+          <li><a href="#kisa-cevaplar">Kısa cevaplar</a></li>
+          <li><a href="#iki-anlam">"YouTube'a oyun yüklemek" iki anlam</a></li>
+          <li><a href="#playables-nedir">YouTube Playables nedir, nerede görünür, Türkiye durumu</a></li>
+          <li><a href="#sartlar-basvuru">Şartlar ve başvuru süreci</a></li>
+          <li><a href="#teknik-sartlar">Teknik şartlar ve Playables SDK</a></li>
+          <li><a href="#motor-secimi">Araç / motor seçimi</a></li>
+          <li><a href="#ai-ile-gelistirme">AI asistanla birlikte geliştirme</a></li>
+          <li><a href="#baslangic-rehberi">Baştan sona başlangıç rehberi</a></li>
+          <li><a href="#para-kazanma">Para kazanma ve para nasıl alınır</a></li>
+          <li><a href="#telif-hukuk">Telif ve hukuk</a></li>
+          <li><a href="#oyun-fikirleri">Oyun fikirleri</a></li>
+          <li><a href="#online-roblox">Roblox gibi online ortam</a></li>
+          <li><a href="#dagitim-kanallari">Diğer dağıtım kanalları ve münhasırlık</a></li>
+          <li><a href="#riskler">Riskler ve sık hatalar</a></li>
+          <li><a href="#karar-tablosu">Durum → Sonuç genel karar tablosu</a></li>
+          <li><a href="#kaynakca">Kaynakça</a></li>
+        </ol>
+
+        <!-- ===================================================== -->
+        <h2 id="kisa-cevaplar"><span class="h-num">§ 1</span>Kısa cevaplar</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Soru</th><th>Kısa cevap</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td>Nasıl yapılır?</td><td>HTML5 (JS/Canvas/WebGL) oyun yapılır → Playables SDK eklenir → ilgi formuyla başvurulur → kabul gelirse Developer Portal'a ZIP yüklenir → test → sertifikasyon → kademeli yayın. <span class="tag tag--ok">RESMÎ</span></td><td><a href="#sartlar-basvuru">§ 4</a>, <a href="#teknik-sartlar">§ 5</a></td></tr>
+              <tr><td>Şartlar ne?</td><td>Erken erişim, davetli; <strong>bitmiş/oynanabilir oyunla</strong> başvuru; 13+ genel kitle (çocuklara yönelik olamaz); İngilizce desteği zorunlu; dış ağ çağrısı yok; ilk paket &lt; 30 MiB; dokunmatik + fare; tüm varlıklar özgün veya lisanslı. <span class="tag tag--ok">RESMÎ</span></td><td><a href="#sartlar-basvuru">§ 4</a>, <a href="#teknik-sartlar">§ 5</a></td></tr>
+              <tr><td>Hiç bilmesem AI (Claude) ile yapabilir miyiz?</td><td>Basit 2D oyun (bulmaca, kelime, hiper-casual, idle) için <strong>evet, gerçekçi</strong>. Kodu, SDK entegrasyonunu, kontrol listesini AI yapar; fikir, oynayıp test etme, varlık seçimi ve karar insanda kalır. <span class="tag tag--warn">TAHMİN</span></td><td><a href="#ai-ile-gelistirme">§ 7</a></td></tr>
+              <tr><td>Geliri var mı?</td><td>Playables'ta reklam altyapısı var ama <strong>gelir paylaşımı yalnızca seçili geliştiricilerle pilot</strong>; oran açıklanmamış. <span class="tag tag--ok">RESMÎ</span> Gameplay kanalında YPP ile reklam geliri var (1.000 abone + 4.000 saat vb.). <span class="tag tag--ok">RESMÎ</span></td><td><a href="#para-kazanma">§ 9</a></td></tr>
+              <tr><td>Gelir durumu nedir?</td><td>Belirsiz ve çoğu kişi için ilk 6–12 ay <strong>sıfır</strong> varsayılmalı. Bilinen rakamlar yayıncı firmaların tanıtım beyanları (oyun başına ayda yüzlerce – birkaç bin $). Oyun videosu RPM'i düşük (≈0,5–4 $/1.000 izlenme; Türkiye izleyicisi daha düşük). <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span></td><td><a href="#para-kazanma">§ 9</a></td></tr>
+              <tr><td>Telifsiz fikirler neler?</td><td>Geleneksel oyunlar (tavla, mangala, okey, pişti, satranç), kelime/atasözü oyunları, özgün temalı idle/refleks/bulmaca oyunları. 20 fikirlik tablo var. <span class="tag tag--warn">TAHMİN</span></td><td><a href="#oyun-fikirleri">§ 11</a></td></tr>
+              <tr><td>Başka oyunları telifsiz kopyalama imkânı var mı?</td><td><strong>Mekanik/kural</strong> genel olarak telifle korunmaz <span class="tag tag--ok">RESMÎ</span> <small>(ABD)</small>; <strong>kod, grafik, ses, ad, logo, "görünüm ve his"</strong> korunur. Birebir klon yasak; Playables ayrıca başka bir Playable'a "büyük ölçüde benzer" oyunu reddeder. <span class="tag tag--ok">RESMÎ</span></td><td><a href="#telif-hukuk">§ 10</a></td></tr>
+              <tr><td>Orijinal fikirler neler?</td><td>Türk kültürüne özgü temalar (vapur iskelesi, simit tezgâhı idle, çini/ebru eşleştirme), Türkçe günlük kelime bulmacası, kendi kanal karakteriyle mini oyun vb.</td><td><a href="#oyun-fikirleri">§ 11</a></td></tr>
+              <tr><td>Roblox gibi online ortam olur mu?</td><td><strong>Playables içinde bugün hayır</strong> — dış sunucu, hesap, giriş ekranı, sohbet yasak. <span class="tag tag--ok">RESMÎ</span> Online için Roblox'un kendisi, Fortnite UEFN veya kendi web siten (+ Colyseus/SignalR) kullanılır. Kendi Roblox rakibini kurmak tek kişi için gerçekçi değil. <span class="tag tag--warn">TAHMİN</span></td><td><a href="#online-roblox">§ 12</a></td></tr>
+              <tr><td>Para nasıl alınır?</td><td>Playables: pilotta AdSense üzerinden (3. TARAF), yayıncıyla çalışırsan yayıncı öder. Kanal: AdSense for YouTube. ABD vergi formu (W-8) verilir. Türkiye'de içerik geliri için GVK 20/B istisnası (%15 stopaj) veya şahıs işletmesi. <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--info">3. TARAF</span></td><td><a href="#para-kazanma">§ 9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="iki-anlam"><span class="h-num">§ 2</span>"YouTube'a oyun yüklemek" iki anlam</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th></th><th><strong>A. YouTube Playables</strong></th><th><strong>B. Gameplay / oyun video kanalı</strong></th></tr></thead>
+            <tbody>
+              <tr><td>Ne yüklenir?</td><td>Oyunun kendisi (HTML5 paket, ZIP)</td><td>Oyun oynarken çekilen video, Shorts, canlı yayın</td></tr>
+              <tr><td>Kim yapabilir?</td><td>Davetli/onaylı geliştiriciler (erken erişim) <span class="tag tag--ok">RESMÎ</span></td><td>YouTube hesabı olan herkes</td></tr>
+              <tr><td>Ne gerekir?</td><td>Programlama (JS) veya web çıktısı veren motor</td><td>Ekran kaydı, mikrofon, kurgu</td></tr>
+              <tr><td>Gelir</td><td>Oyun içi YouTube reklamları; pay pilot aşamasında <span class="tag tag--ok">RESMÎ</span></td><td>YPP reklam geliri, Shorts havuzu, kanal üyeliği, Super Thanks <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Telif riski</td><td>Kendi oyunun → kendi varlıkların lisans durumu</td><td>Başka şirketin oyununu yayınlıyorsan yayıncı politikası + Content ID + "reused content"</td></tr>
+              <tr><td>Birlikte</td><td>En mantıklı yol ikisini birleştirmek: kendi Playable'ını kendi kanalında video/Shorts ile tanıtmak <span class="tag tag--warn">TAHMİN</span></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="playables-nedir"><span class="h-num">§ 3</span>YouTube Playables nedir, nerede görünür, Türkiye durumu</h2>
+        <h3 id="b3-1">3.1 Tanım</h3>
+        <ul>
+          <li>"Playables are interactive games and experiences published to YouTube, playable through our apps and website." YouTube mobil uygulamasında ve web sitesinde kurulum gerektirmeden oynanan HTML5 oyunlar. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables">developers.google.com/youtube/gaming/playables</a> (son güncelleme 2026-08-31)</li>
+          <li>Oyunlar ücretsiz oynanır; şu an oyun içi satın alma (IAP) yok. <span class="tag tag--ok">RESMÎ</span> <small>(monetizasyon sayfasında IAP geçmiyor; harici IAP yasak)</small></li>
+        </ul>
+        <h3 id="b3-2">3.2 Nerede görünür <span class="tag tag--ok">RESMÎ</span></h3>
+        <ul>
+          <li>Ana sayfadaki Playables rafı</li>
+          <li>Arama sonuçları</li>
+          <li>Keşfet menüsü altındaki Playables sayfası</li>
+          <li>"Sen" sekmesi (kaydedilen oyunlar)</li>
+          <li>Oyunu yayınlayan kanalın <strong>Playables sekmesi</strong>; oyun içinde kanala abone olma bağlantısı çıkar</li>
+          <li>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/support/faq">developers.google.com/youtube/gaming/playables/support/faq</a> (2026-03-09), <a href="https://support.google.com/youtube/answer/14328604">support.google.com/youtube/answer/14328604</a></li>
+        </ul>
+        <h3 id="b3-3">3.3 Oyuncu tarafı özellikler <span class="tag tag--ok">RESMÎ</span></h3>
+        <ul>
+          <li>Giriş yapan kullanıcının ilerlemesi ve en iyi skoru otomatik kaydedilir, cihazlar arasında eşitlenir. Her oyun için tek kayıt dosyası + en iyi skor tutulur.</li>
+          <li>Oyun ilerlemesi öneri sisteminde kullanılmaz.</li>
+          <li>En iyi skor YouTube arayüzünde gösterilir (<code>sendScore</code>). <strong>Oyuncular arası küresel liderlik tablosu resmî belgede bulunamadı.</strong></li>
+          <li><strong>Playables on Live:</strong> Eylül 2025'te duyuruldu; yayıncı canlı yayında Playables oynayıp sohbetle etkileşebiliyor, Mart 2026'da dikey mobil yayın eklendi. Bu, izleyicilerin oyuna katıldığı çok oyunculu mod değildir. <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--info">3. TARAF</span> <small>(blog)</small> — <a href="https://blog.youtube/news-and-events/live-updates/">blog.youtube/news-and-events/live-updates/</a></li>
+        </ul>
+        <h3 id="b3-4">3.4 Desteklenen cihazlar <span class="tag tag--ok">RESMÎ</span></h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Platform</th><th>Şart</th></tr></thead>
+            <tbody>
+              <tr><td>Android</td><td>YouTube 20.46+; Android S+; O/P/Q/R sürümlerinde 64-bit veya yüksek bellekli 32-bit cihaz</td></tr>
+              <tr><td>iOS</td><td>YouTube 20.44+, iOS 14+</td></tr>
+              <tr><td>Web (masaüstü + mobil)</td><td>Chrome, Safari, Firefox</td></tr>
+              <tr><td>TV / konsol</td><td>Resmî kaynakta geçmiyor; bulunamadı. TV hedeflenmemeli <span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b3-5">3.5 Ülkeler ve Türkiye</h3>
+        <ul>
+          <li><strong>Oyuncu tarafı:</strong> Resmî yardım sayfası <strong>53 ülke</strong> listeliyor; <strong>Türkiye "Turkey (TR)"</strong> ve <strong>Avustralya "Australia (AU)"</strong> olarak listede. <span class="tag tag--ok">RESMÎ</span> <small>(15.10.2026'da kontrol edildi)</small> — <a href="https://support.google.com/youtube/answer/14328604?hl=en">support.google.com/youtube/answer/14328604?hl=en</a><ul><li>YouTube oyunlara sınırlı erişim, kademeli yayılım (staged rollout) ve otomatik sistemlerle ayarlamalar uygulayabilir; yani ülke listesinde olmak oyunun her kullanıcıya aynı ölçüde gösterileceğini garanti etmez. <span class="tag tag--ok">RESMÎ</span> <small>(FAQ 2026-03-09)</small> — <a href="https://developers.google.com/youtube/gaming/playables/support/faq">developers.google.com/youtube/gaming/playables/support/faq</a> . Reklamlar da "Playables'ın açık olduğu bölge ve platformlardaki kullanıcıların bir alt kümesine" gösteriliyor. <span class="tag tag--ok">RESMÎ</span> <small>(monetizasyon sayfası)</small></li><li>2024'teki ilk 7 pazar: ABD, Birleşik Krallık, Kanada, Avustralya, Hindistan, Malezya, <strong>Türkiye</strong>. <span class="tag tag--info">3. TARAF</span> 50+ pazara genişleme Eylül 2026'da haber oldu. <span class="tag tag--info">3. TARAF</span> — <a href="https://www.pocketgamer.biz/youtube-playables-expands-to-more-than-50-markets-including-the-eu-and-nordics/">pocketgamer.biz/youtube-playables-expands-to-more-than-50-mar…</a> (28.09.2026)</li><li>Mediacube'un analitik ülke filtresi yalnızca US, AU, CA, UK, IN, MY gösteriyor; Türkiye için "kısmi trafik sinyali" notu düşüyor (23.07.2026). Bu, oyuncu erişim listesinden ayrı bir analitik konusudur. <span class="tag tag--info">3. TARAF</span> — <a href="https://mediacube.io/en/blog/youtube-playables-updates">mediacube.io/en/blog/youtube-playables-updates</a></li></ul></li>
+          <li><strong>Geliştirici olarak Türkiye'den başvuru: belgede yok.</strong> İlgi formunun ilk sayfasında ülke kısıtı görünmüyor; yasak olduğuna dair ifade de yok. Türkiye'nin oyuncu pazarı olması, başvurunun kabul edileceği anlamına gelmez. <span class="tag tag--warn">TAHMİN</span></li>
+          <li><strong>Playables Builder</strong> (Gemini 3 ile metin/görsel/video isteminden oyun üreten araç, 17.12.2025 kapalı beta): yalnızca ABD, Kanada, Birleşik Krallık ve Avustralya; aktif kanal ve başvuru onayı gerekiyor. <strong>Türkiye yok.</strong> <span class="tag tag--info">3. TARAF</span> — <a href="https://9to5google.com/2025/12/23/youtube-playables-builder/">9to5google.com/2025/12/23/youtube-playables-builder/</a></li>
+        </ul>
+        <h3 id="b3-6">3.6 Tarihçe</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Tarih</th><th>Olay</th><th>Etiket</th></tr></thead>
+            <tbody>
+              <tr><td>Eylül 2023</td><td>Küçük kullanıcı grubuyla test</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>28.11.2023</td><td>Premium üyelere ~30–37 oyun</td><td><span class="tag tag--info">3. TARAF</span> (tubefilter, techcrunch)</td></tr>
+              <tr><td>28.05.2024</td><td>Seçili pazarlarda tüm kullanıcılara, 75+ oyun (Angry Birds Showdown, Cut the Rope, Trivia Crack…)</td><td><span class="tag tag--ok">RESMÎ</span>: <a href="https://blog.youtube/news-and-events/youtube-playables/">blog.youtube/news-and-events/youtube-playables/</a></td></tr>
+              <tr><td>Aralık 2024</td><td>Ludo Club ve Magic Tiles 3 ile çok oyunculu test</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>16.09.2025</td><td>Playables on Live</td><td><span class="tag tag--ok">RESMÎ</span> blog + <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>2025 sonu</td><td>Developer Portal "Private Preview"</td><td><span class="tag tag--ok">RESMÎ</span> (2025-10-16)</td></tr>
+              <tr><td>17.12.2025</td><td>Playables Builder kapalı beta (TR yok)</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>2026</td><td>Reklam API'leri, gelir paylaşımı pilotu (Mediacube'e göre Nisan 2026'dan itibaren tam monetize)</td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Temmuz 2026</td><td>Yaş/cinsiyet/ülke kırılımlı analitik</td><td><span class="tag tag--info">3. TARAF</span> (Mediacube)</td></tr>
+              <tr><td>25.08.2026</td><td>"Substantially identical" (büyük ölçüde aynı) Playable yasağı eklendi</td><td><span class="tag tag--ok">RESMÎ</span> (revision history)</td></tr>
+              <tr><td>Eylül 2026</td><td>50+ pazar; resmî liste 53 ülke, Türkiye dahil</td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Ekim 2026</td><td>Bağımsız takipçi site 1.759 oyun, toplam 5,27 milyar+ oynanma sayıyor; YouTube doğrulamadı</td><td><span class="tag tag--info">3. TARAF</span> (tech-insider.org)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="sartlar-basvuru"><span class="h-num">§ 4</span>Şartlar ve başvuru süreci (adım adım)</h2>
+        <h3 id="b4-1">4.1 Erişim durumu</h3>
+        <ul>
+          <li>"Developer access for Playables is in an early access stage." Herkese açık değil. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables">developers.google.com/youtube/gaming/playables</a></li>
+          <li>Yol: <strong>Playables interest form</strong> — <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvdQ0lgIq2369aemj1O6w8R8FwGn9O5ARRGODDDUbVINCRJQ/viewform">docs.google.com/forms/d/e/1FAIpQLSdvdQ0lgIq2369aemj1O6w8R8FwG…</a></li>
+          <li>Developer Portal "Private Preview", yalnızca davetle; ek sözleşme gerekebilir. Portala girmek için <strong>Playables'a onboard edilmiş bir YouTube kanalında "channel manager" yetkisi</strong> gerekir. Ekip üyesine erişim YouTube Studio &gt; Ayarlar &gt; İzinler'den Editor/Manager rolüyle verilir. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables/developer_portal">developers.google.com/youtube/gaming/playables/developer_portal</a> (2025-10-16)</li>
+          <li>Gereksinimler sayfası süreç ayrıntıları için <strong>Partner Manager</strong>'a başvurulmasını söylüyor ("Speak to your Partner Manager for details on this process"). <span class="tag tag--ok">RESMÎ</span> Kime, hangi koşulla Partner Manager atandığı <strong>belgede yok</strong>. — <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-16)</li>
+          <li><span class="tag tag--bad">ÇELİŞKİLİ</span> Bir kaynak "SDK, test suite ve sertifikasyon kaynakları onboarding sonrası açılıyor" diyor; diğer gözlem SDK referansı, gereksinimler, örnekler ve test rehberinin herkes tarafından okunabildiği yönünde. Pratik sonuç: <strong>belgeler okunabilir, başvurudan önce oyun geliştirmeye başlanabilir; Dev Link / Test Suite Link ise ancak Portal erişimiyle gelir.</strong> <span class="tag tag--warn">TAHMİN</span></li>
+        </ul>
+        <h3 id="b4-2">4.2 Formun şartları <span class="tag tag--ok">RESMÎ</span> <small>(formdan)</small></h3>
+        <ul>
+          <li>"We do not accept unsolicited game ideas or concepts." → Fikirle başvurulmaz.</li>
+          <li>"Please only submit fully developed games or games in a playable state." → <strong>Önce oyunu bitir.</strong></li>
+          <li>"By submitting your game, you confirm that you own all rights to the game and its content."</li>
+          <li>Her başvuruya dönüş yapılmaz; ilgilenilen başvurucuyla "licensing" için iletişime geçilir.</li>
+          <li>Form "game or company" diyor. <strong>Bireysel geliştirici açıkça yasaklanmamış, açıkça kabul edildiği de yazmıyor.</strong> Formun 2. sayfası (bireysel/şirket, ülke, motor soruları) okunamadı.</li>
+          <li>Değerlendirme ölçütleri (kanal geçmişi, önceki performans vb.) <strong>belgede yok</strong>. Kanal geçmişinin etkili olabileceği bir çıkarımdır. <span class="tag tag--warn">TAHMİN</span> Resmî olan: oyunun hakları başvurana ait olmalı ve ilgilenilen başvurucuyla "licensing" için iletişime geçiliyor.</li>
+        </ul>
+        <h3 id="b4-3">4.3 Onay süresi</h3>
+        <ul>
+          <li>Resmî süre <strong>belgede yok</strong>.</li>
+          <li>Mediacube (yayıncı, ticari çıkarı var): doğrudan başvuruda "3–6 ay", başka bir yazısında "5–6 ay"; kendi aracılığıyla ~1 hafta / 3 iş günü. <span class="tag tag--info">3. TARAF</span> <span class="tag tag--bad">ÇELİŞKİLİ</span> — <a href="https://mediacube.io/en/blog/youtube-playables-updates">mediacube.io/en/blog/youtube-playables-updates</a> , <a href="https://mediacube.io/en/blog/youtube-playables-monetization">mediacube.io/en/blog/youtube-playables-monetization</a></li>
+        </ul>
+        <h3 id="b4-4">4.4 Süreç adımları <span class="tag tag--ok">RESMÎ</span> <small>(belgelerden derlendi)</small></h3>
+        <ol class="steps">
+          <li><strong>Oyunu web olarak geliştir</strong> — HTML5/WebGL/Canvas, tek sayfa uygulaması (SPA).</li>
+          <li><strong>SDK'yı ekle</strong> — <code>index.html</code> içinde oyun kodundan önce <code>&lt;script src="https://www.youtube.com/game_api/v1"&gt;&lt;/script&gt;</code>; <code>firstFrameReady()</code> → <code>gameReady()</code>; kayıt, ses, pause entegrasyonu. (<a href="#teknik-sartlar">Bölüm 5</a>)</li>
+          <li><strong>İlgi formuyla başvur</strong> (oyun oynanabilir durumda olmalı).</li>
+          <li>Onay gelirse <strong>kanal onboard edilir</strong>, Developer Portal erişimi açılır.</li>
+          <li>Portal'da <strong>"Add a new game"</strong> → meta veri (başlık, tür, açıklama, yayıncı/geliştirici), <strong>ZIP paket</strong> (kökte <code>index.html</code>), birden çok en-boy oranında küçük resim, reklam ayarları.</li>
+          <li><strong>"Create release"</strong> → "Verify and test" sekmesinde <strong>YouTube Dev Link</strong> ve <strong>Test Suite Link</strong> gelir. Masaüstü web, mobil web, Android ve iOS'ta test edilir. Dev/staging linkleri dışarıyla paylaşılmaz.</li>
+          <li><strong>"Submit for Certification"</strong> → inceleme sürerken ikinci sürüm gönderilemez; değiştirmek için Playables Ops'tan staging release'in reddedilmesi istenir.</li>
+          <li><strong>Kademeli yayın</strong> — sınırlı erişim, aşamalı yayılım, otomatik ayarlamalar; etkileşim dalgalanabilir.</li>
+        </ol>
+        <h3 id="b4-5">4.5 Alternatif yol: yayıncı (publisher)</h3>
+        <ul>
+          <li>Mediacube, Playgama gibi yayıncılar aracılığıyla yayın. Mediacube 50+ Playables oyunu ve günde ~16 milyon oynanma iddia ediyor; anlaşma münhasır değil, pay oyuna göre değişiyor, yüzde açıklanmamış. <span class="tag tag--info">3. TARAF</span></li>
+        </ul>
+        <h3 id="b4-6">4.6 Durum → Sonuç (başvuru)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Elinde sadece fikir var</td><td>Başvurma; form fikir kabul etmiyor. Önce oynanabilir oyun yap. <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Oyun bitti, bireysel geliştiricisin</td><td>Formu doldur; kabul garanti değil, aylarca dönüş gelmeyebilir. Bu arada oyunu itch.io / CrazyGames'te yayınla (<a href="#dagitim-kanallari">Bölüm 13</a>). <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Şirketin / stüdyon var</td><td>Aynı form; şirket şartı belgede yok ama form "company" seçeneğini açıkça sayıyor. <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Hızlı yayın istiyorsun</td><td>Yayıncı (Mediacube, Playgama vb.) üzerinden git; pay ve şartlar yayıncıyla belirlenir. <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Kanalında topluluk ihlali / zayıf geçmiş var</td><td>Değerlendirme ölçütleri belgede yok; kanal geçmişinin olumsuz etki etmesi olası. <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Türkiye'de yaşıyorsun</td><td>Belgede ülke kısıtı yok; kabul edileceği de doğrulanmadı. <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Yurt dışında (ABD/UK/CA/AU) yaşıyorsun</td><td>Ek olarak Playables Builder kapalı betasına başvurabilirsin. <span class="tag tag--info">3. TARAF</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="teknik-sartlar"><span class="h-num">§ 5</span>Teknik şartlar ve Playables SDK</h2>
+        <p>Bir <strong>MUST</strong> maddesi karşılanmazsa oyun yayınlanmaz. Gereksinim kategorileri: erişilebilirlik, tasarım, i18n/L10n, entegrasyon, monetizasyon, gizlilik ve veri, kararlılık ve performans, güven ve güvenlik. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <h3 id="b5-1">5.1 Boyut, performans, kararlılık <span class="tag tag--ok">RESMÎ</span> <small>(2026-06-16)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_stability">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kural</th><th>MUST (zorunlu)</th><th>SHOULD (önerilen)</th></tr></thead>
+            <tbody>
+              <tr><td>İlk paket (<code>gameReady</code>'ye kadar inen veri, <strong>HTTP sıkıştırma sonrası</strong>)</td><td>&lt; 30 MiB</td><td>&lt; 15 MiB</td></tr>
+              <tr><td>Toplam paket</td><td>&lt; 250 MiB (lazy-load için destekle görüşülerek istisna olabilir; Haziran 2024'te 100'den 250'ye çıktı)</td><td>—</td></tr>
+              <tr><td>Tek dosya</td><td>&lt; 30 MiB (<strong>istisna yok</strong>)</td><td>&lt; 512 KiB</td></tr>
+              <tr><td>Kayıt verisi</td><td>&lt; 3 MiB</td><td>&lt; 500 KiB</td></tr>
+              <tr><td>Çıkıştaki son kayıt</td><td>best-effort, ≤ 64 KiB</td><td>—</td></tr>
+              <tr><td>Etkileşime hazır olma süresi</td><td>—</td><td>&lt; 5 sn</td></tr>
+              <tr><td>Tepe JS heap</td><td>512 MB'ı geçemez (MUST NOT); aşılırsa iPhone'larda çökmeye yol açar (Stability 6)</td><td>—</td></tr>
+              <tr><td>Dosya sayısı</td><td>≤ 8.000</td><td>—</td></tr>
+              <tr><td>Yollar</td><td>Yalnızca göreli yol</td><td>—</td></tr>
+              <tr><td>Dosya adları</td><td>Yalnızca alfanümerik + <code>_ - .</code></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><span class="tag tag--bad">ÇELİŞKİLİ</span> Aynı sayfanın özet kısmı: ilk paket &lt; 15 MB, toplam &lt; 250 MB; ideal olarak sırasıyla 5 MB ve 15 MB. Gövde (ayrıntılı maddeler): ilk paket MUST &lt; 30 MiB, SHOULD &lt; 15 MiB; toplam MUST &lt; 250 MiB. <strong>Gövde esas alınmalı</strong>; güvenli hedef ilk paket ≤ 15 MiB.</li>
+          <li>Android'de oyun önce <strong>sıfır boyutlu, gizli bir WebView'da</strong> yüklenir → <code>resize</code> dinlenmeli, yükseklik ancak <code>innerHeight &gt; 0</code> olunca ayarlanmalı; yoksa boş ekran. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables/support/certification_faq">developers.google.com/youtube/gaming/playables/support/certif…</a> (2026-06-16)</li>
+          <li>Bundle analyzer: <a href="https://developers.google.com/youtube/gaming/playables/samples/bundle_analyzer">developers.google.com/youtube/gaming/playables/samples/bundle…</a> <span class="tag tag--ok">RESMÎ</span></li>
+        </ul>
+        <h3 id="b5-2">5.2 Gizlilik, veri ve ağ <span class="tag tag--ok">RESMÎ</span> <small>(2026-06-15)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_privacydata">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <div class="callout callout--info">
+          <p><strong>Numara notu:</strong> Resmî gereksinim sayfaları yalnızca <strong>bölüm numarası</strong> veriyor (ör. Privacy 3, Integration 4); bölüm içindeki maddeler numarasız. Bu belgede "Integration 4.3" gibi alt numaralar, bölümdeki <strong>madde sırasına göre bu belgede verilmiş kısaltmalardır</strong>, resmî kimlik değildir. (Design sayfasında 6.1–6.4 alt başlıkları resmîdir.)</p>
+        </div>
+        <ul>
+          <li><strong>Privacy 3 (1. madde):</strong> Zorunlu Google/YouTube API'leri dışında <strong>hiçbir harici URL veya servise çağrı yapılamaz</strong> — analitik dahil. Privacy 3 (2. madde): engeli aşmaya çalışmak yasak.</li>
+          <li>Tüm oyun verisi pakette olmalı; uzak veritabanı/sunucudan bölüm indirmek yasak. Tek istisna seçili oyunlarla yürüyen küçük bir "remote data access" pilotu. <span class="tag tag--ok">RESMÎ</span> <small>(certification_faq)</small></li>
+          <li>Privacy 3 (3. madde): QR koda benzeyen grafik yasak.</li>
+          <li>Privacy 4.1–4.2: Ad, yaş, konum, kullanıcı adı, parola istenemez; giriş/hesap açma ekranına <strong>benzeyen</strong> arayüz bile yasak. Pano yalnızca kullanıcı açıkça yapıştırınca okunabilir.</li>
+          <li>Privacy 5: Kod gizleme (obfuscation) yasak; standart minify serbest.</li>
+          <li>Privacy 6: Kod boyutu/karmaşıklığı YouTube tarama araçlarının sınırında kalmalı.</li>
+          <li>Privacy 7: YouTube değerlendiremediği oyunu reddedebilir; örnek: <strong>WebAssembly, <code>eval()</code>, web worker</strong>.<ul><li><span class="tag tag--bad">ÇELİŞKİLİ</span> Resmî Unity ve Godot sarmalayıcıları <code>.wasm</code> üretiyor ve CSP <code>unsafe-eval</code> + worker'a izin veriyor. Yorum: WASM yasak değil ama <strong>saf JS/Canvas en düşük riskli yol</strong>. <span class="tag tag--warn">TAHMİN</span></li></ul></li>
+          <li>Privacy 8: Oyun Single Page Application olmalı.</li>
+        </ul>
+        <p><strong>CSP başlığı</strong> (YouTube oyunu bununla sunuyor) <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables/reference/test_suite_guide">developers.google.com/youtube/gaming/playables/reference/test…</a> (2025-08-20):</p>
+        <ul>
+          <li><code>default-src 'none'</code>, <code>connect-src 'self' blob: data:</code>, <code>worker-src 'self' blob:</code></li>
+          <li>Script: <code>'unsafe-eval'</code>, <code>'unsafe-inline'</code>, <code>blob:</code> ve game_api v0/v1 izinli</li>
+          <li><code>img-src 'self' blob: data:</code>; <code>media-src 'self' blob:</code>; <code>object-src 'none'</code></li>
+          <li><code>style-src 'self' 'unsafe-inline' fonts.googleapis.com</code>; <code>font-src 'self' data: fonts.googleapis.com fonts.gstatic.com</code></li>
+          <li>CSP başlığının içindeki <strong><code>sandbox</code> direktifi</strong> (iframe özniteliği değil): <code>allow-pointer-lock allow-same-origin allow-scripts</code></li>
+          <li>Yerelde Chrome DevTools "Local Overrides" ile <code>index.html</code> yanıtına uygulanıp test edilmesi öneriliyor.</li>
+        </ul>
+        <h3 id="b5-3">5.3 Entegrasyon <span class="tag tag--ok">RESMÎ</span> <small>(2026-09-25)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_integration">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Madde (bölüm.sıra)</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td>1.1</td><td>SDK, oyun kodundan <strong>önce</strong> yüklenir</td></tr>
+              <tr><td>2.1</td><td><code>firstFrameReady()</code> çağrıldığında ekranda yükleme/splash olmalı; <code>gameReady</code>'den önce çağrılmazsa oyun hiç gösterilmez</td></tr>
+              <tr><td>2.2 / 2.3</td><td><code>gameReady()</code> oyun etkileşime hazır olunca (ör. ana menü); yükleme ekranı dururken çağrılmaz</td></tr>
+              <tr><td>3.2</td><td><code>sendScore</code> kullanılıyorsa gönderilen en iyi skor, kayıttaki en iyi skorla aynı olmalı</td></tr>
+              <tr><td>4.1</td><td>Kayda değer ilerlemede <code>saveData</code> çağrılır (her oturumda baştan başlayan oyunlar muaf)</td></tr>
+              <tr><td>4.2</td><td>SDK bulut kaydı dışında kayıt mekanizması <strong>yasak</strong> (MUST NOT; fiilen <code>localStorage</code>/IndexedDB ile ilerleme saklamak dışlanır) <span class="tag tag--warn">TAHMİN</span> <small>(yorumu)</small></td></tr>
+              <tr><td>4.3</td><td><code>saveData</code>'dan önce <code>loadData</code> başarıyla beklenmeli, yoksa kayıt reddedilir</td></tr>
+              <tr><td>4.4</td><td>Eski sürümlerin kayıtları hatasız yüklenmeli</td></tr>
+              <tr><td>(Stability)</td><td>Çıkıştaki son kayıt best-effort, ≤ 64 KiB</td></tr>
+              <tr><td>5.1–5.5</td><td>Sistem sesine, YouTube sessiz ayarına (<code>isAudioEnabled</code>/<code>onAudioEnabledChange</code>) ve cihaz ses düzeyine uy; beklenmedik ses yok; YouTube sessizken oyun sesi açamaz</td></tr>
+              <tr><td>5.7 / 5.8</td><td>Oyunda <strong>genel sessiz düğmesi olmamalı</strong> (SHOULD NOT); müzik/efekt için ayrı ayar olabilir (MAY)</td></tr>
+              <tr><td>6.1</td><td><code>onPause</code> gelince yürütme tamamen durur (döngü, müzik, ağ, render); yalnızca <code>onResume</code> ile devam</td></tr>
+              <tr><td>6.2</td><td>Yalnızca SDK'nın <code>onPause</code>/<code>onResume</code>'u; <strong>Page Visibility API vb. kullanmak yasak</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>En sık görülen <strong>ses</strong> sorunu: oynatmayı başlatmak için kullanıcı etkileşimi beklemek. YouTube odağı otomatik verebilir. <span class="tag tag--ok">RESMÎ</span> <small>(certification_faq 2026-06-16)</small></li>
+        </ul>
+        <h3 id="b5-4">5.4 Tasarım <span class="tag tag--ok">RESMÎ</span> <small>(2026-09-25)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_design">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <p>Numaralar "bölüm.madde sırası" (bu belgenin kısaltması; 6.1–6.4 resmî alt başlık).</p>
+        <ul>
+          <li><strong>Ekran:</strong> Her en-boy oranı (1.1); dolduramıyorsa ortala + letterbox/pillarbox (1.2, SHOULD); <strong>yön/duruş kilitlenemez</strong> (1.3); boyut değişince durum korunur (1.4).</li>
+          <li><strong>Giriş:</strong> Dokunma (2.1) ve fare (2.2) <strong>zorunlu</strong>; klavye önerilir (2.5); modallar Esc ile kapanır (2.6), Esc'de <code>preventDefault</code> yok (2.7); titreşim varsa kapatma ayarı (2.8).</li>
+          <li><strong>Görüntü:</strong> Her çözünürlük/DPI'da net metin ve grafik (3.1).</li>
+          <li><strong>Yasak öğeler (6.1–6.4):</strong> paylaşım istemi (6.1), dış içeriğe tıklanabilir link — kanal linkleri istisna (6.2), ek kullanıcı sözleşmesi (6.3), YouTube'un kapat/sessiz/menü ikonlarının aynısını yanlarına koymak ve çıkış (quit) düğmesi (6.4).</li>
+          <li><strong>Metadata (4.1/4.2):</strong> gerekli alanlar eksiksiz; küçük resim, başlık ve açıklamada logo/marka yok. Küçük resim piksel ölçüleri <strong>belgede bulunamadı</strong>.</li>
+          <li><strong>Bitiş (5.1):</strong> İçerik bitince (son bölümden sonra) oyuncuya açıkça bildirilir.</li>
+        </ul>
+        <h3 id="b5-5">5.5 Dil ve erişilebilirlik <span class="tag tag--ok">RESMÎ</span></h3>
+        <ul>
+          <li><strong>İngilizce desteği zorunlu.</strong> Dil <code>ytgame.system.getLanguage()</code> ile okunur; <code>navigator.language</code> gibi web yerelleştirme API'leri <strong>yasak</strong>. Dil değeri cloud save'e yazılmaz. — requirements_i18n_l10n (2026-06-16)</li>
+          <li>WCAG AA önerilir; AGI erişilebilirlik etiketleri önerilir, yanlış etiket yasak. — requirements_accessibility (2026-08-26)</li>
+        </ul>
+        <h3 id="b5-6">5.6 Güven ve güvenlik / içerik <span class="tag tag--ok">RESMÎ</span> <small>(2026-08-26)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_trustsafety">developers.google.com/youtube/gaming/playables/certification/…</a></p>
+        <ul>
+          <li>YouTube Topluluk Kuralları geçerli.</li>
+          <li><strong>"Made for kids" yasak</strong>; 13+ genel kitleye uygun olmalı. IARC vb. derecelendirme belgede yok.</li>
+          <li>Üçüncü taraf hakları (telif, marka, trade dress, müzik, kişilik hakları) tamamen temizlenmiş olmalı; oyun "authorized, original, or properly licensed".</li>
+          <li><strong>Kural 2.2 (25.08.2026):</strong> Kopya yükleme veya başka bir Playable'a "substantially identical" oyun yasak.</li>
+          <li>Yanıltıcı başlık/küçük resim/açıklama yasak.</li>
+          <li>AI'a özgü ayrı bir Playables kuralı <strong>yok</strong>.</li>
+        </ul>
+        <h3 id="b5-7">5.7 Monetizasyon kuralları <span class="tag tag--ok">RESMÎ</span> <small>(2026-06-16)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_monetization">developers.google.com/youtube/gaming/playables/certification/…</a> (resmî sayfada yalnızca bölüm 1–3 numaralı).</p>
+        <ul>
+          <li>Monetization 1: Platform dışı servislerle oyun içi para kazanma yasak. Monetization 3: Platform dışı servislerle her türlü uygulama içi satın alma (IAP) yasak.</li>
+          <li>Monetization 2: Reklam yalnızca YouTube'un sağladığı reklam işlevleriyle (<code>ytgame.ads</code>) gösterilebilir (MAY); <strong>platform dışı servislerle her türlü oyun içi reklam yasak</strong> (MUST NOT) <span class="tag tag--ok">RESMÎ</span>. Örnek olarak AdSense, AdMob, Unity Ads gibi harici reklam SDK'ları bu yasağa girer <span class="tag tag--warn">TAHMİN</span> <small>(örnekler belgede geçmiyor)</small>. Reklam kullanılıyorsa ses (<code>isAudioEnabled</code>/<code>onAudioEnabledChange</code>) ve pause (<code>onPause</code>/<code>onResume</code>) kurallarına uyulmaya devam edilir; Developer Portal'da monetizasyon ayarı yapılmalı (MUST).</li>
+          <li><span class="tag tag--bad">ÇELİŞKİLİ</span> Sayfa özeti "in-game advertising strictly prohibited" diyor; ayrıntılı maddeler <code>ytgame.ads</code>'e izin veriyor. <strong>Ayrıntılı maddeler esas.</strong></li>
+        </ul>
+        <h3 id="b5-8">5.8 SDK API referansı (ytgame) <span class="tag tag--ok">RESMÎ</span> <small>(2026-06-04)</small></h3>
+        <p>Kaynak: <a href="https://developers.google.com/youtube/gaming/playables/reference/sdk">developers.google.com/youtube/gaming/playables/reference/sdk</a> , <a href="https://developers.google.com/youtube/gaming/playables/reference/getting_started">developers.google.com/youtube/gaming/playables/reference/gett…</a> (2026-06-02). TypeScript tanımları: <a href="https://www.youtube.com/playablesportal/static/youtube_ytgame_web_deploy_mpm_files/index.d.ts">youtube.com/playablesportal/static/youtube_ytgame_web_deploy_…</a></p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ad alanı</th><th>Üye</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>(üst)</td><td><code>IN_PLAYABLES_ENV</code>, <code>SDK_VERSION</code>, <code>SdkError</code> (<code>errorType</code>: <code>API_UNAVAILABLE | INVALID_PARAMS | SIZE_LIMIT_EXCEEDED | UNKNOWN</code>)</td><td><code>catch</code>'te hata nesnesi <code>undefined</code> gelebilir. Yerelde SDK <strong>no-op</strong></td></tr>
+              <tr><td><code>game</code></td><td><code>firstFrameReady()</code></td><td>Yükleme ekranındayken</td></tr>
+              <tr><td><code>game</code></td><td><code>gameReady()</code></td><td>Etkileşim başlayınca</td></tr>
+              <tr><td><code>game</code></td><td><code>loadData(): Promise&lt;string&gt;</code> / <code>saveData(data: string): Promise&lt;void&gt;</code></td><td>Geçerli UTF-16 string, ≤ 3 MiB</td></tr>
+              <tr><td><code>system</code></td><td><code>getLanguage(): Promise&lt;string&gt;</code></td><td>BCP-47 etiketi</td></tr>
+              <tr><td><code>system</code></td><td><code>isAudioEnabled()</code>, <code>onAudioEnabledChange(cb)</code></td><td>Abonelikten çıkış fonksiyonu döner</td></tr>
+              <tr><td><code>system</code></td><td><code>onPause(cb)</code>, <code>onResume(cb)</code></td><td>Pause sonrası resume garanti değil; pause = kaydetmek için kısa pencere</td></tr>
+              <tr><td><code>engagement</code></td><td><code>sendScore({value})</code></td><td>Tam sayı, ≤ <code>Number.MAX_SAFE_INTEGER</code></td></tr>
+              <tr><td><code>engagement</code></td><td><code>openYTContent({id, contentType: VIDEO|PLAYABLE})</code></td><td>Video veya başka Playable açar</td></tr>
+              <tr><td><code>ads</code></td><td><code>requestInterstitialAd()</code></td><td>Gösterim garanti değil; ödül için kullanma</td></tr>
+              <tr><td><code>ads</code></td><td><code>requestRewardedAd(rewardId): Promise&lt;boolean&gt;</code></td><td><code>rewardId</code> her ödül türü için sabit, kullanıcı verisi içermez</td></tr>
+              <tr><td><code>health</code></td><td><code>logError()</code>, <code>logWarning()</code></td><td>Best-effort, hız sınırı var</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b5-9">5.9 En küçük çalışan Playable iskeleti</h3>
+        <div class="callout callout--warn">
+          <p><strong><span class="tag tag--warn">TAHMİN</span></strong> Bu iskelet resmî API'ye göre kurulmuştur; çalıştırılmadı ve Test Suite'ten geçirilmedi. Sertifikasyon öncesi denenmeli. ZIP kökünde: <code>index.html</code>, <code>game.js</code> (isteğe bağlı <code>assets/</code>).</p>
+        </div>
+        <p><code>index.html</code>:</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width,initial-scale=1"&gt;
+  &lt;!-- SDK, oyun kodundan ÖNCE (Integration 1.1) --&gt;
+  &lt;script src="https://www.youtube.com/game_api/v1"&gt;&lt;/script&gt;
+  &lt;style&gt;
+    html,body{margin:0;height:100%;overflow:hidden;background:#000}
+    canvas{display:block;width:100%;height:100%;touch-action:none}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;canvas id="c"&gt;&lt;/canvas&gt;
+  &lt;script src="game.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <p><code>game.js</code>:</p>
+<pre><code>const yt = (typeof ytgame !== 'undefined' &amp;&amp; ytgame.IN_PLAYABLES_ENV) ? ytgame : null;
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+
+let state = { best: 0, score: 0 };
+let paused = false, audioOn = true, raf = 0;
+let loaded = false;                 // Integration 4.3: loadData bitmeden saveData yok
+
+function resize() {                 // Android'de viewport önce 0 olabilir
+  if (!innerHeight) return;
+  const d = devicePixelRatio || 1;
+  c.width = innerWidth * d;
+  c.height = innerHeight * d;
+}
+addEventListener('resize', resize);
+resize();
+
+function draw() {
+  ctx.fillStyle = '#123';
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.fillStyle = '#fff';
+  ctx.font = `${Math.max(12, c.height / 12)}px sans-serif`;
+  ctx.fillText(`Score ${state.score}  Best ${state.best}`, 20, c.height / 2);
+}
+
+function loop() {
+  if (paused) return;
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+
+async function save() {
+  if (!yt || !loaded) return;
+  try { await yt.game.saveData(JSON.stringify({ best: state.best })); } catch (e) {}
+}
+
+c.addEventListener('pointerdown', async () =&gt; {   // dokunma + fare tek olayla
+  if (paused) return;
+  state.score++;
+  if (state.score &gt; state.best) {
+    state.best = state.score;
+    await save();                                  // Integration 3.2: kayıt ve skor aynı
+    if (yt) try { yt.engagement.sendScore({ value: state.best }); } catch (e) {}
+  }
+});
+
+(async function init() {
+  draw();                                          // yükleme/splash ekranı
+  if (yt) {
+    yt.game.firstFrameReady();
+    audioOn = yt.system.isAudioEnabled();
+    yt.system.onAudioEnabledChange(v =&gt; { audioOn = v; /* ses motorunu aç/kapat */ });
+    yt.system.onPause(() =&gt; { paused = true; cancelAnimationFrame(raf); save(); });
+    yt.system.onResume(() =&gt; { paused = false; loop(); });
+    try {
+      const s = await yt.game.loadData();
+      if (s) state = { ...state, ...JSON.parse(s), score: 0 };
+    } catch (e) {}
+    // const lang = await yt.system.getLanguage();  // 'tr' / 'en' ... (navigator.language YASAK)
+  }
+  loaded = true;
+  loop();
+  if (yt) yt.game.gameReady();                     // etkileşime hazır
+})();</code></pre>
+        <p><strong>Yerel test:</strong></p>
+        <ol class="steps">
+          <li>Gzip açık bir yerel sunucu (<code>npx serve</code> vb.) — ilk paket boyutu sıkıştırma sonrası ölçülür.</li>
+          <li>Chrome DevTools Local Overrides ile <code>index.html</code> yanıtına <a href="#b5-2">Bölüm 5.2</a>'deki CSP başlığını ekle; konsolda CSP ihlali var mı bak.</li>
+          <li>Chrome DevTools: cihaz/katlanabilir telefon simülasyonu, heap snapshot (512 MB), Network (ilk yük), Performance (FPS). <span class="tag tag--ok">RESMÎ</span> <small>(FAQ)</small></li>
+          <li>Gerçek davranış ancak Developer Portal'daki <strong>Dev Link + Test Suite</strong> ile doğrulanır; SDK yerelde no-op. "Sandbox" adında ayrı bir ürün bulunamadı.</li>
+          <li>Yerelde geliştirme kolaylığı için <code>IN_PLAYABLES_ENV</code> false iken basit bir <strong>mock SDK</strong> (konsola yazan sahte <code>ytgame</code>) kullanılabilir. <span class="tag tag--warn">TAHMİN</span></li>
+        </ol>
+        <h3 id="b5-10">5.10 Sertifikasyon kontrol listesi</h3>
+        <ul class="checklist">
+          <li>SDK script'i ilk sırada</li>
+          <li>Yükleme ekranındayken <code>firstFrameReady</code>, menü hazır olunca <code>gameReady</code></li>
+          <li><code>loadData</code> sonucu beklenmeden <code>saveData</code> çağrılmıyor; eski kayıtlar hatasız yükleniyor</li>
+          <li>Kayıt &lt; 3 MiB (hedef 500 KiB), çıkışta 64 KiB'tan büyük kayıt yok</li>
+          <li><code>localStorage</code>/IndexedDB ilerleme için kullanılmıyor</li>
+          <li><code>onPause</code> gelince döngü, ses, render, ağ duruyor; Page Visibility API yok</li>
+          <li><code>isAudioEnabled</code> / <code>onAudioEnabledChange</code> uygulanmış; genel sessiz düğmesi yok; ses kullanıcı tıklamasını beklemiyor</li>
+          <li>Dokunma + fare (+ klavye), tüm en-boy oranları, yön kilidi yok, resize sonrası durum korunuyor</li>
+          <li>Sıfır boyutlu viewport ele alınıyor; her DPI'da net görüntü</li>
+          <li>Harici ağ çağrısı yok (yalnızca Google Fonts), analitik yok</li>
+          <li>Harici link, paylaşım istemi, çıkış düğmesi, login benzeri ekran, QR benzeri grafik, kişisel veri isteme yok</li>
+          <li>İngilizce desteği var; dil <code>getLanguage</code> ile alınıyor</li>
+          <li>İlk paket &lt; 30 MiB (hedef 15), tek dosya &lt; 30 MiB (hedef 512 KiB), toplam &lt; 250 MiB, ≤ 8000 dosya, göreli yollar, ASCII dosya adları</li>
+          <li>Heap &lt; 512 MB, yükleme &lt; 5 sn</li>
+          <li>Kod gizleme yok; <code>eval</code>, worker ve WASM'den mümkünse kaçınılmış</li>
+          <li>Reklam yalnızca <code>ytgame.ads</code>; reklam başarısız olursa yedek mantık var; interstitial ödül için kullanılmıyor</li>
+          <li>Özgün içerik, müzik lisansı tamam, 13+ uygun, çocuklara yönelik değil</li>
+          <li>Metadata ve küçük resimler logosuz, yanıltıcı değil; içerik bitince oyuncuya bildiriliyor</li>
+          <li>Varlık lisans listesi (<code>LICENSES.md</code>) tutuluyor</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="motor-secimi"><span class="h-num">§ 6</span>Araç / motor seçimi</h2>
+        <p><strong>Resmî liste:</strong> BabylonJS, Cocos, Construct, Defold, melonJS, Phaser, PixiJS, PlayCanvas, React, three.js, Godot, Unity — WebGL/Canvas web çıktısı veren her motor uygun. <span class="tag tag--ok">RESMÎ</span></p>
+        <p><strong>Resmî örnekler:</strong> Flutter web, PixiJS, Phaser 3 (Vite şablonu), Unity wrapper, Godot wrapper, bundle analyzer — <a href="https://github.com/google/web-game-samples">github.com/google/web-game-samples</a> , <a href="https://developers.google.com/youtube/gaming/playables/samples/oss_samples">developers.google.com/youtube/gaming/playables/samples/oss_sa…</a> <span class="tag tag--ok">RESMÎ</span>. Cocos, Construct, Defold, PlayCanvas için resmî örnek yok.</p>
+        <h3 id="b6-1">6.1 Karşılaştırma tablosu</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Araç</th><th>Güncel durum</th><th>Lisans / ücret</th><th>Playables uyumu</th><th>Öğrenme</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Phaser</strong> (JS/TS, 2D)</td><td>v4.2.1, 9 Temmuz 2026 <span class="tag tag--ok">RESMÎ</span> <small>(phaser.io)</small>; v4.0.0 10.04.2026 <span class="tag tag--info">3. TARAF</span></td><td>Ücretsiz, açık kaynak (MIT — <span class="tag tag--warn">TAHMİN</span>, lisans sayfası okunmadı)</td><td>Çok uygun; çıktı birkaç MB, WASM yok <span class="tag tag--warn">TAHMİN</span></td><td>Orta (JS/TS)</td><td>Resmî Playables örneği (Phaser 3). Kurulum: <code>npm create @phaserjs/game@latest</code> <span class="tag tag--ok">RESMÎ</span>. Eğitimlerin çoğu Phaser 3; AI'a sürüm açıkça söylenmeli</td></tr>
+              <tr><td><strong>Saf HTML5/JS + Canvas</strong></td><td>—</td><td>—</td><td>En küçük paket, en düşük Privacy 7 riski</td><td>AI ile kolay</td><td>Çok küçük oyunlar için ideal</td></tr>
+              <tr><td><strong>PixiJS</strong> (2D render)</td><td>—</td><td>Açık kaynak</td><td>Çok uygun</td><td>Orta</td><td>Resmî örnek var <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td><strong>KAPLAY</strong> (eski Kaboom)</td><td>v3001, MIT <span class="tag tag--info">3. TARAF</span></td><td>Ücretsiz</td><td>Çok küçük</td><td>Çok kolay</td><td>Prototip için iyi; Kaboom bakımsız</td></tr>
+              <tr><td><strong>Excalibur.js</strong> (TS)</td><td>0.32.x, 1.0 öncesi <span class="tag tag--info">3. TARAF</span></td><td>BSD-2</td><td>Küçük</td><td>Orta</td><td>API kırılabilir</td></tr>
+              <tr><td><strong>Godot 4</strong> (GDScript)</td><td>Doküman 4.7 <span class="tag tag--ok">RESMÎ</span></td><td>MIT, ücretsiz</td><td>Uygun; <code>.wasm</code> gzip ile ~1/4; <code>.pck</code> ile parça yükleme <span class="tag tag--ok">RESMÎ</span></td><td>Orta; görsel editör</td><td>Resmî Godot wrapper (yalnızca GDScript). 4.3'ten beri thread'siz web export varsayılan, COOP/COEP gerekmez <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td><strong>Godot 4 C#</strong></td><td>"Projects written in C# using Godot 4 currently cannot be exported to the web" <span class="tag tag--ok">RESMÎ</span> <small>(docs 4.7)</small></td><td>—</td><td><strong>Kullanılamaz</strong></td><td>—</td><td>4.7/4.8'de gelebileceği forum spekülasyonu <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td><strong>Unity 6 (Web)</strong></td><td>6.3 LTS; iOS Safari 15+, Android Chrome 58+ <span class="tag tag--ok">RESMÎ</span></td><td>Personal ücretsiz (yıllık gelir/fon &lt; 200 bin $), Runtime Fee iptal, splash isteğe bağlı <span class="tag tag--ok">RESMÎ</span> <small>(12.09.2024)</small>; Pro 2.200 $/yıl/koltuk</td><td>Zorlayıcı: Unity gzip/brotli <strong>desteklenmiyor</strong>, Compression=Disabled; YouTube sıkıştırıyor (~25 → ~7 MiB <code>.wasm</code>); 30 MiB üstü dosyada elle zip; Addressables önerilir <span class="tag tag--ok">RESMÎ</span> <small>(26.05.2026)</small>. Boş proje ~3,3–4,7 MB, ~200 MB bellek <span class="tag tag--info">3. TARAF</span></td><td>C# bilene kolay, editör ağır</td><td>Boyut, heap ve mobil performansta en çok zorlanacak seçenek <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Construct 3</strong> (kodsuz)</td><td>Tarayıcıda</td><td>Ücretsiz: 50 event, 2 katman, <strong>para kazanma/reklam yok</strong> <span class="tag tag--ok">RESMÎ</span>; Personal 42–100 $/yıl <span class="tag tag--bad">ÇELİŞKİLİ</span> <span class="tag tag--info">3. TARAF</span></td><td>Uygun</td><td>En kolay</td><td>Ücretsiz sürüm gelir için yetersiz</td></tr>
+              <tr><td><strong>GDevelop</strong> (kodsuz)</td><td>MIT <span class="tag tag--ok">RESMÎ</span></td><td>Ücretsiz plan: 3 bulut projesi, 40 AI kredisi/ay; ücretli fiyat okunamadı</td><td>Uygun <span class="tag tag--warn">TAHMİN</span></td><td>Çok kolay</td><td>Ücretsiz planda filigran olup olmadığı netleşmedi</td></tr>
+              <tr><td><strong>PlayCanvas</strong> (3D web)</td><td>Motor MIT <span class="tag tag--info">3. TARAF</span></td><td>Ücretsiz plan (açık projeler, 1 GB); Personal 15 $/ay <span class="tag tag--ok">RESMÎ</span></td><td>Uygun</td><td>Orta–zor</td><td>3D</td></tr>
+              <tr><td><strong>three.js / Babylon</strong> (3D)</td><td>—</td><td>Açık kaynak</td><td>Listede var, rehber yok</td><td>Orta–zor</td><td>3D hiper-casual (ör. runner) için</td></tr>
+              <tr><td><strong>Flutter web</strong></td><td>—</td><td>Açık kaynak</td><td>Resmî örnek var</td><td>Orta (Dart)</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Motor bazında FPS/performans ölçütü belgede <strong>yok</strong>.</p>
+        <h3 id="b6-2">6.2 Durum → Sonuç (motor)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Öneri</th></tr></thead>
+            <tbody>
+              <tr><td>Hiç programlama bilmiyorsun, AI ile çalışacaksın</td><td><strong>Phaser + TypeScript + Vite</strong> veya saf Canvas; AI en çok bu ekosistemde örnek görmüş <span class="tag tag--warn">TAHMİN</span>. Alternatif: GDevelop/Construct (kodsuz) — ama Construct ücretsiz sürümü gelir için yetersiz</td></tr>
+              <tr><td>JavaScript/TypeScript biliyorsun</td><td>Phaser veya PixiJS</td></tr>
+              <tr><td>C#/.NET, Java gibi başka dilden geliyorsun</td><td>TypeScript'e geçiş kolay (benzer tip sistemi) → Phaser. Görsel editör istersen Godot <strong>GDScript</strong> (Godot C# web'e çıkmıyor)</td></tr>
+              <tr><td>Unity'yi zaten biliyorsun</td><td>Unity Web mümkün; boyut, sıkıştırma ve 512 MB heap için optimizasyonu göze al</td></tr>
+              <tr><td>3D istiyorsun</td><td>three.js / Babylon / PlayCanvas; paket boyutunu sıkı takip et</td></tr>
+              <tr><td>Python biliyorsun</td><td>Playables için Python web çıktısı resmî listede yok → JS/TS'e geç <span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="ai-ile-gelistirme"><span class="h-num">§ 7</span>AI asistanla (Claude) birlikte geliştirme</h2>
+        <div class="callout callout--warn">
+          <p>Bu bölüm büyük ölçüde <strong><span class="tag tag--warn">TAHMİN</span></strong>'dir; AI ile oyun geliştirmenin zayıf yönlerini sistemli inceleyen güvenilir kaynak bulunamadı. Bilinen örnek: bir geliştirici Phaser 3 ile Breakout klonunu Claude Code ile ~2 saatte yazmış <span class="tag tag--info">3. TARAF</span> — <a href="https://blog.lmorchard.com/2025/07/10/breakout-with-claude/">blog.lmorchard.com/2025/07/10/breakout-with-claude/</a> . Topluluğun Phaser 4 skill'leri de var <span class="tag tag--info">3. TARAF</span> — <a href="https://www.skills.sh/yakoub-ai/phaser4-gamedev/phaser-init">skills.sh/yakoub-ai/phaser4-gamedev/phaser-init</a> . "Bir haftada oyun" türü iddialar pazarlamadır.</p>
+        </div>
+        <h3 id="b7-1">7.1 "Hiç bilmesem seninle yapabilir miyiz?"</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Okurun durumu</th><th>Gerçekçi mi?</th></tr></thead>
+            <tbody>
+              <tr><td>Hiç programlama bilmiyor</td><td>Basit 2D oyun için evet; ama terminal, Node.js, git, hata mesajı okumayı öğrenmek gerekir. Kapsam çok küçük tutulmalı (tek ekran, tek mekanik)</td></tr>
+              <tr><td>Başka bir dilde yazılımcı</td><td>Evet, rahat. Kod okuma ve hata ayıklama yeterli; oyun kavramları (game loop, delta time, sahne, sprite) 1–2 haftada öğrenilir</td></tr>
+              <tr><td>Oyun geliştirmiş</td><td>Evet; AI özellikle SDK entegrasyonu ve kontrol listesinde zaman kazandırır</td></tr>
+              <tr><td>Herkes için</td><td><strong>Asıl darboğaz kod değil:</strong> Playables erişim onayı, görsel kalite, eğlencenin tutturulması</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b7-2">7.2 İş bölümü</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>AI'ın iyi olduğu</th><th>AI'ın zayıf olduğu</th><th>İnsanın işi</th></tr></thead>
+            <tbody>
+              <tr><td>Proje iskeleti (Vite + TS + Phaser), build script'leri</td><td>Özgün piksel/vektör sanat, animasyon (kod asistanı üretemez)</td><td>Fikir, hedef kitle, kapsamı küçük tutmak</td></tr>
+              <tr><td>Oyun döngüsü, hareket, çarpışma, spawn, skor, zorluk eğrisi kodu</td><td>Müzik ve kaliteli ses</td><td>Her gün oynayıp geri bildirim vermek</td></tr>
+              <tr><td>UI/menü, responsive ölçek, touch/fare/klavye</td><td>"Oyun hissi", denge, eğlence</td><td>Varlık seçimi ve lisans takibi (Kenney CC0 vb.)</td></tr>
+              <tr><td>SDK entegrasyonu, mock SDK, save/load sarmalayıcı</td><td>Büyük projede bağlam kaybı, tutarsızlık</td><td>Gerçek telefonda test</td></tr>
+              <tr><td>Kontrol listesi, paket boyutu ölçen script, refactor, test</td><td>Yeni API'ler (Phaser 4) yerine eski API önermek</td><td>Başvuru formu, mağaza/kanal metinleri</td></tr>
+              <tr><td>Prosedürel grafik (şekil, parçacık, ekran sarsıntısı), jsfxr ses parametreleri</td><td>Gerçek cihaz performans profili</td><td>Sertifikasyonun öznel kısımları</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b7-3">7.3 Çalışma kuralları</h3>
+        <ul>
+          <li>Küçük adımlarla ilerle: her özellikten sonra <strong>oyna ve commit at</strong>.</li>
+          <li>Projeye bir <code>CLAUDE.md</code> koy: motor ve sürümü (ör. "Phaser 3.x" veya "Phaser 4.x — v3 API önerme"), Playables kuralları (bu dosyanın <a href="#teknik-sartlar">Bölüm 5</a>'i), klasör yapısı, varlık lisans listesi.</li>
+          <li>Resmî doküman bağlantısını prompt'a ekle; AI'dan "bu API bu sürümde var mı?" kontrolü iste.</li>
+          <li>Her yeni özellikte AI'dan <strong><a href="#b5-10">Bölüm 5.10</a> kontrol listesine</strong> göre öz-denetim iste.</li>
+        </ul>
+        <h3 id="b7-4">7.4 Örnek iş akışı ve prompt kalıpları</h3>
+<pre><code>1) Kurulum
+"Phaser &lt;SÜRÜM&gt; + TypeScript + Vite ile boş bir proje kur. Tek sahne, ortada dönen bir kare.
+Phaser Scale Manager ile her en-boy oranına uysun, yön kilidi olmasın. npm run dev ile çalışsın."
+
+2) Çekirdek mekanik
+"Oyun fikri: &lt;tek cümle&gt;. Sadece çekirdek mekaniği gri kutularla yap: &lt;girdi&gt; → &lt;sonuç&gt;.
+Skor ve yeniden başlatma olsun. Dokunma ve fare aynı pointer olayıyla çalışsın. Grafik yok."
+
+3) His (juice)
+"Çarpışmada ekran sarsıntısı, skor artışında küçük parçacık efekti ekle. Prosedürel, harici dosya yok."
+
+4) Playables SDK
+"src/platform/yt.ts adında bir sarmalayıcı yaz: IN_PLAYABLES_ENV false ise konsola yazan mock kullansın.
+firstFrameReady → loadData (await) → gameReady sırası; saveData yalnızca loadData bittikten sonra;
+onPause'da update/render/ses dursun, Page Visibility API kullanma; isAudioEnabled/onAudioEnabledChange;
+getLanguage ile tr/en metin seçimi (navigator.language kullanma); sendScore en iyi skorla kayıt aynı."
+
+5) Reklam noktaları
+"Bölüm sonunda requestInterstitialAd, 'ekstra can' için requestRewardedAd('extra_life') ekle.
+Reklam başarısız olursa oyun normal devam etsin; interstitial ödül vermesin; reklam sırasında oyun ve ses dursun."
+
+6) Denetim
+"Projeyi şu kontrol listesine göre denetle: &lt;Bölüm 5.10&gt;. Dış URL çağrısı, localStorage, eval,
+Page Visibility, dış link, login benzeri ekran var mı? İlk paket ve en büyük dosya boyutunu ölçen
+bir script yaz (gzip sonrası)."
+
+7) Paketleme
+"dist/ klasörünü kökte index.html olacak şekilde ZIP'le; göreli yollar, ASCII dosya adları, ≤ 8000 dosya kontrolü yap."</code></pre>
+
+        <!-- ===================================================== -->
+        <h2 id="baslangic-rehberi"><span class="h-num">§ 8</span>Baştan sona başlangıç rehberi</h2>
+        <h3 id="b8-1">8.1 Hazırlık kontrol listesi</h3>
+        <p><strong>Hesaplar</strong></p>
+        <ul class="checklist">
+          <li>Google hesabı (2 adımlı doğrulama açık — YPP için de şart <span class="tag tag--ok">RESMÎ</span>)</li>
+          <li>YouTube kanalı (Playables onboarding kanala bağlanır <span class="tag tag--ok">RESMÎ</span>; geçmişi değerlendirmede dikkate alınır)</li>
+          <li>(Gelir aşamasında) AdSense for YouTube hesabı, vergi bilgisi (W-8)</li>
+          <li>(İsteğe bağlı) itch.io hesabı — Playables onayı beklerken yayın için</li>
+          <li>(İsteğe bağlı) GitHub hesabı — kod yedeği ve GitHub Pages ile kendi site</li>
+        </ul>
+        <p><strong>Araçlar</strong></p>
+        <ul class="checklist">
+          <li>Node.js LTS, npm, Git, VS Code (veya başka editör)</li>
+          <li>Phaser şablonu: <code>npm create @phaserjs/game@latest</code> → <code>npm install</code> → <code>npm run dev</code> <span class="tag tag--ok">RESMÎ</span></li>
+          <li>(Godot seçilirse) Godot 4.x standart (GDScript) + web export şablonları</li>
+          <li>Chrome DevTools (cihaz simülasyonu, heap, network, performance)</li>
+          <li>(İsteğe bağlı) Android Studio emülatörü (katlanabilir cihaz testi)</li>
+          <li>Gerçek cihaz: en az bir orta segment Android, mümkünse bir iPhone (512 MB heap aşımında iPhone çökmesi riski için) <span class="tag tag--warn">TAHMİN</span></li>
+          <li>Ekran kaydı aracı (tanıtım videoları/Shorts için)</li>
+        </ul>
+        <p><strong>Varlıklar</strong></p>
+        <ul class="checklist">
+          <li>Kenney.nl (CC0, atıf gerekmez, Kenney logosu kullanılmaz) <span class="tag tag--ok">RESMÎ</span> — <a href="https://kenney.nl/support">kenney.nl/support</a></li>
+          <li>OpenGameArt (her varlığın lisansı ayrı kontrol) <span class="tag tag--ok">RESMÎ</span> — <a href="https://opengameart.org/content/faq">opengameart.org/content/faq</a></li>
+          <li>Google Fonts (OFL; lisans dosyası oyunla verilir)</li>
+          <li>jsfxr/sfxr ile prosedürel ses efektleri</li>
+          <li>CC0 veya açıkça "oyunda kullanılabilir" lisanslı müzik</li>
+          <li><code>LICENSES.md</code> — her varlık: kaynak, lisans, atıf metni</li>
+        </ul>
+        <h3 id="b8-2">8.2 Hafta hafta plan <span class="tag tag--warn">TAHMİN</span> <small>(gereksinimlere göre kuruldu)</small></h3>
+        <p><strong>Paralel yol:</strong> Oyun oynanabilir hâle gelince (hafta 3–4) Playables formunu gönder. Onay gelmezse aynı oyun itch.io, kendi site (GitHub Pages) veya CrazyGames'te yayımlanabilir. Poki'nin münhasır anlaşmasına Playables hedefin varsa dikkat et (<a href="#dagitim-kanallari">Bölüm 13</a>).</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Hafta</th><th>İş</th><th>Çıktı</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>Araç kurulumu; Phaser "Making your first Phaser game" eğitimini AI ile birlikte yap</td><td>Çalışan örnek oyun</td></tr>
+              <tr><td>1</td><td>Fikir: tek ekran, tek mekanik, 30 sn–3 dk oturum, dokunmatik + fare. 3 fikirden kâğıt prototip seç (<a href="#oyun-fikirleri">Bölüm 11</a>)</td><td>Tek sayfalık tasarım notu</td></tr>
+              <tr><td>2</td><td>Gri kutu prototip: çekirdek mekanik, skor, yeniden başlatma; responsive; touch/fare/klavye</td><td>Oynanabilir prototip</td></tr>
+              <tr><td>3</td><td>3–5 kişiyle oyun testi; denge, zorluk eğrisi, juice</td><td>Eğlenceli çekirdek</td></tr>
+              <tr><td>4</td><td>Varlıklar (Kenney CC0 / kendi çizim), ses (sfxr), lisans listesi; <strong>Playables formunu gönder</strong></td><td>Görsel/sesli sürüm</td></tr>
+              <tr><td>5</td><td>SDK: mock SDK, <code>firstFrameReady</code>/<code>gameReady</code>, save/load (eski sürüm uyumu), pause/resume, ses, <code>getLanguage</code> ile TR/EN, <code>sendScore</code>, reklam noktaları</td><td>Playables'a hazır kod</td></tr>
+              <tr><td>6</td><td>Performans/boyut: ilk paket &lt; 15 MiB, dosyalar &lt; 512 KiB, &lt; 5 sn, heap ölçümü; dış URL/link/login yok</td><td>Kontrol listesi tamam</td></tr>
+              <tr><td>7</td><td>(Onay varsa) Dev Link + Test Suite, gerçek cihaz, düzeltme, sertifikasyon. (Onay yoksa) itch.io / CrazyGames Basic Launch</td><td>Yayında oyun</td></tr>
+              <tr><td>8+</td><td>Gameplay videosu, "nasıl oynanır" Shorts, kanalda tanıtım; geri bildirimle güncelleme</td><td>Büyüme döngüsü</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b8-3">8.3 Ücretsiz öğrenme kaynakları</h3>
+        <p><strong>Resmî (İngilizce)</strong></p>
+        <ul>
+          <li>Phaser — Making your first Phaser game: <a href="https://docs.phaser.io/phaser/getting-started/making-your-first-phaser-game">docs.phaser.io/phaser/getting-started/making-your-first-phase…</a></li>
+          <li>Phaser — Create Game App: <a href="https://phaser.io/tutorials/create-game-app">phaser.io/tutorials/create-game-app</a></li>
+          <li>Phaser 4 + Vite + TS kurulum yazısı (17.04.2026) <span class="tag tag--info">3. TARAF</span>: <a href="https://emanueleferonato.com/2026/04/17/getting-started-with-phaser-4-vite-typescript-setup-using-the-official-create-game-app/">emanueleferonato.com/2026/04/17/getting-started-with-phaser-4…</a></li>
+          <li>Godot — Your first 2D game: <a href="https://docs.godotengine.org/en/stable/getting_started/first_2d_game/">docs.godotengine.org/en/stable/getting_started/first_2d_game/</a></li>
+          <li>Godot — Web export: <a href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html">docs.godotengine.org/en/stable/tutorials/export/exporting_for…</a></li>
+          <li>Playables örnekleri: <a href="https://developers.google.com/youtube/gaming/playables/samples/phaser">developers.google.com/youtube/gaming/playables/samples/phaser</a> , …/godot_wrapper , …/unity_wrapper</li>
+        </ul>
+        <p><strong>Türkçe</strong></p>
+        <ul>
+          <li>BTK Akademi: "Unity ile Dijital Oyun Geliştirmeye Giriş" ve "Oyunlaştırma Tasarım Temelleri" listeleniyor <span class="tag tag--info">3. TARAF</span>; site bizzat doğrulanamadı. Phaser/Godot kursu bulunamadı.</li>
+          <li>Techcareer.net — Unity ile Oyun Geliştirme (~6 saat, ücretsiz) <span class="tag tag--info">3. TARAF</span>: <a href="https://www.techcareer.net/courses/unity-ile-oyun-gelistirme">techcareer.net/courses/unity-ile-oyun-gelistirme</a></li>
+          <li>Türkçe Phaser/Godot içeriği zayıf; ana yol İngilizce resmî doküman + AI asistan. <span class="tag tag--warn">TAHMİN</span></li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="para-kazanma"><span class="h-num">§ 9</span>Para kazanma ve para nasıl alınır</h2>
+        <h3 id="b9-1">9.1 Playables geliri</h3>
+        <p><strong>Reklam türleri</strong> <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.google.com/youtube/gaming/playables/reference/monetization">developers.google.com/youtube/gaming/playables/reference/mone…</a> (2026-06-01)</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Tür</th><th>Nasıl</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Pre-roll</td><td>Yüklenirken; YouTube otomatik ekler</td><td>Entegrasyon gerekmez</td></tr>
+              <tr><td>Interstitial</td><td><code>ytgame.ads.requestInterstitialAd()</code>, doğal molalarda</td><td>Gösterim garanti değil</td></tr>
+              <tr><td>Rewarded</td><td><code>ytgame.ads.requestRewardedAd(id)</code>, oyuncu isteyerek izler</td><td>Mediacube'e göre en yüksek CPM <span class="tag tag--info">3. TARAF</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Entegrasyon "yaklaşık 5 dakika"; türler Portal'dan kapatılabilir, varsayılan açık. Reklamlar uygun bölge/platformlardaki kullanıcıların <strong>bir kısmına</strong> gösterilir; başarısızlıkta yedek mantık gerekir. <span class="tag tag--ok">RESMÎ</span></li>
+          <li><strong>Gelir paylaşımı:</strong> "We are in the initial phase of Playables monetization… piloting revenue sharing with a select number of Playable creators… aim to align with the broader YouTube monetization programs over time." <strong>Yüzde, eşik, ödeme takvimi, uygunluk ölçütü belgede yok.</strong> <span class="tag tag--ok">RESMÎ</span></li>
+          <li><span class="tag tag--bad">ÇELİŞKİLİ</span> Developer Portal sayfası (2025-10-16) monetizasyon ayarlarının "henüz son kullanıcı deneyimini değiştirmediğini" söylüyor; 2026 tarihli monetizasyon sayfası reklamların gösterildiğini söylüyor → <strong>daha yeni sayfa esas</strong>.</li>
+          <li><span class="tag tag--bad">ÇELİŞKİLİ</span> Haber kaynakları geliştiriciye ödemenin "netleşmediğini", yayıncılar "ödendiğini" söylüyor.</li>
+          <li><strong>IAP:</strong> Şu an yok. YouTube'dan bir yöneticinin LinkedIn yorumuna göre 2027'de test hedefleniyor <span class="tag tag--info">3. TARAF</span>; Mediacube "2026 sonu veya 2027" diyor <span class="tag tag--bad">ÇELİŞKİLİ</span>; resmî doğrulama yok.</li>
+          <li><strong>Sabit ödeme/fon programı:</strong> bulunamadı.</li>
+        </ul>
+        <p><strong>Pilot katılımcılarının aktardıkları</strong> <span class="tag tag--info">3. TARAF</span> <small>(tanıtım amaçlı, doğrulanmadı)</small></p>
+        <ul>
+          <li>Ödeme AdSense altyapısı üzerinden (Mediacube).</li>
+          <li>Premium aboneler reklam görmüyor; oynama süresine göre abonelik payı verildiği iddia ediliyor.</li>
+          <li>Toplam günlük gelir 48 saat gecikmeyle; oyun bazlı rapor her ayın 15'inde, önceki ay için.</li>
+          <li>Fill rate %100 değil; interstitial'ı 4.–5. bölüm civarında başlatmak öneriliyor.</li>
+          <li>Mediacube portföy geliri Mayıs→Haziran 2026 ~10 kat artmış; Playgama kapalı betada oyun başına ortalama ~<strong>3.100 $/ay</strong> demiş (tek geliştiricinin rakamı, platform ortalaması değil). Playgama Temmuz 2026: ~50 aktif oyun, Haziran'da ~57 milyon oynanma.</li>
+          <li>Tall Man Run (~106–108 milyon), Build A Queen (100M+), Snake Clash (~97M) gibi en çok oynananlar büyük stüdyo oyunları.</li>
+          <li>Analitik (Temmuz 2026'dan beri): oynanma sayısı + yaş/coğrafya/cinsiyet; oturum süresi, DAU/MAU, retention yok.</li>
+          <li><strong>Bağımsız gelir verisi bulunamadı.</strong></li>
+        </ul>
+        <h3 id="b9-2">9.2 Gameplay / oyun video kanalı geliri</h3>
+        <p><strong>YPP şartları</strong> <span class="tag tag--ok">RESMÎ</span></p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kademe</th><th>Şart</th><th>Açtıkları</th></tr></thead>
+            <tbody>
+              <tr><td>Alt kademe</td><td>500 abone + son 90 günde 3 herkese açık yükleme + (12 ayda 3.000 saat <strong>veya</strong> 90 günde 3M Shorts)</td><td>Kanal üyeliği, Super Thanks, Super Chat, Shopping — <a href="https://support.google.com/youtube/answer/13429240">support.google.com/youtube/answer/13429240</a></td></tr>
+              <tr><td>Tam kademe</td><td>1.000 abone + (12 ayda 4.000 saat <strong>veya</strong> 90 günde 10M Shorts); Shorts akışı izlenme saati 4.000'e sayılmaz</td><td>Reklam geliri, Premium payı — <a href="https://support.google.com/youtube/answer/72851">support.google.com/youtube/answer/72851</a></td></tr>
+              <tr><td>Ortak</td><td>Para kazanma politikalarına uyum, YPP'nin açık olduğu ülkede yaşamak (Türkiye listede), aktif ihtar yok, 2 adımlı doğrulama, gelişmiş özellik erişimi, tek AdSense for YouTube hesabı</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>01.02.2027 değişikliği:</strong> YPP koşulları güncelleniyor; mevcut ortaklar yeni koşulları 31.01.2027'ye kadar Studio'da kabul etmeli <span class="tag tag--ok">RESMÎ</span> <small>(<a href="https://support.google.com/youtube/answer/72851">support.google.com/youtube/answer/72851</a> ; sayfa yeni eşikleri listelemiyor)</small>. Yeni başvuranlar için 01.02.2027'den itibaren reklam eşiği <strong>8.000 nitelikli saat (12 ay) veya 20M Shorts (90 gün)</strong>; <strong>mevcut YPP ortakları etkilenmez</strong> (grandfathered). Duyuru YouTube resmî blogunda 10.08.2026'da yapıldı <span class="tag tag--info">3. TARAF</span> <small>(birden çok kaynak tutarlı)</small> — <a href="https://vidiq.com/blog/post/youtube-partner-program-changes-2027/">vidiq.com/blog/post/youtube-partner-program-changes-2027/</a> , <a href="https://www.netinfluencer.com/youtube-raises-bar-for-new-creators-to-join-partner-program-tightens-shorts-payout-threshold/">netinfluencer.com/youtube-raises-bar-for-new-creators-to-join…</a> . Abone eşiğinin 1.000'de kalması <span class="tag tag--bad">ÇELİŞKİLİ</span>: bazı kaynaklar 1.000 diyor, NetInfluencer duyuruda abone sayısı belirtilmediğini söylüyor.</li>
+        </ul>
+        <p><strong>Gelir payları</strong></p>
+        <ul>
+          <li><strong>Shorts</strong> <span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/12504220">support.google.com/youtube/answer/12504220</a> : Ülke bazlı havuz, müzik lisansı payı düşülür, kanala etkileşimli görüntüleme oranıyla pay ayrılır, yapımcı bunun <strong>%45</strong>'ini alır. Resmî örnek: ülke Shorts geliri 100.000 $ → müzik sonrası 90.000 $ → %1 pay = 900 $ → yapımcıya 405 $. Aylık Shorts reklam ve Premium payı, <strong>her ay için</strong> son 90 günde ≥ 10M nitelikli Shorts görüntülemesi şartına bağlıdır (sürekli şart). 01.02.2027'den itibaren 90 günlük pencere ödeme yapılan aydan önceki ayın 15'inde biter. Eşiğin altında kalan kanal YPP'de kalır ve uzun video gelirini almaya devam eder; yalnızca o ayın Shorts payını alamaz. <span class="tag tag--ok">RESMÎ</span></li>
+          <li><strong>Uzun video:</strong> Watch Page Monetization Module — herkese açık videolarda izleme sayfasındaki ve gömülü oynatıcıdaki reklamların net gelirinin <strong>%55</strong>'i yapımcıya. <span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/72902">support.google.com/youtube/answer/72902</a></li>
+          <li><strong>Fan funding (kanal üyeliği, Super Chat, Super Stickers, Super Thanks):</strong> genişletilmiş YPP'nin <strong>alt kademesinde</strong> açılır (yukarıdaki tablo). Yapımcı payı geçerli vergi ve ücretler düşüldükten sonra <strong>%70</strong>; kanal sahibi 18+. <span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/13429240">support.google.com/youtube/answer/13429240</a> , <a href="https://support.google.com/youtube/answer/7636690">support.google.com/youtube/answer/7636690</a></li>
+        </ul>
+        <p><strong>Oyun nişinde RPM</strong> <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span></p>
+        <ul>
+          <li>Uzun oyun videoları: CPM 2–9 $, RPM 0,50–4 $ (MilX, 16.03.2026). Başka blog: 0,70–2 $, nişler arasında en düşük kademe (genç kitle).</li>
+          <li>Türkiye izleyicisinin RPM'i ABD'nin ~0,12–0,22 katı <span class="tag tag--info">3. TARAF</span>.</li>
+          <li>Shorts RPM ≈ 0,02–0,10 $/1.000 <span class="tag tag--warn">TAHMİN</span> <small>(sağlam kaynak yok)</small>.</li>
+          <li>Kaba hesap <span class="tag tag--warn">TAHMİN</span>: ayda 100.000 uzun video görüntülemesi → Türkçe/TR izleyicili kanal ~10–60 $/ay; İngilizce/global kanal ~50–300 $/ay. Doğrulanmış Türkiye oyun RPM'i bulunamadı.</li>
+        </ul>
+        <p><strong>Oyun videosunda para kazanma riski:</strong> yorumsuz ham oyun görüntüsü "reused/inauthentic content" nedeniyle reddedilebilir (<a href="#b10-6">Bölüm 10.6</a>).</p>
+        <h3 id="b9-3">9.3 Para nasıl alınır — ödeme altyapısı</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kanal</th><th>Ödeme yolu</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td>Gameplay kanalı (YPP)</td><td>AdSense for YouTube</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Playables (doğrudan pilot)</td><td>AdSense olduğu söyleniyor; Playables'a özel ödeme belgesi <strong>yok</strong></td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Playables (yayıncı üzerinden)</td><td>Yayıncı öder (ör. Mediacube MCPay: 80+ para birimi, banka havalesi, kripto dahil 12+ yöntem)</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Diğer portallar</td><td><a href="#dagitim-kanallari">Bölüm 13</a></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>AdSense genel kuralları</strong> <span class="tag tag--ok">RESMÎ</span></p>
+        <ul>
+          <li>Eşik <strong>100 USD</strong>; TL hesap için sayfa <strong>₺200</strong> gösteriyor (düşük görünüyor; hesap para biriminde kontrol edilmeli) — <a href="https://support.google.com/adsense/answer/1709871">support.google.com/adsense/answer/1709871</a></li>
+          <li>Yöntemler: EFT, havale, çek, Western Union, PayPal Hyperwallet — Türkiye'de hangilerinin açık olduğu sayfada yok.</li>
+          <li>Takvim: önceki ay kazancı ayın 3'ünde kesinleşir; ödeme bilgisi/eşik için son gün 20'si; ödeme 21–26'sı arası; EFT ≤ 7 iş günü, havale ≤ 15 iş günü — <a href="https://support.google.com/adsense/answer/7164703">support.google.com/adsense/answer/7164703</a></li>
+          <li><strong>PayPal</strong> Türkiye'de 06.06.2016'dan beri para gönderme/alma için kapalı; geri döndüğüne dair duyuru bulunamadı <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+        <h3 id="b9-4">9.4 Vergi</h3>
+        <p><strong>ABD stopajı (YouTube/AdSense)</strong> <span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/10391362">support.google.com/youtube/answer/10391362</a></p>
+        <ul>
+          <li>Nerede yaşarsa yaşasın herkes vergi bilgisini (W-8 formu; araç doğru formu seçtirir) vermek zorunda.</li>
+          <li>Geçerli ABD vergi bilgisi (W-8BEN) verildiyse stopaj yalnızca <strong>ABD'li izleyicilerden gelen</strong> kazanca uygulanır; oran anlaşmaya göre %0–30. Verilmediyse aşağıdaki %24 kuralı geçerli.</li>
+          <li>10 Aralık'a kadar verilmezse: bireysel hesapta <strong>dünya genelindeki tüm kazancın %24'ü</strong>, işletme hesabında ABD kazancının %30'u kesilebilir.</li>
+          <li>Form geçerliliği imza yılından sonraki 3. takvim yılı sonunda biter; 1042-S 14 Nisan'a kadar.</li>
+          <li>Türkiye–ABD anlaşma oranı Türk kaynaklarına göre <strong>%10</strong> <span class="tag tag--info">3. TARAF</span> <small>(alomaliye/donanimhaber)</small>; Google sayfası oran vermiyor; mali müşavire danışılmalı.</li>
+        </ul>
+        <p><strong>Türkiye: GVK mükerrer 20/B istisnası</strong> <span class="tag tag--info">3. TARAF</span> <small>(kanun metni alıntılarıyla)</small> — <a href="https://www.fatiharas.com/gvk-mukerrer-madde-20-b-sosyal-icerik-ureticiligi-istisnasi/">fatiharas.com/gvk-mukerrer-madde-20-b-sosyal-icerik-ureticili…</a></p>
+        <ul>
+          <li>Kapsam: internette içerik paylaşanlar + "mobil cihazlar için uygulama geliştirenlerin elektronik uygulama paylaşım ve satış platformları üzerinden" kazancı (7338 s.K., 7491 s.K. ile 01.01.2024'ten genişletildi).</li>
+          <li>Şartlar: Türkiye'de bir bankada özel hesap; faaliyetin <strong>tüm</strong> geliri <strong>yalnızca</strong> bu hesaba gelir (tek istisna dışı ödeme istisnayı düşürür); vergi dairesinden istisna belgesi; banka <strong>%15</strong> keser (brüt, gider düşülmez), şartlar sağlanırsa nihai vergi; defter/belge yükümlülüğü yok, belgeler 5 yıl saklanır.</li>
+          <li><strong>2026 sınırı: 5.300.000 TL</strong> = GVK 103. madde tarifesinde <strong>ücret gelirleri için</strong> 4. dilim tutarı (ücret dışı tarifede bu dilim farklıdır, karıştırılmamalı); 332 Sıra No.lu GVK Genel Tebliği, RG 31.12.2025 (5. mükerrer) <span class="tag tag--info">3. TARAF</span> <small>(PwC, KPMG; ikincil kaynaklarda RG sayısı 32124 / 33124 farklı geçiyor)</small>. Aşılırsa istisna o yıl düşer, tamamı beyan edilir, kesilen vergi mahsup edilir. Banka sınırı takip etmez. — <a href="https://www.pwc.com.tr/tr/hizmetlerimiz/vergi/bultenler/2026/2026-yili-bazi-gelir-vergisi-rakamlari.html">pwc.com.tr/tr/hizmetlerimiz/vergi/bultenler/2026/2026-yili-ba…</a></li>
+          <li>Şahsi YouTube geliri istisna belgesi olmadan alınırsa ticari kazanç sayılır; izaha davet yazıları gönderiliyor <span class="tag tag--info">3. TARAF</span> — <a href="https://www.alomaliye.com/2025/01/27/youtubedan-gelir-elde-edenler-izaha-davet-ediliyor/">alomaliye.com/2025/01/27/youtubedan-gelir-elde-edenler-izaha-…</a></li>
+          <li><strong>Gameplay kanalı geliri</strong> 20/B kapsamına açıkça girer <span class="tag tag--warn">TAHMİN</span> <small>(kanun metnine dayanarak)</small>.</li>
+          <li><strong>Playables oyun geliri</strong> <span class="tag tag--bad">ÇELİŞKİLİ</span> <span class="tag tag--warn">TAHMİN</span>: kanun "mobil uygulama" ve "uygulama paylaşım ve satış platformu" diyor; YouTube içinde çalışan HTML5 oyunun buna girip girmediği belirsiz. Yayıncı üzerinden gelen ödeme yurt dışı şirketten hizmet/lisans bedeli sayılıp <strong>şahıs işletmesi gerektirebilir</strong>. <strong>GİB'den özelge veya mali müşavir görüşü alınmalı.</strong></li>
+        </ul>
+        <p><strong>Depodaki ilgili rehberler</strong></p>
+        <ul>
+          <li><a href="../Sirket-Kurma/12-sirketsiz.html">Şirketsiz gelir — 20/B vergi boyutu</a></li>
+          <li><a href="../Sirket-Kurma/07-genc-girisimci.html">Genç girişimci istisnası ve YouTube bölümü (29 yaş altı)</a></li>
+          <li><a href="../Sirket-Kurma/03-vergi-101.html">Vergi 101 — 20/B, %15, 5.300.000 TL özeti</a></li>
+          <li><a href="../Sirket-Kurma/05-limited-sirket.html">Limited şirket — içerik gelirinin şahıs işletmesiyle faturalanması notu</a></li>
+          <li><a href="../Sirket-Kurma/02-sgk-bagkur.html">SGK/Bağ-Kur — kamu görevlilerinin şahıs işletmesi açma yasağı</a></li>
+        </ul>
+        <h3 id="b9-5">9.5 Durum → Sonuç (vergi/ödeme)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Türkiye'de yaşıyorsun, gelir YouTube kanalından (AdSense)</td><td>20/B istisna hesabı + belge → %15 nihai; ABD izleyicisi kısmında ~%10 ABD stopajı (W-8 ile)</td></tr>
+              <tr><td>Türkiye'de, gelir Playables'tan doğrudan (AdSense)</td><td>20/B kapsamı belirsiz → özelge/mali müşavir</td></tr>
+              <tr><td>Türkiye'de, gelir yayıncı/portaldan (Mediacube, CrazyGames, Poki)</td><td>Yurt dışı şirketten ödeme → şahıs işletmesi olasılığı yüksek <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Yıllık gelir 5.300.000 TL'yi aşıyor (2026)</td><td>20/B o yıl düşer; beyanname + muhtemelen şirket</td></tr>
+              <tr><td>29 yaş altı ve ilk kez işletme açıyorsun</td><td>Genç girişimci istisnası değerlendirilebilir → depodaki 07 sayfası</td></tr>
+              <tr><td>4/a çalışansın</td><td>20/B ve şahıs işletmesi genelde mümkün; iş sözleşmendeki rekabet/yan iş maddelerini kontrol et <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Kamu görevlisisin</td><td>Şahıs işletmesi açmak yasak (657 s.K. md. 28); 20/B için kurumdan teyit al</td></tr>
+              <tr><td>Şirketin var</td><td>Gelir şirket adına faturalanır; AdSense/portal hesabı şirket adına açılabilir <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Yurt dışında yaşıyorsun</td><td>Bulunduğun ülkenin vergi kuralları; ABD stopajı anlaşma oranına göre değişir</td></tr>
+              <tr><td>W-8 vermedin</td><td>Bireysel hesapta tüm dünyadaki kazancın %24'ü kesilebilir <span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b9-6">9.6 Gerçekçi beklenti <span class="tag tag--warn">TAHMİN</span></h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Playables'a başvurdun, onay gelmedi</td><td>Gelir 0; aynı oyun itch.io/CrazyGames'e konabilir</td></tr>
+              <tr><td>Kabul edildin, gelir pilotunda değilsin</td><td>Oyun yayında, gelir 0 (pilot dışı ödeme tanımlı değil)</td></tr>
+              <tr><td>Yayıncı üzerinden girdin</td><td>Gelir mümkün, payı yayıncı belirler; beyanlar seçilmiş başarılı oyunlar için ayda yüzlerce–birkaç bin $</td></tr>
+              <tr><td>Gameplay kanalı, YPP eşiğinin altında</td><td>Gelir 0</td></tr>
+              <tr><td>01.02.2027 sonrası YPP'ye başvuruyorsun</td><td>Eşik 8.000 saat / 20M Shorts <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Türkçe kanal, TR izleyici</td><td>100.000 görüntüleme ≈ onlarca $</td></tr>
+              <tr><td>İngilizce global kanal</td><td>RPM 3–10 kat yüksek olabilir; rekabet de çok yüksek</td></tr>
+              <tr><td>Kendi Playable'ını kendi kanalında tanıtıyorsun</td><td>İki gelir birbirini besler; en mantıklı yol ama iki taraf da belirsiz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Sonuç:</strong> İlk 6–12 ay için <strong>sıfır gelir varsayarak</strong> plan yap. Playables'ta iki seçici kapı var (geliştirici erişimi + gelir pilotu); gameplay nişinde RPM düşük ve 2027'de YPP eşikleri yükseliyor.</p>
+
+        <!-- ===================================================== -->
+        <h2 id="telif-hukuk"><span class="h-num">§ 10</span>Telif ve hukuk</h2>
+        <div class="callout callout--warn">
+          <p>Hukuki danışmanlık değildir. Somut durumda fikri mülkiyet avukatına danışılmalı.</p>
+        </div>
+        <h3 id="b10-1">10.1 Temel ilke: fikir korunmaz, ifade korunur</h3>
+        <ul>
+          <li><strong>ABD Telif Ofisi:</strong> "The idea for a game is not protected by copyright. The name or title given to the game and the methods for playing it are not protected by copyright." Kural metni ve grafik sanatı korunabilir. <span class="tag tag--ok">RESMÎ</span> — <a href="https://www.copyright.gov/register/tx-games.html">copyright.gov/register/tx-games.html</a></li>
+          <li><strong>AB — Nintendo v PC Box (C-355/12, 23.01.2014, ECLI:EU:C:2014:25):</strong> Kararın asıl konusu teknolojik koruma önlemleri (konsol korumasını aşan cihazlar). Yan tespit olarak: video oyunu karmaşık eserdir; program + grafik + ses unsurları özgün oldukları ölçüde korunur. <span class="tag tag--info">3. TARAF</span> <small>(özet; resmî metin CURIA'da)</small> — <a href="https://curia.europa.eu/juris/liste.jsf?num=C-355/12">curia.europa.eu/juris/liste.jsf?num=C-355/12</a> , <a href="https://www.ippt.eu/items/ippt20142301-cjeu-nintendo-v-pc-box">ippt.eu/items/ippt20142301-cjeu-nintendo-v-pc-box</a></li>
+          <li><strong>Türkiye — FSEK (5846):</strong> fikrin değil ifade biçiminin korunması; eser "sahibinin hususiyetini" taşımalı, tescil şartı yok; m.1/B bilgisayar programı tanımı; görsel ve müzik ayrı eser olarak korunabilir. <span class="tag tag--info">3. TARAF</span> "Oyun mekaniği korunmaz" diyen Türk mahkeme kararı <strong>bulunamadı</strong> <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li><strong>TTK m.55/1-c</strong> başkasının iş ürününden yetkisiz yararlanma, <strong>m.55/1-a-4</strong> iltibas → telif ihlali olmasa bile haksız rekabet olabilir; kasıtlıysa m.62 suç. <span class="tag tag--info">3. TARAF</span> — <a href="https://www.erdem-erdem.av.tr/bilgi-bankasi/yeni-turk-ticaret-kanununda-haksiz-rekabet-hukumleri">erdem-erdem.av.tr/bilgi-bankasi/yeni-turk-ticaret-kanununda-h…</a></li>
+          <li>Marka ve ürün görünümü 6769 s. SMK ile korunur <span class="tag tag--warn">TAHMİN</span> <small>(kaynakla doğrulanmadı)</small>.</li>
+        </ul>
+        <h3 id="b10-2">10.2 Önemli davalar</h3>
+        <ul>
+          <li><strong>Tetris Holding v. Xio Interactive</strong> (D.N.J., 30.05.2012, 863 F. Supp. 2d 394): "Mino" klonu tahta boyutu, parça görünümü, renkler, ekran düzenini neredeyse birebir kopyalamıştı → telif + trade dress ihlali. Kurallar korunmaz ama sonsuz alternatif varken ifadeyi birebir kopyalamak ihlaldir. Bölge mahkemesi kararı, emsal gücü sınırlı. <span class="tag tag--info">3. TARAF</span> — <a href="https://www.loeb.com/en/insights/publications/2012/06/tetris-holding-llc-v-xio-interactive-inc">loeb.com/en/insights/publications/2012/06/tetris-holding-llc-…</a></li>
+          <li><strong>Spry Fox v. Lolapps/6Waves</strong> (Triple Town / Yeti Town, 2012): mekanik koruması zayıf ama oyun alanı ifadesi çok benzer → reddetme talebi geri çevrildi, sulh. Gerekçe kaynaklar arasında <span class="tag tag--bad">ÇELİŞKİLİ</span>.</li>
+          <li><strong>NYT – Wordle klonları (2024):</strong> NYT, Ocak–Mart 2024'te (GitHub'a 02.01.2024) Reactle adlı açık kaynak Wordle klonuna ve yüzlerce fork'una DMCA bildirimi gönderdi. NYT açıklaması koşullu: "Wordle markasını <strong>veya telifli oynanışımızı</strong> ihlal etmeyen benzer kelime oyunlarına itirazımız yok." NYT oynanış üzerinde de hak iddia ettiği için (bu belgedeki "mekanik serbest" çerçevesiyle gerilim) ad, renk düzeni (yeşil/sarı/gri) ve ızgara görünümü de farklılaştırılmalı. <span class="tag tag--info">3. TARAF</span> <small>(AP)</small> — <a href="https://www.wsls.com/business/2024/03/12/the-new-york-times-is-fighting-off-wordle-look-alikes-with-copyright-takedown-notices/">wsls.com/business/2024/03/12/the-new-york-times-is-fighting-o…</a> , <a href="https://www.wusf.org/2024-03-13/c-e-a-s-e-and-desist-the-new-york-times-goes-after-wordle-spinoffs">wusf.org/2024-03-13/c-e-a-s-e-and-desist-the-new-york-times-g…</a></li>
+        </ul>
+        <h3 id="b10-3">10.3 Ne korunur, ne korunmaz</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Unsur</th><th>Korunur mu?</th><th>Güven</th></tr></thead>
+            <tbody>
+              <tr><td>Oyun fikri, kural, mekanik</td><td>Telifle korunmaz (patent ayrı)</td><td><span class="tag tag--ok">RESMÎ</span> (ABD), <span class="tag tag--info">3. TARAF</span> (TR)</td></tr>
+              <tr><td>Kod</td><td>Telifle korunur; aynı işlevi kendi kodunla sıfırdan yazmak genelde serbest, ama başkasının kodunu, yapısını/sırasını/organizasyonunu (SSO) veya görünümünü birebir taklit etmek ihlal olabilir (bkz. Tetris v. Xio)</td><td><span class="tag tag--ok">RESMÎ</span> (koruma: <a href="https://www.copyright.gov/circs/circ61.pdf">copyright.gov/circs/circ61.pdf</a>) + <span class="tag tag--warn">TAHMİN</span> (sınır)</td></tr>
+              <tr><td>Grafik, sprite, ikon, UI düzeni, renk/yerleşim birlikteliği</td><td>Korunur; birebir taklit ihlal</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Müzik, ses efekti</td><td>Korunur</td><td><span class="tag tag--ok">RESMÎ</span> / <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Karakter (görünüş, isim)</td><td>Telif + marka</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Oyun adı, logo</td><td>Telifle değil, markayla; karıştırılma riski ihlal</td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Mağaza sayfası/küçük resim benzerliği</td><td>Playables kural 1.3 ve 2.3</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b10-4">10.4 Patentli mekanikler</h3>
+        <ul>
+          <li><strong>Warner Bros "Nemesis System"</strong> — US 10,926,179. Verilme <strong>23.02.2021</strong> <span class="tag tag--info">3. TARAF</span>. Başvuru 2015 veya 2016 olarak bildiriliyor; bitiş ~2035–2036 (KitGuru: 11.08.2036) <span class="tag tag--bad">ÇELİŞKİLİ</span>. Kesin tarih için USPTO/Google Patents kaydı kontrol edilmeli. — <a href="https://www.finnegan.com/en/insights/articles/will-101-be-a-nemesis-to-warner-brothers-patent.html">finnegan.com/en/insights/articles/will-101-be-a-nemesis-to-wa…</a> , <a href="https://www.patentarcade.com/2021/02/warner-brothers-granted-patent-for-nemesis-system-from-middle-earth-video-games.html">patentarcade.com/2021/02/warner-brothers-granted-patent-for-n…</a> , <a href="https://www.kitguru.net/gaming/matthew-wilson/warner-bros-nemesis-system-patent-wont-expire-until-2036/">kitguru.net/gaming/matthew-wilson/warner-bros-nemesis-system-…</a></li>
+          <li><strong>Nintendo/The Pokémon Company – Pocketpair (Palworld):</strong> Eylül 2024'te Tokyo Bölge Mahkemesi'nde 3 Japon patentiyle (JP7545191, JP7493117, JP7528390: top fırlatarak yakalama, yaratığa binme/binekle hareket) dava açıldı. Kasım 2025'te talepler yalnızca Pocketpair'in mekanikleri yamayla değiştirmesinden önceki (Early Access) sürümlerle sınırlandı. İhtiyati tedbir yok; Palworld 1.0 Temmuz 2026'da çıktı. Talep ~10 milyon yen; duruşma 01.10.2026'da yapıldı, karar 09.11.2026'da bekleniyor. <span class="tag tag--info">3. TARAF</span> — <a href="https://www.patentarcade.com/?p=7128">patentarcade.com/?p=7128</a> , <a href="https://gamesfray.com/ahead-of-october-1-court-hearing-nintendo-has-zero-chance-of-prevailing-over-current-palworld-versions-it-may-get-30k-chump-change/">gamesfray.com/ahead-of-october-1-court-hearing-nintendo-has-z…</a> . <strong>Ders:</strong> mekaniği değiştirerek (yamayla) risk azaltılabildi.</li>
+          <li>Patent ülkeye özgüdür; küçük HTML5 oyunu için risk düşük ama büyük stüdyoların imza mekaniklerini birebir taklit etme <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+        <h3 id="b10-5">10.5 Klasik oyunlar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Oyun</th><th>Durum</th><th>Risk</th></tr></thead>
+            <tbody>
+              <tr><td>Satranç, dama, tavla, go, mangala, solitaire, okey, pişti, batak</td><td>Kurallar kamu malı; görselleri kendin yap; ticari ürün adlarını ("101 Okey Plus" vb.) kullanma</td><td>Çok düşük <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Snake, Pong, Breakout, Asteroids tarzı</td><td>Mekanik serbest; ad ve marka (ör. "Pong", Atari) kullanma</td><td>Düşük</td></tr>
+              <tr><td>Mayın tarlası</td><td>Microsoft görsellerini kopyalama</td><td>Düşük</td></tr>
+              <tr><td>2048</td><td>Orijinali MIT lisanslı açık kaynak (2014); lisans metni korunarak kod bile kullanılabilir; Threes'in ad/görseline dikkat</td><td>Düşük <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td><strong>Tetris</strong></td><td>Ad ve trade dress (10×20 tahta, renkli tetromino, düşüş görünümü) agresif korunuyor; çok sayıda klon kaldırıldı</td><td><strong>Yüksek</strong></td></tr>
+              <tr><td>Pac-Man, Space Invaders, Mario, Pokémon</td><td>Karakter/isim/görsel korunur</td><td>Yüksek</td></tr>
+              <tr><td>Bir Playable'ın birebir/benzer kopyası</td><td>Kural 2.2</td><td>Ret <span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>"Eski oyun = kamu malı" varsayımı yanlış. <strong>FSEK m.27:</strong> gerçek kişi eser sahibinde koruma ölümünden itibaren 70 yıl; ilk eser sahibi <strong>tüzel kişiyse (stüdyo/şirket) aleniyet tarihinden itibaren 70 yıl</strong>. Bu yüzden 1970–90'ların arcade/konsol oyunlarının hiçbiri kamu malı değil (ör. 1980'de yayımlanan şirket oyunu ~2050'ye kadar korunur). <span class="tag tag--ok">RESMÎ</span> <small>(5846 s. FSEK m.27)</small> — <a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5846&amp;MevzuatTur=1&amp;MevzuatTertip=5">mevzuat.gov.tr/mevzuat?MevzuatNo=5846&amp;MevzuatTur=1&amp;MevzuatTer…</a></li>
+        </ul>
+        <h3 id="b10-6">10.6 Varlık lisansları</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kaynak</th><th>Lisans</th><th>Ticari</th><th>Atıf</th></tr></thead>
+            <tbody>
+              <tr><td>Kenney.nl</td><td>CC0</td><td>Evet</td><td>Gerekmez; logo kullanılmaz <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>OpenGameArt</td><td>CC0 / CC-BY / CC-BY-SA / OGA-BY / GPL</td><td>CC0 serbest; CC-BY atıfla (DRM yasak); CC-BY-SA türev aynı lisansla; GPL kapalı kaynakta riskli</td><td>Lisansa göre <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>itch.io asset'leri</td><td>Yaratıcıya göre</td><td>Çoğu "oyunda kullan, ham dosyayı satma"; <strong>NC</strong> ticari oyunda kullanılamaz; <strong>ND</strong> değiştirilemez</td><td>Sayfaya göre <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Google Fonts</td><td>Çoğu SIL OFL, kalanı Apache</td><td>Evet; font tek başına satılamaz, lisans dosyası eklenir</td><td>Lisans dosyası <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>YouTube Ses Kitaplığı</td><td>Standart + bazı CC-BY</td><td>Standart lisanslı müzik yalnızca YouTube videoları için; videolardan ayrı dağıtılması ve YouTube dışında kullanılması yasak → oyun paketine konmaz. CC-BY parçalar CC-BY 4.0 şartıyla (atıfla) başka yerde kullanılabilir; lisans Studio'da parça parça kontrol edilmeli</td><td>Resmî sayfa oyun kullanımına değinmiyor <span class="tag tag--ok">RESMÎ</span> <small>(belgede yok — <a href="https://support.google.com/youtube/answer/3376882">support.google.com/youtube/answer/3376882</a>)</small> + <span class="tag tag--info">3. TARAF</span> <small>(<a href="https://licenseorg.com/guide/music-audio/youtube-audio-library">licenseorg.com/guide/music-audio/youtube-audio-library</a>)</small></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Content ID ve royalty-free müzik:</strong> Royalty-free müzik kütüphaneleri Content ID'ye referans olarak eklenebiliyor, ancak bu tür eşleşmelerin hak talebinden <strong>önce elle incelenmesi</strong> gerekiyor; münhasır olmayan lisansla alınan içerik Content ID'ye uygun değil <span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/2605065">support.google.com/youtube/answer/2605065</a> . Yine de bu müziği kullanan videolara hak talebi (claim) gelebilir; lisans belgesini sakla ve itiraz et <span class="tag tag--warn">TAHMİN</span> <span class="tag tag--info">3. TARAF</span>.</li>
+        </ul>
+        <h3 id="b10-7">10.7 AI ile üretilen varlıklar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Durum</th><th>Güven</th></tr></thead>
+            <tbody>
+              <tr><td>ABD</td><td>Telif Ofisi raporu Bölüm 2 – Copyrightability (29.01.2025): insan yaratıcılığı şart; yalnızca prompt yetmez; insanın seçimi/düzenlemesi korunabilir</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://copyright.gov/newsnet/2025/1060.html">copyright.gov/newsnet/2025/1060.html</a> , <a href="https://blogs.loc.gov/copyright/2025/02/inside-the-copyright-offices-report-copyright-and-artificial-intelligence-part-2-copyrightability/">blogs.loc.gov/copyright/2025/02/inside-the-copyright-offices-…</a></td></tr>
+              <tr><td>Türkiye</td><td>FSEK'e göre eser sahibi gerçek kişi; tamamen otonom AI çıktısı korunmaz, anlamlı insan katkısı varsa korunabilir (doktrin)</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Pratik</td><td>Tamamen AI görseli başkası kopyalarsa koruma talep edemeyebilirsin; AI çıktısı bilinen karaktere benzerse risk kullananda</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Playables</td><td>AI'a özgü kural yok; genel IP kuralları geçerli</td><td><span class="tag tag--ok">RESMÎ</span> (belgede yok)</td></tr>
+              <tr><td>YouTube videoları</td><td>Gerçekçi görünen AI içeriği beyan edilir; "gameplay footage from video games" minör, beyan gerekmez</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/14328491">support.google.com/youtube/answer/14328491</a></td></tr>
+              <tr><td>Steam</td><td>16.01.2026'da AI beyan formu daraltıldı (bazı kaynaklarda 17 Ocak, saat dilimi farkı). Arka planda kullanılan verimlilik araçları (kod asistanları, gönderilmeyen konsept çizimleri) beyan dışı; oyuncunun gördüğü AI görsel, ses, metin ve canlı üretilen içerik beyan edilir</td><td><span class="tag tag--info">3. TARAF</span>; Steamworks belgesi okunmadı — <a href="https://www.notebookcheck.net/Steam-updates-AI-disclosure-form-requiring-developers-to-report-visible-and-in-game-AI-but-not-background-tools.1206103.0.html">notebookcheck.net/Steam-updates-AI-disclosure-form-requiring-…</a> , <a href="https://respawn.outlookindia.com/gaming/gaming-news/valve-clarifies-steam-ai-policy-focus-shifts-to-content-consumed">respawn.outlookindia.com/gaming/gaming-news/valve-clarifies-s…</a></td></tr>
+              <tr><td>AI ile yazılan kod</td><td>Yönlendirip seçip düzenliyorsan insan katkısı var; AI sağlayıcısının ticari şartlarına bakılmalı (incelenmedi)</td><td><span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b10-8">10.8 Gameplay videosunda telif</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Kural</th><th>Güven</th></tr></thead>
+            <tbody>
+              <tr><td>YPP "reused content"</td><td>Anlamlı katkı eklenmemiş başkasının içeriği para kazanamaz; kanal bütününe bakılır; telif izni bu politikadan muaf tutmaz</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/1311392">support.google.com/youtube/answer/1311392</a></td></tr>
+              <tr><td>"Inauthentic content" (15.07.2025; eski adı "repetitious content")</td><td>Seri üretilmiş, tekrarlayan içerik; yalnızca başkasının metnini (web sitesi, haber akışı) okuyan içerik ve genel/özgün olmayan şablonlarla yapılmış AI içerik para kazanamaz. AI kullanılabilir ama yaratıcı katkı ve eğitici/eğlendirici değer olmalı <span class="tag tag--ok">RESMÎ</span>. Örnek: oyun görüntüsü + AI sesle Reddit okuma <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span> <small>(resmî sayfada geçmiyor)</small></td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/1311392">support.google.com/youtube/answer/1311392</a></td></tr>
+              <tr><td>Uzun yorumsuz oynanış</td><td>Kabul edilmeyebileceği iddia ediliyor; resmî sayfada doğrulanamadı</td><td><span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Şiddet/küfür</td><td>Reklam veren uygunluk kuralları; ilk saniyelerdeki grafik şiddet reklamı sınırlayabilir</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://support.google.com/youtube/answer/10291745">support.google.com/youtube/answer/10291745</a></td></tr>
+              <tr><td>Oyun müziği / oyun içi radyo</td><td>Lisanslı müzik Content ID claim'i getirir; pratik çözüm: radyo/müziği kapat</td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Nintendo (02.09.2024)</td><td>YPP ile para kazanmak serbest; yaratıcı katkısız düz kopya, çıkış öncesi içerik, emülatör, data-mining yasak</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://www.nintendo.co.jp/networkservice_guideline/en/index.html">nintendo.co.jp/networkservice_guideline/en/index.html</a></td></tr>
+              <tr><td>Ubisoft</td><td>Let's Play, walkthrough, inceleme serbest ve para kazanılabilir; politika 2016 tarihli</td><td><span class="tag tag--ok">RESMÎ</span> — <a href="https://www.ubisoft.com/en-us/videopolicy.html">ubisoft.com/en-us/videopolicy.html</a></td></tr>
+              <tr><td>Rockstar</td><td>Gameplay video politikası bulunamadı</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b10-9">10.9 Durum → Sonuç (telif)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Satranç/Snake/mayın/2048 tarzını kendi kod, görsel ve adınla yapıyorsun</td><td>Hukuken düşük risk; Playables "özgünlük" incelemesine takılabilir</td></tr>
+              <tr><td>2048'in MIT kodunu kullanıyorsun</td><td>Serbest; lisans metnini koru, ad ve görseli farklılaştır</td></tr>
+              <tr><td>Popüler mekaniği kendi temanla yapıyorsun</td><td>Genelde serbest; "substantially identical" sayılmayacak kadar farklı olmalı</td></tr>
+              <tr><td>Ekran düzeni, renkler, sprite birebir aynı</td><td>Telif + trade dress ihlali; Playables reddeder; TR'de TTK 55 riski</td></tr>
+              <tr><td>Adda "Tetris", "Pac-Man", "Minecraft", "Wordle"</td><td>Marka ihlali, kaldırılır</td></tr>
+              <tr><td>Bilinen karakter (Mario, Pikachu)</td><td>İhlal</td></tr>
+              <tr><td>Patentli mekaniği birebir uyguluyorsun</td><td>Patentin geçerli olduğu ülkede risk</td></tr>
+              <tr><td>Kenney / CC0</td><td>Serbest</td></tr>
+              <tr><td>CC-BY</td><td>Serbest, oyunda ve açıklamada atıf</td></tr>
+              <tr><td>CC-BY-NC / "personal use only"</td><td>Para kazanılan oyunda kullanılamaz</td></tr>
+              <tr><td>Google Fonts (OFL)</td><td>Serbest, lisans dosyası ekle</td></tr>
+              <tr><td>YouTube Ses Kitaplığı müziği oyunun içinde</td><td>Standart lisanslı parça: kullanma (yalnızca YouTube videoları için); CC-BY parça: CC-BY 4.0 şartıyla, atıfla <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Stok royalty-free müzik</td><td>Kullanılabilir; videolarına Content ID gelebilir</td></tr>
+              <tr><td>Görseller tamamen AI</td><td>Kullanılabilir, telif koruman zayıf; bilinen esere benzerse risk senin</td></tr>
+              <tr><td>Başka şirketin oyunu, yorumsuz uzun oynanış</td><td>Claim ve/veya YPP reddi riski</td></tr>
+              <tr><td>Yorumlu, eğitici Let's Play</td><td>Genelde serbest; yayıncı politikasına uy</td></tr>
+              <tr><td>Kendi oyununun gameplay videosu</td><td>Serbest; müzik lisansına dikkat</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="oyun-fikirleri"><span class="h-num">§ 11</span>Oyun fikirleri</h2>
+        <h3 id="b11-1">11.1 Playables'ta hangi türler tutuyor</h3>
+        <ul>
+          <li>En çok oynananlar (Tall Man Run, Build A Queen, Snake Clash) hiper-casual runner / yılan / sayı-kapısı türünde; tek parmakla, tek ekranlık refleks oyunları <span class="tag tag--info">3. TARAF</span> <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li>Açılış kataloğu: Angry Birds Showdown, Cut the Rope, Words of Wonders, Trivia Crack, Tomb of the Mask, satranç, 8 Ball Billiards <span class="tag tag--info">3. TARAF</span>.</li>
+          <li>İyi giden türler: hiper-casual, bulmaca, yarış, simülasyon; oturum başına ~10 dk referans <span class="tag tag--info">3. TARAF</span> <small>(Playgama)</small>.</li>
+          <li>Kısıtlara en uygun türler: kısa oturumlu kelime, trivia, refleks, idle — sunucusuz, hesapsız, küçük paket <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+        <h3 id="b11-2">11.2 Fikir tablosu</h3>
+        <p>Ölçek: Zorluk 1 (kolay) – 5 (zor). AI = AI asistanla web teknolojisiyle yapılabilirlik. PL = Playables uygunluğu. Tümü <strong><span class="tag tag--warn">TAHMİN</span></strong>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>#</th><th>Fikir</th><th>Tür</th><th>Telif riski neden düşük</th><th>Zorluk</th><th>AI</th><th>PL</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Türkçe günlük kelime bulmacası (5 harf, ğ/ı/ş; kendi adı ve renk düzeni)</td><td>Kelime</td><td>Mekanik genelde serbest; ama NYT "oynanış" üzerinde de hak iddia ediyor (10.2) → "Wordle" adı kullanma, renk düzeni (yeşil/sarı/gri) ve ızgara görünümü Wordle'dan belirgin farklı olmalı</td><td>2</td><td>Çok yüksek</td><td>Yüksek (liste pakette, dil <code>getLanguage</code>)</td></tr>
+              <tr><td>2</td><td>Atasözü/deyim tamamlama (harf sürükle-bırak)</td><td>Kelime/bulmaca</td><td>Atasözleri anonim, kamu malı</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>3</td><td>Tavla (bilgisayara karşı)</td><td>Masa</td><td>Yüzyıllık; kendi tahta tasarımı</td><td>3</td><td>Yüksek</td><td>Orta-yüksek (rakip bilgisayar)</td></tr>
+              <tr><td>4</td><td>Okey/101 (bilgisayar rakiplere karşı)</td><td>Taş</td><td>Kurallar geleneksel; ticari ürün adı yok</td><td>4</td><td>Orta-yüksek</td><td>Orta</td></tr>
+              <tr><td>5</td><td>Mangala</td><td>Strateji</td><td>Geleneksel Anadolu oyunu</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>6</td><td>Pişti/Batak (bilgisayara karşı)</td><td>Kart</td><td>Standart iskambil</td><td>3</td><td>Yüksek</td><td>Orta-yüksek</td></tr>
+              <tr><td>7</td><td>Simit tezgâhı / çay ocağı idle (dükkânı büyüt)</td><td>Idle</td><td>Özgün tema, idle mekaniği serbest</td><td>2</td><td>Çok yüksek</td><td>Yüksek (<code>saveData</code>)</td></tr>
+              <tr><td>8</td><td>Vapur iskelesi zamanlama (doğru anda yanaştır)</td><td>Tek dokunuş refleks</td><td>Özgün tema</td><td>2</td><td>Çok yüksek</td><td>Çok yüksek</td></tr>
+              <tr><td>9</td><td>Çini/ebru desen eşleştirme</td><td>Eşleştirme</td><td>Geometrik motifler kamu malı, kendi çizim</td><td>2–3</td><td>Yüksek (prosedürel desen)</td><td>Yüksek</td></tr>
+              <tr><td>10</td><td>Kalabalık koşucusu "kapı seç, sayıyı büyüt"</td><td>Hiper-casual runner (3D)</td><td>Mekanik serbest; <strong>kopya kuralı riski — belirgin fark gerekli</strong></td><td>3</td><td>Orta-yüksek (three.js)</td><td>Yüksek ama tür kalabalık</td></tr>
+              <tr><td>11</td><td>Fizik ile kule dizme / denge</td><td>Fizik bulmaca</td><td>Genel mekanik</td><td>3</td><td>Yüksek (matter.js)</td><td>Yüksek</td></tr>
+              <tr><td>12</td><td>Trafik/kavşak yönetimi (ışıkları zamanla)</td><td>Bulmaca/simülasyon</td><td>Genel tema</td><td>3</td><td>Yüksek</td><td>Yüksek</td></tr>
+              <tr><td>13</td><td>Türkiye coğrafya bilgi yarışması (ili haritada bul)</td><td>Trivia</td><td>Harita verisi açık lisanslı (ör. Natural Earth, kamu malı)</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>14</td><td>Nonogram (Türk motifleriyle)</td><td>Mantık</td><td>Genel tür</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>15</td><td>Kervan/deve katarı yılan oyunu</td><td>Arcade</td><td>Snake kamu malı mekanik</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>16</td><td>Sayı birleştirme, özgün kural (ör. sikke birleştirme)</td><td>Bulmaca</td><td>2048 açık kaynak; kendi kural ve görselin</td><td>1–2</td><td>Çok yüksek</td><td>Yüksek (ama 2048 klonu çok)</td></tr>
+              <tr><td>17</td><td>Ritim oyunu (kendi bestelediğin/CC0 müzikle)</td><td>Ritim</td><td>Telifli şarkı <strong>asla</strong></td><td>3</td><td>Orta</td><td>Orta-yüksek</td></tr>
+              <tr><td>18</td><td>Günlük kelime zinciri (son harfle yeni kelime, süreye karşı)</td><td>Kelime/refleks</td><td>Geleneksel sözlü oyun</td><td>2</td><td>Çok yüksek</td><td>Yüksek</td></tr>
+              <tr><td>19</td><td>Kendi kanal karakterinle mini koşu oyunu</td><td>Hiper-casual</td><td>Karakter sana ait</td><td>2–3</td><td>Yüksek</td><td>Yüksek (<code>openYTContent</code> ile videolarına bağ)</td></tr>
+              <tr><td>20</td><td>Tek ekran kaçış odası / bulmaca kutusu</td><td>Macera/bulmaca</td><td>Özgün hikâye</td><td>3</td><td>Yüksek</td><td>Orta (bitiş açıkça bildirilmeli, Design 5.1)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b11-3">11.3 Türk kültürüne özgü fikirler — değerlendirme <span class="tag tag--warn">TAHMİN</span></h3>
+        <ul>
+          <li>Tavla, mangala, okey, pişti, batak: kurallar serbest; risk yalnızca marka adı ve görsel kopyalamada.</li>
+          <li>Türkçe kelime oyunlarında <strong>kelime listesi kaynağı</strong> önemli: TDK sözlük içeriği telifli olabilir → açık lisanslı liste veya kendi derlemen.</li>
+          <li>İngilizce desteği zorunlu olduğundan TR + EN çift dilli tasarla; gelirde ABD/Batı Avrupa CPM'i önde <span class="tag tag--info">3. TARAF</span> <small>(Playgama)</small>. Kültürel temalı oyunlarda mekanik evrensel, tema yerel olsun (ör. vapur zamanlaması herkesin anlayacağı bir mekanik).</li>
+        </ul>
+        <h3 id="b11-4">11.4 Oyuncu çeken unsurlar ve Playables'ta durumu</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Unsur</th><th>Playables'ta</th><th>Dayanak</th></tr></thead>
+            <tbody>
+              <tr><td>Kişisel en iyi skor</td><td>Var, YouTube arayüzünde (<code>sendScore</code>)</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Küresel liderlik tablosu</td><td>Resmî belgede yok</td><td>—</td></tr>
+              <tr><td>Günlük görev/bulmaca</td><td>Mümkün: cihaz tarihi + pakete gömülü seed listesi; uzaktan "günün bulmacası" çekilemez</td><td><span class="tag tag--warn">TAHMİN</span> (<span class="tag tag--ok">RESMÎ</span> kurala dayalı)</td></tr>
+              <tr><td>İlerleme/idle büyüme</td><td><code>saveData</code> ile</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Ödüllü reklam karşılığı bonus</td><td><code>requestRewardedAd</code></td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Oyun içi paylaşım istemi</td><td><strong>Yasak</strong></td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Video sinerjisi</td><td><code>openYTContent</code> ile "nasıl oynanır" Shorts'una bağlantı; Shorts ve canlı yayında oyunu göstermek en güçlü büyüme yolu</td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Canlı yayında oynama</td><td>Playables on Live</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Çok oyunculu</td><td>Geliştiriciye açık API yok</td><td><span class="tag tag--ok">RESMÎ</span> (SDK'da yok)</td></tr>
+              <tr><td>Kısa oturum, anında başlama, &lt; 5 sn yükleme</td><td>Kurallarla zaten teşvik ediliyor</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="online-roblox"><span class="h-num">§ 12</span>Roblox gibi online ortam</h2>
+        <h3 id="b12-1">12.1 Playables içinde</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th><th>Etiket</th></tr></thead>
+            <tbody>
+              <tr><td>Kendi sunucunla gerçek zamanlı çok oyunculu, sohbet, UGC, hesap sistemi</td><td><strong>Mümkün değil</strong> — dış çağrı, giriş ekranı, kişisel veri yasak; CSP <code>connect-src 'self'</code></td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>YouTube'un kendi çok oyunculu altyapısı</td><td>Yalnızca seçili oyunlarda test (Aralık 2024: Ludo Club — eşleşme + emoji/hazır mesaj; Magic Tiles 3). Geliştiriciye açık resmî API yok <span class="tag tag--ok">RESMÎ</span> <small>(SDK referansında çok oyunculu ad alanı yok: <a href="https://developers.google.com/youtube/gaming/playables/reference/sdk">developers.google.com/youtube/gaming/playables/reference/sdk</a>)</small>. Mediacube "ayrıntıların 2026'nın 2. yarısında" gelmesini bekliyor (resmî duyuru değil) ve çok oyunculu/PvP oyunu olan geliştiricilerin başvurularını bir "multiplayer testing program" formuyla YouTube'a ilettiğini söylüyor (23.07.2026) <span class="tag tag--info">3. TARAF</span> <small>(<a href="https://mediacube.io/en/blog/youtube-playables-updates">mediacube.io/en/blog/youtube-playables-updates</a>)</small></td><td><span class="tag tag--ok">RESMÎ</span> + <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td>Topluluk hissi</td><td>Bugün yalnızca skor, canlı yayın ve video bağlantısı</td><td><span class="tag tag--ok">RESMÎ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="b12-2">12.2 Alternatif platformlar</h3>
+        <p><strong>Roblox (Roblox Studio + Luau)</strong></p>
+        <ul>
+          <li>Oyun içi satış (game pass, dev product): geliştirici %70 <span class="tag tag--ok">RESMÎ</span> — <a href="https://create.roblox.com/docs/get-started/monetization">create.roblox.com/docs/get-started/monetization</a> . 29.05.2026'dan beri oyunlar arası satış kapalı. Avatar eşyası başka bir deneyimin içinde satılırsa: yapan %30, deneyim sahibi (affiliate) %40, platform %30 — bu önceden de geçerli resmî kural <span class="tag tag--ok">RESMÎ</span> <small>(<a href="https://create.roblox.com/docs/monetize-avatar">create.roblox.com/docs/monetize-avatar</a>)</small>. 14.07.2026'dan itibaren 2D/3D eşya yayın kuralları birleşti; 600 Robux'tan başlayan yayın avansı ve yayın için aktif Plus/Premium aboneliği şartı geldi; Roblox'a göre efektif platform ücreti ve gelir payı <strong>değişmedi</strong> <span class="tag tag--ok">RESMÎ</span> <small>(<a href="https://devforum.roblox.com/t/building-stronger-protections-and-a-more-consistent-marketplace-unifying-2d-and-3d-avatar-item-publishing/4722717">devforum.roblox.com/t/building-stronger-protections-and-a-mor…</a>)</small>. "2D payı %70'ten %30'a düştü" diyen 3. taraf haberler (ör. Tech Insider) var <span class="tag tag--bad">ÇELİŞKİLİ</span>.</li>
+          <li>Creator Rewards (Temmuz 2025, Premium Payouts yerine): Robux harcamış oyuncuların süresine göre, 60 gün bekleme; bazı geliştiriciler düşüş bildiriyor <span class="tag tag--info">3. TARAF</span>.</li>
+          <li><strong>DevEx</strong> <span class="tag tag--ok">RESMÎ</span> — <a href="https://create.roblox.com/docs/production/monetization/developer-exchange">create.roblox.com/docs/production/monetization/developer-exch…</a> : 1 Robux = <strong>0,0038 USD</strong> (05.09.2025'ten beri; 30.000 Robux ≈ 114 USD); eski bakiye 0,0035. 08.06.2026'dan itibaren <strong>0,0054 USD/Robux</strong> (%42 artış) yalnızca şu kapsamda: R15 avatar kullanan uygun deneyimlerde, yaşı yüz tahmini veya kimlikle 18+ doğrulanmış ABD oyuncularının seçili harcamaları (game pass, Robux abonelikleri, seçili oyun içi eşyalar, özel sunucular); diğer tüm kazanç 0,0038'den bozulur <span class="tag tag--ok">RESMÎ</span> <small>(<a href="https://about.roblox.com/newsroom/2026/04/roblox-fuels-high-fidelity-games-over-18-players-increases-qualifying-devex-rate-42">about.roblox.com/newsroom/2026/04/roblox-fuels-high-fidelity-…</a>)</small>. Şartlar: ≥ 30.000 kazanılmış Robux, 13+, doğrulanmış e-posta, DevEx Portal, vergi formu (ABD dışı W-8). Ülke kısıtı belgede yok.</li>
+          <li>2025'te DevEx ile 1,5 milyar USD+ ödeme <span class="tag tag--ok">RESMÎ</span> <small>(newsroom)</small>.</li>
+          <li><strong>Türkiye'de erişim <span class="tag tag--bad">ÇELİŞKİLİ</span>:</strong> 2024'ten beri erişim engeli; bazı haberler 18.06.2026'da kaldırıldığını, diğerleri kararın hâlâ göründüğünü söylüyor. Önce güncel durumu kontrol et; erişim engelini aşma yöntemleri önerilmez.</li>
+          <li>Gerçekçilik: Luau öğrenmek programlama bilen için kolay; gelir dağılımı çok dengesiz, çoğu oyun 30.000 Robux eşiğine ulaşamaz <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+        <p><strong>Fortnite UEFN (Verse)</strong></p>
+        <ul>
+          <li><strong>18 yaş şartı</strong>; ABD dışı geliştiriciler için vergi raporlama yükümlülüğü olmadığı söyleniyor <span class="tag tag--ok">RESMÎ</span> — <a href="https://dev.epicgames.com/documentation/fortnite/fortnite-developer-program-faqs-in-fortnite">dev.epicgames.com/documentation/fortnite/fortnite-developer-p…</a></li>
+          <li>Engagement Payout: Item Shop vb. net gelirin %40'ı havuza, günlük dağıtım <span class="tag tag--ok">RESMÎ</span>.</li>
+          <li>Ada içi satış: normalde V-Bucks değerinin %50'si (~harcamanın %37'si); <strong>09.01.2026–31.01.2027 arası %100</strong> (~%74) <span class="tag tag--ok">RESMÎ</span> — <a href="https://dev.epicgames.com/documentation/fortnite/in-island-transactions-overview-in-fortnite">dev.epicgames.com/documentation/fortnite/in-island-transactio…</a></li>
+          <li>Ödeme eşiği resmî SSS'de <strong>bulunamadı</strong> (belgede yok); SSS yalnızca ABD'li geliştiriciler için 600 USD'lik IRS 1099-NEC raporlama eşiğini veriyor <span class="tag tag--ok">RESMÎ</span>. Toplam 1 milyar USD+ ödeme (kapsamı ÇELİŞKİLİ).</li>
+          <li>3D ve Verse gerekir; AI desteği web teknolojilerine göre sınırlı <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+        <p><strong>Minecraft Marketplace:</strong> Partner Programı; kayıtlı şirket, vergi bilgisi, portföy; uzun ve seçici süreç <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--info">3. TARAF</span> <small>(çerçeve)</small> — <a href="https://www.minecraft.net/en-us/partner">minecraft.net/en-us/partner</a> . Bireysel başlangıç için uygun değil <span class="tag tag--warn">TAHMİN</span>.</p>
+        <p><strong>Web tabanlı .io / odalı çok oyunculu oyun (Playables dışında)</strong></p>
+        <ul>
+          <li>Sunucu: Colyseus (Node.js, açık kaynak) kendi sunucunda ücretsiz; Colyseus Cloud 15 $/ay'dan <span class="tag tag--ok">RESMÎ</span> — <a href="https://www.colyseus.io/pricing">colyseus.io/pricing</a></li>
+          <li>5 $'lık VPS: sıra tabanlı ~3.000 CCU, gerçek zamanlı 50–500 <span class="tag tag--info">3. TARAF</span> <small>(topluluk tahmini)</small>.</li>
+          <li>.NET bilen için alternatif: ASP.NET Core + SignalR <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li>Yayın: kendi site, Poki, CrazyGames (<a href="#dagitim-kanallari">Bölüm 13</a>); .io pazarı klonlarla dolu <span class="tag tag--info">3. TARAF</span>.</li>
+          <li>Kullanıcı adı girilebiliyorsa küfür filtresi (Poki şartı) <span class="tag tag--ok">RESMÎ</span>.</li>
+        </ul>
+        <p><strong>Kendi Roblox benzeri platformunu kurmak <span class="tag tag--warn">TAHMİN</span></strong></p>
+        <ul>
+          <li>Gerekenler: motor/editör, UGC araçları, hesap sistemi, ödeme, moderasyon (çocuk güvenliği, KVKK/GDPR), sunucu, anti-cheat.</li>
+          <li>Gerçekçi minimum: 10–30 kişilik ekip, birkaç yıl, milyonlarca USD. Roblox'un kendisi bile Türkiye'de çocuk güvenliği gerekçesiyle engellendi. <strong>Tek geliştirici için gerçekçi değil.</strong></li>
+          <li>Ölçeklenebilir ara yol: küçük, odalı, hesapsız, sohbetsiz (hazır mesajlı) bir web oyunu (ör. 4 kişilik okey odası).</li>
+        </ul>
+        <h3 id="b12-3">12.3 Durum → Sonuç</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Önerilen yol</th></tr></thead>
+            <tbody>
+              <tr><td>Hiç oyun yapmadım, AI ile hızlı başlamak istiyorum</td><td>Tek kişilik HTML5 Playable (Phaser/Canvas); kelime, bulmaca, hiper-casual</td></tr>
+              <tr><td>Gerçek zamanlı çok oyunculu + topluluk, web'de</td><td>Playables dışında: kendi site + Colyseus/SignalR + Poki/CrazyGames; tanıtım YouTube video/Shorts</td></tr>
+              <tr><td>Hazır kitle ve olgun ödeme sistemi, 13–17 yaş dahil</td><td>Roblox (Luau); Türkiye erişimini önce kontrol et</td></tr>
+              <tr><td>18+, 3D seviye tasarımı</td><td>Fortnite UEFN (31.01.2027'ye kadar %100 ada içi satış kampanyası)</td></tr>
+              <tr><td>Şirketin var, Minecraft bilgin iyi</td><td>Minecraft Marketplace Partner başvurusu</td></tr>
+              <tr><td>Roblox rakibi kurmak</td><td>Tek kişi için gerçekçi değil</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="dagitim-kanallari"><span class="h-num">§ 13</span>Diğer dağıtım kanalları ve münhasırlık</h2>
+        <h3 id="b13-1">13.1 En önemli bulgular</h3>
+        <ol class="steps">
+          <li><strong>Poki'nin "Web Exclusive" anlaşması YouTube Playables'ı da kapsıyor</strong> — "web"e tarayıcılar, Discord ve YouTube Playables açıkça sayılıyor; Steam, mobil, konsol hariç. <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.poki.com/guide/revenue-deal-types">developers.poki.com/guide/revenue-deal-types</a></li>
+          <li><strong>CrazyGames:</strong> FAQ'a göre başka platformlarda yayınlanmış olmak gelir payı uygunluğunu etkilemez; dağıtım hakkı sende olmalı <span class="tag tag--ok">RESMÎ</span> — <a href="https://docs.crazygames.com/faq/">docs.crazygames.com/faq/</a> . Münhasırlık şartı FAQ'da açıkça yok; T&amp;C'den kontrol edilmeli.</li>
+          <li><strong>YouTube Playables belgelerinde münhasırlık maddesi bulunamadı</strong> — kabul sonrası Partner Manager'a sorulmalı.</li>
+        </ol>
+        <h3 id="b13-2">13.2 Karşılaştırma tablosu</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kanal</th><th>Giriş</th><th>Bireysel?</th><th>Ücret</th><th>Gelir modeli / oran</th><th>Reklam/IAP</th><th>Münhasırlık</th><th>Türkiye'den ödeme</th></tr></thead>
+            <tbody>
+              <tr><td><strong>YouTube Playables</strong></td><td>Form, seçici (ölçütler belgede yok)</td><td>Belgede yok</td><td>Yok</td><td>Reklam; pay <strong>pilot</strong>, oran yok <span class="tag tag--ok">RESMÎ</span></td><td>Yalnızca <code>ytgame.ads</code>; IAP yok</td><td>Belgede yok</td><td>AdSense (3. TARAF)</td></tr>
+              <tr><td><strong>Poki</strong></td><td>Seçici, "Web Fit" testi</td><td>Belgede yok</td><td>Yok</td><td>Exclusive: Poki'nin getirdiği oyunculardan gelir payı; güncel resmî sayfada yüzde yok, koşulları sözleşme belirler <span class="tag tag--ok">RESMÎ</span>. "Kendi trafiğin %100 / Poki trafiği %50" rakamı eski belge/3. taraf bilgisi <span class="tag tag--info">3. TARAF</span> <small>(ESKİ)</small>. Non-exclusive: tek seferlik lisans ücreti, gelir payı yok <span class="tag tag--ok">RESMÎ</span></td><td>Yalnızca Poki SDK, 3. taraf reklam ve IAP yok</td><td><strong>Evet</strong>, varsayılan 5 yıl (7 diyen sayfalar var, ÇELİŞKİLİ); Playables + Discord dahil</td><td>Havale (PayPal TR'de yok)</td></tr>
+              <tr><td><strong>CrazyGames</strong></td><td>Basic Launch (~2 hafta, gelir yok) → Full Launch (SDK zorunlu, QA)</td><td>Evet, ülke kısıtı yok <span class="tag tag--ok">RESMÎ</span></td><td>Yok</td><td>Reklam + IAP; oran T&amp;C'de (%50–70 veya %60/%70, 3. TARAF, ÇELİŞKİLİ)</td><td>CrazyGames SDK</td><td>FAQ'da açık şart yok; başka platformda yayında olmak engel değil <span class="tag tag--ok">RESMÎ</span>; T&amp;C'den kontrol et</td><td>Aylık, ≥ €100, havale/PayPal <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td><strong>itch.io</strong></td><td>Serbest, anında</td><td>Evet</td><td>Yok</td><td>Satış/bağış; platform payını sen seçersin (varsayılan %10) <span class="tag tag--ok">RESMÎ</span></td><td>Reklam yok</td><td>Yok <span class="tag tag--warn">TAHMİN</span></td><td>Payoneer; ≥ $5; 7 (bazen 30) gün; TIN yoksa %30 stopaj <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td><strong>GameDistribution</strong></td><td>Serbest <span class="tag tag--info">3. TARAF</span></td><td>?</td><td>Yok</td><td>Net gelirin %33'ü <span class="tag tag--info">3. TARAF</span></td><td>GD SDK</td><td>Doğrulanamadı</td><td>€100 eşik, 60 gün <span class="tag tag--info">3. TARAF</span></td></tr>
+              <tr><td><strong>Newgrounds</strong></td><td>Serbest</td><td>Evet</td><td>Yok</td><td>Reklam programı <span class="tag tag--bad">ÇELİŞKİLİ</span></td><td>NG</td><td>Yok <span class="tag tag--warn">TAHMİN</span></td><td>$50, PayPal/çek → sorunlu</td></tr>
+              <tr><td><strong>Google Play</strong> (Capacitor/TWA)</td><td>$25 + kimlik + kişisel hesapta <strong>12 test kullanıcısı / 14 gün</strong> kapalı test <span class="tag tag--ok">RESMÎ</span></td><td>Evet (kurumsal: D-U-N-S)</td><td>$25 bir kez</td><td>IAP %15 (ilk $1M) / %30 <span class="tag tag--ok">RESMÎ</span>; AdMob</td><td>Serbest</td><td>Yok</td><td>Google Payments <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td><strong>Steam</strong> (Electron/NW.js/Tauri)</td><td>$100/uygulama, 30 gün bekleme, KYC 15–30 gün <span class="tag tag--ok">RESMÎ</span></td><td>Evet</td><td>$100 ($1K brüt sonrası iade)</td><td>Valve %30 / %25 ($10M+) / %20 ($50M+) <span class="tag tag--info">3. TARAF</span></td><td>—</td><td>Yok</td><td>Banka havalesi <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td><strong>Facebook Instant Games</strong></td><td>App Review + Business Manager, "approved partner"</td><td>Net değil</td><td>Yok</td><td>Reklam ~%70 <span class="tag tag--info">3. TARAF</span> + IAP</td><td>Audience Network</td><td>Yok <span class="tag tag--warn">TAHMİN</span></td><td>Monetization Manager</td></tr>
+              <tr><td><strong>Telegram Mini Apps</strong></td><td>Bot ile serbest</td><td>Evet</td><td>Yok</td><td>Dijital ürünler yalnızca Stars <span class="tag tag--ok">RESMÎ</span>; mağaza %30 sonrası</td><td>AdsGram vb. <span class="tag tag--info">3. TARAF</span></td><td>Yok</td><td>Fragment → TON (kripto; ayrı vergi süreci)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Notlar:</p>
+        <ul>
+          <li>Poki teknik şartları: Poki SDK zorunlu; harici istekler varsayılan engelli; dış link ve splash yok; masaüstü/mobil/tablet; reklam engelleyiciyle çalışmalı <span class="tag tag--ok">RESMÎ</span> — <a href="https://developers.poki.com/guide/requirements-quality">developers.poki.com/guide/requirements-quality</a></li>
+          <li>CrazyGames limitleri: ilk indirme ≤ 50 MB, toplam ≤ 250 MB (SDK ile), ≤ 1.500 dosya, PEGI 12 uygun, çocuklara yönelik oyun kabul edilmiyor <span class="tag tag--ok">RESMÎ</span> — <a href="https://docs.crazygames.com/requirements/intro/">docs.crazygames.com/requirements/intro/</a></li>
+          <li>itch.io HTML5: zip, kökte <code>index.html</code>, ≤ 1.000 dosya, açılmış ≤ 500 MB, tek dosya ≤ 200 MB, yol ≤ 240 karakter <span class="tag tag--ok">RESMÎ</span> — <a href="https://itch.io/docs/creators/html5">itch.io/docs/creators/html5</a></li>
+          <li>Facebook Instant: Zero Permissions zorunlu, Rewarded Interstitial API kaldırıldı (14.04.2026), banner kaldırılacak — platform küçülüyor, yeni başlayan için riskli <span class="tag tag--ok">RESMÎ</span> <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li>Playgama, GamePix, Yandex Games, Y8, Discord Activities bu turda incelenmedi (Discord, Poki münhasırlığına giriyor).</li>
+        </ul>
+        <h3 id="b13-3">13.3 Durum → Sonuç (kanal)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>İlk oyunun, hiç yayınlamadın</td><td>itch.io (anında) + CrazyGames Basic Launch (gerçek oyuncu verisi, münhasırlık yok); Playables başvurusunda referans olabilir <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Hedefin Playables</td><td>Poki <strong>exclusive</strong> imzalama (Playables'ı kapsıyor); CrazyGames, itch.io, Steam, Google Play birlikte yürüyebilir</td></tr>
+              <tr><td>Poki exclusive teklif etti</td><td>Web'de 5 (belki 7) yıl yalnızca Poki; Playables/Discord/CrazyGames kapanır; mobil ve Steam açık</td></tr>
+              <tr><td>IAP istiyorsun</td><td>Playables ve Poki uygun değil; CrazyGames, Google Play, Steam, itch.io uygun</td></tr>
+              <tr><td>Ödemeyi Türkiye'den alacaksın</td><td>PayPal kullanılamıyor (2016'dan beri); SWIFT havale veya Payoneer; vergi için <a href="#b9-4">Bölüm 9.4</a></td></tr>
+              <tr><td>Mobil mağaza da istiyorsun</td><td>Capacitor/TWA ile Google Play; Poki münhasırlığıyla çakışmaz</td></tr>
+              <tr><td>Oyun büyük (&gt; 30 MiB ilk yükleme)</td><td>Playables MUST'ı geçemez; CrazyGames 50 MB; varlıkları parça parça yükle</td></tr>
+              <tr><td>Gelir hemen gerekiyor</td><td>Hiçbir web kanalı kısa vadede garanti vermez <span class="tag tag--warn">TAHMİN</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="riskler"><span class="h-num">§ 14</span>Riskler ve sık hatalar</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Risk / hata</th><th>Sonuç</th><th>Önlem</th></tr></thead>
+            <tbody>
+              <tr><td>Fikirle Playables'a başvurmak</td><td>Form fikir kabul etmiyor</td><td>Önce oynanabilir oyun</td></tr>
+              <tr><td>Onay gelecek diye tek kanala bağlanmak</td><td>Aylarca bekleme, gelir 0</td><td>Paralel yayın (itch.io/CrazyGames)</td></tr>
+              <tr><td>Poki exclusive imzalayıp Playables'a da gitmek</td><td>Sözleşme ihlali</td><td>Münhasırlık maddelerini oku</td></tr>
+              <tr><td>Sesi kullanıcı tıklamasına bağlamak</td><td><strong>En sık sertifikasyon reddi</strong> <span class="tag tag--ok">RESMÎ</span></td><td><code>isAudioEnabled</code> ile başlat</td></tr>
+              <tr><td>Page Visibility API ile pause</td><td>Ret (Integration 6.2)</td><td><code>onPause</code>/<code>onResume</code></td></tr>
+              <tr><td><code>localStorage</code> ile ilerleme kaydı</td><td>Ret (Integration 4.2)</td><td><code>saveData</code>/<code>loadData</code></td></tr>
+              <tr><td><code>loadData</code> beklenmeden <code>saveData</code></td><td>Kayıt reddedilir (Integration 4.3)</td><td><code>loaded</code> bayrağı</td></tr>
+              <tr><td>Android'de 0 yükseklikli viewport'u yok saymak</td><td>Boş ekran</td><td><code>resize</code> + <code>innerHeight &gt; 0</code></td></tr>
+              <tr><td>Analitik/CDN/kendi API'ne çağrı</td><td>Ret (Privacy 3)</td><td>Her şey pakette; fontlar yalnızca Google Fonts</td></tr>
+              <tr><td><code>navigator.language</code></td><td>Ret</td><td><code>getLanguage()</code></td></tr>
+              <tr><td>Sadece Türkçe arayüz</td><td>Ret (İngilizce zorunlu)</td><td>TR + EN</td></tr>
+              <tr><td>Yön kilidi, yalnızca klavye</td><td>Ret</td><td>Her oran + touch + fare</td></tr>
+              <tr><td>Çıkış düğmesi, paylaşım istemi, dış link, login benzeri ekran, QR benzeri grafik</td><td>Ret</td><td>Kontrol listesi 5.10</td></tr>
+              <tr><td>Çocuklara yönelik tasarım</td><td>Ret ("made for kids" yasak)</td><td>13+ genel kitle</td></tr>
+              <tr><td>Kod gizleme (obfuscation)</td><td>Ret</td><td>Yalnızca minify</td></tr>
+              <tr><td>Unity build'i sıkıştırmalı almak</td><td>Desteklenmiyor</td><td>Compression=Disabled</td></tr>
+              <tr><td>Godot C# ile web hedeflemek</td><td>Web export yok</td><td>GDScript</td></tr>
+              <tr><td>Tetris/Wordle adı veya birebir görünüm</td><td>Kaldırma, marka/trade dress</td><td>Kendi ad ve görsel</td></tr>
+              <tr><td>Mevcut bir Playable'ın reskin'i</td><td>Ret (kural 2.2)</td><td>Belirgin fark</td></tr>
+              <tr><td>CC-BY-NC / "personal use" varlık</td><td>Ticari kullanımda ihlal</td><td>Lisans listesi</td></tr>
+              <tr><td>YouTube Ses Kitaplığı müziğini oyuna koymak</td><td>Belirsiz</td><td>CC0 müzik</td></tr>
+              <tr><td>Stok müzik → videolarına Content ID</td><td>Gelir hak sahibine</td><td>Kendi/CC0 müzik</td></tr>
+              <tr><td>Yorumsuz gameplay yüklemek</td><td>YPP reddi (reused/inauthentic)</td><td>Yorum, eğitim, kurgu</td></tr>
+              <tr><td>W-8 vermemek</td><td>Tüm kazançtan %24 kesinti</td><td>AdSense'te vergi bilgisi</td></tr>
+              <tr><td>20/B hesabı dışından tek ödeme almak</td><td>İstisna düşer</td><td>Tüm gelir tek hesaba</td></tr>
+              <tr><td>Erişim engelini aşma yöntemleri (ör. Roblox)</td><td>Hukuki risk</td><td>Önerilmez</td></tr>
+              <tr><td>AI'ın eski API önermesi (Phaser 3/4 karışması)</td><td>Hatalar</td><td>Sürümü <code>CLAUDE.md</code>'ye yaz</td></tr>
+              <tr><td>Kapsamı büyük tutmak</td><td>Oyun bitmez</td><td>Tek ekran, tek mekanik</td></tr>
+              <tr><td>Dev/staging linkini paylaşmak</td><td>Kural ihlali (T&amp;S 3)</td><td>Yalnızca ekip içi</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="karar-tablosu"><span class="h-num">§ 15</span>Durum → Sonuç genel karar tablosu</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Sonuç / önerilen yol</th></tr></thead>
+            <tbody>
+              <tr><td>Hiç programlama bilmiyorsun</td><td>AI ile Phaser/saf Canvas; tek ekran, tek mekanik; önce itch.io; 4–8 hafta plan <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Başka dilde yazılımcısın (C#, Java vb.)</td><td>TypeScript + Phaser; Godot istersen GDScript; Unity biliyorsan boyut optimizasyonunu göze al</td></tr>
+              <tr><td>Amacın para kazanmak, hemen</td><td>Gerçekçi değil; ilk 6–12 ay sıfır gelir varsay</td></tr>
+              <tr><td>Amacın öğrenmek + portföy</td><td>Playables uyumlu küçük oyun + itch.io + kanalda geliştirme günlüğü videoları</td></tr>
+              <tr><td>Playables'a kabul edilmek istiyorsun</td><td>Bitmiş, cilalı, kontrol listesi tam bir oyunla form; kanal geçmişini temiz tut <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Hızlı Playables yayını</td><td>Yayıncı (Mediacube/Playgama vb.); pay yayıncıya göre</td></tr>
+              <tr><td>Kabul edilmedin</td><td>Aynı oyun CrazyGames/itch.io/kendi site; Poki'yi değerlendir (münhasırlığa dikkat)</td></tr>
+              <tr><td>Gameplay kanalı açmak istiyorsun</td><td>Yorumlu, eğitici içerik; yayıncı video politikalarına uy; YPP eşikleri (2027'de yükseliyor)</td></tr>
+              <tr><td>Hem oyun hem kanal</td><td>En mantıklı birleşim: kendi oyununun videoları + <code>openYTContent</code> ile Shorts bağlantısı</td></tr>
+              <tr><td>Online / Roblox benzeri istiyorsun</td><td>Playables'ta olmaz; Roblox / UEFN (18+) / kendi web sunucun</td></tr>
+              <tr><td>Türkiye'de yaşıyorsun, gelir başladı</td><td>20/B (içerik) veya şahıs işletmesi (yurt dışı yayıncı/portal); W-8; özelge/mali müşavir</td></tr>
+              <tr><td>Yurt dışında yaşıyorsun</td><td>O ülkenin vergi kuralları + W-8/W-9; Playables Builder'a (US/CA/UK/AU) başvurabilirsin</td></tr>
+              <tr><td>Şirketin var</td><td>Hesapları şirket adına aç; form "company" seçeneğini sayıyor</td></tr>
+              <tr><td>Kamu görevlisisin</td><td>Şahıs işletmesi yasak; 20/B için kurumdan teyit</td></tr>
+              <tr><td>18 yaş altındasın</td><td>Playables 13+ kitle şartı oyunun içeriği içindir; hesap/sözleşme/ödeme için veli ve platform yaş şartları ayrıca kontrol edilmeli (UEFN 18+, kanal üyeliği 18+) <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Klasik bir oyunu yapmak istiyorsun</td><td>Kurallar serbest; ad, görsel, karakter özgün olsun; Tetris'ten uzak dur</td></tr>
+              <tr><td>Görselleri AI ile üreteceksin</td><td>Kullanılabilir; telif koruman zayıf; bilinen karakterlere benzememeli</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynakca"><span class="h-num">§ 16</span>Kaynakça</h2>
+        <p>Tüm kaynaklar <strong>15 Ekim 2026</strong> tarihinde okunmuştur. Parantez içindeki tarihler sayfanın kendi "son güncelleme" alanıdır.</p>
+        <h3>YouTube Playables — resmî</h3>
+        <ul class="sources">
+          <li><span class="src-n">01</span><span><a href="https://developers.google.com/youtube/gaming/playables">developers.google.com/youtube/gaming/playables</a> (2026-08-31)</span></li>
+          <li><span class="src-n">02</span><span><a href="https://developers.google.com/youtube/gaming/playables/reference/getting_started">developers.google.com/youtube/gaming/playables/reference/gett…</a> (2026-06-02)</span></li>
+          <li><span class="src-n">03</span><span><a href="https://developers.google.com/youtube/gaming/playables/reference/sdk">developers.google.com/youtube/gaming/playables/reference/sdk</a> (2026-06-04)</span></li>
+          <li><span class="src-n">04</span><span><a href="https://www.youtube.com/playablesportal/static/youtube_ytgame_web_deploy_mpm_files/index.d.ts">youtube.com/playablesportal/static/youtube_ytgame_web_deploy_…</a></span></li>
+          <li><span class="src-n">05</span><span><a href="https://developers.google.com/youtube/gaming/playables/reference/monetization">developers.google.com/youtube/gaming/playables/reference/mone…</a> (2026-06-01)</span></li>
+          <li><span class="src-n">06</span><span><a href="https://developers.google.com/youtube/gaming/playables/reference/test_suite_guide">developers.google.com/youtube/gaming/playables/reference/test…</a> (2025-08-20)</span></li>
+          <li><span class="src-n">07</span><span><a href="https://developers.google.com/youtube/gaming/playables/test_suite">developers.google.com/youtube/gaming/playables/test_suite</a></span></li>
+          <li><span class="src-n">08</span><span><a href="https://developers.google.com/youtube/gaming/playables/developer_portal">developers.google.com/youtube/gaming/playables/developer_portal</a> (2025-10-16)</span></li>
+          <li><span class="src-n">09</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-16)</span></li>
+          <li><span class="src-n">10</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_stability">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-16)</span></li>
+          <li><span class="src-n">11</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_integration">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-09-25)</span></li>
+          <li><span class="src-n">12</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_design">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-09-25)</span></li>
+          <li><span class="src-n">13</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_privacydata">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-15)</span></li>
+          <li><span class="src-n">14</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_trustsafety">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-08-26)</span></li>
+          <li><span class="src-n">15</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_monetization">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-16)</span></li>
+          <li><span class="src-n">16</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_i18n_l10n">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-06-16)</span></li>
+          <li><span class="src-n">17</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/requirements_accessibility">developers.google.com/youtube/gaming/playables/certification/…</a> (2026-08-26)</span></li>
+          <li><span class="src-n">18</span><span><a href="https://developers.google.com/youtube/gaming/playables/certification/revisionhistory">developers.google.com/youtube/gaming/playables/certification/…</a></span></li>
+          <li><span class="src-n">19</span><span><a href="https://developers.google.com/youtube/gaming/playables/support/faq">developers.google.com/youtube/gaming/playables/support/faq</a> (2026-03-09)</span></li>
+          <li><span class="src-n">20</span><span><a href="https://developers.google.com/youtube/gaming/playables/support/certification_faq">developers.google.com/youtube/gaming/playables/support/certif…</a> (2026-06-16)</span></li>
+          <li><span class="src-n">21</span><span><a href="https://developers.google.com/youtube/gaming/playables/samples/oss_samples">developers.google.com/youtube/gaming/playables/samples/oss_sa…</a></span></li>
+          <li><span class="src-n">22</span><span><a href="https://developers.google.com/youtube/gaming/playables/samples/phaser">developers.google.com/youtube/gaming/playables/samples/phaser</a></span></li>
+          <li><span class="src-n">23</span><span><a href="https://developers.google.com/youtube/gaming/playables/samples/unity_wrapper">developers.google.com/youtube/gaming/playables/samples/unity_…</a> (2026-05-26)</span></li>
+          <li><span class="src-n">24</span><span><a href="https://developers.google.com/youtube/gaming/playables/samples/godot_wrapper">developers.google.com/youtube/gaming/playables/samples/godot_…</a> (2025-08-20)</span></li>
+          <li><span class="src-n">25</span><span><a href="https://developers.google.com/youtube/gaming/playables/samples/bundle_analyzer">developers.google.com/youtube/gaming/playables/samples/bundle…</a></span></li>
+          <li><span class="src-n">26</span><span><a href="https://github.com/google/web-game-samples">github.com/google/web-game-samples</a></span></li>
+          <li><span class="src-n">27</span><span><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvdQ0lgIq2369aemj1O6w8R8FwGn9O5ARRGODDDUbVINCRJQ/viewform">docs.google.com/forms/d/e/1FAIpQLSdvdQ0lgIq2369aemj1O6w8R8FwG…</a> (Playables interest form)</span></li>
+          <li><span class="src-n">28</span><span><a href="https://support.google.com/youtube/answer/14328604">support.google.com/youtube/answer/14328604</a></span></li>
+          <li><span class="src-n">29</span><span><a href="https://blog.youtube/news-and-events/youtube-playables/">blog.youtube/news-and-events/youtube-playables/</a></span></li>
+          <li><span class="src-n">30</span><span><a href="https://blog.youtube/news-and-events/live-updates/">blog.youtube/news-and-events/live-updates/</a></span></li>
+        </ul>
+        <h3>YouTube kanal geliri, vergi, ödeme — resmî</h3>
+        <ul class="sources">
+          <li><span class="src-n">31</span><span><a href="https://support.google.com/youtube/answer/72851">support.google.com/youtube/answer/72851</a> (YPP)</span></li>
+          <li><span class="src-n">32</span><span><a href="https://support.google.com/youtube/answer/13429240">support.google.com/youtube/answer/13429240</a> (YPP alt kademe)</span></li>
+          <li><span class="src-n">33</span><span><a href="https://support.google.com/youtube/answer/12504220">support.google.com/youtube/answer/12504220</a> (Shorts gelir paylaşımı)</span></li>
+          <li><span class="src-n">34</span><span><a href="https://support.google.com/youtube/answer/72902">support.google.com/youtube/answer/72902</a> (Watch Page Monetization Module, %55)</span></li>
+          <li><span class="src-n">35</span><span><a href="https://support.google.com/youtube/answer/7636690">support.google.com/youtube/answer/7636690</a> (kanal üyeliği, %70)</span></li>
+          <li><span class="src-n">36</span><span><a href="https://support.google.com/youtube/answer/10391362">support.google.com/youtube/answer/10391362</a> (ABD vergisi)</span></li>
+          <li><span class="src-n">37</span><span><a href="https://support.google.com/youtube/answer/1311392">support.google.com/youtube/answer/1311392</a> (reused content)</span></li>
+          <li><span class="src-n">38</span><span><a href="https://support.google.com/youtube/answer/10291745">support.google.com/youtube/answer/10291745</a> (reklam veren uygunluğu)</span></li>
+          <li><span class="src-n">39</span><span><a href="https://support.google.com/youtube/answer/2605065">support.google.com/youtube/answer/2605065</a> (Content ID)</span></li>
+          <li><span class="src-n">40</span><span><a href="https://support.google.com/youtube/answer/14328491">support.google.com/youtube/answer/14328491</a> (AI içerik beyanı)</span></li>
+          <li><span class="src-n">41</span><span><a href="https://support.google.com/youtube/answer/3376882">support.google.com/youtube/answer/3376882</a> (Ses Kitaplığı)</span></li>
+          <li><span class="src-n">42</span><span><a href="https://support.google.com/adsense/answer/1709871">support.google.com/adsense/answer/1709871</a> (ödeme eşiği)</span></li>
+          <li><span class="src-n">43</span><span><a href="https://support.google.com/adsense/answer/7164703">support.google.com/adsense/answer/7164703</a> (ödeme takvimi)</span></li>
+        </ul>
+        <h3>Telif ve hukuk</h3>
+        <ul class="sources">
+          <li><span class="src-n">44</span><span><a href="https://www.copyright.gov/register/tx-games.html">copyright.gov/register/tx-games.html</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">45</span><span><a href="https://webharvest.gov/peth04/20041015023438/http://www.copyright.gov/fls/fl108.html">webharvest.gov/peth04/20041015023438/http://www.copyright.gov…</a> <span class="tag tag--ok">RESMÎ</span> <small>(arşiv)</small></span></li>
+          <li><span class="src-n">46</span><span><a href="https://www.ippt.eu/items/ippt20142301-cjeu-nintendo-v-pc-box">ippt.eu/items/ippt20142301-cjeu-nintendo-v-pc-box</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">47</span><span><a href="https://curia.europa.eu/juris/liste.jsf?num=C-355/12">curia.europa.eu/juris/liste.jsf?num=C-355/12</a> (C-355/12, ECLI:EU:C:2014:25) <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">48</span><span><a href="https://www.copyright.gov/circs/circ61.pdf">copyright.gov/circs/circ61.pdf</a> (Circular 61 – bilgisayar programları) <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">49</span><span><a href="https://copyright.gov/newsnet/2025/1060.html">copyright.gov/newsnet/2025/1060.html</a> , <a href="https://blogs.loc.gov/copyright/2025/02/inside-the-copyright-offices-report-copyright-and-artificial-intelligence-part-2-copyrightability/">blogs.loc.gov/copyright/2025/02/inside-the-copyright-offices-…</a> (AI raporu Bölüm 2) <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">50</span><span><a href="https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=5846&amp;MevzuatTur=1&amp;MevzuatTertip=5">mevzuat.gov.tr/mevzuat?MevzuatNo=5846&amp;MevzuatTur=1&amp;MevzuatTer…</a> (FSEK) <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">51</span><span><a href="https://www.loeb.com/en/insights/publications/2012/06/tetris-holding-llc-v-xio-interactive-inc">loeb.com/en/insights/publications/2012/06/tetris-holding-llc-…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">52</span><span><a href="https://www.erdem-erdem.av.tr/bilgi-bankasi/yeni-turk-ticaret-kanununda-haksiz-rekabet-hukumleri">erdem-erdem.av.tr/bilgi-bankasi/yeni-turk-ticaret-kanununda-h…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">53</span><span><a href="https://www.patentarcade.com/video-game-patent/US10926179/">patentarcade.com/video-game-patent/US10926179/</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">54</span><span><a href="https://www.finnegan.com/en/insights/articles/will-101-be-a-nemesis-to-warner-brothers-patent.html">finnegan.com/en/insights/articles/will-101-be-a-nemesis-to-wa…</a> , <a href="https://www.patentarcade.com/2021/02/warner-brothers-granted-patent-for-nemesis-system-from-middle-earth-video-games.html">patentarcade.com/2021/02/warner-brothers-granted-patent-for-n…</a> , <a href="https://www.kitguru.net/gaming/matthew-wilson/warner-bros-nemesis-system-patent-wont-expire-until-2036/">kitguru.net/gaming/matthew-wilson/warner-bros-nemesis-system-…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">55</span><span><a href="https://www.patentarcade.com/?p=7128">patentarcade.com/?p=7128</a> , <a href="https://gamesfray.com/ahead-of-october-1-court-hearing-nintendo-has-zero-chance-of-prevailing-over-current-palworld-versions-it-may-get-30k-chump-change/">gamesfray.com/ahead-of-october-1-court-hearing-nintendo-has-z…</a> (Palworld davası) <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">56</span><span><a href="https://www.wsls.com/business/2024/03/12/the-new-york-times-is-fighting-off-wordle-look-alikes-with-copyright-takedown-notices/">wsls.com/business/2024/03/12/the-new-york-times-is-fighting-o…</a> , <a href="https://www.wusf.org/2024-03-13/c-e-a-s-e-and-desist-the-new-york-times-goes-after-wordle-spinoffs">wusf.org/2024-03-13/c-e-a-s-e-and-desist-the-new-york-times-g…</a> (AP, 2024) <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">57</span><span><a href="https://licenseorg.com/guide/music-audio/youtube-audio-library">licenseorg.com/guide/music-audio/youtube-audio-library</a> , <a href="https://nofilmschool.com/2013/09/youtube-audio-library-royalty-free-music-track">nofilmschool.com/2013/09/youtube-audio-library-royalty-free-m…</a> (Ses Kitaplığı lisansı) <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">58</span><span><a href="https://www.notebookcheck.net/Steam-updates-AI-disclosure-form-requiring-developers-to-report-visible-and-in-game-AI-but-not-background-tools.1206103.0.html">notebookcheck.net/Steam-updates-AI-disclosure-form-requiring-…</a> , <a href="https://respawn.outlookindia.com/gaming/gaming-news/valve-clarifies-steam-ai-policy-focus-shifts-to-content-consumed">respawn.outlookindia.com/gaming/gaming-news/valve-clarifies-s…</a> (Steam AI beyanı) <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">59</span><span><a href="https://katv.com/news/offbeat/nyt-fighting-off-wordle-copycats-with-several-takedown-notices-word-guessing-game-new-york-times-look-alikes-digital-millenium-copycat-act-github-trademark-battle">katv.com/news/offbeat/nyt-fighting-off-wordle-copycats-with-s…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">60</span><span><a href="https://www.nintendo.co.jp/networkservice_guideline/en/index.html">nintendo.co.jp/networkservice_guideline/en/index.html</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">61</span><span><a href="https://www.ubisoft.com/en-us/videopolicy.html">ubisoft.com/en-us/videopolicy.html</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">62</span><span><a href="https://kenney.nl/support">kenney.nl/support</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">63</span><span><a href="https://opengameart.org/content/faq">opengameart.org/content/faq</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+        </ul>
+        <h3>Türkiye vergisi</h3>
+        <ul class="sources">
+          <li><span class="src-n">64</span><span><a href="https://www.fatiharas.com/gvk-mukerrer-madde-20-b-sosyal-icerik-ureticiligi-istisnasi/">fatiharas.com/gvk-mukerrer-madde-20-b-sosyal-icerik-ureticili…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">65</span><span><a href="https://www.forbes.com.tr/ekonomi/2026-yili-gelir-vergisi-tarifesi-ve-istisna-tutarlari-belirlendi">forbes.com.tr/ekonomi/2026-yili-gelir-vergisi-tarifesi-ve-ist…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">66</span><span><a href="https://www.pwc.com.tr/tr/hizmetlerimiz/vergi/bultenler/2026/2026-yili-bazi-gelir-vergisi-rakamlari.html">pwc.com.tr/tr/hizmetlerimiz/vergi/bultenler/2026/2026-yili-ba…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">67</span><span><a href="https://kpmgvergi.com/yayinlar/mali-bultenler/vergi/2026-yili-gelir-vergisi-dilimleri-ile-dikkate-alinacak-bazi-had-ve-tutarlar-belirlendi/3351">kpmgvergi.com/yayinlar/mali-bultenler/vergi/2026-yili-gelir-v…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">68</span><span><a href="https://www.alomaliye.com/2025/01/27/youtubedan-gelir-elde-edenler-izaha-davet-ediliyor/">alomaliye.com/2025/01/27/youtubedan-gelir-elde-edenler-izaha-…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">69</span><span><a href="https://www.diken.com.tr/?p=295227">diken.com.tr/?p=295227</a> (PayPal Türkiye, 2016) <span class="tag tag--info">3. TARAF</span></span></li>
+        </ul>
+        <h3>Motorlar ve öğrenme</h3>
+        <ul class="sources">
+          <li><span class="src-n">70</span><span><a href="https://phaser.io/download/stable">phaser.io/download/stable</a> , <a href="https://phaser.io/tutorials/create-game-app">phaser.io/tutorials/create-game-app</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">71</span><span><a href="https://docs.phaser.io/phaser/getting-started/making-your-first-phaser-game">docs.phaser.io/phaser/getting-started/making-your-first-phase…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">72</span><span><a href="https://emanueleferonato.com/2026/04/17/getting-started-with-phaser-4-vite-typescript-setup-using-the-official-create-game-app/">emanueleferonato.com/2026/04/17/getting-started-with-phaser-4…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">73</span><span><a href="https://docs.godotengine.org/en/stable/getting_started/first_2d_game/">docs.godotengine.org/en/stable/getting_started/first_2d_game/</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">74</span><span><a href="https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html">docs.godotengine.org/en/stable/tutorials/export/exporting_for…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">75</span><span><a href="https://blog.lmorchard.com/2025/07/10/breakout-with-claude/">blog.lmorchard.com/2025/07/10/breakout-with-claude/</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">76</span><span><a href="https://www.skills.sh/yakoub-ai/phaser4-gamedev/phaser-init">skills.sh/yakoub-ai/phaser4-gamedev/phaser-init</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">77</span><span><a href="https://www.techcareer.net/courses/unity-ile-oyun-gelistirme">techcareer.net/courses/unity-ile-oyun-gelistirme</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">78</span><span><a href="https://gdevelop.io/pricing">gdevelop.io/pricing</a> , <a href="https://playcanvas.com/plans">playcanvas.com/plans</a> , construct.net <span class="tag tag--ok">RESMÎ</span></span></li>
+        </ul>
+        <h3>Roblox, UEFN, Minecraft, çok oyunculu</h3>
+        <ul class="sources">
+          <li><span class="src-n">79</span><span><a href="https://create.roblox.com/docs/get-started/monetization">create.roblox.com/docs/get-started/monetization</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">80</span><span><a href="https://create.roblox.com/docs/production/monetization/developer-exchange">create.roblox.com/docs/production/monetization/developer-exch…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">81</span><span><a href="https://about.roblox.com/newsroom/2026/04/roblox-fuels-high-fidelity-games-over-18-players-increases-qualifying-devex-rate-42">about.roblox.com/newsroom/2026/04/roblox-fuels-high-fidelity-…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">82</span><span><a href="https://create.roblox.com/docs/monetize-avatar">create.roblox.com/docs/monetize-avatar</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">83</span><span><a href="https://devforum.roblox.com/t/building-stronger-protections-and-a-more-consistent-marketplace-unifying-2d-and-3d-avatar-item-publishing/4722717">devforum.roblox.com/t/building-stronger-protections-and-a-mor…</a> <span class="tag tag--ok">RESMÎ</span> <small>(forum, 14.07.2026)</small></span></li>
+          <li><span class="src-n">84</span><span><a href="https://devforum.roblox.com/t/introducing-creator-rewards-earn-more-by-growing-the-community/3777628">devforum.roblox.com/t/introducing-creator-rewards-earn-more-b…</a> <span class="tag tag--ok">RESMÎ</span> <small>(forum)</small></span></li>
+          <li><span class="src-n">85</span><span><a href="https://www.sozcu.com.tr/roblox-a-erisim-engeli-680-gun-sonra-kaldirildi-p329131">sozcu.com.tr/roblox-a-erisim-engeli-680-gun-sonra-kaldirildi-…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">86</span><span><a href="https://www.technopat.net/2026/06/19/roblox-turkiye-acildi-mi-erisim-engeli-karari-son-durum/">technopat.net/2026/06/19/roblox-turkiye-acildi-mi-erisim-enge…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">87</span><span><a href="https://dev.epicgames.com/documentation/fortnite/fortnite-developer-program-faqs-in-fortnite">dev.epicgames.com/documentation/fortnite/fortnite-developer-p…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">88</span><span><a href="https://dev.epicgames.com/documentation/fortnite/in-island-transactions-overview-in-fortnite">dev.epicgames.com/documentation/fortnite/in-island-transactio…</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">89</span><span><a href="https://www.tubefilter.com/2026/06/17/epic-games-unreal-editor-for-fortnite-creator-payouts/">tubefilter.com/2026/06/17/epic-games-unreal-editor-for-fortni…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">90</span><span><a href="https://www.minecraft.net/en-us/partner">minecraft.net/en-us/partner</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">91</span><span><a href="https://www.colyseus.io/pricing">colyseus.io/pricing</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">92</span><span><a href="https://www.tubefilter.com/2024/12/10/youtube-playables-hub-multiplayer-casual-games-test/">tubefilter.com/2024/12/10/youtube-playables-hub-multiplayer-c…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+        </ul>
+        <h3>Diğer dağıtım kanalları</h3>
+        <ul class="sources">
+          <li><span class="src-n">93</span><span><a href="https://developers.poki.com/guide/revenue-deal-types">developers.poki.com/guide/revenue-deal-types</a> , …/payouts-billing , …/requirements-quality <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">94</span><span><a href="https://docs.crazygames.com/faq/">docs.crazygames.com/faq/</a> , <a href="https://docs.crazygames.com/requirements/intro/">docs.crazygames.com/requirements/intro/</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">95</span><span><a href="https://itch.io/docs/creators/payments">itch.io/docs/creators/payments</a> , <a href="https://itch.io/docs/creators/html5">itch.io/docs/creators/html5</a> , <a href="https://itch.io/docs/creators/faq">itch.io/docs/creators/faq</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">96</span><span><a href="https://support.google.com/googleplay/android-developer/answer/6112435">support.google.com/googleplay/android-developer/answer/6112435</a> , …/14151465 , …/10632485 <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">97</span><span><a href="https://partner.steamgames.com/doc/gettingstarted/appfee">partner.steamgames.com/doc/gettingstarted/appfee</a> , <a href="https://partner.steamgames.com/steamdirect">partner.steamgames.com/steamdirect</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">98</span><span><a href="https://developers.facebook.com/documentation/games/whats-new/changelog/">developers.facebook.com/documentation/games/whats-new/changelog/</a> , <a href="https://developers.facebook.com/documentation/games/monetize/overview">developers.facebook.com/documentation/games/monetize/overview</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">99</span><span><a href="https://core.telegram.org/bots/payments-stars">core.telegram.org/bots/payments-stars</a> <span class="tag tag--ok">RESMÎ</span></span></li>
+          <li><span class="src-n">100</span><span><a href="https://www.neowin.net/news/valve-introduces-new-revenue-share-tiers-for-steam-promising-bigger-cuts-for-studios/">neowin.net/news/valve-introduces-new-revenue-share-tiers-for-…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">101</span><span><a href="https://app.cinevva.com/guides/web-game-monetization">app.cinevva.com/guides/web-game-monetization</a> , <a href="https://app.cinevva.com/guides/publish-web-game">app.cinevva.com/guides/publish-web-game</a> <span class="tag tag--info">3. TARAF</span></span></li>
+          <li><span class="src-n">102</span><span><a href="https://playgama.com/blog/business-faqs/poki-vs-crazygames-vs-gamedistribution-revenue-share/">playgama.com/blog/business-faqs/poki-vs-crazygames-vs-gamedis…</a> <span class="tag tag--info">3. TARAF</span> <small>(rakip)</small></span></li>
+          <li><span class="src-n">103</span><span><a href="https://mobileecosystemforum.com/2026/02/24/telegrams-gaming-have-indie-games-found-a-new-love/">mobileecosystemforum.com/2026/02/24/telegrams-gaming-have-ind…</a> <span class="tag tag--info">3. TARAF</span></span></li>
+        </ul>
+        <h3>Haber / yayıncı (3. TARAF)</h3>
+        <ul class="sources">
+          <li><span class="src-n">104</span><span><a href="https://mediacube.io/en/blog/youtube-playables-updates">mediacube.io/en/blog/youtube-playables-updates</a></span></li>
+          <li><span class="src-n">105</span><span><a href="https://mediacube.io/en/blog/youtube-playables-monetization">mediacube.io/en/blog/youtube-playables-monetization</a></span></li>
+          <li><span class="src-n">106</span><span><a href="https://www.pocketgamer.biz/youtube-playables-expands-to-more-than-50-markets-including-the-eu-and-nordics/">pocketgamer.biz/youtube-playables-expands-to-more-than-50-mar…</a></span></li>
+          <li><span class="src-n">107</span><span><a href="https://mobilegamer.biz/youtube-has-quietly-rolled-out-playables-across-europe/">mobilegamer.biz/youtube-has-quietly-rolled-out-playables-acro…</a></span></li>
+          <li><span class="src-n">108</span><span><a href="https://shattered.io/?p=5148">shattered.io/?p=5148</a></span></li>
+          <li><span class="src-n">109</span><span><a href="https://playgama.com/blog/2026/06/04/youtube-playables/">playgama.com/blog/2026/06/04/youtube-playables/</a></span></li>
+          <li><span class="src-n">110</span><span><a href="https://tech-insider.org/youtube-playables-50-markets-eu-nordics-2026/">tech-insider.org/youtube-playables-50-markets-eu-nordics-2026/</a></span></li>
+          <li><span class="src-n">111</span><span><a href="https://9to5google.com/2025/12/23/youtube-playables-builder/">9to5google.com/2025/12/23/youtube-playables-builder/</a></span></li>
+          <li><span class="src-n">112</span><span><a href="https://techcrunch.com/2025/09/16/youtube-live-gets-a-major-update-introduces-dual-format-streaming-minigames-and-more/">techcrunch.com/2025/09/16/youtube-live-gets-a-major-update-in…</a></span></li>
+          <li><span class="src-n">113</span><span><a href="https://www.phonearena.com/news/youtube-test-multiplayer-mini-games_id165709">phonearena.com/news/youtube-test-multiplayer-mini-games_id165709</a></span></li>
+          <li><span class="src-n">114</span><span><a href="https://www.mediapost.com/publications/article/401767/youtube-tests-multiplayer-playables-games.html">mediapost.com/publications/article/401767/youtube-tests-multi…</a></span></li>
+          <li><span class="src-n">115</span><span><a href="https://www.tomsguide.com/computing/social-media/youtube-gets-into-gaming-with-playables-75-games-you-can-try-right-now">tomsguide.com/computing/social-media/youtube-gets-into-gaming…</a></span></li>
+          <li><span class="src-n">116</span><span><a href="https://vidiq.com/blog/post/youtube-partner-program-changes-2027/">vidiq.com/blog/post/youtube-partner-program-changes-2027/</a></span></li>
+          <li><span class="src-n">117</span><span><a href="https://www.netinfluencer.com/youtube-raises-bar-for-new-creators-to-join-partner-program-tightens-shorts-payout-threshold/">netinfluencer.com/youtube-raises-bar-for-new-creators-to-join…</a></span></li>
+          <li><span class="src-n">118</span><span><a href="https://milx.app/tr/trends/youtube-cpm-rpm-rates-2026-average-niches-countries-more">milx.app/tr/trends/youtube-cpm-rpm-rates-2026-average-niches-…</a></span></li>
+        </ul>
+        <h3>Bulunamayanlar (açık noktalar)</h3>
+        <ul>
+          <li>Başvuru formunun 2. sayfası; Türkiye'den geliştirici kabulü; bireysel/şirket şartı</li>
+          <li>Playables gelir paylaşım oranı, CPM, ödeme eşiği ve vergi profili şartları</li>
+          <li>Resmî inceleme/onay süresi; 250 MiB istisnasının ölçütleri; küçük resim piksel ölçüleri</li>
+          <li>IARC derecelendirmesi; TV desteği; geliştiricilere açık çok oyunculu API ve takvimi</li>
+          <li>Küresel liderlik tablosu; Playables münhasırlık maddesi</li>
+          <li>Playables geliri için 20/B uygulanabilirliği (özelge gerekir)</li>
+          <li>Oyun mekaniğine ilişkin Türk mahkeme kararı; YouTube Ses Kitaplığı'nın oyun içi kullanımı (resmî sayfada yok; 3. taraf kaynaklar standart lisansı YouTube dışı kullanıma kapalı sayıyor)</li>
+          <li>Playables başvurusunda değerlendirme ölçütleri ve Partner Manager atama koşulları; UEFN ödeme eşiği</li>
+          <li>Roblox'un Ekim 2026 itibarıyla Türkiye erişim durumu; Poki/CrazyGames güncel resmî oranları</li>
+        </ul>
+
+        <p><a href="arastirma.md">Bu sayfanın yapay zekâ için Markdown hâli: arastirma.md</a> &middot; <a href="../../index.html">&larr; Ana Dizin</a></p>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

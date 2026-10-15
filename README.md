@@ -42,6 +42,7 @@ Türkiye'deki mevzuata göre hazırlanmış genel rehberler. Rakamlar yazıldık
 | Rehber | Açıklama |
 |---|---|
 | [İşsizlik](Rehberler/Issizlik/) | İşten çıkışta kıdem ve ihbar tazminatı, çıkış kodları, işsizlik ödeneği hesabı ve başvurusu, borç yönetimi, devlet destekleri ve nakit planı. |
+| [YouTube'da Oyun](Rehberler/YouTube-Oyun/) | YouTube Playables'a oyun yayınlamak ve oyun video kanalı: şartlar, SDK, AI ile geliştirme, gelir, telif, oyun fikirleri, Roblox benzeri ortamlar. |
 | [Mesajlaşma Altyapıları](Rehberler/Mesajlasma-Altyapilari/) | Telegram Bot API, WhatsApp Business API, BiP Keşfet API ve SMS: uç noktalar, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları. |
 | [Şirket Kurma](Rehberler/Sirket-Kurma/) | Şahıs mı limited mi, vergi ve Bağ-Kur, genç girişimci istisnası, giderler, yurt dışı şirket, ödeme altyapıları ve maliyet senaryoları. |
 

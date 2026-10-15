@@ -18,3 +18,12 @@
 - Sayfa dili Türkçe, hitap genel ("sen" dili kullanılabilir ama kişisel durum anlatılmaz).
 - Kullanıcı bir konu çalışıp eksik görürse anlatım genişletilebilir; çalışma kâğıdı fotoğraflarından örnekler eklenebilir.
 - Taşıma/yeniden adlandırma sonrası kırık bağlantı kontrolü yapılır.
+
+## Yeni araştırma: iki biçim
+
+Kullanıcı yeni bir araştırma istediğinde (özellikle ileride uygulamaya dökülebilecek konularda) aynı içerik iki biçimde üretilir:
+
+- `arastirma.md` — **yapay zekâ için saf Markdown**: HTML yok, net başlık hiyerarşisi, tablolar, kod blokları, her önemli iddiada kaynak + güven etiketi (RESMÎ / 3. TARAF / TAHMİN / ÇELİŞKİLİ), sonda tam kaynakça. Bir AI asistanına bağlam olarak verilip uygulamaya geçilebilmeli.
+- `index.html` — **kullanıcının okuyacağı** sayfa: aynı içerik, sitenin tasarımıyla (rozetler, tablolar, callout'lar).
+- Klasörün `README.md`'si ikisine de bağlantı verir. Önce `.md` yazılır ve doğrulanır, HTML ondan üretilir; içerik değişirse ikisi birlikte güncellenir.
+- Web araştırması resmî kaynaklardan yapılır, iddialar bağımsız doğrulamadan geçirilir; araştırma tarihi yazılır.
