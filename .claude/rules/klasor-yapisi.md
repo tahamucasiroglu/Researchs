@@ -17,6 +17,9 @@
 │  ├─ Python/  Go/  Rust/
 │  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
 │  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/ …)
+├─ API/                 Platform başına Türkçe API başvurusu (.md), kategorilere göre
+│  ├─ Sosyal-Medya/  Mesajlasma/  Canli-Yayin-ve-Video/  Gelistirici-Platformlari/  Haber/
+│  └─ Kripto-Borsalari/  Finans-ve-Ekonomi/  Hava-Durumu/  Turkiye-Kamu-ve-Acik-Veri/  API-Kaynaklari/
 └─ Rehberler/
    ├─ Issizlik/           Türkiye'de işsizlik hakları — genel rehber
    ├─ Mesajlasma-Altyapilari/  Telegram, WhatsApp, BiP, SMS API'leri ve kuralları
@@ -59,3 +62,11 @@ NN-konu-adi/
 
 - GitHub dosya başına 100 MB'ı reddeder, 50 MB üstünde uyarır. Video koyma; gerekiyorsa bağlantı ver ya da kullanıcıya Git LFS'i hatırlat.
 - Fotoğrafları gerekirse küçült (uzun kenar ~1600 px, JPEG/WebP). `bin/`, `obj/`, `node_modules/` vb. `.gitignore` ile dışarıda.
+
+## API klasörü
+
+- Her platform/site için tek dosya: `API/<Kategori>/<Platform>.md` (ör. `API/Mesajlasma/WhatsApp.md`). Yalnızca Markdown, Türkçe (resmî dokümandaki İngilizce açıklamalar çevrilir, teknik adlar orijinal kalır).
+- Her dosyanın başında **Yazılma tarihi** ve **Son doğrulama** tarihi bulunur; dosya güncellenince "Son doğrulama" değişir.
+- Erişim seviyeleri ayrı gösterilir: herkese açık · geliştirici hesabı · işletme/uygulama onayı · ücretli/kurumsal · resmî olmayan (topluluk uç noktaları, ToS riskiyle).
+- Başka bir araştırmada bir sitenin API'si çıkarsa: API bilgisi ayrıca `API/` altındaki dosyasına eklenir (yoksa oluşturulur) ve **iki taraflı bağlantı** kurulur (araştırma sayfası → API dosyası, API dosyasının "Depoda ilgili sayfalar" bölümü → araştırma).
+- Kategori README'leri ve `API/README.md`'deki takip matrisi yeni platform eklenince güncellenir. "Diğer" kategorisi açılmaz.

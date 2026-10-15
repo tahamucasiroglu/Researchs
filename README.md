@@ -35,6 +35,23 @@ Dile ve platforma göre ayrılmış anahtar kelime listeleri: her başlık için
 | [Yapay Zekâ](Programlama/Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini kullanmak; görüntü netleştirme (super-resolution, yüz düzeltme) ve kodla video üretimi (Remotion); modeller, lisanslar, ölçümler. |
 | [Proje Fikirleri](Programlama/proje-fikirleri/) | Öğrenileni kanıtlamak için tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu. |
 
+### [API](API/)
+
+Proje yazmadan önce bakılacak güncel, Türkçe API başvurusu: erişim seviyeleri, gerçek zamanlı bildirim, limitler ve takip uygulaması için neyin mümkün olduğu.
+
+| Kategori | Açıklama |
+|---|---|
+| [Sosyal Medya](API/Sosyal-Medya/) | Bluesky, Mastodon, X, Facebook, Instagram, Threads, LinkedIn, TikTok, Reddit ve diğerleri: gönderi ve canlı yayın takibi. |
+| [Mesajlaşma](API/Mesajlasma/) | Discord, Telegram, Slack, WhatsApp, Messenger, Signal, Viber/LINE: hangi sohbetler okunabilir, webhook ve WebSocket. |
+| [Canlı Yayın ve Video](API/Canli-Yayin-ve-Video/) | YouTube, Twitch, Kick, Rumble, Trovo, Facebook Live: yeni video, canlı yayın ve sohbet takibi. |
+| [Geliştirici Platformları](API/Gelistirici-Platformlari/) | GitHub: release, commit, issue takibi; webhook, yoklama ve Atom feed'leri. |
+| [Haber](API/Haber/) | Küresel haber API'leri, GDELT ve Türkiye haber kaynakları (ajanslar, RSS). |
+| [Finans ve Ekonomi](API/Finans-ve-Ekonomi/) | TCMB EVDS, Borsa İstanbul ve KAP, ABD resmî verileri, piyasa veri API'leri, TradingView. |
+| [Kripto Borsaları](API/Kripto-Borsalari/) | Binance, OKX, Bybit, Kraken, Coinbase, BtcTurk, Paribu ve kripto veri servisleri. |
+| [Hava Durumu](API/Hava-Durumu/) | Hava durumu ve uyarı servisleri, MGM, deprem kaynakları (AFAD, Kandilli, USGS, EMSC). |
+| [Türkiye Kamu ve Açık Veri](API/Turkiye-Kamu-ve-Acik-Veri/) | Belediye açık veri portalları, TÜİK, Resmî Gazete ve Türkiye topluluk API'leri. |
+| [API Kaynakları](API/API-Kaynaklari/) | API dizinleri, resmî Postman/OpenAPI koleksiyonları ve uç nokta keşif yöntemleri. |
+
 ### [Rehberler](Rehberler/)
 
 Türkiye'deki mevzuata göre hazırlanmış genel rehberler. Rakamlar yazıldıkları tarihin mevzuatına dayanır; karar vermeden önce resmi kaynaktan teyit edin. Hukuki, mali veya yatırım danışmanlığı yerine geçmez.

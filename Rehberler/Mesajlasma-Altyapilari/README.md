@@ -27,6 +27,9 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
 - [Şirket Kurma → Şirketsiz Ne Yapabilirsin?](../Sirket-Kurma/12-sirketsiz.html) — WhatsApp test numarası, İYS / 6563 dallanması.
 - [Şirket Kurma → Ödeme Altyapıları](../Sirket-Kurma/11-odeme-altyapilari.html) — Telegram Stars ve BiP ödeme API'si dışındaki ödeme seçenekleri.
+- [API → WhatsApp](../../API/Mesajlasma/WhatsApp.md) — WhatsApp'ı okuma/takip tarafından inceler: erişim seviyeleri, webhook, Groups API, Kanallar ve resmî olmayan kütüphanelerin riskleri.
+- [API → Telegram](../../API/Mesajlasma/Telegram.md) — Bot API ile kullanıcı API'si (MTProto) farkı, başkasının kanalını izleme, güncelleme akışı ve sınırlar.
+- [API Kütüphanesi](../../API/README.md) — Tüm platformların API başvurusu ve takip uygulaması için özet matris.
 
 ---
 

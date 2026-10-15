@@ -58,6 +58,7 @@ Ayrıntı ve karar ağacı: [Süreç ve engel raporu](surec-ve-engeller.html) (�
 - [Şirket Kurma → Genç Girişimci İstisnası](../Sirket-Kurma/07-genc-girisimci.html) — 29 yaş altı ilk kez işletme açanlar için istisna ve YouTube geliri notları.
 - [JavaScript / TypeScript](../../Programlama/JavaScript-TypeScript/) — Playables oyunlarının yazıldığı dil; temel kavramlar ve araçlar.
 - [Yapay Zekâ → Kodla Video Üretimi](../../Programlama/Yapay-Zeka/kodla-video/) — Oyun tanıtım videosu ve Shorts'u kodla üretmek için.
+- [API → YouTube](../../API/Canli-Yayin-ve-Video/YouTube.md) — YouTube Data API, kota, WebSub ile yeni video bildirimi ve canlı yayın/sohbet takibi.
 
 ---
 
