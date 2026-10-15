@@ -16,7 +16,7 @@
 │  ├─ HTML-CSS/
 │  ├─ Python/  Go/  Rust/
 │  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
-│  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/ …)
+│  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/, video-uretim-sistemi/ …)
 ├─ API/                 Platform başına Türkçe API başvurusu (.md), kategorilere göre
 │  ├─ Sosyal-Medya/  Mesajlasma/  Canli-Yayin-ve-Video/  Gelistirici-Platformlari/  Haber/
 │  └─ Kripto-Borsalari/  Finans-ve-Ekonomi/  Hava-Durumu/  Turkiye-Kamu-ve-Acik-Veri/  API-Kaynaklari/

@@ -124,6 +124,7 @@ Tam referans: <https://developers.google.com/youtube/v3/docs> ve <https://develo
 
 ## Depoda ilgili sayfalar
 
+- [Video Üretim Sistemi](../../Programlama/Yapay-Zeka/video-uretim-sistemi/) — Claude ile video üretip YouTube'a yükleme; Data API yükleme kısıtları ve YPP politikaları.
 - [Rehberler / YouTube-Oyun](../../Rehberler/YouTube-Oyun/) — YouTube Playables ve oyun kanalı araştırması.
 - [Yapay-Zeka / kodla-video](../../Programlama/Yapay-Zeka/kodla-video/) — Remotion ile kodla video üretimi (YouTube içerik üretimiyle ilişkili).
 - [X-Twitter](../Sosyal-Medya/X-Twitter.md), [Threads](../Sosyal-Medya/Threads.md), [Instagram](../Sosyal-Medya/Instagram.md), [TikTok](../Sosyal-Medya/TikTok.md) — aynı takip uygulaması için diğer platformlar.
