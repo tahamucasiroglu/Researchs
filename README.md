@@ -1,3 +1,6 @@
+# Ai yada kendi araştırmalarımı ham olarak tuttuğum yer. 
+
+
 # Araştırma ve Öğrenme Kütüphanesi
 
 Dil, programlama ve hayatın pratik konularında (işsizlik hakları, şirket kurma) öğrendiklerimin Türkçe kaydı. Amaç, Türkçe kaynağı az olan konuları sade bir dille, konu konu ayrılmış klasörlerde toplamak; kendi çalışmalarım (kod denemeleri, notlar) da ilgili konunun altına eklenir. Herkes yararlanabilir.
