@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anahtar kelime ve arama niyeti — SEO Rehberi</title>
+<meta name="description" content="Hangi kelimeyi hedefleyeceğini bulmak, aramanın arkasındaki niyeti ilk 10 sonuçtan okumak, hacim yanılgısından kaçmak ve her niyeti tek bir sayfaya eşlemek.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Anahtar kelime ve arama niyeti</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 04 · Sayfa ve içerik</div>
+        <h1 class="page-title">Anahtar kelime ve arama niyeti</h1>
+        <p class="lede">Sayfa yazmadan önce iki soru cevaplanır: insanlar bu konuyu hangi kelimelerle arıyor, ve o kelimeyi yazan kişi aslında ne istiyor? Bu bölüm bu iki soruyu nasıl cevaplayacağını, bulduğun kelimeleri sayfalara nasıl dağıtacağını ve en sık düşülen ölçüm yanılgılarını anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Niyet, kelimeden önemlidir: aynı konu için Google'ın ilk 10 sonucu hangi türde sayfa gösteriyorsa, kazanma şansı olan sayfa türü odur.</li>
+            <li>Arama hacmi yanıltıcıdır; 1. sıra bile hacmin küçük bir kısmını alır. "Trafik potansiyeli" ve "ticari değer" daha iyi ölçütlerdir.</li>
+            <li>Sitede Google Ads kullanılıyorsa arama terimleri raporu ve ücretli-organik raporu bedava bir anahtar kelime araştırması kaynağıdır.</li>
+            <li>Her niyete bir sayfa: aynı niyet için birden çok sayfa yazmak sayfaları birbirine rakip yapar (kannibalizasyon).</li>
+            <li>Anahtar kelime yoğunluğu, "LSI kelimeler" ve meta keywords mittir; sayfaya "yakınımdaki" yazmak da işe yaramaz.</li>
+          </ul>
+        </div>
+
+        <h2 id="anahtar-kelime-nedir"><span class="h-num">§ 1</span>Anahtar kelime nedir, neden hâlâ önemli</h2>
+        <p><strong>Anahtar kelime</strong> (keyword), insanların arama kutusuna yazdığı ifadedir. Tek kelime olabilir ("nakliyat"), çoğu zaman bir cümle parçasıdır ("evden eve nakliyat fiyatları"). SEO'daki karşılığı basittir: senin sayfan, insanların gerçekten yazdığı ifadelerle bulunabilmelidir.</p>
+        <p>Google'ın resmî temel kuralları (Search Essentials) bunu açıkça söyler: insanların aradığı kelimeleri sayfanın başlığında, ana başlığında, görsellerin alt metninde ve bağlantı metinlerinde belirgin biçimde kullan <sup class="kaynak"><a href="#k1">[1]</a></sup>. Yani kelime hâlâ önemlidir. Değişen şey, kelimenin <em>kaç kez</em> geçtiğinin artık önemsiz olmasıdır.</p>
+        <p>Bugünkü Google kelimeyi birebir eşlemekle yetinmez. Sıralama sistemleri arasında kelimelerin anlamını çözen <strong>BERT</strong>, kelimeleri kavramlara bağlayan <strong>RankBrain</strong> ve sorgudaki kavramları sayfadaki kavramlarla eşleyen <strong>neural matching</strong> vardır <sup class="kaynak"><a href="#k2">[2]</a></sup>. Sonuç: "taşınma firması" arayan biri, sayfasında "nakliyat" yazan bir firmayı da bulabilir. Kelimeyi bilmek hâlâ gerekli, ama kelime listesine takılıp kalmak gereksiz.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Anahtar kelime sayfanın %1–2'si kadar geçmeli (ideal yoğunluk).</p>
+          <p class="mit-gercek">"Optimal yoğunluk" diye bir şey yok. Kelimeyi doğal olmayan biçimde tekrarlamak Google'ın spam politikalarında "keyword stuffing" (anahtar kelime doldurma) olarak geçer <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k4">[4]</a></sup>.</p>
+        </aside>
+
+        <h2 id="arama-niyeti"><span class="h-num">§ 2</span>Arama niyeti: kelimenin arkasındaki istek</h2>
+        <p><strong>Arama niyeti</strong> (search intent), aramayı yapan kişinin asıl amacıdır. "Nakliyat" yazan kişi bilgi mi istiyor, fiyat mı soruyor, yoksa hemen bir firmayı mı arayacak? Google'ın sıralamada başardığı şeyin büyük kısmı bu niyeti doğru tahmin etmektir. Bu yüzden niyete uymayan sayfa, ne kadar iyi yazılmış olursa olsun, üst sıralara çıkmakta zorlanır.</p>
+
+        <h3 id="qrg-niyet-turleri">Google'ın değerlendirici kılavuzundaki dört tür</h3>
+        <p>Google'ın arama kalitesi değerlendiricileri için yazdığı kılavuz (Search Quality Rater Guidelines; değerlendiricilerin sonuçları puanladığı, Google'ın neyi "iyi" saydığını gösteren belge) sorguları dört niyete ayırır <sup class="kaynak"><a href="#k5">[5]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kılavuzdaki adı</th><th>Anlamı</th><th>Örnek sorgu</th><th>Kazanan sayfa türü</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Know</strong> (bil)</td><td>Bilgi istiyor</td><td>"online randevu sistemi nasıl kurulur"</td><td>Rehber, açıklama, video</td></tr>
+              <tr><td><strong>Do</strong> (yap)</td><td>Bir işlem yapmak istiyor: indir, satın al, kaydol</td><td>"randevu programı ücretsiz dene"</td><td>Ürün, indirme, kayıt sayfası</td></tr>
+              <tr><td><strong>Website</strong> (siteye git)</td><td>Belli bir siteye ulaşmak istiyor</td><td>"ÖrnekMarka giriş"</td><td>Markanın kendi sayfası</td></tr>
+              <tr><td><strong>Visit-in-person</strong> (yerinde ziyaret)</td><td>Fiziksel bir yere gitmek ya da yerel hizmet almak istiyor</td><td>"nakliyat firması"</td><td>Harita sonucu, işletme profili, yerel hizmet sayfası</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="seo-niyet-turleri">SEO dünyasındaki dört tür</h3>
+        <p>SEO araçları ve eğitimleri genelde biraz farklı bir dörtlü kullanır <sup class="kaynak"><a href="#k5">[5]</a></sup>. İkisi aynı şeyi farklı açıdan anlatır; hangisini kullandığın önemli değil, sayfa türünü niyete göre seçmen önemli.</p>
+        <ul>
+          <li><strong>Bilgi amaçlı</strong> (informational): "SEO nedir", "kamyon kaç ton taşır".</li>
+          <li><strong>Gezinme amaçlı</strong> (navigational): "youtube studio", "ÖrnekMarka iletişim".</li>
+          <li><strong>Ticari araştırma</strong> (commercial): karar vermeden önce karşılaştırma: "en iyi randevu programları", "X mi Y mi".</li>
+          <li><strong>İşlem amaçlı</strong> (transactional): satın almaya ya da aramaya hazır: "randevu programı fiyat", "evden eve nakliyat teklif al".</li>
+        </ul>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Kelime sırası niyeti değiştirebilir. Semrush'ın örneklerinde aynı kelimelerin farklı sırası farklı sonuç türleri getiriyor <sup class="kaynak"><a href="#k5">[5]</a></sup>. Hedef ifadenin her varyantını ayrı ayrı arat; sonuçlar aynı türdeyse tek sayfa yeter, farklıysa ayrı sayfa gerekebilir.</p>
+        </aside>
+
+        <h2 id="niyeti-okumak"><span class="h-num">§ 3</span>Niyeti ilk 10 sonuçtan okumak</h2>
+        <p>Niyeti tahmin etmenin en güvenilir yolu bir araç değil, Google'ın kendisidir. Google o sorgu için neyi gösteriyorsa, kullanıcıların neyi tıkladığını ve neyden memnun kaldığını o gösterir. Yöntem şöyle <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>:</p>
+        <ol class="steps">
+          <li><strong>Sorguyu gizli pencerede, mobilde ve masaüstünde arat.</strong> Kişiselleştirme sonucu bozmasın. Yerel sorgularda konumun sonucu değiştirdiğini unutma (aşağıda).</li>
+          <li><strong>Sonuç türlerini say.</strong> İlk 10 sonucun kaçı rehber, kaçı ürün sayfası, kaçı liste ("en iyi 10…"), kaçı araç, kaçı video? Ağırlıkta olan tür, Google'ın bu sorgu için uygun bulduğu türdür.</li>
+          <li><strong>Sonuç sayfasının özelliklerine bak.</strong> Harita paketi varsa niyet yereldir. Video kutusu varsa video beklenir. "Kullanıcılar şunu da sordu" (People Also Ask) kutusu varsa, oradaki sorular sayfanın alt başlıkları için hazır listedir.</li>
+          <li><strong>Açıyı yakala.</strong> Başlıklar "2026 rehberi", "yeni başlayanlar için", "ücretsiz" gibi ortak bir vurgu taşıyor mu? Bu, kullanıcının beklediği açıdır.</li>
+          <li><strong>Eksik olanı bul.</strong> İlk 10'un hiçbirinde olmayan ama kullanıcının işine yarayacak bilgi ne? Senin farkın orada olacak (bkz. <a href="07-icerik-kalitesi.html#siradan-olmayan-icerik">Bölüm 7</a>).</li>
+        </ol>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Backlinko'nun anlattığı bir vakada bir yazı, hedeflediği sorguda bir türlü üst sıralara çıkamamış. İlk 10 sonuca bakınca hepsinin <em>araç</em> (sayfada çalışan hesaplayıcı vb.) olduğu görülmüş. Sayfaya bir araç eklenince sayfa ilk sayfaya çıkmış <sup class="kaynak"><a href="#k6">[6]</a></sup>. Ders: içerik kalitesi niyete uymayan bir sayfa türünü kurtarmaz.</p>
+        </aside>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bilgi amaçlı sorgularda Google artık sıkça yapay zekâ özeti (AI Overviews) gösteriyor ve üçüncü taraf ölçümler bu durumda tıklamanın belirgin düştüğünü söylüyor (Ahrefs'in Aralık 2025 verisinde ilk sonucun tıklama oranı yaklaşık %58 düşük; Google ölçüm yöntemine itiraz ediyor) <sup class="kaynak"><a href="#k7">[7]</a></sup>. Bilgi sorgusunu hedeflerken başarıyı yalnız trafikle değil, dönüşümle (kayıt, arama, form) ölç.</p>
+        </aside>
+
+        <h2 id="kelime-bulmak"><span class="h-num">§ 4</span>Kelime bulmak: nereden başlanır</h2>
+        <p>Kelime araştırmasının amacı uzun bir liste değil, sayfa kararıdır: hangi sayfaları yazacaksın, her biri hangi niyete cevap verecek? Başlangıç kaynakları:</p>
+        <ul>
+          <li><strong>Müşterinin ağzı.</strong> Telefonda, e-postada, satışta insanlar işi nasıl tarif ediyor? "Asansörlü taşıma" mı diyorlar, "dış cephe asansörü" mü? Bu dil, sektör jargonundan daha değerlidir.</li>
+          <li><strong>Google'ın kendi önerileri.</strong> Arama kutusunun otomatik tamamlaması, "Kullanıcılar şunu da sordu" kutusu ve sayfa sonundaki ilgili aramalar.</li>
+          <li><strong>Search Console.</strong> Sitenin zaten göründüğü sorguları ve gerçek tıklamaları gösterir (ayrıntı aşağıda).</li>
+          <li><strong>Google Ads verisi.</strong> Reklam veren biri için en zengin kaynak (ayrı bölümde).</li>
+          <li><strong>Ücretli SEO araçları.</strong> Ahrefs, Semrush gibi araçların hacim ve zorluk tahminleri. Bunlar Google verisi değil, araçların kendi tahminidir (bkz. <a href="15-araclar-ve-olcum.html">Bölüm 15</a>).</li>
+        </ul>
+
+        <h3 id="degistiriciler-ve-uzun-kuyruk">Değiştiriciler ve uzun kuyruk</h3>
+        <p><strong>Uzun kuyruk</strong> (long tail), tek tek az aranan ama toplamda büyük hacim oluşturan, daha uzun ve daha belirli sorgulardır. "Nakliyat" kısa kuyruktur; "hafta sonu evden eve nakliyat 3+1 fiyat" uzun kuyruktur. Uzun kuyruğun niyeti daha nettir, rekabeti daha azdır ve dönüşümü genelde daha yüksektir.</p>
+        <p>Uzun kuyruğu yakalamanın pratik yolu <strong>değiştirici kelimelerdir</strong> <sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Değiştirici</th><th>Gösterdiği niyet</th><th>Örnek</th></tr></thead>
+            <tbody>
+              <tr><td>"nasıl", "nedir", "rehber"</td><td>Bilgi</td><td>"randevu hatırlatma mesajı nasıl gönderilir"</td></tr>
+              <tr><td>"en iyi", "karşılaştırma", "alternatif", "mi ... mi"</td><td>Ticari araştırma</td><td>"X alternatifi"</td></tr>
+              <tr><td>"fiyat", "ücret", "teklif", "indir", "satın al"</td><td>İşlem</td><td>"evden eve nakliyat fiyat"</td></tr>
+              <tr><td>Şehir/semt adı, "yakınımdaki"</td><td>Yerel</td><td>"Örnekşehir nakliyat"</td></tr>
+              <tr><td>"ücretsiz", "2026", "yeni başlayanlar için"</td><td>Açıya dair beklenti</td><td>"ücretsiz randevu programı"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hacim-yanilgisi"><span class="h-num">§ 5</span>Hacim yanılgısı ve trafik potansiyeli</h2>
+        <p>Yeni başlayanın ilk refleksi "en çok aranan kelimeyi" hedeflemektir. Bu genelde yanlıştır, üç nedenle:</p>
+        <ol>
+          <li><strong>1. sıra hacmin hepsini almaz.</strong> Ahrefs'in ölçümüne göre 1. sıradaki sayfa bile o kelimenin arama hacminin %30'undan fazlasını nadiren alır; tıklamalar reklamlara, haritaya, özetlere ve diğer sonuçlara dağılır <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>Bir sayfa tek kelimede sıralanmaz.</strong> Aynı çalışmaya göre ilk sıradaki sayfa ortalama yaklaşık 1.000 benzer kelimede de sıralanıyor <sup class="kaynak"><a href="#k8">[8]</a></sup>. Yani tek bir kelimenin hacmi, sayfanın alacağı trafiği göstermez.</li>
+          <li><strong>Hacim, niyeti söylemez.</strong> Yüksek hacimli bir bilgi sorgusu hiç müşteri getirmeyebilir; düşük hacimli bir "fiyat" sorgusu her ay iş getirebilir.</li>
+        </ol>
+        <p>Ahrefs bu yüzden iki kavram önerir <sup class="kaynak"><a href="#k8">[8]</a></sup>:</p>
+        <ul>
+          <li><strong>Trafik potansiyeli:</strong> O sorguda ilk sıradaki sayfanın, sıralandığı bütün kelimelerden aldığı toplam trafik. Tek kelimenin hacminden daha gerçekçi bir tavandır.</li>
+          <li><strong>Üst konu</strong> (parent topic): Bir kelimeyi kendi sayfasına mı koyacağını yoksa daha geniş bir sayfanın içinde mi işleyeceğini söyler. Üst konudaki sayfa bu kelimede de sıralanıyorsa, ayrı sayfa açmaya gerek yoktur.</li>
+        </ul>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Araçların "hacim" ve "zorluk" sayıları tahmindir ve araçtan araca değişir. Hangi zorluk puanının "kolay" sayılacağı konusunda kaynaklar birbiriyle çelişiyor <span class="tag tag--info">3. taraf</span>. Sayıya değil, sonuç sayfasına bak: ilk 10'da senin seviyende siteler var mı, yoksa hepsi büyük markalar mı?</p>
+        </aside>
+
+        <h3 id="ticari-deger">Ticari değer: 0–3 puanı ve CPC sinyali</h3>
+        <p>Bir kelimenin işine yarayıp yaramadığını ölçmek için Ahrefs basit bir puan önerir: ürününü ya da hizmetini o konuda ne kadar doğal anabiliyorsun <sup class="kaynak"><a href="#k8">[8]</a></sup>?</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Puan</th><th>Anlamı</th><th>Örnek (randevu yazılımı)</th></tr></thead>
+            <tbody>
+              <tr><td>3</td><td>Ürün sorunun neredeyse tek çözümü</td><td>"kuaför için online randevu programı"</td></tr>
+              <tr><td>2</td><td>Ürün önemli bir yer tutar ama tek çözüm değil</td><td>"müşteri randevularını düzenli takip etme"</td></tr>
+              <tr><td>1</td><td>Ürün ancak dolaylı anılabilir</td><td>"kuaför salonu açmak için ipuçları"</td></tr>
+              <tr><td>0</td><td>Ürünü anmak zorlama olur</td><td>"en popüler saç modelleri"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>İkinci bir sinyal <strong>CPC</strong>'dir (cost per click: reklamverenin bir tıklama için ödediği bedel). Reklamverenler bir kelimeye yüksek bedel ödüyorsa, o kelime büyük olasılıkla para getiriyordur. Bu kaba bir satın alma niyeti göstergesidir, kesin bir ölçü değildir <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+
+        <h2 id="search-console-verisi"><span class="h-num">§ 6</span>Search Console: gerçek tıklama, ama hacim yok</h2>
+        <p>Google Search Console, sitenin Google'da göründüğü sorguları, gösterim ve tıklama sayılarını ve ortalama pozisyonu verir. Bu, tahmin değil gerçek veridir. Ama iki sınırı var:</p>
+        <ul>
+          <li><strong>Hacim vermez.</strong> Yalnız <em>senin</em> gösterimlerini sayar; bir kelimenin toplam aranma sayısını bilmez <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>Henüz görünmediğin kelimeleri göstermez.</strong> Yeni site için boştur; araştırmanın başında değil, birkaç hafta sonra işe yarar.</li>
+        </ul>
+        <p>En değerli kullanım: ortalama pozisyonu 8–20 arasında olan, gösterimi yüksek ama tıklaması düşük sorguları bulmak. Bunlar sayfanın "neredeyse" sıralandığı kelimelerdir; başlığı, alt başlıkları ve içeriği bu sorgulara göre güçlendirmek çoğu zaman en hızlı kazançtır.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Eylül 2025:</strong> Google sonuç sayfasındaki <code>&amp;num=100</code> parametresini kaldırdı. Birçok sitede Search Console gösterimleri bir anda düştü ve ortalama pozisyon "iyileşti". Bu bir veri değişikliğidir, ceza değil <sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--info">3. taraf</span> (Google resmî duyuru yapmadı). Eylül 2025 öncesiyle karşılaştırırken bunu hesaba kat.</p>
+        </aside>
+
+        <h2 id="ads-verisi"><span class="h-num">§ 7</span>Google Ads verisi: reklam hesabındaki hazine</h2>
+        <p>Sitede Google Ads kullanılıyorsa (hesabı işletme sahibi, bir ajans ya da serbest çalışan yönetiyor olabilir) bu bölüm özellikle önemli; reklam yoksa aynı bilgi <a href="#kelime-bulmak">§ 4</a> ve <a href="#search-console-verisi">§ 6</a>'daki kaynaklardan toplanır. Google Ads hesabı, SEO'cuların ücretli araçlarla tahmin etmeye çalıştığı şeyin gerçeğini zaten tutar.</p>
+        <h3 id="arama-terimleri-raporu">Arama terimleri raporu</h3>
+        <p>Reklamın gerçekten hangi aramalarda çıktığını ve hangilerinin dönüşüm getirdiğini gösterir. Bu liste, insanların hizmeti hangi kelimelerle aradığının en dürüst kanıtıdır. Dönüşüm getiren terimler, organik içerik için öncelikli sayfa adaylarıdır <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
+        <h3 id="anahtar-kelime-planlayici">Anahtar Kelime Planlayıcı</h3>
+        <p>Ads içindeki bu araç kelime önerisi ve hacim aralığı verir; CPC tahminiyle birlikte ticari değeri görmeyi sağlar <sup class="kaynak"><a href="#k6">[6]</a></sup>. Hacim değerleri reklam planlaması için yuvarlanmış aralıklardır, SEO için kesin sayı gibi okunmamalıdır.</p>
+        <h3 id="ucretli-organik-raporu">Ücretli ve organik raporu</h3>
+        <p>Search Console, Google Ads hesabına bağlanırsa aynı sorgu için reklam tıklamaları ile organik tıklamalar yan yana görülür. Organik veri bağlantının kurulduğu tarihten itibaren gelir <sup class="kaynak"><a href="#k10">[10]</a></sup>. Kullanım:</p>
+        <ul>
+          <li>Organikte zaten güçlü olunan sorgularda reklam harcamasını gözden geçirmek.</li>
+          <li>Organikte zayıf kalınan önemli sorgularda reklamla açığı kapatırken, aynı sorgu için organik sayfa hazırlamak.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Google Ads'e para veren organikte de yükselir.</p>
+          <p class="mit-gercek">Google iki ayrı resmî sayfada açıkça yazıyor: reklam vermenin organik sonuçlara hiçbir etkisi yok <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>. Reklam ile SEO'nun buluştuğu yer sıralama değil, veri ve açılış sayfasıdır: iyi açılış sayfası reklamın Kalite Puanı'na da yarar <sup class="kaynak"><a href="#k12">[12]</a></sup>.</p>
+        </aside>
+
+        <h2 id="anahtar-kelime-haritasi"><span class="h-num">§ 8</span>Anahtar kelime haritası: her niyete bir sayfa</h2>
+        <p><strong>Anahtar kelime haritası</strong>, hangi kelime grubunun hangi sayfaya ait olduğunu gösteren tablodur. Kural basit: <strong>aynı niyete tek sayfa</strong>. Aynı niyet için iki sayfa yazılırsa sayfalar birbirine rakip olur; Google ikisinden birini seçer, bazen yanlış olanı, bazen ikisini sırayla değiştirir. Buna <strong>kannibalizasyon</strong> (sayfaların birbirini yemesi) denir <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        <p>Ayrıca Google'ın "site çeşitliliği" sistemi bir siteden ilk sonuçlarda genelde en çok iki sonuç gösterir; alt alan adları da ana alan adıyla birlikte sayılır <sup class="kaynak"><a href="#k2">[2]</a></sup>. Aynı sorgu için on sayfa yazmak bu yüzden de işe yaramaz.</p>
+
+        <h3 id="urun-ornegi">Yazılım ürünü örneği</h3>
+        <p>Online randevu yazılımı satan bir ürün (ÖrnekMarka) için örnek harita <sup class="kaynak"><a href="#k13">[13]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kelime grubu</th><th>Niyet</th><th>Sayfa</th></tr></thead>
+            <tbody>
+              <tr><td>"randevu programı", "online randevu sistemi"</td><td>Ticari / işlem</td><td>Ana sayfa ya da Özellikler</td></tr>
+              <tr><td>"randevu hatırlatma nasıl yapılır", "randevuya gelmeyen müşteri"</td><td>Bilgi</td><td>Nasıl çalışır / rehber</td></tr>
+              <tr><td>"Google Takvim ile randevu eşitleme"</td><td>Bilgi / işlem</td><td>Yardım belgesi</td></tr>
+              <tr><td>"X alternatifi", "X vs Y"</td><td>Ticari araştırma</td><td>Karşılaştırma sayfası</td></tr>
+              <tr><td>"ÖrnekMarka fiyat", "ÖrnekMarka indir"</td><td>Gezinme / işlem</td><td>Fiyatlar, İndir</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Yeni bir ürün sitesi "randevu" gibi tek kelimelik genel terimlerle başlamamalı. Karşılaştırma ve "alternatif" sorguları kategori terimlerinden genelde daha az rekabetlidir ve daha çok dönüşüm getirir <sup class="kaynak"><a href="#k13">[13]</a></sup>. Ahrefs'in Mayıs 2025 çalışmasında yeni yayımlanan sayfaların yalnız %1,74'ü bir yıl içinde ilk 10'a girebildi <sup class="kaynak"><a href="#k14">[14]</a></sup>. Dürüst sıra: önce marka adı, sonra uzun kuyruk, en son genel terim (bkz. <a href="18-yeni-site-yol-haritasi.html">Bölüm 18</a>).</p>
+        </aside>
+
+        <h3 id="yerel-ornek">Yerel işletme örneği</h3>
+        <p>Koddan anlamayan küçük yerel bir işletme (ör. nakliye firması) telefonda aramada üstte çıkmak istiyor. Yerel organik sonuçlarda uzmanların en ağır saydığı etken <strong>her hizmet için ayrı sayfa</strong> açmaktır (Whitespark 2026 anketi; bir anket, Google'ın resmî listesi değil) <sup class="kaynak"><a href="#k15">[15]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sayfa</th><th>Kapsadığı ifadeler</th></tr></thead>
+            <tbody>
+              <tr><td>Evden eve nakliyat</td><td>"evden eve nakliyat", "ev taşıma", "evden eve taşımacılık"</td></tr>
+              <tr><td>Ofis taşıma</td><td>"ofis taşıma", "büro taşıma", "iş yeri taşıma"</td></tr>
+              <tr><td>Asansörlü taşıma</td><td>"asansörlü nakliyat", "dış cephe asansörü kiralama"</td></tr>
+              <tr><td>Eşya depolama</td><td>"eşya depolama", "ev eşyası depolama"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dikkat et: tablo <em>hizmet</em> başına, <em>semt</em> başına değil. Her semt için şablon sayfa açmak Google'ın spam politikasında açıkça örnek verilen "doorway" (kapı sayfası) davranışıdır <sup class="kaynak"><a href="#k3">[3]</a></sup>. Semt sayfası ancak o yere gerçekten özgü içerik varsa açılır; ayrıntı <a href="12-yerel-seo.html">Bölüm 12</a>'de.</p>
+
+        <h3 id="esanlamlilar">Eşanlamlılar tek sayfada</h3>
+        <p>"Nakliyat" ile "taşımacılık", "randevu programı" ile "randevu yazılımı" aynı niyettir. Bunlar için ayrı sayfa açılmaz; tek sayfada doğal biçimde ikisi de geçer. Google'ın anlam eşleyen sistemleri (RankBrain, neural matching) eşanlamlıları zaten bağlar <sup class="kaynak"><a href="#k2">[2]</a></sup>. Gerçekten <em>farklı hizmet</em> olanlar ayrı sayfaya gider <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>Site yapısı</span><span class="dosya">eşanlamlıya ayrı sayfa</span></div>
+<pre><code>/nakliyat
+/nakliye
+/tasimacilik
+/evden-eve-nakliyat
+/evden-eve-tasimacilik      <span class="k-yorum"># hepsi aynı niyet; birbirini yer</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>Site yapısı</span><span class="dosya">hizmet başına bir sayfa</span></div>
+<pre><code>/                           <span class="k-yorum"># marka + genel "nakliyat" niyeti</span>
+/evden-eve-nakliyat         <span class="k-yorum"># ev taşıma, evden eve taşımacılık</span>
+/ofis-tasima
+/asansorlu-tasima
+/esya-depolama</code></pre>
+        </div>
+
+        <h3 id="harita-sablonu">Haritayı tutmak için basit bir şablon</h3>
+        <p>Harita bir tablo dosyasında tutulabilir. Önemli olan her satırda niyetin ve tek bir hedef sayfanın yazılmasıdır.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>CSV</span><span class="dosya">anahtar-kelime-haritasi.csv</span></div>
+<pre><code>kelime_grubu;niyet;hedef_sayfa;ticari_deger;not
+"evden eve nakliyat|ev taşıma";işlem;/evden-eve-nakliyat;3;ilk 10'da harita paketi var
+"evden eve nakliyat fiyat";işlem;/evden-eve-nakliyat;3;fiyat aralığı bölümü eklenecek
+"taşınmada eşya nasıl paketlenir";bilgi;/rehber/esya-paketleme;1;PAA soruları alt başlık
+"ofis taşıma";işlem;/ofis-tasima;3;</code></pre>
+        </div>
+
+        <h2 id="yakinimdaki"><span class="h-num">§ 9</span>"Yakınımdaki" yazmak işe yaramaz</h2>
+        <p>"Yakınımdaki nakliyat" çok aranan bir ifadedir, ama sayfaya bu kelimeyi yazmak sıralamaya yardım etmez. Çünkü "yakınım" aramayı yapan kişinin konumudur, senin sayfanın içeriği değil. Google'ın yerel sıralamada resmî üç ölçütü vardır: <strong>alaka</strong>, <strong>mesafe</strong> ve <strong>öne çıkma</strong> (bilinirlik). Kullanıcı konum paylaşmamışsa Google bildiği bilgiyle mesafeyi tahmin eder <sup class="kaynak"><a href="#k17">[17]</a></sup>.</p>
+        <p>Önerilen yöntem: sayfada "hizmet + şehir/semt" ifadelerini doğal kullanmak ve Google İşletme Profili'ni eksiksiz tutmak <sup class="kaynak"><a href="#k18">[18]</a></sup> <span class="tag tag--info">3. taraf</span>. Google'ın "yakınımdaki" ifadesi hakkında ayrı bir resmî açıklaması bulunamadı <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Nakliye firması sahibi "kendi telefonumda üstteyim ama arkadaşımın telefonunda yokum" diyor. Bu normaldir: mesafe aramayı yapanın konumuna bağlıdır. Firma kendi adresinin yakınında üstte, şehrin öbür ucunda altta çıkabilir. Bunu ölçmenin ve göstermenin yolu tek bir ekran görüntüsü değil, farklı noktalardan ölçüm yapan harita ızgarası (geo-grid) araçlarıdır <sup class="kaynak"><a href="#k16">[16]</a></sup> (bkz. <a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+
+        <h2 id="mitler"><span class="h-num">§ 10</span>Anahtar kelime mitleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>İddia</th><th>Gerçek</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;meta name="keywords"&gt;</code> sıralamayı etkiler</td><td>Google kullanmıyor <span class="tag tag--warn">Değişti: Eyl 2009</span></td><td><sup class="kaynak"><a href="#k19">[19]</a></sup></td></tr>
+              <tr><td>%1–2 anahtar kelime yoğunluğu ideal</td><td>Optimal yoğunluk yok; fazlası keyword stuffing</td><td><sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup></td></tr>
+              <tr><td>"LSI keywords" kullan</td><td>John Mueller (Google): "Böyle bir şey yok"</td><td><sup class="kaynak"><a href="#k4">[4]</a></sup></td></tr>
+              <tr><td>Alan adında anahtar kelime büyük avantaj</td><td>Etkisi çok hafif; tam eşleşen alan adlarının kredisi kısılır</td><td><sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k19">[19]</a></sup></td></tr>
+              <tr><td>Her eşanlamlı için ayrı sayfa aç</td><td>Aynı niyet tek sayfada; ayrı sayfalar birbirini yer</td><td><sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k16">[16]</a></sup></td></tr>
+              <tr><td>En çok aranan kelimeyi hedefle</td><td>Hacim niyeti ve gerçek trafiği göstermez</td><td><sup class="kaynak"><a href="#k8">[8]</a></sup></td></tr>
+              <tr><td>Yapay zekâ aramaları için her sorgu çeşidine ayrı sayfa üret</td><td>Google'ın Mayıs 2026 rehberi: bu, ölçekli içerik istismarına girebilir</td><td><sup class="kaynak"><a href="#k20">[20]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Şehir, ilçe ya da telefon numarası listesini sayfaya yığmak Google'ın spam politikasında keyword stuffing örneği olarak açıkça geçer <sup class="kaynak"><a href="#k3">[3]</a></sup>. Sayfanın altına "Örnekşehir nakliyat, Örnek İlçe nakliyat, ..." diye uzun bir liste eklemek yarar değil zarar getirir.</p>
+        </aside>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 11</span>Bu bölümde öğrendiklerin</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Önce niyet: ilk 10 sonuç hangi sayfa türünü gösteriyorsa, o türde sayfa yaz; içerik kalitesi yanlış türü kurtarmaz.</li>
+            <li>Kelime hâlâ başlıkta, ana başlıkta, alt metinde ve bağlantı metninde geçmeli; ama tekrar sayısı önemsiz, eşanlamlıları Google kendisi bağlar.</li>
+            <li>Hacim yerine trafik potansiyeline, üst konuya ve ticari değere (0–3, CPC) bak.</li>
+            <li>Search Console gerçek tıklama verir ama hacim vermez; 8–20. sıradaki sorgular en hızlı kazançtır.</li>
+            <li>Google Ads kullanan bir sitede arama terimleri raporu ve ücretli-organik raporu en dürüst kelime verisidir; reklam organik sıralamayı etkilemez.</li>
+            <li>Her niyete bir sayfa: eşanlamlılar tek sayfada, farklı hizmetler ayrı sayfada; semt başına şablon sayfa doorway riskidir.</li>
+            <li>"Yakınımdaki" yazmak, yoğunluk hesabı, LSI kelimeler ve meta keywords işe yaramaz.</li>
+            <li>Yeni sitede genel terimde hızlı zirve gerçekçi değil; önce marka ve uzun kuyruk.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search Essentials — <a href="https://developers.google.com/search/docs/essentials">developers.google.com/search/docs/essentials</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--info">3. taraf</span> Semrush — 12 of the Biggest SEO Myths — <a href="https://www.semrush.com/blog/seo-myths/">semrush.com/blog/seo-myths</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--info">3. taraf</span> Semrush — Search Intent (21 Kas 2024) — <a href="https://www.semrush.com/blog/search-intent/">semrush.com/blog/search-intent</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--info">3. taraf</span> Backlinko — On-Page SEO: The Definitive Guide (güncelleme 15 Eki 2026) — <a href="https://backlinko.com/on-page-seo">backlinko.com/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--info">3. taraf</span> PPC Land (Ahrefs verisi) — Google's AI summaries now swallow 58% of clicks — <a href="https://ppc.land/googles-ai-summaries-now-swallow-58-of-clicks-that-once-went-to-websites/">ppc.land/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Keyword Research guide — <a href="https://ahrefs.com/blog/keyword-research/">ahrefs.com/blog/keyword-research</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--info">3. taraf</span> ZEO — The impact of &amp;num=100 parameter removal on SEO reporting — <a href="https://zeo.org/resources/blog/the-impact-of-num-100-parameter-removal-on-seo-reporting">zeo.org/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Ücretli ve organik raporu — <a href="https://support.google.com/google-ads/answer/3097241">support.google.com/google-ads/answer/3097241</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Kalite Puanı ve Ad Rank — <a href="https://support.google.com/google-ads/answer/6167118">support.google.com/google-ads/answer/6167118</a> · <a href="https://support.google.com/google-ads/answer/1722122">answer/1722122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — On-Page SEO guide — <a href="https://ahrefs.com/blog/on-page-seo/">ahrefs.com/blog/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Long Does It Take to Rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/blog/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--info">3. taraf</span> Whitespark — Local Search Ranking Factors 2026 — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Local SEO rehberi — <a href="https://ahrefs.com/blog/local-seo/">ahrefs.com/blog/local-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Yerel sıralamayı iyileştirme ipuçları — <a href="https://support.google.com/business/answer/7091">support.google.com/business/answer/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--info">3. taraf</span> "Near me" optimizasyonu rehberleri — <a href="https://intercom.help/seo-help/en/articles/8287822-should-i-optimize-for-near-me-keywords">intercom.help/…/near-me-keywords</a> · <a href="https://www.localvisibilitysystem.com/2018/01/29/how-to-rank-for-near-me-local-search-terms/">localvisibilitysystem.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Optimizing for generative AI search — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="03-kurallar-ve-siralama.html"><span class="dir">&larr; Önceki</span><span class="ttl">Resmî kurallar ve sıralama sistemleri</span></a>
+        <a class="next" href="05-sayfa-ici.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Sayfa içi SEO</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

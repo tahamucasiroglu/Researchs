@@ -57,7 +57,7 @@ Proje yazmadan önce bakılacak güncel, Türkçe API başvurusu: erişim seviye
 
 ### [Rehberler](Rehberler/)
 
-Türkiye'deki mevzuata göre hazırlanmış genel rehberler. Rakamlar yazıldıkları tarihin mevzuatına dayanır; karar vermeden önce resmi kaynaktan teyit edin. Hukuki, mali veya yatırım danışmanlığı yerine geçmez.
+Belirli bir durumla karşılaşıldığında okunacak genel rehberler: Türkiye mevzuatına dayanan hukuki ve mali konular, dijital yayın ve gelir, teknik başvuru konuları. Rakamlar ve kurallar yazıldıkları tarihe dayanır; karar vermeden önce resmi kaynaktan teyit edin. Hukuki, mali veya yatırım danışmanlığı yerine geçmez.
 
 | Rehber | Açıklama |
 |---|---|
@@ -65,6 +65,7 @@ Türkiye'deki mevzuata göre hazırlanmış genel rehberler. Rakamlar yazıldık
 | [YouTube'da Oyun](Rehberler/YouTube-Oyun/) | YouTube Playables'a oyun yayınlamak ve oyun video kanalı: şartlar, SDK, AI ile geliştirme, gelir, telif, oyun fikirleri, Roblox benzeri ortamlar. |
 | [Mesajlaşma Altyapıları](Rehberler/Mesajlasma-Altyapilari/) | Telegram Bot API, WhatsApp Business API, BiP Keşfet API ve SMS: uç noktalar, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları. |
 | [Şirket Kurma](Rehberler/Sirket-Kurma/) | Şahıs mı limited mi, vergi ve Bağ-Kur, genç girişimci istisnası, giderler, yurt dışı şirket, ödeme altyapıları ve maliyet senaryoları. |
+| [SEO](Rehberler/SEO/) | Bir sitenin Google, Bing, Yandex ve yapay zekâ aramalarında organik görünmesi, 21 bölüm: tarama ve dizine ekleme, sayfa içi SEO, yapılandırılmış veri, hız, yerel SEO, bağlantılar, site denetimi ve kara şapkadan korunma. |
 
 ## Çalışma Günlüğü
 

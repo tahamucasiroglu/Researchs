@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google nasıl çalışır — SEO Rehberi</title>
+<meta name="description" content="Google'ın bir sayfayı bulma, tarama, işleme (render), dizine ekleme ve sonuçlarda sunma adımları; mobil öncelikli dizin, kanonik seçimi, üç teknik asgari gereksinim ve kalkan araçlar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Google nasıl çalışır</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 02 · Temeller</div>
+        <h1 class="page-title">Google nasıl çalışır</h1>
+        <p class="lede">Bir sayfanın aramada görünmesi için önce bulunması, sonra indirilmesi, işlenmesi, dizine eklenmesi ve en sonunda bir aramaya uygun görülmesi gerekir.
+      Her adımda sayfa elenebilir. Bu bölüm adımları sırayla anlatır; bitirdiğinde "sayfam neden Google'da yok?" sorusunda hangi adıma bakacağını bileceksin.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 12 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Google üç ana aşamada çalışır: tarama, dizine ekleme, sunma. Arada JavaScript'i çalıştıran bir işleme (render) adımı vardır.</li>
+            <li>robots.txt <em>taramayı</em>, <code>noindex</code> <em>dizine eklemeyi</em> denetler. İkisini karıştırmak en sık yapılan hatadır.</li>
+            <li>Resmî asgari koşul yalnız üçtür: Googlebot engellenmemiş, sayfa HTTP 200 dönüyor, içerik dizine eklenebilir (son güncelleme 18 Aralık 2025).</li>
+            <li>Google sitenin <strong>mobil</strong> sürümünü tarar ve dizine ekler; 5 Temmuz 2024'ten beri mobilde hiç açılmayan site dizine girmiyor.</li>
+            <li>Google'ın önbelleği (<code>cache:</code>) 2024'te kalktı; Google'ın sayfayı nasıl gördüğüne Search Console'daki URL Denetimi ile bakılır.</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="genel-akis"><span class="h-num">§ 1</span>Genel akış</h2>
+        <p>Google'ın belgesi süreci üç aşamada anlatır: <strong>tarama</strong> (crawling), <strong>dizine ekleme</strong> (indexing) ve <strong>sunma</strong> (serving) <sup class="kaynak"><a href="#k1">[1]</a></sup>.
+          Taramadan önce adresin <em>bulunması</em>, taramayla dizin arasında da sayfanın bir tarayıcıdaki gibi <em>işlenmesi</em> (render) gelir. Google üç şeyi açıkça yazar:
+          dizine eklemeyi garanti etmez, dizindeki sayfanın görünmesini garanti etmez, sıralama için para almaz <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+
+        <div class="sema-kaydir"><svg viewBox="0 0 760 210" role="img" aria-labelledby="akis-baslik akis-aciklama" style="display:block;margin:1.2rem 0;font-family:inherit">
+          <title id="akis-baslik">Google'ın çalışma akışı</title>
+          <desc id="akis-aciklama">Beş kutu soldan sağa: Bulma, Tarama, İşleme, Dizine ekleme, Sunma. Altlarında her adımı etkileyen araç: bağlantılar ve site haritası; robots.txt ve sunucu yanıtı; JavaScript ve CSS erişimi; noindex ve kanonik; konum, dil ve cihaz.</desc>
+          <g style="fill:var(--yuzey);stroke:var(--cizgi);stroke-width:1.5">
+            <rect x="4" y="20" width="130" height="64" rx="10"/>
+            <rect x="156" y="20" width="130" height="64" rx="10"/>
+            <rect x="308" y="20" width="130" height="64" rx="10"/>
+            <rect x="460" y="20" width="130" height="64" rx="10"/>
+            <rect x="612" y="20" width="140" height="64" rx="10"/>
+          </g>
+          <g style="stroke:var(--vurgu);stroke-width:2;fill:none">
+            <path d="M134 52 H152"/><path d="M286 52 H304"/><path d="M438 52 H456"/><path d="M590 52 H608"/>
+          </g>
+          <g style="fill:var(--vurgu)">
+            <path d="M152 47 L157 52 L152 57 Z"/><path d="M304 47 L309 52 L304 57 Z"/><path d="M456 47 L461 52 L456 57 Z"/><path d="M608 47 L613 52 L608 57 Z"/>
+          </g>
+          <g style="fill:var(--yazi);font-size:15px;font-weight:600" text-anchor="middle">
+            <text x="69" y="49">1. Bulma</text>
+            <text x="221" y="49">2. Tarama</text>
+            <text x="373" y="49">3. İşleme</text>
+            <text x="525" y="49">4. Dizine ekleme</text>
+            <text x="682" y="49">5. Sunma</text>
+          </g>
+          <g style="fill:var(--soluk);font-size:12px" text-anchor="middle">
+            <text x="69" y="69">URL keşfi</text>
+            <text x="221" y="69">Googlebot indirir</text>
+            <text x="373" y="69">render, JS çalışır</text>
+            <text x="525" y="69">anlama, kanonik</text>
+            <text x="682" y="69">sıralama, sonuç</text>
+          </g>
+          <g style="fill:var(--vurgu2);font-size:12px" text-anchor="middle">
+            <text x="69" y="120">bağlantılar</text><text x="69" y="137">site haritası</text>
+            <text x="221" y="120">robots.txt</text><text x="221" y="137">sunucu yanıtı</text>
+            <text x="373" y="120">JS/CSS erişimi</text><text x="373" y="137">200 dönmeli</text>
+            <text x="525" y="120">noindex</text><text x="525" y="137">rel=canonical</text>
+            <text x="682" y="120">konum, dil</text><text x="682" y="137">cihaz, niyet</text>
+          </g>
+          <text x="380" y="185" text-anchor="middle" style="fill:var(--soluk);font-size:12px">Renkli alt satırlar: o adımı senin denetleyebildiğin araçlar</text>
+        </svg></div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Adım</th><th>Ne olur</th><th>Senin aracın</th><th>Ayrıntı</th></tr></thead>
+            <tbody>
+              <tr><td>Bulma</td><td>Google adresin varlığından haberdar olur</td><td>İç bağlantılar, site haritası, dış bağlantılar</td><td><a href="09-tarama-ve-dizin.html">Bölüm 9</a></td></tr>
+              <tr><td>Tarama</td><td>Googlebot sayfayı indirir</td><td>robots.txt, sunucu hızı ve durum kodu</td><td><a href="09-tarama-ve-dizin.html#robots-txt">Bölüm 9</a></td></tr>
+              <tr><td>İşleme</td><td>Sayfa bir tarayıcı motorunda çalıştırılır</td><td>Sunucuda hazır HTML, erişilebilir JS/CSS</td><td><a href="10-performans-mobil-js.html">Bölüm 10</a></td></tr>
+              <tr><td>Dizine ekleme</td><td>İçerik çözümlenir, kopyalar kümelenir, kanonik seçilir</td><td><code>noindex</code>, <code>rel="canonical"</code>, içerik kalitesi</td><td><a href="09-tarama-ve-dizin.html">Bölüm 9</a>, <a href="07-icerik-kalitesi.html">Bölüm 7</a></td></tr>
+              <tr><td>Sunma</td><td>Arama için en uygun sonuçlar seçilir</td><td>İlgililik, kalite, yerel sinyaller</td><td><a href="03-kurallar-ve-siralama.html">Bölüm 3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bulma"><span class="h-num">§ 2</span>1. Bulma: Google adresi nereden öğrenir</h2>
+        <p>Web'in merkezî bir kayıt defteri yoktur. Google yeni adresleri üç yoldan öğrenir <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul>
+          <li><strong>Bağlantılar:</strong> zaten bildiği sayfalardaki bağlantılardan (kendi sitendeki iç bağlantılar dahil).</li>
+          <li><strong>Site haritası</strong> (sitemap: sitedeki adreslerin listesini veren XML dosyası).</li>
+          <li><strong>Daha önce ziyaret ettiği sayfalar:</strong> bilinen adresler yeniden ziyaret edilir.</li>
+        </ul>
+        <p>Bu yüzden bir sayfaya site içinden hiç bağlantı verilmemişse ("öksüz sayfa") bulunması zorlaşır. Google'ın bağlantı belgesi, dizine girmesi istenen her sayfaya
+          site içinden en az bir bağlantı gelmesini ister ve yalnız <code>&lt;a href="…"&gt;</code> biçimindeki bağlantıların güvenilir biçimde izlendiğini yazar (ayrıntı <a href="05-sayfa-ici.html">Bölüm 5</a>).</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">Google bu "bağlantıları" güvenilir izlemez</span></div>
+<pre><code><span class="k-etiket">&lt;span</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"git('/fiyatlar')"</span><span class="k-etiket">&gt;</span>Fiyatlar<span class="k-etiket">&lt;/span&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"#/fiyatlar"</span><span class="k-etiket">&gt;</span>Fiyatlar<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span></div>
+<pre><code><span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/fiyatlar"</span><span class="k-etiket">&gt;</span>Randevu programı paket fiyatları<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+
+        <h2 id="tarama"><span class="h-num">§ 3</span>2. Tarama: Googlebot sayfayı indirir</h2>
+        <p><strong>Googlebot</strong>, Google'ın arama için kullandığı tarayıcı programdır. Nereyi, ne sıklıkla ve kaç sayfa tarayacağına kendisi karar verir.
+          Sunucuyu boğmamak için hızını kendisi ayarlar; sunucu 500 hatası verirse bunu "yavaşla" diye yorumlar <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <ul>
+          <li>Ortalamada birkaç saniyede bir istekten fazlasını yapmaması hedeflenir; kısa süreli artışlar olabilir <sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+          <li>Google'ın tarayıcıları çoğunlukla ABD IP adreslerinden gelir. ABD'yi engelleyen bir güvenlik duvarı Googlebot'u da engeller <sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>.</li>
+          <li>Varsayılan protokol HTTP/1.1'dir; HTTP/2 desteklenir ama sıralamaya katkısı yoktur <sup class="kaynak"><a href="#k7">[7]</a></sup>.</li>
+          <li>Giriş isteyen sayfalar ve robots.txt ile engellenen adresler taranmaz <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+        </ul>
+
+        <h3 id="robots-ve-noindex-ayrimi">robots.txt ile noindex arasındaki fark</h3>
+        <p>Bu eğitimin en önemli ayrımlarından biri burada başlar:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Araç</th><th>Hangi adımı durdurur</th><th>Ne yapmaz</th></tr></thead>
+            <tbody>
+              <tr><td><code>robots.txt</code> içinde <code>Disallow</code></td><td>Taramayı</td><td>Adresi sonuçlardan çıkarmaz. Başka sitelerden bağlantı alıyorsa adres açıklamasız biçimde yine görünebilir <sup class="kaynak"><a href="#k3">[3]</a></sup></td></tr>
+              <tr><td><code>&lt;meta name="robots" content="noindex"&gt;</code> ya da <code>X-Robots-Tag: noindex</code> <sup class="kaynak"><a href="#k5">[5]</a></sup></td><td>Dizine eklemeyi</td><td>Taramayı durdurmaz; tersine, okunabilmesi için sayfanın <strong>taranabilir</strong> olması gerekir <sup class="kaynak"><a href="#k4">[4]</a></sup></td></tr>
+              <tr><td>Parola / giriş</td><td>Hem kullanıcıyı hem botu</td><td>Gizli tutmanın tek kesin yolu budur <sup class="kaynak"><a href="#k6">[6]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bir sayfayı hem robots.txt ile engelleyip hem de içine <code>noindex</code> koymak, <code>noindex</code>'in hiç görülmemesi demektir: Google sayfayı indiremediği için etiketi okuyamaz <sup class="kaynak"><a href="#k4">[4]</a></sup>.
+            Sonuçlardan çıkarmak istediğin sayfayı engelleme; taramaya açık bırak ve <code>noindex</code> ver. Ayrıntılar <a href="09-tarama-ve-dizin.html#robots-txt">Bölüm 9</a>'da.</p>
+        </aside>
+
+        <h3 id="tarama-hizi">Tarama hızı ve sunucu yanıtları</h3>
+        <p>Tarama hızını Search Console'dan ayarlamak artık mümkün değil. Hız, sunucunun verdiği yanıtlarla yönetilir:</p>
+        <ul>
+          <li><strong>500, 502, 503 ve 429</strong> yanıtları taramayı geçici olarak yavaşlatır. Bu yanıtlar <em>sürekli</em> dönerse adresler zamanla dizinden düşer <sup class="kaynak"><a href="#k17">[17]</a></sup>.</li>
+          <li>Kısa bakımda <code>503</code> ve <code>Retry-After</code> başlığı döndürülür. Bakım sayfasını <code>200</code> ile göstermek, "bakımdayız" yazısının dizine girmesine yol açabilir.</li>
+          <li>Tarama hızını kısmak için <code>401</code>/<code>403</code> kullanılmaz <sup class="kaynak"><a href="#k17">[17]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>8 Ocak 2024:</strong> Search Console'daki tarama hızı sınırlayıcı (Crawl Rate Limiter) kaldırıldı. Tarama hızını düşürmek için sunucu geçici olarak 500, 503 ya da 429 döndürür <sup class="kaynak"><a href="#k18">[18]</a></sup>.</p>
+        </aside>
+        <div class="kod">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">kısa bakım sırasında sunucu yanıtı</span></div>
+<pre><code>HTTP/1.1 503 Service Unavailable
+Retry-After: 3600</code></pre>
+        </div>
+
+        <h3 id="googlebot-dogrulama">Gerçek Googlebot'u ayırt etmek</h3>
+        <p>İstek başlığındaki tarayıcı adı (user-agent) kolayca taklit edilir. Sunucu günlüğünde "Googlebot" yazması isteğin Google'dan geldiğini kanıtlamaz.
+          Google iki doğrulama yolu verir: IP adresine <strong>ters DNS sorgusu</strong> yapıp Google'a ait bir alan adına çıktığını, sonra o ada ileri sorguyla aynı IP'nin döndüğünü görmek;
+          ya da IP'yi Google'ın yayımladığı IP aralıklarıyla karşılaştırmak <sup class="kaynak"><a href="#k6">[6]</a></sup>. Bot engelleme kuralı yazmadan önce bu kontrol yapılmalıdır.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>Komut satırı</span><span class="dosya">ters + ileri DNS (IP günlükten alınır)</span></div>
+<pre><code><span class="k-yorum"># 1) Ters sorgu: IP hangi ada çıkıyor? Google'a ait bir alan adıyla bitmeli</span>
+nslookup &lt;gunlukteki-ip&gt;
+<span class="k-yorum"># 2) İleri sorgu: o ad aynı IP'yi geri vermeli</span>
+nslookup &lt;1-adimda-cikan-ad&gt;</code></pre>
+        </div>
+
+        <h3 id="iki-mb-siniri">Dosya boyutu sınırı</h3>
+        <p>Googlebot belgesi Şubat 2026'dan beri arama için desteklenen bir dosyanın <strong>ilk 2 MB'ını</strong> (sıkıştırılmamış boyut), PDF'in ilk 64 MB'ını işlediğini yazıyor;
+          diğer Google tarayıcıları için varsayılan 15 MB <sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Google bunun bir davranış değişikliği değil, belgenin açıklanması olduğunu söylüyor <sup class="kaynak"><a href="#k21">[21]</a></sup>.
+          Sıradan bir sayfanın HTML'i bu sınırın çok altındadır. Risk, HTML'e base64 ile gömülmüş görsel ya da yazı tipi, dev satır içi JSON gibi şişirilmiş sayfalardadır; ana içerik HTML'de üste yakın tutulmalıdır.</p>
+
+        <h2 id="isleme"><span class="h-num">§ 4</span>3. İşleme (render): JavaScript çalışır</h2>
+        <p>Google sayfayı güncel bir tarayıcı motoruyla (Chromium tabanlı Web Rendering Service) işler ve JavaScript'i çalıştırır <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup>.
+          Yani JavaScript ile sonradan gelen içerik de görülebilir. Ama bu ücretsiz değildir: sayfa önce bir işleme kuyruğuna girer.</p>
+        <ul>
+          <li>Vercel ve MERJ'in Nisan 2024 ölçümünde kuyruk gecikmesinin ortancası yaklaşık 10 saniye, %75'lik dilimi yaklaşık 26 saniye çıktı; uçlarda saatler görüldü. Ölçüm 3 site ve 37 bin işlem üzerinden; genellenmemeli <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+          <li>200 dışında durum kodu dönen sayfalar işlenmeyebilir; robots.txt ile engellenen JS ve CSS dosyaları işlenmez <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>İlk HTML'de <code>noindex</code> varsa Google işleme adımını atlayabilir. "<code>noindex</code>'i JavaScript ile sonradan kaldırırım" yöntemine güvenilmez <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>İşleme sırasında localStorage, sessionStorage ve çerezler her yüklemede temizlenir; izin istekleri reddedilir; Googlebot tıklamaz, kaydırmaz, yazı yazmaz <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Google JavaScript çalıştırır ama <strong>herkes çalıştırmaz.</strong> Yapay zekâ tarayıcılarının büyük kısmı (ör. GPTBot, ClaudeBot) JS dosyasını indirir ama çalıştırmaz <sup class="kaynak"><a href="#k10">[10]</a></sup>;
+            sosyal ağların önizleme botları da genelde çalıştırmaz. Başlık, açıklama, kanonik, paylaşım etiketleri ve ana metin <strong>ilk HTML yanıtında</strong> olmalıdır. Sunucuda HTML üreten bir yapı (ör. ASP.NET MVC/Razor, PHP, statik üretim) bu yüzden en güvenli yoldur (<a href="10-performans-mobil-js.html">Bölüm 10</a>).</p>
+        </aside>
+
+        <h2 id="dizine-ekleme"><span class="h-num">§ 5</span>4. Dizine ekleme: Google sayfayı anlar ve saklar</h2>
+        <p>Dizin (index), Google'ın sayfalar hakkında tuttuğu dev veritabanıdır. Bu adımda Google sayfanın metnini, önemli etiketlerini ve özniteliklerini (<code>&lt;title&gt;</code>, görsellerin <code>alt</code> metni gibi),
+          görsellerini ve videolarını çözümler <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+
+        <h3 id="kanoniklestirme">Kanonikleştirme: kopyalar arasından asıl adresi seçmek</h3>
+        <p>Aynı ya da çok benzer içerik birden çok adreste olabilir: <code>http</code> ve <code>https</code>, <code>www</code>'li ve <code>www</code>'siz, parametreli adresler, yazdırma sürümleri.
+          Google bunları bir <strong>küme</strong> olarak toplar ve kümeyi en iyi temsil eden adresi <strong>kanonik</strong> (asıl adres) seçer. Sonuçlarda genelde kanonik gösterilir; diğerleri alternatif olarak kalır <sup class="kaynak"><a href="#k1">[1]</a></sup>.
+          Dil, hedef ülke ve kullanılabilirlik gibi sinyaller de kanonik sayfa için toplanır.</p>
+        <p>Sen tercih bildirebilirsin, ama son kararı Google verir. Sinyallerin gücü <sup class="kaynak"><a href="#k15">[15]</a></sup><sup class="kaynak"><a href="#k16">[16]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sinyal</th><th>Güç</th></tr></thead>
+            <tbody>
+              <tr><td>Kalıcı yönlendirme (301/308)</td><td>Güçlü</td></tr>
+              <tr><td><code>&lt;link rel="canonical"&gt;</code></td><td>Güçlü, ama bir <em>ipucu</em>; kural değil</td></tr>
+              <tr><td>Site haritasında yer almak</td><td>Zayıf</td></tr>
+              <tr><td>HTTPS olması</td><td>Google HTTPS'i HTTP'ye tercih eder</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">her sayfanın &lt;head&gt; kısmında, mutlak adresle</span></div>
+<pre><code><span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/hizmetler/"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+
+        <h3 id="neden-dizine-girmez">Bir sayfa neden dizine girmez</h3>
+        <p>Google'ın saydığı yaygın sebepler: düşük kaliteli içerik, <code>noindex</code> kuralı ve dizine eklemeyi zorlaştıran tasarım <sup class="kaynak"><a href="#k1">[1]</a></sup>. Bunlara uygulamada sık görülenler eklenir:
+          sayfanın robots.txt ile engellenmesi, 200 yerine hata kodu dönmesi, "bulunamadı" yazan ama 200 dönen sayfa (<strong>soft 404</strong>), başka bir adresin kanonik seçilmesi.
+          Search Console'daki Sayfa dizine ekleme raporu her sayfanın durumunu bu sebeplere göre ayırır <sup class="kaynak"><a href="#k23">[23]</a></sup>; ayrıntı <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</p>
+
+        <h2 id="sunma"><span class="h-num">§ 6</span>5. Sunma: sonuçlar nasıl seçilir</h2>
+        <p>Biri arama yaptığında Google, dizinden o arama için en uygun gördüğü sonuçları seçer. Seçim konum, dil ve cihaz dahil "yüzlerce faktöre" göre yapılır <sup class="kaynak"><a href="#k1">[1]</a></sup>.
+          Sorguya göre sonuç sayfasının biçimi de değişir: Google'ın kendi örneğinde "bisiklet tamircisi" yerel sonuç, "modern bisiklet" görsel sonuç getirir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <ul>
+          <li>Sıralamayı yapan sistemler (BERT, RankBrain, PageRank, tazelik, yorumlar…) <a href="03-kurallar-ve-siralama.html#siralama-sistemleri">Bölüm 3</a>'te.</li>
+          <li>Bir siteden ilk sonuçlarda genelde en çok 2 sonuç gösterilir <sup class="kaynak"><a href="#k22">[22]</a></sup>.</li>
+          <li>Google sıralama için para kabul etmez <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Küçük bir nakliye firması "kendi telefonumda aratınca üstteyim, müşteri aratınca yokum" diyor. İkisi de doğru olabilir: sunma adımı aramayı yapanın <strong>konumuna</strong> bakar.
+            Firmanın deposunun yanındaki biriyle şehrin öbür ucundaki birinin gördüğü harita sonuçları farklıdır. Bu bir arıza değil, yerel aramanın doğasıdır (<a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+
+        <h2 id="mobil-oncelik"><span class="h-num">§ 7</span>Mobil öncelikli dizin</h2>
+        <p>Google bir siteyi <strong>akıllı telefon tarayıcısıyla</strong> tarar ve dizine sitenin <strong>mobil sürümünü</strong> ekler. Sıralamada da bu sürüm kullanılır <sup class="kaynak"><a href="#k11">[11]</a></sup>.
+          Masaüstünde olup mobilde olmayan içerik, Google için yok demektir.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>31 Ekim 2023:</strong> Google mobil öncelikli dizine geçişin tamamlandığını duyurdu <sup class="kaynak"><a href="#k12">[12]</a></sup>.
+            <strong>5 Temmuz 2024:</strong> kalan siteler de akıllı telefon tarayıcısına geçti; mobilde hiç açılmayan site artık dizine eklenmiyor <sup class="kaynak"><a href="#k13">[13]</a></sup>.
+            "Mobil dostu değil ama mobilde açılıyor" bir site dizine girer. <strong>1 Aralık 2023:</strong> Mobile-Friendly Test aracı ve Mobil Kullanılabilirlik raporu kaldırıldı; yerine Lighthouse kullanılır <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        </aside>
+        <ul>
+          <li><strong>Akordeon ve sekme serbest.</strong> Mobilde yer kazanmak için içeriği açılır kapanır alanlara koymak sorun değildir; ama içeriği mobilde tamamen kaldırmak, o içeriğin dizinde olmaması demektir <sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+          <li><strong>Aynı robots etiketi.</strong> Mobil ve masaüstü sürümde robots meta etiketi aynı olmalı. Mobil sürüme yanlışlıkla <code>noindex</code> konursa site dizinden düşer <sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+          <li><strong>Aynı yapılandırılmış veri, başlık, açıklama ve alt metin</strong> iki sürümde de bulunmalı (ayrı mobil sürüm kullanan siteler için) <sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+          <li><strong>Ana içerik tıklamayla yüklenmemeli.</strong> Googlebot tıklamaz.</li>
+          <li>En basit ve önerilen yol <strong>duyarlı tasarım</strong>dır (responsive: tek HTML, tek adres, ekran genişliğine göre düzen) <sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Önemli içeriği sekmeye ya da akordeona koyma, Google onu daha az önemser."</p>
+          <p class="mit-gercek">Google'ın mobil öncelikli dizin belgesi akordeon ve sekme kullanımını açıkça serbest sayıyor <sup class="kaynak"><a href="#k11">[11]</a></sup>. Bazı eğitimlerde (ör. Backlinko'nun sıralama faktörleri listesi) hâlâ eski öneri geçer.</p>
+        </aside>
+
+        <h2 id="teknik-gereksinimler"><span class="h-num">§ 8</span>Üç teknik asgari gereksinim</h2>
+        <p>Google'ın Search Essentials belgesinin teknik bölümü (son güncelleme 18 Aralık 2025) bir sayfanın dizine girmeye <em>aday</em> olması için yalnız üç koşul sayar <sup class="kaynak"><a href="#k2">[2]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ol class="steps">
+          <li><strong>Googlebot engellenmemiş olmalı.</strong> Sayfa herkese açık olmalı; giriş isteyen sayfa taranmaz; robots.txt engellememeli.</li>
+          <li><strong>Sayfa çalışmalı.</strong> HTTP <code>200</code> dönmeli. 4xx ve 5xx hata sayfaları dizine eklenmez.</li>
+          <li><strong>Dizine eklenebilir içerik olmalı.</strong> Desteklenen dosya türünde olmalı ve spam politikalarını ihlal etmemeli.</li>
+        </ol>
+        <p>Bunları karşılamak dizine eklemeyi <strong>garanti etmez</strong>; yalnız kapıyı açar. Listelenmek ücretsizdir <sup class="kaynak"><a href="#k2">[2]</a></sup>. Geri kalan her şey (içerik kalitesi, başlıklar, hız, bağlantılar)
+          "en iyi uygulama" sınıfındadır ve sıralamayı belirler.</p>
+        <ul class="checklist">
+          <li>Sayfa tarayıcıda giriş yapmadan açılıyor.</li>
+          <li>Sunucu bu adres için <code>200</code> döndürüyor (yönlendirme ya da hata değil).</li>
+          <li>robots.txt bu yolu engellemiyor; sayfada <code>noindex</code> yok.</li>
+          <li>Ana metin HTML'de gerçekten var (görselin içinde yazı değil, boş bir JS kabuğu değil).</li>
+        </ul>
+
+        <h2 id="kalkan-araclar"><span class="h-num">§ 9</span>Kalkan araçlar: önbellek ve "site:" sayısı</h2>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Ocak 2024:</strong> sonuçlardaki "önbellek" (cache) bağlantısı kalktı. <strong>Eylül 2024:</strong> <code>cache:</code> operatörü de kaldırıldı <sup class="kaynak"><a href="#k19">[19]</a></sup>.
+            Google'ın sayfayı nasıl gördüğüne, hangi kanoniği seçtiğine ve işlenmiş HTML'e artık Search Console'daki <strong>URL Denetimi</strong> aracından bakılır.</p>
+        </aside>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"<code>site:ornek.com</code> araması kaç sonuç gösteriyorsa Google'da o kadar sayfam var."</p>
+          <p class="mit-gercek">Google bu listenin tam olmadığını açıkça söylüyor <sup class="kaynak"><a href="#k20">[20]</a></sup>. Doğru sayı Search Console'daki Sayfa dizine ekleme raporundadır <sup class="kaynak"><a href="#k23">[23]</a></sup>.
+            "Eski sitenin binlerce sayfası görünüyor" gibi bir şikâyette ilk adım, sayının nereden ölçüldüğünü sormaktır (<a href="16-sorun-giderme.html">Bölüm 16</a>).</p>
+        </aside>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 10</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Akış: bulma → tarama → işleme → dizine ekleme → sunma. "Sayfam yok" sorusunda önce hangi adımda takıldığını bul.</li>
+            <li>robots.txt taramayı, <code>noindex</code> dizini denetler; <code>noindex</code>'in görülmesi için sayfa taranabilir olmalı.</li>
+            <li>Resmî asgari koşul üçtür: engellenmemiş, 200 dönen, dizine eklenebilir içerik. Karşılamak garanti değildir.</li>
+            <li>Google JS çalıştırır ama gecikmeyle; diğer botların çoğu çalıştırmaz. Önemli içerik ilk HTML'de olmalı.</li>
+            <li>Kopyalar kümelenir ve Google bir kanonik seçer; 301 ve <code>rel="canonical"</code> güçlü, site haritası zayıf sinyaldir.</li>
+            <li>Google mobil sürümü dizine ekler; 5 Temmuz 2024'ten beri mobilde açılmayan site dizine girmiyor. Akordeon ve sekme serbest.</li>
+            <li>Tarama hızı Search Console'dan değil, sunucu yanıtıyla (503/429) yönetilir; <code>cache:</code> yok, URL Denetimi var; <code>site:</code> sayısı güvenilir değil.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 11</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — How Google Search works — <a href="https://developers.google.com/search/docs/fundamentals/how-search-works">developers.google.com/…/how-search-works</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search technical requirements — <a href="https://developers.google.com/search/docs/essentials/technical">developers.google.com/…/essentials/technical</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Introduction to robots.txt — <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">developers.google.com/…/robots/intro</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Block search indexing with noindex — <a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">developers.google.com/…/block-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Robots meta tag and X-Robots-Tag — <a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">developers.google.com/…/robots-meta-tag</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google — Overview of Google crawlers and fetchers — <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers">developers.google.com/crawling/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--info">3. taraf</span> Vercel / MERJ — How Google handles JavaScript throughout the indexing process (Nis 2024) — <a href="https://vercel.com/blog/how-google-handles-javascript-throughout-the-indexing-process">vercel.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026 (ikincil özetler üzerinden)</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--info">3. taraf</span> Vercel — The rise of the AI crawler (Ara 2024) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/blog/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026 (ikincil özetler üzerinden)</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Mobile-first indexing best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing">developers.google.com/…/mobile-sites-mobile-first-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Mobile-first indexing has landed (31 Eki 2023) — <a href="https://developers.google.com/search/blog/2023/10/mobile-first-is-here">developers.google.com/search/blog/2023/10/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google won't index sites that do not work on mobile after July 5 — <a href="https://searchengineland.com/google-wont-index-sites-that-do-not-work-on-mobile-devices-after-july-5th-442851">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google drops Mobile Usability report and Mobile-Friendly Test — <a href="https://searchengineland.com/google-officially-drops-mobile-usability-report-mobile-friendly-test-tool-and-mobile-friendly-test-api-435377">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — What is URL canonicalization — <a href="https://developers.google.com/search/docs/crawling-indexing/canonicalization">developers.google.com/…/canonicalization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Consolidate duplicate URLs — <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com/…/consolidate-duplicate-urls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — How HTTP status codes and network errors affect Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">developers.google.com/…/http-network-errors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Upcoming deprecation of Crawl Rate Limiter Tool (Kas 2023) — <a href="https://developers.google.com/search/blog/2023/11/sc-crawl-limiter-byebye">developers.google.com/search/blog/2023/11/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google Search completely kills the cache feature — <a href="https://searchengineland.com/google-search-completely-kills-the-cache-feature-446904">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — site: search operator — <a href="https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site">developers.google.com/…/all-search-site</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--info">3. taraf</span> DebugBear — Googlebot crawler file size limit — <a href="https://www.debugbear.com/blog/googlebot-crawler-file-size-limit">debugbear.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Page indexing report — <a href="https://support.google.com/webmasters/answer/7440203">support.google.com/webmasters/answer/7440203</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="01-seo-nedir.html"><span class="dir">&larr; Önceki</span><span class="ttl">SEO nedir, ne beklenmeli</span></a>
+        <a class="next" href="03-kurallar-ve-siralama.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Resmî kurallar ve sıralama sistemleri</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

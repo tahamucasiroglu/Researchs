@@ -24,6 +24,10 @@ Sayfa bu seçenekleri kategori kategori listeler, hangisinin ne zaman tercih edi
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
+## İlgili konular
+
+- [SEO Rehberi → Hız, mobil ve JavaScript](../../../Rehberler/SEO/10-performans-mobil-js.html) — SEO gereken herkese açık bir sitede Next.js gibi meta-framework'lerin ve sunucu tarafı render'ın ne zaman gerektiği.
+
 Resmi kaynak: [Node.js belgeleri](https://nodejs.org/docs/latest/api/) · [Vite](https://vite.dev/guide/) · [Next.js](https://nextjs.org/docs)
 
 ---

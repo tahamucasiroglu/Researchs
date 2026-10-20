@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yapılandırılmış veri — SEO Rehberi</title>
+<meta name="description" content="JSON-LD nedir, Google'ın yapılandırılmış veri kuralları, hâlâ işe yarayan türler (Organization, WebSite, LocalBusiness, BreadcrumbList, SoftwareApplication, VideoObject, Article), kaldırılan zengin sonuçlar, sahte puan riski, favicon ve Open Graph.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Yapılandırılmış veri</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 08 · Sayfa ve içerik</div>
+        <h1 class="page-title">Yapılandırılmış veri</h1>
+        <p class="lede">Yapılandırılmış veri, sayfanın ne anlattığını makinenin okuyacağı biçimde tarif eden küçük bir kod parçasıdır. Doğru kullanılırsa Google'ın sayfayı anlamasına ve sonuçlarda daha zengin görünmesine yardım eder; sıralamayı ise kendi başına yükseltmez. Bu bölümü bitirince hangi türlerin bugün hâlâ işe yaradığını, hangilerinin kaldırıldığını, neyin ceza getirdiğini ve kendi sitene ne ekleyeceğini bileceksin.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 18 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Google <strong>JSON-LD</strong> biçimini önerir; işaretleme sayfada görünen içeriği anlatmalı, uydurma bilgi içermemeli.</li>
+            <li>Yapılandırılmış veri sıralama faktörü değildir; görünümü (zengin sonucu) ve dolayısıyla tıklanmayı etkiler. Kural ihlalinin yaptırımı da sıralamayı değil zengin sonuç hakkını kaldırır.</li>
+            <li>Bugün hâlâ işe yarayanlar: Organization, WebSite (site adı), LocalBusiness ve alt türleri, BreadcrumbList, VideoObject, SoftwareApplication, Article yazar bilgisi.</li>
+            <li>Kaldırılanlar: HowTo (13 Eylül 2023), Sitelinks arama kutusu (21 Kasım 2024), 12 Haziran 2025'te yedi tür, <strong>FAQ zengin sonucu 7 Mayıs 2026'da herkes için</strong>. Eski işaretleme zarar vermez.</li>
+            <li>İşletme kendi sitesindeki yorumlarla yıldız alamaz; sahte ya da açıklanmamış teşvikli yorum yasaktır.</li>
+            <li>Yapay zekâ özellikleri (AI Overviews, AI Mode) için özel bir şema yoktur.</li>
+          </ul>
+        </div>
+
+        <!-- ============ 1 ============ -->
+        <h2 id="ne-ise-yarar"><span class="h-num">§ 1</span>Yapılandırılmış veri ne işe yarar, ne işe yaramaz</h2>
+        <p>Bir insan bir nakliye firmasının sayfasına bakınca adresi, telefonu ve çalışma saatlerini hemen tanır. Bir program ise sayfada yalnızca metin görür; "08:00–19:00" yazısının çalışma saati mi, bir maç skoru mu olduğunu tahmin etmek zorundadır. <strong>Yapılandırılmış veri</strong> (structured data) bu tahmini ortadan kaldırır: "Bu sayfa bir nakliye firmasını anlatıyor, adı şu, telefonu şu, şu saatlerde açık" diye açıkça söyler.</p>
+        <p>Kullanılan kelime dağarcığı <strong>schema.org</strong>'dur (arama motorlarının birlikte kurduğu, "işletme", "kişi", "video" gibi türleri ve alanlarını tanımlayan ortak sözlük). Google bu sözlüğün yalnızca bir kısmını kullanır ve her tür için kendi belgesinde hangi alanların zorunlu olduğunu yazar <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <h3 id="ne-kazandirir">Ne kazandırır</h3>
+        <ul>
+          <li><strong>Zengin sonuç</strong> (rich result: arama sonucunda düz mavi başlık ve açıklamanın ötesinde gösterilen yıldız, fiyat, video küçük resmi, işletme bilgisi gibi ek öğeler) için uygunluk.</li>
+          <li><strong>Varlık netliği:</strong> markanın adı, logosu, sosyal hesapları, sitenin adı gibi bilgileri tek yerden, çelişkisiz biçimde Google'a bildirmek.</li>
+          <li><strong>Daha dikkat çekici görünüm</strong> ve dolayısıyla daha yüksek tıklanma olasılığı.</li>
+        </ul>
+
+        <h3 id="ne-kazandirmaz">Ne kazandırmaz</h3>
+        <ul>
+          <li>Doğrudan sıralama artışı. Google'ın yapılandırılmış veri belgelerinde sıralamaya etkiden söz edilmez; işaretleme yalnızca zengin sonuç için <em>uygunluk</em> sağlar, gösterimi de garanti etmez <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+          <li>Yapay zekâ cevaplarında öne geçme. Google, AI Overviews ve AI Mode için özel bir şema gerekmediğini açıkça yazar <sup class="kaynak"><a href="#k17">[17]</a></sup> (ayrıntı: <a href="#yapay-zeka">Yapay zekâ özellikleri ve şema</a>).</li>
+        </ul>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Schema eklersen Google'da yükselirsin."</p>
+          <p class="mit-gercek">Yapılandırılmış veri sıralamayı değil görünümü ve tıklanmayı etkiler. Kural ihlalinde gelen elle işlem (manual action: bir Google çalışanının siteye verdiği yaptırım) bile sıralamayı değil, zengin sonuç hakkını kaldırır <sup class="kaynak"><a href="#k1">[1]</a></sup>. <span class="tag tag--ok">Resmî</span></p>
+        </aside>
+
+        <!-- ============ 2 ============ -->
+        <h2 id="json-ld"><span class="h-num">§ 2</span>Biçim: JSON-LD</h2>
+        <p>Yapılandırılmış veri sayfaya birkaç biçimde yazılabilir; Google'ın önerdiği biçim <strong>JSON-LD</strong>'dir (JSON for Linking Data: sayfanın HTML'ine dokunmadan, ayrı bir <code>&lt;script&gt;</code> etiketi içine yazılan JSON) <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>. Yazılımcı için en rahat biçim de budur: görünen HTML ile karışmaz, sunucu tarafında bir nesneden üretilebilir, şablona tek parça olarak eklenir.</p>
+
+        <h3 id="temel-alanlar">Temel parçalar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Anahtar</th><th>Ne demek</th><th>Örnek</th></tr></thead>
+            <tbody>
+              <tr><td><code>@context</code></td><td>Hangi sözlüğün kullanıldığı. Hemen her zaman schema.org.</td><td><code>"https://schema.org"</code></td></tr>
+              <tr><td><code>@type</code></td><td>Anlatılan şeyin türü. Mümkün olan <strong>en özel</strong> tür seçilir.</td><td><code>"MovingCompany"</code></td></tr>
+              <tr><td><code>@id</code></td><td>Bu varlığın kalıcı kimliği. Başka bloklar ona bu kimlikle başvurur.</td><td><code>"https://www.ornek.com/#org"</code></td></tr>
+              <tr><td><code>@graph</code></td><td>Birden çok varlığı tek blokta, birbirine bağlı olarak vermek için dizi.</td><td>Organization + WebSite</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">her sayfa · &lt;head&gt; içinde</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Organization"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka"</span>,
+  <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/"</span>
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>JSON-LD'yi sayfa açıldıktan sonra JavaScript ile eklemek yerine sunucunun gönderdiği ilk HTML'e koy. Google JavaScript'i çalıştırabilir ama gecikmeyle; yapay zekâ tarayıcıları ve sosyal ağ önizleme botlarının çoğu ise hiç çalıştırmaz. Ayrıntı: <a href="10-performans-mobil-js.html#diger-botlar">Bölüm 10</a>.</p>
+        </aside>
+
+        <!-- ============ 3 ============ -->
+        <h2 id="genel-kurallar"><span class="h-num">§ 3</span>Genel kurallar: neye izin var, neye yok</h2>
+        <p>Google'ın "Genel yapılandırılmış veri yönergeleri" belgesi bütün türler için geçerlidir <sup class="kaynak"><a href="#k1">[1]</a></sup>. Bunları çiğnemek, o sayfanın (ya da bütün sitenin) zengin sonuç hakkını kaybetmesine yol açabilir.</p>
+        <ol class="steps">
+          <li><strong>Görünen içeriği anlat.</strong> İşaretleme, kullanıcının sayfada gördüğü bilgiyle aynı olmalı. Sayfada olmayan bir puan, fiyat ya da soru-cevap JSON-LD'ye yazılmaz.</li>
+          <li><strong>En özel türü seç.</strong> Bir nakliye firması için genel <code>LocalBusiness</code> yerine <code>MovingCompany</code>; bir yazılım için <code>SoftwareApplication</code>.</li>
+          <li><strong>Zorunlu alanları eksiksiz doldur.</strong> Zorunlu alanı eksik olan öğe zengin sonuç için uygun sayılmaz. Önerilen alanlar isteğe bağlıdır ama ne kadar çok doğru bilgi verilirse o kadar iyi.</li>
+          <li><strong>Sahte ya da yanıltıcı içerik işaretleme.</strong> Uydurma yorum, gerçekte olmayan bir etkinlik, kullanıcıdan gizlenmiş içerik yasaktır.</li>
+          <li><strong>İşaretlenen sayfayı engelleme.</strong> robots.txt ile engellenmiş ya da <code>noindex</code> taşıyan sayfadaki işaretleme Google'a ulaşmaz (Google sayfayı ya göremez ya da dizine almaz). Tarama ve dizin kuralları: <a href="09-tarama-ve-dizin.html#robots-ve-noindex">Bölüm 9</a>.</li>
+        </ol>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Görünmeyen içeriği işaretlemek (sayfada olmayan "4,9 yıldız", gizli bir SSS bloğu, sayfada yazmayan fiyat) elle işleme yol açar <sup class="kaynak"><a href="#k1">[1]</a></sup>. Google'ın yapay zekâ önerileri de yapılandırılmış verinin görünür içerikle aynı olmasını ayrıca vurgular <sup class="kaynak"><a href="#k19">[19]</a></sup>.</p>
+        </aside>
+
+        <h3 id="yaptirim">Yaptırım neyi etkiler</h3>
+        <p>Yapılandırılmış veri ihlalinde gelen elle işlem <strong>sıralamayı değil</strong>, zengin sonuç gösterimini etkiler <sup class="kaynak"><a href="#k1">[1]</a></sup>. Sayfa aramada kalmaya devam eder ama yıldız, fiyat gibi süslemeler kaybolur. Bu, işaretlemeyi "kandırmak için" kullanmanın getirisini sıfırlar; riskini ise bırakır: bir kez güven kaybeden sitenin bütün zengin sonuçları gidebilir.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Zengin sonuç testi geçtiyse yıldızlar çıkar."</p>
+          <p class="mit-gercek">Testi geçmek zengin sonucu garanti etmez; yalnızca uygun olduğunu gösterir. Gösterip göstermemeye Google karar verir <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        </aside>
+
+        <h3 id="hangi-sayfaya">Hangi sayfaya hangi tür</h3>
+        <p>Aşağıdaki tablo, Google'ın tür belgelerindeki "nereye konur" önerilerinden derlenmiş pratik bir eşlemedir. Her site her türe ihtiyaç duymaz.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sayfa</th><th>Tür</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Ana sayfa</td><td><code>Organization</code> + <code>WebSite</code></td><td>Logo, sosyal hesaplar, site adı. Tek blokta <code>@graph</code> ile.</td></tr>
+              <tr><td>Ana sayfa ya da İletişim (yerel işletme)</td><td><code>LocalBusiness</code> alt türü</td><td>Ad, adres, telefon, saat; sayfadaki yazımla birebir aynı.</td></tr>
+              <tr><td>Hizmet / özellik sayfası</td><td><code>BreadcrumbList</code></td><td>Kullanıcının izlediği yol.</td></tr>
+              <tr><td>Blog yazısı, rehber</td><td><code>Article</code> (+ <code>BreadcrumbList</code>)</td><td>Yazar, yayın ve güncelleme tarihi.</td></tr>
+              <tr><td>Video izleme sayfası</td><td><code>VideoObject</code></td><td>Bkz. <a href="06-gorsel-ve-video.html">Bölüm 6</a>.</td></tr>
+              <tr><td>Yazılım indirme / ürün sayfası</td><td><code>SoftwareApplication</code></td><td>Zengin sonuç için gerçek puan ya da yorum şart.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ============ 4 ============ -->
+        <h2 id="organization"><span class="h-num">§ 4</span>Organization: kurumun kimlik kartı</h2>
+        <p><code>Organization</code>, sitenin arkasındaki kurumu anlatır: adı, logosu, iletişim bilgisi, sosyal hesapları. Google'ın belgesine göre <strong>zorunlu alanı yoktur</strong>; ana sayfaya ya da "Hakkımızda" sayfasına <strong>bir kez</strong> eklenir <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+
+        <h3 id="organization-alanlar">Önerilen alanlar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Alan</th><th>Ne için</th><th>Kural / not</th></tr></thead>
+            <tbody>
+              <tr><td><code>name</code>, <code>alternateName</code></td><td>Kurumun adı ve bilinen diğer adı</td><td>Tabeladaki, faturadaki gerçek ad.</td></tr>
+              <tr><td><code>url</code></td><td>Kurumun ana sitesi</td><td>Kanonik ana sayfa adresi.</td></tr>
+              <tr><td><code>logo</code></td><td>Sonuçlarda ve bilgi panelinde gösterilebilecek logo</td><td>En az <strong>112×112 px</strong>, taranabilir bir URL, beyaz zeminde düzgün görünmeli.</td></tr>
+              <tr><td><code>sameAs</code></td><td>Kurumun başka sitelerdeki resmî sayfaları</td><td>YouTube, X, Instagram, GitHub vb. profil adresleri.</td></tr>
+              <tr><td><code>contactPoint</code></td><td>Müşteri destek kanalı</td><td>Tür, e-posta/telefon, desteklenen diller.</td></tr>
+              <tr><td><code>address</code>, <code>telephone</code></td><td>Kurumun adresi ve telefonu</td><td>Yerel işletme için <code>LocalBusiness</code> daha uygundur.</td></tr>
+              <tr><td><code>vatID</code>, <code>taxID</code></td><td>Vergi kimliği</td><td>Kurumun gerçekliğini destekleyen bilgi.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: <sup class="kaynak"><a href="#k3">[3]</a></sup></p>
+
+        <h3 id="graph-ornegi">Organization ve WebSite birlikte: <code>@graph</code></h3>
+        <p>Ana sayfada kurumu ve siteyi tek blokta, birbirine bağlayarak vermek temiz bir yoldur. <code>@id</code> ile tanımlanan kurum, <code>publisher</code> alanında yeniden yazılmadan yalnızca kimliğiyle anılır.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">index.html (ana sayfa)</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@graph"</span>: [
+        {
+          <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Organization"</span>,
+          <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#org"</span>,
+          <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka"</span>,
+          <span class="k-anahtar">"alternateName"</span>: <span class="k-deger">"Örnek"</span>,
+          <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/"</span>,
+          <span class="k-anahtar">"logo"</span>: <span class="k-deger">"https://www.ornek.com/logo-512.png"</span>,
+          <span class="k-anahtar">"sameAs"</span>: [<span class="k-deger">"https://www.youtube.com/@ornek"</span>, <span class="k-deger">"https://x.com/ornek"</span>],
+          <span class="k-anahtar">"contactPoint"</span>: {
+            <span class="k-anahtar">"@type"</span>: <span class="k-deger">"ContactPoint"</span>,
+            <span class="k-anahtar">"contactType"</span>: <span class="k-deger">"customer support"</span>,
+            <span class="k-anahtar">"email"</span>: <span class="k-deger">"destek@ornek.com"</span>,
+            <span class="k-anahtar">"availableLanguage"</span>: [<span class="k-deger">"tr"</span>, <span class="k-deger">"en"</span>]
+          }
+        },
+        {
+          <span class="k-anahtar">"@type"</span>: <span class="k-deger">"WebSite"</span>,
+          <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#website"</span>,
+          <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka"</span>,
+          <span class="k-anahtar">"alternateName"</span>: [<span class="k-deger">"Örnek"</span>, <span class="k-deger">"ornek.com"</span>],
+          <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/"</span>,
+          <span class="k-anahtar">"publisher"</span>: { <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#org"</span> },
+          <span class="k-anahtar">"inLanguage"</span>: <span class="k-deger">"tr-TR"</span>
+        }
+  ]
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Organization'ı her sayfaya farklı değerlerle koyma (bir sayfada eski logo, ötekinde yeni ad). Tek yerde ve tutarlı olmalı; yerel işletmede <code>LocalBusiness</code> içindeki ad, adres ve telefon da sitede yazanla aynı olmalı <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>. Bu tutarlılığın yerel SEO'daki karşılığı NAP'tır: <a href="12-yerel-seo.html">Bölüm 12</a>.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Logo, paylaşım görseli olarak kötü bir seçimdir: Google logoları ve yazı ağırlıklı görselleri "tercih edilen görsel" olarak seçmez <sup class="kaynak"><a href="#k22">[22]</a></sup>. Logo <code>Organization.logo</code>'ya, sayfayı anlatan gerçek bir görsel <code>og:image</code>'a gider.</p>
+        </aside>
+
+        <!-- ============ 5 ============ -->
+        <h2 id="site-adi"><span class="h-num">§ 5</span>WebSite ve site adı</h2>
+        <p>Google arama sonuçlarında sayfa başlığının üstünde bir <strong>site adı</strong> gösterir. Bu adı belirlemenin en güçlü yolu <code>WebSite</code> işaretlemesidir <sup class="kaynak"><a href="#k4">[4]</a></sup>. Kurallar:</p>
+        <ul>
+          <li>İşaretleme alan adının ya da alt alan adının <strong>kök sayfasına</strong> (ana sayfa) konur.</li>
+          <li>Bir sitede <strong>tek ad</strong> olur. Alt dizinin (ör. <code>/blog</code>) kendi site adı olamaz.</li>
+          <li><code>alternateName</code> sıralı yedek adlar verir; Google ilk adı kullanamazsa sıradakine bakar.</li>
+          <li>HTTP/HTTPS ve www'li/www'siz sürümlerde <strong>aynı</strong> işaretleme bulunur.</li>
+          <li>Değişikliğin sonuçlara yansıması birkaç gün ile birkaç hafta sürebilir.</li>
+        </ul>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Google istediğin adı göstermiyorsa sırayla dene: önce <code>alternateName</code>'e alternatif ad ekle, o da tutmazsa küçük harfli alan adını (ör. <code>ornek.com</code>) yedek olarak ver <sup class="kaynak"><a href="#k4">[4]</a></sup>. Ayrıca site adı sonuçlarda zaten gösteriliyorsa, Google iç sayfa başlıklarındaki marka tekrarını sık sık siler; başlıkta marka için harcanan karakter boşa gidebilir (<a href="05-sayfa-ici.html">Bölüm 5</a>).</p>
+        </aside>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>21 Kasım 2024:</strong> Sitelinks arama kutusu (sonuçta site adının altında çıkan arama alanı) kaldırıldı. Bunun için eskiden <code>WebSite</code> içine eklenen <code>potentialAction</code> / <code>SearchAction</code> artık bir şey göstermez; <code>nositelinkssearchbox</code> robots kuralı da işlevsiz kaldı <sup class="kaynak"><a href="#k14">[14]</a></sup><sup class="kaynak"><a href="#k27">[27]</a></sup>. Eski kodu silmek zorunlu değil.</p>
+        </aside>
+
+        <!-- ============ 6 ============ -->
+        <h2 id="yerel-isletme"><span class="h-num">§ 6</span>LocalBusiness ve alt türleri (ör. MovingCompany)</h2>
+        <p>Fiziksel olarak hizmet veren işletmeler için <code>LocalBusiness</code> kullanılır. Google'ın belgesi <strong>en özel alt türün</strong> seçilmesini ister <sup class="kaynak"><a href="#k5">[5]</a></sup>. Google belgesi nakliye firmalarını ayrıca anmaz; schema.org'da <code>MovingCompany</code> bir <code>LocalBusiness</code> alt türüdür ve aynı kurallarla kullanılır.</p>
+
+        <h3 id="yerel-zorunlu">Zorunlu ve önerilen alanlar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Alan</th><th>Durum</th><th>Kural</th></tr></thead>
+            <tbody>
+              <tr><td><code>name</code></td><td>Zorunlu</td><td>İşletmenin gerçek adı (anahtar kelime eklenmez).</td></tr>
+              <tr><td><code>address</code></td><td>Zorunlu</td><td><code>PostalAddress</code>; sokak, ilçe, il, posta kodu, ülke.</td></tr>
+              <tr><td><code>geo</code></td><td>Önerilen</td><td>Enlem ve boylam <strong>en az 5 ondalık</strong> haneyle.</td></tr>
+              <tr><td><code>openingHoursSpecification</code></td><td>Önerilen</td><td>Gün dizisi + açılış/kapanış saati.</td></tr>
+              <tr><td><code>telephone</code></td><td>Önerilen</td><td><strong>Ülke koduyla</strong> (ör. +90).</td></tr>
+              <tr><td><code>url</code></td><td>Önerilen</td><td>Bu işletmenin (şubenin) sayfası.</td></tr>
+              <tr><td><code>priceRange</code></td><td>Önerilen</td><td>100 karakterden kısa (ör. "₺₺").</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: <sup class="kaynak"><a href="#k5">[5]</a></sup></p>
+
+        <h3 id="yerel-incelikler">İncelikler</h3>
+        <ul>
+          <li><strong>Birden çok tür:</strong> İşletme gerçekten iki türe de giriyorsa tür dizi olarak verilir: <code>"@type": ["MovingCompany", "Store"]</code>. <code>additionalType</code> Google'da desteklenmez <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong>24 saat açık:</strong> <code>"opens": "00:00", "closes": "23:59"</code>. <strong>Kapalı gün:</strong> <code>"opens": "00:00", "closes": "00:00"</code> <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong><code>areaServed</code>:</strong> schema.org'da geçerli bir alan, ama Google'ın LocalBusiness belgesinde geçmiyor. Eklemek zararsız; Google'da bir etkisi olduğu <span class="tag tag--warn">Doğrulanamadı</span>.</li>
+          <li><strong>Hizmet bölgesi işletmesi</strong> (müşteri adrese gelmiyor, adres İşletme Profili'nde gizli): <code>address</code> yine zorunlu alan olduğu için sokak yazmadan il/ilçe/ülke düzeyinde verilebilir. Bu kullanımın Google'daki etkisi <span class="tag tag--warn">Doğrulanamadı</span>. Hizmet bölgesi kuralları: <a href="12-yerel-seo.html">Bölüm 12</a>.</li>
+        </ul>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">iletisim.html · yalnız sayfada görünen bilgiler</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"MovingCompany"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"Hayalî Nakliyat"</span>,
+  <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/"</span>,
+  <span class="k-anahtar">"telephone"</span>: <span class="k-deger">"+90-XXX-XXX-XXXX"</span>,
+  <span class="k-anahtar">"priceRange"</span>: <span class="k-deger">"₺₺"</span>,
+  <span class="k-anahtar">"image"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/img/arac.jpg"</span>,
+  <span class="k-anahtar">"address"</span>: {
+        <span class="k-anahtar">"@type"</span>: <span class="k-deger">"PostalAddress"</span>,
+        <span class="k-anahtar">"streetAddress"</span>: <span class="k-deger">"Örnek Cad. No:1"</span>,
+        <span class="k-anahtar">"addressLocality"</span>: <span class="k-deger">"Örnek İlçe"</span>,
+        <span class="k-anahtar">"addressRegion"</span>: <span class="k-deger">"Örnekşehir"</span>,
+        <span class="k-anahtar">"postalCode"</span>: <span class="k-deger">"00000"</span>,
+        <span class="k-anahtar">"addressCountry"</span>: <span class="k-deger">"TR"</span>
+  },
+  <span class="k-anahtar">"geo"</span>: { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"GeoCoordinates"</span>, <span class="k-anahtar">"latitude"</span>: 0.00000, <span class="k-anahtar">"longitude"</span>: 0.00000 },
+  <span class="k-anahtar">"openingHoursSpecification"</span>: [
+        {
+          <span class="k-anahtar">"@type"</span>: <span class="k-deger">"OpeningHoursSpecification"</span>,
+          <span class="k-anahtar">"dayOfWeek"</span>: [<span class="k-deger">"Monday"</span>, <span class="k-deger">"Tuesday"</span>, <span class="k-deger">"Wednesday"</span>, <span class="k-deger">"Thursday"</span>, <span class="k-deger">"Friday"</span>, <span class="k-deger">"Saturday"</span>],
+          <span class="k-anahtar">"opens"</span>: <span class="k-deger">"08:00"</span>, <span class="k-anahtar">"closes"</span>: <span class="k-deger">"19:00"</span>
+        },
+        {
+          <span class="k-anahtar">"@type"</span>: <span class="k-deger">"OpeningHoursSpecification"</span>,
+          <span class="k-anahtar">"dayOfWeek"</span>: <span class="k-deger">"Sunday"</span>,
+          <span class="k-anahtar">"opens"</span>: <span class="k-deger">"00:00"</span>, <span class="k-anahtar">"closes"</span>: <span class="k-deger">"00:00"</span>   <span class="k-yorum">// kapalı gün</span>
+        }
+  ],
+  <span class="k-anahtar">"sameAs"</span>: [<span class="k-deger">"https://www.instagram.com/ornek"</span>]
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+        <p>Not: JSON yorum desteklemez; yukarıdaki <code>// kapalı gün</code> yalnız açıklama içindir, gerçek dosyaya yazılmaz. Ad, adres, telefon ve <code>geo</code> değerleri yer tutucudur; gerçek işaretlemede işletmenin kendi bilgileri ve kendi enlem/boylamı yazılır.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Koddan anlamayan küçük bir yerel işletme (ör. nakliye firması) telefonda aramada üstte çıkmak istiyor. Yapılandırılmış veri bunu tek başına sağlamaz: harita sonuçlarındaki sırayı İşletme Profili, yorumlar ve mesafe belirler (<a href="12-yerel-seo.html">Bölüm 12</a>). JSON-LD'nin buradaki işi, sitedeki ad-adres-telefon-saat bilgisini makinenin hatasız okuyacağı biçimde vermek ve profildeki bilgilerle tutarlılığı desteklemektir. Altbilgide "Örnek Cad. No:1" yazıyorsa JSON-LD'de de "Örnek Cad. No:1" yazmalı, "Örnek Caddesi 1" değil.</p>
+        </aside>
+
+        <!-- ============ 7 ============ -->
+        <h2 id="breadcrumb"><span class="h-num">§ 7</span>BreadcrumbList: içerik yolu</h2>
+        <p><strong>Breadcrumb</strong> (içerik yolu: "Ana sayfa › Hizmetler › Evden eve" gibi sayfanın sitedeki yerini gösteren zincir), sonuçlarda URL yerine okunur bir yol göstermeye yarar <sup class="kaynak"><a href="#k6">[6]</a></sup>.</p>
+        <ul>
+          <li>En az <strong>2 öğe</strong> olmalı; her öğe <code>position</code> ve <code>name</code> taşır.</li>
+          <li>Son öğede (bulunduğun sayfa) <code>item</code> URL'si gerekmez.</li>
+          <li>Yol URL yapısını değil, <strong>kullanıcının tipik gezinme yolunu</strong> yansıtmalı.</li>
+        </ul>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>22 Ocak 2025:</strong> Google breadcrumb belgesine "yalnız masaüstü" notu ekledi; belgenin 2026 Eylül güncellemesinde de görünüm masaüstü için anlatılıyor <sup class="kaynak"><a href="#k12">[12]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>. Mobilde içerik yolu zengin sonucu bekleme.</p>
+        </aside>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">ozellikler/online-randevu.html</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"BreadcrumbList"</span>,
+  <span class="k-anahtar">"itemListElement"</span>: [
+        { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"ListItem"</span>, <span class="k-anahtar">"position"</span>: 1, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Özellikler"</span>,
+          <span class="k-anahtar">"item"</span>: <span class="k-deger">"https://www.ornek.com/ozellikler"</span> },
+        { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"ListItem"</span>, <span class="k-anahtar">"position"</span>: 2, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Online randevu"</span> }
+  ]
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <!-- ============ 8 ============ -->
+        <h2 id="yazilim-uygulamasi"><span class="h-num">§ 8</span>SoftwareApplication: yazılım ürünleri</h2>
+        <p>Bir yazılım ürününün (ör. web tabanlı bir online randevu programı) sayfası <code>SoftwareApplication</code> ile işaretlenebilir. Zengin sonuç için Google'ın zorunlu tuttuğu alanlar şunlar <sup class="kaynak"><a href="#k7">[7]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Alan</th><th>Durum</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>name</code></td><td>Zorunlu</td><td>Uygulamanın adı.</td></tr>
+              <tr><td><code>offers.price</code></td><td>Zorunlu</td><td>Ücretsizse <code>0</code>; para birimi <code>priceCurrency</code>.</td></tr>
+              <tr><td><code>aggregateRating</code> <em>ya da</em> <code>review</code></td><td><strong>Zorunlu</strong></td><td>Gerçek kullanıcı puanı / yorumu.</td></tr>
+              <tr><td><code>applicationCategory</code></td><td>Önerilen</td><td>Ör. <code>MultimediaApplication</code>, <code>BusinessApplication</code>.</td></tr>
+              <tr><td><code>operatingSystem</code></td><td>Önerilen</td><td>Ör. "Windows 10, Windows 11".</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Puan ya da yorum zorunlu olduğu için yeni bir üründe <strong>zengin sonuç çıkmaz</strong>; bunu "puan uydurarak" aşmaya çalışmak elle işlem sebebidir <sup class="kaynak"><a href="#k7">[7]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup>. Gerçek puan yokken ürünü tarif etmek istersen işaretlemeyi puansız bırak (zengin sonuç beklemeden); kurum ve site kimliği için <code>Organization</code> + <code>WebSite</code> zaten yeterlidir.</p>
+        </aside>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">indir.html · puan yoksa bu kadar</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"SoftwareApplication"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka Masaüstü"</span>,
+  <span class="k-anahtar">"operatingSystem"</span>: <span class="k-deger">"Windows 10, Windows 11"</span>,
+  <span class="k-anahtar">"applicationCategory"</span>: <span class="k-deger">"MultimediaApplication"</span>,
+  <span class="k-anahtar">"offers"</span>: { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Offer"</span>, <span class="k-anahtar">"price"</span>: <span class="k-deger">"0"</span>, <span class="k-anahtar">"priceCurrency"</span>: <span class="k-deger">"TRY"</span> }
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <!-- ============ 9 ============ -->
+        <h2 id="video-ve-makale"><span class="h-num">§ 9</span>VideoObject ve Article</h2>
+
+        <h3 id="videoobject">VideoObject</h3>
+        <p>Asıl amacı tek bir videoyu göstermek olan <strong>izleme sayfası</strong> (watch page) <code>VideoObject</code> ile işaretlenir. Her video için ayrı <code>name</code>, <code>description</code> ve <code>thumbnailUrl</code> verilir; önemli anlar <code>Clip</code> ya da <code>SeekToAction</code> ile işaretlenir <sup class="kaynak"><a href="#k9">[9]</a></sup>. Küçük resim adresi <code>poster</code>, site haritası ve <code>og:video:image</code> ile aynı olmalı. Google belgeye <strong>24 Eylül 2026</strong>'da <code>creator</code> özelliğini ekledi <sup class="kaynak"><a href="#k12">[12]</a></sup>. İzleme sayfası tanımı, küçük resim boyutu ve video kaldırma: <a href="06-gorsel-ve-video.html">Bölüm 6</a>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">video/tanitim.html</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"VideoObject"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"5 dakikada online randevu sayfası kurma"</span>,
+  <span class="k-anahtar">"description"</span>: <span class="k-deger">"Randevu sayfasının nasıl kurulduğunu adım adım gösterir."</span>,
+  <span class="k-anahtar">"thumbnailUrl"</span>: <span class="k-deger">"https://www.ornek.com/video/tanitim-kucuk.jpg"</span>,
+  <span class="k-anahtar">"uploadDate"</span>: <span class="k-deger">"2026-10-01T10:00:00+03:00"</span>,
+  <span class="k-anahtar">"duration"</span>: <span class="k-deger">"PT2M30S"</span>,
+  <span class="k-anahtar">"contentUrl"</span>: <span class="k-deger">"https://www.ornek.com/video/tanitim.mp4"</span>
+}
+<span class="k-etiket">&lt;/script&gt;</span>
+<span class="k-etiket">&lt;video</span> <span class="k-ozn">src</span>=<span class="k-deger">"/video/tanitim.mp4"</span> <span class="k-ozn">poster</span>=<span class="k-deger">"/video/tanitim-kucuk.jpg"</span> <span class="k-ozn">controls</span> <span class="k-ozn">width</span>=<span class="k-deger">"1280"</span> <span class="k-ozn">height</span>=<span class="k-deger">"720"</span><span class="k-etiket">&gt;&lt;/video&gt;</span></code></pre>
+        </div>
+
+        <h3 id="article-yazar">Article ve yazar bilgisi</h3>
+        <p>Google'ın "insan için içerik" belgesi okuyucuya <strong>Kim / Nasıl / Neden</strong> sorularının cevabını vermeyi önerir: yazar belli olsun, yazar adı bir yazar sayfasına bağlansın, sahte yazar ya da sahte unvan uydurulmasın <sup class="kaynak"><a href="#k11">[11]</a></sup>. Blog yazılarında bunu <code>Article</code> işaretlemesiyle de söylersin. Tarihler için kural: <code>datePublished</code> ve <code>dateModified</code> sayfada görünen, etiketli tarihlerle ("Yayımlandı / Güncellendi") aynı olmalı; gelecek tarih verilmez; <code>dateModified</code> yalnız gerçek bir değişiklikte güncellenir <sup class="kaynak"><a href="#k10">[10]</a></sup>. Ayrıntı: <a href="07-icerik-kalitesi.html">Bölüm 7</a>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML · JSON-LD</span><span class="dosya">blog/esya-paketleme.html</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Article"</span>,
+  <span class="k-anahtar">"headline"</span>: <span class="k-deger">"Evden eve taşınmada eşya nasıl paketlenir"</span>,
+  <span class="k-anahtar">"author"</span>: {
+        <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Person"</span>,
+        <span class="k-anahtar">"name"</span>: <span class="k-deger">"Yazar Adı"</span>,
+        <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/ekip/yazar"</span>
+  },
+  <span class="k-anahtar">"datePublished"</span>: <span class="k-deger">"2026-09-02"</span>,
+  <span class="k-anahtar">"dateModified"</span>: <span class="k-deger">"2026-10-12"</span>
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>İçerik değişmeden <code>dateModified</code>'ı (ya da sayfadaki "güncellendi" tarihini) ileri almak, Google'ın "önce arama motoru için yazılmış içerik" uyarı işaretleri arasında açıkça sayılır <sup class="kaynak"><a href="#k11">[11]</a></sup>. Yanlış tarihle karşılaşan Google sayfadaki tarihi kendisi seçer <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 10 ============ -->
+        <h2 id="yorum-ve-puan"><span class="h-num">§ 10</span>Yorum ve puan: en riskli alan</h2>
+        <p>Yıldızlı sonuç çok cazip göründüğü için yapılandırılmış verinin en çok kötüye kullanılan kısmı burasıdır. Google'ın kuralları net <sup class="kaynak"><a href="#k8">[8]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>:</p>
+        <ul>
+          <li><strong>Kendi hakkındaki yorumlar yıldız almaz.</strong> <code>LocalBusiness</code> ve <code>Organization</code> için işletmenin kendi kontrolündeki yorumlar (kendi sitesine gömdüğü üçüncü taraf yorum eklentisi dahil) yıldızlı sonuç üretmez. Bu kural 2019'dan beri geçerli.</li>
+          <li><code>aggregateRating</code> ve <code>review</code> yerel işletme için, yalnızca <strong>başka işletmeler</strong> hakkında yorum toplayan siteler (rehber, karşılaştırma sitesi) içindir.</li>
+          <li><strong>Sahte yorum ya da açıklanmamış teşvikli yorum yasaktır.</strong> Bu kural belgeye <strong>24 Temmuz 2026</strong>'da eklendi <sup class="kaynak"><a href="#k12">[12]</a></sup>.</li>
+        </ul>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Sitemdeki müşteri yorumlarını <code>aggregateRating</code> olarak eklersem aramada yıldız çıkar."</p>
+          <p class="mit-gercek">İşletmenin kendi kontrolündeki yorumlar yıldız almaz <sup class="kaynak"><a href="#k8">[8]</a></sup>. Üstelik uydurma ya da seçilmiş puan elle işlem riskidir. Yerel işletmenin yıldızları Google İşletme Profili'ndeki gerçek yorumlardan gelir (<a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Türkiye'de sahte yorumun ayrıca hukuki boyutu var: Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği yorumu yalnız satın alana bırakır, Ticaret Bakanlığı da bu konuda idari para cezası uyguluyor. Ayrıntı ve kaynaklar: <a href="12-yerel-seo.html">Bölüm 12</a>.</p>
+        </aside>
+
+        <!-- ============ 11 ============ -->
+        <h2 id="kaldirilanlar"><span class="h-num">§ 11</span>Kaldırılan zengin sonuçlar</h2>
+        <p>Google son üç yılda arama sonuç sayfasını sadeleştirdi ve birçok zengin sonuç türünü kaldırdı. Eski rehberlerde, WordPress eklentilerinde ve hatta bazı güncel üçüncü taraf eğitimlerde bunlar hâlâ öneriliyor. Ahrefs'in sayfa içi SEO rehberi hâlâ FAQPage ve HowTo öneriyor; bu öneri eskimiştir <sup class="kaynak"><a href="#k26">[26]</a></sup>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Tür</th><th>Ne oldu</th><th>Tarih</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HowTo</strong> (adım adım)</td><td>Önce mobilden, sonra masaüstünden kaldırıldı; belgesi silindi</td><td>8 Ağu 2023 (mobil) · 13 Eyl 2023 (masaüstü) · 14 Eyl 2023 (belge) <sup class="kaynak"><a href="#k13">[13]</a></sup></td></tr>
+              <tr><td><strong>FAQ</strong> (SSS açılır kutusu)</td><td>Önce yalnız tanınmış devlet ve sağlık sitelerine kısıtlandı, sonra herkes için kaldırıldı</td><td>8 Ağu 2023 (kısıt) · <strong>7 May 2026 (tamamen)</strong> · 15 Haz 2026 (belge silindi) <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k12">[12]</a></sup><sup class="kaynak"><a href="#k16">[16]</a></sup></td></tr>
+              <tr><td>FAQ — Search Console desteği</td><td>Rapor ve API desteği kaldırıldı</td><td>Haziran 2026 (rapor) · Ağustos 2026 (API) <sup class="kaynak"><a href="#k16">[16]</a></sup></td></tr>
+              <tr><td><strong>Sitelinks arama kutusu</strong></td><td>Kaldırıldı; <code>nositelinkssearchbox</code> kuralı da işlevsiz</td><td>Duyuru 21 Eki 2024 · kaldırma 21 Kas 2024 <sup class="kaynak"><a href="#k14">[14]</a></sup></td></tr>
+              <tr><td>Book Actions, Course Info, ClaimReview, Estimated Salary, Learning Video, Special Announcement, Vehicle Listing</td><td>Aşamalı emekliye ayrıldı; Google sıralamaya etkisi olmadığını belirtti. Book Actions için Kasım 2025'te kısmi geri adım atıldı</td><td>12 Haz 2025 <sup class="kaynak"><a href="#k15">[15]</a></sup><sup class="kaynak"><a href="#k12">[12]</a></sup></td></tr>
+              <tr><td>Practice Problem</td><td>Kaldırıldı</td><td>6 Oca 2026 <sup class="kaynak"><a href="#k12">[12]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>7 Mayıs 2026:</strong> FAQ zengin sonucu artık hiçbir sitede gösterilmiyor. Sayfada SSS bölümü tutmak okur için hâlâ faydalı olabilir; ama <code>FAQPage</code> işaretlemesi arama sonucunda açılır kutu üretmez <sup class="kaynak"><a href="#k12">[12]</a></sup><sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Google her kaldırmada aynı şeyi söyledi: <strong>eski işaretlemeyi silmek gerekmez, sorun çıkarmaz</strong> <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k14">[14]</a></sup><sup class="kaynak"><a href="#k15">[15]</a></sup>. Bir müşterinin sitesinde eski FAQ/HowTo bloğu görürsen acil düzeltme değildir; ama "bunu ekleyelim, zengin sonuç alırsınız" diye satmak yanıltıcıdır.</p>
+        </aside>
+
+        <!-- ============ 12 ============ -->
+        <h2 id="yapay-zeka"><span class="h-num">§ 12</span>Yapay zekâ özellikleri ve şema</h2>
+        <p>Google'ın "AI features and your website" belgesi AI Overviews (YZ Genel Bakış) ve AI Mode (YZ Modu) için açık konuşur: sayfanın dizinde olması ve snippet (sonuçtaki açıklama metni) gösterilmeye uygun olması yeter; "özel bir schema.org yapılandırılmış verisi eklemeniz gerekmiyor", "yeni makine okunur dosyalar ya da işaretleme oluşturmanız gerekmiyor" <sup class="kaynak"><a href="#k17">[17]</a></sup>. Google'ın 15 Mayıs 2026 tarihli yapay zekâ arama rehberi de yapılandırılmış verinin bu özellikler için gerekli olmadığını, yapay zekâya özel bir şema bulunmadığını, ama zengin sonuçlar için kullanılmaya devam edebileceğini yazar <sup class="kaynak"><a href="#k18">[18]</a></sup>.</p>
+        <p>Google'ın 21 Mayıs 2025 tarihli önerilerinden biri yine de şema ile ilgilidir: yapılandırılmış veri sayfada görünen içerikle aynı olmalı <sup class="kaynak"><a href="#k19">[19]</a></sup>. Yani şemanın yapay zekâdaki tek "kuralı", genel kuralın aynısıdır.</p>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"AI Overviews'te çıkmak için özel 'AI şeması' ya da llms.txt şart."</p>
+          <p class="mit-gercek">Google ikisini de gerektirmez; llms.txt'yi Google Arama kullanmaz <sup class="kaynak"><a href="#k17">[17]</a></sup><sup class="kaynak"><a href="#k18">[18]</a></sup>. Ayrıntı: <a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>.</p>
+        </aside>
+
+        <!-- ============ 13 ============ -->
+        <h2 id="favicon"><span class="h-num">§ 13</span>Favicon: sonuçtaki küçük simge</h2>
+        <p>Google mobil ve masaüstü sonuçlarda site adının yanında <strong>favicon</strong> (sitenin küçük simgesi) gösterir. Kurallar <sup class="kaynak"><a href="#k20">[20]</a></sup>:</p>
+        <ul class="checklist">
+          <li>Ana sayfanın <code>&lt;head&gt;</code> kısmında <code>&lt;link rel="icon"&gt;</code> ile tanımlı (<code>apple-touch-icon</code> da kabul edilir).</li>
+          <li>Kare; en az 8×8 px, önerilen 48×48 px'ten büyük.</li>
+          <li>Desteklenen biçimlerden birinde: <strong>BMP, GIF, ICO, PNG, JPEG, PPM, TIFF</strong>.</li>
+          <li>Ana makine adı (host) başına <strong>tek</strong> favicon, URL'si sık değişmiyor.</li>
+          <li>Hem favicon dosyası hem ana sayfa Googlebot'a açık (robots.txt ile engellenmemiş).</li>
+        </ul>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>28 Ağustos 2026:</strong> Google favicon belgesine desteklenen biçimlerin listesini açıkça yazdı ve <strong>SVG listede yok</strong>. Google desteğin değişmediğini, yalnız belgenin netleştirildiğini söylüyor <sup class="kaynak"><a href="#k20">[20]</a></sup><sup class="kaynak"><a href="#k12">[12]</a></sup>. Tarayıcı sekmesi için SVG kullanıyorsan yanına ICO veya PNG yedeği koy.</p>
+        </aside>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ana sayfa · &lt;head&gt;</span></div>
+<pre><code><span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/favicon.ico"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"48x48"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/favicon-192.png"</span> <span class="k-ozn">type</span>=<span class="k-deger">"image/png"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"192x192"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"apple-touch-icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/apple-touch-icon.png"</span><span class="k-etiket">&gt;</span>
+<span class="k-yorum">&lt;!-- İstersen tarayıcı sekmesi için SVG de ekle; ama tek başına bırakma --&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/favicon.svg"</span> <span class="k-ozn">type</span>=<span class="k-deger">"image/svg+xml"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>HTTP ile HTTPS ya da www'li ile www'siz sürümler farklı favicon veya farklı site adı işaretlemesi taşırsa sonuçta tutarsız görünüm oluşur <sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k20">[20]</a></sup>. Önce tek bir adrese 301 ile toplamak gerekir: <a href="09-tarama-ve-dizin.html#tek-adres">Bölüm 9</a>.</p>
+        </aside>
+
+        <!-- ============ 14 ============ -->
+        <h2 id="open-graph"><span class="h-num">§ 14</span>Open Graph ve X kartları</h2>
+        <p><strong>Open Graph</strong> (OG: Facebook'un başlattığı, bir bağlantı paylaşıldığında gösterilecek başlık, açıklama ve görseli belirten meta etiketleri) ve X kartları SEO değildir; paylaşım önizlemesidir. Yine de Google'la iki bağlantısı var:</p>
+        <ul>
+          <li><code>og:title</code>, <strong>26 Ağustos 2024</strong>'ten beri Google'ın sonuçtaki başlığı kurarken baktığı kaynaklar arasında <sup class="kaynak"><a href="#k21">[21]</a></sup><sup class="kaynak"><a href="#k12">[12]</a></sup>. <code>&lt;title&gt;</code> ile çelişkili yazma.</li>
+          <li><code>og:image</code>, sayfanın "tercih edilen görseli" için bir sinyaldir (<code>primaryImageOfPage</code> ve <code>mainEntity.image</code> gibi) <sup class="kaynak"><a href="#k22">[22]</a></sup>.</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Etiket</th><th>Durum</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>og:title</code>, <code>og:type</code>, <code>og:image</code>, <code>og:url</code></td><td>Zorunlu (OG protokolü)</td><td><sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+              <tr><td><code>og:description</code>, <code>og:site_name</code>, <code>og:locale</code></td><td>Önerilen</td><td>Türkçe için <code>tr_TR</code>.</td></tr>
+              <tr><td><code>og:image:alt</code>, <code>og:image:width</code>, <code>og:image:height</code></td><td>Önerilen</td><td>Erişilebilirlik ve doğru önizleme.</td></tr>
+              <tr><td><code>twitter:card</code></td><td>X için</td><td><code>summary_large_image</code>; görsel 5 MB'tan küçük; JPG, PNG, WEBP, GIF; <strong>SVG değil</strong> <sup class="kaynak"><a href="#k24">[24]</a></sup> <span class="tag tag--info">3. taraf</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Önerilen paylaşım görseli boyutu 1200×630 civarı; kaynaklar 1200×628 ile 1200×630 arasında ayrışıyor <sup class="kaynak"><a href="#k24">[24]</a></sup>. X'in eksik <code>twitter:</code> etiketleri için OG'ye geri döndüğü üçüncü taraf kaynaklarda yazıyor, X'in resmî belgesinden <span class="tag tag--warn">Doğrulanamadı</span> (resmî sayfa erişime kapalıydı).</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">her sayfa · &lt;head&gt; (sayfaya özel değerlerle)</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:type"</span> <span class="k-ozn">content</span>=<span class="k-deger">"website"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:title"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Online Randevu Programı"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Takvimini paylaş, randevular gelsin."</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:url"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/online-randevu"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/og/online-randevu-1200x630.jpg"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:width"</span> <span class="k-ozn">content</span>=<span class="k-deger">"1200"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:height"</span> <span class="k-ozn">content</span>=<span class="k-deger">"630"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:alt"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Haftalık takvimde dolu ve boş randevu saatleri"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:site_name"</span> <span class="k-ozn">content</span>=<span class="k-deger">"ÖrnekMarka"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:locale"</span> <span class="k-ozn">content</span>=<span class="k-deger">"tr_TR"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"twitter:card"</span> <span class="k-ozn">content</span>=<span class="k-deger">"summary_large_image"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>OG etiketlerini JavaScript ile sonradan eklemek, paylaşım önizlemesini boş bırakabilir: sosyal ağ önizleme botlarının çoğu JavaScript çalıştırmaz. Bu genel bir sektör bilgisi; bu araştırmada ayrıca kaynaktan doğrulanmadı <span class="tag">Kaynaktan teyit edilmedi</span>. Güvenli yol: OG etiketleri sunucunun gönderdiği ilk HTML'de.</p>
+        </aside>
+
+        <!-- ============ 15 ============ -->
+        <h2 id="test-araclari"><span class="h-num">§ 15</span>Sınama araçları</h2>
+        <ol class="steps">
+          <li><strong>Rich Results Test</strong> (<a href="https://search.google.com/test/rich-results">search.google.com/test/rich-results</a>): Sayfanın hangi Google zengin sonuçlarına uygun olduğunu, zorunlu alan eksiklerini ve uyarıları gösterir <sup class="kaynak"><a href="#k25">[25]</a></sup>. Testi geçmek gösterimi garanti etmez.</li>
+          <li><strong>Schema Markup Validator</strong> (<a href="https://validator.schema.org">validator.schema.org</a>): Google'a özel olmayan, schema.org söz dizimi denetimi. Google'ın desteklemediği türleri (ör. <code>areaServed</code> gibi alanları) de doğrular <sup class="kaynak"><a href="#k25">[25]</a></sup>.</li>
+          <li><strong>Search Console · URL Denetimi:</strong> Google'ın sayfayı gerçekte nasıl gördüğünü, işlenmiş (render edilmiş) HTML'de işaretlemenin bulunup bulunmadığını gösterir <sup class="kaynak"><a href="#k5">[5]</a></sup>. Araçların tamamı: <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</li>
+        </ol>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Sınamada iki ayrı soru var: "söz dizimi doğru mu?" (Schema Validator) ve "Google bunu zengin sonuç için kabul ediyor mu?" (Rich Results Test). İkisi farklı sonuç verebilir; Google'ın belgesinde olmayan bir alan validator'dan geçer ama Google için etkisizdir.</p>
+        </aside>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 16</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Yapılandırılmış veri sayfayı makineye tarif eder; <strong>sıralamayı değil görünümü</strong> etkiler. İhlalin cezası da zengin sonuç hakkının kaybıdır.</li>
+            <li>JSON-LD kullan, ilk HTML'e koy; işaretleme sayfada görünenle birebir aynı olsun, en özel türü seç, zorunlu alanları doldur.</li>
+            <li>Her sitede işe yarayan çekirdek: ana sayfada <code>Organization</code> + <code>WebSite</code> (logo ≥112 px, <code>sameAs</code>, site adı). Yerel işletmede en özel <code>LocalBusiness</code> alt türü; ad-adres-telefon sitedekiyle aynı.</li>
+            <li><code>SoftwareApplication</code> zengin sonucu gerçek puan/yorum ister; kendi yorumlarınla yıldız alınmaz, sahte yorum yasak (24 Tem 2026 kuralı).</li>
+            <li>HowTo, FAQ (7 May 2026), Sitelinks arama kutusu ve 12 Haz 2025'teki yedi tür kalktı; eski işaretleme zararsız ama artık bir şey kazandırmaz.</li>
+            <li>Yapay zekâ özellikleri için özel şema yok. Favicon'da SVG'yi tek başına bırakma; OG etiketleri paylaşım içindir, <code>og:title</code> başlık kaynağı olabilir.</li>
+            <li>Sınamada Rich Results Test (Google uygunluğu) ile Schema Validator (söz dizimi) farklı soruları cevaplar.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 17</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — General structured data guidelines — <a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">developers.google.com/…/sd-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Introduction to structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data">developers.google.com/…/intro-structured-data</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Organization structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/organization">developers.google.com/…/organization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Provide a site name to Google Search — <a href="https://developers.google.com/search/docs/appearance/site-names">developers.google.com/…/site-names</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Local Business structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/local-business">developers.google.com/…/local-business</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Breadcrumb structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb">developers.google.com/…/breadcrumb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Software App structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/software-app">developers.google.com/…/software-app</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Review snippet structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/review-snippet">developers.google.com/…/review-snippet</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Video SEO best practices — <a href="https://developers.google.com/search/docs/appearance/video">developers.google.com/…/appearance/video</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Influencing byline dates in Google Search — <a href="https://developers.google.com/search/docs/appearance/publication-dates">developers.google.com/…/publication-dates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Creating helpful, reliable, people-first content — <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">developers.google.com/…/creating-helpful-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Latest Google Search documentation updates — <a href="https://developers.google.com/search/updates">developers.google.com/search/updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Changes to HowTo and FAQ rich results (8 Ağu 2023, güncelleme 14 Eyl 2023) — <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes">developers.google.com/…/howto-faq-changes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Farewell, Sitelinks Search Box (21 Eki 2024) — <a href="https://developers.google.com/search/blog/2024/10/sitelinks-search-box">developers.google.com/…/sitelinks-search-box</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Simplifying the search results page (12 Haz 2025) — <a href="https://developers.google.com/search/blog/2025/06/simplifying-search-results">developers.google.com/…/simplifying-search-results</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google drops FAQ rich results (10 May 2026); TechWyse — Google Ends FAQ Rich Results for All Sites — <a href="https://www.searchenginejournal.com/google-drops-faq-rich-results/574429/">searchenginejournal.com/…/574429</a> · <a href="https://www.techwyse.com/news/ai-search/google-faq-rich-results-deprecated-2026">techwyse.com/…/google-faq-rich-results-deprecated-2026</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — AI features and your website — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Top ways to ensure your content performs well in Google's AI experiences (21 May 2025) — <a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">developers.google.com/…/succeeding-in-ai-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Define a favicon to show in search results — <a href="https://developers.google.com/search/docs/appearance/favicon-in-search">developers.google.com/…/favicon-in-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Influencing your title links in search results — <a href="https://developers.google.com/search/docs/appearance/title-link">developers.google.com/…/title-link</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Images SEO best practices — <a href="https://developers.google.com/search/docs/appearance/google-images">developers.google.com/…/google-images</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> The Open Graph protocol — <a href="https://ogp.me/">ogp.me</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--info">3. taraf</span> X Cards markup (resmî sayfa erişime kapalıydı; arama özeti ve üçüncü taraf üzerinden) — <a href="https://developer.x.com/cards/markup">developer.x.com/cards/markup</a> · <a href="https://kb.theseoframework.com/kb/twitter-cards-and-x-sharing/">kb.theseoframework.com/…/twitter-cards-and-x-sharing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--ok">Resmî</span> Google Rich Results Test ve Schema Markup Validator — <a href="https://search.google.com/test/rich-results">search.google.com/test/rich-results</a> · <a href="https://validator.schema.org">validator.schema.org</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — On-Page SEO guide (FAQ/HowTo önerisi eskimiş) — <a href="https://ahrefs.com/blog/on-page-seo/">ahrefs.com/blog/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Robots meta tag, data-nosnippet, and X-Robots-Tag specifications — <a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">developers.google.com/…/robots-meta-tag</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="07-icerik-kalitesi.html"><span class="dir">&larr; Önceki</span><span class="ttl">İçerik kalitesi ve yapay zekâ</span></a>
+        <a class="next" href="09-tarama-ve-dizin.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Tarama ve dizine ekleme</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

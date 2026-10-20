@@ -59,6 +59,7 @@ Ayrıntı ve karar ağacı: [Süreç ve engel raporu](surec-ve-engeller.html) (�
 - [JavaScript / TypeScript](../../Programlama/JavaScript-TypeScript/) — Playables oyunlarının yazıldığı dil; temel kavramlar ve araçlar.
 - [Yapay Zekâ → Kodla Video Üretimi](../../Programlama/Yapay-Zeka/kodla-video/) — Oyun tanıtım videosu ve Shorts'u kodla üretmek için.
 - [API → YouTube](../../API/Canli-Yayin-ve-Video/YouTube.md) — YouTube Data API, kota, WebSub ile yeni video bildirimi ve canlı yayın/sohbet takibi.
+- [SEO Rehberi → Video platformlarında kara şapka](../SEO/21-kara-sapka.html#video-platformlari) — İzlenme ve abone botu, sub4sub, yanıltıcı başlık ve küçük resim, yeniden yüklenen içerik: YouTube kuralları ve riskleri.
 
 ---
 

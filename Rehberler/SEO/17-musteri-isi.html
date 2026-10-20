@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Müşteri işi: denetim, öneri, taşıma — SEO Rehberi</title>
+<meta name="description" content="Koddan anlamayan küçük işletme müşterisi için adım adım SEO denetimi, platform ya da host değiştirme kararı, site taşıma rehberi, Google Ads ile birlikte çalışma, dürüst beklenti ve aylık rapor şablonu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Müşteri işi: denetim, öneri, taşıma</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 17 · Uygulama</div>
+        <h1 class="page-title">Müşteri işi: denetim, öneri, taşıma</h1>
+        <p class="lede">Önceki bölümler "SEO nedir"i anlattı; bu bölüm "başkasının sitesine nasıl el atılır"ı anlatır. Anlatım, hizmet veren birinin (reklam ya da SEO hizmeti veren ajans veya serbest çalışan) bakış açısındandır; işletme sahibiysen aynı adımlar, tuttuğun ajansı ya da danışmanı denetlemek için kontrol listesidir. Örnek müşteri koddan anlamayan küçük bir yerel işletme; siteyi görüyor ve "telefonda arayınca üstte çıkmak" istiyor. Burada denetimin sırasını, platform ya da host değiştirmeyi ne zaman önereceğini, siteyi kaybetmeden taşımayı, Google Ads ile SEO'yu birlikte yürütmeyi ve müşteriye dürüst konuşmayı bulacaksın.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 20 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Denetim erişimle başlar: Search Console'da önce <strong>yalnız okuma</strong>, İşletme Profili'nde sahip müşteri, ajans yönetici.</li>
+            <li>CMS ya da programlama dili sıralamayı etkilemez; platform değişikliği yalnız somut bir engel varsa önerilir.</li>
+            <li>Taşımada her eski URL tek adımda kendi karşılığına 301/308 ile gider; yönlendirmeler en az 1 yıl kalır, alan adı değişikliğinde sinyaller 180 gün aktarılır.</li>
+            <li>Reklam organik sıralamayı yükseltmez; ama aynı açılış sayfası hem Ads kalitesine hem SEO'ya hizmet eder.</li>
+            <li>Kimse 1. sırayı garanti edemez; müşteriye sıralama değil, yapılan işler ve ölçülen sonuçlar (arama, yol tarifi, form) raporlanır.</li>
+          </ul>
+        </div>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Senaryo (hayalî): reklam ya da SEO hizmeti veren biri (ajans ya da serbest çalışan), küçük bir nakliye firmasından "siteyi de düzeltir misin, telefonda üstte çıkmıyoruz" isteği alıyor; firmanın Google Ads hesabını da o yönetiyor. Site birkaç yıl önce bir tanıdığa yaptırılmış, alan adının kimin üzerine kayıtlı olduğu bilinmiyor, firma sahibi panele hiç girmemiş. Bu bölümdeki her adım bu müşteriye nasıl uygulanacağıyla birlikte anlatılıyor.</p>
+        </aside>
+        <p>Okurun durumu farklı olabilir; bölüm üç durumda da işe yarar:</p>
+        <ul>
+          <li><strong>İşletmenin reklamını zaten yönetiyorsan</strong> → bütün adımlar, özellikle <a href="#ads-ve-seo">§ 5</a>, doğrudan geçerli.</li>
+          <li><strong>Yalnız SEO için tutulan danışman ya da ajanssan</strong> → erişimi <a href="#erisim">§ 1</a>'deki tabloyla iste; § 5 yalnız işletme reklam veriyorsa gerekir.</li>
+          <li><strong>İşletme sahibiysen ve bir ajans ya da danışmanla çalışıyorsan</strong> → § 1'deki sahiplik tablosu, <a href="#durust-beklenti">§ 6</a>'daki Google uyarı listesi ve <a href="21-kara-sapka.html#ajans-kirmizi-bayrak">Bölüm 21 § 13</a>'teki kırmızı bayraklar senin kontrol listen.</li>
+        </ul>
+
+        <!-- ============ 1. ERİŞİM ============ -->
+        <h2 id="erisim"><span class="h-num">§ 1</span>Önce erişim: kim neyin sahibi?</h2>
+        <p>Teknik bir şeye dokunmadan önce sahiplik ve erişim netleşmeli. Küçük işletmelerde en sık sorun teknik değil, "şifre kimde"dir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Varlık</th><th>Sahip kim olmalı</th><th>Sana verilecek yetki</th></tr></thead>
+            <tbody>
+              <tr><td>Alan adı (kayıt firması hesabı)</td><td>Müşteri, kendi adına</td><td>Gerekirse DNS düzenleme</td></tr>
+              <tr><td>Hosting / sunucu paneli</td><td>Müşteri</td><td>Teknik kullanıcı</td></tr>
+              <tr><td>Google Search Console</td><td>Müşteri (sahip)</td><td>Denetimde önce <strong>yalnız okuma</strong>; iş onaylanınca tam kullanıcı</td></tr>
+              <tr><td>Google İşletme Profili</td><td>Müşteri (birincil sahip)</td><td>Yönetici</td></tr>
+              <tr><td>Google Ads</td><td>Müşteri hesabı (ajans hesabına bağlı)</td><td>Yönetici</td></tr>
+              <tr><td>Analitik</td><td>Müşteri</td><td>Düzenleyici</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google'ın "SEO'ya ihtiyacınız var mı?" sayfası denetim sırasında Search Console'a önce <strong>yalnız okuma</strong> yetkisi verilmesini önerir ve bir hatırlatma yapar: tutulan firmanın yaptığından <strong>site sahibi sorumludur</strong> <sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--ok">Resmî</span>. Bu kural seni de korur: sahiplik müşteride olursa, iş bitince "bizi kilitledi" tartışması çıkmaz.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Alan adı eski web tasarımcısının ya da bir ajansın hesabına kayıtlıysa, her şeyden önce bunu müşterinin üzerine aldır. Alan adı müşterinin elinde değilse yapılan bütün SEO işi bir gün tek bir yenilememe ile kaybolabilir. İşletme Profili için de aynısı: ajans sahip olursa işletme ajanstan ayrılınca profile erişimini kaybeder (iyi uygulama; Google'ın açıkça yazdığı bir kural değil).</p>
+        </aside>
+
+        <!-- ============ 2. DENETİM ============ -->
+        <h2 id="denetim-akisi"><span class="h-num">§ 2</span>Denetim akışı, adım adım</h2>
+        <p>Denetimin amacı "her şeyi düzeltmek" değil, <strong>en çok etki yapacak birkaç sorunu bulmaktır</strong>. Aşağıdaki sıra büyük ve ucuz sorunları önce yakalar.</p>
+
+        <ol class="steps">
+          <li><strong>Dizin durumu (Search Console → Sayfa dizine ekleme).</strong> Kaç sayfa dizinde, kaç tanesi neden dışarıda? "Dizine eklendi, ancak robots.txt tarafından engellendi", "Soft 404", "Yinelenen, Google farklı bir kanonik seçti" gibi durumlar burada görünür <sup class="kaynak"><a href="#k17">[17]</a></sup>. <code>site:</code> aramasındaki sayıya güvenme; Google o sayının tam olmadığını söylüyor (<a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</li>
+          <li><strong>Elle işlemler ve Güvenlik sorunları.</strong> Bildirim varsa diğer her şeyden önce gelir (<a href="13-sayfa-disi.html#yeniden-inceleme">Bölüm 13</a>, <a href="11-altyapi.html#hack">Bölüm 11</a>).</li>
+          <li><strong>Tarama.</strong> Screaming Frog SEO Spider (500 URL'ye kadar ücretsiz) ya da Ahrefs Webmaster Tools (doğrulanmış kendi siteler için ücretsiz) ile siteyi tara <sup class="kaynak"><a href="#k15">[15]</a></sup><sup class="kaynak"><a href="#k16">[16]</a></sup>: kırık bağlantılar, yönlendirme zincirleri, eksik/aynı başlıklar, <code>noindex</code>'li önemli sayfalar, kanonik hataları.</li>
+          <li><strong>Teknik temel.</strong> Tek kanonik host (http/https, www) ve tek adım 301; robots.txt; site haritası; mobilde içerik eksikliği; bilinmeyen URL'nin gerçek 404 dönüp dönmediği; bot korumasının Googlebot'u kesip kesmediği (URL Denetimi → Canlı test) (<a href="11-altyapi.html#waf-bot-korumasi">Bölüm 11</a>).</li>
+          <li><strong>Hız.</strong> PageSpeed Insights'ta saha verisi (CrUX) var mı? Yoksa Lighthouse ile lab ölçümü. TTFB 1,8 sn'nin üstündeyse hosting şüphelidir <sup class="kaynak"><a href="#k23">[23]</a></sup> (<a href="10-performans-mobil-js.html">Bölüm 10</a>).</li>
+          <li><strong>İçerik.</strong> Her hizmetin kendi sayfası var mı? Başlıklar ve açıklamalar sayfaya özel mi? Şablonla çoğaltılmış semt sayfaları var mı (kapı sayfası riski)? (<a href="05-sayfa-ici.html">Bölüm 5</a>, <a href="07-icerik-kalitesi.html">Bölüm 7</a>)</li>
+          <li><strong>Yerel.</strong> İşletme Profili doğrulanmış mı, ad kurallara uygun mu, kategori ve hizmetler doğru mu, kopya profil var mı, NAP sitedekiyle aynı mı, Yandex kartı var mı? (<a href="12-yerel-seo.html">Bölüm 12</a>)</li>
+          <li><strong>Bağlantılar.</strong> Search Console Bağlantılar raporu; geçmişte bağlantı paketi alınmış mı?</li>
+          <li><strong>Ölçüm.</strong> Analitik kurulu mu, telefon tıklamaları ve form gönderimleri ölçülüyor mu? Ölçülmeyen iş raporlanamaz.</li>
+        </ol>
+
+        <h3 id="bulgu-raporu">Bulguları önceliklendirmek</h3>
+        <p>Bulguları müşteriye uzun bir hata listesi olarak değil, <strong>etki ve zahmet</strong> tablosuyla sun. Koddan anlamayan müşteri için her satırın "ne demek" sütunu en önemlisidir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Öncelik</th><th>Bulgu</th><th>Ne demek (müşteri dili)</th><th>Etki</th><th>Zahmet</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>İşletme Profili doğrulanmamış</td><td>Haritada güvenilir görünmüyorsunuz</td><td>Yüksek</td><td>Düşük</td></tr>
+              <tr><td>2</td><td>Bot koruması Googlebot'a 403 dönüyor</td><td>Google sitenizi okuyamıyor</td><td>Çok yüksek</td><td>Düşük</td></tr>
+              <tr><td>3</td><td>Bütün sayfalarda aynı başlık</td><td>Google hangi sayfanın neyle ilgili olduğunu ayırt edemiyor</td><td>Orta</td><td>Düşük</td></tr>
+              <tr><td>4</td><td>Hizmetlerin ayrı sayfası yok</td><td>"Ofis taşıma" arayan kişiye gösterilecek sayfanız yok</td><td>Yüksek</td><td>Orta</td></tr>
+              <tr><td>5</td><td>TTFB 2,5 sn, gece kesintileri</td><td>Site yavaş açılıyor, ara ara çöküyor</td><td>Orta</td><td>Orta (host değişikliği)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Küçük işletme sitelerinde sorun çoğu zaman teknikte değil içerikte ve yerel profildedir. Mueller'in CMS konusundaki sözü bunun özeti: WordPress'in tek avantajı insanın vaktini içeriğe ayırabilmesidir <sup class="kaynak"><a href="#k11">[11]</a></sup>. Denetim raporu teknik bulgularla dolup "hizmet sayfanız yok" bulgusu en alta düşüyorsa sıralamayı yeniden düşün.</p>
+        </aside>
+
+        <!-- ============ 3. PLATFORM DEĞİŞİKLİĞİ ============ -->
+        <h2 id="platform-degisikligi"><span class="h-num">§ 3</span>Platform, host ya da mimari değişikliği ne zaman önerilir?</h2>
+        <p>Google hiçbir CMS'i ayırt etmez <sup class="kaynak"><a href="#k11">[11]</a></sup>. Bu yüzden "siteyi baştan yapalım" önerisi ancak mevcut yapının <strong>somut bir engeli</strong> varsa doğrudur. Her taşıma risk taşır (aşağıdaki taşıma bölümü); gerekçesiz taşıma müşteriye zarar verir.</p>
+
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">✓ Değişiklik önerilir</h4>
+            <ul>
+              <li>Sayfalar taranamıyor: içerik yalnız tarayıcıda JS ile oluşuyor ve düzeltilemiyor.</li>
+              <li>Başlık, meta açıklama, kanonik gibi alanlar düzenlenemiyor.</li>
+              <li>Kalıcı yönlendirme (301) yapılamıyor; 404 yerine her şeye 200 dönüyor ve değiştirilemiyor.</li>
+              <li>Sunucu sürekli yavaş (TTFB &gt; 1,8 sn) ya da sık kesintili; 5xx hataları URL'leri dizinden düşürüyor <sup class="kaynak"><a href="#k22">[22]</a></sup>.</li>
+              <li>Alan adı müşterinin üzerinde değil ve devralınamıyor.</li>
+              <li>Güncellenmeyen CMS ya da eklentiler yüzünden tekrar eden güvenlik açıkları, hack.</li>
+              <li>Mobilde içerik eksik ya da site mobilde çalışmıyor.</li>
+            </ul>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">✗ Önerilmez</h4>
+            <ul>
+              <li>"PHP eski, .NET'e geçelim, Google daha iyi sıralar."</li>
+              <li>"WordPress'e geçelim, SEO dostu."</li>
+              <li>"Yeni tasarım SEO'yu artırır." (Tasarım tek başına değil, içerik ve hız artırır.)</li>
+              <li>"Alan adına anahtar kelime koyalım." (<a href="11-altyapi.html#alan-adi-yasi">Bölüm 11</a>)</li>
+              <li>"Lighthouse puanı 100 olmalı." Sıralamada Lighthouse puanı değil gerçek kullanıcı verisi kullanılır.</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Senaryodaki nakliye sitesi eski bir hazır site oluşturucuda. Başlıklar ve açıklamalar düzenlenebiliyor, sayfalar hızlı, ama hizmet sayfası eklenemiyor ve 301 yapılamıyor. Öneri: "Platform kendi başına sorun değil; ama hizmet başına sayfa açamamak ve yönlendirme yapamamak sizi geride tutuyor. İki seçenek: platformun ücretli planında bu özellikler varsa ona geçmek; yoksa siteyi taşımak." Müşteriye "dil/teknoloji eski" denmez; somut engel söylenir.</p>
+        </aside>
+
+        <!-- ============ 4. SİTE TAŞIMA ============ -->
+        <h2 id="site-tasima"><span class="h-num">§ 4</span>Site taşıma rehberi</h2>
+        <p>Site taşıma; alan adı, sunucu, CMS ya da URL yapısının değişmesidir. Doğru yapılırsa sıralama geçici dalgalanıp oturur; yanlış yapılırsa yıllarca birikmiş değer kaybolur ve "eski site hâlâ görünüyor" sorunları başlar. Google'ın resmî taşıma rehberi beş aşamadır <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <h3 id="tasima-hazirlik">1. Hazırlık</h3>
+        <ul class="checklist">
+          <li>Yeni site kurulur, TLS (HTTPS sertifikası) ayarlanır, yeni robots.txt hazırlanır.</li>
+          <li>Test sitesindeki geçici <code>noindex</code> ve parola koruması ancak taşıma başlarken kaldırılır; test sitesi robots.txt ile değil parola/IP kısıtıyla gizlenir.</li>
+          <li>Taşınmayacak eski içerik için 404/410 kararı verilir.</li>
+          <li>Eski ve yeni sitenin bütün varyantları (www, www'siz, http, https) Search Console'da doğrulanır.</li>
+          <li>Taşıma sonrası tarama artacağı için sunucu kapasitesi ayarlanır; yeni sunucuda WAF/bot korumasının Googlebot'u engellemediği test edilir <sup class="kaynak"><a href="#k26">[26]</a></sup>.</li>
+        </ul>
+
+        <h3 id="url-esleme">2. URL eşleme</h3>
+        <p>Eski URL'ler mümkün olan her kaynaktan toplanır: eski site haritaları, sunucu günlükleri, analitik, Search Console bağlantı raporu ve CMS. Görseller, JS ve CSS dosyaları da dahildir. Sonra <strong>her eski URL belirli bir yeni URL'ye</strong> eşlenir; hepsini ana sayfaya göndermek yanlıştır <sup class="kaynak"><a href="#k1">[1]</a></sup>. Yeni sitede kanonik, hreflang ve iç bağlantılar yeni URL'lere çevrilir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Eski URL</th><th>Yeni URL</th><th>Kod</th></tr></thead>
+            <tbody>
+              <tr><td><code>/hizmetler.php?id=3</code></td><td><code>/evden-eve-nakliyat</code></td><td>301</td></tr>
+              <tr><td><code>/hakkimizda.html</code></td><td><code>/hakkimizda</code></td><td>301</td></tr>
+              <tr><td><code>/kampanya-2019.html</code></td><td>(karşılığı yok)</td><td>410</td></tr>
+              <tr><td><code>/img/kamyon1.jpg</code></td><td><code>/img/kapali-kasa-kamyon.webp</code></td><td>301</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="yonlendirme">3. Yönlendirme</h3>
+        <p>Sunucu tarafında kalıcı yönlendirme kullanılır: <strong>301 ya da 308</strong> (Google ikisini aynı işler). Her eski URL <strong>tek adımda</strong> son hedefe gider. Google'a göre kalıcı yönlendirme PageRank kaybettirmez <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k18">[18]</a></sup>. Zincir en çok 10 adım izlenir; taşımada öneri ideal olarak en çok 3, 5'in altındadır. 302/307 geçici sayılır ve zayıf sinyaldir; taşımada kullanılmaz. JavaScript yönlendirmesi son çaredir.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>C#</span><span class="dosya">Program.cs · ASP.NET Core eşleme tablosu</span></div>
+<pre><code><span class="k-yorum">// Eski → yeni eşleme. null = karşılığı yok → 410 Gone.</span>
+<span class="k-anahtar">var</span> esleme = <span class="k-anahtar">new</span> Dictionary&lt;<span class="k-anahtar">string</span>, <span class="k-anahtar">string</span>?&gt;(StringComparer.OrdinalIgnoreCase)
+{
+        [<span class="k-deger">"/hakkimizda.html"</span>]   = <span class="k-deger">"/hakkimizda"</span>,
+        [<span class="k-deger">"/kampanya-2019.html"</span>] = <span class="k-anahtar">null</span>,
+};
+
+app.Use(<span class="k-anahtar">async</span> (ctx, next) =&gt;
+{
+        <span class="k-anahtar">if</span> (esleme.TryGetValue(ctx.Request.Path.Value ?? <span class="k-deger">""</span>, <span class="k-anahtar">out</span> <span class="k-anahtar">var</span> hedef))
+        {
+            <span class="k-anahtar">if</span> (hedef <span class="k-anahtar">is null</span>) { ctx.Response.StatusCode = 410; <span class="k-anahtar">return</span>; }
+            ctx.Response.Redirect(<span class="k-deger">"https://www.hayalinakliyat.com.tr"</span> + hedef, permanent: <span class="k-anahtar">true</span>); <span class="k-yorum">// 301, tek adım</span>
+            <span class="k-anahtar">return</span>;
+        }
+        <span class="k-anahtar">await</span> next();
+});</code></pre>
+        </div>
+        <div class="kod">
+          <div class="kod-ust"><span>Apache</span><span class="dosya">.htaccess · eski sunucuda</span></div>
+<pre><code>RewriteEngine On
+<span class="k-yorum"># Parametreli eski hizmet sayfası → yeni temiz URL (sorgu dizesini at)</span>
+RewriteCond %{QUERY_STRING} ^id=3$
+RewriteRule ^hizmetler\.php$ https://www.hayalinakliyat.com.tr/evden-eve-nakliyat? [L,R=301]
+<span class="k-yorum"># Tek sayfa</span>
+Redirect 301 /hakkimizda.html https://www.hayalinakliyat.com.tr/hakkimizda
+<span class="k-yorum"># Karşılığı olmayan eski kampanya klasörü</span>
+RewriteRule ^kampanya-2019/ - [G]</code></pre>
+        </div>
+
+        <h3 id="yayina-alma">4. Yayına alma</h3>
+        <ul>
+          <li>Yönlendirmeler açılır. Küçük ve orta sitede <strong>tek seferde</strong> taşıma önerilir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>URL Denetimi ile örnek sayfalar kontrol edilir: yeni URL'ler 200, eski URL'ler 301 dönüyor mu?</li>
+          <li>Yeni site haritası gönderilir; eski site haritası bir süre durabilir (Google eski URL'leri yeniden tarayıp yönlendirmeleri görsün).</li>
+          <li>İşletme Profili, sosyal profiller, dizinler ve <strong>Ads'teki nihai URL'ler</strong> yeni adrese güncellenir.</li>
+        </ul>
+
+        <h3 id="site-adresi-degisikligi">Site Adresi Değişikliği aracı</h3>
+        <p>Alan adı değiştiyse (<code>eski-ornek.com</code> → <code>hayalinakliyat.com.tr</code>) Search Console'daki Site Adresi Değişikliği aracıyla istek gönderilir <sup class="kaynak"><a href="#k2">[2]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ul>
+          <li>Yalnız <strong>alan adı düzeyindeki</strong> mülklerde çalışır; kullanıcı iki mülkün de sahibi olmalı ve aynı Google hesabından yönetmeli.</li>
+          <li>Alt alan adları otomatik taşınmaz.</li>
+          <li>Sinyaller <strong>180 gün</strong> boyunca aktarılır; bu sürede iptal edilebilir.</li>
+          <li>HTTP→HTTPS, www değişikliği ya da yalnız sunucu/CDN değişikliği (URL değişmiyorsa) için <strong>kullanılmaz</strong>.</li>
+          <li>Eski alan adı en az 1 yıl elde tutulmalı; başkasının eline geçip kötüye kullanılmasını önler.</li>
+        </ul>
+
+        <h3 id="yonlendirmeleri-tut">5. Yönlendirmeleri tutma ve izleme</h3>
+        <p>Google'a göre yönlendirmeler "genellikle <strong>en az 1 yıl</strong>" tutulur; daha uzun tutmak sorun değildir <sup class="kaynak"><a href="#k1">[1]</a></sup>. İzlenecekler: yeni site haritasında dizine eklenen sayı artmalı, eskisinde sıfıra inmeli. Sayfa dizine ekleme raporunda "Yönlendirmeli sayfa" ve "Bulunamadı (404)" sayıları önce artar, sonra azalır; bu normaldir. Orta boy bir sitede sıralamanın oturması "birkaç hafta ya da daha uzun" sürebilir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat: sık taşıma hataları</p>
+          <ul>
+            <li>Test sitesindeki genel <code>noindex</code> ya da <code>Disallow: /</code> satırının canlıya taşınması <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+            <li>Kanoniklerin hâlâ test ya da eski URL'yi göstermesi.</li>
+            <li>Bütün eski URL'lerin ana sayfaya 301'lenmesi: Google bunları soft 404 sayar.</li>
+            <li>Zincirler: <code>http</code> → <code>https</code> → <code>www</code> → yeni yol. Hepsi tek adıma indirilmeli.</li>
+            <li>Eski sunucunun açık kalıp 200 dönmesi (DNS değişti ama eski host IP'den ya da eski alt alan adından yanıt veriyor).</li>
+            <li>Yönlendirmelerin birkaç ay sonra "artık gerek yok" diye kaldırılması.</li>
+            <li>Eski yolların robots.txt ile engellenmesi: Google 301'i ve 410'u göremez, eski URL'ler dizinde kalır.</li>
+            <li>Yalnız bir varyantın Search Console'da doğrulanması; http/www varyantlarındaki sorunlar görünmez kalır.</li>
+          </ul>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Search Console'daki Kaldırmalar aracı <strong>geçicidir</strong> (yaklaşık 6 ay) ve taramayı durdurmaz <sup class="kaynak"><a href="#k25">[25]</a></sup>. Taşıma sonrası "eski sayfalar görünmesin" diye kullanılırsa 6 ay sonra geri gelirler. Kalıcı çözüm her zaman durum kodudur: 301, 404 ya da 410. "Eski sitenin yüzlerce sayfası hâlâ görünüyor" vakasının tam çözümü <a href="16-sorun-giderme.html">Bölüm 16</a>'da.</p>
+        </aside>
+
+        <!-- ============ 5. ADS VE SEO ============ -->
+        <h2 id="ads-ve-seo"><span class="h-num">§ 5</span>Google Ads ve SEO birlikte</h2>
+        <p>Reklam veren ya da reklam hesabı yöneten herkes için en önemli gerçek: <strong>reklam organik sıralamayı yükseltmez.</strong> Google bunu iki ayrı resmî sayfada açıkça yazar: "Google'da reklam vermenin sitenizin arama sonuçlarındaki varlığına hiçbir etkisi olmaz" ve "ücretli aramaya yapılan yatırımın organik sıralamanıza etkisi yoktur" <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>. Google Arama, reklam gibi mali ilişkilere dayalı "sıralama artışı gibi özel muamele" yapmaz <sup class="kaynak"><a href="#k4">[4]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+        <p>İki kanal sıralamada değil, <strong>açılış sayfasında ve veride</strong> kesişir.</p>
+
+        <h3 id="kalite-puani">Kalite Puanı ve Ad Rank</h3>
+        <ul>
+          <li><strong>Kalite Puanı</strong> anahtar kelime düzeyinde 1–10 arası bir puandır. Üç bileşeni var: beklenen tıklama oranı, reklam alaka düzeyi ve <strong>açılış sayfası deneyimi</strong>. Her biri son 90 günde aynı aramada çıkan reklamverenlerle kıyaslanır. Google'a göre Kalite Puanı açık artırmaya girdi değildir; bir teşhis aracıdır ve performans ölçütü gibi kullanılmamalıdır <sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+          <li><strong>Ad Rank</strong> (reklamın sırası) altı etkene göre belirlenir: teklif, reklam ve açılış sayfası kalitesi, eşikler, rekabet, arama bağlamı ve reklam öğelerinin beklenen etkisi <sup class="kaynak"><a href="#k7">[7]</a></sup>. Yani iyi bir açılış sayfası reklamın sırasını ve tıklama maliyetini doğrudan etkiler.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Kalite Puanını yükselt, açık artırmayı kazan."</p>
+          <p class="mit-gercek">Kalite Puanı açık artırmaya girdi değil, teşhis aracıdır; açık artırmayı etkileyen, her aramada anlık yapılan kalite değerlendirmesidir <sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Pratikte sonuç aynı yöne çıkar: hızlı, ilgili, net bir açılış sayfası.</p>
+        </aside>
+
+        <h3 id="ads-acilis-sayfasi">Ads açılış sayfası politikası</h3>
+        <p>Google Ads hedef (açılış sayfası) gereksinimlerine göre reklam şu sebeplerle reddedilebilir <sup class="kaynak"><a href="#k8">[8]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ul class="checklist">
+          <li>Sayfa çalışmıyor; AdsBot'a hata kodu dönüyor.</li>
+          <li>Sayfa Google Ads tarafından taranamıyor.</li>
+          <li>Hedef ülkeden erişilemiyor (ülke engelli güvenlik duvarı).</li>
+          <li>Görünen URL ile nihai URL'nin alan adı uyuşmuyor; nihai URL başka alan adına yönlendiriyor.</li>
+          <li>Gezinmesi gereksiz zor sayfa; yalnız başka yere yönlendirmek için yapılmış ya da kopya içerik.</li>
+          <li>Telefon numarası Google tarafından doğrulanamıyor; yanlış, kullanılmayan, alakasız, faks, ücretli (premium), sanal ya da yerel olmayan numara; telesekreteri olmayan numara.</li>
+        </ul>
+        <p>Askıya almadan en az 7 gün önce uyarı gelir <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat: AdsBot ve robots.txt</p>
+          <p>Google'ın özel tarayıcılar belgesine göre <code>AdsBot-Google</code> robots.txt'deki genel <code>User-agent: *</code> grubunu <strong>yok sayar</strong>; yalnız adıyla anılırsa engellenir <sup class="kaynak"><a href="#k10">[10]</a></sup> <span class="tag tag--ok">Resmî</span>. Yani <code>*</code> grubundaki kurallar reklam taramasını etkilemez, ama birisi "kötü botları engelleyelim" diye AdsBot'u adıyla engellerse reklamlar "taranamıyor" diye reddedilir.</p>
+        </aside>
+        <div class="kod">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">/robots.txt</span></div>
+<pre><code>User-agent: *
+Disallow: /yonetim/
+<span class="k-yorum"># AdsBot-Google "*" grubunu dikkate almaz.</span>
+<span class="k-yorum"># Aşağıdaki gibi adıyla engelleme YAPMA, yoksa reklamlar reddedilir:</span>
+<span class="k-yorum"># User-agent: AdsBot-Google</span>
+<span class="k-yorum"># Disallow: /</span>
+
+Sitemap: https://www.hayalinakliyat.com.tr/sitemap.xml</code></pre>
+        </div>
+
+        <h3 id="konum-ogeleri">Konum öğeleri ve İşletme Profili</h3>
+        <p>İşletme Profili Google Ads'e bağlanınca reklamda adres, harita ve mesafe görünür (konum öğeleri). Adres ve telefon düzeltmeleri <strong>Ads'te değil profilde</strong> yapılır. Profilde "geçici/kalıcı kapalı" işaretlenmiş konum reklamda gösterilmez <sup class="kaynak"><a href="#k9">[9]</a></sup>. Yani profilin bakımı reklamın da bakımıdır.</p>
+
+        <h3 id="ucretli-organik">Ücretli ve organik raporu</h3>
+        <p>Search Console Ads'e bağlanırsa aynı sorgu için reklam ve organik tıklamalar yan yana görülür; organik veri bağlantının kurulduğu tarihten itibaren gelir <sup class="kaynak"><a href="#k5">[5]</a></sup>. Kullanım alanları:</p>
+        <ul>
+          <li>Organikte zaten güçlü olunan sorgularda reklam harcamasını gözden geçirmek. (Bu bir çıkarım, Google'ın önerisi değil; marka koruma gibi sebeplerle reklam yine anlamlı olabilir.)</li>
+          <li>Organikte zayıf kalınan sorgularda açığı reklamla kapatmak, bu sırada SEO ile o sorgu için sayfa geliştirmek.</li>
+          <li>Reklamın <strong>arama terimleri raporu</strong>, SEO için ücretsiz bir anahtar kelime araştırması kaynağıdır: insanlar gerçekte ne yazıyor, hangisi arama/teklif getiriyor?</li>
+        </ul>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Reklam hesabını yöneten kişi, nakliye firmasının arama terimleri raporunda "asansörlü taşıma fiyatı" sorgusunun düşük maliyetle sürekli telefon getirdiğini görüyor. Sitede bu hizmetin ayrı bir sayfası yok; reklam ana sayfaya gidiyor. Öneri: "Asansörlü taşıma" için gerçek bilgilerle (hangi kata kadar, fiyatı etkileyen etkenler, iş fotoğrafları) ayrı bir sayfa açmak. Bu sayfa hem reklamın açılış sayfası deneyimini iyileştirir hem de zamanla organikte o sorguda görünme şansı verir.</p>
+        </aside>
+
+        <p>Yerel Hizmet Reklamları'nın (Local Services Ads) Türkiye'de olduğuna dair kanıt bulunamadı; bilinen ülkeler ABD, Kanada ve 10 Avrupa ülkesi <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+
+        <!-- ============ 6. MÜŞTERİYLE KONUŞMAK ============ -->
+        <h2 id="durust-beklenti"><span class="h-num">§ 6</span>Müşteriyle dürüst konuşmak</h2>
+        <p>Google'ın kendi belgesindeki cümle: <strong>"Kimse Google'da 1. sırayı garanti edemez."</strong> <sup class="kaynak"><a href="#k3">[3]</a></sup> Müşteriye söz verilecek şey sıralama değil, yapılacak işler ve ölçülecek sonuçlardır.</p>
+
+        <h3 id="kotu-seo-isaretleri">Google'ın uyarı listesi</h3>
+        <p>Google bir SEO hizmeti seçerken şu işaretlere dikkat edilmesini söyler <sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--ok">Resmî</span>. Bu listeyi müşteriye göstermek, rakip "garantici" tekliflere karşı en güçlü argümandır:</p>
+        <ul>
+          <li>Sıralama garantisi vermek; Google'la "özel ilişkisi" olduğunu söylemek; "öncelikli gönderim" satmak.</li>
+          <li>Ne yapacağını açıklamamak, gizlemek.</li>
+          <li>Bağlantı planları kurmak, "binlerce arama motoruna kayıt" vaat etmek; müşteriden kendi sitesine bağlantı istemek.</li>
+          <li>Davetsiz "sıralamanız şöyle" e-postaları (Google bunları açık dolandırıcılığa benzetiyor).</li>
+          <li>"Google onaylı" araç satmak.</li>
+        </ul>
+        <p>Google'ın işe alırken sorulmasını önerdiği sorular: Daha önceki işleri neler? Search Essentials kurallarına uyuyor mu? Hangi sürede ne sonuç bekliyor, başarıyı nasıl ölçüyor? Sektörde ve şehirde deneyimi var mı? Her değişikliği gerekçesiyle paylaşacak mı? <sup class="kaynak"><a href="#k3">[3]</a></sup></p>
+
+        <h3 id="sure-beklentisi">Süre beklentisi</h3>
+        <p>"Çoğu durumda 4 ay ile 1 yıl" sözü 2017 tarihli bir Google videosundandır; güncel Google sayfasında bu ifade yoktur <sup class="kaynak"><a href="#k13">[13]</a></sup> <span class="tag tag--info">3. taraf</span>. Ahrefs'in Mayıs 2025 çalışmasında yeni yayımlanan sayfaların yalnız %1,74'ü bir yıl içinde ilk 10'a girebildi; ilk 10'a girenlerin %40,82'si bunu ilk ayda başardı <sup class="kaynak"><a href="#k14">[14]</a></sup>. Makul beklenti:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Hedef</th><th>Gerçekçi süre</th></tr></thead>
+            <tbody>
+              <tr><td>İşletme Profili doğrulandıktan sonra marka adıyla aramada görünmek</td><td>Günler–haftalar</td></tr>
+              <tr><td>Uzun kuyruklu, hizmet + yer sorguları ("asansörlü taşıma Örnek İlçe")</td><td>1–6 ay</td></tr>
+              <tr><td>Rekabetli genel terim ("evden eve nakliyat")</td><td>6–12 ay ve üstü, garantisiz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Harita sıralaması kullanıcının konumuna göre değiştiği için "3. sıradayız" gibi tek bir rakam yanıltıcıdır. Bunu müşteriye harita sıralama ızgarasıyla (geo-grid: şehrin farklı noktalarından ölçülen sıralama) göstermek daha dürüsttür <sup class="kaynak"><a href="#k24">[24]</a></sup>.</p>
+
+        <h3 id="yapilmayacaklar">Yapılmayacaklar listesi</h3>
+        <p>Müşteri bunları isteyebilir, rakibinin yaptığını görmüş olabilir. Sözleşmeye "yapmıyoruz" diye yazmak ileride çıkacak tartışmayı önler.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>İstek</th><th>Neden yapılmaz</th></tr></thead>
+            <tbody>
+              <tr><td>İşletme adına anahtar kelime eklemek</td><td>Profil yönergelerine aykırı, askı riski <sup class="kaynak"><a href="#k20">[20]</a></sup> (<a href="12-yerel-seo.html#isletme-adi">Bölüm 12</a>)</td></tr>
+              <tr><td>Sahte ya da ödüllü yorum, yalnız memnun müşteriden yorum toplama</td><td>Google politikası + Türkiye'de idari para cezası riski (<a href="12-yerel-seo.html#yorumlar">Bölüm 12</a>)</td></tr>
+              <tr><td>Her semt için şablon sayfa</td><td>Kapı sayfası (doorway) spamı <sup class="kaynak"><a href="#k21">[21]</a></sup></td></tr>
+              <tr><td>"Backlink paketi" satın almak</td><td>Ya boşa gider ya elle işlem getirir (<a href="13-sayfa-disi.html#satin-alma-riski">Bölüm 13</a>)</td></tr>
+              <tr><td>Yapay zekâyla yüzlerce blog yazısı</td><td>Ölçekli içerik kötüye kullanımı <sup class="kaynak"><a href="#k21">[21]</a></sup> (<a href="07-icerik-kalitesi.html">Bölüm 7</a>)</td></tr>
+              <tr><td>Saatleri olduğundan uzun göstermek</td><td>Kural ihlali, müşteri şikâyeti</td></tr>
+              <tr><td>Sanal/ücretli numara kullanmak</td><td>Hem profilde hem Ads'te sorun <sup class="kaynak"><a href="#k8">[8]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ============ 7. RAPOR ============ -->
+        <h2 id="kpi-raporu"><span class="h-num">§ 7</span>Aylık rapor şablonu</h2>
+        <p>Koddan anlamayan müşteri "sıralama" değil "telefon çaldı mı" diye bakar. Rapor buna göre kurulur. Sıralama tek başına KPI (başarı ölçütü) olarak verilmez, çünkü konuma göre değişir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ölçüt</th><th>Kaynak</th><th>Bu ay</th><th>Geçen ay</th></tr></thead>
+            <tbody>
+              <tr><td>Profilden "Ara" tıklaması</td><td>İşletme Profili performans <sup class="kaynak"><a href="#k12">[12]</a></sup></td><td>—</td><td>—</td></tr>
+              <tr><td>Yol tarifi istekleri</td><td>İşletme Profili performans</td><td>—</td><td>—</td></tr>
+              <tr><td>Profilden web sitesi tıklaması</td><td>İşletme Profili performans</td><td>—</td><td>—</td></tr>
+              <tr><td>Profil görüntülenmeleri</td><td>İşletme Profili performans</td><td>—</td><td>—</td></tr>
+              <tr><td>Organik tıklama / gösterim</td><td>Search Console</td><td>—</td><td>—</td></tr>
+              <tr><td>Sitedeki telefon tıklaması ve form gönderimi</td><td>Analitik olayları</td><td>—</td><td>—</td></tr>
+              <tr><td>Yeni yorum sayısı, ortalama puan, ortalama yanıt süresi</td><td>İşletme Profili</td><td>—</td><td>—</td></tr>
+              <tr><td>Harita sıralama ızgarası (seçili sorgular)</td><td>Geo-grid aracı</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Profilde "Ara" tıklamaları sayılır; numarayı kopyalayıp elle arayanlar sayılmayabilir <sup class="kaynak"><a href="#k12">[12]</a></sup>. Eski "toplam arama" ölçütü kaldırıldı. Rapora her ay ayrıca "bu ay yapılanlar" ve "gelecek ay yapılacaklar" yazılır; Google'ın "her değişikliği gerekçesiyle paylaşacak mı" sorusunun cevabı budur.</p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Eylül 2025'te Google sonuç sayfasındaki <code>&amp;num=100</code> parametresini kaldırdı; birçok sitede Search Console gösterimleri ani düştü, ortalama pozisyon "iyileşti". Bu bir veri değişikliğidir, gerçek kayıp değil (ikincil kaynak; Google resmî duyuru yapmadı) <sup class="kaynak"><a href="#k27">[27]</a></sup>. O dönemi kapsayan karşılaştırmalarda müşteriye bunu açıklamak gerekir.</p>
+        </aside>
+
+        <!-- ============ 8. ÖZET AKIŞ ============ -->
+        <h2 id="is-akisi"><span class="h-num">§ 8</span>Baştan sona iş akışı</h2>
+        <ol class="steps">
+          <li><strong>Tanışma:</strong> müşterinin gerçek hedefi (telefon, form, ziyaret), hizmet bölgesi, rakipler.</li>
+          <li><strong>Erişim:</strong> alan adı, hosting, Search Console (yalnız okuma), İşletme Profili, Ads, analitik.</li>
+          <li><strong>Denetim:</strong> yukarıdaki sırayla; bulgular etki/zahmet tablosunda.</li>
+          <li><strong>Teklif:</strong> öncelikli işler, süre beklentisi, yapılmayacaklar listesi, raporlama biçimi. Garanti yok.</li>
+          <li><strong>Uygulama:</strong> önce düşük zahmet/yüksek etki (profil, erişim engelleri, başlıklar), sonra içerik (hizmet sayfaları), gerekiyorsa platform/taşıma.</li>
+          <li><strong>Ölçüm ve rapor:</strong> aylık; reklam ve organik verisi birlikte.</li>
+          <li><strong>Sahiplik devri:</strong> iş bitince bütün varlıklar müşteride; senin yetkilerin müşterinin isteğine göre.</li>
+        </ol>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 9</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Önce sahiplik: alan adı, Search Console, İşletme Profili müşterinin üzerine; sana denetimde yalnız okuma, sonra yönetici yetkisi. Site sahibi, tuttuğu firmanın yaptığından sorumludur.</li>
+            <li>Denetim sırası: dizin durumu → elle işlem/güvenlik → tarama → teknik temel → hız → içerik → yerel → bağlantılar → ölçüm; bulgular etki/zahmet tablosuyla, müşteri diliyle.</li>
+            <li>Platform/host değişikliği yalnız somut engelde (taranamıyor, düzenlenemiyor, yönlendirilemiyor, yavaş/kesintili, alan adı müşteride değil, tekrar eden hack).</li>
+            <li>Taşıma: her eski URL'yi kendi karşılığına tek adımda 301/308; karşılığı yoksa 410; yönlendirmeler ≥ 1 yıl; alan adı değişikliğinde Site Adresi Değişikliği aracı (180 gün).</li>
+            <li>Reklam organik sıralamayı yükseltmez; ama iyi açılış sayfası Ad Rank'i, arama terimleri raporu SEO'yu besler. AdsBot'u robots.txt'de adıyla engelleme.</li>
+            <li>Kimse 1. sırayı garanti edemez; söz verilecek şey yapılan işler ve ölçülen sonuçtur (arama, yol tarifi, form).</li>
+            <li>Yapılmayacaklar sözleşmede yazılı olsun: addaki anahtar kelime, sahte yorum, şablon semt sayfaları, bağlantı paketi.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 10</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span>Google Search Central — Site moves with URL changes — <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">developers.google.com/…/site-move-with-url-changes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span>Search Console Yardım — Change of Address tool — <a href="https://support.google.com/webmasters/answer/9370220">support.google.com/webmasters/answer/9370220</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span>Google Search Central — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span>Google — How Search Works: Our approach — <a href="https://www.google.com/search/howsearchworks/our-approach/">google.com/search/howsearchworks/our-approach</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span>Google Ads Yardım — Paid and organic report — <a href="https://support.google.com/google-ads/answer/3097241">support.google.com/google-ads/answer/3097241</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span>Google Ads Yardım — Quality Score — <a href="https://support.google.com/google-ads/answer/6167118">support.google.com/google-ads/answer/6167118</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span>Google Ads Yardım — Ad Rank — <a href="https://support.google.com/google-ads/answer/1722122">support.google.com/google-ads/answer/1722122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span>Google Ads Politikaları — Destination requirements — <a href="https://support.google.com/adspolicy/answer/6368661">support.google.com/adspolicy/answer/6368661</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span>Google Ads Yardım — Location assets — <a href="https://support.google.com/google-ads/answer/7189290">support.google.com/google-ads/answer/7189290</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span>Google — Google special-case crawlers (AdsBot: "The global user agent (*) is ignored") — <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/google-special-case-crawlers">developers.google.com/crawling/…/google-special-case-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span>Search Engine Journal — Google's John Mueller: WordPress not inherently better for SEO (Ara 2022) — <a href="https://www.searchenginejournal.com/googles-john-mueller-wordpress-not-inherently-better-for-seo/474737/">searchenginejournal.com/…/474737</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span>Google İşletme Profili Yardım — Performans ölçütleri; Search Engine Land — GBP performance insights — <a href="https://support.google.com/business/answer/7689763">support.google.com/business/answer/7689763</a>, <a href="https://searchengineland.com/google-business-profile-performance-insights-what-you-need-to-know-436468">searchengineland.com/…-436468</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span>Piranha Digital — Google: SEO results take 4 months to a year (2017 videosu) — <a href="https://piranha-solutions.com/google-seo-results-take-4-months-year/">piranha-solutions.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span>Ahrefs — How long does it take to rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/blog/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span>Screaming Frog — SEO Spider pricing — <a href="https://www.screamingfrog.co.uk/seo-spider/pricing/">screamingfrog.co.uk/seo-spider/pricing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span>Ahrefs — Ahrefs Webmaster Tools — <a href="https://ahrefs.com/webmaster-tools">ahrefs.com/webmaster-tools</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span>Search Console Yardım — Page indexing report — <a href="https://support.google.com/webmasters/answer/7440203">support.google.com/webmasters/answer/7440203</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span>Google Search Central — Redirects and Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects">developers.google.com/…/301-redirects</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span>Search Engine Land — Website migration checks; Practical Ecommerce — SEO checklist for redesigns — <a href="https://searchengineland.com/website-migration-checks-472260">searchengineland.com/…-472260</a>, <a href="https://www.practicalecommerce.com/seo-checklist-for-website-redesigns-and-replatforms">practicalecommerce.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span>Google İşletme Profili Yardım — Guidelines for representing your business on Google — <a href="https://support.google.com/business/answer/3038177">support.google.com/business/answer/3038177</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span>Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span>Google Search Central — How HTTP status codes and network errors affect Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">developers.google.com/…/http-network-errors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span>web.dev — Time to First Byte (TTFB) — <a href="https://web.dev/articles/ttfb">web.dev/articles/ttfb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span>Ahrefs — Local SEO rehberi — <a href="https://ahrefs.com/blog/local-seo/">ahrefs.com/blog/local-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span>Search Console Yardım — Removals tool — <a href="https://support.google.com/webmasters/answer/9689846">support.google.com/webmasters/answer/9689846</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span>Search Engine Journal — Report that Cloudflare AI bot blocking prevents Googlebot from indexing sites (4 Ağu 2026) — <a href="https://www.searchenginejournal.com/report-that-cloudflare-ai-bot-blocking-prevents-googlebot-from-indexing-sites">searchenginejournal.com/report-that-cloudflare…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span>ZEO — The impact of &amp;num=100 parameter removal on SEO reporting — <a href="https://zeo.org/resources/blog/the-impact-of-num-100-parameter-removal-on-seo-reporting">zeo.org/resources/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="16-sorun-giderme.html"><span class="dir">&larr; Önceki</span><span class="ttl">Sorun giderme senaryoları</span></a>
+        <a class="next" href="18-yeni-site-yol-haritasi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Yeni site için 90 günlük yol haritası</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

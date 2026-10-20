@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yerel SEO — SEO Rehberi</title>
+<meta name="description" content="Yerel aramada üste çıkmak: Google İşletme Profili kuralları, hizmet bölgesi işletmesi, doğrulama, yorumlar ve Türk mevzuatı, NAP tutarlılığı, Yandex Haritalar, şehir sayfası tuzağı ve yerel yapılandırılmış veri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Yerel SEO</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 12 · Sitenin dışı</div>
+        <h1 class="page-title">Yerel SEO</h1>
+        <p class="lede">Telefonda "evden eve nakliyat" yazan biri çoğu zaman önce bir harita ve üç işletme görür, organik sonuçları ancak aşağı kaydırınca. Bu üçlüye girmenin kuralları klasik SEO'dan farklıdır: sitenden çok <strong>Google İşletme Profili</strong>, yorumlar ve tutarlı işletme bilgisi belirleyicidir. Bu bölüm, koddan anlamayan küçük bir yerel işletmenin (ör. nakliye firması) yerel aramada görünür olması için gereken her şeyi, kural dışı kestirmelerin bedeliyle birlikte anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 22 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Google yerel sonuçları üç ölçüte göre sıralar: alaka, mesafe, öne çıkma. Para vererek yerel sıralama alınmaz.</li>
+            <li>İşletme Profili'nin ad, adres, telefon, kategori ve saat kuralları; çiğnenirse profil askıya alınabilir.</li>
+            <li>Müşteriye giden işletme (hizmet bölgesi işletmesi) adresini gizler; en çok 20 bölge seçer, yarıçap çizemez.</li>
+            <li>Sahte, ödüllü ya da yalnız memnun müşteriden toplanan yorum yasaktır; Türkiye'de ayrıca idari para cezası riski var.</li>
+            <li>Türkiye'de Yandex mobil aramaların yaklaşık %28'ini alır; Yandex Business kartı ve site bölgesi ayarı atlanmamalı.</li>
+            <li>Şablonla çoğaltılmış "semt + hizmet" sayfaları kapı sayfası (doorway) spamıdır; doğrusu hizmet başına gerçek sayfadır.</li>
+          </ul>
+        </div>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bu bölüm boyunca tek bir senaryo kullanacağız: <strong>Hayalî Nakliyat</strong> (uydurma bir örnek; gerçek bir firma değil), Örnekşehir'de evden eve taşıma yapan, 6 kişilik küçük bir firma. Sahibi koddan anlamıyor, bir sitesi var ama kimin yaptığını hatırlamıyor. İsteği tek cümle: "Telefonda 'evden eve nakliyat' yazınca üstte çıkmak istiyorum." Müşteri adrese gelmiyor; ekip müşterinin evine gidiyor.</p>
+        </aside>
+
+        <!-- ============ 1. NASIL SIRALANIR ============ -->
+        <h2 id="yerel-siralama"><span class="h-num">§ 1</span>Yerel sıralama nasıl çalışır?</h2>
+        <p>Google'ın resmî açıklamasına göre yerel sonuçlar üç ölçütün birleşimiyle sıralanır <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ölçüt</th><th>Ne demek</th><th>Sen ne yapabilirsin</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Alaka</strong></td><td>Profil, aranan şeye ne kadar uyuyor</td><td>Doğru kategori, eksiksiz hizmet listesi, açıklayıcı bilgiler</td></tr>
+              <tr><td><strong>Mesafe</strong></td><td>İşletme, arayana (ya da aranan yere) ne kadar yakın</td><td>Neredeyse hiçbir şey; kullanıcının konumuna bağlı</td></tr>
+              <tr><td><strong>Öne çıkma</strong> (prominence)</td><td>İşletme ne kadar biliniyor</td><td>Yorum sayısı ve puanı, web'deki bağlantılar ve anılmalar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google'ın aynı sayfadaki iki net cümlesi: bilgileri eksiksiz ve doğru olan işletmeler yerel sonuçlarda daha sık çıkar; "daha fazla yorum ve olumlu puan yerel sıralamaya yardımcı olabilir." Ve: <strong>daha iyi yerel sıralama talep etmenin ya da satın almanın yolu yoktur</strong> <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Google Ads'e para verirsek haritada da yükseliriz."</p>
+          <p class="mit-gercek">Google: yerel sıralama satın alınamaz <sup class="kaynak"><a href="#k1">[1]</a></sup>; reklam vermenin organik varlığa hiçbir etkisi yoktur. Reklamla SEO'nun nerede kesiştiği <a href="17-musteri-isi.html#ads-ve-seo">Bölüm 17</a>'de.</p>
+        </aside>
+
+        <h3 id="whitespark-anketi">Uzmanlara göre en ağır etkenler (anket, resmî değil)</h3>
+        <p>Google ağırlıkları açıklamaz. En çok başvurulan tahmin Whitespark'ın her yıl yaptığı uzman anketidir: 2026 sürümü 47 uzmanın 187 etkeni puanlamasıyla Kasım 2025'te yayımlandı <sup class="kaynak"><a href="#k12">[12]</a></sup> <span class="tag tag--info">3. taraf</span>. Bu bir görüş derlemesidir, ölçüm ya da Google listesi değildir.</p>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">Harita / yerel paket: ilk 15</h4>
+            <ol>
+              <li>Birincil kategori</li>
+              <li>Aramanın yapıldığı noktaya yakınlık</li>
+              <li>İşletme adında anahtar kelime <em>(kural dışı, aşağıya bak)</em></li>
+              <li>Adresin aranan şehirde olması</li>
+              <li>Aramanın yapıldığı saatte açık olmak <em>(yeni)</em></li>
+              <li>Yüksek puan</li>
+              <li>Adresin gösterilmesi</li>
+              <li>Ek kategoriler</li>
+              <li>Metinli yorum sayısı</li>
+              <li>Harita iğnesinin doğru yeri</li>
+              <li>Yorumların yeniliği</li>
+              <li>Şehir merkezine yakınlık</li>
+              <li>Harita sonucundan tıklama oranı</li>
+              <li>Yorumların zamana yayılması</li>
+              <li>Sitedeki ve profildeki NAP'ın eşleşmesi</li>
+            </ol>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">Yerel organik: ilk sıralar</h4>
+            <ol>
+              <li>Her hizmet için ayrı sayfa</li>
+              <li>Şehir/semt alaka düzeyi</li>
+              <li>Kaliteli dış bağlantılar</li>
+              <li>Profile bağlanan sayfanın <code>&lt;title&gt;</code>'ında anahtar kelime</li>
+              <li>Sektöre uygun alan adlarından bağlantı</li>
+              <li>Site içi bağlantılar</li>
+              <li>Nişe odaklanma</li>
+            </ol>
+          </div>
+        </div>
+        <p><strong>2023'ten 2026'ya en büyük sıçramalar</strong> (aynı anket) <sup class="kaynak"><a href="#k12">[12]</a></sup>: profilde önceden tanımlı hizmetler 81. sıradan 22.'ye, hizmet adlarında anahtar kelime 110.'dan 35.'ye, doğru çalışma saatleri 85.'ten 21.'e çıktı. Atıfların (başka sitelerde işletme bilgisinin geçmesi) değeri yaklaşık yarım puan düştü; yorum ve kullanıcı davranışı sinyallerinin ağırlığı arttı.</p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>"Aramanın yapıldığı saatte açık olmak" 2026 anketinde ilk beşe girdi: kapanışa yaklaştıkça işletme daha az görünebiliyor <sup class="kaynak"><a href="#k12">[12]</a></sup>. Bu, saatleri olduğundan uzun girme bahanesi <strong>değildir</strong>. Tutulmayan saat hem müşteri şikâyeti hem kural ihlalidir. Ama gerçekten 22.00'ye kadar telefona bakılıyorsa bunu doğru girmek değer kazandırır.</p>
+        </aside>
+
+        <!-- ============ 2. İŞLETME PROFİLİ ============ -->
+        <h2 id="isletme-profili"><span class="h-num">§ 2</span>Google İşletme Profili: kurulum kuralları</h2>
+        <p>Google İşletme Profili (Google Business Profile, kısaca GBP: haritada ve aramada çıkan işletme kartı) yerel SEO'nun merkezidir. Kuralları "İşletmenizi Google'da temsil etme yönergeleri"nde yazar ve bunlar sıkı uygulanır <sup class="kaynak"><a href="#k2">[2]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <h3 id="uygunluk">Kimler profil açabilir?</h3>
+        <ul>
+          <li>Müşterinin gelebildiği bir yer olmalı <strong>ya da</strong> işletme müşteriye gitmeli.</li>
+          <li>Her işletmeye <strong>tek profil</strong> açılır.</li>
+          <li><strong>Sanal ofis uygun değildir.</strong> Ortak çalışma alanı ancak tabelası varsa, çalışma saatlerinde müşteri kabul ediliyorsa ve işletmenin kendi personeli oradaysa uygundur <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+        </ul>
+
+        <h3 id="isletme-adi">İşletme adı</h3>
+        <p>Ad, tabelada, faturada ve müşterinin ağzında geçen <strong>gerçek ad</strong> olmalıdır. Slogan, hizmet ya da konum bilgisi, telefon, URL, tamamı büyük harf ve gereksiz özel karakter eklenmez. Kuralı çiğneyen profil askıya alınabilir <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">✗ Kural dışı</h4><p>"HAYALÎ NAKLİYAT – Örnekşehir Evden Eve Asansörlü Ucuz Nakliyat ☎"</p></div>
+          <div class="pane"><h4 class="pane__title">✓ Doğru</h4><p>"Hayalî Nakliyat"</p></div>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat: tuzak</p>
+          <p>Whitespark anketinde "addaki anahtar kelime" harita için <strong>3. en güçlü etken</strong> çıkıyor <sup class="kaynak"><a href="#k12">[12]</a></sup>. Bu yüzden rakiplerin bir kısmı adına "Evden Eve Nakliyat Örnekşehir" ekler ve kısa vadede işe yarıyor gibi görünür. Ama bu Google'ın yönergelerine açıkça aykırıdır <sup class="kaynak"><a href="#k2">[2]</a></sup>: herhangi biri "düzenleme öner" ile adı düzeltebilir, rakip şikâyet edebilir, profil askıya alınabilir. Askıdaki profilin itirazı da ad düzeltilmeden genelde reddedilir (ajans görüşü) <sup class="kaynak"><a href="#k29">[29]</a></sup>. Hizmet veren tarafsan müşteriye açıkça söyle: <strong>yapmıyoruz</strong>. İşletme sahibiysen bunu öneren ajans ya da danışman bir uyarı işaretidir (<a href="21-kara-sapka.html#ajans-kirmizi-bayrak">Bölüm 21 § 13</a>). Adın gerçekten anahtar kelime içermesinin tek meşru yolu, işletmenin resmî adının ve tabelasının öyle olmasıdır.</p>
+        </aside>
+
+        <h3 id="adres">Adres</h3>
+        <ul>
+          <li>Kesin ve doğru adres girilir. Posta kutusu ya da uzaktan posta adresi kabul edilmez.</li>
+          <li>Adres görünür olacaksa orada işletme adını taşıyan <strong>kalıcı bir tabela</strong> gerekir.</li>
+          <li>Sistem kapı numarasını bulamazsa harita iğnesi elle doğru yere taşınır <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+        </ul>
+
+        <h3 id="hizmet-bolgesi">Hizmet bölgesi işletmesi (SAB)</h3>
+        <p>Müşteri işletmenin adresine gelmiyor, işletme müşteriye gidiyorsa bu bir <strong>hizmet bölgesi işletmesidir</strong> (SAB, service-area business). Nakliyeciler, tesisatçılar, temizlik firmaları tipik örnektir <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup>:</p>
+        <ul>
+          <li><strong>Adres gizlenir.</strong> Google'ın örneği: evden çalışan tesisatçı.</li>
+          <li>Hem dükkânı (müşteri kabul eden) hem saha hizmeti olan "karma" işletme adresi de bölgeyi de girer.</li>
+          <li>En çok <strong>20 hizmet bölgesi</strong> seçilir. Bölge şehir, ilçe ya da posta kodu olarak tanımlanır; <strong>yarıçap çizilemez</strong>.</li>
+          <li>Bölgeler işletmeden yaklaşık <strong>2 saatlik sürüş</strong> mesafesini aşmamalıdır.</li>
+          <li>Bölge değişikliğinin yayına girmesi 48 saate kadar sürebilir.</li>
+          <li>Kendi personeli ve bölgesi olan ayrı şubeler ayrı profil açabilir.</li>
+        </ul>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Anketteki uzmanlara göre adresi gizlemek ciddi bir sıralama kaybına yol açıyor; Whitespark'tan Darren Shaw bunun bir hata (bug) olabileceğini düşünüyor <sup class="kaynak"><a href="#k12">[12]</a></sup> <span class="tag tag--info">3. taraf</span>. Yine de kural açık: müşteri adrese gelmiyorsa adres gizlenir <sup class="kaynak"><a href="#k2">[2]</a></sup>. Sıralama için adresi göstermek, sonra "adres doğru değil" diye askı yemek kötü bir takastır. Hayalî Nakliyat'ın deposu müşteri kabul etmiyorsa adresi gizli kalır.</p>
+        </aside>
+
+        <h3 id="telefon-site">Telefon ve web sitesi</h3>
+        <ul>
+          <li>Numara o konuma ait ve işletmenin <strong>doğrudan kontrolünde</strong> olmalı. Yerel numara merkezî çağrı merkezi numarasına tercih edilir.</li>
+          <li><strong>Ücretli (premium) hat kabul edilmez.</strong> Başka numaraya ya da sayfaya yönlendiren numara/URL kullanılmaz <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+          <li>Aynı kurallar Google Ads'te de geçerlidir; sanal, ücretli ya da yerel olmayan numara reklamın da reddine yol açabilir (<a href="17-musteri-isi.html#ads-acilis-sayfasi">Bölüm 17</a>).</li>
+        </ul>
+
+        <h3 id="saatler">Çalışma saatleri</h3>
+        <p>Müşteriye açık <strong>gerçek</strong> saatler girilir. Yalnız randevuyla çalışan işletmeler ve ulaşım hizmetleri gibi bazı türler saat girmemelidir <sup class="kaynak"><a href="#k2">[2]</a></sup>. Bayram ve tatil günleri için özel saatler önceden girilmelidir; "açık" görünüp telefonu açmamak hem kötü yorum hem güven kaybı getirir.</p>
+
+        <h3 id="kategori">Kategori</h3>
+        <p>Bir <strong>birincil kategori</strong> seçilir, en çok <strong>9 ek kategori</strong> eklenebilir. Seçim testi: "Bu işletme BİR …dır" cümlesini tamamlayan kategori seçilir, "…sı var" cümlesini tamamlayan değil. Kategori anahtar kelime gibi kullanılmaz; mümkün olduğunca az ve olabildiğince özgül kategori seçilir <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>. Birincil kategori anketteki 1 numaralı etkendir <sup class="kaynak"><a href="#k12">[12]</a></sup>; en çok düşünülmesi gereken alan budur.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Hayalî Nakliyat için birincil kategori "Nakliye firması" gibi işin kendisini anlatan en özgül seçenek olur. Gerçekten depo kiralıyorsa "Depolama tesisi" ek kategori olabilir. Ama "Kamyon kiralama" yalnızca kamyon kiralıyorsa eklenir; "biz de kamyon kullanıyoruz" diye eklenmez. Ardından profildeki <strong>hizmetler</strong> listesi eksiksiz doldurulur: evden eve taşıma, ofis taşıma, asansörlü taşıma, paketleme, eşya depolama. Önceden tanımlı hizmetler 2026 anketinde en çok yükselen etkenlerden <sup class="kaynak"><a href="#k12">[12]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 3. DOĞRULAMA ============ -->
+        <h2 id="dogrulama"><span class="h-num">§ 3</span>Profili doğrulamak</h2>
+        <p>Doğrulanmamış profil haritada güvenilir biçimde görünmez. Google uygun gördüğü yöntemleri kendisi sunar <sup class="kaynak"><a href="#k7">[7]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yöntem</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Telefon / SMS</td><td>Sesli yanıt sistemine (santral menüsüne) kod gelmez; doğrudan hat gerekir.</td></tr>
+              <tr><td>E-posta</td><td>Yalnız bazı işletmelere sunulur.</td></tr>
+              <tr><td>Canlı görüntülü görüşme</td><td>Bir Google çalışanıyla.</td></tr>
+              <tr><td>Video kaydı</td><td>Google uygunsa bunu öneriyor. Ayrıntı aşağıda.</td></tr>
+              <tr><td>Posta kartı</td><td>Kod çoğunlukla 14 gün içinde gelir, 30 günde geçersiz olur.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>İnceleme 5 iş gününe kadar sürer. <strong>Site Search Console'da doğrulanmışsa</strong> profil doğrulaması anında olabilir <sup class="kaynak"><a href="#k7">[7]</a></sup>; bu yüzden işe önce Search Console'u kurarak başlamak mantıklıdır.</p>
+
+        <h3 id="video-dogrulama">Video doğrulama</h3>
+        <p>Kurgusuz, kesintisiz, en az <strong>30 saniyelik</strong> bir kayıt, İşletme Profili uygulamasından <strong>canlı</strong> çekilir; sonradan dosya yüklenemez. Ruhsat, fatura gibi belgeler de gösterilebilir <sup class="kaynak"><a href="#k8">[8]</a></sup> <span class="tag tag--ok">Resmî</span>. Üçüncü taraf rehberlerin önerisi: tabelayı, sokak adını, işletmenin ticari aracını ve yalnız işletme sahibinin erişebileceği bir şeyi (ör. iş programı, kasa) göster. Bu öneri kısmını Google doğrulamıyor <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Posta kartı beklenirken ad, adres ya da kategori <strong>değiştirilmez</strong>, yeni kod istenmez; yeni kod istemek eskisini geçersiz kılar <sup class="kaynak"><a href="#k7">[7]</a></sup>. Genel olarak da çok sayıda kritik değişikliği (ad, kategori, telefon, URL) aynı anda yapmak askıya alınma tetikleyicisi olarak biliniyor. Joy Hawkins (Sterling Sky) değişiklikleri birer ikişer, zamana yayarak yapmayı öneriyor <sup class="kaynak"><a href="#k29">[29]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+        </aside>
+
+        <h3 id="kalkan-ozellikler">Eski rehberlerde geçen ama artık olmayan özellikler</h3>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <ul>
+            <li><strong>10 Haziran 2024:</strong> Google'ın profilden ücretsiz ürettiği <code>business.site</code> siteleri tamamen kapandı (1 Mart 2024'ten itibaren profile yönlendiriliyordu) <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+            <li><strong>31 Temmuz 2024:</strong> Profil üzerinden sohbet (chat) ve arama geçmişi kapandı <sup class="kaynak"><a href="#k10">[10]</a></sup>.</li>
+            <li><strong>Soru-Cevap:</strong> API 3 Kasım 2025'te kapandı; herkese açık bölüm Aralık 2025 – 2026'nın ilk çeyreği arasında kalkıyor. Yerine "Ask Maps" adlı yapay zekâ özelliği geliyor (şimdilik ABD ve Hindistan'da) <sup class="kaynak"><a href="#k11">[11]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+            <li>Performans ekranındaki eski "toplam arama" ölçütü kaldırıldı <sup class="kaynak"><a href="#k26">[26]</a></sup>.</li>
+          </ul>
+          <p>"Soru-Cevap bölümünü kendiniz doldurun", "business.site ile ücretsiz site açın" gibi tavsiyeler artık zaman kaybıdır.</p>
+        </aside>
+
+        <h3 id="profil-bakimi">Profili canlı tutmak</h3>
+        <ul class="checklist">
+          <li>Gerçek iş fotoğrafları ve kısa videolar (ekip, araç, paketlenmiş eşya) düzenli eklenir; Google bunu açıkça öneriyor <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Kullanıcıların önerdiği düzenlemeler (saat, adres, telefon) profile otomatik işleyebilir; profil ayda bir kontrol edilir <sup class="kaynak"><a href="#k24">[24]</a></sup>.</li>
+          <li>Profilin <strong>asıl sahibi işletme</strong> olmalı, ajansa yönetici yetkisi verilmeli. Ajans sahip olursa işletme ajanstan ayrılınca profile erişimini kaybeder. (İyi uygulama; Google'ın açıkça yazdığı bir kural değil.)</li>
+          <li>Aynı işletmeye eski bir çalışanın ya da ajansın açtığı kopya profil var mı bakılır; kopya profiller askıya alınmanın bilinen sebeplerindendir <sup class="kaynak"><a href="#k29">[29]</a></sup>.</li>
+        </ul>
+
+        <!-- ============ 4. YORUMLAR ============ -->
+        <h2 id="yorumlar"><span class="h-num">§ 4</span>Yorumlar</h2>
+        <p>Yorum sayısı, puan, yenilik ve yorumların zamana yayılması hem Google'ın resmî açıklamasında <sup class="kaynak"><a href="#k1">[1]</a></sup> hem anketin üst sıralarında <sup class="kaynak"><a href="#k12">[12]</a></sup> yer alır. Aynı zamanda en çok hile yapılan ve en sert cezalandırılan alandır.</p>
+
+        <h3 id="yorum-yasaklari">Yasak olanlar</h3>
+        <p>Google Haritalar kullanıcı katkısı politikasına göre <sup class="kaynak"><a href="#k5">[5]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ul>
+          <li>Gerçek deneyime dayanmayan yorum.</li>
+          <li>Parayla ya da karşılığında bir şey verilerek yazdırılan yorum; <strong>indirim veya hediye karşılığı</strong> yorum (olumsuz yorumu değiştirtmek ya da sildirmek için teklif de dahil).</li>
+          <li>Tek kişinin birden fazla hesapla yorum yazması.</li>
+          <li>Rakibin profiline karalama yorumu.</li>
+          <li><strong>Review gating</strong> (seçici toplama): olumsuz yorumu engellemek ya da yalnız memnun müşteriden yorum istemek. Örneğin "Memnun kaldınız mı? Evet → Google'a yorum, Hayır → bize yazın" akışı.</li>
+          <li>Çalışanı yorum yazmaya zorlamak; çıkar çatışması (eski ya da şimdiki çalışan, sözleşmeli kişi).</li>
+        </ul>
+
+        <h3 id="yorum-yaptirimlari">Yaptırımlar</h3>
+        <p>Ağır ya da tekrarlanan ihlalde hesap ayrıcalıkları askıya alınabilir veya hesap kapatılabilir <sup class="kaynak"><a href="#k5">[5]</a></sup>. Profil düzeyinde uygulanan yaptırımlar: belirli bir süre <strong>yeni yorum alamama</strong>, mevcut yorumların yayından kalkması ve profilde ziyaretçilere görünen <strong>"Şüpheli yorumlar yakın zamanda kaldırıldı"</strong> uyarısı <sup class="kaynak"><a href="#k13">[13]</a></sup>. Sürenin yaklaşık 30 gün olduğu yalnız topluluk raporlarına dayanıyor; Google "belirli bir süre" diyor <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Rakip sana sahte <strong>olumlu</strong> yorum da bıraktırabilir; sonuç yine senin profiline yaptırım olabilir <sup class="kaynak"><a href="#k13">[13]</a></sup>. Kısa sürede tanımadığın hesaplardan gelen beş yıldız dalgası görürsen bunları da işaretle.</p>
+        </aside>
+
+        <h3 id="turk-mevzuati">Türkiye'de hukuki boyut</h3>
+        <p>Sahte yorum yalnız Google kuralı ihlali değil, Türkiye'de idari yaptırım konusudur <sup class="kaynak"><a href="#k16">[16]</a></sup> <span class="tag tag--info">3. taraf</span>:</p>
+        <ul>
+          <li>Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği'nin <strong>28/B maddesine</strong> göre yorumu yalnız ürünü ya da hizmeti satın alan yazabilir.</li>
+          <li>Reklam Kurulu <strong>12.09.2023</strong>'te "Tüketici Değerlendirmeleri Hakkında Kılavuz"u kabul etti.</li>
+          <li>Yönetmelikte kapsamlı bir değişiklik <strong>01.07.2026</strong> tarihli, 33297 sayılı Resmî Gazete'de yayımlandı; haberlere göre 1 Ağustos 2026'da yürürlüğe girdi.</li>
+          <li>Bakanlık 2026'nın ilk 8 ayında yaklaşık 218,5 milyon TL idari para cezası kesti; konular arasında sahte işletme adı/adresi ve olumsuz yorumların engellenmesi de var.</li>
+        </ul>
+        <p><span class="tag tag--warn">Doğrulanamadı</span> Bu bilgiler haber kaynaklarından; Resmî Gazete metni bu çalışmada açılıp okunmadı. Bu bilgiye dayanarak karar vermeden ya da başkasına hukuki bilgi olarak aktarmadan önce resmî metinden doğrulanmalı.</p>
+
+        <h3 id="yorum-isteme">Yorum istemek ve yanıtlamak</h3>
+        <p><strong>İstemek:</strong> Müşteriye profilin yorum bağlantısı ya da karekodu (QR kodu) verilir. Yorum için Google hesabı gerekir; Gmail olmayan bir e-postayla da açılabilir <sup class="kaynak"><a href="#k14">[14]</a></sup>. <em>Her</em> müşteriden istenir, yalnız memnun olandan değil (gating yasak).</p>
+        <p><strong>Yanıtlamak (Google'ın önerileri):</strong> kısa, dürüst ve kibar yazılır; kalıp "teşekkürler" verilmez; yanıt reklama çevrilmez. Olumsuz yorumda kişisel bilgi paylaşılmaz, gerçek hata kabul edilir, karmaşık konu özele taşınır, hızlı dönülür <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">✗ Kalıp yanıt</h4><p>"Değerli yorumunuz için teşekkür ederiz. İyi günler dileriz."</p></div>
+          <div class="pane"><h4 class="pane__title">✓ Gerçek yanıt</h4><p>"Merhaba, salı günkü taşımada vitrinin camını sarmadan taşımamız hataydı, haklısınız. Cam bedelini karşılamak için sizi arayacağız. — Hayalî Nakliyat, operasyon sorumlusu"</p></div>
+        </div>
+
+        <p><strong>Tüketici tarafı</strong> (BrightLocal, Şubat 2026, ABD paneli; Türkiye için birebir geçerli olmayabilir) <sup class="kaynak"><a href="#k15">[15]</a></sup> <span class="tag tag--info">3. taraf</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Bulgu</th><th>Oran</th></tr></thead>
+            <tbody>
+              <tr><td>Yorum okuyan tüketici</td><td>%97</td></tr>
+              <tr><td>İşletmeden yanıt bekleyen</td><td>%89</td></tr>
+              <tr><td>Kalıp yanıttan rahatsız olan</td><td>%50</td></tr>
+              <tr><td>Yalnız son 3 ayın yorumlarına bakan</td><td>%74</td></tr>
+              <tr><td>Yerel öneri için üretken yapay zekâ kullanan</td><td>%6 → %45</td></tr>
+              <tr><td>Yorum okumada Google'ın payı / Apple Haritalar'ın payı</td><td>%83 → %71 / %14 → %27</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Yorumlarda yenilik ve süreklilik önemli: bir ayda toplu 40 yorum yerine her ay düzenli birkaç yorum daha doğal ve değerlidir <sup class="kaynak"><a href="#k12">[12]</a></sup>. Nakliye gibi işlerde en pratik yol, iş bitince ekibin müşteriye karekodlu küçük bir kart bırakması ya da aynı gün SMS ile yorum bağlantısı göndermesidir <sup class="kaynak"><a href="#k24">[24]</a></sup>.</p>
+        </aside>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Kendi sitemdeki müşteri yorumlarını JSON-LD ile işaretlersem aramada yıldız çıkar."</p>
+          <p class="mit-gercek">İşletmenin kendi sitesinde kendi hakkındaki (kendi seçtiği ya da gömdüğü) yorumlar LocalBusiness ve Organization için yıldız almaz; <code>aggregateRating</code> yalnız başka işletmeleri değerlendiren siteler içindir <sup class="kaynak"><a href="#k27">[27]</a></sup>. Ayrıntı <a href="08-yapilandirilmis-veri.html">Bölüm 8</a>.</p>
+        </aside>
+
+        <!-- ============ 5. NAP ============ -->
+        <h2 id="nap"><span class="h-num">§ 5</span>NAP tutarlılığı ve dizinler</h2>
+        <p><strong>NAP</strong>: işletme adı (Name), adres (Address), telefon (Phone); web sitesi de eklenince NAPW. Bu bilgilerin site, İşletme Profili ve diğer dizinlerde <strong>birebir aynı</strong> yazılması yerel güvenin temelidir. Sitedeki ve profildeki NAP'ın eşleşmesi ankette ilk 15'te <sup class="kaynak"><a href="#k12">[12]</a></sup><sup class="kaynak"><a href="#k21">[21]</a></sup>.</p>
+
+        <h3 id="turkce-nap">Türkçeye özgü tutarsızlıklar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Bir yerde</th><th>Başka yerde</th><th>Karar</th></tr></thead>
+            <tbody>
+              <tr><td>Cad.</td><td>Caddesi</td><td>Birini seç, her yerde aynı</td></tr>
+              <tr><td>Sk.</td><td>Sokak</td><td>Birini seç, her yerde aynı</td></tr>
+              <tr><td>0 (XXX) XXX XX XX</td><td>+90 XXX XXX XX XX</td><td>Görünür metinde biri; şemada uluslararası biçim</td></tr>
+              <tr><td>Hayalî Nakliyat Ltd. Şti.</td><td>Hayalî Nakliyat</td><td>Tabeladaki ad; unvan gerekiyorsa ayrı satırda</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Site altbilgisi, iletişim sayfası ve şema işaretlemesi aynı yazımı kullanmalı. Dizinlerdeki eski adres ya da kapanmış telefon yılda en az iki kez kontrol edilmeli <sup class="kaynak"><a href="#k24">[24]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">altbilgi · her sayfada</span></div>
+<pre><code><span class="k-etiket">&lt;footer&gt;</span>
+  <span class="k-etiket">&lt;p&gt;&lt;strong&gt;</span>Hayalî Nakliyat<span class="k-etiket">&lt;/strong&gt;</span> · Örnek İlçe / Örnekşehir<span class="k-etiket">&lt;/p&gt;</span>
+  <span class="k-yorum">&lt;!-- Mobilde tek dokunuşla arama. Görünen yazım profildekiyle aynı. --&gt;</span>
+  <span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"tel:+90XXXXXXXXXX"</span> <span class="k-ozn">class</span>=<span class="k-deger">"ara-dugmesi"</span><span class="k-etiket">&gt;</span>Hemen Ara: 0 (XXX) XXX XX XX<span class="k-etiket">&lt;/a&gt;</span>
+  <span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://wa.me/900000000000"</span><span class="k-etiket">&gt;</span>WhatsApp<span class="k-etiket">&lt;/a&gt;</span>
+  <span class="k-etiket">&lt;p&gt;</span>Pazartesi–Cumartesi 08.00–19.00<span class="k-etiket">&lt;/p&gt;</span>
+<span class="k-etiket">&lt;/footer&gt;</span></code></pre>
+        </div>
+        <p>Bu örnekte adres sokak düzeyinde yazılmadı, çünkü senaryodaki işletme hizmet bölgesi işletmesidir ve profilde adresini gizlemiştir. Dükkânı olan işletmede tam adres yazılır.</p>
+
+        <h3 id="dizinler">Türkiye'de kayıt açılacak yerler</h3>
+        <ul class="checklist">
+          <li><strong>Google İşletme Profili</strong> — en önemlisi.</li>
+          <li><strong>Yandex Business / Yandex Haritalar</strong> — ücretsiz; şirket ekle → faaliyet türü → hizmetler → fotoğraflar <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+          <li><strong>Apple Business</strong> — Apple Haritalar yer kartı; 14 Nisan 2026'dan beri eski "Business Connect" bunun altında, veriler otomatik taşındı. Apple'ın ülke listesinde Türkiye için "Brand and Location Management" görünüyor <sup class="kaynak"><a href="#k22">[22]</a></sup><sup class="kaynak"><a href="#k23">[23]</a></sup>.</li>
+          <li><strong>Bing Places</strong> — Google'dan içe aktarma özelliğinin Türkiye'de çalışıp çalışmadığı <span class="tag tag--warn">Doğrulanamadı</span>.</li>
+          <li>Foursquare, Facebook/Instagram işletme sayfası, sektöre özgü dizinler, esnaf ve ticaret odası siteleri <sup class="kaynak"><a href="#k24">[24]</a></sup>.</li>
+        </ul>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Atıfların harita etkisi azaldı:</strong> 2013'te harita için en önemli etkenin atıflar olduğunu söyleyen uzman oranı %18'di, 2021'de %7'ye indi <sup class="kaynak"><a href="#k21">[21]</a></sup>. "Ne kadar çok dizin o kadar iyi" anlayışı eskidi; yüz tane düşük kaliteli dizine kayıt yerine birkaç önemli yerde doğru ve tutarlı bilgi yeterlidir. Öte yandan yapay zekâ aramalarında "uzmanların hazırladığı en iyiler listelerinde yer almak" en güçlü etken çıktı; Darren Shaw'ın değerlendirmesi: "Yapay zekâ SEO'sunda anılmalar yeni bağlantıdır" <sup class="kaynak"><a href="#k12">[12]</a></sup>. Ayrıntı <a href="13-sayfa-disi.html#marka-anilmalari">Bölüm 13</a>.</p>
+        </aside>
+
+        <!-- ============ 6. YANDEX ============ -->
+        <h2 id="yandex"><span class="h-num">§ 6</span>Türkiye'de Yandex</h2>
+        <p>StatCounter'a göre Eylül 2026'da Türkiye'de bütün cihazlarda Google %73,4, Yandex %25,2 pay aldı; <strong>mobilde Yandex %28,1</strong> <sup class="kaynak"><a href="#k17">[17]</a></sup><sup class="kaynak"><a href="#k18">[18]</a></sup>. "Telefonda arayınca üstte çıkmak" isteyen bir işletme için kabaca her dört mobil aramadan biri Yandex'te yapılıyor demektir.</p>
+        <ol class="steps">
+          <li><strong>Yandex Business kartı aç</strong> (ücretsiz) <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+          <li><strong>Siteyi Yandex Webmaster'a ekle</strong> ve doğrula (aşağıdaki meta etiketi ya da dosya ile).</li>
+          <li><strong>Site bölgesini ayarla:</strong> Yandex Webmaster → "Display in the search" → "Site region". Moderatör için iletişim sayfasının bağlantısı eklenir. Moderasyon günlerden haftalara sürebilir, onaydan sonraki yaklaşık 2 hafta içinde etkili olur <sup class="kaynak"><a href="#k20">[20]</a></sup>.</li>
+          <li><strong>İki adresi eşleştir:</strong> Bölge Yandex Business'taki kurum kartından da gelebilir; bunun için iki yerdeki site adresi birebir aynı olmalı (www olup olmaması ve http/https dahil) <sup class="kaynak"><a href="#k20">[20]</a></sup>.</li>
+        </ol>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ana sayfa · &lt;head&gt;</span></div>
+<pre><code><span class="k-yorum">&lt;!-- Değeri Yandex Webmaster verir --&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"yandex-verification"</span> <span class="k-ozn">content</span>=<span class="k-deger">"XXXXXXXXXXXXXXXX"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <p>Diğer motorların ayrıntısı <a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>'te.</p>
+
+        <!-- ============ 7. YAKINIMDAKİ ============ -->
+        <h2 id="yakinimdaki"><span class="h-num">§ 7</span>"Yakınımdaki" aramalar ve mobil</h2>
+        <p>Mesafe, Google'ın resmî üç ölçütünden biridir. Kullanıcı konum paylaşmamışsa Google bildiği bilgiyle tahmin eder <sup class="kaynak"><a href="#k1">[1]</a></sup>. Bunun iki pratik sonucu var:</p>
+        <ul>
+          <li><strong>Sayfaya "yakınımdaki nakliyat" yazmanın faydası yoktur.</strong> "Yakınım" aramayı yapan kişinin konumudur, senin sayfandaki kelime değil. Önerilen yöntem "hizmet + şehir/semt" ifadeleri ve eksiksiz bir profildir. Bu konudaki kaynaklar üçüncü taraf; Google'dan ayrı bir resmî açıklama bulunamadı <sup class="kaynak"><a href="#k25">[25]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+          <li><strong>"Neden şehrin öbür ucunda çıkmıyorum?"</strong> İşletmenin kendi konumunun yakınında üstte çıkıp şehrin öbür ucunda çıkmaması normaldir. Bunu tek bir "sıralama" rakamıyla değil, harita sıralama ızgarasıyla (geo-grid: şehrin farklı noktalarından ölçülen sıralama haritası) ölçmek ve öyle raporlamak gerekir <sup class="kaynak"><a href="#k21">[21]</a></sup>.</li>
+        </ul>
+        <p><strong>Tıkla-ara ölçümü:</strong> Profildeki "Ara" düğmesine yapılan tıklamalar sayılır; numarayı kopyalayıp elle arayanlar ya da arama bağlanmadan kapatanlar sayılmayabilir <sup class="kaynak"><a href="#k26">[26]</a></sup>. Sitede numara her zaman <code>tel:</code> bağlantısı olarak verilmelidir (yukarıdaki altbilgi örneği).</p>
+
+        <!-- ============ 8. ŞEHİR SAYFALARI ============ -->
+        <h2 id="sehir-sayfalari"><span class="h-num">§ 8</span>Şehir ve semt sayfaları: kapı sayfası tuzağı</h2>
+        <p>Yerel SEO'da en sık yapılan büyük hata, her semt için şablondan bir sayfa üretmektir: "Örnek İlçe A Evden Eve Nakliyat", "Örnek İlçe B Evden Eve Nakliyat"… Metin aynı, yalnız semt adı değişiyor.</p>
+        <p>Google'ın spam politikası bunu açıkça örnek verir: "belirli bölgeleri veya şehirleri hedefleyip kullanıcıyı tek bir sayfaya akıtan birden çok alan adı veya sayfa" ve "taranabilir net bir hiyerarşiden çok arama sonucuna benzeyen, büyük ölçüde benzer sayfalar" <strong>doorway</strong> (kapı sayfası) sayılır <sup class="kaynak"><a href="#k4">[4]</a></sup> <span class="tag tag--ok">Resmî</span>. Yapay zekâyla toplu üretilen değersiz sayfalar ayrıca <strong>ölçekli içerik kötüye kullanımı</strong>dır. Üstelik bir site ilk sonuçlarda genelde en çok 2 kez çıktığı için on semt sayfası on ayrı şans da vermez (<a href="03-kurallar-ve-siralama.html">Bölüm 3</a>).</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Telefon numarası, şehir ya da ilçe adı listesini sayfaya yığmak ("Hizmet bölgelerimiz: İlçe A, İlçe B, İlçe C, … 30 ilçe") Google'ın anahtar kelime doldurma örnekleri arasında açıkça geçer <sup class="kaynak"><a href="#k4">[4]</a></sup>.</p>
+        </aside>
+
+        <h3 id="dogru-yapi">Doğru yapı: hizmet başına sayfa</h3>
+        <p>Anketin yerel organikteki 1 numaralı etkeni "her hizmet için ayrı sayfa"dır <sup class="kaynak"><a href="#k12">[12]</a></sup>. Eşanlamlı ifadeler tek sayfada toplanır ("nakliyat" ile "taşımacılık" aynı sayfa); gerçekten farklı hizmetler ayrı sayfaya konur <sup class="kaynak"><a href="#k21">[21]</a></sup>.</p>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">✗ Şablon çoğaltma</h4>
+            <ul>
+              <li>/ilce-a-nakliyat</li>
+              <li>/ilce-b-nakliyat</li>
+              <li>/ilce-c-nakliyat</li>
+              <li>… (aynı metin, 30 sayfa)</li>
+            </ul>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">✓ Hizmet başına</h4>
+            <ul>
+              <li>/evden-eve-nakliyat</li>
+              <li>/ofis-tasima</li>
+              <li>/asansorlu-tasima</li>
+              <li>/esya-depolama</li>
+            </ul>
+          </div>
+        </div>
+        <p>Bir semt sayfası ancak <strong>gerçekten o yere özgü</strong> bir içerik varsa açılır: o bölgede yapılmış işlerin fotoğrafları, bölgeye özgü bilgi (dar sokaklar, otopark, site yönetiminden asansör izni), o bölgeden gelen müşteri yorumları. Bu içeriği üretemiyorsan sayfayı açma.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">/evden-eve-nakliyat · &lt;head&gt;</span></div>
+<pre><code><span class="k-etiket">&lt;title&gt;</span>Evden Eve Nakliyat Örnekşehir | Asansörlü, Sigortalı – Hayalî Nakliyat<span class="k-etiket">&lt;/title&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Örnekşehir ve ilçelerinde evden eve nakliyat: ücretsiz keşif, asansörlü taşıma, sigorta. Hemen arayın."</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.hayalinakliyat.com.tr/evden-eve-nakliyat"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <p>İşletme Profili'ndeki "web sitesi" bağlantısı ana sayfaya ya da en önemli hizmet sayfasına verilir; profile bağlanan sayfanın <code>&lt;title&gt;</code>'ında hizmet ve şehir geçmesi anketin organik listesinde üst sıralardadır <sup class="kaynak"><a href="#k12">[12]</a></sup>.</p>
+
+        <!-- ============ 9. YAPILANDIRILMIŞ VERİ ============ -->
+        <h2 id="yerel-sema"><span class="h-num">§ 9</span>Yerel yapılandırılmış veri</h2>
+        <p>LocalBusiness işaretlemesi (JSON-LD ile sayfaya eklenen, işletmeyi makinenin okuyacağı biçimde tarif eden kod) Google'ın işletmeyi doğru anlamasına yardım eder. Google'ın belgesine göre <sup class="kaynak"><a href="#k27">[27]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ul>
+          <li><strong>Zorunlu:</strong> <code>name</code> ve <code>address</code>.</li>
+          <li><strong>Önerilen:</strong> <code>geo</code> (en az 5 ondalık hane), <code>openingHoursSpecification</code>, <code>telephone</code> (ülke koduyla), <code>url</code>, <code>priceRange</code> (100 karakterden kısa).</li>
+          <li>En özel alt tür seçilir: nakliye için schema.org'daki <code>MovingCompany</code> (LocalBusiness'in alt türü).</li>
+          <li><code>aggregateRating</code> ve <code>review</code> işletmenin kendi sitesinde kendisi için kullanılmaz.</li>
+          <li>İşaretleme zengin sonucu garanti etmez; belgede sıralamaya etkisinden söz edilmez. Kontrol: Zengin Sonuç Testi ve Search Console URL Denetimi <sup class="kaynak"><a href="#k28">[28]</a></sup>.</li>
+        </ul>
+        <p>Hizmet bölgesi işletmesinde adres gizli olsa bile <code>address</code> zorunlu alandır; sokak yazmadan şehir, bölge ve ülke düzeyinde verilebilir. Bu kullanımın Google'daki etkisi <span class="tag tag--warn">Doğrulanamadı</span>. <code>areaServed</code> schema.org'da geçerli bir özelliktir ama Google'ın LocalBusiness belgesinde geçmez; Google'da etkisi de doğrulanamadı <sup class="kaynak"><a href="#k27">[27]</a></sup>.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>JSON-LD</span><span class="dosya">ana sayfa · &lt;head&gt; · hizmet bölgesi işletmesi</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"MovingCompany"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"Hayalî Nakliyat"</span>,
+  <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/"</span>,
+  <span class="k-anahtar">"telephone"</span>: <span class="k-deger">"+90-XXX-XXX-XXXX"</span>,
+  <span class="k-anahtar">"image"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/img/kamyon.jpg"</span>,
+  <span class="k-anahtar">"priceRange"</span>: <span class="k-deger">"₺₺"</span>,
+  <span class="k-anahtar">"address"</span>: {
+        <span class="k-anahtar">"@type"</span>: <span class="k-deger">"PostalAddress"</span>,
+        <span class="k-anahtar">"addressLocality"</span>: <span class="k-deger">"Örnekşehir"</span>,
+        <span class="k-anahtar">"addressRegion"</span>: <span class="k-deger">"Örnekşehir"</span>,
+        <span class="k-anahtar">"addressCountry"</span>: <span class="k-deger">"TR"</span>
+  },
+  <span class="k-anahtar">"areaServed"</span>: [
+        {<span class="k-anahtar">"@type"</span>: <span class="k-deger">"City"</span>, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Örnekşehir"</span>},
+        {<span class="k-anahtar">"@type"</span>: <span class="k-deger">"AdministrativeArea"</span>, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Örnek İlçe"</span>}
+  ],
+  <span class="k-anahtar">"openingHoursSpecification"</span>: [{
+        <span class="k-anahtar">"@type"</span>: <span class="k-deger">"OpeningHoursSpecification"</span>,
+        <span class="k-anahtar">"dayOfWeek"</span>: [<span class="k-deger">"Monday"</span>,<span class="k-deger">"Tuesday"</span>,<span class="k-deger">"Wednesday"</span>,<span class="k-deger">"Thursday"</span>,<span class="k-deger">"Friday"</span>,<span class="k-deger">"Saturday"</span>],
+        <span class="k-anahtar">"opens"</span>: <span class="k-deger">"08:00"</span>, <span class="k-anahtar">"closes"</span>: <span class="k-deger">"19:00"</span>
+  }],
+  <span class="k-anahtar">"sameAs"</span>: [<span class="k-deger">"https://www.instagram.com/ornek"</span>, <span class="k-deger">"https://yandex.com.tr/maps/org/..."</span>]
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+        <p>Dükkânı olan işletmede <code>streetAddress</code>, <code>postalCode</code> ve en az 5 ondalık haneli <code>geo</code> da eklenir <sup class="kaynak"><a href="#k27">[27]</a></sup>. İşaretlemedeki ad, telefon ve saatler sayfada görünenle ve profildekiyle aynı olmalıdır.</p>
+
+        <!-- ============ 10. SORUNLAR ============ -->
+        <h2 id="yerel-sorunlar"><span class="h-num">§ 10</span>Sık sorunlar ve çözümleri</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Ne yapılır</th></tr></thead>
+            <tbody>
+              <tr><td>Profil askıya alındı</td><td>Önce sebep bulunup düzeltilir (ad, adres, kopya profil), sonra belgelerle (vergi levhası, fatura, tabela fotoğrafı) başvurulur. Bekleme yaklaşık 3–4 hafta (2022 raporları). Askıdayken yeni değişiklik yapılmaz <sup class="kaynak"><a href="#k29">[29]</a></sup>.</td></tr>
+              <tr><td>Rakibin adında anahtar kelime</td><td>Önce "düzenleme öner" ile bildirilir; işe yaramazsa Business Redressal formu. Bildirim kendi profilinin bağlı olduğu hesaptan yapılmaz <sup class="kaynak"><a href="#k30">[30]</a></sup>.</td></tr>
+              <tr><td>Sahte olumsuz yorum saldırısı</td><td>Kural dışı yorumlar (sahte, nefret söylemi, rakip saldırısı) işaretlenir; "hizmet kötüydü" gibi öznel yorumlar kaldırılmaz, profesyonelce yanıtlanır <sup class="kaynak"><a href="#k14">[14]</a></sup>.</td></tr>
+              <tr><td>Profilde saat/adres kendiliğinden değişmiş</td><td>Kullanıcı önerisi işlenmiş olabilir; düzelt ve aylık kontrol rutini koy <sup class="kaynak"><a href="#k24">[24]</a></sup>.</td></tr>
+              <tr><td>Profile UTM eklemek istiyorsun</td><td>Ölçüm için yararlı, ama 2022'deki bir hata döneminde askıya alınmalarla ilişkilendirildi; profil oturduktan sonra tek değişiklik olarak ekle <sup class="kaynak"><a href="#k29">[29]</a></sup>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>URL</span><span class="dosya">profildeki web sitesi bağlantısı (ölçüm için)</span></div>
+<pre><code>https://www.hayalinakliyat.com.tr/?utm_source=google&amp;utm_medium=organic&amp;utm_campaign=gbp</code></pre>
+        </div>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Türkiye'de esnaf odası, ticaret odası ve meslek birliği siteleri ulaşılabilir ve gerçek yerel bağlantı kaynaklarıdır <sup class="kaynak"><a href="#k24">[24]</a></sup>. Ajans görüşüne göre büyükşehirler dışındaki şehirlerde rekabet düşük olduğu için yerel SEO daha hızlı sonuç verebiliyor <sup class="kaynak"><a href="#k24">[24]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+        </aside>
+
+        <h2 id="senaryo-plani"><span class="h-num">§ 11</span>Senaryo: Hayalî Nakliyat için ilk 30 gün</h2>
+        <ol class="steps">
+          <li><strong>Erişimleri topla.</strong> İşletme Profili var mı, kimin hesabında? Sahiplik işletmeye alınır, ajans yönetici olur. Site Search Console'da doğrulanır.</li>
+          <li><strong>Profili kurallara uydur.</strong> Gerçek ad, adres gizli (müşteri gelmiyor), en çok 20 hizmet bölgesi, yerel ve doğrudan telefon, gerçek saatler, tek özgül birincil kategori, eksiksiz hizmet listesi.</li>
+          <li><strong>Doğrula.</strong> Video doğrulama sunulursa: tabela, araç, iş belgesi. Beklerken başka değişiklik yok.</li>
+          <li><strong>NAP'ı eşitle.</strong> Site altbilgisi, iletişim sayfası, JSON-LD, Yandex, Apple, Facebook/Instagram aynı yazımla.</li>
+          <li><strong>Yandex.</strong> Business kartı, Webmaster doğrulaması, site bölgesi.</li>
+          <li><strong>Site.</strong> Hizmet başına sayfa; her birinde gerçek iş fotoğrafları, fiyatı etkileyen etkenler, sık sorulan sorular; <code>tel:</code> bağlantıları.</li>
+          <li><strong>Yorum rutini.</strong> Her taşıma sonrası karekodlu kart veya SMS; her yoruma birkaç gün içinde gerçek yanıt.</li>
+          <li><strong>Ölçüm.</strong> Profil performansı (arama tıklamaları, yol tarifi, site tıklamaları), Search Console; aylık rapor (<a href="17-musteri-isi.html#kpi-raporu">Bölüm 17</a>).</li>
+        </ol>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 12</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Yerel sıralama alaka, mesafe ve öne çıkmaya dayanır; mesafeyi değiştiremezsin, para ile sıra alınmaz.</li>
+            <li>İşletme Profili'nde ad = tabeladaki gerçek ad. Addaki anahtar kelime ankette güçlü görünse de kural dışıdır ve askı riskidir.</li>
+            <li>Müşteriye giden işletme adresini gizler; en çok 20 bölge, yarıçap yok, yaklaşık 2 saatlik sürüş sınırı.</li>
+            <li>Birincil kategori en kritik alandır; hizmet listesi ve doğru saatler 2026'da önemi en çok artan alanlar.</li>
+            <li>Her müşteriden yorum iste, hiçbirini ödüllendirme, gating yapma; her yoruma gerçek yanıt ver. Türkiye'de sahte yorum idari ceza konusudur.</li>
+            <li>NAP her yerde birebir aynı; Türkiye'de Yandex Business ve site bölgesi ayarı atlanmaz.</li>
+            <li>Şablon semt sayfaları kapı sayfasıdır; hizmet başına gerçek sayfa aç, semt sayfasını yalnız gerçek yerel içerik varsa yaz.</li>
+            <li>business.site, profil sohbeti ve Soru-Cevap kalktı; eski rehberlerdeki bu adımları atla.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 13</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span>Google İşletme Profili Yardım — Tips to improve your local ranking on Google — <a href="https://support.google.com/business/answer/7091">support.google.com/business/answer/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span>Google İşletme Profili Yardım — Guidelines for representing your business on Google — <a href="https://support.google.com/business/answer/3038177">support.google.com/business/answer/3038177</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span>Google İşletme Profili Yardım — Hizmet bölgesi yönetimi (arama özetiyle) — <a href="https://support.google.com/business/answer/9157481">support.google.com/business/answer/9157481</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span>Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span>Google Haritalar — Kullanıcı katkısı içerik politikası: yasaklı içerik — <a href="https://support.google.com/contributionpolicy/answer/7400114">support.google.com/contributionpolicy/answer/7400114</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span>Google İşletme Profili Yardım — Kategoriler (arama özetiyle) — <a href="https://support.google.com/business/answer/3370250">support.google.com/business/answer/3370250</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span>Google İşletme Profili Yardım — Doğrulama yöntemleri — <a href="https://support.google.com/business/answer/7107242">support.google.com/business/answer/7107242</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span>Google İşletme Profili Yardım — Video doğrulama (arama özetiyle) — <a href="https://support.google.com/business/answer/14271705">support.google.com/business/answer/14271705</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span>TechRadar — Google is shutting down websites made with Business Profiles — <a href="https://www.techradar.com/pro/google-is-shutting-down-websites-made-with-business-profiles">techradar.com/pro/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span>Search Engine Land — Google Business Profile chat and call history going away — <a href="https://searchengineland.com/google-business-profile-chat-and-call-history-going-away-442666">searchengineland.com/…-442666</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span>PPC Land — Google quietly kills Q&amp;A for an AI button; BrightLocal — GBP Q&amp;A — <a href="https://ppc.land/google-quietly-kills-q-a-for-an-ai-button-most-wont-use/">ppc.land/…</a>, <a href="https://www.brightlocal.com/learn/google-business-profile-qa">brightlocal.com/learn/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span>Whitespark — Local Search Ranking Factors 2026 (uzman anketi) — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span>Sterling Sky — Review jail for fake 5-star Google reviews; BrightLocal — New policies on shady review schemes — <a href="https://www.sterlingsky.ca/review-jail-for-fake-5-star-google-reviews/">sterlingsky.ca/…</a>, <a href="https://www.brightlocal.com/blog/new-policies-shady-review-schemes/">brightlocal.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span>Google İşletme Profili Yardım — Yorumları okuma ve yanıtlama — <a href="https://support.google.com/business/answer/3474122">support.google.com/business/answer/3474122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span>BrightLocal — Local Consumer Review Survey 2026 — <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">brightlocal.com/research/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span>Haber derlemesi — Ticaret Bakanlığı sahte yorum yaptırımları ve yönetmelik değişikliği (Dünya, Takvim, Ekonomist) — <a href="https://www.dunya.com/ekonomi/ticaret-bakanligi-acikladi-sahte-yorumlara-yaptirim-uygulanacak-haberi-842114">dunya.com/…</a>, <a href="https://www.takvim.com.tr/guncel/2026/07/27/aldatici-reklamlarla-mucadelede-yeni-donem">takvim.com.tr/…</a>, <a href="https://www.ekonomist.com.tr/gundem/sahte-isletme-adi-engellenen-yorum-yaniltici-gorsel-ticaret-bakanligindan-yaniltici-reklamlara-milyonluk-ceza-77925">ekonomist.com.tr/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span>StatCounter — Search engine market share Turkey (tüm cihazlar) — <a href="https://gs.statcounter.com/search-engine-market-share/all/turkey">gs.statcounter.com/…/all/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span>StatCounter — Search engine market share Turkey (mobil) — <a href="https://gs.statcounter.com/search-engine-market-share/mobile/turkey">gs.statcounter.com/…/mobile/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span>Yandex Business Türkiye — Şirket ekleme — <a href="https://yandex.com.tr/support/business-priority/">yandex.com.tr/support/business-priority</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span>Yandex Webmaster — Site region — <a href="https://yandex.com.tr/support/webmaster/en/site-geography/site-region">yandex.com.tr/support/webmaster/…/site-region</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span>Ahrefs — Local SEO rehberi — <a href="https://ahrefs.com/blog/local-seo/">ahrefs.com/blog/local-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span>Apple Destek — Apple Business hizmetleri ve ülkeler — <a href="https://support.apple.com/en-nz/126603">support.apple.com/…/126603</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span>Apple Newsroom — Introducing Apple Business (Mart 2026); Scalefusion özeti — <a href="https://www.apple.com/mx/newsroom/2026/03/introducing-apple-business/">apple.com/…/introducing-apple-business</a>, <a href="https://blog.scalefusion.com/apple-business-everything-you-need-to-know/">blog.scalefusion.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span>Bravery Technology — Yerel SEO Rehberi 2026 (Türkçe, ajans görüşü) — <a href="https://braverytechnology.com/tr/yerel-seo-rehberi/">braverytechnology.com/tr/yerel-seo-rehberi</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span>"Near me" optimizasyonu — üçüncü taraf rehberler — <a href="https://intercom.help/seo-help/en/articles/8287822-should-i-optimize-for-near-me-keywords">intercom.help/…</a>, <a href="https://www.localvisibilitysystem.com/2018/01/29/how-to-rank-for-near-me-local-search-terms/">localvisibilitysystem.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span>Google İşletme Profili Yardım — Performans ölçütleri; Search Engine Land — GBP performance insights — <a href="https://support.google.com/business/answer/7689763">support.google.com/business/answer/7689763</a>, <a href="https://searchengineland.com/google-business-profile-performance-insights-what-you-need-to-know-436468">searchengineland.com/…-436468</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span>Google Search Central — Local Business structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/local-business">developers.google.com/…/local-business</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span>Google Search Central — Introduction to structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data">developers.google.com/…/intro-structured-data</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span>BrightLocal — GBP suspension and reinstatement (2022, Joy Hawkins görüşleri); Astute — Why was my GBP suspended (2026) — <a href="https://www.brightlocal.com/learn/google-business-profile-suspension/">brightlocal.com/learn/…</a>, <a href="https://astute.co/resource/why-was-my-google-business-profile-suspended-how-to-appeal/">astute.co/resource/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span>Whitespark — GBP spam fighting 101; Fruition — How to manage GMB spam — <a href="https://whitespark.ca/google-business-profile-guide/gbp-spam-fighting-101/">whitespark.ca/…</a>, <a href="https://fruition.net/blog/how-to-manage-google-my-business-spam">fruition.net/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="11-altyapi.html"><span class="dir">&larr; Önceki</span><span class="ttl">Alan adı, sunucu, dil ve güvenlik</span></a>
+        <a class="next" href="13-sayfa-disi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Sayfa dışı SEO: bağlantılar ve marka</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

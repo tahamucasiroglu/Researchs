@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorun giderme senaryoları — SEO Rehberi</title>
+<meta name="description" content="Belirti, olası neden, teşhis, çözüm: eski sitenin binlerce sayfası, çekirdek güncelleme düşüşü, hack, bot korumasının Googlebot'u kesmesi ve sık karşılaşılan diğer vakalar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Sorun giderme senaryoları</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 16 · Uygulama</div>
+        <h1 class="page-title">Sorun giderme senaryoları</h1>
+        <p class="lede">Gerçek hayatta SEO çoğu zaman "bir şey ters gitti, neden?" sorusuyla başlar. Bu bölüm en sık karşılaşılan vakaları aynı kalıpla anlatır: belirti, olası nedenler, teşhis adımı, çözüm. En uzun vaka, eski bir sitenin yüzlerce ya da binlerce sayfasının yıllarca Google'da kalmasıdır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 25 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Önce doğru ölçüm: <code>site:</code> sayısı güvenilmez; Search Console ve URL Denetimi'ne bakılır.</li>
+            <li>Eski sayfaların silinmemesinin en sık iki nedeni: eski URL'lerin hâlâ 200 dönmesi ve robots.txt engelinin Google'ın 404/<code>noindex</code>'i görmesini önlemesi.</li>
+            <li>Çekirdek güncellemeden sonra panik yok: bitmesini bekle, en az 1 hafta sonra karşılaştır, "hızlı düzeltme" yapma.</li>
+            <li>Eylül 2025 gösterim düşüşü çoğu zaman <code>num=100</code> etkisidir, ceza değil.</li>
+            <li>2026'da bot korumaları (Cloudflare ayarları dahil) Googlebot'u sessizce kesebiliyor.</li>
+            <li>Elle işlem varsa Search Console'da yazılıdır; yoksa düşüşün sebebi başka yerde aranır.</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="yontem"><span class="h-num">§ 1</span>Genel yöntem: tahmin etme, ölç</h2>
+        <ol class="steps">
+          <li><strong>Belirtiyi kesinleştir.</strong> Hangi sayfa, hangi sorgu, hangi tarih, hangi motor, hangi cihaz? "Sitem düştü" bir belirti değildir.</li>
+          <li><strong>Doğru veriyle ölç.</strong> Search Console (Performans, Sayfa dizine ekleme, URL Denetimi, Elle işlemler, Güvenlik), sunucu kayıtları. <code>site:</code> sayısı ve kendi tarayıcınızdaki görüntü kanıt değildir (<a href="15-araclar-ve-olcum.html">Bölüm 15</a>).</li>
+          <li><strong>Olası nedenleri sırala</strong>, en yaygından en nadire.</li>
+          <li><strong>Her nedeni bir test ile ele.</strong> Örnek URL'yi <code>curl</code> ile çek, durum koduna bak, URL Denetimi'nde canlı test yap.</li>
+          <li><strong>Bir seferde bir değişiklik yap</strong> ve tarihini not et; aynı anda beş şey değişirse hangisinin işe yaradığı bilinmez.</li>
+        </ol>
+
+        <div class="kod">
+          <div class="kod-ust"><span>Komut satırı</span><span class="dosya">durum kodu ve başlıklara hızlı bakış</span></div>
+<pre><code><span class="k-yorum"># Yönlendirmeleri izle, son durum kodunu ve başlıkları göster</span>
+curl -sIL https://www.ornek.com/eski-sayfa
+
+<span class="k-yorum"># Googlebot gibi davranan istek (yalnız user-agent taklidi; WAF bunu gerçek bottan ayırabilir)</span>
+curl -sI -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" https://www.ornek.com/</code></pre>
+        </div>
+
+        <h2 id="eski-sayfalar"><span class="h-num">§ 2</span>Ana vaka: "Eski sitenin binlerce sayfası hâlâ Google'da görünüyor"</h2>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir işletmenin sitesi yenilendi. Yeni sitede 25 sayfa var. Ama Google'da arayınca eski sitenin ürün, kategori ve blog sayfaları çıkıyor; <code>site:</code> araması "yaklaşık 2.000 sonuç" diyor. Kimse neden olduğunu bilmiyor; "robots.txt'ye bir şey mi eklemek lazım?" diye soruluyor.</p>
+        </aside>
+
+        <h3 id="dogru-olcum">1. Önce doğru ölçüm</h3>
+        <ul>
+          <li><code>site:</code> sayısı güvenilir değildir; Google listenin tam olmadığını açıkça söylüyor <sup class="kaynak"><a href="#k1">[1]</a></sup>. "2.000" gerçek dizin sayısı olmayabilir.</li>
+          <li>Gerçek durum Search Console'daki <strong>Sayfa dizine ekleme</strong> raporunda görülür; dizine eklenmiş ve hariç tutulmuş URL'ler dışa aktarılır <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+          <li>Birkaç örnek eski URL <strong>URL Denetimi</strong> ile tek tek incelenir: dizinde mi, son ne zaman taranmış, Google ne yanıt almış?</li>
+          <li>Kullanıcı aslında başka bir motora (Yandex, Bing) bakıyor olabilir; her motorun kendi paneli ayrı kontrol edilir.</li>
+        </ul>
+
+        <h3 id="olasi-nedenler">2. Olası nedenler (en yaygından aza)</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>#</th><th>Neden</th><th>Nasıl anlaşılır</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>Eski URL'ler hâlâ 200 dönüyor.</strong> Eski sunucu ya da CMS açık; ya da yeni site bilinmeyen her URL'ye ana sayfa veya boş şablonla 200 dönüyor (<strong>soft 404</strong>: aslında "yok" olan ama 200 dönen sayfa). Google sayfanın gittiğini anlayamaz <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k4">[4]</a></sup>.</td><td><code>curl -sI</code> ile eski URL: 200 mü?</td></tr>
+              <tr><td>2</td><td><strong>robots.txt engeli.</strong> Eski yollar <code>Disallow</code> edilmiş; Google 404/410'u ya da <code>noindex</code>'i <strong>göremiyor</strong> ve URL'ler açıklamasız biçimde dizinde kalıyor <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>.</td><td>Raporda "Dizine eklendi, ancak robots.txt tarafından engellendi".</td></tr>
+              <tr><td>3</td><td><strong>robots.txt'ye <code>Noindex:</code> satırı yazılmış.</strong> Google'da 1 Eylül 2019'dan beri etkisi yok <sup class="kaynak"><a href="#k7">[7]</a></sup>.</td><td>robots.txt'yi oku.</td></tr>
+              <tr><td>4</td><td><strong>Eski site haritası</strong> hâlâ yayında ya da Search Console'da kayıtlı; ölü URL'leri listelemeye devam ediyor <sup class="kaynak"><a href="#k8">[8]</a></sup>.</td><td>Site haritaları raporu, eski <code>sitemap.xml</code> adresi.</td></tr>
+              <tr><td>5</td><td><strong>Hepsi ana sayfaya 301'lenmiş.</strong> Google bunu soft 404 sayabilir; URL'ler uzun süre "Yönlendirmeli sayfa" ya da soft 404 olarak kalır <sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>.</td><td>Örnek URL'lerin hepsi <code>/</code>'a mı gidiyor?</td></tr>
+              <tr><td>6</td><td><strong>Başka bir varyant açık:</strong> <code>http://</code>, <code>www</code>'siz, eski alt alan adı, test sunucusu, IP adresi ya da CDN üzerinden aynı içerik ayrı yanıt veriyor <sup class="kaynak"><a href="#k10">[10]</a></sup>.</td><td>Sonuçlardaki URL'lerin ana makinesine bak.</td></tr>
+              <tr><td>7</td><td><strong>Hack.</strong> Japon anahtar kelime hack'i rastgele klasörlerde binlerce sahte sayfa üretir; sahibine sahte 404, Google'a spam gösterebilir <sup class="kaynak"><a href="#k11">[11]</a></sup>.</td><td>Sonuçlarda Japonca/anlamsız başlık, tanımadığınız sahip (<a href="#japon-hack">aşağıda</a>).</td></tr>
+              <tr><td>8</td><td><strong>Google henüz yeniden taramadı.</strong> Düşük değerli eski URL'ler seyrek taranır; düşmeleri haftalar ya da aylar sürebilir <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k12">[12]</a></sup>.</td><td>URL Denetimi'nde son tarama tarihi.</td></tr>
+              <tr><td>9</td><td><strong>Başka motor ya da kalıntı.</strong> Kullanıcı Bing/Yandex'e bakıyor ya da gördüğü şey önbellek kalıntısı (<code>cache:</code> 2024'te kalktı) <sup class="kaynak"><a href="#k13">[13]</a></sup>.</td><td>Hangi motorda, hangi cihazda bakıldığını sor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Robots.txt kalktı mı?" — "Sitemap kalktı mı?"</p>
+          <p class="mit-gercek">İkisi de duruyor. Kalkan şeyler şunlar: robots.txt içindeki <code>Noindex:</code> (ve <code>Nofollow:</code>, <code>Crawl-delay:</code>) satırlarının Google desteği 1 Eylül 2019'da bitti <sup class="kaynak"><a href="#k7">[7]</a></sup>; site haritasını adres çubuğundan "ping"leme yolu 26 Haziran 2023'te kaldırıldı <sup class="kaynak"><a href="#k14">[14]</a></sup>. "Bir şeyler kalktı" hissi büyük olasılıkla bu ikisinden geliyor.</p>
+        </aside>
+
+        <h3 id="temizlik-sirasi">3. Doğru temizlik sırası</h3>
+        <ol class="steps">
+          <li><strong>Envanter çıkar.</strong> Search Console'dan dizindeki ve hariç tutulan URL'leri dışa aktar, URL Denetimi ile örnek al. Sunucu kayıtlarına bak. Bütün varyantları (http, www, alt alan adları) ayrı mülk olarak doğrula. Bilinmeyen sahip ya da sahte site haritası var mı kontrol et <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+          <li><strong>Hack varsa önce temizle</strong> (<a href="#japon-hack">aşağıdaki senaryo</a>).</li>
+          <li><strong>Her eski URL için karar ver.</strong> Yeni karşılığı varsa → tek adımda <strong>301</strong> ile o karşılığa. Karşılığı yoksa → <strong>410</strong> (ya da 404). Kalması gereken ama gizlenecek sayfa → <code>noindex</code> <sup class="kaynak"><a href="#k9">[9]</a></sup><sup class="kaynak"><a href="#k15">[15]</a></sup>.</li>
+          <li><strong>robots.txt'den bu yolların engelini kaldır.</strong> Google 410'u, 301'i ve <code>noindex</code>'i ancak tarayarak görür <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+          <li><strong>Eski sunucuyu kapat ya da tamamen yönlendir.</strong> Eski host 200 dönmeye devam etmemeli <sup class="kaynak"><a href="#k3">[3]</a></sup>.</li>
+          <li><strong>Site haritalarını düzelt.</strong> Yeni haritada yalnız canlı ve kanonik URL'ler olsun; eski haritayı kaldır <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>Acil görünenler için Kaldırmalar aracını kullan</strong> (~6 ay). Bu süre içinde kalıcı çözüm işini yapar; tek başına kullanılırsa 6 ay sonra URL'ler geri gelir <sup class="kaynak"><a href="#k15">[15]</a></sup>.</li>
+          <li><strong>Alan adı değiştiyse</strong> Site Adresi Değişikliği aracını kullan; yönlendirmeler en az 180 gün, tercihen 1 yıl tutulur <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>İzle.</strong> Raporda "Bulunamadı (404)" ve "Yönlendirmeli sayfa" sayıları önce artar, sonra azalır; bu normaldir <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+        </ol>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">eski yolları "silmeye" çalışmak</span></div>
+<pre><code>User-agent: *
+Disallow: /urunler/
+Disallow: /kategori/
+Noindex: /urunler/     <span class="k-yorum"># 2019'dan beri etkisiz; Disallow da 410'u gizliyor</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>nginx</span><span class="dosya">www.ornek.com sunucu bloğu</span></div>
+<pre><code><span class="k-yorum"># Karşılığı olan eski sayfalar: tek adımda yeni adrese</span>
+location = /urunler/evden-eve-paket.html { return 301 https://www.ornek.com/hizmetler/evden-eve; }
+location = /hakkimizda.php              { return 301 https://www.ornek.com/hakkimizda; }
+
+<span class="k-yorum"># Karşılığı olmayan eski bölümler: kalıcı olarak yok</span>
+location ^~ /urunler/  { return 410; }
+location ^~ /kategori/ { return 410; }</code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>Apache</span><span class="dosya">.htaccess</span></div>
+<pre><code>RewriteEngine On
+RewriteRule ^urunler/evden-eve-paket\.html$ https://www.ornek.com/hizmetler/evden-eve [L,R=301]
+RewriteRule ^(urunler|kategori)/ - [G]</code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Silinen her sayfayı ana sayfaya 301'lemek "temiz" görünür ama Google bunu soft 404 sayabilir <sup class="kaynak"><a href="#k4">[4]</a></sup>. Her eski URL ya <strong>gerçek karşılığına</strong> gider ya da 404/410 döner. Yeni site de bilinmeyen URL'lere 200 + "sayfa bulunamadı" yazısıyla değil, gerçek 404 koduyla yanıt vermeli.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>404 ile 410 arasında fark küçüktür: John Mueller'e göre orta ve uzun vadede ikisi aynıdır, 410 bazen "birkaç gün" daha hızlı düşer <sup class="kaynak"><a href="#k17">[17]</a></sup>. Asıl hızlandırıcı, Google'ın bu yanıtı <strong>görebilmesidir</strong>: robots.txt engelini kaldırmak, eski site haritasını silmek, Bing ve Yandex için silinen URL'leri IndexNow ile bildirmek (<a href="14-diger-motorlar-ve-yz.html#indexnow">Bölüm 14</a>). Uygulayıcıların bir önerisi de ölü URL'leri içeren geçici bir "kaldırılanlar" site haritası gönderip temizlik bitince silmektir. <span class="tag tag--warn">Doğrulanamadı</span> Bu yöntem Google belgesinde geçmiyor.</p>
+        </aside>
+
+        <h3 id="ne-kadar-surer">4. Ne kadar sürer</h3>
+        <p>Bin sayfa düzeyinde temizlik <strong>haftalar ile birkaç ay</strong> sürer <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>. Düşük değerli URL'ler seyrek taranır; 4xx dönen URL'ler zamanla düşer ve tarama sıklıkları azalır <sup class="kaynak"><a href="#k3">[3]</a></sup>. Müşteriye "yarın yok olur" denmez; "yanıtlar doğru kuruldu, raporda sayının düşüşünü haftalık izleyeceğiz" denir.</p>
+
+        <h2 id="cekirdek-guncelleme"><span class="h-num">§ 3</span>Çekirdek güncelleme sonrası trafik düştü</h2>
+        <p><strong>Belirti:</strong> Trafik birkaç gün içinde belirgin düştü; tarih Google Search Status Dashboard'daki bir çekirdek güncellemeyle çakışıyor (ör. Mart 2026: 27 Mar → 8 Nis; Mayıs 2026: 21 May → 1 Haz) <sup class="kaynak"><a href="#k18">[18]</a></sup>.</p>
+        <p><strong>Olası nedenler:</strong> Google sayfaların bütününü yeniden değerlendirdi; başka siteler daha yararlı bulundu. Ceza değildir; Elle işlemler raporu boştur.</p>
+        <p><strong>Google'ın önerdiği yol</strong> <sup class="kaynak"><a href="#k19">[19]</a></sup>:</p>
+        <ol class="steps">
+          <li><strong>Güncellemenin bitmesini bekle.</strong></li>
+          <li>Bittikten <strong>en az 1 hafta sonra</strong>, o haftayı güncelleme öncesindeki haftayla Search Console'da karşılaştır. Web, Görsel, Video ve Haberler'i ayrı ayrı incele.</li>
+          <li><strong>Küçük kaymalara dokunma</strong> (ör. 2. sıradan 4.'ye). İyi çalışan içeriği değiştirme.</li>
+          <li>Büyük ve kalıcı düşüşte siteyi <strong>bütün olarak</strong> değerlendir: içerik gerçekten insan için mi, özgün mü, güvenilir mi (<a href="07-icerik-kalitesi.html">Bölüm 7</a>)?</li>
+          <li><strong>"Hızlı düzeltme" yapma</strong>: duyduğun bir öğeyi silmek gibi. İçerik silmek son çaredir.</li>
+        </ol>
+        <p>Toparlanma birkaç gün de sürebilir, aylar da; bazen bir sonraki çekirdek güncellemeyi beklemek gerekir. Duyurulmayan küçük çekirdek güncellemeler de olur <sup class="kaynak"><a href="#k19">[19]</a></sup>.</p>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Helpful Content Update vurdu, onu düzeltmek lazım."</p>
+          <p class="mit-gercek">Ayrı "yararlı içerik" sistemi Mart 2024'te çekirdeğe katıldı; artık ayrı bir HCU yok <sup class="kaynak"><a href="#k20">[20]</a></sup>. Bugünkü düşüşler çekirdek güncellemenin parçasıdır.</p>
+        </aside>
+
+        <h2 id="gosterim-dustu"><span class="h-num">§ 4</span>Search Console'da gösterim aniden düştü, konum "iyileşti"</h2>
+        <p><strong>Belirti:</strong> Eylül 2025 civarında gösterimler bir gecede düştü, tıklamalar neredeyse aynı, ortalama konum yükseldi.</p>
+        <p><strong>Neden:</strong> Google, 100 sonucu bir sayfada getiren <code>&amp;num=100</code> parametresini kaldırdı. Sıralama takip botlarının derin sıralarda ürettiği "gösterimler" kayboldu <sup class="kaynak"><a href="#k21">[21]</a></sup>. <span class="tag tag--info">3. taraf</span> Google resmî duyuru yapmadı.</p>
+        <p><strong>Teşhis:</strong> Tıklamalar düşmediyse ve düşüş tarih olarak Eylül 2025'e oturuyorsa veri değişikliğidir. <strong>Çözüm:</strong> Hiçbir şey; raporlarda öncesi ve sonrası ayrı yorumlanır, karşılaştırma tıklamayla yapılır.</p>
+
+        <h2 id="dizine-eklenmedi"><span class="h-num">§ 5</span>"Tarandı / Bulundu – şu anda dizine eklenmedi"</h2>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">Tarandı – dizine eklenmedi</h4>
+            <p>Google sayfayı okudu, almamaya karar verdi. Çoğu zaman sayfa ince, başka bir sayfanın kopyası ya da değersiz bulundu. Yeniden göndermeye gerek yok <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+            <p><strong>Çözüm:</strong> İçeriği gerçekten güçlendir, benzer sayfaları birleştir, iç bağlantı ver; değersizse kaldır.</p>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">Bulundu – dizine eklenmedi</h4>
+            <p>URL biliniyor ama tarama ertelendi, çoğunlukla sunucuyu yormamak için <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+            <p><strong>Çözüm:</strong> Sunucu yanıt süresi ve 5xx oranı (Tarama istatistikleri), gereksiz URL üreten yapılar (filtre, takvim, parametre), iç bağlantı eksikliği.</p>
+          </div>
+        </div>
+        <p>Küçük bir sitede tarama bütçesi dert değildir; Google'ın tarama bütçesi rehberi 1 milyon+ sayfalı ya da günde 10.000+ sayfası değişen siteler içindir <sup class="kaynak"><a href="#k12">[12]</a></sup>. Küçük sitede bu durumlar genellikle kalite ya da sunucu sorunudur.</p>
+
+        <h2 id="japon-hack"><span class="h-num">§ 6</span>Japon anahtar kelime hack'i</h2>
+        <p><strong>Belirti:</strong> <code>site:ornek.com</code> aramasında Japonca ya da anlamsız başlıklı, sahte ürünlere bağlantı veren binlerce sayfa; Search Console'da tanımadığınız bir sahip; Güvenlik Sorunları raporunda uyarı. Sahibi tarayıcıda o URL'yi açınca 404 görebilir, çünkü sayfa yalnız Googlebot'a spam gösterir (cloaking) <sup class="kaynak"><a href="#k11">[11]</a></sup>.</p>
+        <p><strong>Teşhis:</strong> URL Denetimi'nde canlı test (Google'ın gördüğü HTML), Search Console → Ayarlar → Kullanıcılar ve izinler, sunucuda son değişen dosyalar ve <code>.htaccess</code>.</p>
+        <p><strong>Temizlik</strong> (web.dev'in resmî adımları) <sup class="kaynak"><a href="#k11">[11]</a></sup>:</p>
+        <ol class="steps">
+          <li><strong>Yedek al</strong> (kanıt ve geri dönüş için).</li>
+          <li><strong>Yabancı sahipleri ve doğrulama dosyalarını kaldır.</strong></li>
+          <li><strong><code>.htaccess</code>'i temiz kopyayla değiştir</strong>; yabancı yönlendirmeleri sil.</li>
+          <li><strong>CMS'i, temaları ve eklentileri yeniden kur</strong>; güncel sürüme geç.</li>
+          <li><strong>Sahte site haritalarını sil.</strong></li>
+          <li><strong>Bütün parolaları değiştir, iki adımlı doğrulamayı aç.</strong></li>
+          <li>Spam URL'lerin 404/410 döndüğünü doğrula; Güvenlik Sorunları raporundan inceleme iste.</li>
+        </ol>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Google Safe Browsing uyarısı ("Bu site saldırıya uğramış olabilir") tıklamayı neredeyse sıfırlar <sup class="kaynak"><a href="#k22">[22]</a></sup>. Search Console'da sahipler listesine ayda bir bakmak, ucuz ve etkili bir erken uyarıdır.</p>
+        </aside>
+
+        <h2 id="waf-googlebot"><span class="h-num">§ 7</span>Bot koruması / WAF Googlebot'u kesiyor</h2>
+        <p><strong>Belirti:</strong> Site tarayıcıda normal açılıyor; ama Search Console'da tarama hataları (403, 5xx) artıyor, yeni sayfalar dizine girmiyor, Tarama istatistiklerinde istekler düşüyor. Eski sayfalar bir süre dizinde kaldığı için sorun haftalarca fark edilmeyebilir.</p>
+        <p><strong>Olası nedenler:</strong></p>
+        <ul>
+          <li>Cloudflare'in "Block AI Training" ve Bot Fight Mode ayarlarının Googlebot ve Bingbot'a 403 döndürdüğü bildirildi (SEJ, 4 Ağustos 2026) <sup class="kaynak"><a href="#k23">[23]</a></sup>.</li>
+          <li>15 Eylül 2026'dan itibaren Cloudflare'in Training denetiminde dört seçenek var: Allow; Disallow AI Training (Googlebot arama için serbest); Block on pages with ads (reklamlı sayfalarda Googlebot dahil engeller); <strong>Block</strong> (bütün alan adında Googlebot'u da engeller ve siteyi aramadan düşürür). Eski "Block" ayarları Disallow'a taşındı <sup class="kaynak"><a href="#k24">[24]</a></sup>.</li>
+          <li>ABD IP'lerini engelleyen bir güvenlik duvarı: Google'ın tarayıcıları çoğunlukla ABD IP'lerinden gelir <sup class="kaynak"><a href="#k25">[25]</a></sup>.</li>
+          <li>robots.txt'nin WAF/CDN kuralı yüzünden 5xx dönmesi: Google ilk 12 saat taramayı durdurur <sup class="kaynak"><a href="#k26">[26]</a></sup>.</li>
+        </ul>
+        <p><strong>Teşhis:</strong> URL Denetimi canlı testi (Google sayfayı alabiliyor mu?), Tarama istatistikleri → Ana makine durumu, sunucu ve WAF kayıtlarında Googlebot istekleri. Gerçek Googlebot'u taklitçiden ayırmak için ters DNS sorgusu ya da Google'ın yayımladığı IP aralıkları kullanılır; user-agent taklit edilebilir <sup class="kaynak"><a href="#k25">[25]</a></sup>.</p>
+        <p><strong>Çözüm:</strong> YZ eğitimine karşıysanız Cloudflare'de "Disallow AI Training" seçin, "Block" değil <sup class="kaynak"><a href="#k24">[24]</a></sup>. Doğrulanmış arama botlarını WAF kurallarından muaf tutun. robots.txt'nin her koşulda 200 döndüğünü test edin.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>15 Eylül 2026:</strong> Cloudflare'in YZ eğitim denetimi dört seçenekli oldu ve en sert seçenek Googlebot'u da kapsıyor. 2025'ten kalma bir Cloudflare ayar rehberine göre yapılmış kurulumu yeniden kontrol edin. <span class="tag tag--info">3. taraf</span> Bot Fight Mode'un doğrulanmış tarayıcıları muaf tutmayabileceği yalnız topluluk raporlarında geçiyor.</p>
+        </aside>
+
+        <h2 id="test-ortami"><span class="h-num">§ 8</span>Test ortamından canlıya noindex veya Disallow taşındı</h2>
+        <p><strong>Belirti:</strong> Yeni site yayına alındıktan sonra günler içinde dizinden düşmeye başladı ya da hiç girmedi.</p>
+        <p><strong>Neden:</strong> Test sunucusundaki genel <code>noindex</code>, <code>Disallow: /</code> satırı ya da test alan adını gösteren kanonik etiketler canlıya taşındı <sup class="kaynak"><a href="#k9">[9]</a></sup><sup class="kaynak"><a href="#k27">[27]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>Canlı sitede unutulmuş</span><span class="dosya">robots.txt ve &lt;head&gt;</span></div>
+<pre><code>User-agent: *
+Disallow: /
+
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"robots"</span> <span class="k-ozn">content</span>=<span class="k-deger">"noindex, nofollow"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://test.ornek.com/hizmetler"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <p><strong>Çözüm:</strong> Yayın günü robots.txt, meta robots, <code>X-Robots-Tag</code> başlığı ve kanonikler kontrol edilir (<a href="19-kontrol-listesi.html#yayin-gunu">Bölüm 19</a>). Test ortamı robots.txt ile değil, parola ya da IP kısıtıyla gizlenir; robots.txt ile gizlenen test sitesi, linklenirse dizine girebilir <sup class="kaynak"><a href="#k5">[5]</a></sup>. Ortama göre değişen ayarlar kodda tek yerden yönetilmeli.</p>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>C#</span><span class="dosya">ASP.NET Core · Program.cs</span></div>
+<pre><code><span class="k-yorum">// Test ortamı: her yanıta noindex başlığı; canlıda hiç eklenmez</span>
+<span class="k-anahtar">if</span> (!app.Environment.IsProduction())
+{
+        app.Use(<span class="k-anahtar">async</span> (ctx, next) =&gt;
+        {
+            ctx.Response.Headers[<span class="k-deger">"X-Robots-Tag"</span>] = <span class="k-deger">"noindex, nofollow"</span>;
+            <span class="k-anahtar">await</span> next();
+        });
+}</code></pre>
+        </div>
+
+        <h2 id="bakim-sayfasi"><span class="h-num">§ 9</span>Bakım sayfası 200 dönüyor</h2>
+        <p><strong>Belirti:</strong> Sonuçlarda sayfa açıklaması olarak "Sitemiz bakımdadır" çıkıyor ya da bakımdan sonra sayfalar düştü.</p>
+        <p><strong>Neden:</strong> Bakım sırasında her URL 200 ile aynı "bakımdayız" sayfasını döndü; Google bu metni içerik sanıp dizine aldı ya da sayfaları soft 404 saydı <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">bakım sırasında her URL</span></div>
+<pre><code>HTTP/1.1 503 Service Unavailable
+Retry-After: 3600
+Content-Type: text/html; charset=utf-8</code></pre>
+        </div>
+        <p><strong>Çözüm:</strong> Kısa bakımda 503 + <code>Retry-After</code>. 5xx ve 429 taramayı geçici yavaşlatır, dizindeki URL'ler önce korunur; ama 502/503'ü <strong>sürekli</strong> dönen URL'ler dizinden çıkarılır <sup class="kaynak"><a href="#k3">[3]</a></sup>. Bakım günlerce sürmemeli.</p>
+
+        <h2 id="spa-dizin"><span class="h-num">§ 10</span>SPA'da sayfalar dizine girmiyor, paylaşım önizlemesi boş</h2>
+        <p><strong>Belirti:</strong> Yalnız istemci tarafında çalışan bir uygulamada (React SPA gibi) iç sayfalar dizine girmiyor ya da geç giriyor; WhatsApp/X paylaşımında başlık ve görsel çıkmıyor; YZ cevaplarında site hiç alıntılanmıyor.</p>
+        <p><strong>Olası nedenler</strong> <sup class="kaynak"><a href="#k28">[28]</a></sup>:</p>
+        <ul>
+          <li>İlk HTML boş bir <code>&lt;div id="root"&gt;</code>; içerik JS ile geliyor. Google işler ama gecikmeli; YZ ve sosyal önizleme botları JS çalıştırmaz <sup class="kaynak"><a href="#k29">[29]</a></sup>.</li>
+          <li>Bağlantılar <code>&lt;a href&gt;</code> değil, <code>onclick</code> ya da <code>#/sayfa</code> biçiminde; Google iç sayfaları bulamıyor.</li>
+          <li>Bulunamayan içerik 200 ile "bulunamadı" görünümü dönüyor (soft 404).</li>
+          <li>İlk HTML'de <code>noindex</code> var ve JS ile kaldırılıyor: Google <code>noindex</code>'i görünce işlemeyi atlayabilir.</li>
+        </ul>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span></div>
+<pre><code><span class="k-etiket">&lt;span</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"git('/hizmetler')"</span><span class="k-etiket">&gt;</span>Hizmetler<span class="k-etiket">&lt;/span&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"#/hizmetler"</span><span class="k-etiket">&gt;</span>Hizmetler<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML + JS</span></div>
+<pre><code><span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/hizmetler/evden-eve"</span><span class="k-etiket">&gt;</span>Evden eve taşıma<span class="k-etiket">&lt;/a&gt;</span>
+
+<span class="k-yorum">// İçerik yoksa soft 404 yerine noindex ekle (ya da sunucu 404 dönen bir URL'ye yönlendir)</span>
+<span class="k-anahtar">if</span> (!veri) {
+  <span class="k-anahtar">const</span> m = document.createElement(<span class="k-deger">'meta'</span>);
+  m.name = <span class="k-deger">'robots'</span>; m.content = <span class="k-deger">'noindex'</span>;
+  document.head.appendChild(m);
+}</code></pre>
+        </div>
+        <p><strong>Çözüm:</strong> Başlık, açıklama, kanonik ve <code>og:</code> etiketleri ilk HTML'de olsun; sabit sayfalar sunucuda ya da derlemede HTML'e çevrilsin (SSR/SSG). Teşhis için URL Denetimi canlı testinde işlenmiş HTML'e bakılır. Ayrıntı <a href="10-performans-mobil-js.html">Bölüm 10</a>.</p>
+
+        <h2 id="yonlendirme-zinciri"><span class="h-num">§ 11</span>Yönlendirme zinciri</h2>
+        <p><strong>Belirti:</strong> <code>curl -sIL</code> çıktısında bir URL hedefe 3–5 adımda varıyor: <code>http://ornek.com/sayfa</code> → <code>https://ornek.com/sayfa</code> → <code>https://www.ornek.com/sayfa</code> → <code>https://www.ornek.com/sayfa/</code> → yeni yol.</p>
+        <p><strong>Neden önemli:</strong> Google en çok 10 adım izler <sup class="kaynak"><a href="#k30">[30]</a></sup>; site taşıma rehberi "ideal olarak en çok 3, 5'in altında" der <sup class="kaynak"><a href="#k9">[9]</a></sup>. Her adım hız (LCP/TTFB) maliyetidir.</p>
+        <p><strong>Çözüm:</strong> Her eski URL tek adımda son hedefe gitsin; http→https, www ve sondaki eğik çizgi kuralları tek kuralda birleşsin.</p>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>nginx</span><span class="dosya">tek adımlı kanonik ana makine</span></div>
+<pre><code>server {
+  listen 80; server_name ornek.com www.ornek.com;
+  return 301 https://www.ornek.com$request_uri;
+}
+server {
+  listen 443 ssl; server_name ornek.com;
+  return 301 https://www.ornek.com$request_uri;
+}</code></pre>
+        </div>
+
+        <h2 id="baslik-degisiyor"><span class="h-num">§ 12</span>Google başlığımı değiştiriyor</h2>
+        <p><strong>Belirti:</strong> Sonuçlarda sayfanın <code>&lt;title&gt;</code>'ı yerine başka bir metin çıkıyor.</p>
+        <p><strong>Olası nedenler</strong> <sup class="kaynak"><a href="#k31">[31]</a></sup>: yarım başlık ("| Site Adı"), eskimiş yıl, içerikle uyuşmayan başlık, bütün sayfalarda neredeyse aynı başlık, net bir ana başlığın olmaması, dil uyuşmazlığı, site adının iki kez geçmesi. Google başlığı <code>&lt;title&gt;</code>, ilk görünen <code>&lt;h1&gt;</code>, <code>og:title</code>, gelen bağlantı metinleri ve <code>WebSite</code> verisinden kurar.</p>
+        <p><strong>Çözüm:</strong> Her sayfaya ayrı, açıklayıcı, içerikle uyumlu başlık; tek baskın H1; title ile <code>og:title</code> çelişmesin. Değişikliğin yansıması birkaç gün ile birkaç hafta sürer; Google başlıkları elle düzeltmez <sup class="kaynak"><a href="#k31">[31]</a></sup>. <span class="tag tag--info">3. taraf</span> Bir ölçüme göre Google 2025'in ilk çeyreğinde başlıkların %76'sını değiştirdi <sup class="kaynak"><a href="#k32">[32]</a></sup>; değişiklik tek başına sorun belirtisi değildir. Ayrıntı <a href="05-sayfa-ici.html">Bölüm 5</a>.</p>
+
+        <h2 id="mobil-eksik"><span class="h-num">§ 13</span>Mobilde eksik içerik</h2>
+        <p><strong>Belirti:</strong> Masaüstü sayfada olan bir paragraf, tablo ya da yapılandırılmış veri için site aranınca bulunmuyor.</p>
+        <p><strong>Neden:</strong> Google sitenin mobil sürümünü tarar ve dizine alır; mobilde "yer yok" diye kırpılan içerik dizine girmez. Mobilde <code>noindex</code> ya da engellenmiş CSS/JS aynı sonucu doğurur. 5 Temmuz 2024'ten beri mobilde hiç açılmayan site dizine alınmıyor <sup class="kaynak"><a href="#k33">[33]</a></sup><sup class="kaynak"><a href="#k34">[34]</a></sup>.</p>
+        <p><strong>Çözüm:</strong> Aynı içerik her iki görünümde; gerekiyorsa akordeon veya sekme kullanılır (Google bunları serbest sayıyor) <sup class="kaynak"><a href="#k33">[33]</a></sup>. Robots meta etiketleri iki sürümde aynı olmalı.</p>
+
+        <h2 id="rakip-spam"><span class="h-num">§ 14</span>Rakip spamı ve sahte yorum saldırısı</h2>
+        <h3 id="sahte-yorum">Sahte olumsuz (ya da olumlu) yorum</h3>
+        <p><strong>Belirti:</strong> Kısa sürede çok sayıda düşük puanlı, gerçek müşteriye benzemeyen yorum.</p>
+        <p><strong>Çözüm:</strong> Kural dışı yorumlar (sahte, nefret söylemi, rakip saldırısı, çıkar çatışması) işaretlenir ve kaldırılması istenir <sup class="kaynak"><a href="#k35">[35]</a></sup>. "Hizmet kötüydü" gibi öznel yorumlar kaldırılmaz; kısa, dürüst ve kibar yanıtlanır, kişisel bilgi paylaşılmaz <sup class="kaynak"><a href="#k36">[36]</a></sup>.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Google sahte yorum tespit ettiğinde profile belirli bir süre yeni yorum yasağı koyabiliyor, mevcut yorumları gizleyebiliyor ve "Şüpheli yorumlar kaldırıldı" uyarısı gösterebiliyor <sup class="kaynak"><a href="#k37">[37]</a></sup>. Rakip size sahte <strong>olumlu</strong> yorum da bıraktırabilir; böyle bir dalga görürseniz kendiniz bildirin. Türkiye'de ayrıca Ticaret Bakanlığı'nın tüketici yorumu kuralları ve para cezaları var (<a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+        <h3 id="rakip-anahtar-kelimeli-ad">Rakibin anahtar kelimeli işletme adı</h3>
+        <p>Rakip, profil adına "… Evden Eve Nakliyat Ucuz" gibi anahtar kelime eklemişse bu kurallara aykırıdır <sup class="kaynak"><a href="#k38">[38]</a></sup>. Önce Haritalar'da "düzenleme öner" ile bildirilir; işe yaramazsa Business Redressal formu kullanılır. Bildirim, kendi profilinizin bağlı olduğu e-postadan yapılmamalı <sup class="kaynak"><a href="#k39">[39]</a></sup>. <span class="tag tag--info">3. taraf</span></p>
+
+        <h2 id="gbp-askiya"><span class="h-num">§ 15</span>İşletme Profili askıya alındı</h2>
+        <p><strong>Belirti:</strong> Profil haritada görünmüyor ya da "askıya alındı" bildirimi geldi.</p>
+        <p><strong>Olası nedenler</strong> <sup class="kaynak"><a href="#k38">[38]</a></sup><sup class="kaynak"><a href="#k40">[40]</a></sup>:</p>
+        <ul>
+          <li>İşletme adına anahtar kelime, slogan ya da şehir eklenmiş.</li>
+          <li>Sanal ofis, posta kutusu ya da tabelasız adres.</li>
+          <li>Aynı işletme için birden fazla profil (eski çalışan ya da ajans açmış).</li>
+          <li>Kısa sürede çok sayıda kritik değişiklik (ad, kategori, telefon, URL) <span class="tag tag--info">3. taraf</span>.</li>
+          <li>Sanal, ücretli ya da çağrı merkezi numarası.</li>
+        </ul>
+        <p><strong>Çözüm:</strong> Önce sebep bulunur ve düzeltilir (ör. ad tabeladaki gerçek ada çekilir), sonra belgelerle (vergi levhası, fatura, tabela fotoğrafı) itiraz edilir. Askıdaki profilde yeni değişiklik yapılmaz. Bekleme süresi 2022 raporlarına göre yaklaşık 3–4 hafta <sup class="kaynak"><a href="#k41">[41]</a></sup>. <span class="tag tag--info">3. taraf</span></p>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Koddan anlamayan küçük yerel işletme (ör. nakliye firması), telefonda aramada üstte çıkmak istiyor. Bir ajans profil adını "Hayalî Nakliyat – Örnekşehir Evden Eve Ucuz Nakliyat" yapmış; birkaç hafta yükselmiş, sonra profil askıya alınmış. Çözüm sırası: adı tabeladaki "Hayalî Nakliyat"a çevir, kopya profil varsa birleştir/kaldır, tabela ve fatura fotoğraflarıyla itiraz et, bekleme süresince başka hiçbir alanı değiştirme. Müşteriye ad hilesinin neden yapılmayacağı açıkça anlatılır.</p>
+        </aside>
+
+        <h2 id="elle-islem"><span class="h-num">§ 16</span>Elle işlem: yapay bağlantılar ve yeniden inceleme</h2>
+        <p><strong>Belirti:</strong> Search Console → Elle işlemler raporunda "Sitenize gelen yapay bağlantılar" (Unnatural links to your site) gibi bir kayıt; sıralamada belirgin düşüş <sup class="kaynak"><a href="#k42">[42]</a></sup>.</p>
+        <p><strong>Neden:</strong> Satın alınmış bağlantı paketleri, aşırı bağlantı takası, optimize bağlantı metinli ücretli misafir yazılar gibi bağlantı spam'i <sup class="kaynak"><a href="#k43">[43]</a></sup>.</p>
+        <ol class="steps">
+          <li><strong>Bağlantıları listele</strong> (Search Console Bağlantılar raporu, Ahrefs Webmaster Tools).</li>
+          <li><strong>Kaldırmayı dene:</strong> site sahiplerine yaz, yanıtları belgele. Kaldırmayı denemeden yalnız disavow etmek reddedilme nedeni olabilir <sup class="kaynak"><a href="#k42">[42]</a></sup>.</li>
+          <li><strong>Kalanları disavow et.</strong> Araç yalnız URL öneki mülkünde çalışır; dosya UTF-8 <code>.txt</code>, en çok 100.000 satır ve 2 MB; yeni yükleme eskisini tamamen değiştirir <sup class="kaynak"><a href="#k44">[44]</a></sup>.</li>
+          <li><strong>Yeniden inceleme talebi gönder:</strong> sorun, atılan adımlar ve sonuç anlatılır. Sorun etkilenen bütün sayfalarda düzeltilmiş olmalı; sayfalar giriş, ödeme duvarı, robots.txt ya da <code>noindex</code> arkasında olmamalı <sup class="kaynak"><a href="#k42">[42]</a></sup>.</li>
+          <li><strong>Bekle:</strong> inceleme günler ya da haftalar sürer, bağlantı vakaları daha uzun. Talep beklerken yeniden gönderilmez.</li>
+        </ol>
+        <div class="kod">
+          <div class="kod-ust"><span>Metin</span><span class="dosya">disavow.txt (UTF-8)</span></div>
+<pre><code><span class="k-yorum"># 2026-10 temizlik: kaldırma için 2 kez yazıldı, yanıt yok</span>
+domain:spam-dizin-ornek.xyz
+https://kotu-ornek.com/sayfa-123.html</code></pre>
+        </div>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Zehirli bağlantılar için her ay disavow dosyası yüklemek gerekir.</p>
+          <p class="mit-gercek">Google'da "zehirli alan adı" kavramı yok; kötü bağlantılar çoğunlukla algoritmik olarak görmezden gelinir <sup class="kaynak"><a href="#k45">[45]</a></sup>. Disavow genelde yalnız elle işlem varsa ya da kesin bekleniyorsa gerekir; panikle bütün bağlantıları reddetmek yararlı olanları da sıfırlar <sup class="kaynak"><a href="#k44">[44]</a></sup>. Ayrıntı <a href="13-sayfa-disi.html">Bölüm 13</a>.</p>
+        </aside>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 17</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Önce ölç: <code>site:</code> değil Search Console ve URL Denetimi; <code>curl -sIL</code> ile gerçek durum kodu.</li>
+            <li>Eski sayfaları silmenin yolu doğru durum kodudur (301 gerçek karşılığa, yoksa 404/410) ve Google'ın bunu <strong>görebilmesidir</strong>; robots.txt engeli ve robots.txt <code>Noindex:</code> satırı işe yaramaz, zarar verir.</li>
+            <li>Kaldırmalar aracı ~6 ay geçicidir; bin sayfalık temizlik haftalar ile aylar sürer.</li>
+            <li>Çekirdek güncellemede: bitmesini bekle, 1 hafta sonra karşılaştır, küçük kaymaya dokunma, hızlı düzeltme yapma.</li>
+            <li>Eylül 2025 gösterim düşüşü genellikle <code>num=100</code> etkisidir.</li>
+            <li>Bot korumaları Googlebot'u sessizce kesebilir; Cloudflare'de "Block" değil "Disallow AI Training".</li>
+            <li>Bakımda 503 + <code>Retry-After</code>; test ortamı parolayla gizlenir, yayın günü <code>noindex</code>/<code>Disallow</code>/kanonik kontrol edilir.</li>
+            <li>Elle işlem raporda yazılıdır; bağlantı vakasında önce kaldırma denenir, sonra disavow, sonra eksiksiz yeniden inceleme talebi.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 18</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google — site: search operator — <a href="https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site">developers.google.com/…/all-search-site</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Sayfa dizine ekleme raporu — <a href="https://support.google.com/webmasters/answer/7440203">support.google.com/webmasters/answer/7440203</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google — HTTP status codes, network and DNS errors — <a href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">developers.google.com/…/http-network-errors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — 404 hataları (soft 404) — <a href="https://support.google.com/webmasters/answer/2445990">support.google.com/webmasters/answer/2445990</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google — Introduction to robots.txt — <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">developers.google.com/…/robots/intro</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google — Block indexing with noindex — <a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">developers.google.com/…/block-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — A note on unsupported rules in robots.txt (Tem 2019) — <a href="https://developers.google.com/search/blog/2019/07/a-note-on-unsupported-rules-in-robotstxt">developers.google.com/search/blog/2019/07/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google — Build and submit a sitemap — <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">developers.google.com/…/build-sitemap</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google — Site moves with URL changes — <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">developers.google.com/…/site-move-with-url-changes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google — Consolidate duplicate URLs — <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com/…/consolidate-duplicate-urls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> web.dev — Fix the Japanese keyword hack — <a href="https://web.dev/articles/fix-the-japanese-keyword-hack">web.dev/articles/fix-the-japanese-keyword-hack</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google — Crawl budget management for large sites — <a href="https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget">developers.google.com/…/large-site-managing-crawl-budget</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google Search completely kills the cache feature — <a href="https://searchengineland.com/google-search-completely-kills-the-cache-feature-446904">searchengineland.com/…-446904</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Sitemaps ping endpoint is going away (26 Haz 2023) — <a href="https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping">developers.google.com/search/blog/2023/06/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Kaldırmalar aracı — <a href="https://support.google.com/webmasters/answer/9689846">support.google.com/webmasters/answer/9689846</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Site Adresi Değişikliği aracı — <a href="https://support.google.com/webmasters/answer/9370220">support.google.com/webmasters/answer/9370220</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — 404 vs 410 (Mueller, 2018) — <a href="https://seroundtable.com/404-410-google-15225.html">seroundtable.com/404-410-google-15225</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Status Dashboard — ranking incidents — <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">status.search.google.com/…/history</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google — Google Search's core updates — <a href="https://developers.google.com/search/updates/core-updates">developers.google.com/search/updates/core-updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--info">3. taraf</span> ZEO — The impact of &amp;num=100 parameter removal on SEO reporting — <a href="https://zeo.org/resources/blog/the-impact-of-num-100-parameter-removal-on-seo-reporting">zeo.org/resources/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google — Preventing and monitoring abuse on your site — <a href="https://developers.google.com/search/docs/monitor-debug/security">developers.google.com/…/monitor-debug/security</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Report that Cloudflare AI bot blocking prevents Googlebot from indexing sites (4 Ağu 2026) — <a href="https://www.searchenginejournal.com/report-that-cloudflare-ai-bot-blocking-prevents-googlebot-from-indexing-sites">searchenginejournal.com/report-that-cloudflare-…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Cloudflare drops planned Googlebot block for sites refusing AI training (27 Eyl 2026) — <a href="https://ppc.land/cloudflare-drops-planned-googlebot-block-for-sites-refusing-ai-training/">ppc.land/cloudflare-drops-…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--ok">Resmî</span> Google — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> Google — How Google interprets the robots.txt specification — <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt">developers.google.com/…/robots_txt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Website migration checks — <a href="https://searchengineland.com/website-migration-checks-472260">searchengineland.com/…-472260</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Google — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--info">3. taraf</span> Vercel — The rise of the AI crawler (ikincil özetler üzerinden) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/blog/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--ok">Resmî</span> Google — Redirects and Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects">developers.google.com/…/301-redirects</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span><span class="tag tag--ok">Resmî</span> Google — Influencing your title links in search results — <a href="https://developers.google.com/search/docs/appearance/title-link">developers.google.com/…/title-link</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google changed 76% of title tags in Q1 2025 — <a href="https://searchengineland.com/google-changed-76-of-title-tags-in-q1-2025-heres-what-that-means-454847">searchengineland.com/…-454847</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Google — Mobile-first indexing best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing">developers.google.com/…/mobile-sites-mobile-first-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google won't index sites that do not work on mobile after July 5 — <a href="https://searchengineland.com/google-wont-index-sites-that-do-not-work-on-mobile-devices-after-july-5th-442851">searchengineland.com/…-442851</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k35"><span class="src-n">35</span><span><span class="tag tag--ok">Resmî</span> Google Haritalar — Kullanıcı katkısı içerik politikası: yasaklı içerik — <a href="https://support.google.com/contributionpolicy/answer/7400114">support.google.com/contributionpolicy/answer/7400114</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k36"><span class="src-n">36</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Yorumları okuma ve yanıtlama — <a href="https://support.google.com/business/answer/3474122">support.google.com/business/answer/3474122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k37"><span class="src-n">37</span><span><span class="tag tag--info">3. taraf</span> Sterling Sky — Review jail for fake 5-star Google reviews — <a href="https://www.sterlingsky.ca/review-jail-for-fake-5-star-google-reviews/">sterlingsky.ca/review-jail-…</a>; BrightLocal — <a href="https://www.brightlocal.com/blog/new-policies-shady-review-schemes/">brightlocal.com/blog/new-policies-shady-review-schemes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k38"><span class="src-n">38</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — İşletmenizi Google'da temsil etme yönergeleri — <a href="https://support.google.com/business/answer/3038177">support.google.com/business/answer/3038177</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k39"><span class="src-n">39</span><span><span class="tag tag--info">3. taraf</span> Whitespark — GBP spam fighting 101 — <a href="https://whitespark.ca/google-business-profile-guide/gbp-spam-fighting-101/">whitespark.ca/…/gbp-spam-fighting-101</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k40"><span class="src-n">40</span><span><span class="tag tag--info">3. taraf</span> Astute — Why was my Google Business Profile suspended — <a href="https://astute.co/resource/why-was-my-google-business-profile-suspended-how-to-appeal/">astute.co/resource/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k41"><span class="src-n">41</span><span><span class="tag tag--info">3. taraf</span> BrightLocal — Google Business Profile suspension (2022) — <a href="https://www.brightlocal.com/learn/google-business-profile-suspension/">brightlocal.com/learn/google-business-profile-suspension</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k42"><span class="src-n">42</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Manual Actions report — <a href="https://support.google.com/webmasters/answer/9044175">support.google.com/webmasters/answer/9044175</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k43"><span class="src-n">43</span><span><span class="tag tag--ok">Resmî</span> Google — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k44"><span class="src-n">44</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Disavow links to your site — <a href="https://support.google.com/webmasters/answer/2648487">support.google.com/webmasters/answer/2648487</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k45"><span class="src-n">45</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google: We Don't Have A Concept Of Toxic Domains — <a href="https://seroundtable.com/google-toxic-domains-30056.html">seroundtable.com/google-toxic-domains-30056</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="15-araclar-ve-olcum.html"><span class="dir">&larr; Önceki</span><span class="ttl">Araçlar ve ölçüm</span></a>
+        <a class="next" href="17-musteri-isi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Müşteri işi: denetim, öneri, taşıma</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

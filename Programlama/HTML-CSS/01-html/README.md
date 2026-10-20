@@ -20,6 +20,10 @@ Sayfa etiket ezberi yerine semantik yapıya, form doğrulamaya, erişilebilirli�
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
+## İlgili konular
+
+- [SEO Rehberi](../../../Rehberler/SEO/) — Title, meta açıklama, başlık yapısı, kanonik ve yapılandırılmış verinin arama motoru tarafı; buradaki "SEO ve sayfa performansı" başlığının ayrıntılı devamı.
+
 Resmi kaynak: [MDN — HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) · [HTML Living Standard (WHATWG)](https://html.spec.whatwg.org/)
 
 ---

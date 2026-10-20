@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Ekim 2026
 
+- **21.10.2026** — SEO rehberi (21 bölüm): Google'ın tarama ve dizine eklemesi, sayfa içi ve teknik SEO, yerel SEO, Yandex/Bing/IndexNow ve yapay zekâ araması, site denetimi ve kara şapkadan korunma; HTML + yapay zekâ için arastirma.md → [Rehberler/SEO](Rehberler/SEO/)
 - **15.10.2026** — LinkedIn ile giriş yapan kullanıcının CV/profil verisini alma yolları (OIDC, DMA taşınabilirlik, Verified on LinkedIn, Talent, dışa aktarım) → [API/Sosyal-Medya/LinkedIn](API/Sosyal-Medya/LinkedIn.md)
 - **15.10.2026** — Claude ile video üretim sistemi araştırması (12 dk yatay + dikey, TR/EN, sahne bazlı revizyon, maliyet, YPP) → [Yapay-Zeka/video-uretim-sistemi](Programlama/Yapay-Zeka/video-uretim-sistemi/)
 - **15.10.2026** — API kütüphanesi: 10 kategoride 41 platformun güncel API'leri (sosyal medya, mesajlaşma, canlı yayın, GitHub, haber, kripto, finans, hava/deprem, Türkiye kamu), erişim seviyeleri ve takip uygulaması matrisi → [API](API/)

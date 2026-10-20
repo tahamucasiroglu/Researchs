@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sayfa dışı SEO: bağlantılar ve marka — SEO Rehberi</title>
+<meta name="description" content="Geri bağlantının bugünkü ağırlığı, bağlantı spamı türleri, rel=sponsored/ugc/nofollow, satın alınan bağlantının riski, disavow aracı, dijital PR, marka anılmaları ve elle işlem sonrası yeniden inceleme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Sayfa dışı SEO: bağlantılar ve marka</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 13 · Sitenin dışı</div>
+        <h1 class="page-title">Sayfa dışı SEO: bağlantılar ve marka</h1>
+        <p class="lede">Sayfa dışı SEO, senin sitende değil başkalarının sitesinde olan şeylerdir: sana verilen bağlantılar, markanın anılması, yorumlar. Eski SEO'nun en çok para dökülen ve en çok ceza yenen alanı burasıdır. Bu bölüm bağlantının bugün ne kadar önemli olduğunu, hangi bağlantının spam sayıldığını, satın almanın neden kötü bir takas olduğunu ve bağlantıyı dürüst yoldan nasıl kazanacağını anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Bağlantılar hâlâ önemli ama Google'a göre artık ilk 3 etken arasında değil (Eylül 2023); bağlantısız sayfa da sıralanabilir.</li>
+            <li>Para, mal ya da hizmet karşılığı bağlantı spamdır; ancak <code>rel="sponsored"</code> veya <code>rel="nofollow"</code> ile işaretlenirse serbesttir.</li>
+            <li>Kötü bağlantıların çoğunu Google zaten yok sayar; disavow aracı yalnız elle işlem riski olan durumlar içindir. "Zehirli bağlantı" bir SEO aracı kavramıdır.</li>
+            <li>Kalıcı bağlantı dijital PR ile kazanılır: özgün veri, ücretsiz araç, kaynak sayfaları, gazetecilere kısa e-posta.</li>
+            <li>Yapay zekâ aramalarında marka anılmaları bağlantı kadar değerli hâle geliyor; yapay anılma üretmek ise işe yaramaz.</li>
+          </ul>
+        </div>
+
+        <!-- ============ 1. BUGÜNKÜ YERİ ============ -->
+        <h2 id="baglantinin-yeri"><span class="h-num">§ 1</span>Geri bağlantının bugünkü yeri</h2>
+        <p><strong>Geri bağlantı</strong> (backlink): başka bir siteden senin sitene verilen bağlantı. Google'ın sıralama sistemleri rehberinde <strong>bağlantı analizi ve PageRank</strong> etkin sistemler arasında sayılır: sayfalar arası bağlantılardan bir sayfanın neyle ilgili olduğu ve ne kadar değerli olduğu çıkarılır <sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--ok">Resmî</span>. Bağlantı, bir başkasının "bu sayfa okunmaya değer" demesidir.</p>
+        <p>Ama ağırlığı azaldı. Google'dan Gary Illyes Eylül 2023'te bağlantıların artık "ilk 3 sıralama etkeni" arasında olmadığını, hiç bağlantısı olmayan bir sayfanın da sıralanabildiğini söyledi <sup class="kaynak"><a href="#k4">[4]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Bağlantı 1 numaralı sıralama etkenidir; ne kadar çok bağlantı o kadar üst sıra."</p>
+          <p class="mit-gercek">2016'da ilk 3 arasında sayılıyordu; Eylül 2023'te Illyes "artık ilk 3'te değil" dedi <sup class="kaynak"><a href="#k4">[4]</a></sup>. Sayı değil, ilgili ve güvenilir kaynaktan gelen birkaç bağlantı değerlidir; üstelik yerel bir işletme için İşletme Profili ve yorumlar çoğu zaman bağlantıdan önce gelir (<a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+
+        <h3 id="baglanti-metni">Google bağlantıyı nasıl okur?</h3>
+        <ul>
+          <li>Yalnız <code>href</code> içeren <code>&lt;a&gt;</code> öğelerini güvenilir biçimde izler. <code>onclick</code> ile ya da <code>&lt;span href&gt;</code> ile yapılan "bağlantılar" ayrıştırılmayabilir <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>Bağlantı metni</strong> (anchor text: bağlantının tıklanan yazısı) hedef sayfa hakkında ipucudur. Açıklayıcı olmalı; "buraya tıklayın" önerilmez, anahtar kelime doldurulmaz, bağlantılar art arda dizilmez <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>Görsel bağlantıda bağlantı metninin yerini görselin <code>alt</code> metni tutar <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+        </ul>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">izlenmesi güvenilir olmayan bağlantılar</span></div>
+<pre><code><span class="k-etiket">&lt;span</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"location='/fiyatlar'"</span><span class="k-etiket">&gt;</span>Fiyatlar<span class="k-etiket">&lt;/span&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/fiyatlar"</span><span class="k-etiket">&gt;</span>buraya tıklayın<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/"</span><span class="k-etiket">&gt;</span>ucuz nakliyat evden eve nakliyat en iyi nakliyat<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span></div>
+<pre><code><span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/fiyatlar"</span><span class="k-etiket">&gt;</span>Taşıma fiyatlarını etkileyen etkenler<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/"</span><span class="k-etiket">&gt;&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/logo.png"</span> <span class="k-ozn">alt</span>=<span class="k-deger">"Hayalî Nakliyat"</span> <span class="k-ozn">width</span>=<span class="k-deger">"160"</span> <span class="k-ozn">height</span>=<span class="k-deger">"40"</span><span class="k-etiket">&gt;&lt;/a&gt;</span></code></pre>
+        </div>
+
+        <!-- ============ 2. LINK SPAM ============ -->
+        <h2 id="baglanti-spami"><span class="h-num">§ 2</span>Bağlantı spamı: neler yasak?</h2>
+        <p>Google'ın spam politikalarında "bağlantı spamı" başlığı altında sayılanlar <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Uygulama</th><th>Örnek</th></tr></thead>
+            <tbody>
+              <tr><td>Bağlantı alıp satmak</td><td>"Sitende bize bir bağlantı ver, ayda 500 TL ödeyelim"; ücretsiz ürün karşılığı bağlantı da dahil</td></tr>
+              <tr><td>Aşırı karşılıklı bağlantı takası</td><td>"Sen bana ver, ben sana vereyim" düzeninde yüzlerce takas</td></tr>
+              <tr><td>Otomatik bağlantı hizmetleri</td><td>"1000 backlink paketi", yazılımla yorum ve profil bağlantısı açmak</td></tr>
+              <tr><td>Optimize bağlantı metinli ücretli misafir yazı / advertorial</td><td>Parayla yayımlatılan "tanıtım yazısı" içinde "en ucuz evden eve nakliyat" metinli bağlantı</td></tr>
+              <tr><td>Düşük kaliteli dizin siteleri</td><td>Yüzlerce "firma rehberi" sitesine toplu kayıt</td></tr>
+              <tr><td>Footer / widget bağlantıları, forum imzaları</td><td>Yapılan her sitenin altbilgisine "Web tasarım: X Ajans – ucuz web sitesi" bağlantısı</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bunlara ek olarak sık rastlanan bir düzen <strong>bağlantı ağıdır</strong> (PBN, private blog network: tek kişinin kontrolündeki, birbirine ve hedef siteye bağlantı veren site ağı). Ayrı bir başlıkta geçmese de, sıralama için bağlantı üretmeyi hedeflediği için aynı "bağlantı spamı" tanımına girer <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <p>PBN, ajansların müşteri sitelerine koyduğu gizli bağlantılar, kademeli bağlantı, hacklink ve rakip saldırısı (negatif SEO) ayrıntılı olarak <a href="21-kara-sapka.html#baglanti-semalari">Bölüm 21</a>'de.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Süresi dolmuş, bağlantı almış bir alan adını satın alıp onun itibarıyla üstünde ilgisiz, değersiz içerik sıralatmak Mart 2024'ten beri ayrı bir spam politikasıdır: <strong>süresi dolmuş alan adı kötüye kullanımı</strong> <sup class="kaynak"><a href="#k15">[15]</a></sup>. Aynı tarihte başkasının içeriğini kendi güçlü sitende sıralatmak da <strong>site itibarı kötüye kullanımı</strong> (halk arasında "parazit SEO") olarak yasaklandı. 28 Ağustos 2026'dan beri site itibarı elle işlemi Avrupa Ekonomik Alanı'ndaki aramacılar için sıralamayı etkilemiyor; Türkiye dahil AEA dışında uygulama aynı kaldı <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 3. REL ============ -->
+        <h2 id="rel-degerleri"><span class="h-num">§ 3</span>rel değerleri: sponsored, ugc, nofollow</h2>
+        <p>Bir bağlantıya güvenmediğini ya da karşılığında bir şey aldığını Google'a <code>rel</code> özniteliğiyle söylersin <sup class="kaynak"><a href="#k2">[2]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Değer</th><th>Ne zaman</th></tr></thead>
+            <tbody>
+              <tr><td><code>sponsored</code></td><td>Ücretli, reklam, sponsorluk, ortaklık (affiliate) bağlantıları. Bu durumda <code>nofollow</code> yerine tercih edilir.</td></tr>
+              <tr><td><code>ugc</code></td><td>Kullanıcının eklediği içerik: yorumlar, forum mesajları.</td></tr>
+              <tr><td><code>nofollow</code></td><td>Diğer durumlar: bağlantıyı onaylamadığında ya da güvenmediğinde. Yedek değer.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Değerler birleştirilebilir: <code>rel="ugc nofollow"</code>. Ücretli bir bağlantı bu şekilde işaretlenirse spam sayılmaz <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">rel örnekleri</span></div>
+<pre><code><span class="k-yorum">&lt;!-- Ücretli / reklam / ortaklık --&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://ornek-sponsor.com"</span> <span class="k-ozn">rel</span>=<span class="k-deger">"sponsored"</span><span class="k-etiket">&gt;</span>Sponsorumuz<span class="k-etiket">&lt;/a&gt;</span>
+
+<span class="k-yorum">&lt;!-- Kullanıcı yorumundaki bağlantı --&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://kullanici-sitesi.com"</span> <span class="k-ozn">rel</span>=<span class="k-deger">"ugc nofollow"</span><span class="k-etiket">&gt;</span>kullanıcı bağlantısı<span class="k-etiket">&lt;/a&gt;</span>
+
+<span class="k-yorum">&lt;!-- Güvendiğin kaynak: normal bağlantı, nofollow gereksiz --&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://developers.google.com/search"</span><span class="k-etiket">&gt;</span>Google Search Central belgeleri<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>10 Eylül 2019:</strong> <code>nofollow</code> kesin bir komut olmaktan çıktı; sıralamada "ipucu" (hint) olarak değerlendirilmeye başlandı. <code>sponsored</code> ve <code>ugc</code> aynı gün tanıtıldı. <strong>1 Mart 2020</strong>'den beri tarama ve dizine ekleme için de ipucudur <sup class="kaynak"><a href="#k7">[7]</a></sup>. Yani Google gerekirse nofollow'lu bir bağlantıyı yine de izleyebilir.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <ul>
+            <li>Google güvendiğin dış kaynaklara <strong>normal</strong> bağlantı vermeni önerir; nofollow'u her dış bağlantıya yapıştırmak gereksizdir <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+            <li><strong>Kendi sitenin içindeki bağlantılara nofollow koyma.</strong> Bir sayfanın taranmasını istemiyorsan robots.txt kullan <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+            <li>Kullanıcı yorumlarındaki bağlantılara varsayılan olarak <code>ugc</code> ver; güvenilir ve sürekli katkı veren üyelerde kaldırabilirsin <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+            <li>Backlinko'ya göre nofollow bağlantılar da yönlendirme trafiği ve bilinirlik getirir; küçümsenmemeli <sup class="kaynak"><a href="#k10">[10]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+          </ul>
+        </aside>
+
+        <!-- ============ 4. SATIN ALMA RİSKİ ============ -->
+        <h2 id="satin-alma-riski"><span class="h-num">§ 4</span>Satın alınan bağlantının riski</h2>
+        <p>Satın alınan, işaretlenmemiş bir bağlantının başına iki şey gelebilir:</p>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">1. Algoritmik: yok sayılır</h4>
+            <p>SpamBrain (Google'ın yapay zekâ tabanlı spam tespit sistemi) kötü bağlantıları büyük çoğunlukla <strong>görmezden gelir</strong>; değerleri sıfırlanır <sup class="kaynak"><a href="#k5">[5]</a></sup>. Yani verdiğin para çoğu zaman sadece boşa gider. Google'ın spam güncellemeleri belgesine göre bağlantı spamı güncellemesiyle kaybedilen değer, değişiklik yapılarak geri gelmeyebilir (ikincil kaynaklarda aktarılıyor) <sup class="kaynak"><a href="#k18">[18]</a></sup>.</p>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">2. Elle işlem</h4>
+            <p>Bir Google çalışanı siteyi inceler ve Search Console'daki <strong>Elle işlemler</strong> raporunda "Unnatural links to your site" (sitenize gelen doğal olmayan bağlantılar) bildirimi çıkar <sup class="kaynak"><a href="#k6">[6]</a></sup>. Etkilenen sayfalar ya da bütün site sıralamadan düşer. Düzeltip yeniden inceleme talebi göndermek gerekir (aşağıda).</p>
+          </div>
+        </div>
+        <p>Bilinen 2026 spam güncellemeleri: 24–25 Mart 2026 (yaklaşık 19,5 saat sürdü) ve 24 Haziran 2026'da başlayan güncelleme <sup class="kaynak"><a href="#k18">[18]</a></sup> <span class="tag tag--info">3. taraf</span>. Haziran güncellemesinin tamamlandığı resmî kaynaktan <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Küçük bir işletme sahibine telefonla "aylık 1.500 TL'ye 500 kaliteli backlink" teklif ediliyor. Olası sonuçlar: (a) bağlantılar düşük kaliteli sitelerden gelir, Google yok sayar, para boşa gider; (b) desen belirginse elle işlem gelir, site düşer ve temizliği ilk yatırımdan pahalıya mal olur. İyi senaryo bile "hiçbir şey olmaması"dır. Google'ın SEO seçme rehberi de bağlantı planı öneren hizmeti açıkça uyarı işareti sayar <sup class="kaynak"><a href="#k20">[20]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 5. DISAVOW ============ -->
+        <h2 id="disavow"><span class="h-num">§ 5</span>Disavow aracı</h2>
+        <p><strong>Disavow</strong> (reddetme), Google'a "şu bağlantıları hesaba katma" diye liste verdiğin bir Search Console aracıdır. Ekim 2026 itibarıyla yardım sayfası aktif, kaldırılma uyarısı yoktur <sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <h3 id="disavow-ne-zaman">Ne zaman gerekir?</h3>
+        <p>Google'ın önerisi net: araç yalnız <strong>çok sayıda kötü bağlantı varsa</strong> ve bu bağlantılar <strong>elle işleme yol açtıysa ya da açacaksa</strong> kullanılır. Yanlış kullanımın performansı düşürebileceği de belgede yazar <sup class="kaynak"><a href="#k3">[3]</a></sup>. Çoğu sitenin buna hiç ihtiyacı yoktur, çünkü kötü bağlantılar algoritmik olarak zaten yok sayılır.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"SEO aracım 'zehirli bağlantı' puanı gösteriyor; her ay disavow yapmalıyım."</p>
+          <p class="mit-gercek">Google'da "zehirli alan adı" kavramı yok; Mueller bu kavramı SEO araçlarının ürettiğini söyledi <sup class="kaynak"><a href="#k5">[5]</a></sup>. DA (Domain Authority) ve DR (Domain Rating) da Moz ve Ahrefs'in kendi metrikleridir, Google bunları kullanmaz. Mueller Eylül 2026'da aracın "etkisi olduğunu, yeri ve zamanı olduğunu", ama birkaç bağlantıyı reddetmenin büyük bir düşüşü açıklamadığını söyledi; bu alıntı ikincil kaynaktan <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+        </aside>
+
+        <h3 id="disavow-kurallari">Kurallar ve sınırlar</h3>
+        <ul>
+          <li><strong>Domain property</strong> (alan adı mülkü) desteklemez; URL önekli mülk gerekir. <code>http</code> ve <code>https</code> için <strong>ayrı</strong> liste yüklenir <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k17">[17]</a></sup>.</li>
+          <li>Dosya <code>.txt</code>, UTF-8; en çok 100.000 satır ve 2 MB. Satır başına bir URL ya da <code>domain:</code> önekiyle bütün alan adı. <code>#</code> ile yorum yazılır.</li>
+          <li><strong>Yeni yükleme eskisini tamamen değiştirir.</strong> Ekleme yapmak için eski liste indirilip birleştirilir.</li>
+          <li>Etkisi birkaç haftada görülür. Reddedilen bağlantılar Bağlantılar raporunda <strong>görünmeye devam eder</strong>; "silinmedi" diye panik yapma <sup class="kaynak"><a href="#k3">[3]</a></sup>.</li>
+        </ul>
+
+        <div class="kod">
+          <div class="kod-ust"><span>Metin</span><span class="dosya">disavow.txt · UTF-8</span></div>
+<pre><code><span class="k-yorum"># 2026-10 temizlik: alan adı sahiplerine kaldırma için yazıldı, yanıt yok</span>
+<span class="k-yorum"># Bütün alan adı</span>
+domain:spam-dizin-ornek.xyz
+domain:link-ciftligi-ornek.info
+<span class="k-yorum"># Tek sayfa</span>
+https://kotu-ornek.com/sayfa-123.html</code></pre>
+        </div>
+
+        <!-- ============ 6. ELLE İŞLEM ============ -->
+        <h2 id="yeniden-inceleme"><span class="h-num">§ 6</span>Elle işlem ve yeniden inceleme talebi</h2>
+        <p>Search Console'da elle işlem bildirimi geldiyse süreç şöyledir <sup class="kaynak"><a href="#k6">[6]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ol class="steps">
+          <li><strong>Bildirimi oku.</strong> Elle işlemler raporu sorunun türünü ve etkilenen kapsamı (bazı sayfalar mı, bütün site mi) söyler.</li>
+          <li><strong>Sorunu bütün etkilenen sayfalarda düzelt.</strong> Kısmi düzeltme kısmi dönüş getirmez.</li>
+          <li><strong>Bağlantı sorunlarında önce kaldırmayı dene.</strong> Bağlantıyı veren sitelere yaz, kaldırılmasını iste, yazışmaları belgele. Kaldırılamayanları disavow et. Kaldırmayı denemeden yalnız disavow etmek reddedilme sebebi olabilir.</li>
+          <li><strong>Sayfalar erişilebilir olsun.</strong> İncelenecek sayfalar giriş, ödeme duvarı, robots.txt ya da <code>noindex</code> arkasında olmamalı.</li>
+          <li><strong>Talebi yaz.</strong> Sorunu, attığın adımları ve sonucu anlat; kaldırma yazışmalarının özetini ekle.</li>
+          <li><strong>Bekle.</strong> İnceleme günler ya da haftalar sürer; bağlantı vakaları daha uzun. Talep beklerken yeniden gönderilmez.</li>
+        </ol>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Site itibarı kötüye kullanımında "<code>noindex</code> koydum, kurtuldum" olmuyor; <code>noindex</code> elle işlemi kendiliğinden kaldırmaz, yeniden inceleme talebi şarttır. İçeriği alt klasöre ya da alt alan adına taşımak da politikayı aşma girişimi sayılabilir <sup class="kaynak"><a href="#k15">[15]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 7. DİJİTAL PR ============ -->
+        <h2 id="dijital-pr"><span class="h-num">§ 7</span>Dürüst yol: dijital PR ve kazanılan bağlantı</h2>
+        <p>Kalıcı bağlantı, insanların gerçekten bahsetmek istediği bir şey üretilerek kazanılır. Backlinko'nun güncel rehberindeki işe yarayan türler <sup class="kaynak"><a href="#k10">[10]</a></sup> <span class="tag tag--info">3. taraf</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yöntem</th><th>Nasıl</th><th>Örnek</th></tr></thead>
+            <tbody>
+              <tr><td>Özgün araştırma / veri</td><td>Alıntılanabilir 8–12 istatistiği, yöntemini anlatan bir kutuyla birlikte yayımla</td><td>Bir randevu yazılımı: "10.000 randevuda iptaller en çok hangi gün ve saatte oldu" analizi</td></tr>
+              <tr><td>Ücretsiz araç</td><td>Küçük, gerçekten işe yarayan bir hesaplayıcı ya da araç</td><td>Nakliye firması: oda sayısına göre "kaç koli gerekir" hesaplayıcısı</td></tr>
+              <tr><td>Gömülebilir grafik</td><td>Başkalarının kendi yazısına koyabileceği, kaynak bağlantılı görsel</td><td>Aylara göre taşınma yoğunluğu grafiği</td></tr>
+              <tr><td>Kaynak sayfaları</td><td><code>"[konu]" kaynaklar</code> gibi aramalarla konuyla ilgili bağlantı listeleri bul, eksik olan iyi içeriğini öner</td><td>Belediyenin "taşınırken yapılacaklar" sayfası</td></tr>
+              <tr><td>Rakip bağlantı analizi</td><td>Rakiplerin bağlantı aldığı alan adlarına bak; senin neden alamadığını düşün</td><td>Sektör derneği üyelik listesi</td></tr>
+              <tr><td>Gazeteciler</td><td>Veri yazan muhabirleri hedefle</td><td>Yerel haber sitesine taşınma sezonu verisi</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="ulasim-epostasi">Ulaşım e-postası</h3>
+        <p>Backlinko'nun önerisi: <strong>200 kelimeden kısa</strong>, kişiye özel bir e-posta; 5–7 gün sonra <strong>tek bir</strong> hatırlatma <sup class="kaynak"><a href="#k10">[10]</a></sup>. Toplu şablon e-posta işe yaramaz, kişinin yazdığı şeyi okuduğunu göstermek gerekir.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>"Merhaba, geçen hafta yayımladığınız 'Kiralık daireye taşınırken 10 öneri' yazısını okudum. 7. maddede koli sayısından söz ediyorsunuz; geçen yıl taşıdığımız 400 evin verisinden oda sayısına göre ortalama koli ihtiyacını çıkardık, burada tablo halinde duruyor: [bağlantı]. Okurlarınız için işe yarayabilir diye düşündüm. — Hayalî Nakliyat"</p>
+          <p>Bu e-posta bağlantı istemiyor, faydalı bir veri öneriyor. Bağlantı gelirse doğal biçimde gelir.</p>
+        </aside>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>"Bize bağlantı verirseniz size indirim yaparız" ya da "ücretsiz ürün karşılığı yazınızda bağlantı" teklifi, nezaketle yazılsa bile bağlantı satın almaktır <sup class="kaynak"><a href="#k1">[1]</a></sup>. Gerçek bir sponsorluk varsa karşı tarafın bağlantıyı <code>rel="sponsored"</code> ile işaretlemesini iste.</p>
+        </aside>
+
+        <!-- ============ 8. MARKA ANILMALARI ============ -->
+        <h2 id="marka-anilmalari"><span class="h-num">§ 8</span>Marka anılmaları ve yapay zekâ</h2>
+        <p>Google'ın 15 Mayıs 2026'da yayımladığı üretken yapay zekâ arama rehberine göre AI Overviews ve AI Mode, insanların bloglarda, videolarda ve forumlarda markalar hakkında söylediklerini gösterebilir. Ama aynı rehber açıkça uyarır: <strong>yapay (inauthentic) anılma</strong> peşinde koşmak işe yaramaz; spam sistemleri buna karşı çalışır <sup class="kaynak"><a href="#k11">[11]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+        <p>Whitespark'ın 2026 anketinde yapay zekâ aramalarında en güçlü etken "uzmanların hazırladığı en iyiler listelerinde yer almak" çıktı. Darren Shaw'ın değerlendirmesi: "Yapay zekâ SEO'sunda anılmalar (atıflar) yeni bağlantıdır" <sup class="kaynak"><a href="#k12">[12]</a></sup> <span class="tag tag--info">3. taraf</span>. Buna karşın harita sıralamasında atıfların (dizinlerde işletme bilgisinin geçmesi) etkisi azaldı: 2013'te harita için en önemli etkenin atıflar olduğunu söyleyen uzman oranı %18'di, 2021'de %7 <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+
+        <h3 id="baglantisiz-anilma">Bağlantısız anılmayı bağlantıya çevirmek</h3>
+        <p>Markan bir yazıda geçiyor ama bağlantı verilmemişse, yazara nazikçe bağlantı eklemesini rica etmek yaygın ve meşru bir taktiktir <sup class="kaynak"><a href="#k10">[10]</a></sup>. Rakiplerinin geçtiği ama senin geçmediğin yapay zekâ cevaplarındaki kaynaklar da iyi hedeftir: o kaynaklar kimdir, sen orada neden yoksun?</p>
+
+        <h3 id="yerel-baglanti">Yerel işletmeler için bağlantı kaynakları</h3>
+        <p>Google'ın yerel sıralamasındaki "öne çıkma" ölçütü bağlantıları, yorum sayısını ve puanı içerir; para ile daha iyi yerel sıralama alınamaz <sup class="kaynak"><a href="#k14">[14]</a></sup>. Küçük bir yerel işletme için gerçekçi bağlantı kaynakları:</p>
+        <ul class="checklist">
+          <li>Esnaf odası, ticaret odası ve meslek birliği üye sayfaları <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+          <li>Yerel haber siteleri (gerçek bir haber değeri olduğunda: yeni şube, sosyal sorumluluk, veri).</li>
+          <li>İş birliği yapılan diğer yerel işletmeler (ör. emlakçı, site yönetimi) — gerçek iş ilişkisi varsa, takas düzeni kurmadan.</li>
+          <li>Yerel dernek, okul ya da spor kulübü sponsorluğu — bağlantı <code>rel="sponsored"</code> olabilir; değeri bilinirlik ve gerçek ziyaretçidir.</li>
+        </ul>
+
+        <!-- ============ 9. ÖZET TABLO ============ -->
+        <h2 id="mitler"><span class="h-num">§ 9</span>Mitler ve gerçekler</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>İddia</th><th>Gerçek</th></tr></thead>
+            <tbody>
+              <tr><td>"Bağlantılar 1 numaralı etken"</td><td>Eylül 2023: artık ilk 3'te değil <sup class="kaynak"><a href="#k4">[4]</a></sup>.</td></tr>
+              <tr><td>"nofollow kesin bir komuttur"</td><td>2019'dan beri sıralamada, 1 Mart 2020'den beri tarama ve dizinde ipucu <sup class="kaynak"><a href="#k7">[7]</a></sup>.</td></tr>
+              <tr><td>"Zehirli bağlantılar için sürekli disavow gerekir"</td><td>Kötü bağlantılar algoritmik olarak yok sayılır; disavow genelde yalnız elle işlem durumunda <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>.</td></tr>
+              <tr><td>"Disavow aracı kaldırıldı"</td><td>Ekim 2026 itibarıyla aktif; kaldırma kararı yok <sup class="kaynak"><a href="#k3">[3]</a></sup>.</td></tr>
+              <tr><td>"DA/DR yüksekse Google sever"</td><td>Üçüncü taraf metrikleri; Google kullanmaz <sup class="kaynak"><a href="#k5">[5]</a></sup>.</td></tr>
+              <tr><td>"Para verince yerel sıralama yükselir"</td><td>Google: ödeme ile daha iyi yerel sıralama yolu yok <sup class="kaynak"><a href="#k14">[14]</a></sup>.</td></tr>
+              <tr><td>"Ne kadar çok dizin, o kadar iyi"</td><td>Atıfların harita etkisi azaldı; düşük kaliteli dizinler bağlantı spamı sayılabilir <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k1">[1]</a></sup>.</td></tr>
+              <tr><td>"Site itibarı istismarı her yerde aynı cezalandırılır"</td><td>30 Ağustos 2026'dan beri AEA'da sıralamayı etkilemiyor; Türkiye'de değişmedi <sup class="kaynak"><a href="#k16">[16]</a></sup>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="denetim"><span class="h-num">§ 10</span>Kendi bağlantı profilini denetlemek</h2>
+        <ol class="steps">
+          <li><strong>Search Console → Bağlantılar raporu:</strong> en çok bağlantı veren siteler, en çok bağlantı alan sayfalar, en yaygın bağlantı metinleri.</li>
+          <li><strong>Search Console → Elle işlemler:</strong> bildirim yoksa ve trafik düşüşü yoksa bağlantı tarafında acil bir iş yoktur.</li>
+          <li><strong>Geçmişi sor:</strong> müşteri daha önce "backlink paketi" aldı mı? Aldıysa kaynaklarını listele.</li>
+          <li><strong>Desen ara:</strong> aynı ağdan gelen yüzlerce bağlantı, tamamı "ucuz nakliyat" gibi ticari metinli bağlantılar, alakasız dilde sitelerden toplu bağlantılar.</li>
+          <li><strong>Karar ver:</strong> elle işlem yoksa çoğu durumda dokunma; varsa kaldırma + disavow + yeniden inceleme talebi.</li>
+          <li><strong>İç bağlantıları unutma:</strong> en çok dış bağlantı alan sayfalarından öncelikli sayfalarına iç bağlantı vermek, kazandığın değeri site içinde yayar (<a href="05-sayfa-ici.html">Bölüm 5</a>).</li>
+        </ol>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 11</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Bağlantı hâlâ bir sinyal (PageRank sistemi etkin) ama Eylül 2023'ten beri Google'a göre ilk 3 etken arasında değil.</li>
+            <li>Para, mal, hizmet ya da indirim karşılığı bağlantı spamdır; ücretli bağlantı ancak <code>rel="sponsored"</code>/<code>nofollow</code> ile serbesttir.</li>
+            <li><code>sponsored</code> ücretli, <code>ugc</code> kullanıcı içeriği, <code>nofollow</code> diğerleri için; 2019/2020'den beri hepsi ipucudur. Güvendiğin kaynağa normal bağlantı ver, iç bağlantıya nofollow koyma.</li>
+            <li>Satın alınan bağlantı ya yok sayılır (para boşa gider) ya da elle işlem getirir; iyi senaryo bile "hiçbir şey olmaması"dır.</li>
+            <li>Disavow yalnız elle işlem riski olan, çok sayıda kötü bağlantı durumunda; Domain property'de çalışmaz, her yükleme eskisini siler. "Zehirli bağlantı", DA/DR Google kavramı değildir.</li>
+            <li>Elle işlemde: her yerde düzelt, önce kaldırmayı dene ve belgele, sonra disavow ve tek bir yeniden inceleme talebi.</li>
+            <li>Kalıcı bağlantı dijital PR ile kazanılır: özgün veri, ücretsiz araç, kaynak sayfaları, kısa kişisel e-posta.</li>
+            <li>Yapay zekâ aramasında gerçek marka anılmaları değer kazanıyor; yapay anılma üretmek işe yaramaz.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span>Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span>Google Search Central — Qualify your outbound links to Google — <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links">developers.google.com/…/qualify-outbound-links</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span>Search Console Yardım — Disavow links to your site — <a href="https://support.google.com/webmasters/answer/2648487">support.google.com/webmasters/answer/2648487</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span>Search Engine Land — Links are not a top 3 ranking factor (Gary Illyes, Eyl 2023) — <a href="https://searchengineland.com/links-google-search-ranking-factor-gary-illyes-432422">searchengineland.com/…-432422</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span>Search Engine Roundtable — Google: We don't have a concept of toxic domains; Search Engine Land — Toxic links and disavows — <a href="https://seroundtable.com/google-toxic-domains-30056.html">seroundtable.com/…-30056</a>, <a href="https://searchengineland.com/toxic-links-disavows-seo-383324">searchengineland.com/…-383324</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span>Search Console Yardım — Manual Actions report — <a href="https://support.google.com/webmasters/answer/9044175">support.google.com/webmasters/answer/9044175</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span>Google Search Central Blog — Evolving "nofollow": new ways to identify the nature of links (10 Eyl 2019) — <a href="https://developers.google.com/search/blog/2019/09/evolving-nofollow-new-ways-to-identify">developers.google.com/search/blog/2019/09/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span>Google Search Central — Link best practices for Google — <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">developers.google.com/…/links-crawlable</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span>Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span>Backlinko — Link Building (güncelleme 15 Eki 2026) — <a href="https://backlinko.com/link-building">backlinko.com/link-building</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span>Google Search Central — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span>Whitespark — Local Search Ranking Factors 2026 (uzman anketi) — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span>Ahrefs — Local SEO rehberi — <a href="https://ahrefs.com/blog/local-seo/">ahrefs.com/blog/local-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span>Google İşletme Profili Yardım — Tips to improve your local ranking on Google — <a href="https://support.google.com/business/answer/7091">support.google.com/business/answer/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span>Google Search Central Blog — March 2024 core update and new spam policies; Updating our site reputation abuse policy (19 Kas 2024) — <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">developers.google.com/search/blog/2024/03/…</a>, <a href="https://developers.google.com/search/blog/2024/11/site-reputation-abuse">developers.google.com/search/blog/2024/11/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span>Google Search Central Blog — Update to the site reputation policy (28 Ağu 2026) — <a href="https://developers.google.com/search/blog/2026/08/update-site-reputation-policy">developers.google.com/search/blog/2026/08/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span>Search Engine Journal — Google's disavow tool doesn't work with Domain properties — <a href="https://www.searchenginejournal.com/googles-disavow-tool-doesnt-work-with-search-console-domain-properties/309703/">searchenginejournal.com/…/309703</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span>PPC Land — Google's March 2026 spam update; June 2026 spam update — <a href="https://ppc.land/googles-march-2026-spam-update-is-live-what-changed-and-why-it-matters/">ppc.land/…march-2026…</a>, <a href="https://ppc.land/googles-june-2026-spam-update-is-live-what-it-hits-and-why-it-matters/">ppc.land/…june-2026…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span>Bravery Technology — Yerel SEO Rehberi 2026 (Türkçe, ajans görüşü) — <a href="https://braverytechnology.com/tr/yerel-seo-rehberi/">braverytechnology.com/tr/yerel-seo-rehberi</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span>Google Search Central — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="12-yerel-seo.html"><span class="dir">&larr; Önceki</span><span class="ttl">Yerel SEO</span></a>
+        <a class="next" href="14-diger-motorlar-ve-yz.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Diğer motorlar ve yapay zekâ araması</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

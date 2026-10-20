@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alan adı, sunucu, dil ve güvenlik — SEO Rehberi</title>
+<meta name="description" content="Programlama dili, alan adı uzantısı ve yaşı, hosting ve hız, CDN ve bot koruması tuzakları, HTTPS, hack belirtileri ve çok dilli site yapısı: altyapının SEO'ya gerçek etkisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Alan adı, sunucu, dil ve güvenlik</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 11 · Teknik</div>
+        <h1 class="page-title">Alan adı, sunucu, dil ve güvenlik</h1>
+        <p class="lede">"Hangi dille yazalım, hangi uzantıyı alalım, hangi hosting daha iyi sıralanır?" sorularının cevabı çoğu zaman beklenenden sadedir: Google sunucunu görmez, yalnız sunucunun ona verdiği cevabı görür. Bu bölüm altyapı kararlarının SEO'ya gerçekten nerede dokunduğunu, nerede dokunmadığını ve sessizce siteyi aramadan düşürebilen tuzakları anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 18 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Programlama dili, CMS ve dosya uzantısı sıralamayı etkilemez; etkileyen, tarayıcıya giden HTML, durum kodu ve hızdır.</li>
+            <li>Alan adı yaşı ve anahtar kelimeli alan adı sıralama faktörü değildir; kısa, akılda kalan bir marka adı seçilir.</li>
+            <li>Search Console'daki ülke hedefleme ayarı <strong>22 Eylül 2022</strong>'de kalktı; ülke sinyali artık uzantı, hreflang ve yerel içerikten gelir.</li>
+            <li>Hosting'in doğrudan sinyali zayıftır, ama yavaşlık LCP'yi, süren 5xx hataları dizini bozar.</li>
+            <li>Bot koruması ve CDN ayarları (ör. Cloudflare'in yapay zekâ engelleme seçenekleri) Googlebot'u fark ettirmeden kesebilir.</li>
+            <li>HTTPS 2014'ten beri hafif bir sinyal; asıl iş tek bir kanonik adrese tek adımda 301 ile toplamaktır.</li>
+          </ul>
+        </div>
+
+        <!-- ============ 1. PROGRAMLAMA DİLİ ============ -->
+        <h2 id="programlama-dili"><span class="h-num">§ 1</span>Programlama dili ve CMS sıralamayı etkiler mi?</h2>
+        <p><strong>Hayır.</strong> Googlebot sunucunda ASP.NET mi, PHP mi, Node mu çalıştığını görmez. Gördüğü şeyler şunlardır: HTTP durum kodu, yanıt başlıkları, HTML, sayfanın yüklediği CSS/JS dosyaları ve bunlar çalıştırıldıktan sonra ortaya çıkan sayfa <sup class="kaynak"><a href="#k2">[2]</a></sup>. Aynı HTML'i üreten iki site, biri C# biri PHP ile yazılmış olsa da Google için aynıdır.</p>
+        <p>Google'dan John Mueller Aralık 2022'de bunu açıkça söyledi: kendi içerik yönetim sistemini (CMS: WordPress gibi site yönetim yazılımı) yazmak ya da WordPress kullanmak SEO açısından fark yaratmaz; WordPress'in tek avantajı insanın vaktini içeriğe ayırabilmesidir <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"WordPress siteleri Google'da daha iyi sıralanır" ya da "<code>.aspx</code>/<code>.php</code> uzantılı sayfalar dezavantajlıdır".</p>
+          <p class="mit-gercek">Google hiçbir CMS'i ayırt etmez; dosya uzantısı da önemsizdir. Fark yaratan, ortaya çıkan HTML ve hızdır <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+        </aside>
+
+        <h3 id="mimarinin-ciktisi">Fark yaratan şey: mimarinin çıktısı</h3>
+        <p>Dil değil, sayfanın <em>nasıl</em> oluşturulduğu önemlidir. İçerik ilk HTML yanıtında mı geliyor, yoksa tarayıcıda JavaScript çalışınca mı beliriyor? Bu farkın ayrıntısı <a href="10-performans-mobil-js.html">Bölüm 10</a>'da; burada mimari türlerini karşılaştırıyoruz <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Mimari</th><th>İlk HTML'de içerik var mı?</th><th>Güçlü yanı</th><th>Tipik risk</th></tr></thead>
+            <tbody>
+              <tr><td>ASP.NET MVC / Razor, PHP (sunucuda HTML)</td><td>Evet</td><td>İçerik ilk yanıtta; botlar için en güvenli yol</td><td>Yavaş veritabanı sorgusu yüzünden yüksek TTFB; oturum ya da bot koruması yüzünden Googlebot'a 403/302 dönmesi</td></tr>
+              <tr><td>WordPress</td><td>Evet</td><td>Sunucu HTML'i; ilk görsele otomatik <code>fetchpriority</code> ekler, onu geç yüklemez</td><td>Eklenti şişmesi (INP/LCP bozulur), ucuz paylaşımlı hosting, güvenlik açığı ve hack</td></tr>
+              <tr><td>React / Vue SPA (yalnız tarayıcıda render)</td><td>Hayır, boş bir <code>&lt;div id="root"&gt;</code></td><td>Uygulama gibi akıcı arayüz</td><td>Google gecikmeli render eder; yapay zekâ ve sosyal ağ botları içeriği hiç görmez</td></tr>
+              <tr><td>Next / Nuxt (SSR veya statik üretim)</td><td>Evet</td><td>Hazır HTML + uygulama akıcılığı</td><td>Hydration (sunucu HTML'ini tarayıcıda yeniden canlandırma) kaynaklı INP sorunu</td></tr>
+              <tr><td>Düz statik HTML</td><td>Evet</td><td>En hızlı TTFB, CDN'e çok uygun</td><td>Elle güncelleme zahmeti</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Yapay zekâ tarayıcılarının büyük kısmı (GPTBot, ClaudeBot) JavaScript dosyasını indirir ama <strong>çalıştırmaz</strong> <sup class="kaynak"><a href="#k4">[4]</a></sup> <span class="tag tag--info">3. taraf</span>. Yani yalnız tarayıcıda oluşan içerik Google'da gecikmeyle görünür, yapay zekâ cevaplarında hiç görünmeyebilir. Başlık, açıklama, kanonik ve ana metin ilk HTML'de olmalı.</p>
+        </aside>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir ajans müşterisine "siteniz PHP ile yazılmış, .NET'e taşıyalım ki üste çıksın" diyorsa bu öneri yanlıştır. Doğru soru şudur: <em>Mevcut site doğru durum kodu döndürüyor mu, içerik ilk HTML'de mi, başlıklar düzenlenebiliyor mu, hızlı mı?</em> Cevaplar evetse platform değişikliği gerekmez. Ne zaman gerektiği <a href="17-musteri-isi.html#platform-degisikligi">Bölüm 17</a>'de.</p>
+        </aside>
+
+        <!-- ============ 2. ALAN ADI ============ -->
+        <h2 id="alan-adi"><span class="h-num">§ 2</span>Alan adı seçimi</h2>
+
+        <h3 id="uzanti">Uzantı: .com mu, .com.tr mi?</h3>
+        <p>Uzantılar ikiye ayrılır:</p>
+        <ul>
+          <li><strong>ccTLD</strong> (ülke kodlu uzantı: <code>.com.tr</code>, <code>.tr</code>, <code>.de</code>): Google için <strong>en net ülke sinyalidir</strong>. Bedeli, siteyi tek ülkeye bağlamasıdır <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong>gTLD</strong> (genel uzantı: <code>.com</code>, <code>.net</code>, <code>.org</code>): ülke sinyali vermez. <code>.tv</code>, <code>.me</code>, <code>.io</code> gibi "gösteriş" amaçlı ülke uzantılarını da Google genel uzantı sayar <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+        </ul>
+        <p>Google'ın başlangıç rehberine göre uzantı yalnız ülke hedeflerken önemlidir; bunun dışında <code>.com</code> ile <code>.net</code> arasında fark yoktur <sup class="kaynak"><a href="#k8">[8]</a></sup> <span class="tag tag--ok">Resmî</span>. Ahrefs'in notu: <code>.info</code> ve <code>.biz</code> gibi uzantılar spamla anılır, ama bu uzantıdaki site de başarılı olabilir <sup class="kaynak"><a href="#k30">[30]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>22 Eylül 2022:</strong> Search Console'daki "Uluslararası Hedefleme" raporunun ülke seçme özelliği kaldırıldı <sup class="kaynak"><a href="#k6">[6]</a></sup>. Türkçe kaynaklarda hâlâ geçen "Search Console'da hedef ülkeyi Türkiye seç" tavsiyesi eskimiştir. Genel uzantılı bir site artık ülkeyi hreflang, yerel URL yapısı ve yerel içerikle (Türkçe metin, adres, İşletme Profili) belirtir.</p>
+        </aside>
+
+        <p><strong>Türkiye'de .com.tr:</strong> <code>.tr</code> kayıt işleri 14 Eylül 2022'de BTK bünyesindeki TRABİS'e (.TR Ağ Bilgi Sistemi) geçti; o tarihten beri <code>com.tr</code>, <code>net.tr</code> ve <code>org.tr</code> "ilk gelen alır" ilkesiyle belgesiz tahsis ediliyor <sup class="kaynak"><a href="#k31">[31]</a></sup> <span class="tag tag--info">3. taraf</span>. Yani eskisi gibi vergi levhası, marka belgesi istenmiyor. Doğrudan <code>.tr</code> (ör. <code>ornek.tr</code>) tescilinin herkese açıldığı tarih bu çalışmada <span class="tag tag--warn">Doğrulanamadı</span>; güncel kurallar ve ücretler için TRABİS duyuru sayfasına bakılmalı.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Yalnız Türkiye'ye hizmet veren küçük yerel bir işletme (ör. nakliye firması) için <code>.com.tr</code> doğal seçimdir. Ama elinde yıllardır kullandığı bir <code>.com</code> varsa, sırf uzantı için taşımaya gerek yoktur: Türkçe içerik, sayfadaki adres ve doğrulanmış İşletme Profili aynı ülke sinyalini verir. Bu son cümle Google kurallarından çıkarılmış bir yorumdur, Google'ın ayrı bir açıklaması değildir.</p>
+        </aside>
+
+        <h3 id="alan-adi-yasi">Alan adı yaşı ve anahtar kelimeli alan adı</h3>
+        <p><strong>Alan adı yaşı sıralama faktörü değildir.</strong> Mueller'in sözü: "domain age helps nothing"; Google 2009'da da alan adının kayıt süresini kullanmadığını söylemişti <sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--info">3. taraf</span>. Alan adını "10 yıllığına kaydedersem Google güvenir" düşüncesi de bu yüzden boştur.</p>
+        <p><strong>EMD</strong> (Exact Match Domain: aranan sorguyla birebir aynı adı taşıyan alan adı, ör. <code>ucuz-evden-eve-nakliyat-ornekil.com</code>) için durum daha da açık:</p>
+        <ul>
+          <li>Google'ın sıralama sistemleri rehberinde <strong>tam eşleşen alan adı sistemi</strong> etkin sistemler arasında sayılır; görevi, sorguyla birebir aynı adı taşıyan alan adlarının kredisini kısmaktır <sup class="kaynak"><a href="#k7">[7]</a></sup> <span class="tag tag--ok">Resmî</span>.</li>
+          <li>27–28 Eylül 2012'deki EMD güncellemesi düşük kaliteli EMD'leri hedefledi (İngilizce ABD sorgularının yaklaşık %0,6'sı) <sup class="kaynak"><a href="#k10">[10]</a></sup>. 2020'de Mueller alan adındaki anahtar kelimenin sıralamada rol oynamadığını söyledi <sup class="kaynak"><a href="#k11">[11]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+        </ul>
+
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">✗ Kaçın</h4><p><code>ornekil-ucuz-nakliyat-firmasi.com</code> — uzun, tireli, akılda kalmaz, ek fayda yok, güven kaybettirebilir (son kısım yorumdur).</p></div>
+          <div class="pane"><h4 class="pane__title">✓ Tercih et</h4><p><code>hayalinakliyat.com.tr</code> (hayalî örnek) — kısa, tiresiz, tabeladaki marka adıyla aynı, telefonda söylenip yazılabilir.</p></div>
+        </div>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Alan adında anahtar kelime olursa o kelimede öne çıkarım."</p>
+          <p class="mit-gercek">Google'ın EMD sistemi tam tersine bu tür alan adlarının kredisini kısar <sup class="kaynak"><a href="#k7">[7]</a></sup>; Mueller 2020'de anahtar kelimenin alan adında rol oynamadığını söyledi <sup class="kaynak"><a href="#k11">[11]</a></sup>. Sorguya göre değil, markaya göre ad seç.</p>
+        </aside>
+
+        <h3 id="alt-alan-adi-alt-klasor">Alt alan adı mı, alt klasör mü?</h3>
+        <p>Blog için <code>blog.ornek.com</code> mu, <code>ornek.com/blog/</code> mu? Mueller'in 2017–2018 açıklamalarına göre Google genelde ikisini aynı görür; yine de ilgili içeriğin aynı sitede, alt klasörde durması önerilir <sup class="kaynak"><a href="#k12">[12]</a></sup> <span class="tag tag--info">3. taraf</span>. SEO topluluğu ise taşımalarda alt klasörün kazandığını gösteren vakalar paylaşıyor; bunlar vaka anlatısıdır, resmî kural değildir.</p>
+        <p>Pratik farklar şunlardır:</p>
+        <ul>
+          <li>Her alt alan adı <strong>kendi robots.txt'sine</strong> bakar; <code>blog.ornek.com</code> ana alan adının dosyasından etkilenmez (<a href="09-tarama-ve-dizin.html#robots-txt">Bölüm 9</a>).</li>
+          <li>Site çeşitliliği sisteminde alt alan adları <strong>ana alan adıyla birlikte sayılır</strong>; ilk sonuçlarda bir siteden genelde en çok 2 sonuç çıkar <sup class="kaynak"><a href="#k7">[7]</a></sup>. Yani alt alan adı açarak sonuç sayfasında "ikinci bir site" gibi yer kaplanamaz.</li>
+          <li>Alt klasörde tek sunucu, tek sertifika, tek Search Console mülkü yeter.</li>
+        </ul>
+
+        <h3 id="suresi-dolmus-alan-adi">Süresi dolmuş alan adı satın almak</h3>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Eski, bağlantı almış bir alan adını satın alıp onun itibarıyla <strong>ilgisiz ve değersiz içerik</strong> sıralatmak Mart 2024'ten beri açık bir spam politikasıdır: "süresi dolmuş alan adı kötüye kullanımı" <sup class="kaynak"><a href="#k13">[13]</a></sup> <span class="tag tag--ok">Resmî</span>. Google'ın örneği: eski bir tıp sitesinin alan adında kumar içeriği yayınlamak. Eski bir adı yeni, özgün ve insanlara hizmet eden bir site için kullanmak ise serbesttir.</p>
+        </aside>
+
+        <!-- ============ 3. HOSTING ============ -->
+        <h2 id="hosting"><span class="h-num">§ 3</span>Hosting, sunucu ve hız</h2>
+        <p>Sunucunun doğrudan sıralama sinyali zayıftır. Ama sunucu üç dolaylı yoldan SEO'ya dokunur: <strong>hız</strong> (LCP'ye yansır), <strong>hata kodları</strong> (taramayı ve dizini etkiler) ve <strong>erişilebilirlik</strong> (Googlebot'u kazara engellemek).</p>
+
+        <h3 id="ttfb">TTFB: sunucunun ilk cevabı</h3>
+        <p><strong>TTFB</strong> (Time to First Byte: tarayıcının isteği gönderip sunucudan ilk baytı alana kadar geçen süre) kendisi bir Core Web Vitals metriği değildir, ama LCP'nin önünde gelir. web.dev'in "kaba rehber" eşikleri: iyi ≤ 0,8 sn, kötü &gt; 1,8 sn <sup class="kaynak"><a href="#k14">[14]</a></sup> <span class="tag tag--ok">Resmî</span>. Yönlendirme, DNS sorgusu, TLS el sıkışması ve service worker başlangıcı da TTFB'ye eklenir. LCP'nin önerilen bütçesinde TTFB yaklaşık %40 paya sahiptir; yani sunucu yavaşsa ön yüzü ne kadar iyileştirsen de LCP iyi olmaz.</p>
+
+        <h3 id="tarama-kapasitesi">Tarama kapasitesi ve hata kodları</h3>
+        <p>Google bir siteyi ne kadar tarayacağına iki şeye bakarak karar verir: sunucunun kaldırabildiği (tarama kapasitesi) ve Google'ın istediği (tarama talebi). Hızlı ve kararlı yanıt kapasiteyi artırır; yavaşlık, 5xx ve 429 düşürür. Ama talep düşükse (site az bilinir, az değişir) hız tek başına taramayı artırmaz <sup class="kaynak"><a href="#k15">[15]</a></sup>. Tarama bütçesi rehberi yalnız 1 milyon+ sayfalık ya da her gün değişen 10 bin+ sayfalık siteler içindir; küçük işletme sitesinin böyle bir derdi yoktur.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sunucu cevabı</th><th>Google ne yapar?</th></tr></thead>
+            <tbody>
+              <tr><td>200</td><td>Sayfayı işler; dizine almak garanti değildir.</td></tr>
+              <tr><td>5xx ve 429</td><td>Taramayı hata oranıyla orantılı yavaşlatır. Dizindeki URL'ler önce korunur; 502/503 <strong>sürekli</strong> dönerse URL'ler dizinden çıkar <sup class="kaynak"><a href="#k16">[16]</a></sup>.</td></tr>
+              <tr><td>4xx (429 hariç)</td><td>"İçerik yok" sayılır, URL zamanla düşer. Taramayı kısmak için 401/403 kullanılmaz.</td></tr>
+              <tr><td>robots.txt'ye 5xx</td><td>İlk 12 saat site taranmaz; sorun sürerse bütün site taramadan düşebilir (<a href="09-tarama-ve-dizin.html#robots-txt">Bölüm 9</a>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="bakim-503">Bakım sırasında 503</h3>
+        <p>Siteyi kısa bir süre bakıma alırken "Bakımdayız" sayfasını <strong>200</strong> ile döndürmek, o boş metnin dizine girmesine yol açabilir. Doğrusu <code>503 Service Unavailable</code> ve <code>Retry-After</code> başlığıdır <sup class="kaynak"><a href="#k16">[16]</a></sup>. Bakım uzarsa (günler) 503 de dizin kaybına döner; bakım kısa tutulmalı.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">bakım sayfası</span></div>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+&lt;h1&gt;Bakımdayız, birazdan döneceğiz&lt;/h1&gt;   <span class="k-yorum">&lt;!-- bu metin dizine girebilir --&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">bakım sayfası</span></div>
+<pre><code>HTTP/1.1 503 Service Unavailable
+Retry-After: 3600
+Content-Type: text/html; charset=utf-8</code></pre>
+        </div>
+
+        <h3 id="http-surumu">HTTP sürümü, sıkıştırma ve önbellek</h3>
+        <ul>
+          <li><strong>HTTP/2:</strong> Google tarayıcıları HTTP/1.1 (varsayılan) ve HTTP/2 kullanır. HTTP/2 Google için kaynak tasarrufudur, <strong>sıralama avantajı yoktur</strong>. Sunucu HTTP/2 isteğine <code>421</code> dönerek bu yolu kapatabilir <sup class="kaynak"><a href="#k17">[17]</a></sup>. Google tarayıcılarının HTTP/3 kullanıp kullanmadığı belgede geçmiyor <span class="tag tag--warn">Doğrulanamadı</span>; HTTP/3 kullanıcı tarafında yine hız kazandırır.</li>
+          <li><strong>Sıkıştırma:</strong> gzip, deflate ve Brotli desteklenir <sup class="kaynak"><a href="#k17">[17]</a></sup>.</li>
+          <li><strong>Koşullu istek:</strong> <code>ETag</code> (tercih edilen) ve <code>Last-Modified</code> desteklenir; ETag'de tarih biçimi hatası riski yoktur. Sayfa değişmediyse 304 dönmek sunucu yükünü ve tarama maliyetini düşürür <sup class="kaynak"><a href="#k17">[17]</a></sup><sup class="kaynak"><a href="#k15">[15]</a></sup>.</li>
+          <li><strong>Dosya boyutu:</strong> Googlebot belgesi Şubat 2026'dan beri HTML gibi desteklenen dosyaların ilk <strong>2 MB</strong>'ını (sıkıştırılmamış) okuduğunu yazıyor; PDF'de 64 MB, diğer Google tarayıcılarında varsayılan 15 MB. Google bunun davranış değişikliği değil açıklama olduğunu söylüyor <sup class="kaynak"><a href="#k18">[18]</a></sup><sup class="kaynak"><a href="#k19">[19]</a></sup>. Risk, base64 gömülü görsel/yazı tipi ya da dev satır içi JSON taşıyan sayfalardadır.</li>
+        </ul>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Şubat 2026:</strong> Googlebot belgesi HTML için okunan bölümü 15 MB yerine 2 MB olarak yazmaya başladı <sup class="kaynak"><a href="#k18">[18]</a></sup>. Eski rehberlerdeki "Googlebot 15 MB okur" bilgisi Arama tarayıcısı için artık geçerli değil. Ana içeriği HTML'in başına yakın tut.</p>
+        </aside>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">önerilen yanıt başlıkları</span></div>
+<pre><code><span class="k-yorum"># Dosya adında içerik özeti olan statik dosyalar (app.3f9a1b.js): uzun önbellek</span>
+Cache-Control: public, max-age=31536000, immutable
+Content-Encoding: br
+
+<span class="k-yorum"># HTML: taze kalsın, koşullu istek desteklensin</span>
+Cache-Control: no-cache
+ETag: "a1b2c3"
+
+<span class="k-yorum"># HTTPS zorunluluğu (bütün alt alan adları HTTPS'e hazırsa)</span>
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+<span class="k-yorum"># Aynı URL cihaza göre farklı HTML veriyorsa</span>
+Vary: User-Agent</code></pre>
+        </div>
+
+        <h3 id="cdn-konum-ip">CDN, sunucu konumu ve paylaşımlı IP</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>İddia</th><th>Gerçek</th></tr></thead>
+            <tbody>
+              <tr><td>"CDN kullanmak sıralamayı yükseltir"</td><td>Mueller: doğrudan SEO etkisi yok; dolaylı etkisi hız ve kullanıcı deneyimi <sup class="kaynak"><a href="#k20">[20]</a></sup>.</td></tr>
+              <tr><td>"Sunucu hedef ülkede olmalı"</td><td>Google: kesin olmayan bir sinyal; CDN bu sinyali zaten zayıflatır <sup class="kaynak"><a href="#k5">[5]</a></sup>.</td></tr>
+              <tr><td>"Paylaşımlı IP'de kötü komşu cezası var"</td><td>Mueller IP'yi bu şekilde dikkate alan bir algoritma bilmediğini söyledi <sup class="kaynak"><a href="#k21">[21]</a></sup>. Asıl risk dolaylı: yavaşlık, kesinti, aynı sunucudaki başka sitenin hacklenip sana bulaşması.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Ucuz paylaşımlı hosting'teki küçük bir işletme sitesi: TTFB 2 saniyenin üstünde, gece saatlerinde ara ara 500 hatası. Belirti olarak sıralama "yavaş yavaş" düşer, Search Console'daki Tarama İstatistikleri raporunda ortalama yanıt süresi yüksek ve sunucu hataları görünür. Burada host değişikliği önerisi somut bir gerekçeye dayanır. "Daha iyi host daha iyi sıralanır" gibi genel bir gerekçeye değil.</p>
+        </aside>
+
+        <!-- ============ 4. WAF / BOT KORUMASI ============ -->
+        <h2 id="waf-bot-korumasi"><span class="h-num">§ 4</span>Güvenlik duvarı ve bot koruması tuzakları</h2>
+        <p>Bugün siteyi aramadan düşürmenin en sinsi yolu kod değil, bir ayar düğmesidir. WAF (Web Application Firewall: kötü istekleri süzen güvenlik duvarı) ya da CDN'in bot koruması Googlebot'a 403 dönmeye başlarsa site tarayıcında sorunsuz açılır, eski sayfalar bir süre dizinde kalır ve sorun haftalarca fark edilmez.</p>
+
+        <h3 id="cloudflare">Cloudflare'in yapay zekâ engelleme ayarları</h3>
+        <ul>
+          <li><strong>1 Temmuz 2025:</strong> Cloudflare yeni alan adlarında yapay zekâ botlarını varsayılan olarak engellemeye başladı. Ayrıca "Managed robots.txt" özelliği yayındaki robots.txt'nin başına kendi kurallarını ekleyebiliyor <sup class="kaynak"><a href="#k24">[24]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+          <li><strong>4 Ağustos 2026:</strong> "Block AI Training" ve Bot Fight Mode ayarlarının Googlebot ve Bingbot'a 403 döndürdüğü bildirildi <sup class="kaynak"><a href="#k22">[22]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+          <li><strong>15 Eylül 2026'dan beri</strong> Training denetiminin dört ayarı var <sup class="kaynak"><a href="#k23">[23]</a></sup> <span class="tag tag--info">3. taraf</span>:</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ayar</th><th>Googlebot (arama) ne olur?</th></tr></thead>
+            <tbody>
+              <tr><td>Allow</td><td>Engel yok.</td></tr>
+              <tr><td>Disallow AI Training</td><td>Arama için serbest; yapay zekâ eğitimine karşıysan doğru seçim budur.</td></tr>
+              <tr><td>Block on pages with ads</td><td>Reklamlı sayfalarda Googlebot dahil engellenir.</td></tr>
+              <tr><td>Block</td><td>Bütün alan adında Googlebot'u da engeller; site aramadan düşer.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Eski "Block" ayarları Disallow'a taşındı <sup class="kaynak"><a href="#k23">[23]</a></sup>. Ücretsiz plandaki Bot Fight Mode'un doğrulanmış tarayıcıları muaf tutmayabildiği yalnız topluluk raporlarına dayanıyor <span class="tag tag--warn">Doğrulanamadı</span>. Google da yapay zekâ özellikleri belgesinde robots.txt ile birlikte CDN ve hosting katmanının taramaya izin verip vermediğine bakılmasını istiyor <sup class="kaynak"><a href="#k34">[34]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>"Yapay zekâ botlarını engelleyeyim" diye açılan bir düğme Googlebot'u da kesebilir. Böyle bir ayarı değiştirdikten sonra mutlaka: (1) Search Console'da URL Denetimi → <em>Canlı URL'yi test et</em> ile sayfanın alınabildiğini doğrula, (2) yayındaki <code>https://alanadi/robots.txt</code> dosyasını elle aç, CDN'in eklediği satırlara bak, (3) birkaç gün Tarama İstatistikleri'nde 403 artışı var mı izle.</p>
+        </aside>
+
+        <h3 id="abd-ip-engeli">Ülke engeli ve Googlebot'un konumu</h3>
+        <p>Google'ın tarayıcıları çoğunlukla <strong>ABD IP'lerinden</strong> gelir. "Saldırılar yurt dışından geliyor" diye yalnız Türkiye'ye açık bir güvenlik duvarı kuran site Googlebot'u da engeller. Google, site ABD'yi engellerse başka ülkelerden taramayı deneyebileceğini söylüyor, ama buna güvenilmemeli <sup class="kaynak"><a href="#k18">[18]</a></sup><sup class="kaynak"><a href="#k17">[17]</a></sup>.</p>
+
+        <h3 id="googlebot-dogrulama">Googlebot'u doğrulamak</h3>
+        <p>User-Agent başlığında "Googlebot" yazması hiçbir şey kanıtlamaz; herkes taklit edebilir. Bir botu engellemeden ya da beyaz listeye almadan önce gerçek Googlebot olup olmadığını iki yoldan biriyle doğrula <sup class="kaynak"><a href="#k18">[18]</a></sup>:</p>
+        <ol class="steps">
+          <li><strong>Ters DNS sorgusu:</strong> IP'nin ters kaydı <code>googlebot.com</code>, <code>google.com</code> ya da <code>googleusercontent.com</code> ile bitmeli.</li>
+          <li><strong>İleri DNS sorgusu:</strong> Bulunan ad tekrar sorgulanınca aynı IP'ye dönmeli.</li>
+          <li><strong>Ya da IP listesi:</strong> IP'yi Google'ın yayımladığı tarayıcı IP aralıklarıyla karşılaştır.</li>
+        </ol>
+        <div class="kod">
+          <div class="kod-ust"><span>Kabuk</span><span class="dosya">Googlebot doğrulama</span></div>
+<pre><code><span class="k-yorum"># 1. ters sorgu</span>
+host 66.249.66.1
+<span class="k-yorum"># → crawl-66-249-66-1.googlebot.com</span>
+<span class="k-yorum"># 2. ileri sorgu, aynı IP'ye dönmeli</span>
+host crawl-66-249-66-1.googlebot.com
+<span class="k-yorum"># → 66.249.66.1</span></code></pre>
+        </div>
+
+        <!-- ============ 5. HTTPS ============ -->
+        <h2 id="https"><span class="h-num">§ 5</span>HTTPS ve tek kanonik adres</h2>
+        <p>HTTPS <strong>7 Ağustos 2014</strong>'ten beri hafif bir sıralama sinyalidir; duyurulduğu gün sorguların %1'inden azını etkiliyordu <sup class="kaynak"><a href="#k25">[25]</a></sup> <span class="tag tag--ok">Resmî</span>. Sonradan güçlendirildiğine dair bir açıklama yok. Asıl önemi başka yerdedir: Google aynı içeriğin HTTP ve HTTPS sürümleri arasında kanonik seçerken <strong>HTTPS'i tercih eder</strong> <sup class="kaynak"><a href="#k27">[27]</a></sup>, tarayıcılar da HTTP sitelere "güvenli değil" uyarısı gösterir. Search Console'da Eylül 2022'den beri bir HTTPS raporu var <sup class="kaynak"><a href="#k26">[26]</a></sup>.</p>
+
+        <h3 id="tek-host">Tek ana makine, tek adım</h3>
+        <p>Google için şu dört adres <strong>dört ayrı URL</strong>'dir: <code>http://ornek.com</code>, <code>http://www.ornek.com</code>, <code>https://ornek.com</code>, <code>https://www.ornek.com</code>. Biri seçilir, diğer üçü ona <strong>tek adımda</strong> 301 ile gider. Kanonik etiketi, site haritası ve iç bağlantılar da aynı sürümü gösterir <sup class="kaynak"><a href="#k27">[27]</a></sup>.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>Yönlendirme zinciri</span></div>
+<pre><code>http://ornek.com/hizmet
+  → 301 https://ornek.com/hizmet
+  → 301 https://www.ornek.com/hizmet
+  → 301 https://www.ornek.com/hizmet/      <span class="k-yorum"># 3 adım: yavaş, sinyal dağılır</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>Yönlendirme</span></div>
+<pre><code>http://ornek.com/hizmet
+  → 301 https://www.ornek.com/hizmet/      <span class="k-yorum"># tek adım, son hedef</span></code></pre>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>C#</span><span class="dosya">Program.cs · ASP.NET Core</span></div>
+<pre><code><span class="k-yorum">// Tek adımda: http veya www'siz gelen her isteği https://www.… adresine 301 ile gönder.
+// (UseHttpsRedirection + ayrı www kuralı iki adım üretebilir; burada ikisi birleşik.)</span>
+<span class="k-anahtar">const</span> <span class="k-anahtar">string</span> AnaHost = <span class="k-deger">"www.ornek.com"</span>;
+
+app.Use(<span class="k-anahtar">async</span> (ctx, next) =&gt;
+{
+        <span class="k-anahtar">var</span> istek = ctx.Request;
+        <span class="k-anahtar">if</span> (!istek.IsHttps || !<span class="k-anahtar">string</span>.Equals(istek.Host.Host, AnaHost, StringComparison.OrdinalIgnoreCase))
+        {
+            <span class="k-anahtar">var</span> hedef = <span class="k-deger">$"https://{AnaHost}{istek.PathBase}{istek.Path}{istek.QueryString}"</span>;
+            ctx.Response.Redirect(hedef, permanent: <span class="k-anahtar">true</span>);   <span class="k-yorum">// 301</span>
+            <span class="k-anahtar">return</span>;
+        }
+        <span class="k-anahtar">await</span> next();
+});</code></pre>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>Apache</span><span class="dosya">.htaccess</span></div>
+<pre><code>RewriteEngine On
+<span class="k-yorum"># http ya da www'siz → https://www tek adımda</span>
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.ornek.com%{REQUEST_URI} [L,R=301]</code></pre>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>nginx</span><span class="dosya">site.conf</span></div>
+<pre><code>server {
+  listen 80; server_name ornek.com www.ornek.com;
+  return 301 https://www.ornek.com$request_uri;
+}
+server {
+  listen 443 ssl; server_name ornek.com;
+  return 301 https://www.ornek.com$request_uri;
+}</code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p><strong>Karışık içerik</strong> (mixed content): HTTPS sayfa içinde <code>http://</code> ile yüklenen script veya CSS tarayıcıda engellenir; sayfa Google'ın render'ında da bozuk görünebilir. HTTPS'e geçişte bütün kaynak adreslerini https yap ve Search Console'daki HTTPS raporunu izle <sup class="kaynak"><a href="#k26">[26]</a></sup>. <code>Strict-Transport-Security</code> başlığına <code>includeSubDomains</code> eklemeden önce bütün alt alan adlarının HTTPS'e hazır olduğundan emin ol; yoksa tarayıcılar o alt alan adlarına bir yıl boyunca HTTP ile giremez.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>HTTP→HTTPS geçişi ya da www ekleme/çıkarma için Search Console'daki <strong>Site Adresi Değişikliği aracı kullanılmaz</strong>; o araç yalnız alan adı değişikliği içindir. Burada sunucu tarafındaki 301 yeterlidir. Ayrıntı: <a href="17-musteri-isi.html#site-tasima">Bölüm 17</a>.</p>
+        </aside>
+
+        <!-- ============ 6. GÜVENLİK / HACK ============ -->
+        <h2 id="hack"><span class="h-num">§ 6</span>Güvenlik: hack'lenmiş siteler</h2>
+        <p>Hack'lenen site yalnız veri kaybetmez, aramada da çöker. En yaygın SEO hack'i <strong>Japon anahtar kelime hack'idir</strong>: saldırgan rastgele klasörlerde, sahte ürün satan sitelere bağlantı veren binlerce Japonca sayfa üretir <sup class="kaynak"><a href="#k28">[28]</a></sup> <span class="tag tag--ok">Resmî</span>. Bu sayfalar site sahibine sahte bir 404 gösterip Googlebot'a spam sunabilir (cloaking: bota ve insana farklı içerik göstermek). Bu yüzden sahibi tarayıcıda baktığında hiçbir şey göremez.</p>
+
+        <h3 id="hack-belirtileri">Belirtiler</h3>
+        <ul class="checklist">
+          <li>Aramada sitenin adıyla Japonca ya da anlamsız başlıklar çıkıyor.</li>
+          <li>Search Console'da tanımadığın bir <strong>sahip</strong> eklenmiş (Ayarlar → Kullanıcılar ve izinler).</li>
+          <li>Site Haritaları raporunda senin göndermediğin site haritaları var.</li>
+          <li>Güvenlik Sorunları raporunda uyarı var.</li>
+          <li>Sayfa dizine ekleme raporunda tanımadığın klasörlerde binlerce URL birden belirdi.</li>
+          <li><code>.htaccess</code> dosyasında, kullanıcıyı bot olup olmamasına göre farklı yere yönlendiren kurallar var.</li>
+        </ul>
+
+        <h3 id="hack-temizlik">Temizlik sırası</h3>
+        <ol class="steps">
+          <li><strong>Yedek al</strong> (kanıt olarak, hack'li haliyle).</li>
+          <li><strong>Yabancı sahipleri</strong> ve onların doğrulama dosyalarını/etiketlerini kaldır; sadece kullanıcıyı silmek yetmez, doğrulama jetonu durursa geri gelir.</li>
+          <li><strong><code>.htaccess</code></strong> dosyasını temiz bir kopyayla değiştir.</li>
+          <li><strong>CMS'i, temaları ve eklentileri</strong> güvenilir kaynaktan yeniden kur; son değişen dosyaları denetle.</li>
+          <li><strong>Sahte site haritalarını</strong> sil; sahte sayfalar 404/410 dönsün.</li>
+          <li><strong>Bütün parolaları</strong> değiştir, iki adımlı doğrulamayı aç.</li>
+          <li>URL Denetimi ile örnek spam URL'lerine bak: Google'ın gördüğü sayfa artık temiz mi? <sup class="kaynak"><a href="#k28">[28]</a></sup></li>
+        </ol>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Google Safe Browsing (Güvenli Tarama) bir siteyi zararlı olarak işaretlerse tarayıcılar ziyaretçiye tam ekran kırmızı uyarı gösterir; tıklama neredeyse sıfırlanır <sup class="kaynak"><a href="#k29">[29]</a></sup>. Hack belirtisi görünce bekleme. Temizlikten sonra Güvenlik Sorunları raporundan inceleme iste.</p>
+        </aside>
+
+        <!-- ============ 7. ÇOK DİLLİ ============ -->
+        <h2 id="cok-dilli"><span class="h-num">§ 7</span>Çok dilli ve çok bölgeli siteler</h2>
+        <p>Site birden çok dilde yayın yapacaksa temel kural tektir: <strong>her dilin kendi URL'si olur</strong>. Dili çerezle, tarayıcı ayarıyla ya da IP'ye göre belirleyip aynı URL'de farklı dil göstermek Googlebot'un diğer dilleri hiç görmemesine yol açar. Çünkü Googlebot çoğunlukla ABD'den ve <code>Accept-Language</code> başlığı göndermeden tarar <sup class="kaynak"><a href="#k5">[5]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <h3 id="dil-yapisi">Yapı seçenekleri</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yapı</th><th>Örnek</th><th>Artısı</th><th>Eksisi</th></tr></thead>
+            <tbody>
+              <tr><td>Ülke uzantısı (ccTLD)</td><td><code>ornek.com.tr</code>, <code>ornek.de</code></td><td>En net ülke sinyali</td><td>Pahalı, her ülke ayrı alan adı ve ayrı itibar</td></tr>
+              <tr><td>Alt alan adı</td><td><code>tr.ornek.com</code></td><td>Kurulumu kolay, ayrı sunucu olabilir</td><td>Ayrı robots.txt, ayrı Search Console mülkü</td></tr>
+              <tr><td>Alt klasör</td><td><code>ornek.com/tr/</code></td><td>Tek alan adı, tek itibar, en az bakım</td><td>Tek sunucu konumu</td></tr>
+              <tr><td>URL parametresi</td><td><code>ornek.com/?lang=tr</code></td><td>—</td><td><strong>Önerilmez</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="dil-kurallari">Kurallar</h3>
+        <ul>
+          <li><strong>IP'ye göre otomatik yönlendirme yapma.</strong> Kullanıcıya görünür bir dil değiştirici sun <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong>hreflang</strong> (her dil sürümünün diğerlerini gösterdiği etiket) ile sürümleri birbirine bağla. Her sürüm kendini ve diğerlerini listeler, bağlantı karşılıklıdır, URL'ler mutlaktır; eşleşmeyenler için <code>x-default</code> verilir <sup class="kaynak"><a href="#k32">[32]</a></sup>. Ayrıntı <a href="09-tarama-ve-dizin.html">Bölüm 9</a>'da.</li>
+          <li>Kanonik etiketi <strong>aynı dildeki</strong> sayfayı göstermeli; Türkçe sayfanın kanoniğini İngilizceye vermek o sayfayı dizinden siler.</li>
+          <li>Google dili metinden kendisi algılar; <code>lang</code> özniteliğine ya da hreflang'a bakarak dil belirlemez <sup class="kaynak"><a href="#k32">[32]</a></sup>. <code>lang</code> yine de erişilebilirlik ve ekran okuyucu için doğru yazılır.</li>
+        </ul>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">her dil sürümünün &lt;head&gt;'inde aynı küme</span></div>
+<pre><code><span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"alternate"</span> <span class="k-ozn">hreflang</span>=<span class="k-deger">"tr"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/tr/"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"alternate"</span> <span class="k-ozn">hreflang</span>=<span class="k-deger">"en"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/en/"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"alternate"</span> <span class="k-ozn">hreflang</span>=<span class="k-deger">"x-default"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/"</span><span class="k-etiket">&gt;</span>
+<span class="k-yorum">&lt;!-- Türkçe sayfada kanonik Türkçe sayfanın kendisi --&gt;</span>
+<span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/tr/"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+
+        <!-- ============ 8. ERİŞİLEBİLİRLİK ============ -->
+        <h2 id="erisilebilirlik"><span class="h-num">§ 8</span>Erişilebilirlik ve SEO</h2>
+        <p>Mueller'e göre erişilebilirlik <strong>doğrudan</strong> bir sıralama faktörü değildir; Google'ın erişilebilirliği nesnel ölçecek bir yolu yoktur. Lighthouse erişilebilirlik puanı da sıralamada kullanılmaz <sup class="kaynak"><a href="#k33">[33]</a></sup> <span class="tag tag--info">3. taraf</span>. Ama iki alan büyük ölçüde örtüşür; erişilebilir bir site neredeyse kendiliğinden SEO dostudur:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Erişilebilirlik uygulaması</th><th>SEO karşılığı</th></tr></thead>
+            <tbody>
+              <tr><td>Görsellere anlamlı <code>alt</code> metni</td><td>Google görseli bununla anlar; "en önemli görsel üst verisi" (<a href="06-gorsel-ve-video.html">Bölüm 6</a>)</td></tr>
+              <tr><td>Gerçek <code>&lt;a href&gt;</code> bağlantılar, <code>&lt;button&gt;</code> düğmeler</td><td>Googlebot yalnız <code>&lt;a href&gt;</code> bağlantıları güvenilir izler</td></tr>
+              <tr><td>Anlamlı başlık sırası (h1, h2, h3)</td><td>Konuyu ve bölümleri anlamayı kolaylaştırır</td></tr>
+              <tr><td>Metni görselin içine değil, metin olarak koymak</td><td>Metin dizine girer, görseldeki yazı güvenilir girmez</td></tr>
+              <tr><td>Doğru <code>lang</code> özniteliği</td><td>Ekran okuyucu ve tarayıcı çevirisi için; dil sinyali değil</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Lighthouse erişilebilirlik puanını 100 yaparsam sıralamam yükselir."</p>
+          <p class="mit-gercek">Puan sıralamada kullanılmaz <sup class="kaynak"><a href="#k33">[33]</a></sup>. Fayda, örtüşen uygulamalardan (alt metin, gerçek bağlantılar) ve memnun kullanıcıdan gelir.</p>
+        </aside>
+
+        <!-- ============ 9. KARAR TABLOSU ============ -->
+        <h2 id="karar-ozeti"><span class="h-num">§ 9</span>Altyapı kararları: kısa özet</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Karar</th><th>SEO'ya etkisi</th><th>Öneri</th></tr></thead>
+            <tbody>
+              <tr><td>Programlama dili / CMS</td><td>Yok</td><td>Ekibin en iyi bildiği; içerik ilk HTML'de olsun</td></tr>
+              <tr><td>Uzantı</td><td>Yalnız ülke hedeflemede</td><td>Tek ülke: <code>.com.tr</code>; uluslararası: <code>.com</code> + alt klasör + hreflang</td></tr>
+              <tr><td>Alan adı adı</td><td>Anahtar kelime yardımcı olmaz</td><td>Kısa, tiresiz marka adı</td></tr>
+              <tr><td>Alan adı yaşı</td><td>Yok</td><td>Süresi dolmuş ad alıp ilgisiz içerik koyma</td></tr>
+              <tr><td>Hosting</td><td>Dolaylı (TTFB, 5xx)</td><td>TTFB ≤ 0,8 sn; kesintisiz; bakımda 503</td></tr>
+              <tr><td>CDN</td><td>Dolaylı (hız)</td><td>Kullan; bot ayarlarını doğrula</td></tr>
+              <tr><td>HTTP/2, HTTP/3</td><td>Sıralama avantajı yok</td><td>Kullanıcı hızı için aç</td></tr>
+              <tr><td>HTTPS</td><td>Hafif sinyal + kanonik tercihi</td><td>Zorunlu; tek ana makine, tek adım 301</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 10</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Google sunucuyu değil, sunucunun cevabını görür: dil, CMS ve dosya uzantısı sıralamayı etkilemez; ilk HTML'deki içerik, durum kodu ve hız etkiler.</li>
+            <li>Alan adı yaşı ve anahtar kelimeli alan adı işe yaramaz; EMD sistemi bu tür adların kredisini kısar. Kısa, tiresiz bir marka adı seç.</li>
+            <li>Ülke sinyali uzantıdan (ccTLD), hreflang'dan ve yerel içerikten gelir; Search Console'daki ülke ayarı 22 Eylül 2022'de kalktı.</li>
+            <li>Hosting'in etkisi dolaylıdır ama gerçektir: yavaş TTFB LCP'yi bozar, süren 5xx URL'leri dizinden düşürür. Bakımda 503 + <code>Retry-After</code>.</li>
+            <li>Bot koruması ve CDN ayarları (Cloudflare "Block", ABD IP engeli) Googlebot'u sessizce keser; her ayar değişikliğinden sonra URL Denetimi canlı testiyle doğrula.</li>
+            <li>HTTPS hafif sinyaldir; asıl iş bütün varyantları tek kanonik adrese tek adımda 301 ile toplamaktır.</li>
+            <li>Hack'in ilk işaretleri Search Console'dadır: yabancı sahip, bilinmeyen site haritası, Japonca başlıklar.</li>
+            <li>Çok dilli sitede her dile ayrı URL; IP'ye ya da çereze göre dil değiştirme yok.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 11</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span>Search Engine Journal — Google's John Mueller: WordPress not inherently better for SEO (Ara 2022) — <a href="https://www.searchenginejournal.com/googles-john-mueller-wordpress-not-inherently-better-for-seo/474737/">searchenginejournal.com/…/474737</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span>Google Search Central — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span>web.dev — Rendering on the Web — <a href="https://web.dev/articles/rendering-on-the-web">web.dev/articles/rendering-on-the-web</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span>Vercel — The rise of the AI crawler (Ara 2024; ikincil özetler üzerinden) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/blog/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span>Google Search Central — Managing multi-regional and multilingual sites — <a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">developers.google.com/…/managing-multi-regional-sites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span>Search Console Yardım — The International Targeting report is deprecated — <a href="https://support.google.com/webmasters/answer/12474899">support.google.com/webmasters/answer/12474899</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span>Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span>Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span>Practical Ecommerce — Domain age impacts rankings and other SEO myths — <a href="https://www.practicalecommerce.com/domain-age-impacts-rankings-and-8-other-seo-myths">practicalecommerce.com/…/domain-age…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span>Search Engine Journal — Google algorithm history: EMD update — <a href="https://www.searchenginejournal.com/google-algorithm-history/emd-update/">searchenginejournal.com/…/emd-update</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span>Search Engine Journal — Domain name as a ranking factor — <a href="https://www.searchenginejournal.com/ranking-factors/domain-name/">searchenginejournal.com/ranking-factors/domain-name</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span>Search Engine Journal — Google treats subdomains and subdirectories the same — <a href="https://www.searchenginejournal.com/google-treats-subdomains-subdirectories-john-mueller-says/254687/">searchenginejournal.com/…/254687</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span>Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span>web.dev — Time to First Byte (TTFB) — <a href="https://web.dev/articles/ttfb">web.dev/articles/ttfb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span>Google Search Central — Crawl budget management for large sites — <a href="https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget">developers.google.com/…/large-site-managing-crawl-budget</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span>Google Search Central — How HTTP status codes and network errors affect Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">developers.google.com/…/http-network-errors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span>Google — Overview of Google crawlers and fetchers — <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers">developers.google.com/crawling/…/overview-google-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span>Google Search Central — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span>DebugBear — Googlebot crawler file size limit — <a href="https://www.debugbear.com/blog/googlebot-crawler-file-size-limit">debugbear.com/blog/googlebot-crawler-file-size-limit</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span>Search Engine Journal — Does using a CDN improve ranking? — <a href="https://www.searchenginejournal.com/does-using-a-cdn-improve-ranking/453995/">searchenginejournal.com/…/453995</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span>Search Engine Journal — IP address as a ranking factor — <a href="https://www.searchenginejournal.com/ranking-factors/ip-address/">searchenginejournal.com/ranking-factors/ip-address</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span>Search Engine Journal — Report that Cloudflare AI bot blocking prevents Googlebot from indexing sites (4 Ağu 2026) — <a href="https://www.searchenginejournal.com/report-that-cloudflare-ai-bot-blocking-prevents-googlebot-from-indexing-sites">searchenginejournal.com/report-that-cloudflare…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span>PPC Land — Cloudflare drops planned Googlebot block for sites refusing AI training (27 Eyl 2026) — <a href="https://ppc.land/cloudflare-drops-planned-googlebot-block-for-sites-refusing-ai-training/">ppc.land/cloudflare-drops…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span>MIT Technology Review — Cloudflare will now by default block AI bots (1 Tem 2025) — <a href="https://www.technologyreview.com/2025/07/01/1119498/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites/">technologyreview.com/2025/07/01/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span>Google Search Central Blog — HTTPS as a ranking signal (Ağu 2014) — <a href="https://developers.google.com/search/blog/2014/08/https-as-ranking-signal">developers.google.com/search/blog/2014/08/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span>Google Search Central Blog — The new HTTPS report in Search Console (Eyl 2022) — <a href="https://developers.google.com/search/blog/2022/09/https-search-console-report">developers.google.com/search/blog/2022/09/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span>Google Search Central — What is URL canonicalization — <a href="https://developers.google.com/search/docs/crawling-indexing/canonicalization">developers.google.com/…/canonicalization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span>web.dev — Fix the Japanese keyword hack — <a href="https://web.dev/articles/fix-the-japanese-keyword-hack">web.dev/articles/fix-the-japanese-keyword-hack</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span>Google Search Central — Preventing and monitoring abuse on your site — <a href="https://developers.google.com/search/docs/monitor-debug/security">developers.google.com/…/monitor-debug/security</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span>Ahrefs — SEO basics — <a href="https://ahrefs.com/blog/seo-basics/">ahrefs.com/blog/seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span>Haber derlemesi — .tr alan adında yeni dönem (TRABİS, 14 Eyl 2022; belgesiz tahsis) — <a href="https://www.ntv.com.tr/teknoloji/tr-alan-adinda-yeni-donem,JPtag88EKU2zN6hGWi73yw">ntv.com.tr/…/tr-alan-adinda-yeni-donem</a>; güncel kurallar: <a href="https://www.trabis.gov.tr/announcements">trabis.gov.tr/announcements</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span>Google Search Central — Localized versions of your pages (hreflang) — <a href="https://developers.google.com/search/docs/specialty/international/localized-versions">developers.google.com/…/localized-versions</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span>Search Engine Journal — Google: accessibility not a direct ranking factor — <a href="https://www.searchenginejournal.com/google-accessibility-not-a-direct-ranking-factor/443784/">searchenginejournal.com/…/443784</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span>Google Search Central — AI features and your website — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="10-performans-mobil-js.html"><span class="dir">&larr; Önceki</span><span class="ttl">Hız, mobil ve JavaScript</span></a>
+        <a class="next" href="12-yerel-seo.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Yerel SEO</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

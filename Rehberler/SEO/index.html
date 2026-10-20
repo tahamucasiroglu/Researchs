@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genel Bakış — SEO Rehberi</title>
+<meta name="description" content="Sıfırdan, güncel ve kaynaklı SEO rehberi: Google'ın çalışma biçimi, resmî kurallar, sayfa içi ve teknik SEO, yerel SEO, yapay zekâ araması, sorun giderme ve müşteri işi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Genel Bakış</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">SEO Rehberi · Genel Bakış</div>
+        <h1 class="page-title">Google'da üste çıkmanın <em>gerçek kuralları</em></h1>
+        <p class="lede">SEO'yu (Search Engine Optimization, arama motoru optimizasyonu: bir sitenin arama sonuçlarında ücretsiz, yani organik olarak görünmesini sağlama işi) hiç bilmeyen birinin baştan sona okuyup bir siteyi kendi başına denetleyebileceği, bir işletmeye dürüst öneri sunabileceği ve yeni bir siteyi doğru kurabileceği bir rehber. Ana hedef Google; Yandex, Bing ve yapay zekâ aramaları da var. Her kural kaynağıyla, eskimiş bilgiler tarihiyle işaretli.</p>
+        <div class="head-meta">21 bölüm &middot; ≈ 6,5 saat okuma &middot; bilgiler 21 Ekim 2026 itibarıyla</div>
+      </header>
+
+      <div class="content">
+
+        <h2 id="otuz-saniyede"><span class="h-num">§ 1</span>Otuz saniyede SEO</h2>
+
+        <ul>
+          <li><strong>Sıralama satın alınamaz.</strong> Google Ads'e para vermek organik sıralamayı yükseltmez; Google bunu iki ayrı resmî sayfada yazıyor (<a href="01-seo-nedir.html#organik-ve-reklam">Bölüm 1</a>).</li>
+          <li><strong>Kimse 1. sırayı garanti edemez.</strong> "Garanti" veren kişi, Google'ın SEO firması seçerken verdiği uyarı listesinin ilk maddesindedir (<a href="01-seo-nedir.html#garanti-yok">Bölüm 1</a>).</li>
+          <li><strong>Kurallar yazılıdır.</strong> Google Search Essentials = teknik gereksinimler + spam politikaları + temel en iyi uygulamalar (<a href="03-kurallar-ve-siralama.html">Bölüm 3</a>).</li>
+          <li><strong>robots.txt taramayı, noindex dizini yönetir.</strong> İkisini karıştırmak en sık yapılan teknik hatadır (<a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</li>
+          <li><strong>Yapay zekâ araması için özel dosya gerekmez.</strong> Google'ın belgesine göre llms.txt, özel "YZ şeması" ya da ayrı "GEO" yazımı gerekmiyor; normal SEO yeterli (<a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>).</li>
+          <li><strong>Türkiye'de Yandex de büyük.</strong> Eylül 2026'da Google %73,4, Yandex %25,2 pay aldı (StatCounter); Yandex Webmaster ve Haritalar atlanmaz (<a href="01-seo-nedir.html#turkiye-pazari">Bölüm 1</a>).</li>
+          <li><strong>Gerçekçi süre:</strong> marka adı haftalar, uzun kuyruk aylar, rekabetli genel terim 6–12 ay ve üstü, garantisiz (<a href="18-yeni-site-yol-haritasi.html">Bölüm 18</a>).</li>
+        </ul>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Baştan söyleyelim</p>
+          <p>Bu rehber "hile" öğretmez. Google'ın açıkça yazdığı kurallara uyan, kalıcı yöntemleri öğretir. Toplu yapay zekâ sayfası, bağlantı paketi, şehir şablon sayfası, işletme adına anahtar kelime ve sahte yorum gibi kısayolların hepsi ya işe yaramaz ya ceza getirir. Hileler yalnız <a href="21-kara-sapka.html">Bölüm 21</a>'de, tanımak ve korunmak için anlatılır.</p>
+        </div>
+
+        <h2 id="nasil-okunur"><span class="h-num">§ 2</span>Bu rehber nasıl okunur</h2>
+
+        <p class="intro">Bölümler birbirinin üstüne kurulu. İlk üç bölüm (≈ 40 dk) geri kalan her şeyin zeminidir; atlama. Sonra ihtiyacına göre sıçrayabilirsin; her sayfanın sonunda önceki/sonraki bağlantısı, sol menüde o sayfanın başlıkları var.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Kutular ve rozetler</caption>
+            <thead><tr><th>İşaret</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td>Yeşil kutu · <strong>Püf noktası</strong></td><td>Eğitimlerin çoğunda gözden kaçan, işe yarayan ayrıntı.</td></tr>
+              <tr><td>Kırmızı kutu · <strong>Dikkat</strong></td><td>Siteyi düşürebilecek, ceza getirebilecek ya da sık yapılan hata.</td></tr>
+              <tr><td>Sarı kutu · <strong>Mit</strong></td><td>Yaygın ama yanlış bilgi: üstü çizili iddia, altında gerçeği.</td></tr>
+              <tr><td>Mavi kutu · <strong>Değişti</strong></td><td>Eskimiş kural; ne zaman değiştiği tarihiyle.</td></tr>
+              <tr><td>Kesik çizgili kutu · <strong>Örnek</strong></td><td>Somut, genel bir senaryo.</td></tr>
+              <tr><td><span class="tag tag--ok">Resmî</span></td><td>Google, Bing, Yandex, schema.org ya da web.dev belgesi.</td></tr>
+              <tr><td><span class="tag tag--info">3. taraf</span></td><td>Tanınmış eğitim, ölçüm ya da haber kaynağı (Ahrefs, Moz, Search Engine Land vb.).</td></tr>
+              <tr><td><span class="tag tag--warn">Doğrulanamadı</span></td><td>Birincil kaynakta bulunamadı ya da kaynaklar çelişiyor; toplu liste <a href="20-sozluk-ve-kaynakca.html">Bölüm 20</a>'de.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Köşeli numaralar (<sup>[1]</sup>) aynı sayfanın sonundaki kaynağa gider. Örnekler iki genel senaryo üzerinden anlatılır: <strong>koddan anlamayan küçük bir yerel işletme</strong> (ör. telefonda aramada üstte çıkmak isteyen bir nakliye firması) ve <strong>bir yazılım ürünü</strong> (ör. online randevu programı satan bir site). Örneklerdeki işletme ve marka adları uydurma; alan adları, adresler ve numaralar yer tutucudur. Kod örnekleri HTML, robots.txt, JSON-LD ve sunucu yapılandırmasıdır.</p>
+
+        <h2 id="bolumler"><span class="h-num">§ 3</span>Bölümler</h2>
+
+        <h3 id="kisim-i">I · Temeller</h3>
+        <div class="cards">
+          <a class="card" href="01-seo-nedir.html">
+            <span class="card__num">01</span>
+            <h3 class="card__title">SEO nedir, ne beklenmeli</h3>
+            <p class="card__desc">Organik arama ile reklamın farkı, SEO'nun ayakları, gerçekçi süre, neden kimse 1. sırayı garanti edemez.</p>
+            <span class="card__foot"><span class="tag">10 dk</span><span class="tag tag--ok">ÖNCE OKU</span></span>
+          </a>
+          <a class="card" href="02-google-nasil-calisir.html">
+            <span class="card__num">02</span>
+            <h3 class="card__title">Google nasıl çalışır</h3>
+            <p class="card__desc">Tarama, işleme (render), dizine ekleme ve sunma; mobil öncelikli dizin, kanonik seçimi, robots.txt ile noindex farkı.</p>
+            <span class="card__foot"><span class="tag">12 dk</span><span class="tag tag--ok">ÖNCE OKU</span></span>
+          </a>
+          <a class="card" href="03-kurallar-ve-siralama.html">
+            <span class="card__num">03</span>
+            <h3 class="card__title">Resmî kurallar ve sıralama sistemleri</h3>
+            <p class="card__desc">Search Essentials, spam politikaları, adı konmuş sıralama sistemleri, çekirdek güncellemeler ve E-E-A-T'nin gerçek yeri.</p>
+            <span class="card__foot"><span class="tag">20 dk</span><span class="tag tag--ok">ÖNCE OKU</span></span>
+          </a>
+        </div>
+
+        <h3 id="kisim-ii">II · Sayfa ve içerik</h3>
+        <div class="cards">
+          <a class="card" href="04-anahtar-kelime-ve-niyet.html">
+            <span class="card__num">04</span>
+            <h3 class="card__title">Anahtar kelime ve arama niyeti</h3>
+            <p class="card__desc">Kelime bulmak, arama niyetini okumak, hacim yanılgısı, her niyete bir sayfa ve kannibalizasyon.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="05-sayfa-ici.html">
+            <span class="card__num">05</span>
+            <h3 class="card__title">Sayfa içi SEO</h3>
+            <p class="card__desc">Title, meta açıklama, başlıklar, URL, iç bağlantılar; Google'ın sonuç başlığını neden yeniden yazdığı.</p>
+            <span class="card__foot"><span class="tag">20 dk</span></span>
+          </a>
+          <a class="card" href="06-gorsel-ve-video.html">
+            <span class="card__num">06</span>
+            <h3 class="card__title">Görsel ve video SEO</h3>
+            <p class="card__desc">Alt metin, dosya adı, biçimler, geç yükleme, ana görsel, görsel site haritası ve video izleme sayfası.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="07-icerik-kalitesi.html">
+            <span class="card__num">07</span>
+            <h3 class="card__title">İçerik kalitesi ve yapay zekâ</h3>
+            <p class="card__desc">İnsan için içerik, Kim/Nasıl/Neden, tarih oyunları, konu kümeleri, yapay zekâ ile üretimin sınırı.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="08-yapilandirilmis-veri.html">
+            <span class="card__num">08</span>
+            <h3 class="card__title">Yapılandırılmış veri</h3>
+            <p class="card__desc">JSON-LD, hâlâ işe yarayan türler, kaldırılan zengin sonuçlar (FAQ, HowTo…), sahte puan riski, favicon ve OG.</p>
+            <span class="card__foot"><span class="tag">18 dk</span></span>
+          </a>
+        </div>
+
+        <h3 id="kisim-iii">III · Teknik</h3>
+        <div class="cards">
+          <a class="card" href="09-tarama-ve-dizin.html">
+            <span class="card__num">09</span>
+            <h3 class="card__title">Tarama ve dizine ekleme</h3>
+            <p class="card__desc">robots.txt, noindex, site haritası, kanonik, durum kodları, yönlendirme, tarama bütçesi, hreflang.</p>
+            <span class="card__foot"><span class="tag">30 dk</span><span class="tag tag--bad">EN ÇOK HATA</span></span>
+          </a>
+          <a class="card" href="10-performans-mobil-js.html">
+            <span class="card__num">10</span>
+            <h3 class="card__title">Hız, mobil ve JavaScript</h3>
+            <p class="card__desc">Core Web Vitals, mobil öncelikli dizin, JavaScript ile render, SSR/CSR, yazı tipi ve görsel hızı.</p>
+            <span class="card__foot"><span class="tag">22 dk</span></span>
+          </a>
+          <a class="card" href="11-altyapi.html">
+            <span class="card__num">11</span>
+            <h3 class="card__title">Alan adı, sunucu, dil ve güvenlik</h3>
+            <p class="card__desc">Alan adı uzantısı ve yaşı, hosting, CDN/WAF tuzakları, HTTPS, programlama dili, çok dilli site, hack belirtileri.</p>
+            <span class="card__foot"><span class="tag">18 dk</span></span>
+          </a>
+        </div>
+
+        <h3 id="kisim-iv">IV · Sitenin dışı</h3>
+        <div class="cards">
+          <a class="card" href="12-yerel-seo.html">
+            <span class="card__num">12</span>
+            <h3 class="card__title">Yerel SEO</h3>
+            <p class="card__desc">İşletme Profili, hizmet bölgesi, kategori, yorumlar, NAP tutarlılığı, Yandex Haritalar, kapı sayfası tuzağı.</p>
+            <span class="card__foot"><span class="tag">22 dk</span></span>
+          </a>
+          <a class="card" href="13-sayfa-disi.html">
+            <span class="card__num">13</span>
+            <h3 class="card__title">Sayfa dışı SEO: bağlantılar ve marka</h3>
+            <p class="card__desc">Geri bağlantının bugünkü ağırlığı, rel değerleri, bağlantı satın alma riski, disavow, dijital PR.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="14-diger-motorlar-ve-yz.html">
+            <span class="card__num">14</span>
+            <h3 class="card__title">Diğer motorlar ve yapay zekâ araması</h3>
+            <p class="card__desc">Yandex, Bing, IndexNow, AI Overviews / AI Mode, yapay zekâ tarayıcıları ve llms.txt gerçeği.</p>
+            <span class="card__foot"><span class="tag">18 dk</span></span>
+          </a>
+        </div>
+
+        <h3 id="kisim-v">V · Uygulama</h3>
+        <div class="cards">
+          <a class="card" href="15-araclar-ve-olcum.html">
+            <span class="card__num">15</span>
+            <h3 class="card__title">Araçlar ve ölçüm</h3>
+            <p class="card__desc">Search Console raporları, Bing/Yandex Webmaster, PageSpeed Insights, ücretsiz tarayıcılar, doğru KPI'lar.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="16-sorun-giderme.html">
+            <span class="card__num">16</span>
+            <h3 class="card__title">Sorun giderme senaryoları</h3>
+            <p class="card__desc">Eski sitenin binlerce sayfası, hack, ani düşüş, soft 404, bot korumasının Googlebot'u kesmesi.</p>
+            <span class="card__foot"><span class="tag">25 dk</span></span>
+          </a>
+          <a class="card" href="17-musteri-isi.html">
+            <span class="card__num">17</span>
+            <h3 class="card__title">Müşteri işi: denetim, öneri, taşıma</h3>
+            <p class="card__desc">Denetim akışı, platform/host değiştirme kararı, site taşıma, Google Ads ile birlikte çalışma, raporlama.</p>
+            <span class="card__foot"><span class="tag">20 dk</span></span>
+          </a>
+          <a class="card" href="18-yeni-site-yol-haritasi.html">
+            <span class="card__num">18</span>
+            <h3 class="card__title">Yeni site için 90 günlük yol haritası</h3>
+            <p class="card__desc">Yayın öncesinden üçüncü aya hafta hafta yapılacaklar; yazılım ürünü ve yerel işletme için iki örnek hat.</p>
+            <span class="card__foot"><span class="tag">15 dk</span></span>
+          </a>
+          <a class="card" href="19-kontrol-listesi.html">
+            <span class="card__num">19</span>
+            <h3 class="card__title">Kontrol listesi</h3>
+            <p class="card__desc">Yayın öncesi ve denetim için işaretlenebilir tam liste; her madde ilgili bölüme bağlı.</p>
+            <span class="card__foot"><span class="tag">10 dk</span><span class="tag tag--info">BAŞVURU</span></span>
+          </a>
+          <a class="card" href="20-sozluk-ve-kaynakca.html">
+            <span class="card__num">20</span>
+            <h3 class="card__title">Sözlük ve kaynakça</h3>
+            <p class="card__desc">Bütün terimler tek cümleyle, doğrulanamayan iddiaların listesi ve resmî/üçüncü taraf kaynakların toplu kaynakçası.</p>
+            <span class="card__foot"><span class="tag">15 dk</span><span class="tag tag--info">BAŞVURU</span></span>
+          </a>
+        </div>
+
+        <h3 id="kisim-vi">VI · Savunma</h3>
+        <div class="cards">
+          <a class="card" href="21-kara-sapka.html">
+            <span class="card__num">21</span>
+            <h3 class="card__title">Kara şapka teknikleri: tanı, korun, temizle</h3>
+            <p class="card__desc">Gizli bağlantı, cloaking, PBN, parazit SEO, hack, sahte yorum, YZ'ye gizli talimat, video platformu hileleri, negatif SEO: nasıl fark edilir, nasıl temizlenir.</p>
+            <span class="card__foot"><span class="tag">30 dk</span><span class="tag tag--warn">SAVUNMA</span></span>
+          </a>
+        </div>
+
+        <h2 id="hakkinda"><span class="h-num">§ 4</span>Bu rehber hakkında</h2>
+
+        <ul>
+          <li><strong>Tarih:</strong> bilgiler 21 Ekim 2026 itibarıyla derlendi. Arama motorları kurallarını sık değiştirir; tarihli her bilgi "şu tarihte değişti" diye işaretlendi.</li>
+          <li><strong>Kaynak önceliği:</strong> önce Google Search Central belgeleri ve blogu, web.dev, Bing ve Yandex Webmaster belgeleri, schema.org; sonra Ahrefs, Moz, Semrush, Backlinko, Search Engine Land/Journal gibi tanınmış kaynaklar ve Türkçe kaynaklar.</li>
+          <li><strong>Sınır:</strong> genel bilgi amaçlıdır; tek bir siteye özel danışmanlık değildir. Rakamlar (pazar payı, tıklama oranları, süreler) ölçüm yapan kaynağa ve tarihe bağlıdır.</li>
+          <li><strong>Kısa başvuru notu:</strong> yapay zekâ asistanına bağlam olarak verilebilecek yoğun Markdown özeti aynı klasördeki <code>arastirma.md</code> dosyasındadır.</li>
+          <li><strong>İlgili:</strong> HTML tarafındaki SEO temeli (semantik etiketler, başlık yapısı) için <a href="../../Programlama/HTML-CSS/01-html/index.html">HTML konusu</a>.</li>
+        </ul>
+
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="next" href="01-seo-nedir.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">SEO nedir, ne beklenmeli</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

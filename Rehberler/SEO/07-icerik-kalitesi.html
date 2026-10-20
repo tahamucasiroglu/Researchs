@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İçerik kalitesi ve yapay zekâ — SEO Rehberi</title>
+<meta name="description" content="Google'ın 'insan için içerik' ölçütleri, Kim/Nasıl/Neden, tarih oyunları, konu kümeleri, kopya içerik, şehir şablon sayfaları ve yapay zekâ ile içerik üretiminin sınırı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">İçerik kalitesi ve yapay zekâ</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 07 · Sayfa ve içerik</div>
+        <h1 class="page-title">İçerik kalitesi ve yapay zekâ</h1>
+        <p class="lede">Teknik SEO sayfanın bulunmasını sağlar; sıralamayı ise büyük ölçüde içeriğin kendisi belirler. Google "kaliteli içerik" derken ne kastettiğini oldukça ayrıntılı yazmıştır. Bu bölüm o ölçütleri, en sık düşülen "önce arama motoru" tuzaklarını ve yapay zekâ ile içerik üretmenin nerede yardım, nerede ihlal olduğunu anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Google'ın "yararlı, güvenilir, insan için içerik" belgesi (güncelleme <strong>5 Ekim 2026</strong>) bir öz-değerlendirme listesi verir; kelime sayısı hedefi yoktur.</li>
+            <li>"Yararlı içerik" (Helpful Content) ayrı bir sistem değil artık; <strong>Mart 2024</strong>'te çekirdek sıralamaya katıldı.</li>
+            <li>İçerik değişmeden tarihi güncellemek açıkça "önce arama motoru" işareti sayılır.</li>
+            <li>Yapay zekâ ile yazmak yasak değil; sıralamayı manipüle etmek için toplu sayfa üretmek, nasıl üretildiğinden bağımsız olarak "ölçekli içerik istismarı"dır.</li>
+            <li>Neredeyse aynı şehir/semt sayfaları "kapı sayfası" (doorway) ihlalidir; "kopya içerik cezası" ise yoktur, yalnız verim kaybı vardır.</li>
+          </ul>
+        </div>
+
+        <h2 id="insan-icin-icerik"><span class="h-num">§ 1</span>"İnsan için" içerik ne demek</h2>
+        <p>Google'ın içerik konusundaki temel belgesi "Creating helpful, reliable, people-first content" (yararlı, güvenilir, önce insan için içerik oluşturma) adını taşır. Son güncellemesi 5 Ekim 2026 <sup class="kaynak"><a href="#k1">[1]</a></sup>. Ana fikir: sıralama sistemleri, öncelikle arama trafiği çekmek için değil, insanlara gerçekten yardım etmek için yazılmış içeriği öne çıkarmaya çalışır.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Mart 2024:</strong> Ağustos 2022'de ayrı bir sistem olarak başlayan "Helpful Content" (yararlı içerik) sistemi çekirdek sıralamaya katıldı ve ayrı sistem olarak emekliye ayrıldı. Google şöyle yazdı: "Artık bunu yapan tek bir sinyal ya da sistem yok" <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup>. Bugün "HCU beni vurdu" demek eskimiş bir ifadedir; kalite değerlendirmesi artık her çekirdek güncellemenin parçası.</p>
+        </aside>
+
+        <h3 id="oz-degerlendirme">Öz-değerlendirme soruları</h3>
+        <p>Google'ın belgesi, içeriğini değerlendirmen için sorular verir. En önemlileri <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul class="checklist">
+          <li>İçerik özgün bilgi, araştırma ya da analiz sunuyor mu?</li>
+          <li>Konuyu esaslı ve eksiksiz anlatıyor mu?</li>
+          <li>Bariz olanın ötesinde bir içgörü veriyor mu?</li>
+          <li>Başka kaynaklardan yararlanıyorsa yalnız kopyalamak ya da yeniden yazmak yerine belirgin bir değer katıyor mu?</li>
+          <li>Arama sonucundaki diğer sayfalara göre ek değer sunuyor mu?</li>
+          <li>Okuyan kişi sayfayı yer imlerine ekler mi, bir arkadaşına önerir mi?</li>
+          <li>Kolayca kontrol edilebilecek bir bilgi hatası var mı?</li>
+          <li>Konuyu iyi bilen biri tarafından yazılmış ya da gözden geçirilmiş gibi mi?</li>
+        </ul>
+
+        <h3 id="arama-motoru-oncelikli">"Önce arama motoru" uyarı işaretleri</h3>
+        <p>Aynı belge, içeriğin insan için değil arama motoru için yazıldığını gösteren işaretleri de sayar <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul>
+          <li>Asıl amaç arama trafiği çekmek.</li>
+          <li>"Biri tutar" diye çok sayıda konuda içerik üretiliyor.</li>
+          <li>Birçok konuda yoğun otomasyonla içerik üretiliyor.</li>
+          <li>Başkalarının söyledikleri değer katmadan özetleniyor.</li>
+          <li>Konular kitleye uyduğu için değil, trend olduğu için seçiliyor.</li>
+          <li>Okuyan kişi sayfadan sonra yine başka yerde arama yapmak zorunda kalıyor.</li>
+          <li>Belirli bir kelime sayısına ulaşmak için yazılıyor.</li>
+          <li>Gerçek uzmanlık olmadan, trafik umuduyla niş bir konuya giriliyor.</li>
+          <li>Var olmayan bir cevap vaat ediliyor (ör. doğrulanmamış bir çıkış tarihi).</li>
+          <li>Sayfa tarihi, ciddi bir değişiklik yapılmadan güncel görünsün diye değiştiriliyor.</li>
+          <li>Taze görünsün diye içerik eklenip çıkarılıyor.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">2.000 kelimeden uzun yazılar daha iyi sıralanır.</p>
+          <p class="mit-gercek">Google'ın belgesi açık: "Hayır, tercih ettiğimiz bir kelime sayısı yok." Kelime sayısını hedeflemek bir uyarı işaretidir <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k4">[4]</a></sup>. Bir nakliye firmasının "çalışma saatleri" sayfası 50 kelimeyle mükemmel olabilir; bir taşınma rehberi 3.000 kelime gerektirebilir. Uzunluğu konu belirler.</p>
+        </aside>
+
+        <h2 id="e-e-a-t"><span class="h-num">§ 2</span>E-E-A-T ve kalite değerlendiricileri</h2>
+        <p><strong>E-E-A-T</strong>; Experience (deneyim), Expertise (uzmanlık), Authoritativeness (otorite) ve Trust (güven) sözcüklerinin kısaltmasıdır. Google'ın içeriği değerlendirirken önem verdiği nitelikleri özetler. "Deneyim" harfi Aralık 2022'de eklendi. Dördünün en önemlisi <strong>güven</strong>dir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <p>İki önemli ayrım:</p>
+        <ol>
+          <li><strong>E-E-A-T doğrudan bir sıralama faktörü değildir.</strong> Google'ın deyişiyle sistemler E-E-A-T'yi gösteren çeşitli sinyalleri harmanlar, ama "E-E-A-T puanı" diye bir şey yoktur <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k4">[4]</a></sup>.</li>
+          <li><strong>Kalite değerlendiricileri sıralamayı değiştirmez.</strong> Google'ın dışarıdan çalıştırdığı değerlendiriciler (quality raters) arama sonuçlarını bir kılavuza göre puanlar. Bu puanlar sıralamada doğrudan kullanılmaz; yalnız algoritma değişikliklerinin işe yarayıp yaramadığını ölçmeye yarar <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+        </ol>
+        <p>Sağlık, para, güvenlik ve toplum refahı gibi konularda (<strong>YMYL</strong>: "Your Money or Your Life", yanlış bilginin insana zarar verebileceği konular) güven çok daha ağır basar <sup class="kaynak"><a href="#k1">[1]</a></sup>. Değerlendirici kılavuzunun 11 Eylül 2025 sürümünde YMYL tanımı güncellendi ve AI Overviews örnekleri eklendi <sup class="kaynak"><a href="#k5">[5]</a></sup> <span class="tag tag--info">3. taraf</span> (ikincil aktarım). 2026'da yeni bir kılavuz sürümü olduğuna dair birincil kaynak bulunamadı <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Değerlendirici kılavuzu bir "sıralama faktörleri listesi" değil, ama Google'ın neyi kaliteli saydığını gösteren en ayrıntılı kamusal belgedir. Müşteriye "Google böyle bir sayfaya en düşük puanı veriyor" diye açıklama yaparken somut bir dayanak olarak işe yarar. Doğrudan kontrol listesi gibi kullanma.</p>
+        </aside>
+
+        <h2 id="kim-nasil-neden"><span class="h-num">§ 3</span>Kim, Nasıl, Neden</h2>
+        <p>Google'ın belgesi içeriği üç soruyla değerlendirmeni ister <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Soru</th><th>Google ne bekler</th><th>Pratikte</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Kim</strong> yazdı?</td><td>Okurun kolayca anlayabileceği bir yazar; beklenen yerde yazar adı ve yazar hakkında bilgi veren sayfaya bağlantı</td><td>Yazı altında imza, <code>/ekip/ad-soyad</code> gibi bir yazar sayfası, ilgili deneyimi</td></tr>
+              <tr><td><strong>Nasıl</strong> üretildi?</td><td>Okurun bekleyeceği yerde üretim sürecinin açıklanması; otomasyon ya da yapay zekâ kullanıldıysa bunun belirtilmesi</td><td>"Bu karşılaştırmada her programı aynı 3 saatlik yayınla denedik", "Taslak yapay zekâ ile hazırlandı, uzman ekip kontrol etti"</td></tr>
+              <tr><td><strong>Neden</strong> üretildi?</td><td>Asıl amacın insanlara yardım etmek olması</td><td>Sayfa, okurun sorusunu cevaplıyor mu, yoksa yalnız bir kelimeyi hedefliyor mu?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Sahte yazar ya da sahte unvan uydurma. Var olmayan bir "uzman" adı, yapay zekâ ile üretilmiş yüz fotoğrafı, uydurma sertifikalar aldatma sayılır <sup class="kaynak"><a href="#k1">[1]</a></sup>. Gerçek bir kişi yoksa yazarı kurum olarak göstermek (ör. "Hayalî Nakliyat ekibi") dürüst bir yoldur.</p>
+        </aside>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML + JSON-LD</span><span class="dosya">rehber yazısı · yazar bilgisi</span></div>
+<pre><code><span class="k-etiket">&lt;p</span> <span class="k-ozn">class</span>=<span class="k-deger">"imza"</span><span class="k-etiket">&gt;</span>
+  Yazan: <span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/ekip/yazar-adi"</span><span class="k-etiket">&gt;</span>Yazar Adı<span class="k-etiket">&lt;/a&gt;</span>, 12 yıllık taşıma ekibi şefi ·
+  Yayımlandı: <span class="k-etiket">&lt;time</span> <span class="k-ozn">datetime</span>=<span class="k-deger">"2026-03-04"</span><span class="k-etiket">&gt;</span>4 Mart 2026<span class="k-etiket">&lt;/time&gt;</span> ·
+  Güncellendi: <span class="k-etiket">&lt;time</span> <span class="k-ozn">datetime</span>=<span class="k-deger">"2026-10-12"</span><span class="k-etiket">&gt;</span>12 Ekim 2026<span class="k-etiket">&lt;/time&gt;</span>
+<span class="k-etiket">&lt;/p&gt;</span>
+<span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Article"</span>,
+  <span class="k-anahtar">"headline"</span>: <span class="k-deger">"Evden eve taşınmada eşya nasıl paketlenir"</span>,
+  <span class="k-anahtar">"author"</span>: { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Person"</span>, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Yazar Adı"</span>,
+                  <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.hayalinakliyat.com.tr/ekip/yazar-adi"</span> },
+  <span class="k-anahtar">"datePublished"</span>: <span class="k-deger">"2026-03-04"</span>,
+  <span class="k-anahtar">"dateModified"</span>: <span class="k-deger">"2026-10-12"</span>
+}
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <h2 id="tarih"><span class="h-num">§ 4</span>Tarih: görünür, tutarlı, dürüst</h2>
+        <p>Google sonuçta bazen sayfanın tarihini gösterir. Bu tarihi doğru seçebilmesi için <sup class="kaynak"><a href="#k6">[6]</a></sup>:</p>
+        <ul>
+          <li>Tarih sayfada <strong>görünür ve etiketli</strong> olmalı: "Yayımlandı: …", "Güncellendi: …".</li>
+          <li>Yapılandırılmış verideki <code>datePublished</code> ve <code>dateModified</code> görünür tarihle <strong>aynı</strong> olmalı.</li>
+          <li><strong>Gelecek tarih</strong> verilmez.</li>
+          <li><code>dateModified</code> yalnız gerçek bir değişiklikte güncellenir. Yanlış tarih seçilirse sayfadaki diğer tarihleri kaldırmak önerilir.</li>
+        </ul>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>Sunucu kodu</span><span class="dosya">her istekte "bugün"</span></div>
+<pre><code><span class="k-yorum">// Sayfa her açıldığında "güncellendi" tarihi bugüne çekiliyor</span>
+&lt;p&gt;Güncellendi: @DateTime.Now.ToString("d MMMM yyyy")&lt;/p&gt;</code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>Sunucu kodu</span><span class="dosya">içerik gerçekten değiştiğinde</span></div>
+<pre><code><span class="k-yorum">// Tarih, içeriğin son esaslı değişikliğinden gelir (veritabanında tutulur)</span>
+&lt;p&gt;Güncellendi: &lt;time datetime="@yazi.SonEsasliDegisiklik:yyyy-MM-dd"&gt;…&lt;/time&gt;&lt;/p&gt;</code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>İçeriği değiştirmeden tarihi güncellemek Google'ın belgesinde açıkça "önce arama motoru" işareti olarak geçer; içerik ekleyip çıkararak "taze" görünmeye çalışmanın sıralamaya yaramadığını da Google kendisi söylüyor <sup class="kaynak"><a href="#k1">[1]</a></sup>. Site haritasındaki <code>lastmod</code> için de aynı kural geçerlidir (bkz. <a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</p>
+        </aside>
+
+        <h2 id="cevap-once"><span class="h-num">§ 5</span>Yazım: cevap önce</h2>
+        <p>Okur sayfaya bir soruyla gelir. Cevabı ilk paragrafta, hatta ilk cümlede ver; ayrıntıyı sonra anlat. Bu hem okurun işini görür hem öne çıkan snippet ve yapay zekâ alıntısı şansını artırır <sup class="kaynak"><a href="#k7">[7]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup> <span class="tag tag--info">3. taraf</span>.</p>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">Önce hikâye (zayıf)</h4>
+            <p>"Taşınmak hayatın en stresli olaylarından biridir. Yıllar boyunca biriktirdiğimiz eşyalar… (3 paragraf sonra) …ortalama bir 3+1 ev 4–6 saatte taşınır."</p>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">Önce cevap (güçlü)</h4>
+            <p>"Ortalama bir 3+1 ev, asansör varsa 4–6 saatte taşınır. Süreyi en çok kat sayısı, asansör ve paketleme belirler. Aşağıda her birini ayrı anlatıyoruz."</p>
+          </div>
+        </div>
+        <p>Bu, Google'ın <strong>passage ranking</strong> sistemiyle de uyumludur: Google bir sayfanın tek tek bölümlerini de değerlendirir <sup class="kaynak"><a href="#k3">[3]</a></sup>. Her alt başlığın altında o başlığın sorusunu net cevaplayan bir paragraf, uzun sayfanın her parçasının ayrı ayrı bulunmasına yardım eder.</p>
+
+        <h2 id="konu-kumeleri"><span class="h-num">§ 6</span>Konu kümeleri ve sütun sayfalar</h2>
+        <p><strong>Konu kümesi</strong> (topic cluster), bir ana konuyu geniş anlatan bir <strong>sütun sayfa</strong> (pillar page) ile onun alt konularını ayrıntılı işleyen sayfaların, iki yönlü iç bağlantılarla birbirine bağlanmasıdır ("göbek ve kollar") <sup class="kaynak"><a href="#k9">[9]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Fikir: konuyu kapsamlı işlemek, tek bir kelimeyi tekrarlamaktan daha değerlidir.</p>
+        <div class="sema-kaydir"><svg role="img" aria-labelledby="kume-baslik" viewBox="0 0 640 230">
+          <title id="kume-baslik">Sütun sayfa ortada, dört alt konu sayfası çevresinde, iki yönlü bağlantılarla</title>
+          <g stroke="var(--cizgi)" stroke-width="2">
+            <line x1="320" y1="115" x2="110" y2="45"/><line x1="320" y1="115" x2="530" y2="45"/>
+            <line x1="320" y1="115" x2="110" y2="185"/><line x1="320" y1="115" x2="530" y2="185"/>
+          </g>
+          <g font-size="14" text-anchor="middle" fill="var(--yazi)">
+            <rect x="220" y="90" width="200" height="50" rx="8" fill="var(--yuzey)" stroke="var(--vurgu)" stroke-width="2"/>
+            <text x="320" y="112">Sütun sayfa</text><text x="320" y="130" font-size="12">Evden eve taşınma rehberi</text>
+            <rect x="20" y="22" width="180" height="46" rx="8" fill="var(--yuzey)" stroke="var(--cizgi)"/>
+            <text x="110" y="50" font-size="12">Eşya nasıl paketlenir</text>
+            <rect x="440" y="22" width="180" height="46" rx="8" fill="var(--yuzey)" stroke="var(--cizgi)"/>
+            <text x="530" y="50" font-size="12">Taşınma kontrol listesi</text>
+            <rect x="20" y="162" width="180" height="46" rx="8" fill="var(--yuzey)" stroke="var(--cizgi)"/>
+            <text x="110" y="190" font-size="12">Beyaz eşya taşıma</text>
+            <rect x="440" y="162" width="180" height="46" rx="8" fill="var(--yuzey)" stroke="var(--cizgi)"/>
+            <text x="530" y="190" font-size="12">Taşınma maliyeti</text>
+          </g>
+        </svg></div>
+        <p>Google'ın kendi SEO başlangıç rehberi de benzer bir şey söyler: çok sayfalı sitelerde benzer konuları klasörlerde toplamak, Google'ın her bölümün ne sıklıkla değiştiğini öğrenmesine yardım eder <sup class="kaynak"><a href="#k4">[4]</a></sup>.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Satıcı bloglarında geçen "konu kümeleri %30–43 daha çok trafik, 3,2 kat daha çok yapay zekâ alıntısı getirir" gibi rakamlar doğrulanamadı <span class="tag tag--warn">Doğrulanamadı</span> <sup class="kaynak"><a href="#k9">[9]</a></sup>. Konu kümesi iyi bir düzen yöntemidir; ama "küme kurdum, trafik %40 artacak" diye vaat verilmez.</p>
+        </aside>
+
+        <h2 id="siradan-olmayan-icerik"><span class="h-num">§ 7</span>Sıradan olmayan içerik ve özgün veri</h2>
+        <p>Google'ın 15 Mayıs 2026'da yayımladığı yapay zekâ araması rehberi, AI Overviews ve AI Mode'da en önemli etkenin <strong>"sıradan olmayan" (non-commodity)</strong> içerik olduğunu söyler: ilk elden deneyim ve özgün bakış <sup class="kaynak"><a href="#k10">[10]</a></sup>. Sıradan içerik, herkesin yazabileceği ve zaten yüz yerde yazılmış olan içeriktir. Yapay zekâ bunu zaten özetleyebildiği için, bu tür sayfaya tıklama ihtiyacı giderek azalıyor.</p>
+        <p>Sıradan olmayan içerik örnekleri:</p>
+        <ul>
+          <li><strong>İlk elden ölçüm:</strong> "Aynı salonun bir haftalık randevularını beş programa girdik; hangisinde kurulum kaç dakika sürdü, kaç hatırlatma doğru zamanda gitti."</li>
+          <li><strong>Gerçek iş fotoğrafları:</strong> Nakliye firmasının kendi ekibinin, kendi aracının, gerçek bir taşınmadan fotoğrafları; stok fotoğraf değil.</li>
+          <li><strong>Yerel bilgi:</strong> "Bu semtte sokaklar dar, kamyon girmiyor; eşya küçük araçla aktarılıyor."</li>
+          <li><strong>Gerçek fiyat aralıkları ve süreler:</strong> Belirsiz "uygun fiyat" yerine somut aralık ve neye göre değiştiği.</li>
+          <li><strong>Hata ve deneyim:</strong> "Şu yöntemi denedik, işe yaramadı, nedeni şu."</li>
+        </ul>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Online randevu yazılımı satan bir ürün "en iyi randevu programları" yazısı yazacak. Sıradan sürüm: her programın sitesinden alınmış özellik listesi. Sıradan olmayan sürüm: aynı randevu senaryosu beş programda denenmiş, kurulum süreleri ve hatırlatma sonuçları tabloda, ekran görüntüleri ve "hangisi neyde iyi" yorumu, yöntem kutusunda nasıl test edildiği. İkincisi hem okura gerçekten yardım eder hem başka sitelerin alıntılayacağı bir kaynak olur (bkz. <a href="13-sayfa-disi.html">Bölüm 13</a>).</p>
+        </aside>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Yapay zekâ aramaları için içeriği küçük parçalara bölmek, özel şema eklemek ya da llms.txt koymak gerekir.</p>
+          <p class="mit-gercek">Google'ın Mayıs 2026 rehberi bunların hiçbirinin gerekmediğini söyler: "AEO ve GEO de SEO'dur." Sorgu çeşitlemeleri için toplu sayfa üretmek ise ölçekli içerik istismarına girebilir <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>. Ayrıntı <a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>'te.</p>
+        </aside>
+
+        <h2 id="yapay-zeka-icerik"><span class="h-num">§ 8</span>Yapay zekâ ile içerik: Google'ın tutumu</h2>
+        <p>Google'ın tutumu üç belgede netleşir:</p>
+        <ol class="steps">
+          <li><strong>8 Şubat 2023 blog yazısı:</strong> Google içeriğin nasıl üretildiğine değil kalitesine bakar. Yapay zekâ ile üretmek ek bir avantaj sağlamaz. Sıralamayı manipüle etmek amacıyla yapay zekâ ile üretilen içerik spam sayılır. Okurun bekleyeceği yerde yapay zekâ kullanımını açıklamak önerilir; <strong>yapay zekâyı yazar olarak göstermek önerilmez</strong> <sup class="kaynak"><a href="#k12">[12]</a></sup>.</li>
+          <li><strong>"Using generative AI content" belgesi</strong> (güncelleme 1 Ekim 2026): Yapay zekâ araştırmaya ve içeriğe yapı kurmaya yardım edebilir. Toplu üretim ölçekli içerik ihlali olabilir. Yapay zekâ bilgi uydurabilir (halüsinasyon); bu yüzden <code>&lt;title&gt;</code>, meta açıklama, yapılandırılmış veri ve alt metin dahil her şey elle kontrol edilmelidir. 1 Ekim 2026 güncellemesi, değerlendirici kılavuzunun ölçekli içerik (§4.6.5) ve az emekli, özgün olmayan ana içerik (§4.6.6) bölümlerini belgeye ekledi; aynı yerde "değerlendirici puanları sıralamayı doğrudan etkilemez" notu da var. E-ticarette yapay zekâ ile üretilmiş ürün görsellerine IPTC <code>DigitalSourceType</code> bilgisi eklenmesi isteniyor <sup class="kaynak"><a href="#k13">[13]</a></sup>.</li>
+          <li><strong>Değerlendirici kılavuzu, Ocak 2025 sürümü:</strong> Üretken yapay zekâ ilk kez tanımlandı. §4.6.6'ya göre ana içeriğin çoğu ya da tamamı kopya, başka sözlerle yeniden yazılmış, otomatik ya da yapay zekâ ile üretilmişse <em>ve</em> az emek, az değer içeriyorsa sayfa <strong>"Lowest"</strong> (en düşük) puan almalıdır. §4.6.5 ölçekli içerik istismarını anlatır <sup class="kaynak"><a href="#k5">[5]</a></sup>. Bölüm numaraları artık Google'ın kendi belgesinde de geçiyor <sup class="kaynak"><a href="#k13">[13]</a></sup> <span class="tag tag--ok">Resmî</span>; "Lowest" puan ayrıntısı ikincil aktarım <span class="tag tag--info">3. taraf</span>.</li>
+        </ol>
+        <p>Özetle: <strong>araç değil, sonuç ve amaç</strong> değerlendirilir. Yapay zekâ ile taslak hazırlayıp üzerine gerçek deneyim, veri ve kontrol eklenen içerik sorun değildir. Yapay zekâ ile yüzlerce sayfa üretip hiçbirine değer katmamak sorundur.</p>
+        <div class="compare">
+          <div class="pane">
+            <h4 class="pane__title">Kabul edilebilir kullanım</h4>
+            <ul>
+              <li>Taslak çıkarma, başlık iskeleti önerme</li>
+              <li>Kendi ölçüm verini tabloya dökme</li>
+              <li>Yazım ve dil kontrolü</li>
+              <li>Uzmanın kontrol ettiği, deneyimle zenginleştirilmiş metin</li>
+            </ul>
+          </div>
+          <div class="pane">
+            <h4 class="pane__title">Riskli kullanım</h4>
+            <ul>
+              <li>Her şehir/semt için otomatik sayfa</li>
+              <li>Her sorgu çeşidi için ayrı yazı</li>
+              <li>Rakip içeriklerini yeniden yazdırma</li>
+              <li>Kontrol edilmeden yayımlanan title, meta, alt metin, şema</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Yapay zekâ ile üretilen yapılandırılmış veride sayfada olmayan bir puan, fiyat ya da adres uydurulursa bu yalnız yanlış bilgi değil, Google'ın yapılandırılmış veri kurallarının ihlalidir ve elle işlem getirebilir (bkz. <a href="08-yapilandirilmis-veri.html">Bölüm 8</a>). Yapay zekâ çıktısını yayımlamadan önce oku <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        </aside>
+
+        <h2 id="olcekli-icerik"><span class="h-num">§ 9</span>Ölçekli içerik istismarı</h2>
+        <p>Mart 2024'te Google, "ölçekli içerik istismarı" (scaled content abuse) adında yeni bir spam politikası duyurdu: kullanıcıya değer katmadan, esas olarak sıralamayı manipüle etmek için çok sayıda sayfa üretmek. Kritik ifade: bu politika içeriğin <strong>"nasıl üretildiğine bakılmaksızın"</strong> geçerlidir; yapay zekâ, insan ya da ikisi birlikte fark etmez <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>.</p>
+        <p>Aynı dönemde Mart 2024 çekirdek güncellemesi tamamlandığında Google, düşük kaliteli ve özgün olmayan içeriğin sonuçlarda yaklaşık %45 azaldığını bildirdi <sup class="kaynak"><a href="#k14">[14]</a></sup> <span class="tag tag--info">3. taraf</span> (Search Engine Land aktarımı).</p>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir ajans, müşterisi için "Örnekşehir'de en iyi 10 X" kalıbında, sadece X'i değiştirerek yapay zekâ ile 400 sayfa üretiyor. Sayfalar birbirinin neredeyse aynısı, hiçbirinde ilk elden bilgi yok. Bu, ölçekli içerik istismarının ders kitabı örneğidir; elle işlem riski taşır ve sitedeki iyi sayfaların da değerlendirilmesini olumsuz etkileyebilir <sup class="kaynak"><a href="#k11">[11]</a></sup>.</p>
+        </aside>
+
+        <h2 id="sehir-sayfalari"><span class="h-num">§ 10</span>Şehir ve semt şablon sayfaları</h2>
+        <p>Yerel işletmelerin en sık düştüğü tuzak budur. Koddan anlamayan küçük yerel bir işletme (ör. nakliye firması) "her semtte üstte çıkayım" diye "Örnek İlçe A nakliyat", "Örnek İlçe B nakliyat"… diye yalnız semt adı değişen onlarca sayfa açtırır.</p>
+        <p>Google'ın spam politikası bunu açıkça "doorway" (kapı sayfası) örneği olarak sayar: belirli bölgeleri ya da şehirleri hedefleyip kullanıcıyı tek bir sayfaya akıtan birden çok sayfa ya da alan adı; tarama edilebilir net bir hiyerarşiden çok arama sonucuna benzeyen, büyük ölçüde benzer sayfalar <sup class="kaynak"><a href="#k11">[11]</a></sup>. Ayrıca bir siteden ilk sonuçlarda genelde en çok iki sonuç gösterildiği için bu sayfalar zaten birbirini yer <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>Metin</span><span class="dosya">/ornek-ilce-a-nakliyat ve /ornek-ilce-b-nakliyat</span></div>
+<pre><code>"Örnek İlçe A'nın en güvenilir nakliyat firması olarak Örnek İlçe A'da
+evden eve nakliyat hizmeti veriyoruz. Örnek İlçe A nakliyat için hemen arayın."
+<span class="k-yorum"># Öbür sayfada yalnız "A" yerine "B" yazıyor</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>Metin</span><span class="dosya">/bolgeler/ornek-ilce-a (yalnız gerçek içerik varsa)</span></div>
+<pre><code>"Örnek İlçe A'daki eski yapılı binaların çoğunda asansör yok ve sokaklar dar;
+bu yüzden burada genelde küçük araçla aktarma yapıyoruz. Bu ay ilçede yaptığımız
+üç taşınmanın fotoğrafları, müşteri yorumları ve belediyeden park izni
+alma süreci aşağıda."</code></pre>
+        </div>
+        <p>Doğru yol: önce <strong>hizmet başına</strong> sayfa (evden eve, ofis, depolama…). Semt sayfası ancak o yere gerçekten özgü içerik varsa açılır: o bölgede yapılmış işin fotoğrafı, bölgeye özgü bilgi (dar sokak, otopark, asansör izni), o bölgeden müşteri yorumu <sup class="kaynak"><a href="#k15">[15]</a></sup>. Ayrıntılı yerel strateji <a href="12-yerel-seo.html">Bölüm 12</a>'de.</p>
+
+        <h2 id="kopya-icerik"><span class="h-num">§ 11</span>Kopya içerik</h2>
+        <p>"Kopya içerik cezası" en yaygın SEO korkularından biridir ve büyük ölçüde mittir. Google'a göre aynı ya da çok benzer içeriğin sitende birden çok adreste bulunması elle işlem gerektiren bir ihlal değildir; yalnız <strong>verim kaybıdır</strong>: Google sayfalardan birini kanonik seçer, ötekiler sonuçta gösterilmez ve sinyaller bölünür <sup class="kaynak"><a href="#k4">[4]</a></sup>. Google'ın "deduplication" sistemi zaten çok benzer sonuçlardan yalnız en ilgilisini gösterir <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        <p>Çözüm teknik: <code>rel="canonical"</code>, 301 yönlendirme ve iç bağlantıların asıl adrese verilmesi <sup class="kaynak"><a href="#k16">[16]</a></sup> (ayrıntı <a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</p>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Sitende aynı paragraf iki sayfada geçerse Google ceza verir.</p>
+          <p class="mit-gercek">Elle işlem yok, yalnız verim kaybı <sup class="kaynak"><a href="#k4">[4]</a></sup>. Ama dikkat: <em>başkasının</em> içeriğini değer katmadan kopyalamak ayrı bir konudur; Google'ın spam politikasında "scraping" (kazıma) olarak geçer <sup class="kaynak"><a href="#k11">[11]</a></sup>. Toplu üretilmiş neredeyse aynı sayfalar da doorway/ölçekli içerik olarak değerlendirilebilir.</p>
+        </aside>
+
+        <h2 id="icerik-guncelleme"><span class="h-num">§ 12</span>Mevcut içeriği güncellemek</h2>
+        <p>Yeni içerik kadar eski içeriğin bakımı da önemlidir. Pratik kurallar:</p>
+        <ul>
+          <li><strong>Bekle, sonra değerlendir.</strong> Ahrefs'in çalışmasında ilk 10'a giren sayfaların %40,82'si bunu ilk ayda başarmış; 6 ay sonra hâlâ ilk 10'da olmayan bir sayfanın güncellenmesi öneriliyor <sup class="kaynak"><a href="#k17">[17]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+          <li><strong>Esaslı güncelle.</strong> Eskimiş bilgiyi düzelt, yeni veri ekle, ilk 10'daki sayfaların kapsadığı ama seninkinin kaçırdığı alt konuları ekle. Yalnız tarih ve birkaç kelime değiştirmek işe yaramaz <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Çekirdek güncellemeden sonra panik yapma.</strong> Google güncellemenin bitmesini, sonra en az bir hafta beklemeyi, küçük kaymalara dokunmamayı ve "hızlı düzeltme" ya da içerik silme yapmamayı öneriyor <sup class="kaynak"><a href="#k18">[18]</a></sup> (ayrıntı <a href="16-sorun-giderme.html">Bölüm 16</a>).</li>
+        </ul>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 13</span>Bu bölümde öğrendiklerin</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Google insan için yazılmış içeriği öne çıkarmaya çalışır; öz-değerlendirme sorularını ve "önce arama motoru" işaretlerini kontrol listesi gibi kullan.</li>
+            <li>Kelime sayısı hedefi yok; E-E-A-T doğrudan faktör değil; değerlendiriciler sıralamayı değiştirmez.</li>
+            <li>Kim/Nasıl/Neden: gerçek yazar ve yazar sayfası, üretim sürecinin açıklanması, sahte yazar yok.</li>
+            <li>Tarih görünür ve tutarlı olsun; içerik değişmeden tarihi güncellemek kırmızı bayrak.</li>
+            <li>Cevap önce; konu kümeleri iyi bir düzen ama trafik vaadi değil.</li>
+            <li>Sıradan olmayan içerik (ilk elden deneyim, özgün veri, gerçek fotoğraf) hem klasik aramada hem yapay zekâ aramasında öne çıkar.</li>
+            <li>Yapay zekâ serbest; değer katmayan toplu üretim "ölçekli içerik istismarı", title/meta/alt/şema elle kontrol edilir, yapay zekâ yazar gösterilmez.</li>
+            <li>Semt şablon sayfaları doorway; kopya içerik cezası yok ama verim kaybı ve kazıma ayrı konu.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 14</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Creating helpful, reliable, people-first content (güncelleme 5 Eki 2026) — <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">developers.google.com/…/creating-helpful-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — What web creators should know about our March 2024 core update and new spam policies — <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">developers.google.com/search/blog/2024/03/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--info">3. taraf</span> Marie Haynes — Google quality raters now rate AI Overviews; Search Engine Land — Google quality raters &amp; AI-generated content — <a href="https://www.mariehaynes.com/google-quality-raters-now-rate-ai-overviews/">mariehaynes.com/…</a> · <a href="https://searchengineland.com/google-quality-raters-content-ai-generated-454161">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Influencing byline dates in Google Search — <a href="https://developers.google.com/search/docs/appearance/publication-dates">developers.google.com/…/publication-dates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — On-Page SEO guide — <a href="https://ahrefs.com/blog/on-page-seo/">ahrefs.com/blog/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--info">3. taraf</span> Backlinko — On-Page SEO: The Definitive Guide (güncelleme 15 Eki 2026) — <a href="https://backlinko.com/on-page-seo">backlinko.com/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--info">3. taraf</span> Conductor — Topic Clusters; HubSpot — Topic clusters — <a href="https://www.conductor.com/academy/topic-clusters">conductor.com/academy/topic-clusters</a> · <a href="https://blog.hubspot.com/marketing/topic-clusters-seo">blog.hubspot.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Spam policies for Google web search (güncelleme 28 Ağu 2026) — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Google Search's guidance about AI-generated content (8 Şub 2023) — <a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content">developers.google.com/search/blog/2023/02/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Using generative AI content (güncelleme 1 Eki 2026) — <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">developers.google.com/…/using-gen-ai-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google March 2024 core update rollout is now complete — <a href="https://searchengineland.com/google-march-2024-core-update-rollout-is-now-complete-438713">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--info">3. taraf</span> Whitespark — Local Search Ranking Factors 2026 — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — How to specify a canonical URL — <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com/…/consolidate-duplicate-urls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Long Does It Take to Rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/blog/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search's core updates — <a href="https://developers.google.com/search/updates/core-updates">developers.google.com/search/updates/core-updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="06-gorsel-ve-video.html"><span class="dir">&larr; Önceki</span><span class="ttl">Görsel ve video SEO</span></a>
+        <a class="next" href="08-yapilandirilmis-veri.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Yapılandırılmış veri</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

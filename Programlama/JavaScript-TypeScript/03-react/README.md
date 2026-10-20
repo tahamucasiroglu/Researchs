@@ -22,6 +22,10 @@ Sayfa temel kavramlardan bütün hook'lara, performans optimizasyonundan yaygın
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
+## İlgili konular
+
+- [SEO Rehberi → Hız, mobil ve JavaScript](../../../Rehberler/SEO/10-performans-mobil-js.html) — Herkese açık bir React sitesinde SSR, SSG ve CSR seçiminin arama motoruna etkisi.
+
 Resmi kaynak: [react.dev — Learn](https://react.dev/learn) · [React API referansı](https://react.dev/reference/react)
 
 ---

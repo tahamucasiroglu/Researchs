@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sayfa içi SEO — SEO Rehberi</title>
+<meta name="description" content="Title, meta açıklama, başlık etiketleri, URL, iç bağlantılar, desteklenen meta etiketler ve Open Graph: Google'ın başlığı neden yeniden yazdığı ve tam bir head örneği.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Sayfa içi SEO</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 05 · Sayfa ve içerik</div>
+        <h1 class="page-title">Sayfa içi SEO</h1>
+        <p class="lede">Sayfa içi SEO (on-page SEO), sayfanın kendi kodunda ve metninde senin kontrolündeki her şeydir: başlık etiketi, açıklama, başlıklar, adres, bağlantılar ve meta etiketler. Bu bölümü bitirdiğinde hangisinin gerçekten işe yaradığını, hangisinin efsane olduğunu ve Google'ın yazdığın başlığı neden değiştirdiğini bileceksin.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 20 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li><code>&lt;title&gt;</code> hâlâ en güçlü sayfa içi sinyal, ama sonuçtaki başlığı Google kendisi kurar; 2025'in ilk çeyreğinde başlıkların yaklaşık %76'sını değiştirdi.</li>
+            <li><code>og:title</code> <strong>26 Ağustos 2024</strong>'ten beri Google'ın başlık kaynaklarından biri.</li>
+            <li>Meta açıklama sıralamayı etkilemez, yalnız tıklamayı; title ve açıklama için resmî karakter sınırı yok.</li>
+            <li>Başlık etiketlerinin sırası Google için önemsiz, ama tek ve net bir ana başlık işe yarar.</li>
+            <li>Yalnız <code>&lt;a href&gt;</code> bağlantıları güvenilir biçimde taranır; bağlantı metni tek başına anlamlı olmalı.</li>
+            <li><code>keywords</code> meta etiketi Google'da yok sayılır; <code>lang</code> özniteliği dil sinyali değildir.</li>
+          </ul>
+        </div>
+
+        <h2 id="title"><span class="h-num">§ 1</span>Başlık etiketi: <code>&lt;title&gt;</code></h2>
+        <p><code>&lt;title&gt;</code>, sayfanın <code>&lt;head&gt;</code> kısmındaki başlıktır. Tarayıcı sekmesinde görünür ve Google'ın arama sonucundaki tıklanır mavi başlığı (Google'ın deyişiyle <strong>title link</strong>) kurarken baktığı ilk yerdir. Google'ın resmî belgesinin önerileri <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul>
+          <li><strong>Her sayfaya ayrı başlık.</strong> Şablondan gelen aynı başlık her sayfada tekrar etmemeli.</li>
+          <li><strong>Açıklayıcı ve kısa.</strong> "Ana sayfa", "Profil", "Yeni sayfa 1" gibi belirsiz başlıklar kullanılmaz.</li>
+          <li><strong>Marka kısa ve ayrılmış biçimde.</strong> Marka adı başa ya da sona, tire, iki nokta veya dikey çizgiyle ayrılarak eklenir. Ana sayfa biraz daha uzun bir tanıtım cümlesi taşıyabilir.</li>
+          <li><strong>Anahtar kelime doldurma yok.</strong> Aynı kelimeyi başlıkta tekrar tekrar yazmak işe yaramaz.</li>
+        </ul>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">kötü başlıklar</span></div>
+<pre><code><span class="k-etiket">&lt;title&gt;</span>Ana Sayfa<span class="k-etiket">&lt;/title&gt;</span>
+<span class="k-etiket">&lt;title&gt;</span>Nakliyat | Nakliyat Örnekşehir | Ucuz Nakliyat | En İyi Nakliyat<span class="k-etiket">&lt;/title&gt;</span>
+<span class="k-etiket">&lt;title&gt;</span>| ÖrnekMarka<span class="k-etiket">&lt;/title&gt;</span>   <span class="k-yorum">&lt;!-- yarım başlık --&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">iyi başlıklar</span></div>
+<pre><code><span class="k-etiket">&lt;title&gt;</span>Evden Eve Nakliyat Örnekşehir | Asansörlü, Sigortalı – Hayalî Nakliyat<span class="k-etiket">&lt;/title&gt;</span>
+<span class="k-etiket">&lt;title&gt;</span>Online Randevu Programı – ÖrnekMarka<span class="k-etiket">&lt;/title&gt;</span></code></pre>
+        </div>
+
+        <h3 id="title-uzunlugu">Uzunluk: resmî sınır yok</h3>
+        <p>Google'a göre başlık için bir uzunluk sınırı yoktur; sonuçta gösterilen kısım cihaz genişliğine göre kesilir <sup class="kaynak"><a href="#k1">[1]</a></sup>. Eğitimlerin önerdiği 50–60 karakter (yaklaşık 600 piksel), kesilmeden görünmesi için pratik bir öneridir, kural değildir <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--info">3. taraf</span>. Uzun başlık ceza almaz; yalnız sonu görünmez. Bu yüzden önemli kelimeyi başa yakın yaz.</p>
+
+        <h3 id="title-link-kaynaklari">Google sonuç başlığını nereden kurar</h3>
+        <p>Google sonuçtaki başlığı yalnız <code>&lt;title&gt;</code>'dan almaz. Belgeye göre baktığı kaynaklar <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kaynak</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;title&gt;</code></td><td>Ana kaynak</td></tr>
+              <tr><td>Sayfadaki ilk görünen ana başlık (genelde <code>&lt;h1&gt;</code>)</td><td>"En belirgin, ilk görünen" başlık</td></tr>
+              <tr><td><code>og:title</code></td><td><span class="tag tag--warn">Değişti: 26 Ağu 2024</span> listeye eklendi <sup class="kaynak"><a href="#k4">[4]</a></sup></td></tr>
+              <tr><td>Sayfada öne çıkan diğer metin</td><td>Stil olarak baskın metinler</td></tr>
+              <tr><td>Sayfaya gelen bağlantıların metni</td><td>Başka sayfaların bu sayfayı nasıl andığı</td></tr>
+              <tr><td><code>WebSite</code> yapılandırılmış verisi</td><td>Site adı için</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="yeniden-yazma">Google başlığı neden değiştirir</h3>
+        <p>Google'ın belgesinde başlığı değiştirmesinin tipik sebepleri <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul>
+          <li><strong>Yarım başlık:</strong> "| Site Adı" gibi, asıl içerik yok.</li>
+          <li><strong>Eskimiş yıl:</strong> Başlıkta "2024" yazıyor ama sayfa 2026'da güncellenmiş.</li>
+          <li><strong>İçerikle uyuşmama:</strong> Başlık bir şey, sayfa başka şey söylüyor.</li>
+          <li><strong>Mikro kalıp:</strong> Birçok sayfa yalnız bir ayrıntıda farklılaşan özdeş başlıklar taşıyor.</li>
+          <li><strong>Net ana başlık yok:</strong> Sayfada aynı büyüklükte birçok "büyük metin" var.</li>
+          <li><strong>Dil ya da alfabe uyuşmazlığı:</strong> Başlık sayfanın dilinde değil.</li>
+          <li><strong>Site adının iki kez geçmesi:</strong> Site adı zaten ayrı gösteriliyorsa Google onu başlıktan atar.</li>
+        </ul>
+        <p>Ne kadar sık oluyor? Search Engine Land'in aktardığı bağımsız bir çalışmaya göre Google 2025'in ilk çeyreğinde başlıkların yaklaşık <strong>%76</strong>'sını değiştirdi; 2023'te bu oran %61'di. En sık değişiklik marka adının atılması (değişikliklerin yaklaşık %63'ü) <sup class="kaynak"><a href="#k5">[5]</a></sup> <span class="tag tag--info">3. taraf</span>. Ahrefs'in rehberindeki %61,6 rakamı eski çalışmaya dayanıyor <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Google'ın en sık yaptığı değişiklik marka adını atmak. Site adını <code>WebSite</code> yapılandırılmış verisiyle doğru verirsen (bkz. <a href="08-yapilandirilmis-veri.html">Bölüm 8</a>) Google site adını sonucun üstünde ayrıca gösterir; iç sayfa başlıklarında markayı uzun yazmak çoğu zaman boşa gider <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k5">[5]</a></sup>. Markayı kısa tut ya da sona koy.</p>
+        </aside>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p><code>og:title</code> artık bir başlık kaynağı olduğu için title ile çelişmemeli. Paylaşım için "Şok olacaksınız!" gibi bir <code>og:title</code>, Google'ın sonuç başlığını da etkileyebilir <sup class="kaynak"><a href="#k4">[4]</a></sup>. Başlık değişikliğinin sonuçlara yansıması birkaç gün ile birkaç hafta sürer ve Google başlıkları elle düzeltmez <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        </aside>
+
+        <h2 id="meta-aciklama"><span class="h-num">§ 2</span>Meta açıklama ve snippet</h2>
+        <p><strong>Meta açıklama</strong> (meta description), sayfanın kısa özetidir. Google bunu sonuçtaki açıklama metni (<strong>snippet</strong>) için aday olarak kullanır. Önemli gerçek: <strong>sıralamayı etkilemez</strong>, yalnız kişinin tıklayıp tıklamamasını etkiler <sup class="kaynak"><a href="#k6">[6]</a></sup>.</p>
+        <p>Google çoğu zaman snippet'i sayfanın kendi metninden, sorguya en uygun kısmı seçerek kurar. Ahrefs'in 2020 ölçümüne göre yazılan açıklama zamanın yalnız yaklaşık %37'sinde aynen gösteriliyor <sup class="kaynak"><a href="#k7">[7]</a></sup> <span class="tag tag--info">3. taraf</span>. Yine de yazmaya değer: Google'ın kendi seçimi kötü olduğunda devreye giren sensin.</p>
+        <p>Google'ın önerileri <sup class="kaynak"><a href="#k8">[8]</a></sup>:</p>
+        <ul>
+          <li>Her sayfaya ayrı açıklama. Ana sayfada site geneli, diğer sayfalarda sayfaya özel.</li>
+          <li>Somut bilgi koy: fiyat, tarih, özellik, süre. "En iyi hizmeti veriyoruz" bilgi değildir.</li>
+          <li>Anahtar kelime listesi yazma.</li>
+          <li>Sayfanın tamamını özetle, giriş anekdotunu değil.</li>
+        </ul>
+        <p>Uzunlukta da resmî sınır yok <sup class="kaynak"><a href="#k8">[8]</a></sup>. Eğitimlerin pratik önerisi 120–160 karakter, mobilde yaklaşık 120 <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--info">3. taraf</span>. Sorguyla eşleşen kelimeler snippet'te kalın gösterilir; bu da tıklamayı artırabilir <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">bilgi taşımayan açıklama</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"nakliyat, evden eve nakliyat, ucuz nakliyat, nakliye firması, en iyi nakliyat"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">somut açıklama</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Örnekşehir ve ilçelerinde evden eve nakliyat: ücretsiz keşif, asansörlü taşıma, sigorta. Hafta sonu da çalışıyoruz."</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+
+        <h3 id="snippet-kontrolu">Snippet'i sınırlamak</h3>
+        <p>Bazı metinlerin sonuçta görünmesini istemeyebilirsin. Üç araç var <sup class="kaynak"><a href="#k8">[8]</a></sup>. Bunlar Google'ın yapay zekâ özetlerinde (AI Overviews) de aynen geçerlidir:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Araç</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;meta name="robots" content="nosnippet"&gt;</code></td><td>Sayfa için hiç snippet gösterilmez</td></tr>
+              <tr><td><code>max-snippet:[sayı]</code></td><td>Snippet en çok bu kadar karakter olur</td></tr>
+              <tr><td><code>data-nosnippet</code> özniteliği</td><td>Yalnız o HTML öğesi snippet'e alınmaz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">snippet kontrolü</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"robots"</span> <span class="k-ozn">content</span>=<span class="k-deger">"max-snippet:160, max-image-preview:large"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;p&gt;</span>Fiyat listesi <span class="k-etiket">&lt;span</span> <span class="k-ozn">data-nosnippet</span><span class="k-etiket">&gt;</span>yalnız müşteriye özeldir<span class="k-etiket">&lt;/span&gt;</span>.<span class="k-etiket">&lt;/p&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Meta açıklama sıralama faktörüdür ve tam 155 karakter olmalıdır.</p>
+          <p class="mit-gercek">Sıralama faktörü değil, yalnız tıklamayı etkiler <sup class="kaynak"><a href="#k6">[6]</a></sup>; resmî bir uzunluk sınırı da yok <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+        </aside>
+
+        <h2 id="basliklar"><span class="h-num">§ 3</span>Başlık etiketleri: h1–h6</h2>
+        <p>Başlık etiketleri (<code>&lt;h1&gt;</code> … <code>&lt;h6&gt;</code>) sayfanın iskeletidir. Google'ın resmî görüşü şaşırtıcı derecede gevşek: başlıkları sırasız kullanmak arama sonuçlarını etkilemez, "ideal başlık sayısı" diye bir şey yoktur; yalnız aşırısı sorun olabilir <sup class="kaynak"><a href="#k9">[9]</a></sup>.</p>
+        <p>Yine de iki neden tek ve net bir ana başlığı iyi uygulama yapar:</p>
+        <ol>
+          <li><strong>Google başlığı kurarken ona bakar.</strong> Sonuç başlığı için "en belirgin, ilk görünen" ana başlığı kullanır. Aynı boyutta birden çok büyük metin varsa ilkini seçer <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Erişilebilirlik ve anlaşılırlık.</strong> Yoast ve Türkçe rehberler tek <code>&lt;h1&gt;</code>, seviye atlamayan hiyerarşi ve görünüm için etiket değil CSS kullanılmasını öneriyor; gerekçe ekran okuyucu kullanıcılar ve okunabilirlik <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+        </ol>
+        <p><code>&lt;h1&gt;</code> ile <code>&lt;title&gt;</code> aynı olmak zorunda değil, ama anlamca çelişmemeli <sup class="kaynak"><a href="#k11">[11]</a></sup>. Title arama sonucuna, h1 sayfaya gelmiş okura hitap eder.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">görünüm için başlık etiketi</span></div>
+<pre><code><span class="k-etiket">&lt;h1&gt;</span>ÖrnekMarka<span class="k-etiket">&lt;/h1&gt;</span>          <span class="k-yorum">&lt;!-- logo metni h1 olmuş --&gt;</span>
+<span class="k-etiket">&lt;h1&gt;</span>Online randevu alın<span class="k-etiket">&lt;/h1&gt;</span>
+<span class="k-etiket">&lt;h4&gt;</span>Hemen deneyin<span class="k-etiket">&lt;/h4&gt;</span>       <span class="k-yorum">&lt;!-- küçük yazı istendi diye h4 --&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">anlamlı iskelet</span></div>
+<pre><code><span class="k-etiket">&lt;h1&gt;</span>Online randevu programı<span class="k-etiket">&lt;/h1&gt;</span>
+  <span class="k-etiket">&lt;h2&gt;</span>Nasıl çalışır<span class="k-etiket">&lt;/h2&gt;</span>
+        <span class="k-etiket">&lt;h3&gt;</span>1. Hizmetlerini ekle<span class="k-etiket">&lt;/h3&gt;</span>
+        <span class="k-etiket">&lt;h3&gt;</span>2. Takvimini paylaş<span class="k-etiket">&lt;/h3&gt;</span>
+  <span class="k-etiket">&lt;h2&gt;</span>Fiyatlar<span class="k-etiket">&lt;/h2&gt;</span>
+<span class="k-etiket">&lt;p</span> <span class="k-ozn">class</span>=<span class="k-deger">"cagri"</span><span class="k-etiket">&gt;</span>Hemen deneyin<span class="k-etiket">&lt;/p&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Bölüm başlığını soru biçiminde yazıp hemen altına net, kısa bir cevap koymak hem öne çıkan snippet hem yapay zekâ alıntısı için işe yarıyor <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup> <span class="tag tag--info">3. taraf</span>. Örnek: <code>&lt;h2&gt;Evden eve nakliyat kaç saat sürer?&lt;/h2&gt;</code> ve altında ilk cümlede cevap.</p>
+        </aside>
+
+        <h2 id="url"><span class="h-num">§ 4</span>URL yapısı</h2>
+        <p>URL (sayfa adresi) hem kullanıcıya hem Google'a sayfa hakkında küçük bir ipucu verir. Google'ın kuralları <sup class="kaynak"><a href="#k12">[12]</a></sup>:</p>
+        <ul>
+          <li><strong>Okunur kelimeler</strong> kullan: <code>/evden-eve-nakliyat</code>, <code>/sayfa?id=4821</code> değil.</li>
+          <li><strong>Kelimeleri tire ile ayır</strong>, alt çizgi ile değil: <code>/ofis-tasima</code>, <code>/ofis_tasima</code> değil.</li>
+          <li><strong>Büyük-küçük harf tek biçimde.</strong> <code>/Ofis</code> ile <code>/ofis</code> ayrı URL'lerdir; hepsi küçük harf en temizi.</li>
+          <li><strong>Gereksiz parametre olmasın.</strong> İçeriği değiştirmeyen parametreler (oturum kimliği gibi) URL'de değil çerezde tutulur.</li>
+          <li><strong>İçerik değiştirmek için <code>#</code> kullanma.</strong> Tek sayfalık uygulamalarda History API ile gerçek URL üret.</li>
+          <li><strong>Göreli (<code>../</code>) bağlantıdan kaçın.</strong> Sonsuz sahte yollar üretebilir; köke göreli (<code>/hizmetler</code>) yol kullan.</li>
+        </ul>
+        <p>URL'deki kelimenin sıralamaya etkisi "çok çok hafiftir" <sup class="kaynak"><a href="#k9">[9]</a></sup>. Yani URL'yi kelime doldurmak için değil, okunurluk ve kalıcılık için tasarla. Bir kez yayına çıkan URL'yi değiştirmek yönlendirme yükü getirir (bkz. <a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</p>
+
+        <h3 id="turkce-karakter">Türkçe karakter: kodlama mı, ASCII mi?</h3>
+        <p>Google ASCII dışı karakterleri destekler; bunlar yüzde kodlamasıyla yazılır (ör. <code>ü</code> → <code>%C3%BC</code>) <sup class="kaynak"><a href="#k12">[12]</a></sup>. Türkiye'deki yaygın uygulama ise ş→s, ğ→g, ı→i, ç→c, ö→o, ü→u dönüşümüdür. Bu bir uygulama tercihidir; Google'ın ikisini karşılaştıran resmî bir kuralı bulunamadı <span class="tag tag--warn">Doğrulanamadı</span>. Pratikte ASCII biçim kopyalanıp paylaşıldığında bozulmadığı için daha az sorun çıkarır. Hangisini seçersen seç, bütün sitede aynısını kullan.</p>
+
+        <h3 id="slug-yil">Slug'a yıl yazma</h3>
+        <p><strong>Slug</strong>, URL'nin sondaki okunur kısmıdır (<code>/rehber/<strong>esya-paketleme</strong></code>). Slug'a yıl yazılmaz; içerik güncellendiğinde URL eskimiş görünür ve değiştirmek gerekir. Yıl gerekiyorsa başlıkta kalır <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>URL</span></div>
+<pre><code>https://www.ornek.com/Blog/En_Iyi_Randevu_Programlari_2024?sessionid=8f2a
+https://www.ornek.com/#/fiyatlar</code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>URL</span></div>
+<pre><code>https://www.ornek.com/blog/en-iyi-randevu-programlari
+https://www.ornek.com/fiyatlar</code></pre>
+        </div>
+
+        <h2 id="ic-baglantilar"><span class="h-num">§ 5</span>İç bağlantılar ve bağlantı metni</h2>
+        <p>İç bağlantılar, Google'ın sitedeki sayfaları bulmasının ve hangisinin önemli olduğunu anlamasının ana yoludur. Dizine girmesi istenen her sayfaya site içinden <strong>en az bir bağlantı</strong> gelmelidir <sup class="kaynak"><a href="#k13">[13]</a></sup>. Hiçbir yerden bağlantı almayan sayfaya "yetim sayfa" denir; site haritasında olsa bile zayıf kalır.</p>
+
+        <h3 id="taranabilir-baglanti">Yalnız <code>&lt;a href&gt;</code> güvenilir</h3>
+        <p>Google yalnız <code>href</code> özniteliği olan <code>&lt;a&gt;</code> öğelerini güvenilir biçimde izler. <code>onclick</code> ile, <code>javascript:</code> ile ya da çerçeve yönlendiricisinin (router) özel bileşenleriyle yapılan "bağlantılar" taranmayabilir. JavaScript ile sonradan eklenen bağlantı, aynı biçimde (<code>&lt;a href&gt;</code>) olduğu sürece taranır <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">taranmayabilir</span></div>
+<pre><code><span class="k-etiket">&lt;span</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"git('/fiyatlar')"</span><span class="k-etiket">&gt;</span>Fiyatlar<span class="k-etiket">&lt;/span&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"javascript:goTo('fiyatlar')"</span><span class="k-etiket">&gt;</span>buraya tıklayın<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;button</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"location='/fiyatlar'"</span><span class="k-etiket">&gt;</span>Fiyatlar<span class="k-etiket">&lt;/button&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">taranabilir</span></div>
+<pre><code><span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/fiyatlar"</span><span class="k-etiket">&gt;</span>Randevu programı paket fiyatları<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/"</span><span class="k-etiket">&gt;&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/logo.png"</span> <span class="k-ozn">alt</span>=<span class="k-deger">"ÖrnekMarka"</span> <span class="k-ozn">width</span>=<span class="k-deger">"160"</span> <span class="k-ozn">height</span>=<span class="k-deger">"40"</span><span class="k-etiket">&gt;&lt;/a&gt;</span></code></pre>
+        </div>
+
+        <h3 id="baglanti-metni">Bağlantı metni</h3>
+        <p><strong>Bağlantı metni</strong> (anchor text), bağlantının tıklanan yazısıdır. Google bunu hedef sayfanın ne hakkında olduğunu anlamak için kullanır. Kurallar <sup class="kaynak"><a href="#k13">[13]</a></sup>:</p>
+        <ul>
+          <li>Açıklayıcı, kısa ve iki sayfayla da ilgili olsun.</li>
+          <li>"Buraya tıklayın", "devamı", "link" yazma.</li>
+          <li>Sınaması kolay: bağlantı metni tek başına okunduğunda anlamlı olmalı.</li>
+          <li>Bağlantıları art arda dizme; çevresinde açıklayıcı metin olsun.</li>
+          <li>Anahtar kelime doldurma; her bağlantıda aynı kelimeyi zorlamak doğal değildir.</li>
+          <li><strong>Görsel bağlantıda bağlantı metni görselin <code>alt</code> metnidir.</strong> Logo bağlantısının alt metni "Ana sayfa" ya da "logo" değil, marka adı olmalı.</li>
+        </ul>
+
+        <h3 id="guclu-sayfadan-baglanti">En güçlü sayfadan bağlantı ver</h3>
+        <p>Sitende en çok dış bağlantı alan sayfalar (genelde ana sayfa ve popüler yazılar) en çok "güç" taşıyan sayfalardır. Yeni ya da öncelikli bir sayfayı bu sayfalardan bağlamak, onun daha hızlı bulunmasına ve güçlenmesine yardım eder <sup class="kaynak"><a href="#k2">[2]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup> <span class="tag tag--info">3. taraf</span>. Aday sayfaları bulmak için Google'da <code>site:ornek.com "anahtar kelime"</code> araması işe yarar: konuyu zaten anan sayfaları listeler.</p>
+
+        <h3 id="dis-baglanti-rel">Dış bağlantılarda <code>rel</code></h3>
+        <p>Güvendiğin dış kaynaklara normal bağlantı ver; <code>nofollow</code>'u her dış bağlantıya koymak gereksizdir. <code>rel</code> değerleri yalnız şu durumlar içindir <sup class="kaynak"><a href="#k13">[13]</a></sup>: ücretli ya da reklam bağlantısı <code>sponsored</code>, kullanıcının eklediği bağlantı (yorum, forum) <code>ugc</code>, güvenmediğin diğer bağlantılar <code>nofollow</code>. Ayrıntı <a href="13-sayfa-disi.html">Bölüm 13</a>'te.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Tek sayfalık uygulamalarda (SPA) menü bağlantıları çoğu zaman <code>&lt;a&gt;</code> değil, tıklama olaylı bileşenlerdir. Tarayıcıda her şey çalışır ama Google iç sayfaları hiç bulmaz. Sayfa kaynağına (işlenmiş HTML'e) bakıp her menü öğesinin gerçek bir <code>href</code> taşıdığını doğrula <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        </aside>
+
+        <h2 id="meta-etiketler"><span class="h-num">§ 6</span>Desteklenen ve desteklenmeyen meta etiketler</h2>
+        <p><code>&lt;head&gt;</code>'e yazılabilecek sayısız etiket var, ama Google'ın gerçekten okuduğu liste kısadır <sup class="kaynak"><a href="#k14">[14]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Etiket</th><th>Google ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td><code>description</code></td><td>Snippet adayı</td></tr>
+              <tr><td><code>robots</code> / <code>googlebot</code></td><td>Dizine ekleme ve snippet kuralları (<code>noindex</code>, <code>nosnippet</code> vb.; bkz. <a href="09-tarama-ve-dizin.html">Bölüm 9</a>)</td></tr>
+              <tr><td><code>notranslate</code></td><td>Sonuçta çeviri önerisi gösterilmez</td></tr>
+              <tr><td><code>nopagereadaloud</code></td><td>Sesli okuma hizmetleri sayfayı okumaz</td></tr>
+              <tr><td><code>google-site-verification</code></td><td>Search Console sahiplik doğrulaması</td></tr>
+              <tr><td><code>charset</code></td><td>Karakter kodlaması</td></tr>
+              <tr><td><code>viewport</code></td><td>Mobil uyum sinyali; sayfanın mobilde düzgün ölçeklendiğini söyler</td></tr>
+              <tr><td><code>rating</code></td><td>Yetişkin içerik işareti</td></tr>
+              <tr><td><code>refresh</code></td><td>Okunur, ama yerine sunucu tarafında 301 yönlendirmesi önerilir</td></tr>
+              <tr><td><code>keywords</code></td><td><strong>Yok sayılır</strong></td></tr>
+              <tr><td><code>lang</code> özniteliği (dil sinyali olarak)</td><td><strong>Kullanılmaz</strong>; Google dili metinden algılar</td></tr>
+              <tr><td><code>rel="next"</code> / <code>rel="prev"</code></td><td><strong>Kullanılmaz</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia"><code>&lt;meta name="keywords"&gt;</code> doldurmak sıralamayı yükseltir.</p>
+          <p class="mit-gercek">Google bu etiketi kullanmıyor <sup class="kaynak"><a href="#k14">[14]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--warn">Değişti: Eyl 2009</span>. Bing ise 2014'te etiketi kötüye kullananları yakalamak için bir sinyal olarak gördüğünü söylemişti <sup class="kaynak"><a href="#k15">[15]</a></sup>. Kısacası yazmanın bir faydası yok, doldurmanın Bing'de zararı olabilir.</p>
+        </aside>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p><code>&lt;html lang="tr"&gt;</code> Google'ın dil sinyali değil, ama yine de yazılmalı: ekran okuyucuların doğru telaffuzu ve tarayıcının çeviri önerisi için gerekli. Google'ın dili bilmediği değil, kendisinin metinden çıkardığı durum bu <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        </aside>
+
+        <h2 id="open-graph"><span class="h-num">§ 7</span>Open Graph ve X kartları</h2>
+        <p><strong>Open Graph</strong> (OG), bir sayfa sosyal ağda ya da mesajlaşma uygulamasında paylaşıldığında görünen önizlemeyi (başlık, açıklama, görsel) belirleyen etiketlerdir. Bunlar SEO değil, paylaşım içindir. Ama iki kesişim var: <code>og:title</code> 26 Ağustos 2024'ten beri Google'ın başlık kaynaklarından biri <sup class="kaynak"><a href="#k4">[4]</a></sup>, <code>og:image</code> de Google için "tercih edilen görsel" sinyallerinden biri <sup class="kaynak"><a href="#k16">[16]</a></sup> (bkz. <a href="06-gorsel-ve-video.html#tercih-edilen-gorsel">Bölüm 6</a>).</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Etiket</th><th>Durum</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>og:title</code>, <code>og:type</code>, <code>og:image</code>, <code>og:url</code></td><td>Zorunlu (OG protokolü)</td><td><sup class="kaynak"><a href="#k17">[17]</a></sup></td></tr>
+              <tr><td><code>og:description</code>, <code>og:site_name</code>, <code>og:locale</code> (<code>tr_TR</code>)</td><td>Önerilen</td><td><sup class="kaynak"><a href="#k17">[17]</a></sup></td></tr>
+              <tr><td><code>og:image:alt</code>, <code>og:image:width</code>, <code>og:image:height</code></td><td>Önerilen</td><td>Görsel erişilebilirliği ve hızlı önizleme</td></tr>
+              <tr><td><code>twitter:card</code> = <code>summary_large_image</code></td><td>X için</td><td>Görsel 5 MB'tan küçük; JPG, PNG, WEBP, GIF; <strong>SVG desteklenmez</strong> <sup class="kaynak"><a href="#k18">[18]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Önerilen paylaşım görseli boyutu 1200×630 civarı (kaynaklar 1200×628 ile 1200×630 arasında ayrışıyor) <sup class="kaynak"><a href="#k18">[18]</a></sup>. X'in eksik <code>twitter:</code> etiketleri için OG etiketlerine geri döndüğü üçüncü taraf kaynaklarda yazıyor; X'in resmî belgesinden doğrulanamadı <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Sosyal ağ önizleme botları genelde JavaScript çalıştırmaz. OG etiketlerini JavaScript ile sonradan eklersen paylaşımda önizleme boş çıkar. Bu etiketler sunucudan gelen ilk HTML'de olmalı (bkz. <a href="10-performans-mobil-js.html">Bölüm 10</a>) <span class="tag">Kaynaktan teyit edilmedi</span>.</p>
+        </aside>
+
+        <h2 id="tam-head"><span class="h-num">§ 8</span>Tam bir <code>&lt;head&gt;</code> örneği</h2>
+        <p>Aşağıdaki örnek, bu bölümde anlatılan her şeyi bir araya getirir. Kanonik etiket <a href="09-tarama-ve-dizin.html">Bölüm 9</a>'da, favicon ve yapılandırılmış veri <a href="08-yapilandirilmis-veri.html">Bölüm 8</a>'de, ana görselin önden yüklenmesi <a href="06-gorsel-ve-video.html#lcp-gorseli">Bölüm 6</a>'da ayrıntılı.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">online-randevu.html · &lt;head&gt;</span></div>
+<pre><code><span class="k-etiket">&lt;!doctype html&gt;</span>
+<span class="k-etiket">&lt;html</span> <span class="k-ozn">lang</span>=<span class="k-deger">"tr"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;head&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">charset</span>=<span class="k-deger">"utf-8"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"viewport"</span> <span class="k-ozn">content</span>=<span class="k-deger">"width=device-width, initial-scale=1"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;title&gt;</span>Online Randevu Programı – ÖrnekMarka<span class="k-etiket">&lt;/title&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Müşterileriniz 7/24 online randevu alsın; hatırlatmaları yazılım göndersin. Ücretsiz deneme."</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/online-randevu"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/favicon.ico"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"48x48"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"apple-touch-icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/apple-touch-icon.png"</span><span class="k-etiket">&gt;</span>
+
+  <span class="k-yorum">&lt;!-- Paylaşım önizlemesi (og:title aynı zamanda Google başlık kaynağı) --&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:type"</span> <span class="k-ozn">content</span>=<span class="k-deger">"website"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:title"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Online Randevu Programı"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Takvimini paylaş, randevular gelsin."</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:url"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/online-randevu"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/og/online-randevu-1200x630.jpg"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:width"</span> <span class="k-ozn">content</span>=<span class="k-deger">"1200"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:height"</span> <span class="k-ozn">content</span>=<span class="k-deger">"630"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image:alt"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Haftalık takvimde dolu ve boş randevu saatleri"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:site_name"</span> <span class="k-ozn">content</span>=<span class="k-deger">"ÖrnekMarka"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:locale"</span> <span class="k-ozn">content</span>=<span class="k-deger">"tr_TR"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"twitter:card"</span> <span class="k-ozn">content</span>=<span class="k-deger">"summary_large_image"</span><span class="k-etiket">&gt;</span>
+
+  <span class="k-yorum">&lt;!-- Ana görseli erken yükle (Bölüm 6) --&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"preload"</span> <span class="k-ozn">as</span>=<span class="k-deger">"image"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/img/hero-960.avif"</span> <span class="k-ozn">type</span>=<span class="k-deger">"image/avif"</span> <span class="k-ozn">fetchpriority</span>=<span class="k-deger">"high"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"stylesheet"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/css/site.5c1e9a.css"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;script</span> <span class="k-ozn">src</span>=<span class="k-deger">"/js/app.3f9a1b.js"</span> <span class="k-ozn">defer</span><span class="k-etiket">&gt;&lt;/script&gt;</span>
+<span class="k-etiket">&lt;/head&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Title, açıklama ve kanonik etiket JavaScript ile sonradan değiştiriliyorsa Google ham HTML ile işlenmiş HTML arasında çelişki görür. Kanonik etiketi JavaScript hiç değiştirmemeli <sup class="kaynak"><a href="#k19">[19]</a></sup>. Bu üç etiket sunucudan gelen ilk HTML'de doğru olmalı.</p>
+        </aside>
+
+        <h2 id="sik-hatalar"><span class="h-num">§ 9</span>Sık hatalar</h2>
+        <ul class="checklist">
+          <li>Bütün sayfalarda aynı title ve açıklama yok (şablondan kopyalanmamış) <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>Başlıkta eskimiş bir yıl kalmamış <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Her sayfada tek, baskın bir ana başlık var; logo metni <code>&lt;h1&gt;</code> değil.</li>
+          <li>Menü ve sayfa içi bağlantıların hepsi gerçek <code>&lt;a href&gt;</code>.</li>
+          <li>Hiçbir bağlantı metni "buraya tıklayın" değil; logo bağlantısının alt metni marka adı.</li>
+          <li>URL'ler küçük harf, tireli, parametresiz; slug'da yıl yok.</li>
+          <li><code>og:title</code> ile <code>&lt;title&gt;</code> anlamca uyumlu; paylaşım görseli SVG değil, 5 MB altında.</li>
+          <li>Title, açıklama, kanonik ve OG etiketleri ilk HTML'de; JavaScript değiştirmiyor.</li>
+        </ul>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 10</span>Bu bölümde öğrendiklerin</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Her sayfaya ayrı, açıklayıcı bir title yaz; önemli kelime başa yakın, marka kısa ve sonda. 50–60 karakter pratik öneri, resmî sınır değil.</li>
+            <li>Google sonuç başlığını title, ilk h1, og:title, bağlantı metinleri ve WebSite verisinden kurar ve sıkça (Q1 2025'te ~%76) değiştirir; en çok marka adını atar.</li>
+            <li>Meta açıklama sıralamaya değil tıklamaya yarar; somut bilgi taşısın. Gizlemek için <code>nosnippet</code>, <code>max-snippet</code>, <code>data-nosnippet</code>.</li>
+            <li>Başlık sırası Google için önemsiz, ama tek ve net bir ana başlık hem Google'ın başlık seçimine hem erişilebilirliğe yarar.</li>
+            <li>URL'de tire, küçük harf, kalıcı slug; kelimenin sıralama etkisi çok hafif.</li>
+            <li>Yalnız <code>&lt;a href&gt;</code> taranır; bağlantı metni tek başına anlamlı olsun, güçlü sayfalardan öncelikli sayfalara bağlantı ver.</li>
+            <li><code>keywords</code> yok sayılır, <code>lang</code> dil sinyali değil, <code>viewport</code> mobil uyum için gerekli.</li>
+            <li>OG etiketleri SEO değil ama og:title Google başlığını etkileyebilir; hepsi ilk HTML'de olmalı.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 11</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Influencing your title links in search results (güncelleme 10 Ara 2025) — <a href="https://developers.google.com/search/docs/appearance/title-link">developers.google.com/…/title-link</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--info">3. taraf</span> Backlinko — On-Page SEO: The Definitive Guide (güncelleme 15 Eki 2026) — <a href="https://backlinko.com/on-page-seo">backlinko.com/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — On-Page SEO guide — <a href="https://ahrefs.com/blog/on-page-seo/">ahrefs.com/blog/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Latest Google Search documentation updates — <a href="https://developers.google.com/search/updates">developers.google.com/search/updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google changed 76% of title tags in Q1 2025 — <a href="https://searchengineland.com/google-changed-76-of-title-tags-in-q1-2025-heres-what-that-means-454847">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--info">3. taraf</span> Semrush — 12 of the Biggest SEO Myths — <a href="https://www.semrush.com/blog/seo-myths/">semrush.com/blog/seo-myths</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Often Does Google Rewrite Meta Descriptions? (2020) — <a href="https://ahrefs.com/blog/meta-description-study/">ahrefs.com/blog/meta-description-study</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Control your snippets in search results (güncelleme 20 Nis 2026) — <a href="https://developers.google.com/search/docs/appearance/snippet">developers.google.com/…/snippet</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--info">3. taraf</span> Yoast — How to use headings on your site (11 Ara 2025) — <a href="https://yoast.com/how-to-use-headings-on-your-site/">yoast.com/how-to-use-headings-on-your-site</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--info">3. taraf</span> İdeaSoft — Başlık Etiketleri (H1-H6) rehberi (27 Oca 2026) — <a href="https://www.ideasoft.com.tr/baslik-ve-baslik-etiketlerinin-kullanimlari/">ideasoft.com.tr/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — URL structure best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/url-structure">developers.google.com/…/url-structure</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Link best practices for Google — <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">developers.google.com/…/links-crawlable</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Meta tags and attributes that Google supports — <a href="https://developers.google.com/search/docs/crawling-indexing/special-tags">developers.google.com/…/special-tags</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — The Meta Keywords Tag Lives At Bing — <a href="https://searchengineland.com/the-meta-keywords-tag-lives-at-bing-why-only-spammers-should-use-it-96874">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Images SEO best practices — <a href="https://developers.google.com/search/docs/appearance/google-images">developers.google.com/…/google-images</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> The Open Graph protocol — <a href="https://ogp.me/">ogp.me</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--info">3. taraf</span> X Cards markup (resmî sayfa açılamadı; üçüncü taraf özet) — <a href="https://developer.x.com/cards/markup">developer.x.com/cards/markup</a> · <a href="https://kb.theseoframework.com/kb/twitter-cards-and-x-sharing/">kb.theseoframework.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — How to specify a canonical URL — <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com/…/consolidate-duplicate-urls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="04-anahtar-kelime-ve-niyet.html"><span class="dir">&larr; Önceki</span><span class="ttl">Anahtar kelime ve arama niyeti</span></a>
+        <a class="next" href="06-gorsel-ve-video.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Görsel ve video SEO</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

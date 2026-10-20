@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yeni site için 90 günlük yol haritası — SEO Rehberi</title>
+<meta name="description" content="Sıfırdan kurulan bir site için yayın öncesinden üçüncü aya hafta hafta SEO planı: teknik zemin, Search Console, Bing ve Yandex kaydı, içerik haritası, yorum düzeni, ölçüm; yazılım ürünü ve yerel işletme için iki örnek hat ve yapılmayacaklar listesi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Yeni site için 90 günlük yol haritası</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 18 · Uygulama</div>
+        <h1 class="page-title">Yeni site için 90 günlük yol haritası</h1>
+        <p class="lede">Önceki bölümler "ne" ve "neden"i anlattı; bu bölüm "hangi sırayla"yı verir. Sıfırdan kurulan bir site için yayından önceki günden üçüncü ayın sonuna kadar
+      yapılacakları sıraya koyar ve her adımı ayrıntısının olduğu bölüme bağlar. Sonunda iki örnek hat (bir yazılım ürünü sitesi, bir yerel hizmet işletmesi) ve "yapma" listesi var.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Gün 0'da teknik zemin kurulur: marka alan adı, tek kanonik adres, HTTPS, sunucuda hazır HTML, başlıklar, yapılandırılmış veri, robots.txt ve site haritası, yönetim paneline <code>noindex</code>.</li>
+            <li>İlk iki haftada site Google, Bing ve Yandex'e tanıtılır; yerel işletmeyse İşletme Profili açılır; dönüşüm ölçümü kurulur.</li>
+            <li>1.–3. aylar içerik ve güven işidir: anahtar kelime haritası, her niyete bir sayfa, yardım ve karşılaştırma içerikleri, yorum düzeni, kazanılmış bağlantılar.</li>
+            <li>Dürüst beklenti: marka adı haftalar; uzun kuyruk aylar; "randevu" gibi genel bir terim belki hiç. 6 ay sonra ilk 10'da olmayan sayfa güncellenir.</li>
+            <li>Kısayollar (YZ ile toplu sayfa, bağlantı paketi, şehir şablonları, llms.txt peşinde koşmak) ya işe yaramaz ya ceza getirir.</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="once-beklenti"><span class="h-num">§ 1</span>Önce beklenti</h2>
+        <p>Planı yazmadan önce neyin ne kadar süreceğini netleştir; yoksa üçüncü ayda "hâlâ 1. değiliz" hayal kırıklığı planı bozar. Ahrefs'in Mayıs 2025 çalışmasında yeni sayfaların yalnız
+          <strong>%1,74</strong>'ü bir yıl içinde ilk 10'a girdi; girenlerin %40,82'si bunu ilk ayda başardı; ilk sıradaki sayfa ortalama 5 yaşındaydı <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k1">[1]</a></sup>.
+          Google da "kimse 1. sırayı garanti edemez" diyor <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Hedef türü</th><th>Örnek</th><th>Gerçekçi süre</th><th>Strateji</th></tr></thead>
+            <tbody>
+              <tr><td>Marka adı</td><td>"ÖrnekMarka"</td><td>Haftalar</td><td>Teknik zemin + Organization/WebSite işaretlemesi + profiller</td></tr>
+              <tr><td>Uzun kuyruk, net niyet</td><td>"kuaförler için online randevu programı", "Örnekşehir asansörlü ev taşıma"</td><td>1–6 ay</td><td>Her niyete ayrı, gerçekten cevap veren sayfa</td></tr>
+              <tr><td>Rekabetli genel terim</td><td>"randevu programı", "evden eve nakliyat"</td><td>6–12 ay ve üstü, garantisiz</td><td>Konu derinliği, kazanılmış bağlantılar, marka bilinirliği</td></tr>
+              <tr><td>Tek kelimelik genel terim</td><td>"randevu", "nakliye"</td><td>Belki hiç</td><td>Hedef olarak koyma; ölçüt olarak kullanma</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bu tablo kaynaklardan çıkarılmış pratik bir rehberdir, Google'ın verdiği bir takvim değildir. Yeni sitenin yavaş yükselmesinin sebebi kasıtlı bir "bekleme kutusu" (sandbox) değil, sinyal azlığıdır <sup class="kaynak"><a href="#k35">[35]</a></sup>.</p>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir yazılım ürünü sahibi "biz 'randevu' yazınca da çıkalım" istiyor. "Randevu" araması yapan kişi hastane randevusu almak, resmî bir kurumdan sıra almak ya da kelimenin anlamını öğrenmek istiyor olabilir; sonuç sayfasında
+            resmî randevu sistemleri var. Dürüst hedef: "online randevu programı", "kuaför randevu sistemi", "randevu hatırlatma SMS" gibi niyeti net sorgular ve marka adı. Genel terim, yıllar içinde
+            konu derinliği ve bilinirlikle gelirse gelir.</p>
+        </aside>
+
+        <h2 id="takvim-ozeti"><span class="h-num">§ 2</span>Takvim özeti</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Dönem</th><th>Ana iş</th><th>Bitti sayılır, eğer…</th></tr></thead>
+            <tbody>
+              <tr><td><a href="#gun-0">Gün 0</a> (yayın öncesi)</td><td>Teknik zemin</td><td>Ana sayfa ve önemli sayfalar 200 dönüyor, tek adres, HTML'de başlık/açıklama/metin hazır, yönetim paneli dizin dışı</td></tr>
+              <tr><td><a href="#hafta-1-2">Hafta 1–2</a></td><td>Tanıtım ve ölçüm</td><td>Search Console, Bing, Yandex kayıtlı; site haritası gönderildi; dönüşümler ölçülüyor; (yerel) profil doğrulamada</td></tr>
+              <tr><td><a href="#ay-1">Ay 1</a></td><td>Kelime haritası ve ana sayfalar</td><td>Her ana niyetin bir sayfası var; iç bağlantılar kuruldu</td></tr>
+              <tr><td><a href="#ay-2">Ay 2</a></td><td>Derinlik ve güven</td><td>Yardım/karşılaştırma içerikleri, özgün veri, yorum toplama düzeni çalışıyor</td></tr>
+              <tr><td><a href="#ay-3">Ay 3</a></td><td>Veriyle düzeltme ve bilinirlik</td><td>İlk Search Console verisiyle başlıklar ve sayfalar düzeltildi; ilk kazanılmış bağlantı/anılmalar var</td></tr>
+              <tr><td><a href="#sonrasi">Sonrası</a></td><td>Bakım döngüsü</td><td>Aylık kontrol, 6 ayda güncelleme, güncellemelerde sakin değerlendirme</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="gun-0"><span class="h-num">§ 3</span>Gün 0: yayından önce</h2>
+        <p>Yayın öncesi yapılan teknik hatalar sonradan en pahalıya düzeltilenlerdir: adres yapısı değişirse yönlendirme gerekir, yanlış <code>noindex</code> siteyi görünmez yapar.
+          Aşağıdaki listeyi yayından önce tek tek işaretle.</p>
+
+        <h3 id="alan-adi-ve-adres">Alan adı ve adres</h3>
+        <ul class="checklist">
+          <li><strong>Marka alan adı al, anahtar kelimeli alan adı alma.</strong> Google'ın tam eşleşen alan adı (EMD) sistemi sorguya göre kurulmuş alan adlarının kredisini kısar <sup class="kaynak"><a href="#k3">[3]</a></sup>; alan adı yaşı da sıralamaya yardım etmez <sup class="kaynak"><a href="#k4">[4]</a></sup>. Kısa, akılda kalan, tiresiz bir ad seç (<a href="11-altyapi.html">Bölüm 11</a>).</li>
+          <li><strong>Uzantı:</strong> yalnız Türkiye'ye hizmet veren işletme için <code>.com.tr</code> ülke sinyali verir; <code>.com</code> da Türkçe içerik ve yerel sinyallerle aynı sonucu alabilir <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong>Tek kanonik ana makine seç:</strong> <code>https://www.ornek.com</code> ya da <code>https://ornek.com</code>. Diğer üç varyant (http, www'li/www'siz) <strong>tek adımda</strong> 301 ile oraya gitsin.</li>
+          <li><strong>HTTPS</strong> baştan açık olsun. 2014'ten beri hafif bir sıralama sinyalidir ve Google kanonik seçerken HTTPS'i tercih eder <sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+          <li><strong>Adres yapısı:</strong> küçük harf, kelimeler tire ile, Türkçe karakter yerine sade harf (bu yaygın bir uygulama tercihidir), gereksiz parametre yok (<a href="05-sayfa-ici.html">Bölüm 5</a>).</li>
+        </ul>
+
+        <h3 id="sayfa-temeli">Sayfa temeli</h3>
+        <ul class="checklist">
+          <li><strong>İçerik sunucudan hazır HTML olarak gelsin.</strong> Google JS çalıştırır ama gecikmeli; YZ ve sosyal ağ botları çoğunlukla çalıştırmaz <sup class="kaynak"><a href="#k34">[34]</a></sup> (<a href="10-performans-mobil-js.html">Bölüm 10</a>).</li>
+          <li>Her sayfanın <strong>kendine ait</strong> <code>&lt;title&gt;</code>, meta açıklaması, tek ve net bir <code>&lt;h1&gt;</code>'i ve mutlak adresli kanonik etiketi olsun.</li>
+          <li>Bağlantılar gerçek <code>&lt;a href&gt;</code>; menüdeki her önemli sayfaya site içinden bağlantı var.</li>
+          <li>Ana sayfada <strong>Organization + WebSite</strong> JSON-LD: site adı ve logo için (<a href="08-yapilandirilmis-veri.html">Bölüm 8</a>) <sup class="kaynak"><a href="#k7">[7]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>Paylaşım etiketleri</strong> (Open Graph) ilk HTML'de; <code>og:title</code> Google'ın başlık kaynaklarından biri, çelişmesin.</li>
+          <li><strong>Favicon</strong> ICO ya da PNG; yalnız SVG bırakma (Google'ın listesinde SVG yok) <sup class="kaynak"><a href="#k13">[13]</a></sup>.</li>
+          <li>Var olmayan adres gerçek <code>404</code> dönsün; "bulunamadı" yazan 200 sayfası (soft 404) olmasın.</li>
+          <li><strong>Mobil:</strong> duyarlı tasarım; mobilde içerik kırpılmasın.</li>
+          <li><strong>Hız temeli:</strong> LCP ≤ 2,5 sn, INP ≤ 200 ms, CLS ≤ 0,1 hedefi <sup class="kaynak"><a href="#k11">[11]</a></sup>. Ekranın üstündeki ana görsel <code>loading="lazy"</code> almaz, <code>fetchpriority="high"</code> alır; görsellere <code>width</code>/<code>height</code> verilir <sup class="kaynak"><a href="#k12">[12]</a></sup>.</li>
+        </ul>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ana sayfa · &lt;head&gt; (örnek alan adı)</span></div>
+<pre><code><span class="k-etiket">&lt;html</span> <span class="k-ozn">lang</span>=<span class="k-deger">"tr"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;head&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">charset</span>=<span class="k-deger">"utf-8"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"viewport"</span> <span class="k-ozn">content</span>=<span class="k-deger">"width=device-width, initial-scale=1"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;title&gt;</span>ÖrnekMarka – Online randevu programı<span class="k-etiket">&lt;/title&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Müşterileriniz 7/24 online randevu alsın; hatırlatmaları program göndersin."</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"icon"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/favicon.ico"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"48x48"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:title"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Online randevu programı"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:type"</span> <span class="k-ozn">content</span>=<span class="k-deger">"website"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:url"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">property</span>=<span class="k-deger">"og:image"</span> <span class="k-ozn">content</span>=<span class="k-deger">"https://www.ornek.com/og/ana-1200x630.jpg"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+  {
+        <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+        <span class="k-anahtar">"@graph"</span>: [
+          { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Organization"</span>, <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#org"</span>,
+            <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka"</span>, <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/"</span>,
+            <span class="k-anahtar">"logo"</span>: <span class="k-deger">"https://www.ornek.com/logo-512.png"</span>,
+            <span class="k-anahtar">"sameAs"</span>: [<span class="k-deger">"https://www.youtube.com/@ornek"</span>] },
+          { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"WebSite"</span>, <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#website"</span>,
+            <span class="k-anahtar">"name"</span>: <span class="k-deger">"ÖrnekMarka"</span>, <span class="k-anahtar">"alternateName"</span>: [<span class="k-deger">"ornek.com"</span>],
+            <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/"</span>, <span class="k-anahtar">"publisher"</span>: { <span class="k-anahtar">"@id"</span>: <span class="k-deger">"https://www.ornek.com/#org"</span> } }
+        ]
+  }
+  <span class="k-etiket">&lt;/script&gt;</span>
+<span class="k-etiket">&lt;/head&gt;</span></code></pre>
+        </div>
+
+        <h3 id="robots-ve-site-haritasi">robots.txt ve site haritası</h3>
+        <ul class="checklist">
+          <li>robots.txt kökte; yalnız gerçekten taranmaması gereken yolları engeller (sepet, arama sonuçları, durum değiştiren adresler). CSS ve JS engellenmez.</li>
+          <li>Site haritası yalnız <strong>canlı, kanonik, 200 dönen</strong> adresleri içerir; <code>lastmod</code> yalnız içerik gerçekten değişince güncellenir; <code>priority</code> ve <code>changefreq</code> yazılmaz (Google kullanmıyor) <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+          <li>robots.txt'nin sonunda <code>Sitemap:</code> satırı var.</li>
+        </ul>
+        <div class="kod">
+          <div class="kod-ust"><span>XML</span><span class="dosya">/sitemap.xml</span></div>
+<pre><code><span class="k-etiket">&lt;?xml</span> <span class="k-ozn">version</span>=<span class="k-deger">"1.0"</span> <span class="k-ozn">encoding</span>=<span class="k-deger">"UTF-8"</span><span class="k-etiket">?&gt;</span>
+<span class="k-etiket">&lt;urlset</span> <span class="k-ozn">xmlns</span>=<span class="k-deger">"http://www.sitemaps.org/schemas/sitemap/0.9"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;url&gt;</span><span class="k-etiket">&lt;loc&gt;</span>https://www.ornek.com/<span class="k-etiket">&lt;/loc&gt;</span><span class="k-etiket">&lt;lastmod&gt;</span>2026-10-15<span class="k-etiket">&lt;/lastmod&gt;</span><span class="k-etiket">&lt;/url&gt;</span>
+  <span class="k-etiket">&lt;url&gt;</span><span class="k-etiket">&lt;loc&gt;</span>https://www.ornek.com/ozellikler<span class="k-etiket">&lt;/loc&gt;</span><span class="k-etiket">&lt;lastmod&gt;</span>2026-10-15<span class="k-etiket">&lt;/lastmod&gt;</span><span class="k-etiket">&lt;/url&gt;</span>
+<span class="k-etiket">&lt;/urlset&gt;</span></code></pre>
+        </div>
+
+        <h3 id="yonetim-ve-test">Yönetim paneli ve test ortamı</h3>
+        <p>Yönetim paneli, giriş sayfaları ve test ortamı dizine girmemeli; ama bunu robots.txt ile değil, <strong><code>noindex</code> ya da parola</strong> ile yap. robots.txt ile engellenen bir adres
+          başka yerden bağlantı alırsa açıklamasız olarak dizinde görünebilir; engellenmiş sayfadaki <code>noindex</code> da okunamaz <sup class="kaynak"><a href="#k10">[10]</a></sup>. Ayrıca yönetim adresini robots.txt'ye yazmak,
+          herkese açık bir dosyada adresi ilan etmek demektir.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>C#</span><span class="dosya">ASP.NET Core · Program.cs (yönetim yollarına başlık)</span></div>
+<pre><code>app.Use(async (ctx, next) =&gt;
+{
+        <span class="k-yorum">// Yönetim alanı dizine girmesin; robots.txt'de ENGELLEME, yoksa bu başlık görülmez</span>
+        if (ctx.Request.Path.StartsWithSegments("/admin"))
+            ctx.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
+        await next();
+});</code></pre>
+        </div>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">test ortamından canlıya taşınmış dosya</span></div>
+<pre><code>User-agent: *
+Disallow: /          <span class="k-yorum"># canlıda kalırsa bütün site taranmaz</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">canlı</span></div>
+<pre><code>User-agent: *
+Disallow: /sepet/ekle
+Disallow: /arama?
+
+Sitemap: https://www.ornek.com/sitemap.xml</code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Yayın gününün en sık hatası: test ortamındaki <code>Disallow: /</code>, genel <code>noindex</code> ya da test adresini gösteren kanonik etiketin canlıya taşınması <sup class="kaynak"><a href="#k14">[14]</a></sup>.
+            Yayından hemen sonra canlı adresin robots.txt'sine, birkaç sayfanın kaynağındaki robots meta etiketine ve kanoniğe gözle bak. Test ortamını ise parola ya da IP kısıtıyla koru.</p>
+        </aside>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Site bir CDN ya da güvenlik duvarı arkasındaysa (ör. Cloudflare) bot ayarlarını kontrol et. 15 Eylül 2026'dan beri Cloudflare'in yapay zekâ eğitimi denetimindeki "Block" seçeneği
+            Googlebot'u da engelliyor; yalnız eğitimi kapatmak istiyorsan "Disallow AI Training" seçilmeli <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k15">[15]</a></sup>. Site tarayıcıda açılır ama Google'a 403 döner; fark edilmesi haftalar sürebilir.</p>
+        </aside>
+
+        <h2 id="hafta-1-2"><span class="h-num">§ 4</span>Hafta 1–2: tanıtım ve ölçüm</h2>
+        <ol class="steps">
+          <li><strong>Google Search Console'a alan adı mülkü (Domain property) olarak ekle.</strong> DNS kaydıyla doğrulanır ve http/https, www/www'siz, alt alan adları dahil bütün varyantları kapsar.
+            robots.txt raporu da yalnız alan adı mülkünde çalışır <sup class="kaynak"><a href="#k16">[16]</a></sup>. Ayrıntı <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</li>
+          <li><strong>Site haritasını gönder</strong> (Site Haritaları raporu). Gönderim bir öneridir; her adresin taranacağı garanti değildir <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+          <li><strong>URL Denetimi</strong> ile ana sayfayı ve 3–5 önemli sayfayı kontrol et: Google'ın gördüğü HTML'de metin var mı, seçilen kanonik doğru mu? Gerekirse "dizine eklenmeyi iste". Bu düğmenin günlük sınırı için resmî bir rakam yok.</li>
+          <li><strong>Bing Webmaster Tools:</strong> siteyi Search Console'dan içe aktar (tek seferde en çok 100 site; verinin gelmesi 48 saati bulabilir; Search Console erişimi sürmeli, çünkü Bing sahipliği düzenli yeniden kontrol eder) <sup class="kaynak"><a href="#k17">[17]</a></sup>. Bing'e kayıt DuckDuckGo görünürlüğünü de besler.</li>
+          <li><strong>Yandex Webmaster:</strong> siteyi ekle ve doğrula; "Arama sonuçlarında göster → Site bölgesi" ayarını yap. Türkiye'de Yandex payı ≈ %25 <sup class="kaynak"><a href="#k40">[40]</a></sup><sup class="kaynak"><a href="#k18">[18]</a></sup>.</li>
+          <li><strong>IndexNow</strong> (Bing, Yandex ve diğer katılımcı motorlara değişen adresleri anında bildirme protokolü): kökte anahtar dosyası; yalnız eklenen, değişen ya da silinen adresleri gönder. Google IndexNow kullanmaz <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+          <li><strong>Yerel işletmeysen Google İşletme Profili</strong>'ni aç ve doğrulamayı başlat. Site Search Console'da doğrulanmışsa profil doğrulaması anında olabiliyor; bu yüzden önce 1. adım <sup class="kaynak"><a href="#k20">[20]</a></sup>. Doğrulama beklerken ad, adres, kategori değiştirilmez.</li>
+          <li><strong>Dönüşüm ölçümü kur.</strong> Sıralama değil, sonuç ölçülür: <code>tel:</code> tıklamaları, form gönderimleri, deneme indirmeleri, (yerel) profildeki arama ve yol tarifi istekleri. Google Ads kullanılıyorsa Search Console bağlanır; ücretli ve organik raporu aynı sorgunun iki kanaldaki tıklamalarını yan yana gösterir <sup class="kaynak"><a href="#k23">[23]</a></sup>.</li>
+        </ol>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">&lt;head&gt; · doğrulama etiketleri (değerleri paneller verir)</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"yandex-verification"</span> <span class="k-ozn">content</span>=<span class="k-deger">"XXXXXXXXXXXXXXXX"</span><span class="k-etiket">&gt;</span>
+<span class="k-yorum">&lt;!-- Google için alan adı mülkü DNS TXT kaydıyla doğrulanır; HTML etiketi gerekmez --&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Bu iki haftada içerik "mükemmel" olmak zorunda değil; ama <strong>ölçüm baştan kurulmalı</strong>. Search Console verisi kurulduğu günden itibaren gelir, geriye dönük dolmaz.
+            Üçüncü ayda "neyi düzelteyim?" sorusunun cevabı bu iki haftada kurulan ölçümden çıkar.</p>
+        </aside>
+
+        <h2 id="ay-1"><span class="h-num">§ 5</span>Ay 1: anahtar kelime haritası ve ana sayfalar</h2>
+        <ol class="steps">
+          <li><strong>Kelime listesi çıkar.</strong> Kaynaklar: müşterinin kendi cümleleri, rakip siteler, "Kullanıcılar şunu da sordu" kutusu, (varsa) Ads arama terimleri raporu ve Anahtar Kelime Planlayıcı. Ayrıntı <a href="04-anahtar-kelime-ve-niyet.html">Bölüm 4</a>.</li>
+          <li><strong>Her kelimenin niyetini sonuç sayfasından oku.</strong> İlk 10 sonuç hangi türde: ürün sayfası mı, rehber mi, araç mı, yerel sonuç mu? Sayfa türün buna uymalı <sup class="kaynak"><a href="#k24">[24]</a></sup>.</li>
+          <li><strong>Grupla ve eşle: bir niyet = bir sayfa.</strong> Eş anlamlı ifadeler aynı sayfada toplanır; gerçekten farklı işler ayrı sayfaya gider. Aynı sorgu için iki sayfanın yarışması (yamyamlaşma) önlenir. Hacim yanıltıcıdır; üst konuya ve "trafik potansiyeline" göre grupla <sup class="kaynak"><a href="#k25">[25]</a></sup>.</li>
+          <li><strong>Ana sayfaları yaz.</strong> Her biri: net başlık, ilk ekranda cevap, somut bilgi (fiyat aralığı, süre, kapsam), görseller, iç bağlantılar. Sayfa içi ayrıntılar <a href="05-sayfa-ici.html">Bölüm 5</a>.</li>
+          <li><strong>İç bağlantıları kur.</strong> Ana sayfadan hizmet/özellik sayfalarına, onlardan ilgili alt sayfalara; açıklayıcı bağlantı metniyle.</li>
+        </ol>
+
+        <h2 id="ay-2"><span class="h-num">§ 6</span>Ay 2: derinlik ve güven</h2>
+        <ul>
+          <li><strong>Yardım belgeleri ve rehberler.</strong> Müşterilerin gerçekten sorduğu sorulara birer sayfa. Yapay zekâyla yüzlerce sorgu çeşitlemesi sayfası üretmek ölçekli içerik ihlalidir <sup class="kaynak"><a href="#k26">[26]</a></sup><sup class="kaynak"><a href="#k27">[27]</a></sup>.</li>
+          <li><strong>Karşılaştırma ve "alternatif" sayfaları</strong> (yazılım için): "X alternatifi", "X ile Y farkı". Kategori terimlerinden daha az rekabetlidir ve satın almaya yakındır. Dürüst ve doğrulanabilir bilgiyle yazılmalı.</li>
+          <li><strong>Özgün veri ve ilk elden deneyim.</strong> Gerçek ekran görüntüleri, ölçümler, örnek işler. Google'ın Mayıs 2026 yapay zekâ arama rehberi en çok "sıradan olmayan" (non-commodity) içeriği öne çıkarıyor <sup class="kaynak"><a href="#k26">[26]</a></sup>. Kim/Nasıl/Neden çerçevesi <a href="07-icerik-kalitesi.html">Bölüm 7</a>.</li>
+          <li><strong>Yorum toplama düzeni</strong> (yerel işletme): iş bitince müşteriye profilin yorum bağlantısı ya da karekodu verilir <sup class="kaynak"><a href="#k29">[29]</a></sup>. Yalnız memnun müşteriden yorum istemek (review gating), indirim karşılığı yorum ve sahte yorum yasaktır <sup class="kaynak"><a href="#k30">[30]</a></sup>. Her yoruma kısa, kişisel bir yanıt.</li>
+          <li><strong>Diğer harita ve dizinler</strong> (yerel): Yandex Haritalar/Business, Apple Business <sup class="kaynak"><a href="#k39">[39]</a></sup>, Bing Places; ad-adres-telefon her yerde birebir aynı (<a href="12-yerel-seo.html">Bölüm 12</a>).</li>
+        </ul>
+
+        <h2 id="ay-3"><span class="h-num">§ 7</span>Ay 3: veriyle düzeltme ve bilinirlik</h2>
+        <ul>
+          <li><strong>Search Console Performans raporu:</strong> gösterim alan ama tıklanmayan sorgularda başlık ve açıklamayı yeniden yaz; hangi sayfanın hangi sorguda çıktığına bak, yanlış sayfa çıkıyorsa iç bağlantıları ve başlıkları düzelt.</li>
+          <li><strong>Sayfa dizine ekleme raporu:</strong> "Tarandı – şu anda dizine eklenmedi" çok sayfadaysa o sayfaların değerini sorgula (ince mi, kopya mı?); soft 404 ve yönlendirme hatalarını düzelt <sup class="kaynak"><a href="#k43">[43]</a></sup>.</li>
+          <li><strong>Core Web Vitals raporu:</strong> yeterli ziyaret yoksa "veri yok" görünür; bu ceza değildir, laboratuvar ölçümüyle (Lighthouse) ilerlenir. Düzeltmenin saha verisine yansıması ≈ 28 gün sürer <sup class="kaynak"><a href="#k33">[33]</a></sup>.</li>
+          <li><strong>Bağlantı ve anılma kazanma:</strong> özgün bir istatistik, küçük ücretsiz bir araç, sektör topluluklarında gerçek katılım, yerel basın; esnaf/ticaret odası ve meslek birliği kayıtları <sup class="kaynak"><a href="#k28">[28]</a></sup>. Satın alınan bağlantı yok (<a href="13-sayfa-disi.html">Bölüm 13</a>).</li>
+          <li><strong>Yapay zekâ görünürlüğü:</strong> Search Console'daki üretken YZ performans raporu (3 Haziran 2026'dan beri) yalnız gösterim sayar, tıklama vermez <sup class="kaynak"><a href="#k32">[32]</a></sup>; trafik ölçüsü olarak değil eğilim olarak oku.</li>
+        </ul>
+
+        <h2 id="sonrasi"><span class="h-num">§ 8</span>Üçüncü aydan sonra</h2>
+        <ul class="checklist">
+          <li><strong>6 ay kuralı:</strong> 6 ay sonra hâlâ ilk 10'da olmayan önemli sayfayı güncelle; bekleyerek gelmesi olasılığı düşük <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Aylık:</strong> Search Console'da yeni hata türü, elle işlem, güvenlik sorunu var mı; profilde ziyaretçi düzenlemesi önerilmiş mi.</li>
+          <li><strong>Çekirdek güncellemelerde:</strong> bitmesini bekle, bir hafta sonra karşılaştır, küçük kaymaya dokunma <sup class="kaynak"><a href="#k36">[36]</a></sup> (<a href="03-kurallar-ve-siralama.html#dusus-sonrasi">Bölüm 3</a>).</li>
+          <li><strong>Yılda en az iki kez:</strong> dizinlerdeki ad-adres-telefon, çalışma saatleri, kapanmış telefon numaraları.</li>
+          <li><strong>Tarih dürüstlüğü:</strong> "Güncellendi" tarihi yalnız gerçek değişiklikte değişir; içerik değişmeden tarih oynatmak Google'ın saydığı bir "önce arama motoru" işaretidir <sup class="kaynak"><a href="#k37">[37]</a></sup>.</li>
+        </ul>
+
+        <h2 id="ornek-yazilim-urunu"><span class="h-num">§ 9</span>Örnek hat (a): yazılım ürünü sitesi</h2>
+        <p>Senaryo: online randevu yazılımı satan bir ürün, adı "ÖrnekMarka". Aylık abonelikle satılıyor; sitenin işi tanıtmak, ücretsiz deneme kaydına ve satın almaya götürmek.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Niyet / sorgu grubu</th><th>Sayfa</th><th>Tür</th></tr></thead>
+            <tbody>
+              <tr><td>"ÖrnekMarka", "ÖrnekMarka giriş"</td><td>Ana sayfa, giriş/kayıt sayfası</td><td>Marka / gezinme</td></tr>
+              <tr><td>"randevu programı", "online randevu sistemi"</td><td>Özellikler / nasıl çalışır</td><td>Ticari araştırma</td></tr>
+              <tr><td>"kuaför randevu sistemi", "diş kliniği randevu programı"</td><td>Sektöre özel sayfalar (gerçekten farklı ihtiyaç ve adımlar varsa)</td><td>Bilgi + işlem</td></tr>
+              <tr><td>"X alternatifi", "X ile Y farkı"</td><td>Karşılaştırma sayfası</td><td>Ticari araştırma</td></tr>
+              <tr><td>"randevu programı fiyat"</td><td>Fiyatlar</td><td>Satın alma</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Gün 0 özel:</strong> Organization + WebSite işaretlemesi; <code>SoftwareApplication</code> işaretlemesi yalnız gerçek puan/yorum varsa zengin sonuç verir, sahte puan ekleme (<a href="08-yapilandirilmis-veri.html">Bölüm 8</a>).</li>
+          <li><strong>Yapay zekâ botları:</strong> arama için olanlar (ör. <code>OAI-SearchBot</code>) açık kalsın; eğitim botlarını (ör. <code>GPTBot</code>) kapatmak isteğe bağlıdır ve aramayı etkilemez <sup class="kaynak"><a href="#k42">[42]</a></sup>. llms.txt gerekmez (<a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>).</li>
+          <li><strong>Bağlantı kaynakları:</strong> işletme sahibi ve sektör topluluklarında gerçek katılım, sektöre yönelik özgün istatistik ("randevuların yüzde kaçı iptal ediliyor" gibi ölçülmüş veri), ücretsiz küçük araç.</li>
+          <li><strong>Beklenti:</strong> marka adı haftalar; sektöre özel uzun kuyruk sorgular aylar; "randevu programı" uzun vade; "randevu" hedef değil.</li>
+        </ul>
+
+        <h2 id="ornek-yerel-isletme"><span class="h-num">§ 10</span>Örnek hat (b): yerel hizmet işletmesi</h2>
+        <p>Senaryo: koddan anlamayan küçük yerel bir işletme (ör. nakliye firması) telefonda aramada üstte çıkmak istiyor. Müşteri dükkâna gelmiyor; firma müşterinin adresine gidiyor.</p>
+        <ol class="steps">
+          <li><strong>Google İşletme Profili (ilk hafta).</strong> İşletme adı tabeladaki gerçek ad; içine "ucuz nakliyat Örnekşehir" gibi kelime eklenmez, kural ihlalidir ve profil askıya alınabilir <sup class="kaynak"><a href="#k21">[21]</a></sup>.
+            Müşteri adrese gelmediği için <strong>hizmet bölgesi işletmesi</strong> olarak adres gizlenir; en çok 20 bölge, yarıçap değil şehir/ilçe olarak, işletmeden yaklaşık 2 saatlik sürüş mesafesini aşmadan <sup class="kaynak"><a href="#k38">[38]</a></sup>.
+            Birincil kategori en özgül olanı; gerçek çalışma saatleri; hizmet listesi eksiksiz; fotoğraflar.</li>
+          <li><strong>Site: her hizmete bir sayfa.</strong> Evden eve taşıma, ofis taşıma, asansörlü taşıma, eşya depolama… Whitespark'ın 2026 anketinde yerel organik sonuçlarda 1. etken "her hizmet için ayrı sayfa" <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k31">[31]</a></sup>. Şehir/ilçe sayfası yalnız o yere özgü gerçek içerik varsa (o bölgede yapılmış iş, bölgeye özgü bilgi, oradan müşteri yorumu).</li>
+          <li><strong>Telefon ve NAP.</strong> Mobilde tek dokunuşla arama; ad-adres-telefon sitede, profilde ve dizinlerde birebir aynı yazım.</li>
+          <li><strong>Yorum düzeni.</strong> Her işten sonra yorum bağlantısı; düzenli, zamana yayılmış yorum; her yoruma yanıt. Türkiye'de ayrıca tüketici yorumlarıyla ilgili yönetmelik ve para cezaları var <sup class="kaynak"><a href="#k41">[41]</a></sup>.</li>
+          <li><strong>Yandex Haritalar + Yandex Webmaster site bölgesi</strong>; Apple Business ve Bing Places.</li>
+          <li><strong>Ölçüm:</strong> profildeki "Ara" tıklamaları, yol tarifi istekleri, site tıklamaları; sitedeki form ve arama tıklamaları. Sıralama tek başına ölçüt değil, çünkü aramayı yapanın konumuna göre değişir <sup class="kaynak"><a href="#k22">[22]</a></sup>.</li>
+        </ol>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">altbilgi · profildeki yazımla birebir aynı</span></div>
+<pre><code><span class="k-etiket">&lt;footer&gt;</span>
+  <span class="k-etiket">&lt;p&gt;&lt;strong&gt;</span>Hayalî Nakliyat<span class="k-etiket">&lt;/strong&gt;</span> · Örnek İlçe / Örnekşehir<span class="k-etiket">&lt;/p&gt;</span>
+  <span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"tel:+90XXXXXXXXXX"</span><span class="k-etiket">&gt;</span>Hemen ara: 0 (XXX) XXX XX XX<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;/footer&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Firma sahibi "rakip adına 'ucuz nakliyat' yazmış, üstte çıkıyor, biz de yazalım" diyor. Whitespark anketinde addaki anahtar kelime gerçekten güçlü bir harita etkeni <sup class="kaynak"><a href="#k31">[31]</a></sup>;
+            ama Google'ın kuralına aykırı ve profil askıya alınabilir <sup class="kaynak"><a href="#k21">[21]</a></sup>. Doğrusu: kendi adını kurala uygun tutmak, rakibin adını "düzenleme öner" ile bildirmek.
+            Kısa vadeli kazanç, askıya alınmış bir profilin haftalarca süren itiraz sürecine değmez.</p>
+        </aside>
+
+        <h2 id="yapma-listesi"><span class="h-num">§ 11</span>Yapma listesi</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yapma</th><th>Neden</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td>Yapay zekâyla toplu sayfa üretmek ("yüz sorgu, yüz sayfa")</td><td>Ölçekli içerik kötüye kullanımı; değerlendirici kılavuzunda "Lowest"</td><td><a href="07-icerik-kalitesi.html">7</a></td></tr>
+              <tr><td>Bağlantı paketi satın almak</td><td>Bağlantı spamı; ya işe yaramaz ya elle işlem getirir</td><td><a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td>Anahtar kelimeli alan adı almak</td><td>EMD sistemi krediyi kısar; güven kaybettirebilir</td><td><a href="11-altyapi.html">11</a></td></tr>
+              <tr><td>Şehir/ilçe şablon sayfaları açmak</td><td>Kapı sayfası; bir siteden zaten en çok 2 sonuç çıkar</td><td><a href="03-kurallar-ve-siralama.html#spam-politikalari">3</a>, <a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td>İşletme adına anahtar kelime eklemek</td><td>Kural ihlali, askıya alınma</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td>Sahte ya da ödüllü yorum, yalnız memnun müşteriden yorum istemek</td><td>Google yaptırımı + Türkiye'de idari para cezası riski</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td>Kendi sitendeki yorumlarla kendine yıldız şeması eklemek</td><td>Yıldız çıkmaz; yanıltıcı işaretleme</td><td><a href="08-yapilandirilmis-veri.html">8</a></td></tr>
+              <tr><td>FAQ/HowTo şemasını "zengin sonuç" diye satmak</td><td>İkisi de artık gösterilmiyor (FAQ: 7 Mayıs 2026)</td><td><a href="08-yapilandirilmis-veri.html">8</a></td></tr>
+              <tr><td>llms.txt, "GEO şeması" peşinde koşmak</td><td>Google kullanmıyor; ek dosya gerekmez</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td>Değişiklik yapmadan tarihi güncellemek</td><td>Google'ın açık "önce arama motoru" işareti</td><td><a href="07-icerik-kalitesi.html">7</a></td></tr>
+              <tr><td>Gizlenecek sayfayı robots.txt ile engellemek</td><td>Dizinden çıkarmaz; <code>noindex</code> görülmez</td><td><a href="09-tarama-ve-dizin.html#robots-txt">9</a></td></tr>
+              <tr><td>Meta keywords etiketine emek harcamak</td><td>Google kullanmıyor</td><td><a href="05-sayfa-ici.html">5</a></td></tr>
+              <tr><td>Müşteriye "1. sıra garantisi" vermek</td><td>Google'ın tehlike listesinin ilk maddesi</td><td><a href="01-seo-nedir.html#garanti-yok">1</a>, <a href="17-musteri-isi.html">17</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Yeni siteyi hızlı yükseltmenin yolu çok sayfa açmak; Google büyük siteyi sever."</p>
+          <p class="mit-gercek">Google kelime sayısı ya da sayfa sayısı hedeflemeyi "önce arama motoru" işareti sayar <sup class="kaynak"><a href="#k37">[37]</a></sup>; değersiz toplu sayfa ölçekli içerik ihlalidir <sup class="kaynak"><a href="#k27">[27]</a></sup>.
+            Az ama her biri gerçek bir soruya cevap veren sayfa, çok ama birbirine benzeyen sayfadan iyidir.</p>
+        </aside>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 12</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Beklentiyi baştan yaz: marka adı haftalar, uzun kuyruk aylar, genel terim 6–12 ay ve üstü, tek kelimelik terim belki hiç.</li>
+            <li>Gün 0: marka alan adı, tek kanonik ve HTTPS adres, sunucuda hazır HTML, her sayfaya ayrı başlık/açıklama/kanonik, Organization + WebSite, temiz robots.txt ve dürüst site haritası.</li>
+            <li>Yönetim ve test ortamı <code>noindex</code> ya da parolayla gizlenir, robots.txt ile değil; yayın günü test ayarlarının canlıya taşınmadığını kontrol et; CDN bot ayarlarına bak.</li>
+            <li>İlk iki hafta: Search Console (alan adı mülkü), Bing (içe aktar), Yandex (site bölgesi), IndexNow, (yerel) İşletme Profili ve en önemlisi dönüşüm ölçümü.</li>
+            <li>1.–3. ay: bir niyet = bir sayfa; yardım ve karşılaştırma içerikleri; özgün veri; yorum düzeni; kazanılmış bağlantılar; Search Console verisiyle düzeltme.</li>
+            <li>Sonrası: 6 ayda ilk 10'a girmeyen sayfayı güncelle; güncellemelerde sakin kal; tarih ve yorumlarda dürüst ol.</li>
+            <li>Kısayolların (toplu YZ sayfası, bağlantı paketi, şehir şablonu, adda anahtar kelime, sahte yorum) hepsi ya işe yaramaz ya ceza getirir.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 13</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Long Does It Take to Rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/blog/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--info">3. taraf</span> Practical Ecommerce — Domain age impacts rankings and other SEO myths — <a href="https://www.practicalecommerce.com/domain-age-impacts-rankings-and-8-other-seo-myths">practicalecommerce.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Managing multi-regional and multilingual sites — <a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">developers.google.com/…/managing-multi-regional-sites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — HTTPS as a ranking signal (Ağu 2014) — <a href="https://developers.google.com/search/blog/2014/08/https-as-ranking-signal">developers.google.com/search/blog/2014/08/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Provide a site name to Google Search — <a href="https://developers.google.com/search/docs/appearance/site-names">developers.google.com/…/site-names</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Organization structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/organization">developers.google.com/…/organization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Build and submit a sitemap — <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">developers.google.com/…/build-sitemap</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Block search indexing with noindex — <a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">developers.google.com/…/block-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> web.dev — Web Vitals — <a href="https://web.dev/articles/vitals">web.dev/articles/vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Largest Contentful Paint — <a href="https://web.dev/articles/optimize-lcp">web.dev/articles/optimize-lcp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Define a favicon to show in search results — <a href="https://developers.google.com/search/docs/appearance/favicon-in-search">developers.google.com/…/favicon-in-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Website migration checks — <a href="https://searchengineland.com/website-migration-checks-472260">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Cloudflare drops planned Googlebot block for sites refusing AI training (27 Eyl 2026) — <a href="https://ppc.land/cloudflare-drops-planned-googlebot-block-for-sites-refusing-ai-training/">ppc.land/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Search Console adds robots.txt report — <a href="https://searchengineland.com/google-search-console-adds-robots-txt-report-434708">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Import sites from Search Console to Bing Webmaster Tools — <a href="https://blogs.bing.com/webmaster/september-2019/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools">blogs.bing.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — Site region — <a href="https://yandex.com.tr/support/webmaster/en/site-geography/site-region">yandex.com.tr/support/webmaster/…/site-region</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> IndexNow — FAQ — <a href="https://www.indexnow.org/faq">indexnow.org/faq</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Doğrulama yöntemleri — <a href="https://support.google.com/business/answer/7107242">support.google.com/business/answer/7107242</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — İşletmenizi Google'da temsil etme yönergeleri — <a href="https://support.google.com/business/answer/3038177">support.google.com/business/answer/3038177</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Tips to improve your local ranking — <a href="https://support.google.com/business/answer/7091">support.google.com/business/answer/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Ücretli ve organik raporu — <a href="https://support.google.com/google-ads/answer/3097241">support.google.com/google-ads/answer/3097241</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--info">3. taraf</span> Semrush — Search Intent (21 Kas 2024) — <a href="https://www.semrush.com/blog/search-intent/">semrush.com/blog/search-intent</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Keyword Research guide — <a href="https://ahrefs.com/blog/keyword-research/">ahrefs.com/blog/keyword-research</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Link Building (güncelleme 15 Eki 2026) — <a href="https://backlinko.com/link-building">backlinko.com/link-building</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Yorumları okuma ve yanıtlama — <a href="https://support.google.com/business/answer/3474122">support.google.com/business/answer/3474122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--ok">Resmî</span> Google Haritalar Kullanıcı Katkısı İçerik Politikası — Yasaklı içerik — <a href="https://support.google.com/contributionpolicy/answer/7400114">support.google.com/contributionpolicy/answer/7400114</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span><span class="tag tag--info">3. taraf</span> Whitespark — Local Search Ranking Factors 2026 — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Search Generative AI performance reports (3 Haz 2026) — <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">developers.google.com/search/blog/2026/06/…</a> <span class="erisim">· erişim 21 Eki 2026 (gövde metni okunamadı; ayrıntılar ikincil kaynaklardan)</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Core Web Vitals report — <a href="https://support.google.com/webmasters/answer/9205520">support.google.com/webmasters/answer/9205520</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k35"><span class="src-n">35</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Google Sandbox — <a href="https://ahrefs.com/blog/google-sandbox/">ahrefs.com/blog/google-sandbox</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k36"><span class="src-n">36</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search's core updates — <a href="https://developers.google.com/search/updates/core-updates">developers.google.com/search/updates/core-updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k37"><span class="src-n">37</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Creating helpful, reliable, people-first content — <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">developers.google.com/…/creating-helpful-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k38"><span class="src-n">38</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Hizmet bölgesi yönetimi — <a href="https://support.google.com/business/answer/9157481">support.google.com/business/answer/9157481</a> <span class="erisim">· erişim 21 Eki 2026 (arama özeti üzerinden)</span></span></li>
+          <li id="k39"><span class="src-n">39</span><span><span class="tag tag--ok">Resmî</span> Apple Destek — Apple Business hizmetleri ve ülkeler — <a href="https://support.apple.com/en-nz/126603">support.apple.com/…/126603</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k40"><span class="src-n">40</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share Turkey — <a href="https://gs.statcounter.com/search-engine-market-share/all/turkey">gs.statcounter.com/…/all/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k41"><span class="src-n">41</span><span><span class="tag tag--info">3. taraf</span> Dünya — Ticaret Bakanlığı: sahte yorumlara yaptırım (haber) — <a href="https://www.dunya.com/ekonomi/ticaret-bakanligi-acikladi-sahte-yorumlara-yaptirim-uygulanacak-haberi-842114">dunya.com/…</a> <span class="erisim">· erişim 21 Eki 2026 (Resmî Gazete metni ayrıca doğrulanmalı)</span></span></li>
+          <li id="k42"><span class="src-n">42</span><span><span class="tag tag--ok">Resmî</span> OpenAI — Overview of OpenAI crawlers — <a href="https://developers.openai.com/api/docs/bots">developers.openai.com/api/docs/bots</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k43"><span class="src-n">43</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Page indexing report — <a href="https://support.google.com/webmasters/answer/7440203">support.google.com/webmasters/answer/7440203</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="17-musteri-isi.html"><span class="dir">&larr; Önceki</span><span class="ttl">Müşteri işi: denetim, öneri, taşıma</span></a>
+        <a class="next" href="19-kontrol-listesi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Kontrol listesi</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hız, mobil ve JavaScript — SEO Rehberi</title>
+<meta name="description" content="Core Web Vitals (LCP, INP, CLS) eşikleri ve ölçümü, CrUX ve Lighthouse farkı, LCP/INP/CLS iyileştirme, yazı tipleri, mobil öncelikli dizin, JavaScript ile render, SSR/SSG/CSR, yapay zekâ ve sosyal botlar, araya giren pencereler.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Hız, mobil ve JavaScript</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 10 · Teknik</div>
+        <h1 class="page-title">Hız, mobil ve JavaScript</h1>
+        <p class="lede">Bu bölüm sitenin "nasıl çalıştığı" ile ilgilenir: ne kadar hızlı açılıyor, dokununca ne kadar çabuk tepki veriyor, telefonda düzgün mü, içerik JavaScript çalışmadan görünüyor mu. Önce Google'ın bunları nasıl ölçtüğünü ve sıralamada ne kadar ağırlık verdiğini, sonra her metriği nasıl iyileştireceğini, en sonda da JavaScript ağırlıklı sitelerin Google'a ve yapay zekâ botlarına nasıl göründüğünü anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 22 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li><strong>Core Web Vitals</strong> üç metriktir: LCP ≤ 2,5 sn, INP ≤ 200 ms, CLS ≤ 0,1. Gerçek kullanıcıların <strong>75. yüzdeliği</strong>ne bakılır; INP, 12 Mart 2024'te FID'in yerini aldı.</li>
+            <li>Google bunları sıralamada kullanır ama <strong>küçük bir faktördür</strong>: ilgililiğin önüne geçmez, benzer sayfalar arasında eşitlik bozar. Lighthouse puanı sıralamada kullanılmaz.</li>
+            <li>Saha verisi CrUX'tan gelir; Brave, Edge ve iOS kullanıcıları bu veride yok. Kendi tarayıcında hızlı görmek Google'ın gördüğü değildir.</li>
+            <li>Mobil öncelikli dizin bitti: 5 Temmuz 2024'ten beri mobilde açılmayan site dizine girmez.</li>
+            <li>Google JavaScript'i çalıştırır ama gecikmeyle; yapay zekâ ve sosyal ağ botlarının çoğu hiç çalıştırmaz. İçerik, başlık, kanonik ve <code>og:</code> etiketleri <strong>ilk HTML'de</strong> olmalı. Dinamik render artık önerilmiyor.</li>
+          </ul>
+        </div>
+
+        <!-- ============ 1 ============ -->
+        <h2 id="cwv-nedir"><span class="h-num">§ 1</span>Core Web Vitals: üç metrik, üç eşik</h2>
+        <p><strong>Core Web Vitals</strong> (CWV, Önemli Web Verileri), sayfanın gerçek kullanıcıdaki deneyimini ölçen üç metriktir. Üçü de şu an "stable" (kararlı) aşamadadır <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Metrik</th><th>Ne ölçer</th><th>İyi</th><th>İyileştirilmeli</th><th>Kötü</th></tr></thead>
+            <tbody>
+              <tr><td><strong>LCP</strong> (Largest Contentful Paint)</td><td>Sayfanın en büyük ilk görünen öğesinin (genelde ana görsel ya da başlık metni) ekrana gelme süresi</td><td>≤ 2,5 sn</td><td>2,5–4 sn</td><td>&gt; 4 sn</td></tr>
+              <tr><td><strong>INP</strong> (Interaction to Next Paint)</td><td>Tıklama, dokunma, tuşa basmadan sonra ekranın tepki vermesi; sayfa açık kaldıkça bütün etkileşimler</td><td>≤ 200 ms</td><td>200–500 ms</td><td>&gt; 500 ms</td></tr>
+              <tr><td><strong>CLS</strong> (Cumulative Layout Shift)</td><td>Sayfa yüklenirken öğelerin beklenmedik kayması</td><td>≤ 0,1</td><td>0,1–0,25</td><td>&gt; 0,25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <h3 id="gecme-kurali">Geçme kuralı</h3>
+        <ul>
+          <li>Değerler gerçek kullanıcı verisinin <strong>75. yüzdeliğinde</strong> ölçülür: ziyaretlerin en az %75'i eşiğin altında kalmalı <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Mobil ve masaüstü ayrı</strong> değerlendirilir <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li>Search Console'da bir URL grubunun durumu, <strong>en kötü metriği</strong> neyse odur. Tek bir "kötü" metrik bütün grubu kötü yapar <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li>Search Console ve CrUX <strong>28 günlük kayan pencere</strong> kullanır: bir düzeltmenin saha verisine tamamen yansıması yaklaşık 4 hafta sürer; "Düzeltmeyi doğrula" da 28 gün izler <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li>Metrikler deneysel → beklemede (en az 6 ay) → kararlı aşamalarından geçer; kararlı metrikler yılda en fazla bir kez değişir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+        </ul>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>12 Mart 2024:</strong> INP, FID'in (First Input Delay) yerini aldı. INP Mayıs 2022'de deneysel olarak çıkmış, Mayıs 2023'te duyurulmuştu. FID, 9 Eylül 2024'te CrUX ve PageSpeed Insights API'lerinden de kaldırıldı <sup class="kaynak"><a href="#k3">[3]</a></sup>. 2021 tarihli bazı Türkçe kaynaklar hâlâ FID eşiklerini veriyor <sup class="kaynak"><a href="#k29">[29]</a></sup>; FID gören rehberi eskimiş say.</p>
+        </aside>
+
+        <!-- ============ 2 ============ -->
+        <h2 id="siralamadaki-yeri"><span class="h-num">§ 2</span>Sıralamada ne kadar önemli</h2>
+        <p>Google'ın sayfa deneyimi belgesi iki cümleyi yan yana kurar: "Core Web Vitals sıralama sistemlerimizce kullanılır" ve "en ilgili içeriği, sayfa deneyimi vasat olsa bile göstermeye çalışırız" <sup class="kaynak"><a href="#k4">[4]</a></sup>. İyi deneyim, birçok iyi sayfanın aynı sorgu için yarıştığı durumda belirleyici olur; Google mükemmel puan peşinde koşmanın "zamanın en iyi kullanımı olmayabileceğini" söyler.</p>
+        <ul>
+          <li>Tek bir "sayfa deneyimi sinyali" yoktur. HTTPS, araya giren pencereler, reklam yoğunluğu gibi başlıklar doğrudan sıralama artışı getirmez ama kullanıcıyı memnun eder <sup class="kaynak"><a href="#k4">[4]</a></sup>.</li>
+          <li>Değerlendirme genelde sayfa bazındadır; bazı site geneli değerlendirmeler de vardır <sup class="kaynak"><a href="#k4">[4]</a></sup>.</li>
+          <li>Google temsilcileri CWV'yi "küçük faktör / eşitlik bozucu" diye tarif etmiştir. Ahrefs'in incelediği 42 milyon sayfanın yalnız %11,4'ünde CWV verisi vardı <sup class="kaynak"><a href="#k25">[25]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"PageSpeed puanı 100 olursa 1. sıraya çıkarım."</p>
+          <p class="mit-gercek">Sıralamada saha verisi (CrUX) kullanılır, Lighthouse puanı değil; ilgililik her zaman önce gelir <sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Hız, iyi bir sayfayı rakibinin önüne geçirebilir; kötü bir sayfayı kurtarmaz.</p>
+        </aside>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Hızın asıl getirisi çoğu zaman sıralama değil <strong>dönüşümdür</strong>: telefonda geç açılan bir sayfadan çıkan ziyaretçi zaten arama yapmayacak, formu doldurmayacaktır. Koddan anlamayan bir yerel işletmeye (ör. nakliye firması) hızı "Google sever" diye değil, "müşteri bekleyip kaçmasın" diye anlatmak daha dürüsttür.</p>
+        </aside>
+
+        <!-- ============ 3 ============ -->
+        <h2 id="olcum"><span class="h-num">§ 3</span>Ölçüm: saha verisi ve laboratuvar verisi</h2>
+        <h3 id="crux">CrUX: Google'ın gördüğü gerçek kullanıcı verisi</h3>
+        <p><strong>CrUX</strong> (Chrome User Experience Report), Google'ın sıralamada kullandığı saha verisinin kaynağıdır <sup class="kaynak"><a href="#k6">[6]</a></sup>:</p>
+        <ul>
+          <li><strong>Kapsananlar:</strong> Windows, macOS, ChromeOS ve Linux'taki masaüstü Chrome ile Android Chrome.</li>
+          <li><strong>Kapsanmayanlar:</strong> iOS'taki Chrome, Android WebView ve Edge gibi diğer Chromium tabanlı tarayıcılar. <strong>Brave de bu gruptadır.</strong></li>
+          <li>Sayfa "keşfedilebilir" olmalı (200 dönmeli, <code>noindex</code> olmamalı) ve yeterince ziyaret almalıdır; eşik açıklanmıyor.</li>
+          <li>Veri yetersizse Google URL grubuna, o da yoksa bütün <strong>origin</strong>'e (alan adının tamamına) geri düşer.</li>
+        </ul>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p><code>noindex</code>'li ve 200 dönmeyen sayfalar CrUX'ta sayfa düzeyinde yer almaz ama <strong>origin verisine katkı verir</strong>. Aynı alan adındaki yavaş bir yönetim paneli, verisi az olan sitenin genel skorunu aşağı çekebilir <sup class="kaynak"><a href="#k6">[6]</a></sup>. Paneli ayrı bir alt alan adına almak bu etkiyi de ayırır.</p>
+        </aside>
+
+        <h3 id="lab-saha">Laboratuvar ve saha farkı</h3>
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">Saha (field)</h4><p>Gerçek kullanıcılardan, gerçek cihaz ve ağlarda, 28 gün boyunca toplanır. Sıralamada kullanılan budur. Kaynak: CrUX, Search Console, kendi RUM ölçümün (Real User Monitoring: kendi ziyaretçilerinden topladığın ölçüm).</p></div>
+          <div class="pane"><h4 class="pane__title">Laboratuvar (lab)</h4><p>Tek bir sentetik test: Lighthouse, Chrome DevTools. Geliştirme sırasında sorunu bulmak içindir. Lab'da INP yoktur; vekili <strong>TBT</strong>'dir (Total Blocking Time: ana iş parçacığının kilitli kaldığı toplam süre).</p></div>
+        </div>
+        <p>Lighthouse performans puanının ağırlıkları: TBT %30, LCP %25, CLS %25, FCP %10, Speed Index %10. Bu puan <strong>sıralamada kullanılmaz</strong> <sup class="kaynak"><a href="#k7">[7]</a></sup>.</p>
+
+        <h3 id="olcum-araclari">Araçlar</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Araç</th><th>Ne verir</th></tr></thead>
+            <tbody>
+              <tr><td>PageSpeed Insights</td><td>Tek URL; hem saha (CrUX) hem lab (Lighthouse) verisi</td></tr>
+              <tr><td>Search Console · Core Web Vitals raporu</td><td>Site geneli, şablona göre gruplanmış URL'ler</td></tr>
+              <tr><td>CrUX API / BigQuery / CrUX Vis</td><td>Günlük (API) ve aylık (BigQuery) ham saha verisi</td></tr>
+              <tr><td>Lighthouse, Chrome DevTools</td><td>Geliştirme sırasında lab testi</td></tr>
+              <tr><td><code>web-vitals</code> JS kitaplığı</td><td>Kendi RUM ölçümün</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Araçların geniş anlatımı: <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</p>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>"Sitem bende çok hızlı ama PageSpeed kötü diyor." Ölçüm yavaş bir mobil cihaz ve kısıtlı ağ ile yapılıyor; saha verisi de gerçek (çoğu orta segment) Android kullanıcılarından geliyor. Geliştiricinin güçlü masaüstü bilgisayarı ve hızlı bağlantısı ölçüt değildir <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>. Ziyaretçisi az bir sitede Search Console "veri yok" der: bu ceza değildir; lab ölçümüyle ilerle, istersen kendi RUM'unu kur.</p>
+        </aside>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">kendi saha ölçümün (RUM)</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"module"</span><span class="k-etiket">&gt;</span>
+  <span class="k-yorum">// Üretimde kitaplığı kendi sunucundan ver; sürümü tam yaz.</span>
+  import {onLCP, onINP, onCLS} from '/js/web-vitals-4.2.4.js';
+  const gonder = m =&gt; navigator.sendBeacon('/olcum',
+        JSON.stringify({ad: m.name, deger: m.value, id: m.id}));
+  onLCP(gonder); onINP(gonder); onCLS(gonder);
+<span class="k-etiket">&lt;/script&gt;</span></code></pre>
+        </div>
+
+        <!-- ============ 4 ============ -->
+        <h2 id="lcp"><span class="h-num">§ 4</span>LCP'yi iyileştirmek</h2>
+        <p>web.dev, LCP süresini dört alt parçaya ayırır ve her birine bir pay önerir <sup class="kaynak"><a href="#k8">[8]</a></sup>. Hangi parçanın şiştiğini bilmeden yapılan iyileştirme çoğu zaman yanlış yere gider.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Alt parça</th><th>Ne</th><th>Önerilen pay</th></tr></thead>
+            <tbody>
+              <tr><td>TTFB</td><td>Sunucunun ilk baytı göndermesi (Time to First Byte)</td><td>~%40</td></tr>
+              <tr><td>Kaynak yükleme gecikmesi</td><td>Tarayıcının LCP görselini "keşfetmesi" için geçen süre</td><td>&lt; %10</td></tr>
+              <tr><td>Kaynak indirme süresi</td><td>Görselin inmesi</td><td>~%40</td></tr>
+              <tr><td>Öğe çizim gecikmesi</td><td>İndikten sonra ekrana çizilmesi</td><td>&lt; %10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="lcp-oneriler">Öneriler</h3>
+        <ul class="checklist">
+          <li>LCP görseli <strong>ilk HTML'de</strong> <code>src</code>/<code>srcset</code> ile görünsün. CSS arka planında ya da JS ile ekleniyorsa <code>&lt;link rel="preload"&gt;</code> ile önceden yüklensin <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>LCP görseline <code>fetchpriority="high"</code>; bunu en çok 1–2 görsele ver <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li><strong>LCP görseli asla <code>loading="lazy"</code> olmasın</strong> <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>Görseller mümkünse HTML ile aynı origin'den gelsin (ek bağlantı kurma süresi olmasın).</li>
+          <li><code>&lt;head&gt;</code> içindeki eşzamanlı script'leri <code>defer</code>/<code>async</code> yap; kritik olmayan CSS'i ertele.</li>
+          <li>Yönlendirmeleri en aza indir; URL'ye her seferinde değişen parametre ekleme, CDN önbelleği boşa çıkar.</li>
+          <li>AVIF/WebP, doğru boyutlandırılmış, sıkıştırılmış görsel. Görsel SEO tarafı: <a href="06-gorsel-ve-video.html">Bölüm 6</a>.</li>
+        </ul>
+        <p>LCP öğesi bir görsel, video posteri, CSS <code>url()</code> arka planı ya da <strong>bir metin bloğu</strong> olabilir <sup class="kaynak"><a href="#k25">[25]</a></sup>. Metin LCP'sinde yazı tipinin yüklenmesi belirleyicidir (<a href="#yazi-tipi">Yazı tipleri</a>).</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ekranın üstü</span></div>
+<pre><code><span class="k-yorum">&lt;!-- LCP görseli: lazy YOK, öncelik yüksek, boyutlu --&gt;</span>
+<span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/hero-1200.jpg"</span>
+         <span class="k-ozn">srcset</span>=<span class="k-deger">"/img/hero-600.avif 600w, /img/hero-1200.avif 1200w"</span>
+         <span class="k-ozn">sizes</span>=<span class="k-deger">"100vw"</span> <span class="k-ozn">width</span>=<span class="k-deger">"1200"</span> <span class="k-ozn">height</span>=<span class="k-deger">"600"</span>
+         <span class="k-ozn">alt</span>=<span class="k-deger">"Kamyona yüklenmiş paketlenmiş ev eşyaları"</span>
+         <span class="k-ozn">fetchpriority</span>=<span class="k-deger">"high"</span><span class="k-etiket">&gt;</span>
+
+<span class="k-yorum">&lt;!-- Ekran dışı görsel: lazy, boyutlu --&gt;</span>
+<span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/ekip.webp"</span> <span class="k-ozn">width</span>=<span class="k-deger">"800"</span> <span class="k-ozn">height</span>=<span class="k-deger">"533"</span> <span class="k-ozn">loading</span>=<span class="k-deger">"lazy"</span>
+         <span class="k-ozn">alt</span>=<span class="k-deger">"Paketleme ekibi koltuğu streç filmle sarıyor"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bazı temalar ve eklentiler <strong>her</strong> görsele <code>loading="lazy"</code> ekler; ekranın üstündeki ana görsel de geç yüklenir ve LCP bozulur <sup class="kaynak"><a href="#k8">[8]</a></sup><sup class="kaynak"><a href="#k26">[26]</a></sup>. <code>data-src</code> ile JS'in sonradan doldurduğu görselleri hem tarayıcının ön yükleyicisi hem Google kaçırabilir. (WordPress'in kendisi ilk görsele otomatik <code>fetchpriority</code> ekler ve onu lazy yapmaz <sup class="kaynak"><a href="#k25">[25]</a></sup>; sorun genelde tema ve eklentilerde.)</p>
+        </aside>
+        <p><strong>TTFB:</strong> CWV değildir ama LCP'nin önünde gelir. Kaba rehber: iyi ≤ 0,8 sn, kötü &gt; 1,8 sn. Yönlendirme, DNS, TLS el sıkışması TTFB'ye eklenir <sup class="kaynak"><a href="#k11">[11]</a></sup>. Sunucu, hosting ve CDN tarafı: <a href="11-altyapi.html">Bölüm 11</a>.</p>
+
+        <!-- ============ 5 ============ -->
+        <h2 id="inp"><span class="h-num">§ 5</span>INP'yi iyileştirmek</h2>
+        <p>INP üç parçadan oluşur: <strong>girdi gecikmesi</strong> (ana iş parçacığı meşgulken tıklamanın beklemesi), <strong>işlem süresi</strong> (olay işleyicinin çalışması) ve <strong>sunum gecikmesi</strong> (sonucun ekrana çizilmesi) <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
+        <ul>
+          <li><strong>Olay işleyicilerini hafif tut.</strong> Önce arayüzü güncelle, gerisini (kaydetme, sayaç, analiz) sonraki bir göreve bırak.</li>
+          <li><strong>Uzun görevleri böl</strong>: <code>scheduler.yield()</code> ya da <code>setTimeout</code>.</li>
+          <li><strong>Stil yazıp hemen ölçme.</strong> Bu "layout thrashing" (tarayıcıyı düzeni üst üste yeniden hesaplamaya zorlamak) yaratır.</li>
+          <li><strong>DOM'u küçük tut.</strong> Ekran dışı bölümler için <code>content-visibility</code> kullanılabilir.</li>
+          <li><strong>Hydration'a dikkat</strong> (sunucu HTML'ini istemcide JavaScript ile yeniden "canlandırma"): web.dev bunu "bir uygulama fiyatına iki uygulama" diye anlatır; INP'yi kötüleştirebilir <sup class="kaynak"><a href="#k20">[20]</a></sup>.</li>
+        </ul>
+        <p>Kaynak: <sup class="kaynak"><a href="#k10">[10]</a></sup>. Kaydırma ve yakınlaştırma INP'ye sayılmaz; INP en çok form, giriş ve sepet gibi etkileşim sayfalarında önemlidir <sup class="kaynak"><a href="#k26">[26]</a></sup>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>JavaScript</span><span class="dosya">uzun işi bölme</span></div>
+<pre><code>dugme.addEventListener('click', async () =&gt; {
+  arayuzuGuncelle();                       <span class="k-yorum">// kullanıcı hemen tepki görsün</span>
+  if ('scheduler' in window &amp;&amp; 'yield' in scheduler) {
+        await scheduler.yield();               <span class="k-yorum">// tarayıcıya çizme fırsatı ver</span>
+  } else {
+        await new Promise(r =&gt; setTimeout(r, 0));
+  }
+  agirIsiYap();                            <span class="k-yorum">// kaydetme, analiz vb. sonra</span>
+});</code></pre>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Backlinko'nun 5,2 milyon sayfalık analizine göre her üçüncü taraf script ortalama ~34 ms ekliyor <sup class="kaynak"><a href="#k26">[26]</a></sup> <span class="tag tag--info">3. taraf</span>. Sohbet kutuları, iki üç ayrı analiz aracı ve reklam pikselleri yerel işletme sitelerinde INP'nin en sık düşmanıdır; hangisinin gerçekten kullanıldığını sor, gerisini kaldır.</p>
+        </aside>
+
+        <!-- ============ 6 ============ -->
+        <h2 id="cls"><span class="h-num">§ 6</span>CLS'yi iyileştirmek</h2>
+        <ul class="checklist">
+          <li><code>&lt;img&gt;</code> ve <code>&lt;video&gt;</code> için <code>width</code>/<code>height</code> öznitelikleri ya da CSS <code>aspect-ratio</code> ver: tarayıcı yeri önceden ayırsın.</li>
+          <li>Reklam, iframe ve gömülü içerik için <code>min-height</code> ile yer ayır; içerik gelmese de yer kalsın.</li>
+          <li>Sonradan gelen içeriği (çerez bandı, kampanya şeridi) mevcut içeriğin <strong>üstüne</strong> ekleme.</li>
+          <li>Yazı tiplerinde <code>font-display: optional</code> ya da yedek fonta <code>size-adjust</code>.</li>
+          <li>Animasyonda <code>top</code>/<code>left</code> yerine <code>transform</code>.</li>
+          <li><strong>bfcache</strong>'e (tarayıcının geri/ileri önbelleği) uygun ol: <code>unload</code> olayı ve <code>Cache-Control: no-store</code> bfcache'i bozar <span class="tag">Kaynaktan teyit edilmedi</span>.</li>
+        </ul>
+        <p>Kaynak: <sup class="kaynak"><a href="#k9">[9]</a></sup>. Kullanıcı girdisinden sonraki 500 ms içindeki kaymalar sayılmaz: menü açılınca içeriğin kayması sorun değildir.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>CSS</span><span class="dosya">site.css</span></div>
+<pre><code>.reklam-yeri { min-height: 250px; }            <span class="k-yorum">/* reklam gelmese de yer kalsın */</span>
+.video-kutu  { aspect-ratio: 16 / 9; }
+img, video   { max-width: 100%; height: auto; } <span class="k-yorum">/* width/height öznitelikleriyle birlikte */</span>
+.kayan       { transition: transform .3s; }     <span class="k-yorum">/* top/left değil transform */</span></code></pre>
+        </div>
+
+        <!-- ============ 7 ============ -->
+        <h2 id="yazi-tipi"><span class="h-num">§ 7</span>Yazı tipleri</h2>
+        <p>Web yazı tipleri hem LCP'yi (metin geç görünür) hem CLS'yi (yedek fonttan gerçek fonta geçerken metin kayar) etkiler. web.dev önerileri <sup class="kaynak"><a href="#k12">[12]</a></sup>:</p>
+        <ul>
+          <li><strong>WOFF2</strong> kullan (WOFF'tan yaklaşık %30 daha iyi sıkıştırır).</li>
+          <li><strong>Alt küme</strong> (subset) ve <code>unicode-range</code> kullan. Türkçe karakterleri (<strong>Ğ ğ İ ı Ş ş</strong>) içeren aralığı unutma; yoksa bu harfler yedek fontla çizilir, metin "yamalı" görünür.</li>
+          <li><code>@font-face</code> bildirimlerini <code>&lt;head&gt;</code> içinde satır içi yaz (font dosyasının kendisini değil).</li>
+          <li>Font başka bir origin'deyse <code>preconnect</code> (crossorigin ile) ekle; <code>preload</code>'u dikkatli kullan.</li>
+          <li><code>font-display</code>: gövde metni için <code>optional</code>, marka/başlık yazısı için <code>swap</code>.</li>
+          <li>Yedek fontu <code>size-adjust</code> ile web fontuna yaklaştır; ikon fontları yerine SVG; gövde için <code>system-ui</code> düşünülebilir.</li>
+        </ul>
+        <div class="kod">
+          <div class="kod-ust"><span>CSS</span><span class="dosya">&lt;head&gt; içinde satır içi</span></div>
+<pre><code>@font-face {
+  font-family: "Marka";
+  src: url("/fonts/marka-latin-ext.woff2") format("woff2");
+  font-display: swap;            <span class="k-yorum">/* başlık için; gövdede optional */</span>
+  unicode-range: U+0000-00FF, U+011E-011F, U+0130-0131, U+015E-015F; <span class="k-yorum">/* Ğğ İı Şş dahil */</span>
+}
+@font-face {                     <span class="k-yorum">/* yedek fontu web fontuna yaklaştır → daha az kayma */</span>
+  font-family: "Marka-yedek";
+  src: local("Arial");
+  size-adjust: 104%;
+}
+body { font-family: "Marka", "Marka-yedek", system-ui, sans-serif; }</code></pre>
+        </div>
+
+        <!-- ============ 8 ============ -->
+        <h2 id="head-iskeleti"><span class="h-num">§ 8</span>Hızlı ve SEO dostu bir &lt;head&gt; iskeleti</h2>
+        <p>Yukarıdaki kuralların çoğu sayfanın başında toplanır. Aşağıdaki iskelet bir başlangıç noktasıdır; başlık ve açıklama kuralları <a href="05-sayfa-ici.html">Bölüm 5</a>'te, kanonik <a href="09-tarama-ve-dizin.html#kanonik">Bölüm 9</a>'da.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">sayfa şablonu</span></div>
+<pre><code><span class="k-etiket">&lt;!doctype html&gt;</span>
+<span class="k-etiket">&lt;html</span> <span class="k-ozn">lang</span>=<span class="k-deger">"tr"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;head&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">charset</span>=<span class="k-deger">"utf-8"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"viewport"</span> <span class="k-ozn">content</span>=<span class="k-deger">"width=device-width, initial-scale=1"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;title&gt;</span>Sayfa başlığı | Marka<span class="k-etiket">&lt;/title&gt;</span>
+  <span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"description"</span> <span class="k-ozn">content</span>=<span class="k-deger">"Sayfaya özgü 1-2 cümlelik açıklama."</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"canonical"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://www.ornek.com/hizmetler/"</span><span class="k-etiket">&gt;</span>
+  <span class="k-yorum">&lt;!-- Font başka origin'deyse erken bağlantı --&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"preconnect"</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://fonts.ornek-cdn.com"</span> <span class="k-ozn">crossorigin</span><span class="k-etiket">&gt;</span>
+  <span class="k-yorum">&lt;!-- LCP görseli CSS/JS'ten geliyorsa önceden yükle --&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"preload"</span> <span class="k-ozn">as</span>=<span class="k-deger">"image"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/img/hero-1200.avif"</span> <span class="k-ozn">fetchpriority</span>=<span class="k-deger">"high"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;style&gt;</span><span class="k-yorum">/* yalnız kritik, küçük CSS satır içi */</span><span class="k-etiket">&lt;/style&gt;</span>
+  <span class="k-etiket">&lt;link</span> <span class="k-ozn">rel</span>=<span class="k-deger">"stylesheet"</span> <span class="k-ozn">href</span>=<span class="k-deger">"/css/site.5c1e9a.css"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;script</span> <span class="k-ozn">src</span>=<span class="k-deger">"/js/app.3f9a1b.js"</span> <span class="k-ozn">defer</span><span class="k-etiket">&gt;&lt;/script&gt;</span>
+<span class="k-etiket">&lt;/head&gt;</span></code></pre>
+        </div>
+        <p>Dosya adlarındaki <code>5c1e9a</code>, <code>3f9a1b</code> içerik özetidir (hash). Bunun SEO tarafındaki gerekçesi aşağıda: <a href="#js-kurallari">Google eski JS ile render edebilir</a>.</p>
+
+        <!-- ============ 9 ============ -->
+        <h2 id="mobil-oncelik"><span class="h-num">§ 9</span>Mobil öncelikli dizin</h2>
+        <p>Google sitenin <strong>mobil sürümünü</strong> akıllı telefon tarayıcısıyla tarar, dizine alır ve sıralar <sup class="kaynak"><a href="#k13">[13]</a></sup>. Masaüstünde olup mobilde olmayan içerik, Google için yoktur.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>2016</strong> duyuru · <strong>31 Ekim 2023</strong> geçişin tamamlandığı duyuruldu <sup class="kaynak"><a href="#k28">[28]</a></sup> · <strong>5 Temmuz 2024:</strong> kalan masaüstü taramalı siteler de akıllı telefon tarayıcısına geçti; <strong>mobilde hiç erişilemeyen site artık dizine alınmıyor</strong>. "Mobil dostu olmayan ama mobilde açılan" site dizine girer <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        </aside>
+        <p><strong>Duyarlı tasarım</strong> (responsive: tek HTML, tek URL, ekran genişliğine göre değişen düzen) en basit ve önerilen yoldur. Ayrı mobil sürüm (<code>m.</code> alt alan adı) ya da cihaza göre farklı HTML veren (dinamik sunum) siteler için kurallar <sup class="kaynak"><a href="#k13">[13]</a></sup>:</p>
+        <ul>
+          <li>Mobilde de aynı ana içerik, aynı başlık ve açıklama, aynı yapılandırılmış veri, aynı alt metin.</li>
+          <li><strong>Robots meta etiketleri iki sürümde aynı.</strong> Mobil sürüme yanlışlıkla <code>noindex</code> konursa site dizinden düşer.</li>
+          <li>Ana içerik etkileşimle (tıklayınca) yüklenmesin; Googlebot tıklamaz.</li>
+          <li>Dinamik sunumda <code>Vary: User-Agent</code> başlığı gönderilsin.</li>
+          <li><code>m.</code> sitede kanonik masaüstünü, <code>alternate</code> mobili göstersin.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Önemli içeriği sekmeye ya da akordeona koyma, Google görmez."</p>
+          <p class="mit-gercek">Google'ın mobil belgesi akordeon ve sekmeyi serbest sayar. Sorun, içeriğin mobilde <strong>tamamen kaldırılmasıdır</strong> <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        </aside>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>1 Aralık 2023:</strong> Mobile-Friendly Test, Search Console'daki Mobile Usability raporu ve API'si kaldırıldı; yerine Lighthouse önerildi. Page Experience raporu, CWV ve HTTPS raporlarına bağlantı veren bir sayfaya dönüştü <sup class="kaynak"><a href="#k15">[15]</a></sup>. "Mobile-Friendly Test ile kontrol et" diyen rehber eskimiştir.</p>
+        </aside>
+
+        <!-- ============ 10 ============ -->
+        <h2 id="javascript-seo"><span class="h-num">§ 10</span>JavaScript ve Google</h2>
+        <h3 id="render-akisi">Render akışı</h3>
+        <p>Google JavaScript'li bir sayfayı üç aşamada işler: <strong>tarama</strong> → <strong>render kuyruğu</strong> → <strong>render</strong> (Web Rendering Service, WRS: güncel Chromium tabanlı, sayfayı tarayıcı gibi çalıştıran hizmet) → <strong>dizine ekleme</strong> <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        <div class="sema-kaydir"><svg role="img" aria-labelledby="sema-render-baslik" viewBox="0 0 640 110">
+          <title id="sema-render-baslik">Google'ın JavaScript işleme akışı: tarama, render kuyruğu, render, dizine ekleme</title>
+          <g font-size="13" fill="currentColor" text-anchor="middle">
+            <rect x="5" y="30" width="130" height="50" rx="8" fill="none" stroke="currentColor"/>
+            <text x="70" y="52">Tarama</text><text x="70" y="69" font-size="11">HTML iner</text>
+            <rect x="170" y="30" width="130" height="50" rx="8" fill="none" stroke="currentColor"/>
+            <text x="235" y="52">Render kuyruğu</text><text x="235" y="69" font-size="11">bekleme</text>
+            <rect x="335" y="30" width="130" height="50" rx="8" fill="none" stroke="currentColor"/>
+            <text x="400" y="52">Render (WRS)</text><text x="400" y="69" font-size="11">JS çalışır</text>
+            <rect x="500" y="30" width="130" height="50" rx="8" fill="none" stroke="currentColor"/>
+            <text x="565" y="52">Dizine ekleme</text><text x="565" y="69" font-size="11">işlenmiş HTML</text>
+            <path d="M135 55 H168 M300 55 H333 M465 55 H498" stroke="currentColor" fill="none"/>
+            <text x="320" y="100" font-size="11">200 dışı kod ya da ilk HTML'de noindex → render atlanabilir</text>
+          </g>
+        </svg></div>
+        <ul>
+          <li>200 dışında durum kodu dönen sayfalar render edilmeyebilir; robots.txt ile engellenmiş JS/CSS render edilmez <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Gecikme:</strong> Vercel ve MERJ'in Nisan 2024 ölçümünde render gecikmesinin medyanı ~10 sn, 75. yüzdeliği ~26 sn çıktı; uç değerlerde saatler sürebiliyor. Ölçüm 3 site ve 37 bin render üzerinden; genellenmemeli <sup class="kaynak"><a href="#k21">[21]</a></sup> <span class="tag tag--info">3. taraf</span>.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Google JavaScript'i hiç okumaz" ya da tam tersi "Google JS'i sorunsuz okur, fark etmez".</p>
+          <p class="mit-gercek">Okur, ama gecikmeli ve sınırlı: izin istekleri reddedilir, WebSocket/WebRTC ve WebGL yoktur, durum saklanmaz <sup class="kaynak"><a href="#k17">[17]</a></sup>. Ve diğer botların çoğu hiç okumaz (<a href="#diger-botlar">aşağıda</a>).</p>
+        </aside>
+
+        <h3 id="js-kurallari">Kurallar</h3>
+        <ol class="steps">
+          <li><strong>Bağlantılar gerçek <code>&lt;a href="…"&gt;</code> olsun.</strong> <code>onclick</code> ile gezinme ve <code>&lt;span&gt;</code> "bağlantılar" bulunmaz <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Rota için History API ve gerçek URL.</strong> <code>#/sayfa</code> gibi parçalı URL ile farklı içerik yükleme; eski AJAX tarama şeması (<code>#!</code>) kaldırıldı <sup class="kaynak"><a href="#k17">[17]</a></sup>.</li>
+          <li><strong><code>noindex</code>'i JS ile kaldırmaya güvenme.</strong> İlk HTML'de <code>noindex</code> gören Google render'ı atlayabilir (<a href="09-tarama-ve-dizin.html#js-noindex">Bölüm 9</a>) <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Kanonik ilk HTML'de.</strong> JS ile eklenecekse HTML'dekiyle aynı olsun; sayfada tek kanonik bulunsun <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Tek sayfalık uygulamada (SPA) soft 404'ü önle.</strong> Bulunamayan içerikte ya sunucunun 404 döndüğü bir URL'ye yönlendir ya da hata görünümüne JS ile <code>noindex</code> ekle <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Dosya adına içerik özeti ekle</strong> (<code>app.3f9a1.js</code>). WRS önbellek başlıklarını yok sayabilir; özet yoksa Google sayfayı eski JS ile render edebilir <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Durum saklanmaz.</strong> WRS'de localStorage, sessionStorage ve çerezler her sayfa yüklemesinde temizlenir; içerik bunlara bağlı olmasın <sup class="kaynak"><a href="#k16">[16]</a></sup>.</li>
+          <li><strong>Geç yükleme</strong> yerleşik <code>loading="lazy"</code> ya da IntersectionObserver ile; kaydırma veya tıklama olayına bağlama. Sonsuz kaydırmada her parça kalıcı bir URL (<code>?page=12</code>, mutlak numara; <code>?tarih=dun</code> gibi göreli değil) alsın ve sırayla bağlansın <sup class="kaynak"><a href="#k19">[19]</a></sup>.</li>
+        </ol>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">taranmaz</span></div>
+<pre><code><span class="k-etiket">&lt;span</span> <span class="k-ozn">onclick</span>=<span class="k-deger">"git('/hizmetler')"</span><span class="k-etiket">&gt;</span>Hizmetler<span class="k-etiket">&lt;/span&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"#/hizmetler"</span><span class="k-etiket">&gt;</span>Hizmetler<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">taranır</span></div>
+<pre><code><span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"/hizmetler/evden-eve"</span><span class="k-etiket">&gt;</span>Evden eve taşıma<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+        <div class="kod">
+          <div class="kod-ust"><span>JavaScript</span><span class="dosya">SPA · bulunamayan içerik</span></div>
+<pre><code>fetch(`/api/urun/${id}`).then(r =&gt; {
+  if (r.status === 404) {
+        const m = document.createElement('meta');
+        m.name = 'robots';
+        m.content = 'noindex';
+        document.head.appendChild(m);   <span class="k-yorum">// ya da: location.href = '/404' (sunucu 404 dönsün)</span>
+  }
+});</code></pre>
+        </div>
+        <p>Kontrol için Search Console'daki URL Denetimi'nin <strong>"Canlı URL'yi test et"</strong> seçeneği ve oluşturulan (render edilmiş) HTML kullanılır <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+
+        <!-- ============ 11 ============ -->
+        <h2 id="render-stratejileri"><span class="h-num">§ 11</span>Render stratejileri: SSR, SSG, CSR, hibrit</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Strateji</th><th>Ne demek</th><th>Artısı</th><th>Bedeli</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SSR</strong></td><td>Sunucu tarafı render: HTML her istekte sunucuda üretilir</td><td>İçerik ilk HTML'de; FCP hızlı</td><td>TTFB artabilir, sunucu maliyeti</td></tr>
+              <tr><td><strong>SSG / statik</strong></td><td>HTML derleme anında üretilir, dosya olarak sunulur</td><td>En hızlı TTFB, CDN'e çok uygun</td><td>Sık değişen içerikte yeniden derleme</td></tr>
+              <tr><td><strong>CSR</strong></td><td>İstemci tarafı render: ilk HTML neredeyse boş, içeriği JS çizer</td><td>Uygulama gibi deneyim</td><td>Google'da "ek test ve yük ister"; JS büyüdükçe INP bozulur; diğer botlar içeriği görmez</td></tr>
+              <tr><td><strong>Hibrit</strong></td><td>Bazı sayfalar SSR/statik, bazıları CSR</td><td>Büyük sitelerde iyi sonuç</td><td>Kurulum karmaşıklığı</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: <sup class="kaynak"><a href="#k20">[20]</a></sup>. Sunucuda hazırlanan ya da derlemede üretilen HTML hâlâ en güvenli yoldur.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Dinamik render</strong> (botlara önceden render edilmiş ayrı HTML, insanlara JS'li sürümü verme) Google belgesinde artık "geçici bir çözümdü, uzun vadeli değil, önerilmez" diye geçiyor; yerine SSR, statik render ya da hydration öneriliyor (belge güncellemesi 10 Aralık 2025) <sup class="kaynak"><a href="#k18">[18]</a></sup>. Bing 2018'deki resmî yazısında yoğun JS'li siteler için dinamik render önermişti; bu önerinin bugün geçerli olup olmadığı güncel Bing belgesinden <span class="tag tag--warn">Doğrulanamadı</span> <sup class="kaynak"><a href="#k27">[27]</a></sup>.</p>
+        </aside>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir online randevu yazılımının tanıtım sitesi: sayfalar (ana sayfa, özellikler, fiyat, yardım) sunucuda HTML olarak üretilir; JavaScript yalnız etkileşim için (form gönderme, video oynatıcı, menü) kullanılır. Böylece Google, Bing, Yandex, yapay zekâ botları ve sosyal ağ önizlemeleri içeriği beklemeden görür. Klasik MVC (ASP.NET Core Razor, PHP vb.) zaten varsayılan olarak böyle çalışır. Programlama dilinin kendisinin sıralamaya etkisi yoktur; etkili olan çıkan HTML'dir (<a href="11-altyapi.html">Bölüm 11</a>).</p>
+        </aside>
+
+        <!-- ============ 12 ============ -->
+        <h2 id="diger-botlar"><span class="h-num">§ 12</span>Yapay zekâ ve sosyal ağ botları JavaScript çalıştırmaz</h2>
+        <p>Google'ın JS'i render etmesi diğer botlar için geçerli değildir. Vercel'in Aralık 2024 analizine göre GPTBot ve ClaudeBot gibi yapay zekâ tarayıcıları JavaScript dosyalarını indirir ama <strong>çalıştırmaz</strong> <sup class="kaynak"><a href="#k22">[22]</a></sup> <span class="tag tag--info">3. taraf</span>. Sosyal ağ önizleme botlarının da genelde JS çalıştırmadığı yaygın bir sektör bilgisidir; bu araştırmada ayrıca <span class="tag">Kaynaktan teyit edilmedi</span>.</p>
+        <ul class="checklist">
+          <li>Ana içerik (başlık, metin, fiyat, iletişim) <strong>ilk HTML'de</strong>.</li>
+          <li><code>&lt;title&gt;</code>, meta açıklama ve kanonik ilk HTML'de.</li>
+          <li><code>og:</code> etiketleri ve JSON-LD ilk HTML'de (<a href="08-yapilandirilmis-veri.html#open-graph">Bölüm 8</a>).</li>
+          <li>CSR bir uygulamada en azından sabit sayfalar önceden HTML'e çevrilmiş (prerender) olsun.</li>
+        </ul>
+        <p>Yapay zekâ botlarına robots.txt ile izin verme/engelleme: <a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>.</p>
+
+        <!-- ============ 13 ============ -->
+        <h2 id="araya-giren-pencereler"><span class="h-num">§ 13</span>Araya giren pencereler (interstitial)</h2>
+        <p>Google'ın belgesine göre içeriği kaplayan pencereler "kötü arama performansına yol açabilir" <sup class="kaynak"><a href="#k24">[24]</a></sup>:</p>
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">Sorunlu</h4><ul><li>Sayfayı tümüyle kaplayan katman (kampanya, bülten kaydı).</li><li>İçeriği görmeden önce ayrı bir onay sayfasına yönlendirme.</li><li>İçeriği kapatan "uygulamamızı indirin" penceresi.</li></ul></div>
+          <div class="pane"><h4 class="pane__title">Kabul edilir</h4><ul><li>Ekranın küçük bir kısmını kaplayan bant (ör. alt çerez bandı).</li><li>Yasal zorunluluk olan yaş doğrulaması.</li></ul></div>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Tam ekran çerez onayı ya da kampanya penceresi hem bu kurala takılabilir hem de sonradan açılıp içeriği ittiği için CLS'yi bozar. Küçük, alta yapışık bir bant kullan; onay için ayrı sayfaya yönlendirme <sup class="kaynak"><a href="#k24">[24]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>.</p>
+        </aside>
+
+        <!-- ============ 14 ============ -->
+        <h2 id="mitler"><span class="h-num">§ 14</span>Eskimiş bilgiler: toplu tablo</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yaygın iddia</th><th>Güncel durum</th></tr></thead>
+            <tbody>
+              <tr><td>"FID bir Core Web Vital'dir"</td><td>12 Mart 2024'te INP yerini aldı <sup class="kaynak"><a href="#k3">[3]</a></sup></td></tr>
+              <tr><td>"Mobile-Friendly Test ile kontrol et"</td><td>1 Aralık 2023'te kaldırıldı <sup class="kaynak"><a href="#k15">[15]</a></sup></td></tr>
+              <tr><td>"Google masaüstünü dizine alır"</td><td>Mobil öncelik tamam; 5 Temmuz 2024'ten beri mobilde açılmayan site dizine girmez <sup class="kaynak"><a href="#k14">[14]</a></sup></td></tr>
+              <tr><td>"Lighthouse puanı sıralamayı belirler"</td><td>Saha verisi (CrUX) kullanılır <sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup></td></tr>
+              <tr><td>"CWV'yi geçersen 1. sıraya çıkarsın"</td><td>İlgililik önce; CWV küçük faktör <sup class="kaynak"><a href="#k4">[4]</a></sup><sup class="kaynak"><a href="#k25">[25]</a></sup></td></tr>
+              <tr><td>"Sayfa deneyimi tek bir sinyaldir"</td><td>Google: tek sinyal yok <sup class="kaynak"><a href="#k4">[4]</a></sup></td></tr>
+              <tr><td>"Dinamik render önerilen yoldur"</td><td>Önerilmiyor; SSR/statik/hydration <sup class="kaynak"><a href="#k18">[18]</a></sup></td></tr>
+              <tr><td>"Google JS'li sayfayı haftalarca render etmez"</td><td>2024 ölçümünde medyan ~10 sn; uçta saatler <sup class="kaynak"><a href="#k21">[21]</a></sup></td></tr>
+              <tr><td>"Hash URL'ler (<code>#!</code>) taranır"</td><td>AJAX tarama şeması kaldırıldı; History API <sup class="kaynak"><a href="#k17">[17]</a></sup></td></tr>
+              <tr><td>"Googlebot HTML'in 15 MB'ını okur"</td><td>Belge Şubat 2026'dan beri 2 MB diyor <sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+              <tr><td>"Top Stories için AMP gerekli"</td><td>2021 sayfa deneyimi güncellemesiyle şart kalktı <sup class="kaynak"><a href="#k25">[25]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 15</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>CWV: LCP ≤ 2,5 sn, INP ≤ 200 ms, CLS ≤ 0,1; 75. yüzdelik, mobil ve masaüstü ayrı, 28 günlük pencere, grubu en kötü metrik belirler.</li>
+            <li>Hız sıralamada küçük ama gerçek bir faktördür; asıl getirisi ziyaretçinin kaçmamasıdır. Lighthouse puanı sıralamada kullanılmaz.</li>
+            <li>Google'ın gördüğü veri CrUX'tur; Brave, Edge ve iOS kullanıcıları bu veride yok. Kendi tarayıcın ölçüt değil.</li>
+            <li>LCP görselini lazy yapma, <code>fetchpriority="high"</code> ver; her görsele boyut ver; Türkçe karakter aralığını içeren WOFF2 font kullan; uzun JS işlerini böl.</li>
+            <li>Mobilde içerik eksikse Google için yoktur; mobil sürümde <code>noindex</code> felakettir. Mobile-Friendly Test artık yok.</li>
+            <li>İçerik, başlık, kanonik, <code>og:</code> ve JSON-LD ilk HTML'de olsun; bağlantılar gerçek <code>&lt;a href&gt;</code>; dinamik render önerilmiyor; yapay zekâ ve sosyal botlar JS çalıştırmaz.</li>
+            <li>İçeriği kaplayan tam ekran pencereler yerine küçük bant kullan.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 16</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> web.dev — Web Vitals — <a href="https://web.dev/articles/vitals">web.dev/articles/vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> web.dev — Interaction to Next Paint (INP) — <a href="https://web.dev/articles/inp">web.dev/articles/inp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> web.dev blog — INP is officially a Core Web Vital — <a href="https://web.dev/blog/inp-cwv-launch">web.dev/blog/inp-cwv-launch</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Understanding page experience in Google Search results — <a href="https://developers.google.com/search/docs/appearance/page-experience">developers.google.com/…/page-experience</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Core Web Vitals report — <a href="https://support.google.com/webmasters/answer/9205520">support.google.com/webmasters/answer/9205520</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — CrUX methodology — <a href="https://developer.chrome.com/docs/crux/methodology">developer.chrome.com/docs/crux/methodology</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — Lighthouse performance scoring — <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">developer.chrome.com/…/performance-scoring</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Largest Contentful Paint — <a href="https://web.dev/articles/optimize-lcp">web.dev/articles/optimize-lcp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Cumulative Layout Shift — <a href="https://web.dev/articles/optimize-cls">web.dev/articles/optimize-cls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Interaction to Next Paint — <a href="https://web.dev/articles/optimize-inp">web.dev/articles/optimize-inp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> web.dev — Time to First Byte (TTFB) — <a href="https://web.dev/articles/ttfb">web.dev/articles/ttfb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> web.dev — Best practices for fonts — <a href="https://web.dev/articles/font-best-practices">web.dev/articles/font-best-practices</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Mobile-first indexing best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing">developers.google.com/…/mobile-sites-mobile-first-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google won't index sites that do not work on mobile after July 5 — <a href="https://searchengineland.com/google-wont-index-sites-that-do-not-work-on-mobile-devices-after-july-5th-442851">searchengineland.com/…-442851</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google officially drops Mobile Usability report and Mobile-Friendly Test — <a href="https://searchengineland.com/google-officially-drops-mobile-usability-report-mobile-friendly-test-tool-and-mobile-friendly-test-api-435377">searchengineland.com/…-435377</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Fix Search-related JavaScript problems — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/fix-search-javascript">developers.google.com/…/fix-search-javascript</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Dynamic rendering as a workaround — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/dynamic-rendering">developers.google.com/…/dynamic-rendering</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Fix lazy-loaded content — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading">developers.google.com/…/lazy-loading</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> web.dev — Rendering on the Web — <a href="https://web.dev/articles/rendering-on-the-web">web.dev/articles/rendering-on-the-web</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--info">3. taraf</span> Vercel / MERJ — How Google handles JavaScript throughout the indexing process (Nis 2024; ikincil özetler üzerinden) — <a href="https://vercel.com/blog/how-google-handles-javascript-throughout-the-indexing-process">vercel.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--info">3. taraf</span> Vercel — The rise of the AI crawler (Ara 2024; ikincil özetler üzerinden) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/blog/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Avoid intrusive interstitials and dialogs — <a href="https://developers.google.com/search/docs/appearance/avoid-intrusive-interstitials">developers.google.com/…/avoid-intrusive-interstitials</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Core Web Vitals (Patrick Stox, güncelleme Oca 2025) — <a href="https://ahrefs.com/blog/core-web-vitals/">ahrefs.com/blog/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Core Web Vitals (güncelleme Nis 2025) — <a href="https://backlinko.com/hub/seo/core-web-vitals">backlinko.com/hub/seo/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — bingbot Series: JavaScript, Dynamic Rendering, and Cloaking (Eki 2018; arama özeti üzerinden) — <a href="https://blogs.bing.com/webmaster/october-2018/bingbot-Series-JavaScript,-Dynamic-Rendering,-and-Cloaking-Oh-My">blogs.bing.com/…/october-2018/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Mobile-first indexing has landed (31 Eki 2023) — <a href="https://developers.google.com/search/blog/2023/10/mobile-first-is-here">developers.google.com/…/mobile-first-is-here</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--info">3. taraf</span> Zeo (Türkçe, Ara 2021; FID kısmı eskimiş) — Google'ın site hızındaki karar ölçeği: Core Web Vitals — <a href="https://zeo.org/tr/kaynaklar/blog/googlein-site-hizindaki-karar-olcegi-core-web-vitals">zeo.org/tr/…/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="09-tarama-ve-dizin.html"><span class="dir">&larr; Önceki</span><span class="ttl">Tarama ve dizine ekleme</span></a>
+        <a class="next" href="11-altyapi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Alan adı, sunucu, dil ve güvenlik</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

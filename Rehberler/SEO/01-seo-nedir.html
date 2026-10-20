@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO nedir, ne beklenmeli — SEO Rehberi</title>
+<meta name="description" content="SEO'ya sıfırdan giriş: organik arama ile reklamın farkı, SEO'nun ayakları, neden kimse 1. sırayı garanti edemez, gerçekçi süreler, yapay zekâ özetlerinin tıklamaya etkisi ve Türkiye'de arama motoru payları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">SEO nedir, ne beklenmeli</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 01 · Temeller</div>
+        <h1 class="page-title">SEO nedir, ne beklenmeli</h1>
+        <p class="lede">SEO, bir sitenin arama motorunda <em>para ödemeden</em> çıkan sonuçlarda bulunmasını ve doğru sorgularda öne çıkmasını sağlama işidir.
+      Bu bölüm işin çerçevesini çizer: SEO neyi değiştirebilir, neyi değiştiremez, ne kadar sürer ve başarı nasıl ölçülür.
+      Bitirdiğinde bir müşteriye ya da kendine dürüst bir beklenti cümlesi kurabileceksin.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 10 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Organik sonuç ile reklam ayrı dünyalardır: Google Ads'e para vermek organik sıralamayı yükseltmez; Google bunu iki ayrı resmî sayfada yazıyor.</li>
+            <li>Kimse 1. sırayı garanti edemez. "Garanti" diyen kişi, Google'ın kendi uyarı listesinin ilk maddesindedir.</li>
+            <li>Yeni bir sayfanın bir yıl içinde ilk 10'a girme oranı Ahrefs'in ölçümünde yalnız %1,74. Marka adı haftalar, genel terim aylar ya da yıllar sürer.</li>
+            <li>Yapay zekâ özetleri (AI Overviews) bilgi sorgularında tıklamayı belirgin düşürüyor; başarı tıklamayla değil dönüşümle ölçülür.</li>
+            <li>Türkiye'de Google'ın yanında Yandex de büyük (Eylül 2026: Google %73,4, Yandex %25,2).</li>
+            <li>"robots.txt mi kalktı, site haritası mı?" İkisi de duruyor; kalkan, robots.txt içindeki <code>noindex</code> satırı (2019) ve site haritası "ping" ucu (2023).</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="seo-ne-demek"><span class="h-num">§ 1</span>SEO ne demek, neyi kapsar</h2>
+        <p><strong>SEO</strong> (Search Engine Optimization, arama motoru optimizasyonu), bir sitenin arama motorunun ücretsiz sonuçlarında
+          bulunabilmesi, doğru anlaşılması ve kullanıcının aradığı şeye en iyi cevap olarak gösterilmesi için yapılan işlerin toplamıdır.
+          Bu sonuçlara <strong>organik sonuç</strong> denir: kimse yerleşimi için para ödemez.</p>
+        <p>Bir arama sonuç sayfası (<strong>SERP</strong>, Search Engine Results Page: aramadan sonra açılan sonuç listesi) bugün tek bir "on mavi bağlantı" listesi değildir. Aynı sayfada birkaç ayrı bölüm bulunabilir:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Bölüm</th><th>Ne</th><th>Nasıl girilir</th><th>Bu eğitimde</th></tr></thead>
+            <tbody>
+              <tr><td>Reklamlar</td><td>"Sponsorlu" etiketli sonuçlar</td><td>Google Ads ile, teklif ve kaliteye göre</td><td>Kapsam dışı; yalnız SEO ile ilişkisi anlatılıyor</td></tr>
+              <tr><td>Yapay zekâ özeti</td><td>AI Overviews / AI Mode cevabı ve kaynak bağlantıları</td><td>Normal SEO; ek şart yok</td><td><a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a></td></tr>
+              <tr><td>Harita paketi</td><td>Yerel işletmeler, harita ve "Ara" düğmesi</td><td>Google İşletme Profili + yerel sinyaller</td><td><a href="12-yerel-seo.html">Bölüm 12</a></td></tr>
+              <tr><td>Organik sonuçlar</td><td>Klasik başlık + adres + açıklama</td><td>Tarama, dizine ekleme, sıralama</td><td>Bölüm 2–11</td></tr>
+              <tr><td>Zengin sonuçlar, görseller, videolar</td><td>Yıldız, görsel şeridi, video karuseli vb.</td><td>Yapılandırılmış veri, görsel/video SEO</td><td><a href="06-gorsel-ve-video.html">Bölüm 6</a>, <a href="08-yapilandirilmis-veri.html">Bölüm 8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>SEO; bu bölümlerin reklam dışındaki hepsinde yer almakla ilgilenir. Ama hiçbirinde yer almak satın alınamaz.
+          Google, sıralama karşılığında para almadığını açıkça yazıyor <sup class="kaynak"><a href="#k3">[3]</a></sup>.
+          Yerel sonuçlar için de "daha iyi yerel sıralama talep etmenin ya da satın almanın yolu yok" diyor <sup class="kaynak"><a href="#k21">[21]</a></sup>.</p>
+
+        <h2 id="organik-ve-reklam"><span class="h-num">§ 2</span>Organik arama ile reklam: iki ayrı dünya</h2>
+        <p>Reklam veren, reklam hesabı yöneten ya da reklam vermeyi düşünen herkes için en önemli cümle şudur: <strong>reklam vermek organik sıralamayı yükseltmez, reklamı kesmek de düşürmez.</strong>
+          Google bunu iki ayrı resmî sayfada açıkça yazıyor <span class="tag tag--ok">Resmî</span>:</p>
+        <ul>
+          <li>"SEO'ya ihtiyacınız var mı?" belgesi: Google'da reklam vermenin, sitenin arama sonuçlarındaki varlığına hiçbir etkisi olmaz <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Google Ads yardımındaki "Ücretli ve organik" raporu sayfası: ücretli aramaya yapılan yatırımın organik sıralamaya etkisi yoktur <sup class="kaynak"><a href="#k2">[2]</a></sup>.</li>
+        </ul>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Google Ads'e çok para veren firmayı Google organikte de kayırır."</p>
+          <p class="mit-gercek">Yanlış. Google, reklam gibi mali ilişkilere dayalı "sıralama artışı gibi özel muamele" yapmadığını yazıyor <sup class="kaynak"><a href="#k3">[3]</a></sup>; Ads belgesi de etkisi olmadığını söylüyor <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+        </aside>
+
+        <h3 id="reklam-ile-seonun-kesistigi-yer">Reklamla SEO'nun gerçekten kesiştiği yer</h3>
+        <p>İkisi sıralamada kesişmez; <strong>açılış sayfasında ve veride</strong> kesişir:</p>
+        <ul>
+          <li><strong>Açılış sayfası kalitesi.</strong> Reklamın sırası (Ad Rank) altı etkene göre belirlenir; bunlardan biri "reklam ve açılış sayfası kalitesi"dir <sup class="kaynak"><a href="#k5">[5]</a></sup>.
+            Hızlı, net, mobilde düzgün açılan bir sayfa hem reklamın işine yarar hem organikte iyi bir sayfadır.</li>
+          <li><strong>Kalite Puanı</strong> (Quality Score: Google Ads'in anahtar kelime başına verdiği 1–10 arası puan) bir teşhis aracıdır; Google'a göre açık artırmaya doğrudan girmez <sup class="kaynak"><a href="#k4">[4]</a></sup>.
+            İçindeki "açılış sayfası deneyimi" bileşeni yine de SEO'cunun da baktığı şeyleri ölçer.</li>
+          <li><strong>Veri.</strong> Ads'teki arama terimleri raporu, insanların gerçekte ne yazdığını gösterir; bu, SEO için ücretsiz bir anahtar kelime araştırmasıdır.
+            Search Console ile Ads bağlanırsa aynı sorgu için reklam ve organik tıklamalar yan yana görülür <sup class="kaynak"><a href="#k2">[2]</a></sup>. Ayrıntı <a href="17-musteri-isi.html">Bölüm 17</a>'de.</li>
+        </ul>
+        <div class="compare">
+          <div class="pane"><h4 class="pane__title">Reklam</h4><p>Bugün açılır, bugün trafik getirir. Bütçe biterse trafik de biter. Her tıklamanın bedeli var. Sıralama teklif + kalite ile belirlenir.</p></div>
+          <div class="pane"><h4 class="pane__title">Organik (SEO)</h4><p>Haftalar–aylar içinde oturur. Tıklama başına bedel yok, ama emek ve zaman ister. Sıralama satın alınamaz; içerik ve teknik kalite ile kazanılır.</p></div>
+        </div>
+
+        <h2 id="seonun-ayaklari"><span class="h-num">§ 3</span>SEO'nun ayakları</h2>
+        <p>Eğitimlerde genelde "üç ayak" denir; yerel işletmeler için dördüncü ayak ayrı tutulmalıdır. Her biri bir sonrakinin zeminidir:
+          teknik sorun varsa iyi içerik görülmez, içerik zayıfsa bağlantı kazanılmaz.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ayak</th><th>Soru</th><th>Örnek işler</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Teknik</strong></td><td>Google sayfayı bulabiliyor, okuyabiliyor, dizine ekleyebiliyor mu?</td><td>robots.txt, site haritası, durum kodları, kanonik, hız, mobil, JavaScript, HTTPS</td><td><a href="09-tarama-ve-dizin.html">9</a>, <a href="10-performans-mobil-js.html">10</a>, <a href="11-altyapi.html">11</a></td></tr>
+              <tr><td><strong>Sayfa içi ve içerik</strong></td><td>Sayfa, aranan şeye en iyi cevabı veriyor ve bunu açıkça söylüyor mu?</td><td>Anahtar kelime ve niyet, başlık, açıklama, metin, görsel, yapılandırılmış veri</td><td><a href="04-anahtar-kelime-ve-niyet.html">4</a>–<a href="08-yapilandirilmis-veri.html">8</a></td></tr>
+              <tr><td><strong>Sayfa dışı</strong></td><td>Başkaları bu siteden söz ediyor, bağlantı veriyor mu?</td><td>Kazanılmış bağlantılar, marka anılmaları, dijital PR</td><td><a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>Yerel</strong></td><td>Yakındaki biri aradığında işletme haritada çıkıyor mu?</td><td>Google İşletme Profili, yorumlar, ad-adres-telefon tutarlılığı, Yandex Haritalar</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google'ın kendi başlangıç rehberi de aynı çerçeveyi verir: insanlar için içerik yaz, insanların aradığı kelimeleri başlıkta ve metinde açıkça kullan,
+          bağlantıları taranabilir yap, siteni ilgili topluluklarda tanıt <sup class="kaynak"><a href="#k22">[22]</a></sup>.</p>
+
+        <h2 id="garanti-yok"><span class="h-num">§ 4</span>Neden kimse 1. sırayı garanti edemez</h2>
+        <p>Google'ın "SEO'ya ihtiyacınız var mı?" belgesi açık konuşur: <strong>"Kimse Google'da 1. sırayı garanti edemez."</strong> <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--ok">Resmî</span></p>
+        <p>Sebep basit: sıralama, senin kontrol etmediğin şeylere bağlı. Rakiplerin ne yaptığı, aramayı yapan kişinin konumu, cihazı, dili,
+          sorgunun o anki niyeti ve Google'ın sürekli güncellenen sistemleri. Aynı kelimede bile sıralama şehirden şehre, telefondan masaüstüne değişir.</p>
+        <p>Aynı belge, bir SEO hizmeti seçerken dikkat edilecek <strong>tehlike işaretlerini</strong> de sayar <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul class="checklist">
+          <li>Sıralama garantisi veriyor, Google ile "özel ilişkisi" olduğunu söylüyor, "öncelikli gönderim" satıyor.</li>
+          <li>Ne yapacağını açıklamıyor, değişiklikleri gizliyor.</li>
+          <li>Bağlantı planları kuruyor, "binlerce arama motoruna kayıt" vaat ediyor, senden kendi sitesine bağlantı istiyor.</li>
+          <li>Davetsiz "sıralamanız şöyle" e-postası atıyor; "Google onaylı" araç satıyor.</li>
+        </ul>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Tutulan firmanın yaptığından <strong>site sahibi sorumludur</strong> <sup class="kaynak"><a href="#k1">[1]</a></sup>. Satın alınmış bağlantı paketi ya da yapay zekâyla toplu sayfa üretimi yüzünden ceza gelirse, cezayı firma değil site yer.
+            Denetim için birine Search Console erişimi verilecekse önce <strong>yalnız okuma</strong> yetkisi verilir, tam yetki verilmez.</p>
+        </aside>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Koddan anlamayan küçük yerel bir işletme (ör. nakliye firması) "telefonda aratınca üstte çıkmak istiyorum" diyor. Dürüst cevap şudur:
+            "1. sırayı kimse garanti edemez. Şunları yapacağız (profil, sayfalar, yorum düzeni, teknik düzeltmeler), şunları ölçeceğiz (aramalar, yol tarifi istekleri, form),
+            ilk sonuçları şu kadar sürede görmeyi bekliyoruz." Söz verilen şey sıralama değil, yapılan iş ve ölçülen sonuçtur.</p>
+        </aside>
+
+        <h2 id="ne-kadar-surer"><span class="h-num">§ 5</span>Ne kadar sürer: gerçekçi beklenti</h2>
+        <p>SEO'nun en çok yanlış anlatılan yanı süredir. Elimizdeki en sağlam ölçüm Ahrefs'in Mayıs 2025 çalışması <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k6">[6]</a></sup>:</p>
+        <ul>
+          <li>Yeni yayımlanan sayfaların yalnız <strong>%1,74</strong>'ü bir yıl içinde ilk 10'a girebildi.</li>
+          <li>İlk 10'a girenlerin <strong>%40,82</strong>'si bunu ilk ayda başardı. Yani "giren hızlı giriyor, girmeyen genelde hiç girmiyor".</li>
+          <li>İlk sıradaki sayfa ortalama <strong>5 yaşında</strong>.</li>
+          <li>Çalışmanın önerisi: 6 ay sonra hâlâ ilk 10'da olmayan sayfayı bekletme, güncelle.</li>
+        </ul>
+        <p>Bu ölçümden ve diğer kaynaklardan çıkan pratik beklenti tablosu (genel bir rehber, Google'ın verdiği bir takvim değil):</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Hedef</th><th>Beklenti</th><th>Neden</th></tr></thead>
+            <tbody>
+              <tr><td>Marka adı ("ÖrnekMarka")</td><td>Haftalar</td><td>Rakip az; sorgu zaten sizi arıyor</td></tr>
+              <tr><td>Uzun kuyruk (ör. "kuaförler için online randevu programı")</td><td>1–6 ay</td><td>Arayan az, rekabet az, niyet net</td></tr>
+              <tr><td>Rekabetli genel terim (ör. "randevu programı")</td><td>6–12 ay ve üstü, garantisiz</td><td>Yerleşik, yıllanmış, çok bağlantılı rakipler</td></tr>
+              <tr><td>Tek kelimelik çok genel terim (ör. "randevu")</td><td>Belki hiç</td><td>Niyet dağınık; sonuçlarda resmî randevu sistemleri ve sözlükler var</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>2017 videosu, güncel belge değil:</strong> "SEO çoğu durumda 4 ay ile 1 yıl sürer" sözü 2017 tarihli bir Google videosundan (Maile Ohye) gelir <sup class="kaynak"><a href="#k7">[7]</a></sup>.
+            Google'ın bugünkü "SEO'ya ihtiyacınız var mı?" sayfasında bu ifade yok <sup class="kaynak"><a href="#k1">[1]</a></sup>. "Google 4–12 ay dedi" diye kesin takvim vermek yanlış olur.</p>
+        </aside>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Google yeni siteleri bilerek birkaç ay 'sandbox'ta (bekleme kutusunda) tutar."</p>
+          <p class="mit-gercek">Google kasıtlı bir bekletme olmadığını söylüyor. Yeni sitenin bağlantısı, geçmişi, kullanıcı verisi az olduğu için davranış öyle <em>görünebilir</em>; sebep sinyal azlığıdır <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+        </aside>
+
+        <h2 id="kural-ve-icerik-isi"><span class="h-num">§ 6</span>SEO "gizli algoritma" değil, kural ve içerik işi</h2>
+        <p>SEO dışarıdan "algoritmayı çözme" işi gibi görünür. Gerçekte işin büyük kısmı <strong>yazılı kurallara uymak ve kullanıcının sorusuna en iyi cevabı vermektir</strong>.</p>
+        <ul>
+          <li>Sıralamayı tek bir algoritma yapmaz; Google'ın adını verdiği birçok sistem birlikte çalışır (BERT, RankBrain, PageRank, tazelik, yorumlar, spam tespiti vb.) <sup class="kaynak"><a href="#k9">[9]</a></sup>.
+            Mart 2024'te Google, yararlı içeriği ölçen işin "artık tek bir sinyal ya da sistemle" yapılmadığını yazdı <sup class="kaynak"><a href="#k10">[10]</a></sup>. Ayrıntı <a href="03-kurallar-ve-siralama.html#siralama-sistemleri">Bölüm 3</a>'te.</li>
+          <li>Google kuralları yazılıdır ve herkese açıktır: Search Essentials (teknik gereksinimler, spam politikaları, temel uygulamalar). Bir "hile" bu kurallardan birini çiğniyorsa kısa vadede işe yarasa bile risktir.</li>
+          <li>Yazılımcı için iyi haber: sitenin hangi dilde yazıldığı fark etmez. Google sunucuda ne çalıştığını görmez; yalnız gelen HTML'i, durum kodlarını ve hızı görür.
+            John Mueller'e göre kendi içerik sistemini yazmak ya da WordPress kullanmak SEO açısından fark yaratmaz <sup class="kaynak"><a href="#k11">[11]</a></sup>. Ayrıntı <a href="11-altyapi.html">Bölüm 11</a>'de.</li>
+        </ul>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Bir SEO tavsiyesini değerlendirirken tek soru sor: "Bu, Google'ın resmî belgesinde var mı, yoksa bir aracın, bir ajansın ya da bir söylentinin iddiası mı?"
+            Google'ın kendisi de önerileri resmî belgelere dayanmayan hizmete şüpheyle yaklaşılmasını söylüyor <sup class="kaynak"><a href="#k1">[1]</a></sup>. Bu eğitimde her iddianın yanında rozet bu yüzden var.</p>
+        </aside>
+
+        <h2 id="site-cesitliligi"><span class="h-num">§ 7</span>Bir site aynı aramada kaç kez çıkabilir</h2>
+        <p>Google'ın <strong>site çeşitliliği sistemi</strong>, ilk sonuçlarda genelde bir siteden <strong>en çok 2 sonuç</strong> gösterir; alt alan adları (ör. <code>blog.ornek.com</code>) ana alan adıyla birlikte sayılır <sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--ok">Resmî</span>.</p>
+        <p>Pratik sonucu: aynı sorgu için on benzer sayfa yazmak ilk sayfayı doldurmaz. Her sayfa farklı bir soruya, farklı bir niyete hizmet etmelidir.
+          Benzer sayfaları çoğaltmak ayrıca "kapı sayfası" (doorway) spam riskine girer (<a href="03-kurallar-ve-siralama.html#spam-politikalari">Bölüm 3</a>).</p>
+
+        <h2 id="yapay-zeka-ozetleri"><span class="h-num">§ 8</span>Yapay zekâ özetleri ve tıklamanın azalması</h2>
+        <p>Google artık birçok aramada sonuçların üstünde yapay zekâ ile yazılmış bir özet gösteriyor: <strong>AI Overviews</strong> (YZ Genel Bakış) ve daha sohbet benzeri <strong>AI Mode</strong> (YZ Modu).
+          Google'ın resmî belgesine göre bunlarda görünmek için <strong>ek bir teknik şart, özel bir dosya ya da özel bir şema yoktur</strong>; sayfanın dizinde olması ve snippet (sonuçtaki açıklama metni) gösterilmeye uygun olması yeterlidir <sup class="kaynak"><a href="#k12">[12]</a></sup>.</p>
+        <p>Türkiye'de bu özellikler 18 Şubat 2026'dan itibaren kademeli açıldı <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k16">[16]</a></sup> (Google'ın asıl duyuru metni bu araştırmada görülmedi <span class="tag tag--warn">Doğrulanamadı</span>).</p>
+        <p>Etkisi ölçülüyor ve küçük değil. Aşağıdakiler üçüncü taraf ölçümleridir; Google yöntemlerine itiraz ediyor:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kaynak</th><th>Bulgu</th></tr></thead>
+            <tbody>
+              <tr><td>Ahrefs (Nisan 2025)</td><td>Özet çıkan sorgularda 1. sıradaki sayfanın tıklama oranı (CTR) ≈ %34,5 düşük <sup class="kaynak"><a href="#k13">[13]</a></sup></td></tr>
+              <tr><td>Ahrefs (Aralık 2025 verisi)</td><td>Aynı düşüş ≈ %58 <sup class="kaynak"><a href="#k13">[13]</a></sup></td></tr>
+              <tr><td>Pew Research</td><td>Özet görünürken bağlantıya tıklama %8, görünmezken %15; özetin içindeki kaynağa tıklama ≈ %1 <sup class="kaynak"><a href="#k14">[14]</a></sup></td></tr>
+              <tr><td>Seer Interactive</td><td>Organik CTR %1,76'dan %0,61'e indi <sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bundan çıkan ders: <strong>başarıyı yalnız tıklamayla ölçme.</strong> "Nasıl yapılır" tipi bilgi sorgularında trafik azalabilir; ama telefonla arama, form, yol tarifi, deneme indirme gibi
+          dönüşümler asıl ölçüdür. Google da Mayıs 2025 yazısında yalnız tıklamaya değil dönüşüme bakılmasını, YZ'den gelen tıklamaların "daha kaliteli" olduğunu söylüyor <sup class="kaynak"><a href="#k15">[15]</a></sup>.
+          Yerel ve satın alma niyetli sorgularda harita paketi ve İşletme Profili daha da önem kazanır.</p>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Yapay zekâ aramasında çıkmak için llms.txt dosyası, özel 'GEO' yazımı ya da YZ şeması gerekir."</p>
+          <p class="mit-gercek">Google'ın belgesi: yeni makine okunur dosyalar, YZ metin dosyaları ya da özel işaretleme gerekmiyor; normal SEO yeterli <sup class="kaynak"><a href="#k12">[12]</a></sup>. Ayrıntı <a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>.</p>
+        </aside>
+
+        <h2 id="turkiye-pazari"><span class="h-num">§ 9</span>Türkiye'de hangi arama motoru</h2>
+        <p>"SEO = Google" çoğu ülkede neredeyse doğrudur; Türkiye'de tam değildir. StatCounter'ın Eylül 2026 verisi <span class="tag tag--info">3. taraf</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Arama motoru</th><th>Tüm cihazlar</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Google</td><td>%73,4 <sup class="kaynak"><a href="#k17">[17]</a></sup></td><td>Ana hedef</td></tr>
+              <tr><td>Yandex</td><td>%25,2 <sup class="kaynak"><a href="#k17">[17]</a></sup></td><td>Mobilde ≈ %28,1 <sup class="kaynak"><a href="#k18">[18]</a></sup></td></tr>
+              <tr><td>Bing</td><td>%0,7 <sup class="kaynak"><a href="#k17">[17]</a></sup></td><td>Küçük ama DuckDuckGo ve Copilot'u besler</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Yani Türkiye'de kabaca her dört aramadan biri Yandex'te. Yandex Webmaster kaydı, site bölgesi ayarı ve Yandex Haritalar kaydı ücretsizdir ve atlanmamalıdır (<a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a>, <a href="12-yerel-seo.html">Bölüm 12</a>).
+          Bu eğitimin ağırlığı yine Google'dadır; çünkü kuralların çoğu ortak, en ayrıntılı resmî belge de Google'ın.</p>
+
+        <h2 id="robots-sitemap-kalkti-mi"><span class="h-num">§ 10</span>"robots.txt mi kalktı, site haritası mı?"</h2>
+        <p>Kısa cevap: <strong>ikisi de duruyor ve kullanılıyor.</strong> Akılda kalan "bir şey kalktı" bilgisi büyük olasılıkla şu iki değişikliktir:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Ne kalktı</th><th>Ne zaman</th><th>Ne duruyor</th></tr></thead>
+            <tbody>
+              <tr><td>robots.txt içine yazılan <code>Noindex:</code> satırının desteği (ayrıca <code>nofollow</code> ve <code>crawl-delay</code> satırları Google'da desteklenmiyor)</td>
+                <td>Temmuz 2019 duyurusu <sup class="kaynak"><a href="#k19">[19]</a></sup>; yürürlük tarihi aynı yazıda: 1 Eylül 2019 <span class="tag tag--ok">Resmî</span></td>
+                <td>robots.txt dosyası ve <code>Disallow</code>/<code>Allow</code>/<code>Sitemap</code> satırları</td></tr>
+              <tr><td>Site haritasını adres çubuğundan "ping"leyerek bildirme ucu</td>
+                <td>26 Haziran 2023'te duyuruldu, yaklaşık 6 ay sonra 404 dönmeye başladı <sup class="kaynak"><a href="#k20">[20]</a></sup></td>
+                <td>Site haritası; Search Console'dan ya da robots.txt'deki <code>Sitemap:</code> satırıyla gönderilir</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">eski alışkanlık</span></div>
+<pre><code>User-agent: *
+Disallow: /eski/
+Noindex: /eski/      <span class="k-yorum"># 2019'dan beri Google'da etkisiz; üstelik Disallow noindex'i gizler</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>robots.txt + HTML</span><span class="dosya">bugünkü doğru yol</span></div>
+<pre><code><span class="k-yorum"># robots.txt: yalnız taramayı yönetir, site haritasının yerini bildirir</span>
+User-agent: *
+Disallow: /sepet/ekle
+Sitemap: https://www.ornek.com/sitemap.xml
+
+<span class="k-yorum">&lt;!-- Dizinden çıkarılacak sayfanın kendisinde (sayfa taranabilir kalmalı) --&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"robots"</span> <span class="k-ozn">content</span>=<span class="k-deger">"noindex"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>"Eski sitenin yüzlerce sayfası hâlâ Google'da görünüyor" şikâyetinin en yaygın sebeplerinden biri tam olarak budur: sayfalar robots.txt ile engellenmiştir,
+            bu yüzden Google ne <code>noindex</code>'i ne de 404/410 yanıtını görebilir ve adresler açıklamasız biçimde dizinde kalır. Teşhis ve temizlik sırası
+            <a href="09-tarama-ve-dizin.html#robots-txt">Bölüm 9</a> ve <a href="16-sorun-giderme.html">Bölüm 16</a>'da.</p>
+        </aside>
+        <p>Aynı dönemde kalkan başka şeyler de var: Search Console'daki URL Parametreleri aracı (Nisan 2022), tarama hızı sınırlayıcı (Ocak 2024), eski robots.txt test aracı (Kasım 2023),
+          Google'ın önbellek bağlantısı ve <code>cache:</code> operatörü (2024). Hepsi ilgili bölümlerde tarihiyle işaretli.</p>
+
+        <h2 id="bu-egitim-nasil-ilerler"><span class="h-num">§ 11</span>Bu eğitim nasıl ilerler</h2>
+        <ol class="steps">
+          <li><strong>Zemin (Bölüm 1–3).</strong> Google'ın nasıl çalıştığı ve hangi kuralları yazdığı. Sonraki her şey buna dayanır.</li>
+          <li><strong>Sayfa ve içerik (4–8).</strong> Doğru kelimeyi bulup doğru sayfaya yerleştirmek, sayfayı makinenin anlayacağı biçimde anlatmak.</li>
+          <li><strong>Teknik (9–11).</strong> Tarama, dizin, hız, mobil, JavaScript, alan adı ve sunucu.</li>
+          <li><strong>Sitenin dışı (12–14).</strong> Yerel SEO, bağlantılar, Yandex/Bing ve yapay zekâ aramaları.</li>
+          <li><strong>Uygulama (15–20).</strong> Araçlar, sorun giderme, müşteri işi, yeni site yol haritası, kontrol listesi, sözlük.</li>
+        </ol>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 12</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Organik sıralama satın alınamaz; Google Ads organiği yükseltmez. Reklam ile SEO açılış sayfasında ve veride buluşur.</li>
+            <li>"1. sıra garantisi" veren kişi Google'ın tehlike listesindedir; tutulan firmanın yaptığından site sahibi sorumludur.</li>
+            <li>SEO'nun dört ayağı: teknik, sayfa içi/içerik, sayfa dışı, yerel. Teknik zemin yoksa diğerleri görünmez.</li>
+            <li>Gerçekçi süre: marka adı haftalar, uzun kuyruk aylar, genel terim 6–12 ay ve üstü, garantisiz. Kasıtlı bir "sandbox" yok; yeni sitede sinyal az.</li>
+            <li>Bir site bir aramada genelde en çok 2 kez çıkar; aynı soruya on sayfa yazmak işe yaramaz.</li>
+            <li>YZ özetleri bilgi sorgularında tıklamayı düşürüyor; başarıyı dönüşümle (arama, form, yol tarifi) ölç.</li>
+            <li>Türkiye'de Yandex yaklaşık %25 pay alıyor; Yandex Webmaster ve Haritalar atlanmamalı.</li>
+            <li>robots.txt ve site haritası duruyor; kalkan, robots.txt'deki <code>noindex</code> desteği (2019) ve site haritası ping ucu (2023).</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 13</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Ücretli ve organik raporu — <a href="https://support.google.com/google-ads/answer/3097241">support.google.com/google-ads/answer/3097241</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google — How Search Works: Our approach — <a href="https://www.google.com/search/howsearchworks/our-approach/">google.com/search/howsearchworks/our-approach</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Kalite Puanı — <a href="https://support.google.com/google-ads/answer/6167118">support.google.com/google-ads/answer/6167118</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Ad Rank — <a href="https://support.google.com/google-ads/answer/1722122">support.google.com/google-ads/answer/1722122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Long Does It Take to Rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/blog/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--info">3. taraf</span> Piranha Digital — Google: SEO results take 4 months to a year (2017 videosu) — <a href="https://piranha-solutions.com/google-seo-results-take-4-months-year/">piranha-solutions.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Google Sandbox — <a href="https://ahrefs.com/blog/google-sandbox/">ahrefs.com/blog/google-sandbox</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — March 2024 core update and new spam policies — <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">developers.google.com/search/blog/2024/03/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Mueller: WordPress not inherently better for SEO (Ara 2022) — <a href="https://www.searchenginejournal.com/googles-john-mueller-wordpress-not-inherently-better-for-seo/474737/">searchenginejournal.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — AI features and your website — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Google's AI summaries now swallow 58% of clicks (Ahrefs verisi) — <a href="https://ppc.land/googles-ai-summaries-now-swallow-58-of-clicks-that-once-went-to-websites/">ppc.land/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Whole Whale — Pew Research özeti — <a href="https://wholewhale.com/resources/googles-gaslighting-pew-research-confirms-what-seos-already-know-about-ai-overviews/">wholewhale.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Top ways to ensure your content performs well in Google's AI experiences (21 May 2025) — <a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">developers.google.com/search/blog/2025/05/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--info">3. taraf</span> ZEO — Google AI Mode and AI Overview finally live in Türkiye — <a href="https://zeo.org/resources/blog/google-ai-mode-and-ai-overview-finally-live-in-turkiye">zeo.org/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share Turkey (tüm cihazlar) — <a href="https://gs.statcounter.com/search-engine-market-share/all/turkey">gs.statcounter.com/…/all/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share Turkey (mobil) — <a href="https://gs.statcounter.com/search-engine-market-share/mobile/turkey">gs.statcounter.com/…/mobile/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — A note on unsupported rules in robots.txt (Tem 2019) — <a href="https://developers.google.com/search/blog/2019/07/a-note-on-unsupported-rules-in-robotstxt">developers.google.com/search/blog/2019/07/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Sitemaps ping endpoint is going away (26 Haz 2023) — <a href="https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping">developers.google.com/search/blog/2023/06/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--ok">Resmî</span> Google İşletme Profili Yardım — Tips to improve your local ranking — <a href="https://support.google.com/business/answer/7091">support.google.com/business/answer/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--info">3. taraf</span> Seer Interactive — AI Overviews araştırması — <a href="https://www.seerinteractive.com/news/forbes-cites-seer-interactive-research-on-ai-overviews">seerinteractive.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="index.html"><span class="dir">&larr; Önceki</span><span class="ttl">Genel Bakış</span></a>
+        <a class="next" href="02-google-nasil-calisir.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Google nasıl çalışır</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

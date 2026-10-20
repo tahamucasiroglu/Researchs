@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resmî kurallar ve sıralama sistemleri — SEO Rehberi</title>
+<meta name="description" content="Google Search Essentials, spam politikaları (2024–2026 yenileri dahil), adı konmuş sıralama sistemleri, E-E-A-T ve kalite değerlendiricileri, çekirdek güncellemeler tablosu, düşüş sonrası yapılacaklar ve yaygın mitler.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Resmî kurallar ve sıralama sistemleri</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 03 · Temeller</div>
+        <h1 class="page-title">Resmî kurallar ve sıralama sistemleri</h1>
+        <p class="lede">Google'ın oyun kuralları gizli değil, yazılı. Bu bölüm o yazılı kuralları (Search Essentials ve spam politikaları), sıralamayı yapan adı konmuş sistemleri,
+      "kalite" kavramının Google'daki karşılığını ve çekirdek güncellemelerin ne olduğunu anlatır. Bitirdiğinde bir taktiğin kural içinde mi dışında mı olduğunu kendin söyleyebileceksin.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 20 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Search Essentials üç parçadır: teknik gereksinimler, spam politikaları, temel en iyi uygulamalar.</li>
+            <li>2024–2026'da yeni spam politikaları geldi: ölçekli içerik, süresi dolmuş alan adı, site itibarı kötüye kullanımı ve 15 Haziran 2026'dan beri "geri tuşu kaçırma".</li>
+            <li>Sıralamayı tek algoritma değil, adı konmuş birçok sistem yapar. Yararlı içerik sistemi Mart 2024'te çekirdeğe katıldı; ayrı bir "HCU" artık yok.</li>
+            <li>E-E-A-T doğrudan sıralama faktörü değildir; kalite değerlendiricileri sıralamayı değiştiremez.</li>
+            <li>Son çekirdek güncellemeler: Mart 2026 ve Mayıs 2026. Düşüş sonrası Google'ın önerisi: bitmesini bekle, bir hafta sonra karşılaştır, acele etme.</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="search-essentials"><span class="h-num">§ 1</span>Search Essentials: Google'ın yazılı kuralları</h2>
+        <p><strong>Google Search Essentials</strong> (eski adıyla "Webmaster Yönergeleri"), bir sitenin Google'da görünmesi için uyması gereken kuralların resmî belgesidir. Üç parçadan oluşur <sup class="kaynak"><a href="#k1">[1]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Parça</th><th>Ne söyler</th><th>Çiğnenirse</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Teknik gereksinimler</strong></td><td>Engellenmemiş, HTTP 200 dönen, dizine eklenebilir içerik (<a href="02-google-nasil-calisir.html#teknik-gereksinimler">Bölüm 2</a>)</td><td>Sayfa dizine giremez</td></tr>
+              <tr><td><strong>Spam politikaları</strong></td><td>Yasak taktiklerin listesi (aşağıda)</td><td>Sıralama düşer ya da site sonuçlardan tamamen çıkarılır</td></tr>
+              <tr><td><strong>Temel en iyi uygulamalar</strong></td><td>İnsan odaklı içerik; aranan kelimeleri başlıkta, ana başlıkta, alt metinde ve bağlantı metninde belirgin kullanmak; bağlantıları taranabilir yapmak; siteyi ilgili topluluklarda tanıtmak; görsel, video, yapılandırılmış veri ve JavaScript rehberlerine uymak</td><td>Ceza yok; ama sıralamayı bunlar belirler</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Teknik gereksinimleri karşılamak dizine girmeyi garanti etmez; listelenmek ücretsizdir <sup class="kaynak"><a href="#k2">[2]</a></sup>.</p>
+
+        <h2 id="spam-politikalari"><span class="h-num">§ 2</span>Spam politikaları</h2>
+        <p>Spam politikaları belgesi (son güncelleme 28 Ağustos 2026), Google'ın yasakladığı taktikleri sayar <sup class="kaynak"><a href="#k3">[3]</a></sup>. İhlal iki yoldan yakalanır: otomatik sistemler (özellikle <strong>SpamBrain</strong>, Google'ın yapay zekâ tabanlı spam tespit sistemi)
+          ve insan incelemesiyle verilen <strong>elle işlem</strong> (manual action; Search Console'da "Elle işlemler" raporunda görünür).</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Politika</th><th>Ne demek</th><th>Sık görülen örnek</th></tr></thead>
+            <tbody>
+              <tr><td>Cloaking (gizleme)</td><td>Arama motoruna ve kullanıcıya farklı içerik göstermek</td><td>Googlebot'a metin dolu sayfa, ziyaretçiye başka bir sayfa</td></tr>
+              <tr><td>Doorway (kapı sayfası)</td><td>Benzer sorgular için açılıp ziyaretçiyi başka yere akıtan ara sayfalar</td><td>"Örnek İlçe nakliyat", "Örnek Semt nakliyat"… diye içeriği aynı onlarca şablon sayfa</td></tr>
+              <tr><td>Süresi dolmuş alan adı kötüye kullanımı</td><td>Eski bir alan adını satın alıp itibarıyla değersiz içerik sıralatmak</td><td>Eski bir sağlık sitesinin alan adında kumar içeriği</td></tr>
+              <tr><td>Hacklenmiş içerik</td><td>Güvenlik açığından izinsiz eklenen içerik</td><td>Rastgele klasörlerde binlerce yabancı dilde sayfa</td></tr>
+              <tr><td>Gizli metin ve bağlantı</td><td>Ziyaretçiye değil arama motoruna yönelik gizlenmiş metin</td><td>Beyaz zemine beyaz yazı. <em>Akordeon ve ipucu balonu (tooltip) serbest</em></td></tr>
+              <tr><td>Keyword stuffing (anahtar kelime doldurma)</td><td>Doğal olmayan kelime, şehir ya da telefon listeleri</td><td>Sayfa altına 40 ilçe adı yığmak</td></tr>
+              <tr><td>Link spam (bağlantı spamı)</td><td>Sıralama için bağlantı üretmek ya da satın almak</td><td>"1000 backlink" paketi; ücretli bağlantı ancak <code>rel="sponsored"</code>/<code>nofollow</code> ile serbest</td></tr>
+              <tr><td>Makine üretimi trafik</td><td>Google'a izinsiz otomatik sorgu atmak</td><td>Sıra takibi için kazıyıcı botlar</td></tr>
+              <tr><td>Kötü amaçlı uygulamalar</td><td>Kötü yazılım, istenmeyen yazılım ve <strong>geri tuşu kaçırma</strong></td><td>Ziyaretçi geri tuşuna basınca reklam sayfasına atmak</td></tr>
+              <tr><td>Yanıltıcı işlev</td><td>Var olmayan bir hizmet ya da araç vaadi</td><td>Çalışmayan "ücretsiz hesaplayıcı" sayfası</td></tr>
+              <tr><td><strong>Ölçekli içerik kötüye kullanımı</strong></td><td>Kullanıcıya değer katmadan, sıralamayı manipüle etmek için toplu sayfa üretmek — "nasıl üretildiğine bakılmaksızın"</td><td>Yapay zekâyla yüzlerce "X nedir" sayfası</td></tr>
+              <tr><td>Scraping (kazıma)</td><td>Başka sitelerin içeriğini değer katmadan yeniden yayınlamak</td><td>Rakip blogları kopyalayan otomatik site</td></tr>
+              <tr><td><strong>Site itibarı kötüye kullanımı</strong></td><td>Ev sahibi sitenin sıralama gücünü sömürmek için üçüncü taraf içeriği yayınlamak ("parazit SEO")</td><td>Haber sitesinde ilgisiz kupon/kumar bölümü</td></tr>
+              <tr><td>Sinsi yönlendirme</td><td>Kullanıcıyı beklemediği yere aldatıcı biçimde göndermek</td><td>Mobil kullanıcıyı başka alan adına yönlendirmek</td></tr>
+              <tr><td>İnce ortaklık (thin affiliate)</td><td>Değer katmayan ortaklık sayfaları</td><td>Mağaza açıklamalarını kopyalayan ürün listeleri</td></tr>
+              <tr><td>Kullanıcı kaynaklı spam</td><td>Yorum, forum ve profil spamı</td><td>Bakımsız blog yorumlarında ilaç bağlantıları</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Belge ayrıca iki şey söyler: çok sayıda geçerli yasal kaldırma talebi alan siteler düşürülür; bir politikayı yeni alt alan adı ya da klasörle <strong>aşmaya çalışmak da ihlaldir</strong> <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        <p>Bu tekniklerin nasıl işlediği, bir müşteri sitesinde nasıl fark edileceği ve nasıl temizleneceği <a href="21-kara-sapka.html">Bölüm 21</a>'de.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">gizli metin + anahtar kelime doldurma</span></div>
+<pre><code><span class="k-etiket">&lt;div</span> <span class="k-ozn">style</span>=<span class="k-deger">"color:#fff;background:#fff"</span><span class="k-etiket">&gt;</span>
+  nakliyat ucuz nakliyat evden eve nakliyat Örnekşehir nakliyat Örnek İlçe nakliyat …
+<span class="k-etiket">&lt;/div&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">açılır içerik serbest; ücretli bağlantı işaretli</span></div>
+<pre><code><span class="k-etiket">&lt;details&gt;</span>
+  <span class="k-etiket">&lt;summary&gt;</span>Hangi ilçelere hizmet veriyoruz?<span class="k-etiket">&lt;/summary&gt;</span>
+  <span class="k-etiket">&lt;p&gt;</span>Örnekşehir merkez ve çevre ilçeler; şehir dışı taşımalar için ayrıca teklif veriyoruz.<span class="k-etiket">&lt;/p&gt;</span>
+<span class="k-etiket">&lt;/details&gt;</span>
+
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://ornek-sponsor.com"</span> <span class="k-ozn">rel</span>=<span class="k-deger">"sponsored"</span><span class="k-etiket">&gt;</span>Sponsorumuz<span class="k-etiket">&lt;/a&gt;</span>
+<span class="k-etiket">&lt;a</span> <span class="k-ozn">href</span>=<span class="k-deger">"https://kullanici-sitesi.com"</span> <span class="k-ozn">rel</span>=<span class="k-deger">"ugc nofollow"</span><span class="k-etiket">&gt;</span>yorumdaki bağlantı<span class="k-etiket">&lt;/a&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Yerel işletme siteleri için en sık spam riski <strong>şehir/ilçe şablon sayfalarıdır</strong>. İçeriği neredeyse aynı onlarca "ilçe + hizmet" sayfası hem kapı sayfası hem ölçekli içerik ihlali riski taşır;
+            üstelik bir siteden genelde en çok 2 sonuç gösterildiği için işe de yaramaz <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>. Her bölge sayfası gerçekten farklı bilgi taşımalıdır (<a href="12-yerel-seo.html">Bölüm 12</a>).</p>
+        </aside>
+
+        <h2 id="yeni-politikalar"><span class="h-num">§ 3</span>2024–2026'da gelen yeni politikalar</h2>
+
+        <h3 id="mart-2024">Mart 2024: üç yeni politika</h3>
+        <p>Mart 2024 çekirdek güncellemesiyle birlikte üç politika duyuruldu <sup class="kaynak"><a href="#k4">[4]</a></sup>:</p>
+        <ul>
+          <li><strong>Ölçekli içerik kötüye kullanımı:</strong> otomasyonla, insanla ya da ikisinin birleşimiyle — "nasıl üretildiğine bakılmaksızın" — değersiz toplu sayfa üretimi.</li>
+          <li><strong>Süresi dolmuş alan adı kötüye kullanımı:</strong> eski alan adının itibarını alakasız, düşük değerli içerikle sömürmek.</li>
+          <li><strong>Site itibarı kötüye kullanımı:</strong> 5 Mayıs 2024'te yürürlüğe girdi.</li>
+        </ul>
+
+        <h3 id="kasim-2024">Kasım 2024: site itibarı netleştirmesi</h3>
+        <p>Google 19 Kasım 2024'te politikayı netleştirdi <sup class="kaynak"><a href="#k5">[5]</a></sup>:</p>
+        <ul>
+          <li>"Birinci tarafın ne kadar dahil olduğu, içeriğin üçüncü taraf doğasını değiştirmez." Beyaz etiket, lisans, kısmi ortaklık gibi düzenlemeler muafiyet sağlamaz.</li>
+          <li><code>noindex</code> eklemek elle işlemi kendiliğinden kaldırmaz; yeniden değerlendirme talebi gerekir.</li>
+          <li>İçeriği alt klasöre ya da alt alan adına taşımak işe yaramaz, politikayı aşma girişimi sayılabilir.</li>
+          <li>Serbest yazara yazdırılan içerik ve doğru işaretlenmiş ortaklık içeriği tek başına ihlal değildir.</li>
+        </ul>
+
+        <h3 id="aea-farki">Ağustos 2026: Avrupa'da farklı uygulama, Türkiye'de değişiklik yok</h3>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>30 Ağustos 2026'dan itibaren</strong> (duyuru 28 Ağustos 2026), site itibarı kötüye kullanımı için verilen elle işlem, Avrupa Ekonomik Alanı'ndaki (AEA: AB + İzlanda, Norveç, Lihtenştayn) kullanıcılara
+            sıralama düşüşü olarak uygulanmıyor; ilgili bölüm ana alan adından ayrı sınıflanıp kendi değerine göre sıralanıyor. Sebep, AB Komisyonu'nun Dijital Piyasalar Yasası incelemesi <sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>.
+            <strong>Türkiye AEA'da değil; Türkiye'deki kullanıcılar için uygulama aynen sürüyor.</strong></p>
+        </aside>
+
+        <h3 id="geri-tusu">Haziran 2026: geri tuşu kaçırma</h3>
+        <p>13 Nisan 2026'da duyurulan ve <strong>15 Haziran 2026'dan beri</strong> uygulanan politika, ziyaretçinin tarayıcıdaki geri tuşunu ele geçirip onu geldiği yere değil başka bir sayfaya (genelde reklama)
+          götürmeyi "kötü amaçlı uygulamalar" altında açık ihlal sayıyor <sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bu davranış sitenin kendi kodundan değil, eklenen bir reklam ağı betiğinden ya da hazır kütüphaneden geliyor olabilir. Google'a göre <strong>sorumluluk yine site sahibindedir</strong> <sup class="kaynak"><a href="#k8">[8]</a></sup>.
+            Bir müşteri sitesini devralırken üçüncü taraf betiklerin listesini çıkar ve her birinin ne yaptığını kontrol et.</p>
+        </aside>
+
+        <h2 id="siralama-sistemleri"><span class="h-num">§ 4</span>Sıralama sistemleri</h2>
+        <p>Google, sıralamayı tek bir "algoritma"nın değil, birlikte çalışan çok sayıda sistemin yaptığını söyler ve bunların adlarını resmî bir rehberde listeler (son güncelleme 10 Aralık 2025) <sup class="kaynak"><a href="#k9">[9]</a></sup> <span class="tag tag--ok">Resmî</span>.
+          Hepsinin ayrıntısı açıklanmaz; ama neyin ölçüldüğü yazılıdır.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sistem</th><th>Ne yapar</th><th>Sana pratik anlamı</th></tr></thead>
+            <tbody>
+              <tr><td>BERT</td><td>Kelime birleşimlerinin anlamını çözer</td><td>Doğal dille yaz; kelime sırasını hileyle zorlamaya gerek yok</td></tr>
+              <tr><td>RankBrain</td><td>Kelimeleri kavramlara bağlar; birebir eşleşme olmadan da sonuç bulur</td><td>Eş anlamlıları ayrı sayfalara bölmek gereksiz</td></tr>
+              <tr><td>Neural matching</td><td>Sorgudaki ve sayfadaki kavramları eşleştirir</td><td>Konuyu kapsamlı anlatmak tek kelimeyi tekrarlamaktan önemli</td></tr>
+              <tr><td>Bağlantı analizi ve PageRank</td><td>Sayfalar arası bağlantılardan konu ve değer çıkarır</td><td>İç ve dış bağlantılar hâlâ sayılır (<a href="13-sayfa-disi.html">Bölüm 13</a>)</td></tr>
+              <tr><td>Passage ranking</td><td>Sayfanın tek tek bölümlerini değerlendirir</td><td>Uzun sayfada iyi bir alt başlık kendi başına sorguya cevap olabilir</td></tr>
+              <tr><td>Tazelik</td><td>Sorgu gerektiriyorsa yeni içeriği öne çıkarır</td><td>Haber ve güncel konular için; her sorgu için değil</td></tr>
+              <tr><td>Deduplication (tekrar ayıklama)</td><td>Çok benzer sonuçlardan yalnız en ilgilisini gösterir</td><td>Kopya sayfalar birbirini götürür</td></tr>
+              <tr><td>Site çeşitliliği</td><td>İlk sonuçlarda bir siteden genelde en çok 2 sonuç; alt alan adları ana alanla birlikte sayılır</td><td>Aynı sorguya on sayfa yazma</td></tr>
+              <tr><td>Tam eşleşen alan adı (EMD) sistemi</td><td>Sorguyla birebir aynı adı taşıyan alan adlarının kredisini kısar</td><td>Anahtar kelimeli alan adı değil, marka adı al (<a href="11-altyapi.html">Bölüm 11</a>)</td></tr>
+              <tr><td>Yorumlar (reviews) sistemi</td><td>Derinlemesine, özgün inceleme içeriğini ödüllendirir</td><td>Kopya "en iyi 10" listeleri zayıf kalır</td></tr>
+              <tr><td>Özgün içerik</td><td>Özgün habere, onu alıntılayandan fazla öncelik verir</td><td>İlk kaynak ol</td></tr>
+              <tr><td>Güvenilir bilgi, kriz bilgisi, yerel haber</td><td>Belirli sorgu türlerinde güvenilir ve resmî kaynakları öne alır</td><td>Hassas konularda güven sinyalleri önemli</td></tr>
+              <tr><td>Kaldırma tabanlı düşürme</td><td>Çok sayıda geçerli yasal kaldırma talebi alan siteyi düşürür</td><td>Telif ihlalinin sıralama bedeli var</td></tr>
+              <tr><td>MUM</td><td>Belirli özelliklerde kullanılır; genel sıralamada kullanılmaz</td><td>—</td></tr>
+              <tr><td>Spam tespiti (SpamBrain)</td><td>Spam politikası ihlallerini yakalar</td><td>Yukarıdaki tablo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="emekli-sistemler">Emekli sistemler</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sistem</th><th>Duyuru</th><th>Akıbeti</th></tr></thead>
+            <tbody>
+              <tr><td>Helpful content (yararlı içerik)</td><td>Ağustos 2022</td><td>Mart 2024'te çekirdek sistemlere katıldı</td></tr>
+              <tr><td>Hummingbird</td><td>Ağustos 2013</td><td>Emekli</td></tr>
+              <tr><td>Panda</td><td>2011</td><td>2015'te çekirdeğe katıldı</td></tr>
+              <tr><td>Penguin</td><td>2012</td><td>2016'da çekirdeğe katıldı</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Mart 2024:</strong> yararlı içerik sistemi ayrı bir sistem olmaktan çıktı. Google o duyuruda şunu yazdı: "Artık bunu yapan tek bir sinyal ya da sistem yok" <sup class="kaynak"><a href="#k4">[4]</a></sup>.
+            "Sitemi Helpful Content Update vurdu" cümlesi Mart 2024'ten sonraki düşüşler için teknik olarak yanlıştır; artık ayrı bir HCU yok, çekirdek güncellemeler var <sup class="kaynak"><a href="#k9">[9]</a></sup>.</p>
+        </aside>
+
+        <h3 id="navboost">Tıklama verisi (Navboost): resmî olan ile olmayanı ayır</h3>
+        <p><strong>Navboost</strong> adı Google'ın resmî belgelerinde geçmez. ABD Adalet Bakanlığı'nın (DOJ) Google davasında Pandu Nayak'ın 2023 tanıklığı ve Mayıs 2024'te sızan API belgeleri,
+          Google'ın <em>toplu</em> kullanıcı etkileşim verisini (iyi ve kötü tıklama gibi) sıralamada kullandığını gösteriyor <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k20">[20]</a></sup><sup class="kaynak"><a href="#k21">[21]</a></sup>.
+          Ayrıntıların çoğu SEO yorumcularının çıkarımıdır; <span class="tag tag--warn">Doğrulanamadı</span>.</p>
+        <p>Bunu Google'ın şu sözüyle karıştırma: Google, Analytics'teki <strong>hemen çıkma oranı</strong> gibi site ölçümlerini kullanmadığını söylüyor <sup class="kaynak"><a href="#k29">[29]</a></sup>. "Analytics kurarsam sıralamam artar" yanlıştır;
+          "insanların sonuçlarla nasıl etkileştiği toplu olarak bir yerde sayılıyor olabilir" ise davadan çıkan bir bilgidir. Pratik sonuç aynıdır: tıklayan kişiyi memnun eden sayfa yaz, tıklama tuzağı başlık yazma.</p>
+
+        <h3 id="baglantilarin-agirligi">Bağlantıların bugünkü ağırlığı</h3>
+        <p>Google'dan Gary Illyes Eylül 2023'te bağlantıların artık "ilk 3 sıralama etkeni" arasında olmadığını, hiç bağlantısı olmayan bir sayfanın da sıralanabildiğini söyledi <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k19">[19]</a></sup>.
+          Bu "bağlantı önemsiz" demek değildir; PageRank hâlâ resmî sistemler listesinde. Anlamı şudur: bağlantı satın almak hem riskli hem de eskisi kadar etkili değil. Ayrıntı <a href="13-sayfa-disi.html">Bölüm 13</a>.</p>
+
+        <h2 id="kalite-ve-eeat"><span class="h-num">§ 5</span>Kalite: yararlı içerik, E-E-A-T ve değerlendiriciler</h2>
+
+        <h3 id="yararli-icerik">"İnsan için" içerik</h3>
+        <p>Google'ın "yararlı, güvenilir, insan odaklı içerik" belgesi (son güncelleme 5 Ekim 2026) kendi kendine sorulacak soruları verir <sup class="kaynak"><a href="#k10">[10]</a></sup>: İçerik özgün mü? Bariz olanın ötesinde içgörü var mı?
+          Diğer sonuçlara göre ek değer katıyor mu? Okuyan kişi yer imlerine ekler mi, başkasına önerir mi? Kolayca kontrol edilebilecek bir hata var mı?</p>
+        <p>Aynı belge "önce arama motoru için" yazılmış içeriğin uyarı işaretlerini de sayar. Bunlardan özellikle ikisi sık atlanır:</p>
+        <ul>
+          <li><strong>Belirli bir kelime sayısı hedeflemek.</strong> Google "tercih ettiğimiz bir kelime sayısı yok" diyor <sup class="kaynak"><a href="#k10">[10]</a></sup>.</li>
+          <li><strong>İçerik değişmeden tarihi güncellemek</strong> ya da taze görünsün diye içerik ekleyip çıkarmak. Google bunun sıralamaya yaramadığını yazıyor <sup class="kaynak"><a href="#k10">[10]</a></sup>.</li>
+        </ul>
+        <p>"Kim, Nasıl, Neden" çerçevesi ve yapay zekâ ile içerik üretiminin sınırları <a href="07-icerik-kalitesi.html">Bölüm 7</a>'de ayrıntılı.</p>
+
+        <h3 id="eeat">E-E-A-T</h3>
+        <p><strong>E-E-A-T</strong>: Experience (deneyim), Expertise (uzmanlık), Authoritativeness (otorite), Trust (güven). Google'ın kalite kavramını tarif eden kısaltmadır.</p>
+        <ul>
+          <li>İlk "E" (deneyim) Aralık 2022'de eklendi.</li>
+          <li>Dördünün en önemlisi <strong>güven</strong>dir.</li>
+          <li><strong>Doğrudan bir sıralama faktörü değildir.</strong> Google'ın deyişiyle sinyallerin nasıl harmanlanacağına yön verir <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k22">[22]</a></sup>.</li>
+          <li>YMYL konularında (Your Money or Your Life: sağlık, para, güvenlik, toplum refahı) daha ağır basar.</li>
+        </ul>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"E-E-A-T puanını yükseltmek için sayfaya yazar kutusu ve 'uzman onaylı' rozeti ekle; sıralama artar."</p>
+          <p class="mit-gercek">E-E-A-T bir puan değil, doğrudan faktör de değil <sup class="kaynak"><a href="#k22">[22]</a></sup>. Yazar bilgisi okura güven verdiği için önerilir; sahte yazar ya da sahte unvan uydurmak ise açıkça kural dışıdır <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
+        </aside>
+
+        <h3 id="kalite-degerlendiricileri">Kalite değerlendiricileri ve kılavuzları</h3>
+        <p>Google, sonuçları elle puanlayan dış çalışanlarla (<strong>search quality raters</strong>) çalışır ve onlara ayrıntılı bir kılavuz verir (Search Quality Rater Guidelines). İki şeyi doğru bilmek gerekir:</p>
+        <ul>
+          <li>Değerlendiriciler <strong>sıralamayı değiştiremez</strong>. Puanları algoritmalarda doğrudan kullanılmaz; yalnız bir değişikliğin işe yarayıp yaramadığını ölçmeye yarar <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+          <li>Kılavuz, Google'ın neyi "kaliteli" saydığını gösteren en ayrıntılı kamusal belgedir; ama bir "sıralama faktörleri listesi" değildir.</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sürüm</th><th>Önemli değişiklik</th></tr></thead>
+            <tbody>
+              <tr><td>Ocak 2025</td><td>Üretken yapay zekâ ilk kez tanımlandı. §4.6.6: ana içeriğin çoğu kopya, başka sözlerle yazılmış, otomatik ya da YZ ile üretilmişse ve az emek/değer içeriyorsa sayfa <strong>"Lowest"</strong> (en düşük) puan alır. §4.6.5 ölçekli içerik kötüye kullanımını anlatır <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k14">[14]</a></sup></td></tr>
+              <tr><td>11 Eylül 2025</td><td>YMYL tanımı güncellendi, AI Overviews örnekleri eklendi <sup class="kaynak"><a href="#k13">[13]</a></sup></td></tr>
+              <tr><td>2026</td><td>Yeni sürüm olduğuna dair birincil kaynak bulunamadı <span class="tag tag--warn">Doğrulanamadı</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="yapay-zeka-icerik">Yapay zekâ ile yazılmış içerik</h3>
+        <p>Google'ın tutumu 8 Şubat 2023'ten beri aynıdır: <strong>içeriğin nasıl üretildiğine değil kalitesine bakılır.</strong> Yapay zekâ ile yazmak ceza getirmez, avantaj da sağlamaz.
+          Sıralamayı manipüle etmek amacıyla toplu üretim ise ölçekli içerik ihlalidir <sup class="kaynak"><a href="#k12">[12]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup>.
+          Google'ın 1 Ekim 2026'da güncellenen belgesi, yapay zekânın uydurabileceği için <code>&lt;title&gt;</code>, meta açıklama, yapılandırılmış veri ve alt metin dahil her şeyin elle kontrol edilmesini ister <sup class="kaynak"><a href="#k11">[11]</a></sup>.
+          Ayrıntı <a href="07-icerik-kalitesi.html">Bölüm 7</a>.</p>
+
+        <h2 id="cekirdek-guncellemeler"><span class="h-num">§ 6</span>Çekirdek güncellemeler</h2>
+        <p><strong>Çekirdek güncelleme</strong> (core update), Google'ın sıralama sistemlerinde yılda birkaç kez yaptığı geniş çaplı değişikliktir. Belirli bir siteyi ya da taktiği hedeflemez;
+          içeriğin genel olarak nasıl değerlendirildiğini yeniden ayarlar. <strong>Spam güncellemesi</strong> ise spam tespit sistemlerini günceller. İkisi de Google Search Status Dashboard'da başlangıç ve bitiş tarihiyle yayımlanır <sup class="kaynak"><a href="#k15">[15]</a></sup>.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Güncelleme</th><th>Başlangıç → bitiş</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Helpful Content Update</td><td>Ağustos 2022</td><td>Ayrı sistem olarak başladı</td></tr>
+              <tr><td>Mart 2024 çekirdek</td><td>5 Mar → 19 Nis 2024</td><td>≈ 45 gün. Google bitince %45 daha az düşük kaliteli, özgün olmayan içerik bildirdi <sup class="kaynak"><a href="#k17">[17]</a></sup>; yararlı içerik sistemi çekirdeğe katıldı</td></tr>
+              <tr><td>Mart 2024 spam</td><td>5 → 19 Mar 2024</td><td>Yeni politikalar</td></tr>
+              <tr><td>Ağustos 2024 çekirdek</td><td>15 Ağu → 3 Eyl 2024</td><td>—</td></tr>
+              <tr><td>Kasım 2024 çekirdek</td><td>11 Kas → 4 Ara 2024</td><td>—</td></tr>
+              <tr><td>Aralık 2024 çekirdek / spam</td><td>12 → 18 Ara / 19 → 26 Ara 2024</td><td>—</td></tr>
+              <tr><td>Mart 2025 çekirdek</td><td>13 → 26 Mar 2025</td><td>—</td></tr>
+              <tr><td>Haziran 2025 çekirdek</td><td>30 Haz → 16 Tem 2025</td><td>—</td></tr>
+              <tr><td>Ağustos 2025 spam</td><td>26 Ağu → 21 Eyl 2025</td><td>—</td></tr>
+              <tr><td>Aralık 2025 çekirdek</td><td>11 → 29 Ara 2025</td><td>—</td></tr>
+              <tr><td>Şubat 2026 Discover</td><td>5 → 26 Şub 2026</td><td>Yalnız Discover akışı</td></tr>
+              <tr><td>Mart 2026 spam</td><td>24 → 25 Mar 2026</td><td>—</td></tr>
+              <tr><td><strong>Mart 2026 çekirdek</strong></td><td>27 Mar → 8 Nis 2026</td><td>Google açıklama yapmadı. SE Ranking verisine göre ilk 3'teki adreslerin ≈ %80'i yer değiştirdi <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k18">[18]</a></sup></td></tr>
+              <tr><td><strong>Mayıs 2026 çekirdek</strong></td><td>21 May → 1 Haz 2026</td><td>—</td></tr>
+              <tr><td>Haziran / Ağustos / Eylül 2026 spam</td><td>24–26 Haz; 18–21 Ağu; 24 Eyl → 8 Eki 2026</td><td>En son spam güncellemesi</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Tarihler Google Search Status Dashboard'dan <sup class="kaynak"><a href="#k15">[15]</a></sup>. Google, duyurulmayan küçük çekirdek güncellemeler de yaptığını söylüyor <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+
+        <h3 id="dusus-sonrasi">Düşüş sonrası ne yapılır</h3>
+        <p>Google'ın çekirdek güncellemeler belgesi bir düşüşten sonra şu sırayı önerir <sup class="kaynak"><a href="#k16">[16]</a></sup> <span class="tag tag--ok">Resmî</span>:</p>
+        <ol class="steps">
+          <li><strong>Güncellemenin bitmesini bekle.</strong> Yayılma sürerken veriler oynar.</li>
+          <li><strong>Bittikten en az 1 hafta sonra karşılaştır.</strong> Search Console'da o haftayı güncelleme öncesindeki bir haftayla kıyasla; Web, Görsel, Video ve Haberler sekmelerini ayrı ayrı incele.</li>
+          <li><strong>Küçük kaymalara dokunma.</strong> 2. sıradan 4. sıraya düşmek gibi değişikliklerde iyi çalışan içeriği değiştirme.</li>
+          <li><strong>Büyük ve kalıcı düşüşte siteyi bütün olarak değerlendir.</strong> Tek sayfaya değil, sitenin genel kalitesine bak (yukarıdaki öz-değerlendirme soruları).</li>
+          <li><strong>"Hızlı düzeltme" yapma.</strong> Duyduğun bir öğeyi silmek gibi aceleci adımlar atma; içerik silmek son çaredir.</li>
+        </ol>
+        <p>Toparlanma birkaç gün de sürebilir, aylar da; bazen bir sonraki çekirdek güncellemeyi beklemek gerekir <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Her düşüş güncelleme değildir. Eylül 2025'te Google'ın sonuç sayfasındaki <code>&amp;num=100</code> parametresi kalktı; birçok sitede Search Console gösterimleri bir anda düştü,
+            ortalama pozisyon ise "iyileşti". Bu bir ölçüm değişikliğiydi, gerçek trafik kaybı değil <span class="tag tag--info">3. taraf</span> <sup class="kaynak"><a href="#k25">[25]</a></sup>. Gösterim düştü ama tıklama aynıysa önce ölçüme bak.</p>
+        </aside>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir hizmet sitesinin trafiği bir çekirdek güncellemenin ortasında %30 düşüyor; site sahibi panikle blog yazılarının yarısını silmek istiyor. Doğru sıra: güncellemenin
+            dashboard'da "tamamlandı" görünmesini bekle, bir hafta sonra Search Console'da karşılaştır, düşüşün hangi sayfa ve sorgularda olduğunu bul. Yalnız birkaç sorguda 1–2 sıra kaymışsa dokunma;
+            bütün sitede kalıcı bir düşüş varsa içeriği öz-değerlendirme sorularıyla tek tek gözden geçir.</p>
+        </aside>
+
+        <h2 id="mitler"><span class="h-num">§ 7</span>Yaygın mitler</h2>
+        <p>Aşağıdaki iddiaların çoğu eski eğitimlerde, ajans tekliflerinde ve forumlarda hâlâ dolaşıyor.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Söylenti</th><th>Gerçek</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;meta name="keywords"&gt;</code> sıralamayı etkiler</td><td>Google kullanmıyor; Eylül 2009'dan beri resmî</td><td><sup class="kaynak"><a href="#k22">[22]</a></sup></td></tr>
+              <tr><td>%1–2 anahtar kelime yoğunluğu idealdir</td><td>"Optimal yoğunluk yok"; fazlası anahtar kelime doldurmadır</td><td><sup class="kaynak"><a href="#k23">[23]</a></sup><sup class="kaynak"><a href="#k3">[3]</a></sup></td></tr>
+              <tr><td>"LSI keywords" kullanılmalı</td><td>Mueller: "Böyle bir şey yok"</td><td><sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+              <tr><td>2000+ kelimelik içerik daha iyi sıralanır</td><td>Sihirli bir kelime sayısı yok</td><td><sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k22">[22]</a></sup></td></tr>
+              <tr><td>Yinelenen içerik cezası var</td><td>Elle işlem yok, yalnız verim kaybı. Başkasının içeriğini kopyalamak ayrı konu (scraping)</td><td><sup class="kaynak"><a href="#k22">[22]</a></sup></td></tr>
+              <tr><td>E-E-A-T bir sıralama faktörüdür</td><td>Doğrudan değil</td><td><sup class="kaynak"><a href="#k22">[22]</a></sup></td></tr>
+              <tr><td>Değerlendiriciler siteni düşürür</td><td>Sıralamaya dokunamazlar</td><td><sup class="kaynak"><a href="#k10">[10]</a></sup></td></tr>
+              <tr><td>Meta açıklama sıralama faktörüdür</td><td>Değil; ama sonuçta görünüp tıklamayı etkileyebilir</td><td><sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+              <tr><td>Domain Authority (DA/DR) Google sinyalidir</td><td>Moz ve Ahrefs'in metrikleri; Google kullanmaz</td><td><sup class="kaynak"><a href="#k23">[23]</a></sup></td></tr>
+              <tr><td>Alan adı yaşı yardımcı olur</td><td>Mueller: "Hiç yardımcı olmaz"</td><td><sup class="kaynak"><a href="#k30">[30]</a></sup></td></tr>
+              <tr><td>Analytics kurmak / hemen çıkma oranı sıralamayı etkiler</td><td>Google kullanmadığını söylüyor; toplu tıklama verisi (Navboost) ise ayrı bir konu</td><td><sup class="kaynak"><a href="#k29">[29]</a></sup><sup class="kaynak"><a href="#k20">[20]</a></sup></td></tr>
+              <tr><td>Site haritasındaki <code>priority</code> ve <code>changefreq</code> önemlidir</td><td>Google kullanmıyor</td><td><sup class="kaynak"><a href="#k24">[24]</a></sup></td></tr>
+              <tr><td>Başlık etiketleri (H1–H6) sırayla olmazsa sıralama düşer</td><td>Google için fark etmez; ideal başlık sayısı yok (erişilebilirlik için düzgün tutulmalı)</td><td><sup class="kaynak"><a href="#k22">[22]</a></sup></td></tr>
+              <tr><td>FAQ şemasıyla sonuçta S.S.S. kutusu çıkar</td><td>Ağustos 2023'te devlet/sağlık sitelerine kısıtlandı; <strong>7 Mayıs 2026'dan beri hiç gösterilmiyor</strong></td><td><sup class="kaynak"><a href="#k26">[26]</a></sup><sup class="kaynak"><a href="#k27">[27]</a></sup></td></tr>
+              <tr><td>HowTo zengin sonucu</td><td>13 Eylül 2023'ten beri yok</td><td><sup class="kaynak"><a href="#k26">[26]</a></sup></td></tr>
+              <tr><td>Mobil öncelikli dizin "geliyor"</td><td>Tamamlandığı Ekim 2023'te duyuruldu</td><td><a href="02-google-nasil-calisir.html#mobil-oncelik">Bölüm 2</a></td></tr>
+              <tr><td>AMP sıralama faktörüdür</td><td>Doğrudan değil</td><td><sup class="kaynak"><a href="#k30">[30]</a></sup></td></tr>
+              <tr><td>Google Ads'e para veren organikte yükselir</td><td>Hayır</td><td><a href="01-seo-nedir.html#organik-ve-reklam">Bölüm 1</a></td></tr>
+              <tr><td>llms.txt yapay zekâ görünürlüğünü artırır</td><td>Google kullanmıyor</td><td><a href="14-diger-motorlar-ve-yz.html">Bölüm 14</a></td></tr>
+              <tr><td>"Sitem Helpful Content Update yüzünden düştü"</td><td>Ayrı sistem Mart 2024'te çekirdeğe katıldı</td><td><sup class="kaynak"><a href="#k9">[9]</a></sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">"Eski şemaları (FAQ, HowTo) siteden hemen silmezsen ceza alırsın."</p>
+          <p class="mit-gercek">Google her kaldırmada "eski işaretlemeyi kaldırmak gerekmez, sorun çıkarmaz" dedi. Kaldırılan türler sıralamayı etkilemiyor <sup class="kaynak"><a href="#k26">[26]</a></sup><sup class="kaynak"><a href="#k28">[28]</a></sup>.
+            Asıl yanlış, bunları müşteriye "zengin sonuç getirecek" diye satmaktır (<a href="08-yapilandirilmis-veri.html">Bölüm 8</a>).</p>
+        </aside>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 8</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Kurallar yazılı: Search Essentials = teknik gereksinimler + spam politikaları + temel en iyi uygulamalar.</li>
+            <li>Spam politikalarında üretim yöntemi önemli değil, amaç ve ölçek önemli: değersiz toplu sayfa, insan da yazsa YZ de yazsa ihlaldir.</li>
+            <li>Yeni politikalar: ölçekli içerik, süresi dolmuş alan adı, site itibarı (Mayıs 2024; AEA'da Ağustos 2026'dan beri farklı, Türkiye'de aynı), geri tuşu kaçırma (15 Haziran 2026). Reklam betiğinden gelse bile sorumlu site sahibi.</li>
+            <li>Sıralamayı adı konmuş birçok sistem yapar; yararlı içerik artık çekirdeğin parçası. Bir siteden genelde en çok 2 sonuç gösterilir.</li>
+            <li>E-E-A-T doğrudan faktör değil; değerlendiriciler sıralamayı değiştiremez; kılavuzları "kalite" kavramını anlamak için okunur.</li>
+            <li>Son çekirdek güncellemeler Mart 2026 ve Mayıs 2026; son spam güncellemesi 24 Eylül → 8 Ekim 2026.</li>
+            <li>Düşüşte: bitmesini bekle, 1 hafta sonra karşılaştır, küçük kaymaya dokunma, hızlı düzeltme yapma; önce ölçüm değişikliği (ör. <code>num=100</code>) olup olmadığına bak.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 9</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search Essentials — <a href="https://developers.google.com/search/docs/essentials">developers.google.com/search/docs/essentials</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search technical requirements — <a href="https://developers.google.com/search/docs/essentials/technical">developers.google.com/…/essentials/technical</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — What web creators should know about our March 2024 core update and new spam policies — <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">developers.google.com/search/blog/2024/03/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Updating our site reputation abuse policy (19 Kas 2024) — <a href="https://developers.google.com/search/blog/2024/11/site-reputation-abuse">developers.google.com/search/blog/2024/11/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Update to the Site Reputation Policy (28 Ağu 2026) — <a href="https://developers.google.com/search/blog/2026/08/update-site-reputation-policy">developers.google.com/search/blog/2026/08/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google won't enforce site reputation manual actions in EEA — <a href="https://www.seroundtable.com/google-site-reputation-abuse-eea-41968.html">seroundtable.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Introducing a new spam policy for "back button hijacking" (13 Nis 2026) — <a href="https://developers.google.com/search/blog/2026/04/back-button-hijacking">developers.google.com/search/blog/2026/04/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Creating helpful, reliable, people-first content — <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">developers.google.com/…/creating-helpful-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Using generative AI content — <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">developers.google.com/…/using-gen-ai-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Google Search's guidance about AI-generated content (8 Şub 2023) — <a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content">developers.google.com/search/blog/2023/02/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--info">3. taraf</span> Marie Haynes — Google quality raters now rate AI Overviews — <a href="https://www.mariehaynes.com/google-quality-raters-now-rate-ai-overviews/">mariehaynes.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google quality raters &amp; AI-generated content — <a href="https://searchengineland.com/google-quality-raters-content-ai-generated-454161">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Google Search Status Dashboard — ranking incidents history — <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">status.search.google.com/…/history</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Search's core updates — <a href="https://developers.google.com/search/updates/core-updates">developers.google.com/search/updates/core-updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google March 2024 core update rollout is now complete — <a href="https://searchengineland.com/google-march-2024-core-update-rollout-is-now-complete-438713">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--info">3. taraf</span> Brafton — Google's March 2026 core update has finished rolling out — <a href="https://www.brafton.com.au/blog/seo/googles-march-2026-core-update-has-finished-rolling-out/">brafton.com.au/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Links are not a top 3 ranking factor (Gary Illyes) — <a href="https://searchengineland.com/links-google-search-ranking-factor-gary-illyes-432422">searchengineland.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--info">3. taraf</span> SE Ranking — Navboost: what the docs tell us — <a href="https://seranking.com/blog/navboost/">seranking.com/blog/navboost</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--info">3. taraf</span> JC Chouinard — Google DOJ trial documents — <a href="https://www.jcchouinard.com/google-doj-trial-documents/">jcchouinard.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--info">3. taraf</span> Semrush — 12 of the Biggest SEO Myths — <a href="https://www.semrush.com/blog/seo-myths/">semrush.com/blog/seo-myths</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Sitemaps ping endpoint is going away (26 Haz 2023) — <a href="https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping">developers.google.com/search/blog/2023/06/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--info">3. taraf</span> ZEO — The impact of &amp;num=100 parameter removal on SEO reporting — <a href="https://zeo.org/resources/blog/the-impact-of-num-100-parameter-removal-on-seo-reporting">zeo.org/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Changes to HowTo and FAQ rich results (8 Ağu 2023) — <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes">developers.google.com/search/blog/2023/08/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google drops FAQ rich results (10 May 2026) — <a href="https://www.searchenginejournal.com/google-drops-faq-rich-results/574429/">searchenginejournal.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Simplifying the search results page (12 Haz 2025) — <a href="https://developers.google.com/search/blog/2025/06/simplifying-search-results">developers.google.com/search/blog/2025/06/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google: Don't worry about bounce rate for SEO — <a href="https://seroundtable.com/google-bounce-rate-seo-31124.html">seroundtable.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Google's 200 ranking factors — <a href="https://backlinko.com/google-ranking-factors">backlinko.com/google-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="02-google-nasil-calisir.html"><span class="dir">&larr; Önceki</span><span class="ttl">Google nasıl çalışır</span></a>
+        <a class="next" href="04-anahtar-kelime-ve-niyet.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Anahtar kelime ve arama niyeti</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

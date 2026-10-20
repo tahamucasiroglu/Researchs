@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Görsel ve video SEO — SEO Rehberi</title>
+<meta name="description" content="Görselin Google'da bulunması için gerekenler: img etiketi, alt metin, dosya adı, biçimler, geç yükleme, ana (LCP) görsel, görsel site haritası; video izleme sayfası, küçük resim ve VideoObject.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Görsel ve video SEO</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 06 · Sayfa ve içerik</div>
+        <h1 class="page-title">Görsel ve video SEO</h1>
+        <p class="lede">Görseller iki ayrı işe yarar: Google Görseller'de bulunmak ve sayfanın hızını belirlemek. Video ise ancak doğru sayfada, doğru işaretlemeyle video sonucu olarak görünür. Bu bölüm her ikisinin kurallarını ve en sık yapılan, sayfayı yavaşlatan hataları anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Google görseli yalnız <code>&lt;img&gt;</code> (ve <code>&lt;picture&gt;</code> içindeki <code>&lt;img&gt;</code>) üzerinden bulur; CSS arka plan görselleri dizine girmez.</li>
+            <li>Alt metin en önemli görsel üst verisidir: görseli doğal dille anlatır, anahtar kelime yığını değildir.</li>
+            <li>Ekranın üstündeki ana görsel asla geç yüklenmez; <code>fetchpriority="high"</code> ve boyut alır.</li>
+            <li>Görsel site haritasında yalnız <code>image:loc</code> kaldı; <code>caption</code>, <code>title</code>, <code>license</code> <strong>2022</strong>'de kaldırıldı.</li>
+            <li>Video sonucu için asıl amacı tek bir videoyu göstermek olan bir "izleme sayfası" gerekir; <code>VideoObject</code>'e <code>creator</code> <strong>24 Eylül 2026</strong>'da eklendi.</li>
+          </ul>
+        </div>
+
+        <h2 id="gorsel-bulunma"><span class="h-num">§ 1</span>Google görseli nasıl bulur</h2>
+        <p>Google görseli sayfadaki <code>&lt;img&gt;</code> öğesinin <code>src</code> özniteliğinden bulur. Duyarlı görsellerde <code>srcset</code>/<code>sizes</code> ya da <code>&lt;picture&gt;</code> kullanılabilir, ama içinde mutlaka bir yedek <code>&lt;img src&gt;</code> bulunmalıdır. CSS ile verilen arka plan görselleri (<code>background-image</code>) Google Görseller'e girmez <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>HTML + CSS</span><span class="dosya">dizine girmez</span></div>
+<pre><code><span class="k-etiket">&lt;div</span> <span class="k-ozn">class</span>=<span class="k-deger">"hero"</span><span class="k-etiket">&gt;&lt;/div&gt;</span>
+<span class="k-etiket">&lt;style&gt;</span>.hero { background-image: url("/img/kamyon.jpg"); }<span class="k-etiket">&lt;/style&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">bulunabilir</span></div>
+<pre><code><span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/kapali-kasa-kamyon.jpg"</span> <span class="k-ozn">width</span>=<span class="k-deger">"1200"</span> <span class="k-ozn">height</span>=<span class="k-deger">"675"</span>
+         <span class="k-ozn">alt</span>=<span class="k-deger">"Paketlenmiş ev eşyaları kapalı kasa kamyona yükleniyor"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <p>Arka plan görselinin yeri vardır: süs, doku, desen gibi aranması gerekmeyen görseller için uygundur. Kural: insanların Google Görseller'de bulmasını istediğin ya da içeriğin parçası olan her görsel <code>&lt;img&gt;</code> olmalı.</p>
+
+        <h3 id="desteklenen-bicimler">Desteklenen biçimler</h3>
+        <p>Google'ın dizine eklediği biçimler: <strong>BMP, GIF, JPEG, PNG, WebP, SVG ve AVIF</strong>. Dosya uzantısı gerçek biçimle aynı olmalıdır; içi WebP olan bir dosyaya <code>.jpg</code> uzantısı verilmez. Görseli <strong>data URI</strong> (base64 olarak HTML'in içine gömülmüş görsel) ile vermek sayfayı şişirir <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Googlebot'un belgesi Şubat 2026'dan beri HTML için dosyanın ilk <strong>2 MB</strong>'ını (sıkıştırılmamış) okuduğunu yazıyor. base64 ile gömülen görseller ana içeriği bu sınırın dışına itebilir <sup class="kaynak"><a href="#k2">[2]</a></sup>. Görseli ayrı dosya olarak ver (ayrıntı <a href="10-performans-mobil-js.html">Bölüm 10</a>).</p>
+        </aside>
+
+        <h2 id="alt-metin"><span class="h-num">§ 2</span>Alt metin</h2>
+        <p><strong>Alt metin</strong> (<code>alt</code> özniteliği), görsel yüklenmediğinde ya da ekran okuyucu kullanan biri sayfayı dinlediğinde görselin yerine geçen yazıdır. Google'a göre görseller için <strong>en önemli üst veri</strong> budur: Google görselin ne gösterdiğini ve sayfayla ilgisini büyük ölçüde buradan anlar <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <h3 id="iyi-alt-metin">İyi alt metin nasıl yazılır</h3>
+        <ul>
+          <li><strong>Görseli bağlamında doğru anlat.</strong> Görselde ne var, bu sayfada neden var?</li>
+          <li><strong>Doğal bir cümle kur.</strong> Google'ın kendi örneğinde iyi alt metin "Dalmatian puppy playing fetch" (top getiren dalmaçyalı yavru) gibi kısa ve somuttur <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Anahtar kelime doldurma.</strong> Kelime listesi şeklinde alt metin Google'ın spam politikasında anahtar kelime doldurma sayılır <sup class="kaynak"><a href="#k3">[3]</a></sup>.</li>
+          <li><strong>"Resim", "görsel", "fotoğraf" diye başlama.</strong> Ekran okuyucu zaten bunun bir görsel olduğunu söyler.</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Görsel</th><th>Kötü alt metin</th><th>İyi alt metin</th></tr></thead>
+            <tbody>
+              <tr><td>Kamyona eşya yükleyen ekip</td><td><code>alt="nakliyat evden eve nakliyat ucuz nakliyat"</code></td><td><code>alt="Ekip ev eşyalarını kapalı kasa kamyona yüklüyor"</code></td></tr>
+              <tr><td>Koltuğu streçleyen kişi</td><td><code>alt="resim1"</code></td><td><code>alt="Paketleme ekibi koltuğu streç filmle sarıyor"</code></td></tr>
+              <tr><td>Randevu takvimi ekran görüntüsü</td><td><code>alt="ekran görüntüsü"</code></td><td><code>alt="Haftalık takvimde dolu ve boş randevu saatleri, yanında telefon önizlemesi"</code></td></tr>
+              <tr><td>Bölüm arası süs çizgisi</td><td><code>alt="ayraç çizgisi görseli"</code></td><td><code>alt=""</code> (boş)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="sus-gorseli">Süs görselleri ve satır içi SVG</h3>
+        <p>Hiçbir bilgi taşımayan süs görsellerine <strong>boş alt metin</strong> (<code>alt=""</code>) verilir; ekran okuyucu onu atlar. <code>alt</code> özniteliğini hiç yazmamak ise farklıdır: bazı ekran okuyucular bu durumda dosya adını okur <span class="tag">Kaynaktan teyit edilmedi</span>. Sayfaya doğrudan yazılan (satır içi) SVG'lerde alt metin yerine <code>&lt;title&gt;</code> öğesi kullanılır <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">süs görseli ve satır içi SVG</span></div>
+<pre><code><span class="k-yorum">&lt;!-- Süs: boş alt (öznitelik var, değeri boş) --&gt;</span>
+<span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/ayrac.svg"</span> <span class="k-ozn">alt</span>=<span class="k-deger">""</span> <span class="k-ozn">width</span>=<span class="k-deger">"40"</span> <span class="k-ozn">height</span>=<span class="k-deger">"4"</span><span class="k-etiket">&gt;</span>
+
+<span class="k-yorum">&lt;!-- Satır içi SVG için erişilebilir ad --&gt;</span>
+<span class="k-etiket">&lt;svg</span> <span class="k-ozn">role</span>=<span class="k-deger">"img"</span> <span class="k-ozn">aria-labelledby</span>=<span class="k-deger">"t1"</span> <span class="k-ozn">viewBox</span>=<span class="k-deger">"0 0 200 100"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;title</span> <span class="k-ozn">id</span>=<span class="k-deger">"t1"</span><span class="k-etiket">&gt;</span>Aylara göre alınan randevu sayısı<span class="k-etiket">&lt;/title&gt;</span>
+  …
+<span class="k-etiket">&lt;/svg&gt;</span></code></pre>
+        </div>
+
+        <h3 id="bagli-gorsel">Bağlantı olan görsel</h3>
+        <p>Bir görsel bağlantının içindeyse, Google o görselin alt metnini bağlantı metni olarak kullanır <sup class="kaynak"><a href="#k4">[4]</a></sup>. Logo bağlantısında alt metin "logo" ya da "ana sayfa" değil, marka adı olmalıdır: <code>&lt;a href="/"&gt;&lt;img src="/logo.png" alt="ÖrnekMarka"&gt;&lt;/a&gt;</code>.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Alt metne anahtar kelime eklemek sayfanın web aramasındaki sırasını yükseltir.</p>
+          <p class="mit-gercek">Google 2022'de alt metnin web aramasında (Görseller dışı) sıralamaya doğrudan etki etmediğini söyledi; asıl etkisi görsel aramasında ve görseli anlamlandırmadadır <sup class="kaynak"><a href="#k5">[5]</a></sup> <span class="tag tag--info">3. taraf</span> (Google ofis saatleri, ikincil aktarım). Doldurulmuş alt metin ise spam riskidir <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        </aside>
+
+        <h2 id="dosya-adi-ve-url"><span class="h-num">§ 3</span>Dosya adı ve görsel URL'si</h2>
+        <ul>
+          <li><strong>Dosya adı kısa ve açıklayıcı olsun:</strong> <code>kapali-kasa-kamyon.jpg</code>; <code>IMG_20261012_0034.jpg</code> ya da <code>image1.jpg</code> değil. Dosya adı da görselin konusu hakkında hafif bir ipucudur <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Çok dilli sitede dosya adı da çevrilir</strong> <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Aynı görsel her sayfada aynı URL ile</strong> kullanılır. Sürüm parametresi ekleyip (<code>?v=123</code>) aynı görseli farklı adreslerle çoğaltma <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li><strong>Görsel adreslerini sabit tut.</strong> Google'ın mobil öncelikli dizin belgesi, görsel URL'leri değişirse görsel trafiğinin geçici olarak düşeceğini söylüyor <sup class="kaynak"><a href="#k6">[6]</a></sup>. Site yenilerken görsel klasör yapısını değiştirmek bu yüzden maliyetlidir.</li>
+        </ul>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bazı içerik yönetim sistemleri ve görsel CDN'leri her yüklemede görsele yeni rastgele ad ya da önbellek bozucu parametre ekler. Bu, aynı görselin Google'da her seferinde "yeni görsel" olarak görülmesine ve görsel trafiğinin dağılmasına yol açar <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>.</p>
+        </aside>
+
+        <h2 id="gorsel-baglam"><span class="h-num">§ 4</span>Görseli ilgili metnin yanına koy</h2>
+        <p>Google görseli anlamak için çevresindeki metne, başlığa ve sayfanın konusuna da bakar. Bu yüzden görsel, anlattığı metnin hemen yanında durmalıdır; bütün görsellerin sayfanın en altındaki bir galeride toplanması bağlamı zayıflatır <sup class="kaynak"><a href="#k1">[1]</a></sup>. Görselin altına <code>&lt;figure&gt;</code> ve <code>&lt;figcaption&gt;</code> ile kısa bir açıklama koymak hem okura hem Google'a bağlam verir.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">bağlamıyla birlikte görsel</span></div>
+<pre><code><span class="k-etiket">&lt;h2&gt;</span>Asansörlü taşıma nasıl yapılır<span class="k-etiket">&lt;/h2&gt;</span>
+<span class="k-etiket">&lt;p&gt;</span>Dar merdivenli binalarda eşya dış cephe asansörüyle indirilir …<span class="k-etiket">&lt;/p&gt;</span>
+<span class="k-etiket">&lt;figure&gt;</span>
+  <span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/dis-cephe-asansoru.webp"</span> <span class="k-ozn">width</span>=<span class="k-deger">"800"</span> <span class="k-ozn">height</span>=<span class="k-deger">"533"</span> <span class="k-ozn">loading</span>=<span class="k-deger">"lazy"</span>
+           <span class="k-ozn">alt</span>=<span class="k-deger">"Dış cephe asansörüyle dördüncü kattan koltuk indiriliyor"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;figcaption&gt;</span>Dış cephe asansörü, merdiven boşluğu dar binalarda kullanılır.<span class="k-etiket">&lt;/figcaption&gt;</span>
+<span class="k-etiket">&lt;/figure&gt;</span></code></pre>
+        </div>
+
+        <h2 id="tercih-edilen-gorsel"><span class="h-num">§ 5</span>Tercih edilen görsel</h2>
+        <p>Bir sayfa sonuçta küçük resimle gösterilecekse Google hangi görseli seçeceğine karar verir. Tercihini şu yollarla bildirebilirsin <sup class="kaynak"><a href="#k1">[1]</a></sup>:</p>
+        <ul>
+          <li>Yapılandırılmış veride <code>primaryImageOfPage</code> ya da ana varlığın görseli (<code>mainEntity.image</code>).</li>
+          <li><code>og:image</code> meta etiketi.</li>
+        </ul>
+        <p>Logo, yazı ağırlıklı görseller ve aşırı uzun ya da aşırı geniş en-boy oranlı görseller tercih edilen görsel olarak seçilmez <sup class="kaynak"><a href="#k1">[1]</a></sup>. Yani <code>og:image</code> olarak logoyu vermek, hem paylaşımda hem Google'da kötü bir seçimdir; sayfayı temsil eden gerçek bir fotoğraf ya da ekran görüntüsü ver.</p>
+
+        <h2 id="lazy-loading"><span class="h-num">§ 6</span>Geç yükleme (lazy loading)</h2>
+        <p><strong>Geç yükleme</strong>, ekranda görünmeyen görsellerin kullanıcı oraya yaklaşana kadar indirilmemesidir. Sayfayı hızlandırır, ama yanlış yapılırsa Google görseli hiç görmez. Google'ın kuralları <sup class="kaynak"><a href="#k7">[7]</a></sup>:</p>
+        <ul>
+          <li><strong>Tarayıcının yerleşik özelliğini</strong> (<code>loading="lazy"</code>) ya da <code>IntersectionObserver</code> kullan.</li>
+          <li><strong>Kaydırma ya da tıklama olayına bağlama.</strong> Googlebot sayfayla etkileşime girmez; kaydırmaz, tıklamaz.</li>
+          <li><strong>Ekranın üst kısmını geç yükleme.</strong></li>
+          <li><strong>Sonsuz kaydırmada</strong> her parça kalıcı, benzersiz bir URL alır (<code>?page=2</code> gibi) ve parçalar birbirine sırayla bağlanır.</li>
+        </ul>
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>JavaScript</span><span class="dosya">Googlebot görmez</span></div>
+<pre><code><span class="k-yorum">// Görsel yalnız kullanıcı kaydırınca yükleniyor</span>
+window.addEventListener('scroll', () =&gt; {
+  document.querySelectorAll('img[data-src]').forEach(img =&gt; {
+        if (img.getBoundingClientRect().top &lt; innerHeight) img.src = img.dataset.src;
+  });
+});</code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">yerleşik geç yükleme</span></div>
+<pre><code><span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/ekip.webp"</span> <span class="k-ozn">width</span>=<span class="k-deger">"800"</span> <span class="k-ozn">height</span>=<span class="k-deger">"533"</span> <span class="k-ozn">loading</span>=<span class="k-deger">"lazy"</span>
+         <span class="k-ozn">alt</span>=<span class="k-deger">"Paketleme ekibi koltuğu streç filmle sarıyor"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p><code>data-src</code> ile saklanan görselleri yalnız Google değil, tarayıcının ön yükleme tarayıcısı (preload scanner: HTML'i okurken görselleri önden bulup indiren mekanizma) da kaçırır. Bu da sayfayı yavaşlatır. Ana görselde her zaman gerçek <code>src</code> kullan <sup class="kaynak"><a href="#k8">[8]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>.</p>
+        </aside>
+
+        <h2 id="lcp-gorseli"><span class="h-num">§ 7</span>Ana görsel (LCP görseli)</h2>
+        <p><strong>LCP</strong> (Largest Contentful Paint), sayfanın ilk ekranındaki en büyük öğenin görünme süresidir ve Google'ın Core Web Vitals ölçütlerinden biridir. "İyi" eşik, ziyaretlerin %75'inde 2,5 saniye ya da altıdır <sup class="kaynak"><a href="#k8">[8]</a></sup><sup class="kaynak"><a href="#k9">[9]</a></sup>. Çoğu sayfada LCP öğesi üstteki büyük görseldir. Bu görsel için kurallar <sup class="kaynak"><a href="#k8">[8]</a></sup>:</p>
+        <ol class="steps">
+          <li><strong>Asla <code>loading="lazy"</code> verme.</strong> Geç yüklenen ana görsel LCP'yi doğrudan kötüleştirir.</li>
+          <li><strong><code>fetchpriority="high"</code> ver.</strong> Ama yalnız bir-iki görsele; her şeye öncelik vermek önceliği anlamsızlaştırır.</li>
+          <li><strong>HTML kaynağında doğrudan görünsün.</strong> <code>src</code>/<code>srcset</code> ile; <code>data-src</code> ya da CSS arka planıyla saklanmasın. CSS ya da JavaScript'ten geliyorsa <code>&lt;link rel="preload"&gt;</code> ile önden yükle.</li>
+          <li><strong>Modern biçim ve sıkıştırma:</strong> AVIF ya da WebP, ekran boyutuna uygun çözünürlük.</li>
+          <li><strong>Mümkünse HTML ile aynı alan adından</strong> gelsin; başka sunucuya bağlantı kurmak zaman alır.</li>
+        </ol>
+        <p>Bir de sayfa kayması var: <strong>CLS</strong> (Cumulative Layout Shift), sayfa yüklenirken öğelerin yer değiştirmesidir; "iyi" eşik 0,1'dir. Boyutu belirtilmemiş görsel yüklendiğinde altındaki metni aşağı iter. Önlemi basit: her <code>&lt;img&gt;</code>'e <code>width</code> ve <code>height</code> ver ya da CSS'te <code>aspect-ratio</code> kullan <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ana görsel ve ekran dışı görsel</span></div>
+<pre><code><span class="k-yorum">&lt;!-- Ekranın üstü / LCP: lazy YOK, öncelik yüksek, boyutlu --&gt;</span>
+<span class="k-etiket">&lt;picture&gt;</span>
+  <span class="k-etiket">&lt;source</span> <span class="k-ozn">type</span>=<span class="k-deger">"image/avif"</span> <span class="k-ozn">srcset</span>=<span class="k-deger">"/img/hero-480.avif 480w, /img/hero-960.avif 960w"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"(max-width:600px) 100vw, 960px"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;source</span> <span class="k-ozn">type</span>=<span class="k-deger">"image/webp"</span> <span class="k-ozn">srcset</span>=<span class="k-deger">"/img/hero-480.webp 480w, /img/hero-960.webp 960w"</span> <span class="k-ozn">sizes</span>=<span class="k-deger">"(max-width:600px) 100vw, 960px"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/hero-960.jpg"</span> <span class="k-ozn">width</span>=<span class="k-deger">"960"</span> <span class="k-ozn">height</span>=<span class="k-deger">"540"</span> <span class="k-ozn">fetchpriority</span>=<span class="k-deger">"high"</span>
+           <span class="k-ozn">alt</span>=<span class="k-deger">"Haftalık takvimde dolu ve boş randevu saatleri, yanında telefon önizlemesi"</span><span class="k-etiket">&gt;</span>   <span class="k-yorum">&lt;!-- yedek src şart --&gt;</span>
+<span class="k-etiket">&lt;/picture&gt;</span>
+
+<span class="k-yorum">&lt;!-- Ekran dışı: yerleşik lazy, yine boyutlu --&gt;</span>
+<span class="k-etiket">&lt;img</span> <span class="k-ozn">src</span>=<span class="k-deger">"/img/depo.webp"</span> <span class="k-ozn">width</span>=<span class="k-deger">"1000"</span> <span class="k-ozn">height</span>=<span class="k-deger">"667"</span> <span class="k-ozn">loading</span>=<span class="k-deger">"lazy"</span>
+         <span class="k-ozn">alt</span>=<span class="k-deger">"Raflı eşya depolama alanı"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+        <div class="kod">
+          <div class="kod-ust"><span>CSS</span><span class="dosya">kayma önleme</span></div>
+<pre><code>img, video  { max-width: 100%; height: auto; }   <span class="k-yorum">/* width/height öznitelikleriyle birlikte */</span>
+.video-kutu { aspect-ratio: 16 / 9; }</code></pre>
+        </div>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Hazır temaların bir kısmı sayfadaki <em>bütün</em> görsellere otomatik <code>loading="lazy"</code> ekler; ilk görsel de dahil. Bu, LCP'yi bozan en yaygın hatalardan biridir <sup class="kaynak"><a href="#k8">[8]</a></sup>. Sayfa kaynağında ilk görseli kontrol et.</p>
+        </aside>
+
+        <h2 id="gorsel-site-haritasi"><span class="h-num">§ 8</span>Görsel site haritası</h2>
+        <p>Görsel site haritası, Google'ın sayfada kolay bulamayabileceği görselleri bildirmenin ek yoludur; görseller zaten <code>&lt;img src&gt;</code> ile sayfadaysa şart değildir. CDN'deki görseller de site haritasında listelenebilir; CDN alan adı Search Console'da doğrulanırsa tarama hataları da görülür <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k11">[11]</a></sup>.</p>
+        <ul>
+          <li>Yalnız <code>&lt;image:image&gt;</code> ve <code>&lt;image:loc&gt;</code> desteklenir.</li>
+          <li>Bir <code>&lt;url&gt;</code> içinde en çok 1.000 görsel olabilir <sup class="kaynak"><a href="#k11">[11]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>2022:</strong> Görsel site haritasındaki <code>image:caption</code>, <code>image:title</code>, <code>image:geo_location</code> ve <code>image:license</code> etiketleri kaldırıldı <sup class="kaynak"><a href="#k11">[11]</a></sup>. Eski eklentiler hâlâ üretebilir; zararsızdır ama işe yaramaz.</p>
+        </aside>
+        <div class="kod">
+          <div class="kod-ust"><span>XML</span><span class="dosya">sitemap-gorseller.xml</span></div>
+<pre><code><span class="k-etiket">&lt;?xml</span> <span class="k-ozn">version</span>=<span class="k-deger">"1.0"</span> <span class="k-ozn">encoding</span>=<span class="k-deger">"UTF-8"</span><span class="k-etiket">?&gt;</span>
+<span class="k-etiket">&lt;urlset</span> <span class="k-ozn">xmlns</span>=<span class="k-deger">"http://www.sitemaps.org/schemas/sitemap/0.9"</span>
+            <span class="k-ozn">xmlns:image</span>=<span class="k-deger">"http://www.google.com/schemas/sitemap-image/1.1"</span><span class="k-etiket">&gt;</span>
+  <span class="k-etiket">&lt;url&gt;</span>
+        <span class="k-etiket">&lt;loc&gt;</span>https://www.ornek.com/online-randevu<span class="k-etiket">&lt;/loc&gt;</span>
+        <span class="k-etiket">&lt;image:image&gt;&lt;image:loc&gt;</span>https://cdn.ornek.com/img/hero-960.jpg<span class="k-etiket">&lt;/image:loc&gt;&lt;/image:image&gt;</span>
+        <span class="k-etiket">&lt;image:image&gt;&lt;image:loc&gt;</span>https://cdn.ornek.com/img/zaman-cizelgesi.jpg<span class="k-etiket">&lt;/image:loc&gt;&lt;/image:image&gt;</span>
+  <span class="k-etiket">&lt;/url&gt;</span>
+<span class="k-etiket">&lt;/urlset&gt;</span></code></pre>
+        </div>
+
+        <h2 id="yz-gorselleri"><span class="h-num">§ 9</span>Yapay zekâ ile üretilmiş görseller</h2>
+        <p>Google yapay zekâ ile üretilmiş görselleri yasaklamaz. İki resmî not var:</p>
+        <ul>
+          <li>Görselin nasıl üretildiğini bildiren IPTC üst verisi <code>digitalSourceType</code> önerisi 10 Mayıs 2023'te görsel belgesine eklendi <sup class="kaynak"><a href="#k12">[12]</a></sup>. IPTC, görsel dosyasının içine gömülen standart bilgi alanlarıdır.</li>
+          <li>Google'ın "Using generative AI content" belgesi (güncelleme 1 Ekim 2026), Merchant Center'daki (Google'ın ürün listeleme hizmeti) yapay zekâ görsellerine <code>DigitalSourceType = TrainedAlgorithmicMedia</code> eklenmesini istiyor; ayrıca yapay zekânın ürettiği alt metinlerin de elle kontrol edilmesini söylüyor, çünkü yapay zekâ olmayan şeyi "görebilir" <sup class="kaynak"><a href="#k13">[13]</a></sup>.</li>
+        </ul>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Yapay zekâ ile toplu alt metin üretmek pratik görünür, ama üretilen metin görselde olmayan bir şeyi anlatıyorsa hem kullanıcıyı yanıltır hem Google'ın belgesine aykırıdır. Toplu üretimden sonra en azından önemli görselleri tek tek oku <sup class="kaynak"><a href="#k13">[13]</a></sup>. Sahte "gerçek fotoğraf" izlenimi veren yapay zekâ görselleri (ör. hiç yapılmamış bir işin "fotoğrafı") güven konusudur; ayrıntı <a href="07-icerik-kalitesi.html">Bölüm 7</a>.</p>
+        </aside>
+
+        <h2 id="video-izleme-sayfasi"><span class="h-num">§ 10</span>Video: izleme sayfası</h2>
+        <p>Google bir videoyu video sonucu (büyük küçük resimli, oynatma süreli sonuç) olarak göstermek için bir <strong>izleme sayfası</strong> (watch page) arar: asıl amacı <em>tek bir videoyu</em> göstermek olan sayfa <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        <ul>
+          <li>İçine bir video gömülmüş blog yazısı ya da ürün sayfası izleme sayfası <strong>sayılmaz</strong>. O videolar dizine girebilir, ama sonuçta en çok küçük bir video rozetiyle metin ya da görsel sonucu olarak görünür <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li>Bir video için ayrı bir izleme sayfası açmak, video aramasında görünmenin ana yoludur. Tanıtım videosu, kurulum anlatımı gibi videolar için bu düşünülebilir.</li>
+        </ul>
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Bir randevu yazılımının "5 dakikada kurulum" videosu ana sayfaya gömülü. Ana sayfa izleme sayfası değil; video, video sonuçlarında büyük olasılıkla görünmez. <code>/video/kurulum</code> gibi, videonun başlığı, açıklaması ve dökümüyle birlikte yalnız bu videoya ayrılmış bir sayfa açılırsa izleme sayfası olur <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        </aside>
+
+        <h3 id="video-gomme">Video nasıl yerleştirilmeli</h3>
+        <ul>
+          <li>Video <code>&lt;video&gt;</code>, <code>&lt;iframe&gt;</code>, <code>&lt;embed&gt;</code> ya da <code>&lt;object&gt;</code> öğesinin içinde olmalı <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li>Kullanıcı tıklayınca yüklenen ya da URL parçasıyla (<code>#video</code>) açılan video bulunamaz <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li>Kutuya <code>aspect-ratio</code> ya da boyut vererek sayfa kaymasını önle <sup class="kaynak"><a href="#k10">[10]</a></sup>.</li>
+        </ul>
+
+        <h3 id="video-kucuk-resim">Küçük resim (thumbnail)</h3>
+        <ul>
+          <li>En az 60×30 piksel ve kalıcı bir URL <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li><code>&lt;video poster&gt;</code>, video site haritası, <code>thumbnailUrl</code> ve <code>og:video:image</code> hepsi <strong>aynı URL</strong>'yi göstermeli <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li>Saydam küçük resimde piksellerin en az %80'i opak olmalı <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+        </ul>
+
+        <h2 id="videoobject"><span class="h-num">§ 11</span>VideoObject işaretlemesi</h2>
+        <p><code>VideoObject</code>, videonun adını, açıklamasını, küçük resmini, süresini ve yüklenme tarihini Google'a makine okunur biçimde bildiren yapılandırılmış veridir (genel kurallar <a href="08-yapilandirilmis-veri.html">Bölüm 8</a>'de). Her video için ayrı <code>name</code>, <code>description</code> ve <code>thumbnailUrl</code> gerekir <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>HTML + JSON-LD</span><span class="dosya">/video/kurulum</span></div>
+<pre><code><span class="k-etiket">&lt;script</span> <span class="k-ozn">type</span>=<span class="k-deger">"application/ld+json"</span><span class="k-etiket">&gt;</span>
+{
+  <span class="k-anahtar">"@context"</span>: <span class="k-deger">"https://schema.org"</span>,
+  <span class="k-anahtar">"@type"</span>: <span class="k-deger">"VideoObject"</span>,
+  <span class="k-anahtar">"name"</span>: <span class="k-deger">"5 dakikada online randevu sayfası kurma"</span>,
+  <span class="k-anahtar">"description"</span>: <span class="k-deger">"Randevu sayfasının nasıl kurulduğunu adım adım gösterir."</span>,
+  <span class="k-anahtar">"thumbnailUrl"</span>: <span class="k-deger">"https://www.ornek.com/video/tanitim-kucuk.jpg"</span>,
+  <span class="k-anahtar">"uploadDate"</span>: <span class="k-deger">"2026-10-01T10:00:00+03:00"</span>,
+  <span class="k-anahtar">"duration"</span>: <span class="k-deger">"PT2M30S"</span>,
+  <span class="k-anahtar">"contentUrl"</span>: <span class="k-deger">"https://www.ornek.com/video/tanitim.mp4"</span>,
+  <span class="k-anahtar">"hasPart"</span>: [
+        { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Clip"</span>, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Hizmetleri ekleme"</span>,
+          <span class="k-anahtar">"startOffset"</span>: 0, <span class="k-anahtar">"endOffset"</span>: 40,
+          <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/video/kurulum?t=0"</span> },
+        { <span class="k-anahtar">"@type"</span>: <span class="k-deger">"Clip"</span>, <span class="k-anahtar">"name"</span>: <span class="k-deger">"Randevu bağlantısını paylaşma"</span>,
+          <span class="k-anahtar">"startOffset"</span>: 41, <span class="k-anahtar">"endOffset"</span>: 150,
+          <span class="k-anahtar">"url"</span>: <span class="k-deger">"https://www.ornek.com/video/kurulum?t=41"</span> }
+  ]
+}
+<span class="k-etiket">&lt;/script&gt;</span>
+<span class="k-etiket">&lt;video</span> <span class="k-ozn">src</span>=<span class="k-deger">"/video/tanitim.mp4"</span> <span class="k-ozn">poster</span>=<span class="k-deger">"/video/tanitim-kucuk.jpg"</span> <span class="k-ozn">controls</span> <span class="k-ozn">width</span>=<span class="k-deger">"1280"</span> <span class="k-ozn">height</span>=<span class="k-deger">"720"</span><span class="k-etiket">&gt;&lt;/video&gt;</span></code></pre>
+        </div>
+
+        <h3 id="onemli-anlar">Önemli anlar: Clip ve SeekToAction</h3>
+        <p>Google bazı videolarda "önemli anlar" (key moments) gösterir: videonun bölümlerine doğrudan atlayan bağlantılar. Bunu iki yolla bildirebilirsin <sup class="kaynak"><a href="#k14">[14]</a></sup>:</p>
+        <ul>
+          <li><strong><code>Clip</code>:</strong> Bölümleri başlangıç-bitiş saniyeleri ve adlarıyla kendin tanımlarsın (yukarıdaki örnek).</li>
+          <li><strong><code>SeekToAction</code>:</strong> Google'a URL'de zamanın nasıl verildiğini söylersin, bölümleri Google kendisi bulur.</li>
+        </ul>
+        <p>Video YouTube'daysa açıklamaya yazılan zaman damgaları yeterlidir <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>24 Eylül 2026:</strong> <code>VideoObject</code> belgesine <code>creator</code> (videonun yaratıcısı) özelliği eklendi <sup class="kaynak"><a href="#k12">[12]</a></sup>. Videoyu kimin ürettiğini bildirmek, içeriğin "kim tarafından" yapıldığı sorusuna da cevap verir (bkz. <a href="07-icerik-kalitesi.html#kim-nasil-neden">Bölüm 7</a>).</p>
+        </aside>
+
+        <h3 id="video-kaldirma">Videoyu kaldırmak</h3>
+        <p>Bir videonun sonuçlardan çıkması için izleme sayfası 404 dönebilir, <code>noindex</code> alabilir ya da yapılandırılmış veride <code>expires</code> tarihi verilebilir <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+
+        <h2 id="sik-hatalar"><span class="h-num">§ 12</span>Sık hatalar</h2>
+        <ul class="checklist">
+          <li>Önemli görseller CSS arka planında değil, <code>&lt;img src&gt;</code> içinde <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Ana görsel geç yüklenmiyor; <code>fetchpriority="high"</code> taşıyor <sup class="kaynak"><a href="#k8">[8]</a></sup>.</li>
+          <li>Bütün görsellerde <code>width</code>/<code>height</code> var (sayfa kayması yok) <sup class="kaynak"><a href="#k10">[10]</a></sup>.</li>
+          <li>Alt metinler doğal cümle; kelime listesi değil; süs görsellerinde <code>alt=""</code> <sup class="kaynak"><a href="#k3">[3]</a></sup>.</li>
+          <li>Dosya uzantıları gerçek biçimle aynı; base64 gömülü büyük görsel yok <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Görsel URL'leri sabit, sürüm parametresiyle çoğaltılmıyor <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+          <li><code>og:image</code> logo değil, sayfayı temsil eden bir görsel <sup class="kaynak"><a href="#k1">[1]</a></sup>.</li>
+          <li>Öne çıkarılmak istenen videonun kendi izleme sayfası ve <code>VideoObject</code>'i var; küçük resim URL'si her yerde aynı <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+        </ul>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 13</span>Bu bölümde öğrendiklerin</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Google görseli <code>&lt;img src&gt;</code>'den bulur; <code>&lt;picture&gt;</code>/<code>srcset</code>'te yedek <code>src</code> şart, CSS arka planı dizine girmez.</li>
+            <li>Alt metin en önemli görsel üst verisi: doğal, somut, bağlama uygun; süs görselinde boş, bağlantılı görselde bağlantı metni yerine geçer.</li>
+            <li>Dosya adı açıklayıcı, URL sabit; aynı görsele hep aynı adres. Adres değişirse görsel trafiği geçici düşer.</li>
+            <li>Geç yükleme yerleşik <code>loading="lazy"</code> ile, kaydırma olayıyla değil; ana görsel hiç geç yüklenmez ve <code>fetchpriority="high"</code> alır.</li>
+            <li>Her görsele boyut ver; LCP ≤ 2,5 sn ve CLS ≤ 0,1 hedeflenir.</li>
+            <li>Görsel site haritasında yalnız <code>image:loc</code> kaldı (2022); yapay zekâ görselleri yasak değil ama üst veri ve alt metin kontrolü gerekir.</li>
+            <li>Video sonucu için tek videoya ayrılmış izleme sayfası, aynı küçük resim URL'si ve <code>VideoObject</code> gerekir; önemli anlar <code>Clip</code> ya da <code>SeekToAction</code> ile.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 14</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Google Images SEO best practices (güncelleme 2 Mar 2026) — <a href="https://developers.google.com/search/docs/appearance/google-images">developers.google.com/…/google-images</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Link best practices for Google — <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">developers.google.com/…/links-crawlable</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--info">3. taraf</span> Infidigit — Alt text does not impact web search rankings says Google (Mar 2022) — <a href="https://www.infidigit.com/news/alt-text-does-not-impact-web-search-rankings-says-google/">infidigit.com/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Mobile-first indexing best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing">developers.google.com/…/mobile-sites-mobile-first-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Fix lazy-loaded content — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading">developers.google.com/…/lazy-loading</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Largest Contentful Paint — <a href="https://web.dev/articles/optimize-lcp">web.dev/articles/optimize-lcp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> web.dev — Web Vitals — <a href="https://web.dev/articles/vitals">web.dev/articles/vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Cumulative Layout Shift — <a href="https://web.dev/articles/optimize-cls">web.dev/articles/optimize-cls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Image sitemaps — <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps">developers.google.com/…/image-sitemaps</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Latest Google Search documentation updates — <a href="https://developers.google.com/search/updates">developers.google.com/search/updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Using generative AI content (güncelleme 1 Eki 2026) — <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">developers.google.com/…/using-gen-ai-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Video SEO best practices (güncelleme 18 Ara 2025) — <a href="https://developers.google.com/search/docs/appearance/video">developers.google.com/…/video</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="05-sayfa-ici.html"><span class="dir">&larr; Önceki</span><span class="ttl">Sayfa içi SEO</span></a>
+        <a class="next" href="07-icerik-kalitesi.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">İçerik kalitesi ve yapay zekâ</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

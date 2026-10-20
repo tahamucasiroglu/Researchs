@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diğer motorlar ve yapay zekâ araması — SEO Rehberi</title>
+<meta name="description" content="Yandex, Bing, DuckDuckGo, IndexNow; Google AI Overviews ve AI Mode için resmî kurallar, YZ tarayıcıları ve llms.txt gerçeği.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Diğer motorlar ve yapay zekâ araması</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 14 · Sitenin dışı</div>
+        <h1 class="page-title">Diğer motorlar ve yapay zekâ araması</h1>
+        <p class="lede">Türkiye'de aramaların dörtte biri Google dışında yapılıyor ve aramanın bir kısmı artık yapay zekâ cevaplarına kayıyor. Bu bölüm Yandex, Bing ve IndexNow'u kurmayı; Google'ın AI Overviews ve AI Mode özellikleri için resmî olarak ne istediğini (ve ne istemediğini); yapay zekâ tarayıcılarını robots.txt ile nasıl ayıracağını anlatır.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 18 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Türkiye'de Eylül 2026'da Yandex tüm cihazlarda ~%25, mobilde ~%28 pay aldı; Yandex Webmaster ve Yandex Haritalar atlanmamalı.</li>
+            <li>Bing Webmaster Tools, Search Console'dan tek tıkla içe aktarılır; Bing'i beslemek DuckDuckGo'yu ve Copilot'u da besler.</li>
+            <li>IndexNow Bing, Yandex ve birkaç motora anında bildirim yapar; <strong>Google IndexNow kullanmaz</strong>.</li>
+            <li>AI Overviews ve AI Mode için ek dosya, özel şema ya da "YZ'ye göre yazım" gerekmez; Google'ın 15 Mayıs 2026 rehberi "AEO ve GEO de SEO'dur" diyor.</li>
+            <li>llms.txt Google Aramada yok sayılır; ne yarar ne zarar verir.</li>
+            <li>YZ tarayıcıları "arama için" ve "eğitim için" diye ayrılır; eğitimi kapatıp aramayı açık bırakmak mümkündür.</li>
+          </ul>
+        </div>
+
+        <!-- ============ İÇERİK ============ -->
+
+        <h2 id="turkiye-pazari"><span class="h-num">§ 1</span>Türkiye'de arama pazarı: neden yalnız Google yetmez</h2>
+        <p>Google dünyada da Türkiye'de de açık ara birinci. Ama Türkiye, Yandex'in güçlü olduğu az sayıdaki pazardan biri. StatCounter'ın Eylül 2026 verisi şöyle <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k2">[2]</a></sup>:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Motor</th><th>Tüm cihazlar (Eyl 2026)</th><th>Mobil (Eyl 2026)</th><th>Pratik anlamı</th></tr></thead>
+            <tbody>
+              <tr><td>Google</td><td>%73,42</td><td>~%71</td><td>Ana iş burada; her şey önce Google'a göre yapılır.</td></tr>
+              <tr><td>Yandex</td><td>%25,19</td><td>%28,1</td><td>Webmaster + site bölgesi + Haritalar kaydı: ucuz ve etkili ek adım.</td></tr>
+              <tr><td>Bing</td><td>%0,71</td><td>düşük</td><td>Payı az ama DuckDuckGo ve Copilot'u besler; kurulumu 5 dakika.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><span class="tag tag--info">3. taraf</span> StatCounter tarayıcı örneklemine dayanır; farklı filtrelerde Google payı %73 ile %88 arasında değişebiliyor. Mobil Google payı tablodaki diğer iki satırdan çıkarılmış yaklaşık değerdir. Kesin rakamdan çok sıralama önemli: <strong>Türkiye'de ikinci motor Yandex'tir</strong> ve mobilde payı daha da yüksektir.</p>
+
+        <aside class="callout callout--example">
+          <p class="callout__title">Örnek</p>
+          <p>Koddan anlamayan küçük yerel işletme (ör. nakliye firması), telefonda aramada üstte çıkmak istiyor. Müşteri telefonunda Yandex tarayıcısı ya da Yandex varsayılanlı bir uygulama kullanıyorsa Google İşletme Profili hiç görünmez; orada Yandex Haritalar kartı çıkar. Mobil aramaların yaklaşık her dörtte biri bu yoldan geçiyorsa, Yandex kaydı ihmal edilecek bir ayrıntı değildir.</p>
+        </aside>
+
+        <h2 id="yandex"><span class="h-num">§ 2</span>Yandex</h2>
+        <p>Yandex'in kendi belgesi Türkçe de yayımlanıyor. Yandex resmî bir sıralama etkenleri listesi yayımlamaz; önerileri Google'ınkine çok benzer: özgün içerik, mobil uyum, hızlı ve hatasız site <sup class="kaynak"><a href="#k5">[5]</a></sup>.</p>
+
+        <h3 id="yandex-webmaster">Yandex Webmaster kurulumu</h3>
+        <ol class="steps">
+          <li><strong>Siteyi ekle ve doğrula.</strong> En kolay yol, Yandex'in verdiği meta etiketini ana sayfanın <code>&lt;head&gt;</code> kısmına koymak.</li>
+          <li><strong>Site haritasını ekle.</strong> robots.txt'deki <code>Sitemap:</code> satırını da okur.</li>
+          <li><strong>Site bölgesini ayarla.</strong> "Arama sonuçlarında göster → Site bölgesi" adımıyla bölge seçilir, moderatör için iletişim sayfasının bağlantısı eklenir <sup class="kaynak"><a href="#k4">[4]</a></sup>.</li>
+          <li><strong>Yandex Metrica'yı bağla (isteğe bağlı).</strong> Yandex'in ücretsiz analiz aracı; zayıf sayfaları bulmaya yarar <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
+          <li><strong>IndexNow'u aç.</strong> Yandex IndexNow'u destekler (aşağıda) <sup class="kaynak"><a href="#k6">[6]</a></sup>.</li>
+        </ol>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">ana sayfa · &lt;head&gt;</span></div>
+<pre><code><span class="k-yorum">&lt;!-- Değeri Yandex Webmaster verir --&gt;</span>
+<span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"yandex-verification"</span> <span class="k-ozn">content</span>=<span class="k-deger">"XXXXXXXXXXXXXXXX"</span><span class="k-etiket">&gt;</span></code></pre>
+        </div>
+
+        <h3 id="yandex-site-bolgesi">Site bölgesi: yerel işletme için en önemli Yandex ayarı</h3>
+        <p>Yandex, siteyi bir bölgeyle ilişkilendirir ve o bölgeden yapılan aramalarda öne alır. Ayar moderatör onayından geçer; onay günler ile haftalar arasında sürebilir, onaydan sonraki yaklaşık 2 hafta içinde etkili olur <sup class="kaynak"><a href="#k4">[4]</a></sup>. Bölge, Yandex Business'taki kurum kartından da gelebilir; bunun için iki yerdeki site adresi <strong>birebir aynı</strong> olmalı (www olup olmaması ve http/https dahil).</p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Yandex Business'a (Yandex Haritalar) şirket eklemek ücretsizdir: şirket ekle → faaliyet türü → hizmetler → fotoğraflar <sup class="kaynak"><a href="#k33">[33]</a></sup>. Kurum kartındaki web adresini Webmaster'daki adresle karakter karakter aynı yazarsanız site bölgesi kart üzerinden de bağlanır. "https://ornek.com" ile "https://www.ornek.com" Yandex için iki ayrı sitedir.</p>
+        </aside>
+
+        <h3 id="yandex-robots">Yandex'e özgü robots.txt yönergeleri</h3>
+        <p>Yandex'in güncel belgesine göre <code>Clean-param</code> desteklenir: içeriği değiştirmeyen parametreleri (UTM gibi) yok saydırarak aynı sayfanın onlarca adresle taranmasını önler <sup class="kaynak"><a href="#k3">[3]</a></sup>.</p>
+        <div class="kod">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">yalnız Yandex okur</span></div>
+<pre><code>User-agent: Yandex
+<span class="k-yorum"># ?utm_source=...&amp;utm_medium=... farklı URL sayılmasın</span>
+Clean-param: utm_source&amp;utm_medium&amp;utm_campaign</code></pre>
+        </div>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>Crawl-delay ve Host:</strong> Yandex'in güncel robots.txt belgesinde bu iki yönerge artık desteklenenler arasında yok <sup class="kaynak"><a href="#k3">[3]</a></sup>. Eski Türkçe rehberler (ve Ahrefs'in robots.txt rehberi) "Yandex crawl-delay destekler" diyor; bu, Yandex'in kendi belgesiyle çelişiyor ve eskimiş görünüyor. Resmî belgeyi esas alın. Tarama hızı sorunu varsa sunucu tarafında çözülür.</p>
+        </aside>
+
+        <h2 id="bing"><span class="h-num">§ 3</span>Bing</h2>
+        <p>Bing'in Türkiye payı %1'in altında. Yine de kurulması önerilir, çünkü Bing'in dizini başka ürünlere de veri sağlar: DuckDuckGo'nun geleneksel sonuçları büyük ölçüde Bing'den gelir <sup class="kaynak"><a href="#k12">[12]</a></sup>, Microsoft'un Copilot'u da Bing'in tarama ve dizinleme altyapısını kullanır <sup class="kaynak"><a href="#k10">[10]</a></sup><sup class="kaynak"><a href="#k31">[31]</a></sup>.</p>
+
+        <h3 id="bing-webmaster">Bing Webmaster Tools: Search Console'dan içe aktarma</h3>
+        <ul>
+          <li>Site, Google Search Console'dan içe aktarılarak otomatik doğrulanır. Tek seferde en çok 100 site aktarılır <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+          <li>Search Console erişimi sürmeli: Bing sahipliği düzenli olarak yeniden kontrol eder. Verilerin gelmesi 48 saati bulabilir <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
+          <li>Şubat 2026'dan beri "AI Performance" raporu var; Copilot cevaplarında sitenizin kaç kez alıntılandığını sayar (trafik değil, alıntı) <sup class="kaynak"><a href="#k30">[30]</a></sup>. Ayrıntı <a href="15-araclar-ve-olcum.html#bing-yandex-araclari">Bölüm 15</a>'te.</li>
+        </ul>
+
+        <h3 id="bing-kilavuz">Bing'in kılavuzu ne diyor</h3>
+        <p>Bing Webmaster Guidelines dört bölümden oluşur: bulma ve dizinleme (site haritası, IndexNow), anlama, sıralama ve kötüye kullanım. Sıralama başlıkları: ilgililik, kalite ve güvenilirlik, kullanıcı etkileşimi, tazelik, konum, sayfa yükleme süresi <sup class="kaynak"><a href="#k10">[10]</a></sup>. <span class="tag tag--warn">Doğrulanamadı</span> Bu özet ikincil kaynaktan; Bing'in asıl sayfası bu araştırmada açılamadı.</p>
+
+        <h3 id="bing-site-haritasi">Site haritasında lastmod Bing için önemli</h3>
+        <p>Bing Temmuz 2025'te açıkça şunu yazdı: eksiksiz bir XML site haritası, doğru <code>lastmod</code> ve IndexNow kullanın. <code>changefreq</code> ve <code>priority</code> taramayı ve sıralamayı etkilemez. <code>lastmod</code>, sayfanın <strong>gerçek</strong> değişiklik zamanı olmalı; ISO 8601 biçiminde ve saatle birlikte yazılmalı <sup class="kaynak"><a href="#k7">[7]</a></sup><sup class="kaynak"><a href="#k8">[8]</a></sup>.</p>
+
+        <div class="kod yanlis">
+          <div class="kod-ust"><span>XML</span><span class="dosya">her derlemede "şimdi" basılmış</span></div>
+<pre><code><span class="k-etiket">&lt;url&gt;</span>
+  <span class="k-etiket">&lt;loc&gt;</span>https://www.ornek.com/hakkimizda<span class="k-etiket">&lt;/loc&gt;</span>
+  <span class="k-etiket">&lt;lastmod&gt;</span>2026-10-21T03:00:00+03:00<span class="k-etiket">&lt;/lastmod&gt;</span>  <span class="k-yorum">&lt;!-- site derlendi diye; sayfa değişmedi --&gt;</span>
+  <span class="k-etiket">&lt;changefreq&gt;</span>daily<span class="k-etiket">&lt;/changefreq&gt;</span>  <span class="k-yorum">&lt;!-- Google ve Bing yok sayar --&gt;</span>
+  <span class="k-etiket">&lt;priority&gt;</span>1.0<span class="k-etiket">&lt;/priority&gt;</span>         <span class="k-yorum">&lt;!-- Google ve Bing yok sayar --&gt;</span>
+<span class="k-etiket">&lt;/url&gt;</span></code></pre>
+        </div>
+        <div class="kod dogru">
+          <div class="kod-ust"><span>XML</span><span class="dosya">sitemap.xml</span></div>
+<pre><code><span class="k-etiket">&lt;url&gt;</span>
+  <span class="k-etiket">&lt;loc&gt;</span>https://www.ornek.com/hakkimizda<span class="k-etiket">&lt;/loc&gt;</span>
+  <span class="k-etiket">&lt;lastmod&gt;</span>2026-09-14T11:20:00+03:00<span class="k-etiket">&lt;/lastmod&gt;</span>  <span class="k-yorum">&lt;!-- metin gerçekten bu an değişti --&gt;</span>
+<span class="k-etiket">&lt;/url&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Site haritasını bir betikle üretiyorsanız <code>lastmod</code>'u dosyanın derlenme saatinden değil, içeriğin gerçek değişiklik tarihinden alın. Bing, her derlemede "şimdi" yazılan <code>lastmod</code>'un güvenilirliğini düşürdüğünü söylüyor <sup class="kaynak"><a href="#k8">[8]</a></sup>; Google da aynı alanı "tutarlı ve doğruysa" kullanır (<a href="09-tarama-ve-dizin.html">Bölüm 9</a>).</p>
+        </aside>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">Meta keywords hiçbir motorda işe yaramaz, o yüzden doldurmanın da zararı yok.</p>
+          <p class="mit-gercek">Google kullanmıyor; Bing ise 2014'te bu etiketi, aşırı doldurulmuşsa <strong>spam sinyali</strong> olarak gördüğünü söylemişti <sup class="kaynak"><a href="#k11">[11]</a></sup>. Yani doldurmak en iyi ihtimalle boşa iş, en kötü ihtimalle zarar. Etiketi hiç koymamak en temizi.</p>
+        </aside>
+
+        <h2 id="duckduckgo-yahoo"><span class="h-num">§ 4</span>DuckDuckGo ve Yahoo</h2>
+        <ul>
+          <li><strong>DuckDuckGo:</strong> Kendi tarayıcısı DuckDuckBot var, ama resmî yardım sayfasına göre "geleneksel bağlantıları ve görselleri büyük ölçüde Bing'den alır" <sup class="kaynak"><a href="#k12">[12]</a></sup>. Pratik sonuç: Bing'de iyi olan DuckDuckGo'da da iyi olur; ayrı bir webmaster aracı yoktur.</li>
+          <li><strong>Yahoo:</strong> <span class="tag tag--warn">Doğrulanamadı</span> Yaygın bilgiye göre organik sonuçlar Bing'den gelir, ama bu araştırmada resmî kaynaktan teyit edilemedi.</li>
+        </ul>
+
+        <h2 id="indexnow"><span class="h-num">§ 5</span>IndexNow: değişikliği anında bildirmek</h2>
+        <p><strong>IndexNow</strong> (yeni, değişen ya da silinen sayfaları arama motorlarına anında bildiren açık protokol), "Google'ın beni bulmasını bekleme" sorununu Bing ve Yandex tarafında çözer. Destekleyen motorlar (indexnow.org listesi, 21 Eki 2026): Bing, Yandex, Naver, Seznam, Yep, Internet Archive ve Amazon (Amazonbot). Bir motora gönderilen bildirim diğer katılımcılara da iletilir <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">IndexNow kurarsam Google da sayfalarımı daha hızlı dizine alır.</p>
+          <p class="mit-gercek">Google katılımcılar arasında yok <sup class="kaynak"><a href="#k13">[13]</a></sup>. Google için yol site haritası, robots.txt'deki <code>Sitemap:</code> satırı ve Search Console'dur. IndexNow ayrıca bir <strong>bildirim</strong> mekanizmasıdır, sıralama faktörü değildir; gönderim dizine alınmayı da garanti etmez <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        </aside>
+
+        <h3 id="indexnow-nasil">Nasıl çalışır</h3>
+        <ol class="steps">
+          <li><strong>Anahtar üret.</strong> Rastgele bir dize (ör. 32 karakter onaltılık).</li>
+          <li><strong>Anahtar dosyasını kökte yayımla.</strong> <code>https://www.ornek.com/&lt;anahtar&gt;.txt</code> adresinde durur, içinde yalnızca anahtarın kendisi yazar <sup class="kaynak"><a href="#k14">[14]</a></sup>.</li>
+          <li><strong>Değişen URL'leri gönder.</strong> Tek URL için GET, toplu gönderim için POST; POST başına en çok 10.000 URL <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k15">[15]</a></sup>.</li>
+          <li><strong>Yanıt kodunu kontrol et.</strong> Aşağıdaki tabloya göre.</li>
+        </ol>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">toplu gönderim</span></div>
+<pre><code>POST https://api.indexnow.org/IndexNow
+Content-Type: application/json; charset=utf-8
+
+{
+  <span class="k-anahtar">"host"</span>: <span class="k-deger">"www.ornek.com"</span>,
+  <span class="k-anahtar">"key"</span>: <span class="k-deger">"a1b2c3d4e5f6a7b8c9d0a1b2c3d4e5f6"</span>,
+  <span class="k-anahtar">"keyLocation"</span>: <span class="k-deger">"https://www.ornek.com/a1b2c3d4e5f6a7b8c9d0a1b2c3d4e5f6.txt"</span>,
+  <span class="k-anahtar">"urlList"</span>: [
+        <span class="k-deger">"https://www.ornek.com/hizmetler/evden-eve"</span>,
+        <span class="k-deger">"https://www.ornek.com/eski-sayfa"</span>
+  ]
+}</code></pre>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTTP</span><span class="dosya">tek URL</span></div>
+<pre><code>GET https://api.indexnow.org/IndexNow?url=https://www.ornek.com/hizmetler/evden-eve&amp;key=a1b2c3d4e5f6a7b8c9d0a1b2c3d4e5f6</code></pre>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Yanıt</th><th>Anlamı</th><th>Ne yapmalı</th></tr></thead>
+            <tbody>
+              <tr><td>200</td><td>Başarılı</td><td>Hiçbir şey; dizine alınma garanti değil.</td></tr>
+              <tr><td>400</td><td>Biçim hatası</td><td>JSON'u ve URL'leri kontrol et.</td></tr>
+              <tr><td>403</td><td>Anahtar geçersiz</td><td>Anahtar dosyası yayında mı, içeriği aynı mı?</td></tr>
+              <tr><td>422</td><td>URL bu alan adına ait değil</td><td><code>host</code> ile URL'lerin alan adı uyuşmalı.</td></tr>
+              <tr><td>429</td><td>Çok fazla istek</td><td>Gereksiz gönderimi kes; yalnız değişenleri gönder.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kaynak: Bing IndexNow başlangıç sayfası <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>IndexNow her yayında bütün siteyi göndermek için değildir. Yalnız eklenen, değişen ya da <strong>silinen</strong> URL'ler gönderilir; gönderim tarama kotasından düşer <sup class="kaynak"><a href="#k14">[14]</a></sup>. Silinen sayfayı göndermek, 404/410'un Bing ve Yandex tarafından daha çabuk görülmesini sağlar. Gereksiz toplu gönderim 429 ve kota kaybı getirir.</p>
+        </aside>
+
+        <h2 id="google-yz-ozellikleri"><span class="h-num">§ 6</span>Google'ın yapay zekâ özellikleri: AI Overviews ve AI Mode</h2>
+        <p><strong>AI Overviews</strong> (YZ Genel Bakış: sonuçların üstünde çıkan, kaynak bağlantılı yapay zekâ özeti) ve <strong>AI Mode</strong> (YZ Modu: karmaşık sorular ve karşılaştırmalar için sohbet benzeri arama) Google'ın normal arama sistemlerinin üzerinde çalışır. Google'ın resmî "AI features and your website" belgesi (son güncelleme 10 Aralık 2025) şunu söylüyor <sup class="kaynak"><a href="#k16">[16]</a></sup>:</p>
+        <ul>
+          <li><strong>Uygunluk koşulu:</strong> Sayfa dizine eklenmiş ve snippet (sonuçtaki açıklama metni) ile gösterilmeye uygun olmalı. "Ek teknik gereksinim yok."</li>
+          <li>"Özel bir schema.org yapılandırılmış verisi eklemeniz gerekmiyor." "Yeni makine okunur dosyalar, YZ metin dosyaları ya da işaretleme oluşturmanız gerekmiyor."</li>
+          <li>İki özellik de <strong>query fan-out</strong> (tek soru için alt konularda birden çok arama yapma) kullanabilir. Bu yüzden bir sayfa, kullanıcının yazdığı sorgu için değil, alt sorulardan biri için alıntılanabilir.</li>
+          <li>AI Overviews yalnızca klasik sonuçlara ek değer katacaksa çıkar.</li>
+          <li><strong>Raporlama:</strong> Bu özelliklerden gelen trafik Search Console Performans raporunda "Web" türü altında, ayrı gösterilmeden sayılır.</li>
+        </ul>
+
+        <h3 id="sekiz-madde">Google'ın 21 Mayıs 2025 tavsiyeleri</h3>
+        <p>Google Search Central blogunda YZ deneyimlerinde iyi performans için sekiz madde sıraladı <sup class="kaynak"><a href="#k17">[17]</a></sup>:</p>
+        <ol>
+          <li>Benzersiz, "emtia olmayan" (non-commodity) içerik üret.</li>
+          <li>İyi sayfa deneyimi sun.</li>
+          <li>Erişim sağla: taranabilir sayfa, HTTP 200.</li>
+          <li>Önizleme kontrollerini bilinçli kullan; kısıtlama arttıkça YZ'de daha az yer alırsın.</li>
+          <li>Yapılandırılmış veri görünür içerikle aynı olsun.</li>
+          <li>Görsel ve video ekle; Merchant Center ve İşletme Profili bilgilerini güncel tut.</li>
+          <li>Yalnız tıklamaya değil dönüşüme bak; Google'a göre YZ'den gelen tıklamalar "daha kaliteli".</li>
+          <li>Kullanıcıyla birlikte değiş.</li>
+        </ol>
+
+        <h3 id="yz-optimizasyon-rehberi">15 Mayıs 2026 YZ optimizasyon rehberi</h3>
+        <p>Google, 15 Mayıs 2026'da "Optimizing for generative AI search" adlı resmî bir rehber yayımladı <sup class="kaynak"><a href="#k18">[18]</a></sup>. Özeti:</p>
+        <ul>
+          <li><strong>"AEO ve GEO de SEO'dur."</strong> (AEO: answer engine optimization, cevap motoru optimizasyonu; GEO: generative engine optimization, üretken motor optimizasyonu.) Ayrı bir disiplin değildir.</li>
+          <li>AI Overviews ve AI Mode, Google'ın temel sıralama ve kalite sistemlerine dayanır.</li>
+          <li>En önemli etken <strong>sıradan olmayan içerik</strong>: ilk elden deneyim, özgün bakış, özgün veri.</li>
+          <li><strong>Gereksiz olanlar:</strong> llms.txt, içeriği küçük parçalara bölme (chunking), içeriği yapay zekâya göre yeniden yazma, yapay marka anılmaları, YZ'ye özel şema.</li>
+          <li>Sorgu çeşitlemeleri için toplu sayfa üretmek ölçekli içerik istismarına (scaled content abuse) girebilir (<a href="07-icerik-kalitesi.html">Bölüm 7</a>).</li>
+          <li>"YZ görünürlük" araçlarının Google'ın iç verisine eriştiği iddialarına şüpheyle bakılmalı.</li>
+        </ul>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">AI Overviews'te çıkmak için içeriği "YZ dostu" parçalara bölmek, özel şema eklemek ve llms.txt koymak gerekir.</p>
+          <p class="mit-gercek">Google'ın 10 Aralık 2025 belgesi ve 15 Mayıs 2026 rehberi bunların hiçbirinin gerekmediğini açıkça yazıyor <sup class="kaynak"><a href="#k16">[16]</a></sup><sup class="kaynak"><a href="#k18">[18]</a></sup>. "AIO için yeniden yazım" ya da "YZ şeması" satan hizmetler resmî belgeyle çelişir.</p>
+        </aside>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Resmî kural "ek bir şey gerekmez" olsa da, bölüm başlığını soru biçiminde yazıp hemen altına net bir cevap koymak hem öne çıkan snippet'e hem YZ alıntısına yarar; bu bir yazım alışkanlığıdır, "YZ'ye göre yeniden yazım" değildir. Ayrıntı <a href="05-sayfa-ici.html">Bölüm 5</a>'te. <span class="tag tag--info">3. taraf</span> Ahrefs ve Backlinko önerisi.</p>
+        </aside>
+
+        <h3 id="turkiyede-yz-arama">Türkiye'de durum</h3>
+        <ul>
+          <li>Ağustos 2025'te AI Mode 180 ülkeye açıldı; Türkiye listede yoktu. Ekim 2025'te Türkçe destek eklendi.</li>
+          <li>Google'ın 18 Şubat 2026 tarihli duyurusuyla AI Mode ve AI Overviews Türkiye'de kademeli açıldı <sup class="kaynak"><a href="#k21">[21]</a></sup>. <span class="tag tag--warn">Doğrulanamadı</span> Bu bilgi ikincil kaynağa (ZEO) dayanıyor; Google'ın asıl yazısı görülmedi.</li>
+        </ul>
+
+        <h3 id="tiklama-etkisi">Tıklamaya etkisi: üçüncü taraf ölçümler</h3>
+        <p>Google bu ölçümlerin yöntemine itiraz ediyor; yine de yön tutarlı <sup class="kaynak"><a href="#k22">[22]</a></sup><sup class="kaynak"><a href="#k23">[23]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Kaynak</th><th>Bulgu</th></tr></thead>
+            <tbody>
+              <tr><td>Ahrefs (Nisan 2025)</td><td>YZ Genel Bakış varken ilk sıradaki sayfanın tıklama oranı (CTR) ~%34,5 düşük.</td></tr>
+              <tr><td>Ahrefs (Aralık 2025 verisi)</td><td>Aynı düşüş ~%58'e çıktı.</td></tr>
+              <tr><td>Seer Interactive</td><td>Organik CTR %1,76'dan %0,61'e indi.</td></tr>
+              <tr><td>Pew Research</td><td>Özet görünürken bağlantı tıklama oranı %8, görünmezken %15; özetin içindeki kaynağa tıklama ~%1.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Çıkarım:</strong> "nasıl yapılır", "nedir" gibi bilgi sorgularında trafik azalıyor. Yerel ve ticari niyetli sorgularda (nakliye fiyatı, firma araması) kazanç tıklamadan çok aramaya, yol tarifine ve forma kayıyor. Başarıyı yalnız tıklamayla değil dönüşümle ölçün (<a href="15-araclar-ve-olcum.html#kpi">Bölüm 15</a>). <span class="tag tag--info">3. taraf</span> Bunlar korelasyon ölçümleridir.</p>
+
+        <h2 id="snippet-ve-google-extended"><span class="h-num">§ 7</span>YZ'de ne gösterileceğini sınırlamak: nosnippet ve Google-Extended</h2>
+        <p>Google'da görünmek isteyip bir kısmının YZ özetinde görünmesini istemiyorsanız araçlar klasik snippet kontrolleriyle aynıdır <sup class="kaynak"><a href="#k16">[16]</a></sup>:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Araç</th><th>Etkisi</th></tr></thead>
+            <tbody>
+              <tr><td><code>noindex</code></td><td>Sayfa hiç dizine girmez; YZ özelliklerinde de olmaz.</td></tr>
+              <tr><td><code>nosnippet</code></td><td>Hiç snippet gösterilmez; YZ özetinde de kullanılmaz.</td></tr>
+              <tr><td><code>max-snippet:[sayı]</code></td><td>Gösterilecek metin uzunluğunu sınırlar.</td></tr>
+              <tr><td><code>data-nosnippet</code></td><td>Sayfadaki belirli bir bölümü snippet ve YZ özetinin dışında tutar.</td></tr>
+              <tr><td><code>Google-Extended</code> (robots.txt)</td><td>İçeriğin Gemini eğitiminde ve Gemini Apps / Vertex AI'deki grounding'de (cevabı web kaynağına dayandırma) kullanılmasını sınırlar. <strong>Google Aramayı ve sıralamayı etkilemez.</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="kod">
+          <div class="kod-ust"><span>HTML</span><span class="dosya">sayfa</span></div>
+<pre><code><span class="k-etiket">&lt;meta</span> <span class="k-ozn">name</span>=<span class="k-deger">"robots"</span> <span class="k-ozn">content</span>=<span class="k-deger">"max-snippet:160"</span><span class="k-etiket">&gt;</span>
+<span class="k-etiket">&lt;p&gt;</span>Fiyatlar bölgeye göre değişir. <span class="k-etiket">&lt;span</span> <span class="k-ozn">data-nosnippet</span><span class="k-etiket">&gt;</span>Kurumsal indirim koşulları yalnız müşteriye özeldir.<span class="k-etiket">&lt;/span&gt;&lt;/p&gt;</span></code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p><code>Google-Extended</code> gerçek bir tarayıcı değildir; sunucu kayıtlarında görünmez, tarama Googlebot ile yapılır <sup class="kaynak"><a href="#k24">[24]</a></sup>. Onu engellemek Google Aramadan düşürmez. Ama "YZ özetinde görünmeyeyim" diye <code>nosnippet</code> koymak, klasik sonuçtaki açıklamanızı da siler ve tıklamayı düşürür. Google'ın belgesi Google-Extended'ın AI Overviews'e etkisi hakkında açık bir şey söylemiyor <sup class="kaynak"><a href="#k24">[24]</a></sup>; YZ özetini sınırlamanın belgelenmiş yolu snippet kontrolleridir <sup class="kaynak"><a href="#k16">[16]</a></sup>.</p>
+        </aside>
+
+        <h2 id="llms-txt"><span class="h-num">§ 8</span>llms.txt gerçeği</h2>
+        <p><strong>llms.txt</strong> (sitenin kökünde, büyük dil modellerine "sitem hakkında özet" sunmak için önerilen Markdown dosyası) 2024'ten beri çok konuşuluyor. Durum:</p>
+        <ul>
+          <li><strong>Google Arama bu dosyayı yok sayar;</strong> olması ne yarar ne zarar verir <sup class="kaynak"><a href="#k18">[18]</a></sup>.</li>
+          <li>Gary Illyes (Temmuz 2025, Search Central Live): Google bu dosyayı taramaz. John Mueller (Haziran 2025): hiçbir YZ sistemi kullanmıyor; dosyayı meta keywords etiketine benzetti <sup class="kaynak"><a href="#k20">[20]</a></sup>. <span class="tag tag--info">3. taraf</span> Bu sözler haber sitelerinden aktarılıyor.</li>
+          <li><strong>Lighthouse ayrıntısı:</strong> Lighthouse 13.3 (7 Mayıs 2026) "Agentic Browsing" kategorisinde llms.txt'yi kontrol ediyor. Dosya yoksa (404) sonuç "uygulanamaz" çıkar; ceza yoktur <sup class="kaynak"><a href="#k19">[19]</a></sup>. Yani bu denetim sıralamayla ilgili değildir.</li>
+        </ul>
+
+        <aside class="callout callout--warn">
+          <p class="callout__title">Mit</p>
+          <p class="mit-iddia">llms.txt ya da "GEO dosyası" eklemek ChatGPT ve Google YZ cevaplarında görünürlüğü artırır.</p>
+          <p class="mit-gercek">Google kullanmıyor <sup class="kaynak"><a href="#k18">[18]</a></sup>; diğer büyük YZ sistemlerinin kullandığına dair resmî açıklama bulunamadı <sup class="kaynak"><a href="#k20">[20]</a></sup>. Zararı yoksa da önceliği yoktur; aynı zaman bir yardım belgesi yazmaya harcanmalı.</p>
+        </aside>
+
+        <h2 id="yz-tarayicilari"><span class="h-num">§ 9</span>Yapay zekâ tarayıcıları</h2>
+        <p>YZ şirketlerinin botları üç amaca hizmet eder: <strong>arama dizini</strong> (cevaplarda sizi alıntılamak), <strong>model eğitimi</strong> ve <strong>kullanıcının o anki isteği</strong> (kullanıcı sohbet içinde bir bağlantı açtırınca). Bunlar ayrı user-agent'larla gelir, bu yüzden robots.txt ile ayrı ayrı yönetilebilir.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Şirket</th><th>Arama / alıntı</th><th>Eğitim</th><th>Kullanıcı isteği</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>OpenAI</td><td><code>OAI-SearchBot</code></td><td><code>GPTBot</code></td><td><code>ChatGPT-User</code></td><td>İkisi bağımsız; robots.txt değişikliğinin aramaya yansıması ~24 saat <sup class="kaynak"><a href="#k25">[25]</a></sup>.</td></tr>
+              <tr><td>Anthropic</td><td><code>Claude-SearchBot</code></td><td><code>ClaudeBot</code></td><td><code>Claude-User</code></td><td>robots.txt'ye uyar, <code>Crawl-delay</code> destekler; her alt alan adı ayrı robots.txt ister <sup class="kaynak"><a href="#k26">[26]</a></sup>.</td></tr>
+              <tr><td>Perplexity</td><td><code>PerplexityBot</code></td><td>(eğitim için kullanılmıyor)</td><td><code>Perplexity-User</code></td><td>Değişikliğin yansıması 24 saati bulabilir <sup class="kaynak"><a href="#k27">[27]</a></sup>.</td></tr>
+              <tr><td>Google</td><td><code>Googlebot</code></td><td><code>Google-Extended</code> (kontrol etiketi)</td><td>—</td><td>Google-Extended Aramayı etkilemez <sup class="kaynak"><a href="#k24">[24]</a></sup>.</td></tr>
+              <tr><td>Apple</td><td><code>Applebot</code></td><td><code>Applebot-Extended</code> (kontrol etiketi)</td><td>—</td><td>Kapatılsa da site Apple aramasında kalır <sup class="kaynak"><a href="#k28">[28]</a></sup>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="js-calistirmazlar">YZ tarayıcıları JavaScript çalıştırmaz</h3>
+        <p>Vercel'in Aralık 2024 ölçümüne göre GPTBot ve ClaudeBot JavaScript dosyalarını indirir ama <strong>çalıştırmaz</strong> <sup class="kaynak"><a href="#k29">[29]</a></sup>. Yalnız istemci tarafında oluşan bir sayfa (React SPA gibi) bu botlara boş görünür. YZ cevaplarında görünmek isteyen sayfanın asıl metni, başlığı ve açıklaması ilk HTML yanıtında olmalı. Ayrıntı: <a href="10-performans-mobil-js.html">Bölüm 10</a>. <span class="tag tag--info">3. taraf</span></p>
+
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p><code>ChatGPT-User</code>, <code>Claude-User</code> ve <code>Perplexity-User</code> bir kullanıcının o anki isteğiyle gelir; OpenAI ve Perplexity bunların robots.txt'ye uymayabileceğini belgelerinde yazıyor <sup class="kaynak"><a href="#k25">[25]</a></sup><sup class="kaynak"><a href="#k27">[27]</a></sup>. Sunucu kayıtlarında "engellediğim halde geliyor" görmek normaldir; tarayıcıya giren bir insanın yaptığı ziyarete benzer.</p>
+        </aside>
+
+        <aside class="callout callout--info">
+          <p class="callout__title">Değişti</p>
+          <p><strong>1 Temmuz 2025:</strong> Cloudflare yeni alan adlarında YZ botlarını varsayılan olarak engellemeye başladı; "Managed robots.txt" özelliği yayındaki robots.txt'nin başına kendi kurallarını ekleyebiliyor <sup class="kaynak"><a href="#k32">[32]</a></sup>. CDN arkasındaki bir sitede, kaynak koddaki robots.txt ile yayındaki robots.txt farklı olabilir. Ayarların Googlebot'u da kesebildiği 2026 olayları <a href="11-altyapi.html">Bölüm 11</a> ve <a href="16-sorun-giderme.html#waf-googlebot">Bölüm 16</a>'da.</p>
+        </aside>
+
+        <h2 id="robots-yz-sablonu"><span class="h-num">§ 10</span>Eğitimi kapat, aramayı aç: robots.txt şablonu</h2>
+        <p>Bir ürün sitesi için makul varsayılan: YZ cevaplarında alıntılanmak (arama botları açık), içeriğin model eğitiminde kullanılmasını ise isteğe bağlı kapatmak. Bu bir <strong>iş kararıdır</strong>, SEO kuralı değil; eğitimi açık bırakmanın da arama görünürlüğüne bilinen bir zararı yoktur.</p>
+
+        <div class="kod">
+          <div class="kod-ust"><span>robots.txt</span><span class="dosya">https://www.ornek.com/robots.txt</span></div>
+<pre><code>User-agent: *
+Allow: /
+Disallow: /admin/
+
+<span class="k-yorum"># Arama / alıntı botları: açık kalsın</span>
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+<span class="k-yorum"># Model eğitimi: isteğe bağlı kapatma</span>
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+Sitemap: https://www.ornek.com/sitemap.xml</code></pre>
+        </div>
+
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Bir bota kendi grubunu yazdığınız anda o bot <code>User-agent: *</code> grubundaki kuralları <strong>okumaz</strong>; yalnız kendisine en özgül grubu izler (<a href="09-tarama-ve-dizin.html">Bölüm 9</a>). Yukarıdaki şablonda <code>OAI-SearchBot</code> grubuna <code>Disallow: /admin/</code> yazılmadığı için o bot admin yolunu tarayabilir. Admin zaten giriş arkasında ve <code>noindex</code> başlıklı olmalı; robots.txt gizleme aracı değildir. Gizli tutmak istediğiniz bir yolu robots.txt'ye yazmak, adresi herkese ilan etmek demektir.</p>
+        </aside>
+
+        <h3 id="yz-icin-asil-is">YZ cevaplarında görünmek için asıl iş</h3>
+        <ul class="checklist">
+          <li>Sayfa dizinde, 200 dönüyor, snippet'e uygun (<code>nosnippet</code> yok).</li>
+          <li>Asıl metin ilk HTML'de (JS çalıştırmayan botlar için).</li>
+          <li>Arama botları (OAI-SearchBot, Claude-SearchBot, PerplexityBot, Bingbot) robots.txt'de ve CDN/WAF'ta açık.</li>
+          <li>Bing Webmaster kurulu (Copilot ve DuckDuckGo Bing'den beslenir).</li>
+          <li>İçerikte ilk elden veri, gerçek örnek, ekran görüntüsü: "sıradan olmayan" içerik.</li>
+          <li>Marka başka sitelerde doğal olarak anılıyor (<a href="13-sayfa-disi.html">Bölüm 13</a>); yapay anılma peşinde koşulmuyor.</li>
+        </ul>
+
+        <!-- BÖLÜM SONU -->
+        <h2 id="akilda-kalsin"><span class="h-num">§ 11</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Türkiye'de ikinci motor Yandex (~%25; mobilde ~%28): Webmaster + site bölgesi + Yandex Haritalar kaydı yapılır; Crawl-delay ve Host artık yok, Clean-param var.</li>
+            <li>Bing Webmaster, Search Console'dan içe aktarılır; Bing'i beslemek DuckDuckGo'yu ve Copilot'u da besler. Bing için <code>lastmod</code> gerçek olmalı; <code>priority</code>/<code>changefreq</code> etkisiz.</li>
+            <li>IndexNow Bing, Yandex ve diğer katılımcılara anında bildirir; yalnız değişen URL'ler gönderilir; Google kullanmaz.</li>
+            <li>AI Overviews ve AI Mode için ek dosya, şema ya da özel yazım yok: dizinde ve snippet'e uygun olmak yeter. "AEO/GEO de SEO'dur" (Google, 15 May 2026).</li>
+            <li>llms.txt Google Aramada yok sayılır; Lighthouse'taki kontrolü ceza değildir.</li>
+            <li>Google-Extended aramayı etkilemez; YZ özetini sınırlamanın yolu <code>nosnippet</code>, <code>max-snippet</code>, <code>data-nosnippet</code>.</li>
+            <li>YZ botları arama/eğitim/kullanıcı diye ayrılır ve JavaScript çalıştırmaz: eğitimi kapatıp aramayı açık bırakmak mümkün, içerik ilk HTML'de olmalı.</li>
+            <li>Bilgi sorgularında YZ özetleri tıklamayı belirgin düşürüyor; başarıyı dönüşümle ölçün.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 12</span>Kaynaklar</h2>
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share Turkey (tüm cihazlar) — <a href="https://gs.statcounter.com/search-engine-market-share/all/turkey">gs.statcounter.com/…/all/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share Turkey (mobil) — <a href="https://gs.statcounter.com/search-engine-market-share/mobile/turkey">gs.statcounter.com/…/mobile/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — robots.txt — <a href="https://yandex.com/support/webmaster/en/controlling-robot/robots-txt">yandex.com/support/webmaster/…/robots-txt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — Site region — <a href="https://yandex.com.tr/support/webmaster/en/site-geography/site-region">yandex.com.tr/support/webmaster/…/site-region</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — Sitenin arama sıralamasını nasıl iyileştirebilirim? — <a href="https://yandex.com.tr/support/webmaster/tr/yandex-indexing/rank">yandex.com.tr/support/webmaster/tr/…/rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Yandex — IndexNow desteği — <a href="https://yandex.com/support/webmaster/en/indexing-options/index-now">yandex.com/support/webmaster/…/index-now</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Keeping Content Discoverable with Sitemaps in AI Powered Search (Tem 2025) — <a href="https://blogs.bing.com/webmaster/July-2025/Keeping-Content-Discoverable-with-Sitemaps-in-AI-Powered-Search">blogs.bing.com/webmaster/July-2025/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Bing Recommends lastmod Tags for AI Search Indexing — <a href="https://www.searchenginejournal.com/bing-recommends-lastmod-tags-for-ai-search-indexing/552642/">searchenginejournal.com/…/552642</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Import sites from Search Console to Bing Webmaster Tools (Eyl 2019) — <a href="https://blogs.bing.com/webmaster/september-2019/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools">blogs.bing.com/webmaster/september-2019/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Bing updates its Webmaster Guidelines — <a href="https://searchengineland.com/bing-updates-its-webmaster-guidelines-336915">searchengineland.com/…-336915</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — The Meta Keywords Tag Lives At Bing (2014) — <a href="https://searchengineland.com/the-meta-keywords-tag-lives-at-bing-why-only-spammers-should-use-it-96874">searchengineland.com/…-96874</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> DuckDuckGo Help — Results sources — <a href="https://duckduckgo.com/duckduckgo-help-pages/results/sources">duckduckgo.com/…/results/sources</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> IndexNow — FAQ — <a href="https://www.indexnow.org/faq">indexnow.org/faq</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Bing — IndexNow Get Started — <a href="https://www.bing.com/indexnow/getstarted">bing.com/indexnow/getstarted</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> IndexNow — Documentation — <a href="https://www.indexnow.org/documentation">indexnow.org/documentation</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — AI features and your website (güncelleme 10 Ara 2025) — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Top ways to ensure your content performs well in Google's AI experiences (21 May 2025) — <a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">developers.google.com/search/blog/2025/05/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--info">3. taraf</span> TechWyse — Google AI Search Optimization Guide + Lighthouse llms.txt audit — <a href="https://www.techwyse.com/news/ai-search/google-ai-search-optimization-guide-llms-txt-lighthouse-audit">techwyse.com/news/ai-search/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google says normal SEO works for AI Overviews, llms.txt won't be used — <a href="https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422">searchengineland.com/…-459422</a>; Search Engine Roundtable — <a href="https://seroundtable.com/google-ai-llms-txt-39607.html">seroundtable.com/google-ai-llms-txt-39607</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--info">3. taraf</span> <span class="tag tag--warn">Doğrulanamadı</span> ZEO — Google AI Mode and AI Overview finally live in Türkiye — <a href="https://zeo.org/resources/blog/google-ai-mode-and-ai-overview-finally-live-in-turkiye">zeo.org/resources/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — AI Overviews reduce clicks (güncelleme) — <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update">ahrefs.com/blog/ai-overviews-reduce-clicks-update</a>; PPC Land — <a href="https://ppc.land/googles-ai-summaries-now-swallow-58-of-clicks-that-once-went-to-websites/">ppc.land/…58-of-clicks…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--info">3. taraf</span> Seer Interactive — <a href="https://www.seerinteractive.com/news/forbes-cites-seer-interactive-research-on-ai-overviews">seerinteractive.com/news/…</a>; Pew özeti (Whole Whale) — <a href="https://wholewhale.com/resources/googles-gaslighting-pew-research-confirms-what-seos-already-know-about-ai-overviews/">wholewhale.com/resources/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--ok">Resmî</span> Google — Common crawlers (Google-Extended) — <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">developers.google.com/…/google-common-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--ok">Resmî</span> OpenAI — Crawlers / bots — <a href="https://developers.openai.com/api/docs/bots">developers.openai.com/api/docs/bots</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> Anthropic — Claude'un web tarayıcıları — <a href="https://support.claude.com/en/articles/8896518">support.claude.com/en/articles/8896518</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Perplexity — Perplexity Crawlers (tam metin okunamadı) — <a href="https://docs.perplexity.ai/docs/resources/perplexity-crawlers">docs.perplexity.ai/…/perplexity-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Apple — About Applebot — <a href="https://support.apple.com/en-us/119829">support.apple.com/en-us/119829</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--info">3. taraf</span> Vercel — The rise of the AI crawler (Ara 2024; ikincil özetler üzerinden) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/blog/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--info">3. taraf</span> Search Influence — Bing AI Performance Report — <a href="https://www.searchinfluence.com/blog/bing-ai-performance-report-copilot-citations/">searchinfluence.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span><span class="tag tag--info">3. taraf</span> eSEOspace — Bing Webmaster Tools and IndexNow for AI search: what's confirmed — <a href="https://eseospace.com/blog/bing-webmaster-tools-indexnow-ai-search/">eseospace.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span><span class="tag tag--info">3. taraf</span> MIT Technology Review — Cloudflare will now block AI bots by default (1 Tem 2025) — <a href="https://www.technologyreview.com/2025/07/01/1119498/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites/">technologyreview.com/2025/07/01/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Yandex Business Türkiye — Şirket ekleme — <a href="https://yandex.com.tr/support/business-priority/">yandex.com.tr/support/business-priority</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="13-sayfa-disi.html"><span class="dir">&larr; Önceki</span><span class="ttl">Sayfa dışı SEO: bağlantılar ve marka</span></a>
+        <a class="next" href="15-araclar-ve-olcum.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Araçlar ve ölçüm</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

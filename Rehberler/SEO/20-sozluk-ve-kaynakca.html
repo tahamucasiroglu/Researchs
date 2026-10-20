@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sözlük ve kaynakça — SEO Rehberi</title>
+<meta name="description" content="Eğitimde geçen bütün SEO terimleri tek-iki cümleyle ve ilgili bölüm bağlantısıyla; araştırmada kullanılan resmî ve üçüncü taraf kaynakların gruplu, tekilleştirilmiş listesi ve doğrulanamayan noktalar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları, mit kutusu, şema renkleri (ortak style.css'te yok). */
+  .content .kod { margin: 1.1rem 0 1.4rem; }
+  .content .kod-ust { display: flex; justify-content: space-between; gap: .6rem; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content .kod-ust .dosya { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content .kod pre { margin: 0; border-radius: 0 0 var(--radius) var(--radius); }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content .kod.yanlis pre { border-left-color: var(--flag); }
+  .content .kod.yanlis .kod-ust { color: var(--flag); }
+  .content .kod.yanlis .kod-ust::before { content: "✗ Yanlış · "; }
+  .content .kod.dogru .kod-ust { color: var(--accent); }
+  .content .kod.dogru .kod-ust::before { content: "✓ Doğru · "; }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .k-etiket { color: var(--info); }
+  .k-ozn { color: var(--gold); }
+  .k-deger { color: var(--accent); }
+  .k-anahtar { color: var(--flag); font-weight: 600; }
+  .mit-iddia { font-weight: 600; text-decoration: line-through; text-decoration-color: var(--flag); }
+  .mit-gercek::before { content: "Gerçek: "; font-weight: 700; }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+  .content svg { max-width: 100%; height: auto; --yuzey: var(--paper-raise); --cizgi: var(--rule-strong); --vurgu: var(--accent); --vurgu2: var(--gold); --yazi: var(--ink); --soluk: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Sözlük ve kaynakça</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SEO Rehberi</span>
+      <span class="brand__sub">Google ve ötesi · 21 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Temeller</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="01-seo-nedir.html"><span class="nav-num">01</span><span>SEO nedir, ne beklenmeli</span></a></li>
+          <li><a class="nav-item" href="02-google-nasil-calisir.html"><span class="nav-num">02</span><span>Google nasıl çalışır</span></a></li>
+          <li><a class="nav-item" href="03-kurallar-ve-siralama.html"><span class="nav-num">03</span><span>Resmî kurallar ve sıralama sistemleri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sayfa ve içerik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="04-anahtar-kelime-ve-niyet.html"><span class="nav-num">04</span><span>Anahtar kelime ve arama niyeti</span></a></li>
+          <li><a class="nav-item" href="05-sayfa-ici.html"><span class="nav-num">05</span><span>Sayfa içi SEO</span></a></li>
+          <li><a class="nav-item" href="06-gorsel-ve-video.html"><span class="nav-num">06</span><span>Görsel ve video SEO</span></a></li>
+          <li><a class="nav-item" href="07-icerik-kalitesi.html"><span class="nav-num">07</span><span>İçerik kalitesi ve yapay zekâ</span></a></li>
+          <li><a class="nav-item" href="08-yapilandirilmis-veri.html"><span class="nav-num">08</span><span>Yapılandırılmış veri</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Teknik</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="09-tarama-ve-dizin.html"><span class="nav-num">09</span><span>Tarama ve dizine ekleme</span></a></li>
+          <li><a class="nav-item" href="10-performans-mobil-js.html"><span class="nav-num">10</span><span>Hız, mobil ve JavaScript</span></a></li>
+          <li><a class="nav-item" href="11-altyapi.html"><span class="nav-num">11</span><span>Alan adı, sunucu, dil ve güvenlik</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Sitenin dışı</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="12-yerel-seo.html"><span class="nav-num">12</span><span>Yerel SEO</span></a></li>
+          <li><a class="nav-item" href="13-sayfa-disi.html"><span class="nav-num">13</span><span>Sayfa dışı SEO: bağlantılar ve marka</span></a></li>
+          <li><a class="nav-item" href="14-diger-motorlar-ve-yz.html"><span class="nav-num">14</span><span>Diğer motorlar ve yapay zekâ araması</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Uygulama</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="15-araclar-ve-olcum.html"><span class="nav-num">15</span><span>Araçlar ve ölçüm</span></a></li>
+          <li><a class="nav-item" href="16-sorun-giderme.html"><span class="nav-num">16</span><span>Sorun giderme senaryoları</span></a></li>
+          <li><a class="nav-item" href="17-musteri-isi.html"><span class="nav-num">17</span><span>Müşteri işi: denetim, öneri, taşıma</span></a></li>
+          <li><a class="nav-item" href="18-yeni-site-yol-haritasi.html"><span class="nav-num">18</span><span>Yeni site için 90 günlük yol haritası</span></a></li>
+          <li><a class="nav-item" href="19-kontrol-listesi.html"><span class="nav-num">19</span><span>Kontrol listesi</span></a></li>
+          <li><a class="nav-item" href="20-sozluk-ve-kaynakca.html"><span class="nav-num">20</span><span>Sözlük ve kaynakça</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Savunma</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="21-kara-sapka.html"><span class="nav-num">21</span><span>Kara şapka teknikleri: tanı, korun, temizle</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 21 Ekim 2026 itibarıyla resmî belgelerden derlendi. Arama motorları kurallarını sık değiştirir; uygulamadan önce bölüm sonundaki kaynağa bak.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 20 · Uygulama</div>
+        <h1 class="page-title">Sözlük ve kaynakça</h1>
+        <p class="lede">Eğitimde geçen 127 terim, Türkçe alfabe sırasıyla, tek-iki cümlelik açıklama ve ayrıntının anlatıldığı bölümün bağlantısıyla burada. Ardından araştırmada kullanılan 248 kaynağın gruplu listesi ve doğrulanamayan noktaların toplu dökümü geliyor. Bir terimi unuttuğunda ya da bir iddianın nereden geldiğini merak ettiğinde bu sayfaya dön.</p>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+      </header>
+
+      <div class="content">
+        <div class="callout callout--def">
+          <p class="callout__title">Bu bölümde</p>
+          <ul>
+            <li>Sözlük: kısaltmalar (LCP, NAP, SAB…) ve kavramlar (kanonik, soft 404…) tek yerde; her biri ilgili bölüme bağlı.</li>
+            <li>Kaynakça: Google'ın resmî belgeleri, blogu ve yardım sayfaları; web.dev; Bing, Yandex ve yapay zekâ şirketlerinin resmî sayfaları; üçüncü taraf eğitim ve ölçümler; Türkçe kaynaklar.</li>
+            <li>Kaynakların hepsine 21 Ekim 2026'da erişildi; SEO kuralları sık değiştiği için tarih önemlidir.</li>
+            <li>Doğrulanamayanlar: araştırma sırasında birincil kaynaktan teyit edilemeyen iddiaların listesi.</li>
+          </ul>
+        </div>
+
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 1</span>Bu sayfa nasıl kullanılır</h2>
+        <ul>
+          <li><strong>Sözlük</strong> bir terimin ne olduğunu hatırlatır; kuralı ve ayrıntıyı değil. Kural için sağ sütundaki bölüm numarasına tıkla.</li>
+          <li>Yabancı terimler sözlükte genelde sektörde en çok kullanılan biçimiyle (İngilizce ya da kısaltma) yer alır; Türkçe karşılığı açıklamada verilir. Türkçe adıyla aranan terimler için ayrıca Türkçe madde açılmıştır (ör. <em>kanonik URL</em> ve <em>canonical</em>).</li>
+          <li><strong>Kaynakça</strong> bölümlerdeki numaralı kaynakların birleşimidir. Bölüm içindeki <code>[3]</code> gibi numaralar o bölümün kendi listesine aittir; buradaki numaralarla aynı değildir.</li>
+        </ul>
+
+        <h2 id="sozluk"><span class="h-num">§ 2</span>Sözlük</h2>
+        <p class="giris">Harfler: <a href="#harf-a">A</a> · <a href="#harf-b">B</a> · <a href="#harf-c">C</a> · <a href="#harf-c2">Ç</a> · <a href="#harf-d">D</a> · <a href="#harf-e">E</a> · <a href="#harf-f">F</a> · <a href="#harf-g">G</a> · <a href="#harf-h">H</a> · <a href="#harf-i">I</a> · <a href="#harf-i2">İ</a> · <a href="#harf-j">J</a> · <a href="#harf-k">K</a> · <a href="#harf-l">L</a> · <a href="#harf-m">M</a> · <a href="#harf-n">N</a> · <a href="#harf-o">O</a> · <a href="#harf-o2">Ö</a> · <a href="#harf-p">P</a> · <a href="#harf-q">Q</a> · <a href="#harf-r">R</a> · <a href="#harf-s">S</a> · <a href="#harf-s2">Ş</a> · <a href="#harf-t">T</a> · <a href="#harf-u">U</a> · <a href="#harf-v">V</a> · <a href="#harf-w">W</a> · <a href="#harf-x">X</a> · <a href="#harf-y">Y</a> · <a href="#harf-z">Z</a></p>
+        <h3 id="harf-a">A</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Ad Rank</strong></td><td>Google Ads'te reklamın sırası. Teklif, reklam ve açılış sayfası kalitesi, eşikler, rekabet, arama bağlamı ve reklam öğelerinin etkisiyle belirlenir. Organik sıralamayla ilgisi yoktur.</td><td><a href="17-musteri-isi.html">17</a></td></tr>
+              <tr><td><strong>AdsBot</strong></td><td>Google Ads'in açılış sayfalarını denetleyen tarayıcısı. Engellenirse reklam "taranamıyor" diye reddedilebilir.</td><td><a href="17-musteri-isi.html">17</a></td></tr>
+              <tr><td><strong>AEA</strong></td><td>Avrupa Ekonomik Alanı (AB + İzlanda, Norveç, Lihtenştayn). Site itibarı istismarı yaptırımı 30 Ağustos 2026'dan beri burada farklı uygulanıyor; Türkiye kapsam dışı.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>AEO / GEO</strong></td><td>"Yanıt motoru" ve "üretken motor" optimizasyonu; yapay zekâ cevaplarında görünme çabasına verilen adlar. Google'a göre ayrı bir disiplin değil, SEO'nun kendisidir.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>AI Mode (YZ Modu)</strong></td><td>Google'ın karmaşık sorular ve karşılaştırmalar için sohbet benzeri arama kipi. Ek teknik şart yok; Türkiye'de 2026 başından itibaren kademeli açıldı (ikincil kaynak).</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>AI Overviews (YZ Genel Bakış)</strong></td><td>Arama sonuçlarının üstünde çıkan yapay zekâ özeti. Görünmek için sayfanın dizinde ve snippet'e uygun olması yeter; özel dosya ya da şema gerekmez.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>açık yönlendirme (open redirect)</strong></td><td>Parametredeki her adrese yönlendiren site adresi (<code>/git?url=…</code>). Spamcı ve kimlik avcısı güvenilir alan adının arkasına saklanmak için kullanır; yönlendirme izinli hedeflerle sınırlanmalı.</td><td><a href="21-kara-sapka.html#alt-alan-adi">21</a></td></tr>
+              <tr><td><strong>alt alan adı / alt klasör</strong></td><td><code>blog.ornek.com</code> ile <code>ornek.com/blog</code>. Google genelde ikisini aynı görür; her alt alan adının kendi robots.txt'si vardır.</td><td><a href="11-altyapi.html">11</a>, <a href="09-tarama-ve-dizin.html#robots-oncelik">9</a></td></tr>
+              <tr><td><strong>alt alan adı ele geçirme (subdomain takeover)</strong></td><td>Kapatılmış bir bulut hizmetine yönlenen unutulmuş DNS kaydı (<code>CNAME</code>) üzerinden saldırganın kurumun alt alan adında kendi içeriğini yayımlaması. Korunma: hizmeti kapatırken DNS kaydını da sil.</td><td><a href="21-kara-sapka.html#alt-alan-adi">21</a></td></tr>
+              <tr><td><strong>alt metin (alt)</strong></td><td>Görselin metin açıklaması (<code>alt</code> özniteliği). Google'a göre en önemli görsel üst verisi; anahtar kelime doldurulmaz.</td><td><a href="06-gorsel-ve-video.html">6</a></td></tr>
+              <tr><td><strong>anahtar kelime doldurma</strong></td><td>Sayfaya ya da alt metne doğal olmayan kelime, şehir, telefon listeleri yığmak (keyword stuffing). Spam politikası ihlali.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>arama niyeti</strong></td><td>Aramayı yapanın asıl istediği şey: bilgi, işlem, belli bir siteye gitme, yerinde ziyaret. İlk 10 sonuca bakarak okunur.</td><td><a href="04-anahtar-kelime-ve-niyet.html">4</a></td></tr>
+              <tr><td><strong>astroturfing</strong></td><td>Organize bir tanıtım kampanyasını kendiliğinden oluşmuş kullanıcı görüşü gibi göstermek (sahte hesaplarla forum/Reddit önerisi). YZ cevaplarına sızmak için kullanılıyor.</td><td><a href="21-kara-sapka.html#sahte-bahsetme">21</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-b">B</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>bağlantı çiftliği (link farm)</strong></td><td>Tek amacı birbirine ve müşterilere bağlantı vermek olan, içeriği anlamsız site grubu. Bağlantı spamı; Bing dizinden çıkarma sebebi sayar.</td><td><a href="21-kara-sapka.html#otomatik-ciftlik">21</a></td></tr>
+              <tr><td><strong>bağlantı metni</strong></td><td>Bir bağlantının tıklanan yazısı (anchor text). Açıklayıcı olmalı; "buraya tıklayın" değil. Görsel bağlantıda alt metin bağlantı metni sayılır.</td><td><a href="05-sayfa-ici.html">5</a>, <a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>bağlantı spamı</strong></td><td>Sıralama için bağlantı alıp satmak, aşırı takas, otomatik bağlantı hizmetleri, düşük kaliteli dizinler. Ücretli bağlantı ancak <code>rel="sponsored"</code> ile serbest.</td><td><a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>BERT</strong></td><td>Google'ın kelime birleşimlerinin anlamını çözen dil sistemi; sıralama sistemlerinden biri.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>beyaz / gri / kara şapka</strong></td><td>Kurallara uyan (beyaz), sınırda gezen (gri) ve arama motorunu bilerek aldatan (kara) SEO yöntemleri için kullanılan adlar.</td><td><a href="21-kara-sapka.html#neden-bilmek">21</a></td></tr>
+              <tr><td><strong>bfcache</strong></td><td>Tarayıcının geri/ileri önbelleği. Uygun sayfalar geri tuşunda anında açılır; <code>unload</code> olayı ve <code>no-store</code> bunu bozar.</td><td><a href="10-performans-mobil-js.html#cls">10</a></td></tr>
+              <tr><td><strong>bilinirlik (prominence)</strong></td><td>Yerel sıralamanın üç ayağından biri (ilgililik ve mesafe ile birlikte): işletmenin ne kadar tanındığı; bağlantılar ve yorum sayısı/puanı etkiler.</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>breadcrumb (içerik yolu)</strong></td><td>"Ana sayfa › Hizmetler › Evden eve" gibi sayfanın sitedeki yerini gösteren zincir. Google'da zengin sonucu 2025'ten beri yalnız masaüstü.</td><td><a href="08-yapilandirilmis-veri.html#breadcrumb">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-c">C</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>canonical</strong></td><td>Bkz. <strong>kanonik URL</strong>.</td><td><a href="09-tarama-ve-dizin.html#kanonik">9</a></td></tr>
+              <tr><td><strong>ccTLD / gTLD</strong></td><td>Ülke kodlu uzantı (<code>.com.tr</code>, <code>.de</code>) ve genel uzantı (<code>.com</code>, <code>.net</code>). ccTLD güçlü ülke sinyalidir; <code>.tv</code>, <code>.me</code> gibi uzantılar gTLD sayılır.</td><td><a href="11-altyapi.html">11</a></td></tr>
+              <tr><td><strong>CDN</strong></td><td>İçerik dağıtım ağı: dosyaları kullanıcıya yakın sunuculardan veren hizmet. Doğrudan sıralama etkisi yok; hız üzerinden dolaylı etkisi var. Bot koruması ayarları Googlebot'u kesebilir.</td><td><a href="11-altyapi.html">11</a></td></tr>
+              <tr><td><strong>cloaking (gizleme)</strong></td><td>Arama motoruna ve kullanıcıya farklı içerik göstermek. Spam politikası ihlali; hack'lenmiş sitelerde de görülür.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="16-sorun-giderme.html">16</a>, <a href="21-kara-sapka.html#cloaking">21</a></td></tr>
+              <tr><td><strong>CLS</strong></td><td>Cumulative Layout Shift: sayfanın yüklenirken kayma miktarı. İyi ≤ 0,1.</td><td><a href="10-performans-mobil-js.html#cls">10</a></td></tr>
+              <tr><td><strong>CrUX</strong></td><td>Chrome User Experience Report: Google'ın sıralamada kullandığı gerçek kullanıcı hız verisi. Brave, Edge ve iOS kullanıcıları dahil değil.</td><td><a href="10-performans-mobil-js.html#crux">10</a></td></tr>
+              <tr><td><strong>CSR</strong></td><td>İstemci tarafı render: ilk HTML neredeyse boş gelir, içeriği JavaScript çizer. Google gecikmeli okur, çoğu bot hiç okumaz.</td><td><a href="10-performans-mobil-js.html#render-stratejileri">10</a></td></tr>
+              <tr><td><strong>CTR</strong></td><td>Tıklanma oranı: gösterimlerin yüzde kaçının tıklandığı. Search Console'da sorgu ve sayfa bazında görülür.</td><td><a href="15-araclar-ve-olcum.html">15</a></td></tr>
+              <tr><td><strong>CWV (Core Web Vitals)</strong></td><td>Önemli Web Verileri: LCP, INP ve CLS. Sıralamada küçük bir faktör; 75. yüzdelikte ölçülür.</td><td><a href="10-performans-mobil-js.html#cwv-nedir">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-c2">Ç</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>çekirdek güncelleme</strong></td><td>Google'ın yılda birkaç kez duyurduğu genel sıralama güncellemesi (core update). Düşüşte bitişini bekleyip en az bir hafta sonra karşılaştırma yapılır.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-d">D</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>data-nosnippet</strong></td><td>Sayfanın bir bölümünü sonuç açıklamasında ve yapay zekâ özetinde göstermemek için HTML özniteliği.</td><td><a href="09-tarama-ve-dizin.html#robots-kurallari">9</a>, <a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>dinamik render</strong></td><td>Botlara önceden render edilmiş HTML, insanlara JS'li sürüm verme. Google artık önermiyor (geçici çözüm).</td><td><a href="10-performans-mobil-js.html#render-stratejileri">10</a></td></tr>
+              <tr><td><strong>disavow</strong></td><td>"Bu bağlantıları hesaba katma" diye Google'a liste verme aracı. Hâlâ var; genelde yalnız bağlantı kaynaklı elle işlemde gerekir.</td><td><a href="13-sayfa-disi.html">13</a>, <a href="21-kara-sapka.html#negatif-seo">21</a></td></tr>
+              <tr><td><strong>DMCA (sahte telif şikâyeti)</strong></td><td>ABD telif yasasına dayanan kaldırma bildirimi. Rakip ya da "itibar yönetimi" firmaları sahte bildirimle gerçek sayfayı sonuçtan kaldırtabiliyor; karşı bildirimle itiraz edilir.</td><td><a href="21-kara-sapka.html#negatif-seo">21</a></td></tr>
+              <tr><td><strong>dizine ekleme (indexing)</strong></td><td>Taranan sayfanın işlenip arama sonuçlarında gösterilmeye aday olması. <code>noindex</code> ile engellenir.</td><td><a href="02-google-nasil-calisir.html">2</a>, <a href="09-tarama-ve-dizin.html#tarama-dizin-farki">9</a></td></tr>
+              <tr><td><strong>doorway (kapı sayfası)</strong></td><td>Benzer sorgular için açılmış, birbirinin neredeyse aynısı sayfalar (ör. şablon "şehir + hizmet" sayfaları). Spam politikası ihlali.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="12-yerel-seo.html">12</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-e">E</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>E-E-A-T</strong></td><td>Deneyim, uzmanlık, otorite, güven. Google'ın kaliteyi tarif ettiği çerçeve; doğrudan sıralama faktörü değildir, en önemlisi güvendir.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="07-icerik-kalitesi.html">7</a></td></tr>
+              <tr><td><strong>elle işlem (manual action)</strong></td><td>Bir Google çalışanının spam ya da kural ihlali nedeniyle siteye verdiği yaptırım. Search Console'da bildirilir, düzeltip yeniden inceleme istenir.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="13-sayfa-disi.html">13</a>, <a href="21-kara-sapka.html#elle-islem">21</a></td></tr>
+              <tr><td><strong>EMD</strong></td><td>Exact Match Domain: sorguyla birebir aynı adı taşıyan alan adı (ör. ucuz-nakliyat-firmasi.com). Google'ın EMD sistemi bunların kredisini kısar; marka adı tercih edilir.</td><td><a href="11-altyapi.html">11</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-f">F</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>favicon</strong></td><td>Sitenin küçük simgesi; sonuçlarda site adının yanında çıkar. Google'ın desteklediği biçimler listesinde SVG yok.</td><td><a href="08-yapilandirilmis-veri.html#favicon">8</a></td></tr>
+              <tr><td><strong>FID</strong></td><td>First Input Delay: eski Core Web Vitals metriği. 12 Mart 2024'te yerini INP'ye bıraktı.</td><td><a href="10-performans-mobil-js.html#cwv-nedir">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-g">G</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>GBP (Google İşletme Profili)</strong></td><td>Google Business Profile: işletmenin haritalar ve yerel sonuçlardaki kartı. Yerel SEO'nun en büyük kaldıracı.</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>geri bağlantı (backlink)</strong></td><td>Başka bir siteden sizin sitenize verilen bağlantı. Hâlâ önemli ama 2023'ten beri Google'a göre ilk üç etken arasında değil.</td><td><a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>geri tuşu kaçırma</strong></td><td>Back button hijacking: tarayıcının geri tuşunu ele geçiren kod. 15 Haziran 2026'dan beri spam politikası ihlali; reklam kodundan gelse de sorumlu site sahibi.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>gizli metin / gizli bağlantı</strong></td><td>Ziyaretçinin görmediği ama botun okuduğu metin ya da bağlantı (<code>display:none</code>, zeminle aynı renk, ekran dışı konum, tek karakterlik bağlantı). Spam politikası ihlali.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="21-kara-sapka.html#gizli-baglanti">21</a></td></tr>
+              <tr><td><strong>Google-Extended</strong></td><td>İçeriğin Gemini eğitimi ve dayanağı için kullanılmasını robots.txt ile sınırlayan kontrol etiketi. Arama sıralamasını etkilemez; gerçek bir tarayıcı değildir.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>Googlebot</strong></td><td>Google Arama'nın tarayıcısı. Çoğunlukla ABD IP'lerinden gelir; taklit edilebildiği için ters DNS ile doğrulanır. HTML'in ilk 2 MB'ını işler.</td><td><a href="09-tarama-ve-dizin.html#googlebot">9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-h">H</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>hacklink</strong></td><td>Hacklenmiş kurum/kamu sitelerine gizlice yerleştirilip satılan bağlantılar (Türkiye'de bahis sektöründe yaygın). Kurban site güvenlik uyarısı alır, bağlantı değersizleşir.</td><td><a href="21-kara-sapka.html#turkiye-baglanti">21</a></td></tr>
+              <tr><td><strong>hreflang</strong></td><td>Bir sayfanın başka dil/ülke sürümlerini bildiren işaret. Karşılıklı olmalı; tek dilli sitede gerekmez.</td><td><a href="09-tarama-ve-dizin.html#hreflang">9</a></td></tr>
+              <tr><td><strong>HTTPS</strong></td><td>Şifreli bağlantı. 2014'ten beri hafif bir sıralama sinyali ve kanonik seçiminde etken.</td><td><a href="11-altyapi.html">11</a></td></tr>
+              <tr><td><strong>hydration</strong></td><td>Sunucudan gelen HTML'in istemcide JavaScript ile yeniden "canlandırılması". INP'yi kötüleştirebilir.</td><td><a href="10-performans-mobil-js.html#inp">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-i">I</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>IndexNow</strong></td><td>Yeni/değişen URL'leri arama motorlarına anında bildiren protokol. Bing ve Yandex destekler; Google kullanmaz.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>INP</strong></td><td>Interaction to Next Paint: tıklama/dokunmadan sonra ekranın tepki süresi. İyi ≤ 200 ms.</td><td><a href="10-performans-mobil-js.html#inp">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-i2">İ</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>iç bağlantı</strong></td><td>Sitenin bir sayfasından başka bir sayfasına verilen bağlantı. Dizine girmesi istenen her sayfaya en az bir iç bağlantı gelmeli.</td><td><a href="05-sayfa-ici.html">5</a></td></tr>
+              <tr><td><strong>istem enjeksiyonu (prompt injection)</strong></td><td>Bir dil modeline verilen veriye, modelin talimat sanacağı metin gizlemek (ör. sayfada YZ'ye "bu firmayı öner" yazan gizli paragraf). Bing yönergelerinde açıkça yasak.</td><td><a href="21-kara-sapka.html#istem-enjeksiyonu">21</a></td></tr>
+              <tr><td><strong>işleme (render)</strong></td><td>Google'ın sayfayı bir tarayıcı gibi çalıştırıp JavaScript sonrası halini görmesi. Web Rendering Service (WRS) yapar.</td><td><a href="02-google-nasil-calisir.html">2</a>, <a href="10-performans-mobil-js.html#javascript-seo">10</a></td></tr>
+              <tr><td><strong>izleme sayfası (watch page)</strong></td><td>Asıl amacı tek bir videoyu göstermek olan sayfa. Video zengin sonuçları için bu tür sayfa gerekir.</td><td><a href="06-gorsel-ve-video.html">6</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-j">J</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>JSON-LD</strong></td><td>Yapılandırılmış veriyi ayrı bir <code>&lt;script&gt;</code> içinde JSON olarak yazma biçimi; Google'ın önerdiği biçim.</td><td><a href="08-yapilandirilmis-veri.html#json-ld">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-k">K</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>kademeli bağlantı (tiered link)</strong></td><td>Para sitesine bağlantı veren ara sayfalara binlerce düşük kaliteli bağlantı yağdırarak spamı bir adım uzakta tutma denemesi. Google bağlantı grafiğini bütün olarak değerlendirir.</td><td><a href="21-kara-sapka.html#kademeli">21</a></td></tr>
+              <tr><td><strong>Kaldırmalar aracı</strong></td><td>Search Console'da bir URL'yi sonuçlardan yaklaşık 6 ay gizleyen araç. Geçicidir; kalıcı çözüm 404/410 ya da <code>noindex</code>.</td><td><a href="09-tarama-ve-dizin.html#kaldirmalar-araci">9</a></td></tr>
+              <tr><td><strong>kalite değerlendiricisi (QRG)</strong></td><td>Google'ın kılavuzla (Search Quality Rater Guidelines) çalıştırdığı değerlendiriciler. Sıralamayı değiştirmezler; algoritmaların doğru çalışıp çalışmadığını ölçerler.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>Kalite Puanı</strong></td><td>Google Ads'te anahtar kelime düzeyinde 1–10 teşhis puanı. Açık artırmaya doğrudan girdi değildir.</td><td><a href="17-musteri-isi.html">17</a></td></tr>
+              <tr><td><strong>kanonik URL</strong></td><td>Aynı içeriğin birden çok adresi varsa "asıl adres budur" diye seçilen URL. <code>rel="canonical"</code> bir ipucudur, kural değildir.</td><td><a href="09-tarama-ve-dizin.html#kanonik">9</a></td></tr>
+              <tr><td><strong>konu kümesi / pillar sayfa</strong></td><td>Geniş bir ana sayfa ile onu ayrıntılandıran alt sayfaların iki yönlü bağlandığı yapı.</td><td><a href="07-icerik-kalitesi.html">7</a></td></tr>
+              <tr><td><strong>KPI</strong></td><td>Başarıyı ölçmek için seçilen gösterge (ör. aramalar, form, yol tarifi, tıklama). Sıralama tek başına KPI yapılmaz.</td><td><a href="15-araclar-ve-olcum.html">15</a>, <a href="17-musteri-isi.html">17</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-l">L</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>lastmod</strong></td><td>Site haritasında sayfanın son gerçek değişiklik tarihi. Yalnız doğruysa değerlidir; <code>priority</code> ve <code>changefreq</code> yok sayılır.</td><td><a href="09-tarama-ve-dizin.html#lastmod">9</a></td></tr>
+              <tr><td><strong>LCP</strong></td><td>Largest Contentful Paint: en büyük ilk görünen öğenin ekrana gelme süresi. İyi ≤ 2,5 sn.</td><td><a href="10-performans-mobil-js.html#lcp">10</a></td></tr>
+              <tr><td><strong>Lighthouse</strong></td><td>Google'ın laboratuvar ölçüm aracı (Chrome DevTools içinde, PageSpeed Insights'ta). Puanı sıralamada kullanılmaz.</td><td><a href="10-performans-mobil-js.html#olcum">10</a>, <a href="15-araclar-ve-olcum.html">15</a></td></tr>
+              <tr><td><strong>llms.txt</strong></td><td>Yapay zekâ sistemleri için önerilmiş bir metin dosyası. Google Arama kullanmaz; ne yarar ne zarar verir.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a></td></tr>
+              <tr><td><strong>LocalBusiness</strong></td><td>Yerel işletme için schema.org türü; en özel alt türü (ör. MovingCompany) seçilir. Zorunlu alanlar <code>name</code> ve <code>address</code>.</td><td><a href="08-yapilandirilmis-veri.html#yerel-isletme">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-m">M</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>meta açıklama</strong></td><td><code>&lt;meta name="description"&gt;</code>: sonuçtaki açıklama metnine aday. Sıralamayı değil tıklanmayı etkiler; Google çoğu zaman sayfadan kendisi üretir.</td><td><a href="05-sayfa-ici.html">5</a></td></tr>
+              <tr><td><strong>meta keywords</strong></td><td><code>&lt;meta name="keywords"&gt;</code>. Google yıllardır kullanmıyor; sıralamaya etkisi yok.</td><td><a href="05-sayfa-ici.html">5</a>, <a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>meta robots</strong></td><td>Sayfanın dizine alınma ve gösterilme kurallarını veren meta etiketi (<code>noindex</code>, <code>nosnippet</code> vb.).</td><td><a href="09-tarama-ve-dizin.html#meta-robots">9</a></td></tr>
+              <tr><td><strong>mobil öncelikli dizin</strong></td><td>Google'ın sitenin mobil sürümünü tarayıp sıralaması. Tamamlandı; 5 Temmuz 2024'ten beri mobilde açılmayan site dizine girmez.</td><td><a href="10-performans-mobil-js.html#mobil-oncelik">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-n">N</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>NAP</strong></td><td>Name, Address, Phone: işletme adı, adresi ve telefonu. Site, İşletme Profili ve dizinlerde birebir aynı yazılmalı.</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>Navboost</strong></td><td>Google'ın toplu tıklama/etkileşim verisini sıralamada kullanan sistemi. Resmî belgede yok; ABD dava belgeleri ve 2024 sızıntısından biliniyor.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>negatif SEO</strong></td><td>Rakibin sıralamasını ya da itibarını düşürmeye yönelik saldırı. Spam bağlantı yağdırmak çoğunlukla işe yaramaz; sahte yorum, sahte DMCA, profil düzenleme ve hack gerçek zarar verir.</td><td><a href="21-kara-sapka.html#negatif-seo">21</a></td></tr>
+              <tr><td><strong>nofollow / sponsored / ugc</strong></td><td>Bağlantının niteliğini bildiren <code>rel</code> değerleri: ücretli → <code>sponsored</code>, kullanıcı içeriği → <code>ugc</code>, diğer güvenilmeyen → <code>nofollow</code>. 2019/2020'den beri ipucu.</td><td><a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>noindex</strong></td><td>Sayfanın sonuçlarda gösterilmemesi kuralı (meta etiketi ya da <code>X-Robots-Tag</code>). Çalışması için sayfa taranabilir olmalı.</td><td><a href="09-tarama-ve-dizin.html#robots-ve-noindex">9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-o">O</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Open Graph (OG)</strong></td><td>Paylaşım önizlemesi için meta etiketleri (<code>og:title</code>, <code>og:image</code>…). SEO değildir; ama <code>og:title</code> Google'ın başlık kaynaklarından biridir.</td><td><a href="08-yapilandirilmis-veri.html#open-graph">8</a></td></tr>
+              <tr><td><strong>origin</strong></td><td>Bir sitenin protokol + alan adı + port birleşimi (ör. <code>https://www.ornek.com</code>). CrUX'ta sayfa verisi yetmezse origin verisine düşülür.</td><td><a href="10-performans-mobil-js.html#crux">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-o2">Ö</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ölçekli içerik istismarı</strong></td><td>Kullanıcıya değer katmadan, sıralama için toplu sayfa üretmek (scaled content abuse); insan, otomasyon ya da yapay zekâ fark etmez.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="07-icerik-kalitesi.html">7</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-p">P</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>PageRank</strong></td><td>Sayfalar arası bağlantılardan değer çıkaran Google sistemi; hâlâ sıralama sistemlerinden biri.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="13-sayfa-disi.html">13</a></td></tr>
+              <tr><td><strong>parazit SEO</strong></td><td>Bkz. <strong>site itibarı istismarı</strong>.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="21-kara-sapka.html#parazit-seo">21</a></td></tr>
+              <tr><td><strong>passage ranking</strong></td><td>Sayfanın tek tek bölümlerini ayrıca değerlendiren Google sistemi.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>PBN (özel blog ağı)</strong></td><td>Private blog network: tek kişinin kontrolündeki, bağımsız görünen ve asıl siteye bağlantı veren site ağı; çoğu süresi dolmuş alan adları üzerine kurulur. Bağlantı spamı.</td><td><a href="13-sayfa-disi.html">13</a>, <a href="21-kara-sapka.html#pbn">21</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-q">Q</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>QRG</strong></td><td>Search Quality Rater Guidelines. Bkz. <strong>kalite değerlendiricisi</strong>.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-r">R</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>RankBrain</strong></td><td>Kelimeleri kavramlara bağlayan, birebir eşleşme olmadan da sonuç bulan Google sistemi.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>render</strong></td><td>Bkz. <strong>işleme</strong>.</td><td><a href="10-performans-mobil-js.html#javascript-seo">10</a></td></tr>
+              <tr><td><strong>robots.txt</strong></td><td>Sitenin kökündeki, tarayıcılara "şuraya girme" diyen dosya. Taramayı yönetir, dizinden çıkarmaz; gizleme aracı değildir.</td><td><a href="09-tarama-ve-dizin.html#robots-txt">9</a></td></tr>
+              <tr><td><strong>RUM</strong></td><td>Real User Monitoring: kendi ziyaretçilerinden topladığın gerçek hız ölçümü (ör. <code>web-vitals</code> kitaplığıyla).</td><td><a href="10-performans-mobil-js.html#olcum">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-s">S</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SAB (hizmet bölgesi işletmesi)</strong></td><td>Service-area business: müşteriye giden, müşteriyi adresinde kabul etmeyen işletme (ör. nakliye). Adresi gizler, en çok 20 bölge seçer.</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>sahte etkileşim</strong></td><td>İşletme Profili'nde sahte, satın alınmış, teşvikli ya da süzülmüş yorum ve sahte tıklama. Yorum kapatma ve profilde uyarı gibi kısıtlamalarla cezalandırılır.</td><td><a href="12-yerel-seo.html">12</a>, <a href="21-kara-sapka.html#sahte-yorum">21</a></td></tr>
+              <tr><td><strong>Search Console</strong></td><td>Google'ın site sahipleri için ücretsiz aracı: performans, dizin durumu, URL Denetimi, elle işlemler, site haritaları.</td><td><a href="15-araclar-ve-olcum.html">15</a></td></tr>
+              <tr><td><strong>SEO zehirlemesi (SEO poisoning)</strong></td><td>Hacklenmiş sitelere yerleştirilen sahte sayfaları üst sıralara taşıyıp aramayı yapanı kötü amaçlı yazılım indirmeye yönlendirmek (ör. Gootloader).</td><td><a href="21-kara-sapka.html#seo-zehirlemesi">21</a></td></tr>
+              <tr><td><strong>SERP</strong></td><td>Search Engine Results Page: arama sonuç sayfası.</td><td><a href="04-anahtar-kelime-ve-niyet.html">4</a></td></tr>
+              <tr><td><strong>site adı</strong></td><td>Sonuçlarda başlığın üstünde gösterilen ad; <code>WebSite</code> yapılandırılmış verisiyle bildirilir.</td><td><a href="08-yapilandirilmis-veri.html#site-adi">8</a></td></tr>
+              <tr><td><strong>site haritası</strong></td><td>Sitedeki önemli URL'lerin listesi (XML). En çok 50.000 URL / 50 MB; ping ucu 2023'te kalktı.</td><td><a href="09-tarama-ve-dizin.html#site-haritasi">9</a></td></tr>
+              <tr><td><strong>site itibarı istismarı</strong></td><td>Güçlü bir sitenin itibarını sömürmek için üçüncü taraf içerik barındırmak ("parazit SEO"). 2024'ten beri spam politikası.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="21-kara-sapka.html#parazit-seo">21</a></td></tr>
+              <tr><td><strong>snippet</strong></td><td>Arama sonucundaki açıklama metni. Google çoğu zaman sayfadan kendisi seçer; <code>nosnippet</code>, <code>max-snippet</code> ile sınırlanır.</td><td><a href="05-sayfa-ici.html">5</a></td></tr>
+              <tr><td><strong>soft 404</strong></td><td>Aslında olmayan ama 200 dönen sayfa; ya da silinen her şeyi ana sayfaya yönlendirmek. Gerçek 404/410 dönülmeli.</td><td><a href="09-tarama-ve-dizin.html#soft-404">9</a></td></tr>
+              <tr><td><strong>SpamBrain</strong></td><td>Google'ın yapay zekâ tabanlı spam tespit sistemi.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="13-sayfa-disi.html">13</a>, <a href="21-kara-sapka.html#neden-bir-sure-ise-yarar">21</a></td></tr>
+              <tr><td><strong>SSR / SSG</strong></td><td>Sunucu tarafı render (her istekte HTML) ve statik üretim (derlemede HTML). İçeriğin ilk HTML'de gelmesinin en güvenli yolları.</td><td><a href="10-performans-mobil-js.html#render-stratejileri">10</a></td></tr>
+              <tr><td><strong>sub4sub / izlenme botu</strong></td><td>Karşılıklı abonelik takası ve ücretli bot ile izlenme, abone, canlı izleyici şişirme. YouTube Sahte Etkileşim politikası yasaklar; tekrarında kanal kapatmaya gider.</td><td><a href="21-kara-sapka.html#video-platformlari">21</a></td></tr>
+              <tr><td><strong>süresi dolmuş alan adı istismarı</strong></td><td>Eski bir alan adını itibarı için satın alıp ilgisiz, değersiz içerik sıralatmak. Spam politikası ihlali.</td><td><a href="03-kurallar-ve-siralama.html">3</a>, <a href="21-kara-sapka.html#suresi-dolmus">21</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-s2">Ş</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>şema (schema.org)</strong></td><td>Arama motorlarının ortak yapılandırılmış veri sözlüğü; türleri ve alanları tanımlar.</td><td><a href="08-yapilandirilmis-veri.html">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-t">T</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>tarama (crawling)</strong></td><td>Googlebot'un URL'yi indirmesi. robots.txt ile yönetilir.</td><td><a href="02-google-nasil-calisir.html">2</a>, <a href="09-tarama-ve-dizin.html#tarama-dizin-farki">9</a></td></tr>
+              <tr><td><strong>tarama bütçesi</strong></td><td>Google'ın bir siteyi ne kadar taramak istediği ve tarayabildiği. Yalnız çok büyük ya da çok hızlı değişen siteleri ilgilendirir.</td><td><a href="09-tarama-ve-dizin.html#tarama-butcesi">9</a></td></tr>
+              <tr><td><strong>TBT</strong></td><td>Total Blocking Time: laboratuvar ölçümünde ana iş parçacığının kilitli kaldığı süre; INP'nin lab vekili.</td><td><a href="10-performans-mobil-js.html#olcum">10</a></td></tr>
+              <tr><td><strong>title (başlık etiketi)</strong></td><td><code>&lt;title&gt;</code>: en güçlü sayfa içi sinyal. Google sonuçtaki başlığı (title link) bundan ve başka kaynaklardan kendisi kurar.</td><td><a href="05-sayfa-ici.html">5</a></td></tr>
+              <tr><td><strong>TTFB</strong></td><td>Time to First Byte: sunucunun ilk baytı gönderme süresi. CWV değil ama LCP'nin önünde gelir; kaba rehber iyi ≤ 0,8 sn.</td><td><a href="10-performans-mobil-js.html#lcp">10</a>, <a href="11-altyapi.html">11</a></td></tr>
+              <tr><td><strong>typosquatting (marka taklidi)</strong></td><td>Bir markanın yazım hatalı ya da benzer görünen alan adını alıp trafiğini çalmak veya dolandırıcılık yapmak. Savunma: varyasyonları kaydetmek, yeni kayıtları izlemek, UDRP.</td><td><a href="21-kara-sapka.html#marka-taklidi">21</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-u">U</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>URL Denetimi</strong></td><td>Search Console'da Google'ın sayfayı nasıl gördüğünü, seçtiği kanoniği ve işlenmiş HTML'i gösteren araç; eski <code>cache:</code> yerine kullanılır.</td><td><a href="09-tarama-ve-dizin.html#url-denetimi">9</a>, <a href="15-araclar-ve-olcum.html">15</a></td></tr>
+              <tr><td><strong>UTM</strong></td><td>Bağlantıya eklenen ölçüm parametreleri (<code>utm_source</code> vb.). İşletme Profili'ndeki site bağlantısını ölçmek için kullanılır; dikkatle eklenir.</td><td><a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>USOM</strong></td><td>Ulusal Siber Olaylara Müdahale Merkezi. Hacklenmiş kamu sitesi ya da siber olay bildirimi yapılan resmî kurum.</td><td><a href="21-kara-sapka.html#hack">21</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-v">V</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>VideoObject</strong></td><td>Video için schema.org türü; izleme sayfasında <code>name</code>, <code>description</code>, <code>thumbnailUrl</code> ile verilir.</td><td><a href="06-gorsel-ve-video.html">6</a>, <a href="08-yapilandirilmis-veri.html#videoobject">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-w">W</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>WAF</strong></td><td>Web Application Firewall: web uygulama güvenlik duvarı / bot koruması. Yanlış ayarlanırsa Googlebot'u ya da robots.txt'yi engeller.</td><td><a href="11-altyapi.html">11</a>, <a href="09-tarama-ve-dizin.html#robots-http-yanitlari">9</a></td></tr>
+              <tr><td><strong>WRS</strong></td><td>Web Rendering Service: Google'ın sayfaları çalıştıran Chromium tabanlı hizmeti. Durum saklamaz, önbellek başlıklarını yok sayabilir.</td><td><a href="10-performans-mobil-js.html#js-kurallari">10</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-x">X</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>X-Robots-Tag</strong></td><td>HTTP başlığıyla verilen robots kuralları (<code>X-Robots-Tag: noindex</code>). PDF ve görsellerde tek yol; yönetim paneli için ideal.</td><td><a href="09-tarama-ve-dizin.html#meta-robots">9</a>, <a href="09-tarama-ve-dizin.html#admin-ve-test">9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-y">Y</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>yapılandırılmış veri</strong></td><td>Sayfanın ne anlattığını makinenin okuyacağı biçimde tarif eden kod. Zengin sonuç için uygunluk sağlar, sıralamayı yükseltmez.</td><td><a href="08-yapilandirilmis-veri.html">8</a></td></tr>
+              <tr><td><strong>Yandex Webmaster</strong></td><td>Yandex'in site sahibi aracı. Türkiye'de Yandex'in payı yaklaşık dörtte bir; site bölgesi ayarı yerel işletmeler için önemli.</td><td><a href="14-diger-motorlar-ve-yz.html">14</a>, <a href="12-yerel-seo.html">12</a></td></tr>
+              <tr><td><strong>yeniden değerlendirme talebi</strong></td><td>Elle işlemden sonra sorunu düzeltip Search Console'dan Google'a gönderilen inceleme isteği (reconsideration request). Algoritmik düşüşte gönderilemez.</td><td><a href="13-sayfa-disi.html#yeniden-inceleme">13</a>, <a href="21-kara-sapka.html#elle-islem">21</a></td></tr>
+              <tr><td><strong>YMYL</strong></td><td>Your Money or Your Life: sağlık, para, güvenlik, toplum refahı gibi hayatı etkileyen konular. Burada güven ölçütleri daha ağır basar.</td><td><a href="03-kurallar-ve-siralama.html">3</a></td></tr>
+              <tr><td><strong>yorum süzme (review gating)</strong></td><td>Yalnız memnun müşteriyi yorum sayfasına, memnun olmayanı özel forma yönlendirmek. Google politikasında açıkça yasak.</td><td><a href="21-kara-sapka.html#sahte-yorum">21</a></td></tr>
+              <tr><td><strong>yönlendirme (301/302)</strong></td><td>Bir URL'yi başka bir URL'ye göndermek. 301/308 kalıcı (güçlü sinyal), 302/307 geçici (zayıf). Tek adım, en az 1 yıl tutulur.</td><td><a href="09-tarama-ve-dizin.html#durum-kodlari">9</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 id="harf-z">Z</h3>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Terim</th><th>Anlamı</th><th>Bölüm</th></tr></thead>
+            <tbody>
+              <tr><td><strong>zengin sonuç</strong></td><td>Arama sonucunda düz başlık ve açıklamanın ötesindeki ek öğeler (yıldız, fiyat, video küçük resmi). Yapılandırılmış veriyle uygunluk kazanılır; FAQ ve HowTo kalktı.</td><td><a href="08-yapilandirilmis-veri.html#kaldirilanlar">8</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kaynak-turleri"><span class="h-num">§ 3</span>Kaynakları nasıl okumalı</h2>
+        <p>Eğitim boyunca her iddianın yanında bir kaynak ve çoğu zaman bir rozet var. Rozetler şunu söyler:</p>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Rozet</th><th>Anlamı</th><th>Nasıl tartılır</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--ok">Resmî</span></td><td>Google, Bing, Yandex, web.dev, schema.org gibi kuralı koyanın kendi belgesi</td><td>Kural budur. Çelişki varsa resmî belge esas alınır.</td></tr>
+              <tr><td><span class="tag tag--info">3. taraf</span></td><td>Ahrefs, Backlinko, Semrush, anketler, haber siteleri</td><td>Ölçüm, gözlem ya da görüş. Değerli ama kural değildir; yöntemi ve tarihi önemlidir.</td></tr>
+              <tr><td><span class="tag tag--warn">Değişti: …</span></td><td>Kural belirli bir tarihte değişti</td><td>O tarihten eski rehberlerdeki bilgi geçersiz olabilir.</td></tr>
+              <tr><td><span class="tag tag--warn">Doğrulanamadı</span></td><td>Birincil kaynaktan teyit edilemedi</td><td>Karar verirken tek başına dayanma.</td></tr>
+              <tr><td><span class="tag">Kaynaktan teyit edilmedi</span></td><td>Genel bilinen ama bu araştırmada kaynağı açılmadı</td><td>Büyük olasılıkla doğru; önemliyse kaynağına bak.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <aside class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p>Bir SEO iddiasını tartarken üç soru sor: <strong>Kim söylüyor?</strong> (Google mı, bir araç satıcısı mı?) <strong>Ne zaman?</strong> (2023 öncesi bir FAQ şeması önerisi bugün geçersiz.) <strong>Ölçüm mü, görüş mü?</strong> (Ahrefs'in 42 milyon sayfalık analizi ile bir ajansın "bizce" yazısı aynı ağırlıkta değil.) Google'ın kendi "SEO tutmalı mıyım" sayfası da önerileri resmî belgelere dayanmayan hizmete şüpheyle yaklaşılmasını söyler.</p>
+        </aside>
+        <aside class="callout callout--danger">
+          <p class="callout__title">Dikkat</p>
+          <p>Moz ve Search Engine Land'in bazı rehber sayfaları araştırma sırasında erişime kapalıydı (403); bu kaynaklar yalnız arama özetleri üzerinden kullanıldı ya da hiç kullanılmadı. Bazı resmî sayfalar (X Cards, Perplexity tarayıcıları, Google'ın Haziran 2026 yapay zekâ raporu yazısı) tam okunamadı; bunlar listede not edildi.</p>
+        </aside>
+
+        <h2 id="dogrulanamayanlar"><span class="h-num">§ 4</span>Doğrulanamayanlar: toplu liste</h2>
+        <p>Araştırma sırasında birincil kaynaktan teyit edilemeyen ya da kaynaklar arasında çelişen noktalar. Bölümlerde bu konular geçtiğinde <span class="tag tag--warn">Doğrulanamadı</span> ya da <span class="tag">Kaynaktan teyit edilmedi</span> rozetiyle işaretlendi.</p>
+        <h3 id="dogrulanamayan-google">Google ve genel arama</h3>
+        <ul>
+          <li>Google'ın AI Mode ve AI Overviews'i Türkiye'de kademeli açtığı 18 Şubat 2026 tarihli duyurusunun asıl metni (yalnız ikincil kaynak).</li>
+          <li>Arama Kalitesi Değerlendirici Kılavuzu'nun 2026 tarihli bir sürümü olup olmadığı.</li>
+          <li>Google'ın llms.txt için belgesine "ne yardım eder ne zarar verir" notu eklediği bilgisi (yalnız ikincil kaynak).</li>
+          <li>John Mueller'in sosyal sinyaller hakkındaki birincil alıntısı.</li>
+          <li>Navboost'un ayrıntıları: dava tanıklığı ve sızıntıya dayanan yorumlar; resmî belgede yok.</li>
+          <li>Google'ın "2026 SEO in AI Search Guide for Marketers" PDF'inin metni çıkarılamadı.</li>
+          <li>Google'ın Haziran 2026 yapay zekâ performans raporu duyurusunun gövde metni okunamadı; ayrıntılar ikincil kaynaklardan.</li>
+          <li>24 Haziran 2026'da başlayan spam güncellemesinin tamamlandığı.</li>
+          <li>Mueller'in Eylül 2026'da disavow aracı hakkındaki Reddit yorumunun asıl metni.</li>
+          <li><code>&amp;num=100</code> parametresinin Eylül 2025'te kalkması ve Search Console gösterimlerine etkisi: Google resmî duyuru yapmadı.</li>
+        </ul>
+        <h3 id="dogrulanamayan-teknik">Teknik tarama ve dizin</h3>
+        <ul>
+          <li>Kök adreste sondaki eğik çizginin fark etmediği (<code>ornek.com</code> = <code>ornek.com/</code>): Mueller alıntısı, Google belgesinde yok.</li>
+          <li>"Dizine eklenmeyi iste" düğmesinin günlük sınırı için resmî rakam yok.</li>
+          <li>Ölü URL'leri hızlı yeniden tarattırmak için geçici "kaldırılanlar" site haritası göndermek: uygulayıcı önerisi, Google belgesinde yok.</li>
+          <li>Bing'in <code>crawl-delay</code> desteği: 2010 blog yazısı var, güncel resmî belgede doğrulanamadı.</li>
+          <li>Yandex'in <code>crawl-delay</code> desteği: Ahrefs "destekler" diyor, Yandex'in güncel belgesinde yok (Yandex belgesi esas alındı).</li>
+          <li>Google'ın IndexNow'a katıldığına dair resmî kaynak yok.</li>
+          <li>Google'ın Türkçe karakterli URL'ler ile ASCII'ye çevrilmiş URL'leri karşılaştıran resmî bir görüşü.</li>
+          <li>AdsBot'un robots.txt'deki <code>*</code> kuralını yok saydığı bilgisi bu araştırmada yeniden açılıp kontrol edilmedi.</li>
+        </ul>
+        <h3 id="dogrulanamayan-performans">Performans ve altyapı</h3>
+        <ul>
+          <li>Doğrudan <code>.tr</code> alan adı tescilinin herkese açıldığı tarih.</li>
+          <li>Bing'in güncel JavaScript ve hız rehberi (yalnız 2018 yazısına ulaşıldı); dinamik render önerisinin bugün de geçerli olup olmadığı.</li>
+          <li>Google tarayıcılarının HTTP/3 kullanıp kullanmadığı (belgede geçmiyor).</li>
+          <li>Cloudflare Bot Fight Mode'un doğrulanmış tarayıcıları muaf tutmayabildiği: topluluk raporu, resmî belge değil.</li>
+          <li>Sosyal ağ önizleme botlarının JavaScript çalıştırmadığı: yaygın sektör bilgisi, bu araştırmada ayrıca teyit edilmedi.</li>
+          <li>bfcache'i bozan <code>unload</code> ve <code>Cache-Control: no-store</code> örnekleri web.dev bfcache rehberinden; o sayfa bu oturumda ayrıca açılmadı.</li>
+        </ul>
+        <h3 id="dogrulanamayan-icerik">Sayfa içi, yapılandırılmış veri ve paylaşım</h3>
+        <ul>
+          <li>X'in eksik <code>twitter:</code> etiketleri için Open Graph'a geri döndüğü (resmî X belgesine erişilemedi).</li>
+          <li><code>areaServed</code> alanının Google'da bir etkisi olduğu (Google'ın LocalBusiness belgesinde geçmiyor).</li>
+          <li>Hizmet bölgesi işletmesinde sokaksız <code>address</code> kullanımının Google'daki etkisi.</li>
+          <li>Konu kümeleri için verilen "%30–43 daha çok trafik, 3,2× daha çok yapay zekâ alıntısı" rakamları (satıcı blogları).</li>
+        </ul>
+        <h3 id="dogrulanamayan-yerel">Yerel SEO, sayfa dışı ve araçlar</h3>
+        <ul>
+          <li>Sahte yorum yaptırımında "yaklaşık 30 gün yeni yorum alamama" süresi: topluluk raporu; Google "belirli bir süre" diyor.</li>
+          <li>Bing Places'in Google'dan içe aktarma özelliğinin Türkiye'de çalışıp çalışmadığı.</li>
+          <li>Yerel Hizmet Reklamları'nın (Local Services Ads) Türkiye'de olduğuna dair kanıt bulunamadı.</li>
+          <li>Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği'ndeki 2026 değişikliği ve ceza rakamları haber kaynaklarından; Resmî Gazete metni ayrıca doğrulanmalı.</li>
+          <li>Yahoo organik sonuçlarının Bing'den geldiği: yaygın bilgi, resmî kaynaktan doğrulanamadı.</li>
+          <li>ChatGPT'nin Bing dizinine dayandığı: yaygın iddia, OpenAI tarafından resmî olarak doğrulanmadı.</li>
+          <li>Semrush ücretsiz planının günlük sorgu sınırı; Screaming Frog lisans fiyatı (kaynaklar arasında farklı).</li>
+        </ul>
+
+        <h2 id="akilda-kalsin"><span class="h-num">§ 5</span>Akılda kalsın</h2>
+        <div class="callout callout--win">
+          <ul>
+            <li>Terimi unuttuysan sözlükten bak, kuralı öğrenmek için bağlı bölüme git.</li>
+            <li>Kural için resmî kaynak, gözlem ve ölçüm için üçüncü taraf; ikisini aynı ağırlıkta tutma.</li>
+            <li>SEO bilgisinin son kullanma tarihi var: kaynağın tarihine ve "Değişti" rozetine bak; bu eğitim 21 Ekim 2026 itibarıyla doğrudur.</li>
+            <li>Doğrulanamayan bir iddiaya dayanarak müşteriye söz verme; listedeki noktaları önce kaynağından teyit et.</li>
+            <li>Sık güncellenen resmî sayfaları (Google'ın belge güncellemeleri sayfası, Search Status Dashboard) ara sıra kontrol etmek, eğitimi güncel tutmanın en ucuz yoludur.</li>
+          </ul>
+        </div>
+
+        <h2 id="kaynaklar"><span class="h-num">§ 6</span>Kaynakça</h2>
+        <p>Altı araştırmanın kaynak listelerinin birleşimi, tekilleştirilmiş ve gruplanmış hali. Hepsine 21 Ekim 2026'da erişildi.</p>
+        <h3 id="kaynak-google-belge">Google Search Central belgeleri</h3>
+        <ol class="sources" start="1">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> Google — How Google Search works — <a href="https://developers.google.com/search/docs/fundamentals/how-search-works">developers.google.com/…/how-search-works</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> Google — Google Search Essentials — <a href="https://developers.google.com/search/docs/essentials">developers.google.com/…/essentials</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> Google — Google Search technical requirements — <a href="https://developers.google.com/search/docs/essentials/technical">developers.google.com/…/technical</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> Google — Spam policies for Google web search — <a href="https://developers.google.com/search/docs/essentials/spam-policies">developers.google.com/…/spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> Google — A guide to Google Search ranking systems — <a href="https://developers.google.com/search/docs/appearance/ranking-systems-guide">developers.google.com/…/ranking-systems-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> Google — Creating helpful, reliable, people-first content — <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">developers.google.com/…/creating-helpful-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> Google — Using generative AI content — <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content">developers.google.com/…/using-gen-ai-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> Google — SEO Starter Guide — <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide">developers.google.com/…/seo-starter-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> Google — Do you need an SEO? — <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo">developers.google.com/…/do-i-need-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> Google — Get started with Search: a developer's guide — <a href="https://developers.google.com/search/docs/fundamentals/get-started">developers.google.com/…/get-started</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> Google — AI features and your website — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> Google — Optimizing for generative AI search (15 May 2026) — <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">developers.google.com/…/ai-optimization-guide</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> Google — Understanding page experience in Google Search results — <a href="https://developers.google.com/search/docs/appearance/page-experience">developers.google.com/…/page-experience</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> Google — Avoid intrusive interstitials and dialogs — <a href="https://developers.google.com/search/docs/appearance/avoid-intrusive-interstitials">developers.google.com/…/avoid-intrusive-interstitials</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> Google — Mobile-first indexing best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing">developers.google.com/…/mobile-sites-mobile-first-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Google — Introduction to robots.txt — <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">developers.google.com/…/intro</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Google — How Google interprets the robots.txt specification — <a href="https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt">developers.google.com/…/robots_txt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Google — Block Search indexing with noindex — <a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing">developers.google.com/…/block-indexing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> Google — Robots meta tag, data-nosnippet, and X-Robots-Tag — <a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">developers.google.com/…/robots-meta-tag</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> Google — Meta tags and attributes that Google supports — <a href="https://developers.google.com/search/docs/crawling-indexing/special-tags">developers.google.com/…/special-tags</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--ok">Resmî</span> Google — How HTTP status codes, and network and DNS errors affect Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/http-network-errors">developers.google.com/…/http-network-errors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> Google — Redirects and Google Search — <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects">developers.google.com/…/301-redirects</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> Google — How to specify a canonical URL — <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">developers.google.com/…/consolidate-duplicate-urls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--ok">Resmî</span> Google — What is URL canonicalization — <a href="https://developers.google.com/search/docs/crawling-indexing/canonicalization">developers.google.com/…/canonicalization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--ok">Resmî</span> Google — Crawl budget management for large sites — <a href="https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget">developers.google.com/…/large-site-managing-crawl-budget</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> Google — URL structure best practices — <a href="https://developers.google.com/search/docs/crawling-indexing/url-structure">developers.google.com/…/url-structure</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Google — Pagination and incremental page loading — <a href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">developers.google.com/…/pagination-and-incremental-page-loading</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Google — Localized versions of your pages (hreflang) — <a href="https://developers.google.com/search/docs/specialty/international/localized-versions">developers.google.com/…/localized-versions</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k29"><span class="src-n">29</span><span><span class="tag tag--ok">Resmî</span> Google — Managing multi-regional and multilingual sites — <a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">developers.google.com/…/managing-multi-regional-sites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--ok">Resmî</span> Google — Site moves with URL changes — <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">developers.google.com/…/site-move-with-url-changes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span><span class="tag tag--ok">Resmî</span> Google — Build and submit a sitemap — <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">developers.google.com/…/build-sitemap</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span><span class="tag tag--ok">Resmî</span> Google — Image sitemaps — <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps">developers.google.com/…/image-sitemaps</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Google — Googlebot — <a href="https://developers.google.com/search/docs/crawling-indexing/googlebot">developers.google.com/…/googlebot</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span><span class="tag tag--ok">Resmî</span> Google — Overview of Google crawlers and fetchers — <a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers">developers.google.com/…/overview-google-crawlers</a> · <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers">developers.google.com/…/overview-google-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k35"><span class="src-n">35</span><span><span class="tag tag--ok">Resmî</span> Google — Google common crawlers (Google-Extended) — <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers">developers.google.com/…/google-common-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k36"><span class="src-n">36</span><span><span class="tag tag--ok">Resmî</span> Google — Understand JavaScript SEO basics — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">developers.google.com/…/javascript-seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k37"><span class="src-n">37</span><span><span class="tag tag--ok">Resmî</span> Google — Fix Search-related JavaScript problems — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/fix-search-javascript">developers.google.com/…/fix-search-javascript</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k38"><span class="src-n">38</span><span><span class="tag tag--ok">Resmî</span> Google — Dynamic rendering as a workaround — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/dynamic-rendering">developers.google.com/…/dynamic-rendering</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k39"><span class="src-n">39</span><span><span class="tag tag--ok">Resmî</span> Google — Fix lazy-loaded content — <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading">developers.google.com/…/lazy-loading</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k40"><span class="src-n">40</span><span><span class="tag tag--ok">Resmî</span> Google — Link best practices for Google — <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">developers.google.com/…/links-crawlable</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k41"><span class="src-n">41</span><span><span class="tag tag--ok">Resmî</span> Google — Qualify your outbound links — <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links">developers.google.com/…/qualify-outbound-links</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k42"><span class="src-n">42</span><span><span class="tag tag--ok">Resmî</span> Google — Influencing your title links in search results — <a href="https://developers.google.com/search/docs/appearance/title-link">developers.google.com/…/title-link</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k43"><span class="src-n">43</span><span><span class="tag tag--ok">Resmî</span> Google — Control your snippets in search results — <a href="https://developers.google.com/search/docs/appearance/snippet">developers.google.com/…/snippet</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k44"><span class="src-n">44</span><span><span class="tag tag--ok">Resmî</span> Google — Google Images SEO best practices — <a href="https://developers.google.com/search/docs/appearance/google-images">developers.google.com/…/google-images</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k45"><span class="src-n">45</span><span><span class="tag tag--ok">Resmî</span> Google — Video SEO best practices — <a href="https://developers.google.com/search/docs/appearance/video">developers.google.com/…/video</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k46"><span class="src-n">46</span><span><span class="tag tag--ok">Resmî</span> Google — Influencing byline dates in Google Search — <a href="https://developers.google.com/search/docs/appearance/publication-dates">developers.google.com/…/publication-dates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k47"><span class="src-n">47</span><span><span class="tag tag--ok">Resmî</span> Google — Provide a site name to Google Search — <a href="https://developers.google.com/search/docs/appearance/site-names">developers.google.com/…/site-names</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k48"><span class="src-n">48</span><span><span class="tag tag--ok">Resmî</span> Google — Define a favicon to show in search results — <a href="https://developers.google.com/search/docs/appearance/favicon-in-search">developers.google.com/…/favicon-in-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k49"><span class="src-n">49</span><span><span class="tag tag--ok">Resmî</span> Google — General structured data guidelines — <a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">developers.google.com/…/sd-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k50"><span class="src-n">50</span><span><span class="tag tag--ok">Resmî</span> Google — Introduction to structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data">developers.google.com/…/intro-structured-data</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k51"><span class="src-n">51</span><span><span class="tag tag--ok">Resmî</span> Google — Organization structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/organization">developers.google.com/…/organization</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k52"><span class="src-n">52</span><span><span class="tag tag--ok">Resmî</span> Google — Local Business structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/local-business">developers.google.com/…/local-business</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k53"><span class="src-n">53</span><span><span class="tag tag--ok">Resmî</span> Google — Software App structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/software-app">developers.google.com/…/software-app</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k54"><span class="src-n">54</span><span><span class="tag tag--ok">Resmî</span> Google — Review snippet structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/review-snippet">developers.google.com/…/review-snippet</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k55"><span class="src-n">55</span><span><span class="tag tag--ok">Resmî</span> Google — Breadcrumb structured data — <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb">developers.google.com/…/breadcrumb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k56"><span class="src-n">56</span><span><span class="tag tag--ok">Resmî</span> Google — Preventing and monitoring abuse on your site — <a href="https://developers.google.com/search/docs/monitor-debug/security">developers.google.com/…/security</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k57"><span class="src-n">57</span><span><span class="tag tag--ok">Resmî</span> Google — site: search operator — <a href="https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site">developers.google.com/…/all-search-site</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k58"><span class="src-n">58</span><span><span class="tag tag--ok">Resmî</span> Google — Indexing API quickstart — <a href="https://developers.google.com/search/apis/indexing-api/v3/quickstart">developers.google.com/…/quickstart</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k59"><span class="src-n">59</span><span><span class="tag tag--ok">Resmî</span> Google — Google Search's core updates — <a href="https://developers.google.com/search/updates/core-updates">developers.google.com/…/core-updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k60"><span class="src-n">60</span><span><span class="tag tag--ok">Resmî</span> Google — Latest Google Search documentation updates — <a href="https://developers.google.com/search/updates">developers.google.com/…/updates</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-google-blog">Google Search Central Blog (tarih sırasıyla)</h3>
+        <ol class="sources" start="61">
+          <li id="k61"><span class="src-n">61</span><span><span class="tag tag--ok">Resmî</span> Google — To slash or not to slash (Nis 2010) — <a href="https://developers.google.com/search/blog/2010/04/to-slash-or-not-to-slash">developers.google.com/…/to-slash-or-not-to-slash</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k62"><span class="src-n">62</span><span><span class="tag tag--ok">Resmî</span> Google — HTTPS as a ranking signal (Ağu 2014) — <a href="https://developers.google.com/search/blog/2014/08/https-as-ranking-signal">developers.google.com/…/https-as-ranking-signal</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k63"><span class="src-n">63</span><span><span class="tag tag--ok">Resmî</span> Google — A note on unsupported rules in robots.txt (Tem 2019) — <a href="https://developers.google.com/search/blog/2019/07/a-note-on-unsupported-rules-in-robotstxt">developers.google.com/…/a-note-on-unsupported-rules-in-robotstxt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k64"><span class="src-n">64</span><span><span class="tag tag--ok">Resmî</span> Google — Evolving "nofollow" (10 Eyl 2019) — <a href="https://developers.google.com/search/blog/2019/09/evolving-nofollow-new-ways-to-identify">developers.google.com/…/evolving-nofollow-new-ways-to-identify</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k65"><span class="src-n">65</span><span><span class="tag tag--ok">Resmî</span> Google — The new HTTPS report in Search Console (Eyl 2022) — <a href="https://developers.google.com/search/blog/2022/09/https-search-console-report">developers.google.com/…/https-search-console-report</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k66"><span class="src-n">66</span><span><span class="tag tag--ok">Resmî</span> Google — Google Search's guidance about AI-generated content (8 Şub 2023) — <a href="https://developers.google.com/search/blog/2023/02/google-search-and-ai-content">developers.google.com/…/google-search-and-ai-content</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k67"><span class="src-n">67</span><span><span class="tag tag--ok">Resmî</span> Google — Sitemaps ping endpoint is going away (26 Haz 2023) — <a href="https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping">developers.google.com/…/sitemaps-lastmod-ping</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k68"><span class="src-n">68</span><span><span class="tag tag--ok">Resmî</span> Google — Changes to HowTo and FAQ rich results (8 Ağu 2023) — <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes">developers.google.com/…/howto-faq-changes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k69"><span class="src-n">69</span><span><span class="tag tag--ok">Resmî</span> Google — Mobile-first indexing has landed (31 Eki 2023) — <a href="https://developers.google.com/search/blog/2023/10/mobile-first-is-here">developers.google.com/…/mobile-first-is-here</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k70"><span class="src-n">70</span><span><span class="tag tag--ok">Resmî</span> Google — Upcoming deprecation of Crawl Rate Limiter Tool (Kas 2023) — <a href="https://developers.google.com/search/blog/2023/11/sc-crawl-limiter-byebye">developers.google.com/…/sc-crawl-limiter-byebye</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k71"><span class="src-n">71</span><span><span class="tag tag--ok">Resmî</span> Google — March 2024 core update and new spam policies — <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies">developers.google.com/…/core-update-spam-policies</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k72"><span class="src-n">72</span><span><span class="tag tag--ok">Resmî</span> Google — Farewell, Sitelinks Search Box (21 Eki 2024) — <a href="https://developers.google.com/search/blog/2024/10/sitelinks-search-box">developers.google.com/…/sitelinks-search-box</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k73"><span class="src-n">73</span><span><span class="tag tag--ok">Resmî</span> Google — Updating our site reputation abuse policy (19 Kas 2024) — <a href="https://developers.google.com/search/blog/2024/11/site-reputation-abuse">developers.google.com/…/site-reputation-abuse</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k74"><span class="src-n">74</span><span><span class="tag tag--ok">Resmî</span> Google — Top ways to ensure your content performs well in Google's AI experiences (21 May 2025) — <a href="https://developers.google.com/search/blog/2025/05/succeeding-in-ai-search">developers.google.com/…/succeeding-in-ai-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k75"><span class="src-n">75</span><span><span class="tag tag--ok">Resmî</span> Google — Simplifying the search results page (12 Haz 2025) — <a href="https://developers.google.com/search/blog/2025/06/simplifying-search-results">developers.google.com/…/simplifying-search-results</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k76"><span class="src-n">76</span><span><span class="tag tag--ok">Resmî</span> Google — Introducing a new spam policy for "back button hijacking" (13 Nis 2026) — <a href="https://developers.google.com/search/blog/2026/04/back-button-hijacking">developers.google.com/…/back-button-hijacking</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k77"><span class="src-n">77</span><span><span class="tag tag--ok">Resmî</span> Google — Search Generative AI performance reports (3 Haz 2026; gövde metni okunamadı) — <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">developers.google.com/…/gen-ai-performance-reports</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k78"><span class="src-n">78</span><span><span class="tag tag--ok">Resmî</span> Google — Update to the Site Reputation Policy (28 Ağu 2026) — <a href="https://developers.google.com/search/blog/2026/08/update-site-reputation-policy">developers.google.com/…/update-site-reputation-policy</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-google-yardim">Google yardım sayfaları ve diğer Google kaynakları</h3>
+        <ol class="sources" start="79">
+          <li id="k79"><span class="src-n">79</span><span><span class="tag tag--ok">Resmî</span> Google — Search Status Dashboard — sıralama olayları geçmişi — <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history">status.search.google.com/…/history</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k80"><span class="src-n">80</span><span><span class="tag tag--ok">Resmî</span> Google — How Search Works — Our approach — <a href="https://www.google.com/search/howsearchworks/our-approach/">google.com/…/our-approach</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k81"><span class="src-n">81</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Core Web Vitals report — <a href="https://support.google.com/webmasters/answer/9205520">support.google.com/…/9205520</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k82"><span class="src-n">82</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Page indexing report — <a href="https://support.google.com/webmasters/answer/7440203">support.google.com/…/7440203</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k83"><span class="src-n">83</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — 404 (Page Not Found) errors — <a href="https://support.google.com/webmasters/answer/2445990">support.google.com/…/2445990</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k84"><span class="src-n">84</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Removals tool — <a href="https://support.google.com/webmasters/answer/9689846">support.google.com/…/9689846</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k85"><span class="src-n">85</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Change of Address tool — <a href="https://support.google.com/webmasters/answer/9370220">support.google.com/…/9370220</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k86"><span class="src-n">86</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — robots.txt report — <a href="https://support.google.com/webmasters/answer/6062598">support.google.com/…/6062598</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k87"><span class="src-n">87</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Disavow links to your site — <a href="https://support.google.com/webmasters/answer/2648487">support.google.com/…/2648487</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k88"><span class="src-n">88</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Manual Actions report — <a href="https://support.google.com/webmasters/answer/9044175">support.google.com/…/9044175</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k89"><span class="src-n">89</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — The International Targeting report is deprecated — <a href="https://support.google.com/webmasters/answer/12474899">support.google.com/…/12474899</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k90"><span class="src-n">90</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Tips to improve your local ranking — <a href="https://support.google.com/business/answer/7091">support.google.com/…/7091</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k91"><span class="src-n">91</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Guidelines for representing your business on Google — <a href="https://support.google.com/business/answer/3038177">support.google.com/…/3038177</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k92"><span class="src-n">92</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Service area management — <a href="https://support.google.com/business/answer/9157481">support.google.com/…/9157481</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k93"><span class="src-n">93</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Categories — <a href="https://support.google.com/business/answer/3370250">support.google.com/…/3370250</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k94"><span class="src-n">94</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Verification methods — <a href="https://support.google.com/business/answer/7107242">support.google.com/…/7107242</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k95"><span class="src-n">95</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Video verification — <a href="https://support.google.com/business/answer/14271705">support.google.com/…/14271705</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k96"><span class="src-n">96</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Read and reply to reviews — <a href="https://support.google.com/business/answer/3474122">support.google.com/…/3474122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k97"><span class="src-n">97</span><span><span class="tag tag--ok">Resmî</span> İşletme Profili Yardım — Performance / call metrics — <a href="https://support.google.com/business/answer/7689763">support.google.com/…/7689763</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k98"><span class="src-n">98</span><span><span class="tag tag--ok">Resmî</span> Google Haritalar — User contributed content policy — prohibited content — <a href="https://support.google.com/contributionpolicy/answer/7400114">support.google.com/…/7400114</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k99"><span class="src-n">99</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Paid and organic report — <a href="https://support.google.com/google-ads/answer/3097241">support.google.com/…/3097241</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k100"><span class="src-n">100</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Quality Score — <a href="https://support.google.com/google-ads/answer/6167118">support.google.com/…/6167118</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k101"><span class="src-n">101</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Ad Rank — <a href="https://support.google.com/google-ads/answer/1722122">support.google.com/…/1722122</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k102"><span class="src-n">102</span><span><span class="tag tag--ok">Resmî</span> Google Ads Yardım — Location assets — <a href="https://support.google.com/google-ads/answer/7189290">support.google.com/…/7189290</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k103"><span class="src-n">103</span><span><span class="tag tag--ok">Resmî</span> Google Ads Politikaları — Destination requirements — <a href="https://support.google.com/adspolicy/answer/6368661">support.google.com/…/6368661</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k104"><span class="src-n">104</span><span><span class="tag tag--ok">Resmî</span> Google Arama Yardım — AI Mode — <a href="https://support.google.com/websearch/answer/16011537">support.google.com/…/16011537</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k105"><span class="src-n">105</span><span><span class="tag tag--ok">Resmî</span> Google — Rich Results Test — <a href="https://search.google.com/test/rich-results">search.google.com/…/rich-results</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k106"><span class="src-n">106</span><span><span class="tag tag--ok">Resmî</span> Google — PageSpeed Insights — <a href="https://pagespeed.web.dev">pagespeed.web.dev</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-webdev">web.dev ve Chrome for Developers</h3>
+        <ol class="sources" start="107">
+          <li id="k107"><span class="src-n">107</span><span><span class="tag tag--ok">Resmî</span> web.dev — Web Vitals — <a href="https://web.dev/articles/vitals">web.dev/…/vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k108"><span class="src-n">108</span><span><span class="tag tag--ok">Resmî</span> web.dev — Interaction to Next Paint (INP) — <a href="https://web.dev/articles/inp">web.dev/…/inp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k109"><span class="src-n">109</span><span><span class="tag tag--ok">Resmî</span> web.dev — INP is officially a Core Web Vital — <a href="https://web.dev/blog/inp-cwv-launch">web.dev/…/inp-cwv-launch</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k110"><span class="src-n">110</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Largest Contentful Paint — <a href="https://web.dev/articles/optimize-lcp">web.dev/…/optimize-lcp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k111"><span class="src-n">111</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Cumulative Layout Shift — <a href="https://web.dev/articles/optimize-cls">web.dev/…/optimize-cls</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k112"><span class="src-n">112</span><span><span class="tag tag--ok">Resmî</span> web.dev — Optimize Interaction to Next Paint — <a href="https://web.dev/articles/optimize-inp">web.dev/…/optimize-inp</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k113"><span class="src-n">113</span><span><span class="tag tag--ok">Resmî</span> web.dev — Time to First Byte (TTFB) — <a href="https://web.dev/articles/ttfb">web.dev/…/ttfb</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k114"><span class="src-n">114</span><span><span class="tag tag--ok">Resmî</span> web.dev — Best practices for fonts — <a href="https://web.dev/articles/font-best-practices">web.dev/…/font-best-practices</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k115"><span class="src-n">115</span><span><span class="tag tag--ok">Resmî</span> web.dev — Rendering on the Web — <a href="https://web.dev/articles/rendering-on-the-web">web.dev/…/rendering-on-the-web</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k116"><span class="src-n">116</span><span><span class="tag tag--ok">Resmî</span> web.dev — Fix the Japanese keyword hack — <a href="https://web.dev/articles/fix-the-japanese-keyword-hack">web.dev/…/fix-the-japanese-keyword-hack</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k117"><span class="src-n">117</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — CrUX methodology — <a href="https://developer.chrome.com/docs/crux/methodology">developer.chrome.com/…/methodology</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k118"><span class="src-n">118</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — Lighthouse performance scoring — <a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring">developer.chrome.com/…/performance-scoring</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-diger-resmi">Diğer resmî kaynaklar: Bing, Yandex, IndexNow, yapay zekâ şirketleri, standartlar</h3>
+        <ol class="sources" start="119">
+          <li id="k119"><span class="src-n">119</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Keeping Content Discoverable with Sitemaps in AI Powered Search (Tem 2025) — <a href="https://blogs.bing.com/webmaster/July-2025/Keeping-Content-Discoverable-with-Sitemaps-in-AI-Powered-Search">blogs.bing.com/…/Keeping-Content-Discoverable-with-Sitemaps-in-AI-Powered-Search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k120"><span class="src-n">120</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Import sites from Search Console to Bing Webmaster Tools (Eyl 2019) — <a href="https://blogs.bing.com/webmaster/september-2019/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools">blogs.bing.com/…/Import-sites-from-Search-Console-to-Bing-Webmaster-Tools</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k121"><span class="src-n">121</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — bingbot Series: JavaScript, Dynamic Rendering, and Cloaking (Eki 2018; arama özeti üzerinden) — <a href="https://blogs.bing.com/webmaster/october-2018/bingbot-Series-JavaScript,-Dynamic-Rendering,-and-Cloaking-Oh-My">blogs.bing.com/…/bingbot-Series-JavaScript,-Dynamic-Rendering,-and-Cloaking-Oh-My</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k122"><span class="src-n">122</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — Looking for Input on Crawl-Delay (Eki 2010) — <a href="https://blogs.bing.com/webmaster/October-2010/Looking-for-Input-on-Crawl-Delay">blogs.bing.com/…/Looking-for-Input-on-Crawl-Delay</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k123"><span class="src-n">123</span><span><span class="tag tag--ok">Resmî</span> Bing — IndexNow — Get started — <a href="https://www.bing.com/indexnow/getstarted">bing.com/…/getstarted</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k124"><span class="src-n">124</span><span><span class="tag tag--ok">Resmî</span> IndexNow — Documentation · FAQ — <a href="https://www.indexnow.org/documentation">indexnow.org/documentation</a> · <a href="https://www.indexnow.org/faq">indexnow.org/faq</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k125"><span class="src-n">125</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — robots.txt (İngilizce ve Türkçe) — <a href="https://yandex.com/support/webmaster/en/controlling-robot/robots-txt">yandex.com/…/robots-txt</a> · <a href="https://yandex.com/support/webmaster/tr/adding-site/indexing-prohibition">yandex.com/…/indexing-prohibition</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k126"><span class="src-n">126</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — IndexNow desteği — <a href="https://yandex.com/support/webmaster/en/indexing-options/index-now">yandex.com/…/index-now</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k127"><span class="src-n">127</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — Sitenin arama sıralamasını nasıl iyileştirebilirim? — <a href="https://yandex.com.tr/support/webmaster/tr/yandex-indexing/rank">yandex.com.tr/…/rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k128"><span class="src-n">128</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — Site region — <a href="https://yandex.com.tr/support/webmaster/en/site-geography/site-region">yandex.com.tr/…/site-region</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k129"><span class="src-n">129</span><span><span class="tag tag--ok">Resmî</span> Yandex Business — Şirket ekleme — <a href="https://yandex.com.tr/support/business-priority/">yandex.com.tr/…/business-priority</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k130"><span class="src-n">130</span><span><span class="tag tag--ok">Resmî</span> DuckDuckGo — Results sources — <a href="https://duckduckgo.com/duckduckgo-help-pages/results/sources">duckduckgo.com/…/sources</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k131"><span class="src-n">131</span><span><span class="tag tag--ok">Resmî</span> OpenAI — Crawlers (OAI-SearchBot, GPTBot, ChatGPT-User) — <a href="https://developers.openai.com/api/docs/bots">developers.openai.com/…/bots</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k132"><span class="src-n">132</span><span><span class="tag tag--ok">Resmî</span> Anthropic — Claude'un web tarayıcıları — <a href="https://support.claude.com/en/articles/8896518">support.claude.com/…/8896518</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k133"><span class="src-n">133</span><span><span class="tag tag--ok">Resmî</span> Perplexity — Perplexity Crawlers (tam metin okunamadı) — <a href="https://docs.perplexity.ai/docs/resources/perplexity-crawlers">docs.perplexity.ai/…/perplexity-crawlers</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k134"><span class="src-n">134</span><span><span class="tag tag--ok">Resmî</span> Apple — About Applebot — <a href="https://support.apple.com/en-us/119829">support.apple.com/…/119829</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k135"><span class="src-n">135</span><span><span class="tag tag--ok">Resmî</span> Apple — Apple Business hizmetleri ve ülkeler · Introducing Apple Business (Mar 2026) — <a href="https://support.apple.com/en-nz/126603">support.apple.com/…/126603</a> · <a href="https://www.apple.com/mx/newsroom/2026/03/introducing-apple-business/">apple.com/…/introducing-apple-business</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k136"><span class="src-n">136</span><span><span class="tag tag--ok">Resmî</span> IETF — RFC 9309 — Robots Exclusion Protocol — <a href="https://www.rfc-editor.org/rfc/rfc9309.html">rfc-editor.org/…/rfc9309.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k137"><span class="src-n">137</span><span><span class="tag tag--ok">Resmî</span> Open Graph — The Open Graph protocol — <a href="https://ogp.me/">ogp.me</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k138"><span class="src-n">138</span><span><span class="tag tag--ok">Resmî</span> schema.org — Schema Markup Validator — <a href="https://validator.schema.org">validator.schema.org</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k139"><span class="src-n">139</span><span><span class="tag tag--ok">Resmî</span> X — Cards markup (resmî sayfa erişime kapalıydı) — <a href="https://developer.x.com/cards/markup">developer.x.com/…/markup</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-ucuncu">Üçüncü taraf eğitimler, ölçümler ve haberler</h3>
+        <ol class="sources" start="140">
+          <li id="k140"><span class="src-n">140</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — SEO basics — <a href="https://ahrefs.com/blog/seo-basics/">ahrefs.com/…/seo-basics</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k141"><span class="src-n">141</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Robots.txt rehberi — <a href="https://ahrefs.com/blog/robots-txt/">ahrefs.com/…/robots-txt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k142"><span class="src-n">142</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — On-Page SEO guide — <a href="https://ahrefs.com/blog/on-page-seo/">ahrefs.com/…/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k143"><span class="src-n">143</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Often Does Google Rewrite Meta Descriptions? (2020) — <a href="https://ahrefs.com/blog/meta-description-study/">ahrefs.com/…/meta-description-study</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k144"><span class="src-n">144</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Keyword Research guide — <a href="https://ahrefs.com/blog/keyword-research/">ahrefs.com/…/keyword-research</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k145"><span class="src-n">145</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Core Web Vitals (Oca 2025) — <a href="https://ahrefs.com/blog/core-web-vitals/">ahrefs.com/…/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k146"><span class="src-n">146</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Local SEO rehberi — <a href="https://ahrefs.com/blog/local-seo/">ahrefs.com/…/local-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k147"><span class="src-n">147</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — How Long Does It Take to Rank in Google? (15 May 2025) — <a href="https://ahrefs.com/blog/how-long-does-it-take-to-rank/">ahrefs.com/…/how-long-does-it-take-to-rank</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k148"><span class="src-n">148</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Google Sandbox — <a href="https://ahrefs.com/blog/google-sandbox/">ahrefs.com/…/google-sandbox</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k149"><span class="src-n">149</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — AI Overviews reduce clicks (güncelleme) — <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update">ahrefs.com/…/ai-overviews-reduce-clicks-update</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k150"><span class="src-n">150</span><span><span class="tag tag--info">3. taraf</span> Ahrefs — Ahrefs Webmaster Tools — <a href="https://ahrefs.com/webmaster-tools">ahrefs.com/webmaster-tools</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k151"><span class="src-n">151</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Google's 200 ranking factors — <a href="https://backlinko.com/google-ranking-factors">backlinko.com/google-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k152"><span class="src-n">152</span><span><span class="tag tag--info">3. taraf</span> Backlinko — On-Page SEO: The Definitive Guide (15 Eki 2026) — <a href="https://backlinko.com/on-page-seo">backlinko.com/on-page-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k153"><span class="src-n">153</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Core Web Vitals (Nis 2025) — <a href="https://backlinko.com/hub/seo/core-web-vitals">backlinko.com/…/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k154"><span class="src-n">154</span><span><span class="tag tag--info">3. taraf</span> Backlinko — Link Building (15 Eki 2026) — <a href="https://backlinko.com/link-building">backlinko.com/link-building</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k155"><span class="src-n">155</span><span><span class="tag tag--info">3. taraf</span> Semrush — 12 of the Biggest SEO Myths — <a href="https://www.semrush.com/blog/seo-myths/">semrush.com/…/seo-myths</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k156"><span class="src-n">156</span><span><span class="tag tag--info">3. taraf</span> Semrush — Search Intent (21 Kas 2024) — <a href="https://www.semrush.com/blog/search-intent/">semrush.com/…/search-intent</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k157"><span class="src-n">157</span><span><span class="tag tag--info">3. taraf</span> Semrush — JavaScript rendering for SEO (May 2024) — <a href="https://www.semrush.com/blog/js-rendering/">semrush.com/…/js-rendering</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k158"><span class="src-n">158</span><span><span class="tag tag--info">3. taraf</span> Semrush — Core Web Vitals (arama özeti üzerinden) — <a href="https://www.semrush.com/blog/core-web-vitals/">semrush.com/…/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k159"><span class="src-n">159</span><span><span class="tag tag--info">3. taraf</span> Yoast — How to use headings on your site (11 Ara 2025) — <a href="https://yoast.com/how-to-use-headings-on-your-site/">yoast.com/how-to-use-headings-on-your-site</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k160"><span class="src-n">160</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google says normal SEO works for AI Overviews, llms.txt won't be used — <a href="https://searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422">searchengineland.com/google-says-normal-seo-works-for-ranking-in-ai-overviews-and-llms-txt-wont-be-used-459422</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k161"><span class="src-n">161</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google quality raters & AI-generated content — <a href="https://searchengineland.com/google-quality-raters-content-ai-generated-454161">searchengineland.com/google-quality-raters-content-ai-generated-454161</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k162"><span class="src-n">162</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — March 2024 core update rollout is now complete — <a href="https://searchengineland.com/google-march-2024-core-update-rollout-is-now-complete-438713">searchengineland.com/google-march-2024-core-update-rollout-is-now-complete-438713</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k163"><span class="src-n">163</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google Search completely kills the cache feature — <a href="https://searchengineland.com/google-search-completely-kills-the-cache-feature-446904">searchengineland.com/google-search-completely-kills-the-cache-feature-446904</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k164"><span class="src-n">164</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Googlebot crawl rate tool is now gone — <a href="https://searchengineland.com/googlebot-crawl-rate-tool-is-now-gone-436382">searchengineland.com/googlebot-crawl-rate-tool-is-now-gone-436382</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k165"><span class="src-n">165</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google's URL Parameters tool is going away — <a href="https://searchengineland.com/googles-url-parameters-tool-is-going-away-383220">searchengineland.com/googles-url-parameters-tool-is-going-away-383220</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k166"><span class="src-n">166</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Search Console adds robots.txt report — <a href="https://searchengineland.com/google-search-console-adds-robots-txt-report-434708">searchengineland.com/google-search-console-adds-robots-txt-report-434708</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k167"><span class="src-n">167</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google no longer supports rel=next/prev — <a href="https://searchengineland.com/google-no-longer-supports-relnext-prev-314319">searchengineland.com/google-no-longer-supports-relnext-prev-314319</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k168"><span class="src-n">168</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Website migration checks — <a href="https://searchengineland.com/website-migration-checks-472260">searchengineland.com/website-migration-checks-472260</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k169"><span class="src-n">169</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — New crawl stats report (Kas 2020) — <a href="https://searchengineland.com/google-launches-new-crawl-stats-report-in-search-console-344113">searchengineland.com/google-launches-new-crawl-stats-report-in-search-console-344113</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k170"><span class="src-n">170</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google changed 76% of title tags in Q1 2025 — <a href="https://searchengineland.com/google-changed-76-of-title-tags-in-q1-2025-heres-what-that-means-454847">searchengineland.com/google-changed-76-of-title-tags-in-q1-2025-heres-what-that-means-454847</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k171"><span class="src-n">171</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — The Meta Keywords Tag Lives At Bing — <a href="https://searchengineland.com/the-meta-keywords-tag-lives-at-bing-why-only-spammers-should-use-it-96874">searchengineland.com/the-meta-keywords-tag-lives-at-bing-why-only-spammers-should-use-it-96874</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k172"><span class="src-n">172</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google won't index sites that do not work on mobile after July 5 — <a href="https://searchengineland.com/google-wont-index-sites-that-do-not-work-on-mobile-devices-after-july-5th-442851">searchengineland.com/google-wont-index-sites-that-do-not-work-on-mobile-devices-after-july-5th-442851</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k173"><span class="src-n">173</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Google officially drops Mobile Usability report and Mobile-Friendly Test — <a href="https://searchengineland.com/google-officially-drops-mobile-usability-report-mobile-friendly-test-tool-and-mobile-friendly-test-api-435377">searchengineland.com/google-officially-drops-mobile-usability-report-mobile-friendly-test-tool-and-mobile-friendly-test-api-435377</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k174"><span class="src-n">174</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Links are not a top 3 ranking factor (Illyes) — <a href="https://searchengineland.com/links-google-search-ranking-factor-gary-illyes-432422">searchengineland.com/links-google-search-ranking-factor-gary-illyes-432422</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k175"><span class="src-n">175</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Toxic links and disavows — <a href="https://searchengineland.com/toxic-links-disavows-seo-383324">searchengineland.com/toxic-links-disavows-seo-383324</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k176"><span class="src-n">176</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Bing updates its Webmaster Guidelines — <a href="https://searchengineland.com/bing-updates-its-webmaster-guidelines-336915">searchengineland.com/bing-updates-its-webmaster-guidelines-336915</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k177"><span class="src-n">177</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Business Profile chat and call history going away — <a href="https://searchengineland.com/google-business-profile-chat-and-call-history-going-away-442666">searchengineland.com/google-business-profile-chat-and-call-history-going-away-442666</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k178"><span class="src-n">178</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Business Profile performance insights — <a href="https://searchengineland.com/google-business-profile-performance-insights-what-you-need-to-know-436468">searchengineland.com/google-business-profile-performance-insights-what-you-need-to-know-436468</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k179"><span class="src-n">179</span><span><span class="tag tag--info">3. taraf</span> Search Engine Land — Local Services Ads in Europe — <a href="https://searchengineland.com/?p=341284">searchengineland.com</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k180"><span class="src-n">180</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google drops FAQ rich results (10 May 2026) — <a href="https://www.searchenginejournal.com/google-drops-faq-rich-results/574429/">searchenginejournal.com/…/574429</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k181"><span class="src-n">181</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google 404 status (Mueller) — <a href="https://www.searchenginejournal.com/google-404-status/254429/">searchenginejournal.com/…/254429</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k182"><span class="src-n">182</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Bing recommends lastmod tags for AI search indexing — <a href="https://www.searchenginejournal.com/bing-recommends-lastmod-tags-for-ai-search-indexing/552642/">searchenginejournal.com/…/552642</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k183"><span class="src-n">183</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Mueller: WordPress not inherently better for SEO (Ara 2022) — <a href="https://www.searchenginejournal.com/googles-john-mueller-wordpress-not-inherently-better-for-seo/474737/">searchenginejournal.com/…/474737</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k184"><span class="src-n">184</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google treats subdomains and subdirectories the same — <a href="https://www.searchenginejournal.com/google-treats-subdomains-subdirectories-john-mueller-says/254687/">searchenginejournal.com/…/254687</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k185"><span class="src-n">185</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — EMD update (algoritma tarihi) — <a href="https://www.searchenginejournal.com/google-algorithm-history/emd-update/">searchenginejournal.com/…/emd-update</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k186"><span class="src-n">186</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Domain name as a ranking factor — <a href="https://www.searchenginejournal.com/ranking-factors/domain-name/">searchenginejournal.com/…/domain-name</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k187"><span class="src-n">187</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — IP address as a ranking factor — <a href="https://www.searchenginejournal.com/ranking-factors/ip-address/">searchenginejournal.com/…/ip-address</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k188"><span class="src-n">188</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Does using a CDN improve ranking? — <a href="https://www.searchenginejournal.com/does-using-a-cdn-improve-ranking/453995/">searchenginejournal.com/…/453995</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k189"><span class="src-n">189</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Google: accessibility not a direct ranking factor — <a href="https://www.searchenginejournal.com/google-accessibility-not-a-direct-ranking-factor/443784/">searchenginejournal.com/…/443784</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k190"><span class="src-n">190</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Report that Cloudflare AI bot blocking prevents Googlebot from indexing sites (4 Ağu 2026) — <a href="https://www.searchenginejournal.com/report-that-cloudflare-ai-bot-blocking-prevents-googlebot-from-indexing-sites">searchenginejournal.com/report-that-cloudflare-ai-bot-blocking-prevents-googlebot-from-indexing-sites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k191"><span class="src-n">191</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Disavow tool doesn't work with Domain properties — <a href="https://www.searchenginejournal.com/googles-disavow-tool-doesnt-work-with-search-console-domain-properties/309703/">searchenginejournal.com/…/309703</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k192"><span class="src-n">192</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google: No AI system currently uses llms.txt — <a href="https://seroundtable.com/google-ai-llms-txt-39607.html">seroundtable.com/google-ai-llms-txt-39607.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k193"><span class="src-n">193</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google: Don't worry about bounce rate for SEO — <a href="https://seroundtable.com/google-bounce-rate-seo-31124.html">seroundtable.com/google-bounce-rate-seo-31124.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k194"><span class="src-n">194</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Site reputation abuse manual actions in EEA (Ağu 2026) — <a href="https://www.seroundtable.com/google-site-reputation-abuse-eea-41968.html">seroundtable.com/google-site-reputation-abuse-eea-41968.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k195"><span class="src-n">195</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — 404 vs 410 (Mueller, 2018) — <a href="https://seroundtable.com/404-410-google-15225.html">seroundtable.com/404-410-google-15225.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k196"><span class="src-n">196</span><span><span class="tag tag--info">3. taraf</span> Search Engine Roundtable — Google: We Don't Have A Concept Of Toxic Domains — <a href="https://seroundtable.com/google-toxic-domains-30056.html">seroundtable.com/google-toxic-domains-30056.html</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k197"><span class="src-n">197</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Google's AI summaries now swallow 58% of clicks — <a href="https://ppc.land/googles-ai-summaries-now-swallow-58-of-clicks-that-once-went-to-websites/">ppc.land/googles-ai-summaries-now-swallow-58-of-clicks-that-once-went-to-websites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k198"><span class="src-n">198</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Googlebot rulebook: 2 MB limits (Şub 2026) — <a href="https://ppc.land/google-rewrites-googlebots-rulebook-2mb-limits-ip-moves-and-what-crawlers-really-are/">ppc.land/google-rewrites-googlebots-rulebook-2mb-limits-ip-moves-and-what-crawlers-really-are</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k199"><span class="src-n">199</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Cloudflare drops planned Googlebot block (27 Eyl 2026) — <a href="https://ppc.land/cloudflare-drops-planned-googlebot-block-for-sites-refusing-ai-training/">ppc.land/cloudflare-drops-planned-googlebot-block-for-sites-refusing-ai-training</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k200"><span class="src-n">200</span><span><span class="tag tag--info">3. taraf</span> PPC Land — March 2026 spam update · June 2026 spam update — <a href="https://ppc.land/googles-march-2026-spam-update-is-live-what-changed-and-why-it-matters/">ppc.land/googles-march-2026-spam-update-is-live-what-changed-and-why-it-matters</a> · <a href="https://ppc.land/googles-june-2026-spam-update-is-live-what-it-hits-and-why-it-matters/">ppc.land/googles-june-2026-spam-update-is-live-what-it-hits-and-why-it-matters</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k201"><span class="src-n">201</span><span><span class="tag tag--info">3. taraf</span> PPC Land — Google quietly kills Q&amp;A for an AI button — <a href="https://ppc.land/google-quietly-kills-q-a-for-an-ai-button-most-wont-use/">ppc.land/google-quietly-kills-q-a-for-an-ai-button-most-wont-use</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k202"><span class="src-n">202</span><span><span class="tag tag--info">3. taraf</span> Whitespark — Local Search Ranking Factors 2026 — <a href="https://whitespark.ca/local-search-ranking-factors/">whitespark.ca/local-search-ranking-factors</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k203"><span class="src-n">203</span><span><span class="tag tag--info">3. taraf</span> Whitespark — GBP spam fighting 101 — <a href="https://whitespark.ca/google-business-profile-guide/gbp-spam-fighting-101/">whitespark.ca/…/gbp-spam-fighting-101</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k204"><span class="src-n">204</span><span><span class="tag tag--info">3. taraf</span> BrightLocal — Local Consumer Review Survey 2026 — <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">brightlocal.com/…/local-consumer-review-survey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k205"><span class="src-n">205</span><span><span class="tag tag--info">3. taraf</span> BrightLocal — New policies on shady review schemes — <a href="https://www.brightlocal.com/blog/new-policies-shady-review-schemes/">brightlocal.com/…/new-policies-shady-review-schemes</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k206"><span class="src-n">206</span><span><span class="tag tag--info">3. taraf</span> BrightLocal — Google Business Profile Q&amp;A — <a href="https://www.brightlocal.com/learn/google-business-profile-qa">brightlocal.com/…/google-business-profile-qa</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k207"><span class="src-n">207</span><span><span class="tag tag--info">3. taraf</span> BrightLocal — GBP suspension and reinstatement (2022) — <a href="https://www.brightlocal.com/learn/google-business-profile-suspension/">brightlocal.com/…/google-business-profile-suspension</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k208"><span class="src-n">208</span><span><span class="tag tag--info">3. taraf</span> Sterling Sky — Review jail for fake 5-star Google reviews — <a href="https://www.sterlingsky.ca/review-jail-for-fake-5-star-google-reviews/">sterlingsky.ca/review-jail-for-fake-5-star-google-reviews</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k209"><span class="src-n">209</span><span><span class="tag tag--info">3. taraf</span> Astute — Why was my Google Business Profile suspended — <a href="https://astute.co/resource/why-was-my-google-business-profile-suspended-how-to-appeal/">astute.co/…/why-was-my-google-business-profile-suspended-how-to-appeal</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k210"><span class="src-n">210</span><span><span class="tag tag--info">3. taraf</span> Fruition — How to manage Google My Business spam — <a href="https://fruition.net/blog/how-to-manage-google-my-business-spam">fruition.net/…/how-to-manage-google-my-business-spam</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k211"><span class="src-n">211</span><span><span class="tag tag--info">3. taraf</span> Bill Hartzer · TechRadar — business.site kapanışı — <a href="https://www.billhartzer.com/local-search/google-shutting-down-business-site-websites/">billhartzer.com/…/google-shutting-down-business-site-websites</a> · <a href="https://www.techradar.com/pro/google-is-shutting-down-websites-made-with-business-profiles">techradar.com/…/google-is-shutting-down-websites-made-with-business-profiles</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k212"><span class="src-n">212</span><span><span class="tag tag--info">3. taraf</span> TechRadar — Wix or WordPress: Google SEO expert weighs in — <a href="https://www.techradar.com/news/wix-or-wordpress-google-seo-expert-weighs-in-on-website-builder-battle">techradar.com/…/wix-or-wordpress-google-seo-expert-weighs-in-on-website-builder-battle</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k213"><span class="src-n">213</span><span><span class="tag tag--info">3. taraf</span> Intercom SEO Help · Local Visibility System — "Near me" optimizasyonu — <a href="https://intercom.help/seo-help/en/articles/8287822-should-i-optimize-for-near-me-keywords">intercom.help/…/8287822-should-i-optimize-for-near-me-keywords</a> · <a href="https://www.localvisibilitysystem.com/2018/01/29/how-to-rank-for-near-me-local-search-terms/">localvisibilitysystem.com/…/how-to-rank-for-near-me-local-search-terms</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k214"><span class="src-n">214</span><span><span class="tag tag--info">3. taraf</span> Piranha Digital — Google: SEO results take 4 months to a year (2017 videosu) — <a href="https://piranha-solutions.com/google-seo-results-take-4-months-year/">piranha-solutions.com/google-seo-results-take-4-months-year</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k215"><span class="src-n">215</span><span><span class="tag tag--info">3. taraf</span> ZEO — Google AI Mode and AI Overview finally live in Türkiye — <a href="https://zeo.org/resources/blog/google-ai-mode-and-ai-overview-finally-live-in-turkiye">zeo.org/…/google-ai-mode-and-ai-overview-finally-live-in-turkiye</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k216"><span class="src-n">216</span><span><span class="tag tag--info">3. taraf</span> ZEO — The impact of &amp;num=100 parameter removal on SEO reporting — <a href="https://zeo.org/resources/blog/the-impact-of-num-100-parameter-removal-on-seo-reporting">zeo.org/…/the-impact-of-num-100-parameter-removal-on-seo-reporting</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k217"><span class="src-n">217</span><span><span class="tag tag--info">3. taraf</span> Marie Haynes — Google quality raters now rate AI Overviews — <a href="https://www.mariehaynes.com/google-quality-raters-now-rate-ai-overviews/">mariehaynes.com/google-quality-raters-now-rate-ai-overviews</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k218"><span class="src-n">218</span><span><span class="tag tag--info">3. taraf</span> Brafton — Google's March 2026 core update has finished rolling out — <a href="https://www.brafton.com.au/blog/seo/googles-march-2026-core-update-has-finished-rolling-out/">brafton.com.au/…/googles-march-2026-core-update-has-finished-rolling-out</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k219"><span class="src-n">219</span><span><span class="tag tag--info">3. taraf</span> Seer Interactive — Forbes cites Seer research on AI Overviews — <a href="https://www.seerinteractive.com/news/forbes-cites-seer-interactive-research-on-ai-overviews">seerinteractive.com/…/forbes-cites-seer-interactive-research-on-ai-overviews</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k220"><span class="src-n">220</span><span><span class="tag tag--info">3. taraf</span> Whole Whale — Pew Research ve AI Overviews · Bing AI analytics — <a href="https://wholewhale.com/resources/googles-gaslighting-pew-research-confirms-what-seos-already-know-about-ai-overviews/">wholewhale.com/…/googles-gaslighting-pew-research-confirms-what-seos-already-know-about-ai-overviews</a> · <a href="https://wholewhale.com/resources/bing-webmaster-analytics-for-ai-search-is-sobering/">wholewhale.com/…/bing-webmaster-analytics-for-ai-search-is-sobering</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k221"><span class="src-n">221</span><span><span class="tag tag--info">3. taraf</span> Search Influence — Bing AI Performance Report — <a href="https://www.searchinfluence.com/blog/bing-ai-performance-report-copilot-citations/">searchinfluence.com/…/bing-ai-performance-report-copilot-citations</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k222"><span class="src-n">222</span><span><span class="tag tag--info">3. taraf</span> eSEOspace — Bing Webmaster Tools and IndexNow for AI search — <a href="https://eseospace.com/blog/bing-webmaster-tools-indexnow-ai-search/">eseospace.com/…/bing-webmaster-tools-indexnow-ai-search</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k223"><span class="src-n">223</span><span><span class="tag tag--info">3. taraf</span> SE Ranking — Navboost: what the docs tell us — <a href="https://seranking.com/blog/navboost/">seranking.com/…/navboost</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k224"><span class="src-n">224</span><span><span class="tag tag--info">3. taraf</span> JC Chouinard — Google DOJ trial documents — <a href="https://www.jcchouinard.com/google-doj-trial-documents/">jcchouinard.com/google-doj-trial-documents</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k225"><span class="src-n">225</span><span><span class="tag tag--info">3. taraf</span> Dejan Marketing — SEO myth busted: bounce to results — <a href="https://dejanmarketing.com/seo-myth-busted-bounce-to-results-is-a-negative-signal/">dejanmarketing.com/seo-myth-busted-bounce-to-results-is-a-negative-signal</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k226"><span class="src-n">226</span><span><span class="tag tag--info">3. taraf</span> Practical Ecommerce — Domain age and other SEO myths · SEO checklist for redesigns — <a href="https://www.practicalecommerce.com/domain-age-impacts-rankings-and-8-other-seo-myths">practicalecommerce.com/domain-age-impacts-rankings-and-8-other-seo-myths</a> · <a href="https://www.practicalecommerce.com/seo-checklist-for-website-redesigns-and-replatforms">practicalecommerce.com/seo-checklist-for-website-redesigns-and-replatforms</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k227"><span class="src-n">227</span><span><span class="tag tag--info">3. taraf</span> SearchFacts — URL trailing slash — <a href="https://searchfacts.com/url-trailing-slash/">searchfacts.com/url-trailing-slash</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k228"><span class="src-n">228</span><span><span class="tag tag--info">3. taraf</span> DebugBear — Googlebot crawler file size limit — <a href="https://www.debugbear.com/blog/googlebot-crawler-file-size-limit">debugbear.com/…/googlebot-crawler-file-size-limit</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k229"><span class="src-n">229</span><span><span class="tag tag--info">3. taraf</span> Vercel / MERJ — How Google handles JavaScript throughout the indexing process (Nis 2024) — <a href="https://vercel.com/blog/how-google-handles-javascript-throughout-the-indexing-process">vercel.com/…/how-google-handles-javascript-throughout-the-indexing-process</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k230"><span class="src-n">230</span><span><span class="tag tag--info">3. taraf</span> Vercel — The rise of the AI crawler (Ara 2024) — <a href="https://vercel.com/blog/the-rise-of-the-ai-crawler">vercel.com/…/the-rise-of-the-ai-crawler</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k231"><span class="src-n">231</span><span><span class="tag tag--info">3. taraf</span> Conductor · HubSpot — Topic clusters and pillar pages — <a href="https://www.conductor.com/academy/topic-clusters">conductor.com/…/topic-clusters</a> · <a href="https://blog.hubspot.com/marketing/topic-clusters-seo">blog.hubspot.com/…/topic-clusters-seo</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k232"><span class="src-n">232</span><span><span class="tag tag--info">3. taraf</span> Infidigit — Alt text does not impact web search rankings (Mar 2022) — <a href="https://www.infidigit.com/news/alt-text-does-not-impact-web-search-rankings-says-google/">infidigit.com/…/alt-text-does-not-impact-web-search-rankings-says-google</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k233"><span class="src-n">233</span><span><span class="tag tag--info">3. taraf</span> MIT Technology Review — Cloudflare will now block AI bots by default (1 Tem 2025) — <a href="https://www.technologyreview.com/2025/07/01/1119498/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites/">technologyreview.com/…/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k234"><span class="src-n">234</span><span><span class="tag tag--info">3. taraf</span> TechWyse — Google AI Search Optimization Guide + Lighthouse llms.txt · FAQ rich results deprecated — <a href="https://www.techwyse.com/news/ai-search/google-ai-search-optimization-guide-llms-txt-lighthouse-audit">techwyse.com/…/google-ai-search-optimization-guide-llms-txt-lighthouse-audit</a> · <a href="https://www.techwyse.com/news/ai-search/google-faq-rich-results-deprecated-2026">techwyse.com/…/google-faq-rich-results-deprecated-2026</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k235"><span class="src-n">235</span><span><span class="tag tag--info">3. taraf</span> The SEO Framework — Twitter Cards and X sharing — <a href="https://kb.theseoframework.com/kb/twitter-cards-and-x-sharing/">kb.theseoframework.com/…/twitter-cards-and-x-sharing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k236"><span class="src-n">236</span><span><span class="tag tag--info">3. taraf</span> Screaming Frog — SEO Spider pricing — <a href="https://www.screamingfrog.co.uk/seo-spider/pricing/">screamingfrog.co.uk/…/pricing</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k237"><span class="src-n">237</span><span><span class="tag tag--info">3. taraf</span> StatCounter — Search engine market share — Turkey (tüm cihazlar · mobil) — <a href="https://gs.statcounter.com/search-engine-market-share/all/turkey">gs.statcounter.com/…/turkey</a> · <a href="https://gs.statcounter.com/search-engine-market-share/mobile/turkey">gs.statcounter.com/…/turkey</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k238"><span class="src-n">238</span><span><span class="tag tag--info">3. taraf</span> Scalefusion — Apple Business: everything you need to know — <a href="https://blog.scalefusion.com/apple-business-everything-you-need-to-know/">blog.scalefusion.com/apple-business-everything-you-need-to-know</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+        <h3 id="kaynak-turkce">Türkçe kaynaklar</h3>
+        <ol class="sources" start="239">
+          <li id="k239"><span class="src-n">239</span><span><span class="tag tag--info">3. taraf</span> Techsy — SEO Rehberi 2026 (satış amaçlı; rakamların çoğu kaynaksız, yalnız püf noktası taraması için) — <a href="https://techsy.io/tr/blog/seo-rehberi-2026">techsy.io/…/seo-rehberi-2026</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k240"><span class="src-n">240</span><span><span class="tag tag--info">3. taraf</span> İdeaSoft — Başlık etiketleri (H1–H6) rehberi (27 Oca 2026) — <a href="https://www.ideasoft.com.tr/baslik-ve-baslik-etiketlerinin-kullanimlari/">ideasoft.com.tr/baslik-ve-baslik-etiketlerinin-kullanimlari</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k241"><span class="src-n">241</span><span><span class="tag tag--info">3. taraf</span> Hostragons — Site içi SEO kriterleri: başlık, meta açıklaması, alt etiketleri — <a href="https://www.hostragons.com/blog/site-ici-on-page-seo-kriterleri-baslik-meta-aciklamasi-alt-etiketleri/">hostragons.com/…/site-ici-on-page-seo-kriterleri-baslik-meta-aciklamasi-alt-etiketleri</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k242"><span class="src-n">242</span><span><span class="tag tag--info">3. taraf</span> Ticimax — Nofollow ve noindex nedir — <a href="https://www.ticimax.com/blog/nofollow-ve-noindex-nedir">ticimax.com/…/nofollow-ve-noindex-nedir</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k243"><span class="src-n">243</span><span><span class="tag tag--info">3. taraf</span> Sitechecker — robots.txt yapılandırma — <a href="https://sitechecker.pro/tr/configure-robots-txt/">sitechecker.pro/…/configure-robots-txt</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k244"><span class="src-n">244</span><span><span class="tag tag--info">3. taraf</span> Zeo — Google'ın site hızındaki karar ölçeği: Core Web Vitals (Ara 2021; FID kısmı eskimiş) — <a href="https://zeo.org/tr/kaynaklar/blog/googlein-site-hizindaki-karar-olcegi-core-web-vitals">zeo.org/…/googlein-site-hizindaki-karar-olcegi-core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k245"><span class="src-n">245</span><span><span class="tag tag--info">3. taraf</span> Natro — Core Web Vitals (CWV) nedir? (arama özeti üzerinden) — <a href="https://www.natro.com/blog/core-web-vitals-cwv-nedir-sayfa-performansi-nasil-iyilestirilir/">natro.com/…/core-web-vitals-cwv-nedir-sayfa-performansi-nasil-iyilestirilir</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k246"><span class="src-n">246</span><span><span class="tag tag--info">3. taraf</span> Bravery Technology — Yerel SEO Rehberi 2026 — <a href="https://braverytechnology.com/tr/yerel-seo-rehberi/">braverytechnology.com/…/yerel-seo-rehberi</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k247"><span class="src-n">247</span><span><span class="tag tag--info">3. taraf</span> Webtekno — Kasım 2025 en çok kullanılan arama motorları — <a href="https://www.webtekno.com/kasim-2025-en-cok-kullanilan-arama-motorlari-h206443">webtekno.com/kasim-2025-en-cok-kullanilan-arama-motorlari-h206443</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k248"><span class="src-n">248</span><span><span class="tag tag--info">3. taraf</span> Dünya · Takvim · Ekonomist — Ticaret Bakanlığı sahte yorum ve yanıltıcı reklam yaptırımları (haber; Resmî Gazete metni ayrıca doğrulanmalı) — <a href="https://www.dunya.com/ekonomi/ticaret-bakanligi-acikladi-sahte-yorumlara-yaptirim-uygulanacak-haberi-842114">dunya.com/…/ticaret-bakanligi-acikladi-sahte-yorumlara-yaptirim-uygulanacak-haberi-842114</a> · <a href="https://www.takvim.com.tr/guncel/2026/07/27/aldatici-reklamlarla-mucadelede-yeni-donem">takvim.com.tr/…/aldatici-reklamlarla-mucadelede-yeni-donem</a> · <a href="https://www.ekonomist.com.tr/gundem/sahte-isletme-adi-engellenen-yorum-yaniltici-gorsel-ticaret-bakanligindan-yaniltici-reklamlara-milyonluk-ceza-77925">ekonomist.com.tr/…/sahte-isletme-adi-engellenen-yorum-yaniltici-gorsel-ticaret-bakanligindan-yaniltici-reklamlara-milyonluk-ceza-77925</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+        </ol>
+  
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi">
+        <a class="prev" href="19-kontrol-listesi.html"><span class="dir">&larr; Önceki</span><span class="ttl">Kontrol listesi</span></a>
+        <a class="next" href="21-kara-sapka.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Kara şapka teknikleri: tanı, korun, temizle</span></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>
