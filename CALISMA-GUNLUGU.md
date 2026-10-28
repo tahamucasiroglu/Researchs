@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Ekim 2026
 
+- **29.10.2026** — İngilizce: dil bilgisini deftere yazarak çalışmak için 34 sayfalık defter rehberi (formül kutuları, sık hatalar, cevapları gizli alıştırmalar, tek sayfa özet, 4/8 haftalık plan; British Council, Cambridge ve Oxford ile karşılaştırıldı) → [Ingilizce/08-defter-calisma](Dil/Ingilizce/08-defter-calisma/)
 - **29.10.2026** — Mülakat hazırlığı rehberi (.NET / C# backend): mülakat türleri ve online test, teknik soru–cevaplar, algoritma ve sistem tasarımı, davranışsal ve İngilizce kalıplar, maaş ilkeleri, kontrol listesi → [Rehberler/Mulakat-Hazirligi](Rehberler/Mulakat-Hazirligi/)
 - **29.10.2026** — SQL mülakat rehberi: JOIN'lerde kaç satır gelir, NULL mantığı, gruplama, window fonksiyonları, klasik sorular, SQLite notları ve lehçe farkları (örnek sorgular SQLite 3.50.4'te çalıştırıldı) → [Rehberler/SQL-Mulakat](Rehberler/SQL-Mulakat/)
 - **21.10.2026** — SEO rehberi (21 bölüm): Google'ın tarama ve dizine eklemesi, sayfa içi ve teknik SEO, yerel SEO, Yandex/Bing/IndexNow ve yapay zekâ araması, site denetimi ve kara şapkadan korunma; HTML + yapay zekâ için arastirma.md → [Rehberler/SEO](Rehberler/SEO/)

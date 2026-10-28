@@ -11,6 +11,7 @@
 5. [Cümle Yapıları](05-cumle-yapilari/) — Soru ve olumsuz cümle, passive voice, conditionals, relative clauses ve reported speech.
 6. [Diğer Yapılar](06-diger-yapilar/) — Artikeller, edatlar, gerund-infinitive, karşılaştırma, sayılabilirlik, phrasal verbs ve yazılım İngilizcesi eki.
 7. [Çalışma Yol Haritası](07-yol-haritasi/) — Konuların hangi sırayla çalışılacağı, dört beceri teknikleri, CEFR seviyeleri, kaynak türleri ve ilerlemeyi ölçme.
+8. [Defter Çalışma Rehberi](08-defter-calisma/) — Aynı konuları deftere yazarak çalışmak için 34 sayfalık rehber: her konuda formül kutusu, sık hatalar, karıştırılan çiftler ve cevapları gizli alıştırma; tek sayfa özet ve 4/8 haftalık plan.
 
 HTML anlatım: [index.html](index.html) — yerelde tarayıcıda açılır.
 

@@ -19,7 +19,7 @@ Dil bilgisini Türkçe anlatımla ve "denklem" mantığıyla (kalıp = öğe + �
 | Bölüm | Açıklama |
 |---|---|
 | [Türkçe](Dil/Turkce/) | Ses ve ekten başlayıp sözcük türleri, fiil, cümle öğeleri, yazım-noktalama ve anlatım bozukluklarına kadar 9 bölümde Türkçe dil bilgisi. |
-| [İngilizce](Dil/Ingilizce/) | Türkçe anlatımla İngilizce dil bilgisi: temel cümle denklemi, sözcük türleri, 12 zaman, modals, cümle yapıları ve seviyene (CEFR) göre çalışma yol haritası. |
+| [İngilizce](Dil/Ingilizce/) | Türkçe anlatımla İngilizce dil bilgisi: temel cümle denklemi, sözcük türleri, 12 zaman, modals, cümle yapıları, seviyene (CEFR) göre çalışma yol haritası ve aynı konuları deftere yazarak çalışmak için 34 sayfalık defter rehberi. |
 
 ### [Programlama](Programlama/)
 

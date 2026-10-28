@@ -5,7 +5,7 @@
 ## İçindekiler
 
 - [Türkçe](Turkce/) — Türkçe dil bilgisi sıfırdan: ses ve ekten başlayıp fiil, çatı, cümle öğeleri, yazım-noktalama ve anlatım bozukluklarına kadar 9 konu. İngilizceye geçmeden önce okunması önerilir.
-- [İngilizce](Ingilizce/) — İngilizce dil bilgisi Türkçe anlatımla: temel cümle denklemi, sözcük türleri, 12 zaman, modal fiiller, cümle yapıları ve çalışma yol haritası (7 konu).
+- [İngilizce](Ingilizce/) — İngilizce dil bilgisi Türkçe anlatımla: temel cümle denklemi, sözcük türleri, 12 zaman, modal fiiller, cümle yapıları, çalışma yol haritası ve aynı konuları deftere yazarak çalışmak için 34 sayfalık defter rehberi (8 konu).
 
 HTML anlatım: [index.html](index.html) — dosyayı yerelde tarayıcıda açarak okuyabilirsin (GitHub HTML'i işlemez).
 

@@ -38,6 +38,7 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — aynı içerik tek d
 - [C# / .NET](../../Programlama/CSharp-DotNet/) — 10 bölümlük anahtar liste; bu rehberdeki her teknik bölüm ilgili alt sayfanın başlığına bağlanır.
 - [İşsizlik → İş Arama ve Piyasa](../Issizlik/07-is-arama.html) — Mülakat başlıkları, canlı kodlama, sistem tasarımı, İngilizce mülakat (§ 6), maaş pazarlığı (§ 7), maaş ölçümü (§ 2), özgeçmiş (§ 5).
 - [İngilizce → Diğer Yapılar](../../Dil/Ingilizce/06-diger-yapilar/) — Sonundaki yazılım İngilizcesi eki; İngilizce mülakat kalıplarını kurarken dil bilgisi desteği.
+- [İngilizce → Defter Çalışma Rehberi](../../Dil/Ingilizce/08-defter-calisma/) — Konu 32 (e-posta, toplantı, stand-up ve code review kalıpları) ve Konu 13 (soru yapıları); İngilizce mülakat cümlelerinin dil bilgisi tarafı.
 
 ## Kaynakça
 

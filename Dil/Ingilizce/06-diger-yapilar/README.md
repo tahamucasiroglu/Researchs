@@ -25,6 +25,7 @@ HTML anlatım: [index.html](index.html) — yerelde tarayıcıda açılır.
 ## İlgili konular
 
 - [Mülakat Hazırlığı → İngilizce teknik mülakat](../../../Rehberler/Mulakat-Hazirligi/06-davranissal-ve-ingilizce.html#ingilizce) — Kendini tanıtma, soruyu netleştirme, düşünürken zaman kazanma ve "bilmiyorum ama…" kalıpları; yazılım İngilizcesi ekinin mülakattaki kullanımı.
+- [Defter Çalışma Rehberi → 32 İş İngilizcesi](../08-defter-calisma/32-is-ingilizcesi.html) — Yazılım İngilizcesi ekinin e-posta, toplantı, stand-up ve code review kalıplarıyla defter sürümü.
 
 ## Kaynak
 

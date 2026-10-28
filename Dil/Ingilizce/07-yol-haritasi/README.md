@@ -26,6 +26,10 @@ Okuma, yazma, dinleme ve konuşma becerileri için teknik listesi, yazılımcıl
 
 HTML anlatım: [index.html](index.html) — yerelde tarayıcıda açılır.
 
+## İlgili konular
+
+- [Defter Çalışma Rehberi → 4/8 haftalık plan](../08-defter-calisma/34-calisma-plani.html) — Seviyeye göre başlangıç tablosu ve gün gün plan; yol haritasındaki aşamaları deftere yazarak uygulamak için.
+
 ## Kaynak
 
 - [BTK Akademi](https://www.btkakademi.gov.tr/) — Türkçe anlatımlı, ücretsiz çevrim içi kurslar; başlangıç kaynağı.
