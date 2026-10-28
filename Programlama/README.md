@@ -24,7 +24,7 @@ HTML genel bakış sayfası şu konuları işler:
 1. Bu dosya nasıl kullanılır (amaca göre giriş noktası, rozetlerin anlamı)
 2. Bölümler, hedefe göre hangi bölümün temel olduğu ve tüm sayfaların haritası
 3. Başlangıç noktasına göre önerilen öğrenme sıraları (hiç bilmeyen; C#, Java, JS/TS, Python veya başka dilden gelen; mobil hedefleyen) ve gerekçesi
-4. Mülakatta sık sorulanlar (.NET backend'e göre derecelendirilmiş; diğer hedefler ve kıdem için okuma kılavuzu)
+4. Mülakatta sık sorulanlar (.NET backend'e göre derecelendirilmiş; diğer hedefler ve kıdem için okuma kılavuzu). Soru → kısa cevap hazırlık için: [Mülakat Hazırlığı](../Rehberler/Mulakat-Hazirligi/) · [SQL Mülakat Rehberi](../Rehberler/SQL-Mulakat/)
 5. Python, Go ve Rust karşılaştırması
 6. Çalışma yöntemi
 7. İlerleme takibi

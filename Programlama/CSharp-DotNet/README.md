@@ -17,6 +17,10 @@ C# ve .NET ekosistemi için bir "anahtar liste": her bölüm, bir alanda neyin a
 
 HTML anlatım: [index.html](index.html) — genel bakış ve önerilen çalışma sırası (yerelde tarayıcıda açılır).
 
+## İlgili konular
+
+- [Mülakat Hazırlığı](../../Rehberler/Mulakat-Hazirligi/) — Bu anahtar listenin mülakat soru–cevap hâli; rehberin her teknik bölümü buradaki ilgili alt sayfanın başlığına bağlanır.
+
 ## Kaynaklar
 
 - [.NET dokümantasyonu (Microsoft Learn)](https://learn.microsoft.com/dotnet/)

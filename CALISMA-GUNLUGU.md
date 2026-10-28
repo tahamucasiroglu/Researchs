@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Ekim 2026
 
+- **29.10.2026** — Mülakat hazırlığı rehberi (.NET / C# backend): mülakat türleri ve online test, teknik soru–cevaplar, algoritma ve sistem tasarımı, davranışsal ve İngilizce kalıplar, maaş ilkeleri, kontrol listesi → [Rehberler/Mulakat-Hazirligi](Rehberler/Mulakat-Hazirligi/)
 - **29.10.2026** — SQL mülakat rehberi: JOIN'lerde kaç satır gelir, NULL mantığı, gruplama, window fonksiyonları, klasik sorular, SQLite notları ve lehçe farkları (örnek sorgular SQLite 3.50.4'te çalıştırıldı) → [Rehberler/SQL-Mulakat](Rehberler/SQL-Mulakat/)
 - **21.10.2026** — SEO rehberi (21 bölüm): Google'ın tarama ve dizine eklemesi, sayfa içi ve teknik SEO, yerel SEO, Yandex/Bing/IndexNow ve yapay zekâ araması, site denetimi ve kara şapkadan korunma; HTML + yapay zekâ için arastirma.md → [Rehberler/SEO](Rehberler/SEO/)
 - **15.10.2026** — LinkedIn ile giriş yapan kullanıcının CV/profil verisini alma yolları (OIDC, DMA taşınabilirlik, Verified on LinkedIn, Talent, dışa aktarım) → [API/Sosyal-Medya/LinkedIn](API/Sosyal-Medya/LinkedIn.md)

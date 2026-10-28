@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veri yapıları, algoritma ve sistem tasarımı — Mülakat Hazırlığı</title>
+<meta name="description" content="Big-O, List/Dictionary/HashSet/Queue/Stack karmaşıklıkları, 10 klasik kodlama sorusu C# ile, URL kısaltıcı sistem tasarımı iskeleti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  .content .kod { margin: 1rem 0 1.3rem; }
+  .content .kod-ust { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); background: var(--paper-sink); border: 1px solid var(--rule); border-bottom: 0; border-radius: var(--radius) var(--radius) 0 0; padding: .35rem .8rem; }
+  .content pre { margin: 0; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 0 0 var(--radius) var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content table.data td:first-child { min-width: 11rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Veri yapıları, algoritma ve sistem tasarımı</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">Mülakat Hazırlığı</span>
+      <span class="brand__sub">.NET / C# backend · soru → kısa cevap</span>
+    </a>
+    <nav aria-label="Bölümler">
+<div class="nav-group"><div class="nav-group__title">Başlangıç</div><ul class="nav-list"><li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>Genel bakış, mülakat türleri ve süreç</span></a></li></ul></div>
+<div class="nav-group"><div class="nav-group__title">Teknik</div><ul class="nav-list"><li><a class="nav-item" href="01-csharp-dili.html"><span class="nav-num">01</span><span>C# dili</span></a></li><li><a class="nav-item" href="02-oop-solid-desenler.html"><span class="nav-num">02</span><span>OOP, SOLID, mimari ve desenler</span></a></li><li><a class="nav-item" href="03-aspnet-core-ef-core.html"><span class="nav-num">03</span><span>ASP.NET Core, EF Core ve SQL özeti</span></a></li><li><a class="nav-item" href="04-dagitik-test-git.html"><span class="nav-num">04</span><span>Dağıtık sistemler, test ve Git</span></a></li><li><a class="nav-item" href="05-algoritma-sistem-tasarimi.html" aria-current="page"><span class="nav-num">05</span><span>Veri yapıları, algoritma ve sistem tasarımı</span></a></li></ul></div>
+<div class="nav-group"><div class="nav-group__title">İnsan tarafı</div><ul class="nav-list"><li><a class="nav-item" href="06-davranissal-ve-ingilizce.html"><span class="nav-num">06</span><span>Davranışsal sorular ve İngilizce mülakat</span></a></li><li><a class="nav-item" href="07-kapanis-maas-kontrol.html"><span class="nav-num">07</span><span>Sona sorular, maaş ve kontrol listesi</span></a></li></ul></div>
+<div class="nav-group"><div class="nav-group__title">Tekrar</div><ul class="nav-list"><li><a class="nav-item" href="08-son-gece.html"><span class="nav-num">08</span><span>Son gece hızlı tekrar</span></a></li></ul></div>
+<div class="nav-group"><div class="nav-group__title">Bağlantılı rehberler</div><ul class="nav-list">
+<li><a class="nav-item" href="../SQL-Mulakat/index.html"><span class="nav-num">&rarr;</span><span>SQL mülakat rehberi</span></a></li>
+<li><a class="nav-item" href="../../Programlama/index.html#mulakatta-sik"><span class="nav-num">&rarr;</span><span>Programlama · Mülakatta sık sorulanlar</span></a></li>
+<li><a class="nav-item" href="../../Programlama/CSharp-DotNet/index.html"><span class="nav-num">&rarr;</span><span>C# / .NET anahtar listesi</span></a></li>
+<li><a class="nav-item" href="../Issizlik/07-is-arama.html#mulakat"><span class="nav-num">&rarr;</span><span>İş arama · mülakat ve pazarlık</span></a></li>
+<li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+</ul></div>
+    </nav>
+    <div class="sidebar__foot">Bilgiler 29 Ekim 2026 itibarıyla .NET 10 (LTS) ve C# 14'e göre learn.microsoft.com'dan kontrol edildi. Kısa cevaplar ezber için değil, konuşmanın iskeleti içindir.</div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Bölüm 05 · Teknik</div>
+        <h1 class="page-title">Algoritma soruları ve <em>sistem tasarımı</em> iskeleti</h1>
+        <p class="lede">Big-O tablosu, .NET koleksiyonlarının karmaşıklıkları, sık sorulan 10 kodlama sorusunun kısa C# çözümü ve "URL kısaltıcı tasarla" tipi bir soruya adım adım cevap iskeleti.</p>
+        <div class="head-meta">≈ 35 dk &middot; 29 Ekim 2026</div>
+      </header>
+
+      <div class="content">
+<h2 id="big-o"><span class="h-num">§ 1</span>Big-O</h2>
+<p>Big-O, girdi büyüdükçe çalışma süresinin (veya belleğin) <strong>en kötü durumda nasıl büyüdüğünü</strong> gösterir; sabitler atılır.</p>
+<div class="tablewrap"><table class="data"><thead><tr><th>Karmaşıklık</th><th>Ad</th><th>Örnek</th></tr></thead><tbody><tr><td>O(1)</td><td>Sabit</td><td>Dizide indeksle erişim, <code>Dictionary</code> araması (ortalama)</td></tr><tr><td>O(log n)</td><td>Logaritmik</td><td>İkili arama, dengeli ağaç (<code>SortedDictionary</code>)</td></tr><tr><td>O(n)</td><td>Doğrusal</td><td>Tek döngü, <code>List.Contains</code></td></tr><tr><td>O(n log n)</td><td>Doğrusal-logaritmik</td><td>İyi sıralama algoritmaları (<code>Array.Sort</code>, <code>OrderBy</code>)</td></tr><tr><td>O(n²)</td><td>Karesel</td><td>İç içe iki döngü, kabarcık sıralama</td></tr><tr><td>O(2ⁿ)</td><td>Üstel</td><td>Önbelleksiz özyinelemeli Fibonacci, tüm alt kümeler</td></tr><tr><td>O(n!)</td><td>Faktöriyel</td><td>Tüm permütasyonlar</td></tr></tbody></table></div>
+<div class="tablewrap"><table class="data"><thead><tr><th>Soru</th><th>Kısa cevap</th></tr></thead><tbody><tr><td>Zaman ve alan karmaşıklığı?</td><td>Zaman: adım sayısının büyümesi. Alan: <strong>ek</strong> belleğin büyümesi. Çoğu iyileştirme alan karşılığı zaman kazandırır (ör. <code>HashSet</code> ile O(n²) → O(n)).</td></tr><tr><td>Amortized O(1) ne demek?</td><td><code>List.Add</code> çoğu zaman O(1); kapasite dolunca dizi iki katına kopyalanır (O(n)), ama <strong>ortalama</strong> O(1).</td></tr><tr><td><code>Array.Sort</code> hangi algoritma?</td><td>.NET <strong>introsort</strong> kullanır (quicksort + heapsort + insertion sort), O(n log n), kararsız. <code>OrderBy</code> (LINQ) <strong>kararlı</strong>.</td></tr></tbody></table></div>
+<h2 id="koleksiyonlar"><span class="h-num">§ 2</span>.NET koleksiyonları</h2>
+<div class="tablewrap"><table class="data"><thead><tr><th>Koleksiyon</th><th>Ekleme</th><th>Silme</th><th>Arama / erişim</th><th>Not</th></tr></thead><tbody><tr><td><code>T[]</code> (dizi)</td><td>—</td><td>—</td><td>İndeks O(1), değer O(n)</td><td>Sabit boyut</td></tr><tr><td><code>List&lt;T&gt;</code></td><td>Sona O(1)*, araya O(n)</td><td>O(n)</td><td>İndeks O(1), <code>Contains</code> O(n)</td><td>*amortized; varsayılan seçim</td></tr><tr><td><code>Dictionary&lt;K,V&gt;</code></td><td>O(1)*</td><td>O(1)*</td><td>Anahtar O(1)*</td><td>*ortalama, en kötü O(n); sıra garanti değil</td></tr><tr><td><code>HashSet&lt;T&gt;</code></td><td>O(1)*</td><td>O(1)*</td><td><code>Contains</code> O(1)*</td><td>Benzersizlik, küme işlemleri</td></tr><tr><td><code>SortedDictionary&lt;K,V&gt;</code></td><td>O(log n)</td><td>O(log n)</td><td>O(log n)</td><td>Kırmızı-siyah ağaç, sıralı</td></tr><tr><td><code>Queue&lt;T&gt;</code></td><td><code>Enqueue</code> O(1)*</td><td><code>Dequeue</code> O(1)</td><td><code>Peek</code> O(1)</td><td>FIFO; BFS</td></tr><tr><td><code>Stack&lt;T&gt;</code></td><td><code>Push</code> O(1)*</td><td><code>Pop</code> O(1)</td><td><code>Peek</code> O(1)</td><td>LIFO; parantez, geri al, DFS</td></tr><tr><td><code>LinkedList&lt;T&gt;</code></td><td>Baş/son O(1)</td><td>Düğüm verilirse O(1)</td><td>O(n)</td><td>Nadiren gerekir</td></tr><tr><td><code>PriorityQueue&lt;E,P&gt;</code></td><td>O(log n)</td><td><code>Dequeue</code> O(log n)</td><td><code>Peek</code> O(1)</td><td>.NET 6+; en küçük öncelik önce</td></tr></tbody></table></div>
+<div class="tablewrap"><table class="data"><thead><tr><th>Soru</th><th>Kısa cevap</th></tr></thead><tbody><tr><td>Dictionary nasıl O(1)? <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td>Anahtarın <code>GetHashCode()</code>'u ile <strong>kova (bucket)</strong> seçilir, çakışmada <code>Equals</code> ile karşılaştırılır. Kötü hash (hep aynı değer) → O(n).</td></tr><tr><td>Array mi List mi?</td><td>Boyut sabit ve performans kritikse dizi; diğer her durumda <code>List&lt;T&gt;</code>.</td></tr><tr><td>Thread-safe sözlük?</td><td><code>ConcurrentDictionary&lt;K,V&gt;</code>; okuma ağırlıklı, değişmeyen veri için <code>FrozenDictionary</code> (.NET 8).</td></tr></tbody></table></div>
+<h2 id="kodlama"><span class="h-num">§ 3</span>Sık sorulan 10 kodlama sorusu</h2>
+<p>Genel taktik: önce kaba çözümü söyle, sonra <strong>Dictionary/HashSet</strong> veya <strong>iki işaretçi</strong> ile iyileştir; karmaşıklığı belirt. Ayrıntılı taktikler: <a href="../Issizlik/07-is-arama.html#mulakat">İş arama § 6.2</a> ve <a href="index.html#online-test">online test</a>.</p>
+<h3>1. İki toplam (Two Sum) <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p>Dizide toplamı hedefe eşit iki elemanın indeksleri. Kaba: iç içe döngü O(n²). İyi: gördüklerini sözlükte tut, O(n) zaman, O(n) alan.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static (int, int)? IkiToplam(int[] dizi, int hedef)
+{
+    var gorulen = new Dictionary&lt;int, int&gt;();           // değer -&gt; indeks
+    for (int i = 0; i &lt; dizi.Length; i++)
+    {
+        if (gorulen.TryGetValue(hedef - dizi[i], out int j)) return (j, i);
+        gorulen[dizi[i]] = i;
+    }
+    return null;
+}</code></pre></div>
+<h3>2. Palindrom <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p>İki işaretçi baştan ve sondan; harf/rakam olmayanları atla, büyük-küçük harf yok say. O(n) zaman, O(1) alan.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static bool PalindromMu(string s)
+{
+    int i = 0, j = s.Length - 1;
+    while (i &lt; j)
+    {
+        if (!char.IsLetterOrDigit(s[i])) { i++; continue; }
+        if (!char.IsLetterOrDigit(s[j])) { j--; continue; }
+        if (char.ToLowerInvariant(s[i]) != char.ToLowerInvariant(s[j])) return false;
+        i++; j--;
+    }
+    return true;
+}</code></pre></div>
+<h3>3. Anagram <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p>Aynı harflerden mi oluşuyor? Sıralayıp karşılaştırmak O(n log n); harf sayacı O(n).</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static bool AnagramMi(string a, string b)
+{
+    if (a.Length != b.Length) return false;
+    var sayac = new Dictionary&lt;char, int&gt;();
+    foreach (var c in a) sayac[c] = sayac.GetValueOrDefault(c) + 1;
+    foreach (var c in b)
+    {
+        if (!sayac.TryGetValue(c, out int n) || n == 0) return false;
+        sayac[c] = n - 1;
+    }
+    return true;
+}</code></pre></div>
+<h3>4. String ters çevirme</h3>
+<p><code>char[]</code> + <code>Array.Reverse</code> veya iki işaretçiyle yer değiştirme, O(n). Ek soru: emoji ve birleşik karakterlerde <code>char</code> bazlı ters çevirme bozar → <code>StringInfo</code> ile metin öğesi (text element) bazlı çevir.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static string TersCevir(string s)
+{
+    var dizi = s.ToCharArray();
+    Array.Reverse(dizi);
+    return new string(dizi);
+}</code></pre></div>
+<h3>5. FizzBuzz</h3>
+<p>3'e bölünene "Fizz", 5'e "Buzz", ikisine "FizzBuzz". Tuzak: önce 15 kontrolü.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>for (int i = 1; i &lt;= 100; i++)
+    Console.WriteLine(i % 15 == 0 ? "FizzBuzz" : i % 3 == 0 ? "Fizz" : i % 5 == 0 ? "Buzz" : i.ToString());</code></pre></div>
+<h3>6. Tekrar eden eleman <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p>İlk tekrar edeni bul: <code>HashSet.Add</code> false dönerse tekrar. O(n). Tümü için LINQ: <code>dizi.GroupBy(x =&gt; x).Where(g =&gt; g.Count() &gt; 1).Select(g =&gt; g.Key)</code>.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static int? IlkTekrar(int[] dizi)
+{
+    var kume = new HashSet&lt;int&gt;();
+    foreach (var x in dizi)
+        if (!kume.Add(x)) return x;
+    return null;
+}</code></pre></div>
+<h3>7. En uzun alt dizi</h3>
+<p>İki klasik yorum var; soruyu netleştir. <strong>(a)</strong> Tekrarsız karakterli en uzun alt string — <strong>kayan pencere</strong> (sliding window), O(n):</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static int EnUzunTekrarsiz(string s)
+{
+    var sonGorulen = new Dictionary&lt;char, int&gt;();
+    int baslangic = 0, enUzun = 0;
+    for (int i = 0; i &lt; s.Length; i++)
+    {
+        if (sonGorulen.TryGetValue(s[i], out int j) &amp;&amp; j &gt;= baslangic) baslangic = j + 1;
+        sonGorulen[s[i]] = i;
+        enUzun = Math.Max(enUzun, i - baslangic + 1);
+    }
+    return enUzun;
+}</code></pre></div>
+<p><strong>(b)</strong> Toplamı en büyük ardışık alt dizi — <strong>Kadane</strong>, O(n):</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static int EnBuyukAltToplam(int[] a)
+{
+    int simdiki = a[0], enIyi = a[0];
+    for (int i = 1; i &lt; a.Length; i++)
+    {
+        simdiki = Math.Max(a[i], simdiki + a[i]);
+        enIyi = Math.Max(enIyi, simdiki);
+    }
+    return enIyi;
+}</code></pre></div>
+<h3>8. Parantez dengesi <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p>Açanı yığına koy, kapatanda yığının tepesiyle eşleştir; sonda yığın boş olmalı. O(n).</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static bool DengeliMi(string s)
+{
+    var esi = new Dictionary&lt;char, char&gt; { [')'] = '(', [']'] = '[', ['}'] = '{' };
+    var yigin = new Stack&lt;char&gt;();
+    foreach (var c in s)
+    {
+        if (c is '(' or '[' or '{') yigin.Push(c);
+        else if (esi.TryGetValue(c, out var acan))
+            if (yigin.Count == 0 || yigin.Pop() != acan) return false;
+    }
+    return yigin.Count == 0;
+}</code></pre></div>
+<h3>9. İkili arama (Binary Search) <span class="tag tag--bad">MÜLAKATTA SIK</span></h3>
+<p><strong>Sıralı</strong> dizide her adımda aralığı yarıya indir, O(log n). Tuzak: <code>(lo + hi) / 2</code> taşabilir → <code>lo + (hi - lo) / 2</code>. Hazırı: <code>Array.BinarySearch</code>, <code>List&lt;T&gt;.BinarySearch</code>.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static int IkiliArama(int[] a, int hedef)
+{
+    int lo = 0, hi = a.Length - 1;
+    while (lo &lt;= hi)
+    {
+        int orta = lo + (hi - lo) / 2;
+        if (a[orta] == hedef) return orta;
+        if (a[orta] &lt; hedef) lo = orta + 1; else hi = orta - 1;
+    }
+    return -1;
+}</code></pre></div>
+<h3>10. Fibonacci</h3>
+<p>Saf özyineleme O(2ⁿ) — aynı değeri tekrar tekrar hesaplar. Döngü O(n) zaman O(1) alan; memoization da O(n). Büyük n'de <code>long</code> taşar → <code>BigInteger</code>.</p>
+<div class="kod"><div class="kod-ust"><span>csharp</span></div><pre><code>static long Fib(int n)
+{
+    if (n &lt; 2) return n;
+    long a = 0, b = 1;
+    for (int i = 2; i &lt;= n; i++) (a, b) = (b, a + b);
+    return b;
+}</code></pre></div>
+<div class="callout callout--info"><p class="callout__title">Sonraki adım</p><p>Bunlar rahatsa sırada: iki işaretçi ile sıralı dizide iki toplam, BFS/DFS (ağaç ve graf gezme), bağlı listeyi ters çevirme, iki sıralı diziyi birleştirme, <code>PriorityQueue</code> ile en büyük k eleman. Platform: LeetCode "Top Interview" listeleri, HackerRank, Exercism (C# yolu).</p></div>
+<h2 id="sistem-tasarimi"><span class="h-num">§ 4</span>Sistem tasarımı iskeleti</h2>
+<p>Kıdeme göre ağırlığı değişir (junior'da nadir, senior'da belirleyici) — <a href="../Issizlik/07-is-arama.html#mulakat">İş arama § 6.3</a>. Beklenen şey mükemmel mimari değil, <strong>sırayla düşünmek</strong> ve kararları <strong>gerekçelendirmek</strong>.</p>
+<div class="tablewrap"><table class="data"><thead><tr><th>Adım</th><th>Ne yapılır</th><th>Süre (45 dk'lık mülakat)</th></tr></thead><tbody><tr><td><strong>1. Gereksinimler</strong></td><td>İşlevsel (ne yapacak) ve işlevsel olmayan (ölçek, gecikme, erişilebilirlik, tutarlılık) gereksinimleri <strong>sor</strong>, kapsamı daralt.</td><td>5 dk</td></tr><tr><td><strong>2. Kapasite tahmini</strong></td><td>Günlük kullanıcı, okuma/yazma oranı, saniyedeki istek (QPS), depolama. Kaba hesap yeter.</td><td>5 dk</td></tr><tr><td><strong>3. API</strong></td><td>Ana uçlar, girdi/çıktı, durum kodları.</td><td>5 dk</td></tr><tr><td><strong>4. Veri modeli</strong></td><td>Tablolar/anahtarlar, SQL mi NoSQL mi ve neden.</td><td>5 dk</td></tr><tr><td><strong>5. Üst düzey tasarım</strong></td><td>Kutular: istemci → yük dengeleyici → API → cache → DB, kuyruk.</td><td>10 dk</td></tr><tr><td><strong>6. Ölçekleme ve darboğaz</strong></td><td>Cache, replika, sharding, kuyruk, CDN, rate limit; tek hata noktası; izleme.</td><td>10 dk</td></tr><tr><td><strong>7. Özet</strong></td><td>Kararlar ve takaslar (trade-off), "zaman olsa şunu eklerdim".</td><td>5 dk</td></tr></tbody></table></div>
+<h3>Örnek: URL kısaltıcı</h3>
+<p><strong>1. Gereksinimler.</strong> İşlevsel: uzun URL → kısa kod; kısa kod → yönlendirme; isteğe bağlı özel takma ad, son kullanma, tıklama istatistiği. İşlevsel olmayan: yönlendirme hızlı (düşük gecikme), yüksek erişilebilirlik, kodlar tahmin edilmesi zor, <strong>okuma ağır</strong> (okuma ≫ yazma).</p>
+<p><strong>2. Kapasite (örnek rakamlar).</strong> Ayda 100 milyon yeni URL → ≈ 40 yazma/sn. Okuma:yazma 100:1 → ≈ 4.000 okuma/sn (tepe için ×2–3). 5 yılda 6 milyar kayıt × ≈ 500 bayt ≈ 3 TB.</p>
+<p><strong>3. API.</strong></p>
+<div class="kod"><div class="kod-ust"><span>text</span></div><pre><code>POST /api/urls        { "url": "https://...", "alias": null, "expiresAt": null }
+                      -&gt; 201 Created { "code": "aZ3kP9q", "shortUrl": "https://kisa.example/aZ3kP9q" }
+GET  /{code}          -&gt; 302 Found, Location: https://...   (yoksa 404, süresi geçtiyse 410)
+GET  /api/urls/{code}/stats -&gt; 200 { "clicks": 1234, ... }</code></pre></div>
+<p><strong>4. Veri modeli.</strong> <code>Urls(Code PK, LongUrl, CreatedAt, ExpiresAt, OwnerId)</code>; istatistik ayrı tabloda veya olay akışında. Erişim deseni anahtar → değer olduğu için <strong>anahtar-değer / NoSQL</strong> (DynamoDB, Cassandra) veya indeksli <strong>ilişkisel</strong> DB (PostgreSQL) — ikisi de savunulabilir; gerekçe: basit sorgu, büyük hacim, yatay ölçek.</p>
+<p><strong>5. Kod üretimi.</strong> (a) Benzersiz sayaç/ID → <strong>Base62</strong> (<code>[a-zA-Z0-9]</code>): 7 karakter = 62⁷ ≈ 3,5 trilyon kod. Sayaç tahmin edilebilir → karıştırma veya aralık tahsisi (her sunucuya ID bloğu). (b) URL'nin hash'i (ör. SHA-256) ilk 7 karakter → <strong>çakışma</strong> kontrolü gerekir. (c) Rastgele kod + benzersizlik kısıtı.</p>
+<p><strong>6. Ölçekleme.</strong> Okuma ağır → <strong>Redis cache</strong> (popüler kodlar, LRU), DB <strong>okuma replikaları</strong>, CDN/edge'de yönlendirme. Veri büyüyünce koda göre <strong>sharding</strong>. Tıklama istatistiği yönlendirmeyi yavaşlatmasın → olayı <strong>kuyruğa</strong> at, asenkron say. Kötüye kullanım için <strong>rate limiting</strong> ve zararlı URL taraması. Durumsuz API örnekleri yük dengeleyici arkasında yatay ölçeklenir.</p>
+<div class="tablewrap"><table class="data"><thead><tr><th>Soru</th><th>Kısa cevap</th></tr></thead><tbody><tr><td>301 mi 302 mi? <span class="tag tag--bad">MÜLAKATTA SIK</span></td><td><strong>301</strong> kalıcı: tarayıcı önbelleğe alır, sunucu yükü azalır ama sonraki tıklamaları <strong>göremezsin</strong>. <strong>302</strong> (veya 307) geçici: her tıklama sunucuya gelir, <strong>istatistik</strong> tutulabilir. Analitik isteniyorsa 302.</td></tr><tr><td>SQL mi NoSQL mi?</td><td>Karmaşık ilişki ve transaction → SQL. Basit anahtar erişimi, devasa hacim, yatay ölçek → NoSQL. "İkisi de olur, ben şu nedenle şunu seçerim" de.</td></tr><tr><td>Tek hata noktaları?</td><td>Tek DB, tek cache, tek bölge. Replika, otomatik failover, çok bölge.</td></tr><tr><td>Diğer sık sorular</td><td>Sipariş servisi, bildirim sistemi, rate limiter, sohbet uygulaması, haber akışı. Aynı 7 adım uygulanır.</td></tr></tbody></table></div>
+<h2 id="kaynaklar"><span class="h-num">§ 5</span>Kaynaklar</h2>
+<ul><li><span class="tag tag--ok">RESMÎ</span> <a href="https://learn.microsoft.com/dotnet/standard/collections/">Collections and data structures (.NET)</a></li><li><span class="tag tag--ok">RESMÎ</span> <a href="https://learn.microsoft.com/dotnet/standard/collections/selecting-a-collection-class">Selecting a collection class</a></li><li><span class="tag tag--ok">RESMÎ</span> <a href="https://learn.microsoft.com/dotnet/api/system.array.sort">Array.Sort — Remarks (introsort)</a></li><li><span class="tag tag--ok">RESMÎ</span> <a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.priorityqueue-2">PriorityQueue&lt;TElement,TPriority&gt;</a></li><li><span class="tag tag--ok">RESMÎ</span> <a href="https://learn.microsoft.com/azure/architecture/patterns/">Azure Architecture Center — Cloud design patterns</a></li><li><span class="tag tag--info">3. TARAF</span> <a href="https://github.com/donnemartin/system-design-primer">System Design Primer (GitHub)</a></li></ul>
+      </div>
+
+      <nav class="pagenav" aria-label="Sayfa gezinmesi"><a class="prev" href="04-dagitik-test-git.html"><span class="dir">&larr; Önceki</span><span class="ttl">Dağıtık sistemler, test ve Git</span></a><a class="next" href="06-davranissal-ve-ingilizce.html"><span class="dir">Sonraki &rarr;</span><span class="ttl">Davranışsal sorular ve İngilizce mülakat</span></a></nav>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

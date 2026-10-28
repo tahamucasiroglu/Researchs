@@ -21,6 +21,11 @@ Sayfalardaki takvimler fesih gününe (F) göre göreli verilmiştir (F+1, F+30,
 
 HTML anlatım: [index.html](index.html) — GitHub HTML'i işlemez; dosyayı yerelde tarayıcıda açın.
 
+## İlgili konular
+
+- [Mülakat Hazırlığı](../Mulakat-Hazirligi/) — .NET / C# backend mülakatına soru → kısa cevap hazırlık; 07 · İş Arama'daki mülakat ve maaş pazarlığı bölümlerinin üstüne kurulur.
+- [SQL Mülakat Rehberi](../SQL-Mulakat/) — Online kodlama sınavlarında sık çıkan SQL soruları.
+
 ## Resmi kaynaklar
 
 - [İŞKUR](https://www.iskur.gov.tr/) · [SGK](https://www.sgk.gov.tr/)
