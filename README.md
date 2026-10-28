@@ -66,6 +66,7 @@ Belirli bir durumla karşılaşıldığında okunacak genel rehberler: Türkiye 
 | [Mesajlaşma Altyapıları](Rehberler/Mesajlasma-Altyapilari/) | Telegram Bot API, WhatsApp Business API, BiP Keşfet API ve SMS: uç noktalar, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları. |
 | [Şirket Kurma](Rehberler/Sirket-Kurma/) | Şahıs mı limited mi, vergi ve Bağ-Kur, genç girişimci istisnası, giderler, yurt dışı şirket, ödeme altyapıları ve maliyet senaryoları. |
 | [SEO](Rehberler/SEO/) | Bir sitenin Google, Bing, Yandex ve yapay zekâ aramalarında organik görünmesi, 21 bölüm: tarama ve dizine ekleme, sayfa içi SEO, yapılandırılmış veri, hız, yerel SEO, bağlantılar, site denetimi ve kara şapkadan korunma. |
+| [SQL Mülakat](Rehberler/SQL-Mulakat/) | Mülakat ve online kodlama sınavları için kısa SQL: JOIN'lerde kaç satır gelir, NULL, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme, SQLite notları ve lehçe farkları. |
 
 ## Çalışma Günlüğü
 

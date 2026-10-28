@@ -11,6 +11,7 @@ Belirli bir iş ya da durumla karşılaşıldığında sıfırdan, adım adım o
 - [YouTube'da Oyun](YouTube-Oyun/) — YouTube Playables'a oyun yayınlamak ve oyun video kanalı: şartlar, başvuru, Playables SDK, AI ile geliştirme, gelir ve ödeme, telif, oyun fikirleri, Roblox benzeri ortam. Yapay zekâ için Markdown hâli de var.
 - [Mesajlaşma Altyapıları](Mesajlasma-Altyapilari/) — Uygulamadan Telegram, WhatsApp, BiP ve SMS ile mesaj göndermek: API uç noktaları, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları.
 - [SEO Rehberi](SEO/) — Bir sitenin Google'da ve diğer arama motorlarında reklamsız (organik) görünmesi, 21 bölümde: tarama ve dizine ekleme, sayfa içi SEO, yapılandırılmış veri, hız, yerel SEO ve İşletme Profili, bağlantılar, Yandex/Bing/IndexNow ve yapay zekâ araması, site denetimi ve kara şapka tekniklerinden korunma. Yapay zekâ için Markdown hâli de var.
+- [SQL Mülakat Rehberi](SQL-Mulakat/) — Mülakatta ve online kodlama sınavlarında sık sorulan SQL konularının kısa, anahtar kelimeli özeti: JOIN'lerde kaç satır gelir, NULL mantığı, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme, SQLite notları ve SQLite/PostgreSQL/SQL Server/MySQL farkları. Yapay zekâ için Markdown hâli de var.
 
 ---
 

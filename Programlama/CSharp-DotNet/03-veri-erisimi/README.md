@@ -22,6 +22,10 @@ Bu sayfa ORM'in derinliklerini, ham SQL'i, migration stratejilerini, sorgu perfo
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
+## İlgili konular
+
+- [SQL Mülakat Rehberi](../../../Rehberler/SQL-Mulakat/) — EF Core'un ürettiği SQL'i okumak için: JOIN satır sayıları, NULL mantığı, window fonksiyonları, klasik mülakat soruları ve SQL Server dahil lehçe farkları.
+
 Resmî kaynak: [EF Core dokümantasyonu](https://learn.microsoft.com/ef/core/)
 
 ---

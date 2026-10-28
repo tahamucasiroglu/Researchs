@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Mülakat Rehberi</title>
+<meta name="description" content="Mülakat ve online kodlama sınavları için kısa, anahtar kelimeli SQL rehberi: JOIN'lerde kaç satır gelir, NULL mantığı, gruplama, window fonksiyonları, klasik sorular, SQLite notları ve lehçe farkları.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  /* Bu rehbere özel küçük ekler: kod blokları ve sonuç tabloları (ortak style.css'te yok). */
+  .content pre { margin: 1rem 0 1.4rem; padding: .9rem 1rem; background: var(--paper-raise); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: var(--radius); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+  .content pre code { background: none; border: 0; padding: 0; font-size: inherit; white-space: pre; }
+  .content pre.yanlis { border-left-color: var(--flag); }
+  .k-yorum { color: var(--ink-faint); font-style: italic; }
+  .content table.data td.n { font-family: var(--f-mono); font-weight: 600; text-align: center; white-space: nowrap; }
+  .null { color: var(--ink-faint); font-family: var(--f-mono); font-size: .9em; }
+  .tuzak::before { content: "Tuzak: "; font-weight: 700; color: var(--flag); }
+  .erisim { color: var(--ink-faint); font-size: .9em; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">SQL Mülakat Rehberi</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Rehber · Ekim 2026</span>
+      <span class="brand__name">SQL Mülakat Rehberi</span>
+      <span class="brand__sub">Kısa, net, anahtar kelimeli · 15 bölüm</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Rehber</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="index.html"><span class="nav-num">00</span><span>SQL Mülakat Rehberi</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="arastirma.md"><span class="nav-num">MD</span><span>arastirma.md (yapay zekâ için)</span></a></li>
+          <li><a class="nav-item" href="../Mulakat-Hazirligi/index.html"><span class="nav-num">&rarr;</span><span>Mülakat Hazırlığı</span></a></li>
+          <li><a class="nav-item" href="../../Programlama/CSharp-DotNet/03-veri-erisimi/index.html"><span class="nav-num">&rarr;</span><span>C# / .NET · Veri Erişimi</span></a></li>
+          <li><a class="nav-item" href="../../Programlama/Java/03-veri-ve-mesajlasma/index.html"><span class="nav-num">&rarr;</span><span>Java · Veri ve Mesajlaşma</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Bilgiler 29 Ekim 2026 itibarıyla resmî belgelerden derlendi; örnek sorgular SQLite 3.50.4 üzerinde çalıştırılıp satır sayıları doğrulandı. 6 Kasım 2026: sınav motorunu belirleme notu eklendi; MySQL alias ve TRUNCATE kimlik sayacı bilgileri düzeltildi.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Rehber · Veritabanı</div>
+        <h1 class="page-title">SQL mülakatı için <em>kısa ve net</em> rehber</h1>
+        <p class="lede">Mülakatlarda ve online kodlama sınavlarında en sık sorulan SQL konuları: her konu bir anahtar kelime, birkaç satır açıklama, küçük bir örnek ve bir tuzak. En önemli bölüm JOIN'ler ve "kaç satır gelir?" soruları.</p>
+        <div class="head-meta">15 bölüm &middot; ≈ 45 dk okuma &middot; standart SQL + SQLite / PostgreSQL / SQL Server / MySQL farkları</div>
+      </header>
+
+      <div class="content">
+
+        <h2 id="nasil-kullanilir"><span class="h-num">§ 0</span>Bu sayfa nasıl kullanılır</h2>
+
+        <p class="intro">Baştan sona bir kez oku, sonra <a href="#cheat-sheet">Hızlı tekrar</a> bölümüyle tazele. <a href="#join">JOIN bölümündeki</a> alıştırmaları cevaba bakmadan çöz. Örnekler standart SQL'dir; lehçeye özgü yerler ayrıca işaretlidir. Mülakat türleri, online test taktikleri ve SQL dışındaki konular için kardeş rehber: <a href="../Mulakat-Hazirligi/index.html">Mülakat Hazırlığı</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Rozetler</caption>
+            <thead><tr><th>İşaret</th><th>Anlamı</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag--ok">Resmî</span></td><td>Ürünün kendi belgesi (sqlite.org, postgresql.org, learn.microsoft.com, dev.mysql.com).</td></tr>
+              <tr><td><span class="tag tag--info">Ölçüldü</span></td><td>Python <code>sqlite3</code> ile SQLite 3.50.4 üzerinde <code>:memory:</code> veritabanında çalıştırıldı.</td></tr>
+              <tr><td><span class="tag tag--warn">Tahmin</span></td><td>Genel deneyim; tek bir kaynağa bağlanmadı.</td></tr>
+              <tr><td><span class="tag tag--bad">Mülakatta sık</span></td><td>Neredeyse her mülakatta karşına çıkar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ================================================================ -->
+        <h2 id="calisma-sirasi"><span class="h-num">§ 1</span>Sorgunun mantıksal çalışma sırası</h2>
+
+        <p>Yazım sırası <code>SELECT … FROM … WHERE …</code> olsa da veritabanı sorguyu şu sırayla <strong>mantıksal olarak</strong> işler:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Adım</th><th>Cümle</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td class="n">1</td><td><code>FROM</code> / <code>JOIN</code></td><td>Tabloları birleştirir, ara tabloyu kurar</td></tr>
+              <tr><td class="n">2</td><td><code>WHERE</code></td><td>Satırları süzer (toplama fonksiyonu yok)</td></tr>
+              <tr><td class="n">3</td><td><code>GROUP BY</code></td><td>Satırları gruplar</td></tr>
+              <tr><td class="n">4</td><td><code>HAVING</code></td><td>Grupları süzer (toplama fonksiyonu var)</td></tr>
+              <tr><td class="n">5</td><td><code>SELECT</code></td><td>Kolonları hesaplar, alias burada doğar</td></tr>
+              <tr><td class="n">6</td><td><code>DISTINCT</code></td><td>Tekrarları atar</td></tr>
+              <tr><td class="n">7</td><td><code>ORDER BY</code></td><td>Sıralar (alias'ı görür)</td></tr>
+              <tr><td class="n">8</td><td><code>LIMIT</code> / <code>OFFSET</code></td><td>İlk N satırı keser</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre class="yanlis"><code>SELECT Maas * 2 AS m FROM Calisan WHERE m &gt; 10000;   <span class="k-yorum">-- PostgreSQL / SQL Server / MySQL: hata</span>
+SELECT Maas * 2 AS m FROM Calisan WHERE Maas * 2 &gt; 10000;   <span class="k-yorum">-- doğru: ifadeyi tekrar yaz</span></code></pre>
+
+        <p class="tuzak">Alias 5. adımda doğar, WHERE 2. adımda çalışır; bu yüzden standart SQL'de WHERE alias'ı göremez. <code>ORDER BY</code> ise alias'ı görür; PostgreSQL ve SQL Server <code>HAVING</code>'de görmez. MySQL alias'ı <code>WHERE</code>'de reddeder, <code>GROUP BY</code> / <code>HAVING</code> / <code>ORDER BY</code>'da kabul eder <span class="tag tag--ok">Resmî</span>. SQLite <code>WHERE</code>'de de kabul eder <span class="tag tag--info">Ölçüldü</span> — taşınabilir değil, mülakatta güvenme.</p>
+
+        <!-- ================================================================ -->
+        <h2 id="join"><span class="h-num">§ 2</span>JOIN'ler ve "kaç satır gelir?" <span class="tag tag--bad">Mülakatta sık</span></h2>
+
+        <h3 id="join-veri">Örnek veri</h3>
+
+        <pre><code>CREATE TABLE Ogrenci (Id INTEGER PRIMARY KEY, Ad TEXT);
+INSERT INTO Ogrenci VALUES (1, 'Ali'), (2, 'Ayse');      <span class="k-yorum">-- Ali kurs almış, Ayse almamış</span>
+
+CREATE TABLE OgrenciKurs (OgrenciId INTEGER, Kurs TEXT);
+INSERT INTO OgrenciKurs VALUES (1, 'C#'), (1, 'SQL');    <span class="k-yorum">-- yalnız Ali'nin 2 kursu</span></code></pre>
+
+        <p>Ortak gövde: <code>SELECT o.Ad, k.Kurs FROM Ogrenci o &lt;JOIN&gt; OgrenciKurs k ON k.OgrenciId = o.Id;</code></p>
+
+        <h3 id="join-sonuclar">Sonuçlar <span class="tag tag--info">Ölçüldü</span></h3>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>JOIN</th><th>Sonuç (Ad – Kurs)</th><th>Satır</th></tr></thead>
+            <tbody>
+              <tr><td><code>INNER JOIN</code> = <code>JOIN</code></td><td>Ali–C#, Ali–SQL</td><td class="n">2</td></tr>
+              <tr><td><code>LEFT JOIN</code> = <code>LEFT OUTER JOIN</code></td><td>Ali–C#, Ali–SQL, Ayse–<span class="null">NULL</span></td><td class="n">3</td></tr>
+              <tr><td><code>RIGHT JOIN</code> = <code>RIGHT OUTER JOIN</code></td><td>Ali–C#, Ali–SQL (sağdaki her satırın eşi var)</td><td class="n">2</td></tr>
+              <tr><td><code>FULL OUTER JOIN</code></td><td>Ali–C#, Ali–SQL, Ayse–<span class="null">NULL</span></td><td class="n">3</td></tr>
+              <tr><td><code>CROSS JOIN</code> (ON yok)</td><td>Ali–C#, Ali–SQL, Ayse–C#, Ayse–SQL</td><td class="n">4 = 2×2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>INNER</strong>: yalnız iki tarafta da eşi olanlar.</li>
+          <li><strong>LEFT</strong>: soldaki her satır en az bir kez gelir; eşi yoksa sağ kolonlar <span class="null">NULL</span>.</li>
+          <li><strong>RIGHT</strong>: LEFT'in aynası; <code>A RIGHT JOIN B</code> = <code>B LEFT JOIN A</code> (kolon sırası hariç).</li>
+          <li><strong>FULL OUTER</strong>: LEFT ∪ RIGHT; iki taraftaki eşsizler de NULL'la gelir.</li>
+          <li><strong>CROSS</strong>: Kartezyen çarpım, her satır × her satır.</li>
+          <li><strong>SELF</strong>: tablo kendisiyle birleşir (aşağıda).</li>
+        </ul>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Anahtar cümleler</p>
+          <p>"<code>LEFT JOIN</code> ile <code>LEFT OUTER JOIN</code> aynıdır." · "<code>JOIN</code> tek başına <code>INNER JOIN</code> demektir." · "<code>OUTER</code> kelimesi isteğe bağlıdır." · "Eşleşmeyen tarafın kolonları NULL gelir."</p>
+        </div>
+
+        <h3 id="join-formul">Satır sayısı formülleri</h3>
+
+        <p>Solda <em>a</em>, sağda <em>b</em> satır:</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>JOIN</th><th>En az</th><th>En çok</th></tr></thead>
+            <tbody>
+              <tr><td>INNER</td><td class="n">0</td><td class="n">a×b</td></tr>
+              <tr><td>LEFT</td><td class="n">a</td><td class="n">a×b</td></tr>
+              <tr><td>RIGHT</td><td class="n">b</td><td class="n">a×b</td></tr>
+              <tr><td>FULL</td><td class="n">max(a,b)</td><td>a×b; hiç eşleşme yoksa a+b</td></tr>
+              <tr><td>CROSS</td><td class="n">a×b</td><td class="n">a×b</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Çoklu eşleşme çoğaltır:</strong> soldaki bir satır sağda 3 satırla eşleşirse 3 satır olur. Sol tarafta iki tane <code>1</code>, sağda üç tane <code>1</code> → INNER <strong>6</strong> satır <span class="tag tag--info">Ölçüldü</span>.</li>
+          <li><strong>NULL anahtar eşleşmez:</strong> <code>NULL = NULL</code> doğru değildir; iki tarafta da NULL olsa INNER'da gelmez.</li>
+          <li>Anahtar bir tarafta benzersizse (PK–FK): LEFT'te "çok" taraf soldaysa sonuç tam olarak sol satır sayısıdır.</li>
+        </ul>
+
+        <h3 id="anti-join">Anti-join: eşi olmayanlar</h3>
+
+        <pre><code>SELECT o.Ad
+FROM Ogrenci o
+LEFT JOIN OgrenciKurs k ON k.OgrenciId = o.Id
+WHERE k.OgrenciId IS NULL;            <span class="k-yorum">-- Ayse (1 satır)</span>
+
+<span class="k-yorum">-- aynı iş:</span>
+SELECT o.Ad FROM Ogrenci o
+WHERE NOT EXISTS (SELECT 1 FROM OgrenciKurs k WHERE k.OgrenciId = o.Id);</code></pre>
+
+        <p class="tuzak">NULL kontrolünü sağ tablonun NULL olamayan bir kolonunda (join anahtarı ya da PK) yap; zaten NULL olabilen kolonda yanlış sonuç verir.</p>
+
+        <h3 id="on-where">Klasik tuzak: koşul ON'da mı WHERE'de mi?</h3>
+
+        <pre><code><span class="k-yorum">-- A) Koşul ON'da: sol taraf korunur → 2 satır (Ali–SQL, Ayse–NULL)</span>
+SELECT o.Ad, k.Kurs FROM Ogrenci o
+LEFT JOIN OgrenciKurs k ON k.OgrenciId = o.Id AND k.Kurs = 'SQL';</code></pre>
+
+        <pre class="yanlis"><code><span class="k-yorum">-- B) Koşul WHERE'de: LEFT JOIN fiilen INNER'a döner → 1 satır (Ali–SQL)</span>
+SELECT o.Ad, k.Kurs FROM Ogrenci o
+LEFT JOIN OgrenciKurs k ON k.OgrenciId = o.Id
+WHERE k.Kurs = 'SQL';</code></pre>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Kural</p>
+          <p>Sağ tabloya ait süzgeç <strong>ON</strong>'a, sonucun tamamına ait süzgeç <strong>WHERE</strong>'e. Ayse'nin Kurs'u NULL'dır; <code>NULL = 'SQL'</code> doğru olmadığı için WHERE onu atar. INNER JOIN'de ikisi arasında fark yoktur.</p>
+        </div>
+
+        <h3 id="self-join">SELF JOIN</h3>
+
+        <pre><code>SELECT c.Ad AS Calisan, y.Ad AS Yonetici
+FROM Calisan c
+LEFT JOIN Calisan y ON y.Id = c.YoneticiId;   <span class="k-yorum">-- iki farklı alias şart</span></code></pre>
+
+        <p>5 çalışan, biri yöneticisiz: LEFT ile <strong>5</strong>, INNER ile <strong>4</strong> satır (en üstteki yönetici düşer) <span class="tag tag--info">Ölçüldü</span>.</p>
+
+        <h3 id="uc-tablo">Üç tablo</h3>
+
+        <p><code>Kurs</code> = C#, SQL, Python (Python'u kimse almamış); ara tablo <code>OK2(OgrenciId, KursId)</code> = (1,1), (1,2).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Sorgu</th><th>Sonuç</th><th>Satır</th></tr></thead>
+            <tbody>
+              <tr><td><code>Ogrenci LEFT JOIN OK2 … LEFT JOIN Kurs …</code></td><td>Ali–C#, Ali–SQL, Ayse–NULL</td><td class="n">3</td></tr>
+              <tr><td><code>Ogrenci JOIN OK2 … RIGHT JOIN Kurs …</code></td><td>Ali–C#, Ali–SQL, NULL–Python</td><td class="n">3</td></tr>
+              <tr><td><code>Ogrenci LEFT JOIN OK2 … FULL JOIN Kurs …</code></td><td>Ali–C#, Ali–SQL, Ayse–NULL, NULL–Python</td><td class="n">4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="tuzak">LEFT JOIN zincirinin ortasına bir <code>INNER JOIN</code> (ya da sağ tabloya WHERE koşulu) girerse soldaki eşsiz satırlar yine düşer.</p>
+
+        <h3 id="count-left">COUNT ve LEFT JOIN</h3>
+
+        <pre><code>SELECT o.Ad, COUNT(k.Kurs) AS KursSayisi, COUNT(*) AS SatirSayisi
+FROM Ogrenci o LEFT JOIN OgrenciKurs k ON k.OgrenciId = o.Id
+GROUP BY o.Ad;
+<span class="k-yorum">-- Ali  2  2
+-- Ayse 0  1</span></code></pre>
+
+        <p class="tuzak">"Kurs sayısı" için <code>COUNT(*)</code> Ayse'ye 1 verir; <code>COUNT(sag.kolon)</code> NULL'ı saymaz → 0.</p>
+
+        <h3 id="join-alistirma">Alıştırmalar: kaç satır gelir? <span class="tag tag--info">Ölçüldü</span></h3>
+
+        <p>Veri: <code>Ogrenci</code> (2), <code>OgrenciKurs</code> (2), <code>Kurs</code> (3), <code>OK2</code> (2). Ayrıca <code>A(x)</code> = 1, 1, 2, NULL ve <code>B(x)</code> = 1, 1, 1, 3, NULL.</p>
+
+        <details class="qa"><summary>1 · <code>Ogrenci INNER JOIN OgrenciKurs</code></summary><div class="qa__body"><p><strong>2</strong> — yalnız Ali'nin iki kursu.</p></div></details>
+        <details class="qa"><summary>2 · <code>Ogrenci LEFT JOIN OgrenciKurs</code></summary><div class="qa__body"><p><strong>3</strong> — Ali×2 + Ayse–NULL.</p></div></details>
+        <details class="qa"><summary>3 · Aynısı + <code>WHERE k.OgrenciId IS NULL</code></summary><div class="qa__body"><p><strong>1</strong> — Ayse (anti-join).</p></div></details>
+        <details class="qa"><summary>4 · <code>Ogrenci CROSS JOIN Kurs</code></summary><div class="qa__body"><p><strong>6</strong> — 2 × 3.</p></div></details>
+        <details class="qa"><summary>5 · <code>Kurs LEFT JOIN OK2 ON x.KursId = k.Id</code></summary><div class="qa__body"><p><strong>3</strong> — C#–1, SQL–1, Python–NULL.</p></div></details>
+        <details class="qa"><summary>6 · <code>A INNER JOIN B ON A.x = B.x</code></summary><div class="qa__body"><p><strong>6</strong> — Soldaki iki <code>1</code> × sağdaki üç <code>1</code>; <code>2</code>, <code>3</code> ve NULL'lar eşleşmez.</p></div></details>
+        <details class="qa"><summary>7 · <code>A LEFT JOIN B ON A.x = B.x</code></summary><div class="qa__body"><p><strong>8</strong> — 6 + (2, NULL) + (NULL, NULL). Soldaki NULL da sola ait olduğu için gelir, ama eşi yoktur.</p></div></details>
+        <details class="qa"><summary>8 · <code>A FULL JOIN B ON A.x = B.x</code></summary><div class="qa__body"><p><strong>10</strong> — 8 + B'nin eşsizleri (NULL, 3) ve (NULL, NULL).</p></div></details>
+        <details class="qa"><summary>9 · <code>A CROSS JOIN B</code></summary><div class="qa__body"><p><strong>20</strong> — 4 × 5; NULL'lar da sayılır, çünkü koşul yok.</p></div></details>
+        <details class="qa"><summary>10 · ON'da ve WHERE'de <code>k.Kurs = 'SQL'</code> (yukarıdaki A ve B)</summary><div class="qa__body"><p><strong>2</strong> ve <strong>1</strong>.</p></div></details>
+
+        <!-- ================================================================ -->
+        <h2 id="filtreleme"><span class="h-num">§ 3</span>Filtreleme ve NULL mantığı</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Anahtar</th><th>Kısaca</th><th>Örnek</th></tr></thead>
+            <tbody>
+              <tr><td><code>AND</code> / <code>OR</code></td><td><code>AND</code> önce bağlar</td><td><code>a OR b AND c</code> = <code>a OR (b AND c)</code></td></tr>
+              <tr><td><code>IN</code></td><td>Listeden biri</td><td><code>Dept IN ('IT','IK')</code></td></tr>
+              <tr><td><code>BETWEEN</code></td><td><strong>Uçlar dahil</strong></td><td><code>Maas BETWEEN 7000 AND 9000</code> = <code>&gt;= 7000 AND &lt;= 9000</code></td></tr>
+              <tr><td><code>LIKE</code></td><td><code>%</code> = 0+ karakter, <code>_</code> = tam 1 karakter</td><td><code>Ad LIKE 'A_i%'</code></td></tr>
+              <tr><td><code>IS NULL</code></td><td>NULL testi</td><td><code>YoneticiId IS NULL</code> (asla <code>= NULL</code>)</td></tr>
+              <tr><td><code>COALESCE(a, b, …)</code></td><td>İlk NULL olmayan değer</td><td><code>COALESCE(Telefon, '-')</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="tuzak"><code>WHERE Dept='IK' OR Dept='IT' AND Maas&gt;8000</code> örnek veride 4 satır, <code>(Dept='IK' OR Dept='IT') AND Maas&gt;8000</code> 2 satır döndürür <span class="tag tag--info">Ölçüldü</span>. Parantez koy.</p>
+
+        <h3 id="null-mantigi">NULL mantığı</h3>
+
+        <ul>
+          <li><strong>Üç değerli mantık:</strong> TRUE / FALSE / UNKNOWN. <code>NULL = NULL</code> → NULL (bilinmez); WHERE yalnız TRUE'yu geçirir.</li>
+          <li><strong>COUNT(*) vs COUNT(kolon):</strong> <code>COUNT(*)</code> bütün satırları, <code>COUNT(kolon)</code> NULL olmayanları, <code>COUNT(DISTINCT kolon)</code> farklı NULL-dışı değerleri sayar. 5 çalışan, biri yöneticisiz → <code>COUNT(*)</code> = 5, <code>COUNT(YoneticiId)</code> = 4.</li>
+          <li><strong>Toplama fonksiyonları NULL'ı atlar:</strong> <code>AVG(kolon)</code> NULL'ları paydaya katmaz.</li>
+          <li>NULL ile aritmetik/birleştirme NULL verir: <code>'abc' || NULL</code> → NULL.</li>
+        </ul>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">NOT IN + NULL tuzağı</p>
+          <p>Alt sorgu tek bir NULL döndürürse <code>x NOT IN (…)</code> hiçbir satırda TRUE olmaz → <strong>0 satır</strong>. "Yönetici olmayan çalışanlar" sorusu <code>NOT IN (SELECT YoneticiId FROM Calisan)</code> ile 0, <code>NOT EXISTS</code> ile 3 satır döndü <span class="tag tag--info">Ölçüldü</span> <span class="tag tag--ok">Resmî</span>. Çözüm: <code>NOT EXISTS</code> ya da alt sorguya <code>WHERE YoneticiId IS NOT NULL</code>.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <h2 id="gruplama"><span class="h-num">§ 4</span>Gruplama</h2>
+
+        <p><code>GROUP BY</code> satırları gruplar; toplama fonksiyonları <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>. <strong>WHERE</strong> gruplamadan önce satırı, <strong>HAVING</strong> sonra grubu süzer.</p>
+
+        <pre><code>SELECT Dept, COUNT(*) AS Kisi, AVG(Maas) AS Ort
+FROM Calisan
+WHERE Maas &gt; 0              <span class="k-yorum">-- satır süzgeci</span>
+GROUP BY Dept
+HAVING COUNT(*) &gt; 2;        <span class="k-yorum">-- grup süzgeci; WHERE COUNT(*) &gt; 2 hatadır</span></code></pre>
+
+        <p class="tuzak">SELECT'teki her kolon ya GROUP BY'da ya da bir toplama fonksiyonunun içinde olmalı. <code>SELECT Dept, Ad, MAX(Maas) … GROUP BY Dept</code> PostgreSQL ve SQL Server'da hata, MySQL'de <code>ONLY_FULL_GROUP_BY</code> açıkken hata verir. SQLite kabul eder ("bare column") ama eşitlikte yalnız bir kişiyi gösterir <span class="tag tag--info">Ölçüldü</span>. Bunun yerine window fonksiyonu ya da alt sorgu yaz.</p>
+
+        <p class="tuzak">Tamsayı bölmesi: <code>5/2</code> = 2 (SQLite, PostgreSQL, SQL Server); oran için <code>5 * 1.0 / 2</code> ya da <code>CAST</code>. MySQL'de <code>/</code> ondalık verir.</p>
+
+        <!-- ================================================================ -->
+        <h2 id="alt-sorgu"><span class="h-num">§ 5</span>Alt sorgu, EXISTS, CTE, CASE</h2>
+
+        <ul>
+          <li><strong>Skaler alt sorgu:</strong> tek değer döner — <code>WHERE Maas &gt; (SELECT AVG(Maas) FROM Calisan)</code>.</li>
+          <li><strong>IN vs EXISTS:</strong> <code>IN</code> değer listesine, <code>EXISTS</code> "en az bir satır var mı"ya bakar ve NULL'dan etkilenmez. İyileştiriciler çoğu zaman ikisini aynı plana çevirir; asıl fark <strong>NOT IN + NULL</strong>'da.</li>
+          <li><strong>Korelasyonlu alt sorgu:</strong> dıştaki satıra bağlıdır, mantıksal olarak her satır için yeniden çalışır.</li>
+          <li><strong>CTE (<code>WITH</code>):</strong> adlandırılmış geçici sonuç; okunabilirlik. <code>WITH RECURSIVE</code> ağaç/hiyerarşi için.</li>
+          <li><strong>CASE WHEN:</strong> koşullu değer; ilk doğru dalda durur, <code>ELSE</code> yoksa NULL.</li>
+        </ul>
+
+        <pre><code><span class="k-yorum">-- Korelasyonlu: departmanının en yükseğini alanlar</span>
+SELECT Dept, Ad, Maas FROM Calisan c
+WHERE Maas = (SELECT MAX(Maas) FROM Calisan x WHERE x.Dept = c.Dept);
+
+<span class="k-yorum">-- CTE: departman ortalamasından fazla alanlar</span>
+WITH DeptOrt AS (SELECT Dept, AVG(Maas) AS Ort FROM Calisan GROUP BY Dept)
+SELECT c.Ad FROM Calisan c JOIN DeptOrt d ON d.Dept = c.Dept WHERE c.Maas &gt; d.Ort;
+
+<span class="k-yorum">-- CASE: seviye ve koşullu sayım</span>
+SELECT Ad, CASE WHEN Maas &gt;= 9000 THEN 'yuksek'
+                WHEN Maas &gt;= 7000 THEN 'orta'
+                ELSE 'dusuk' END AS Seviye
+FROM Calisan;
+SELECT SUM(CASE WHEN Maas &gt; 8000 THEN 1 ELSE 0 END) AS YuksekSayisi FROM Calisan;</code></pre>
+
+        <p class="tuzak">CASE dallarının sırası önemli: <code>WHEN Maas &gt;= 7000</code> önce yazılırsa 9000 alan da "orta" olur.</p>
+
+        <!-- ================================================================ -->
+        <h2 id="kume"><span class="h-num">§ 6</span>UNION, INTERSECT, EXCEPT</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Anahtar</th><th>Ne yapar</th></tr></thead>
+            <tbody>
+              <tr><td><code>UNION</code></td><td>Birleştirir, <strong>tekrarları atar</strong></td></tr>
+              <tr><td><code>UNION ALL</code></td><td>Birleştirir, tekrarları korur; daha hızlı</td></tr>
+              <tr><td><code>INTERSECT</code></td><td>İki sonucun ortak satırları</td></tr>
+              <tr><td><code>EXCEPT</code></td><td>Birincide olup ikincide olmayanlar (Oracle'da <code>MINUS</code>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li>Kolon sayısı ve türleri uyumlu olmalı; kolon adları <strong>ilk</strong> sorgudan gelir; <code>ORDER BY</code> en sona bir kez.</li>
+          <li>Aynı tablo kendisiyle: <code>UNION</code> → 2 departman, <code>UNION ALL</code> → 10 satır <span class="tag tag--info">Ölçüldü</span>.</li>
+          <li><code>SELECT Id FROM Ogrenci EXCEPT SELECT OgrenciId FROM OgrenciKurs</code> → 2 (Ayse): anti-join'in kısa hâli.</li>
+        </ul>
+
+        <p class="tuzak">JOIN kolon ekler (yatay), UNION satır ekler (dikey).</p>
+
+        <!-- ================================================================ -->
+        <h2 id="window"><span class="h-num">§ 7</span>Window fonksiyonları</h2>
+
+        <p>Satırları <strong>gruplamadan</strong> yanlarına grup bilgisi ekler: <code>fonksiyon() OVER (PARTITION BY … ORDER BY …)</code>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption><code>ORDER BY Maas DESC</code> · Ölçüldü</caption>
+            <thead><tr><th>Ad</th><th>Maas</th><th>ROW_NUMBER</th><th>RANK</th><th>DENSE_RANK</th></tr></thead>
+            <tbody>
+              <tr><td>A</td><td>9000</td><td class="n">1</td><td class="n">1</td><td class="n">1</td></tr>
+              <tr><td>E</td><td>9000</td><td class="n">2</td><td class="n">1</td><td class="n">1</td></tr>
+              <tr><td>B</td><td>7000</td><td class="n">3</td><td class="n">3</td><td class="n">2</td></tr>
+              <tr><td>C</td><td>7000</td><td class="n">4</td><td class="n">3</td><td class="n">2</td></tr>
+              <tr><td>D</td><td>5000</td><td class="n">5</td><td class="n">5</td><td class="n">3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><code>ROW_NUMBER</code>: hep benzersiz 1, 2, 3… (eşitlikte sıra belirsiz → ikinci sıralama kolonu ekle).</li>
+          <li><code>RANK</code>: eşitler aynı numara, sonra <strong>boşluk</strong> (1, 1, 3).</li>
+          <li><code>DENSE_RANK</code>: eşitler aynı numara, <strong>boşluksuz</strong> (1, 1, 2) — "N. en yüksek farklı değer" için.</li>
+          <li><code>PARTITION BY</code>: numaralamayı grup başına sıfırlar.</li>
+          <li><code>LAG(kolon)</code> / <code>LEAD(kolon)</code>: önceki / sonraki satırın değeri (ilk satırda NULL).</li>
+          <li><code>SUM(Maas) OVER (PARTITION BY Dept)</code>: her satırın yanında departman toplamı; <code>SUM(x) OVER (ORDER BY Tarih)</code>: kümülatif toplam; <code>AVG(x) OVER (…)</code> aynı mantık.</li>
+        </ul>
+
+        <p class="tuzak">Window fonksiyonu WHERE'de kullanılamaz (SELECT adımında hesaplanır) → alt sorgu/CTE içine al, dışarıda süz. <code>GROUP BY</code> satır sayısını azaltır, <code>OVER</code> azaltmaz.</p>
+
+        <!-- ================================================================ -->
+        <h2 id="klasik-sorular"><span class="h-num">§ 8</span>Klasik mülakat soruları <span class="tag tag--bad">Mülakatta sık</span></h2>
+
+        <p>Örnek tablo (hayalî veri): <code>Calisan(Id, Ad, YoneticiId, Dept, Maas)</code> — A 9000 IT · B 7000 IT · C 7000 IK · D 5000 IK · E 9000 IT. Sonuçların hepsi <span class="tag tag--info">Ölçüldü</span>.</p>
+
+        <h3 id="ikinci-en-yuksek">İkinci en yüksek maaş (üç yol → 7000)</h3>
+
+        <pre><code><span class="k-yorum">-- 1) Alt sorgu + MAX (her lehçede çalışır; ikinci yoksa NULL döner)</span>
+SELECT MAX(Maas) FROM Calisan WHERE Maas &lt; (SELECT MAX(Maas) FROM Calisan);
+
+<span class="k-yorum">-- 2) DISTINCT + LIMIT/OFFSET (SQLite, PostgreSQL, MySQL)</span>
+SELECT DISTINCT Maas FROM Calisan ORDER BY Maas DESC LIMIT 1 OFFSET 1;
+<span class="k-yorum">--    SQL Server: ... ORDER BY Maas DESC OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY;</span>
+
+<span class="k-yorum">-- 3) DENSE_RANK</span>
+SELECT DISTINCT Maas FROM (
+  SELECT Maas, DENSE_RANK() OVER (ORDER BY Maas DESC) AS r FROM Calisan
+) t WHERE r = 2;</code></pre>
+
+        <p class="tuzak">2. yolda <code>DISTINCT</code> unutulursa iki kişi 9000 aldığı için yine 9000 gelir.</p>
+
+        <h3 id="n-en-yuksek">N. en yüksek maaş</h3>
+
+        <pre><code><span class="k-yorum">-- DENSE_RANK ... WHERE r = N   ya da   DISTINCT ... LIMIT 1 OFFSET N-1</span>
+SELECT DISTINCT Maas FROM Calisan c1
+WHERE 2 = (SELECT COUNT(DISTINCT Maas) FROM Calisan c2 WHERE c2.Maas &gt;= c1.Maas);   <span class="k-yorum">-- N = 2</span></code></pre>
+
+        <h3 id="tekrar-edenler">Tekrar eden kayıtları bul ve sil</h3>
+
+        <pre><code>SELECT Eposta, COUNT(*) FROM Musteri GROUP BY Eposta HAVING COUNT(*) &gt; 1;
+
+<span class="k-yorum">-- Her gruptan en küçük Id kalsın (a, b, a, c, a → 3 satır kalır)</span>
+DELETE FROM Musteri
+WHERE Id NOT IN (SELECT MIN(Id) FROM Musteri GROUP BY Eposta);</code></pre>
+
+        <p>Burada <code>NOT IN</code> güvenli, çünkü <code>MIN(Id)</code> NULL olamaz. Alternatif: <code>ROW_NUMBER() OVER (PARTITION BY Eposta ORDER BY Id) &gt; 1</code> olanları sil. MySQL aynı tabloyu alt sorguda okuyup silmeye izin vermez; alt sorguyu bir kat türetilmiş tabloya sar.</p>
+
+        <h3 id="dept-en-yuksek">Departman başına en yüksek maaşlı kişi</h3>
+
+        <pre><code>SELECT Dept, Ad, Maas FROM (
+  SELECT *, RANK() OVER (PARTITION BY Dept ORDER BY Maas DESC) AS r FROM Calisan
+) t WHERE r = 1;
+<span class="k-yorum">-- IK–C, IT–A, IT–E → 3 satır (IT'de eşitlik). Tek kişi istenirse ROW_NUMBER.</span></code></pre>
+
+        <h3 id="siparissiz">Hiç sipariş vermeyen müşteriler</h3>
+
+        <pre><code>SELECT m.* FROM Musteri m
+LEFT JOIN Siparis s ON s.MusteriId = m.Id
+WHERE s.Id IS NULL;
+<span class="k-yorum">-- ya da: WHERE NOT EXISTS (SELECT 1 FROM Siparis s WHERE s.MusteriId = m.Id)</span></code></pre>
+
+        <h3 id="calisan-yonetici">Çalışan – yönetici</h3>
+
+        <pre><code><span class="k-yorum">-- Yöneticisinden fazla kazananlar</span>
+SELECT c.Ad FROM Calisan c
+JOIN Calisan y ON y.Id = c.YoneticiId
+WHERE c.Maas &gt; y.Maas;</code></pre>
+
+        <h3 id="gruptan-ilk">Her gruptan ilk kayıt</h3>
+
+        <pre><code>SELECT * FROM (
+  SELECT *, ROW_NUMBER() OVER (PARTITION BY Dept ORDER BY Id) AS rn FROM Calisan
+) t WHERE rn = 1;            <span class="k-yorum">-- IK–C, IT–A; "son kayıt" için ORDER BY Id DESC</span></code></pre>
+
+        <!-- ================================================================ -->
+        <h2 id="veri-degistirme"><span class="h-num">§ 9</span>Veri değiştirme</h2>
+
+        <pre><code>INSERT INTO Calisan (Ad, Dept, Maas) VALUES ('F', 'IT', 6000);   <span class="k-yorum">-- kolon listesini yaz</span>
+INSERT INTO Arsiv (Ad) SELECT Ad FROM Calisan WHERE Maas &lt; 6000;
+UPDATE Calisan SET Maas = Maas + 5 WHERE Id = 1;                 <span class="k-yorum">-- aritmetik: kolon = kolon + 5</span>
+DELETE FROM Calisan WHERE Id = 4;</code></pre>
+
+        <p class="tuzak">WHERE'siz <code>UPDATE</code>/<code>DELETE</code> bütün tabloyu değiştirir. Önce aynı WHERE ile <code>SELECT</code> çalıştır; gerçek veride transaction içinde dene.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Komut</th><th>Ne siler</th><th>WHERE</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td><code>DELETE</code></td><td>Seçili satırlar</td><td>Var</td><td>DML, satır satır, trigger çalışır, transaction ile geri alınır</td></tr>
+              <tr><td><code>TRUNCATE</code></td><td>Bütün satırlar</td><td>Yok</td><td>DDL sayılır, hızlı. Kimlik sayacını SQL Server ve MySQL başa alır; PostgreSQL varsayılanda almaz (<code>CONTINUE IDENTITY</code>), <code>TRUNCATE … RESTART IDENTITY</code> yazmak gerekir. Geri alma lehçeye bağlı (PostgreSQL ve SQL Server'da transaction içinde olur, MySQL örtük commit yapar) <span class="tag tag--ok">Resmî</span>. SQLite'ta <strong>yok</strong></td></tr>
+              <tr><td><code>DROP</code></td><td>Tablonun kendisi</td><td>Yok</td><td>Şema + veri gider</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="upsert">UPSERT ve başka tablodan UPDATE</h3>
+
+        <pre><code><span class="k-yorum">-- SQLite (≥ 3.24.0) / PostgreSQL</span>
+INSERT INTO Sayac (Kelime) VALUES ('x')
+  ON CONFLICT (Kelime) DO UPDATE SET Adet = Adet + 1;   <span class="k-yorum">-- excluded.kolon = eklenmek istenen değer</span>
+<span class="k-yorum">-- MySQL:      INSERT ... ON DUPLICATE KEY UPDATE ...
+-- SQL Server: MERGE   (ya da UPDATE + IF @@ROWCOUNT = 0 INSERT)</span>
+
+<span class="k-yorum">-- Başka tablodan güncelleme: PostgreSQL, SQLite (≥ 3.33.0)</span>
+UPDATE A SET v = B.v FROM B WHERE B.id = A.id;
+<span class="k-yorum">-- SQL Server: UPDATE A SET v = B.v FROM A JOIN B ON B.id = A.id;
+-- MySQL:      UPDATE A JOIN B ON B.id = A.id SET A.v = B.v;</span></code></pre>
+
+        <!-- ================================================================ -->
+        <h2 id="sema"><span class="h-num">§ 10</span>Şema, kısıtlar, normalizasyon, index</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Anahtar</th><th>Kısaca</th></tr></thead>
+            <tbody>
+              <tr><td><code>PRIMARY KEY</code></td><td>Satırı benzersiz tanımlar; benzersiz + NULL olamaz; tabloda bir tane (SQLite'ta INTEGER olmayan PK tarihsel olarak NULL kabul edebilir)</td></tr>
+              <tr><td><code>FOREIGN KEY … REFERENCES</code></td><td>Başka tablonun anahtarına bağ; olmayan değeri engeller</td></tr>
+              <tr><td><code>ON DELETE CASCADE</code></td><td>Üst satır silinince bağlı satırlar da silinir (<code>SET NULL</code>, <code>RESTRICT</code> diğer seçenekler)</td></tr>
+              <tr><td><code>UNIQUE</code></td><td>Tekrar yok; NULL'lar çoğu lehçede birden çok olabilir (SQL Server'da tek NULL)</td></tr>
+              <tr><td><code>NOT NULL</code></td><td>Boş bırakılamaz</td></tr>
+              <tr><td><code>CHECK (Maas &gt;= 0)</code></td><td>Koşul</td></tr>
+              <tr><td><code>DEFAULT 0</code></td><td>Değer verilmezse kullanılır</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>1NF:</strong> her hücrede tek (atomik) değer, tekrar eden grup yok. <strong>2NF:</strong> 1NF + bileşik anahtarın <em>bir kısmına</em> bağlı kolon yok. <strong>3NF:</strong> 2NF + anahtar olmayan kolona bağlı kolon yok (geçişli bağımlılık yok). Kısaca: "anahtara, anahtarın tamamına, anahtardan başka hiçbir şeye."</li>
+          <li><strong>Denormalizasyon:</strong> okuma hızı için bilinçli tekrar (raporlama).</li>
+          <li><strong>Index:</strong> WHERE / JOIN / ORDER BY'da sık kullanılan, seçici kolonlarda okumayı hızlandırır; her INSERT/UPDATE/DELETE'te güncellendiği için yazmayı yavaşlatır, yer kaplar. Kolonu fonksiyona sokmak (<code>UPPER(Ad) = …</code>) ya da başta joker (<code>LIKE '%abc'</code>) çoğu zaman index'i kullanamaz. Bileşik index'te soldan sağa sıra önemli.</li>
+          <li><strong>Clustered vs nonclustered</strong> (SQL Server): clustered = verinin kendisi o anahtara göre sıralı tutulur, tabloda bir tane; nonclustered = ayrı yapı, satıra işaret eder, birden çok olabilir.</li>
+          <li><strong>View:</strong> kaydedilmiş SELECT; veri tutmaz (materialized view hariç); sadeleştirme ve yetki için.</li>
+        </ul>
+
+        <p class="tuzak">SQLite'ta yabancı anahtar denetimi varsayılan <strong>kapalıdır</strong>; her bağlantıda <code>PRAGMA foreign_keys = ON;</code> <span class="tag tag--ok">Resmî</span>.</p>
+
+        <!-- ================================================================ -->
+        <h2 id="transaction"><span class="h-num">§ 11</span>Transaction, ACID, izolasyon</h2>
+
+        <p><code>BEGIN</code> → işlemler → <code>COMMIT</code> (kalıcı) ya da <code>ROLLBACK</code> (geri al); <code>SAVEPOINT</code> ile ara nokta. <strong>ACID:</strong> <em>Atomicity</em> (ya hepsi ya hiçbiri) · <em>Consistency</em> (kısıtlar korunur) · <em>Isolation</em> (eşzamanlı işler birbirini bozmaz) · <em>Durability</em> (commit edilen kalıcı).</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Seviye</th><th>Dirty read</th><th>Non-repeatable read</th><th>Phantom read</th></tr></thead>
+            <tbody>
+              <tr><td>Read Uncommitted</td><td>Olabilir</td><td>Olabilir</td><td>Olabilir</td></tr>
+              <tr><td>Read Committed</td><td>Yok</td><td>Olabilir</td><td>Olabilir</td></tr>
+              <tr><td>Repeatable Read</td><td>Yok</td><td>Yok</td><td>Olabilir</td></tr>
+              <tr><td>Serializable</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ul>
+          <li><strong>Dirty read:</strong> başkasının commit etmediği veriyi okumak. <strong>Non-repeatable:</strong> aynı satırı iki kez okuyunca farklı değer. <strong>Phantom:</strong> aynı koşulla tekrar sorgulayınca yeni satır belirmesi.</li>
+          <li>Varsayılanlar <span class="tag tag--ok">Resmî</span>: PostgreSQL ve SQL Server <strong>Read Committed</strong>; MySQL InnoDB <strong>Repeatable Read</strong>. PostgreSQL'de Read Uncommitted, Read Committed gibi davranır ve Repeatable Read'de phantom da oluşmaz. SQL Server'da ek olarak <code>SNAPSHOT</code> seviyesi vardır.</li>
+        </ul>
+
+        <!-- ================================================================ -->
+        <h2 id="sqlite"><span class="h-num">§ 12</span>SQLite'a özel notlar</h2>
+
+        <p class="intro">Online sınav platformları farklı veritabanı motorları kullanır (SQLite, PostgreSQL, MySQL, SQL Server…); motor çoğu zaman görev ekranında yazar ya da seçilebilir <span class="tag tag--warn">Tahmin</span>. Bu bölümdeki notlar motor SQLite ise geçerlidir; önce motoru belirle.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Sınav motoru hangisi? Durum → Ne yap</caption>
+            <thead><tr><th>Durum</th><th>Ne yap</th></tr></thead>
+            <tbody>
+              <tr><td>Motor görevde yazıyor ya da seçilebiliyor</td><td>O lehçeyle yaz; farklar <a href="#lehceler">§ 13</a>'te.</td></tr>
+              <tr><td>Motor yazmıyor</td><td>Sürüm sorgusunu dene: SQLite <code>SELECT sqlite_version();</code> · PostgreSQL <code>SELECT version();</code> · MySQL <code>SELECT VERSION();</code> · SQL Server <code>SELECT @@VERSION;</code> <span class="tag tag--ok">Resmî</span>. Hata vereni ele; birden fazlası çalışırsa karar çıktıya göre verilir: PostgreSQL'de "PostgreSQL …", SQL Server'da "Microsoft SQL …" diye başlar; MySQL'de sürüm numarasıyla başlar, sonunda <code>-standard</code> gibi bir ek olabilir (ör. <code>8.4.x</code>) <span class="tag tag--ok">Resmî</span>. SQLite'ta <code>version()</code> ve <code>@@VERSION</code> hata verir <span class="tag tag--info">Ölçüldü</span>.</td></tr>
+              <tr><td>Motor SQLite</td><td>Aşağıdaki notlar geçerli; sürüm 3.39.0'dan eskiyse RIGHT/FULL JOIN yerine LEFT JOIN (+ <code>UNION ALL</code>) yaz.</td></tr>
+              <tr><td>Motor bilinmiyor, deneme imkânı yok</td><td>Her lehçede çalışan standart yolu seç (<code>COALESCE</code>, alt sorgu + <code>MAX</code>); <code>LIMIT</code>/<code>TOP</code>, <code>||</code>/<code>+</code> gibi lehçeye özgü yazımlardan kaçın.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Her komutun sonuna <code>;</code></p>
+          <p>Test sistemi kendi kontrol <code>SELECT</code>'ini kodunun arkasına ekleyebilir <span class="tag tag--warn">Tahmin</span>. Son komutta <code>;</code> yoksa iki komut birleşir: <code>UPDATE … WHERE Id = 1</code> + yeni satırda <code>SELECT …</code> → <code>near "SELECT": syntax error</code> <span class="tag tag--info">Ölçüldü</span>.</p>
+          <p>Görev bir UPDATE/DELETE ise sonuna kendi <code>SELECT *</code>'ını ekleme: sistem kendi sorgusunun sonucunu karşılaştırır, fazladan çıktı testi bozabilir <span class="tag tag--warn">Tahmin</span>.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>Bilgi</th><th>Kaynak</th></tr></thead>
+            <tbody>
+              <tr><td><code>RIGHT</code> / <code>FULL OUTER JOIN</code></td><td><strong>3.39.0</strong> (2022-06-25) ile geldi. Eskide: RIGHT → tabloları ters çevirip LEFT; FULL → aşağıdaki taklit</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td><code>UPDATE … FROM</code></td><td><strong>3.33.0</strong> (2020-08-14)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td>Window fonksiyonları</td><td><strong>3.25.0</strong> (2018-09-15)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td>UPSERT <code>ON CONFLICT DO UPDATE</code></td><td><strong>3.24.0</strong> (2018-06-04)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td><code>RETURNING</code></td><td><strong>3.35.0</strong> (2021-03-12)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td><code>TRUNCATE</code></td><td>Yok (<code>near "TRUNCATE": syntax error</code>). <code>DELETE FROM t;</code> yaz; WHERE yoksa SQLite bunu "truncate optimizasyonu" ile hızlı yapar</td><td><span class="tag tag--ok">Resmî</span> <span class="tag tag--info">Ölçüldü</span></td></tr>
+              <tr><td>Satır sınırlama</td><td><code>LIMIT n OFFSET m</code> (SQL Server: <code>TOP n</code>, <code>OFFSET … FETCH</code>)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td>Birleştirme</td><td><code>'a' || 'b'</code>; NULL ile sonuç NULL</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td>Tür yakınlığı (type affinity)</td><td>Kolon türü kesin değil, öneridir; <code>'12' + 0</code> → integer. <code>STRICT</code> tablo (3.37.0) katı tür ister</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td><code>LIKE</code></td><td>Varsayılan <strong>yalnız ASCII'de</strong> büyük/küçük harf duyarsız: <code>'a' LIKE 'A'</code> doğru, <code>'æ' LIKE 'Æ'</code> yanlış (Türkçe <code>İ/ı</code> da ASCII dışı)</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+              <tr><td>Tarih</td><td>Ayrı tarih türü yok; <code>date('2026-10-29', '+1 day')</code> → <code>2026-10-30</code>, <code>strftime('%Y', tarih)</code></td><td><span class="tag tag--ok">Resmî</span> <span class="tag tag--info">Ölçüldü</span></td></tr>
+              <tr><td>Tamsayı bölme</td><td><code>5/2</code> = 2</td><td><span class="tag tag--info">Ölçüldü</span></td></tr>
+              <tr><td>Esneklikler</td><td>WHERE'de alias'a ve GROUP BY dışı kolona izin verir — başka veritabanında hata</td><td><span class="tag tag--info">Ölçüldü</span></td></tr>
+              <tr><td>Metin tırnağı</td><td>Metin için <strong>tek tırnak</strong> <code>'…'</code>; çift tırnak tanımlayıcı içindir</td><td><span class="tag tag--ok">Resmî</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre><code><span class="k-yorum">-- FULL OUTER JOIN taklidi (eski SQLite / MySQL) → 4 satır, Ölçüldü</span>
+SELECT o.Ad, k.Ad FROM Ogrenci o
+LEFT JOIN OK2 x ON x.OgrenciId = o.Id
+LEFT JOIN Kurs k ON k.Id = x.KursId
+UNION ALL
+SELECT NULL, k.Ad FROM Kurs k
+WHERE NOT EXISTS (SELECT 1 FROM OK2 x WHERE x.KursId = k.Id);</code></pre>
+
+        <!-- ================================================================ -->
+        <h2 id="lehceler"><span class="h-num">§ 13</span>Lehçe farkları</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Konu</th><th>SQLite</th><th>PostgreSQL</th><th>SQL Server</th><th>MySQL</th></tr></thead>
+            <tbody>
+              <tr><td>İlk N satır</td><td><code>LIMIT n OFFSET m</code></td><td><code>LIMIT n OFFSET m</code></td><td><code>TOP n</code> / <code>OFFSET … FETCH</code></td><td><code>LIMIT n OFFSET m</code></td></tr>
+              <tr><td>Otomatik artan</td><td><code>INTEGER PRIMARY KEY</code></td><td><code>GENERATED AS IDENTITY</code> / <code>SERIAL</code></td><td><code>IDENTITY(1,1)</code></td><td><code>AUTO_INCREMENT</code></td></tr>
+              <tr><td>Metin birleştirme</td><td><code>||</code></td><td><code>||</code>, <code>CONCAT()</code></td><td><code>+</code>, <code>CONCAT()</code></td><td><code>CONCAT()</code> (<code>||</code> varsayılanda OR)</td></tr>
+              <tr><td>NULL yerine değer</td><td><code>IFNULL</code>, <code>COALESCE</code></td><td><code>COALESCE</code></td><td><code>ISNULL</code>, <code>COALESCE</code></td><td><code>IFNULL</code>, <code>COALESCE</code></td></tr>
+              <tr><td>Şu an</td><td><code>datetime('now')</code></td><td><code>NOW()</code></td><td><code>GETDATE()</code></td><td><code>NOW()</code></td></tr>
+              <tr><td>Metin uzunluğu</td><td><code>length()</code></td><td><code>length()</code></td><td><code>LEN()</code></td><td><code>CHAR_LENGTH()</code></td></tr>
+              <tr><td>Upsert</td><td><code>ON CONFLICT</code></td><td><code>ON CONFLICT</code></td><td><code>MERGE</code></td><td><code>ON DUPLICATE KEY UPDATE</code></td></tr>
+              <tr><td>Varsayılan izolasyon</td><td>Serializable</td><td>Read Committed</td><td>Read Committed</td><td>Repeatable Read</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--win">
+          <p class="callout__title">Püf noktası</p>
+          <p><code>COALESCE</code> standarttır ve dördünde de vardır — hangi lehçe olduğundan emin değilsen onu kullan.</p>
+        </div>
+
+        <!-- ================================================================ -->
+        <h2 id="kontrol-listesi"><span class="h-num">§ 14</span>Mülakat günü kontrol listesi (online test)</h2>
+
+        <p class="intro">Bu liste otomatik değerlendirilen online SQL testi içindir. Canlı ya da yüz yüze mülakatta platforma özgü maddeler (3, 7, 8, 9) gerekmeyebilir; diğer mülakat türleri için kardeş rehber: <a href="../Mulakat-Hazirligi/index.html">Mülakat Hazırlığı</a>.</p>
+
+        <ol>
+          <li>Şemayı ve <strong>örnek çıktıyı</strong> dikkatle oku: kolon adları, sırası, alias'lar birebir aynı olmalı.</li>
+          <li>Büyük/küçük harf ve boşluk: metin karşılaştırmaları ve çıktı başlıkları.</li>
+          <li>Her komutun sonuna <code>;</code>.</li>
+          <li>İstenen <strong>sırayı</strong> koru; <code>ORDER BY</code> istenmişse yaz, eşitlik için ikinci kolon ekle.</li>
+          <li>Örnek veri ≠ tam veri: sabit Id'ye göre değil <strong>koşula göre</strong> yaz; gizli testler farklı veriyle çalışır.</li>
+          <li>NULL, eşitlik (aynı maaş), boş tablo, tekrar eden değer durumlarını düşün.</li>
+          <li>UPDATE/DELETE görevinde istenmeyen fazladan SELECT ekleme.</li>
+          <li>Testleri çalıştır, <strong>hata mesajını oku</strong>: <code>near "X"</code> = hata X'in hemen önünde.</li>
+          <li>Motor ya da sürüm belirsizse sorgula (<a href="#sqlite">§ 12</a>): SQLite <code>SELECT sqlite_version();</code> · PostgreSQL <code>SELECT version();</code> · MySQL <code>SELECT VERSION();</code> · SQL Server <code>SELECT @@VERSION;</code>. SQLite 3.39.0'dan eskiyse RIGHT/FULL JOIN yerine LEFT ile yaz.</li>
+          <li>Süre kalırsa okunabilirlik: CTE, anlamlı alias, girintili yazım.</li>
+        </ol>
+
+        <!-- ================================================================ -->
+        <h2 id="cheat-sheet"><span class="h-num">§ 15</span>Hızlı tekrar (cheat sheet)</h2>
+
+        <ul>
+          <li>Çalışma sırası: <strong>FROM/JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT</strong>.</li>
+          <li>INNER = eşleşenler · LEFT ≥ sol satır · RIGHT ≥ sağ satır · FULL = LEFT ∪ RIGHT · CROSS = a×b.</li>
+          <li><code>LEFT JOIN</code> = <code>LEFT OUTER JOIN</code>; <code>JOIN</code> = <code>INNER JOIN</code>.</li>
+          <li>Çoklu eşleşme çoğaltır (2 × 3 = 6). NULL anahtar eşleşmez.</li>
+          <li>Anti-join: <code>LEFT JOIN … WHERE sag.anahtar IS NULL</code> ya da <code>NOT EXISTS</code>.</li>
+          <li>Sağ tablo koşulu ON'a; WHERE'e yazarsan LEFT → INNER olur.</li>
+          <li><code>= NULL</code> değil <code>IS NULL</code>. <code>NOT IN</code> + NULL = boş sonuç → <code>NOT EXISTS</code>.</li>
+          <li><code>COUNT(*)</code> satır, <code>COUNT(kolon)</code> NULL-dışı sayar.</li>
+          <li><code>BETWEEN</code> uçlar dahil. <code>AND</code> önce bağlar — parantez koy.</li>
+          <li>WHERE satır, HAVING grup süzer; window fonksiyonu WHERE'de olmaz.</li>
+          <li>ROW_NUMBER 1,2,3 · RANK 1,1,3 · DENSE_RANK 1,1,2.</li>
+          <li>2. en yüksek: <code>MAX … WHERE x &lt; MAX</code> · <code>DISTINCT … LIMIT 1 OFFSET 1</code> · <code>DENSE_RANK = 2</code>.</li>
+          <li>Grup başına en iyi: <code>RANK() OVER (PARTITION BY g ORDER BY x DESC) = 1</code>.</li>
+          <li>Tekrar sil: <code>DELETE … WHERE Id NOT IN (SELECT MIN(Id) … GROUP BY k)</code>.</li>
+          <li><code>UNION</code> tekrarı atar, <code>UNION ALL</code> atmaz.</li>
+          <li>DELETE (satır, WHERE) · TRUNCATE (hepsi, hızlı, SQLite'ta yok) · DROP (tablo gider).</li>
+          <li>UPDATE/DELETE'ten önce aynı WHERE ile SELECT.</li>
+          <li>ACID; varsayılan Read Committed (PostgreSQL, SQL Server), Repeatable Read (MySQL InnoDB).</li>
+          <li>SQLite: <code>;</code> · RIGHT/FULL ≥ 3.39.0 · UPDATE FROM ≥ 3.33.0 · window ≥ 3.25.0 · <code>||</code> · <code>LIMIT</code> · <code>PRAGMA foreign_keys = ON</code>.</li>
+          <li><code>5/2 = 2</code> → <code>5 * 1.0 / 2</code>.</li>
+        </ul>
+
+        <h2 id="kaynakca"><span class="h-num">§ 16</span>Kaynakça</h2>
+
+        <ol class="sources">
+          <li id="k1"><span class="src-n">01</span><span><span class="tag tag--ok">Resmî</span> SQLite — Release History (3.39.0 RIGHT/FULL JOIN, 3.35.0 RETURNING, 3.37.0 STRICT) — <a href="https://www.sqlite.org/changes.html">sqlite.org/changes.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k2"><span class="src-n">02</span><span><span class="tag tag--ok">Resmî</span> SQLite — UPDATE (UPDATE-FROM 3.33.0) — <a href="https://www.sqlite.org/lang_update.html">sqlite.org/lang_update.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k3"><span class="src-n">03</span><span><span class="tag tag--ok">Resmî</span> SQLite — Window Functions (3.25.0) — <a href="https://www.sqlite.org/windowfunctions.html">sqlite.org/windowfunctions.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k4"><span class="src-n">04</span><span><span class="tag tag--ok">Resmî</span> SQLite — UPSERT (3.24.0) — <a href="https://www.sqlite.org/lang_upsert.html">sqlite.org/lang_upsert.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k5"><span class="src-n">05</span><span><span class="tag tag--ok">Resmî</span> SQLite — DELETE (truncate optimization) — <a href="https://www.sqlite.org/lang_delete.html">sqlite.org/lang_delete.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k6"><span class="src-n">06</span><span><span class="tag tag--ok">Resmî</span> SQLite — Expressions (LIKE, ||, IN/NOT IN ve NULL) — <a href="https://www.sqlite.org/lang_expr.html">sqlite.org/lang_expr.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k7"><span class="src-n">07</span><span><span class="tag tag--ok">Resmî</span> SQLite — Datatypes / type affinity — <a href="https://www.sqlite.org/datatype3.html">sqlite.org/datatype3.html</a></span></li>
+          <li id="k8"><span class="src-n">08</span><span><span class="tag tag--ok">Resmî</span> SQLite — SELECT (LIMIT/OFFSET, bare columns) — <a href="https://www.sqlite.org/lang_select.html">sqlite.org/lang_select.html</a></span></li>
+          <li id="k9"><span class="src-n">09</span><span><span class="tag tag--ok">Resmî</span> SQLite — Foreign Keys — <a href="https://www.sqlite.org/foreignkeys.html">sqlite.org/foreignkeys.html</a></span></li>
+          <li id="k10"><span class="src-n">10</span><span><span class="tag tag--ok">Resmî</span> SQLite — Date and Time Functions — <a href="https://www.sqlite.org/lang_datefunc.html">sqlite.org/lang_datefunc.html</a></span></li>
+          <li id="k11"><span class="src-n">11</span><span><span class="tag tag--ok">Resmî</span> SQLite — Quirks (çift tırnak, PK'da NULL) — <a href="https://www.sqlite.org/quirks.html">sqlite.org/quirks.html</a></span></li>
+          <li id="k12"><span class="src-n">12</span><span><span class="tag tag--ok">Resmî</span> SQLite — Isolation In SQLite — <a href="https://www.sqlite.org/isolation.html">sqlite.org/isolation.html</a></span></li>
+          <li id="k13"><span class="src-n">13</span><span><span class="tag tag--ok">Resmî</span> PostgreSQL — Transaction Isolation — <a href="https://www.postgresql.org/docs/current/transaction-iso.html">postgresql.org/docs/current/transaction-iso.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k14"><span class="src-n">14</span><span><span class="tag tag--ok">Resmî</span> PostgreSQL — INSERT / ON CONFLICT — <a href="https://www.postgresql.org/docs/current/sql-insert.html">postgresql.org/docs/current/sql-insert.html</a></span></li>
+          <li id="k15"><span class="src-n">15</span><span><span class="tag tag--ok">Resmî</span> PostgreSQL — Window Functions — <a href="https://www.postgresql.org/docs/current/tutorial-window.html">postgresql.org/docs/current/tutorial-window.html</a></span></li>
+          <li id="k16"><span class="src-n">16</span><span><span class="tag tag--ok">Resmî</span> Microsoft Learn — SET TRANSACTION ISOLATION LEVEL — <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/set-transaction-isolation-level-transact-sql">learn.microsoft.com/…/set-transaction-isolation-level-transact-sql</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k17"><span class="src-n">17</span><span><span class="tag tag--ok">Resmî</span> Microsoft Learn — ORDER BY (OFFSET FETCH) — <a href="https://learn.microsoft.com/en-us/sql/t-sql/queries/select-order-by-clause-transact-sql">learn.microsoft.com/…/select-order-by-clause-transact-sql</a></span></li>
+          <li id="k18"><span class="src-n">18</span><span><span class="tag tag--ok">Resmî</span> Microsoft Learn — Clustered and nonclustered indexes — <a href="https://learn.microsoft.com/en-us/sql/relational-databases/indexes/clustered-and-nonclustered-indexes-described">learn.microsoft.com/…/clustered-and-nonclustered-indexes-described</a></span></li>
+          <li id="k19"><span class="src-n">19</span><span><span class="tag tag--ok">Resmî</span> MySQL 8.4 — InnoDB Transaction Isolation Levels — <a href="https://dev.mysql.com/doc/refman/8.4/en/innodb-transaction-isolation-levels.html">dev.mysql.com/…/innodb-transaction-isolation-levels.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k20"><span class="src-n">20</span><span><span class="tag tag--ok">Resmî</span> MySQL 8.4 — Server SQL Modes (PIPES_AS_CONCAT, ONLY_FULL_GROUP_BY) — <a href="https://dev.mysql.com/doc/refman/8.4/en/sql-mode.html">dev.mysql.com/…/sql-mode.html</a> <span class="erisim">· erişim 29 Eki 2026</span></span></li>
+          <li id="k21"><span class="src-n">21</span><span><span class="tag tag--ok">Resmî</span> SQLite — Built-In Scalar SQL Functions (<code>sqlite_version()</code>) — <a href="https://www.sqlite.org/lang_corefunc.html">sqlite.org/lang_corefunc.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k22"><span class="src-n">22</span><span><span class="tag tag--ok">Resmî</span> PostgreSQL — System Information Functions (<code>version()</code>) — <a href="https://www.postgresql.org/docs/current/functions-info.html">postgresql.org/docs/current/functions-info.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k23"><span class="src-n">23</span><span><span class="tag tag--ok">Resmî</span> Microsoft Learn — @@VERSION (Transact-SQL) — <a href="https://learn.microsoft.com/en-us/sql/t-sql/functions/version-transact-sql-configuration-functions">learn.microsoft.com/…/version-transact-sql-configuration-functions</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k24"><span class="src-n">24</span><span><span class="tag tag--ok">Resmî</span> MySQL 8.4 — Information Functions (<code>VERSION()</code>; değerin sonunda ek olabilir) — <a href="https://dev.mysql.com/doc/refman/8.4/en/information-functions.html">dev.mysql.com/…/information-functions.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k25"><span class="src-n">25</span><span><span class="tag tag--ok">Resmî</span> MySQL 8.4 — Problems with Column Aliases (WHERE'de alias yok; GROUP BY / HAVING / ORDER BY'da var) — <a href="https://dev.mysql.com/doc/refman/8.4/en/problems-with-alias.html">dev.mysql.com/…/problems-with-alias.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k26"><span class="src-n">26</span><span><span class="tag tag--ok">Resmî</span> PostgreSQL — TRUNCATE (<code>CONTINUE IDENTITY</code> varsayılan, <code>RESTART IDENTITY</code>) — <a href="https://www.postgresql.org/docs/current/sql-truncate.html">postgresql.org/docs/current/sql-truncate.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Microsoft Learn — TRUNCATE TABLE (identity sayacı başa döner, transaction içinde geri alınabilir) — <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/truncate-table-transact-sql">learn.microsoft.com/…/truncate-table-transact-sql</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> MySQL 8.4 — TRUNCATE TABLE Statement (AUTO_INCREMENT başa döner, örtük commit) — <a href="https://dev.mysql.com/doc/refman/8.4/en/truncate-table.html">dev.mysql.com/…/truncate-table.html</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+        </ol>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>
