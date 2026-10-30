@@ -68,6 +68,7 @@ Belirli bir durumla karşılaşıldığında okunacak genel rehberler: Türkiye 
 | [SEO](Rehberler/SEO/) | Bir sitenin Google, Bing, Yandex ve yapay zekâ aramalarında organik görünmesi, 21 bölüm: tarama ve dizine ekleme, sayfa içi SEO, yapılandırılmış veri, hız, yerel SEO, bağlantılar, site denetimi ve kara şapkadan korunma. |
 | [SQL Mülakat](Rehberler/SQL-Mulakat/) | Mülakat ve online kodlama sınavları için kısa SQL: JOIN'lerde kaç satır gelir, NULL, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme, SQLite notları ve lehçe farkları. |
 | [Mülakat Hazırlığı](Rehberler/Mulakat-Hazirligi/) | .NET / C# backend mülakatı için soru → kısa cevap tekrar rehberi: mülakat türleri ve online test, C#, ASP.NET Core, EF Core, dağıtık sistemler, algoritma ve sistem tasarımı, davranışsal ve İngilizce sorular, maaş ilkeleri ve kontrol listesi. |
+| [Masaüstü Uygulamada Reklam](Rehberler/Masaustu-Uygulama-Reklam/) | Masaüstü uygulama ve web sitesinde reklam ve reklam izleyerek kredi: ağ politikaları, ödüllü reklam ve SSV, engelleyiciler, doğrudan satış, hukuk, vergi ve şirket yapısı. |
 
 ## Çalışma Günlüğü
 

@@ -22,7 +22,7 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
 Resmî kaynaklar: [Blazor dokümantasyonu](https://learn.microsoft.com/aspnet/core/blazor/) · [.NET MAUI dokümantasyonu](https://learn.microsoft.com/dotnet/maui/)
 
-İlgili: [JavaScript ve TypeScript](../../JavaScript-TypeScript/) · [HTML ve CSS](../../HTML-CSS/)
+İlgili: [JavaScript ve TypeScript](../../JavaScript-TypeScript/) · [HTML ve CSS](../../HTML-CSS/) · [Masaüstü Uygulamada Reklam](../../../Rehberler/Masaustu-Uygulama-Reklam/) (masaüstü uygulamaya ve WebView2'ye reklam koyma kuralları, ödüllü reklam ve SSV mimarisi)
 
 ---
 

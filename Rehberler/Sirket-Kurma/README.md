@@ -31,6 +31,10 @@ Rehber farklı durumları birlikte ele alır (adres kurucunun mülkü mü, kiral
 
 HTML anlatım: [index.html](index.html) — GitHub HTML'i işlemez; dosyayı yerelde tarayıcıda açın.
 
+## İlgili konular
+
+- [Masaüstü Uygulamada Reklam](../Masaustu-Uygulama-Reklam/) — Reklam ya da abonelik geliri olan bir yazılım ürünü için şirketsiz dönem, Türkiye'de şahıs/limited ve ABD LLC / Estonya OÜ / BK Ltd karar tablosu; ödeme altyapılarının Türkiye'deki durumu.
+
 ## Resmi kaynaklar
 
 - [Gelir İdaresi Başkanlığı (GİB)](https://www.gib.gov.tr/)
