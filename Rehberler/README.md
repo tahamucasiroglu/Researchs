@@ -1,6 +1,6 @@
 # Rehberler
 
-Belirli bir iş ya da durumla karşılaşıldığında sıfırdan, adım adım okunacak genel rehberler: Türkiye mevzuatına dayanan hukuki ve mali konular (işsizlik, şirket kurma), dijital kanallarda yayın ve gelir, kariyer (mülakat hazırlığı), teknik başvuru konuları (mesajlaşma altyapıları, SEO). Her rehber kendi klasöründe, birbirine bağlı düz HTML sayfalarından oluşur; kavramlar, hesap formülleri, takvimler ve resmi kaynaklar bir arada verilir. Araştırma niteliğindeki rehberlerde yapay zekâ için saf Markdown hâli (`arastirma.md`) de bulunur.
+Belirli bir iş ya da durumla karşılaşıldığında sıfırdan, adım adım okunacak genel rehberler: Türkiye mevzuatına dayanan hukuki ve mali konular (işsizlik, şirket kurma, araçla ek gelir), dijital kanallarda yayın ve gelir, kariyer (mülakat hazırlığı), teknik başvuru konuları (mesajlaşma altyapıları, SEO). Her rehber kendi klasöründe, birbirine bağlı düz HTML sayfalarından oluşur; kavramlar, hesap formülleri, takvimler ve resmi kaynaklar bir arada verilir. Araştırma niteliğindeki rehberlerde yapay zekâ için saf Markdown hâli (`arastirma.md`) de bulunur.
 
 > **Uyarı:** Bu rehberler genel bilgi amaçlıdır; hukuki, mali veya vergisel danışmanlık değildir. Rakamlar (asgari ücret, tavanlar, oranlar, harçlar, tahmini maliyetler) belirtilen tarihteki mevzuata göredir ve değişebilir. Teknik rehberlerdeki kurallar (arama motoru politikaları, API'ler, platform şartları) da sık değişir. Karar vermeden önce güncel bilgiyi resmi kaynaktan, avukattan veya mali müşavirden doğrulayın.
 
@@ -14,6 +14,7 @@ Belirli bir iş ya da durumla karşılaşıldığında sıfırdan, adım adım o
 - [SQL Mülakat Rehberi](SQL-Mulakat/) — Mülakatta ve online kodlama sınavlarında sık sorulan SQL konularının kısa, anahtar kelimeli özeti: JOIN'lerde kaç satır gelir, NULL mantığı, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme, SQLite notları ve SQLite/PostgreSQL/SQL Server/MySQL farkları. Yapay zekâ için Markdown hâli de var.
 - [Mülakat Hazırlığı](Mulakat-Hazirligi/) — .NET / C# backend ağırlıklı yazılım mülakatına "soru → kısa cevap" biçiminde hazırlık: mülakat türleri ve online test taktikleri, C#, OOP/SOLID, ASP.NET Core, EF Core, dağıtık sistemler, algoritma ve sistem tasarımı, davranışsal ve İngilizce sorular, maaş pazarlığı ilkeleri ve kontrol listesi. Yapay zekâ için Markdown hâli de var.
 - [Masaüstü Uygulamada Reklam](Masaustu-Uygulama-Reklam/) — Windows masaüstü uygulaması ve web sitesi olan bir üründe reklam göstermek ve reklam izletip kredi vermek: reklam ağlarının masaüstü politikaları, ödüllü reklam ve sunucu doğrulaması (SSV), reklam engelleyiciler ve doğrudan reklam satışı. Hukuk, vergi ve Türkiye ya da yurt dışı şirket seçenekleri okurun durumuna göre dallanan tablolarla anlatılır. Yapay zekâ için Markdown hâli de var.
+- [Yolculuk Paylaşımı](Yolculuk-Paylasimi/) — Martı TAG gibi paylaşımlı yolculuk uygulamalarıyla özel araçla ücretli yolcu taşımanın hukuku: 2026 KTK Ek 2 cezaları, 2022–2026 mahkeme kararları, sigorta rücusu, vergi ve Bağ-Kur; il, araç ve yakıt durumuna göre sonuçlar ve maliyet senaryoları. Yapay zekâ için Markdown hâli de var.
 
 ---
 
