@@ -61,6 +61,7 @@ Ayrıntı ve karar ağacı: [Süreç ve engel raporu](surec-ve-engeller.html) (�
 - [API → YouTube](../../API/Canli-Yayin-ve-Video/YouTube.md) — YouTube Data API, kota, WebSub ile yeni video bildirimi ve canlı yayın/sohbet takibi.
 - [SEO Rehberi → Video platformlarında kara şapka](../SEO/21-kara-sapka.html#video-platformlari) — İzlenme ve abone botu, sub4sub, yanıltıcı başlık ve küçük resim, yeniden yüklenen içerik: YouTube kuralları ve riskleri.
 - [Masaüstü Uygulamada Reklam](../Masaustu-Uygulama-Reklam/) — Masaüstü uygulama ve web sitesinde reklam, ödüllü reklamla kredi (SSV), AdSense'in yazılım içi yasağı; şirket ve vergi karar tabloları.
+- [Google Play'de Reklamlı Oyun](../Google-Play-Oyun/) — Aynı sorunun Google Play tarafı: 12 kişi / 14 gün kapalı test, AdMob ödeme eşikleri, mobil uygulama gelirinde 20/B ve çalışma durumuna göre dallar.
 
 ---
 

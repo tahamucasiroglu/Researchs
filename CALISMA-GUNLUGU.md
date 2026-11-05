@@ -4,6 +4,10 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ← [Ana sayfa](README.md)
 
+## Kasım 2026
+
+- **05.11.2026** — Google Play'de reklamlı oyun yayınlama araştırması: maliyet ve süre, 12 kişi / 14 gün kapalı test, API 36 ve 16 KB şartları, AdMob ödeme eşikleri, gelir senaryoları, GVK 20/B ve çalışma durumu dalları → [Rehberler/Google-Play-Oyun](Rehberler/Google-Play-Oyun/)
+
 ## Ekim 2026
 
 - **30.10.2026** — Paylaşımlı yolculuk (Martı TAG) hukuku araştırması: 2026 KTK Ek 2 cezaları, 2022–2026 mahkeme kararları, sigorta rücusu, vergi ve Bağ-Kur, il ve araç durumlarına göre sonuçlar, maliyet senaryoları → [Rehberler/Yolculuk-Paylasimi](Rehberler/Yolculuk-Paylasimi/)

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Play'de Reklamlı Oyun — Araştırma</title>
+<meta name="description" content="Google Play'de basit, reklamlı bir oyun yayınlamak: maliyet ve süre, kapalı test şartı (12 kişi / 14 gün), teknik şartlar, Godot / Kotlin / Unity, AdMob geliri ve ödeme eşikleri, şirket ve vergi (GVK mük. 20/B) durum durum.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<style>
+  .dog { color: var(--flag); font-weight: 600; }
+  .sources li { overflow-wrap: anywhere; font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Google Play'de reklamlı oyun</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">Araştırma · Kasım 2026</span>
+      <span class="brand__name">Google Play'de Reklamlı Oyun</span>
+      <span class="brand__sub">Yayın · AdMob · vergi</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="#kisa"><span class="nav-num">00</span><span>Kısa cevap</span></a></li>
+          <li><a class="nav-item" href="#maliyet"><span class="nav-num">01</span><span>Para ve süre</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group__title">Yayınlamak</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="#hesap"><span class="nav-num">02</span><span>Hesap türü, görünen bilgiler</span></a></li>
+          <li><a class="nav-item" href="#kapali-test"><span class="nav-num">03</span><span>Kapalı test: 12 kişi, 14 gün</span></a></li>
+          <li><a class="nav-item" href="#teknik"><span class="nav-num">04</span><span>Teknik şartlar</span></a></li>
+          <li><a class="nav-item" href="#motor"><span class="nav-num">05</span><span>Godot · Kotlin · Unity</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group__title">Gelir ve vergi</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="#admob"><span class="nav-num">06</span><span>AdMob: birikme ve ödeme</span></a></li>
+          <li><a class="nav-item" href="#gelir"><span class="nav-num">07</span><span>Gelir senaryoları</span></a></li>
+          <li><a class="nav-item" href="#vergi"><span class="nav-num">08</span><span>Şirket ve vergi, durum durum</span></a></li>
+          <li><a class="nav-item" href="#bakim"><span class="nav-num">09</span><span>Yıllık bakım</span></a></li>
+          <li><a class="nav-item" href="#karar"><span class="nav-num">10</span><span>Karar tablosu</span></a></li>
+          <li><a class="nav-item" href="#dogrulanamayan"><span class="nav-num">11</span><span>Doğrulanamayanlar</span></a></li>
+          <li><a class="nav-item" href="#kaynakca"><span class="nav-num">12</span><span>Kaynakça</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="arastirma.md"><span class="nav-num">MD</span><span>Yapay zekâ için Markdown hâli</span></a></li>
+          <li><a class="nav-item" href="../Masaustu-Uygulama-Reklam/index.html"><span class="nav-num">&rarr;</span><span>Masaüstü uygulamada reklam</span></a></li>
+          <li><a class="nav-item" href="../YouTube-Oyun/index.html"><span class="nav-num">&rarr;</span><span>YouTube Oyun (motor seçimi, 20/B)</span></a></li>
+          <li><a class="nav-item" href="../Sirket-Kurma/12-sirketsiz.html"><span class="nav-num">&rarr;</span><span>Şirketsiz gelir</span></a></li>
+          <li><a class="nav-item" href="../Issizlik/06-odenek-alirken-gelir.html"><span class="nav-num">&rarr;</span><span>Ödenek alırken gelir</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      Araştırma tarihi 5 Kasım 2026. Yalnız herkese açık sayfalar okundu; hiçbir hesap açılmadı, API'ye istek atılmadı.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Araştırma · Mobil oyun ve para kazanma</div>
+        <h1 class="page-title">Google Play'de basit bir oyun <em>reklamla yayınlamak</em></h1>
+        <p class="lede">Tek kişinin Godot ya da Kotlin ile yaptığı 2D/3D basit bir oyunu Google Play'e çıkarması: ne kadar para ve zaman ister, yeni hesaplardaki kapalı test şartı, teknik şartlar, AdMob geliri nasıl birikir ve ödenir, şirket gerekir mi, vergi nasıl işler.</p>
+        <div class="head-meta">Erişim tarihi 5 Kasım 2026 &middot; resmî kaynak öncelikli &middot; bulunamayan bilgi "doğrulanamadı" &middot; <a href="arastirma.md">arastirma.md</a></div>
+      </header>
+
+      <div class="content">
+
+        <h2 id="kisa"><span class="h-num">§ 0</span>Kısa cevap</h2>
+        <p class="intro">Rozetler: <span class="tag tag--ok">RESMÎ</span> resmî sayfada okundu · <span class="tag tag--info">3. TARAF</span> blog/forum · <span class="tag tag--warn">TAHMİN</span> ölçülmemiş yorum. Terimler ilk geçtiği yerde tek satırla açıklanır.</p>
+
+        <div class="callout callout--win">
+          <p class="callout__title">Olan</p>
+          <ul>
+            <li><b>Para:</b> zorunlu tek gider Google Play geliştirici hesabı, <b>tek seferlik 25 $</b>. Godot ve Kotlin araçları ücretsiz. → <a href="#maliyet">§1</a></li>
+            <li><b>Şirket:</b> başlamak için gerekmez. Kişisel hesap reklamla para kazanabilir; D-U-N-S numarası yalnız kuruluş hesabında istenir. → <a href="#hesap">§2</a></li>
+            <li><b>İlk yayın:</b> 13 Kasım 2023'ten sonra açılan kişisel hesapta en az <b>12 test kullanıcısı, 14 gün kesintisiz</b> kapalı test, sonra inceleme (genelde 7 gün veya daha az). En az ~3 hafta. → <a href="#kapali-test">§3</a></li>
+            <li><b>Ödeme:</b> AdMob geliri her ay birikir; eşik TRY hesabında <b>₺200</b>, USD hesabında <b>100 $</b>; ödeme ayın 21'i civarı. Türkiye EFT listesinde var. → <a href="#admob">§6</a></li>
+            <li><b>Vergi (Türkiye'de yaşayan gerçek kişi):</b> GVK mük. 20/B istisnası mobil uygulama mağazası gelirini kapsar: ayrı banka hesabı, banka <b>%15</b> keser, 2026 sınırı <b>5.300.000 TL</b>. Çalışma durumu (kamu görevlisi, ödenek alan, öğrenci, emekli…) ve yaş sonucu değiştirebilir; yurt dışında yaşayan için ikamet ülkesinin kuralları geçerli. → <a href="#vergi">§8</a></li>
+          </ul>
+        </div>
+        <div class="callout callout--warn">
+          <p class="callout__title">Gerçekçi beklenti</p>
+          <ul>
+            <li>Basit reklamlı bir oyun, paylaşılan deneyimlere göre <b>1.000 indirme başına birkaç dolar</b> getiriyor. Ayda 100 $ için ayda on binlerce indirme gerekir. Zor olan oyunu yapmak değil, indirtmek. → <a href="#gelir">§7</a></li>
+            <li>Kendi reklamına tıklamak ya da çevreye tıklatmak hesabı kapattırabilir. → <a href="#admob">§6</a></li>
+          </ul>
+        </div>
+
+        <h2 id="maliyet"><span class="h-num">§ 1</span>Para ve süre</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Para</caption>
+            <thead><tr><th>Kalem</th><th>Tutar</th><th>Not</th></tr></thead>
+            <tbody>
+              <tr><td>Google Play geliştirici kaydı</td><td>25 $, tek sefer</td><td>Visa, Mastercard, AmEx; ön ödemeli kart kabul edilmez; kabul edilen kart ülkeye göre değişir <span class="tag tag--ok">RESMÎ</span> [1]</td></tr>
+              <tr><td>Godot</td><td>0</td><td>MIT lisansı; telif ücreti, gelir payı yok; lisans metni oyunda bir yerde gösterilir <span class="tag tag--ok">RESMÎ</span> [20]</td></tr>
+              <tr><td>Kotlin + Android Studio</td><td>0</td><td>Ücretsiz araçlar</td></tr>
+              <tr><td>Unity Personal</td><td>0 (şartlı)</td><td>Son 12 ayda gelir + yatırım 200.000 $'ın altındaysa <span class="tag tag--ok">RESMÎ</span> [24]</td></tr>
+              <tr><td>Görseller, sesler</td><td>0'dan başlar</td><td>Kenney paketleri CC0 (ticari serbest, atıf gerekmez) <span class="tag tag--ok">RESMÎ</span> [21]; diğer paketlerde lisans tek tek okunur: CC-BY atıf ister, CC-BY-NC reklamlı oyunda kullanılamaz</td></tr>
+              <tr><td>Gizlilik politikası sayfası, <code>app-ads.txt</code></td><td>0 olabilir</td><td>Herkese açık bir web sayfası gerekir; ücretsiz statik barındırma yeter (ör. GitHub Pages)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Süre (tek kişi, programlama bilen, yapay zekâ yardımıyla) <span class="tag tag--warn">TAHMİN</span></caption>
+            <thead><tr><th>İş</th><th>Süre</th></tr></thead>
+            <tbody>
+              <tr><td>Tek mekanikli basit 2D oyun (reklam + mağaza sayfası dahil)</td><td>1–3 hafta</td></tr>
+              <tr><td>Cilalı casual oyun (seviyeler, ilerleme, ses, ayarlar)</td><td>2–4 ay</td></tr>
+              <tr><td>Basit 3D oyun (düşük poligon)</td><td>1–3 ay; ucuz telefonda performans ayarı ayrıca</td></tr>
+              <tr><td>İlk oyunda dışa aktarma, imzalama, AdMob kurulumu</td><td>+3–5 gün (sonraki oyunlarda çok azalır)</td></tr>
+              <tr><td>Kapalı test + inceleme (yeni kişisel hesap)</td><td>en az ~3 hafta; geliştirmeyle paralel yürüyebilir</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Stüdyo ve serbest çalışan kaynakları 2D hyper-casual için 2 hafta ile 3 ay arası rakamlar veriyor <span class="tag tag--info">3. TARAF</span> [28]. Yapay zekâ çalışan bir prototipi hızlı çıkarıyor; darboğaz animasyon ve "oyun hissi" <span class="tag tag--info">3. TARAF</span>. Hiç kod yazmamış biri için motorun temel eğitimine ayrılan süre bu tabloya ayrıca eklenir <span class="tag tag--warn">TAHMİN</span>; başlangıç noktasına göre motor seçimi: <a href="#motor">§5</a>.</p>
+
+        <h2 id="hesap"><span class="h-num">§ 2</span>Hesap türü ve herkese açık görünen bilgiler</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th></th><th>Kişisel hesap</th><th>Kuruluş hesabı</th></tr></thead>
+            <tbody>
+              <tr><td>Kimin için</td><td>Kişisel kullanım: öğrenci, hobi, amatör geliştirici</td><td>Şirket / kurum</td></tr>
+              <tr><td>Kimlik</td><td>Resmî kimlik + kart</td><td>D-U-N-S numarası zorunlu</td></tr>
+              <tr><td>Zorunlu olduğu uygulamalar</td><td>—</td><td>Finans, sağlık, VPN, devlet. Basit oyun bunlardan değil.</td></tr>
+              <tr><td>Para kazanma</td><td colspan="2">İkisi de aynı temel işlevlere sahip, ödeme profiliyle para kazanabilir <span class="tag tag--ok">RESMÎ</span> [2]</td></tr>
+              <tr><td>Play'de görünen</td><td>Yasal ad, ülke, geliştirici e-postası. "If you decide to monetize on Google Play then Google will display your full address." Bazı bölgelerde telefon da görünebilir.</td><td>Yasal ad, yasal adres, geliştirici e-postası ve telefonu</td></tr>
+              <tr><td>Kapalı test şartı (§3)</td><td>13 Kas 2023 sonrası açıldıysa var</td><td>Resmî metin şartı kişisel hesaplar için koyuyor (çıkarım: kuruluş hesabında yok)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Görünen bilgiler <span class="tag tag--ok">RESMÎ</span> [3]. Google'ın iletişim için kullandığı e-posta ve telefon oyunculara gösterilmez. Tam adresin <b>yalnız reklamlı</b> bir uygulamada da görünüp görünmediği <span class="dog">doğrulanamadı</span>: Play'deki ödeme (satıcı) profili ücretli uygulama ve uygulama içi satın alma için anlatılıyor [4]; AdMob ise kendi ödeme sistemiyle öder. Ev adresinin görünmesini istemeyen biri, satıcı profili açmadan önce bunu düşünmeli.</p>
+        <div class="callout callout--info">
+          <p class="callout__title">Ülke</p>
+          <p>Türkiye hem geliştirici kaydında hem satıcı kaydında destekli; varsayılan para birimi TRY [4]. İş yeri ülkesi sonradan değiştirilemez, banka hesabı aynı ülkede olmalı. Yurt dışında yaşayan biri kayıt ülkesini ikamet adresine göre seçer; o ülkenin desteklenip desteklenmediği aynı tablodan bakılır.</p>
+        </div>
+
+        <h2 id="kapali-test"><span class="h-num">§ 3</span>Kapalı test: 12 kişi, 14 gün</h2>
+        <ul>
+          <li><b>Kimlere:</b> "personal accounts created after November 13, 2023" <span class="tag tag--ok">RESMÎ</span> [5]</li>
+          <li><b>Şart:</b> "a minimum of 12 testers who have been opted in continuously for at least 14 days". 14 günü doldurmadan çıkan sayılmaz; çıkıp yeniden giren için gün baştan sayılır [5].</li>
+          <li><b>Sonra:</b> üretime erişim başvurusu; formda test kullanıcılarını nasıl bulduğun, ne kadar kullandıkları, geri bildirim, hedef kitle ve test sonrası değişiklikler sorulur. "Review usually takes seven days or less, but can occasionally take longer." [5]</li>
+          <li><b>Etkileşim:</b> yetersiz etkileşimde testi sürdürmen istenebilir; ölçüt yayınlanmadı. "12 kişiden çoğu 14 günün 5–7'sinde açmalı" iddiası yalnız bir blogda <span class="tag tag--info">3. TARAF</span> [6].</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Test kullanıcısı nereden</th><th>Değerlendirme</th></tr></thead>
+            <tbody>
+              <tr><td>Arkadaş, aile, iş çevresi</td><td>Google'ın gösterdiği en yaygın yol; en sağlam <span class="tag tag--ok">RESMÎ</span></td></tr>
+              <tr><td>Oyunun hedef kitlesinin bulunduğu topluluklar</td><td>Google öneriyor; gerçek geri bildirim de getirir</td></tr>
+              <tr><td>Takas grupları (Reddit, Google Groups)</td><td>Resmî metin ne yasaklıyor ne onaylıyor; uygulamayı hiç açmayanlar yüzünden reddedilme anlatıları var <span class="tag tag--info">3. TARAF</span> [7]</td></tr>
+              <tr><td>Ücretli test hizmetleri</td><td>Var; kaynakların çoğu hizmeti satan siteler, tarafsız değil</td></tr>
+              <tr><td>Sahte hesap, emülatör, bot</td><td>Yapma: hesap askıya alınabilir (blog yorumu; Google metni bulunamadı). Yorum karşılığı yorum Google politikasına aykırı.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Pratik öneri <span class="tag tag--info">3. TARAF</span>: test sırasında en az bir güncelleme yayınla, geri bildirim topla, formu ayrıntılı doldur.</p>
+
+        <h2 id="teknik"><span class="h-num">§ 4</span>Teknik şartlar (Kasım 2026)</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Şart</th><th>Bugünkü hâli</th></tr></thead>
+            <tbody>
+              <tr><td>Paket biçimi</td><td>Yeni uygulamada Android App Bundle (<code>.aab</code>) <span class="tag tag--ok">RESMÎ</span> [8]</td></tr>
+              <tr><td>Hedef API düzeyi</td><td>31 Ağustos 2026'dan beri yeni uygulamalar ve güncellemeler <b>Android 16 (API 36)</b> veya üstünü hedeflemeli. Ek süre 1 Kasım 2026'ya kadar istenebiliyordu (geçti). Mevcut uygulama en az API 35'i hedeflemezse yeni Android sürümlü cihazlardaki yeni kullanıcılara görünmez. <span class="tag tag--ok">RESMÎ</span> [9]</td></tr>
+              <tr><td>16 KB bellek sayfası</td><td>"all apps targeting Android 15 (API level 35) and higher must support 16 KB memory page sizes on 64-bit devices"; "Starting February 1, 2027, if your app updates don't support 16 KB memory page sizes, you won't be able to release these updates." <span class="tag tag--ok">RESMÎ</span> [10]. Yalnız Java/Kotlin kodlu uygulama zaten uyumlu; yerel (C/C++) kod içeren motorlar (Godot, Unity) güncel sürümle derlenmeli. NDK r28+ varsayılan olarak 16 KB hizalı.</td></tr>
+              <tr><td>Gizlilik politikası</td><td>Herkese açık, girişsiz bir web sayfası; veri toplanmasa da gerekli [11]</td></tr>
+              <tr><td>Veri güvenliği formu</td><td>Bütün uygulamalarda; AdMob gibi SDK'ların topladığı veriler de beyan edilir [12]</td></tr>
+              <tr><td>Reklam beyanı, içerik derecelendirmesi, hedef yaş</td><td>Reklam SDK'sı varsa "Reklam içerir" etiketi; derecelendirme anketi; hedef kitle seçimi [11]</td></tr>
+              <tr><td>Hedef kitlede çocuk varsa</td><td>Aileler politikası: yalnız onaylı reklam SDK'ları, kişiselleştirilmiş reklam yok, daha sıkı reklam yerleşimi kuralları [13]. Oyun çocuklara yönelik değilse hedef yaşı 13+ seçmek reklam tarafını sadeleştirir.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>16 KB tarihleri hakkında not:</b> ikincil kaynaklar ilk son tarihi 1 Kasım 2025, uzatmayı Mayıs 2026 olarak veriyor; resmî sayfa bugün güncellemeler için 1 Şubat 2027 diyor. Yeni uygulamalar için tarih resmî sayfada ayrıca yazmıyor: <span class="dog">doğrulanamadı</span>. API 36 hedefleyen her uygulama zaten "API 35 ve üstü" kapsamında olduğundan pratikte baştan 16 KB uyumlu derlemek gerekir.</p>
+
+        <h2 id="motor"><span class="h-num">§ 5</span>Godot · Kotlin · Unity</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th></th><th>Godot 4</th><th>Kotlin (Compose / libGDX / KorGE)</th><th>Unity</th></tr></thead>
+            <tbody>
+              <tr><td>Ücret</td><td>Ücretsiz, MIT</td><td>Ücretsiz</td><td>Personal: 200.000 $ altı ücretsiz [24]</td></tr>
+              <tr><td>Güncel sürüm</td><td>4.7.2 (18 Ağustos 2026) <span class="tag tag--ok">RESMÎ</span> [19]</td><td>libGDX 1.14.x; KorGE 6.0 <span class="tag tag--info">3. TARAF</span></td><td>—</td></tr>
+              <tr><td>Güçlü yanı</td><td>Sahne editörü; 2D ve 3D; tek kişilik iş için verimli</td><td>Resmî Android AdMob ve Billing SDK'ları doğrudan; küçük paket; 16 KB sorunu yok (saf Kotlin)</td><td>En büyük ekosistem; resmî reklam araçları</td></tr>
+              <tr><td>Zayıf yanı</td><td>AdMob için resmî SDK yok, topluluk eklentisi; boş proje bile onlarca MB</td><td>Oyun motoru değil (Compose) ya da sahne editörü yok (libGDX); aksiyon oyununda Compose performansı sınırlı olabilir</td><td>Paket büyük; gelir eşiği aşılınca abonelik</td></tr>
+              <tr><td>Uygun</td><td>2D/3D basit oyunlar</td><td>Bulmaca, kelime, kart, sıra tabanlı</td><td>Unity bilen ya da 3D ağırlıklı</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Godot ile Android'e çıkış</h3>
+        <ul>
+          <li>Belgedeki gereksinimler (4.7): OpenJDK 17, Android SDK (Platform-Tools, Build-Tools 35.0.1, Platform 35), NDK r28b; AAB için "Gradle build" açılır; debug olmayan bir keystore ile imzalanır <span class="tag tag--ok">RESMÎ</span> [22]. Hedef SDK 36 için Platform 36'nın da kurulması gerekir (forum) <span class="tag tag--info">3. TARAF</span>.</li>
+          <li>Ucuz telefonlar için <b>Compatibility</b> çizicisi: "supports the widest range of hardware"; 2D için genelde yeterli [23].</li>
+          <li>AdMob: Google'ın "diğer platformlar" sayfası Poing Studios <code>godot-admob-plugin</code>'i listeliyor ama destek vermiyor [25]. Eklenti AB onay formunu (UMP) destekliyor; Eylül 2026'da sürüm almış <span class="tag tag--info">3. TARAF</span> [26].</li>
+          <li>Godot'ta C# da var; Android'de C# dışa aktarmanın durumu bu araştırmada sınanmadı. Web hedefinde Godot C# yok: <a href="../YouTube-Oyun/index.html#motor-secimi">YouTube Oyun · motor seçimi</a>.</li>
+        </ul>
+        <div class="callout callout--info">
+          <p class="callout__title">Başlangıç noktasına göre</p>
+          <ul>
+            <li>Hiç oyun yapmamış: Godot + GDScript (editör ve resmî "ilk 2D oyun" eğitimi).</li>
+            <li>Android/Kotlin bilen, oyun basit: Kotlin + Compose ya da libGDX.</li>
+            <li>C#/.NET'ten gelen: Godot C# (Android desteğini önce boş projede sına) ya da Unity.</li>
+            <li>Unity bilen: Unity; paket boyutu ve 200.000 $ eşiği göz önünde.</li>
+          </ul>
+        </div>
+
+        <h2 id="admob"><span class="h-num">§ 6</span>AdMob: gelir nasıl birikir, nasıl ödenir</h2>
+        <ul>
+          <li><b>Döngü aylık:</b> önceki ayın kazancı ayın 3'ünde kesinleşir; 20'sinde bakiye eşiği geçmişse "you'll be issued a payment on or around the 21st of the month"; geçmemişse sonraki aya devreder <span class="tag tag--ok">RESMÎ</span> [14]. EFT genelde 7 iş gününde ulaşır.</li>
+          <li><b>Bekletme:</b> "You can place a hold on your payment for up to one year." [15]</li>
+          <li><b>Türkiye:</b> EFT ülke listesinde var: lira, deneme yatırımı (test deposit) gerekli [16].</li>
+          <li><b>Hesap türü:</b> ödeme profilinde Bireysel ya da İşletme seçilir, sonradan değişmez; bireysel hesap için şirket gerekmez.</li>
+          <li><b>ABD vergi formu:</b> gerekip gerekmediği hesaptaki "Vergi bilgileri" sayfasında görünür; ABD'de faaliyeti olmayan için form istenmeyebilir [27]. Kişinin durumuna hangi formun düştüğü hesap açılmadan <span class="dog">doğrulanamadı</span>.</li>
+        </ul>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Eşikler <span class="tag tag--ok">RESMÎ</span> [17]</caption>
+            <thead><tr><th>Eşik</th><th>USD hesabı</th><th>TRY hesabı</th></tr></thead>
+            <tbody>
+              <tr><td>Doğrulama (kimlik / adres PIN'i)</td><td>0 $ / 10 $</td><td>0 $ / 10 $ karşılığı</td></tr>
+              <tr><td>Ödeme yöntemi seçme</td><td>10 $</td><td>₺20</td></tr>
+              <tr><td>Ödeme</td><td>100 $</td><td>₺200</td></tr>
+              <tr><td>İptal</td><td>10 $</td><td>₺20</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout--danger">
+          <p class="callout__title">Hesabı kaybettiren hatalar</p>
+          <ul>
+            <li>"It is against AdMob policy to click on your own live ads." Geliştirirken hep test reklamı kullan; çevreye "reklama tıkla" deme. Geçersiz trafikle kapatılan hesaba ödenmemiş bakiye ödenmeyebilir [18].</li>
+            <li>Geçiş (interstitial) reklamını açılışta, her dokunuşta ya da art arda gösterme; ayrıntı: <a href="../Masaustu-Uygulama-Reklam/index.html#aralikli">Masaüstü reklam · §4</a>.</li>
+          </ul>
+        </div>
+        <ul>
+          <li><b>Yeni uygulama:</b> Play'de yayınlanıp AdMob'a bağlanınca hazırlık incelemesi başlar; "Reviews typically take 2-3 days", bu sürede reklam sınırlı olabilir [29].</li>
+          <li><b><code>app-ads.txt</code>:</b> Play mağaza sayfasına geliştirici web sitesi eklenir, dosya o alan adının köküne konur; taranması 24 saate kadar sürer [30].</li>
+          <li><b>AB/İngiltere kullanıcıları:</b> Google sertifikalı bir onay platformu (CMP; Google'ın ücretsiz UMP SDK'sı da olur) yoksa bu trafiğe yalnız sınırlı reklam gider [31]. Türkiye'yi hedefleyen oyunu da AB'den indirenler olacağı için baştan eklemek mantıklı. Onay kuralları ayrıntısı: <a href="../Masaustu-Uygulama-Reklam/index.html#hukuk">Masaüstü reklam · §9</a>.</li>
+        </ul>
+
+        <h2 id="gelir"><span class="h-num">§ 7</span>Gelir senaryoları (temkinli)</h2>
+        <div class="callout callout--def">
+          <p class="callout__title">eCPM</p>
+          <p>1.000 reklam gösterimi başına kazanç. Gelir ≈ gösterim ÷ 1.000 × eCPM. AdMob resmî eCPM yayınlamaz; sektör raporlarındaki aralıklar ve Türkiye için bulunamayan veri: <a href="../Masaustu-Uygulama-Reklam/index.html#gelir">Masaüstü reklam · §11</a>. Sıralama her raporda aynı: ödüllü &gt; geçiş &gt; banner; Ekim–Aralık'ta yükselir.</p>
+        </div>
+        <p><b>Paylaşılan deneyimler</b> <span class="tag tag--info">3. TARAF</span> [32]: ~2.700 indirmeden ~20 $; 17.000 indirmeden ~150 $; yüzlerce indirmeden birkaç sent. Kabaca <b>1.000 indirme ≈ 5–10 $</b> (toplam, aylık değil). Bunlar anekdot; tür, ülke ve reklam yerleşimine göre çok değişir.</p>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Örnek hesap — yalnız aritmetik <span class="tag tag--warn">TAHMİN</span></caption>
+            <thead><tr><th>Senaryo</th><th>Varsayım</th><th>Kabaca</th></tr></thead>
+            <tbody>
+              <tr><td>Kötümser (çoğu ilk oyun)</td><td>Toplam birkaç yüz indirme, kitle çoğunlukla düşük eCPM'li ülkelerde</td><td>Ödeme eşiğine aylarca ulaşmayabilir</td></tr>
+              <tr><td>Orta</td><td>Ayda 5.000 indirme, 1.000 indirme ≈ 5 $</td><td>Ayda ~25 $</td></tr>
+              <tr><td>İyimser</td><td>Ayda 20.000 indirme, 1.000 indirme ≈ 10 $</td><td>Ayda ~200 $</td></tr>
+              <tr><td>Günlük oyuncu ile</td><td>200 günlük oyuncu × 3 gösterim × eCPM 2 $</td><td>Günde ~1,2 $ (ayda ~36 $)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>Büyük gelir paylaşımları genelde çok yüksek indirme, uygulama içi satın alma ya da ücretli tanıtımla geliyor <span class="tag tag--info">3. TARAF</span>.</li>
+          <li>"Reklamları kaldır" satın alması bazı geliştiricilerde reklamdan fazla getirmiş (anekdot). Godot için Google Play Billing eklentisi var [33]; satış için Play'de ödeme profili gerekir (§2'deki adres notu geçerli).</li>
+          <li>Kısa vadede güvenilir gelir kaynağı varsaymak yanlış olur; ilk oyunun asıl kazancı yayın sürecini bir kez baştan sona yaşamaktır <span class="tag tag--warn">TAHMİN</span>.</li>
+        </ul>
+
+        <h2 id="vergi"><span class="h-num">§ 8</span>Şirket ve vergi, durum durum</h2>
+        <h3>GVK mük. 20/B (Türkiye)</h3>
+        <p>Kanun metni <span class="tag tag--ok">RESMÎ</span> [34]: "akıllı telefon veya tablet gibi mobil cihazlar için uygulama geliştirenlerin elektronik uygulama paylaşım ve satış platformları üzerinden elde ettikleri kazançlar" gelir vergisinden istisna. Şartlar:</p>
+        <ul>
+          <li>Türkiye'de kurulu bir bankada hesap; bu faaliyetin <b>bütün</b> hasılatı yalnız bu hesaba gelir.</li>
+          <li>Banka aktarılan tutardan aktarım tarihinde <b>%15</b> gelir vergisi keser (Cumhurbaşkanı oranı sıfıra indirebilir ya da bir katına kadar artırabilir).</li>
+          <li>Kazanç toplamı 103. maddedeki tarifenin <b>4. dilim tutarını</b> aşarsa istisna o yıl uygulanmaz. 2026 tarifesinde bu tutar <b>5.300.000 TL</b> <span class="tag tag--ok">RESMÎ</span> [35].</li>
+          <li>Başka faaliyetlerden kazanç olması istisnaya engel değil.</li>
+          <li>Ödemenin bir kısmı başka hesaba gelirse istisna o yıl düşer; eksik vergi, vergi ziyaı cezası ve gecikme faiziyle istenir.</li>
+        </ul>
+        <p>Tebliğe göre (318 Seri No.lu GVGT) kapsam "ücretli uygulama satış geliri, reklam geliri, uygulama içi satış geliri"ni sayar; mağaza dışında dağıtılan uygulama (APK sitesi, web oyunu) kapsam dışıdır <span class="tag tag--info">3. TARAF</span> (tebliğ alıntısı) [36]. Uygulamada önce vergi dairesinde mükellefiyet açılır, sonra istisna belgesi alınır, belge bankaya götürülür, hesap bilgisi 1 ay içinde vergi dairesine bildirilir. Bu sınırdaki adımların ayrıntısı ve 2026 tutarı: <a href="../Sirket-Kurma/03-vergi-101.html">Şirket Kurma · Vergi 101</a>, <a href="../Sirket-Kurma/12-sirketsiz.html">Şirketsiz gelir</a>.</p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yapıya göre</caption>
+            <thead><tr><th>Durum</th><th>Play / AdMob</th><th>Vergi</th></tr></thead>
+            <tbody>
+              <tr><td>Bireysel, şirket yok, Türkiye'de yaşıyor</td><td>Kişisel Play hesabı (kapalı test şartı var); AdMob bireysel ödeme profili</td><td>20/B: istisna belgesi + ayrı hesap + %15; beyanname, defter, fatura yok (sınır aşılmadıkça). 29 yaş altındaysa: 20/B için açılan mükellefiyet genç girişimci istisnasındaki "ilk kez mükellef olma" şartını tüketebilir; iki yolu önce karşılaştır: <a href="../Sirket-Kurma/07-genc-girisimci.html#sartlar">Genç girişimci · §2</a></td></tr>
+              <tr><td>Şahıs şirketi sahibi (başka bir iş için)</td><td>Kişisel ya da kuruluş hesabı (kuruluşta D-U-N-S; Türkiye'deki şahıs işletmesinin D-U-N-S alışı <span class="dog">doğrulanamadı</span>)</td><td>Kanuna göre başka faaliyet istisnaya engel değil; uygulama gelirinin şahıs işletmesinin defterine mi 20/B hesabına mı gireceği mali müşavirle netleşmeli</td></tr>
+              <tr><td>Uygulama işi şahıs şirketinin konusu</td><td>Kuruluş hesabı mümkün</td><td>Ticari kazanç, defter, beyanname. 29 yaş altı ve ilk kez mükellefse genç girişimci istisnası: <a href="../Sirket-Kurma/07-genc-girisimci.html">Genç girişimci</a></td></tr>
+              <tr><td>Limited / anonim şirket</td><td>Kuruluş hesabı, D-U-N-S; adres ve telefon herkese açık</td><td>Kurumlar vergisi; <b>20/B uygulanmaz</b> (istisna gelir vergisi içindir, şirketler yararlanamaz)</td></tr>
+              <tr><td>Yıllık kazanç 5.300.000 TL'yi aşıyor (2026)</td><td>—</td><td>O yıl istisna yok; bütün kazanç beyan edilir, kesilen %15'ler mahsup edilir; şirketleşme düşünülür</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yaşanan yere ve çalışma durumuna göre</caption>
+            <thead><tr><th>Durum</th><th>Sonuç</th></tr></thead>
+            <tbody>
+              <tr><td>Yurt dışında yaşıyor</td><td>Play ve AdMob kaydı ikamet ülkesine göre yapılır; vergi o ülkenin kurallarına tabidir. 20/B'nin Türkiye'de yerleşik olmayan (dar mükellef) kişiye uygulanıp uygulanmadığı <span class="dog">doğrulanamadı</span>.</td></tr>
+              <tr><td>Türkiye'de yaşıyor, yurt dışı şirket düşünüyor</td><td>Türkiye'de yaşarken yurt dışı şirket vergiyi kendiliğinden kaldırmaz (iş merkezi, kontrol edilen yabancı kurum): <a href="../Masaustu-Uygulama-Reklam/index.html#sirket">Masaüstü reklam · §10</a></td></tr>
+              <tr><td>4/a çalışan</td><td>20/B genelde mümkün; iş sözleşmesindeki yan iş / rekabet maddelerine bakılmalı <span class="tag tag--warn">TAHMİN</span></td></tr>
+              <tr><td>Kamu görevlisi</td><td>Ticari faaliyet yasağı var; 20/B için kurumdan teyit alınmalı: <a href="../YouTube-Oyun/index.html#para-kazanma">YouTube Oyun · §9</a></td></tr>
+              <tr><td>İşsizlik ödeneği alıyor</td><td>İŞKUR: "gelir getirici bir işte çalıştığı" tespit edilenin ödeneği tekrar başlatılmamak üzere kesilir <span class="tag tag--ok">RESMÎ</span> [37]. 20/B için mükellefiyet açmanın etkisi ve güvenli sıra: <a href="../Issizlik/06-odenek-alirken-gelir.html">Ödenek alırken gelir</a>. Oyunu geliştirmek tek başına gelir değildir <span class="tag tag--warn">TAHMİN</span>. Ölçüt "gelir getirici bir işte çalışmak" [37], paranın hesaba geçmesi değil: reklamlı oyun yayına girip gelir birikmeye başladıktan sonra AdMob ödemesini bekletmek [15] ödeneği korumaz varsayılmalı <span class="tag tag--warn">TAHMİN</span>. İŞKUR'un bu konudaki uygulaması <span class="dog">doğrulanamadı</span>.</td></tr>
+              <tr><td>Çalışmıyor, ödenek almıyor, başka sigortası yok</td><td>20/B mümkün. Mükellefiyet açmanın Bağ-Kur (4/b) doğurup doğurmadığı <span class="dog">doğrulanamadı</span> (§11); doğarsa kazanç olmasa da aylık prim başlar. Mükellefiyetten önce SGK'ya yazılı sor: <a href="../Sirket-Kurma/12-sirketsiz.html#vergi-boyutu">Şirketsiz gelir · §5</a></td></tr>
+              <tr><td>Öğrenci</td><td>Öğrencilik 20/B'ye engel değil <span class="tag tag--warn">TAHMİN</span>. Mükellefiyet 4/b doğurursa ebeveyn üzerinden genel sağlık sigortası (bakmakla yükümlü olunan kişi) sona erebilir; KYK burs/kredi etkisi bulunamadı, SGK'ya ve KYK'ya yazılı sor: <a href="../YouTube-Oyun/surec-ve-engeller.html#b3-10-4">YouTube Oyun · Bağ-Kur tablosu</a>. 18 yaş altındaysa Play ve AdMob için asgari yaş da <span class="dog">doğrulanamadı</span> (§11).</td></tr>
+              <tr><td>Emekli (yaşlılık aylığı alıyor)</td><td>Aylık kesilmez, tam Bağ-Kur doğmaz; sosyal güvenlik destek primi (SGDP) uygulanıp uygulanmadığı SGK'dan teyit edilmeli: <a href="../Sirket-Kurma/02-sgk-bagkur.html#statuler">Şirket Kurma · SGK/Bağ-Kur §2</a></td></tr>
+              <tr><td>Yetim / ölüm aylığı alıyor</td><td>4/b sigortalılığı başlarsa aylık kesilebilir; 20/B mükellefiyetinin 4/b doğurup doğurmadığı <span class="dog">doğrulanamadı</span>. Gelir başlamadan SGK'ya yazılı sor: <a href="../YouTube-Oyun/surec-ve-engeller.html#b3-10-4">YouTube Oyun · Bağ-Kur tablosu</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bakim"><span class="h-num">§ 9</span>Yıllık bakım</h2>
+        <ul>
+          <li><b>Hedef API:</b> şart her yıl yükseliyor (2026'da 31 Ağustos). Her oyun yeni motor sürümüyle yeniden derlenip güncelleme olarak yüklenir; güncellenmeyen oyun yeni Android sürümlerindeki yeni kullanıcılara görünmez [9].</li>
+          <li><b>AdMob SDK:</b> Google ana sürümleri belirli bir süre destekler, sonra "sunset" olur ve reklam gelmeyebilir [38]. Eklentiyi 1–2 yılda bir güncellemek gerekir; topluluk eklentisi geç güncellenirse beklemek gerekir.</li>
+          <li>Oyun başına yılda kabaca 1–3 iş günü; birden çok oyun toplu güncellenebilir <span class="tag tag--warn">TAHMİN</span>.</li>
+          <li>Godot imza anahtarını (keystore) yedekle.</li>
+        </ul>
+
+        <h2 id="karar"><span class="h-num">§ 10</span>Karar tablosu</h2>
+        <div class="tablewrap">
+          <table class="data">
+            <thead><tr><th>Durum</th><th>Önerilen yol</th></tr></thead>
+            <tbody>
+              <tr><td>İlk oyun, amaç süreci öğrenmek</td><td>Tek mekanikli 2D, Godot (Compatibility) ya da Kotlin; yalnız reklamla başla</td></tr>
+              <tr><td>Kişisel hesap yeni açılacak</td><td>12 test kullanıcısını oyun bitmeden ayarla; test süresini geliştirmeyle paralel yürüt</td></tr>
+              <tr><td>Ev adresinin görünmesini istemiyor</td><td>Yalnız reklamla başla, satıcı profili açmadan önce görünen bilgileri kontrol et</td></tr>
+              <tr><td>Oyun çocuklara yönelik</td><td>Aileler politikası, onaylı reklam SDK'sı, kişiselleştirilmiş reklam yok; gelir daha düşük</td></tr>
+              <tr><td>AB kullanıcısı olabilir</td><td>UMP / sertifikalı CMP baştan</td></tr>
+              <tr><td>Türkiye'de yaşayan gerçek kişi, gelir başladı</td><td>20/B belgesi + ayrı hesap; sınır yaklaşırsa mali müşavir</td></tr>
+              <tr><td>Şirket (limited) üzerinden</td><td>Kuruluş hesabı + D-U-N-S; kurumlar vergisi, 20/B yok</td></tr>
+              <tr><td>İşsizlik ödeneği alıyor</td><td>Reklam geliri başlamadan ve mükellefiyet açmadan önce İŞKUR/SGK'ya yazılı sor</td></tr>
+              <tr><td>Öğrenci, emekli, yetim aylığı alan ya da başka sigortası olmayan</td><td>Mükellefiyet açmadan önce Bağ-Kur, sağlık sigortası ve aylık etkisini SGK'ya yazılı sor (§8)</td></tr>
+              <tr><td>4/a çalışan ya da kamu görevlisi</td><td>Çalışan iş sözleşmesindeki yan iş maddesine bakar; kamu görevlisi kurumundan yazılı teyit alır (§8)</td></tr>
+              <tr><td>Yurt dışında yaşıyor</td><td>Play ve AdMob kaydı ikamet ülkesine göre; vergi o ülkenin kurallarına tabi, 20/B uygulanması doğrulanamadı (§8)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="dogrulanamayan"><span class="h-num">§ 11</span>Doğrulanamayanlar</h2>
+        <ul>
+          <li>Yalnız AdMob reklamlı (satıcı profilsiz) uygulamada kişisel hesabın tam adresinin Play'de görünüp görünmediği.</li>
+          <li>Kapalı test şartının hesap başına mı her yeni uygulama için mi uygulandığı; etkileşim ölçütü; sayının önce 20 olup Aralık 2024'te 12'ye indiği iddiası.</li>
+          <li>16 KB şartının yeni uygulamalar için resmî başlangıç tarihi (resmî sayfa yalnız güncellemeler için 1 Şubat 2027 diyor); Godot'un 16 KB desteğinin hangi sürümde geldiği (topluluk kaynakları 4.5 diyor).</li>
+          <li>Türk banka kartlarının kayıt ücretinde sorunsuz geçtiği; Play ve AdMob için asgari yaş.</li>
+          <li>Türkiye'ye özel AdMob eCPM; TRY mi USD raporlama para biriminin mi avantajlı olduğu; EFT'de banka masrafı.</li>
+          <li>Türkiye'deki bireye hangi ABD vergi formunun istendiği.</li>
+          <li>AdMob'u adıyla anan 20/B özelgesi; dar mükellefin 20/B'den yararlanıp yararlanamayacağı; şahıs işletmesi sahibinde uygulama gelirinin hangi rejime gireceği; Türkiye'deki şahıs işletmesinin D-U-N-S alması.</li>
+          <li>20/B için mükellefiyet açmanın Bağ-Kur'u kendiliğinden başlatıp başlatmadığı (kütüphanedeki <a href="../Issizlik/06-odenek-alirken-gelir.html">Ödenek alırken gelir</a> sayfası bu konuda ayrıntılı değerlendirme içeriyor).</li>
+          <li>Reklam geliri birikirken AdMob ödemesini bekletmenin İŞKUR'un "gelir getirici iş" değerlendirmesine etkisi.</li>
+          <li>Godot C#'ın Android'de AdMob eklentisiyle sorunsuz çalıştığı; ucuz telefonda Godot 3D performansı.</li>
+          <li>Süre ve gelir rakamlarının hepsi ölçülmemiş tahmin ya da anekdottur.</li>
+        </ul>
+
+        <h2 id="kaynakca"><span class="h-num">§ 12</span>Kaynakça (erişim: 5 Kasım 2026)</h2>
+        <ol class="sources">
+          <li>Play Console, geliştirici hesabı kaydı (25 $) — https://support.google.com/googleplay/android-developer/answer/6112435</li>
+          <li>Play Console, hesap türü seçimi (kişisel / kuruluş, D-U-N-S) — https://support.google.com/googleplay/android-developer/answer/13634885</li>
+          <li>Play Console, Play'de görünen geliştirici bilgileri — https://support.google.com/googleplay/android-developer/answer/13628312</li>
+          <li>Play Console, desteklenen ülkeler ve ödeme profili — https://support.google.com/googleplay/android-developer/table/3539140 ; https://support.google.com/googleplay/android-developer/answer/7161426 ; https://support.google.com/googleplay/android-developer/answer/13634081</li>
+          <li>Play Console, yeni kişisel hesaplarda test şartı — https://support.google.com/googleplay/android-developer/answer/14151465</li>
+          <li>Etkileşim nedeniyle ret (ikincil, blog) — https://dev.to/tizoc_araujo_3cd9fb67191f/google-play-closed-testing-rejected-for-insufficient-engagement-what-that-actually-means-in-2026-ion</li>
+          <li>Test kullanıcısı takası (ikincil, hizmet satan siteler) — https://www.testerscommunity.com/blog/reddit-vs-testers-community-which-is-better-for-app-testing-in-2026 ; https://extendsclass.com/blog/google-plays-closed-testing-requirement-what-developers-need-to-know-in-2026</li>
+          <li>Play Console, Android App Bundle — https://support.google.com/googleplay/android-developer/answer/9844279</li>
+          <li>Android Developers, hedef API düzeyi — https://developer.android.com/google/play/requirements/target-sdk ; https://support.google.com/googleplay/android-developer/answer/11926878</li>
+          <li>Android Developers, 16 KB sayfa boyutu — https://developer.android.com/guide/practices/page-sizes</li>
+          <li>Play Console, uygulama içeriği beyanları — https://support.google.com/googleplay/android-developer/answer/9859455</li>
+          <li>Play Console, veri güvenliği formu — https://support.google.com/googleplay/android-developer/answer/10787469</li>
+          <li>Play Console, Aileler politikası — https://support.google.com/googleplay/android-developer/answer/9893335</li>
+          <li>AdMob, ödeme takvimi — https://support.google.com/admob/answer/2772140</li>
+          <li>AdMob, ödemeyi bekletme — https://support.google.com/admob/answer/3109143</li>
+          <li>AdMob, EFT ile ödeme ve ülke listesi — https://support.google.com/admob/answer/1714398</li>
+          <li>AdMob, ödeme eşikleri — https://support.google.com/admob/answer/2772208</li>
+          <li>AdMob, geçersiz trafik — https://support.google.com/admob/answer/6197403 ; https://support.google.com/admob/answer/9493252</li>
+          <li>Godot indirme sayfası (4.7.2) — https://godotengine.org/download/windows/</li>
+          <li>Godot lisansı — https://godotengine.org/license/</li>
+          <li>Kenney lisansı — https://kenney.nl/support</li>
+          <li>Godot, Android'e dışa aktarma — https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.html ; hedef SDK forumu (ikincil) — https://forum.godotengine.org/t/how-to-target-latest-android-sdk/142631</li>
+          <li>Godot, çiziciler — https://docs.godotengine.org/en/stable/tutorials/rendering/renderers.html</li>
+          <li>Unity Personal — https://unity.com/products/unity-personal</li>
+          <li>AdMob, diğer platformlar — https://developers.google.com/admob/other-platforms</li>
+          <li>Poing Studios godot-admob-plugin — https://github.com/poingstudios/godot-admob-plugin</li>
+          <li>AdMob, vergi bilgileri — https://support.google.com/admob/answer/4381375</li>
+          <li>Geliştirme süresi (ikincil) — https://oceanviewgames.co.uk/resources/game-development-timeline ; https://meliorgames.com/game-development/how-long-does-it-take-to-create-a-casual-mobile-game/</li>
+          <li>AdMob, uygulama hazırlık incelemesi — https://support.google.com/admob/answer/10564477</li>
+          <li>AdMob, app-ads.txt — https://support.google.com/admob/answer/9363762</li>
+          <li>AdMob, AB onay şartı (UMP) — https://developers.google.com/admob/android/privacy/gdpr</li>
+          <li>Geliştirici gelir anlatıları (ikincil, anekdot) — https://www.reddit.com/r/gamedev/comments/l1jejb/is_mobile_development_still_profitable_in_2021 ; https://forums.unrealengine.com/t/my-first-months-ad-revenue-admob/81860</li>
+          <li>Godot Google Play Billing — https://docs.godotengine.org/en/stable/tutorials/platform/android/android_in_app_purchases.html</li>
+          <li>193 sayılı Gelir Vergisi Kanunu, mük. md. 20/B — https://www.mevzuat.gov.tr/mevzuatmetin/1.4.193.pdf</li>
+          <li>GİB, 2026 gelir vergisi tarifesi — https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fgelir-vergisi-tarifeleri%2Fgelir-vergisi-tarifesi-2026.pdf</li>
+          <li>318 Seri No.lu GVGT (ikincil alıntı) — https://www.alomaliye.com/2022/01/12/gelir-vergisi-genel-tebligi-seri-no-318-gvk-318</li>
+          <li>İŞKUR, ödeneğin kesilme halleri — https://www.iskur.gov.tr/sikca-sorulan-sorular/issizlik-sigortasi/issizlik-odenegi-hangi-hallerde-kesilmektedir/</li>
+          <li>AdMob Android SDK destek takvimi — https://developers.google.com/admob/android/deprecation</li>
+        </ol>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Uyarı</p>
+          <p>Genel bilgi amaçlıdır; vergi ve hukuk bölümü danışmanlık değildir. Google Play ve AdMob kuralları sık değişir; uygulamadan önce ilgili resmî sayfaya bakılmalı.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -70,6 +70,7 @@ Belirli bir durumla karşılaşıldığında okunacak genel rehberler: Türkiye 
 | [Mülakat Hazırlığı](Rehberler/Mulakat-Hazirligi/) | .NET / C# backend mülakatı için soru → kısa cevap tekrar rehberi: mülakat türleri ve online test, C#, ASP.NET Core, EF Core, dağıtık sistemler, algoritma ve sistem tasarımı, davranışsal ve İngilizce sorular, maaş ilkeleri ve kontrol listesi. |
 | [Masaüstü Uygulamada Reklam](Rehberler/Masaustu-Uygulama-Reklam/) | Masaüstü uygulama ve web sitesinde reklam ve reklam izleyerek kredi: ağ politikaları, ödüllü reklam ve SSV, engelleyiciler, doğrudan satış, hukuk, vergi ve şirket yapısı. |
 | [Yolculuk Paylaşımı](Rehberler/Yolculuk-Paylasimi/) | Özel araçla paylaşımlı yolculuk (Martı TAG): 2026 KTK Ek 2 cezaları, mahkeme kararları, sigorta rücusu, vergi ve Bağ-Kur, il ve araç durumlarına göre sonuçlar, maliyet senaryoları. |
+| [Google Play'de Reklamlı Oyun](Rehberler/Google-Play-Oyun/) | Basit bir oyunu Google Play'e çıkarıp AdMob reklamıyla gelir elde etmek: kapalı test şartı, teknik şartlar, ödeme eşikleri, gelir senaryoları, 20/B vergi dalları. |
 
 ## Çalışma Günlüğü
 

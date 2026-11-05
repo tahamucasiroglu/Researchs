@@ -35,6 +35,7 @@ HTML anlatım: [index.html](index.html) — GitHub HTML'i işlemez; dosyayı yer
 
 - [Masaüstü Uygulamada Reklam](../Masaustu-Uygulama-Reklam/) — Reklam ya da abonelik geliri olan bir yazılım ürünü için şirketsiz dönem, Türkiye'de şahıs/limited ve ABD LLC / Estonya OÜ / BK Ltd karar tablosu; ödeme altyapılarının Türkiye'deki durumu.
 - [Yolculuk Paylaşımı](../Yolculuk-Paylasimi/) — Özel araçla ücretli yolcu taşımada vergi kaydı, Bağ-Kur, D2 yetki belgesi ve taksi plakası gibi resmî yollar.
+- [Google Play'de Reklamlı Oyun](../Google-Play-Oyun/) — Mobil oyunun reklam gelirinde GVK 20/B, şahıs ve limited dalları; çalışma durumuna göre sonuçlar.
 
 ## Resmi kaynaklar
 
