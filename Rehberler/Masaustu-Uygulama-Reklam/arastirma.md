@@ -4,7 +4,7 @@ Araştırma · Masaüstü yazılım ve para kazanma. Bu dosya aynı klasördeki 
 
 ## Belge bilgisi
 
-- **Araştırma tarihi:** 30 Ekim 2026. Bütün kaynaklara bu tarihte erişildi. §10'daki "(rehber)" işaretli rakamların veri tarihi 3 Eylül 2026'dır.
+- **Araştırma tarihi:** 30 Ekim 2026 (güncelleme: 6 Kasım 2026). Bütün kaynaklara bu tarihte erişildi; 6 Kasım 2026 güncellemesinde Google, Meta ve TikTok kaynaklı bazı iddialar resmî sayfalardan yeniden kontrol edilip düzeltildi ve [120]–[128] eklendi. §10'daki "(rehber)" işaretli rakamların veri tarihi 3 Eylül 2026'dır.
 - **Kapsam:** Windows masaüstü uygulaması ve yanında web sitesi/sunucusu olan bir ürün reklam gösterebilir mi, kullanıcıya reklam izletip kredi verebilir mi, bunu reklam engelleyicilere karşı güvenilir nasıl kurar? Hangi ağın neye izin verdiği, sunucu tarafı doğrulama, hukuk ve vergi. Ele alınanlar: Windows masaüstü uygulamada reklam ağları, reklam izleyerek kredi (ödüllü reklam, SSV), ücretsiz plana aralıklı reklam, reklam engelleyiciler, doğrudan reklam satışı, uygulamayı tanıtmak için reklam, genel mimari, Türkiye/AB/ABD hukuk ve vergi, Türkiye şirketi mi yurt dışı şirketi mi, gelir tahmini.
 - **Yöntem:** Resmî kaynak öncelikli. Yalnız herkese açık belgeler okundu; hiçbir reklam ağında hesap açılmadı. Bulunamayan bilgi "doğrulanamadı" diye işaretli.
 - **Uyarı:** Genel bilgi amaçlıdır; hukuk ve vergi bölümü danışmanlık değildir. Reklam ağı politikaları sık değişir; uygulamadan önce ilgili resmî sayfaya bakılmalı. Karar öncesi mali müşavire danışılmalı.
@@ -19,6 +19,7 @@ Araştırma · Masaüstü yazılım ve para kazanma. Bu dosya aynı klasördeki 
 | [TAHMİN] | Kaynağın değil yorumun, hesabın ya da tasarım önerisinin ifadesi: sayfada "(çıkarım)" yazanlar, örnek hesaplar, kaynak numarası verilmemiş öneri ve genel bilgi. Yanlış demek değildir; kaynakla doğrulanmamıştır. |
 | [TAHMİN: doğrulanamadı] | Sayfada "doğrulanamadı" diye işaretli: resmî kaynakta bulunamadı ya da okunamadı. |
 | [ÇELİŞKİLİ] | Kaynaklar birbirini tutmuyor; iki taraf da yazılır. |
+| [ÇELİŞKİLİ: kısmen çözüldü] | Kaynaklar birlikte okununca çelişkinin çoğu çözülüyor; kalan belirsizlik ayrıca yazılır. |
 
 - `[n]` biçimindeki sayılar §14 Kaynakça'daki numaralardır (HTML sayfasıyla aynı). Etiket, hemen önündeki kaynak numaralarına ya da cümleye aittir.
 - "(rehber)": bilgi depodaki Şirket Kurma rehberinden alındı (veri tarihi 3 Eylül 2026) ve burada birincil kaynaktan yeniden açılmadı.
@@ -45,13 +46,13 @@ Araştırma · Masaüstü yazılım ve para kazanma. Bu dosya aynı klasördeki 
 
 ### Olan
 
-- Reklam izleyerek kredi — ürünün **web sitesinde**, gerçek tarayıcıda: Google Ad Manager web ödüllü reklamı + sunucu doğrulaması (SSV). [9] [RESMÎ]; masaüstü tarayıcı desteği [9][10] [ÇELİŞKİLİ] (§8) → §3
+- Reklam izleyerek kredi — ürünün **web sitesinde**, gerçek tarayıcıda: Google Ad Manager web ödüllü reklamı + sunucu doğrulaması (SSV). [9] [RESMÎ]; web geri çağrısının parametreleri, imza yöntemi ve kullanıcıyla eşleştirme yolu belgede yok [9][10] [TAHMİN: doğrulanamadı]; masaüstü tarayıcı desteği [9][10] [ÇELİŞKİLİ: kısmen çözüldü] (§8) → §3
 - Ücretsiz plana aralıklı reklam — ürünün kendi sunucusundan, kendi alan adından gelen reklamla (ev reklamı ya da doğrudan satılan). [TAHMİN] (tasarım önerisi) → §4, §6
-- Reklam alanını reklamverene doğrudan satmak; uygulamayı Google Ads / Meta / TikTok API'leriyle tanıtmak. [53][64][65][66][67] [RESMÎ]; TikTok [68] [3. TARAF] → §6, §7
+- Reklam alanını reklamverene doğrudan satmak; uygulamayı Google Ads / Meta / TikTok API'leriyle tanıtmak (TikTok API for Business yalnız şirket kaydı kabul ediyor; şirketi olmayan için Ads Manager arayüzü ya da MCP Server). [53][64][65][66][67] [RESMÎ]; TikTok [68] [3. TARAF], kayıt şartı ve MCP Server [125][126] [RESMÎ] → §6, §7
 
 ### Güvenilir kurulumun iki ilkesi
 
-- **İstemci yalnız gösterir, ödülü sunucu verir.** Kredi yalnız reklam ağının sunucuya imzalı bildirimiyle yazılır. [7] [RESMÎ] → §3
+- **İstemci yalnız gösterir, ödülü sunucu verir.** Kredi yalnız reklam ağının sunucuya imzalı bildirimiyle yazılır. [TAHMİN] (kredi ekonomisi için tasarım önerisi; Google bu yolu ödülün geçerliliği kritik ve gecikme kabul edilebilir olduğunda öneriyor, genel önerisi ödülü istemcide hemen verip tüm ödülleri sunucuda doğrulamak [7] [RESMÎ]) → §3
 - **DNS/hosts ile engellenemeyen tek yol**, reklamın uygulamanın zaten muhtaç olduğu API alan adından gelmesidir — yalnız kendi (ev/doğrudan satılan) reklamda mümkün. DNS süzgecinin sınırı [44][45] [RESMÎ]; "tek yol" değerlendirmesi [TAHMİN]. → §5
 - **Şirket:** reklam geliri için şirket şart değil [112] [RESMÎ]; Türkiye'de yerleşik kişide düzenli gelirle vergi mükellefiyeti şart [84] [RESMÎ] (aylık reklam gelirine uygulanması çıkarım [TAHMİN]). Stripe Türkiye'de yok [94] (Paddle/Polar/iyzico var [114][116][117]) [RESMÎ]; Türkiye'de yaşarken yurt dışı şirket vergi avantajı getirmez (iş merkezi, KVK m.7) [108] [RESMÎ] (tek kurucuya uygulanması çıkarım [TAHMİN]). → §10
 
@@ -69,7 +70,7 @@ Araştırma · Masaüstü yazılım ve para kazanma. Bu dosya aynı klasördeki 
 |---|---|---|---|---|---|
 | Google AdSense | **YASAK** — "software application" maddesi [1] | Yalnız web, beta [2][3] | Belgede yok; ödül sayfadaki JS'e döner [2] | Onaylı WebView listesinde WebView2 yok [1] | [RESMÎ] |
 | Google AdMob | **YOK** — Android, iOS, Unity, Flutter [5][6] | Mobil | Mobil [7] | WebView API for Ads yalnız Android/iOS [8] | [RESMÎ]; forum [6] [3. TARAF] |
-| Google Ad Manager | **DOĞRULANAMADI**; WebView kuralları Ad Manager'ı da kapsıyor [1] | Web: "desktop, mobile, and tablet web" [9] | **VAR** [9] | Çelişki: GPT örneği "only supported on mobile optimized pages" [10] | Masaüstü uygulama izni [TAHMİN: doğrulanamadı]; WebView kuralı [1] ve SSV [9] [RESMÎ]; masaüstü web desteği [9] ile [10] [ÇELİŞKİLİ] |
+| Google Ad Manager | **DOĞRULANAMADI**; WebView kuralları Ad Manager'ı da kapsıyor [1] | Web: "desktop, mobile, and tablet web" [9] | **VAR** [9]; web'de parametre ve imza belgede yok | Çelişki kısmen çözüldü: [9] ve GPT örneği [10] aynı "mobile optimized" sayfa (viewport meta etiketi) şartını koyuyor, şart cihaz değil sayfa; hangi cihazda `null` döndüğü belgelenmemiş [10] | Masaüstü uygulama izni [TAHMİN: doğrulanamadı]; WebView kuralı [1] ve SSV [9] [RESMÎ]; web SSV parametreleri [TAHMİN: doğrulanamadı]; masaüstü web desteği [9][10] [ÇELİŞKİLİ: kısmen çözüldü] |
 | Microsoft Ad Monetization | **KAPANDI** — 1 Haz 2020 [11][12] | — | — | Store politikası §10.10 reklamı kurala bağlar [13] | [RESMÎ] |
 | Overwolf | **VAR** — yalnız Overwolf Native / ow-electron [14][15] | Doğrulanamadı | Doğrulanamadı | Başka çatıyla (ör. .NET) uyumu doğrulanamadı; 1 Kas 2026'dan sonra yalnız Overwolf para kazanımlı uygulama onayı; dağıtım tekelliği, ayrılmak için 6/12 ay bildirim; ödeme NET 60, en az 200 $ [16][17] | İzin ve şartlar [RESMÎ]; ödüllü, SSV ve başka çatı uyumu [TAHMİN: doğrulanamadı] |
 | Playwire | **VAR** — "Desktop Apps" [18][19] | Rewarded Video | Doğrulanamadı | Uygulama için 1.000 günlük aktif kullanıcı; genel şartlar: İngilizce konuşulan ülkelerde (ABD/BK/Kanada) kitle, geçersiz trafik %7 altı [18] | [RESMÎ]; SSV [TAHMİN: doğrulanamadı] |
@@ -101,11 +102,11 @@ Uygulama içindeki gömülü tarayıcıda (ör. WebView2) Google reklamı göste
 - Önce açık onay ("affirmatively and unambiguously opts in"); "it must be possible to skip or dismiss them"; reddetmek "must not impede or interfere with the normal usage". [35][36] [RESMÎ]
 - Nakit, kripto, hediye kartı "under any circumstance" yasak; dolaylı ödül yalnız yayıncının kendi platformunda geçerli ve devredilemez olmalı. [4][36] [RESMÎ]
 - Ödül ve şart önceden gösterilir; "Google onaylı" denemez; yönlendirici söz yasak (örnek: "watch this ad to support our business"). [35][36] [RESMÎ]
-- Ad Manager web: görüntülü reklam en az 7 sn görünür; erken kapatan ödülü kaybettiğini onaylar; aynı anda tek ödüllü yuva; SSV adresine Google GET geri çağrısı yapar. [9] [RESMÎ]
+- Ad Manager web: görüntülü reklam en az 7 sn görünür; erken kapatan ödülü kaybettiğini onaylar; aynı anda tek ödüllü yuva; SSV adresine Google GET geri çağrısı yapar. [9] [RESMÎ] Geri çağrının parametreleri ve imza yöntemi belgede yok; GPT'de `custom_data`/`user_id` geçirme yolu da yok. [9][10] [TAHMİN: doğrulanamadı]
 
 ### SSV (AdMob belgesi)
 
-- Alanlar: `ad_network, ad_unit, custom_data, key_id, reward_amount, reward_item, signature, timestamp, transaction_id, user_id`. İmza ECDSA + SHA-256; açık anahtarlar en çok 24 saat önbellekte. 200 dönmezse 1 sn arayla en çok 5 deneme. Her ödülün tekil `transaction_id`'si var; Google önerisi "validate every reward". [7] [RESMÎ]
+- Alanlar: `ad_network, ad_unit, custom_data, key_id, reward_amount, reward_item, signature, timestamp, transaction_id, user_id`. İmza ECDSA + SHA-256; açık anahtarlar en çok 24 saat önbellekte. 200 dönmezse 1 sn arayla en çok 5 deneme. Her ödülün tekil `transaction_id`'si var. Google önerisi: "use the client-side callback to reward the user immediately, while performing validation on all rewards upon the receipt of server-side callbacks"; ödülün geçerliliği kritikse (örnek: oyun içi ekonomi) ve gecikme kabul edilebilirse "waiting for the verified server-side callback may be the best approach". [7] [RESMÎ]
 - AdSense ödüllü birimi ödülü yalnız sayfa JS'ine bildirir; SSV yok → sunucu kredisi için güvenilmez (çıkarım). [2] — [2] [RESMÎ]; "güvenilmez" sonucu [TAHMİN]
 
 ### Genel akış
@@ -113,7 +114,7 @@ Uygulama içindeki gömülü tarayıcıda (ör. WebView2) Google reklamı göste
 Adımlara sayfada ayrı kaynak verilmemiş; akış yukarıdaki kurallar [35][36] ve SSV belgeleri [7][9] üzerine kurulu tasarımdır → [TAHMİN].
 
 1. Kullanıcı "reklam izle, X kredi kazan" seçer; ödül ve şart önceden yazılıdır.
-2. Sunucu tek kullanımlık, imzalı, kısa ömürlü belirteç üretir; `custom_data`'ya konur (hesap kimliği yerine).
+2. Sunucu tek kullanımlık, imzalı, kısa ömürlü belirteç üretir; `custom_data`'ya konur (hesap kimliği yerine). `custom_data` mobil SDK belgesinde var [7]; web'de (GPT) bu alanı geçirme yolu belgede yok, eşleştirme Google'a yazılı sorulmalı [9][10] [TAHMİN: doğrulanamadı].
 3. Reklam oynar; ağ SSV çağrısını sunucuya yapar.
 4. Sunucu imzayı ve belirteci doğrular, `transaction_id`'yi benzersiz kısıtla kaydeder, günlük tavanı denetler, krediyi yazar.
 5. Masaüstü uygulama krediyi API'den okur; istemcinin "izledim" bildirimi kalıcı kredi doğurmaz.
@@ -121,7 +122,7 @@ Adımlara sayfada ayrı kaynak verilmemiş; akış yukarıdaki kurallar [35][36]
 ### Sahte trafik
 
 - AdMob: teşvik vaat eden uygulamaya reklam konamaz (kurallı ödüllü biçim hariç); kendi reklamını tıklamak, gösterimi şişirmek yasak; yaptırım gösterimin durması, hesabın kapanması, diğer Google yayıncı ürünlerinden men. [37] [RESMÎ]
-- **IVT** (geçersiz trafik): GIVT (bilinen bot, veri merkezi IP'si) ve SIVT (emülatör, ele geçirilmiş cihaz, tıklama çiftliği); asıl tanım MRC belgesinde (okunmadı). [38] [RESMÎ]
+- **IVT** (geçersiz trafik): Google'ın sayfasındaki sınıflar GIVT için data center, known crawler, irregular pattern (bilinen bot, veri merkezi IP'si gibi); SIVT için automated browsing, false representation, misleading user interface, manipulated behavior, incentivized behavior, undisclosed classification. [38] [RESMÎ] Emülatör, ele geçirilmiş cihaz ve tıklama çiftliği gibi SIVT örnekleri bu sayfada geçmez; asıl tanım MRC belgesinde (okunmadı). [TAHMİN: doğrulanamadı]
 - Önlem önerileri (etkinlik ölçümü bulunamadı): `transaction_id` tekilliği, hesap başına günlük tavan, hız sınırı, cihaz/hesap ilişkisi, e-posta doğrulaması (veri en azlığıyla dengeli). [TAHMİN]
 
 ## § 4 — Ücretsiz plana aralıklı reklam
@@ -158,7 +159,7 @@ Adımlara sayfada ayrı kaynak verilmemiş; akış yukarıdaki kurallar [35][36]
 | DNS/hosts engeli | Reklamı uygulamanın kendi API alan adından sunmak | Google kodu için desteklenmez; kendi reklamında Google kısıtı yok | **YÜKSEK** | [TAHMİN] (kaynak numarası yok) |
 | Google kodunu vekil sunucudan geçirmek | Yapılmaz | Açık yasak **doğrulanamadı**; değişiklik/şişirme kuralları [31] | **DÜŞÜK** | Açık yasak [TAHMİN: doğrulanamadı]; [31] [RESMÎ] |
 | Engelleyici ödüllü reklamı durdurur | SSV yoksa kredi yok | Uygun | **YÜKSEK** | [TAHMİN] |
-| Sahte "izledim" | Kredi yalnız imzası doğrulanmış SSV ile | Google önerisi [7] | **YÜKSEK** | [7] [RESMÎ] |
+| Sahte "izledim" | Kredi yalnız imzası doğrulanmış SSV ile | Uygun; Google ödülün geçerliliği kritikse ve gecikme kabul edilebilirse doğrulanmış sunucu geri çağrısını beklemeyi öneriyor (genel öneri: ödülü istemcide hemen ver, tüm ödülleri sunucuda doğrula) [7] | **YÜKSEK** | Koşullu öneri [7] [RESMÎ]; önlem [TAHMİN] |
 | Tekrar oynatma | `transaction_id` benzersiz kısıtı + zaman penceresi | Uygun | **YÜKSEK** | Önlem [TAHMİN]; tekil `transaction_id` [7] [RESMÎ] |
 | Bot, emülatör, çok hesap | Tavan, hız sınırı, cihaz/hesap ilişkisi; ağın IVT süzgeci | Şişirme yasak [37] | **ORTA** | Kural [37] [RESMÎ]; önlemler [TAHMİN] |
 | Kendi reklamında sahte gösterim | Tek kullanımlık imzalı karar belirteci, sunucu zaman denetimi, küçültülmüş/odak dışı pencere sayılmaz | Dürüst ölçüm yayıncının sorumluluğu | **ORTA** | [TAHMİN] |
@@ -175,7 +176,7 @@ Adımlara sayfada ayrı kaynak verilmemiş; akış yukarıdaki kurallar [35][36]
 
 | Araç | Ne | Maliyet | Masaüstü | Güven |
 |---|---|---|---|---|
-| Google Ad Manager | Doğrudan satış + açık artırma; öncelik Sponsorship 4, Standard 6/8/10, ağ/AdSense/AdX 12, House 16 [53] | Ücretsiz sürüm sınırı ülkeye göre (Türkiye 200 M, ABD/Kanada/Avustralya/YZ 90 M, diğer 150 M); video 800 bin; AdSense hesabı gerekir [54][55] | Resmi SDK yok; site için | [53][54][55] [RESMÎ]; masaüstü sütunu [TAHMİN] (kaynak numarası yok) |
+| Google Ad Manager | Doğrudan satış + açık artırma; öncelik Sponsorship 4, Standard 6/8/10, ağ/AdSense/AdX 12, House 16 [53] | Ücretsiz sürüm sınırı ülkeye göre (Türkiye 200 M, ABD/Kanada/Avustralya/YZ 90 M, diğer 150 M); video 800 bin [54][55]; geçerli AdSense hesabı gerekir ve Ad Manager hesabı ona kalıcı bağlanır [120] | Resmi SDK yok; site için | [53][54][55][120] [RESMÎ]; masaüstü sütunu [TAHMİN] (kaynak numarası yok) |
 | Revive Adserver | Açık kaynak (GPL-2.0+) [56][57] | Ücretsiz; barındırılan ayda 10 $'dan | PHP 8.1+, MySQL/PostgreSQL [58]; REST API doğrulanamadı | [56][57][58] [RESMÎ]; REST API [TAHMİN: doğrulanamadı] |
 | Kevel | REST Decision API, frekans, bütçe [59] | Teklifle; ikincil tahmin yılda 9.250–139.500 $ [60] | Kod gerektirmez; uyum çıkarım | [59] [RESMÎ]; fiyat tahmini [60] [3. TARAF]; masaüstü uyumu [TAHMİN] |
 | AdButler | Barındırılan, in-app destekli | Essentials 179 $/ay; API +550 $/ay; pazar yeri 2.200 $ + %3,5 [61] | In-app var | [61] [RESMÎ] |
@@ -188,9 +189,9 @@ Adımlara sayfada ayrı kaynak verilmemiş; akış yukarıdaki kurallar [35][36]
 
 ## § 7 — Uygulamayı tanıtmak için reklam vermek
 
-- **Google Ads API** erişimi: Test (yalnız test hesabı, günde 15 bin işlem) · Explorer (gerçek hesap, 2.880) · Basic (15 bin, marka doğrulaması) · Standard (sınırsız, ~10 iş günü denetim). [64] [RESMÎ] Ücretsiz masaüstü yazılım reklamı kısıtlı: "Only authoritative distribution sites that have completed an application are allowed to advertise free desktop software"; site resmi kaynak olmalı, doğrudan indirme sunmalı, her reklamda yazılımın adı geçmeli; SaaS bu kuralın dışında. [65] [RESMÎ]
-- **Meta Marketing API:** 4 May 2026'dan beri "Limited" ve "Full"; Full için App Review (son 15 günde ≥500 çağrı, hata <%15); yalnız kendi reklam hesabı için standart `ads_management` yeter. [66][67] [RESMÎ]
-- **TikTok API for Business:** geliştirici kaydı + OAuth; onay süresi resmi kaynakta doğrulanamadı (ikincil 1–2 hafta). [68] — [68] [3. TARAF]; onay süresi [TAHMİN: doğrulanamadı]
+- **Google Ads API** erişimi: developer token 9 Eylül 2026'da kaldırıldı; erişim seviyesi artık OAuth istemcisinin ya da servis hesabının ait olduğu Google Cloud projesine bağlı, başvuru Cloud Console'daki Google Ads API Overview sayfasından yapılıyor ve yönetici (MCC) hesabı şart değil. [121] [RESMÎ] Seviyeler: Test (yalnız test hesabı, günde 15 bin işlem) · Explorer (gerçek hesapta günde 2.880, test hesabında 15 bin; Anahtar Kelime Planlayıcı (`KeywordPlanIdeaService`, `KeywordPlanService`), `ReachPlanService`, `AudienceInsightsService`, hesap oluşturma, kullanıcı yönetimi ve fatura servisleri kapalı) · Basic (15 bin, marka doğrulaması) · Standard (sınırsız, ~10 iş günü denetim). [64] [RESMÎ] Marka doğrulaması yeni Standard başvurularında da zorunlu [121] [RESMÎ]; "Access levels and RMF" sayfası Standard denetimi için "several business days or sometimes weeks" diyor [122] [RESMÎ]. Ücretsiz masaüstü yazılım reklamı kısıtlı: "Only authoritative distribution sites that have completed an application are allowed to advertise free desktop software"; site resmi kaynak olmalı, doğrudan indirme sunmalı, her reklamda yazılımın adı geçmeli, sitede geçmişte ya da şu an politika ihlali olmamalı; başvuru formu yazılımın yayıncısına yönelik ("If you're the publisher of the specific software you want to advertise, complete the application"). Kapsama ücretsiz deneme, freeware, shareware, freemium ve indirilebilir demolar da giriyor; yani ücretsiz planı olan masaüstü uygulaması da bu başvuruya tabi. SaaS bu kuralın dışında. [65] [RESMÎ]
+- **Meta Marketing API:** 4 May 2026'dan beri "Limited" ve "Full"; Full için App Review: son 15 günde en az 500 başarılı çağrı ve son 500 çağrıda (kayan pencere) %15'in altında hata oranı; ekran kaydı artık istenmiyor, yükseltme App Dashboard'da Marketing API Access Tier özelliğinin +Upgrade düğmesiyle yapılıyor. [66][67] [RESMÎ] Yalnız kendi reklam hesabı için standart `ads_management` izni yeter [66] [RESMÎ]; ancak varsayılan Limited katman "For development only. Not for production apps running for live advertisers" diye tanımlı ve reklam hesabı başına saatlik `ads_management` kotası 300 + 40 × aktif reklam [66][123] [RESMÎ]. Uygulamaya doğrulanmamış işletme portföyü bağlanabilir, ama "it must be verified before you can run ads" [124] [RESMÎ]. Yani kendi hesabında reklam yayınlamak için de Business Verification, düzenli üretim kullanımında Full katman gerekebilir. [TAHMİN]
+- **TikTok API for Business:** geliştirici kaydı + OAuth [68] [3. TARAF]. Kayıt şirket alan adlı e-posta ve şirkete ait web sitesi istiyor; belgeye göre "Currently, we are unable to onboard personal accounts or individual developers", yani şirketi olmayan bireysel geliştirici için Marketing API yolu fiilen kapalı. Kayıt sonucu üç iş gününde bildiriliyor, geliştirici uygulaması incelemesi 2–3 iş günü sürüyor. [125] [RESMÎ] Toplam ≈ 5–6 iş günü (resmî sürelerin toplamı). [TAHMİN] "Birkaç gün ile iki hafta" süresi yalnız TikTok for Developers SSS'sinde geçiyor; o SSS reklam API'leri için TikTok for Business'a yönlendiriyor. [127] [RESMÎ] Şirket yoksa seçenekler: TikTok Ads Manager arayüzü [TAHMİN] ya da geliştirici kimlik bilgisi (developer credential) istemeyen TikTok for Business MCP Server (yetki 30 günde bir yenileniyor, araç başına 6 QPS; API for Business uç noktalarının hepsi henüz yok, araç erişimi bölgeye ve hesap yapısına göre değişebilir) [126] [RESMÎ].
 - Türkiye: Dijital Hizmet Vergisi 2026'da %5, 2027'den %2,5 (10767 sayılı Cumhurbaşkanı Kararı, RG 25 Ara 2025; haber/ikincil kaynaklarla doğrulandı, RG metni okunmadı); reklam ağına uygulanır, fiyata yansıyabilir. [69] [3. TARAF] (Aynı oranlar §10'da 7194 sayılı Kanun metniyle [111] verilir.)
 
 ## § 8 — Genel mimari: masaüstü uygulama + web sunucusu
@@ -206,7 +207,7 @@ Reklam ağı: talep, gösterim, sahte trafik süzgeci, SSV. Sunucu: kredinin ve 
 3. **Doğrudan satış paneli:** reklamveren kaydı, bakiye, kampanya, kreatif onayı, rapor; fatura ve stopaj gerektirdiği için hukuki yapıya bağlı (§9).
 4. **Google reklamı gömülü tarayıcıda:** yalnız Google'dan yazılı onay gelirse.
 
-Riskler: Ad Manager web ödüllü reklamının masaüstü tarayıcı desteği iki resmi sayfada çelişiyor [9][10] [ÇELİŞKİLİ]; yedek olarak AppLixir (web + SSV) var [28][29] [RESMÎ], ülke ve ödeme şartları doğrulanamadı [TAHMİN: doğrulanamadı].
+Riskler: Ad Manager web ödüllü reklamının masaüstü tarayıcı desteğindeki çelişki kısmen çözüldü. Yardım sayfası "You can traffic rewarded ads on Google Ad Manager desktop, mobile, and tablet web inventory" diyor; aynı sayfa ve GPT örneği "mobile optimized" sayfa şartını viewport meta etiketiyle örnekliyor, yani şart cihaz değil sayfa [9][10] [RESMÎ]. Örnek koddaki "Slot returns null if the page or device does not support rewarded ads" yorumu yüzünden hangi cihazda `null` döndüğü belgelenmemiş [10] [ÇELİŞKİLİ: kısmen çözüldü]. Web SSV geri çağrısının parametreleri, imza yöntemi ve GPT'de `custom_data`/`user_id` geçirme yolu belgede yok; kullanıcı eşleştirmesi Google'a yazılı sorulmalı [9][10] [TAHMİN: doğrulanamadı]. Yedek olarak AppLixir (web + SSV) var [28][29] [RESMÎ], ülke ve ödeme şartları doğrulanamadı [TAHMİN: doğrulanamadı].
 
 ## § 9 — Hukuk ve vergi
 
@@ -241,7 +242,7 @@ Riskler: Ad Manager web ödüllü reklamının masaüstü tarayıcı desteği ik
 | Türkiye, reklam veren | Kurumsal mükellef yabancı ağ faturasında KDV'yi sorumlu sıfatıyla 2 no'lu beyannameyle öder [88]; DHV ağa uygulanır [69]. | [88][69] [3. TARAF] |
 | Yurt dışında yerleşik | Bu araştırmada ülke ülke incelenmedi; ağın vergi formu (ör. ABD için W-8/W-9) ve yerel mevzuat geçerli. | İncelenmedi; kaynak numarası yok [TAHMİN] |
 
-Ödeme: Ad Manager EFT listesinde "Turkey | Lira" var [89] [RESMÎ]; AdSense SEPA listesinde Türkiye yok, Türkiye ödeme yöntemi doğrulanamadı [90] — liste [90] [RESMÎ]; ödeme yöntemi [TAHMİN: doğrulanamadı]. AdSense genel ödeme takvimi ve 20/B ayrıntısı için: [YouTube Oyun rehberi](../YouTube-Oyun/index.html); şirketsiz gelir için: [Şirket Kurma · Şirketsiz](../Sirket-Kurma/12-sirketsiz.html).
+Ödeme: Ad Manager'ın ödeme yöntemi tablosunda Türkiye için EFT ve havale (wire) var, çek ve Hyperwallet yok [89] [RESMÎ]; EFT ödemesi yerel para biriminde yatar, banka hesabı hesapta girilen ülkede ve o ülkenin yerel para biriminde olmalı (yoksa test yatırması başarısız olur) [128] [RESMÎ]; AdSense SEPA listesinde Türkiye yok, Türkiye ödeme yöntemi doğrulanamadı [90] — liste [90] [RESMÎ]; ödeme yöntemi [TAHMİN: doğrulanamadı]. AdSense genel ödeme takvimi ve 20/B ayrıntısı için: [YouTube Oyun rehberi](../YouTube-Oyun/index.html); şirketsiz gelir için: [Şirket Kurma · Şirketsiz](../Sirket-Kurma/12-sirketsiz.html).
 
 ## § 10 — Türkiye şirketi mi, yurt dışı şirketi mi?
 
@@ -258,7 +259,7 @@ Riskler: Ad Manager web ödüllü reklamının masaüstü tarayıcı desteği ik
 
 - Gelir yokken geliştirme, test ve hesap başvuruları mükellefiyet doğurmaz (çıkarım: vergi konusu gelir yok). [TAHMİN]
 - İlk düzenli ödemede işe başlama kanuni sürede bildirilir; bu genç girişimci istisnasının da şartıdır. [84][109] [RESMÎ] Rehbere göre süre 10 gündür ve geçmiş kayıt dışı faaliyet tespit edilirse istisna kaybedilebilir. [3. TARAF] (rehber)
-- Reklam ödemesinin gelişi: Ad Manager EFT listesinde "Turkey | Lira" var [89]; YouTube için AdSense ödeme tablosunda Türkiye: EFT evet, havale evet, çek hayır; banka, ödeme profilindeki adresle aynı ülkede olmalı [113]. [RESMÎ] Ana AdSense hesabına aynen uygulandığı **doğrulanamadı**. [TAHMİN: doğrulanamadı]
+- Reklam ödemesinin gelişi: Ad Manager ödeme tablosunda Türkiye: EFT evet, havale evet, çek ve Hyperwallet hayır; EFT yerel para biriminde yatar [89][128]; YouTube için AdSense ödeme tablosunda Türkiye: EFT evet, havale evet, çek hayır; banka, ödeme profilindeki adresle aynı ülkede olmalı [113]. [RESMÎ] Ana AdSense hesabına aynen uygulandığı **doğrulanamadı**. [TAHMİN: doğrulanamadı]
 - Yurt dışından düzenli gelen parada sözleşme → fatura → dekont zinciri banka için de gerekir; güncel kambiyo kuralları **doğrulanamadı** ([Yurt dışı çerçeve §7](../Sirket-Kurma/09-yurtdisi-cerceve.html)). — zincir bilgisi rehberden [3. TARAF]; kambiyo kuralları [TAHMİN: doğrulanamadı]
 
 ### Türkiye seçenekleri
@@ -347,7 +348,7 @@ eCPM X $ ise bir izleme ≈ X/1000 $. Global 8–18 $ ile bir izleme ≈ 0,8–1
 | Durum | Önerilen yol | Güven |
 |---|---|---|
 | Yalnız masaüstü uygulama, web sitesi yok | Kendi ev reklamı ya da doğrudan satış; ödüllü reklam için Overwolf/Playwire gibi masaüstü izinli ağlar (çatı ve trafik şartlarına bak) | Öneri [TAHMİN]; masaüstü izni [14][15][18][19] [RESMÎ]; Overwolf'ta ödüllü reklam [TAHMİN: doğrulanamadı] (§1, §13) |
-| Masaüstü uygulama + web sitesi + sunucu | Sitede ödüllü reklam + SSV → kredi; uygulamada kendi alan adından ev/doğrudan reklam | Öneri [TAHMİN]; web ödüllü reklam + SSV [9] [RESMÎ]; masaüstü tarayıcı desteği [9][10] [ÇELİŞKİLİ] |
+| Masaüstü uygulama + web sitesi + sunucu | Sitede ödüllü reklam + SSV → kredi (web geri çağrısının parametreleri ve kullanıcı eşleştirmesi belgede yok; Google'a yazılı sorulmalı); uygulamada kendi alan adından ev/doğrudan reklam | Öneri [TAHMİN]; web ödüllü reklam + SSV [9] [RESMÎ]; web SSV parametreleri ve eşleştirme [TAHMİN: doğrulanamadı]; masaüstü tarayıcı desteği [9][10] [ÇELİŞKİLİ: kısmen çözüldü] |
 | Uygulama Overwolf/Electron üzerinde | Overwolf Ads SDK (tekellik ve onay şartları) | [14][15][16][17] [RESMÎ] |
 | Kitlesi ağırlıkla ABD/BK/Kanada, trafiği yüksek | Playwire "Desktop Apps" adayı (1.000 DAU şartı) | [18][19] [RESMÎ] |
 | Kullanıcılar AEA/BK/İsviçre'de | Kişiselleştirilmiş reklam için onaylı TCF CMP; yoksa sınırlı/kişiselleştirilmemiş reklam | [79][80] [RESMÎ] |
@@ -358,14 +359,14 @@ eCPM X $ ise bir izleme ≈ X/1000 $. Global 8–18 $ ile bir izleme ≈ 0,8–1
 
 Aşağıdaki maddeler [TAHMİN: doğrulanamadı] sayılır ("(rehber)" rakamları için [3. TARAF]).
 
-- Ad Manager'ın masaüstü yazılım / WebView2 kuralı; web ödüllü reklamın masaüstü tarayıcı desteği (iki resmi sayfa çelişiyor: [9][10] [ÇELİŞKİLİ]).
+- Ad Manager'ın masaüstü yazılım / WebView2 kuralı; web ödüllü reklamda GPT'nin hangi cihazda `null` döndürdüğü (masaüstü desteğindeki çelişki kısmen çözüldü: [9][10] [ÇELİŞKİLİ: kısmen çözüldü]); web SSV geri çağrısının parametreleri, imza yöntemi ve GPT'de `custom_data`/`user_id` geçirme yolu.
 - AdMob için "Windows desteklenmez" diyen resmi cümle; Offerwall'da SSV; AdSense'in Türkiye ödeme yöntemi.
 - Overwolf: başka çatılarla uyum, ödüllü reklam, gelir payı (üçüncü taraf %20–30 rakamı resmi değil), oyun dışı uygulama kabulü.
 - Playwire, AppLixir, Venatus, Ezoic için ülke kabulü ve ödeme şartları.
 - Vekil sunucu yasağının resmi metni; DAI'nin küçük yayıncıya açıklığı; MRC belgelerinin kendisi; Open Measurement Windows desteği.
 - Revive REST API; Kevel fiyatı; Epom/Broadstreet masaüstü uyumu.
 - 476 sayılı CK oranlarının güncelliği; 20/B'nin masaüstü uygulamaya uygulanması ve 2026 sınırı; Mesafeli Sözleşmeler m.15; push bildiriminin İYS kapsamı.
-- TikTok Marketing API onay şartları; TCF v2.3 Google şartı.
+- TCF v2.3 Google şartı.
 - §10: AdSense ana hesabında Türkiye ödeme yöntemleri (yalnız YouTube tablosu okundu); Mercury'nin Türkiye durumu; Paddle'ın Türkiye KDV'sini beyan edip etmediği; reklam/abonelik gelirinin KVK m.7'de aktif mi pasif mi sayıldığı; ABD LLC'nin GVK m.22/4'te "kurum" sayılıp sayılmadığı; İrlanda ve BAE ile ÇVÖA ve maliyetleri; PayTR, Param, Lemon Squeezy güncel durumu; güncel kambiyo kuralları. "(rehber)" rakamları 3 Eylül 2026 tarihli Şirket Kurma rehberinden, burada yeniden doğrulanmadı.
 
 ## § 14 — Kaynakça (erişim: 30 Ekim 2026)
@@ -460,7 +461,7 @@ Numaralar HTML sayfasıyla aynıdır. Her kaydın sonundaki etiket kaynağın t�
 86. Reklam alanı KDV görüşü (ikincil) — https://www.muhasebetr.com/yazarlarimiz/menderescetin/023/ — [3. TARAF]
 87. İnternet reklam stopajı (ikincil, 2019) — https://www.alomaliye.com/2019/04/08/internet-reklamlari-vergi-kesintisi/ — [3. TARAF]
 88. Google Ireland KDV 2 (ikincil) — https://www.muhasebenews.com/?p=132492 — [3. TARAF]
-89. Ad Manager EFT ülkeleri — https://support.google.com/admanager/answer/147604 — [RESMÎ]
+89. Ad Manager ödeme yöntemleri ("Set up your form of payment", ülke tablosu; 6 Kasım 2026'da yeniden okundu) — https://support.google.com/admanager/answer/147604 — [RESMÎ]
 90. AdSense SEPA EFT ülkeleri — https://support.google.com/adsense/answer/2975858 — [RESMÎ]
 91. Playwire AdMob eCPM (ikincil) — https://www.playwire.com/blog/admob-ecpm-benchmarks-what-publishers-should-expect — [3. TARAF]
 92. MonetizeMore uygulama geliri (ikincil) — https://www.monetizemore.com/blog/how-much-ad-revenue-can-apps-generate/ — [3. TARAF]
@@ -491,6 +492,15 @@ Numaralar HTML sayfasıyla aynıdır. Her kaydın sonundaki etiket kaynağın t�
 117. iyzico fiyatlandırma — https://www.iyzico.com/fiyatlandirma — [RESMÎ]
 118. Ticaret Bakanlığı, asgari sermaye tutarları — https://icticaret.ticaret.gov.tr/haberler/anonim-ve-limited-sirketlerde-asgari-sermaye-tutarlari-artirilmistir — [RESMÎ]
 119. Elektronik hizmet sunucularına özel KDV mükellefiyeti (ikincil, 2018) — https://www.grantthornton.com.tr/globalassets/_markets_/tur/media/vergi-sirkuleri/2018/2018-14.pdf — [3. TARAF]
+120. Ad Manager'a kaydolma, AdSense hesabı şartı (erişim: 6 Kasım 2026) — https://support.google.com/admanager/answer/7084151 — [RESMÎ]
+121. Google Ads API developer token: kaldırılması, Cloud projesine bağlı erişim, marka doğrulaması (erişim: 6 Kasım 2026) — https://developers.google.com/google-ads/api/docs/api-policy/developer-token ; https://developers.google.com/google-ads/api/docs/first-call/dev-token — [RESMÎ]
+122. Google Ads API Access levels and RMF (erişim: 6 Kasım 2026) — https://developers.google.com/google-ads/api/docs/productionize/access-levels — [RESMÎ]
+123. Meta Marketing API hız sınırları (erişim: 6 Kasım 2026) — https://developers.facebook.com/docs/marketing-api/overview/rate-limiting — [RESMÎ]
+124. Meta Marketing API kullanım senaryoları (erişim: 6 Kasım 2026) — https://developers.facebook.com/documentation/development/create-an-app/marketing-api-use-cases — [RESMÎ]
+125. TikTok API for Business: geliştirici kaydı ve geliştirici uygulaması (erişim: 6 Kasım 2026) — https://business-api.tiktok.com/portal/docs?id=1738855176671234 ; https://business-api.tiktok.com/portal/docs?id=1738855242728450 — [RESMÎ]
+126. TikTok for Business MCP Server (erişim: 6 Kasım 2026) — https://business-api.tiktok.com/portal/docs?id=1869388085523458 — [RESMÎ]
+127. TikTok for Developers SSS, son güncelleme 4 Ağustos 2026 (erişim: 6 Kasım 2026) — https://developers.tiktok.com/doc/getting-started-faq — [RESMÎ]
+128. Ad Manager EFT ile ödeme (erişim: 6 Kasım 2026) — https://support.google.com/admanager/answer/2731686 — [RESMÎ]
 
 ---
 

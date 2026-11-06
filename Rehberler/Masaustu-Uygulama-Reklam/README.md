@@ -4,7 +4,7 @@ Windows masaüstü uygulaması ve yanında bir web sitesi/sunucusu olan bir ür�
 
 HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır; GitHub HTML'i işlemez)
 
-> **Araştırma tarihi:** 30 Ekim 2026 (bütün kaynaklara bu tarihte erişildi; hiçbir reklam ağında hesap açılmadı, API'ye istek atılmadı). Reklam ağı politikaları, ülke listeleri, oranlar ve ücretler sık değişir; kullanmadan önce kaynakçadaki resmî sayfadan güncelini kontrol et. Gelir ve maliyet rakamları örnek ve tahmindir; mali müşavir tabanı gibi il grubuna bağlı tutarlar örnek 1. grup il içindir.
+> **Araştırma tarihi:** 30 Ekim 2026 (bütün kaynaklara bu tarihte erişildi; hiçbir reklam ağında hesap açılmadı, API'ye istek atılmadı). **Güncelleme, 6 Kasım 2026:** API başvuru dosyaları yazılırken resmî kaynaklara yeniden bakıldı; Google Ads API (developer token'ın kalkması, Explorer kısıtları, Standard için marka doğrulaması, ücretsiz masaüstü yazılım kapsamı), AdMob SSV alıntısı ve geçersiz trafik sınıfları, Ad Manager (masaüstü çelişkisi kısmen çözüldü, web SSV'de belgelenmeyenler, Türkiye ödeme yöntemleri, AdSense şartı), Meta Limited/Full ölçütleri ve TikTok kayıt şartları ile süreleri düzeltildi (kaynakça [120]–[128]). Reklam ağı politikaları, ülke listeleri, oranlar ve ücretler sık değişir; kullanmadan önce kaynakçadaki resmî sayfadan güncelini kontrol et. Gelir ve maliyet rakamları örnek ve tahmindir; mali müşavir tabanı gibi il grubuna bağlı tutarlar örnek 1. grup il içindir.
 >
 > **Uyarı:** Genel bilgi amaçlıdır; hukuk ve vergi bölümü danışmanlık değildir. Resmî kaynakta bulunamayan her bilgi sayfada "doğrulanamadı" diye işaretli; "(çıkarım)" yazanlar kaynağın değil yorumun ifadesidir. Somut durumda mali müşavire danışılmalıdır.
 

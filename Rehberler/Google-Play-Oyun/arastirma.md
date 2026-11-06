@@ -2,7 +2,7 @@
 
 Araştırma · Mobil oyun ve para kazanma (yayın · AdMob · vergi)
 
-- **Araştırma tarihi:** 5 Kasım 2026. Bütün kaynaklara bu tarihte erişildi. Yalnız herkese açık sayfalar okundu; hiçbir hesap açılmadı, API'ye istek atılmadı.
+- **Araştırma tarihi:** 5 Kasım 2026 (güncelleme: 6 Kasım 2026). Kaynaklara 5 Kasım'da erişildi; 6 Kasım güncellemesinde § 1 ve § 6'daki `app-ads.txt` ve hazırlık incelemesi bilgisi resmî sayfalara göre düzeltildi, [39]–[41] eklendi. Yalnız herkese açık sayfalar okundu; hiçbir hesap açılmadı, API'ye istek atılmadı.
 - **Kapsam:** Tek kişinin Godot ya da Kotlin ile yaptığı 2D/3D basit bir oyunu Google Play'e çıkarması: ne kadar para ve zaman ister, yeni hesaplardaki kapalı test şartı, teknik şartlar, AdMob geliri nasıl birikir ve ödenir, şirket gerekir mi, vergi nasıl işler. Motor karşılaştırmasında Unity de var (§ 5).
 - **Yöntem:** Resmî kaynak öncelikli; resmî kaynakta bulunamayan bilgi "doğrulanamadı" diye işaretli (toplu liste: § 11). Süre ve gelir rakamlarının hepsi ölçülmemiş tahmin ya da anekdottur.
 - **Okurun durumu:** Tek bir durum varsayılmaz. Vergi bölümü (§ 8) ve karar tablosu (§ 10) "Durum → Sonuç" biçiminde dallanır: bireysel / şahıs şirketi / limited; Türkiye'de ya da yurt dışında yaşayan; 4/a çalışan, kamu görevlisi, çalışmayan, ödenek alan, öğrenci, emekli, yetim aylığı alan. Motor seçimi başlangıç noktasına göre ayrılır (§ 5).
@@ -20,7 +20,7 @@ Araştırma · Mobil oyun ve para kazanma (yayın · AdMob · vergi)
 | [TAHMİN: doğrulanamadı] | Resmî kaynakta bulunamadı ya da bu araştırmada sınanmadı; toplu liste § 11. |
 | [ÇELİŞKİLİ] | Kaynaklar birbirini tutmuyor; hangi kaynağın ne dediği yanında yazılı. |
 
-- Köşeli parantezli numaralar ([1]–[38]) § 12 Kaynakça'daki sırayı izler; [index.html](index.html) ile aynı numaralardır.
+- Köşeli parantezli numaralar ([1]–[41]) § 12 Kaynakça'daki sırayı izler; [index.html](index.html) ile aynı numaralardır.
 - Etiket taşımayan cümle: sayfada kaynak ya da rozet verilmemiş açıklama, sonuç veya öneri.
 - Tırnak içindeki İngilizce ifadeler, yanında numarası verilen kaynaktan alıntıdır.
 - Terimler ilk geçtiği yerde tek satırla açıklanır. Bölüm göndermeleri "→ § N" biçimindedir.
@@ -67,7 +67,7 @@ Araştırma · Mobil oyun ve para kazanma (yayın · AdMob · vergi)
 | Kotlin + Android Studio | 0 | Ücretsiz araçlar |
 | Unity Personal | 0 (şartlı) | Son 12 ayda gelir + yatırım 200.000 $'ın altındaysa [RESMÎ] [24] |
 | Görseller, sesler | 0'dan başlar | Kenney paketleri CC0 (ticari serbest, atıf gerekmez) [RESMÎ] [21]; diğer paketlerde lisans tek tek okunur: CC-BY atıf ister, CC-BY-NC reklamlı oyunda kullanılamaz |
-| Gizlilik politikası sayfası, `app-ads.txt` | 0 olabilir | Herkese açık bir web sayfası gerekir; ücretsiz statik barındırma yeter (ör. GitHub Pages) |
+| Gizlilik politikası sayfası, `app-ads.txt` | 0 olabilir | Herkese açık bir web sayfası gerekir; ücretsiz statik barındırma yeter (ör. GitHub Pages). `app-ads.txt` alan adının köküne konur (→ § 6) [RESMÎ] [30]: GitHub Pages'te proje sitesi (`kullanici.github.io/depo`) kök değildir; kökte yayınlanan kullanıcı/kuruluş sitesi (`kullanici.github.io`) ya da özel alan adı gerekir [RESMÎ] [41]. Kökte dosya barındıramayana AdMob Firebase Hosting'i öneriyor [RESMÎ] [30]. |
 
 **Süre** (tek kişi, programlama bilen, yapay zekâ yardımıyla) — tablonun tamamı [TAHMİN]
 
@@ -183,8 +183,8 @@ Araştırma · Mobil oyun ve para kazanma (yayın · AdMob · vergi)
 > - "It is against AdMob policy to click on your own live ads." Geliştirirken hep test reklamı kullan; çevreye "reklama tıkla" deme. Geçersiz trafikle kapatılan hesaba ödenmemiş bakiye ödenmeyebilir [RESMÎ] [18].
 > - Geçiş (interstitial) reklamını açılışta, her dokunuşta ya da art arda gösterme; ayrıntı: [Masaüstü reklam · §4](../Masaustu-Uygulama-Reklam/index.html#aralikli).
 
-- **Yeni uygulama:** Play'de yayınlanıp AdMob'a bağlanınca hazırlık incelemesi başlar; "Reviews typically take 2-3 days", bu sürede reklam sınırlı olabilir [RESMÎ] [29].
-- **`app-ads.txt`:** Play mağaza sayfasına geliştirici web sitesi eklenir, dosya o alan adının köküne konur; taranması 24 saate kadar sürer [RESMÎ] [30].
+- **Yeni uygulama:** Ocak 2025'ten beri AdMob'a eklenen yeni uygulama önce `app-ads.txt` ile doğrulanmalı (sonraki madde): "Once your app is verified, the app readiness review will begin." [RESMÎ] [39]. Doğrulanmayan yeni uygulama sınırlı reklam sunumunda kalır [RESMÎ] [40]. İnceleme için "Reviews typically take 2-3 days", bu sürede reklam sınırlı olabilir [RESMÎ] [29]. Hazırlık incelemesi sayfası ise `app-ads.txt` doğrulamasını anmıyor, incelemenin uygulama desteklenen bir mağazaya bağlanınca kendiliğinden başladığını yazıyor [ÇELİŞKİLİ] [29] [39]; doğrulamayı baştan tamamlamak iki okumada da güvenli.
+- **`app-ads.txt`:** Ocak 2025'ten beri yeni uygulamada zorunlu (önceki madde) [RESMÎ] [39]. Play mağaza sayfasına geliştirici web sitesi eklenir, dosya o alan adının köküne konur; taranması 24 saate kadar sürer [RESMÎ] [30]. Dosya kurulunca AdMob'da uygulama ayarlarından doğrulama kontrolü istenir (Verify app) [RESMÎ] [39]. Kökte dosya barındıramayana AdMob Firebase Hosting'i öneriyor [RESMÎ] [30]; GitHub Pages proje sitesi kök sayılmaz (→ § 1).
 - **AB/İngiltere kullanıcıları:** Google sertifikalı bir onay platformu (CMP; Google'ın ücretsiz UMP SDK'sı da olur) yoksa bu trafiğe yalnız sınırlı reklam gider [RESMÎ] [31]. Türkiye'yi hedefleyen oyunu da AB'den indirenler olacağı için baştan eklemek mantıklı. Onay kuralları ayrıntısı: [Masaüstü reklam · §9](../Masaustu-Uygulama-Reklam/index.html#hukuk).
 
 ## § 7 — Gelir senaryoları (temkinli)
@@ -337,3 +337,6 @@ Numaralar metindeki [n] göndermeleriyle ve [index.html](index.html) § 12 ile a
 36. 318 Seri No.lu GVGT (ikincil alıntı) — https://www.alomaliye.com/2022/01/12/gelir-vergisi-genel-tebligi-seri-no-318-gvk-318 [3. TARAF]
 37. İŞKUR, ödeneğin kesilme halleri — https://www.iskur.gov.tr/sikca-sorulan-sorular/issizlik-sigortasi/issizlik-odenegi-hangi-hallerde-kesilmektedir/ [RESMÎ]
 38. AdMob Android SDK destek takvimi — https://developers.google.com/admob/android/deprecation [RESMÎ]
+39. AdMob, app-ads.txt ile uygulama doğrulama (erişim: 6 Kasım 2026) — https://support.google.com/admob/answer/14538460 [RESMÎ]
+40. AdMob, başlangıç kılavuzu: doğrulanmayan yeni uygulamada sınırlı reklam (erişim: 6 Kasım 2026) — https://support.google.com/admob/answer/15948559 [RESMÎ]
+41. GitHub Docs, GitHub Pages site türleri ve adresleri (erişim: 6 Kasım 2026) — https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages [RESMÎ]

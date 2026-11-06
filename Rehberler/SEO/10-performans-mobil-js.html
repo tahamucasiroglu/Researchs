@@ -134,7 +134,7 @@
         <div class="eyebrow">Bölüm 10 · Teknik</div>
         <h1 class="page-title">Hız, mobil ve JavaScript</h1>
         <p class="lede">Bu bölüm sitenin "nasıl çalıştığı" ile ilgilenir: ne kadar hızlı açılıyor, dokununca ne kadar çabuk tepki veriyor, telefonda düzgün mü, içerik JavaScript çalışmadan görünüyor mu. Önce Google'ın bunları nasıl ölçtüğünü ve sıralamada ne kadar ağırlık verdiğini, sonra her metriği nasıl iyileştireceğini, en sonda da JavaScript ağırlıklı sitelerin Google'a ve yapay zekâ botlarına nasıl göründüğünü anlatır.</p>
-        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 22 dk okuma</div>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; güncelleme: 6 Kasım 2026 &middot; ≈ 22 dk okuma</div>
       </header>
 
       <div class="content">
@@ -143,7 +143,7 @@
           <ul>
             <li><strong>Core Web Vitals</strong> üç metriktir: LCP ≤ 2,5 sn, INP ≤ 200 ms, CLS ≤ 0,1. Gerçek kullanıcıların <strong>75. yüzdeliği</strong>ne bakılır; INP, 12 Mart 2024'te FID'in yerini aldı.</li>
             <li>Google bunları sıralamada kullanır ama <strong>küçük bir faktördür</strong>: ilgililiğin önüne geçmez, benzer sayfalar arasında eşitlik bozar. Lighthouse puanı sıralamada kullanılmaz.</li>
-            <li>Saha verisi CrUX'tan gelir; Brave, Edge ve iOS kullanıcıları bu veride yok. Kendi tarayıcında hızlı görmek Google'ın gördüğü değildir.</li>
+            <li>Saha verisi CrUX'tan gelir; Edge ve iOS kullanıcıları bu veride yok, Brave'in de olmadığı kuraldan çıkarımdır. Kendi tarayıcında hızlı görmek Google'ın gördüğü değildir.</li>
             <li>Mobil öncelikli dizin bitti: 5 Temmuz 2024'ten beri mobilde açılmayan site dizine girmez.</li>
             <li>Google JavaScript'i çalıştırır ama gecikmeyle; yapay zekâ ve sosyal ağ botlarının çoğu hiç çalıştırmaz. İçerik, başlık, kanonik ve <code>og:</code> etiketleri <strong>ilk HTML'de</strong> olmalı. Dinamik render artık önerilmiyor.</li>
           </ul>
@@ -175,7 +175,7 @@
 
         <aside class="callout callout--info">
           <p class="callout__title">Değişti</p>
-          <p><strong>12 Mart 2024:</strong> INP, FID'in (First Input Delay) yerini aldı. INP Mayıs 2022'de deneysel olarak çıkmış, Mayıs 2023'te duyurulmuştu. FID, 9 Eylül 2024'te CrUX ve PageSpeed Insights API'lerinden de kaldırıldı <sup class="kaynak"><a href="#k3">[3]</a></sup>. 2021 tarihli bazı Türkçe kaynaklar hâlâ FID eşiklerini veriyor <sup class="kaynak"><a href="#k29">[29]</a></sup>; FID gören rehberi eskimiş say.</p>
+          <p><strong>12 Mart 2024:</strong> INP, FID'in (First Input Delay) yerini aldı. INP Mayıs 2022'de deneysel olarak çıkmış, Mayıs 2023'te duyurulmuştu. FID'in Chrome araçlarından kaldırılması 10 Eylül 2024'te ilan edildi (9 Eylül 2024 geçiş için verilen son gündü): CrUX API FID'i o gün bıraktı, PageSpeed Insights ve öteki araçların da birkaç gün içinde bırakacağı duyuruldu; BigQuery'de son FID verisi Ağustos 2024 tablosundadır (202408) <sup class="kaynak"><a href="#k3">[3]</a></sup><sup class="kaynak"><a href="#k30">[30]</a></sup><sup class="kaynak"><a href="#k31">[31]</a></sup>. 2021 tarihli bazı Türkçe kaynaklar hâlâ FID eşiklerini veriyor <sup class="kaynak"><a href="#k29">[29]</a></sup>; FID gören rehberi eskimiş say.</p>
         </aside>
 
         <!-- ============ 2 ============ -->
@@ -202,13 +202,13 @@
         <p><strong>CrUX</strong> (Chrome User Experience Report), Google'ın sıralamada kullandığı saha verisinin kaynağıdır <sup class="kaynak"><a href="#k6">[6]</a></sup>:</p>
         <ul>
           <li><strong>Kapsananlar:</strong> Windows, macOS, ChromeOS ve Linux'taki masaüstü Chrome ile Android Chrome.</li>
-          <li><strong>Kapsanmayanlar:</strong> iOS'taki Chrome, Android WebView ve Edge gibi diğer Chromium tabanlı tarayıcılar. <strong>Brave de bu gruptadır.</strong></li>
+          <li><strong>Kapsanmayanlar:</strong> iOS'taki Chrome, Android WebView ve Edge gibi diğer Chromium tabanlı tarayıcılar. Brave belgede adıyla geçmez; Chromium tabanlı olduğu için bu gruba girdiği bir çıkarımdır.</li>
           <li>Sayfa "keşfedilebilir" olmalı (200 dönmeli, <code>noindex</code> olmamalı) ve yeterince ziyaret almalıdır; eşik açıklanmıyor.</li>
-          <li>Veri yetersizse Google URL grubuna, o da yoksa bütün <strong>origin</strong>'e (alan adının tamamına) geri düşer.</li>
+          <li>CrUX API kendiliğinden origin'e geçmez: URL için veri yetersizse "veri yok" (404) döner <sup class="kaynak"><a href="#k33">[33]</a></sup>. PageSpeed Insights bu durumda doğrudan <strong>origin</strong>'e (alan adının tamamına) geri düşer; API yanıtında <code>origin_fallback: true</code> görünür <sup class="kaynak"><a href="#k32">[32]</a></sup>. "URL grubu" yalnız Search Console'un Core Web Vitals raporunda vardır; grup küçükse rapor origin grubuna geçer <sup class="kaynak"><a href="#k5">[5]</a></sup>.</li>
         </ul>
         <aside class="callout callout--win">
           <p class="callout__title">Püf noktası</p>
-          <p><code>noindex</code>'li ve 200 dönmeyen sayfalar CrUX'ta sayfa düzeyinde yer almaz ama <strong>origin verisine katkı verir</strong>. Aynı alan adındaki yavaş bir yönetim paneli, verisi az olan sitenin genel skorunu aşağı çekebilir <sup class="kaynak"><a href="#k6">[6]</a></sup>. Paneli ayrı bir alt alan adına almak bu etkiyi de ayırır.</p>
+          <p><code>noindex</code>'li ve 200 dönmeyen sayfalar CrUX'ta sayfa düzeyinde yer almaz. Origin verisine katkı verip vermedikleri ise belirsiz <span class="tag tag--warn">Doğrulanamadı</span>: metodoloji sayfasının "Origin" bölümü bu deneyimlerin, sayfaların tek tek keşfedilebilirliğinden bağımsız olarak origin düzeyinde toplandığını yazar; giriş bölümü ise sayfa şartını karşılamayan deneyimlerin origin verisine girmediğini söyler <sup class="kaynak"><a href="#k6">[6]</a></sup>. "Origin" bölümü doğruysa aynı alan adındaki yavaş bir yönetim paneli, verisi az olan sitenin genel skorunu aşağı çekebilir. Paneli ayrı bir alt alan adına almak bu olası etkiyi ayırır.</p>
         </aside>
 
         <h3 id="lab-saha">Laboratuvar ve saha farkı</h3>
@@ -225,13 +225,14 @@
             <tbody>
               <tr><td>PageSpeed Insights</td><td>Tek URL; hem saha (CrUX) hem lab (Lighthouse) verisi</td></tr>
               <tr><td>Search Console · Core Web Vitals raporu</td><td>Site geneli, şablona göre gruplanmış URL'ler</td></tr>
-              <tr><td>CrUX API / BigQuery / CrUX Vis</td><td>Günlük (API) ve aylık (BigQuery) ham saha verisi</td></tr>
+              <tr><td>CrUX API / BigQuery</td><td>Günlük (API) ve aylık (BigQuery) ham saha verisi</td></tr>
+              <tr><td>CrUX History API / CrUX Vis</td><td>Haftalık saha verisi serisi; son 40 hafta</td></tr>
               <tr><td>Lighthouse, Chrome DevTools</td><td>Geliştirme sırasında lab testi</td></tr>
               <tr><td><code>web-vitals</code> JS kitaplığı</td><td>Kendi RUM ölçümün</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Kaynak: <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup>. Araçların geniş anlatımı: <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</p>
+        <p>Kaynak: <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup><sup class="kaynak"><a href="#k7">[7]</a></sup><sup class="kaynak"><a href="#k34">[34]</a></sup>. Araçların geniş anlatımı: <a href="15-araclar-ve-olcum.html">Bölüm 15</a>.</p>
         <aside class="callout callout--example">
           <p class="callout__title">Örnek</p>
           <p>"Sitem bende çok hızlı ama PageSpeed kötü diyor." Ölçüm yavaş bir mobil cihaz ve kısıtlı ağ ile yapılıyor; saha verisi de gerçek (çoğu orta segment) Android kullanıcılarından geliyor. Geliştiricinin güçlü masaüstü bilgisayarı ve hızlı bağlantısı ölçüt değildir <sup class="kaynak"><a href="#k5">[5]</a></sup><sup class="kaynak"><a href="#k6">[6]</a></sup>. Ziyaretçisi az bir sitede Search Console "veri yok" der: bu ceza değildir; lab ölçümüyle ilerle, istersen kendi RUM'unu kur.</p>
@@ -550,7 +551,7 @@ body { font-family: "Marka", "Marka-yedek", system-ui, sans-serif; }</code></pre
           <ul>
             <li>CWV: LCP ≤ 2,5 sn, INP ≤ 200 ms, CLS ≤ 0,1; 75. yüzdelik, mobil ve masaüstü ayrı, 28 günlük pencere, grubu en kötü metrik belirler.</li>
             <li>Hız sıralamada küçük ama gerçek bir faktördür; asıl getirisi ziyaretçinin kaçmamasıdır. Lighthouse puanı sıralamada kullanılmaz.</li>
-            <li>Google'ın gördüğü veri CrUX'tur; Brave, Edge ve iOS kullanıcıları bu veride yok. Kendi tarayıcın ölçüt değil.</li>
+            <li>Google'ın gördüğü veri CrUX'tur; Edge ve iOS kullanıcıları bu veride yok, Brave'in de olmadığı kuraldan çıkarımdır. Kendi tarayıcın ölçüt değil.</li>
             <li>LCP görselini lazy yapma, <code>fetchpriority="high"</code> ver; her görsele boyut ver; Türkçe karakter aralığını içeren WOFF2 font kullan; uzun JS işlerini böl.</li>
             <li>Mobilde içerik eksikse Google için yoktur; mobil sürümde <code>noindex</code> felakettir. Mobile-Friendly Test artık yok.</li>
             <li>İçerik, başlık, kanonik, <code>og:</code> ve JSON-LD ilk HTML'de olsun; bağlantılar gerçek <code>&lt;a href&gt;</code>; dinamik render önerilmiyor; yapay zekâ ve sosyal botlar JS çalıştırmaz.</li>
@@ -589,6 +590,11 @@ body { font-family: "Marka", "Marka-yedek", system-ui, sans-serif; }</code></pre
           <li id="k27"><span class="src-n">27</span><span><span class="tag tag--ok">Resmî</span> Bing Webmaster Blog — bingbot Series: JavaScript, Dynamic Rendering, and Cloaking (Eki 2018; arama özeti üzerinden) — <a href="https://blogs.bing.com/webmaster/october-2018/bingbot-Series-JavaScript,-Dynamic-Rendering,-and-Cloaking-Oh-My">blogs.bing.com/…/october-2018/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k28"><span class="src-n">28</span><span><span class="tag tag--ok">Resmî</span> Google Search Central Blog — Mobile-first indexing has landed (31 Eki 2023) — <a href="https://developers.google.com/search/blog/2023/10/mobile-first-is-here">developers.google.com/…/mobile-first-is-here</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k29"><span class="src-n">29</span><span><span class="tag tag--info">3. taraf</span> Zeo (Türkçe, Ara 2021; FID kısmı eskimiş) — Google'ın site hızındaki karar ölçeği: Core Web Vitals — <a href="https://zeo.org/tr/kaynaklar/blog/googlein-site-hizindaki-karar-olcegi-core-web-vitals">zeo.org/tr/…/core-web-vitals</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k30"><span class="src-n">30</span><span><span class="tag tag--ok">Resmî</span> web.dev blog — Chrome ends support for First Input Delay (10 Eyl 2024) — <a href="https://web.dev/blog/fid">web.dev/blog/fid</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k31"><span class="src-n">31</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — CrUX release notes (10 Eyl 2024 ve 8 Eki 2024 notları) — <a href="https://developer.chrome.com/docs/crux/release-notes">developer.chrome.com/docs/crux/release-notes</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k32"><span class="src-n">32</span><span><span class="tag tag--ok">Resmî</span> Google for Developers — About PageSpeed Insights · runPagespeed referansı (origin'e geri düşme, origin_fallback) — <a href="https://developers.google.com/speed/docs/insights/v5/about">developers.google.com/speed/docs/insights/v5/about</a> · <a href="https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed">developers.google.com/…/runpagespeed</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — How to use the CrUX API (veri yoksa 404) — <a href="https://developer.chrome.com/docs/crux/guides/crux-api">developer.chrome.com/docs/crux/guides/crux-api</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — CrUX tools (güncelleme 9 Eyl 2025) — <a href="https://developer.chrome.com/docs/crux/methodology/tools">developer.chrome.com/docs/crux/methodology/tools</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
         </ol>
   
       </div>

@@ -134,7 +134,7 @@
         <div class="eyebrow">Bölüm 14 · Sitenin dışı</div>
         <h1 class="page-title">Diğer motorlar ve yapay zekâ araması</h1>
         <p class="lede">Türkiye'de aramaların dörtte biri Google dışında yapılıyor ve aramanın bir kısmı artık yapay zekâ cevaplarına kayıyor. Bu bölüm Yandex, Bing ve IndexNow'u kurmayı; Google'ın AI Overviews ve AI Mode özellikleri için resmî olarak ne istediğini (ve ne istemediğini); yapay zekâ tarayıcılarını robots.txt ile nasıl ayıracağını anlatır.</p>
-        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 18 dk okuma</div>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; güncelleme: 6 Kasım 2026 &middot; ≈ 18 dk okuma</div>
       </header>
 
       <div class="content">
@@ -263,7 +263,7 @@ Clean-param: utm_source&amp;utm_medium&amp;utm_campaign</code></pre>
         </ul>
 
         <h2 id="indexnow"><span class="h-num">§ 5</span>IndexNow: değişikliği anında bildirmek</h2>
-        <p><strong>IndexNow</strong> (yeni, değişen ya da silinen sayfaları arama motorlarına anında bildiren açık protokol), "Google'ın beni bulmasını bekleme" sorununu Bing ve Yandex tarafında çözer. Destekleyen motorlar (indexnow.org listesi, 21 Eki 2026): Bing, Yandex, Naver, Seznam, Yep, Internet Archive ve Amazon (Amazonbot). Bir motora gönderilen bildirim diğer katılımcılara da iletilir <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
+        <p><strong>IndexNow</strong> (yeni, değişen ya da silinen sayfaları arama motorlarına anında bildiren açık protokol), "Google'ın beni bulmasını bekleme" sorununu Bing ve Yandex tarafında çözer. Destekleyen motorların listesi indexnow.org'un kendi sayfaları arasında farklı (6 Kasım 2026) <span class="tag tag--warn">Doğrulanamadı</span>: ana sayfa beş motor sayar (Bing, Naver, Seznam.cz, Yandex, Yep) <sup class="kaynak"><a href="#k34">[34]</a></sup>; SSS'nin uç nokta listesinde bunlara Amazon (Amazonbot) eklenir <sup class="kaynak"><a href="#k13">[13]</a></sup>. Internet Archive yalnız motorların okuduğu <code>searchengines.json</code> listesinde geçer; <code>meta.json</code> dosyasında <code>unsubscribe: true</code> yazar, yani anlık bildirim istemez (katılımcılar gönderim kayıtlarını ayrıca log dosyalarından indirebilir) <sup class="kaynak"><a href="#k35">[35]</a></sup>. Bir motora gönderilen bildirim diğer katılımcılara da iletilir <sup class="kaynak"><a href="#k13">[13]</a></sup>.</p>
 
         <aside class="callout callout--warn">
           <p class="callout__title">Mit</p>
@@ -297,22 +297,25 @@ Content-Type: application/json; charset=utf-8
 
         <div class="kod">
           <div class="kod-ust"><span>HTTP</span><span class="dosya">tek URL</span></div>
-<pre><code>GET https://api.indexnow.org/IndexNow?url=https://www.ornek.com/hizmetler/evden-eve&amp;key=a1b2c3d4e5f6a7b8c9d0a1b2c3d4e5f6</code></pre>
+<pre><code>GET https://api.indexnow.org/IndexNow?url=https%3A%2F%2Fwww.ornek.com%2Fhizmetler%2Fevden-eve&amp;key=a1b2c3d4e5f6a7b8c9d0a1b2c3d4e5f6</code></pre>
         </div>
+        <p><code>url</code> değeri RFC 3986'ya göre kodlanır (<code>:</code> → <code>%3A</code>, <code>/</code> → <code>%2F</code>); SSS kodlanmamış URL'yi 400 nedenleri arasında sayar <sup class="kaynak"><a href="#k13">[13]</a></sup><sup class="kaynak"><a href="#k15">[15]</a></sup>. indexnow.org belgesinin kendi GET örneği kodlanmadan yazılmış; örneğe değil kurala uy.</p>
 
         <div class="tablewrap">
           <table class="data">
             <thead><tr><th>Yanıt</th><th>Anlamı</th><th>Ne yapmalı</th></tr></thead>
             <tbody>
               <tr><td>200</td><td>Başarılı</td><td>Hiçbir şey; dizine alınma garanti değil.</td></tr>
-              <tr><td>400</td><td>Biçim hatası</td><td>JSON'u ve URL'leri kontrol et.</td></tr>
-              <tr><td>403</td><td>Anahtar geçersiz</td><td>Anahtar dosyası yayında mı, içeriği aynı mı?</td></tr>
-              <tr><td>422</td><td>URL bu alan adına ait değil</td><td><code>host</code> ile URL'lerin alan adı uyuşmalı.</td></tr>
+              <tr><td>202</td><td>URL alındı, anahtar doğrulaması bekleniyor</td><td>Yeni anahtarla gelen ilk isteklerde olağandır; biraz bekleyip başka URL'ler gönder. Yanıt 200'e dönünce anahtar doğrulanmıştır.</td></tr>
+              <tr><td>400</td><td>Biçim hatası</td><td>JSON'u, URL kodlamasını ve eksik alanları kontrol et.</td></tr>
+              <tr><td>403</td><td>Anahtar geçersiz (dosya bulunamadı ya da içinde anahtar yok)</td><td>Anahtar dosyası yayında mı, içeriği aynı mı?</td></tr>
+              <tr><td>405</td><td>Yöntem desteklenmiyor (Yandex)</td><td>Yalnız GET ve POST kullan.</td></tr>
+              <tr><td>422</td><td>URL'ler <code>host</code>'a ait değil ya da anahtar protokolün şemasına uymuyor</td><td><code>host</code> ile URL'lerin alan adı uyuşmalı. Yandex ayrıca geçersiz <code>keyLocation</code>, anahtar uzunluğu (8–128) ya da karakter hatası, eksik <code>key</code>/<code>host</code>/<code>url</code>, boş ya da dizi olmayan <code>urlList</code> ve 10.000 URL aşımında da 422 döner.</td></tr>
               <tr><td>429</td><td>Çok fazla istek</td><td>Gereksiz gönderimi kes; yalnız değişenleri gönder.</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Kaynak: Bing IndexNow başlangıç sayfası <sup class="kaynak"><a href="#k14">[14]</a></sup>.</p>
+        <p>Kaynak: Bing IndexNow başlangıç sayfası <sup class="kaynak"><a href="#k14">[14]</a></sup>, IndexNow belgesi <sup class="kaynak"><a href="#k15">[15]</a></sup>, Yandex IndexNow API başvurusu <sup class="kaynak"><a href="#k36">[36]</a></sup>. Bing'in tablosunda 202 yok; 405 yalnız Yandex başvurusunda geçer. <span class="tag tag--warn">Doğrulanamadı</span> SSS eksik ya da erişilemeyen anahtar dosyasını 422, eksik ya da yanlış anahtarı 400 nedenleri arasında sayar; belge ve Bing ise anahtar sorununu 403'e bağlar <sup class="kaynak"><a href="#k13">[13]</a></sup>. Bu yüzden 400, 403 ya da 422 alınca önce anahtar dosyasına bak.</p>
 
         <aside class="callout callout--win">
           <p class="callout__title">Püf noktası</p>
@@ -554,6 +557,9 @@ Sitemap: https://www.ornek.com/sitemap.xml</code></pre>
           <li id="k31"><span class="src-n">31</span><span><span class="tag tag--info">3. taraf</span> eSEOspace — Bing Webmaster Tools and IndexNow for AI search: what's confirmed — <a href="https://eseospace.com/blog/bing-webmaster-tools-indexnow-ai-search/">eseospace.com/blog/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k32"><span class="src-n">32</span><span><span class="tag tag--info">3. taraf</span> MIT Technology Review — Cloudflare will now block AI bots by default (1 Tem 2025) — <a href="https://www.technologyreview.com/2025/07/01/1119498/cloudflare-will-now-by-default-block-ai-bots-from-crawling-its-clients-websites/">technologyreview.com/2025/07/01/…</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Yandex Business Türkiye — Şirket ekleme — <a href="https://yandex.com.tr/support/business-priority/">yandex.com.tr/support/business-priority</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k34"><span class="src-n">34</span><span><span class="tag tag--ok">Resmî</span> IndexNow — Ana sayfa (destekleyen motorlar) — <a href="https://www.indexnow.org/">indexnow.org</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k35"><span class="src-n">35</span><span><span class="tag tag--ok">Resmî</span> IndexNow — searchengines.json, Internet Archive meta.json ve Documentation for search engines (unsubscribe alanı, log dosyaları) — <a href="https://www.indexnow.org/searchengines.json">indexnow.org/searchengines.json</a> · <a href="https://web-static.archive.org/indexnow/meta.json">web-static.archive.org/indexnow/meta.json</a> · <a href="https://www.indexnow.org/searchengines">indexnow.org/searchengines</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k36"><span class="src-n">36</span><span><span class="tag tag--ok">Resmî</span> Yandex Webmaster — IndexNow API request reference (yanıt kodları) — <a href="https://yandex.com/support/webmaster/en/indexnow/reference">yandex.com/support/webmaster/…/indexnow/reference</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
         </ol>
   
       </div>

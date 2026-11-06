@@ -6,7 +6,7 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır; GitHub 
 
 Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — aynı içerik, bir AI asistanına bağlam olarak verilebilecek saf Markdown hâlinde.
 
-> Araştırma tarihi: 5 Kasım 2026 (bütün kaynaklara bu tarihte erişildi; hiçbir hesap açılmadı, API'ye istek atılmadı). Google Play ve AdMob kuralları, eşikler ve tarihler sık değişir; uygulamadan önce kaynakçadaki resmî sayfalardan güncelini kontrol et. Resmî kaynakta bulunamayan her bilgi sayfada "doğrulanamadı" diye işaretli; süre ve gelir rakamları ölçülmemiş tahmin ya da anekdottur. Genel bilgi amaçlıdır; vergi ve hukuk bölümü danışmanlık değildir, somut durumda mali müşavire danışılmalıdır.
+> Araştırma tarihi: 5 Kasım 2026 (bütün kaynaklara bu tarihte erişildi; hiçbir hesap açılmadı, API'ye istek atılmadı). **Güncelleme, 6 Kasım 2026:** yeni uygulamada Ocak 2025'ten beri önce app-ads.txt doğrulaması gerektiği ve hazırlık incelemesinin doğrulamadan sonra başladığı (§ 6; Google sayfaları arasındaki sıra farkı ÇELİŞKİLİ olarak işaretli), app-ads.txt'nin alan adı kökünde olması gerektiği ve GitHub Pages proje sitesinin bunun için yetmediği (§ 1) düzeltildi (kaynakça [39]–[41]). Google Play ve AdMob kuralları, eşikler ve tarihler sık değişir; uygulamadan önce kaynakçadaki resmî sayfalardan güncelini kontrol et. Resmî kaynakta bulunamayan her bilgi sayfada "doğrulanamadı" diye işaretli; süre ve gelir rakamları ölçülmemiş tahmin ya da anekdottur. Genel bilgi amaçlıdır; vergi ve hukuk bölümü danışmanlık değildir, somut durumda mali müşavire danışılmalıdır.
 
 ## İçindekiler
 

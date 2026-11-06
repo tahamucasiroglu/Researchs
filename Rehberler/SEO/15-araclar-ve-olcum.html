@@ -134,7 +134,7 @@
         <div class="eyebrow">Bölüm 15 · Uygulama</div>
         <h1 class="page-title">Araçlar ve ölçüm</h1>
         <p class="lede">SEO'da tahmin değil ölçüm konuşur. Bu bölüm Google Search Console'u rapor rapor gezer, artık var olmayan araçları (ve onların yerine geleni) listeler, Bing, Yandex, hız ve tarama araçlarını tanıtır; sonunda bir müşteriye ya da kendinize "işler iyi gidiyor mu" sorusunu hangi rakamlarla cevaplayacağınızı anlatır.</p>
-        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; ≈ 15 dk okuma</div>
+        <div class="head-meta">SEO Rehberi &middot; bilgiler 21 Ekim 2026 itibarıyla &middot; güncelleme: 6 Kasım 2026 &middot; ≈ 15 dk okuma</div>
       </header>
 
       <div class="content">
@@ -176,7 +176,7 @@
         <h3 id="sahipler-ve-izinler">Sahipler ve izin seviyeleri</h3>
         <ul>
           <li><strong>Sahip</strong> her şeyi yapabilir: kullanıcı ekler, Site Adresi Değişikliği ve Kaldırmalar gibi işlemleri başlatır.</li>
-          <li><strong>Tam yetkili kullanıcı</strong> çoğu veriyi görür ve bazı işlemleri yapar; <strong>kısıtlı kullanıcı</strong> çoğunlukla yalnız okur.</li>
+          <li><strong>Tam yetkili kullanıcı</strong> bütün veriyi görür ve bazı işlemleri yapar; <strong>kısıtlı kullanıcı</strong> verinin çoğunu yalnız görüntüler <sup class="kaynak"><a href="#k37">[37]</a></sup>.</li>
           <li>Google'ın "SEO tutmalı mısınız" belgesi: denetim sırasında dışarıdan birine önce <strong>yalnız okuma</strong> yetkisi verin, yazma yetkisi vermeyin <sup class="kaynak"><a href="#k9">[9]</a></sup>.</li>
           <li>Sahipler listesinde tanımadığınız bir hesap görmek <strong>hack işaretidir</strong>; saldırganlar kendilerini sahip olarak ekleyebilir <sup class="kaynak"><a href="#k30">[30]</a></sup>. Ayrıntı <a href="16-sorun-giderme.html#japon-hack">Bölüm 16</a>.</li>
         </ul>
@@ -226,7 +226,7 @@
         </aside>
 
         <h2 id="url-denetimi"><span class="h-num">§ 4</span>URL Denetimi</h2>
-        <p>Tek bir URL hakkında Google'ın bildiği her şeyi gösterir: dizinde mi, hangi kanonik seçilmiş, son ne zaman taranmış, hangi Googlebot ile, mobilde sorun var mı, yapılandırılmış veri algılanmış mı <sup class="kaynak"><a href="#k1">[1]</a></sup>.</p>
+        <p>Tek bir URL hakkında Google'ın bildiği her şeyi gösterir: dizinde mi, hangi kanonik seçilmiş, son ne zaman taranmış, hangi Googlebot ile (mobil ya da masaüstü: "Crawled as" satırı), yapılandırılmış veri algılanmış mı <sup class="kaynak"><a href="#k1">[1]</a></sup><sup class="kaynak"><a href="#k36">[36]</a></sup>. Mobil kullanılabilirlik sonucu vermez: Mobil Kullanılabilirlik raporu ve Mobile-Friendly Test 1 Aralık 2023'te kalktı (<a href="#kalkan-araclar">§ 6</a>).</p>
         <ul>
           <li><strong>Canlı URL'yi test et:</strong> Sayfayı şimdi çeker ve işler; <strong>işlenmiş HTML</strong>'i (JavaScript çalıştıktan sonraki hali) ve ekran görüntüsünü gösterir. JS ile gelen içeriğin Google'a ulaşıp ulaşmadığını görmenin en kesin yolu budur (<a href="10-performans-mobil-js.html">Bölüm 10</a>).</li>
           <li><strong>Cloaking yakalama:</strong> Hacklenmiş siteler size normal sayfa, Googlebot'a spam gösterebilir. URL Denetimi Google'ın gördüğünü gösterdiği için gizlenmiş spam'i görmenin yolu da budur <sup class="kaynak"><a href="#k30">[30]</a></sup>.</li>
@@ -314,7 +314,8 @@
             <tbody>
               <tr><td>PageSpeed Insights (pagespeed.web.dev)</td><td>Saha (CrUX) + lab (Lighthouse)</td><td>Tek URL'nin hem gerçek hem test sonucu.</td></tr>
               <tr><td>Search Console CWV raporu</td><td>Saha</td><td>Site geneli, URL grupları.</td></tr>
-              <tr><td>CrUX (API, BigQuery, CrUX Vis)</td><td>Saha</td><td>Kaynak veri; API günlük, BigQuery aylık.</td></tr>
+              <tr><td>CrUX (API, BigQuery)</td><td>Saha</td><td>Kaynak veri; API günlük, BigQuery aylık.</td></tr>
+              <tr><td>CrUX History API, CrUX Vis</td><td>Saha</td><td>Haftalık seri; son 40 hafta <sup class="kaynak"><a href="#k40">[40]</a></sup>.</td></tr>
               <tr><td>Lighthouse / Chrome DevTools</td><td>Lab</td><td>Geliştirirken test; INP yerine TBT gösterir.</td></tr>
               <tr><td><code>web-vitals</code> kitaplığı</td><td>Saha (kendi ölçümünüz)</td><td>RUM (Real User Monitoring, kendi gerçek kullanıcı ölçümünüz) <sup class="kaynak"><a href="#k26">[26]</a></sup>.</td></tr>
             </tbody>
@@ -323,7 +324,7 @@
 
         <aside class="callout callout--win">
           <p class="callout__title">Püf noktası</p>
-          <p><strong>CrUX</strong> (Chrome User Experience Report: Google'ın gerçek kullanıcı hız verisi deposu) yalnız masaüstü Chrome ve Android Chrome kullanıcılarından toplanır. iOS, Android WebView, Edge ve Brave gibi diğer Chromium tarayıcıları <strong>sayılmaz</strong> <sup class="kaynak"><a href="#k19">[19]</a></sup>. Kendi tarayıcınızda sitenin hızlı açılması Google'ın gördüğü veri değildir. Saha verisi yetersizse Google URL grubuna, o da yoksa bütün alan adına geri düşer.</p>
+          <p><strong>CrUX</strong> (Chrome User Experience Report: Google'ın gerçek kullanıcı hız verisi deposu) yalnız masaüstü Chrome ve Android Chrome kullanıcılarından toplanır. iOS, Android WebView ve Edge gibi diğer Chromium tarayıcıları <strong>sayılmaz</strong> <sup class="kaynak"><a href="#k19">[19]</a></sup>; Brave belgede adıyla geçmez, onun da sayılmadığı bu kuraldan çıkarımdır. Kendi tarayıcınızda sitenin hızlı açılması Google'ın gördüğü veri değildir. Saha verisi yetersizse olacak şey araca göre değişir: PageSpeed Insights bütün alan adının (origin) verisine geri düşer <sup class="kaynak"><a href="#k38">[38]</a></sup>, CrUX API "veri yok" (404) döner <sup class="kaynak"><a href="#k39">[39]</a></sup>; URL grubu yalnız Search Console'un Core Web Vitals raporunda vardır, grup küçükse rapor origin grubuna geçer <sup class="kaynak"><a href="#k10">[10]</a></sup>.</p>
         </aside>
 
         <h3 id="kendi-olcumun">Kendi saha ölçümünüz (RUM)</h3>
@@ -409,7 +410,7 @@
             <li>Kaldırmalar aracı ~6 ay geçicidir; kalıcı çözüm 404/410, <code>noindex</code> ya da parola.</li>
             <li>Eski rehberlerdeki URL Parametreleri, ülke hedefleme, robots.txt test aracı, Mobile-Friendly Test, tarama hızı ayarı ve <code>cache:</code> artık yok.</li>
             <li>Eylül 2025 gösterim düşüşü <code>num=100</code> etkisidir; tıklamalara bakın.</li>
-            <li>Sıralamada saha verisi (CrUX) kullanılır, Lighthouse puanı değil; Brave ve Edge kullanıcıları CrUX'ta yok.</li>
+            <li>Sıralamada saha verisi (CrUX) kullanılır, Lighthouse puanı değil; Edge kullanıcıları CrUX'ta yok, Brave'in de olmadığı kuraldan çıkarımdır.</li>
             <li>KPI'lar dönüşüme dayanır: aramalar, yol tarifi, form, yorum; sıralama tek başına KPI olmaz.</li>
           </ul>
         </div>
@@ -451,6 +452,11 @@
           <li id="k33"><span class="src-n">33</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Site Adresi Değişikliği aracı — <a href="https://support.google.com/webmasters/answer/9370220">support.google.com/webmasters/answer/9370220</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k34"><span class="src-n">34</span><span><span class="tag tag--info">3. taraf</span> Search Engine Journal — Disavow tool doesn't work with Domain properties — <a href="https://www.searchenginejournal.com/googles-disavow-tool-doesnt-work-with-search-console-domain-properties/309703/">searchenginejournal.com/…/309703</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
           <li id="k35"><span class="src-n">35</span><span><span class="tag tag--ok">Resmî</span> Google Search Central — AI features and your website — <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/…/ai-features</a> <span class="erisim">· erişim 21 Eki 2026</span></span></li>
+          <li id="k36"><span class="src-n">36</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — URL Denetimi aracı — <a href="https://support.google.com/webmasters/answer/9012289">support.google.com/webmasters/answer/9012289</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k37"><span class="src-n">37</span><span><span class="tag tag--ok">Resmî</span> Search Console Yardım — Mülk sahiplerini, kullanıcıları ve izinleri yönetme — <a href="https://support.google.com/webmasters/answer/7687615">support.google.com/webmasters/answer/7687615</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k38"><span class="src-n">38</span><span><span class="tag tag--ok">Resmî</span> Google for Developers — About PageSpeed Insights · runPagespeed referansı (origin'e geri düşme, origin_fallback) — <a href="https://developers.google.com/speed/docs/insights/v5/about">developers.google.com/speed/docs/insights/v5/about</a> · <a href="https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed">developers.google.com/…/runpagespeed</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k39"><span class="src-n">39</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — How to use the CrUX API (veri yoksa 404) — <a href="https://developer.chrome.com/docs/crux/guides/crux-api">developer.chrome.com/docs/crux/guides/crux-api</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
+          <li id="k40"><span class="src-n">40</span><span><span class="tag tag--ok">Resmî</span> Chrome for Developers — CrUX tools (güncelleme 9 Eyl 2025) — <a href="https://developer.chrome.com/docs/crux/methodology/tools">developer.chrome.com/docs/crux/methodology/tools</a> <span class="erisim">· erişim 6 Kas 2026</span></span></li>
         </ol>
   
       </div>

@@ -1,6 +1,6 @@
 # SEO — yoğun başvuru notu
 
-- **Araştırma tarihi:** 21 Ekim 2026 (bütün kaynaklara bu tarihte erişildi)
+- **Araştırma tarihi:** 21 Ekim 2026 (ilk sürümdeki bütün kaynaklara bu tarihte erişildi) · **güncelleme: 6 Kasım 2026** — API başvuru dosyaları yazılırken resmî kaynaklara yeniden bakıldı; § 9, 13, 14 ve 19'daki bazı iddialar düzeltildi, eklenen kaynaklar kaynakçanın sonunda (249–258).
 - **Kapsam:** Google ağırlıklı; Yandex, Bing, IndexNow ve yapay zekâ araması (AI Overviews, AI Mode, YZ tarayıcıları) dahil. Türkiye pazarı notlarıyla.
 - **Biçim:** Bu dosya yapay zekâ asistanına bağlam olarak verilmek için yazıldı: saf Markdown, her iddiada güven etiketi, sonda tam kaynakça. Okumak için hazırlanmış 21 bölümlük anlatım aynı klasördeki `index.html` ve `01-…21-*.html` sayfalarındadır; ayrıntı ve kaynak numaraları orada.
 - **Güven etiketleri:** `RESMÎ` = Google / Bing / Yandex / schema.org / web.dev belgesi ya da resmî blog · `3. TARAF` = tanınmış eğitim, ölçüm, haber · `TAHMİN` = uygulayıcı önerisi, resmî sınır değil · `ÇELİŞKİLİ` = kaynaklar çelişiyor ya da birincil kaynak bulunamadı.
@@ -116,8 +116,9 @@
 
 ## 9. Hız, mobil ve JavaScript
 
-- **Core Web Vitals:** LCP ≤ 2,5 sn · INP ≤ 200 ms · CLS ≤ 0,1; gerçek kullanıcıların 75. yüzdeliği, 28 günlük pencere, mobil/masaüstü ayrı; grubu en kötü metrik belirler. **INP 12 Mar 2024'te FID'in yerini aldı** (FID 9 Eyl 2024'te CrUX/PSI API'lerinden de kalktı; FID eşiği veren rehber eskimiş). `RESMÎ`
-- Sıralamada küçük ama gerçek faktör: ilgililiğin önüne geçmez, benzer sayfalarda eşitlik bozar. **Lighthouse/PageSpeed puanı sıralamada kullanılmaz**; saha verisi CrUX kullanılır. CrUX'ta Brave, Edge ve iOS kullanıcıları yok; kendi tarayıcında hızlı görmek ölçüt değil. `RESMÎ`
+- **Core Web Vitals:** LCP ≤ 2,5 sn · INP ≤ 200 ms · CLS ≤ 0,1; gerçek kullanıcıların 75. yüzdeliği, 28 günlük pencere, mobil/masaüstü ayrı; grubu en kötü metrik belirler. **INP 12 Mar 2024'te FID'in yerini aldı** (FID'in Chrome araçlarından kaldırılması 10 Eyl 2024'te ilan edildi, 9 Eyl geçiş için verilen son gündü: CrUX API FID'i o gün bıraktı, PSI ve öteki araçların da birkaç gün içinde bırakacağı duyuruldu; BigQuery'de son FID verisi 202408 tablosunda; FID eşiği veren rehber eskimiş). `RESMÎ`
+- Sıralamada küçük ama gerçek faktör: ilgililiğin önüne geçmez, benzer sayfalarda eşitlik bozar. **Lighthouse/PageSpeed puanı sıralamada kullanılmaz**; saha verisi CrUX kullanılır. CrUX'ta Brave, Edge ve iOS kullanıcıları yok; kendi tarayıcında hızlı görmek ölçüt değil. `RESMÎ` (Brave kısmı: `TAHMİN` — belge yalnız "diğer Chromium tarayıcıları (ör. Microsoft Edge)" der, Brave adını anmaz; kuraldan çıkarım)
+- CrUX araçları: API günlük (28 günlük kayan ortalama), History API ve CrUX Vis haftalık (son 40 hafta), BigQuery aylık (yalnız origin). URL için veri yetersizse PSI doğrudan origin'e düşer (yanıtta `origin_fallback: true`), CrUX API 404 döner; "URL grubu → origin grubu" geçişi yalnız Search Console CWV raporunda. `RESMÎ` `noindex`'li ya da 200 dönmeyen sayfaların origin verisine katkısı belirsiz: metodoloji sayfası kendi içinde çelişiyor (yönetim panelini ayrı alt alan adına almak olası etkiyi ayırır). `ÇELİŞKİLİ`
 - Pratik: LCP görselini lazy yapma + `fetchpriority="high"`; her görsele boyut; Türkçe karakter aralığını içeren WOFF2 yazı tipi; uzun JS işlerini böl; tam ekran çerez/kampanya penceresi yerine küçük alt bant (hem müdahaleci geçiş reklamı kuralı hem CLS). `RESMÎ` / `3. TARAF`
 - Render: sayfaları sunucuda HTML olarak üret (SSR, statik üretim, klasik MVC); JS yalnız etkileşim için. **Dinamik render artık "geçici çözümdü, önerilmez"** (belge güncellemesi 10 Ara 2025); Bing'in 2018 önerisinin bugün geçerliliği doğrulanamadı. Programlama dilinin kendisinin sıralamaya etkisi yok; etkili olan çıkan HTML. `RESMÎ` / `ÇELİŞKİLİ`
 - Mobilde içerik eksikse Google için yoktur; mobil sürümde `noindex` felaket. `RESMÎ`
@@ -157,7 +158,7 @@
 
 - **Yandex:** Webmaster + site bölgesi + Haritalar; güncel robots.txt belgesinde `Crawl-delay` ve `Host` yok (eski Türkçe rehberler ve bazı 3. taraf rehberler hâlâ "destekler" diyor; Yandex belgesi esas), `Clean-param` var. `RESMÎ` / `ÇELİŞKİLİ`
 - **Bing Webmaster:** Search Console'dan içe aktarılır; Bing'i beslemek DuckDuckGo'yu ve Copilot'u da besler (Yahoo'nun Bing'den beslendiği yaygın ama resmî doğrulanamadı). `lastmod` gerçek olmalı. `RESMÎ` / `ÇELİŞKİLİ`
-- **IndexNow:** Bing, Yandex ve katılımcılara anında bildirim; yalnız değişen URL'ler; anahtar dosyası yayında olmalı. **Google kullanmıyor** (katıldığına dair resmî kaynak yok). `RESMÎ`
+- **IndexNow:** Bing, Yandex ve katılımcılara anında bildirim; yalnız değişen URL'ler; anahtar dosyası yayında olmalı. **Google kullanmıyor** (katıldığına dair resmî kaynak yok). GET'te `url` değeri RFC 3986'ya göre kodlanır (`https%3A%2F%2F…`; indexnow.org belgesinin kendi örneği kodlanmamış, kurala uy). Yanıtlar: `202` = URL alındı, anahtar doğrulaması bekleniyor (yeni anahtarda olağan); `422` = URL'ler `host`'a ait değil ya da anahtar şemaya uymuyor (Yandex'te ayrıca anahtar uzunluk/karakter hatası, boş `urlList`, 10.000 aşımı); `405` = yöntem desteklenmiyor (Yandex). `RESMÎ` Katılımcı listesi kaynağa göre değişiyor (6 Kas 2026: ana sayfa Bing, Naver, Seznam.cz, Yandex, Yep; SSS uç noktalarında bunlara ek olarak Amazon; Internet Archive yalnız `searchengines.json`'da ve `unsubscribe: true`, yani anlık bildirim almıyor); SSS anahtar hatalarını 400/422'de sayıyor, belge ve Bing 403'te → 400/403/422'de önce anahtar dosyasına bak. `ÇELİŞKİLİ`
 - **AI Overviews / AI Mode:** ek dosya, özel şema ya da özel yazım yok; dizinde ve snippet'e uygun olmak yeter. Google (15 May 2026): "AEO ve GEO de SEO'dur." Sorgu çeşitlemeleri için toplu sayfa ölçekli içerik istismarına girebilir. `RESMÎ`
 - **llms.txt** Google Aramada yok sayılır; Lighthouse'taki kontrolü ceza değil. `RESMÎ`
 - **Google-Extended** aramayı etkilemez (yalnız Gemini eğitimi/temellendirme); YZ özetini sınırlamanın yolu `nosnippet`, `max-snippet`, `data-nosnippet`. `RESMÎ`
@@ -165,8 +166,8 @@
 
 ## 14. Araçlar ve ölçüm
 
-- Search Console: **alan adı mülkü** bütün varyantları görür; disavow ise URL öneki mülkünde. Dışarıdan birine önce yalnız okuma (kısıtlı) yetki. `RESMÎ`
-- Dizindeki sayfa sayısı: Sayfa dizine ekleme raporu. "Google ne görüyor": URL Denetimi canlı testi + işlenmiş HTML. `RESMÎ`
+- Search Console: **alan adı mülkü** bütün varyantları görür; disavow ise URL öneki mülkünde. Dışarıdan birine önce yalnız okuma (kısıtlı) yetki: tam kullanıcı bütün veriyi görür ve bazı işlemleri yapar, kısıtlı kullanıcı verinin çoğunu yalnız görüntüler. `RESMÎ`
+- Dizindeki sayfa sayısı: Sayfa dizine ekleme raporu. "Google ne görüyor": URL Denetimi canlı testi + işlenmiş HTML. URL Denetimi taramanın hangi Googlebot'la (mobil/masaüstü, "Crawled as") yapıldığını gösterir; mobil kullanılabilirlik sonucu vermez (o rapor ve Mobile-Friendly Test 1 Ara 2023'te kalktı). `RESMÎ`
 - **Kaldırmalar aracı ~6 ay geçici**; kalıcı çözüm 404/410, `noindex` ya da parola. `RESMÎ`
 - Eski rehberlerdeki ama artık olmayanlar: URL Parametreleri, ülke hedefleme, robots.txt test aracı (yerine robots.txt raporu), Mobile-Friendly Test, tarama hızı ayarı, `cache:`. `RESMÎ`
 - Tarama İstatistikleri raporu (Ayarlar): son 90 gün istekleri, yanıt süresi/kodu, amaç, robots.txt/DNS/bağlantı sağlığı. `RESMÎ`
@@ -237,6 +238,8 @@
 - Sahte yorum yaptırımında "~30 gün" süre; Bing Places'in Google'dan içe aktarmasının Türkiye'de çalışıp çalışmadığı.
 - Yahoo organik sonuçlarının Bing'den geldiği; ChatGPT'nin Bing dizinine dayandığı.
 - Ticari Reklam ve Haksız Ticari Uygulamalar Yönetmeliği 2026 değişikliği ve ceza rakamları (haber kaynakları; Resmî Gazete metni doğrulanmalı).
+- IndexNow katılımcı listesi (indexnow.org ana sayfası, SSS ve `searchengines.json` farklı) ve SSS'deki hata kodu nedenleri (anahtar sorunu belge ve Bing'de 403, SSS'de 400/422).
+- CrUX'ta `noindex`'li ya da 200 dönmeyen sayfaların origin verisine katkısı (metodoloji sayfası kendi içinde çelişiyor).
 
 ---
 
@@ -296,7 +299,7 @@ Ayrıntı, kaynak numaraları ve komut örnekleri: `21-kara-sapka.html`.
 
 ## Kaynakça
 
-Bütün kaynaklara 21 Ekim 2026'da erişildi. Bölüm sayfalarının sonunda her sayfanın kendi numaralı kaynak listesi de vardır.
+İlk sürümdeki bütün kaynaklara 21 Ekim 2026'da erişildi; sondaki "6 Kasım 2026 güncellemesinde eklenenler" grubundakilere 6 Kasım 2026'da erişildi. Bölüm sayfalarının sonunda her sayfanın kendi numaralı kaynak listesi de vardır.
 
 ### Google Search Central belgeleri
 
@@ -566,3 +569,18 @@ Bütün kaynaklara 21 Ekim 2026'da erişildi. Bölüm sayfalarının sonunda her
 - [3. TARAF] Bravery Technology — Yerel SEO Rehberi 2026 — <https://braverytechnology.com/tr/yerel-seo-rehberi/>
 - [3. TARAF] Webtekno — Kasım 2025 en çok kullanılan arama motorları — <https://www.webtekno.com/kasim-2025-en-cok-kullanilan-arama-motorlari-h206443>
 - [3. TARAF] Dünya · Takvim · Ekonomist — Ticaret Bakanlığı sahte yorum ve yanıltıcı reklam yaptırımları (haber; Resmî Gazete metni ayrıca doğrulanmalı) — <https://www.dunya.com/ekonomi/ticaret-bakanligi-acikladi-sahte-yorumlara-yaptirim-uygulanacak-haberi-842114> · <https://www.takvim.com.tr/guncel/2026/07/27/aldatici-reklamlarla-mucadelede-yeni-donem> · <https://www.ekonomist.com.tr/gundem/sahte-isletme-adi-engellenen-yorum-yaniltici-gorsel-ticaret-bakanligindan-yaniltici-reklamlara-milyonluk-ceza-77925>
+
+### 6 Kasım 2026 güncellemesinde eklenenler
+
+Numaralar `20-sozluk-ve-kaynakca.html` birleşik kaynakçasındakilerle aynıdır.
+
+249. [RESMÎ] web.dev — Chrome ends support for First Input Delay (10 Eyl 2024) — <https://web.dev/blog/fid>
+250. [RESMÎ] Chrome for Developers — CrUX release notes (10 Eyl 2024 ve 8 Eki 2024 notları) — <https://developer.chrome.com/docs/crux/release-notes>
+251. [RESMÎ] Chrome for Developers — CrUX tools (güncelleme 9 Eyl 2025) — <https://developer.chrome.com/docs/crux/methodology/tools>
+252. [RESMÎ] Google for Developers — About PageSpeed Insights · runPagespeed referansı (origin'e geri düşme, `origin_fallback`) — <https://developers.google.com/speed/docs/insights/v5/about> · <https://developers.google.com/speed/docs/insights/rest/v5/pagespeedapi/runpagespeed>
+253. [RESMÎ] Chrome for Developers — How to use the CrUX API (veri yoksa 404) — <https://developer.chrome.com/docs/crux/guides/crux-api>
+254. [RESMÎ] IndexNow — Ana sayfa (destekleyen motorlar) — <https://www.indexnow.org/>
+255. [RESMÎ] IndexNow — searchengines.json, Internet Archive meta.json ve Documentation for search engines (`unsubscribe` alanı, log dosyaları) — <https://www.indexnow.org/searchengines.json> · <https://web-static.archive.org/indexnow/meta.json> · <https://www.indexnow.org/searchengines>
+256. [RESMÎ] Yandex Webmaster — IndexNow API request reference (yanıt kodları) — <https://yandex.com/support/webmaster/en/indexnow/reference>
+257. [RESMÎ] Search Console Yardım — URL Denetimi aracı — <https://support.google.com/webmasters/answer/9012289>
+258. [RESMÎ] Search Console Yardım — Mülk sahiplerini, kullanıcıları ve izinleri yönetme — <https://support.google.com/webmasters/answer/7687615>

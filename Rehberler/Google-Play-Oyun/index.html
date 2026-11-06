@@ -84,13 +84,13 @@
         <div class="eyebrow">Araştırma · Mobil oyun ve para kazanma</div>
         <h1 class="page-title">Google Play'de basit bir oyun <em>reklamla yayınlamak</em></h1>
         <p class="lede">Tek kişinin Godot ya da Kotlin ile yaptığı 2D/3D basit bir oyunu Google Play'e çıkarması: ne kadar para ve zaman ister, yeni hesaplardaki kapalı test şartı, teknik şartlar, AdMob geliri nasıl birikir ve ödenir, şirket gerekir mi, vergi nasıl işler.</p>
-        <div class="head-meta">Erişim tarihi 5 Kasım 2026 &middot; resmî kaynak öncelikli &middot; bulunamayan bilgi "doğrulanamadı" &middot; <a href="arastirma.md">arastirma.md</a></div>
+        <div class="head-meta">Erişim tarihi 5 Kasım 2026 (güncelleme: 6 Kasım 2026) &middot; resmî kaynak öncelikli &middot; bulunamayan bilgi "doğrulanamadı" &middot; <a href="arastirma.md">arastirma.md</a></div>
       </header>
 
       <div class="content">
 
         <h2 id="kisa"><span class="h-num">§ 0</span>Kısa cevap</h2>
-        <p class="intro">Rozetler: <span class="tag tag--ok">RESMÎ</span> resmî sayfada okundu · <span class="tag tag--info">3. TARAF</span> blog/forum · <span class="tag tag--warn">TAHMİN</span> ölçülmemiş yorum. Terimler ilk geçtiği yerde tek satırla açıklanır.</p>
+        <p class="intro">Rozetler: <span class="tag tag--ok">RESMÎ</span> resmî sayfada okundu · <span class="tag tag--info">3. TARAF</span> blog/forum · <span class="tag tag--warn">TAHMİN</span> ölçülmemiş yorum · <span class="tag tag--bad">ÇELİŞKİLİ</span> kaynaklar birbirini tutmuyor. Terimler ilk geçtiği yerde tek satırla açıklanır.</p>
 
         <div class="callout callout--win">
           <p class="callout__title">Olan</p>
@@ -121,7 +121,7 @@
               <tr><td>Kotlin + Android Studio</td><td>0</td><td>Ücretsiz araçlar</td></tr>
               <tr><td>Unity Personal</td><td>0 (şartlı)</td><td>Son 12 ayda gelir + yatırım 200.000 $'ın altındaysa <span class="tag tag--ok">RESMÎ</span> [24]</td></tr>
               <tr><td>Görseller, sesler</td><td>0'dan başlar</td><td>Kenney paketleri CC0 (ticari serbest, atıf gerekmez) <span class="tag tag--ok">RESMÎ</span> [21]; diğer paketlerde lisans tek tek okunur: CC-BY atıf ister, CC-BY-NC reklamlı oyunda kullanılamaz</td></tr>
-              <tr><td>Gizlilik politikası sayfası, <code>app-ads.txt</code></td><td>0 olabilir</td><td>Herkese açık bir web sayfası gerekir; ücretsiz statik barındırma yeter (ör. GitHub Pages)</td></tr>
+              <tr><td>Gizlilik politikası sayfası, <code>app-ads.txt</code></td><td>0 olabilir</td><td>Herkese açık bir web sayfası gerekir; ücretsiz statik barındırma yeter (ör. GitHub Pages). <code>app-ads.txt</code> alan adının köküne konur (→ <a href="#admob">§6</a>) <span class="tag tag--ok">RESMÎ</span> [30]: GitHub Pages'te proje sitesi (<code>kullanici.github.io/depo</code>) kök değildir; kökte yayınlanan kullanıcı/kuruluş sitesi (<code>kullanici.github.io</code>) ya da özel alan adı gerekir [41]. Kökte dosya barındıramayana AdMob Firebase Hosting'i öneriyor [30].</td></tr>
             </tbody>
           </table>
         </div>
@@ -256,8 +256,8 @@
           </ul>
         </div>
         <ul>
-          <li><b>Yeni uygulama:</b> Play'de yayınlanıp AdMob'a bağlanınca hazırlık incelemesi başlar; "Reviews typically take 2-3 days", bu sürede reklam sınırlı olabilir [29].</li>
-          <li><b><code>app-ads.txt</code>:</b> Play mağaza sayfasına geliştirici web sitesi eklenir, dosya o alan adının köküne konur; taranması 24 saate kadar sürer [30].</li>
+          <li><b>Yeni uygulama:</b> Ocak 2025'ten beri AdMob'a eklenen yeni uygulama önce <code>app-ads.txt</code> ile doğrulanmalı (sonraki madde): "Once your app is verified, the app readiness review will begin." [39]. Doğrulanmayan yeni uygulama sınırlı reklam sunumunda kalır [40]. İnceleme için "Reviews typically take 2-3 days", bu sürede reklam sınırlı olabilir [29]. Hazırlık incelemesi sayfası ise <code>app-ads.txt</code> doğrulamasını anmıyor, incelemenin uygulama desteklenen bir mağazaya bağlanınca kendiliğinden başladığını yazıyor <span class="tag tag--bad">ÇELİŞKİLİ</span> [29] [39]; doğrulamayı baştan tamamlamak iki okumada da güvenli.</li>
+          <li><b><code>app-ads.txt</code>:</b> Ocak 2025'ten beri yeni uygulamada zorunlu (önceki madde) [39]. Play mağaza sayfasına geliştirici web sitesi eklenir, dosya o alan adının köküne konur; taranması 24 saate kadar sürer [30]. Dosya kurulunca AdMob'da uygulama ayarlarından doğrulama kontrolü istenir (Verify app) [39]. Kökte dosya barındıramayana AdMob Firebase Hosting'i öneriyor [30]; GitHub Pages proje sitesi kök sayılmaz (→ <a href="#maliyet">§1</a>).</li>
           <li><b>AB/İngiltere kullanıcıları:</b> Google sertifikalı bir onay platformu (CMP; Google'ın ücretsiz UMP SDK'sı da olur) yoksa bu trafiğe yalnız sınırlı reklam gider [31]. Türkiye'yi hedefleyen oyunu da AB'den indirenler olacağı için baştan eklemek mantıklı. Onay kuralları ayrıntısı: <a href="../Masaustu-Uygulama-Reklam/index.html#hukuk">Masaüstü reklam · §9</a>.</li>
         </ul>
 
@@ -411,6 +411,9 @@
           <li>318 Seri No.lu GVGT (ikincil alıntı) — https://www.alomaliye.com/2022/01/12/gelir-vergisi-genel-tebligi-seri-no-318-gvk-318</li>
           <li>İŞKUR, ödeneğin kesilme halleri — https://www.iskur.gov.tr/sikca-sorulan-sorular/issizlik-sigortasi/issizlik-odenegi-hangi-hallerde-kesilmektedir/</li>
           <li>AdMob Android SDK destek takvimi — https://developers.google.com/admob/android/deprecation</li>
+          <li>AdMob, app-ads.txt ile uygulama doğrulama (erişim: 6 Kasım 2026) — https://support.google.com/admob/answer/14538460</li>
+          <li>AdMob, başlangıç kılavuzu: doğrulanmayan yeni uygulamada sınırlı reklam (erişim: 6 Kasım 2026) — https://support.google.com/admob/answer/15948559</li>
+          <li>GitHub Docs, GitHub Pages site türleri ve adresleri (erişim: 6 Kasım 2026) — https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages</li>
         </ol>
 
         <div class="callout callout--warn">
