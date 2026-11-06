@@ -58,6 +58,9 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — Rehberin yoğun ba�
 - [JavaScript ekosistemi ve araçlar](../../Programlama/JavaScript-TypeScript/04-ekosistem-ve-araclar/) — Herkese açık, SEO gereken sitede Next.js gibi meta-framework'lerin ve sunucu tarafı render'ın ne zaman gerektiği.
 - [YouTube'da Oyun](../YouTube-Oyun/) — Oyun video kanalı ve Shorts; izlenme/abone botu, sub4sub ve yeniden yüklenen içerik risklerinin YouTube kuralları bu rehberde Bölüm 21 § 7'de.
 - [API → Google Ads](../../API/Reklam/Google-Ads.md) — Anahtar Kelime Planlayıcı, arama terimleri ve ücretli-organik raporlarının API karşılıkları; Anahtar Kelime Planlayıcı verisi Explorer erişiminde kapalı, Basic ve Standard'da açık.
+- [API → IndexNow](../../API/Arama-Motorlari/IndexNow.md) — Protokolün teknik ayrıntıları: anahtar dosyası ve `keyLocation` kapsamı, GET/POST ve JSON alanları, 202 dahil yanıt kodları, katılımcı motorların uç noktaları, Bing/Yandex Webmaster gönderim API'leriyle farkı ve .NET `HttpClient` örneği.
+- [API → Google Search Console ve Indexing API](../../API/Arama-Motorlari/Google-Search-Console.md) — Search Console verisini (tıklama, gösterim, URL dizin durumu, site haritası) kodla çekmek: kotalar, OAuth ve servis hesabı kurulumu, BigQuery toplu dışa aktarma; Indexing API'nin yalnız JobPosting/BroadcastEvent sınırı.
+- [API → PageSpeed Insights ve CrUX](../../API/Arama-Motorlari/PageSpeed-Insights-ve-CrUX.md) — Bölüm 10 ve 15'teki ölçüm araçlarını koddan kullanmak: PSI `runPagespeed`, CrUX `queryRecord` / `queryHistoryRecord`, kota ve fiyat, FID'in kaldırılma tarihleri, .NET paketleri.
 
 ## Kaynaklar
 

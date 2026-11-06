@@ -37,11 +37,12 @@ Sayfalarda aynı sözlük kullanılır:
 | [Hava Durumu](Hava-Durumu/) | Open-Meteo, OpenWeatherMap, WeatherAPI, Tomorrow.io, Visual Crossing, NOAA/NWS, MGM ve deprem kaynakları (AFAD, Kandilli, USGS, EMSC). |
 | [Türkiye Kamu ve Açık Veri](Turkiye-Kamu-ve-Acik-Veri/) | Belediye açık veri portalları (CKAN), TÜİK, Resmî Gazete, Diyanet ve topluluk API'leri (TurkiyeAPI, Nager.Date, CollectAPI). |
 | [Reklam](Reklam/) | Google Ads, Google AdMob, Google Ad Manager (Meta Marketing API ve TikTok API for Business, Sosyal Medya dosyalarında ayrı bölüm): kendi reklam ve yayıncı hesabını yönetme, raporlama, dönüşüm yükleme, ödüllü reklamın sunucuda doğrulanması (SSV). |
+| [Arama Motorları](Arama-Motorlari/) | IndexNow, Google Search Console ve Indexing API, PageSpeed Insights ve Chrome UX Report (CrUX): değişen URL'yi motora bildirme, kendi sitenin arama performansı ve dizin durumu, sayfa hızı (rakip siteler dahil). |
 | [API Kaynakları](API-Kaynaklari/) | API bulma ve deneme: public-apis, APIs.guru, resmî Postman/OpenAPI koleksiyonları, RapidAPI ve DevTools/HAR/mitmproxy ile uç nokta keşfi. |
 
 ## Takip uygulaması için özet matris
 
-Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (son doğrulama: 15.10.2026; Reklam satırları 6.11.2026). Ayrıntı ve koşullar için ilgili kategori sayfasına bak.
+Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (son doğrulama: 15.10.2026; Reklam ve Arama Motorları satırları 6.11.2026). Ayrıntı ve koşullar için ilgili kategori sayfasına bak.
 
 | Platform | Yeni gönderi | Canlı yayın | Mesaj/grup içeriği | Gerçek zamanlı push | Resmî olmayan yol |
 |---|---|---|---|---|---|
@@ -109,6 +110,10 @@ Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (so
 | Google AdMob | Uygulanamaz; kendi gelir raporun yoklamayla (~4 saat gecikme) | Yok | Yok | Yalnız ödüllü reklam SSV geri çağrısı (kendi reklam birimin) | Gerek yok; sahte trafik hesabı kapattırır |
 | Google Ad Manager | Uygulanamaz; kendi ağındaki değişiklikler `changeEvents` yoklamasıyla | Uygulanamaz (yalnız kendi DAI akışları, 360) | Yok | API'de webhook yok; yalnız ödüllü reklam SSV geri çağrısı | Gerek yok; arayüz kazıma ve masaüstü WebView'de gösterim hesap riski |
 | Meta Marketing API / TikTok API for Business | Yalnız kendi ya da yetki veren reklam hesabı (kampanya, reklam durumu) | Yok | Yok (lead formu var) | Evet, yalnız kendi reklam hesabın (Meta Ad Account webhook'u, TikTok aboneliği) | Gerek yok |
+| **Arama Motorları** | | | | | |
+| IndexNow | Yalnız kendi siten için bildirim (yazma yönlü); başkasının yeni sayfası okunamaz | Yok | Yok | Ters yönde: site → motor (anında); motordan geri bildirim yok | Gerek yok |
+| Google Search Console (+ Indexing API) | Yalnız kendi doğrulanmış siten: yeni sayfa/sorgu ve dizin durumu yoklamayla (2–3 gün gecikme) | Yok | Yok | Yok (webhook yok; e-posta uyarıları, günlük BigQuery dışa aktarması) | Arayüz otomasyonu ya da Indexing API'yi sıradan sayfada kullanmak; erişim iptali riski |
+| PageSpeed Insights ve CrUX | Uygulanamaz (performans verisi; rakip siteler dahil, günlük CrUX yoklaması) | Yok | Yok | Yok | Gerek yok (API anahtarı ücretsiz) |
 | **API Kaynakları** | | | | | |
 | API koleksiyonları ve keşif | Kendisinde yok (hedef platforma bağlı) | Kendisinde yok | Kendisinde yok | Yok (APIs.guru RSS) | DevTools/HAR/mitmproxy; yüksek risk |
 
@@ -121,6 +126,7 @@ Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (so
 - **Yalnız resmî olmayan yolla mümkün olanlar:** WhatsApp kanalları/durumları ve başkalarının grupları, Signal, TikTok canlı yayınları, Instagram kişisel hesapları, LinkedIn kişileri, Snapchat, OnlyFans/Fansly, Kick VOD'ları, MGM uyarıları. Bunlar ayrı, kapatılabilir bir modülde tutulmalı; bozulması uygulamanın geri kalanını etkilememelidir.
 - **Pratikte mümkün olmayanlar:** Facebook kişisel profil ve grupları, başkalarının DM'leri (her platformda), Reddit/Snapchat/Pinterest için gerçek zamanlı push, kapanmış platformlar (DLive, Reddit RPAN) ve Türkiye haber sitelerinde okur yorumları.
 - **Reklam API'leri takip kaynağı değildir:** Yalnız kendi reklamveren ya da yayıncı hesabın için çalışır. Yayıncı tarafında tek gerçek push ödüllü reklamın SSV geri çağrısıdır; reklamveren tarafında Meta ve TikTok'un kendi reklam hesabı webhook'ları ile Google'ın lead form webhook'u vardır. Rakip reklamları için şeffaflık kütüphaneleri kullanılır.
+- **Arama motoru API'leri ters yönlüdür:** IndexNow ve Indexing API siteden motora bildirim yapar; Search Console yalnız kendi mülkünün verisini gecikmeli yoklamayla verir. Rakip bir site hakkında resmî yoldan alınabilen tek veri CrUX/PSI hız verisidir.
 - **Mesajlaşma platformları çıkış kanalıdır:** Discord webhook'u, Telegram botu, Slack ve LINE push; toplanan ve filtrelenen olayları kullanıcıya iletmek için kaynak olarak kullanılmalarından daha değerlidir.
 - **Filtre ve kişisel veri senin sorumluluğunda:** Anahtar kelime filtresi neredeyse her yerde istemci tarafında yapılır; toplanan mesaj, profil ve yorumlar kişisel veridir (KVKK/GDPR). Saklama süresini ve amacını baştan belirle; bazı platformlar (Telegram, WhatsApp) veriyi yapay zekâ eğitimi için kullanmayı yasaklar.
 

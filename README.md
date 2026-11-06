@@ -54,6 +54,7 @@ Proje yazmadan önce bakılacak güncel, Türkçe API başvurusu: erişim seviye
 | [Hava Durumu](API/Hava-Durumu/) | Hava durumu ve uyarı servisleri, MGM, deprem kaynakları (AFAD, Kandilli, USGS, EMSC). |
 | [Türkiye Kamu ve Açık Veri](API/Turkiye-Kamu-ve-Acik-Veri/) | Belediye açık veri portalları, TÜİK, Resmî Gazete ve Türkiye topluluk API'leri. |
 | [Reklam](API/Reklam/) | Google Ads, AdMob, Ad Manager (Meta ve TikTok reklam API'leri Sosyal Medya'da): kampanya yönetimi, raporlama, ödüllü reklamın sunucuda doğrulanması. |
+| [Arama Motorları](API/Arama-Motorlari/) | IndexNow, Google Search Console ve Indexing API, PageSpeed Insights ve CrUX: URL bildirimi, arama performansı ve sayfa hızı. |
 | [API Kaynakları](API/API-Kaynaklari/) | API dizinleri, resmî Postman/OpenAPI koleksiyonları ve uç nokta keşif yöntemleri. |
 
 ### [Rehberler](Rehberler/)
