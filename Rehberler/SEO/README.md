@@ -57,6 +57,7 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — Rehberin yoğun ba�
 - [React](../../Programlama/JavaScript-TypeScript/03-react/) — SSR, CSR ve SSG ayrımı, kurulum yolunun proje türüne göre seçimi; bu rehberde karşılığı Bölüm 10 (JavaScript ile render).
 - [JavaScript ekosistemi ve araçlar](../../Programlama/JavaScript-TypeScript/04-ekosistem-ve-araclar/) — Herkese açık, SEO gereken sitede Next.js gibi meta-framework'lerin ve sunucu tarafı render'ın ne zaman gerektiği.
 - [YouTube'da Oyun](../YouTube-Oyun/) — Oyun video kanalı ve Shorts; izlenme/abone botu, sub4sub ve yeniden yüklenen içerik risklerinin YouTube kuralları bu rehberde Bölüm 21 § 7'de.
+- [API → Google Ads](../../API/Reklam/Google-Ads.md) — Anahtar Kelime Planlayıcı, arama terimleri ve ücretli-organik raporlarının API karşılıkları; Anahtar Kelime Planlayıcı verisi Explorer erişiminde kapalı, Basic ve Standard'da açık.
 
 ## Kaynaklar
 

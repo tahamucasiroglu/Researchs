@@ -51,6 +51,7 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — aynı içerik, bir 
 - [Şirket Kurma → Genç Girişimci ve Teşvikler](../Sirket-Kurma/07-genc-girisimci.html) — 29 yaş altında ilk kez mükellef olanların istisnası ve 20/B ile ilişkisi.
 - [Şirket Kurma → SGK ve Bağ-Kur](../Sirket-Kurma/02-sgk-bagkur.html) — 4/a, 4/b, 4/c statüleri; emekli ve başka sigortası olmayan dalları.
 - [İşsizlik → Ödenek Alırken Para Kazanmak](../Issizlik/06-odenek-alirken-gelir.html) — Ödenek alırken mükellefiyet açmanın ve uygulama gelirinin ödeneğe etkisi.
+- [API → Google AdMob](../../API/Reklam/AdMob.md) — AdMob API ile gelir raporu çekme (OAuth kapsamları, kotalar, C# örneği), SSV ile ödül doğrulama, SDK platformları, ödeme eşikleri ve Ocak 2025'ten beri zorunlu app-ads.txt doğrulaması.
 
 ## Kaynakça (erişim: 5 Kasım 2026)
 

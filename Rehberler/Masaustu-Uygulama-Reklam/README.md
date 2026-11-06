@@ -36,6 +36,11 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır; GitHub 
 - [Şirket Kurma → Ülke Ülke Seçenekler](../Sirket-Kurma/10-yurtdisi-ulkeler.html) — ABD LLC, Estonya e-Residency, BK Ltd ve BAE için kuruluş, yıllık gider ve banka şartları.
 - [Şirket Kurma → Ödeme Altyapıları](../Sirket-Kurma/11-odeme-altyapilari.html) — Stripe'ın Türkiye'de olmadığı durumda Paddle, Lemon Squeezy, iyzico, PayTR ile tahsilat.
 - [İşsizlik → Ödenek Alırken Para Kazanmak](../Issizlik/06-odenek-alirken-gelir.html) — Ödenek alırken uygulama, reklam ya da abonelik geliri ve şirket kurmanın ödeneğe etkisi.
+- [API → Google Ads](../../API/Reklam/Google-Ads.md) — §7'deki Google Ads API'nin ayrıntısı: erişim seviyeleri, 9 Eylül 2026'da kalkan developer token, GAQL raporlama, Data Manager API'ye geçiş ve ücretsiz masaüstü yazılım politikası (freemium ve deneme sürümleri dahil).
+- [API → Google AdMob](../../API/Reklam/AdMob.md) — Ödüllü reklam SSV geri çağrısının parametreleri, ECDSA imza doğrulaması (C# örneğiyle), anahtar sunucusu ve AdMob'un yalnız Android/iOS olduğunu gösteren resmî kaynaklar.
+- [API → Google Ad Manager](../../API/Reklam/Google-Ad-Manager.md) — Ad Manager API (REST Beta ve SOAP), GPT ödüllü reklam olayları, web SSV, ücretsiz sürüm eşikleri; §1 ve §3'teki masaüstü–mobil çelişkisinin resmî metinlerle değerlendirmesi.
+- [API → Meta Graph API (Marketing API bölümü)](../../API/Sosyal-Medya/Meta-Graph-API-Genel.md) — Limited/Full erişim katmanı (4 Mayıs 2026), kendi reklam hesabı için Standard `ads_management`, sistem kullanıcısı token'ı, hız sınırları ve Conversions API.
+- [API → TikTok (API for Business bölümü)](../../API/Sosyal-Medya/TikTok.md) — Yalnız şirketlere açık geliştirici kaydı, uygulama incelemesi süreleri, reklamveren OAuth akışı ve hız seviyeleri.
 - [API → Meta Graph API (genel)](../../API/Sosyal-Medya/Meta-Graph-API-Genel.md) — Marketing API'nin üzerinde durduğu Graph API: erişim seviyeleri, izinler ve uygulama incelemesi.
 - [API → TikTok](../../API/Sosyal-Medya/TikTok.md) — TikTok for Developers ile reklam tarafındaki TikTok API for Business (Marketing API) ayrımı.
 

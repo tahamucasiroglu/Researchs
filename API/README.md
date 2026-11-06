@@ -36,11 +36,12 @@ Sayfalarda aynı sözlük kullanılır:
 | [Kripto Borsaları](Kripto-Borsalari/) | Binance, OKX, Bybit, Kraken, Coinbase, BtcTurk, Paribu ve kripto veri servisleri (CoinGecko, CMC, CoinDesk, Etherscan): duyuru, listeleme, fiyat ve likidasyon akışları. |
 | [Hava Durumu](Hava-Durumu/) | Open-Meteo, OpenWeatherMap, WeatherAPI, Tomorrow.io, Visual Crossing, NOAA/NWS, MGM ve deprem kaynakları (AFAD, Kandilli, USGS, EMSC). |
 | [Türkiye Kamu ve Açık Veri](Turkiye-Kamu-ve-Acik-Veri/) | Belediye açık veri portalları (CKAN), TÜİK, Resmî Gazete, Diyanet ve topluluk API'leri (TurkiyeAPI, Nager.Date, CollectAPI). |
+| [Reklam](Reklam/) | Google Ads, Google AdMob, Google Ad Manager (Meta Marketing API ve TikTok API for Business, Sosyal Medya dosyalarında ayrı bölüm): kendi reklam ve yayıncı hesabını yönetme, raporlama, dönüşüm yükleme, ödüllü reklamın sunucuda doğrulanması (SSV). |
 | [API Kaynakları](API-Kaynaklari/) | API bulma ve deneme: public-apis, APIs.guru, resmî Postman/OpenAPI koleksiyonları, RapidAPI ve DevTools/HAR/mitmproxy ile uç nokta keşfi. |
 
 ## Takip uygulaması için özet matris
 
-Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (son doğrulama: 15.10.2026). Ayrıntı ve koşullar için ilgili kategori sayfasına bak.
+Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (son doğrulama: 15.10.2026; Reklam satırları 6.11.2026). Ayrıntı ve koşullar için ilgili kategori sayfasına bak.
 
 | Platform | Yeni gönderi | Canlı yayın | Mesaj/grup içeriği | Gerçek zamanlı push | Resmî olmayan yol |
 |---|---|---|---|---|---|
@@ -103,6 +104,11 @@ Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (so
 | **Türkiye Kamu ve Açık Veri** | | | | | |
 | Türkiye Açık Veri ve Kamu API'leri | Yeni veri seti, Resmî Gazete, TÜİK (yoklama) | Yok | Yok | Yok (CKAN Atom feed en yakını) | Fihrist kazıma; e-Devlet otomasyonu yüksek risk |
 | Türkiye Topluluk API'leri | Doğrudan yok; güncellik `meta`/Atom ile | Yok | Yok | Yok | Bakımsız gayriresmî API'ler |
+| **Reklam** | | | | | |
+| Google Ads | Kendi hesabında yeni reklam ve onay durumu yoklamayla (GAQL); rakip reklamı yalnız Ads Transparency Center'da | Yok | Yok (yalnız lead form gönderimleri) | Yalnız lead form webhook'u | Şeffaflık merkezi ve arama sonucu kazıma servisleri var; politikaya aykırı |
+| Google AdMob | Uygulanamaz; kendi gelir raporun yoklamayla (~4 saat gecikme) | Yok | Yok | Yalnız ödüllü reklam SSV geri çağrısı (kendi reklam birimin) | Gerek yok; sahte trafik hesabı kapattırır |
+| Google Ad Manager | Uygulanamaz; kendi ağındaki değişiklikler `changeEvents` yoklamasıyla | Uygulanamaz (yalnız kendi DAI akışları, 360) | Yok | API'de webhook yok; yalnız ödüllü reklam SSV geri çağrısı | Gerek yok; arayüz kazıma ve masaüstü WebView'de gösterim hesap riski |
+| Meta Marketing API / TikTok API for Business | Yalnız kendi ya da yetki veren reklam hesabı (kampanya, reklam durumu) | Yok | Yok (lead formu var) | Evet, yalnız kendi reklam hesabın (Meta Ad Account webhook'u, TikTok aboneliği) | Gerek yok |
 | **API Kaynakları** | | | | | |
 | API koleksiyonları ve keşif | Kendisinde yok (hedef platforma bağlı) | Kendisinde yok | Kendisinde yok | Yok (APIs.guru RSS) | DevTools/HAR/mitmproxy; yüksek risk |
 
@@ -114,6 +120,7 @@ Kategori README'lerindeki "takip" satırlarının kısaltılmış birleşimi (so
 - **Karma yaklaşım en verimli:** Ucuz push sinyalini pahalı API çağrısıyla doğrula (ör. YouTube WebSub ile gelen video ID'sini `videos.list` ile kontrol edip canlı yayın olup olmadığını anlamak; Twitch'te `GET /streams` yedek yoklaması).
 - **Yalnız resmî olmayan yolla mümkün olanlar:** WhatsApp kanalları/durumları ve başkalarının grupları, Signal, TikTok canlı yayınları, Instagram kişisel hesapları, LinkedIn kişileri, Snapchat, OnlyFans/Fansly, Kick VOD'ları, MGM uyarıları. Bunlar ayrı, kapatılabilir bir modülde tutulmalı; bozulması uygulamanın geri kalanını etkilememelidir.
 - **Pratikte mümkün olmayanlar:** Facebook kişisel profil ve grupları, başkalarının DM'leri (her platformda), Reddit/Snapchat/Pinterest için gerçek zamanlı push, kapanmış platformlar (DLive, Reddit RPAN) ve Türkiye haber sitelerinde okur yorumları.
+- **Reklam API'leri takip kaynağı değildir:** Yalnız kendi reklamveren ya da yayıncı hesabın için çalışır. Yayıncı tarafında tek gerçek push ödüllü reklamın SSV geri çağrısıdır; reklamveren tarafında Meta ve TikTok'un kendi reklam hesabı webhook'ları ile Google'ın lead form webhook'u vardır. Rakip reklamları için şeffaflık kütüphaneleri kullanılır.
 - **Mesajlaşma platformları çıkış kanalıdır:** Discord webhook'u, Telegram botu, Slack ve LINE push; toplanan ve filtrelenen olayları kullanıcıya iletmek için kaynak olarak kullanılmalarından daha değerlidir.
 - **Filtre ve kişisel veri senin sorumluluğunda:** Anahtar kelime filtresi neredeyse her yerde istemci tarafında yapılır; toplanan mesaj, profil ve yorumlar kişisel veridir (KVKK/GDPR). Saklama süresini ve amacını baştan belirle; bazı platformlar (Telegram, WhatsApp) veriyi yapay zekâ eğitimi için kullanmayı yasaklar.
 

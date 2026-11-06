@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Kasım 2026
 
+- **06.11.2026** — API: reklam API'leri (Google Ads, AdMob, Google Ad Manager) eklendi; Meta Marketing API ve TikTok API for Business bölümleri güncellendi (masaüstü reklam ve Google Play araştırmalarından) → [API/Reklam](API/Reklam/)
 - **05.11.2026** — Google Play'de reklamlı oyun yayınlama araştırması: maliyet ve süre, 12 kişi / 14 gün kapalı test, API 36 ve 16 KB şartları, AdMob ödeme eşikleri, gelir senaryoları, GVK 20/B ve çalışma durumu dalları → [Rehberler/Google-Play-Oyun](Rehberler/Google-Play-Oyun/)
 
 ## Ekim 2026
