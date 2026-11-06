@@ -24,7 +24,7 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 
 ## İlgili konular
 
-- [SQL Mülakat Rehberi](../../../Rehberler/SQL-Mulakat/) — JDBC ve JPA'nın arkasındaki SQL için: JOIN satır sayıları, NULL mantığı, window fonksiyonları, klasik mülakat soruları ve lehçe farkları.
+- [SQL Mülakat Rehberi](../../Veritabani-SQL/sql-mulakat/) — [Veritabanı ve SQL](../../Veritabani-SQL/) alanında; JDBC ve JPA'nın arkasındaki SQL için: JOIN satır sayıları, NULL mantığı, window fonksiyonları, klasik mülakat soruları ve lehçe farkları.
 
 Resmi kaynak: [Hibernate ORM belgeleri](https://hibernate.org/orm/documentation/) · [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 

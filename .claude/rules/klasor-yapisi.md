@@ -16,6 +16,7 @@
 │  ├─ HTML-CSS/
 │  ├─ Python/  Go/  Rust/
 │  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
+│  ├─ Veritabani-SQL/     Dil değil alan; SQL ve ilişkisel veritabanları (sql-mulakat/ …)
 │  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/, video-uretim-sistemi/ …)
 ├─ API/                 Platform başına Türkçe API başvurusu (.md), kategorilere göre
 │  ├─ Sosyal-Medya/  Mesajlasma/  Canli-Yayin-ve-Video/  Gelistirici-Platformlari/  Haber/
@@ -30,8 +31,7 @@
    ├─ Masaustu-Uygulama-Reklam/  Masaüstü uygulamada reklam ve ödüllü reklam
    ├─ Yolculuk-Paylasimi/ Paylaşımlı yolculuk (Martı TAG) hukuku, ceza, vergi
    ├─ SEO/                SEO rehberi (21 bölüm)
-   ├─ Mulakat-Hazirligi/  .NET / C# backend mülakat hazırlığı
-   └─ SQL-Mulakat/        SQL mülakat rehberi (Programlama altında veritabanı alanı açılırsa oraya taşınabilir)
+   └─ Mulakat-Hazirligi/  .NET / C# backend mülakat hazırlığı
 ```
 
 ## Konu klasörü düzeni (Dil ve Programlama)
@@ -54,7 +54,7 @@ NN-konu-adi/
 ## Kategori kuralları
 
 - Programlama **dile/platforma göre** ayrılır. "Frontend", "Backend", "Diğer diller" gibi katman veya artık kategori **açılmaz**. Bir dil eklenince kendi klasörü olur (`Programlama/Kotlin/`).
-- Dil/platformdan bağımsız, ayrı eğitim gerektiren alanlar (Blockchain gibi) kendi kategorisini alabilir. Yeni böyle bir alan (ör. Veritabanlari, DevOps, Yapay-Zeka) açmadan önce kullanıcıya sor.
+- Dil/platformdan bağımsız, ayrı eğitim gerektiren alanlar (Blockchain gibi) kendi kategorisini alabilir. Yeni böyle bir alan (ör. DevOps) açmadan önce kullanıcıya sor.
 - Bir teknoloji birden çok dilde kullanılıyorsa (Redis hem .NET hem Java'da), çalışmanın yapıldığı dilin altına konur; diğer yerden README'de bağlantı verilir. Kopyalanmaz.
 - Bir çalışma başka bir konuyu da kullanıyorsa (RabbitMQ denemesinde Redis de kullanılmış), ana konuya konur, README'de "ilgili: [Redis](...)" diye karşılıklı bağlantı verilir.
 - Yeni dil (insan dili) öğrenilecekse `Dil/<DilAdi>/` açılır (ör. `Dil/Rusca/`), Türkçe/İngilizce düzeni örnek alınır.

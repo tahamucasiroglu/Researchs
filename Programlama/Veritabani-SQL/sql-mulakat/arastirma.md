@@ -472,7 +472,7 @@ Sürüm öğrenmek: `SELECT sqlite_version();`
 
 ## 14. Mülakat günü kontrol listesi (online test)
 
-Bu liste otomatik değerlendirilen online SQL testi içindir. Canlı ya da yüz yüze mülakatta platforma özgü maddeler (3, 7, 8, 9) gerekmeyebilir; diğer mülakat türleri için kardeş rehber: [Mülakat Hazırlığı](../Mulakat-Hazirligi/).
+Bu liste otomatik değerlendirilen online SQL testi içindir. Canlı ya da yüz yüze mülakatta platforma özgü maddeler (3, 7, 8, 9) gerekmeyebilir; diğer mülakat türleri için tamamlayıcı rehber: [Mülakat Hazırlığı](../../../Rehberler/Mulakat-Hazirligi/).
 
 1. Şemayı ve **örnek çıktıyı** dikkatle oku: kolon adları, sırası, alias'lar birebir aynı olmalı.
 2. Büyük/küçük harf ve boşluk: metin karşılaştırmaları ve çıktı başlıkları.

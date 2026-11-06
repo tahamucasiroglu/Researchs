@@ -1,6 +1,6 @@
 # Programlama
 
-Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi klasörü vardır, alt klasörler o dilin konularını sırayla işler. Dilden bağımsız, ayrı eğitim gerektiren alanlar (şimdilik yalnızca Blockchain) kendi klasörünü alır. Sayfalar birer "anahtar kelime listesi"dir: her başlık için kısa bir "bu nedir" notu, öncelik rozeti (`TEMEL`, `ORTA`, `İLERİ`, `MÜLAKATTA SIK`) ve resmi doküman bağlantısı verilir; amaç neyi araştıracağını ve başlangıç noktana (hiç bilmeyen, başka dilden gelen) ve hedefine (backend, frontend, veri, mobil) göre hangi sırayla çalışacağını göstermektir. Konulara ait kod denemeleri ve notlar ilgili konu klasörünün altına eklenir.
+Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi klasörü vardır, alt klasörler o dilin konularını sırayla işler. Dilden bağımsız, ayrı eğitim gerektiren alanlar (şimdilik Blockchain, Yapay Zekâ ile Veritabanı ve SQL) kendi klasörünü alır. Sayfalar birer "anahtar kelime listesi"dir: her başlık için kısa bir "bu nedir" notu, öncelik rozeti (`TEMEL`, `ORTA`, `İLERİ`, `MÜLAKATTA SIK`) ve resmi doküman bağlantısı verilir; amaç neyi araştıracağını ve başlangıç noktana (hiç bilmeyen, başka dilden gelen) ve hedefine (backend, frontend, veri, mobil) göre hangi sırayla çalışacağını göstermektir. Konulara ait kod denemeleri ve notlar ilgili konu klasörünün altına eklenir.
 
 ## İçindekiler
 
@@ -15,6 +15,7 @@ Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi kla
 | [Rust](Rust/) | Tek sayfa: Cargo, sahiplik ve ödünç alma, yaşam süreleri, trait ve generic, async/Tokio, ekosistem ve öğrenme maliyeti. |
 | [Blockchain](Blockchain/) | 7 bölüm: zincir temelleri, Solidity ve akıllı sözleşmeler, JS/TS ve .NET ile dApp geliştirme, diğer zincirler, altyapı ve güvenlik, proje fikirleri. |
 | [Yapay Zekâ](Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini uygulamalarda kullanmak. Konular: görüntü netleştirme (super-resolution, yüz düzeltme), kodla video üretimi (Remotion), Claude ile video üretim sistemi. |
+| [Veritabanı ve SQL](Veritabani-SQL/) | Dil değil alan: SQL dili ve ilişkisel veritabanları; örnekler standart SQL, SQLite / PostgreSQL / SQL Server / MySQL farkları ayrıca. Konular: SQL Mülakat Rehberi (JOIN'lerde kaç satır gelir, NULL, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme). ORM tarafı (EF Core, JPA/Hibernate) dil klasörlerinde kalır. |
 | [Proje Fikirleri](proje-fikirleri/) | Tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu; her projenin hangi konuyu kanıtladığıyla birlikte. |
 
 ## Genel bakış sayfasının başlıkları
@@ -24,7 +25,7 @@ HTML genel bakış sayfası şu konuları işler:
 1. Bu dosya nasıl kullanılır (amaca göre giriş noktası, rozetlerin anlamı)
 2. Bölümler, hedefe göre hangi bölümün temel olduğu ve tüm sayfaların haritası
 3. Başlangıç noktasına göre önerilen öğrenme sıraları (hiç bilmeyen; C#, Java, JS/TS, Python veya başka dilden gelen; mobil hedefleyen) ve gerekçesi
-4. Mülakatta sık sorulanlar (.NET backend'e göre derecelendirilmiş; diğer hedefler ve kıdem için okuma kılavuzu). Soru → kısa cevap hazırlık için: [Mülakat Hazırlığı](../Rehberler/Mulakat-Hazirligi/) · [SQL Mülakat Rehberi](../Rehberler/SQL-Mulakat/)
+4. Mülakatta sık sorulanlar (.NET backend'e göre derecelendirilmiş; diğer hedefler ve kıdem için okuma kılavuzu). Soru → kısa cevap hazırlık için: [Mülakat Hazırlığı](../Rehberler/Mulakat-Hazirligi/) · [SQL Mülakat Rehberi](Veritabani-SQL/sql-mulakat/)
 5. Python, Go ve Rust karşılaştırması
 6. Çalışma yöntemi
 7. İlerleme takibi

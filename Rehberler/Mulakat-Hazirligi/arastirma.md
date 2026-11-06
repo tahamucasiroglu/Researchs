@@ -3,7 +3,7 @@
 - **Biçim:** saf Markdown; HTML anlatımın (index.html ve 01–08 sayfaları) birebir içeriği, tek dosyada.
 - **Tarih:** 29 Ekim 2026. .NET bilgileri .NET 10 (LTS, Kasım 2025) ve C# 14 itibarıyla learn.microsoft.com'dan kontrol edildi.
 - **Kullanım:** Bir yapay zekâ asistanına bağlam olarak verilip "bana bu konudan mülakat sorusu sor, cevabımı değerlendir" gibi çalışmalarda kullanılabilir. Cevaplar kasıtlı olarak kısadır (1–4 satır); derinlik için bağlantı verilen sayfalara gidilir.
-- **Kapsam dışı:** SQL mülakatı ayrı rehberde ([SQL Mülakat Rehberi](../SQL-Mulakat/)); burada yalnız 6 soruluk özet var.
+- **Kapsam dışı:** SQL mülakatı ayrı rehberde ([SQL Mülakat Rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/)); burada yalnız 6 soruluk özet var.
 
 ## Güven etiketleri ve rozetler
 
@@ -58,7 +58,7 @@ Teknik cevaplarda etiket yoksa, ilgili sayfanın "Kaynaklar" bölümündeki resm
 > [Programlama · Mülakatta sık sorulanlar](../../Programlama/index.html#mulakatta-sik) — hangi teknoloji hangi sıklıkla sorulur, kıdeme ve hedefe göre nasıl okunur (risk tablosu).
 > [C# / .NET anahtar listesi](../../Programlama/CSharp-DotNet/) — 10 bölümde bütün terimler ve resmî doküman bağlantıları.
 > [İşsizlik rehberi · İş arama](../Issizlik/07-is-arama.html#mulakat) — .NET mülakat başlıkları, canlı kodlama, sistem tasarımı, İngilizce mülakat ve maaş pazarlığı.
-> SQL mülakatı ayrı rehberde: [SQL mülakat rehberi](../SQL-Mulakat/index.html). Burada yalnız kısa özet var ([03 · § SQL](03-aspnet-core-ef-core.html#sql-ozet)).
+> SQL mülakatı ayrı rehberde: [SQL mülakat rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/index.html). Burada yalnız kısa özet var ([03 · § SQL](03-aspnet-core-ef-core.html#sql-ozet)).
 
 ### Mülakat türleri
 
@@ -483,7 +483,7 @@ Derin sayfa: [03 · EF Core çekirdek](../../Programlama/CSharp-DotNet/03-veri-e
 
 ### SQL özeti
 
-Ayrıntılı soru–cevaplar ayrı rehberde: **[SQL mülakat rehberi](../SQL-Mulakat/index.html)**. Buradakiler yalnız en sık 6 soru.
+Ayrıntılı soru–cevaplar ayrı rehberde: **[SQL mülakat rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/index.html)**. Buradakiler yalnız en sık 6 soru.
 
 | Soru | Kısa cevap |
 |---|---|
@@ -1174,7 +1174,7 @@ Ayrıntılı anlatım, cümle kalıpları ve yan hakların değeri: **[İş aram
 - Optimistic concurrency: `[Timestamp]`/rowversion → `DbUpdateConcurrencyException` → 409.
 - `FromSql($"...")` güvenli, `FromSqlRaw` + birleştirme = SQL injection.
 - EF Core yazma/iş kuralı, Dapper ağır okuma.
-- SQL: WHERE gruptan önce, HAVING sonra · clustered tablo sırası (bir tane) · Read Committed varsayılan · ayrıntı [SQL rehberi](../SQL-Mulakat/index.html).
+- SQL: WHERE gruptan önce, HAVING sonra · clustered tablo sırası (bir tane) · Read Committed varsayılan · ayrıntı [SQL rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/index.html).
 
 ### Dağıtık, test, Git
 
@@ -1225,7 +1225,7 @@ Ayrıntılı anlatım, cümle kalıpları ve yan hakların değeri: **[İş aram
 - `../../Programlama/index.html#mulakatta-sik` — teknoloji bazında sorulma sıklığı (risk tablosu), kıdeme ve hedefe göre okuma.
 - `../../Programlama/CSharp-DotNet/` — 10 bölümlük C# / .NET anahtar listesi (01 dil, 02 Web API, 03 veri, 04 mimari, 05 mesajlaşma, 06 test, 07 DevOps, 08 UI, 09 modern .NET, 10 kütüphaneler).
 - `../Issizlik/07-is-arama.html` — § 6 mülakat (.NET başlıkları, canlı kodlama, sistem tasarımı, İngilizce), § 7 maaş pazarlığı, § 2 maaş ölçümü, § 5 özgeçmiş.
-- `../SQL-Mulakat/index.html` — SQL mülakat rehberi (ayrıntılı SQL soruları).
+- `../../Programlama/Veritabani-SQL/sql-mulakat/index.html` — SQL mülakat rehberi (ayrıntılı SQL soruları).
 
 ## Tam kaynakça (erişim 29 Ekim 2026)
 

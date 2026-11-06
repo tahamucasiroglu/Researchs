@@ -36,6 +36,7 @@ Dile ve platforma göre ayrılmış anahtar kelime listeleri: her başlık için
 | [Rust](Programlama/Rust/) | Sahiplik ve ödünç alma modeli, tip sistemi, güvenli eşzamanlılık ve öğrenme maliyeti. |
 | [Blockchain](Programlama/Blockchain/) | Dil değil alan: temeller, Solidity ve akıllı sözleşmeler, JS/.NET ile dApp geliştirme, diğer zincirler, güvenlik ve proje fikirleri. |
 | [Yapay Zekâ](Programlama/Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini kullanmak; görüntü netleştirme (super-resolution, yüz düzeltme) kodla video üretimi (Remotion) ve Claude ile video üretim sistemi; modeller, lisanslar, ölçümler. |
+| [Veritabanı ve SQL](Programlama/Veritabani-SQL/) | Dil değil alan: SQL dili ve ilişkisel veritabanları. İlk konu: mülakat ve online kodlama sınavları için SQL mülakat rehberi (JOIN'ler, NULL, gruplama, window fonksiyonları, SQLite / PostgreSQL / SQL Server / MySQL farkları). |
 | [Proje Fikirleri](Programlama/proje-fikirleri/) | Öğrenileni kanıtlamak için tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu. |
 
 ### [API](API/)
@@ -68,7 +69,6 @@ Belirli bir durumla karşılaşıldığında okunacak genel rehberler: Türkiye 
 | [Mesajlaşma Altyapıları](Rehberler/Mesajlasma-Altyapilari/) | Telegram Bot API, WhatsApp Business API, BiP Keşfet API ve SMS: uç noktalar, JSON ve C# örnekleri, fiyatlar, BTK/İYS kuralları. |
 | [Şirket Kurma](Rehberler/Sirket-Kurma/) | Şahıs mı limited mi, vergi ve Bağ-Kur, genç girişimci istisnası, giderler, yurt dışı şirket, ödeme altyapıları ve maliyet senaryoları. |
 | [SEO](Rehberler/SEO/) | Bir sitenin Google, Bing, Yandex ve yapay zekâ aramalarında organik görünmesi, 21 bölüm: tarama ve dizine ekleme, sayfa içi SEO, yapılandırılmış veri, hız, yerel SEO, bağlantılar, site denetimi ve kara şapkadan korunma. |
-| [SQL Mülakat](Rehberler/SQL-Mulakat/) | Mülakat ve online kodlama sınavları için kısa SQL: JOIN'lerde kaç satır gelir, NULL, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme, SQLite notları ve lehçe farkları. |
 | [Mülakat Hazırlığı](Rehberler/Mulakat-Hazirligi/) | .NET / C# backend mülakatı için soru → kısa cevap tekrar rehberi: mülakat türleri ve online test, C#, ASP.NET Core, EF Core, dağıtık sistemler, algoritma ve sistem tasarımı, davranışsal ve İngilizce sorular, maaş ilkeleri ve kontrol listesi. |
 | [Masaüstü Uygulamada Reklam](Rehberler/Masaustu-Uygulama-Reklam/) | Masaüstü uygulama ve web sitesinde reklam ve reklam izleyerek kredi: ağ politikaları, ödüllü reklam ve SSV, engelleyiciler, doğrudan satış, hukuk, vergi ve şirket yapısı. |
 | [Yolculuk Paylaşımı](Rehberler/Yolculuk-Paylasimi/) | Özel araçla paylaşımlı yolculuk (Martı TAG): 2026 KTK Ek 2 cezaları, mahkeme kararları, sigorta rücusu, vergi ve Bağ-Kur, il ve araç durumlarına göre sonuçlar, maliyet senaryoları. |

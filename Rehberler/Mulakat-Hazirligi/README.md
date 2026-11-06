@@ -33,7 +33,7 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — aynı içerik tek d
 
 ## İlgili konular
 
-- [SQL Mülakat Rehberi](../SQL-Mulakat/) — Kardeş rehber: SQL soruları ayrıntılı (bu rehberde yalnız 6 soruluk özet var); JOIN'ler, gruplama, window fonksiyonları, online sınav taktikleri.
+- [SQL Mülakat Rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/) — Programlama → Veritabanı ve SQL altında: SQL soruları ayrıntılı (bu rehberde yalnız 6 soruluk özet var); JOIN'ler, gruplama, window fonksiyonları, online sınav taktikleri.
 - [Programlama · Mülakatta sık sorulanlar](../../Programlama/index.html#mulakatta-sik) — Teknoloji bazında sorulma sıklığı, kıdeme ve hedefe göre okuma kılavuzu.
 - [C# / .NET](../../Programlama/CSharp-DotNet/) — 10 bölümlük anahtar liste; bu rehberdeki her teknik bölüm ilgili alt sayfanın başlığına bağlanır.
 - [İşsizlik → İş Arama ve Piyasa](../Issizlik/07-is-arama.html) — Mülakat başlıkları, canlı kodlama, sistem tasarımı, İngilizce mülakat (§ 6), maaş pazarlığı (§ 7), maaş ölçümü (§ 2), özgeçmiş (§ 5).

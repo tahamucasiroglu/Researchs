@@ -33,10 +33,10 @@ Yapay zekâ için Markdown: [arastirma.md](arastirma.md) — aynı içerik saf M
 
 ## İlgili konular
 
-- [Mülakat Hazırlığı](../Mulakat-Hazirligi/) — Kardeş rehber: mülakat türleri, online test taktikleri, teknik konuların kısa soru–cevapları (kısa bir SQL özeti dahil), davranışsal sorular ve kontrol listesi.
-- [C# / .NET → Veri Erişimi](../../Programlama/CSharp-DotNet/03-veri-erisimi/) — İlişkisel veritabanı temelleri, SQL Server ve T-SQL, EF Core ve Dapper; SQL'in .NET uygulamasından kullanımı.
-- [Java → Veri ve Mesajlaşma](../../Programlama/Java/03-veri-ve-mesajlasma/) — JDBC, JPA/Hibernate, Spring Data JPA ve migration; SQL'in Java uygulamasından kullanımı.
-- [Programlama · Mülakatta sık sorulanlar](../../Programlama/index.html#mulakatta-sik) — Teknolojilerin mülakatta sorulma sıklığı; SQL, dilden bağımsız temel konular arasında.
+- [Mülakat Hazırlığı](../../../Rehberler/Mulakat-Hazirligi/) — Rehberler altındaki tamamlayıcı rehber: mülakat türleri, online test taktikleri, teknik konuların kısa soru–cevapları (kısa bir SQL özeti dahil), davranışsal sorular ve kontrol listesi.
+- [C# / .NET → Veri Erişimi](../../CSharp-DotNet/03-veri-erisimi/) — İlişkisel veritabanı temelleri, SQL Server ve T-SQL, EF Core ve Dapper; SQL'in .NET uygulamasından kullanımı.
+- [Java → Veri ve Mesajlaşma](../../Java/03-veri-ve-mesajlasma/) — JDBC, JPA/Hibernate, Spring Data JPA ve migration; SQL'in Java uygulamasından kullanımı.
+- [Programlama · Mülakatta sık sorulanlar](../../index.html#mulakatta-sik) — Teknolojilerin mülakatta sorulma sıklığı; SQL, dilden bağımsız temel konular arasında.
 
 ## Kaynakça
 
@@ -73,4 +73,4 @@ Erişim: 29 Ekim 2026 (son sekiz kaynak: 6 Kasım 2026). Güven etiketleriyle ta
 
 ---
 
-← [Üst klasör](../) · ⌂ [Ana sayfa](../../README.md)
+← [Üst klasör](../) · ⌂ [Ana sayfa](../../../README.md)

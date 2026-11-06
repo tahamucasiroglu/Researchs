@@ -24,7 +24,7 @@ HTML anlatım: [index.html](index.html) — GitHub HTML'i işlemez; dosyayı yer
 ## İlgili konular
 
 - [Mülakat Hazırlığı](../Mulakat-Hazirligi/) — .NET / C# backend mülakatına soru → kısa cevap hazırlık; 07 · İş Arama'daki mülakat ve maaş pazarlığı bölümlerinin üstüne kurulur.
-- [SQL Mülakat Rehberi](../SQL-Mulakat/) — Online kodlama sınavlarında sık çıkan SQL soruları.
+- [SQL Mülakat Rehberi](../../Programlama/Veritabani-SQL/sql-mulakat/) — Online kodlama sınavlarında sık çıkan SQL soruları.
 - [Yolculuk Paylaşımı](../Yolculuk-Paylasimi/) — Ödenek alırken ya da almazken özel araçla ücretli yolcu taşımanın ödeneğe, cezaya, vergiye ve Bağ-Kur'a etkisi.
 
 ## Resmi kaynaklar
