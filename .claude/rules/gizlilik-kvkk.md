@@ -21,6 +21,9 @@ Kişisel durumu silmek yerine **her durumu kapsayan genel anlatıma** çevir:
 - "İşyerin 25 kişi, o yüzden…" → "Çalışan sayısı 30'dan azsa…; 30 ve üzeriyse (İK, iş güvencesi hükümleri)…"
 - "CV'nde yazan teknolojiler" → "İş ilanlarında sık istenen teknolojiler".
 - Tahmini/hesaplanmış genel rakamlar (vergi oranı, asgari ücret, ortalama kuruluş maliyeti) kalabilir; tarih ve "TAHMİN" etiketiyle.
+- Örnek işletme, kişi ve alan adı uydururken gerçekte var olan biriyle çakışmamasına dikkat edilir: "Örnek Nakliyat" ya da `ornek.com.tr` gibi adlar gerçek firmalara ait olabilir. Açıkça uydurma adlar ("Hayalî Nakliyat") ve alan adlarında `example.com` / `.example` (RFC 2606) kullanılır; koordinat, telefon ve adres yer tutucu olur.
+- Dil örneklerinde birinci şahıs cümleler ("I was born in…", "I've worked here for 3 years", "I live in…") yazarın kendi bilgisi gibi okunabilir. Yaş, doğum yılı, şehir, işe giriş tarihi, aile ve sağlık içeren örnekler üçüncü şahsa ya da açıkça hayalî bir karaktere çevrilir.
+- Tek bir il/ilçe ya da tek bir araç modeli "örnek" diye öne çıkarılırsa okurun (yazarın) kendi durumu gibi okunabilir; birkaç örnekten biri olarak verilir ya da sınıf düzeyine çekilir ("yaygın bir dizel kompakt sedan").
 
 ## Tek durum varsayma — çok dallı anlat
 

@@ -21,4 +21,4 @@ Bu dosya ve `.claude/rules/` altındaki kurallar, bilgisayar değişse de oturum
 6. Yalnızca kullanıcının README'de anlattıklarına dayan; kodu satır satır incelemeyi yalnızca kullanıcı isterse yap.
 7. Kullanıcının koduna açıklama yorumu ekleme; açıklama README'ye yazılır.
 8. Her ayrıştırma/konu hazırlama sonunda `CALISMA-GUNLUGU.md`'ye kısa kayıt düş (tarih = çalışmanın yapıldığı gün, dosya tarihlerinden).
-9. Ayrıştırma sonunda commit'i Claude atar (çalışma tarihiyle, konu başına ayrı commit); **push asla yapılmaz**. Ayrıntı: `ayristirma.md` → Commit.
+9. Ayrıştırma sonunda commit'i Claude atar (çalışma tarihiyle, konu başına ayrı commit); **push yalnızca kullanıcı açıkça isterse yapılır** (ör. "commitle ve pushla"). Ayrıntı: `ayristirma.md` → Commit.

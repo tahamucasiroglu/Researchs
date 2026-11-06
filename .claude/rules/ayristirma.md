@@ -11,6 +11,7 @@ Kullanıcı hafta boyunca yaptığı çalışmaları kendi adlandırdığı klas
    - Konunun ne olduğunu internetteki yaygın tanımına uygun, açıklayıcı ve doğru biçimde anlatır (ör. Redis nedir, ne işe yarar, ne zaman kullanılır).
    - Kullanıcının bu klasörde ne yaptığını (kendi notundan) anlatır.
    - Nasıl çalıştırılır, kaynakça (kullanıcının verdiği kaynaklar + resmi doküman), ilgili konulara bağlantılar.
+   - Araştırma niteliğindeki çalışmada `arastirma.md` yoksa `index.html`'den sadık biçimde (yeni iddia eklemeden, rakam değiştirmeden) üretilir; ikisi birlikte güncel tutulur (`readme-ve-html.md` → Yeni araştırma: iki biçim).
 7. **Üst README'leri güncelle**: Ebeveyn README'lere bağlantı + 1–2 cümle açıklama ekle (ör. `CSharp-DotNet/README.md` → Kütüphaneler → `[Redis](...)` — "Bellekte anahtar-değer saklayan, önbellek ve kuyruk için kullanılan veri deposu."). Kök README'ye kadar zincir kopmamalı.
 8. **Fotoğraflar**: Çalışma kâğıdı fotoğraflarındaki yazıyı çıkar, konuyu belirle, notu `notlar/` altına Markdown olarak yaz, fotoğrafı (kişisel veri yoksa, küçültülmüş) `gorseller/` altına koy.
 9. **Günlüğe yaz**: Taşımadan ÖNCE dosya tarihlerinden çalışma tarihini belirle (`calisma-gunlugu.md`) ve `CALISMA-GUNLUGU.md`'ye kısa kayıt ekle. (Pratikte bu adımı 2. adımla birlikte, taşımadan önce yap.)
@@ -18,7 +19,7 @@ Kullanıcı hafta boyunca yaptığı çalışmaları kendi adlandırdığı klas
 
 ## Commit
 
-Ayrıştırmanın son adımı commit'tir; kullanıcıya ayrıca sorulmaz. **Push asla yapılmaz** — push'u kullanıcı kendisi yapar.
+Ayrıştırmanın son adımı commit'tir; kullanıcıya ayrıca sorulmaz. **Push varsayılan olarak yapılmaz**; kullanıcı açıkça isterse (ör. "commitle ve pushla") commit'lerden sonra yapılır. Push öncesi `git fetch` ile uzak dalın ilerlemediği kontrol edilir; yalnız ileri sarma (fast-forward) push'u yapılır, `--force` kullanılmaz; uzak dal ilerlemişse durulur ve kullanıcıya sorulur.
 
 - Her ayrıştırılan çalışma (konu) **ayrı bir commit** olur; README ve günlük güncellemeleri o çalışmanın commit'ine dahildir. Depo düzeni değişiklikleri ayrı commit.
 - Commit tarihi = çalışmanın yapıldığı tarih (`calisma-gunlugu.md`'deki yöntemle bulunan en erken tarih). Böylece `git log` da gerçek çalışma sırasını gösterir:

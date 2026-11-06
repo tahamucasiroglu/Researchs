@@ -7,7 +7,7 @@
 ├─ _sablonlar/            Yeni konu/HTML/README açarken kopyalanacak şablonlar
 ├─ Dil/
 │  ├─ Turkce/             01-temel-kavramlar/ … 09-denklem-ozeti/
-│  └─ Ingilizce/          01-temel-denklemler/ … 07-yol-haritasi/
+│  └─ Ingilizce/          01-temel-denklemler/ … 07-yol-haritasi/, 08-defter-calisma/ (deftere yazarak çalışma rehberi)
 ├─ Programlama/
 │  ├─ proje-fikirleri/    Seviyelere göre proje fikirleri kataloğu
 │  ├─ CSharp-DotNet/      01-csharp-dili/ … 10-kutuphaneler/ (Redis, RabbitMQ… burada alt klasör olur)
@@ -19,12 +19,19 @@
 │  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/, video-uretim-sistemi/ …)
 ├─ API/                 Platform başına Türkçe API başvurusu (.md), kategorilere göre
 │  ├─ Sosyal-Medya/  Mesajlasma/  Canli-Yayin-ve-Video/  Gelistirici-Platformlari/  Haber/
-│  └─ Kripto-Borsalari/  Finans-ve-Ekonomi/  Hava-Durumu/  Turkiye-Kamu-ve-Acik-Veri/  API-Kaynaklari/
+│  ├─ Kripto-Borsalari/  Finans-ve-Ekonomi/  Hava-Durumu/  Turkiye-Kamu-ve-Acik-Veri/  API-Kaynaklari/
+│  └─ Reklam/  Arama-Motorlari/
 └─ Rehberler/
    ├─ Issizlik/           Türkiye'de işsizlik hakları — genel rehber
+   ├─ Sirket-Kurma/       Türkiye'de şirket kurma — genel rehber (+ ödeme/e-fatura ek sayfaları)
    ├─ Mesajlasma-Altyapilari/  Telegram, WhatsApp, BiP, SMS API'leri ve kuralları
    ├─ YouTube-Oyun/       YouTube Playables ve oyun kanalı (index.html + arastirma.md)
-   └─ Sirket-Kurma/       Türkiye'de şirket kurma — genel rehber (+ ödeme/e-fatura ek sayfaları)
+   ├─ Google-Play-Oyun/   Google Play'de reklamlı (AdMob) oyun yayınlama
+   ├─ Masaustu-Uygulama-Reklam/  Masaüstü uygulamada reklam ve ödüllü reklam
+   ├─ Yolculuk-Paylasimi/ Paylaşımlı yolculuk (Martı TAG) hukuku, ceza, vergi
+   ├─ SEO/                SEO rehberi (21 bölüm)
+   ├─ Mulakat-Hazirligi/  .NET / C# backend mülakat hazırlığı
+   └─ SQL-Mulakat/        SQL mülakat rehberi (Programlama altında veritabanı alanı açılırsa oraya taşınabilir)
 ```
 
 ## Konu klasörü düzeni (Dil ve Programlama)
