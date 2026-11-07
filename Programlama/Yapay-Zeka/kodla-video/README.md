@@ -25,6 +25,7 @@ HTML anlatım: [index.html](index.html) (yerelde tarayıcıda açılır)
 ## İlgili konular
 
 - [Görüntü Netleştirme](../goruntu-netlestirme/) — yerel görsel büyütme/yüz düzeltme modelleri; videodaki kareler için de kullanılabilir.
+- [Yerel Çok Dilli TTS](../yerel-tts/) — yerel TTS modellerinin daha yeni (Kasım 2026) ve ayrıntılı araştırması; bu sayfadaki yerel TTS bölümüyle (Ekim 2026) çelişen yerde o araştırmaya bakılır.
 - [JavaScript / TypeScript](../../JavaScript-TypeScript/) — Remotion bir React çatısıdır; React temeli için.
 
 ## Kaynakça

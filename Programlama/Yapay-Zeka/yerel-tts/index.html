@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yerel Çok Dilli TTS — Araştırma</title>
+<meta name="description" content="Bilgisayarda çalışan (yerel) çok dilli metinden sese (TTS) modelleri: Türkçe desteği, ağırlık lisansları ve ticari kullanım, ses klonlama, donanım ihtiyacı, sherpa-onnx / ONNX Runtime / GGUF çalışma yolları, Freya-TR-Eval ölçümleri ve bakım durumu (Kasım 2026).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap">
+<link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="iconbtn" type="button" data-menu-toggle aria-expanded="false" aria-controls="sidebar">İÇİNDEKİLER</button>
+  <span class="topbar__title">Yerel Çok Dilli TTS</span>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">Ses · Yerel TTS</span>
+      <span class="brand__name">Yerel Çok Dilli TTS</span>
+      <span class="brand__sub">Araştırma · Kasım 2026</span>
+    </a>
+
+    <nav aria-label="Bölümler">
+      <div class="nav-group">
+        <div class="nav-group__title">Başlangıç</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../index.html"><span class="nav-num">00</span><span>Genel Bakış</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Konular</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="../goruntu-netlestirme/index.html"><span class="nav-num">01</span><span>Görüntü Netleştirme</span></a></li>
+          <li><a class="nav-item" href="../kodla-video/index.html"><span class="nav-num">02</span><span>Kodla Video (Remotion)</span></a></li>
+          <li><a class="nav-item" href="../video-uretim-sistemi/index.html"><span class="nav-num">03</span><span>Video Üretim Sistemi</span></a></li>
+          <li><a class="nav-item" href="index.html"><span class="nav-num">04</span><span>Yerel Çok Dilli TTS</span></a></li>
+          <li><a class="nav-item" href="../ai-native-engineering-workspace/index.html"><span class="nav-num">05</span><span>AI-Native Engineering Workspace (ANEW)</span></a></li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group__title">Diğer dosyalar</div>
+        <ul class="nav-list">
+          <li><a class="nav-item" href="arastirma.md"><span class="nav-num">&rarr;</span><span>Ham araştırma (arastirma.md)</span></a></li>
+          <li><a class="nav-item" href="../../Python/index.html"><span class="nav-num">&rarr;</span><span>Python</span></a></li>
+          <li><a class="nav-item" href="../../CSharp-DotNet/index.html"><span class="nav-num">&rarr;</span><span>C# / .NET</span></a></li>
+          <li><a class="nav-item" href="../../index.html"><span class="nav-num">&larr;</span><span>Programlama</span></a></li>
+          <li><a class="nav-item" href="../../../index.html"><span class="nav-num">&larr;</span><span>Ana Dizin</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__foot">
+      7 Kasım 2026'da model kartları, lisans dosyaları, makaleler ve sürüm notlarından derlendi; hiçbir model indirilmedi, dinlenmedi. Lisans, sürüm ve bakım durumu değişir; kullanmadan önce kaynaktan teyit et. Lisans özetleri hukuki görüş değildir.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="wrap">
+
+      <header class="page-head">
+        <div class="eyebrow">Ses üretimi · Yerel metinden sese (TTS)</div>
+        <h1 class="page-title">Yerel, çok dilli TTS modelleri: <em>Türkçe desteği, lisans ve çalışma yolları</em></h1>
+        <p class="lede">Bilgisayarda çalışan metinden sese modelleri: hangisinde Türkçe var, hangisinin ağırlığı ticari yayında kullanılabilir, hangisi ses klonlar, hangisi işlemcide ve Python'suz çalışır. Kasım 2026 durumu.</p>
+        <div class="head-meta">Araştırma: 7 Kasım 2026 &middot; Yalnız belge okundu, model denenmedi &middot; Doğrulanamayan bilgi <span class="tag tag--warn">DOĞRULANMADI</span> etiketli</div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===================================================== -->
+        <h2 id="kapsam-ve-yontem"><span class="h-num">§ 0</span>Kapsam ve yöntem</h2>
+
+        <ul>
+          <li><strong>Tarih:</strong> 7 Kasım 2026.</li>
+          <li><strong>Kapsam:</strong> Bilgisayarda çalışan (yerel) TTS modelleri; Türkçesi iyi olanlar ve genel dillerde (İngilizce, Almanca, İspanyolca, Fransızca…) iyi olanlar.</li>
+          <li><strong>Lisans denetimi:</strong> Çıktının ticari kanallarda (para kazanan YouTube vb.) yayınlanacak videolarda kullanılması durumu için <strong>ağırlık lisansı</strong> ayrıca denetlendi.</li>
+          <li><strong>Örnek hedef donanım</strong> (değerlendirmede esas alınan sınıf): ~6 GB ekran kartı, 16 GB RAM, Windows; tercihen Python'suz (ONNX Runtime / sherpa-onnx / ggml) çalışma. Farklı donanım için <a href="#karsilastirma">§ 2 tablosundaki</a> "Donanım / hız" ve "Çalışma yolu" sütunlarına bakılır.</li>
+          <li><strong>Yöntem:</strong> Yalnız web okuma (model kartları, lisans dosyaları, makaleler, sürüm notları, GitHub API). Hiçbir model indirilmedi, dinlenmedi.</li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Okurken</p>
+          <p>Doğrulanamayan her şey <span class="tag tag--warn">DOĞRULANMADI</span> diye işaretli. Lisans özetleri hukuki görüş değildir. Tablolardaki <span class="tag tag--ok">VAR</span> (ya da <span class="tag tag--ok">EVET</span>) / <span class="tag tag--bad">YOK</span> (ya da <span class="tag tag--bad">HAYIR</span>) / <span class="tag tag--warn">DİKKAT</span> rozetleri <a href="arastirma.md">arastirma.md</a> dosyasındaki ✅ / ❌ / ⚠ işaretlerinin karşılığıdır.</p>
+          <p>Ölçüm terimlerinin (WER, CER, MOS, SIM, RTF) kısa açıklaması klasörün <a href="README.md">README.md</a> dosyasındadır.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kisa-sonuc"><span class="h-num">§ 1</span>Kısa sonuç</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>İhtiyaca göre en iyi aday</caption>
+            <thead>
+              <tr><th>İhtiyaç</th><th>En iyi aday</th><th>Neden</th><th>Çalışma yolu</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Türkçe, hafif, işlemcide, hazır ses</td><td><strong>Supertonic 3</strong></td><td>Resmî 31 dil arasında Türkçe; Minimax-MLS'te TR WER 1,00</td><td>sherpa-onnx (hazır)</td></tr>
+              <tr><td>Türkçe + klon, temiz lisans, en yüksek kalite</td><td><strong>VoxCPM2</strong> (2B, Apache-2.0)</td><td>TR WER 0,82 / SIM 87,1 (MiniMax-MLS; kendi raporu)</td><td>PyTorch ya da GGUF + llama.cpp-omni (C++)</td></tr>
+              <tr><td>Türkçe + klon, MIT</td><td><strong>Chatterbox Multilingual V3</strong> (0,5B)</td><td>23 dilde Türkçe; MIT; topluluk ONNX'leri var</td><td>PyTorch ya da ONNX Runtime (kendi döngün)</td></tr>
+              <tr><td>İngilizce, hafif</td><td><strong>Kokoro 82M</strong> (Apache-2.0)</td><td>28 İngilizce ses, <code>af_heart</code> "A" notlu</td><td>sherpa-onnx (hazır)</td></tr>
+              <tr><td>Almanca, hafif, CC0</td><td>Supertonic 3 (DE WER 0,86) ya da Piper <code>de_DE-thorsten</code> (veri CC0)</td><td></td><td>sherpa-onnx (Piper için dışarıdan fonem gerekir, <a href="#sherpa-onnx-2">§ 3.1</a>)</td></tr>
+              <tr><td>EN/FR/DE/ES/PT/IT + klon, işlemcide</td><td><strong>Pocket TTS</strong> (Kyutai, ~100M, CC-BY-4.0)</td><td>2 çekirdekte gerçek zamanın ~6 katı</td><td>sherpa-onnx (yalnız İngilizce paket)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--danger">
+          <p class="callout__title">Elenenler (ticari kullanıma kapalı ağırlık)</p>
+          <p>XTTS-v2 (CPML), F5-TTS ve türevleri, Fish-Speech / Fish Audio S2 (Research License), OmniVoice (CC-BY-NC), MMS-TTS (CC-BY-NC 4.0), Voxtral TTS (CC BY-NC 4.0), Higgs TTS 3 (araştırma / ticari olmayan; yalnız "Creator Use Grant" istisnası, <a href="#lisans">§ 4</a>), Piper <code>tr_TR-dfki</code> (eğitim verisi CC BY-NC-SA).</p>
+          <p>Eleme ölçütü ticari yayındır; ticari olmayan kullanım düşünülüyorsa her modelin lisans koşulu ayrıca okunmalıdır.</p>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">Türkçe yok</p>
+          <p>Kokoro, Kitten (eski ONNX'ler), MeloTTS, CosyVoice 3, Qwen3-TTS, IndexTTS2, Orpheus çok dilli, VibeVoice, Pocket TTS (resmî), ZipVoice, Voxtral.</p>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="karsilastirma"><span class="h-num">§ 2</span>Karşılaştırma tablosu</h2>
+
+        <div class="callout callout--def">
+          <p class="callout__title">Kısaltmalar</p>
+          <p><strong>TR</strong> Türkçe desteği &middot; <strong>Klon</strong> sıfır atışlı ses klonlama &middot; <strong>Ağırlık</strong> model ağırlık lisansı &middot; <strong>sherpa</strong> sherpa-onnx 2.x ile doğrudan çalışır mı.</p>
+        </div>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Yerel TTS modelleri: dil, klon, lisans, boyut, donanım, çalışma yolu (Kasım 2026)</caption>
+            <thead>
+              <tr><th>Model</th><th>TR</th><th>Diğer diller</th><th>Klon</th><th>Kod / Ağırlık lisansı</th><th>Boyut</th><th>Donanım / hız</th><th>Çalışma yolu</th><th>Hazır ses</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Supertonic 3</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (WER 1,00)</td>
+                <td>31 dil</td>
+                <td><span class="tag tag--bad">YOK</span> (Voice Builder ücretli, 31 Ağu 2026'da kapandı)</td>
+                <td>MIT / <strong>OpenRAIL-M</strong></td>
+                <td>~99M; int8 paket 129 MB</td>
+                <td>İşlemci</td>
+                <td><strong>sherpa</strong> (<code>supertonic</code>)</td>
+                <td>10 (sid 0–9)</td>
+              </tr>
+              <tr>
+                <td><strong>VoxCPM2</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (WER 0,82)</td>
+                <td>30 dil + 9 Çince lehçe</td>
+                <td><span class="tag tag--ok">VAR</span> (+ metinden ses tasarımı)</td>
+                <td>Apache-2.0 / Apache-2.0</td>
+                <td>2B; GGUF Q8 BaseLM 1,6 GB + Acoustic 1,7 GB</td>
+                <td>PyTorch ~8 GB VRAM, RTF 0,30 (4090)</td>
+                <td>PyTorch &middot; GGUF + llama.cpp-omni</td>
+                <td>Yok (tasarım/klon)</td>
+              </tr>
+              <tr>
+                <td><strong>Chatterbox Multilingual V3</strong></td>
+                <td><span class="tag tag--ok">VAR</span> [kalite ölçümü bulunamadı]</td>
+                <td>23 dil</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>MIT / MIT</td>
+                <td>0,5B; ONNX fp32 ~3,6 GB, LM q4 354 MB</td>
+                <td>~5 GB VRAM (PyTorch)</td>
+                <td>PyTorch &middot; ONNX Runtime (topluluk)</td>
+                <td>1 varsayılan referans</td>
+              </tr>
+              <tr>
+                <td><strong>Kokoro 82M v1.0</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>EN (US/UK), JA, ZH, ES, FR, HI, IT, PT-BR</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>Apache-2.0 / Apache-2.0</td>
+                <td>int8 132 MB</td>
+                <td>İşlemci</td>
+                <td><strong>sherpa</strong> (<code>kokoro</code>)</td>
+                <td>54 (EN 28)</td>
+              </tr>
+              <tr>
+                <td><strong>Pocket TTS</strong></td>
+                <td><span class="tag tag--bad">YOK</span> (topluluk TR ince ayarı var)</td>
+                <td>EN, FR, DE, PT, IT, ES</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>MIT / CC-BY-4.0 (HF kapılı)</td>
+                <td>~100M; int8 98 MB</td>
+                <td>İşlemci, 2 çekirdekte ~6× gerçek zaman</td>
+                <td><strong>sherpa</strong> (<code>pocket</code>, yalnız EN paketi)</td>
+                <td>Referansla</td>
+              </tr>
+              <tr>
+                <td><strong>Piper (VITS)</strong></td>
+                <td><span class="tag tag--warn">DİKKAT</span> dfki (veri NC-SA)</td>
+                <td>~40 dil</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>GPL-3.0 (piper1-gpl) / ses başına</td>
+                <td>21–115 MB</td>
+                <td>İşlemci, çok hızlı</td>
+                <td><strong>sherpa</strong> (<code>vits</code>) + dış fonemleştirici</td>
+                <td>1 / ses</td>
+              </tr>
+              <tr>
+                <td><strong>Kitten 0.8 ONNX</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>EN</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>Apache-2.0 / Apache-2.0 <span class="tag tag--warn">SES BAŞINA DOĞRULANMADI</span></td>
+                <td>25–80 MB</td>
+                <td>İşlemci</td>
+                <td><strong>sherpa</strong> (<code>kitten</code>)</td>
+                <td>8 <span class="tag tag--warn">DOĞRULANMADI</span></td>
+              </tr>
+              <tr>
+                <td><strong>KittenTTS 2</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (20 dil listesinde)</td>
+                <td>20 dil</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>Apache-2.0 / <strong>Stellon Community</strong> <span class="tag tag--warn">DİKKAT</span></td>
+                <td>1,7B</td>
+                <td>GPU</td>
+                <td>Python</td>
+                <td>115</td>
+              </tr>
+              <tr>
+                <td><strong>Matcha</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>EN (LJSpeech), ZH</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td></td>
+                <td></td>
+                <td>İşlemci</td>
+                <td><strong>sherpa</strong> (<code>matcha</code>)</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><strong>ZipVoice</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>ZH+EN</td>
+                <td><span class="tag tag--ok">VAR</span> (referans metni şart)</td>
+                <td>Apache-2.0 kod / ağırlık <span class="tag tag--warn">DOĞRULANMADI</span> (Emilia verisi)</td>
+                <td>int8 109 MB</td>
+                <td>İşlemci</td>
+                <td><strong>sherpa</strong> (<code>zipvoice</code>)</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Qwen3-TTS</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT</td>
+                <td><span class="tag tag--ok">VAR</span> (3 sn)</td>
+                <td>Apache-2.0 / Apache-2.0</td>
+                <td>0,6B (2,5 GB) / 1,7B (4,5 GB)</td>
+                <td>GPU</td>
+                <td>PyTorch &middot; LunaVox (C++ ORT + llama.cpp)</td>
+                <td>CustomVoice'ta hazır sesler</td>
+              </tr>
+              <tr>
+                <td><strong>CosyVoice 3</strong> (Fun-CosyVoice3-0.5B)</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>9 dil + 18 Çince lehçe</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>Apache-2.0 / Apache-2.0</td>
+                <td>0,5B</td>
+                <td>GPU</td>
+                <td>PyTorch</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>IndexTTS2</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>ZH, EN</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>bilibili Model Use License (100M MAU / 1 milyar RMB eşiği)</td>
+                <td></td>
+                <td>GPU</td>
+                <td>PyTorch</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Orpheus çok dilli</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>ZH, HI, KO, ES+IT, FR, DE (beta)</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>Apache-2.0 (temel model)</td>
+                <td>3–4B</td>
+                <td>GPU</td>
+                <td>PyTorch &middot; GGUF + SNAC</td>
+                <td>dile göre</td>
+              </tr>
+              <tr>
+                <td><strong>Orpheus TR</strong> (Karayakar)</td>
+                <td><span class="tag tag--ok">VAR</span> [ölçüm yok]</td>
+                <td>—</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>MIT / MIT <span class="tag tag--warn">DİKKAT</span> veri "sentetik", kaynağı belirsiz</td>
+                <td>3B</td>
+                <td>GPU</td>
+                <td>PyTorch + SNAC</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>MeloTTS</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>EN, ES, FR, ZH, JA, KO</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>MIT / MIT</td>
+                <td></td>
+                <td>İşlemci</td>
+                <td>Python (sherpa'da yalnız ZH+EN VITS)</td>
+                <td>aksan başına 1</td>
+              </tr>
+              <tr>
+                <td><strong>VibeVoice</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>EN, ZH (+9 deneysel)</td>
+                <td><span class="tag tag--bad">YOK</span> (Realtime)</td>
+                <td>MIT, "yalnız araştırma"</td>
+                <td>0,5B / 1,5B</td>
+                <td>GPU</td>
+                <td>Python (TTS kodu depodan kaldırıldı)</td>
+                <td>hazır</td>
+              </tr>
+              <tr>
+                <td><strong>Higgs TTS 3</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (WER/CER &lt; 5 katmanı)</td>
+                <td>100+</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td><strong>Araştırma / ticari olmayan</strong> + Creator Use Grant</td>
+                <td>~5B</td>
+                <td>GPU (H100 ölçümü)</td>
+                <td>PyTorch &middot; topluluk GGUF</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>OmniVoice</strong></td>
+                <td>[Türkçe adı geçmiyor]</td>
+                <td>600+</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td>Apache-2.0 / <strong>CC-BY-NC</strong></td>
+                <td>0,6B</td>
+                <td>GPU, RTF 0,025</td>
+                <td>PyTorch</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>MMS-TTS</strong> (tur)</td>
+                <td><span class="tag tag--ok">VAR</span> (WER 6,8)</td>
+                <td>1100+</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td><strong>CC-BY-NC 4.0</strong></td>
+                <td>36M</td>
+                <td>İşlemci</td>
+                <td>sherpa (<code>vits</code>)</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><strong>FreyaTTS-small</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (WER 8,0 / MOS 3,68)</td>
+                <td>yalnız TR</td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>Apache-2.0 / Apache-2.0</td>
+                <td>183M</td>
+                <td>1,5 GB VRAM; M3 CPU RTF 0,70</td>
+                <td>Python</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><strong>Voxtral TTS</strong></td>
+                <td><span class="tag tag--bad">YOK</span></td>
+                <td>9 dil</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td><strong>CC BY-NC 4.0</strong></td>
+                <td>4B</td>
+                <td>GPU</td>
+                <td>vLLM Omni</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td><strong>Fish Audio S2</strong></td>
+                <td><span class="tag tag--ok">VAR</span> (WER 0,87)</td>
+                <td>80+</td>
+                <td><span class="tag tag--ok">VAR</span></td>
+                <td><strong>Fish Audio Research License</strong></td>
+                <td></td>
+                <td>GPU</td>
+                <td>SGLang</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="adaylar"><span class="h-num">§ 3</span>Adaylar — ayrıntı</h2>
+
+        <p class="intro">Önce ortak altyapı (sherpa-onnx 2.x), sonra tek tek modeller. Her maddenin sonunda bilginin alındığı kaynak bağlantısı vardır.</p>
+
+        <h3 id="sherpa-onnx-2">3.1 sherpa-onnx 2.x: altyapıdaki büyük değişiklik</h3>
+
+        <ul>
+          <li><strong>v2.0.0 (23 Eki 2026) espeak-ng ve piper-phonemize'ı kaldırdı</strong> ("Remove espeak-ng and piper-phonemize from sherpa-onnx"). — <a href="https://github.com/k2-fsa/sherpa-onnx/releases">sherpa-onnx sürüm notları</a></li>
+          <li>C API başlığında <code>vits</code>, <code>matcha</code>, <code>kokoro</code>, <code>kitten</code>, <code>zipvoice</code> yapılandırmalarındaki <code>data_dir</code> (espeak-ng-data yolu) "Ignored since v2.0.0" diye işaretli; yerine <strong><code>SherpaOnnxGenerationConfig.phoneme_codepoints</code></strong> (ya da <code>.tokens</code>) ile <strong>önceden fonemleştirilmiş girdi</strong> verilmesi isteniyor; boş bırakılırsa metin sözlükle (lexicon) okunuyor. — <a href="https://github.com/k2-fsa/sherpa-onnx/blob/master/sherpa-onnx/c-api/c-api.h">c-api.h</a></li>
+          <li>sherpa'nın Türkçe sayfası iki model listeliyor: <code>vits-piper-tr_TR-dfki-medium</code> ve <code>supertonic-3-tr</code>. — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/Turkish/index.html">sherpa Türkçe TTS sayfası</a></li>
+          <li>sherpa'da <strong>Chatterbox, OmniVoice, Qwen TTS, VoxCPM yok</strong> (sürüm notlarında geçmiyor). — <a href="https://github.com/k2-fsa/sherpa-onnx/releases">sherpa-onnx sürüm notları</a></li>
+        </ul>
+
+        <div class="callout callout--warn">
+          <p class="callout__title">Sonuç: Piper/VITS için fonemleştirme artık uygulamanın işi</p>
+          <p>Piper/VITS sesleri sherpa 2.x'te hâlâ çalışır ama metni IPA fonemlere uygulama kendi çevirmeli. Türkçe yazımı neredeyse foneme bire bir olduğu için kural tabanlı bir Türkçe→IPA çevirici yazılabilir; ancak Piper sesleri espeak-ng'nin Türkçe çıktısıyla (vurgu işareti <code>ˈ</code>, uzunluk vb.) eğitildiği için çıktı espeak'in sembol düzenine uymalı <span class="tag tag--warn">DOĞRULANMADI</span> — kalite farkı ölçülmeli.</p>
+        </div>
+
+        <h3 id="supertonic-3">3.2 Supertonic 3 (Supertone)</h3>
+
+        <ul>
+          <li><strong>Diller:</strong> 31 dil, <strong>Türkçe (<code>tr</code>) dahil</strong>; sürüm 29 Nis 2026 (Supertonic 2: 5 dil). — <a href="https://huggingface.co/Supertone/supertonic-3">HF: Supertone/supertonic-3</a>, <a href="https://github.com/supertone-inc/supertonic">GitHub: supertone-inc/supertonic</a></li>
+          <li><strong>Türkçe ölçüm (üreticinin kendi tablosu, Minimax-MLS-test, WER):</strong> Supertonic 3 <strong>1,00</strong>, VoxCPM2 0,88, OmniVoice 2,18. Almanca 0,86, İngilizce 2,06, İspanyolca 1,13. — <a href="https://github.com/supertone-inc/supertonic">GitHub: supertone-inc/supertonic</a></li>
+          <li><strong>Lisans:</strong> örnek kod MIT, ağırlık <strong>OpenRAIL-M</strong>. Ticari içerik üretimi serbest; ama Ek A(e): üretilen içerik "makine üretimi olduğu açıkça belirtilmeden" yayınlanamaz; A(g): rızasız kimliğe bürünme yasak; dağıtımda kullanım kısıtları alıcıya aktarılmalı (<a href="#lisans">§ 4</a>). — <a href="https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE">LICENSE</a></li>
+          <li><strong>Klon:</strong> açık pakette yok; Voice Builder (ücretli) 31 Ağu 2026'dan sonra erişilemez. <strong>Depo 9 Eyl 2026'da arşivlendi</strong> (güncelleme yok). — <a href="https://github.com/supertone-inc/supertonic">GitHub: supertone-inc/supertonic</a></li>
+          <li><strong>sherpa:</strong> <code>extra = {"lang":"tr"}</code>, <code>num_steps = 8</code>, 10 konuşmacı (sid 0–9), 24 kHz. Paket bilgisi aşağıdaki tabloda. — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/Turkish/supertonic-3-tr.html">sherpa: supertonic-3-tr</a>, GitHub API (<code>releases/tags/tts-models</code>)</li>
+          <li><strong>Bilinen sorun:</strong> Rusçada yanlış hece vurgusu (alıntı kelimeler, özel adlar); bakımcı cevap vermedi; topluluk birleşik vurgu işaretiyle (U+0301) çözüyor. Türkçe için benzer bir rapor bulunamadı. — <a href="https://huggingface.co/Supertone/supertonic-3/discussions/23">HF tartışma #23</a></li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Supertonic 3 — sherpa-onnx paketi</caption>
+            <thead>
+              <tr><th>Paket</th><th>Boyut</th><th>SHA-256</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>sherpa-onnx-supertonic-3-tts-int8-2026-05-11.tar.bz2</code></td><td class="n">128.774.318 bayt</td><td><code>82fa96f91c4ef8abaae3a14a3f4153facf88bed821d1f7331cec2700f432c427</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--example">
+          <p class="callout__title">Alıntı kelimeler (ör. "Viking")</p>
+          <p>Karakter tabanlı modeller yabancı kökenli kelimeyi eğitim verisindeki yaygın (İngilizce) okunuşla söyleyebilir <span class="tag tag--warn">TÜRKÇE İÇİN DOĞRULANMADI</span>. Pratik çözüm: dil başına <strong>telaffuz sözlüğü / yeniden yazım</strong> katmanı (ör. <code>Viking → Vikink</code>) TTS'ten önce. Önce çağrının gerçekten <code>lang=tr</code> ile gittiği doğrulanmalı.</p>
+        </div>
+
+        <h3 id="voxcpm2">3.3 VoxCPM2 (OpenBMB)</h3>
+
+        <ul>
+          <li><strong>Diller:</strong> 30 dil (Türkçe dahil) + 9 Çince lehçe; 48 kHz çıktı; 2B parametre; <strong>Apache-2.0</strong>; ses tasarımı (metinle tarif), kontrollü klon, referans metinli "Ultimate" klon. PyTorch'ta ~8 GB VRAM, RTF 0,30 (RTX 4090), Nano-vLLM ile 0,13. — <a href="https://huggingface.co/openbmb/VoxCPM2">HF: openbmb/VoxCPM2</a></li>
+          <li><strong>Türkçe ölçüm (teknik rapor, MiniMax-MLS-Test):</strong> aşağıdaki tabloda. İç 30 dillik testte TR WER 1,65. Eğitim verisi 2M+ saat, çoğu ZH/EN; diğer diller 1K–50K saat. — <a href="https://arxiv.org/html/2606.06928">arXiv 2606.06928</a></li>
+          <li><strong>Python'suz yol:</strong> GGUF + <strong>llama.cpp-omni</strong> (<code>voxcpm2-cli</code>): BaseLM Q8_0 ~1,6 GB + Acoustic F16 ~1,7 GB; CPU/CUDA/Vulkan; <code>-r ses.wav</code> klon, <code>--prompt-wav/--prompt-text</code>, "(a calm female voice)" ön ekiyle tasarım. — <a href="https://huggingface.co/DennisHuang648/VoxCPM2-GGUF">HF: DennisHuang648/VoxCPM2-GGUF</a></li>
+          <li>Diğer: <code>cstr/voxcpm2-GGUF</code> (Q4_K ~1,5 GB, CrispASR), <code>VoxCPM.cpp</code> (doğruluk denetimi sürüyor). — <a href="https://huggingface.co/cstr/voxcpm2-GGUF">HF: cstr/voxcpm2-GGUF</a>, <a href="https://github.com/joonsoome/VoxCPM.cpp">GitHub: VoxCPM.cpp</a></li>
+          <li>6 GB kartta GGUF yolunun VRAM kullanımı <span class="tag tag--warn">DOĞRULANMADI</span> (ağırlık toplamı ~3,3 GB).</li>
+          <li>Türkçe türevleri: <code>Jetlink/JetlinkTTS-v1.0-2B</code> (VoxCPM2 kopyası, TR ölçümü yok, Apache-2.0) — <a href="https://huggingface.co/Jetlink/JetlinkTTS-v1.0-2B">HF: Jetlink/JetlinkTTS-v1.0-2B</a>; "Trendyol-TTS" (VoxCPM2 + LoRA, özel veri; ticari kullanım belirsiz) <span class="tag tag--warn">DOĞRULANMADI</span>.</li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Türkçe, MiniMax-MLS-Test (VoxCPM2 teknik raporu)</caption>
+            <thead>
+              <tr><th>Sistem</th><th class="n">WER</th><th class="n">SIM</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>VoxCPM2</strong></td><td class="n"><strong>0,82</strong></td><td class="n"><strong>87,1</strong></td></tr>
+              <tr><td>ElevenLabs</td><td class="n">0,70</td><td class="n">59,6</td></tr>
+              <tr><td>Fish S2</td><td class="n">0,87</td><td class="n">83,5</td></tr>
+              <tr><td>MiniMax</td><td class="n">1,52</td><td class="n">77,9</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="chatterbox">3.4 Chatterbox Multilingual V3 (Resemble AI)</h3>
+
+        <ul>
+          <li><strong>Diller:</strong> 23 dil, Türkçe dahil; 0,5B (Llama omurgası); <strong>MIT</strong>; her çıktıda <strong>PerTh filigranı</strong> (Python paketinde). Referans klibin dili etiketle uyuşmazsa aksan sızar → <code>cfg = 0</code> önerisi. — <a href="https://huggingface.co/ResembleAI/chatterbox">HF: ResembleAI/chatterbox</a></li>
+          <li><strong>Durum:</strong> "As of August 2026, Chatterbox is retired research and is no longer maintained" (arşiv, MIT). Turbo ve Nano yalnız İngilizce. — <a href="https://github.com/resemble-ai/chatterbox">GitHub: resemble-ai/chatterbox</a></li>
+          <li><strong>Türkçe kalite ölçümü:</strong> bulunamadı (Resemble'ın sayfasında dil başına ölçü yok). — <a href="https://resemble.ai/learn/models/chatterbox-multilingual">resemble.ai: Chatterbox Multilingual</a></li>
+          <li><strong>Uzun metin:</strong> 350+ karakterde halüsinasyon raporları → cümle bazlı parçala <span class="tag tag--warn">V3 İÇİN YENİDEN DOĞRULANMADI</span>; V3 "istenmeyen devam, tekrar azaltıldı" diyor.</li>
+        </ul>
+
+        <p><strong>ONNX dışa aktarımları:</strong></p>
+
+        <ul>
+          <li><code>onnx-community/chatterbox-multilingual-ONNX</code> (V2 dönemi): grafik boyutları aşağıdaki tabloda; 24 kHz; örnek betik Python + onnxruntime; betikte <code>cfg</code> yok, yalnız <code>exaggeration</code>. Türkçe için özel ön işleme yok (ZH: pkuseg+Cangjie, JA: pykakasi, HE: dicta, KO: Jamo). — <a href="https://huggingface.co/onnx-community/chatterbox-multilingual-ONNX">HF: onnx-community/chatterbox-multilingual-ONNX</a>, <a href="https://huggingface.co/onnx-community/chatterbox-multilingual-ONNX/tree/main/onnx">onnx/ klasörü</a></li>
+          <li><code>Masterx/chatterbox-multilingual-v3-ONNX</code> (V3, topluluk): aynı 4 grafik düzeni; LM q4 (cosine 0,9937, top-1 %81); EN/FR/DE/ES ortalama WER V3 %2,0 vs V2 %7,3; <strong>Türkçe sonucu yok</strong>; filigran grafiklerde yok, yayıncıdan eklemesi isteniyor. — <a href="https://huggingface.co/Masterx/chatterbox-multilingual-v3-ONNX">HF: Masterx/chatterbox-multilingual-v3-ONNX</a></li>
+          <li><code>KitsuMate/chatterbox-multilingual-v3-onnx</code> (fp32, 4 ya da 5 grafik). — <a href="https://huggingface.co/KitsuMate/chatterbox-multilingual-v3-onnx">HF: KitsuMate/chatterbox-multilingual-v3-onnx</a></li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>onnx-community/chatterbox-multilingual-ONNX (V2 dönemi) — grafikler</caption>
+            <thead>
+              <tr><th>Grafik</th><th>Boyut</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>speech_encoder</code></td><td>591 MB</td></tr>
+              <tr><td><code>embed_tokens</code></td><td>68 MB</td></tr>
+              <tr><td><code>language_model</code></td><td>fp32 2,08 GB / fp16 1,04 GB / q4 354 MB / q4f16 305 MB</td></tr>
+              <tr><td><code>conditional_decoder</code></td><td>534 MB</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title">.NET'te çalışma</p>
+          <p>ONNX Runtime ile mümkün ama hazır değil: BPE tokenizer (<code>tokenizer.json</code>), dil etiketi (<code>[tr]</code>), KV önbellekli özbağlanımlı döngü, örnekleme (tekrar cezası), ses kodlayıcı ve koşullu çözücü ayrı ayrı yazılmalı. Python'un <code>str.lower()</code> / normalizasyonu ile .NET'in Türkçe <code>İ/ı</code> davranışı birebir aynı olmalı <span class="tag tag--warn">DOĞRULANMADI</span>.</p>
+        </div>
+
+        <h3 id="piper">3.5 Piper (Türkçe sesler)</h3>
+
+        <ul>
+          <li><code>rhasspy/piper-voices</code> içinde bugün yalnız <strong><code>tr_TR/dfki</code></strong> var; <strong>fahrettin ve fettah 30 Ara 2025'te "katkıcıların isteğiyle" kaldırıldı</strong> (sherpa sürüm sayfasında arşivleri hâlâ duruyor — kullanılmamalı). — <a href="https://huggingface.co/rhasspy/piper-voices/commits/main/tr/tr_TR">piper-voices tr_TR geçmişi</a></li>
+          <li><strong>dfki lisansı:</strong> depo etiketi MIT, ama model kartı: veri <code>marytts/dfki-ot-data</code>, <strong>"License: CC BY-NC-SA 4.0"</strong>; İngilizce <code>lessac</code> sesinden ince ayar. Ticari kullanım için riskli → elenir. — <a href="https://huggingface.co/rhasspy/piper-voices/raw/main/tr/tr_TR/dfki/medium/MODEL_CARD">dfki MODEL_CARD</a></li>
+          <li><strong>Kalite (Freya-TR-Eval, 495 cümle):</strong> Piper dfki <strong>WER 4,4 / CER 1,1 (en anlaşılır)</strong>, MOS 3,47. — <a href="https://arxiv.org/html/2607.09530">arXiv 2607.09530</a></li>
+          <li><strong>piper1-gpl:</strong> kod GPL-3.0, espeak-ng gömülü; bakımcı aranıyor. GPL'in üretilen sese ya da ses modeline etkisi depoda yazmıyor (genel kabul: program çıktısı programın lisansını almaz; ses lisansı ayrı, model kartında) <span class="tag tag--warn">DEPODA AÇIK İFADE YOK</span>. — <a href="https://github.com/OHF-Voice/piper1-gpl">GitHub: OHF-Voice/piper1-gpl</a></li>
+          <li><strong>Almanca:</strong> <code>de_DE-thorsten</code> verisi <strong>CC0</strong> — ticari için temiz. — <a href="https://huggingface.co/rhasspy/piper-voices/raw/main/de/de_DE/thorsten/high/MODEL_CARD">thorsten MODEL_CARD</a></li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Piper Almanca — sherpa arşivleri (SHA-256, GitHub API)</caption>
+            <thead>
+              <tr><th>Arşiv</th><th>Boyut</th><th>SHA-256</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>vits-piper-de_DE-thorsten-high.tar.bz2</code></td><td class="n">115.591.546 B</td><td><code>dd4ed1b0d42c30a1a4862fc2b243e8044d52b8889c9ff3d1e99e92028888bc4a</code></td></tr>
+              <tr><td><code>...thorsten-medium-int8</code></td><td class="n">20.949.833 B</td><td><code>07e240b7b9c1fc9211d5a69512f8cbe11b3286c2ed79c15c076ac6ed427fdf13</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="kokoro">3.6 Kokoro 82M</h3>
+
+        <ul>
+          <li>v1.0: 54 ses / 9 dil (US-EN 20, UK-EN 8, JA 5, ZH 8, ES 3, FR 1, HI 4, IT 2, PT-BR 3); <strong>Türkçe ve Almanca yok</strong>. En iyi notlar: <code>af_heart</code> A, <code>af_bella</code> A-. — <a href="https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md">Kokoro VOICES.md</a></li>
+          <li>sherpa 2.x espeak'siz yalnız sözlükten okur (pratikte EN + ZH). sherpa paketleri: v1.0 int8 132 MB, v1.1 int8 147 MB (ZH+EN, 103 ses). — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/kokoro.html">sherpa: Kokoro modelleri</a></li>
+        </ul>
+
+        <h3 id="pocket-tts">3.7 Pocket TTS (Kyutai)</h3>
+
+        <ul>
+          <li>~100M, 2 işlemci çekirdeğinde ~6× gerçek zaman; diller EN, FR, DE, PT, IT, ES (İngilizce dışı için 24 katmanlı kaliteli sürümler de var); ağırlık <strong>CC-BY-4.0</strong>, HF'te koşul kabulü gerekli; klon WAV ile; rızasız klon yasak. — <a href="https://huggingface.co/kyutai/pocket-tts">HF: kyutai/pocket-tts</a></li>
+          <li>sherpa'da yalnız <code>sherpa-onnx-pocket-tts-int8-2026-01-26</code> (İngilizce; referans sesle klon, metin gerekmez); boyut ve özet aşağıdaki tabloda. — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/pocket.html">sherpa: Pocket TTS</a></li>
+          <li>Diğer dillerin sherpa uyumlu ONNX'i <span class="tag tag--warn">DOĞRULANMADI</span>; topluluk ONNX'leri var (<code>lineofflight/pocket-tts-onnx</code>).</li>
+          <li><strong>Türkçe:</strong> <code>kaanhgunay/pocket-tts-tr</code> (0,3B, CC BY 4.0, veri <code>serdarcaglar/turkish-tts-audiobooks</code> — veri lisansı belirtilmemiş, ölçüm yok). — <a href="https://huggingface.co/kaanhgunay/pocket-tts-tr">HF: kaanhgunay/pocket-tts-tr</a></li>
+        </ul>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Pocket TTS — sherpa-onnx paketi</caption>
+            <thead>
+              <tr><th>Paket</th><th>Boyut</th><th>SHA-256</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>sherpa-onnx-pocket-tts-int8-2026-01-26</code></td><td class="n">98.336.520 B</td><td><code>2f3b88823cbbb9bf0b2477ec8ae7b3fec417b3a87b6bb5f256dba66f2ad967cb</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="digerleri">3.8 Diğerleri (kısa)</h3>
+
+        <ul>
+          <li><strong>Kitten:</strong> 0.8 ONNX ailesi (nano/micro/mini, 25–80 MB) yalnız İngilizce, sherpa'da var. <strong>KittenTTS 2</strong> (1,7B, 20 dil, Türkçe listede, 115 ses, klon) ağırlığı <strong>Stellon Labs Community License</strong>: yıllık gelir/fon 1 M $ eşiği, kayıt, geri alınabilir, "Powered by Stellon Labs" <span class="tag tag--warn">DİKKAT</span>. — <a href="https://github.com/KittenML/KittenTTS">GitHub: KittenML/KittenTTS</a>, <a href="https://pypi.org/project/kittenml/0.9.5/">PyPI: kittenml 0.9.5</a></li>
+          <li><strong>ZipVoice:</strong> sherpa'da yalnız ZH+EN; klon referans ses + birebir referans metni ister. — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/zipvoice.html">sherpa: ZipVoice</a></li>
+          <li><strong>Matcha:</strong> sherpa'da EN (LJSpeech) ve ZH (baker). — <a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html">sherpa: TTS ana sayfası</a></li>
+          <li><strong>Qwen3-TTS:</strong> Apache-2.0; 10 dil (ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT) — <strong>Türkçe yok</strong>; 3 sn klon (<code>ref_text</code> ile). — <a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base">HF: Qwen/Qwen3-TTS-12Hz-1.7B-Base</a>. Python'suz: LunaVox (ONNX Runtime + llama.cpp, i9-12900K'da 0.6B klon RTF 0,858). — <a href="https://pypi.org/project/lunavox/">PyPI: lunavox</a></li>
+          <li><strong>CosyVoice 3 (Fun-CosyVoice3-0.5B-2512):</strong> Apache-2.0; 9 dil, Türkçe yok. — <a href="https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512">HF: FunAudioLLM/Fun-CosyVoice3-0.5B-2512</a></li>
+          <li><strong>IndexTTS2:</strong> ZH+EN; bilibili Model Use License (100M aylık kullanıcı ya da 1 milyar RMB gelir üstünde ayrı lisans; Çince metin geçerli). — <a href="https://raw.githubusercontent.com/index-tts/index-tts/main/LICENSE">index-tts LICENSE</a></li>
+          <li><strong>Higgs Audio v2:</strong> Boson Community License — 100.000 yıllık aktif kullanıcı üstünde genişletilmiş lisans; "Built with Higgs Materials…" ibaresi; türev model adı "Higgs Audio 2" ile başlamalı. — <a href="https://huggingface.co/bosonai/higgs-audio-v2-generation-3B-base/blob/main/LICENSE">Higgs Audio v2 LICENSE</a></li>
+          <li><strong>Higgs TTS 3 (4 Haz 2026):</strong> 100+ dil, <strong>Türkçe "WER/CER &lt; 5" katmanında</strong>, klon; <strong>Research and Non-Commercial License</strong>; <em>Creator Use Grant</em>: içerik üreticisinin para kazanan kanallarında ücretsiz (Boson/Higgs Audio'ya atıf şartıyla) ama "ürüne gömme, barındırma, yeniden satış" ayrı ticari lisans ister. Bir uygulamanın modeli indirip çalıştırması "ürüne gömme" sayılabilir <span class="tag tag--warn">DİKKAT</span>. ~5B, VRAM belirtilmemiş. — <a href="https://huggingface.co/bosonai/higgs-tts-3-4b">HF: bosonai/higgs-tts-3-4b</a></li>
+          <li><strong>VibeVoice:</strong> MIT ama "yalnız araştırma ve geliştirme"; TTS kodu Eyl 2025'te depodan kaldırıldı; Realtime-0.5B İngilizce + 9 deneysel dil (Türkçe yok). — <a href="https://github.com/microsoft/VibeVoice">GitHub: microsoft/VibeVoice</a></li>
+          <li><strong>Orpheus çok dilli:</strong> beta araştırma sürümü; ZH, HI, KO, ES+IT, FR, DE (3–4B). Türkçe yok. — <a href="https://huggingface.co/collections/canopylabs/orpheus-multilingual-research-release-67f5894cd16794db163786ba">HF koleksiyonu: Orpheus multilingual</a>. Topluluk Türkçesi <code>Karayakar/Orpheus-TTS-Turkish-PT-5000</code> (MIT, 3B, 220 saat <strong>sentetik</strong> veri — kaynağı belirsiz <span class="tag tag--warn">DİKKAT</span>, ölçüm yok). — <a href="https://huggingface.co/Karayakar/Orpheus-TTS-Turkish-PT-5000">HF: Karayakar/Orpheus-TTS-Turkish-PT-5000</a></li>
+          <li><strong>MeloTTS:</strong> MIT; EN (4 aksan), ES, FR, ZH, JA, KO. Türkçe yok. — <a href="https://github.com/myshell-ai/MeloTTS">GitHub: myshell-ai/MeloTTS</a></li>
+          <li><strong>MMS-TTS (<code>facebook/mms-tts-tur</code>):</strong> 36M, <strong>CC-BY-NC 4.0</strong> → elenir (Freya-TR-Eval'de WER 6,8 / MOS 3,58). — <a href="https://huggingface.co/facebook/mms-tts-tur">HF: facebook/mms-tts-tur</a></li>
+          <li><strong>OmniVoice (k2-fsa):</strong> kod Apache-2.0, ağırlık <strong>CC-BY-NC</strong> (Emilia verisi yüzünden) → elenir. — <a href="https://huggingface.co/k2-fsa/OmniVoice">HF: k2-fsa/OmniVoice</a></li>
+          <li><strong>Voxtral TTS (Mistral, Mart 2026):</strong> CC BY-NC 4.0, 9 dil, Türkçe yok. — <a href="https://siliconangle.com/2026/03/26/mistral-releases-open-weights-speaking-AI-model-voxtral-tts/">SiliconANGLE haberi</a></li>
+          <li><strong>Fish Audio S2:</strong> Fish Audio Research License — ticari için ayrı yazılı lisans. — <a href="https://fish.audio/fr/blog/what-we-mean-by-open-source-for-s2/">fish.audio blog</a></li>
+          <li><strong>FreyaTTS-small:</strong> yalnız Türkçe, 183M, Apache-2.0, tek ses, klon yok, 48 kHz; Python. — <a href="https://huggingface.co/freyavoice/freya-tts">HF: freyavoice/freya-tts</a></li>
+        </ul>
+
+        <h3 id="freya-tr-eval">3.9 Türkçe için bağımsız değerlendirme: Freya-TR-Eval (Tem 2026)</h3>
+
+        <p>495 cümle, Whisper ile WER/CER, insan MOS (yazarlar FreyaTTS'in sahibi — kendi ölçütleri). — <a href="https://arxiv.org/html/2607.09530">arXiv 2607.09530</a></p>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Freya-TR-Eval sonuçları</caption>
+            <thead>
+              <tr><th>Sistem</th><th class="n">Param</th><th class="n">WER</th><th class="n">CER</th><th class="n">MOS (±%95)</th><th>Ticari ağırlık</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Piper tr dfki</td><td class="n">16M</td><td class="n"><strong>4,4</strong></td><td class="n"><strong>1,1</strong></td><td class="n">3,47 ± 0,22</td><td><span class="tag tag--bad">HAYIR</span> (veri NC-SA)</td></tr>
+              <tr><td>Coqui GlowTTS tr</td><td class="n">28M</td><td class="n">12,1</td><td class="n">3,3</td><td class="n">2,53</td><td><span class="tag tag--warn">DOĞRULANMADI</span></td></tr>
+              <tr><td>MMS-TTS tr</td><td class="n">36M</td><td class="n">6,8</td><td class="n">1,7</td><td class="n">3,58</td><td><span class="tag tag--bad">HAYIR</span></td></tr>
+              <tr><td>SpeechT5 tr</td><td class="n">144M</td><td class="n">83,4</td><td class="n">45,5</td><td class="n">1,59</td><td>—</td></tr>
+              <tr><td>FreyaTTS</td><td class="n">183M</td><td class="n">8,0</td><td class="n">3,0</td><td class="n">3,68</td><td><span class="tag tag--ok">EVET</span></td></tr>
+              <tr><td>F5-TTS tr</td><td class="n">336M</td><td class="n">24,3</td><td class="n">10,9</td><td class="n">3,63</td><td><span class="tag tag--bad">HAYIR</span></td></tr>
+              <tr><td>XTTS-v2</td><td class="n">470M</td><td class="n">11,1</td><td class="n">3,9</td><td class="n"><strong>3,82</strong></td><td><span class="tag tag--bad">HAYIR</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>İlk dört MOS'un güven aralıkları örtüşüyor. Chatterbox, Supertonic, VoxCPM2 bu tabloda yok.</p>
+
+        <p>Ayrıca 2026 Türkçe TTS taraması (21 model; WER/MOS yok, lisans etiketleri tutarsız): <a href="https://danielquillanroxas.github.io/turkish-tts-survey">turkish-tts-survey</a></p>
+
+        <!-- ===================================================== -->
+        <h2 id="lisans"><span class="h-num">§ 4</span>Lisans notları</h2>
+
+        <ul>
+          <li><strong>Kod lisansı ≠ ağırlık lisansı.</strong> Örn. OmniVoice: kod Apache, ağırlık NC; Supertonic: kod MIT, ağırlık OpenRAIL-M; Kitten 2: kod Apache, ağırlık Stellon.</li>
+          <li><strong>Eğitim verisi lisansı da bakılmalı:</strong> Piper dfki (MIT etiketli depo, ama veri CC BY-NC-SA); Emilia verisiyle eğitilenler (OmniVoice, ZipVoice <span class="tag tag--warn">DOĞRULANMADI</span>).</li>
+          <li><strong>OpenRAIL-M (Supertonic):</strong> ticari içerik serbest; yayında "makine üretimi" beyanı şart; uygulama modeli dağıtıyor/indirtiyorsa kullanım kısıtlarını kullanıcıya bildirmeli, lisans kopyası vermeli.</li>
+          <li><strong>Klon etiği:</strong> Pocket, VoxCPM2, Higgs, OmniVoice, Chatterbox kartları rızasız klonu yasaklıyor/uyarıyor. YouTube "altered or synthetic content" etiketi gerçek kişi taklidinde zorunlu.</li>
+          <li><strong>Filigran:</strong> Chatterbox Python paketi PerTh gömer; topluluk ONNX'lerinde yok ama yeniden eklenmesi isteniyor.</li>
+        </ul>
+
+        <!-- ===================================================== -->
+        <h2 id="bakim-durumu"><span class="h-num">§ 5</span>Bakım durumu uyarısı (Kasım 2026)</h2>
+
+        <div class="tablewrap">
+          <table class="data">
+            <caption>Projelerin bakım durumu</caption>
+            <thead>
+              <tr><th>Proje</th><th>Durum</th><th>Ayrıntı</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Chatterbox</strong></td><td><span class="tag tag--bad">BAKIM YOK</span></td><td>Ağustos 2026'da "retired research", bakım yok.</td></tr>
+              <tr><td><strong>Supertonic</strong></td><td><span class="tag tag--bad">ARŞİV</span></td><td>Depo 9 Eylül 2026'da arşivlendi.</td></tr>
+              <tr><td><strong>piper1-gpl</strong></td><td><span class="tag tag--warn">BAKIMCI ARANIYOR</span></td><td>Bakımcı aranıyor.</td></tr>
+              <tr><td><strong>sherpa-onnx</strong></td><td><span class="tag tag--ok">ETKİN</span></td><td>Etkin (2.0.1, 26 Eki 2026), ama espeak kalktı.</td></tr>
+              <tr><td><strong>VoxCPM2</strong></td><td><span class="tag tag--ok">ETKİN</span></td><td>Etkin (teknik rapor Haziran 2026, birden çok C++/GGUF portu).</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ===================================================== -->
+        <h2 id="kaynaklar"><span class="h-num">§ 6</span>Kaynakça</h2>
+
+        <p>Metin içinde verilen bağlantıların toplu listesi (araştırma tarihi: 7 Kasım 2026). Yeni kaynak içermez. Aynı liste düz Markdown olarak <a href="arastirma.md">arastirma.md</a> dosyasının sonunda da bulunur.</p>
+
+        <ul class="sources">
+          <li><span class="src-n">01</span><span><strong>sherpa-onnx:</strong> <a href="https://github.com/k2-fsa/sherpa-onnx/releases">sürüm notları</a> · <a href="https://github.com/k2-fsa/sherpa-onnx/blob/master/sherpa-onnx/c-api/c-api.h">c-api.h</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/index.html">TTS ana sayfası</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/Turkish/index.html">Türkçe modeller</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/all/Turkish/supertonic-3-tr.html">supertonic-3-tr</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/pretrained_models/kokoro.html">Kokoro</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/pocket.html">Pocket TTS</a> · <a href="https://k2-fsa.github.io/sherpa/onnx/tts/zipvoice.html">ZipVoice</a></span></li>
+          <li><span class="src-n">02</span><span><strong>Supertonic 3:</strong> <a href="https://huggingface.co/Supertone/supertonic-3">HF model kartı</a> · <a href="https://github.com/supertone-inc/supertonic">GitHub deposu</a> · <a href="https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE">LICENSE (OpenRAIL-M)</a> · <a href="https://huggingface.co/Supertone/supertonic-3/discussions/23">tartışma #23</a></span></li>
+          <li><span class="src-n">03</span><span><strong>VoxCPM2:</strong> <a href="https://huggingface.co/openbmb/VoxCPM2">HF model kartı</a> · <a href="https://arxiv.org/html/2606.06928">teknik rapor (arXiv 2606.06928)</a> · <a href="https://huggingface.co/DennisHuang648/VoxCPM2-GGUF">VoxCPM2-GGUF</a> · <a href="https://huggingface.co/cstr/voxcpm2-GGUF">cstr/voxcpm2-GGUF</a> · <a href="https://github.com/joonsoome/VoxCPM.cpp">VoxCPM.cpp</a> · <a href="https://huggingface.co/Jetlink/JetlinkTTS-v1.0-2B">JetlinkTTS-v1.0-2B</a></span></li>
+          <li><span class="src-n">04</span><span><strong>Chatterbox Multilingual:</strong> <a href="https://huggingface.co/ResembleAI/chatterbox">HF model kartı</a> · <a href="https://github.com/resemble-ai/chatterbox">GitHub deposu</a> · <a href="https://resemble.ai/learn/models/chatterbox-multilingual">resemble.ai sayfası</a> · <a href="https://huggingface.co/onnx-community/chatterbox-multilingual-ONNX">onnx-community ONNX</a> · <a href="https://huggingface.co/onnx-community/chatterbox-multilingual-ONNX/tree/main/onnx">onnx/ klasörü</a> · <a href="https://huggingface.co/Masterx/chatterbox-multilingual-v3-ONNX">Masterx V3 ONNX</a> · <a href="https://huggingface.co/KitsuMate/chatterbox-multilingual-v3-onnx">KitsuMate V3 ONNX</a></span></li>
+          <li><span class="src-n">05</span><span><strong>Piper:</strong> <a href="https://huggingface.co/rhasspy/piper-voices/commits/main/tr/tr_TR">piper-voices tr_TR geçmişi</a> · <a href="https://huggingface.co/rhasspy/piper-voices/raw/main/tr/tr_TR/dfki/medium/MODEL_CARD">dfki MODEL_CARD</a> · <a href="https://huggingface.co/rhasspy/piper-voices/raw/main/de/de_DE/thorsten/high/MODEL_CARD">thorsten MODEL_CARD</a> · <a href="https://github.com/OHF-Voice/piper1-gpl">piper1-gpl</a></span></li>
+          <li><span class="src-n">06</span><span><strong>Kokoro ve Pocket TTS:</strong> <a href="https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md">Kokoro VOICES.md</a> · <a href="https://huggingface.co/kyutai/pocket-tts">kyutai/pocket-tts</a> · <a href="https://huggingface.co/kaanhgunay/pocket-tts-tr">pocket-tts-tr</a></span></li>
+          <li><span class="src-n">07</span><span><strong>Kitten, Qwen3-TTS, CosyVoice, IndexTTS2:</strong> <a href="https://github.com/KittenML/KittenTTS">KittenTTS</a> · <a href="https://pypi.org/project/kittenml/0.9.5/">kittenml 0.9.5</a> · <a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base">Qwen3-TTS-12Hz-1.7B-Base</a> · <a href="https://pypi.org/project/lunavox/">LunaVox</a> · <a href="https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512">Fun-CosyVoice3-0.5B-2512</a> · <a href="https://raw.githubusercontent.com/index-tts/index-tts/main/LICENSE">index-tts LICENSE</a></span></li>
+          <li><span class="src-n">08</span><span><strong>Higgs, VibeVoice, Orpheus, MeloTTS:</strong> <a href="https://huggingface.co/bosonai/higgs-audio-v2-generation-3B-base/blob/main/LICENSE">Higgs Audio v2 LICENSE</a> · <a href="https://huggingface.co/bosonai/higgs-tts-3-4b">higgs-tts-3-4b</a> · <a href="https://github.com/microsoft/VibeVoice">VibeVoice</a> · <a href="https://huggingface.co/collections/canopylabs/orpheus-multilingual-research-release-67f5894cd16794db163786ba">Orpheus multilingual koleksiyonu</a> · <a href="https://huggingface.co/Karayakar/Orpheus-TTS-Turkish-PT-5000">Orpheus-TTS-Turkish-PT-5000</a> · <a href="https://github.com/myshell-ai/MeloTTS">MeloTTS</a></span></li>
+          <li><span class="src-n">09</span><span><strong>MMS-TTS, OmniVoice, Voxtral, Fish Audio, FreyaTTS:</strong> <a href="https://huggingface.co/facebook/mms-tts-tur">facebook/mms-tts-tur</a> · <a href="https://huggingface.co/k2-fsa/OmniVoice">k2-fsa/OmniVoice</a> · <a href="https://siliconangle.com/2026/03/26/mistral-releases-open-weights-speaking-AI-model-voxtral-tts/">Voxtral TTS haberi (SiliconANGLE)</a> · <a href="https://fish.audio/fr/blog/what-we-mean-by-open-source-for-s2/">fish.audio blog</a> · <a href="https://huggingface.co/freyavoice/freya-tts">freyavoice/freya-tts</a></span></li>
+          <li><span class="src-n">10</span><span><strong>Türkçe değerlendirme ve tarama:</strong> <a href="https://arxiv.org/html/2607.09530">Freya-TR-Eval (arXiv 2607.09530)</a> · <a href="https://danielquillanroxas.github.io/turkish-tts-survey">2026 Türkçe TTS taraması</a></span></li>
+        </ul>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="../../../assets/app.js"></script>
+</body>
+</html>
