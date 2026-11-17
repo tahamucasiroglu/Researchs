@@ -17,7 +17,7 @@
 │  ├─ Python/  Go/  Rust/
 │  ├─ Blockchain/         Dil değil alan; ayrı eğitim gerektirdiği için kendi kategorisi var
 │  ├─ Veritabani-SQL/     Dil değil alan; SQL ve ilişkisel veritabanları (sql-mulakat/ …)
-│  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma (goruntu-netlestirme/, kodla-video/, video-uretim-sistemi/ …)
+│  └─ Yapay-Zeka/         Dil değil alan; hazır modelleri kullanma ve yapay zekâ ajanlarıyla geliştirme (goruntu-netlestirme/, kodla-video/, yerel-tts/, ai-native-engineering-workspace/ …)
 ├─ API/                 Platform başına Türkçe API başvurusu (.md), kategorilere göre
 │  ├─ Sosyal-Medya/  Mesajlasma/  Canli-Yayin-ve-Video/  Gelistirici-Platformlari/  Haber/
 │  ├─ Kripto-Borsalari/  Finans-ve-Ekonomi/  Hava-Durumu/  Turkiye-Kamu-ve-Acik-Veri/  API-Kaynaklari/
