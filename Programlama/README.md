@@ -14,7 +14,7 @@ Programlama bölümü **dile ve platforma göre** ayrılır: her dilin kendi kla
 | [Go](Go/) | Tek sayfa: paket sistemi, struct ve interface, hata yönetimi, goroutine/channel/context, standart kütüphane, web çatıları. |
 | [Rust](Rust/) | Tek sayfa: Cargo, sahiplik ve ödünç alma, yaşam süreleri, trait ve generic, async/Tokio, ekosistem ve öğrenme maliyeti. |
 | [Blockchain](Blockchain/) | 7 bölüm: zincir temelleri, Solidity ve akıllı sözleşmeler, JS/TS ve .NET ile dApp geliştirme, diğer zincirler, altyapı ve güvenlik, proje fikirleri. |
-| [Yapay Zekâ](Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini uygulamalarda kullanmak. Konular: görüntü netleştirme (super-resolution, yüz düzeltme), kodla video üretimi (Remotion), Claude ile video üretim sistemi, yerel çok dilli TTS modelleri. |
+| [Yapay Zekâ](Yapay-Zeka/) | Dil değil alan: hazır yapay zekâ modellerini uygulamalarda kullanmak. Konular: görüntü netleştirme (super-resolution, yüz düzeltme), kodla video üretimi (Remotion), Claude ile video üretim sistemi, yerel çok dilli TTS modelleri, yapay zekâ ajanlarıyla geliştirme şablonu (ANEW). |
 | [Veritabanı ve SQL](Veritabani-SQL/) | Dil değil alan: SQL dili ve ilişkisel veritabanları; örnekler standart SQL, SQLite / PostgreSQL / SQL Server / MySQL farkları ayrıca. Konular: SQL Mülakat Rehberi (JOIN'lerde kaç satır gelir, NULL, gruplama, window fonksiyonları, klasik sorular, sınav motorunu belirleme). ORM tarafı (EF Core, JPA/Hibernate) dil klasörlerinde kalır. |
 | [Proje Fikirleri](proje-fikirleri/) | Tek dosyalık denemelerden portfolyo projelerine kadar seviyeli proje kataloğu; her projenin hangi konuyu kanıtladığıyla birlikte. |
 

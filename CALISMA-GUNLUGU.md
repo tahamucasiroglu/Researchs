@@ -6,6 +6,7 @@ Ne zaman ne çalıştığımın kısa kaydı. Tarihler, çalışmanın yapıldı
 
 ## Kasım 2026
 
+- **17.11.2026** — ANEW (AI-Native Engineering Workspace) skill/komut şablonu incelemesi: ilk kurulum, 12 komut ve 7 betik, sonradan özellik ekleme, kurtarma senaryoları, örnek senaryo (kaynak: repo v1.26.1 ve yazarın YouTube videosu) → [Yapay-Zeka/ai-native-engineering-workspace](Programlama/Yapay-Zeka/ai-native-engineering-workspace/)
 - **07.11.2026** — Yerel çok dilli TTS modelleri araştırması (Türkçe desteği, ses klonlama, ağırlık lisansları ve ticari kullanım, sherpa-onnx / ONNX Runtime / GGUF yolları) → [Yapay-Zeka/yerel-tts](Programlama/Yapay-Zeka/yerel-tts/)
 - **06.11.2026** — Depo: Programlama altında Veritabanı ve SQL alanı açıldı; SQL mülakat rehberi Rehberler altından buraya taşındı → [Programlama/Veritabani-SQL](Programlama/Veritabani-SQL/)
 - **06.11.2026** — Depo: gelen kutusundaki 7 çalışma kişisel veriden arındırılıp ayrıştırıldı (gerçek işletmelerle çakışan örnek ad ve alan adları hayalî adlarla değiştirildi, tek ilçe ve tek araç modeli örnekleri genelleştirildi, dil örneklerindeki birinci şahıs kişisel bilgiler üçüncü şahsa çevrildi). Kurallara bu gizlilik dersleri, eksik `arastirma.md`'nin ayrıştırmada üretilmesi ve "push yalnızca kullanıcı açıkça isterse" maddesi eklendi; klasör ağacı güncellendi.
